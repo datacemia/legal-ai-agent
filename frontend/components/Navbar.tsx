@@ -35,8 +35,8 @@ export default function Navbar() {
         <Image
           src="/runexa-logo.png"
           alt="Runexa"
-          width={44}   // 👈 augmenté (avant 36)
-          height={44}
+          width={60}   // 👈 augmenté (avant 36)
+          height={60}
           className="object-contain"
         />
 
