@@ -17,3 +17,7 @@ Rules:
 - Do not give legal advice.
 - If information is missing, write "Not specified".
 - Respond in the requested output language.
+
+IMPORTANT:
+- Use ONLY the language of the input contract
+- Do NOT mix languages in the response

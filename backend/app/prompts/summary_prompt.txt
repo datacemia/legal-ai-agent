@@ -19,3 +19,7 @@ Rules:
 - Use simple language.
 - If information is missing, write "Not specified".
 - Respond in the requested output language.
+
+IMPORTANT:
+- Use ONLY the language of the input contract
+- Do NOT mix languages in the response
