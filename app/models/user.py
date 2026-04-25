@@ -12,6 +12,7 @@ class User(Base):
     password_hash = Column(String, nullable=False)
 
     is_active = Column(Boolean, default=True)
+    email_verified = Column(Boolean, default=True)
     activation_token = Column(String, nullable=True)
 
     role = Column(String, default="user")
