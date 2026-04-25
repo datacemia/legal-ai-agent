@@ -1,63 +1,121 @@
-import Link from "next/link";
+"use client";
 
-const agents = [
-  {
-    name: "Legal Agent",
-    description: "Analyze contracts, detect risky clauses, and get clear recommendations before you sign.",
-    href: "/upload",
-    status: "Available",
+import Link from "next/link";
+import { useState } from "react";
+
+const labels: any = {
+  en: {
+    platform: "Runexa AI Agents Platform",
+    title: "AI agents that help you get work done faster.",
+    desc: "Runexa brings specialized AI agents for legal, finance, HR, business, and more — all in one simple platform.",
+    explore: "Explore agents",
+    tryLegal: "Try Legal Agent",
+    choose: "Choose your AI agent",
+    chooseDesc: "Start with Legal Agent today. More specialized agents are coming soon.",
+    available: "Available",
+    coming: "Coming soon",
+    open: "Open agent",
+    ctaTitle: "One platform. Multiple AI agents. Real business outcomes.",
+    ctaDesc: "Start with contract analysis today, then expand into finance, HR, operations, and business automation as your needs grow.",
+    ctaButton: "Start with Legal Agent",
+    footer: "Runexa AI · Specialized agents for modern teams",
+    agents: [
+      ["Legal Agent", "Analyze contracts, detect risky clauses, and get clear recommendations before you sign."],
+      ["Finance Agent", "Review invoices, budgets, expenses, and financial documents faster."],
+      ["HR Agent", "Analyze CVs, job descriptions, HR policies, and employee documents."],
+      ["Business Agent", "Generate summaries, reports, strategies, and business insights."],
+    ],
   },
-  {
-    name: "Finance Agent",
-    description: "Review invoices, budgets, expenses, and financial documents faster.",
-    href: "#",
-    status: "Coming soon",
+  fr: {
+    platform: "Plateforme d’agents IA Runexa",
+    title: "Des agents IA pour travailler plus vite.",
+    desc: "Runexa réunit des agents IA spécialisés pour le juridique, la finance, les RH, le business et plus encore.",
+    explore: "Explorer les agents",
+    tryLegal: "Tester l’agent juridique",
+    choose: "Choisissez votre agent IA",
+    chooseDesc: "Commencez avec l’agent juridique. D’autres agents spécialisés arrivent bientôt.",
+    available: "Disponible",
+    coming: "Bientôt",
+    open: "Ouvrir l’agent",
+    ctaTitle: "Une plateforme. Plusieurs agents IA. Des résultats concrets.",
+    ctaDesc: "Commencez avec l’analyse de contrats, puis développez vers la finance, les RH et l’automatisation business.",
+    ctaButton: "Commencer avec l’agent juridique",
+    footer: "Runexa AI · Agents spécialisés pour équipes modernes",
+    agents: [
+      ["Agent juridique", "Analysez vos contrats, détectez les clauses à risque et obtenez des recommandations claires."],
+      ["Agent finance", "Analysez factures, budgets, dépenses et documents financiers plus rapidement."],
+      ["Agent RH", "Analysez CV, fiches de poste, politiques RH et documents employés."],
+      ["Agent business", "Générez des résumés, rapports, stratégies et insights business."],
+    ],
   },
-  {
-    name: "HR Agent",
-    description: "Analyze CVs, job descriptions, HR policies, and employee documents.",
-    href: "#",
-    status: "Coming soon",
+  ar: {
+    platform: "منصة Runexa للوكلاء الذكيين",
+    title: "وكلاء ذكاء اصطناعي يساعدونك على إنجاز العمل بسرعة.",
+    desc: "تجمع Runexa وكلاء متخصصين في القانون والمالية والموارد البشرية والأعمال في منصة واحدة.",
+    explore: "استكشاف الوكلاء",
+    tryLegal: "تجربة الوكيل القانوني",
+    choose: "اختر وكيلك الذكي",
+    chooseDesc: "ابدأ بالوكيل القانوني اليوم. المزيد من الوكلاء المتخصصين قريباً.",
+    available: "متاح",
+    coming: "قريباً",
+    open: "فتح الوكيل",
+    ctaTitle: "منصة واحدة. عدة وكلاء ذكاء اصطناعي. نتائج عملية.",
+    ctaDesc: "ابدأ بتحليل العقود، ثم توسع إلى المالية والموارد البشرية وأتمتة الأعمال.",
+    ctaButton: "ابدأ بالوكيل القانوني",
+    footer: "Runexa AI · وكلاء متخصصون للفرق الحديثة",
+    agents: [
+      ["الوكيل القانوني", "حلل العقود، واكتشف البنود الخطرة، واحصل على توصيات واضحة."],
+      ["وكيل المالية", "راجع الفواتير والميزانيات والمصاريف والوثائق المالية بسرعة."],
+      ["وكيل الموارد البشرية", "حلل السير الذاتية والوصف الوظيفي وسياسات الموارد البشرية."],
+      ["وكيل الأعمال", "أنشئ ملخصات وتقارير واستراتيجيات ورؤى عملية."],
+    ],
   },
-  {
-    name: "Business Agent",
-    description: "Generate summaries, reports, strategies, and business insights.",
-    href: "#",
-    status: "Coming soon",
-  },
-];
+};
+
+const agentLinks = ["/upload", "#", "#", "#"];
 
 export default function HomePage() {
+  const [language, setLanguage] = useState("en");
+  const t = labels[language] || labels.en;
+
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900">
+    <main
+      dir={language === "ar" ? "rtl" : "ltr"}
+      className="min-h-screen bg-slate-50 text-slate-900"
+    >
       <section className="px-6 py-20">
         <div className="max-w-6xl mx-auto text-center space-y-8">
-          <p className="text-blue-600 font-semibold">
-            Runexa AI Agents Platform
-          </p>
+          <div className="flex justify-center">
+            <select
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+              className="border rounded-lg px-3 py-2 bg-white"
+            >
+              <option value="en">English</option>
+              <option value="fr">Français</option>
+              <option value="ar">العربية</option>
+            </select>
+          </div>
 
-          <h1 className="text-5xl font-bold leading-tight">
-            AI agents that help you get work done faster.
-          </h1>
+          <p className="text-blue-600 font-semibold">{t.platform}</p>
 
-          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-            Runexa brings specialized AI agents for legal, finance, HR,
-            business, and more — all in one simple platform.
-          </p>
+          <h1 className="text-5xl font-bold leading-tight">{t.title}</h1>
+
+          <p className="text-lg text-slate-600 max-w-3xl mx-auto">{t.desc}</p>
 
           <div className="flex justify-center gap-4">
             <a
               href="#agents"
               className="px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition"
             >
-              Explore agents
+              {t.explore}
             </a>
 
             <Link
               href="/upload"
               className="px-6 py-3 bg-white border border-slate-200 rounded-xl font-semibold hover:bg-slate-100 transition"
             >
-              Try Legal Agent
+              {t.tryLegal}
             </Link>
           </div>
         </div>
@@ -66,74 +124,69 @@ export default function HomePage() {
       <section id="agents" className="px-6 py-12">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold">Choose your AI agent</h2>
-            <p className="mt-3 text-slate-600">
-              Start with Legal Agent today. More specialized agents are coming soon.
-            </p>
+            <h2 className="text-3xl font-bold">{t.choose}</h2>
+            <p className="mt-3 text-slate-600">{t.chooseDesc}</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {agents.map((agent) => (
-              <div
-                key={agent.name}
-                className="bg-white p-6 rounded-2xl border shadow-sm flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between gap-3">
-                    <h3 className="text-xl font-bold">{agent.name}</h3>
-                    <span className="text-xs bg-slate-100 text-slate-600 px-3 py-1 rounded-full">
-                      {agent.status}
-                    </span>
+            {t.agents.map((agent: string[], index: number) => {
+              const isAvailable = index === 0;
+
+              return (
+                <div
+                  key={agent[0]}
+                  className="bg-white p-6 rounded-2xl border shadow-sm flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-3">
+                      <h3 className="text-xl font-bold">{agent[0]}</h3>
+                      <span className="text-xs bg-slate-100 text-slate-600 px-3 py-1 rounded-full">
+                        {isAvailable ? t.available : t.coming}
+                      </span>
+                    </div>
+
+                    <p className="mt-4 text-slate-600">{agent[1]}</p>
                   </div>
 
-                  <p className="mt-4 text-slate-600">
-                    {agent.description}
-                  </p>
+                  {isAvailable ? (
+                    <Link
+                      href={agentLinks[index]}
+                      className="inline-block mt-6 text-center px-4 py-2 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition"
+                    >
+                      {t.open}
+                    </Link>
+                  ) : (
+                    <button
+                      disabled
+                      className="mt-6 px-4 py-2 bg-slate-100 text-slate-400 rounded-xl font-semibold cursor-not-allowed"
+                    >
+                      {t.coming}
+                    </button>
+                  )}
                 </div>
-
-                {agent.status === "Available" ? (
-                  <Link
-                    href={agent.href}
-                    className="inline-block mt-6 text-center px-4 py-2 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition"
-                  >
-                    Open agent
-                  </Link>
-                ) : (
-                  <button
-                    disabled
-                    className="mt-6 px-4 py-2 bg-slate-100 text-slate-400 rounded-xl font-semibold cursor-not-allowed"
-                  >
-                    Coming soon
-                  </button>
-                )}
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
       <section className="px-6 py-16">
         <div className="max-w-5xl mx-auto bg-blue-600 text-white rounded-3xl p-10 text-center">
-          <h2 className="text-3xl font-bold">
-            One platform. Multiple AI agents. Real business outcomes.
-          </h2>
+          <h2 className="text-3xl font-bold">{t.ctaTitle}</h2>
 
-          <p className="mt-4 text-blue-100">
-            Start with contract analysis today, then expand into finance, HR,
-            operations, and business automation as your needs grow.
-          </p>
+          <p className="mt-4 text-blue-100">{t.ctaDesc}</p>
 
           <Link
             href="/upload"
             className="inline-block mt-6 px-6 py-3 bg-white text-blue-600 rounded-xl font-semibold"
           >
-            Start with Legal Agent
+            {t.ctaButton}
           </Link>
         </div>
       </section>
 
       <footer className="px-6 py-8 text-center text-sm text-slate-500">
-        Runexa AI · Specialized agents for modern teams
+        {t.footer}
       </footer>
     </main>
   );
