@@ -21,6 +21,7 @@ def get_labels(language: str = "en") -> dict:
             "no_text": "No text found.",
             "summary_unavailable": "Summary unavailable. Preview:",
             "simplified_unavailable": "Simplified version unavailable. Preview:",
+            "not_specified": "Not specified",
         },
         "fr": {
             "type": "Type",
@@ -34,6 +35,7 @@ def get_labels(language: str = "en") -> dict:
             "no_text": "Aucun texte trouvé.",
             "summary_unavailable": "Résumé indisponible. Aperçu :",
             "simplified_unavailable": "Version simplifiée indisponible. Aperçu :",
+            "not_specified": "Non spécifié",
         },
         "ar": {
             "type": "النوع",
@@ -47,6 +49,7 @@ def get_labels(language: str = "en") -> dict:
             "no_text": "لم يتم العثور على نص.",
             "summary_unavailable": "الملخص غير متاح. معاينة:",
             "simplified_unavailable": "النسخة المبسطة غير متاحة. معاينة:",
+            "not_specified": "غير محدد",
         },
     }
 
@@ -100,9 +103,13 @@ Contract text:
         summary = data.get("global_summary", "")
         contract_type = data.get("contract_type", "")
         parties = data.get("parties", [])
-        duration = data.get("duration", "")
+        duration = data.get("duration")
         payment_terms = data.get("payment_terms", "")
         main_obligations = data.get("main_obligations", [])
+
+        # 🔥 FIX: translate "Not specified"
+        if not duration or str(duration).lower() == "not specified":
+            duration = t["not_specified"]
 
         output = f"{t['type']}: {contract_type}\n"
         output += f"{t['parties']}: {', '.join(parties)}\n"
