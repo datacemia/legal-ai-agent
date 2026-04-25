@@ -21,6 +21,7 @@ export default function RegisterPage() {
       const data = await res.json();
 
       if (res.ok) {
+        alert("Account created. Please check your email to verify your account before login.");
         window.location.href = "/login";
       } else {
         alert(data.detail || "Registration failed");
