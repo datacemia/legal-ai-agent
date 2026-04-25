@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image"; // ✅ ajouté
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function Navbar() {
@@ -30,15 +30,22 @@ export default function Navbar() {
   return (
     <nav className="bg-white border-b px-6 py-4 flex justify-between items-center">
       
-      {/* 🔥 LOGO + NAME */}
-      <Link href="/" className="flex items-center gap-2">
+      {/* 🔥 LOGO + NAME + SLOGAN */}
+      <Link href="/" className="flex items-center gap-3">
         <Image
-          src="/runexa-logo.png" // ⚠️ ton fichier ici
+          src="/runexa-logo.png"
           alt="Runexa"
-          width={36}
-          height={36}
+          width={44}   // 👈 augmenté (avant 36)
+          height={44}
+          className="object-contain"
         />
-        <span className="font-bold text-lg">Runexa</span>
+
+        <div className="leading-tight">
+          <div className="font-bold text-lg">Runexa</div>
+          <div className="text-xs text-gray-500">
+            AI agents that get things done
+          </div>
+        </div>
       </Link>
 
       <div className="flex items-center gap-4">
