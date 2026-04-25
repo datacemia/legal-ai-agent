@@ -130,11 +130,7 @@ export default function UploadPage() {
         <div className="text-center space-y-4">
           <div className="w-12 h-12 border-4 border-black border-t-transparent rounded-full animate-spin mx-auto"></div>
           <p className="text-gray-600">{t.loading}</p>
-          {fileName && (
-            <p className="text-sm text-gray-500">
-              {t.file}: {fileName}
-            </p>
-          )}
+          {fileName && <p className="text-sm text-gray-500">{t.file}: {fileName}</p>}
         </div>
       </main>
     );
@@ -166,13 +162,30 @@ export default function UploadPage() {
         </div>
 
         <div className="bg-white p-6 rounded-2xl shadow-sm border">
-          <p className="mb-4 text-sm font-medium text-gray-600">
-            {t.signupCta}
-          </p>
 
-          <p className="text-xs text-gray-400 text-center">
-            {t.author}
-          </p>
+          {/* 🔥 SELECT EN HAUT */}
+          <div className="flex items-center gap-4 mb-5 flex-wrap">
+            <select
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+              className="border rounded-lg px-3 py-2"
+            >
+              <option value="en">English</option>
+              <option value="fr">Français</option>
+              <option value="ar">العربية</option>
+            </select>
+          </div>
+
+          {/* 🔥 CTA DYNAMIQUE */}
+          <div className="text-center space-y-1 mb-4">
+            <p className="text-sm font-medium text-gray-600">
+              {t.signupCta}
+            </p>
+
+            <p className="text-xs text-gray-400">
+              {t.author}
+            </p>
+          </div>
 
           <UploadBox
             file={file}
@@ -185,16 +198,6 @@ export default function UploadPage() {
           />
 
           <div className="flex items-center gap-4 mt-5 flex-wrap">
-            <select
-              value={language}
-              onChange={(e) => setLanguage(e.target.value)}
-              className="border rounded-lg px-3 py-2"
-            >
-              <option value="en">English</option>
-              <option value="fr">Français</option>
-              <option value="ar">العربية</option>
-            </select>
-
             <button
               onClick={handleUpload}
               disabled={!file}
@@ -210,12 +213,8 @@ export default function UploadPage() {
             <p className="font-medium">{t.loginRequired}</p>
 
             <div className="flex justify-center gap-3">
-              <a href="/login" className="underline">
-                Login
-              </a>
-              <a href="/register" className="underline">
-                Register
-              </a>
+              <a href="/login" className="underline">Login</a>
+              <a href="/register" className="underline">Register</a>
             </div>
           </div>
         )}
@@ -249,64 +248,6 @@ export default function UploadPage() {
               <p className="mt-4 text-blue-900 whitespace-pre-line">
                 {result.simplified_version}
               </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-2xl shadow-sm border">
-              <h2 className="text-xl font-semibold mb-4">{t.clauses}</h2>
-
-              <div className="space-y-4">
-                {clauses.map((clause: any, index: number) => (
-                  <div
-                    key={index}
-                    className={`border rounded-xl p-4 cursor-pointer transition ${
-                      clause.risk_level === "high"
-                        ? "border-red-300 bg-red-50"
-                        : clause.risk_level === "medium"
-                        ? "border-yellow-300 bg-yellow-50"
-                        : "border-gray-200 bg-white hover:bg-gray-50"
-                    }`}
-                    onClick={() =>
-                      setOpenIndex(openIndex === index ? null : index)
-                    }
-                  >
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center gap-2">
-                        <span className="font-semibold">
-                          {t.clause} {index + 1}
-                        </span>
-                        <span className="text-xs text-gray-400">
-                          {openIndex === index ? "▲" : "▼"}
-                        </span>
-                      </div>
-
-                      <RiskBadge
-                        risk={clause.risk_level}
-                        language={language || "en"}
-                      />
-                    </div>
-
-                    <p className="text-blue-700 text-sm mt-2">
-                      {clause.explanation_simple}
-                    </p>
-
-                    {openIndex === index && (
-                      <div className="mt-3 space-y-2">
-                        <p className="text-sm text-gray-500">
-                          {t.trigger}: {clause.trigger || t.none}
-                        </p>
-
-                        <p className="text-gray-800">
-                          {clause.original_text}
-                        </p>
-
-                        <p className="text-gray-600 text-sm">
-                          {t.recommendation}: {clause.recommendation}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
             </div>
           </>
         )}
