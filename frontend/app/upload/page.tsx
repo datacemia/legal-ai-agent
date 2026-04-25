@@ -190,7 +190,7 @@ export default function UploadPage() {
 
             <button
               onClick={handleUpload}
-              disabled={!file || !localStorage.getItem("token")}
+              disabled={!file}
               className="px-5 py-2 bg-black text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {t.analyzeButton}
