@@ -83,6 +83,19 @@ export default function UploadPage() {
   const handleUpload = async () => {
     if (!file) return;
 
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert(
+        language === "fr"
+          ? "Veuillez vous inscrire ou vous connecter avant d’analyser un document."
+          : language === "ar"
+          ? "يرجى التسجيل أو تسجيل الدخول قبل تحليل المستند."
+          : "Please register or login before analyzing a document."
+      );
+      return;
+    }
+
     try {
       setLoading(true);
       setResult(null);
