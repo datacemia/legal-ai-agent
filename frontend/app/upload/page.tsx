@@ -197,7 +197,7 @@ export default function UploadPage() {
 
             <button
               onClick={handleUpload}
-              disabled={!file || !localStorage.getItem("token")}
+              disabled={!file}
               className="px-5 py-2 bg-black text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {t.analyzeButton}
@@ -206,8 +206,17 @@ export default function UploadPage() {
         </div>
 
         {result?.authRequired && (
-          <div className="bg-black text-white rounded-2xl p-5 text-center font-medium">
-            {t.loginRequired}
+          <div className="bg-black text-white rounded-2xl p-6 text-center space-y-3">
+            <p className="font-medium">{t.loginRequired}</p>
+
+            <div className="flex justify-center gap-3">
+              <a href="/login" className="underline">
+                Login
+              </a>
+              <a href="/register" className="underline">
+                Register
+              </a>
+            </div>
           </div>
         )}
 
