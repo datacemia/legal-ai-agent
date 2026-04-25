@@ -18,6 +18,8 @@ const labels: any = {
     privateCardText: "Your documents stay protected.",
     multiCard: "🌍 EN / FR / AR",
     multiCardText: "Multilingual contract analysis.",
+    signupCta: "Free analysis available after signup",
+    loginRequired: "Create an account to analyze your contract",
     analyzeButton: "Analyze Contract",
     empty: "Upload a contract to see the summary, risk score, simplified version, and clause analysis.",
     summary: "Summary",
@@ -38,6 +40,8 @@ const labels: any = {
     privateCardText: "Vos documents restent protégés.",
     multiCard: "🌍 EN / FR / AR",
     multiCardText: "Analyse multilingue des contrats.",
+    signupCta: "Analyse gratuite disponible après inscription",
+    loginRequired: "Créez un compte pour analyser votre contrat",
     analyzeButton: "Analyser le contrat",
     empty: "Téléversez un contrat pour voir le résumé, le score de risque, la version simplifiée et l’analyse des clauses.",
     summary: "Résumé",
@@ -58,6 +62,8 @@ const labels: any = {
     privateCardText: "تبقى مستنداتك محمية.",
     multiCard: "🌍 EN / FR / AR",
     multiCardText: "تحليل عقود متعدد اللغات.",
+    signupCta: "التحليل المجاني متاح بعد التسجيل",
+    loginRequired: "أنشئ حسابًا لتحليل عقدك",
     analyzeButton: "تحليل العقد",
     empty: "قم برفع عقد لعرض الملخص ودرجة المخاطر والنسخة المبسطة وتحليل البنود.",
     summary: "ملخص",
@@ -86,13 +92,9 @@ export default function UploadPage() {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      alert(
-        language === "fr"
-          ? "Veuillez vous inscrire ou vous connecter avant d’analyser un document."
-          : language === "ar"
-          ? "يرجى التسجيل أو تسجيل الدخول قبل تحليل المستند."
-          : "Please register or login before analyzing a document."
-      );
+      setResult({
+        authRequired: true,
+      });
       return;
     }
 
@@ -116,7 +118,8 @@ export default function UploadPage() {
     }
   };
 
-  const clauses = result?.clauses ? JSON.parse(result.clauses) : [];
+  const clauses =
+    result?.clauses && !result?.authRequired ? JSON.parse(result.clauses) : [];
 
   if (loading) {
     return (
@@ -124,7 +127,11 @@ export default function UploadPage() {
         <div className="text-center space-y-4">
           <div className="w-12 h-12 border-4 border-black border-t-transparent rounded-full animate-spin mx-auto"></div>
           <p className="text-gray-600">{t.loading}</p>
-          {fileName && <p className="text-sm text-gray-500">{t.file}: {fileName}</p>}
+          {fileName && (
+            <p className="text-sm text-gray-500">
+              {t.file}: {fileName}
+            </p>
+          )}
         </div>
       </main>
     );
@@ -136,9 +143,7 @@ export default function UploadPage() {
       className="min-h-screen bg-gray-50 p-6"
     >
       <div className="max-w-5xl mx-auto space-y-8">
-        <h1 className="text-3xl font-bold text-gray-900">
-          {t.pageTitle}
-        </h1>
+        <h1 className="text-3xl font-bold text-gray-900">{t.pageTitle}</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-white border rounded-xl p-4">
@@ -158,6 +163,10 @@ export default function UploadPage() {
         </div>
 
         <div className="bg-white p-6 rounded-2xl shadow-sm border">
+          <p className="mb-4 text-sm font-medium text-gray-600">
+            {t.signupCta}
+          </p>
+
           <UploadBox
             file={file}
             onFileChange={(selected) => {
@@ -181,13 +190,19 @@ export default function UploadPage() {
 
             <button
               onClick={handleUpload}
-              disabled={!file}
-              className="px-5 py-2 bg-black text-white rounded-lg disabled:opacity-50"
+              disabled={!file || !localStorage.getItem("token")}
+              className="px-5 py-2 bg-black text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {t.analyzeButton}
             </button>
           </div>
         </div>
+
+        {result?.authRequired && (
+          <div className="bg-black text-white rounded-2xl p-5 text-center font-medium">
+            {t.loginRequired}
+          </div>
+        )}
 
         {!result && (
           <div className="bg-white border rounded-2xl p-8 text-center text-gray-500">
@@ -195,7 +210,7 @@ export default function UploadPage() {
           </div>
         )}
 
-        {result && (
+        {result && !result.authRequired && (
           <>
             <div className="bg-white p-6 rounded-2xl shadow-sm border">
               <div className="flex justify-between items-center">
@@ -221,9 +236,7 @@ export default function UploadPage() {
             </div>
 
             <div className="bg-white p-6 rounded-2xl shadow-sm border">
-              <h2 className="text-xl font-semibold mb-4">
-                {t.clauses}
-              </h2>
+              <h2 className="text-xl font-semibold mb-4">{t.clauses}</h2>
 
               <div className="space-y-4">
                 {clauses.map((clause: any, index: number) => (
@@ -250,7 +263,10 @@ export default function UploadPage() {
                         </span>
                       </div>
 
-                      <RiskBadge risk={clause.risk_level} language={language || "en"} />
+                      <RiskBadge
+                        risk={clause.risk_level}
+                        language={language || "en"}
+                      />
                     </div>
 
                     <p className="text-blue-700 text-sm mt-2">
