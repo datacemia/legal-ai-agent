@@ -50,9 +50,16 @@ If you did not create this account, you can ignore this email.
 
     context = ssl.create_default_context()
 
-    with smtplib.SMTP_SSL(smtp_host, smtp_port, context=context) as server:
-        server.login(smtp_user, smtp_password)
-        server.send_message(msg)
+    # ✅ FIX SANS CASSER (debug SMTP)
+    try:
+        with smtplib.SMTP_SSL(smtp_host, smtp_port, context=context) as server:
+            server.login(smtp_user, smtp_password)
+            server.send_message(msg)
+
+        print("Verification email sent to:", to_email)
+
+    except Exception as e:
+        print("SMTP ERROR:", repr(e))
 
 
 @router.post("/register", response_model=UserResponse)
