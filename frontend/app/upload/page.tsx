@@ -237,7 +237,8 @@ export default function UploadPage() {
                         </span>
                       </div>
 
-                      <RiskBadge risk={clause.risk_level} />
+                      <RiskBadge risk={result.risk_level} language={language || "en"} />
+                      <RiskScore score={result.risk_score} language={language || "en"} />
                     </div>
 
                     <p className="text-blue-700 text-sm mt-2">
