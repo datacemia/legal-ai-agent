@@ -22,3 +22,7 @@ Rules:
 - If the clause is dangerous, explain why.
 - If uncertain, use confidence = low.
 - Respond in the requested output language.
+
+IMPORTANT:
+- Use ONLY the language of the input contract
+- Do NOT mix languages in the response
