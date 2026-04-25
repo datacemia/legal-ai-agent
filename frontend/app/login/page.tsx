@@ -16,7 +16,10 @@ export default function LoginPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({
+          email: email.trim(), // ✅ fix espaces
+          password,
+        }),
       });
 
       const data = await res.json();
@@ -24,6 +27,7 @@ export default function LoginPage() {
       console.log("LOGIN RESPONSE:", data);
 
       if (!res.ok) {
+        // ✅ affiche vrai message backend
         alert(data.detail || "Login failed");
         return;
       }
