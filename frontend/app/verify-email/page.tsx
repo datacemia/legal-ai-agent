@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
 
-export default function VerifyEmailPage() {
+function VerifyEmailContent() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
 
@@ -33,11 +33,26 @@ export default function VerifyEmailPage() {
   }, [token]);
 
   return (
-    <main className="min-h-screen flex items-center justify-center">
-      <div className="bg-white p-8 rounded-xl shadow text-center">
-        <h1 className="text-xl font-bold mb-4">Email Verification</h1>
-        <p>{message}</p>
-      </div>
+    <div className="bg-white p-8 rounded-xl shadow text-center space-y-4">
+      <h1 className="text-xl font-bold">Email Verification</h1>
+      <p>{message}</p>
+
+      <a
+        href="/login"
+        className="inline-block bg-black text-white px-4 py-2 rounded-lg"
+      >
+        Go to login
+      </a>
+    </div>
+  );
+}
+
+export default function VerifyEmailPage() {
+  return (
+    <main className="min-h-screen flex items-center justify-center bg-gray-50">
+      <Suspense fallback={<p>Loading...</p>}>
+        <VerifyEmailContent />
+      </Suspense>
     </main>
   );
 }
