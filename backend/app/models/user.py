@@ -12,10 +12,10 @@ class User(Base):
     password_hash = Column(String, nullable=False)
 
     is_active = Column(Boolean, default=True)
+    email_verified = Column(Boolean, default=False)
     activation_token = Column(String, nullable=True)
 
     role = Column(String, default="user")
-
     plan = Column(String, default="free")
 
     free_analyses_used = Column(Integer, default=0)
