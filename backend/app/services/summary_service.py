@@ -7,6 +7,52 @@ from app.utils.prompt_loader import load_prompt
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 
+def get_labels(language: str = "en") -> dict:
+    labels = {
+        "en": {
+            "type": "Type",
+            "parties": "Parties",
+            "duration": "Duration",
+            "payment": "Payment",
+            "summary": "Summary",
+            "main_obligations": "Main obligations",
+            "key_points": "Key points",
+            "things_to_watch": "Things to watch",
+            "no_text": "No text found.",
+            "summary_unavailable": "Summary unavailable. Preview:",
+            "simplified_unavailable": "Simplified version unavailable. Preview:",
+        },
+        "fr": {
+            "type": "Type",
+            "parties": "Parties",
+            "duration": "Durée",
+            "payment": "Paiement",
+            "summary": "Résumé",
+            "main_obligations": "Obligations principales",
+            "key_points": "Points clés",
+            "things_to_watch": "Points à surveiller",
+            "no_text": "Aucun texte trouvé.",
+            "summary_unavailable": "Résumé indisponible. Aperçu :",
+            "simplified_unavailable": "Version simplifiée indisponible. Aperçu :",
+        },
+        "ar": {
+            "type": "النوع",
+            "parties": "الأطراف",
+            "duration": "المدة",
+            "payment": "الدفع",
+            "summary": "ملخص",
+            "main_obligations": "الالتزامات الرئيسية",
+            "key_points": "النقاط الرئيسية",
+            "things_to_watch": "نقاط يجب الانتباه لها",
+            "no_text": "لم يتم العثور على نص.",
+            "summary_unavailable": "الملخص غير متاح. معاينة:",
+            "simplified_unavailable": "النسخة المبسطة غير متاحة. معاينة:",
+        },
+    }
+
+    return labels.get(language, labels["en"])
+
+
 def calculate_global_risk(analysis_results: list[dict]) -> dict:
     high_count = sum(1 for item in analysis_results if item["risk_level"] == "high")
     medium_count = sum(1 for item in analysis_results if item["risk_level"] == "medium")
@@ -20,10 +66,11 @@ def calculate_global_risk(analysis_results: list[dict]) -> dict:
     return {"risk_level": "low", "risk_score": 20}
 
 
-# 🔥 UPDATED SUMMARY WITH GPT
 def generate_summary(text: str, language: str = "en") -> str:
+    t = get_labels(language)
+
     if not text:
-        return "No text found."
+        return t["no_text"]
 
     prompt_template = load_prompt("summary_prompt.txt")
     contract_text = text[:6000]
@@ -57,29 +104,29 @@ Contract text:
         payment_terms = data.get("payment_terms", "")
         main_obligations = data.get("main_obligations", [])
 
-        # 🧠 Build readable output
-        output = f"Type: {contract_type}\n"
-        output += f"Parties: {', '.join(parties)}\n"
-        output += f"Duration: {duration}\n"
-        output += f"Payment: {payment_terms}\n\n"
+        output = f"{t['type']}: {contract_type}\n"
+        output += f"{t['parties']}: {', '.join(parties)}\n"
+        output += f"{t['duration']}: {duration}\n"
+        output += f"{t['payment']}: {payment_terms}\n\n"
 
-        output += f"Summary:\n{summary}\n\n"
+        output += f"{t['summary']}:\n{summary}\n\n"
 
         if main_obligations:
-            output += "Main obligations:\n"
+            output += f"{t['main_obligations']}:\n"
             output += "\n".join([f"- {item}" for item in main_obligations])
 
         return output
 
     except Exception:
         preview = text[:700]
-        return f"Summary unavailable. Preview: {preview}..."
+        return f"{t['summary_unavailable']} {preview}..."
 
 
-# 🔥 SIMPLIFIED VERSION (GPT)
 def generate_simplified_version(text: str, language: str = "en") -> str:
+    t = get_labels(language)
+
     if not text:
-        return "No text found."
+        return t["no_text"]
 
     prompt_template = load_prompt("simplification_prompt.txt")
     contract_text = text[:6000]
@@ -113,15 +160,15 @@ Contract text:
         output = simplified
 
         if key_points:
-            output += "\n\nKey points:\n"
+            output += f"\n\n{t['key_points']}:\n"
             output += "\n".join([f"- {item}" for item in key_points])
 
         if things_to_watch:
-            output += "\n\nThings to watch:\n"
+            output += f"\n\n{t['things_to_watch']}:\n"
             output += "\n".join([f"- {item}" for item in things_to_watch])
 
         return output
 
     except Exception:
         preview = text[:1200]
-        return f"Simplified version unavailable. Preview: {preview}..."
+        return f"{t['simplified_unavailable']} {preview}..."
