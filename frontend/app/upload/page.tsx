@@ -187,7 +187,7 @@ export default function UploadPage() {
             <div className="bg-white p-6 rounded-2xl shadow-sm border">
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-semibold">{t.summary}</h2>
-                <RiskBadge risk={result.risk_level} />
+                <RiskBadge risk={result.risk_level} language={language} />
               </div>
 
               <p className="mt-4 text-gray-700 whitespace-pre-line">
@@ -195,7 +195,7 @@ export default function UploadPage() {
               </p>
             </div>
 
-            <RiskScore score={result.risk_score} />
+            <RiskScore score={result.risk_score} language={language} />
 
             <div className="bg-blue-50 p-6 rounded-2xl border border-blue-200">
               <h2 className="text-xl font-semibold text-blue-800">
