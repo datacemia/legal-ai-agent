@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
 
-export default function ActivatePage() {
+function ActivateContent() {
   const params = useSearchParams();
   const token = params.get("token");
 
@@ -20,9 +19,7 @@ export default function ActivatePage() {
       }
 
       try {
-        const res = await fetch(
-          `${API_URL}/auth/activate?token=${token}`
-        );
+        const res = await fetch(`${API_URL}/auth/activate?token=${token}`);
 
         if (res.ok) {
           setStatus("success");
@@ -74,5 +71,19 @@ export default function ActivatePage() {
         )}
       </div>
     </main>
+  );
+}
+
+export default function ActivatePage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen flex items-center justify-center bg-gray-50">
+          <p>Loading...</p>
+        </main>
+      }
+    >
+      <ActivateContent />
+    </Suspense>
   );
 }
