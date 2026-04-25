@@ -20,6 +20,7 @@ const labels: any = {
     multiCardText: "Multilingual contract analysis.",
     signupCta: "Free analysis available after signup",
     loginRequired: "Create an account to analyze your contract",
+    author: "Created by Dr. Rachid Ejjami",
     analyzeButton: "Analyze Contract",
     empty: "Upload a contract to see the summary, risk score, simplified version, and clause analysis.",
     summary: "Summary",
@@ -42,6 +43,7 @@ const labels: any = {
     multiCardText: "Analyse multilingue des contrats.",
     signupCta: "Analyse gratuite disponible après inscription",
     loginRequired: "Créez un compte pour analyser votre contrat",
+    author: "Créé par Dr. Rachid Ejjami",
     analyzeButton: "Analyser le contrat",
     empty: "Téléversez un contrat pour voir le résumé, le score de risque, la version simplifiée et l’analyse des clauses.",
     summary: "Résumé",
@@ -64,6 +66,7 @@ const labels: any = {
     multiCardText: "تحليل عقود متعدد اللغات.",
     signupCta: "التحليل المجاني متاح بعد التسجيل",
     loginRequired: "أنشئ حسابًا لتحليل عقدك",
+    author: "تم تطويره بواسطة د. رشيد الجامعي",
     analyzeButton: "تحليل العقد",
     empty: "قم برفع عقد لعرض الملخص ودرجة المخاطر والنسخة المبسطة وتحليل البنود.",
     summary: "ملخص",
@@ -167,6 +170,10 @@ export default function UploadPage() {
             {t.signupCta}
           </p>
 
+          <p className="text-xs text-gray-400 text-center">
+            {t.author}
+          </p>
+
           <UploadBox
             file={file}
             onFileChange={(selected) => {
@@ -190,7 +197,7 @@ export default function UploadPage() {
 
             <button
               onClick={handleUpload}
-              disabled={!file}
+              disabled={!file || !localStorage.getItem("token")}
               className="px-5 py-2 bg-black text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {t.analyzeButton}
