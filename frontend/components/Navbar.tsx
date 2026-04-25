@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image"; // ✅ ajouté
 import { useEffect, useState } from "react";
 
 export default function Navbar() {
@@ -8,8 +9,6 @@ export default function Navbar() {
 
   useEffect(() => {
     checkAuth();
-
-    // 🔥 écoute les changements de localStorage
     window.addEventListener("storage", checkAuth);
 
     return () => {
@@ -30,20 +29,28 @@ export default function Navbar() {
 
   return (
     <nav className="bg-white border-b px-6 py-4 flex justify-between items-center">
-      <Link href="/" className="font-bold text-lg">
-        ⚖️ Legal AI 
+      
+      {/* 🔥 LOGO + NAME */}
+      <Link href="/" className="flex items-center gap-2">
+        <Image
+          src="/runexa-logo.png" // ⚠️ ton fichier ici
+          alt="Runexa"
+          width={36}
+          height={36}
+        />
+        <span className="font-bold text-lg">Runexa</span>
       </Link>
 
       <div className="flex items-center gap-4">
         {isLogged ? (
           <>
             <a href="/dashboard" className="text-gray-700">
-  Dashboard
-</a>
+              Dashboard
+            </a>
 
             <a href="/admin" className="text-gray-700">
-  Admin
-</a>
+              Admin
+            </a>
 
             <button
               onClick={handleLogout}
