@@ -121,8 +121,18 @@ export default function UploadPage() {
     }
   };
 
-  const clauses =
-    result?.clauses && !result?.authRequired ? JSON.parse(result.clauses) : [];
+  let clauses: any[] = [];
+
+  try {
+    if (result?.clauses && !result?.authRequired) {
+      clauses = Array.isArray(result.clauses)
+        ? result.clauses
+        : JSON.parse(result.clauses);
+    }
+  } catch (e) {
+    console.error("Clause parsing error:", e);
+    clauses = [];
+  }
 
   if (loading) {
     return (
@@ -314,4 +324,3 @@ export default function UploadPage() {
     </main>
   );
 }
-
