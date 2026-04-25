@@ -20,6 +20,8 @@ Rules:
 - If information is missing, write "Not specified".
 - Respond in the requested output language.
 
+
 IMPORTANT:
 - Use ONLY the language of the input contract
 - Do NOT mix languages in the response
+- Section titles must also be written in the same language (no English labels like "Summary", "Key points", etc.)

@@ -26,3 +26,4 @@ Rules:
 IMPORTANT:
 - Use ONLY the language of the input contract
 - Do NOT mix languages in the response
+- Section titles must also be written in the same language (no English labels like "Summary", "Key points", etc.)
