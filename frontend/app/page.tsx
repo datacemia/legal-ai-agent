@@ -200,77 +200,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <footer className="bg-slate-950 text-white px-6 py-14">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid gap-10 md:grid-cols-4">
-            <div>
-              <h3 className="text-2xl font-bold">Runexa</h3>
-              <p className="mt-4 text-sm leading-6 text-slate-400">
-                {t.footerDesc}
-              </p>
-            </div>
-
-            <div>
-              <h4 className="font-semibold">{t.products}</h4>
-              <div className="mt-4 space-y-3 text-sm text-slate-400">
-                {t.agents.map((agent: string[], index: number) => (
-                  <p key={agent[0]}>
-                    {agent[0]}{" "}
-                    <span className={index === 0 ? "text-green-400" : "text-slate-500"}>
-                      · {index === 0 ? t.available : t.coming}
-                    </span>
-                  </p>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-semibold">{t.platformFooter}</h4>
-              <div className="mt-4 space-y-3 text-sm text-slate-400">
-                <a href="#agents" className="block hover:text-white">
-                  {t.explore}
-                </a>
-                <Link href="/upload" className="block hover:text-white">
-                  {t.tryLegal}
-                </Link>
-                <Link href="/login" className="block hover:text-white">
-                  Login
-                </Link>
-                <Link href="/register" className="block hover:text-white">
-                  Register
-                </Link>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-semibold">{t.about}</h4>
-              <p className="mt-4 text-sm leading-6 text-slate-400">
-                Runexa AI is a platform of specialized AI agents for legal,
-                finance, HR, and business productivity.
-              </p>
-              <p className="mt-4 text-sm font-medium text-blue-400">
-                {t.developedBy}
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-12 border-t border-slate-800 pt-6 flex flex-col gap-4 text-sm text-slate-500 md:flex-row md:items-center md:justify-between">
-            <p>{t.copyright}</p>
-
-            <div className="flex gap-5">
-              <a href="#" className="hover:text-white">
-                Privacy Policy
-              </a>
-              <a href="#" className="hover:text-white">
-                Terms of Service
-              </a>
-              <a href="#" className="hover:text-white">
-                Contact
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      
     </main>
   );
 }
