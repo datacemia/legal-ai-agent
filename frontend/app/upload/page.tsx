@@ -31,8 +31,52 @@ const labels: any = {
     none: "None",
     recommendation: "Recommendation",
   },
-  fr: { /* inchangé */ },
-  ar: { /* inchangé */ },
+  fr: {
+    pageTitle: "Analyser votre contrat",
+    loading: "Analyse de votre contrat...",
+    file: "Fichier",
+    summaryCard: "⚡ Résumé en 60 secondes",
+    summaryCardText: "Comprenez rapidement les points clés.",
+    privateCard: "🔒 Confidentialité intégrée",
+    privateCardText: "Vos documents restent protégés.",
+    multiCard: "🌍 EN / FR / AR",
+    multiCardText: "Analyse multilingue des contrats.",
+    signupCta: "Analyse gratuite disponible après inscription",
+    loginRequired: "Créez un compte pour analyser votre contrat",
+    author: "Créé par Dr. Rachid Ejjami",
+    analyzeButton: "Analyser le contrat",
+    empty: "Téléversez un contrat pour voir le résumé, le score de risque, la version simplifiée et l’analyse des clauses.",
+    summary: "Résumé",
+    simplified: "Version simplifiée",
+    clauses: "Analyse des clauses",
+    clause: "Clause",
+    trigger: "Déclencheur",
+    none: "Aucun",
+    recommendation: "Recommandation",
+  },
+  ar: {
+    pageTitle: "تحليل العقد",
+    loading: "جاري تحليل العقد...",
+    file: "الملف",
+    summaryCard: "⚡ ملخص خلال 60 ثانية",
+    summaryCardText: "افهم النقاط الأساسية بسرعة.",
+    privateCard: "🔒 خصوصية مدمجة",
+    privateCardText: "تبقى مستنداتك محمية.",
+    multiCard: "🌍 EN / FR / AR",
+    multiCardText: "تحليل عقود متعدد اللغات.",
+    signupCta: "التحليل المجاني متاح بعد التسجيل",
+    loginRequired: "أنشئ حسابًا لتحليل عقدك",
+    author: "تم تطويره بواسطة د. رشيد الجامعي",
+    analyzeButton: "تحليل العقد",
+    empty: "قم برفع عقد لعرض الملخص ودرجة المخاطر والنسخة المبسطة وتحليل البنود.",
+    summary: "ملخص",
+    simplified: "نسخة مبسطة",
+    clauses: "تحليل البنود",
+    clause: "البند",
+    trigger: "المؤشر",
+    none: "لا يوجد",
+    recommendation: "التوصية",
+  },
 };
 
 export default function UploadPage() {
@@ -51,7 +95,9 @@ export default function UploadPage() {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      setResult({ authRequired: true });
+      setResult({
+        authRequired: true,
+      });
       return;
     }
 
@@ -63,9 +109,9 @@ export default function UploadPage() {
       const doc = await uploadDocument(file);
       const analysis = await runAnalysis(doc.id, language);
 
-      // ✅ FIX PAYMENT (IMPORTANT)
       if (analysis.detail?.includes("Payment required")) {
-        setResult({ paymentRequired: true });
+        alert("You used your free analysis. Please buy one analysis credit.");
+        window.location.href = "/dashboard";
         return;
       }
 
@@ -112,27 +158,74 @@ export default function UploadPage() {
       <div className="max-w-5xl mx-auto space-y-8">
         <h1 className="text-3xl font-bold text-gray-900">{t.pageTitle}</h1>
 
-        {/* ✅ PAYMENT MESSAGE */}
-        {result?.paymentRequired && (
-          <div className="bg-yellow-50 text-yellow-800 border border-yellow-200 rounded-2xl p-6 text-center space-y-3">
-            <p className="font-medium">
-              You used your free analysis. Please buy one analysis credit.
-            </p>
-            <a
-              href="/dashboard"
-              className="inline-block bg-black text-white px-4 py-2 rounded-lg"
-            >
-              Go to dashboard
-            </a>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="bg-white border rounded-xl p-4">
+            <p className="font-semibold">{t.summaryCard}</p>
+            <p className="text-sm text-gray-500">{t.summaryCardText}</p>
           </div>
-        )}
+
+          <div className="bg-white border rounded-xl p-4">
+            <p className="font-semibold">{t.privateCard}</p>
+            <p className="text-sm text-gray-500">{t.privateCardText}</p>
+          </div>
+
+          <div className="bg-white border rounded-xl p-4">
+            <p className="font-semibold">{t.multiCard}</p>
+            <p className="text-sm text-gray-500">{t.multiCardText}</p>
+          </div>
+        </div>
+
+        <div className="bg-white p-6 rounded-2xl shadow-sm border">
+          <p className="mb-4 text-sm font-medium text-gray-600">
+            {t.signupCta}
+          </p>
+
+          <p className="text-xs text-gray-400 text-center">
+            {t.author}
+          </p>
+
+          <UploadBox
+            file={file}
+            onFileChange={(selected) => {
+              setFile(selected);
+              setFileName(selected?.name || "");
+              setResult(null);
+              setOpenIndex(null);
+            }}
+          />
+
+          <div className="flex items-center gap-4 mt-5 flex-wrap">
+            <select
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+              className="border rounded-lg px-3 py-2"
+            >
+              <option value="en">English</option>
+              <option value="fr">Français</option>
+              <option value="ar">العربية</option>
+            </select>
+
+            <button
+              onClick={handleUpload}
+              disabled={!file}
+              className="px-5 py-2 bg-black text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {t.analyzeButton}
+            </button>
+          </div>
+        </div>
 
         {result?.authRequired && (
           <div className="bg-black text-white rounded-2xl p-6 text-center space-y-3">
             <p className="font-medium">{t.loginRequired}</p>
+
             <div className="flex justify-center gap-3">
-              <a href="/login" className="underline">Login</a>
-              <a href="/register" className="underline">Register</a>
+              <a href="/login" className="underline">
+                Login
+              </a>
+              <a href="/register" className="underline">
+                Register
+              </a>
             </div>
           </div>
         )}
@@ -143,10 +236,88 @@ export default function UploadPage() {
           </div>
         )}
 
-        {/* ✅ SAFE RENDER */}
-        {result && !result.authRequired && !result.paymentRequired && (
+        {result && !result.authRequired && (
           <>
-            {/* TON UI EXISTANT ICI (inchangé) */}
+            <div className="bg-white p-6 rounded-2xl shadow-sm border">
+              <div className="flex justify-between items-center">
+                <h2 className="text-xl font-semibold">{t.summary}</h2>
+                <RiskBadge risk={result.risk_level} language={language} />
+              </div>
+
+              <p className="mt-4 text-gray-700 whitespace-pre-line">
+                {result.summary}
+              </p>
+            </div>
+
+            <RiskScore score={result.risk_score} language={language} />
+
+            <div className="bg-blue-50 p-6 rounded-2xl border border-blue-200">
+              <h2 className="text-xl font-semibold text-blue-800">
+                {t.simplified}
+              </h2>
+
+              <p className="mt-4 text-blue-900 whitespace-pre-line">
+                {result.simplified_version}
+              </p>
+            </div>
+
+            <div className="bg-white p-6 rounded-2xl shadow-sm border">
+              <h2 className="text-xl font-semibold mb-4">{t.clauses}</h2>
+
+              <div className="space-y-4">
+                {clauses.map((clause: any, index: number) => (
+                  <div
+                    key={index}
+                    className={`border rounded-xl p-4 cursor-pointer transition ${
+                      clause.risk_level === "high"
+                        ? "border-red-300 bg-red-50"
+                        : clause.risk_level === "medium"
+                        ? "border-yellow-300 bg-yellow-50"
+                        : "border-gray-200 bg-white hover:bg-gray-50"
+                    }`}
+                    onClick={() =>
+                      setOpenIndex(openIndex === index ? null : index)
+                    }
+                  >
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center gap-2">
+                        <span className="font-semibold">
+                          {t.clause} {index + 1}
+                        </span>
+                        <span className="text-xs text-gray-400">
+                          {openIndex === index ? "▲" : "▼"}
+                        </span>
+                      </div>
+
+                      <RiskBadge
+                        risk={clause.risk_level}
+                        language={language || "en"}
+                      />
+                    </div>
+
+                    <p className="text-blue-700 text-sm mt-2">
+                      {clause.explanation_simple}
+                    </p>
+
+                    {openIndex === index && (
+                      <div className="mt-3 space-y-2">
+                        <p className="text-sm text-gray-500">
+                          {t.trigger}: {clause.trigger || t.none}
+                        </p>
+
+                        <p className="text-gray-800">
+                          {clause.original_text}
+                        </p>
+
+                        <p className="text-gray-600 text-sm">
+                          {t.recommendation}: {clause.recommendation}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
           </>
         )}
       </div>
