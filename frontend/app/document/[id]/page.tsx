@@ -30,19 +30,25 @@ export default function DocumentPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-gray-50">
-        <p className="text-gray-600">Loading analysis...</p>
+      <main className="min-h-screen flex items-center justify-center bg-slate-50">
+        <p className="text-slate-600">Loading analysis...</p>
       </main>
     );
   }
 
   if (!analysis?.id) {
     return (
-      <main className="min-h-screen bg-gray-50 p-6">
-        <div className="max-w-4xl mx-auto bg-white border rounded-2xl p-8">
-          <h1 className="text-xl font-bold">Analysis not found</h1>
-          <Link href="/dashboard" className="text-blue-700 mt-4 inline-block">
-            Back to dashboard
+      <main className="min-h-screen bg-slate-50 px-4 py-8">
+        <div className="max-w-4xl mx-auto bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
+          <h1 className="text-xl font-bold text-slate-950">
+            Analysis not found
+          </h1>
+
+          <Link
+            href="/dashboard"
+            className="text-blue-600 mt-4 inline-block font-medium"
+          >
+            ← Back to dashboard
           </Link>
         </div>
       </main>
@@ -52,67 +58,106 @@ export default function DocumentPage() {
   const clauses = analysis?.clauses ? JSON.parse(analysis.clauses) : [];
 
   return (
-    <main className="min-h-screen bg-gray-50 p-6">
+    <main className="min-h-screen bg-slate-50 px-4 py-8 sm:px-6">
       <div className="max-w-5xl mx-auto space-y-8">
-        <Link href="/dashboard" className="text-blue-700">
+        <Link
+          href="/dashboard"
+          className="inline-flex text-sm font-medium text-blue-600 hover:text-blue-700"
+        >
           ← Back to dashboard
         </Link>
 
-        <div className="bg-white p-6 rounded-2xl shadow-sm border">
-          <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold">Contract Analysis</h1>
+        <section className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="text-sm font-semibold text-blue-600">
+                Document analysis
+              </p>
+              <h1 className="mt-1 text-2xl sm:text-3xl font-bold text-slate-950">
+                Contract Analysis
+              </h1>
+            </div>
+
             <RiskBadge risk={analysis.risk_level} />
           </div>
 
-          <p className="mt-4 text-gray-700 whitespace-pre-line">
+          <p className="mt-6 text-slate-700 whitespace-pre-line leading-7">
             {analysis.summary}
           </p>
-        </div>
+        </section>
 
         <RiskScore score={analysis.risk_score} />
 
-        <div className="bg-blue-50 p-6 rounded-2xl border border-blue-200">
+        <section className="bg-blue-50 p-6 rounded-3xl border border-blue-200">
           <h2 className="text-xl font-semibold text-blue-800">
             Simplified Version
           </h2>
 
-          <p className="mt-4 text-blue-900 whitespace-pre-line">
+          <p className="mt-4 text-blue-900 whitespace-pre-line leading-7">
             {analysis.simplified_version}
           </p>
-        </div>
+        </section>
 
-        <div className="bg-white p-6 rounded-2xl shadow-sm border">
-          <h2 className="text-xl font-semibold mb-4">Clauses Analysis</h2>
+        <section className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
+          <div className="flex items-center justify-between gap-4 mb-5">
+            <div>
+              <p className="text-sm text-slate-500">Detailed review</p>
+              <h2 className="text-xl font-semibold text-slate-950">
+                Clauses Analysis
+              </h2>
+            </div>
+
+            <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
+              {clauses.length} clauses
+            </span>
+          </div>
 
           <div className="space-y-4">
             {clauses.map((clause: any, index: number) => (
               <div
                 key={index}
-                className={`border rounded-xl p-4 cursor-pointer transition ${
+                className={`border rounded-2xl p-4 cursor-pointer transition ${
                   clause.risk_level === "high"
                     ? "border-red-300 bg-red-50"
                     : clause.risk_level === "medium"
                     ? "border-yellow-300 bg-yellow-50"
-                    : "border-gray-200 bg-white hover:bg-gray-50"
+                    : "border-slate-200 bg-white hover:bg-slate-50"
                 }`}
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
               >
-                <div className="flex justify-between items-center">
-                  <span className="font-semibold">Clause {index + 1}</span>
+                <div className="flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-white text-sm font-semibold text-slate-700 border">
+                      {index + 1}
+                    </span>
+
+                    <span className="font-semibold text-slate-900">
+                      Clause {index + 1}
+                    </span>
+
+                    <span className="text-xs text-slate-400">
+                      {openIndex === index ? "▲" : "▼"}
+                    </span>
+                  </div>
+
                   <RiskBadge risk={clause.risk_level} />
                 </div>
 
-                <p className="text-blue-700 text-sm mt-2">
+                <p className="text-blue-700 text-sm mt-3">
                   {clause.explanation_simple}
                 </p>
 
                 {openIndex === index && (
-                  <div className="mt-3 space-y-2">
-                    <p className="text-sm text-gray-500">
+                  <div className="mt-4 space-y-3">
+                    <p className="text-sm text-slate-500">
                       Trigger: {clause.trigger || "None"}
                     </p>
-                    <p className="text-gray-800">{clause.original_text}</p>
-                    <p className="text-gray-600 text-sm">
+
+                    <p className="text-slate-800 leading-7">
+                      {clause.original_text}
+                    </p>
+
+                    <p className="text-slate-600 text-sm">
                       Recommendation: {clause.recommendation}
                     </p>
                   </div>
@@ -120,7 +165,7 @@ export default function DocumentPage() {
               </div>
             ))}
           </div>
-        </div>
+        </section>
       </div>
     </main>
   );
