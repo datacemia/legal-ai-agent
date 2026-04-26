@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const labels: any = {
   en: {
@@ -18,12 +18,6 @@ const labels: any = {
     ctaTitle: "One platform. Multiple AI agents. Real business outcomes.",
     ctaDesc: "Start with contract analysis today, then expand into finance, HR, operations, and business automation as your needs grow.",
     ctaButton: "Start with Legal Agent",
-    footerDesc: "Specialized AI agents for legal, finance, HR, and business productivity.",
-    developedBy: "Developed by Dr. Rachid Ejjami",
-    products: "Products",
-    platformFooter: "Platform",
-    about: "About",
-    copyright: "© 2025 Runexa AI. All rights reserved.",
     agents: [
       ["Legal Agent", "Analyze contracts, detect risky clauses, and get clear recommendations before you sign."],
       ["Finance Agent", "Review invoices, budgets, expenses, and financial documents faster."],
@@ -45,12 +39,6 @@ const labels: any = {
     ctaTitle: "Une plateforme. Plusieurs agents IA. Des résultats concrets.",
     ctaDesc: "Commencez avec l’analyse de contrats, puis développez vers la finance, les RH et l’automatisation business.",
     ctaButton: "Commencer avec l’agent juridique",
-    footerDesc: "Agents IA spécialisés pour le juridique, la finance, les RH et la productivité business.",
-    developedBy: "Développé par Dr. Rachid Ejjami",
-    products: "Produits",
-    platformFooter: "Plateforme",
-    about: "À propos",
-    copyright: "© 2025 Runexa AI. Tous droits réservés.",
     agents: [
       ["Agent juridique", "Analysez vos contrats, détectez les clauses à risque et obtenez des recommandations claires."],
       ["Agent finance", "Analysez factures, budgets, dépenses et documents financiers plus rapidement."],
@@ -72,12 +60,6 @@ const labels: any = {
     ctaTitle: "منصة واحدة. عدة وكلاء ذكاء اصطناعي. نتائج عملية.",
     ctaDesc: "ابدأ بتحليل العقود، ثم توسع إلى المالية والموارد البشرية وأتمتة الأعمال.",
     ctaButton: "ابدأ بالوكيل القانوني",
-    footerDesc: "وكلاء ذكاء اصطناعي متخصصون للقانون والمالية والموارد البشرية والأعمال.",
-    developedBy: "تم التطوير بواسطة Dr. Rachid Ejjami",
-    products: "المنتجات",
-    platformFooter: "المنصة",
-    about: "حول",
-    copyright: "© 2025 Runexa AI. جميع الحقوق محفوظة.",
     agents: [
       ["الوكيل القانوني", "حلل العقود، واكتشف البنود الخطرة، واحصل على توصيات واضحة."],
       ["وكيل المالية", "راجع الفواتير والميزانيات والمصاريف والوثائق المالية بسرعة."],
@@ -93,6 +75,20 @@ export default function HomePage() {
   const [language, setLanguage] = useState("en");
   const t = labels[language] || labels.en;
 
+  useEffect(() => {
+    const saved = localStorage.getItem("locale");
+
+    if (saved && labels[saved]) {
+      setLanguage(saved);
+    }
+  }, []);
+
+  const handleLanguageChange = (lang: string) => {
+    setLanguage(lang);
+    localStorage.setItem("locale", lang);
+    window.dispatchEvent(new Event("locale-change"));
+  };
+
   return (
     <main
       dir={language === "ar" ? "rtl" : "ltr"}
@@ -103,7 +99,7 @@ export default function HomePage() {
           <div className="flex justify-center">
             <select
               value={language}
-              onChange={(e) => setLanguage(e.target.value)}
+              onChange={(e) => handleLanguageChange(e.target.value)}
               className="border rounded-lg px-3 py-2 bg-white"
             >
               <option value="en">English</option>
@@ -199,8 +195,6 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
-
-      
     </main>
   );
 }

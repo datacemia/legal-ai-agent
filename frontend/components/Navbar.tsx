@@ -3,16 +3,27 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { getSavedLocale, translations } from "../lib/i18n";
 
 export default function Navbar() {
   const [isLogged, setIsLogged] = useState(false);
+  const [locale, setLocale] = useState("en");
 
   useEffect(() => {
     checkAuth();
+    setLocale(getSavedLocale());
+
     window.addEventListener("storage", checkAuth);
+
+    const handleLocaleChange = () => {
+      setLocale(getSavedLocale());
+    };
+
+    window.addEventListener("locale-change", handleLocaleChange);
 
     return () => {
       window.removeEventListener("storage", checkAuth);
+      window.removeEventListener("locale-change", handleLocaleChange);
     };
   }, []);
 
@@ -27,28 +38,27 @@ export default function Navbar() {
     window.location.href = "/login";
   };
 
+  const t = translations[locale] || translations.en;
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-200/70 bg-white/70 backdrop-blur-md">
+    <header
+      dir={locale === "ar" ? "rtl" : "ltr"}
+      className="sticky top-0 z-50 w-full border-b border-slate-200/70 bg-white/70 backdrop-blur-md"
+    >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        
-        {/* LEFT */}
         <Link href="/" className="flex items-center gap-3">
           <Image
-           src="/runexa-logo.png"
-           alt="Runexa"
-           width={140}
-           height={40}
+            src="/runexa-logo.png"
+            alt="Runexa"
+            width={140}
+            height={40}
           />
 
           <div className="leading-tight">
-            
-            <div className="text-xs text-slate-500">
-              AI agents that get things done
-            </div>
+            <div className="text-xs text-slate-500">{t.slogan}</div>
           </div>
         </Link>
 
-        {/* RIGHT */}
         <div className="flex items-center gap-5">
           {isLogged ? (
             <>
@@ -56,21 +66,21 @@ export default function Navbar() {
                 href="/dashboard"
                 className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
               >
-                Dashboard
+                {t.dashboard}
               </Link>
 
               <Link
                 href="/admin"
                 className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
               >
-                Admin
+                {t.admin}
               </Link>
 
               <button
                 onClick={handleLogout}
                 className="rounded-xl bg-slate-100 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-200 transition"
               >
-                Logout
+                {t.logout}
               </button>
             </>
           ) : (
@@ -79,14 +89,14 @@ export default function Navbar() {
                 href="/login"
                 className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
               >
-                Login
+                {t.login}
               </Link>
 
               <Link
                 href="/register"
                 className="rounded-xl bg-slate-900 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 transition"
               >
-                Register
+                {t.register}
               </Link>
             </>
           )}
