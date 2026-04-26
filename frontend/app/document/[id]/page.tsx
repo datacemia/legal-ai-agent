@@ -7,6 +7,51 @@ import { getAnalysis } from "../../../lib/api";
 import RiskBadge from "../../../components/RiskBadge";
 import RiskScore from "../../../components/RiskScore";
 
+const labels: any = {
+  en: {
+    loading: "Loading analysis...",
+    notFound: "Analysis not found",
+    back: "← Back to dashboard",
+    documentAnalysis: "Document analysis",
+    title: "Contract Analysis",
+    simplified: "Simplified Version",
+    detailed: "Detailed review",
+    clauses: "Clauses Analysis",
+    clause: "Clause",
+    trigger: "Trigger",
+    none: "None",
+    recommendation: "Recommendation",
+  },
+  fr: {
+    loading: "Chargement de l’analyse...",
+    notFound: "Analyse introuvable",
+    back: "← Retour au tableau de bord",
+    documentAnalysis: "Analyse du document",
+    title: "Analyse du contrat",
+    simplified: "Version simplifiée",
+    detailed: "Revue détaillée",
+    clauses: "Analyse des clauses",
+    clause: "Clause",
+    trigger: "Déclencheur",
+    none: "Aucun",
+    recommendation: "Recommandation",
+  },
+  ar: {
+    loading: "جاري تحميل التحليل...",
+    notFound: "لم يتم العثور على التحليل",
+    back: "← الرجوع إلى لوحة التحكم",
+    documentAnalysis: "تحليل الوثيقة",
+    title: "تحليل العقد",
+    simplified: "النسخة المبسطة",
+    detailed: "مراجعة تفصيلية",
+    clauses: "تحليل البنود",
+    clause: "البند",
+    trigger: "المؤشر",
+    none: "لا يوجد",
+    recommendation: "التوصية",
+  },
+};
+
 export default function DocumentPage() {
   const params = useParams();
   const documentId = Number(params.id);
@@ -28,6 +73,10 @@ export default function DocumentPage() {
     loadAnalysis();
   }, [documentId]);
 
+  const language = analysis?.language || "en";
+  const isArabic = language === "ar";
+  const t = labels[language] || labels.en;
+
   if (loading) {
     return (
       <main className="min-h-screen flex items-center justify-center bg-slate-50">
@@ -40,28 +89,24 @@ export default function DocumentPage() {
     return (
       <main className="min-h-screen bg-slate-50 px-4 py-8">
         <div className="max-w-4xl mx-auto bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
-          <h1 className="text-xl font-bold text-slate-950">
-            Analysis not found
-          </h1>
+          <h1 className="text-xl font-bold text-slate-950">{t.notFound}</h1>
 
           <Link
             href="/dashboard"
             className="text-blue-600 mt-4 inline-block font-medium"
           >
-            ← Back to dashboard
+            {t.back}
           </Link>
         </div>
       </main>
     );
   }
 
-  const isArabic = analysis.language === "ar";
-  const textDirection = isArabic ? "rtl" : "ltr";
   const clauses = analysis?.clauses ? JSON.parse(analysis.clauses) : [];
 
   return (
     <main
-      dir={textDirection}
+      dir={isArabic ? "rtl" : "ltr"}
       className="min-h-screen bg-slate-50 px-4 py-8 sm:px-6"
     >
       <div className="max-w-5xl mx-auto space-y-8">
@@ -69,57 +114,51 @@ export default function DocumentPage() {
           href="/dashboard"
           className="inline-flex text-sm font-medium text-blue-600 hover:text-blue-700"
         >
-          ← Back to dashboard
+          {t.back}
         </Link>
 
         <section className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div>
+            <div className="text-start">
               <p className="text-sm font-semibold text-blue-600">
-                Document analysis
+                {t.documentAnalysis}
               </p>
               <h1 className="mt-1 text-2xl sm:text-3xl font-bold text-slate-950">
-                Contract Analysis
+                {t.title}
               </h1>
             </div>
 
-            <RiskBadge risk={analysis.risk_level} />
+            <RiskBadge risk={analysis.risk_level} language={language} />
           </div>
 
-          <p
-            dir={textDirection}
-            className="mt-6 text-slate-700 whitespace-pre-line leading-7 text-start"
-          >
+          <p className="mt-6 text-slate-700 whitespace-pre-line leading-7 text-start">
             {analysis.summary}
           </p>
         </section>
 
-        <RiskScore score={analysis.risk_score} />
+        <RiskScore score={analysis.risk_score} language={language} />
 
         <section className="bg-blue-50 p-6 rounded-3xl border border-blue-200">
-          <h2 className="text-xl font-semibold text-blue-800">
-            Simplified Version
+          <h2 className="text-xl font-semibold text-blue-800 text-start">
+            {t.simplified}
           </h2>
 
-          <p
-            dir={textDirection}
-            className="mt-4 text-blue-900 whitespace-pre-line leading-7 text-start"
-          >
+          <p className="mt-4 text-blue-900 whitespace-pre-line leading-7 text-start">
             {analysis.simplified_version}
           </p>
         </section>
 
         <section className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
           <div className="flex items-center justify-between gap-4 mb-5">
-            <div>
-              <p className="text-sm text-slate-500">Detailed review</p>
+            <div className="text-start">
+              <p className="text-sm text-slate-500">{t.detailed}</p>
               <h2 className="text-xl font-semibold text-slate-950">
-                Clauses Analysis
+                {t.clauses}
               </h2>
             </div>
 
             <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
-              {clauses.length} clauses
+              {clauses.length}
             </span>
           </div>
 
@@ -143,7 +182,7 @@ export default function DocumentPage() {
                     </span>
 
                     <span className="font-semibold text-slate-900">
-                      Clause {index + 1}
+                      {t.clause} {index + 1}
                     </span>
 
                     <span className="text-xs text-slate-400">
@@ -151,37 +190,27 @@ export default function DocumentPage() {
                     </span>
                   </div>
 
-                  <RiskBadge risk={clause.risk_level} />
+                  <RiskBadge risk={clause.risk_level} language={language} />
                 </div>
 
-                <p
-                  dir={textDirection}
-                  className="text-blue-700 text-sm mt-3 text-start"
-                >
+                <p className="text-blue-700 text-sm mt-3 text-start whitespace-pre-line">
                   {clause.explanation_simple}
                 </p>
 
                 {openIndex === index && (
-                  <div className="mt-4 space-y-3">
-                    <p
-                      dir={textDirection}
-                      className="text-sm text-slate-500 text-start"
-                    >
-                      Trigger: {clause.trigger || "None"}
+                  <div className="mt-4 space-y-3 text-start">
+                    <p className="text-sm text-slate-500">
+                      <span className="font-medium">{t.trigger}:</span>{" "}
+                      {clause.trigger || t.none}
                     </p>
 
-                    <p
-                      dir={textDirection}
-                      className="text-slate-800 leading-7 text-start"
-                    >
+                    <p className="text-slate-800 leading-7 whitespace-pre-line">
                       {clause.original_text}
                     </p>
 
-                    <p
-                      dir={textDirection}
-                      className="text-slate-600 text-sm text-start"
-                    >
-                      Recommendation: {clause.recommendation}
+                    <p className="text-slate-600 text-sm leading-7">
+                      <span className="font-medium">{t.recommendation}:</span>{" "}
+                      {clause.recommendation}
                     </p>
                   </div>
                 )}
