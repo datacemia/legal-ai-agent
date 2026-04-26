@@ -8,8 +8,18 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // ✅ NEW UI
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState<"success" | "error">("success");
+
   const handleRegister = async () => {
     try {
+      if (!email.trim() || !password) {
+        setMessageType("error");
+        setMessage("Please enter email and password");
+        return;
+      }
+
       const res = await fetch(`${API_URL}/auth/register`, {
         method: "POST",
         headers: {
@@ -24,14 +34,22 @@ export default function RegisterPage() {
       const data = await res.json();
 
       if (res.ok) {
-        alert("Account created. Please check your email to verify your account before login.");
-        window.location.href = "/login";
+        setMessageType("success");
+        setMessage(
+          "Account created. Please check your email to verify your account."
+        );
+
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 1500);
       } else {
-        alert(data.detail || "Registration failed");
+        setMessageType("error");
+        setMessage(data.detail || "Registration failed");
       }
     } catch (err) {
       console.error(err);
-      alert("Error connecting to server");
+      setMessageType("error");
+      setMessage("Error connecting to server");
     }
   };
 
@@ -39,6 +57,19 @@ export default function RegisterPage() {
     <main className="min-h-screen flex items-center justify-center">
       <div className="bg-white p-8 rounded-2xl shadow space-y-4 w-80">
         <h1 className="text-xl font-bold">Register</h1>
+
+        {/* ✅ MESSAGE UI */}
+        {message && (
+          <div
+            className={`text-sm p-3 rounded-lg text-center ${
+              messageType === "success"
+                ? "bg-green-50 text-green-700 border border-green-200"
+                : "bg-red-50 text-red-700 border border-red-200"
+            }`}
+          >
+            {message}
+          </div>
+        )}
 
         <input
           type="email"
