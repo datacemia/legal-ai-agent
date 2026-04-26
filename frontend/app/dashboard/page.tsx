@@ -125,8 +125,6 @@ export default function DashboardPage() {
       className="min-h-screen bg-slate-50 px-4 py-8"
     >
       <div className="max-w-6xl mx-auto space-y-8">
-
-        {/* HEADER */}
         <div className="flex flex-col md:flex-row md:justify-between gap-4">
           <div>
             <h1 className="text-3xl font-bold">{t.title}</h1>
@@ -150,7 +148,12 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* STATS */}
+        {message && (
+          <div className="bg-red-50 text-red-700 border border-red-200 text-sm p-3 rounded-xl text-center">
+            {message}
+          </div>
+        )}
+
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="bg-white p-5 rounded-2xl border">
             <p className="text-sm text-slate-500">{t.total}</p>
@@ -172,7 +175,6 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* EMPTY */}
         {documents.length === 0 ? (
           <div className="bg-white border rounded-2xl p-10 text-center">
             <h2 className="text-xl font-semibold">{t.emptyTitle}</h2>
@@ -187,44 +189,50 @@ export default function DashboardPage() {
           </div>
         ) : (
           <div className="bg-white border rounded-2xl overflow-hidden">
-            <table className="w-full text-sm">
-              <thead className="bg-slate-100 text-slate-600">
-                <tr>
-                  <th className="p-4 text-left">{t.document}</th>
-                  <th className="p-4 text-left">{t.type}</th>
-                  <th className="p-4 text-left">{t.language}</th>
-                  <th className="p-4 text-left">{t.status}</th>
-                  <th className="p-4 text-left">{t.date}</th>
-                  <th className="p-4 text-right">{t.action}</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {documents.map((doc) => (
-                  <tr key={doc.id} className="border-t hover:bg-slate-50">
-                    <td className="p-4 font-medium">{doc.file_name}</td>
-                    <td className="p-4">{doc.file_type?.toUpperCase()}</td>
-                    <td className="p-4">{doc.language || "—"}</td>
-                    <td className="p-4">
-                      <RiskBadge
-                        risk={doc.status === "completed" ? "low" : "medium"}
-                      />
-                    </td>
-                    <td className="p-4">
-                      {new Date(doc.created_at).toLocaleDateString()}
-                    </td>
-                    <td className="p-4 text-right">
-                      <Link
-                        href={`/document/${doc.id}`}
-                        className="text-blue-600"
-                      >
-                        {t.view}
-                      </Link>
-                    </td>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead className="bg-slate-100 text-slate-600">
+                  <tr>
+                    <th className="p-4 text-start">{t.document}</th>
+                    <th className="p-4 text-start">{t.type}</th>
+                    <th className="p-4 text-start">{t.language}</th>
+                    <th className="p-4 text-start">{t.status}</th>
+                    <th className="p-4 text-start">{t.date}</th>
+                    <th className="p-4 text-end">{t.action}</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+
+                <tbody>
+                  {documents.map((doc) => (
+                    <tr key={doc.id} className="border-t hover:bg-slate-50">
+                      <td className="p-4 text-start font-medium">
+                        {doc.file_name}
+                      </td>
+                      <td className="p-4 text-start">
+                        {doc.file_type?.toUpperCase()}
+                      </td>
+                      <td className="p-4 text-start">{doc.language || "—"}</td>
+                      <td className="p-4 text-start">
+                        <RiskBadge
+                          risk={doc.status === "completed" ? "low" : "medium"}
+                        />
+                      </td>
+                      <td className="p-4 text-start">
+                        {new Date(doc.created_at).toLocaleDateString()}
+                      </td>
+                      <td className="p-4 text-end">
+                        <Link
+                          href={`/document/${doc.id}`}
+                          className="text-blue-600"
+                        >
+                          {t.view}
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
       </div>
