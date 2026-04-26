@@ -83,7 +83,7 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_user)
 
-    send_verification_email(new_user.email, token)
+    send_reset_email(user.email, token)
 
     return new_user
 
@@ -208,3 +208,38 @@ def reset_password(payload: dict, db: Session = Depends(get_db)):
     db.commit()
 
     return {"message": "Password updated successfully"}
+
+def send_reset_email(to_email: str, token: str):
+    reset_url = f"{FRONTEND_URL}/reset-password?token={token}"
+
+    smtp_host = os.getenv("SMTP_HOST")
+    smtp_port = int(os.getenv("SMTP_PORT", "465"))
+    smtp_user = os.getenv("SMTP_USERNAME")
+    smtp_password = os.getenv("SMTP_PASSWORD")
+    from_email = os.getenv("SMTP_FROM_EMAIL", smtp_user)
+    from_name = os.getenv("SMTP_FROM_NAME", "Runexa")
+
+    msg = EmailMessage()
+    msg["Subject"] = "Reset your password"
+    msg["From"] = f"{from_name} <{from_email}>"
+    msg["To"] = to_email
+
+    msg.set_content(f"""
+Reset your password:
+
+{reset_url}
+
+If you did not request this, ignore this email.
+""")
+
+    context = ssl.create_default_context()
+
+    try:
+        with smtplib.SMTP_SSL(smtp_host, smtp_port, context=context) as server:
+            server.login(smtp_user, smtp_password)
+            server.send_message(msg)
+
+        print("Reset email sent to:", to_email)
+
+    except Exception as e:
+        print("SMTP ERROR:", repr(e))
