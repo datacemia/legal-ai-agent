@@ -10,14 +10,20 @@ function ResetPasswordContent() {
   const token = params.get("token");
   const [password, setPassword] = useState("");
 
+  // ✅ NEW UI
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState<"success" | "error">("success");
+
   const handle = async () => {
     if (!token) {
-      alert("Invalid reset link.");
+      setMessageType("error");
+      setMessage("Invalid reset link.");
       return;
     }
 
     if (!password || password.length < 6) {
-      alert("Password must be at least 6 characters.");
+      setMessageType("error");
+      setMessage("Password must be at least 6 characters.");
       return;
     }
 
@@ -31,15 +37,22 @@ function ResetPasswordContent() {
       const data = await res.json();
 
       if (res.ok) {
-        alert("Password updated successfully. You can now login.");
-        window.location.href = "/login";
+        setMessageType("success");
+        setMessage("Password updated successfully. Redirecting...");
+
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 1500);
+
         return;
       }
 
-      alert(data.detail || data.message || "Request failed");
+      setMessageType("error");
+      setMessage(data.detail || data.message || "Request failed");
     } catch (error) {
       console.error(error);
-      alert("Error connecting to server");
+      setMessageType("error");
+      setMessage("Error connecting to server");
     }
   };
 
@@ -47,6 +60,19 @@ function ResetPasswordContent() {
     <main className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="bg-white p-8 rounded-2xl shadow space-y-4 w-80">
         <h1 className="text-xl font-bold text-center">Reset password</h1>
+
+        {/* ✅ MESSAGE UI */}
+        {message && (
+          <div
+            className={`text-sm p-3 rounded-lg text-center ${
+              messageType === "success"
+                ? "bg-green-50 text-green-700 border border-green-200"
+                : "bg-red-50 text-red-700 border border-red-200"
+            }`}
+          >
+            {message}
+          </div>
+        )}
 
         <input
           type="password"
