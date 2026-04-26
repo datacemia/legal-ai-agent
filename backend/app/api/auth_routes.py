@@ -199,20 +199,22 @@ def forgot_password(payload: dict, db: Session = Depends(get_db)):
 
     now = datetime.utcnow()
 
+    # ✅ RATE LIMIT
     if user.last_reset_email_sent_at and (
         now - user.last_reset_email_sent_at
-    ).total_seconds() < 60:
+    ).total_seconds() < RATE_LIMIT_SECONDS:
         return {"message": "Please wait before requesting another email."}
 
+    # ✅ SET TOKEN + TIMESTAMP AVANT ENVOI
     token = secrets.token_urlsafe(32)
     user.reset_token = token
     user.reset_token_expires = datetime.utcnow() + timedelta(minutes=15)
-    db.commit()
-
-    send_reset_email(user.email, token)
-
     user.last_reset_email_sent_at = now
+
     db.commit()
+
+    # ✅ SEND EMAIL APRÈS COMMIT
+    send_reset_email(user.email, token)
 
     return {"message": "Password reset email sent."}
 
