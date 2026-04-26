@@ -18,6 +18,17 @@ export default function RegisterPage() {
     /\d/.test(password) &&
     /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
+  const passwordRules = [
+    { label: "At least 12 characters", valid: password.length >= 12 },
+    { label: "One uppercase letter", valid: /[A-Z]/.test(password) },
+    { label: "One lowercase letter", valid: /[a-z]/.test(password) },
+    { label: "One number", valid: /\d/.test(password) },
+    {
+      label: "One special character",
+      valid: /[!@#$%^&*(),.?":{}|<>]/.test(password),
+    },
+  ];
+
   const handleRegister = async () => {
     try {
       if (!email.trim() || !password) {
@@ -215,16 +226,20 @@ export default function RegisterPage() {
                 />
               </div>
 
-              <div className="rounded-2xl bg-slate-50 p-5 text-sm text-slate-600">
+              <div className="rounded-2xl bg-slate-50 p-5 text-sm">
                 <p className="mb-3 font-medium text-slate-500">
                   Password must contain:
                 </p>
+
                 <div className="space-y-2">
-                  <p>✓ At least 12 characters</p>
-                  <p>✓ One uppercase letter</p>
-                  <p>✓ One lowercase letter</p>
-                  <p>✓ One number</p>
-                  <p>✓ One special character</p>
+                  {passwordRules.map((rule) => (
+                    <p
+                      key={rule.label}
+                      className={rule.valid ? "text-green-600" : "text-slate-500"}
+                    >
+                      {rule.valid ? "✓" : "○"} {rule.label}
+                    </p>
+                  ))}
                 </div>
               </div>
 
