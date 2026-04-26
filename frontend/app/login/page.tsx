@@ -76,6 +76,29 @@ export default function LoginPage() {
         >
           Login
         </button>
+
+        <button
+          onClick={async () => {
+            if (!email) {
+              alert("Enter your email first");
+              return;
+            }
+
+            const res = await fetch(`${API_URL}/auth/resend-verification`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ email: email.trim() }),
+            });
+
+            const data = await res.json();
+            alert(data.message);
+          }}
+          className="w-full text-sm text-blue-600 underline"
+        >
+          Resend verification email
+        </button>
       </div>
     </main>
   );
