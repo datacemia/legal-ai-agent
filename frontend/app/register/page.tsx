@@ -8,9 +8,16 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // ✅ NEW UI
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState<"success" | "error">("success");
+
+  // ✅ VALIDATION LIVE (UX ONLY)
+  const isValid =
+    password.length >= 12 &&
+    /[A-Z]/.test(password) &&
+    /[a-z]/.test(password) &&
+    /\d/.test(password) &&
+    /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
   const handleRegister = async () => {
     try {
@@ -87,9 +94,22 @@ export default function RegisterPage() {
           onChange={(e) => setPassword(e.target.value)}
         />
 
+        {/* ✅ PASSWORD RULES UI */}
+        <p className="text-xs text-gray-500">
+          Password must contain:
+          <br />- 12 characters
+          <br />- 1 uppercase
+          <br />- 1 lowercase
+          <br />- 1 number
+          <br />- 1 special character
+        </p>
+
         <button
           onClick={handleRegister}
-          className="w-full bg-black text-white py-2 rounded"
+          disabled={!isValid} // ✅ BLOQUE SI PAS VALIDE
+          className={`w-full py-2 rounded text-white ${
+            isValid ? "bg-black" : "bg-gray-400 cursor-not-allowed"
+          }`}
         >
           Register
         </button>

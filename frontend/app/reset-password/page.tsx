@@ -10,9 +10,15 @@ function ResetPasswordContent() {
   const token = params.get("token");
   const [password, setPassword] = useState("");
 
-  // ✅ NEW UI
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState<"success" | "error">("success");
+
+  const isValid =
+    password.length >= 12 &&
+    /[A-Z]/.test(password) &&
+    /[a-z]/.test(password) &&
+    /\d/.test(password) &&
+    /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
   const handle = async () => {
     if (!token) {
@@ -21,9 +27,9 @@ function ResetPasswordContent() {
       return;
     }
 
-    if (!password || password.length < 6) {
+    if (!isValid) {
       setMessageType("error");
-      setMessage("Password must be at least 6 characters.");
+      setMessage("Password does not meet the requirements.");
       return;
     }
 
@@ -61,7 +67,6 @@ function ResetPasswordContent() {
       <div className="bg-white p-8 rounded-2xl shadow space-y-4 w-80">
         <h1 className="text-xl font-bold text-center">Reset password</h1>
 
-        {/* ✅ MESSAGE UI */}
         {message && (
           <div
             className={`text-sm p-3 rounded-lg text-center ${
@@ -82,9 +87,21 @@ function ResetPasswordContent() {
           onChange={(e) => setPassword(e.target.value)}
         />
 
+        <p className="text-xs text-gray-500">
+          Password must contain:
+          <br />- 12 characters
+          <br />- 1 uppercase
+          <br />- 1 lowercase
+          <br />- 1 number
+          <br />- 1 special character
+        </p>
+
         <button
           onClick={handle}
-          className="w-full bg-black text-white py-2 rounded"
+          disabled={!isValid}
+          className={`w-full py-2 rounded text-white ${
+            isValid ? "bg-black" : "bg-gray-400 cursor-not-allowed"
+          }`}
         >
           Reset password
         </button>
