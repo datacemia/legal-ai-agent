@@ -86,22 +86,31 @@ export default function LoginPage() {
 
         <button
           onClick={async () => {
-            if (!email) {
-              alert("Enter your email first");
-              return;
+            try {
+              if (!email.trim()) {
+                alert("Enter your email first");
+                return;
+              }
+
+              const res = await fetch(`${API_URL}/auth/resend-verification`, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email: email.trim() }),
+              });
+
+              const data = await res.json();
+
+              alert(
+                data.message ||
+                data.detail ||
+                "Verification email request sent."
+              );
+            } catch (err) {
+              console.error(err);
+              alert("Error connecting to server");
             }
-
-            const res = await fetch(`${API_URL}/auth/resend-verification`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ email: email.trim() }),
-            });
-
-            const data = await res.json();
-
-            alert(data.message || data.detail || "Verification email request sent.");
           }}
           className="w-full text-sm text-blue-600 underline"
         >
