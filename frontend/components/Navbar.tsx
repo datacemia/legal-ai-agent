@@ -34,11 +34,10 @@ export default function Navbar() {
         {/* LEFT */}
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="/runexa-logo.png"
-            alt="Runexa"
-            width={44}
-            height={44}
-            className="object-contain"
+           src="/runexa-logo.png"
+           alt="Runexa"
+           width={140}
+           height={40}
           />
 
           <div className="leading-tight">
