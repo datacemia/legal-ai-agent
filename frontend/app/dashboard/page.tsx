@@ -10,6 +10,7 @@ import Navbar from "../../components/Navbar";
 export default function DashboardPage() {
   const [documents, setDocuments] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState("");
 
   async function loadDocuments() {
     try {
@@ -28,7 +29,7 @@ export default function DashboardPage() {
       return;
     }
 
-    alert(data.detail || "Payment is not configured yet.");
+    setMessage(data.detail || "Payment is not configured yet.");
   };
 
   useEffect(() => {
@@ -77,6 +78,12 @@ export default function DashboardPage() {
             </Link>
           </div>
         </div>
+
+        {message && (
+          <div className="bg-red-50 text-red-700 border border-red-200 text-sm p-3 rounded-lg text-center">
+            {message}
+          </div>
+        )}
 
         {documents.length === 0 ? (
           <div className="bg-white border rounded-2xl p-10 text-center">
