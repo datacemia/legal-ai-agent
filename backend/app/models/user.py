@@ -18,6 +18,9 @@ class User(Base):
     reset_token = Column(String, nullable=True)
     reset_token_expires = Column(DateTime, nullable=True)
 
+    last_verification_email_sent_at = Column(DateTime, nullable=True)
+    last_reset_email_sent_at = Column(DateTime, nullable=True)
+
     role = Column(String, default="user")
 
     plan = Column(String, default="free")

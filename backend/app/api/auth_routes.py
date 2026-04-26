@@ -168,11 +168,21 @@ def resend_verification(payload: dict, db: Session = Depends(get_db)):
     if user.email_verified:
         return {"message": "Email already verified."}
 
+    now = datetime.utcnow()
+
+    if user.last_verification_email_sent_at and (
+        now - user.last_verification_email_sent_at
+    ).total_seconds() < 60:
+        return {"message": "Please wait before requesting another email."}
+
     token = secrets.token_urlsafe(32)
     user.activation_token = token
     db.commit()
 
     send_verification_email(user.email, token)
+
+    user.last_verification_email_sent_at = now
+    db.commit()
 
     return {"message": "Verification email sent."}
 
@@ -186,12 +196,22 @@ def forgot_password(payload: dict, db: Session = Depends(get_db)):
     if not user:
         return {"message": "If this email exists, a reset link has been sent."}
 
+    now = datetime.utcnow()
+
+    if user.last_reset_email_sent_at and (
+        now - user.last_reset_email_sent_at
+    ).total_seconds() < 60:
+        return {"message": "Please wait before requesting another email."}
+
     token = secrets.token_urlsafe(32)
     user.reset_token = token
     user.reset_token_expires = datetime.utcnow() + timedelta(minutes=15)
     db.commit()
 
     send_reset_email(user.email, token)
+
+    user.last_reset_email_sent_at = now
+    db.commit()
 
     return {"message": "Password reset email sent."}
 
