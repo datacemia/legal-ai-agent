@@ -17,6 +17,8 @@ from app.utils.security import hash_password, verify_password, create_access_tok
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
+RATE_LIMIT_SECONDS = 60
+
 
 def send_verification_email(to_email: str, token: str):
     verify_url = f"{FRONTEND_URL}/verify-email?token={token}"
@@ -168,20 +170,15 @@ def resend_verification(payload: dict, db: Session = Depends(get_db)):
     if user.email_verified:
         return {"message": "Email already verified."}
 
-    from datetime import datetime
     now = datetime.utcnow()
 
-    # ✅ RATE LIMIT
     if user.last_verification_email_sent_at and (
         now - user.last_verification_email_sent_at
     ).total_seconds() < RATE_LIMIT_SECONDS:
         return {"message": "Please wait before requesting another email."}
 
-    # ✅ NEW TOKEN
     token = secrets.token_urlsafe(32)
     user.activation_token = token
-
-    # ✅ IMPORTANT (souvent oublié)
     user.last_verification_email_sent_at = now
 
     db.commit()
@@ -189,6 +186,7 @@ def resend_verification(payload: dict, db: Session = Depends(get_db)):
     send_verification_email(user.email, token)
 
     return {"message": "Verification email sent."}
+
 
 @router.post("/forgot-password")
 def forgot_password(payload: dict, db: Session = Depends(get_db)):
