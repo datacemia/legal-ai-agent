@@ -11,11 +11,11 @@ const labels: any = {
     pageTitle: "Analyze your contract",
     loading: "Analyzing your contract...",
     file: "File",
-    summaryCard: "⚡ 60-second summary",
+    summaryCard: "60-second summary",
     summaryCardText: "Understand key points fast.",
-    privateCard: "🔒 Private by design",
+    privateCard: "Private by design",
     privateCardText: "Your documents stay protected.",
-    multiCard: "🌍 EN / FR / AR",
+    multiCard: "EN / FR / AR",
     multiCardText: "Multilingual contract analysis.",
     signupCta: "Free analysis available after signup",
     loginRequired: "Create an account to analyze your contract",
@@ -35,11 +35,11 @@ const labels: any = {
     pageTitle: "Analyser votre contrat",
     loading: "Analyse de votre contrat...",
     file: "Fichier",
-    summaryCard: "⚡ Résumé en 60 secondes",
+    summaryCard: "Résumé en 60 secondes",
     summaryCardText: "Comprenez rapidement les points clés.",
-    privateCard: "🔒 Confidentialité intégrée",
+    privateCard: "Confidentialité intégrée",
     privateCardText: "Vos documents restent protégés.",
-    multiCard: "🌍 EN / FR / AR",
+    multiCard: "EN / FR / AR",
     multiCardText: "Analyse multilingue des contrats.",
     signupCta: "Analyse gratuite disponible après inscription",
     loginRequired: "Créez un compte pour analyser votre contrat",
@@ -59,11 +59,11 @@ const labels: any = {
     pageTitle: "تحليل العقد",
     loading: "جاري تحليل العقد...",
     file: "الملف",
-    summaryCard: "⚡ ملخص خلال 60 ثانية",
+    summaryCard: "ملخص خلال 60 ثانية",
     summaryCardText: "افهم النقاط الأساسية بسرعة.",
-    privateCard: "🔒 خصوصية مدمجة",
+    privateCard: "خصوصية مدمجة",
     privateCardText: "تبقى مستنداتك محمية.",
-    multiCard: "🌍 EN / FR / AR",
+    multiCard: "EN / FR / AR",
     multiCardText: "تحليل عقود متعدد اللغات.",
     signupCta: "التحليل المجاني متاح بعد التسجيل",
     loginRequired: "أنشئ حسابًا لتحليل عقدك",
@@ -150,6 +150,12 @@ export default function UploadPage() {
     );
   }
 
+  const featureCards = [
+    { number: "01", title: t.summaryCard, text: t.summaryCardText },
+    { number: "02", title: t.privateCard, text: t.privateCardText },
+    { number: "03", title: t.multiCard, text: t.multiCardText },
+  ];
+
   return (
     <main
       dir={language === "ar" ? "rtl" : "ltr"}
@@ -165,20 +171,23 @@ export default function UploadPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-            <p className="font-semibold text-slate-950">{t.summaryCard}</p>
-            <p className="text-sm text-slate-500 mt-2">{t.summaryCardText}</p>
-          </div>
+          {featureCards.map((card) => (
+            <div
+              key={card.number}
+              className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm"
+            >
+              <div className="flex items-start gap-4">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-sm font-bold text-blue-600">
+                  {card.number}
+                </span>
 
-          <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-            <p className="font-semibold text-slate-950">{t.privateCard}</p>
-            <p className="text-sm text-slate-500 mt-2">{t.privateCardText}</p>
-          </div>
-
-          <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-            <p className="font-semibold text-slate-950">{t.multiCard}</p>
-            <p className="text-sm text-slate-500 mt-2">{t.multiCardText}</p>
-          </div>
+                <div>
+                  <p className="font-semibold text-slate-950">{card.title}</p>
+                  <p className="text-sm text-slate-500 mt-2">{card.text}</p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
         <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-5">
