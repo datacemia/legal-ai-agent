@@ -55,10 +55,15 @@ export default function DocumentPage() {
     );
   }
 
+  const isArabic = analysis.language === "ar";
+  const textDirection = isArabic ? "rtl" : "ltr";
   const clauses = analysis?.clauses ? JSON.parse(analysis.clauses) : [];
 
   return (
-    <main className="min-h-screen bg-slate-50 px-4 py-8 sm:px-6">
+    <main
+      dir={textDirection}
+      className="min-h-screen bg-slate-50 px-4 py-8 sm:px-6"
+    >
       <div className="max-w-5xl mx-auto space-y-8">
         <Link
           href="/dashboard"
@@ -81,7 +86,10 @@ export default function DocumentPage() {
             <RiskBadge risk={analysis.risk_level} />
           </div>
 
-          <p className="mt-6 text-slate-700 whitespace-pre-line leading-7">
+          <p
+            dir={textDirection}
+            className="mt-6 text-slate-700 whitespace-pre-line leading-7 text-start"
+          >
             {analysis.summary}
           </p>
         </section>
@@ -93,7 +101,10 @@ export default function DocumentPage() {
             Simplified Version
           </h2>
 
-          <p className="mt-4 text-blue-900 whitespace-pre-line leading-7">
+          <p
+            dir={textDirection}
+            className="mt-4 text-blue-900 whitespace-pre-line leading-7 text-start"
+          >
             {analysis.simplified_version}
           </p>
         </section>
@@ -143,21 +154,33 @@ export default function DocumentPage() {
                   <RiskBadge risk={clause.risk_level} />
                 </div>
 
-                <p className="text-blue-700 text-sm mt-3">
+                <p
+                  dir={textDirection}
+                  className="text-blue-700 text-sm mt-3 text-start"
+                >
                   {clause.explanation_simple}
                 </p>
 
                 {openIndex === index && (
                   <div className="mt-4 space-y-3">
-                    <p className="text-sm text-slate-500">
+                    <p
+                      dir={textDirection}
+                      className="text-sm text-slate-500 text-start"
+                    >
                       Trigger: {clause.trigger || "None"}
                     </p>
 
-                    <p className="text-slate-800 leading-7">
+                    <p
+                      dir={textDirection}
+                      className="text-slate-800 leading-7 text-start"
+                    >
                       {clause.original_text}
                     </p>
 
-                    <p className="text-slate-600 text-sm">
+                    <p
+                      dir={textDirection}
+                      className="text-slate-600 text-sm text-start"
+                    >
                       Recommendation: {clause.recommendation}
                     </p>
                   </div>
