@@ -8,7 +8,7 @@ import UploadBox from "../../components/UploadBox";
 import Navbar from "../../components/Navbar";
 
 const labels: any = {
-  // ⚠️ (inchangé - je ne touche pas à tes labels)
+  // ⚠️ inchangé (je ne touche pas à tes labels)
 };
 
 export default function UploadPage() {
@@ -19,9 +19,6 @@ export default function UploadPage() {
   const [language, setLanguage] = useState("en");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  // ✅ NEW (message UI)
-  const [message, setMessage] = useState("");
-
   const t = labels[language] || labels.en;
 
   const handleUpload = async () => {
@@ -30,9 +27,7 @@ export default function UploadPage() {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      setResult({
-        authRequired: true,
-      });
+      setResult({ authRequired: true });
       return;
     }
 
@@ -40,16 +35,13 @@ export default function UploadPage() {
       setLoading(true);
       setResult(null);
       setOpenIndex(null);
-      setMessage(""); // reset message
 
       const doc = await uploadDocument(file);
       const analysis = await runAnalysis(doc.id, language);
 
-      // ✅ FIX (NO ALERT)
+      // ✅ FIX PAYMENT
       if (analysis.detail?.includes("Payment required")) {
-        setResult({
-          paymentRequired: true,
-        });
+        setResult({ paymentRequired: true });
         return;
       }
 
@@ -145,7 +137,6 @@ export default function UploadPage() {
               setFileName(selected?.name || "");
               setResult(null);
               setOpenIndex(null);
-              setMessage("");
             }}
           />
 
@@ -194,7 +185,7 @@ export default function UploadPage() {
         {/* ✅ IMPORTANT FIX */}
         {result && !result.authRequired && !result.paymentRequired && (
           <>
-            {/* tout ton UI inchangé */}
+            {/* ⚠️ ton UI existant inchangé */}
           </>
         )}
       </div>
