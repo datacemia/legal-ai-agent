@@ -9,6 +9,10 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // ✅ NEW (UI messages)
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState<"success" | "error">("error");
+
   const handleLogin = async () => {
     try {
       const res = await fetch(`${API_URL}/auth/login`, {
@@ -27,12 +31,14 @@ export default function LoginPage() {
       console.log("LOGIN RESPONSE:", data);
 
       if (!res.ok) {
+        setMessageType("error");
+
         if (data.detail === "Invalid credentials") {
-          alert("Incorrect email or password");
+          setMessage("Incorrect email or password");
         } else if (data.detail?.includes("verify")) {
-          alert("Please verify your email before login");
+          setMessage("Please verify your email before login");
         } else {
-          alert(data.detail || "Login failed");
+          setMessage(data.detail || "Login failed");
         }
         return;
       }
@@ -41,11 +47,13 @@ export default function LoginPage() {
         setToken(data.access_token);
         window.location.href = "/dashboard";
       } else {
-        alert("Login failed");
+        setMessageType("error");
+        setMessage("Login failed");
       }
     } catch (err) {
       console.error(err);
-      alert("Error connecting to server");
+      setMessageType("error");
+      setMessage("Error connecting to server");
     }
   };
 
@@ -53,6 +61,19 @@ export default function LoginPage() {
     <main className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="bg-white p-8 rounded-2xl shadow space-y-4 w-80">
         <h1 className="text-xl font-bold text-center">Login</h1>
+
+        {/* ✅ MESSAGE UI */}
+        {message && (
+          <div
+            className={`text-sm p-3 rounded-lg text-center ${
+              messageType === "success"
+                ? "bg-green-50 text-green-700 border border-green-200"
+                : "bg-red-50 text-red-700 border border-red-200"
+            }`}
+          >
+            {message}
+          </div>
+        )}
 
         <input
           type="email"
@@ -88,7 +109,8 @@ export default function LoginPage() {
           onClick={async () => {
             try {
               if (!email.trim()) {
-                alert("Enter your email first");
+                setMessageType("error");
+                setMessage("Enter your email first");
                 return;
               }
 
@@ -102,14 +124,16 @@ export default function LoginPage() {
 
               const data = await res.json();
 
-              alert(
+              setMessageType("success");
+              setMessage(
                 data.message ||
                 data.detail ||
                 "Verification email request sent."
               );
             } catch (err) {
               console.error(err);
-              alert("Error connecting to server");
+              setMessageType("error");
+              setMessage("Error connecting to server");
             }
           }}
           className="w-full text-sm text-blue-600 underline"
