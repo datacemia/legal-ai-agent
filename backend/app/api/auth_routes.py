@@ -2,6 +2,7 @@ import os
 import ssl
 import secrets
 import smtplib
+from datetime import datetime, timedelta
 from email.message import EmailMessage
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -76,6 +77,7 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
         is_active=True,
         email_verified=False,
         activation_token=token,
+        activation_token_expires=datetime.utcnow() + timedelta(hours=24),
     )
 
     db.add(new_user)
@@ -91,7 +93,7 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
 def verify_email(token: str, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.activation_token == token).first()
 
-    if not user:
+    if not user or user.activation_token_expires < datetime.utcnow():
         raise HTTPException(status_code=400, detail="Invalid or expired verification link")
 
     user.email_verified = True
@@ -186,6 +188,7 @@ def forgot_password(payload: dict, db: Session = Depends(get_db)):
 
     token = secrets.token_urlsafe(32)
     user.reset_token = token
+    user.reset_token_expires = datetime.utcnow() + timedelta(minutes=15)
     db.commit()
 
     send_reset_email(user.email, token)
@@ -200,7 +203,7 @@ def reset_password(payload: dict, db: Session = Depends(get_db)):
 
     user = db.query(User).filter(User.reset_token == token).first()
 
-    if not user:
+    if not user or user.reset_token_expires < datetime.utcnow():
         raise HTTPException(status_code=400, detail="Invalid or expired token")
 
     user.password_hash = hash_password(new_password)
