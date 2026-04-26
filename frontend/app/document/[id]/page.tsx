@@ -7,6 +7,28 @@ import { getAnalysis } from "../../../lib/api";
 import RiskBadge from "../../../components/RiskBadge";
 import RiskScore from "../../../components/RiskScore";
 
+function normalizeLanguage(value?: string) {
+  const lang = value?.toLowerCase().trim() || "";
+
+  if (
+    lang === "fr" ||
+    lang.includes("french") ||
+    lang.includes("français")
+  ) {
+    return "fr";
+  }
+
+  if (
+    lang === "ar" ||
+    lang.includes("arabic") ||
+    lang.includes("العربية")
+  ) {
+    return "ar";
+  }
+
+  return "en";
+}
+
 const labels: any = {
   en: {
     loading: "Loading analysis...",
@@ -73,7 +95,7 @@ export default function DocumentPage() {
     loadAnalysis();
   }, [documentId]);
 
-  const language = analysis?.language || "en";
+  const language = normalizeLanguage(analysis?.language);
   const isArabic = language === "ar";
   const t = labels[language] || labels.en;
 
