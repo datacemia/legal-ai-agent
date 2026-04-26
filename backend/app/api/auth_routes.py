@@ -50,7 +50,6 @@ If you did not create this account, you can ignore this email.
 
     context = ssl.create_default_context()
 
-    # ✅ FIX SANS CASSER (debug SMTP)
     try:
         with smtplib.SMTP_SSL(smtp_host, smtp_port, context=context) as server:
             server.login(smtp_user, smtp_password)
@@ -83,7 +82,7 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_user)
 
-    send_reset_email(user.email, token)
+    send_verification_email(new_user.email, token)
 
     return new_user
 
@@ -154,6 +153,7 @@ def token_login(
         "token_type": "bearer",
     }
 
+
 @router.post("/resend-verification")
 def resend_verification(payload: dict, db: Session = Depends(get_db)):
     email = payload.get("email", "").strip()
@@ -174,6 +174,7 @@ def resend_verification(payload: dict, db: Session = Depends(get_db)):
 
     return {"message": "Verification email sent."}
 
+
 @router.post("/forgot-password")
 def forgot_password(payload: dict, db: Session = Depends(get_db)):
     email = payload.get("email", "").strip().lower()
@@ -187,10 +188,10 @@ def forgot_password(payload: dict, db: Session = Depends(get_db)):
     user.reset_token = token
     db.commit()
 
-    reset_url = f"{FRONTEND_URL}/reset-password?token={token}"
-    send_verification_email(user.email, token)  # tu peux adapter message
+    send_reset_email(user.email, token)
 
     return {"message": "Password reset email sent."}
+
 
 @router.post("/reset-password")
 def reset_password(payload: dict, db: Session = Depends(get_db)):
@@ -208,6 +209,7 @@ def reset_password(payload: dict, db: Session = Depends(get_db)):
     db.commit()
 
     return {"message": "Password updated successfully"}
+
 
 def send_reset_email(to_email: str, token: str):
     reset_url = f"{FRONTEND_URL}/reset-password?token={token}"
