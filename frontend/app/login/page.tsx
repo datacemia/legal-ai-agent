@@ -17,7 +17,7 @@ export default function LoginPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: email.trim(), // ✅ fix espaces
+          email: email.trim(),
           password,
         }),
       });
@@ -27,7 +27,6 @@ export default function LoginPage() {
       console.log("LOGIN RESPONSE:", data);
 
       if (!res.ok) {
-        // ✅ affiche vrai message backend
         alert(data.detail || "Login failed");
         return;
       }
