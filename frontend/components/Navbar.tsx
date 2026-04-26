@@ -41,9 +41,7 @@ export default function Navbar() {
           />
 
           <div className="leading-tight">
-            <div className="font-semibold text-slate-900">
-              Runexa
-            </div>
+            
             <div className="text-xs text-slate-500">
               AI agents that get things done
             </div>
