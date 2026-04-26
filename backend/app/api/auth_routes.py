@@ -155,17 +155,17 @@ def token_login(
     }
 
 @router.post("/resend-verification")
-def resend_verification(email: str, db: Session = Depends(get_db)):
+def resend_verification(payload: dict, db: Session = Depends(get_db)):
+    email = payload.get("email", "").strip()
+
     user = db.query(User).filter(User.email == email).first()
 
-    # 🔒 sécurité → ne pas révéler si email existe
     if not user:
         return {"message": "If this email exists, a verification link has been sent."}
 
     if user.email_verified:
         return {"message": "Email already verified."}
 
-    # nouveau token
     token = secrets.token_urlsafe(32)
     user.activation_token = token
     db.commit()

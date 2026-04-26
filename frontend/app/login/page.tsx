@@ -93,7 +93,8 @@ export default function LoginPage() {
             });
 
             const data = await res.json();
-            alert(data.message);
+
+            alert(data.message || data.detail || "Verification email request sent.");
           }}
           className="w-full text-sm text-blue-600 underline"
         >
