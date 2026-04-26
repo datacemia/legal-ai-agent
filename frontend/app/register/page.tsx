@@ -11,7 +11,6 @@ export default function RegisterPage() {
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState<"success" | "error">("success");
 
-  // ✅ VALIDATION LIVE (UX ONLY)
   const isValid =
     password.length >= 12 &&
     /[A-Z]/.test(password) &&
@@ -61,59 +60,157 @@ export default function RegisterPage() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center">
-      <div className="bg-white p-8 rounded-2xl shadow space-y-4 w-80">
-        <h1 className="text-xl font-bold">Register</h1>
-
-        {/* ✅ MESSAGE UI */}
-        {message && (
-          <div
-            className={`text-sm p-3 rounded-lg text-center ${
-              messageType === "success"
-                ? "bg-green-50 text-green-700 border border-green-200"
-                : "bg-red-50 text-red-700 border border-red-200"
-            }`}
-          >
-            {message}
+    <main className="min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-white text-slate-950">
+      <section className="relative hidden lg:flex flex-col justify-between overflow-hidden border-r border-slate-200 bg-gradient-to-br from-slate-50 via-white to-blue-50 px-16 py-12">
+        <div>
+          <div className="flex items-center gap-3">
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-xl font-black text-white">
+              R
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold">Runexa</h2>
+              <p className="text-sm text-slate-500">AI agents that get things done</p>
+            </div>
           </div>
-        )}
 
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full border p-2 rounded"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+          <div className="mt-28 max-w-xl">
+            <span className="inline-flex rounded-full bg-blue-100 px-4 py-2 text-sm font-medium text-blue-700">
+              AI agents that get things done
+            </span>
 
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full border p-2 rounded"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+            <h1 className="mt-8 text-5xl font-bold leading-tight tracking-tight">
+              Create your account and start building
+            </h1>
 
-        {/* ✅ PASSWORD RULES UI */}
-        <p className="text-xs text-gray-500">
-          Password must contain:
-          <br />- 12 characters
-          <br />- 1 uppercase
-          <br />- 1 lowercase
-          <br />- 1 number
-          <br />- 1 special character
-        </p>
+            <p className="mt-6 text-xl leading-8 text-slate-600">
+              Join teams using Runexa to automate workflows, save time, and boost productivity with AI agents.
+            </p>
 
-        <button
-          onClick={handleRegister}
-          disabled={!isValid} // ✅ BLOQUE SI PAS VALIDE
-          className={`w-full py-2 rounded text-white ${
-            isValid ? "bg-black" : "bg-gray-400 cursor-not-allowed"
-          }`}
-        >
-          Register
-        </button>
-      </div>
+            <div className="mt-12 space-y-8">
+              <div className="flex gap-5">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-100 text-blue-700">
+                  ⚡
+                </div>
+                <div>
+                  <h3 className="font-semibold">Powerful AI Agents</h3>
+                  <p className="mt-1 text-slate-600">Automate complex tasks and save hours of work.</p>
+                </div>
+              </div>
+
+              <div className="flex gap-5">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-100 text-blue-700">
+                  👥
+                </div>
+                <div>
+                  <h3 className="font-semibold">Collaborate Seamlessly</h3>
+                  <p className="mt-1 text-slate-600">Work with your team in real time.</p>
+                </div>
+              </div>
+
+              <div className="flex gap-5">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-100 text-blue-700">
+                  🔒
+                </div>
+                <div>
+                  <h3 className="font-semibold">Enterprise-Grade Security</h3>
+                  <p className="mt-1 text-slate-600">Your data is encrypted and always protected.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="pointer-events-none absolute -bottom-24 -left-20 h-72 w-[120%] rounded-[100%] border border-blue-300 opacity-40" />
+        <div className="pointer-events-none absolute -bottom-32 -left-24 h-72 w-[120%] rounded-[100%] border border-blue-400 opacity-30" />
+      </section>
+
+      <section className="flex min-h-screen items-center justify-center px-6 py-10">
+        <div className="w-full max-w-xl">
+          <div className="mb-12 flex items-center justify-between">
+            <div className="lg:hidden flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 font-black text-white">
+                R
+              </div>
+              <span className="text-xl font-bold">Runexa</span>
+            </div>
+
+            <p className="ml-auto text-sm text-slate-500">
+              Already have an account?{" "}
+              <a href="/login" className="font-medium text-blue-600 hover:text-blue-700">
+                Log in
+              </a>
+            </p>
+          </div>
+
+          <div>
+            <h1 className="text-4xl font-bold tracking-tight">Create an account</h1>
+            <p className="mt-3 text-lg text-slate-500">Enter your details to get started</p>
+          </div>
+
+          {message && (
+            <div
+              className={`mt-8 rounded-xl border p-4 text-sm ${
+                messageType === "success"
+                  ? "border-green-200 bg-green-50 text-green-700"
+                  : "border-red-200 bg-red-50 text-red-700"
+              }`}
+            >
+              {message}
+            </div>
+          )}
+
+          <div className="mt-8 space-y-5">
+            <div>
+              <label className="mb-2 block text-sm font-medium text-slate-700">
+                Email address
+              </label>
+              <input
+                type="email"
+                placeholder="you@example.com"
+                className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm font-medium text-slate-700">
+                Password
+              </label>
+              <input
+                type="password"
+                placeholder="Create a strong password"
+                className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            <div className="rounded-2xl bg-slate-50 p-5 text-sm text-slate-600">
+              <p className="mb-3 font-medium text-slate-500">Password must contain:</p>
+              <div className="space-y-2">
+                <p>✓ At least 12 characters</p>
+                <p>✓ One uppercase letter</p>
+                <p>✓ One lowercase letter</p>
+                <p>✓ One number</p>
+                <p>✓ One special character</p>
+              </div>
+            </div>
+
+            <button
+              onClick={handleRegister}
+              disabled={!isValid}
+              className={`w-full rounded-xl py-3 font-semibold text-white shadow-lg transition ${
+                isValid
+                  ? "bg-slate-950 hover:bg-slate-800"
+                  : "bg-slate-400 cursor-not-allowed"
+              }`}
+            >
+              Create account
+            </button>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
