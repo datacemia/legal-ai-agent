@@ -11,14 +11,36 @@ function ResetPasswordContent() {
   const [password, setPassword] = useState("");
 
   const handle = async () => {
-    const res = await fetch(`${API_URL}/auth/reset-password`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token, password }),
-    });
+    if (!token) {
+      alert("Invalid reset link.");
+      return;
+    }
 
-    const data = await res.json();
-    alert(data.message || data.detail || "Request failed");
+    if (!password || password.length < 6) {
+      alert("Password must be at least 6 characters.");
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_URL}/auth/reset-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert("Password updated successfully. You can now login.");
+        window.location.href = "/login";
+        return;
+      }
+
+      alert(data.detail || data.message || "Request failed");
+    } catch (error) {
+      console.error(error);
+      alert("Error connecting to server");
+    }
   };
 
   return (
