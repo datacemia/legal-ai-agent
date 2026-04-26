@@ -7,7 +7,13 @@ export default function RiskScore({
 }) {
   const safeScore = Math.min(Math.max(score || 0, 0), 100);
 
-  // 🔥 labels multilingues
+  const normalizedLanguage =
+    language?.toLowerCase().startsWith("fr")
+      ? "fr"
+      : language?.toLowerCase().startsWith("ar")
+      ? "ar"
+      : "en";
+
   const labels = {
     en: {
       title: "Risk Score",
@@ -41,14 +47,10 @@ export default function RiskScore({
     },
   };
 
-  const t = labels[language as keyof typeof labels] || labels.en;
+  const t = labels[normalizedLanguage as keyof typeof labels];
 
   const label =
-    safeScore >= 70
-      ? t.high
-      : safeScore >= 40
-      ? t.medium
-      : t.low;
+    safeScore >= 70 ? t.high : safeScore >= 40 ? t.medium : t.low;
 
   const barColor =
     safeScore >= 70
@@ -58,21 +60,15 @@ export default function RiskScore({
       : "bg-green-500";
 
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-sm border">
+    <div dir={normalizedLanguage === "ar" ? "rtl" : "ltr"} className="bg-white p-6 rounded-2xl shadow-sm border">
       <div className="flex items-center justify-between mb-3">
-        <div>
-          <h2 className="text-xl font-semibold text-gray-900">
-            {t.title}
-          </h2>
-          <p className="text-sm text-gray-500">
-            {t.subtitle}
-          </p>
+        <div className="text-start">
+          <h2 className="text-xl font-semibold text-gray-900">{t.title}</h2>
+          <p className="text-sm text-gray-500">{t.subtitle}</p>
         </div>
 
-        <div className="text-right">
-          <div className="text-3xl font-bold text-gray-900">
-            {safeScore}/100
-          </div>
+        <div className="text-end">
+          <div className="text-3xl font-bold text-gray-900">{safeScore}/100</div>
           <div className="text-sm text-gray-500">{label}</div>
         </div>
       </div>

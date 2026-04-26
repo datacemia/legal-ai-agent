@@ -4,15 +4,23 @@ type Props = {
 };
 
 export default function RiskBadge({ risk, language = "en" }: Props) {
+  const normalizedLanguage =
+    language?.toLowerCase().startsWith("fr")
+      ? "fr"
+      : language?.toLowerCase().startsWith("ar")
+      ? "ar"
+      : "en";
+
+  const normalizedRisk = risk?.toLowerCase();
+
   const colors: Record<string, string> = {
     low: "bg-green-100 text-green-700",
     medium: "bg-yellow-100 text-yellow-800",
     high: "bg-red-100 text-red-700",
   };
 
-  const style = colors[risk] || "bg-gray-100 text-gray-700";
+  const style = colors[normalizedRisk] || "bg-gray-100 text-gray-700";
 
-  // 🔥 traduction des labels
   const labels: any = {
     en: {
       low: "LOW",
@@ -31,12 +39,14 @@ export default function RiskBadge({ risk, language = "en" }: Props) {
     },
   };
 
-  const t = labels[language] || labels.en;
-
-  const display = t[risk] || risk?.toUpperCase();
+  const t = labels[normalizedLanguage] || labels.en;
+  const display = t[normalizedRisk] || normalizedRisk?.toUpperCase();
 
   return (
-    <span className={`px-3 py-1 rounded-full text-sm font-semibold ${style}`}>
+    <span
+      dir={normalizedLanguage === "ar" ? "rtl" : "ltr"}
+      className={`px-3 py-1 rounded-full text-sm font-semibold ${style}`}
+    >
       {display}
     </span>
   );
