@@ -27,7 +27,13 @@ export default function LoginPage() {
       console.log("LOGIN RESPONSE:", data);
 
       if (!res.ok) {
-        alert(data.detail || "Login failed");
+        if (data.detail === "Invalid credentials") {
+          alert("Incorrect email or password");
+        } else if (data.detail?.includes("verify")) {
+          alert("Please verify your email before login");
+        } else {
+          alert(data.detail || "Login failed");
+        }
         return;
       }
 
