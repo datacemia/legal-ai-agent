@@ -24,7 +24,11 @@ function VerifyEmailContent() {
         if (res.ok) {
           setMessage("Email verified successfully. You can now login.");
         } else {
-          setMessage(data.detail || "Verification failed.");
+          if (data.detail?.includes("Invalid")) {
+            setMessage("This verification link is invalid or already used.");
+          } else {
+            setMessage(data.detail || "Verification failed.");
+          }
         }
       })
       .catch(() => {
