@@ -173,3 +173,38 @@ def resend_verification(payload: dict, db: Session = Depends(get_db)):
     send_verification_email(user.email, token)
 
     return {"message": "Verification email sent."}
+
+@router.post("/forgot-password")
+def forgot_password(payload: dict, db: Session = Depends(get_db)):
+    email = payload.get("email", "").strip().lower()
+
+    user = db.query(User).filter(User.email == email).first()
+
+    if not user:
+        return {"message": "If this email exists, a reset link has been sent."}
+
+    token = secrets.token_urlsafe(32)
+    user.reset_token = token
+    db.commit()
+
+    reset_url = f"{FRONTEND_URL}/reset-password?token={token}"
+    send_verification_email(user.email, token)  # tu peux adapter message
+
+    return {"message": "Password reset email sent."}
+
+@router.post("/reset-password")
+def reset_password(payload: dict, db: Session = Depends(get_db)):
+    token = payload.get("token")
+    new_password = payload.get("password")
+
+    user = db.query(User).filter(User.reset_token == token).first()
+
+    if not user:
+        raise HTTPException(status_code=400, detail="Invalid or expired token")
+
+    user.password_hash = hash_password(new_password)
+    user.reset_token = None
+
+    db.commit()
+
+    return {"message": "Password updated successfully"}

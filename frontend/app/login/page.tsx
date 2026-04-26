@@ -77,6 +77,13 @@ export default function LoginPage() {
           Login
         </button>
 
+        <a
+          href="/forgot-password"
+          className="text-sm text-center underline block mt-2"
+        >
+          Forgot password?
+        </a>
+
         <button
           onClick={async () => {
             if (!email) {
