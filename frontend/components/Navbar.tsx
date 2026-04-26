@@ -28,59 +28,73 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white border-b px-6 py-4 flex justify-between items-center">
-      
-      {/* 🔥 LOGO + NAME + SLOGAN */}
-      <Link href="/" className="flex items-center gap-3">
-        <Image
-          src="/runexa-logo.png"
-          alt="Runexa"
-          width={60}   // 👈 augmenté (avant 36)
-          height={60}
-          className="object-contain"
-        />
+    <header className="sticky top-0 z-50 w-full border-b border-slate-200/70 bg-white/70 backdrop-blur-md">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+        
+        {/* LEFT */}
+        <Link href="/" className="flex items-center gap-3">
+          <Image
+            src="/runexa-logo.png"
+            alt="Runexa"
+            width={44}
+            height={44}
+            className="object-contain"
+          />
 
-        <div className="leading-tight">
-          <div className="font-bold text-lg">Runexa</div>
-          <div className="text-xs text-gray-500">
-            AI agents that get things done
+          <div className="leading-tight">
+            <div className="font-semibold text-slate-900">
+              Runexa
+            </div>
+            <div className="text-xs text-slate-500">
+              AI agents that get things done
+            </div>
           </div>
+        </Link>
+
+        {/* RIGHT */}
+        <div className="flex items-center gap-5">
+          {isLogged ? (
+            <>
+              <Link
+                href="/dashboard"
+                className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
+              >
+                Dashboard
+              </Link>
+
+              <Link
+                href="/admin"
+                className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
+              >
+                Admin
+              </Link>
+
+              <button
+                onClick={handleLogout}
+                className="rounded-xl bg-slate-100 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-200 transition"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
+              >
+                Login
+              </Link>
+
+              <Link
+                href="/register"
+                className="rounded-xl bg-slate-900 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 transition"
+              >
+                Register
+              </Link>
+            </>
+          )}
         </div>
-      </Link>
-
-      <div className="flex items-center gap-4">
-        {isLogged ? (
-          <>
-            <a href="/dashboard" className="text-gray-700">
-              Dashboard
-            </a>
-
-            <a href="/admin" className="text-gray-700">
-              Admin
-            </a>
-
-            <button
-              onClick={handleLogout}
-              className="px-4 py-2 bg-gray-200 rounded-lg"
-            >
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            <Link href="/login" className="text-gray-700">
-              Login
-            </Link>
-
-            <Link
-              href="/register"
-              className="px-4 py-2 bg-black text-white rounded-lg"
-            >
-              Register
-            </Link>
-          </>
-        )}
       </div>
-    </nav>
+    </header>
   );
 }
