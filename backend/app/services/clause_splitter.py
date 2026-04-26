@@ -11,6 +11,10 @@ def split_into_clauses(text: str) -> list[str]:
         r"\n(?=ARTICLE\s+\d+)",   # ARTICLE 1
         r"\n(?=Section\s+\d+)",   # Section 1
         r"\n(?=SECTION\s+\d+)",   # SECTION 1
+
+        # Arabic
+        r"\n(?=المادة\s+\d+)",    # المادة 1
+        r"(?=المادة\s+\d+)",      # fallback if text has no newlines
     ]
 
     combined_pattern = "|".join(patterns)
