@@ -9,20 +9,20 @@ from app.api.analysis_routes import router as analysis_router
 from app.api.payment_routes import router as payment_router
 from app.api.user_routes import router as user_router
 from app.api.admin_routes import router as admin_router
+from app.api.contact_routes import router as contact_router
 
 from app.database import engine, Base
 from app.models.user import User
 from app.models.document import Document
 from app.models.analysis import AnalysisResult
 from app.models.payment import Payment
-
+from app.models.contact import ContactRequest
 
 app = FastAPI(
     title="Legal AI Agent API",
     version="1.0.0"
 )
 
-# ✅ CORS FIX (local + prod)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -35,16 +35,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ✅ Create tables
 Base.metadata.create_all(bind=engine)
 
-# ✅ Routers
 app.include_router(auth_router)
 app.include_router(document_router)
 app.include_router(analysis_router)
 app.include_router(payment_router)
 app.include_router(user_router)
 app.include_router(admin_router)
+app.include_router(contact_router)
 
 
 @app.get("/")
