@@ -1,17 +1,14 @@
 import Link from "next/link";
 
-export default function PricingPage() {
+export default function Pricing() {
   return (
-    <main className="min-h-screen bg-slate-50 px-6 py-20">
-      <div className="mx-auto max-w-6xl space-y-16">
+    <main className="bg-white">
+      <div className="mx-auto max-w-6xl px-6 py-20">
         {/* HEADER */}
-        <div className="text-center max-w-2xl mx-auto">
-          <p className="text-sm font-semibold text-blue-600">Pricing</p>
-
-          <h1 className="mt-4 text-4xl font-bold text-slate-950">
-            Simple, transparent pricing
+        <div className="mx-auto max-w-2xl text-center">
+          <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+            Simple pricing
           </h1>
-
           <p className="mt-4 text-slate-600">
             Start free and scale as you grow. Runexa begins with the AI Legal
             Agent — more specialized agents are coming soon.
@@ -19,7 +16,7 @@ export default function PricingPage() {
         </div>
 
         {/* CARDS */}
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-3 mt-16">
           {/* FREE */}
           <div className="rounded-3xl border bg-white p-8 shadow-sm flex flex-col">
             <h2 className="text-lg font-semibold text-slate-900">Free</h2>
@@ -37,11 +34,15 @@ export default function PricingPage() {
             <p className="text-sm text-slate-500">1 contract analysis</p>
 
             <ul className="mt-6 space-y-3 text-sm text-slate-700">
+              <li>✔ AI Legal Agent access</li>
               <li>✔ Contract summary</li>
               <li>✔ Risk score</li>
               <li>✔ Full simplified version</li>
-              <li>✔ 2 clauses displayed</li>
-              <li>✔ Recommendations for 2 clauses</li>
+              <li>✔ Full contract analysis</li>
+              <li className="text-slate-400">✖ Only 2 clauses displayed</li>
+              <li className="text-slate-400">
+                ✖ Recommendations for 2 clauses
+              </li>
             </ul>
 
             <Link
@@ -72,11 +73,12 @@ export default function PricingPage() {
 
             <div className="mt-6 text-4xl font-bold text-slate-900">€5</div>
 
-            <p className="text-sm text-slate-500">per contract analysis</p>
+            <p className="text-sm text-slate-500">
+              per contract analysis
+            </p>
 
             <ul className="mt-6 space-y-3 text-sm text-slate-700">
               <li>✔ Everything in Free</li>
-              <li>✔ Full contract analysis</li>
               <li>✔ All clauses displayed</li>
               <li>✔ Recommendations for all clauses</li>
             </ul>
@@ -91,7 +93,9 @@ export default function PricingPage() {
 
           {/* BUSINESS */}
           <div className="rounded-3xl border bg-white p-8 shadow-sm flex flex-col">
-            <h2 className="text-lg font-semibold text-slate-900">Business</h2>
+            <h2 className="text-lg font-semibold text-slate-900">
+              Business
+            </h2>
 
             <p className="mt-2 text-sm text-slate-500">
               For teams and companies with advanced needs.
@@ -121,7 +125,7 @@ export default function PricingPage() {
         </div>
 
         {/* DISCLAIMER */}
-        <div className="mx-auto max-w-3xl rounded-2xl border border-amber-200 bg-amber-50 p-5 text-center text-sm text-amber-800">
+        <div className="mx-auto max-w-3xl rounded-2xl border border-amber-200 bg-amber-50 p-5 text-center text-sm text-amber-800 mt-16">
           ⚠️ Runexa does not replace a lawyer. The AI Legal Agent provides
           contract understanding and risk insights for informational purposes
           only.
