@@ -76,6 +76,14 @@ export default function Navbar() {
                 {t.admin}
               </Link>
 
+              {/* ✅ Ajout Pricing */}
+              <Link
+                href="/pricing"
+                className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
+              >
+                Pricing
+              </Link>
+
               <button
                 onClick={handleLogout}
                 className="rounded-xl bg-slate-100 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-200 transition"
@@ -90,6 +98,14 @@ export default function Navbar() {
                 className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
               >
                 {t.login}
+              </Link>
+
+              {/* ✅ Ajout Pricing */}
+              <Link
+                href="/pricing"
+                className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
+              >
+                Pricing
               </Link>
 
               <Link

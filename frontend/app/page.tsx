@@ -77,7 +77,6 @@ export default function HomePage() {
 
   useEffect(() => {
     const saved = localStorage.getItem("locale");
-
     if (saved && labels[saved]) {
       setLanguage(saved);
     }
@@ -127,6 +126,13 @@ export default function HomePage() {
               className="px-6 py-3 bg-white border border-slate-200 rounded-xl font-semibold hover:bg-slate-100 transition"
             >
               {t.tryLegal}
+            </Link>
+
+            <Link
+              href="/pricing"
+              className="px-6 py-3 bg-white border border-slate-200 rounded-xl font-semibold hover:bg-slate-100 transition"
+            >
+              See pricing
             </Link>
           </div>
         </div>
