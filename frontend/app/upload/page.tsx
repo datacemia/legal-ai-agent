@@ -12,24 +12,13 @@ const labels: any = {
     pageTitle: "Analyze your contract",
     loading: "Analyzing your contract...",
     file: "File",
-    summaryCard: "60-second summary",
-    summaryCardText: "Understand key points fast.",
-    privateCard: "Private by design",
-    privateCardText: "Your documents stay protected.",
-    multiCard: "EN / FR / AR",
-    multiCardText: "Multilingual contract analysis.",
     signupCta: "Free analysis available after signup",
     loginRequired: "Create an account to analyze your contract",
-    author: "Created by Dr. Rachid Ejjami",
     analyzeButton: "Analyze Contract",
-    empty:
-      "Upload a contract to see the summary, risk score, simplified version, and clause analysis.",
     summary: "Summary",
     simplified: "Simplified Version",
     clauses: "Clauses Analysis",
     clause: "Clause",
-    trigger: "Trigger",
-    none: "None",
     recommendation: "Recommendation",
     limitedNotice:
       "Only 2 clauses are displayed in the free version. Upgrade to unlock full clause analysis.",
@@ -43,10 +32,10 @@ export default function UploadPage() {
   const [loading, setLoading] = useState(false);
   const [language, setLanguage] = useState("en");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [message, setMessage] = useState("");
 
   const t = labels[language] || labels.en;
 
-  // ✅ NEW
   const handleBuyCredit = async () => {
     const token = localStorage.getItem("token");
 
@@ -62,7 +51,7 @@ export default function UploadPage() {
       return;
     }
 
-    alert(data.detail || "Payment is not configured yet.");
+    setMessage(data.detail || "Payment is not configured yet.");
   };
 
   const handleUpload = async () => {
@@ -80,13 +69,14 @@ export default function UploadPage() {
     try {
       setLoading(true);
       setResult(null);
+      setMessage("");
       setOpenIndex(null);
 
       const doc = await uploadDocument(file);
       const analysis = await runAnalysis(doc.id, language);
 
       if (analysis.detail?.includes("Payment required")) {
-        alert("You used your free analysis. Please buy one analysis credit.");
+        setMessage("You used your free analysis. Please buy one analysis credit.");
         window.location.href = "/pricing";
         return;
       }
@@ -136,8 +126,6 @@ export default function UploadPage() {
       className="min-h-screen bg-slate-50 px-4 py-8 sm:px-6"
     >
       <div className="max-w-5xl mx-auto space-y-8">
-
-        {/* Upload */}
         <div className="bg-white p-6 rounded-3xl shadow-sm border space-y-5">
           <UploadBox
             file={file}
@@ -145,6 +133,7 @@ export default function UploadPage() {
               setFile(selected);
               setFileName(selected?.name || "");
               setResult(null);
+              setMessage("");
               setOpenIndex(null);
             }}
           />
@@ -167,18 +156,22 @@ export default function UploadPage() {
             {t.analyzeButton}
           </button>
 
-          {/* ✅ NEW BUY CREDIT BUTTON */}
           <button
             onClick={handleBuyCredit}
             className="w-full rounded-xl bg-green-600 px-6 py-3 text-sm font-semibold text-white hover:bg-green-700"
           >
             Buy credit
           </button>
+
+          {message && (
+            <div className="bg-red-50 text-red-700 border border-red-200 text-sm p-3 rounded-xl text-center">
+              {message}
+            </div>
+          )}
         </div>
 
         {result && !result.authRequired && (
           <div className="space-y-6">
-
             <div className="bg-white p-6 rounded-3xl border">
               <h2 className="text-xl font-semibold">{t.summary}</h2>
               <p className="mt-4">{result.summary}</p>
@@ -230,7 +223,6 @@ export default function UploadPage() {
                   </div>
                 ))}
               </div>
-
             </div>
           </div>
         )}
