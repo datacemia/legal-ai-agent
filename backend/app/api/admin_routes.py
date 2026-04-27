@@ -5,6 +5,7 @@ from app.database import get_db
 from app.models.user import User
 from app.schemas.user_schema import UserResponse
 from app.utils.security import require_admin
+from app.models.contact import ContactRequest
 
 router = APIRouter(prefix="/admin", tags=["Admin"])
 
@@ -56,3 +57,24 @@ def update_user_credits(
     db.refresh(user)
 
     return user
+
+@router.get("/contact-requests")
+def list_contact_requests(
+    db: Session = Depends(get_db),
+    admin: User = Depends(require_admin)
+):
+    requests = db.query(ContactRequest).order_by(ContactRequest.id.desc()).all()
+
+    return [
+        {
+            "id": r.id,
+            "full_name": r.full_name,
+            "email": r.email,
+            "company_name": r.company_name,
+            "company_size": r.company_size,
+            "use_case": r.use_case,
+            "status": r.status,
+            "created_at": r.created_at,
+        }
+        for r in requests
+    ]
