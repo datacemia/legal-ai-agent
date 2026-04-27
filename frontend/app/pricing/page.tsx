@@ -6,6 +6,17 @@ import { useState } from "react";
 export default function Pricing() {
   const [message, setMessage] = useState("");
 
+  const handleStartFree = () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      window.location.href = "/register";
+      return;
+    }
+
+    window.location.href = "/upload";
+  };
+
   const handleBuyCredits = () => {
     const token = localStorage.getItem("token");
 
@@ -20,7 +31,6 @@ export default function Pricing() {
   return (
     <main className="bg-white">
       <div className="mx-auto max-w-6xl px-6 py-20">
-        {/* HEADER */}
         <div className="mx-auto max-w-2xl text-center">
           <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
             Simple pricing
@@ -31,8 +41,8 @@ export default function Pricing() {
           </p>
         </div>
 
-        {/* CARDS */}
         <div className="grid gap-8 md:grid-cols-3 mt-16">
+
           {/* FREE */}
           <div className="rounded-3xl border bg-white p-8 shadow-sm flex flex-col">
             <h2 className="text-lg font-semibold text-slate-900">Free</h2>
@@ -61,12 +71,12 @@ export default function Pricing() {
               </li>
             </ul>
 
-            <Link
-              href="/register"
+            <button
+              onClick={handleStartFree}
               className="mt-auto block rounded-xl bg-slate-900 px-5 py-3 text-center font-semibold text-white hover:bg-slate-800 transition"
             >
               Start for free
-            </Link>
+            </button>
           </div>
 
           {/* PAY PER USE */}
@@ -144,9 +154,9 @@ export default function Pricing() {
               Contact sales
             </a>
           </div>
+
         </div>
 
-        {/* DISCLAIMER */}
         <div className="mx-auto max-w-3xl rounded-2xl border border-amber-200 bg-amber-50 p-5 text-center text-sm text-amber-800 mt-16">
           ⚠️ Runexa does not replace a lawyer. The AI Legal Agent provides
           contract understanding and risk insights for informational purposes
