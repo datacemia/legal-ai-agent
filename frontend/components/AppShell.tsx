@@ -1,9 +1,11 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import CookieBanner from "./CookieBanner";
+import { isAnalyticsAllowed } from "../lib/analytics";
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -13,6 +15,16 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     pathname === "/register" ||
     pathname === "/forgot-password" ||
     pathname === "/reset-password";
+
+  // 🔥 Analytics (respect cookie consent)
+  useEffect(() => {
+    if (isAnalyticsAllowed()) {
+      console.log("Analytics enabled ✅");
+
+      // 👉 ici on branchera Google Analytics plus tard
+      // ex: window.gtag(...)
+    }
+  }, []);
 
   return (
     <>
