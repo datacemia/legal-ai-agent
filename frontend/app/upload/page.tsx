@@ -31,9 +31,9 @@ const labels: any = {
     trigger: "Trigger",
     none: "None",
     recommendation: "Recommendation",
+    limitedNotice:
+      "Only 2 clauses are displayed in the free version. Upgrade to unlock full clause analysis.",
   },
-  fr: { /* inchangé */ },
-  ar: { /* inchangé */ },
 };
 
 export default function UploadPage() {
@@ -79,23 +79,21 @@ export default function UploadPage() {
   };
 
   let clauses: any[] = [];
+  let isLimited = false;
 
   try {
     if (result?.clauses && !result?.authRequired) {
-      clauses = Array.isArray(result.clauses)
+      const parsed = Array.isArray(result.clauses)
         ? result.clauses
         : JSON.parse(result.clauses);
+
+      clauses = parsed;
+      isLimited = parsed.length === 2;
     }
   } catch (e) {
     console.error("Clause parsing error:", e);
     clauses = [];
   }
-
-  // ✅ FIX ICI (aligned pricing)
-  const isLimitedPreview =
-    result &&
-    !result.authRequired &&
-    clauses.length <= 2;
 
   if (loading) {
     return (
@@ -114,51 +112,88 @@ export default function UploadPage() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-50 px-4 py-8">
+    <main className="min-h-screen bg-slate-50 px-4 py-8 sm:px-6">
       <div className="max-w-5xl mx-auto space-y-8">
+        {/* Upload */}
+        <div className="bg-white p-6 rounded-3xl shadow-sm border space-y-5">
+          <UploadBox
+            file={file}
+            onFileChange={(selected) => {
+              setFile(selected);
+              setFileName(selected?.name || "");
+              setResult(null);
+              setOpenIndex(null);
+            }}
+          />
 
-        <UploadBox file={file} onFileChange={setFile} />
+          <button
+            onClick={handleUpload}
+            disabled={!file}
+            className="w-full rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800"
+          >
+            {t.analyzeButton}
+          </button>
+        </div>
 
-        <button
-          onClick={handleUpload}
-          disabled={!file}
-          className="rounded-xl bg-slate-950 px-6 py-3 text-white"
-        >
-          {t.analyzeButton}
-        </button>
-
-        {!result && (
-          <div className="text-center text-slate-500">{t.empty}</div>
-        )}
-
+        {/* Result */}
         {result && !result.authRequired && (
           <div className="space-y-6">
-
-            {/* ✅ FIX message */}
-            {isLimitedPreview && (
-              <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5 text-sm text-amber-800">
-                Limited preview: free users see the summary, risk score, full simplified version, and up to 2 clauses with recommendations. Upgrade to unlock all clauses and recommendations.
-              </div>
-            )}
-
-            <div>
-              <RiskBadge risk={result.risk_level} />
-              <RiskScore score={result.risk_score} />
-              <p>{result.summary}</p>
+            {/* Summary */}
+            <div className="bg-white p-6 rounded-3xl border">
+              <h2 className="text-xl font-semibold">{t.summary}</h2>
+              <p className="mt-4">{result.summary}</p>
             </div>
 
-            {result.simplified_version && (
-              <div>{result.simplified_version}</div>
-            )}
+            <RiskScore score={result.risk_score} language={language} />
 
-            {clauses.map((clause, i) => (
-              <div key={i}>
-                <p>{clause.explanation_simple}</p>
-                {clause.recommendation && (
-                  <p>{clause.recommendation}</p>
-                )}
+            {/* Simplified */}
+            <div className="bg-blue-50 p-6 rounded-3xl border">
+              <h2 className="text-xl font-semibold">{t.simplified}</h2>
+              <p className="mt-4">{result.simplified_version}</p>
+            </div>
+
+            {/* Clauses */}
+            <div className="bg-white p-6 rounded-3xl border">
+              <h2 className="text-xl font-semibold mb-4">{t.clauses}</h2>
+
+              {isLimited && (
+                <div className="mb-4 text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-xl p-3">
+                  {t.limitedNotice}
+                </div>
+              )}
+
+              <div className="space-y-4">
+                {clauses.map((clause: any, index: number) => (
+                  <div
+                    key={index}
+                    className="border rounded-2xl p-4"
+                    onClick={() =>
+                      setOpenIndex(openIndex === index ? null : index)
+                    }
+                  >
+                    <div className="flex justify-between">
+                      <span>
+                        {t.clause} {index + 1}
+                      </span>
+                      <RiskBadge risk={clause.risk_level} language={language} />
+                    </div>
+
+                    <p className="mt-2 text-sm">
+                      {clause.explanation_simple}
+                    </p>
+
+                    {openIndex === index && (
+                      <div className="mt-3 text-sm">
+                        <p>{clause.original_text}</p>
+                        <p className="mt-2">
+                          {t.recommendation}: {clause.recommendation}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         )}
       </div>
