@@ -148,7 +148,7 @@ export default function Pricing() {
             </ul>
 
             <a
-              href="mailto:contact@runexa.ai"
+              href="/contact"
               className="mt-auto block rounded-xl border px-5 py-3 text-center font-semibold text-slate-900 hover:bg-slate-100 transition"
             >
               Contact sales
