@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import CookieBanner from "./CookieBanner";
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -15,9 +16,17 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <>
+      {/* Navbar (hidden on auth pages) */}
       {!isAuthPage && <Navbar />}
+
+      {/* Main content */}
       {children}
+
+      {/* Footer (hidden on auth pages) */}
       {!isAuthPage && <Footer />}
+
+      {/* Cookie Banner (global, always visible if needed) */}
+      <CookieBanner />
     </>
   );
 }
