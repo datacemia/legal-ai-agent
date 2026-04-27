@@ -42,7 +42,9 @@ export default function PricingPage() {
               <li>✔ Risk detection</li>
               <li>✔ 2 clauses max</li>
               <li className="text-slate-400">✖ Full clause analysis</li>
-              <li className="text-slate-400">✖ Recommendations</li>
+              <li className="text-slate-400">
+                ✖ Full simplified version + recommendations
+              </li>
             </ul>
 
             <Link
