@@ -34,6 +34,58 @@ const labels: any = {
     limitedNotice:
       "Only 2 clauses are displayed in the free version. Upgrade to unlock full clause analysis.",
   },
+  fr: {
+    pageTitle: "Analyser votre contrat",
+    loading: "Analyse de votre contrat...",
+    file: "Fichier",
+    summaryCard: "Résumé en 60 secondes",
+    summaryCardText: "Comprenez rapidement les points clés.",
+    privateCard: "Confidentialité intégrée",
+    privateCardText: "Vos documents restent protégés.",
+    multiCard: "EN / FR / AR",
+    multiCardText: "Analyse multilingue des contrats.",
+    signupCta: "Analyse gratuite disponible après inscription",
+    loginRequired: "Créez un compte pour analyser votre contrat",
+    author: "Créé par Dr. Rachid Ejjami",
+    analyzeButton: "Analyser le contrat",
+    empty:
+      "Téléversez un contrat pour voir le résumé, le score de risque, la version simplifiée et l’analyse des clauses.",
+    summary: "Résumé",
+    simplified: "Version simplifiée",
+    clauses: "Analyse des clauses",
+    clause: "Clause",
+    trigger: "Déclencheur",
+    none: "Aucun",
+    recommendation: "Recommandation",
+    limitedNotice:
+      "Seulement 2 clauses sont affichées en version gratuite. Passez à la version complète pour tout voir.",
+  },
+  ar: {
+    pageTitle: "تحليل العقد",
+    loading: "جاري تحليل العقد...",
+    file: "الملف",
+    summaryCard: "ملخص خلال 60 ثانية",
+    summaryCardText: "افهم النقاط الأساسية بسرعة.",
+    privateCard: "خصوصية مدمجة",
+    privateCardText: "تبقى مستنداتك محمية.",
+    multiCard: "EN / FR / AR",
+    multiCardText: "تحليل عقود متعدد اللغات.",
+    signupCta: "التحليل المجاني متاح بعد التسجيل",
+    loginRequired: "أنشئ حسابًا لتحليل عقدك",
+    author: "تم تطويره بواسطة د. رشيد الجامعي",
+    analyzeButton: "تحليل العقد",
+    empty:
+      "قم برفع عقد لعرض الملخص ودرجة المخاطر والنسخة المبسطة وتحليل البنود.",
+    summary: "ملخص",
+    simplified: "نسخة مبسطة",
+    clauses: "تحليل البنود",
+    clause: "البند",
+    trigger: "المؤشر",
+    none: "لا يوجد",
+    recommendation: "التوصية",
+    limitedNotice:
+      "يتم عرض بندين فقط في النسخة المجانية. قم بالترقية لعرض جميع البنود.",
+  },
 };
 
 export default function UploadPage() {
@@ -112,8 +164,12 @@ export default function UploadPage() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-50 px-4 py-8 sm:px-6">
+    <main
+      dir={language === "ar" ? "rtl" : "ltr"}
+      className="min-h-screen bg-slate-50 px-4 py-8 sm:px-6"
+    >
       <div className="max-w-5xl mx-auto space-y-8">
+
         {/* Upload */}
         <div className="bg-white p-6 rounded-3xl shadow-sm border space-y-5">
           <UploadBox
@@ -126,10 +182,21 @@ export default function UploadPage() {
             }}
           />
 
+          {/* Language selector FIX */}
+          <select
+            value={language}
+            onChange={(e) => setLanguage(e.target.value)}
+            className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+          >
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+            <option value="ar">العربية</option>
+          </select>
+
           <button
             onClick={handleUpload}
             disabled={!file}
-            className="w-full rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800"
+            className="w-full rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800 disabled:bg-slate-400"
           >
             {t.analyzeButton}
           </button>
@@ -138,6 +205,7 @@ export default function UploadPage() {
         {/* Result */}
         {result && !result.authRequired && (
           <div className="space-y-6">
+
             {/* Summary */}
             <div className="bg-white p-6 rounded-3xl border">
               <h2 className="text-xl font-semibold">{t.summary}</h2>
@@ -166,7 +234,7 @@ export default function UploadPage() {
                 {clauses.map((clause: any, index: number) => (
                   <div
                     key={index}
-                    className="border rounded-2xl p-4"
+                    className="border rounded-2xl p-4 cursor-pointer"
                     onClick={() =>
                       setOpenIndex(openIndex === index ? null : index)
                     }
@@ -193,6 +261,7 @@ export default function UploadPage() {
                   </div>
                 ))}
               </div>
+
             </div>
           </div>
         )}
