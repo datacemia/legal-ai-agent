@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { setToken } from "../../lib/auth";
+import { trackEvent } from "../../lib/track";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
 
@@ -43,6 +44,7 @@ export default function LoginPage() {
       }
 
       if (data.access_token) {
+        trackEvent("login");
         setToken(data.access_token);
         window.location.href = "/dashboard";
       } else {

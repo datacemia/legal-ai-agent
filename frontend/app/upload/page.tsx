@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { uploadDocument, runAnalysis } from "../../lib/api";
+import { trackEvent } from "../../lib/track";
 import RiskBadge from "../../components/RiskBadge";
 import RiskScore from "../../components/RiskScore";
 import UploadBox from "../../components/UploadBox";
@@ -100,6 +101,8 @@ export default function UploadPage() {
       setResult({ authRequired: true });
       return;
     }
+
+    trackEvent("upload_document");
 
     try {
       setLoading(true);

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackEvent } from "../../lib/track";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
 
@@ -51,6 +52,8 @@ export default function RegisterPage() {
       const data = await res.json();
 
       if (res.ok) {
+        trackEvent("register");
+
         setMessageType("success");
         setMessage(
           "Account created. Please check your email to verify your account."
@@ -73,195 +76,122 @@ export default function RegisterPage() {
   return (
     <main className="min-h-screen bg-white text-slate-950">
       <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2">
+        {/* LEFT */}
         <section className="relative hidden overflow-hidden bg-gradient-to-br from-blue-50 via-white to-indigo-50 px-10 py-12 lg:flex lg:flex-col lg:justify-center xl:px-20">
           <div className="max-w-xl">
             <span className="inline-flex rounded-full bg-blue-100 px-4 py-2 text-sm font-medium text-blue-700">
               AI agents that get things done
             </span>
 
-            <h1 className="mt-8 text-4xl font-bold leading-tight tracking-tight text-slate-950 xl:text-5xl">
+            <h1 className="mt-8 text-4xl font-bold text-slate-950 xl:text-5xl">
               Start using AI agents to get work done faster
             </h1>
 
-            <p className="mt-6 text-lg leading-8 text-slate-600">
+            <p className="mt-6 text-lg text-slate-600">
               Runexa brings specialized AI agents for legal, finance, HR,
               business, and more — all in one simple platform.
             </p>
 
             <div className="mt-12 space-y-7">
               <div className="flex gap-5">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-100 text-xl text-blue-700">
+                <div className="h-12 w-12 flex items-center justify-center rounded-2xl bg-blue-100 text-blue-700">
                   ⚡
                 </div>
                 <div>
-                  <h3 className="font-semibold text-slate-950">
-                    Specialized AI Agents
-                  </h3>
-                  <p className="mt-1 text-slate-600">
+                  <h3 className="font-semibold">Specialized AI Agents</h3>
+                  <p className="text-slate-600">
                     Access powerful agents built for your business needs.
                   </p>
                 </div>
               </div>
 
               <div className="flex gap-5">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-100 text-xl text-blue-700">
+                <div className="h-12 w-12 flex items-center justify-center rounded-2xl bg-blue-100 text-blue-700">
                   🛡️
                 </div>
                 <div>
-                  <h3 className="font-semibold text-slate-950">
-                    Secure & Private
-                  </h3>
-                  <p className="mt-1 text-slate-600">
+                  <h3 className="font-semibold">Secure & Private</h3>
+                  <p className="text-slate-600">
                     Your data is protected with enterprise-grade security.
                   </p>
                 </div>
               </div>
 
               <div className="flex gap-5">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-100 text-xl text-blue-700">
+                <div className="h-12 w-12 flex items-center justify-center rounded-2xl bg-blue-100 text-blue-700">
                   📈
                 </div>
                 <div>
-                  <h3 className="font-semibold text-slate-950">
+                  <h3 className="font-semibold">
                     Save Time, Get More Done
                   </h3>
-                  <p className="mt-1 text-slate-600">
+                  <p className="text-slate-600">
                     Automate complex tasks and focus on what matters most.
                   </p>
                 </div>
               </div>
             </div>
           </div>
-
-          <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-[120%] rounded-[100%] border border-blue-300 opacity-40" />
-          <div className="pointer-events-none absolute -bottom-36 -left-28 h-72 w-[120%] rounded-[100%] border border-indigo-300 opacity-30" />
-          <div className="pointer-events-none absolute bottom-20 right-16 h-40 w-40 rounded-3xl bg-blue-200/40 blur-3xl" />
         </section>
 
-        <section className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-10 sm:px-6 lg:bg-white lg:px-10">
-          <div className="w-full max-w-xl rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/70 sm:p-8 lg:p-10">
+        {/* RIGHT */}
+        <section className="flex items-center justify-center bg-slate-50 px-4 py-10 lg:bg-white">
+          <div className="w-full max-w-xl rounded-3xl border bg-white p-6 shadow-xl">
             <div className="text-center">
-              <h1 className="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
-                Create your account
-              </h1>
-              <p className="mt-3 text-sm text-slate-500 sm:text-base">
+              <h1 className="text-3xl font-bold">Create your account</h1>
+              <p className="text-slate-500">
                 Start using AI agents to get work done faster
               </p>
             </div>
 
-            <div className="mt-8 grid gap-3">
-              <button
-                type="button"
-                disabled
-                className="flex w-full items-center justify-between rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-500 cursor-not-allowed"
-              >
-                <span className="flex items-center gap-3">
-                  <span className="text-lg">G</span>
-                  Continue with Google
-                </span>
-                <span className="rounded-full bg-indigo-50 px-3 py-1 text-xs text-indigo-700">
-                  Coming soon
-                </span>
-              </button>
-
-              <button
-                type="button"
-                disabled
-                className="flex w-full items-center justify-between rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-500 cursor-not-allowed"
-              >
-                <span className="flex items-center gap-3">
-                  <span className="text-lg">▦</span>
-                  Continue with Microsoft
-                </span>
-                <span className="rounded-full bg-indigo-50 px-3 py-1 text-xs text-indigo-700">
-                  Coming soon
-                </span>
-              </button>
-            </div>
-
-            <div className="my-7 flex items-center gap-4">
-              <div className="h-px flex-1 bg-slate-200" />
-              <span className="text-xs text-slate-500">
-                or continue with email
-              </span>
-              <div className="h-px flex-1 bg-slate-200" />
-            </div>
-
             {message && (
-              <div
-                className={`mb-5 rounded-xl border p-4 text-sm ${
-                  messageType === "success"
-                    ? "border-green-200 bg-green-50 text-green-700"
-                    : "border-red-200 bg-red-50 text-red-700"
-                }`}
-              >
-                {message}
-              </div>
+              <div className="mt-5 text-sm">{message}</div>
             )}
 
-            <div className="space-y-5">
-              <div>
-                <label className="mb-2 block text-sm font-medium text-slate-700">
-                  Email address
-                </label>
-                <input
-                  type="email"
-                  placeholder="you@example.com"
-                  className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-950 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
+            <div className="space-y-5 mt-6">
+              <input
+                type="email"
+                placeholder="you@example.com"
+                className="w-full border px-4 py-3 rounded-xl"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
 
-              <div>
-                <label className="mb-2 block text-sm font-medium text-slate-700">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  placeholder="Create a strong password"
-                  className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-950 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
+              <input
+                type="password"
+                placeholder="Create a strong password"
+                className="w-full border px-4 py-3 rounded-xl"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
 
-              <div className="rounded-2xl bg-slate-50 p-5 text-sm">
-                <p className="mb-3 font-medium text-slate-500">
-                  Password must contain:
-                </p>
-
-                <div className="space-y-2">
-                  {passwordRules.map((rule) => (
-                    <p
-                      key={rule.label}
-                      className={rule.valid ? "text-green-600" : "text-slate-500"}
-                    >
-                      {rule.valid ? "✓" : "○"} {rule.label}
-                    </p>
-                  ))}
-                </div>
+              <div className="text-sm space-y-1">
+                {passwordRules.map((rule) => (
+                  <p
+                    key={rule.label}
+                    className={
+                      rule.valid
+                        ? "text-green-600"
+                        : "text-slate-500"
+                    }
+                  >
+                    {rule.valid ? "✓" : "○"} {rule.label}
+                  </p>
+                ))}
               </div>
 
               <button
                 onClick={handleRegister}
                 disabled={!isValid}
-                className={`w-full rounded-xl py-3 font-semibold text-white shadow-lg transition ${
-                  isValid
-                    ? "bg-slate-950 hover:bg-slate-800"
-                    : "bg-slate-400 cursor-not-allowed"
-                }`}
+                className="w-full bg-black text-white py-3 rounded-xl disabled:bg-gray-400"
               >
                 Create account
               </button>
             </div>
 
-            <p className="mt-7 text-center text-sm text-slate-500">
+            <p className="mt-6 text-center text-sm">
               Already have an account?{" "}
-              <a
-                href="/login"
-                className="font-medium text-blue-600 hover:text-blue-700"
-              >
+              <a href="/login" className="text-blue-600">
                 Log in
               </a>
             </p>
