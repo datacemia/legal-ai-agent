@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { uploadDocument, runAnalysis } from "../../lib/api";
+import { uploadDocument, runAnalysis, createCheckoutSession } from "../../lib/api";
 import { trackEvent } from "../../lib/track";
 import RiskBadge from "../../components/RiskBadge";
 import RiskScore from "../../components/RiskScore";
@@ -34,58 +34,6 @@ const labels: any = {
     limitedNotice:
       "Only 2 clauses are displayed in the free version. Upgrade to unlock full clause analysis.",
   },
-  fr: {
-    pageTitle: "Analyser votre contrat",
-    loading: "Analyse de votre contrat...",
-    file: "Fichier",
-    summaryCard: "Résumé en 60 secondes",
-    summaryCardText: "Comprenez rapidement les points clés.",
-    privateCard: "Confidentialité intégrée",
-    privateCardText: "Vos documents restent protégés.",
-    multiCard: "EN / FR / AR",
-    multiCardText: "Analyse multilingue des contrats.",
-    signupCta: "Analyse gratuite disponible après inscription",
-    loginRequired: "Créez un compte pour analyser votre contrat",
-    author: "Créé par Dr. Rachid Ejjami",
-    analyzeButton: "Analyser le contrat",
-    empty:
-      "Téléversez un contrat pour voir le résumé, le score de risque, la version simplifiée et l’analyse des clauses.",
-    summary: "Résumé",
-    simplified: "Version simplifiée",
-    clauses: "Analyse des clauses",
-    clause: "Clause",
-    trigger: "Déclencheur",
-    none: "Aucun",
-    recommendation: "Recommandation",
-    limitedNotice:
-      "Seulement 2 clauses sont affichées en version gratuite. Passez à la version complète pour tout voir.",
-  },
-  ar: {
-    pageTitle: "تحليل العقد",
-    loading: "جاري تحليل العقد...",
-    file: "الملف",
-    summaryCard: "ملخص خلال 60 ثانية",
-    summaryCardText: "افهم النقاط الأساسية بسرعة.",
-    privateCard: "خصوصية مدمجة",
-    privateCardText: "تبقى مستنداتك محمية.",
-    multiCard: "EN / FR / AR",
-    multiCardText: "تحليل عقود متعدد اللغات.",
-    signupCta: "التحليل المجاني متاح بعد التسجيل",
-    loginRequired: "أنشئ حسابًا لتحليل عقدك",
-    author: "تم تطويره بواسطة د. رشيد الجامعي",
-    analyzeButton: "تحليل العقد",
-    empty:
-      "قم برفع عقد لعرض الملخص ودرجة المخاطر والنسخة المبسطة وتحليل البنود.",
-    summary: "ملخص",
-    simplified: "نسخة مبسطة",
-    clauses: "تحليل البنود",
-    clause: "البند",
-    trigger: "المؤشر",
-    none: "لا يوجد",
-    recommendation: "التوصية",
-    limitedNotice:
-      "يتم عرض بندين فقط في النسخة المجانية. قم بالترقية لعرض جميع البنود.",
-  },
 };
 
 export default function UploadPage() {
@@ -97,6 +45,25 @@ export default function UploadPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const t = labels[language] || labels.en;
+
+  // ✅ NEW
+  const handleBuyCredit = async () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      setResult({ authRequired: true });
+      return;
+    }
+
+    const data = await createCheckoutSession();
+
+    if (data.checkout_url) {
+      window.location.href = data.checkout_url;
+      return;
+    }
+
+    alert(data.detail || "Payment is not configured yet.");
+  };
 
   const handleUpload = async () => {
     if (!file) return;
@@ -182,7 +149,6 @@ export default function UploadPage() {
             }}
           />
 
-          {/* Language selector FIX */}
           <select
             value={language}
             onChange={(e) => setLanguage(e.target.value)}
@@ -200,13 +166,19 @@ export default function UploadPage() {
           >
             {t.analyzeButton}
           </button>
+
+          {/* ✅ NEW BUY CREDIT BUTTON */}
+          <button
+            onClick={handleBuyCredit}
+            className="w-full rounded-xl bg-green-600 px-6 py-3 text-sm font-semibold text-white hover:bg-green-700"
+          >
+            Buy credit
+          </button>
         </div>
 
-        {/* Result */}
         {result && !result.authRequired && (
           <div className="space-y-6">
 
-            {/* Summary */}
             <div className="bg-white p-6 rounded-3xl border">
               <h2 className="text-xl font-semibold">{t.summary}</h2>
               <p className="mt-4">{result.summary}</p>
@@ -214,13 +186,11 @@ export default function UploadPage() {
 
             <RiskScore score={result.risk_score} language={language} />
 
-            {/* Simplified */}
             <div className="bg-blue-50 p-6 rounded-3xl border">
               <h2 className="text-xl font-semibold">{t.simplified}</h2>
               <p className="mt-4">{result.simplified_version}</p>
             </div>
 
-            {/* Clauses */}
             <div className="bg-white p-6 rounded-3xl border">
               <h2 className="text-xl font-semibold mb-4">{t.clauses}</h2>
 
@@ -253,7 +223,7 @@ export default function UploadPage() {
                     {openIndex === index && (
                       <div className="mt-3 text-sm text-slate-600">
                         <p>
-                         {t.recommendation}: {clause.recommendation}
+                          {t.recommendation}: {clause.recommendation}
                         </p>
                       </div>
                     )}
