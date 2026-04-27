@@ -1,6 +1,22 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Pricing() {
+  const [message, setMessage] = useState("");
+
+  const handleBuyCredits = () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      window.location.href = "/register";
+      return;
+    }
+
+    setMessage("Payment is not configured yet.");
+  };
+
   return (
     <main className="bg-white">
       <div className="mx-auto max-w-6xl px-6 py-20">
@@ -83,12 +99,18 @@ export default function Pricing() {
               <li>✔ Recommendations for all clauses</li>
             </ul>
 
-            <Link
-              href="/upload"
+            <button
+              onClick={handleBuyCredits}
               className="mt-auto block rounded-xl bg-blue-600 px-5 py-3 text-center font-semibold text-white hover:bg-blue-700 transition"
             >
               Buy credits
-            </Link>
+            </button>
+
+            {message && (
+              <div className="mt-4 rounded-xl border border-red-200 bg-red-50 p-3 text-center text-sm text-red-700">
+                {message}
+              </div>
+            )}
           </div>
 
           {/* BUSINESS */}
