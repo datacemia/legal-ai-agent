@@ -131,38 +131,175 @@ export default function LoginPage() {
               </div>
             </div>
           </div>
+
+          <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-[120%] rounded-[100%] border border-blue-300 opacity-40" />
+          <div className="pointer-events-none absolute -bottom-36 -left-28 h-72 w-[120%] rounded-[100%] border border-indigo-300 opacity-30" />
+          <div className="pointer-events-none absolute bottom-20 right-16 h-40 w-40 rounded-3xl bg-blue-200/40 blur-3xl" />
         </section>
 
         <section className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-10 sm:px-6 lg:bg-white lg:px-10">
           <div className="w-full max-w-xl rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/70 sm:p-8 lg:p-10">
-            <h1 className="text-3xl font-bold text-center">Login</h1>
+            <div className="text-center">
+              <h1 className="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+                Login
+              </h1>
+              <p className="mt-3 text-sm text-slate-500 sm:text-base">
+                Welcome back! Please login to your account.
+              </p>
+            </div>
+
+            <div className="mt-8 grid gap-3">
+              <button
+                type="button"
+                disabled
+                className="flex w-full items-center justify-between rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-500 cursor-not-allowed"
+              >
+                <span className="flex items-center gap-3">
+                  <span className="text-lg">G</span>
+                  Continue with Google
+                </span>
+                <span className="rounded-full bg-indigo-50 px-3 py-1 text-xs text-indigo-700">
+                  Coming soon
+                </span>
+              </button>
+
+              <button
+                type="button"
+                disabled
+                className="flex w-full items-center justify-between rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-500 cursor-not-allowed"
+              >
+                <span className="flex items-center gap-3">
+                  <span className="text-lg">▦</span>
+                  Continue with Microsoft
+                </span>
+                <span className="rounded-full bg-indigo-50 px-3 py-1 text-xs text-indigo-700">
+                  Coming soon
+                </span>
+              </button>
+            </div>
+
+            <div className="my-7 flex items-center gap-4">
+              <div className="h-px flex-1 bg-slate-200" />
+              <span className="text-xs text-slate-500">
+                or continue with email
+              </span>
+              <div className="h-px flex-1 bg-slate-200" />
+            </div>
 
             {message && (
-              <div className="mt-4 text-center text-red-600">{message}</div>
+              <div
+                className={`mb-5 rounded-xl border p-4 text-sm ${
+                  messageType === "success"
+                    ? "border-green-200 bg-green-50 text-green-700"
+                    : "border-red-200 bg-red-50 text-red-700"
+                }`}
+              >
+                {message}
+              </div>
             )}
 
-            <input
-              type="email"
-              placeholder="Email"
-              className="w-full mt-6 p-3 border rounded-xl"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+            <div className="space-y-5">
+              <div>
+                <label className="mb-2 block text-sm font-medium text-slate-700">
+                  Email address
+                </label>
+                <input
+                  type="email"
+                  placeholder="you@example.com"
+                  className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-950 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
 
-            <input
-              type="password"
-              placeholder="Password"
-              className="w-full mt-4 p-3 border rounded-xl"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+              <div>
+                <label className="mb-2 block text-sm font-medium text-slate-700">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  placeholder="Enter your password"
+                  className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-950 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
 
-            <button
-              onClick={handleLogin}
-              className="w-full mt-6 bg-black text-white py-3 rounded-xl"
-            >
-              Login
-            </button>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <label className="flex items-center gap-2 text-sm text-slate-600">
+                  <input
+                    type="checkbox"
+                    className="h-4 w-4 rounded border-slate-300"
+                  />
+                  Remember me
+                </label>
+
+                <a
+                  href="/forgot-password"
+                  className="text-sm font-medium text-blue-600 hover:text-blue-700"
+                >
+                  Forgot password?
+                </a>
+              </div>
+
+              <button
+                onClick={handleLogin}
+                className="w-full rounded-xl bg-slate-950 py-3 font-semibold text-white shadow-lg transition hover:bg-slate-800"
+              >
+                Login
+              </button>
+            </div>
+
+            <div className="mt-7 space-y-4 text-center">
+              <p className="text-sm text-slate-500">
+                Don&apos;t have an account?{" "}
+                <a
+                  href="/register"
+                  className="font-medium text-blue-600 hover:text-blue-700"
+                >
+                  Create account
+                </a>
+              </p>
+
+              <button
+                onClick={async () => {
+                  try {
+                    if (!email.trim()) {
+                      setMessageType("error");
+                      setMessage("Enter your email first");
+                      return;
+                    }
+
+                    const res = await fetch(
+                      `${API_URL}/auth/resend-verification`,
+                      {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ email: email.trim() }),
+                      }
+                    );
+
+                    const data = await res.json();
+
+                    setMessageType("success");
+                    setMessage(
+                      data.message ||
+                        data.detail ||
+                        "Verification email request sent."
+                    );
+                  } catch (err) {
+                    console.error(err);
+                    setMessageType("error");
+                    setMessage("Error connecting to server");
+                  }
+                }}
+                className="text-sm font-medium text-blue-600 hover:text-blue-700"
+              >
+                Resend verification email
+              </button>
+            </div>
           </div>
         </section>
       </div>
