@@ -40,8 +40,9 @@ export default function PricingPage() {
               <li>✔ AI Legal Agent access</li>
               <li>✔ Contract summary</li>
               <li>✔ Risk detection</li>
-              <li className="text-slate-400">✖ Limited clause analysis</li>
-              <li className="text-slate-400">✖ No full recommendations</li>
+              <li>✔ 2 clauses max</li>
+              <li className="text-slate-400">✖ Full clause analysis</li>
+              <li className="text-slate-400">✖ Recommendations</li>
             </ul>
 
             <Link
