@@ -50,7 +50,7 @@ def run_analysis(
             detail="Payment required. Please buy an analysis credit.",
         )
 
-    is_free_preview = not is_admin and has_free_analysis and not has_paid_credit
+    is_free_analysis = not is_admin and has_free_analysis
 
     if output_language not in ["en", "fr", "ar"]:
         output_language = "en"
@@ -64,20 +64,23 @@ def run_analysis(
     clauses = split_into_clauses(cleaned_text)
 
     clause_results = analyze_contract_clauses(clauses, output_language)
+
+    if is_free_analysis:
+        visible_clause_results = clause_results[:2]
+    else:
+        visible_clause_results = clause_results
+
     global_risk = calculate_global_risk(clause_results)
     summary = generate_summary(cleaned_text, output_language)
     simplified = generate_simplified_version(cleaned_text, output_language)
 
-    if is_free_preview:
-        clause_results_to_save = clause_results[:2]
-        simplified_to_save = simplified
-        recommendations_to_save = [
-            "Recommendations are included for the 2 displayed clauses."
+    if is_free_analysis:
+        recommendations = [
+            "Recommendations are limited to the 2 displayed clauses.",
+            "Upgrade to unlock recommendations for all clauses.",
         ]
     else:
-        clause_results_to_save = clause_results
-        simplified_to_save = simplified
-        recommendations_to_save = [
+        recommendations = [
             "Review all medium and high risk clauses.",
             "Ask a lawyer before signing important contracts.",
         ]
@@ -85,18 +88,18 @@ def run_analysis(
     analysis = AnalysisResult(
         document_id=document.id,
         summary=summary,
-        clauses=json.dumps(clause_results_to_save, ensure_ascii=False),
+        clauses=json.dumps(visible_clause_results, ensure_ascii=False),
         risk_level=global_risk["risk_level"],
         risk_score=global_risk["risk_score"],
-        simplified_version=simplified_to_save,
-        recommendations=json.dumps(recommendations_to_save, ensure_ascii=False),
+        simplified_version=simplified,
+        recommendations=json.dumps(recommendations, ensure_ascii=False),
     )
 
     document.language = detected_language
     document.status = "completed"
 
     if not is_admin:
-        if is_free_preview:
+        if has_free_analysis:
             current_user.free_analyses_used += 1
         else:
             current_user.analysis_credits -= 1
