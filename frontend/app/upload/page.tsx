@@ -137,6 +137,12 @@ export default function UploadPage() {
     clauses = [];
   }
 
+  const isLimitedPreview =
+    result &&
+    !result.authRequired &&
+    clauses.length <= 2 &&
+    !result.simplified_version;
+
   if (loading) {
     return (
       <main className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
@@ -248,6 +254,14 @@ export default function UploadPage() {
 
         {result && !result.authRequired && (
           <div className="space-y-6">
+            {isLimitedPreview && (
+              <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5 text-sm text-amber-800">
+                Limited preview: free users see the summary, risk level, and up
+                to 2 clauses. Upgrade to unlock full clause analysis and
+                recommendations.
+              </div>
+            )}
+
             <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
               <div className="flex justify-between items-center gap-4">
                 <h2 className="text-xl font-semibold text-slate-950">
@@ -263,15 +277,17 @@ export default function UploadPage() {
 
             <RiskScore score={result.risk_score} language={language} />
 
-            <div className="bg-blue-50 p-6 rounded-3xl border border-blue-200">
-              <h2 className="text-xl font-semibold text-blue-800">
-                {t.simplified}
-              </h2>
+            {result.simplified_version && (
+              <div className="bg-blue-50 p-6 rounded-3xl border border-blue-200">
+                <h2 className="text-xl font-semibold text-blue-800">
+                  {t.simplified}
+                </h2>
 
-              <p className="mt-4 text-blue-900 whitespace-pre-line leading-7">
-                {result.simplified_version}
-              </p>
-            </div>
+                <p className="mt-4 text-blue-900 whitespace-pre-line leading-7">
+                  {result.simplified_version}
+                </p>
+              </div>
+            )}
 
             <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
               <h2 className="text-xl font-semibold mb-4 text-slate-950">
@@ -323,9 +339,11 @@ export default function UploadPage() {
                           {clause.original_text}
                         </p>
 
-                        <p className="text-slate-600 text-sm">
-                          {t.recommendation}: {clause.recommendation}
-                        </p>
+                        {clause.recommendation && (
+                          <p className="text-slate-600 text-sm">
+                            {t.recommendation}: {clause.recommendation}
+                          </p>
+                        )}
                       </div>
                     )}
                   </div>
