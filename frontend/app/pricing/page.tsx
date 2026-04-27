@@ -37,14 +37,11 @@ export default function PricingPage() {
             <p className="text-sm text-slate-500">1 contract analysis</p>
 
             <ul className="mt-6 space-y-3 text-sm text-slate-700">
-              <li>✔ AI Legal Agent access</li>
               <li>✔ Contract summary</li>
-              <li>✔ Risk detection</li>
-              <li>✔ 2 clauses max</li>
-              <li className="text-slate-400">✖ Full clause analysis</li>
-              <li className="text-slate-400">
-                ✖ Full simplified version + recommendations
-              </li>
+              <li>✔ Risk score</li>
+              <li>✔ Full simplified version</li>
+              <li>✔ 2 clauses displayed</li>
+              <li>✔ Recommendations for 2 clauses</li>
             </ul>
 
             <Link
@@ -80,10 +77,8 @@ export default function PricingPage() {
             <ul className="mt-6 space-y-3 text-sm text-slate-700">
               <li>✔ Everything in Free</li>
               <li>✔ Full contract analysis</li>
-              <li>✔ Risk score</li>
-              <li>✔ Clause-by-clause insights</li>
-              <li>✔ Clear recommendations</li>
-              <li>✔ Full simplified version</li>
+              <li>✔ All clauses displayed</li>
+              <li>✔ Recommendations for all clauses</li>
             </ul>
 
             <Link
