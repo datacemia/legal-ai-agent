@@ -23,6 +23,26 @@ export default function Footer() {
 
   const t = translations[locale] || translations.en;
 
+  const legalLabels: any = {
+    en: {
+      terms: "Terms",
+      privacy: "Privacy Policy",
+      productTerms: "Product Terms",
+    },
+    fr: {
+      terms: "Conditions",
+      privacy: "Confidentialité",
+      productTerms: "Conditions produit",
+    },
+    ar: {
+      terms: "الشروط",
+      privacy: "الخصوصية",
+      productTerms: "شروط المنتج",
+    },
+  };
+
+  const legal = legalLabels[locale] || legalLabels.en;
+
   return (
     <footer
       dir={locale === "ar" ? "rtl" : "ltr"}
@@ -92,16 +112,21 @@ export default function Footer() {
         <div className="mt-12 border-t border-slate-800 pt-6 flex flex-col gap-4 text-sm text-slate-500 md:flex-row md:items-center md:justify-between">
           <p>{t.copyright}</p>
 
-          <div className="flex gap-5">
+          <div className="flex flex-wrap gap-5">
+            <Link href="/terms" className="hover:text-white transition">
+              {legal.terms}
+            </Link>
+
             <a href="#" className="hover:text-white transition">
-              {t.privacy}
+              {legal.privacy}
             </a>
-            <a href="#" className="hover:text-white transition">
-              {t.terms}
-            </a>
-            <a href="#" className="hover:text-white transition">
-              {t.contact}
-            </a>
+
+            <Link
+              href="/products/ai-legal-agent/terms"
+              className="hover:text-white transition"
+            >
+              {legal.productTerms}
+            </Link>
           </div>
         </div>
       </div>

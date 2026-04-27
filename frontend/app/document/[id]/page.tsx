@@ -119,6 +119,13 @@ export default function DocumentPage() {
           >
             {t.back}
           </Link>
+          <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+         ⚠️ {language === "fr"
+          ? "Cet outil ne remplace pas un avocat. Vérifiez toujours vos contrats attentivement."
+          : language === "ar"
+          ? "⚠️ هذه الأداة لا تغني عن محامٍ. يجب مراجعة العقود بعناية."
+          : "This tool does not replace a lawyer. Always review contracts carefully."}
+          </div>
         </div>
       </main>
     );
