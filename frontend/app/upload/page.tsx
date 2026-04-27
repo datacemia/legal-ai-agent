@@ -120,7 +120,7 @@ export default function UploadPage() {
 
       if (analysis.detail?.includes("Payment required")) {
         alert("You used your free analysis. Please buy one analysis credit.");
-        window.location.href = "/dashboard";
+        window.location.href = "/pricing";
         return;
       }
 
