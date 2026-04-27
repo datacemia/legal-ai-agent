@@ -69,19 +69,11 @@ def run_analysis(
     simplified = generate_simplified_version(cleaned_text, output_language)
 
     if is_free_preview:
-        limited_clauses = []
-
-        for clause in clause_results[:2]:
-            clause_copy = clause.copy() if isinstance(clause, dict) else clause
-
-            if isinstance(clause_copy, dict):
-                clause_copy["recommendation"] = ""
-
-            limited_clauses.append(clause_copy)
-
-        clause_results_to_save = limited_clauses
-        simplified_to_save = ""
-        recommendations_to_save = []
+        clause_results_to_save = clause_results[:2]
+        simplified_to_save = simplified
+        recommendations_to_save = [
+            "Recommendations are included for the 2 displayed clauses."
+        ]
     else:
         clause_results_to_save = clause_results
         simplified_to_save = simplified
