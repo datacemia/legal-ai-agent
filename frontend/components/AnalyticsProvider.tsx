@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Script from "next/script";
 import { isAnalyticsAllowed } from "../lib/analytics";
 
-const GA_ID = "G-LCSF21FG31";
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export default function AnalyticsProvider() {
   const [enabled, setEnabled] = useState(false);
@@ -23,7 +23,8 @@ export default function AnalyticsProvider() {
     };
   }, []);
 
-  if (!enabled) return null;
+  // 🔒 sécurité : ne charge rien si pas d'ID
+  if (!enabled || !GA_ID) return null;
 
   return (
     <>
