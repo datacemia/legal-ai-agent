@@ -7,7 +7,16 @@ import { getSavedLocale, translations } from "../lib/i18n";
 
 export default function Navbar() {
   const [isLogged, setIsLogged] = useState(false);
+  const [role, setRole] = useState("");
   const [locale, setLocale] = useState("en");
+
+  const checkAuth = () => {
+    const token = localStorage.getItem("token");
+    const savedRole = localStorage.getItem("role") || "";
+
+    setIsLogged(!!token);
+    setRole(savedRole);
+  };
 
   useEffect(() => {
     checkAuth();
@@ -27,18 +36,19 @@ export default function Navbar() {
     };
   }, []);
 
-  const checkAuth = () => {
-    const token = localStorage.getItem("token");
-    setIsLogged(!!token);
-  };
-
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
     setIsLogged(false);
+    setRole("");
     window.location.href = "/login";
   };
 
   const t = translations[locale] || translations.en;
+
+  const isAdmin = role === "admin";
+  const isBusiness = role === "business";
+  const canSeeDashboard = isAdmin || isBusiness;
 
   return (
     <header
@@ -62,21 +72,24 @@ export default function Navbar() {
         <div className="flex items-center gap-5">
           {isLogged ? (
             <>
-              <Link
-                href="/dashboard"
-                className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
-              >
-                {t.dashboard}
-              </Link>
+              {canSeeDashboard && (
+                <Link
+                  href="/dashboard"
+                  className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
+                >
+                  {t.dashboard}
+                </Link>
+              )}
 
-              <Link
-                href="/admin"
-                className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
-              >
-                {t.admin}
-              </Link>
+              {isAdmin && (
+                <Link
+                  href="/admin"
+                  className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
+                >
+                  {t.admin}
+                </Link>
+              )}
 
-              {/* ✅ Ajout Pricing */}
               <Link
                 href="/pricing"
                 className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
@@ -100,7 +113,6 @@ export default function Navbar() {
                 {t.login}
               </Link>
 
-              {/* ✅ Ajout Pricing */}
               <Link
                 href="/pricing"
                 className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
