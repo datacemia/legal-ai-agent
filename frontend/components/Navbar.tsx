@@ -12,7 +12,9 @@ export default function Navbar() {
 
   const checkAuth = () => {
     const token = localStorage.getItem("token");
-    const savedRole = localStorage.getItem("role") || "";
+    const savedRole = (localStorage.getItem("role") || "")
+      .toLowerCase()
+      .trim();
 
     setIsLogged(!!token);
     setRole(savedRole);
@@ -70,7 +72,6 @@ export default function Navbar() {
         </Link>
 
         <div className="flex items-center gap-5">
-          {/* Dashboard (admin + business) */}
           {canSeeDashboard && (
             <Link
               href="/dashboard"
@@ -80,7 +81,6 @@ export default function Navbar() {
             </Link>
           )}
 
-          {/* Admin only */}
           {isAdmin && (
             <Link
               href="/admin"
@@ -90,7 +90,6 @@ export default function Navbar() {
             </Link>
           )}
 
-          {/* Always visible */}
           <Link
             href="/login"
             className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
@@ -105,7 +104,6 @@ export default function Navbar() {
             {t.register || "Register"}
           </Link>
 
-          {/* Logout only if logged */}
           {isLogged && (
             <button
               onClick={handleLogout}

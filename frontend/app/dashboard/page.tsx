@@ -27,6 +27,46 @@ const labels: any = {
     action: "Action",
     view: "View",
   },
+  fr: {
+    title: "Tableau de bord",
+    subtitle: "Gérez vos analyses de contrats.",
+    buy: "Acheter crédit",
+    new: "Nouvelle analyse",
+    loading: "Chargement...",
+    total: "Documents",
+    completed: "Terminés",
+    progress: "En cours",
+    emptyTitle: "Aucun document",
+    emptyDesc: "Téléversez votre premier contrat.",
+    upload: "Téléverser",
+    document: "Document",
+    type: "Type",
+    language: "Langue",
+    status: "Statut",
+    date: "Date",
+    action: "Action",
+    view: "Voir",
+  },
+  ar: {
+    title: "لوحة التحكم",
+    subtitle: "إدارة تحليلات العقود",
+    buy: "شراء رصيد",
+    new: "تحليل جديد",
+    loading: "جاري التحميل...",
+    total: "عدد الوثائق",
+    completed: "مكتمل",
+    progress: "قيد المعالجة",
+    emptyTitle: "لا توجد وثائق",
+    emptyDesc: "قم برفع أول عقد",
+    upload: "رفع عقد",
+    document: "الوثيقة",
+    type: "النوع",
+    language: "اللغة",
+    status: "الحالة",
+    date: "التاريخ",
+    action: "الإجراء",
+    view: "عرض",
+  },
 };
 
 export default function DashboardPage() {
@@ -48,10 +88,11 @@ export default function DashboardPage() {
       return;
     }
 
-    const role = localStorage.getItem("role");
+    const role = (localStorage.getItem("role") || "")
+      .toLowerCase()
+      .trim();
 
-    // 🔒 protection stable
-    if (role && role !== "admin" && role !== "business") {
+    if (role !== "admin" && role !== "business") {
       window.location.href = "/pricing";
       return;
     }
@@ -173,19 +214,28 @@ export default function DashboardPage() {
                 <tbody>
                   {documents.map((doc) => (
                     <tr key={doc.id} className="border-t hover:bg-slate-50">
-                      <td className="p-4 font-medium">{doc.file_name}</td>
-                      <td className="p-4">
+                      <td className="p-4 text-start font-medium">
+                        {doc.file_name}
+                      </td>
+
+                      <td className="p-4 text-start">
                         {doc.file_type?.toUpperCase()}
                       </td>
-                      <td className="p-4">{doc.language || "—"}</td>
-                      <td className="p-4">
+
+                      <td className="p-4 text-start">
+                        {doc.language || "—"}
+                      </td>
+
+                      <td className="p-4 text-start">
                         <RiskBadge
                           risk={doc.status === "completed" ? "low" : "medium"}
                         />
                       </td>
-                      <td className="p-4">
+
+                      <td className="p-4 text-start">
                         {new Date(doc.created_at).toLocaleDateString()}
                       </td>
+
                       <td className="p-4 text-end">
                         <Link
                           href={`/document/${doc.id}`}
