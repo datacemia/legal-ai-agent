@@ -140,8 +140,7 @@ export default function UploadPage() {
   const isLimitedPreview =
     result &&
     !result.authRequired &&
-    clauses.length <= 2 &&
-    !result.simplified_version;
+    clauses.length <= 2;
 
   if (loading) {
     return (
@@ -181,176 +180,40 @@ export default function UploadPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {featureCards.map((card) => (
-            <div
-              key={card.number}
-              className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm"
-            >
-              <div className="flex items-start gap-4">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-sm font-bold text-blue-600">
-                  {card.number}
-                </span>
-
-                <div>
-                  <p className="font-semibold text-slate-950">{card.title}</p>
-                  <p className="text-sm text-slate-500 mt-2">{card.text}</p>
-                </div>
-              </div>
+            <div key={card.number} className="bg-white border rounded-2xl p-5">
+              <p className="font-semibold">{card.title}</p>
+              <p className="text-sm text-slate-500 mt-2">{card.text}</p>
             </div>
           ))}
         </div>
 
-        <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-5">
-          <UploadBox
-            file={file}
-            onFileChange={(selected) => {
-              setFile(selected);
-              setFileName(selected?.name || "");
-              setResult(null);
-              setOpenIndex(null);
-            }}
-          />
+        <UploadBox file={file} onFileChange={setFile} />
 
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <select
-              value={language}
-              onChange={(e) => setLanguage(e.target.value)}
-              className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
-            >
-              <option value="en">English</option>
-              <option value="fr">Français</option>
-              <option value="ar">العربية</option>
-            </select>
-
-            <button
-              onClick={handleUpload}
-              disabled={!file}
-              className="rounded-xl bg-slate-950 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-400"
-            >
-              {t.analyzeButton}
-            </button>
-          </div>
-        </div>
-
-        {result?.authRequired && (
-          <div className="bg-slate-950 text-white rounded-3xl p-6 text-center space-y-4">
-            <p className="font-medium">{t.loginRequired}</p>
-
-            <div className="flex justify-center gap-4">
-              <a href="/login" className="underline">
-                Login
-              </a>
-              <a href="/register" className="underline">
-                Register
-              </a>
-            </div>
+        {result && isLimitedPreview && (
+          <div className="bg-yellow-50 p-4 rounded-xl text-sm text-yellow-800">
+            Limited preview: free users see summary, risk score, full simplified
+            version, and only 2 clauses with recommendations.
           </div>
         )}
 
-        {!result && (
-          <div className="bg-white border border-slate-200 rounded-3xl p-8 text-center text-slate-500">
-            {t.empty}
-          </div>
-        )}
+        {result && (
+          <>
+            <RiskBadge risk={result.risk_level} />
+            <RiskScore score={result.risk_score} />
 
-        {result && !result.authRequired && (
-          <div className="space-y-6">
-            {isLimitedPreview && (
-              <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5 text-sm text-amber-800">
-                Limited preview: free users see the summary, risk level, and up
-                to 2 clauses. Upgrade to unlock full clause analysis and
-                recommendations.
-              </div>
-            )}
-
-            <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
-              <div className="flex justify-between items-center gap-4">
-                <h2 className="text-xl font-semibold text-slate-950">
-                  {t.summary}
-                </h2>
-                <RiskBadge risk={result.risk_level} language={language} />
-              </div>
-
-              <p className="mt-4 text-slate-700 whitespace-pre-line leading-7">
-                {result.summary}
-              </p>
-            </div>
-
-            <RiskScore score={result.risk_score} language={language} />
+            <div>{result.summary}</div>
 
             {result.simplified_version && (
-              <div className="bg-blue-50 p-6 rounded-3xl border border-blue-200">
-                <h2 className="text-xl font-semibold text-blue-800">
-                  {t.simplified}
-                </h2>
-
-                <p className="mt-4 text-blue-900 whitespace-pre-line leading-7">
-                  {result.simplified_version}
-                </p>
-              </div>
+              <div>{result.simplified_version}</div>
             )}
 
-            <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
-              <h2 className="text-xl font-semibold mb-4 text-slate-950">
-                {t.clauses}
-              </h2>
-
-              <div className="space-y-4">
-                {clauses.map((clause: any, index: number) => (
-                  <div
-                    key={index}
-                    className={`border rounded-2xl p-4 cursor-pointer transition ${
-                      clause.risk_level === "high"
-                        ? "border-red-300 bg-red-50"
-                        : clause.risk_level === "medium"
-                        ? "border-yellow-300 bg-yellow-50"
-                        : "border-slate-200 bg-white hover:bg-slate-50"
-                    }`}
-                    onClick={() =>
-                      setOpenIndex(openIndex === index ? null : index)
-                    }
-                  >
-                    <div className="flex justify-between items-center gap-4">
-                      <div className="flex items-center gap-2">
-                        <span className="font-semibold text-slate-900">
-                          {t.clause} {index + 1}
-                        </span>
-                        <span className="text-xs text-slate-400">
-                          {openIndex === index ? "▲" : "▼"}
-                        </span>
-                      </div>
-
-                      <RiskBadge
-                        risk={clause.risk_level}
-                        language={language || "en"}
-                      />
-                    </div>
-
-                    <p className="text-blue-700 text-sm mt-3">
-                      {clause.explanation_simple}
-                    </p>
-
-                    {openIndex === index && (
-                      <div className="mt-4 space-y-3">
-                        <p className="text-sm text-slate-500">
-                          {t.trigger}: {clause.trigger || t.none}
-                        </p>
-
-                        <p className="text-slate-800 leading-7">
-                          {clause.original_text}
-                        </p>
-
-                        {clause.recommendation && (
-                          <p className="text-slate-600 text-sm">
-                            {t.recommendation}: {clause.recommendation}
-                          </p>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                ))}
+            {clauses.map((c, i) => (
+              <div key={i}>
+                <div>{c.explanation_simple}</div>
+                {c.recommendation && <div>{c.recommendation}</div>}
               </div>
-            </div>
-          </div>
+            ))}
+          </>
         )}
       </div>
     </main>
