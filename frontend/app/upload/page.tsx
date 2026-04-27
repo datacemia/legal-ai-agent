@@ -251,10 +251,9 @@ export default function UploadPage() {
                     </p>
 
                     {openIndex === index && (
-                      <div className="mt-3 text-sm">
-                        <p>{clause.original_text}</p>
-                        <p className="mt-2">
-                          {t.recommendation}: {clause.recommendation}
+                      <div className="mt-3 text-sm text-slate-600">
+                        <p>
+                         {t.recommendation}: {clause.recommendation}
                         </p>
                       </div>
                     )}
