@@ -82,9 +82,15 @@ export default function DashboardPage() {
     setLocale(saved);
 
     const token = getToken();
+    const role = localStorage.getItem("role");
 
     if (!token) {
       window.location.href = "/login";
+      return;
+    }
+
+    if (role !== "admin" && role !== "business") {
+      window.location.href = "/pricing";
       return;
     }
 
@@ -208,18 +214,25 @@ export default function DashboardPage() {
                       <td className="p-4 text-start font-medium">
                         {doc.file_name}
                       </td>
+
                       <td className="p-4 text-start">
                         {doc.file_type?.toUpperCase()}
                       </td>
-                      <td className="p-4 text-start">{doc.language || "—"}</td>
+
+                      <td className="p-4 text-start">
+                        {doc.language || "—"}
+                      </td>
+
                       <td className="p-4 text-start">
                         <RiskBadge
                           risk={doc.status === "completed" ? "low" : "medium"}
                         />
                       </td>
+
                       <td className="p-4 text-start">
                         {new Date(doc.created_at).toLocaleDateString()}
                       </td>
+
                       <td className="p-4 text-end">
                         <Link
                           href={`/document/${doc.id}`}
