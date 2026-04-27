@@ -7,6 +7,13 @@ import { isAnalyticsAllowed } from "../lib/analytics";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
+declare global {
+  interface Window {
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 export default function AnalyticsProvider() {
   const [enabled, setEnabled] = useState(false);
   const pathname = usePathname();
@@ -25,7 +32,6 @@ export default function AnalyticsProvider() {
     };
   }, []);
 
-  // 🔥 TRACK PAGE VIEWS (IMPORTANT)
   useEffect(() => {
     if (!enabled || !GA_ID || !window.gtag) return;
 
