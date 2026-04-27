@@ -70,63 +70,49 @@ export default function Navbar() {
         </Link>
 
         <div className="flex items-center gap-5">
-          {isLogged ? (
-            <>
-              {canSeeDashboard && (
-                <Link
-                  href="/dashboard"
-                  className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
-                >
-                  {t.dashboard}
-                </Link>
-              )}
+          {/* Dashboard (admin + business) */}
+          {canSeeDashboard && (
+            <Link
+              href="/dashboard"
+              className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
+            >
+              {t.dashboard || "Dashboard"}
+            </Link>
+          )}
 
-              {isAdmin && (
-                <Link
-                  href="/admin"
-                  className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
-                >
-                  {t.admin}
-                </Link>
-              )}
+          {/* Admin only */}
+          {isAdmin && (
+            <Link
+              href="/admin"
+              className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
+            >
+              {t.admin || "Admin"}
+            </Link>
+          )}
 
-              <Link
-                href="/pricing"
-                className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
-              >
-                Pricing
-              </Link>
+          {/* Always visible */}
+          <Link
+            href="/login"
+            className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
+          >
+            {t.login || "Login"}
+          </Link>
 
-              <button
-                onClick={handleLogout}
-                className="rounded-xl bg-slate-100 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-200 transition"
-              >
-                {t.logout}
-              </button>
-            </>
-          ) : (
-            <>
-              <Link
-                href="/login"
-                className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
-              >
-                {t.login}
-              </Link>
+          <Link
+            href="/register"
+            className="rounded-xl bg-slate-900 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 transition"
+          >
+            {t.register || "Register"}
+          </Link>
 
-              <Link
-                href="/pricing"
-                className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
-              >
-                Pricing
-              </Link>
-
-              <Link
-                href="/register"
-                className="rounded-xl bg-slate-900 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 transition"
-              >
-                {t.register}
-              </Link>
-            </>
+          {/* Logout only if logged */}
+          {isLogged && (
+            <button
+              onClick={handleLogout}
+              className="rounded-xl bg-slate-100 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-200 transition"
+            >
+              {t.logout || "Logout"}
+            </button>
           )}
         </div>
       </div>
