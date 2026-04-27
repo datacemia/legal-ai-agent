@@ -87,7 +87,7 @@ export default function Pricing() {
               href="/upload"
               className="mt-auto block rounded-xl bg-blue-600 px-5 py-3 text-center font-semibold text-white hover:bg-blue-700 transition"
             >
-              Analyze a contract
+              Buy credits
             </Link>
           </div>
 
