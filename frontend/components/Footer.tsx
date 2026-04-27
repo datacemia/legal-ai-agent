@@ -117,7 +117,7 @@ export default function Footer() {
               {legal.terms}
             </Link>
 
-            <a href="#" className="hover:text-white transition">
+            <a href="/privacy" className="hover:text-white transition">
               {legal.privacy}
             </a>
 
