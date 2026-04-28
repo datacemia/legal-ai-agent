@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
@@ -23,6 +24,31 @@ from app.services.summary_service import (
 
 router = APIRouter(prefix="/analysis", tags=["Analysis"])
 
+# ================= AJOUT =================
+ANALYSIS_ATTEMPTS = {}
+MAX_ANALYSIS_ATTEMPTS = 3
+ANALYSIS_WINDOW_SECONDS = 60
+
+
+def check_analysis_rate_limit(user_id: int):
+    now = datetime.utcnow()
+
+    attempts = ANALYSIS_ATTEMPTS.get(user_id, [])
+    attempts = [
+        attempt for attempt in attempts
+        if (now - attempt).total_seconds() < ANALYSIS_WINDOW_SECONDS
+    ]
+
+    if len(attempts) >= MAX_ANALYSIS_ATTEMPTS:
+        raise HTTPException(
+            status_code=429,
+            detail="Too many analyses. Please try again later.",
+        )
+
+    attempts.append(now)
+    ANALYSIS_ATTEMPTS[user_id] = attempts
+# ================= FIN AJOUT =================
+
 
 @router.post("/{document_id}/run", response_model=AnalysisResponse)
 def run_analysis(
@@ -31,6 +57,8 @@ def run_analysis(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
+    check_analysis_rate_limit(current_user.id)
+
     document = db.query(Document).filter(Document.id == document_id).first()
 
     if not document:
