@@ -23,6 +23,33 @@ router = APIRouter(prefix="/auth", tags=["Auth"])
 
 RATE_LIMIT_SECONDS = 60
 
+# ================= AJOUT =================
+LOGIN_ATTEMPTS = {}
+MAX_LOGIN_ATTEMPTS = 5
+LOGIN_WINDOW_SECONDS = 60
+
+
+def check_login_rate_limit(email: str):
+    now = datetime.utcnow()
+    email = email.strip().lower()
+
+    attempts = LOGIN_ATTEMPTS.get(email, [])
+    attempts = [
+        attempt for attempt in attempts
+        if (now - attempt).total_seconds() < LOGIN_WINDOW_SECONDS
+    ]
+
+    if len(attempts) >= MAX_LOGIN_ATTEMPTS:
+        raise HTTPException(
+            status_code=429,
+            detail="Too many login attempts. Please try again later.",
+        )
+
+    attempts.append(now)
+    LOGIN_ATTEMPTS[email] = attempts
+# ================= FIN AJOUT =================
+
+
 # ================= OAUTH =================
 
 oauth = OAuth()
@@ -280,6 +307,8 @@ def verify_email(token: str, db: Session = Depends(get_db)):
 
 @router.post("/login", response_model=TokenResponse)
 def login(user: UserLogin, db: Session = Depends(get_db)):
+    check_login_rate_limit(user.email)
+
     existing_user = db.query(User).filter(User.email == user.email).first()
 
     if not existing_user:
@@ -308,6 +337,8 @@ def token_login(
     form_data: OAuth2PasswordRequestForm = Depends(),
     db: Session = Depends(get_db),
 ):
+    check_login_rate_limit(form_data.username)
+
     existing_user = db.query(User).filter(User.email == form_data.username).first()
 
     if not existing_user:
