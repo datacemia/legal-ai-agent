@@ -73,6 +73,11 @@ export default function UploadPage() {
       setOpenIndex(null);
 
       const doc = await uploadDocument(file);
+
+      if (!doc || !doc.id) {
+        throw new Error("Upload failed");
+      }
+
       const analysis = await runAnalysis(doc.id, language);
 
       if (analysis.detail?.includes("Payment required")) {
@@ -82,6 +87,12 @@ export default function UploadPage() {
       }
 
       setResult(analysis);
+    } catch (err: any) {
+      setMessage(
+        err?.response?.data?.detail ||
+          "Invalid file. Only PDF or DOCX allowed."
+      );
+      return;
     } finally {
       setLoading(false);
     }
