@@ -8,7 +8,7 @@ export default function UploadBox({ file, onFileChange }: Props) {
     <label className="block cursor-pointer rounded-2xl border-2 border-dashed border-gray-300 bg-white p-10 text-center hover:border-black transition">
       <input
         type="file"
-        accept=".pdf,.docx"
+        accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
         className="hidden"
         onChange={(e) => onFileChange(e.target.files?.[0] || null)}
       />
