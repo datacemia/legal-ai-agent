@@ -38,7 +38,10 @@ oauth.register(
 
 @router.get("/google/login")
 async def google_login(request: Request):
-    redirect_uri = request.url_for("google_callback")
+    redirect_uri = os.getenv(
+        "GOOGLE_REDIRECT_URI",
+        "https://legal-ai-agent-production-fa17.up.railway.app/auth/google/callback"
+    )
     return await oauth.google.authorize_redirect(request, redirect_uri)
 
 
