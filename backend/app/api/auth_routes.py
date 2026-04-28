@@ -94,7 +94,7 @@ async def microsoft_login(request: Request):
 @router.get("/microsoft/callback")
 async def microsoft_callback(request: Request, db: Session = Depends(get_db)):
     token = await oauth.microsoft.authorize_access_token(request)
-    user_info = token.get("userinfo")
+    user_info = await oauth.microsoft.parse_id_token(request, token)
 
     email = user_info.get("email") or user_info.get("preferred_username")
     name = user_info.get("name", "")
