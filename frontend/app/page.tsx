@@ -199,6 +199,10 @@ export default function HomePage() {
           >
             {t.ctaButton}
           </Link>
+          {/* DISCLAIMER */}
+          <p className="mt-8 text-center text-sm text-slate-500 max-w-2xl mx-auto">
+            AI-powered insights. Always verify before you act.
+          </p>
         </div>
       </section>
     </main>
