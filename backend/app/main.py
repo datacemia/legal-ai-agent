@@ -1,5 +1,7 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.sessions import SessionMiddleware
 
 from app.config import FRONTEND_URL
 
@@ -21,6 +23,14 @@ from app.models.contact import ContactRequest
 app = FastAPI(
     title="Legal AI Agent API",
     version="1.0.0"
+)
+
+# ✅ AJOUT OBLIGATOIRE POUR GOOGLE OAUTH
+app.add_middleware(
+    SessionMiddleware,
+    secret_key=os.getenv("SECRET_KEY", "change-me"),
+    same_site="lax",
+    https_only=True,
 )
 
 app.add_middleware(
