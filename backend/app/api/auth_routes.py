@@ -23,7 +23,7 @@ router = APIRouter(prefix="/auth", tags=["Auth"])
 
 RATE_LIMIT_SECONDS = 60
 
-# ================= GOOGLE OAUTH =================
+# ================= OAUTH =================
 
 oauth = OAuth()
 
@@ -61,7 +61,6 @@ async def google_callback(request: Request, db: Session = Depends(get_db)):
     user_info = token.get("userinfo")
 
     email = user_info["email"]
-    name = user_info.get("name", "")
 
     user = db.query(User).filter(User.email == email).first()
 
@@ -101,7 +100,6 @@ async def microsoft_callback(request: Request, db: Session = Depends(get_db)):
     user_info = resp.json()
 
     email = user_info.get("mail") or user_info.get("userPrincipalName")
-    name = user_info.get("displayName", "")
 
     if not email:
         raise HTTPException(status_code=400, detail="Microsoft email not found")
@@ -169,11 +167,52 @@ def send_verification_email(to_email: str, token: str):
     msg["From"] = f"{from_name} <{from_email}>"
     msg["To"] = to_email
 
-    msg.set_content(f"""
+    msg.set_content(
+        f"""
 Welcome to Runexa.
 
-Verify your email:
+Please verify your email address using this link:
+
 {verify_url}
+
+If you did not create this account, you can ignore this email.
+"""
+    )
+
+    context = ssl.create_default_context()
+
+    try:
+        with smtplib.SMTP_SSL(smtp_host, smtp_port, context=context) as server:
+            server.login(smtp_user, smtp_password)
+            server.send_message(msg)
+
+        print("Verification email sent to:", to_email)
+
+    except Exception as e:
+        print("SMTP ERROR:", repr(e))
+
+
+def send_reset_email(to_email: str, token: str):
+    reset_url = f"{FRONTEND_URL}/reset-password?token={token}"
+
+    smtp_host = os.getenv("SMTP_HOST")
+    smtp_port = int(os.getenv("SMTP_PORT", "465"))
+    smtp_user = os.getenv("SMTP_USERNAME")
+    smtp_password = os.getenv("SMTP_PASSWORD")
+    from_email = os.getenv("SMTP_FROM_EMAIL", smtp_user)
+    from_name = os.getenv("SMTP_FROM_NAME", "Runexa")
+
+    msg = EmailMessage()
+    msg["Subject"] = "Reset your password"
+    msg["From"] = f"{from_name} <{from_email}>"
+    msg["To"] = to_email
+
+    msg.set_content(f"""
+Reset your password:
+
+{reset_url}
+
+If you did not request this, ignore this email.
 """)
 
     context = ssl.create_default_context()
@@ -182,22 +221,9 @@ Verify your email:
         with smtplib.SMTP_SSL(smtp_host, smtp_port, context=context) as server:
             server.login(smtp_user, smtp_password)
             server.send_message(msg)
-    except Exception as e:
-        print("SMTP ERROR:", repr(e))
 
+        print("Reset email sent to:", to_email)
 
-def send_reset_email(to_email: str, token: str):
-    reset_url = f"{FRONTEND_URL}/reset-password?token={token}"
-
-    msg = EmailMessage()
-    msg["Subject"] = "Reset your password"
-    msg["To"] = to_email
-    msg.set_content(f"Reset password:\n{reset_url}")
-
-    try:
-        with smtplib.SMTP_SSL(os.getenv("SMTP_HOST"), int(os.getenv("SMTP_PORT", "465"))) as server:
-            server.login(os.getenv("SMTP_USERNAME"), os.getenv("SMTP_PASSWORD"))
-            server.send_message(msg)
     except Exception as e:
         print("SMTP ERROR:", repr(e))
 
@@ -206,7 +232,9 @@ def send_reset_email(to_email: str, token: str):
 
 @router.post("/register", response_model=UserResponse)
 def register(user: UserCreate, db: Session = Depends(get_db)):
-    if db.query(User).filter(User.email == user.email).first():
+    existing_user = db.query(User).filter(User.email == user.email).first()
+
+    if existing_user:
         raise HTTPException(status_code=400, detail="Email already registered")
 
     error = validate_password(user.password)
@@ -233,17 +261,38 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
     return new_user
 
 
+@router.get("/verify-email")
+def verify_email(token: str, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.activation_token == token).first()
+
+    if not user or user.activation_token_expires < datetime.utcnow():
+        raise HTTPException(status_code=400, detail="Invalid or expired verification link")
+
+    user.email_verified = True
+    user.activation_token = None
+
+    db.commit()
+
+    return {"message": "Email verified successfully. You can now login."}
+
+
 # ================= LOGIN =================
 
 @router.post("/login", response_model=TokenResponse)
 def login(user: UserLogin, db: Session = Depends(get_db)):
     existing_user = db.query(User).filter(User.email == user.email).first()
 
-    if not existing_user or not verify_password(user.password, existing_user.password_hash):
+    if not existing_user:
+        raise HTTPException(status_code=400, detail="Invalid credentials")
+
+    if not verify_password(user.password, existing_user.password_hash):
         raise HTTPException(status_code=400, detail="Invalid credentials")
 
     if not existing_user.email_verified:
-        raise HTTPException(status_code=403, detail="Please verify your email")
+        raise HTTPException(
+            status_code=403,
+            detail="Please verify your email before login",
+        )
 
     token = create_access_token({"sub": str(existing_user.id)})
 
@@ -254,18 +303,63 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
     }
 
 
-# ================= TOKEN LOGIN =================
-
 @router.post("/token")
-def token_login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+def token_login(
+    form_data: OAuth2PasswordRequestForm = Depends(),
+    db: Session = Depends(get_db),
+):
     existing_user = db.query(User).filter(User.email == form_data.username).first()
 
-    if not existing_user or not verify_password(form_data.password, existing_user.password_hash):
+    if not existing_user:
         raise HTTPException(status_code=400, detail="Invalid credentials")
+
+    if not verify_password(form_data.password, existing_user.password_hash):
+        raise HTTPException(status_code=400, detail="Invalid credentials")
+
+    if not existing_user.email_verified:
+        raise HTTPException(
+            status_code=403,
+            detail="Please verify your email before login",
+        )
 
     token = create_access_token({"sub": str(existing_user.id)})
 
-    return {"access_token": token, "token_type": "bearer"}
+    return {
+        "access_token": token,
+        "token_type": "bearer",
+    }
+
+
+# ================= RESEND VERIFICATION =================
+
+@router.post("/resend-verification")
+def resend_verification(payload: dict, db: Session = Depends(get_db)):
+    email = payload.get("email", "").strip()
+
+    user = db.query(User).filter(User.email == email).first()
+
+    if not user:
+        return {"message": "If this email exists, a verification link has been sent."}
+
+    if user.email_verified:
+        return {"message": "Email already verified."}
+
+    now = datetime.utcnow()
+
+    if user.last_verification_email_sent_at and (
+        now - user.last_verification_email_sent_at
+    ).total_seconds() < RATE_LIMIT_SECONDS:
+        return {"message": "Please wait before requesting another email."}
+
+    token = secrets.token_urlsafe(32)
+    user.activation_token = token
+    user.last_verification_email_sent_at = now
+
+    db.commit()
+
+    send_verification_email(user.email, token)
+
+    return {"message": "Verification email sent."}
 
 
 # ================= FORGOT PASSWORD =================
@@ -277,21 +371,26 @@ def forgot_password(payload: dict, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.email == email).first()
 
     if not user:
-        return {"message": "If email exists, reset link sent."}
+        return {"message": "If this email exists, a reset link has been sent."}
+
+    now = datetime.utcnow()
+
+    if user.last_reset_email_sent_at and (
+        now - user.last_reset_email_sent_at
+    ).total_seconds() < RATE_LIMIT_SECONDS:
+        return {"message": "Please wait before requesting another email."}
 
     token = secrets.token_urlsafe(32)
-
     user.reset_token = token
     user.reset_token_expires = datetime.utcnow() + timedelta(minutes=15)
+    user.last_reset_email_sent_at = now
 
     db.commit()
 
     send_reset_email(user.email, token)
 
-    return {"message": "Reset email sent"}
+    return {"message": "Password reset email sent."}
 
-
-# ================= RESET PASSWORD =================
 
 @router.post("/reset-password")
 def reset_password(payload: dict, db: Session = Depends(get_db)):
@@ -302,6 +401,10 @@ def reset_password(payload: dict, db: Session = Depends(get_db)):
 
     if not user or user.reset_token_expires < datetime.utcnow():
         raise HTTPException(status_code=400, detail="Invalid or expired token")
+
+    error = validate_password(new_password)
+    if error:
+        raise HTTPException(status_code=400, detail=error)
 
     user.password_hash = hash_password(new_password)
     user.reset_token = None
