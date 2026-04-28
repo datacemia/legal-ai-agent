@@ -150,17 +150,15 @@ export default function LoginPage() {
 
             <div className="mt-8 grid gap-3">
               <button
-                type="button"
-                disabled
-                className="flex w-full items-center justify-between rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-500 cursor-not-allowed"
-              >
-                <span className="flex items-center gap-3">
-                  <span className="text-lg">G</span>
-                  Continue with Google
-                </span>
-                <span className="rounded-full bg-indigo-50 px-3 py-1 text-xs text-indigo-700">
-                  Coming soon
-                </span>
+                onClick={() => {
+                 window.location.href = `${API_URL}/auth/google/login`;
+                }}
+                className="flex w-full items-center justify-between rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-700 hover:bg-slate-50"
+                >
+              <span className="flex items-center gap-3">
+                <span className="text-lg">G</span>
+                Continue with Google
+              </span>
               </button>
 
               <button
