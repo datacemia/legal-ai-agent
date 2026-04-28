@@ -35,6 +35,14 @@ oauth.register(
     client_kwargs={"scope": "openid email profile"},
 )
 
+oauth.register(
+    name="microsoft",
+    client_id=os.getenv("MICROSOFT_CLIENT_ID"),
+    client_secret=os.getenv("MICROSOFT_CLIENT_SECRET"),
+    server_metadata_url="https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration",
+    client_kwargs={"scope": "openid email profile User.Read"},
+)
+
 
 @router.get("/google/login")
 async def google_login(request: Request):
@@ -52,6 +60,47 @@ async def google_callback(request: Request, db: Session = Depends(get_db)):
 
     email = user_info["email"]
     name = user_info.get("name", "")
+
+    user = db.query(User).filter(User.email == email).first()
+
+    if not user:
+        user = User(
+            email=email,
+            password_hash="",
+            is_active=True,
+            email_verified=True,
+            role="user",
+        )
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+
+    access_token = create_access_token({"sub": str(user.id)})
+
+    return RedirectResponse(
+        url=f"{FRONTEND_URL}/oauth-success?token={access_token}&role={user.role}"
+    )
+
+
+@router.get("/microsoft/login")
+async def microsoft_login(request: Request):
+    redirect_uri = os.getenv(
+        "MICROSOFT_REDIRECT_URI",
+        "https://legal-ai-agent-production-fa17.up.railway.app/auth/microsoft/callback"
+    )
+    return await oauth.microsoft.authorize_redirect(request, redirect_uri)
+
+
+@router.get("/microsoft/callback")
+async def microsoft_callback(request: Request, db: Session = Depends(get_db)):
+    token = await oauth.microsoft.authorize_access_token(request)
+    user_info = token.get("userinfo")
+
+    email = user_info.get("email") or user_info.get("preferred_username")
+    name = user_info.get("name", "")
+
+    if not email:
+        raise HTTPException(status_code=400, detail="Microsoft email not found")
 
     user = db.query(User).filter(User.email == email).first()
 
