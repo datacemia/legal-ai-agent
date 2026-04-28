@@ -35,13 +35,38 @@ oauth.register(
     client_kwargs={"scope": "openid email profile"},
 )
 
-oauth.register(
-    name="microsoft",
-    client_id=os.getenv("MICROSOFT_CLIENT_ID"),
-    client_secret=os.getenv("MICROSOFT_CLIENT_SECRET"),
-    server_metadata_url="https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration",
-    client_kwargs={"scope": "openid email profile User.Read"},
-)
+@router.get("/microsoft/callback")
+async def microsoft_callback(request: Request, db: Session = Depends(get_db)):
+    token = await oauth.microsoft.authorize_access_token(request)
+
+    resp = await oauth.microsoft.get("me", token=token)
+    user_info = resp.json()
+
+    email = user_info.get("mail") or user_info.get("userPrincipalName")
+    name = user_info.get("displayName", "")
+
+    if not email:
+        raise HTTPException(status_code=400, detail="Microsoft email not found")
+
+    user = db.query(User).filter(User.email == email).first()
+
+    if not user:
+        user = User(
+            email=email,
+            password_hash="",
+            is_active=True,
+            email_verified=True,
+            role="user",
+        )
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+
+    access_token = create_access_token({"sub": str(user.id)})
+
+    return RedirectResponse(
+        url=f"{FRONTEND_URL}/oauth-success?token={access_token}&role={user.role}"
+    )
 
 
 @router.get("/google/login")
