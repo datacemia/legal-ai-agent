@@ -28,7 +28,10 @@ def upload_document(
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-    file_path = save_upload_file(file)
+    try:
+        file_path = save_upload_file(file)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
     document = Document(
         user_id=current_user.id,
