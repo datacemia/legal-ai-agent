@@ -16,3 +16,4 @@ langdetect==1.0.9
 stripe==15.1.0
 resend==2.29.0
 Authlib==1.7.0
+itsdangerous==2.2.0
