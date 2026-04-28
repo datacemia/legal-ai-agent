@@ -1,8 +1,16 @@
-node_modules/
-.next/
-.env
-*.pyc
+# Python
+backend/venv/
 __pycache__/
-frontend/node_modules/
-frontend/.next/
-backend/__pycache__/
+*.pyc
+
+# Database
+*.db
+
+# Environment
+.env
+
+# Node
+node_modules/
+
+# Build
+.next/
