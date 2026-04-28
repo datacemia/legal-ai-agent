@@ -149,7 +149,6 @@ export default function LoginPage() {
             </div>
 
             <div className="mt-8 grid gap-3">
-              {/* GOOGLE */}
               <button
                 onClick={() => {
                   window.location.href = `${API_URL}/auth/google/login`;
@@ -162,7 +161,6 @@ export default function LoginPage() {
                 </span>
               </button>
 
-              {/* MICROSOFT */}
               <button
                 onClick={() => {
                   window.location.href = `${API_URL}/auth/microsoft/login`;
@@ -223,11 +221,79 @@ export default function LoginPage() {
                 />
               </div>
 
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <label className="flex items-center gap-2 text-sm text-slate-600">
+                  <input
+                    type="checkbox"
+                    className="h-4 w-4 rounded border-slate-300"
+                  />
+                  Remember me
+                </label>
+
+                <a
+                  href="/forgot-password"
+                  className="text-sm font-medium text-blue-600 hover:text-blue-700"
+                >
+                  Forgot password?
+                </a>
+              </div>
+
               <button
                 onClick={handleLogin}
                 className="w-full rounded-xl bg-slate-950 py-3 font-semibold text-white shadow-lg transition hover:bg-slate-800"
               >
                 Login
+              </button>
+            </div>
+
+            <div className="mt-7 space-y-4 text-center">
+              <p className="text-sm text-slate-500">
+                Don&apos;t have an account?{" "}
+                <a
+                  href="/register"
+                  className="font-medium text-blue-600 hover:text-blue-700"
+                >
+                  Create account
+                </a>
+              </p>
+
+              <button
+                onClick={async () => {
+                  try {
+                    if (!email.trim()) {
+                      setMessageType("error");
+                      setMessage("Enter your email first");
+                      return;
+                    }
+
+                    const res = await fetch(
+                      `${API_URL}/auth/resend-verification`,
+                      {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ email: email.trim() }),
+                      }
+                    );
+
+                    const data = await res.json();
+
+                    setMessageType("success");
+                    setMessage(
+                      data.message ||
+                        data.detail ||
+                        "Verification email request sent."
+                    );
+                  } catch (err) {
+                    console.error(err);
+                    setMessageType("error");
+                    setMessage("Error connecting to server");
+                  }
+                }}
+                className="text-sm font-medium text-blue-600 hover:text-blue-700"
+              >
+                Resend verification email
               </button>
             </div>
           </div>
