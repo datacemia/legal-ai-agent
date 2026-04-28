@@ -35,15 +35,38 @@ oauth.register(
     client_kwargs={"scope": "openid email profile"},
 )
 
-oauth.register(
-    name="microsoft",
-    client_id=os.getenv("MICROSOFT_CLIENT_ID"),
-    client_secret=os.getenv("MICROSOFT_CLIENT_SECRET"),
-    authorize_url="https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-    access_token_url="https://login.microsoftonline.com/common/oauth2/v2.0/token",
-    api_base_url="https://graph.microsoft.com/v1.0/",
-    client_kwargs={"scope": "User.Read"},
-)
+@router.get("/microsoft/callback")
+async def microsoft_callback(request: Request, db: Session = Depends(get_db)):
+    token = await oauth.microsoft.authorize_access_token(request)
+
+    resp = await oauth.microsoft.get("me", token=token)
+    user_info = resp.json()
+
+    email = user_info.get("mail") or user_info.get("userPrincipalName")
+    name = user_info.get("displayName", "")
+
+    if not email:
+        raise HTTPException(status_code=400, detail="Microsoft email not found")
+
+    user = db.query(User).filter(User.email == email).first()
+
+    if not user:
+        user = User(
+            email=email,
+            password_hash="",
+            is_active=True,
+            email_verified=True,
+            role="user",
+        )
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+
+    access_token = create_access_token({"sub": str(user.id)})
+
+    return RedirectResponse(
+        url=f"{FRONTEND_URL}/oauth-success?token={access_token}&role={user.role}"
+    )
 
 
 @router.get("/google/login")
@@ -96,12 +119,10 @@ async def microsoft_login(request: Request):
 @router.get("/microsoft/callback")
 async def microsoft_callback(request: Request, db: Session = Depends(get_db)):
     token = await oauth.microsoft.authorize_access_token(request)
+    user_info = await oauth.microsoft.parse_id_token(request, token)
 
-    resp = await oauth.microsoft.get("me", token=token)
-    user_info = resp.json()
-
-    email = user_info.get("mail") or user_info.get("userPrincipalName")
-    name = user_info.get("displayName", "")
+    email = user_info.get("email") or user_info.get("preferred_username")
+    name = user_info.get("name", "")
 
     if not email:
         raise HTTPException(status_code=400, detail="Microsoft email not found")
