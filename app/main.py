@@ -17,6 +17,7 @@ from app.models.analysis import AnalysisResult
 from app.models.payment import Payment
 
 
+
 app = FastAPI(
     title="Legal AI Agent API",
     version="1.0.0"
