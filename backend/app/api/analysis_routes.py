@@ -67,6 +67,12 @@ def run_analysis(
     if document.user_id != current_user.id:
         raise HTTPException(status_code=403, detail="Not allowed")
 
+    if document.status == "processing":
+        raise HTTPException(
+            status_code=429,
+            detail="Analysis already in progress",
+        )
+
     is_admin = current_user.role == "admin"
 
     has_free_analysis = current_user.free_analyses_used < 1
