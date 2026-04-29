@@ -5,11 +5,11 @@
     RUNEXA
   </text>
 
-  <text x="50%" y="105" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="500" fill="#2563EB" letter-spacing="3">
+  <text x="50%" y="105" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="500" fill="#2563EB" letter-spacing="3">
     SYSTEMS
   </text>
 
-  <text x="50%" y="135" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#64748B">
+  <text x="50%" y="135" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#64748B">
     Runexa Systems LLC
   </text>
 </svg>
