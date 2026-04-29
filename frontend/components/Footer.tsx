@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { getSavedLocale, translations } from "../lib/i18n";
 
@@ -51,7 +52,20 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto">
         <div className="grid gap-10 md:grid-cols-4">
           <div>
-            <h3 className="text-2xl font-bold">Runexa</h3>
+            <Link href="/" className="inline-flex">
+              <Image
+                src="/runexa.svg"
+                alt="Runexa Systems"
+                width={300}
+                height={90}
+                className="h-14 w-auto object-contain brightness-0 invert opacity-95"
+              />
+            </Link>
+
+            <p className="mt-3 text-xs font-medium text-slate-400">
+              {t.slogan}
+            </p>
+
             <p className="mt-4 text-sm text-slate-400 leading-6">
               {t.footerDesc}
             </p>
