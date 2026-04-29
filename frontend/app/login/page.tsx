@@ -53,6 +53,12 @@ export default function LoginPage() {
 
         localStorage.setItem("role", role);
 
+        const plan = (data.user?.plan || "free")
+          .toLowerCase()
+          .trim();
+
+        localStorage.setItem("plan", plan);
+
         if (role === "admin" || role === "business") {
           window.location.href = "/dashboard";
         } else {
