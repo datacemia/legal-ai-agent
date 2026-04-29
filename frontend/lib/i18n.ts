@@ -31,12 +31,12 @@ export const translations: any = {
     register: "Register",
 
     footerDesc:
-      "Specialized AI agents for legal, finance, HR, and business productivity.",
+      "AI agents for legal analysis, learning, personal finance, and business decision-making.",
     products: "Products",
     legalAgent: "Legal Agent",
-    financeAgent: "Finance Agent",
-    hrAgent: "HR Agent",
-    businessAgent: "Business Agent",
+    financeAgent: "Study Agent",
+    hrAgent: "Personal Finance Coach Agent",
+    businessAgent: "Business Decision Agent",
     available: "Available",
     comingSoon: "Coming soon",
     platform: "Platform",
@@ -44,7 +44,7 @@ export const translations: any = {
     tryLegalAgent: "Try Legal Agent",
     about: "About",
     aboutText:
-      "Runexa AI is a platform of specialized AI agents for legal, finance, HR, and business productivity.",
+      "Runexa AI is a platform of AI agents that help users analyze documents, learn faster, manage personal finance, and make smarter business decisions.",
     developedBy: "Developed by Dr. Rachid Ejjami",
     copyright: "© 2025 Runexa AI. All rights reserved.",
     privacy: "Privacy Policy",
@@ -61,12 +61,12 @@ export const translations: any = {
     register: "Inscription",
 
     footerDesc:
-      "Agents IA spécialisés pour le juridique, la finance, les RH et la productivité business.",
+      "Agents IA pour l’analyse juridique, l’apprentissage, la gestion financière personnelle et la prise de décision business.",
     products: "Produits",
     legalAgent: "Agent juridique",
-    financeAgent: "Agent finance",
-    hrAgent: "Agent RH",
-    businessAgent: "Agent business",
+    financeAgent: "Agent étude",
+    hrAgent: "Agent coach financier personnel",
+    businessAgent: "Agent décision business",
     available: "Disponible",
     comingSoon: "Bientôt",
     platform: "Plateforme",
@@ -74,7 +74,7 @@ export const translations: any = {
     tryLegalAgent: "Tester l’agent juridique",
     about: "À propos",
     aboutText:
-      "Runexa AI est une plateforme d’agents IA spécialisés pour le juridique, la finance, les RH et la productivité business.",
+      "Runexa AI est une plateforme d’agents IA qui aide les utilisateurs à analyser leurs documents, apprendre plus vite, gérer leurs finances personnelles et prendre de meilleures décisions business.",
     developedBy: "Développé par Dr. Rachid Ejjami",
     copyright: "© 2025 Runexa AI. Tous droits réservés.",
     privacy: "Confidentialité",
@@ -91,12 +91,12 @@ export const translations: any = {
     register: "إنشاء حساب",
 
     footerDesc:
-      "وكلاء ذكاء اصطناعي متخصصون للقانون والمالية والموارد البشرية والأعمال.",
+      "وكلاء ذكاء اصطناعي للتحليل القانوني والتعلم والإدارة المالية الشخصية واتخاذ قرارات الأعمال.",
     products: "المنتجات",
     legalAgent: "الوكيل القانوني",
-    financeAgent: "وكيل المالية",
-    hrAgent: "وكيل الموارد البشرية",
-    businessAgent: "وكيل الأعمال",
+    financeAgent: "وكيل الدراسة",
+    hrAgent: "وكيل الإدارة المالية الشخصية",
+    businessAgent: "وكيل قرارات الأعمال",
     available: "متاح",
     comingSoon: "قريباً",
     platform: "المنصة",
@@ -104,7 +104,7 @@ export const translations: any = {
     tryLegalAgent: "تجربة الوكيل القانوني",
     about: "حول",
     aboutText:
-      "Runexa AI منصة لوكلاء ذكاء اصطناعي متخصصين في القانون والمالية والموارد البشرية والأعمال.",
+      "Runexa AI منصة لوكلاء ذكاء اصطناعي تساعد المستخدمين على تحليل المستندات والتعلم بشكل أسرع وإدارة المالية الشخصية واتخاذ قرارات أعمال أكثر ذكاءً.",
     developedBy: "تم التطوير بواسطة Dr. Rachid Ejjami",
     copyright: "© 2025 Runexa AI. جميع الحقوق محفوظة.",
     privacy: "الخصوصية",
