@@ -50,7 +50,7 @@ export default function Pricing() {
           </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-3 mt-12">
+        <div className="grid gap-8 md:grid-cols-4 mt-12">
 
           {/* FREE */}
           <div className="rounded-3xl border bg-white p-8 shadow-sm flex flex-col">
@@ -132,10 +132,45 @@ export default function Pricing() {
             )}
           </div>
 
-          {/* BUSINESS */}
+          {/* PRO */}
           <div className="rounded-3xl border bg-white p-8 shadow-sm flex flex-col">
             <h2 className="text-lg font-semibold text-slate-900">
-              Business
+              Pro
+            </h2>
+
+            <span className="mt-2 text-xs text-slate-500">
+              For professionals
+            </span>
+
+            <p className="mt-2 text-sm text-slate-500">
+              Best for users who analyze contracts regularly.
+            </p>
+
+            <div className="mt-6 text-4xl font-bold text-slate-900">€19</div>
+
+            <p className="text-sm text-slate-500">
+              per month
+            </p>
+
+            <ul className="mt-6 space-y-3 text-sm text-slate-700">
+              <li>✔ Everything in Pay per contract</li>
+              <li>✔ 20 contract analyses per month</li>
+              <li>✔ Full clause recommendations</li>
+              <li>✔ Priority processing</li>
+            </ul>
+
+            <button
+              onClick={handleBuyCredits}
+              className="mt-auto block rounded-xl bg-slate-900 px-5 py-3 text-center font-semibold text-white hover:bg-slate-800 transition"
+            >
+              Upgrade to Pro
+            </button>
+          </div>
+
+          {/* PREMIUM */}
+          <div className="rounded-3xl border bg-white p-8 shadow-sm flex flex-col">
+            <h2 className="text-lg font-semibold text-slate-900">
+              Premium
             </h2>
 
             <p className="mt-2 text-sm text-slate-500">
@@ -150,7 +185,7 @@ export default function Pricing() {
 
             <ul className="mt-6 space-y-3 text-sm text-slate-700">
               <li>✔ Multiple users</li>
-              <li>✔ Higher usage limits</li>
+              <li>✔ Custom usage limits</li>
               <li>✔ Admin dashboard</li>
               <li>✔ Future AI agents access</li>
               <li>✔ Priority support</li>
