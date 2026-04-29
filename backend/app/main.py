@@ -25,10 +25,11 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# ✅ AJOUT OBLIGATOIRE POUR GOOGLE OAUTH
+# ✅ OBLIGATOIRE POUR GOOGLE OAUTH
+# ⚠️ SECRET_KEY doit exister dans Railway Variables et dans .env local
 app.add_middleware(
     SessionMiddleware,
-    secret_key=os.getenv("SECRET_KEY", "change-me"),
+    secret_key=os.environ["SECRET_KEY"],
     same_site="lax",
     https_only=True,
 )
@@ -41,8 +42,8 @@ app.add_middleware(
         FRONTEND_URL,
     ],
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type"],
 )
 
 Base.metadata.create_all(bind=engine)
