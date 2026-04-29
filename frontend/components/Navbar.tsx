@@ -13,7 +13,6 @@ export default function Navbar() {
   const checkAuth = () => {
     const token = localStorage.getItem("token");
 
-    // ✅ FIX role propre
     const savedRole = (localStorage.getItem("role") || "")
       .toLowerCase()
       .trim();
@@ -60,18 +59,25 @@ export default function Navbar() {
       className="sticky top-0 z-50 w-full border-b border-slate-200/70 bg-white/70 backdrop-blur-md"
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-3">
-           <span className="text-xl font-bold tracking-tight text-slate-900">
-            RUNEXA
-           </span>
 
-          <div className="leading-tight">
-            <div className="text-xs text-slate-500">{t.slogan}</div>
-          </div>
+        {/* ✅ LOGO + SLOGAN */}
+        <Link href="/" className="flex items-center gap-3">
+          <Image
+            src="/runexa.svg"
+            alt="Runexa Systems"
+            width={300}
+            height={90}
+            priority
+            className="h-10 w-auto object-contain"
+          />
+
+          {/* slogan (desktop only) */}
+          <span className="hidden sm:block text-xs text-slate-500 font-medium">
+            {t.slogan}
+          </span>
         </Link>
 
         <div className="flex items-center gap-5">
-          {/* ✅ Dashboard seulement business/admin */}
           {canSeeDashboard && (
             <Link
               href="/dashboard"
@@ -81,7 +87,6 @@ export default function Navbar() {
             </Link>
           )}
 
-          {/* ✅ Admin seulement */}
           {isAdmin && (
             <Link
               href="/admin"
@@ -91,7 +96,6 @@ export default function Navbar() {
             </Link>
           )}
 
-          {/* Toujours visibles */}
           <Link
             href="/login"
             className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
@@ -106,7 +110,6 @@ export default function Navbar() {
             {t.register || "Register"}
           </Link>
 
-          {/* Logout seulement si connecté */}
           {isLogged && (
             <button
               onClick={handleLogout}
