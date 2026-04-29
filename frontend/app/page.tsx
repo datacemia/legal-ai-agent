@@ -7,7 +7,7 @@ const labels: any = {
   en: {
     platform: "Runexa AI Agents Platform",
     title: "AI agents that help you get work done faster.",
-    desc: "Runexa brings specialized AI agents for legal, finance, HR, business, and more — all in one simple platform.",
+    desc: "Runexa provides AI agents that help you analyze documents, make smarter decisions, and move faster.",
     explore: "Explore agents",
     tryLegal: "Try Legal Agent",
     choose: "Choose your AI agent",
@@ -15,20 +15,21 @@ const labels: any = {
     available: "Available",
     coming: "Coming soon",
     open: "Open agent",
+    pricing: "See pricing",
     ctaTitle: "One platform. Multiple AI agents. Real business outcomes.",
-    ctaDesc: "Start with contract analysis today, then expand into finance, HR, operations, and business automation as your needs grow.",
+    ctaDesc: "Start with contract analysis, then expand into learning, personal finance, and smarter business decisions.",
     ctaButton: "Start with Legal Agent",
     agents: [
       ["Legal Agent", "Analyze contracts, detect risky clauses, and get clear recommendations before you sign."],
-      ["Finance Agent", "Review invoices, budgets, expenses, and financial documents faster."],
-      ["HR Agent", "Analyze CVs, job descriptions, HR policies, and employee documents."],
-      ["Business Agent", "Generate summaries, reports, strategies, and business insights."],
+      ["Study Agent", "Analyze study materials, generate summaries, quizzes, and smart revision plans."],
+      ["Personal Finance Coach Agent", "Analyze your expenses, detect waste, and provide actionable saving strategies."],
+      ["Business Decision Agent", "Analyze business data, detect trends, and support smarter strategic decisions."],
     ],
   },
   fr: {
     platform: "Plateforme d’agents IA Runexa",
     title: "Des agents IA pour travailler plus vite.",
-    desc: "Runexa réunit des agents IA spécialisés pour le juridique, la finance, les RH, le business et plus encore.",
+    desc: "Runexa propose des agents IA qui vous aident à analyser vos documents, prendre de meilleures décisions et avancer plus vite.",
     explore: "Explorer les agents",
     tryLegal: "Tester l’agent juridique",
     choose: "Choisissez votre agent IA",
@@ -36,20 +37,21 @@ const labels: any = {
     available: "Disponible",
     coming: "Bientôt",
     open: "Ouvrir l’agent",
+    pricing: "Voir les tarifs",
     ctaTitle: "Une plateforme. Plusieurs agents IA. Des résultats concrets.",
-    ctaDesc: "Commencez avec l’analyse de contrats, puis développez vers la finance, les RH et l’automatisation business.",
+    ctaDesc: "Commencez par l’analyse de contrats, puis développez vers l’apprentissage, la gestion financière personnelle et des décisions business plus intelligentes.",
     ctaButton: "Commencer avec l’agent juridique",
     agents: [
       ["Agent juridique", "Analysez vos contrats, détectez les clauses à risque et obtenez des recommandations claires."],
-      ["Agent finance", "Analysez factures, budgets, dépenses et documents financiers plus rapidement."],
-      ["Agent RH", "Analysez CV, fiches de poste, politiques RH et documents employés."],
-      ["Agent business", "Générez des résumés, rapports, stratégies et insights business."],
+      ["Agent étude", "Analysez vos cours, générez des résumés, quiz et plans de révision intelligents."],
+      ["Agent coach financier personnel", "Analysez vos dépenses, détectez le gaspillage et recevez des stratégies d’épargne concrètes."],
+      ["Agent décision business", "Analysez vos données business, identifiez les tendances et prenez de meilleures décisions stratégiques."],
     ],
   },
   ar: {
     platform: "منصة Runexa للوكلاء الذكيين",
     title: "وكلاء ذكاء اصطناعي يساعدونك على إنجاز العمل بسرعة.",
-    desc: "تجمع Runexa وكلاء متخصصين في القانون والمالية والموارد البشرية والأعمال في منصة واحدة.",
+    desc: "توفر Runexa وكلاء ذكاء اصطناعي يساعدونك على تحليل المستندات واتخاذ قرارات أفضل والعمل بشكل أسرع.",
     explore: "استكشاف الوكلاء",
     tryLegal: "تجربة الوكيل القانوني",
     choose: "اختر وكيلك الذكي",
@@ -57,14 +59,15 @@ const labels: any = {
     available: "متاح",
     coming: "قريباً",
     open: "فتح الوكيل",
+    pricing: "عرض الأسعار",
     ctaTitle: "منصة واحدة. عدة وكلاء ذكاء اصطناعي. نتائج عملية.",
-    ctaDesc: "ابدأ بتحليل العقود، ثم توسع إلى المالية والموارد البشرية وأتمتة الأعمال.",
+    ctaDesc: "ابدأ بتحليل العقود، ثم توسع إلى التعلم والإدارة المالية الشخصية واتخاذ قرارات أعمال أكثر ذكاءً.",
     ctaButton: "ابدأ بالوكيل القانوني",
     agents: [
       ["الوكيل القانوني", "حلل العقود، واكتشف البنود الخطرة، واحصل على توصيات واضحة."],
-      ["وكيل المالية", "راجع الفواتير والميزانيات والمصاريف والوثائق المالية بسرعة."],
-      ["وكيل الموارد البشرية", "حلل السير الذاتية والوصف الوظيفي وسياسات الموارد البشرية."],
-      ["وكيل الأعمال", "أنشئ ملخصات وتقارير واستراتيجيات ورؤى عملية."],
+      ["وكيل الدراسة", "حلل المواد الدراسية، وأنشئ ملخصات واختبارات وخطط مراجعة ذكية."],
+      ["وكيل الإدارة المالية الشخصية", "حلل مصاريفك، واكتشف الهدر، واحصل على استراتيجيات ادخار فعالة."],
+      ["وكيل قرارات الأعمال", "حلل بيانات الأعمال، واكتشف الاتجاهات، واتخذ قرارات استراتيجية أفضل."],
     ],
   },
 };
@@ -132,7 +135,7 @@ export default function HomePage() {
               href="/pricing"
               className="px-6 py-3 bg-white border border-slate-200 rounded-xl font-semibold hover:bg-slate-100 transition"
             >
-              See pricing
+              {t.pricing}
             </Link>
           </div>
         </div>
@@ -199,7 +202,7 @@ export default function HomePage() {
           >
             {t.ctaButton}
           </Link>
-          {/* DISCLAIMER */}
+
           <p className="mt-8 text-center text-sm text-slate-500 max-w-2xl mx-auto">
             AI-powered insights. Always verify before you act.
           </p>
