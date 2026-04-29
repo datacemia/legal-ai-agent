@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { uploadDocument, runAnalysis, createCheckoutSession } from "../../lib/api";
 import { trackEvent } from "../../lib/track";
+import { getSavedLocale, setSavedLocale } from "../../lib/i18n";
 import RiskBadge from "../../components/RiskBadge";
 import RiskScore from "../../components/RiskScore";
 import UploadBox from "../../components/UploadBox";
+
 
 const labels: any = {
   en: {
@@ -15,6 +17,23 @@ const labels: any = {
     signupCta: "Free analysis available after signup",
     loginRequired: "Create an account to analyze your contract",
     analyzeButton: "Analyze Contract",
+    buyCredit: "Buy credit",
+    heroTitle: "Analyze your contracts in seconds",
+    heroDesc:
+      "Upload your document to detect risky clauses, identify key obligations, and get clear, actionable recommendations before you sign.",
+    whatYouGet: "What you get",
+    whatYouGetItems: [
+      "Risky clauses detection",
+      "Key obligations summary",
+      "Potential legal issues explained",
+      "Clear recommendations",
+    ],
+    howItWorks: "How it works",
+    howItWorksItems: [
+      "Upload your contract",
+      "AI analyzes the content",
+      "Get a structured report instantly",
+    ],
     summary: "Summary",
     simplified: "Simplified Version",
     clauses: "Clauses Analysis",
@@ -22,6 +41,70 @@ const labels: any = {
     recommendation: "Recommendation",
     limitedNotice:
       "Only 2 clauses are displayed in the free version. Upgrade to unlock full clause analysis.",
+  },
+  fr: {
+    pageTitle: "Analyser votre contrat",
+    loading: "Analyse de votre contrat en cours...",
+    file: "Fichier",
+    signupCta: "Analyse gratuite disponible après inscription",
+    loginRequired: "Créez un compte pour analyser votre contrat",
+    analyzeButton: "Analyser le contrat",
+    buyCredit: "Acheter un crédit",
+    heroTitle: "Analysez vos contrats en quelques secondes",
+    heroDesc:
+      "Téléchargez votre document pour détecter les clauses risquées, identifier les obligations clés et obtenir des recommandations claires avant de signer.",
+    whatYouGet: "Ce que vous obtenez",
+    whatYouGetItems: [
+      "Détection des clauses à risque",
+      "Résumé des obligations clés",
+      "Explication des risques juridiques potentiels",
+      "Recommandations claires",
+    ],
+    howItWorks: "Comment ça marche",
+    howItWorksItems: [
+      "Téléchargez votre contrat",
+      "L’IA analyse le contenu",
+      "Recevez instantanément un rapport structuré",
+    ],
+    summary: "Résumé",
+    simplified: "Version simplifiée",
+    clauses: "Analyse des clauses",
+    clause: "Clause",
+    recommendation: "Recommandation",
+    limitedNotice:
+      "Seules 2 clauses sont affichées dans la version gratuite. Passez à la version complète pour débloquer toute l’analyse.",
+  },
+  ar: {
+    pageTitle: "تحليل العقد",
+    loading: "جاري تحليل العقد...",
+    file: "الملف",
+    signupCta: "تحليل مجاني متاح بعد إنشاء الحساب",
+    loginRequired: "أنشئ حساباً لتحليل عقدك",
+    analyzeButton: "تحليل العقد",
+    buyCredit: "شراء رصيد",
+    heroTitle: "حلل عقودك في ثوانٍ",
+    heroDesc:
+      "ارفع مستندك لاكتشاف البنود الخطرة، وتحديد الالتزامات الأساسية، والحصول على توصيات واضحة قبل التوقيع.",
+    whatYouGet: "ماذا ستحصل عليه",
+    whatYouGetItems: [
+      "اكتشاف البنود الخطرة",
+      "ملخص الالتزامات الأساسية",
+      "شرح المخاطر القانونية المحتملة",
+      "توصيات واضحة",
+    ],
+    howItWorks: "كيف يعمل",
+    howItWorksItems: [
+      "ارفع العقد",
+      "يقوم الذكاء الاصطناعي بتحليل المحتوى",
+      "احصل على تقرير منظم فوراً",
+    ],
+    summary: "الملخص",
+    simplified: "نسخة مبسطة",
+    clauses: "تحليل البنود",
+    clause: "بند",
+    recommendation: "توصية",
+    limitedNotice:
+      "يتم عرض بندين فقط في النسخة المجانية. قم بالترقية لفتح التحليل الكامل للبنود.",
   },
 };
 
@@ -33,6 +116,10 @@ export default function UploadPage() {
   const [language, setLanguage] = useState("en");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    setLanguage(getSavedLocale());
+  }, []);
 
   const t = labels[language] || labels.en;
 
@@ -137,6 +224,17 @@ export default function UploadPage() {
       className="min-h-screen bg-slate-50 px-4 py-8 sm:px-6"
     >
       <div className="max-w-5xl mx-auto space-y-8">
+
+        <div className="max-w-3xl mx-auto text-center">
+          <h1 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+            {t.heroTitle}
+          </h1>
+
+          <p className="mt-4 text-base leading-7 text-slate-600">
+            {t.heroDesc}
+          </p>
+        </div>
+
         <div className="bg-white p-6 rounded-3xl shadow-sm border space-y-5">
           <UploadBox
             file={file}
@@ -151,7 +249,10 @@ export default function UploadPage() {
 
           <select
             value={language}
-            onChange={(e) => setLanguage(e.target.value)}
+            onChange={(e) => {
+              setLanguage(e.target.value);
+              setSavedLocale(e.target.value);
+            }}
             className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
           >
             <option value="en">English</option>
@@ -171,7 +272,7 @@ export default function UploadPage() {
             onClick={handleBuyCredit}
             className="w-full rounded-xl bg-green-600 px-6 py-3 text-sm font-semibold text-white hover:bg-green-700"
           >
-            Buy credit
+            {t.buyCredit}
           </button>
 
           {message && (
@@ -179,6 +280,34 @@ export default function UploadPage() {
               {message}
             </div>
           )}
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2">
+          <div className="bg-white p-6 rounded-3xl shadow-sm border">
+            <h2 className="text-lg font-semibold text-slate-900">
+              {t.whatYouGet}
+            </h2>
+
+            <ul className="mt-4 space-y-3 text-sm text-slate-600">
+              {t.whatYouGetItems.map((item: string, index: number) => (
+                <li key={index}>• {item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="bg-white p-6 rounded-3xl shadow-sm border">
+            <h2 className="text-lg font-semibold text-slate-900">
+              {t.howItWorks}
+            </h2>
+
+            <ol className="mt-4 space-y-3 text-sm text-slate-600">
+              {t.howItWorksItems.map((item: string, index: number) => (
+                <li key={index}>
+                  {index + 1}. {item}
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
 
         {result && !result.authRequired && (
