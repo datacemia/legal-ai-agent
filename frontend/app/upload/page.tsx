@@ -127,7 +127,7 @@ export default function UploadPage() {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      setResult({ authRequired: true });
+      window.location.href = "/register";
       return;
     }
 
@@ -147,7 +147,7 @@ export default function UploadPage() {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      setResult({ authRequired: true });
+      window.location.href = "/register";
       return;
     }
 
