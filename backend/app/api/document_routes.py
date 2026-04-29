@@ -54,7 +54,8 @@ def list_documents(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    if current_user.role not in ["admin", "business"]:
+    # ✅ UPDATED: allow premium plan
+    if current_user.role != "admin" and current_user.plan != "premium":
         raise HTTPException(status_code=403, detail="Not allowed")
 
     return db.query(Document).filter(Document.user_id == current_user.id).all()
