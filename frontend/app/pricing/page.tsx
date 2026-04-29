@@ -36,12 +36,21 @@ export default function Pricing() {
             Simple pricing
           </h1>
           <p className="mt-4 text-slate-600">
-            Start free and scale as you grow. Runexa begins with the AI Legal
-            Agent — more specialized agents are coming soon.
+            Start with the Legal Agent. More specialized agents are coming soon, each with clear and transparent pricing.
           </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-3 mt-16">
+        {/* NEW SECTION TITLE */}
+        <div className="text-center mt-16">
+          <h2 className="text-xl font-semibold text-slate-900">
+            Legal Agent Pricing
+          </h2>
+          <p className="mt-2 text-sm text-slate-500">
+            Analyze contracts, detect risky clauses, and get clear recommendations before you sign.
+          </p>
+        </div>
+
+        <div className="grid gap-8 md:grid-cols-3 mt-12">
 
           {/* FREE */}
           <div className="rounded-3xl border bg-white p-8 shadow-sm flex flex-col">

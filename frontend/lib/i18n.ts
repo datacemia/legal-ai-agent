@@ -32,6 +32,10 @@ export const translations: any = {
 
     footerDesc:
       "AI agents for legal analysis, learning, personal finance, and business decision-making.",
+
+    companyAddress:
+      "Runexa Systems LLC\n1309 Coffeen Avenue, Suite 1200\nSheridan, WY 82801, USA",
+
     products: "Products",
     legalAgent: "Legal Agent",
     financeAgent: "Study Agent",
@@ -39,14 +43,18 @@ export const translations: any = {
     businessAgent: "Business Decision Agent",
     available: "Available",
     comingSoon: "Coming soon",
+
     platform: "Platform",
     exploreAgents: "Explore agents",
     tryLegalAgent: "Try Legal Agent",
+
     about: "About",
     aboutText:
       "Runexa Systems is a platform of AI agents that help users analyze documents, learn faster, manage personal finance, and make smarter business decisions.",
+
     developedBy: "Developed by Dr. Rachid Ejjami",
-    copyright: "© 2026 Runexa Systems. All rights reserved.",
+    copyright: "© 2026 Runexa Systems LLC. All rights reserved.",
+
     privacy: "Privacy Policy",
     terms: "Terms of Service",
     contact: "Contact",
@@ -62,6 +70,10 @@ export const translations: any = {
 
     footerDesc:
       "Agents IA pour l’analyse juridique, l’apprentissage, la gestion financière personnelle et la prise de décision business.",
+
+    companyAddress:
+      "Runexa Systems LLC\n1309 Coffeen Avenue, Suite 1200\nSheridan, WY 82801, États-Unis",
+
     products: "Produits",
     legalAgent: "Agent juridique",
     financeAgent: "Agent étude",
@@ -69,14 +81,18 @@ export const translations: any = {
     businessAgent: "Agent décision business",
     available: "Disponible",
     comingSoon: "Bientôt",
+
     platform: "Plateforme",
     exploreAgents: "Explorer les agents",
     tryLegalAgent: "Tester l’agent juridique",
+
     about: "À propos",
     aboutText:
       "Runexa Systems est une plateforme d’agents IA qui aide les utilisateurs à analyser leurs documents, apprendre plus vite, gérer leurs finances personnelles et prendre de meilleures décisions business.",
+
     developedBy: "Développé par Dr. Rachid Ejjami",
-    copyright: "© 2026 Runexa Systems. Tous droits réservés.",
+    copyright: "© 2026 Runexa Systems LLC. Tous droits réservés.",
+
     privacy: "Confidentialité",
     terms: "Conditions",
     contact: "Contact",
@@ -92,6 +108,10 @@ export const translations: any = {
 
     footerDesc:
       "وكلاء ذكاء اصطناعي للتحليل القانوني والتعلم والإدارة المالية الشخصية واتخاذ قرارات الأعمال.",
+
+    companyAddress:
+      "Runexa Systems LLC\n1309 Coffeen Avenue, Suite 1200\nSheridan, WY 82801, الولايات المتحدة",
+
     products: "المنتجات",
     legalAgent: "الوكيل القانوني",
     financeAgent: "وكيل الدراسة",
@@ -99,14 +119,18 @@ export const translations: any = {
     businessAgent: "وكيل قرارات الأعمال",
     available: "متاح",
     comingSoon: "قريباً",
+
     platform: "المنصة",
     exploreAgents: "استكشاف الوكلاء",
     tryLegalAgent: "تجربة الوكيل القانوني",
+
     about: "حول",
     aboutText:
       "Runexa Systems منصة لوكلاء ذكاء اصطناعي تساعد المستخدمين على تحليل المستندات والتعلم بشكل أسرع وإدارة المالية الشخصية واتخاذ قرارات أعمال أكثر ذكاءً.",
+
     developedBy: "تم التطوير بواسطة Dr. Rachid Ejjami",
-    copyright: "© 2026 Runexa Systems. جميع الحقوق محفوظة.",
+    copyright: "© 2026 Runexa Systems LLC. جميع الحقوق محفوظة.",
+
     privacy: "الخصوصية",
     terms: "الشروط",
     contact: "اتصال",

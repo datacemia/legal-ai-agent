@@ -69,6 +69,11 @@ export default function Footer() {
             <p className="mt-4 text-sm text-slate-400 leading-6">
               {t.footerDesc}
             </p>
+
+            {/* ✅ MULTILANGUAGE ADDRESS */}
+            <p className="mt-4 text-xs text-slate-500 leading-5 whitespace-pre-line">
+              {t.companyAddress}
+            </p>
           </div>
 
           <div>
