@@ -8,6 +8,7 @@ import { getSavedLocale, translations } from "../lib/i18n";
 export default function Navbar() {
   const [isLogged, setIsLogged] = useState(false);
   const [role, setRole] = useState("");
+  const [plan, setPlan] = useState("");
   const [locale, setLocale] = useState("en");
 
   const checkAuth = () => {
@@ -17,8 +18,13 @@ export default function Navbar() {
       .toLowerCase()
       .trim();
 
+    const savedPlan = (localStorage.getItem("plan") || "")
+      .toLowerCase()
+      .trim();
+
     setIsLogged(!!token);
     setRole(savedRole);
+    setPlan(savedPlan);
   };
 
   useEffect(() => {
@@ -42,16 +48,18 @@ export default function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
+    localStorage.removeItem("plan");
     setIsLogged(false);
     setRole("");
+    setPlan("");
     window.location.href = "/login";
   };
 
   const t = translations[locale] || translations.en;
 
   const isAdmin = role === "admin";
-  const isBusiness = role === "business";
-  const canSeeDashboard = isAdmin || isBusiness;
+  const isPremium = plan === "premium";
+  const canSeeDashboard = isPremium;
 
   return (
     <header

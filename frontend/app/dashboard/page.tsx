@@ -52,8 +52,16 @@ export default function DashboardPage() {
       .toLowerCase()
       .trim();
 
-    // ✅ REDIRECTION VERS /upload
-    if (role !== "admin" && role !== "business") {
+    const plan = (localStorage.getItem("plan") || "")
+      .toLowerCase()
+      .trim();
+
+    if (role === "admin") {
+      window.location.href = "/admin";
+      return;
+    }
+
+    if (plan !== "premium") {
       window.location.href = "/upload";
       return;
     }
