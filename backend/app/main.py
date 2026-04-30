@@ -2,6 +2,10 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
+from dotenv import load_dotenv
+from app.models.finance_analysis import FinanceAnalysis
+
+load_dotenv()
 
 from app.config import FRONTEND_URL
 
@@ -13,6 +17,9 @@ from app.api.user_routes import router as user_router
 from app.api.admin_routes import router as admin_router
 from app.api.contact_routes import router as contact_router
 
+# ✅ NEW AGENT
+from app.api.finance_routes import router as finance_router
+
 from app.database import engine, Base
 from app.models.user import User
 from app.models.document import Document
@@ -20,13 +27,22 @@ from app.models.analysis import AnalysisResult
 from app.models.payment import Payment
 from app.models.contact import ContactRequest
 
+
 app = FastAPI(
     title="Legal AI Agent API",
-    version="1.0.0"
+    version="1.0.0",
 )
 
+allowed_origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://192.168.100.10:3000",
+]
+
+if FRONTEND_URL:
+    allowed_origins.append(FRONTEND_URL)
+
 # ✅ OBLIGATOIRE POUR GOOGLE OAUTH
-# ⚠️ SECRET_KEY doit exister dans Railway Variables et dans .env local
 app.add_middleware(
     SessionMiddleware,
     secret_key=os.environ["SECRET_KEY"],
@@ -36,14 +52,10 @@ app.add_middleware(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        FRONTEND_URL,
-    ],
+    allow_origins=allowed_origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allow_headers=["Authorization", "Content-Type"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 Base.metadata.create_all(bind=engine)
@@ -55,6 +67,9 @@ app.include_router(payment_router)
 app.include_router(user_router)
 app.include_router(admin_router)
 app.include_router(contact_router)
+
+# ✅ NEW AGENT ROUTER
+app.include_router(finance_router)
 
 
 @app.get("/")

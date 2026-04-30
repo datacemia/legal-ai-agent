@@ -1,16 +1,35 @@
+# =========================
 # Python
+# =========================
 backend/venv/
+venv/
 __pycache__/
 *.pyc
 
+# =========================
 # Database
+# =========================
 *.db
 
-# Environment
+# =========================
+# Environment (CRITICAL)
+# =========================
 .env
+.env.local
+frontend/.env.local
 
-# Node
+# =========================
+# Uploads (CRITICAL)
+# =========================
+backend/uploads/
+
+# =========================
+# Node / Frontend
+# =========================
 node_modules/
+.next/
 
-# Build
-.next/backend/uploads/
+# =========================
+# Misc
+# =========================
+.DS_Store

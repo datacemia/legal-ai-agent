@@ -104,3 +104,34 @@ export async function createCheckoutSession() {
 
   return res.json();
 }
+
+// 2 deuxieme agent
+//
+// 💰 FINANCE AGENT API
+//
+
+export async function analyzeFinanceStatement(file: File) {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const res = await fetch(`${API_URL}/finance/analyze-statement`, {
+    method: "POST",
+    headers: getAuthHeaders(),
+    body: formData,
+  });
+
+  if (!res.ok) {
+    const error = await res.json().catch(() => null);
+    throw new Error(error?.detail || `API error ${res.status}`);
+  }
+
+  return res.json();
+}
+
+export async function getFinanceHistory() {
+  const res = await fetch(`${API_URL}/finance/history`, {
+    headers: getAuthHeaders(),
+  });
+
+  return res.json();
+}
