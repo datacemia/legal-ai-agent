@@ -1,7 +1,176 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getToken } from "../../lib/auth";
+import { getSavedLocale, setSavedLocale } from "../../lib/i18n";
+
+const labels: any = {
+  en: {
+    title: "Study Agent",
+    subtitle:
+      "Upload a PDF to generate a summary, theoretical quiz, practical quiz, flashcards, and a study plan.",
+    howTitle: "How this agent works:",
+    how1:
+      "Upload your study PDF and let the Study Agent transform it into an interactive learning experience.",
+    how2:
+      "Before analysis, you select your learning level and output language. The agent adapts the difficulty, vocabulary, explanations, and questions to match your level and language.",
+    items: [
+      "A clear and structured summary",
+      "Key learning points",
+      "Theoretical quiz (understanding)",
+      "Practical quiz (real-world application)",
+      "Flashcards for memorization",
+      "A short study plan",
+    ],
+    how3:
+      "You can answer the quiz directly, get instant feedback, explanations, and track your score.",
+    disclaimer:
+      "Results are for educational support only. Always verify important academic content with your teacher, course materials, or trusted sources.",
+    analyze: "Analyze",
+    buyCredits: "Buy credits",
+    chooseLevel: "Choose your level",
+    selectLevel: "Select education level",
+    levelHelp:
+      "This helps the Study Agent adapt explanations and questions to your level.",
+    cancel: "Cancel",
+    continue: "Continue",
+    results: "Results",
+    level: "Level",
+    language: "Language",
+    summary: "Summary",
+    keyPoints: "Key Points",
+    quiz: "Quiz",
+    theory: "Theoretical Questions",
+    practice: "Practical Questions",
+    submitQuiz: "Submit quiz",
+    answerAll: "Answer all questions to submit",
+    quizSubmitted: "Quiz submitted",
+    score: "Score",
+    learningFeedback: "Learning feedback",
+    retryQuiz: "Retry quiz",
+    noRetries: "No retries left",
+    flashcards: "Flashcards",
+    front: "Front",
+    back: "Back",
+    studyPlan: "Study Plan",
+    correct: "Correct",
+    incorrect: "Incorrect",
+    answer: "Answer",
+    paymentMessage:
+      "Stripe is not configured yet. Credit purchase will be available soon.",
+    errorMessage: "Failed to connect to Study Agent API.",
+  },
+  fr: {
+    title: "Agent étude",
+    subtitle:
+      "Téléchargez un PDF pour générer un résumé, un quiz théorique, un quiz pratique, des flashcards et un plan de révision.",
+    howTitle: "Comment fonctionne cet agent :",
+    how1:
+      "Téléchargez votre PDF de cours et laissez l’agent étude le transformer en expérience d’apprentissage interactive.",
+    how2:
+      "Avant l’analyse, vous choisissez votre niveau et la langue de sortie. L’agent adapte la difficulté, le vocabulaire, les explications et les questions.",
+    items: [
+      "Un résumé clair et structuré",
+      "Les points clés à retenir",
+      "Un quiz théorique",
+      "Un quiz pratique",
+      "Des flashcards pour mémoriser",
+      "Un court plan de révision",
+    ],
+    how3:
+      "Vous pouvez répondre au quiz directement, recevoir un feedback instantané, des explications et suivre votre score.",
+    disclaimer:
+      "Les résultats sont fournis comme support éducatif uniquement. Vérifiez toujours les contenus importants avec vos supports de cours ou un enseignant.",
+    analyze: "Analyser",
+    buyCredits: "Acheter des crédits",
+    chooseLevel: "Choisissez votre niveau",
+    selectLevel: "Sélectionnez le niveau d’étude",
+    levelHelp:
+      "Cela aide l’agent étude à adapter les explications et les questions à votre niveau.",
+    cancel: "Annuler",
+    continue: "Continuer",
+    results: "Résultats",
+    level: "Niveau",
+    language: "Langue",
+    summary: "Résumé",
+    keyPoints: "Points clés",
+    quiz: "Quiz",
+    theory: "Questions théoriques",
+    practice: "Questions pratiques",
+    submitQuiz: "Soumettre le quiz",
+    answerAll: "Répondez à toutes les questions pour soumettre",
+    quizSubmitted: "Quiz soumis",
+    score: "Score",
+    learningFeedback: "Feedback d’apprentissage",
+    retryQuiz: "Réessayer le quiz",
+    noRetries: "Plus d’essais disponibles",
+    flashcards: "Flashcards",
+    front: "Recto",
+    back: "Verso",
+    studyPlan: "Plan de révision",
+    correct: "Correct",
+    incorrect: "Incorrect",
+    answer: "Réponse",
+    paymentMessage:
+      "Stripe n’est pas encore configuré. L’achat de crédits sera bientôt disponible.",
+    errorMessage: "Impossible de se connecter à l’API Study Agent.",
+  },
+  ar: {
+    title: "وكيل الدراسة",
+    subtitle:
+      "ارفع ملف PDF لإنشاء ملخص، اختبار نظري، اختبار تطبيقي، بطاقات مراجعة وخطة دراسة.",
+    howTitle: "كيف يعمل هذا الوكيل:",
+    how1:
+      "ارفع ملف الدراسة وسيحوّله وكيل الدراسة إلى تجربة تعلم تفاعلية.",
+    how2:
+      "قبل التحليل، اختر مستواك التعليمي ولغة النتائج. يقوم الوكيل بتكييف الصعوبة والمفردات والشرح والأسئلة حسب اختيارك.",
+    items: [
+      "ملخص واضح ومنظم",
+      "النقاط الأساسية للتعلم",
+      "اختبار نظري للفهم",
+      "اختبار تطبيقي للاستخدام العملي",
+      "بطاقات مراجعة للحفظ",
+      "خطة دراسة قصيرة",
+    ],
+    how3:
+      "يمكنك الإجابة على الاختبار مباشرة والحصول على تقييم فوري وشرح وتتبع نتيجتك.",
+    disclaimer:
+      "النتائج مخصصة للدعم التعليمي فقط. تحقق دائماً من المعلومات المهمة مع أستاذك أو مصادر الدورة.",
+    analyze: "تحليل",
+    buyCredits: "شراء رصيد",
+    chooseLevel: "اختر مستواك",
+    selectLevel: "اختر المستوى التعليمي",
+    levelHelp:
+      "يساعد هذا وكيل الدراسة على تكييف الشرح والأسئلة مع مستواك.",
+    cancel: "إلغاء",
+    continue: "متابعة",
+    results: "النتائج",
+    level: "المستوى",
+    language: "اللغة",
+    summary: "الملخص",
+    keyPoints: "النقاط الأساسية",
+    quiz: "الاختبار",
+    theory: "أسئلة نظرية",
+    practice: "أسئلة تطبيقية",
+    submitQuiz: "إرسال الاختبار",
+    answerAll: "أجب عن جميع الأسئلة للإرسال",
+    quizSubmitted: "تم إرسال الاختبار",
+    score: "النتيجة",
+    learningFeedback: "تقييم التعلم",
+    retryQuiz: "إعادة المحاولة",
+    noRetries: "لا توجد محاولات متبقية",
+    flashcards: "بطاقات المراجعة",
+    front: "الوجه الأمامي",
+    back: "الوجه الخلفي",
+    studyPlan: "خطة الدراسة",
+    correct: "صحيح",
+    incorrect: "غير صحيح",
+    answer: "الإجابة",
+    paymentMessage:
+      "Stripe غير مفعّل حالياً. شراء الرصيد سيكون متاحاً قريباً.",
+    errorMessage: "تعذر الاتصال بواجهة Study Agent.",
+  },
+};
 
 export default function StudyPage() {
   const [file, setFile] = useState<File | null>(null);
@@ -10,11 +179,18 @@ export default function StudyPage() {
   const [paymentMessage, setPaymentMessage] = useState("");
   const [showLevelModal, setShowLevelModal] = useState(false);
   const [educationLevel, setEducationLevel] = useState("");
+  const [language, setLanguage] = useState("en");
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string>>(
     {}
   );
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
+
+  useEffect(() => {
+    setLanguage(getSavedLocale());
+  }, []);
+
+  const t = labels[language] || labels.en;
 
   const handleAnalyze = async () => {
     if (!file || !educationLevel) return;
@@ -30,6 +206,7 @@ export default function StudyPage() {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("education_level", educationLevel);
+    formData.append("output_language", language);
 
     try {
       const token = getToken();
@@ -59,7 +236,7 @@ export default function StudyPage() {
     } catch (error) {
       console.error("Study analysis error:", error);
       setResult({
-        detail: "Failed to connect to Study Agent API.",
+        detail: t.errorMessage,
       });
     } finally {
       setLoading(false);
@@ -101,8 +278,20 @@ export default function StudyPage() {
   };
 
   const getScoreFeedback = () => {
-    if (score >= 80) return "Excellent work. You understood the material well.";
-    if (score >= 50) return "Good effort. Review the explanations and retry.";
+    if (score >= 80) {
+      if (language === "fr") return "Excellent travail. Vous avez bien compris le contenu.";
+      if (language === "ar") return "عمل ممتاز. لقد فهمت المحتوى جيداً.";
+      return "Excellent work. You understood the material well.";
+    }
+
+    if (score >= 50) {
+      if (language === "fr") return "Bon effort. Relisez les explications puis réessayez.";
+      if (language === "ar") return "مجهود جيد. راجع الشروحات ثم أعد المحاولة.";
+      return "Good effort. Review the explanations and retry.";
+    }
+
+    if (language === "fr") return "Vous avez besoin de plus de pratique. Concentrez-vous sur les points clés et les flashcards.";
+    if (language === "ar") return "تحتاج إلى المزيد من التدريب. ركز على النقاط الأساسية وبطاقات المراجعة.";
     return "Needs more practice. Focus on the key points and flashcards.";
   };
 
@@ -176,7 +365,7 @@ export default function StudyPage() {
                   : "text-red-600 font-medium"
               }
             >
-              {isCorrect ? "Correct" : "Incorrect"} — Answer:{" "}
+              {isCorrect ? t.correct : t.incorrect} — {t.answer}:{" "}
               {q.correct_answer}
             </p>
             <p className="text-slate-500 mt-1">{q.explanation}</p>
@@ -187,43 +376,51 @@ export default function StudyPage() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-50 px-4 py-10">
+    <main
+      dir={language === "ar" ? "rtl" : "ltr"}
+      className="min-h-screen bg-slate-50 px-4 py-10"
+    >
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="text-center">
-          <h1 className="text-3xl font-bold">Study Agent</h1>
-          <p className="text-slate-500 mt-2">
-            Upload a PDF to generate a summary, theoretical quiz, practical
-            quiz, flashcards, and a study plan.
-          </p>
+          <h1 className="text-3xl font-bold">{t.title}</h1>
+          <p className="text-slate-500 mt-2">{t.subtitle}</p>
         </div>
 
         <div className="bg-white p-6 rounded-2xl border space-y-4">
           <div className="rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm text-slate-600 space-y-3">
             <p>
-              <strong>How this agent works:</strong> Upload your study PDF and let the Study Agent transform it into an interactive learning experience.
+              <strong>{t.howTitle}</strong> {t.how1}
             </p>
 
-            <p>
-              Before analysis, you select your learning level. The agent adapts the difficulty, vocabulary, explanations, and questions to match your level.
-            </p>
+            <p>{t.how2}</p>
 
             <ul className="list-disc ml-5 space-y-1">
-              <li>A clear and structured summary</li>
-              <li>Key learning points</li>
-              <li>Theoretical quiz (understanding)</li>
-              <li>Practical quiz (real-world application)</li>
-              <li>Flashcards for memorization</li>
-              <li>A short study plan</li>
+              {t.items.map((item: string, index: number) => (
+                <li key={index}>{item}</li>
+              ))}
             </ul>
 
-            <p>
-              You can answer the quiz directly, get instant feedback, explanations, and track your score.
-            </p>
+            <p>{t.how3}</p>
 
-            <p className="text-xs text-slate-500">
-              Results are for educational support only. Always verify important academic content with your teacher, course materials, or trusted sources.
-            </p>
+            <p className="text-xs text-slate-500">{t.disclaimer}</p>
           </div>
+
+          <select
+            value={language}
+            onChange={(e) => {
+              setLanguage(e.target.value);
+              setSavedLocale(e.target.value);
+              setResult(null);
+              setSelectedAnswers({});
+              setQuizSubmitted(false);
+              setRetryCount(0);
+            }}
+            className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+          >
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+            <option value="ar">العربية</option>
+          </select>
 
           <input
             type="file"
@@ -253,18 +450,16 @@ export default function StudyPage() {
               disabled={!file || loading}
               className="w-full bg-slate-900 text-white py-3 rounded-xl disabled:bg-slate-400"
             >
-              {loading ? "Analyzing..." : "Analyze"}
+              {loading ? "Analyzing..." : t.analyze}
             </button>
 
             <button
               onClick={() =>
-                setPaymentMessage(
-                  "Stripe is not configured yet. Credit purchase will be available soon."
-                )
+                setPaymentMessage(t.paymentMessage)
               }
               className="w-full bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 transition"
             >
-              Buy credits
+              {t.buyCredits}
             </button>
           </div>
 
@@ -279,11 +474,8 @@ export default function StudyPage() {
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
             <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl space-y-4">
               <div>
-                <h2 className="text-xl font-semibold">Select education level</h2>
-                <p className="text-sm text-slate-500 mt-1">
-                  This helps the Study Agent adapt explanations and questions to
-                  your level.
-                </p>
+                <h2 className="text-xl font-semibold">{t.selectLevel}</h2>
+                <p className="text-sm text-slate-500 mt-1">{t.levelHelp}</p>
               </div>
 
               <select
@@ -291,7 +483,7 @@ export default function StudyPage() {
                 onChange={(e) => setEducationLevel(e.target.value)}
                 className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm"
               >
-                <option value="">Choose your level</option>
+                <option value="">{t.chooseLevel}</option>
                 <option value="primary_school">Primary school</option>
                 <option value="middle_school">Middle school</option>
                 <option value="high_school">High school</option>
@@ -305,7 +497,7 @@ export default function StudyPage() {
                   onClick={() => setShowLevelModal(false)}
                   className="w-full rounded-xl border border-slate-300 py-3 text-slate-700 hover:bg-slate-50"
                 >
-                  Cancel
+                  {t.cancel}
                 </button>
 
                 <button
@@ -314,7 +506,7 @@ export default function StudyPage() {
                   disabled={!educationLevel || loading}
                   className="w-full rounded-xl bg-slate-900 py-3 text-white disabled:bg-slate-400"
                 >
-                  Continue
+                  {t.continue}
                 </button>
               </div>
             </div>
@@ -329,24 +521,34 @@ export default function StudyPage() {
 
         {result && result.summary && (
           <div className="bg-white p-6 rounded-2xl border space-y-6">
-            <h2 className="text-xl font-semibold">Results</h2>
+            <h2 className="text-xl font-semibold">{t.results}</h2>
 
-            {educationLevel && (
-              <p className="text-sm text-slate-500">
-                Adapted level:{" "}
-                <span className="font-medium text-slate-700">
-                  {formatLevel(educationLevel)}
+            <div className="flex flex-wrap gap-2">
+              {educationLevel && (
+                <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 border border-blue-200">
+                  {t.level}: {formatLevel(educationLevel)}
                 </span>
-              </p>
-            )}
+              )}
+
+              {language && (
+                <span className="inline-flex rounded-full bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700 border border-slate-200">
+                  {t.language}:{" "}
+                  {language === "en"
+                    ? "English"
+                    : language === "fr"
+                    ? "Français"
+                    : "العربية"}
+                </span>
+              )}
+            </div>
 
             <div>
-              <strong>Summary:</strong>
+              <strong>{t.summary}:</strong>
               <p className="text-slate-600 mt-1">{result.summary}</p>
             </div>
 
             <div>
-              <strong>Key Points:</strong>
+              <strong>{t.keyPoints}:</strong>
               <ul className="list-disc ml-6">
                 {result.key_points?.map((p: string, i: number) => (
                   <li key={i}>{p}</li>
@@ -356,13 +558,13 @@ export default function StudyPage() {
 
             <div>
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                <strong>Quiz:</strong>
+                <strong>{t.quiz}:</strong>
 
                 {quizSubmitted && Object.keys(selectedAnswers).length > 0 && (
                   <div
                     className={`rounded-xl border px-4 py-2 text-sm ${getScoreColor()}`}
                   >
-                    Score:{" "}
+                    {t.score}:{" "}
                     <strong>
                       {correctAnswers}/{totalQuestions} ({score}%)
                     </strong>
@@ -371,14 +573,14 @@ export default function StudyPage() {
               </div>
 
               <div className="mt-4">
-                <h3 className="font-semibold">Theoretical Questions</h3>
+                <h3 className="font-semibold">{t.theory}</h3>
                 {theoryQuestions.map((q: any, i: number) =>
                   renderQuestion(q, i, "theory")
                 )}
               </div>
 
               <div className="mt-6">
-                <h3 className="font-semibold">Practical Questions</h3>
+                <h3 className="font-semibold">{t.practice}</h3>
                 {practiceQuestions.map((q: any, i: number) =>
                   renderQuestion(q, i, "practice")
                 )}
@@ -394,16 +596,16 @@ export default function StudyPage() {
                   className="mt-5 w-full bg-blue-600 text-white py-3 rounded-xl disabled:bg-slate-400"
                 >
                   {quizSubmitted
-                    ? "Quiz submitted"
+                    ? t.quizSubmitted
                     : Object.keys(selectedAnswers).length < totalQuestions
-                    ? "Answer all questions to submit"
-                    : "Submit quiz"}
+                    ? t.answerAll
+                    : t.submitQuiz}
                 </button>
               )}
 
               {quizSubmitted && (
                 <div className="mt-4 rounded-xl border bg-slate-50 p-4 text-sm">
-                  <p className="font-semibold">Learning feedback</p>
+                  <p className="font-semibold">{t.learningFeedback}</p>
                   <p className="text-slate-600 mt-1">{getScoreFeedback()}</p>
 
                   <button
@@ -411,23 +613,23 @@ export default function StudyPage() {
                     disabled={retryCount >= 2}
                     className="mt-3 px-4 py-2 rounded-xl bg-slate-900 text-white text-sm disabled:bg-slate-400"
                   >
-                    {retryCount >= 2 ? "No retries left" : "Retry quiz"}
+                    {retryCount >= 2 ? t.noRetries : t.retryQuiz}
                   </button>
                 </div>
               )}
             </div>
 
             <div>
-              <strong>Flashcards:</strong>
+              <strong>{t.flashcards}:</strong>
 
               <div className="grid sm:grid-cols-2 gap-4 mt-3">
                 {result.flashcards?.map((f: any, i: number) => (
                   <div key={i} className="border rounded-xl p-4 bg-slate-50">
-                    <p className="text-sm text-slate-500 mb-1">Front</p>
+                    <p className="text-sm text-slate-500 mb-1">{t.front}</p>
                     <p className="font-semibold">{f.front}</p>
 
                     <div className="mt-3 border-t pt-3">
-                      <p className="text-sm text-slate-500 mb-1">Back</p>
+                      <p className="text-sm text-slate-500 mb-1">{t.back}</p>
                       <p className="text-slate-700">{f.back}</p>
                     </div>
                   </div>
@@ -436,7 +638,7 @@ export default function StudyPage() {
             </div>
 
             <div>
-              <strong>Study Plan:</strong>
+              <strong>{t.studyPlan}:</strong>
               <ul className="list-disc ml-6">
                 {result.study_plan?.map((s: string, i: number) => (
                   <li key={i}>{s}</li>

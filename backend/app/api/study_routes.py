@@ -19,6 +19,7 @@ router = APIRouter(prefix="/study", tags=["Study"])
 async def analyze_study(
     file: UploadFile = File(...),
     education_level: str = Form(...),
+    output_language: str = Form("en"),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
@@ -36,7 +37,7 @@ async def analyze_study(
             detail="Could not extract text from PDF.",
         )
 
-    result = analyze_study_content(text, education_level)
+    result = analyze_study_content(text, education_level, output_language)
 
     analysis = StudyAnalysis(
         user_id=current_user.id,
