@@ -13,21 +13,39 @@ const labels: any = {
     tryStudy: "Try Study Agent",
     tryFinance: "Try Finance Coach",
     choose: "Choose your AI agent",
-    chooseDesc: "Start with Legal Agent today. More specialized agents are coming soon.",
+
+    // ✅ UPDATED
+    chooseDesc:
+      "Access all Runexa AI agents (Legal, Study, Finance, Business) with one subscription.",
+
     available: "Available",
     coming: "Coming soon",
     open: "Open agent",
     pricing: "See pricing",
     ctaTitle: "One platform. Multiple AI agents. Real business outcomes.",
-    ctaDesc: "Start with contract analysis, then expand into learning, personal finance, and smarter business decisions.",
+    ctaDesc:
+      "Start with contract analysis, then expand into learning, personal finance, and smarter business decisions.",
     ctaButton: "Start with Legal Agent",
     agents: [
-      ["Legal Agent", "Analyze contracts, detect risky clauses, and get clear recommendations before you sign."],
-      ["Study Agent", "Analyze study materials, generate summaries, quizzes, and smart revision plans."],
-      ["Personal Finance Coach Agent", "Analyze your expenses, detect waste, and provide actionable saving strategies."],
-      ["Business Decision Agent", "Analyze business data, detect trends, and support smarter strategic decisions."],
+      [
+        "Legal Agent",
+        "Analyze contracts, detect risky clauses, and get clear recommendations before you sign.",
+      ],
+      [
+        "Study Agent",
+        "Analyze study materials, generate summaries, quizzes, and smart revision plans.",
+      ],
+      [
+        "Personal Finance Coach Agent",
+        "Analyze your expenses, detect waste, and provide actionable saving strategies.",
+      ],
+      [
+        "Business Decision Agent",
+        "Analyze business data, detect trends, and support smarter strategic decisions.",
+      ],
     ],
   },
+
   fr: {
     platform: "Plateforme d’agents IA Runexa",
     title: "Des agents IA pour travailler plus vite.",
@@ -37,21 +55,39 @@ const labels: any = {
     tryStudy: "Tester l’agent étude",
     tryFinance: "Tester le coach financier",
     choose: "Choisissez votre agent IA",
-    chooseDesc: "Commencez avec l’agent juridique. D’autres agents spécialisés arrivent bientôt.",
+
+    // ✅ UPDATED
+    chooseDesc:
+      "Accédez à tous les agents IA Runexa (juridique, étude, finance, business) avec un seul abonnement.",
+
     available: "Disponible",
     coming: "Bientôt",
     open: "Ouvrir l’agent",
     pricing: "Voir les tarifs",
     ctaTitle: "Une plateforme. Plusieurs agents IA. Des résultats concrets.",
-    ctaDesc: "Commencez par l’analyse de contrats, puis développez vers l’apprentissage, la gestion financière personnelle et des décisions business plus intelligentes.",
+    ctaDesc:
+      "Commencez par l’analyse de contrats, puis développez vers l’apprentissage, la gestion financière personnelle et des décisions business plus intelligentes.",
     ctaButton: "Commencer avec l’agent juridique",
     agents: [
-      ["Agent juridique", "Analysez vos contrats, détectez les clauses à risque et obtenez des recommandations claires."],
-      ["Agent étude", "Analysez vos cours, générez des résumés, quiz et plans de révision intelligents."],
-      ["Agent coach financier personnel", "Analysez vos dépenses, détectez le gaspillage et recevez des stratégies d’épargne concrètes."],
-      ["Agent décision business", "Analysez vos données business, identifiez les tendances et prenez de meilleures décisions stratégiques."],
+      [
+        "Agent juridique",
+        "Analysez vos contrats, détectez les clauses à risque et obtenez des recommandations claires.",
+      ],
+      [
+        "Agent étude",
+        "Analysez vos cours, générez des résumés, quiz et plans de révision intelligents.",
+      ],
+      [
+        "Agent coach financier personnel",
+        "Analysez vos dépenses, détectez le gaspillage et recevez des stratégies d’épargne concrètes.",
+      ],
+      [
+        "Agent décision business",
+        "Analysez vos données business, identifiez les tendances et prenez de meilleures décisions stratégiques.",
+      ],
     ],
   },
+
   ar: {
     platform: "منصة Runexa للوكلاء الذكيين",
     title: "وكلاء ذكاء اصطناعي يساعدونك على إنجاز العمل بسرعة.",
@@ -61,19 +97,36 @@ const labels: any = {
     tryStudy: "تجربة وكيل الدراسة",
     tryFinance: "تجربة وكيل الإدارة المالية",
     choose: "اختر وكيلك الذكي",
-    chooseDesc: "ابدأ بالوكيل القانوني اليوم. المزيد من الوكلاء المتخصصين قريباً.",
+
+    // ✅ UPDATED
+    chooseDesc:
+      "يمكنك الوصول إلى جميع وكلاء Runexa للذكاء الاصطناعي (القانوني، الدراسة، المالية، الأعمال) باشتراك واحد.",
+
     available: "متاح",
     coming: "قريباً",
     open: "فتح الوكيل",
     pricing: "عرض الأسعار",
     ctaTitle: "منصة واحدة. عدة وكلاء ذكاء اصطناعي. نتائج عملية.",
-    ctaDesc: "ابدأ بتحليل العقود، ثم توسع إلى التعلم والإدارة المالية الشخصية واتخاذ قرارات أعمال أكثر ذكاءً.",
+    ctaDesc:
+      "ابدأ بتحليل العقود، ثم توسع إلى التعلم والإدارة المالية الشخصية واتخاذ قرارات أعمال أكثر ذكاءً.",
     ctaButton: "ابدأ بالوكيل القانوني",
     agents: [
-      ["الوكيل القانوني", "حلل العقود، واكتشف البنود الخطرة، واحصل على توصيات واضحة."],
-      ["وكيل الدراسة", "حلل المواد الدراسية، وأنشئ ملخصات واختبارات وخطط مراجعة ذكية."],
-      ["وكيل الإدارة المالية الشخصية", "حلل مصاريفك، واكتشف الهدر، واحصل على استراتيجيات ادخار فعالة."],
-      ["وكيل قرارات الأعمال", "حلل بيانات الأعمال، واكتشف الاتجاهات، واتخذ قرارات استراتيجية أفضل."],
+      [
+        "الوكيل القانوني",
+        "حلل العقود، واكتشف البنود الخطرة، واحصل على توصيات واضحة.",
+      ],
+      [
+        "وكيل الدراسة",
+        "حلل المواد الدراسية، وأنشئ ملخصات واختبارات وخطط مراجعة ذكية.",
+      ],
+      [
+        "وكيل الإدارة المالية الشخصية",
+        "حلل مصاريفك، واكتشف الهدر، واحصل على استراتيجيات ادخار فعالة.",
+      ],
+      [
+        "وكيل قرارات الأعمال",
+        "حلل بيانات الأعمال، واكتشف الاتجاهات، واتخذ قرارات استراتيجية أفضل.",
+      ],
     ],
   },
 };
@@ -118,7 +171,9 @@ export default function HomePage() {
 
           <p className="text-blue-600 font-semibold">{t.platform}</p>
           <h1 className="text-5xl font-bold leading-tight">{t.title}</h1>
-          <p className="text-lg text-slate-600 max-w-3xl mx-auto">{t.desc}</p>
+          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+            {t.desc}
+          </p>
 
           <div className="flex flex-wrap justify-center gap-4">
             <a
@@ -156,13 +211,13 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {t.agents.map((agent: string[], index: number) => {
-              const isAvailable = index === 0 || index === 1 || index === 2;
+              const isAvailable = index <= 2;
 
               return (
                 <div key={agent[0]} className="bg-white p-6 rounded-2xl border shadow-sm flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between gap-3">
-                      <h3 className="text-xl font-bold whitespace-normal break-words">
+                      <h3 className="text-xl font-bold">
                         {agent[0]}
                       </h3>
                       <span className="text-xs bg-slate-100 text-slate-600 px-3 py-1 rounded-full">
@@ -183,7 +238,7 @@ export default function HomePage() {
                   ) : (
                     <button
                       disabled
-                      className="mt-6 px-4 py-2 bg-slate-100 text-slate-400 rounded-xl font-semibold cursor-not-allowed"
+                      className="mt-6 px-4 py-2 bg-slate-100 text-slate-400 rounded-xl font-semibold"
                     >
                       {t.coming}
                     </button>
