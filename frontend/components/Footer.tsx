@@ -85,7 +85,7 @@ export default function Footer() {
               </Link>
 
               <Link href="/study" className="block hover:text-white transition">
-                Study Agent{" "}
+                {(t.studyAgent || "Study Agent")}{" "}
                 <span className="text-green-400">· {t.available}</span>
               </Link>
 
@@ -108,6 +108,7 @@ export default function Footer() {
 
           <div>
             <h4 className="font-semibold">{t.platform}</h4>
+
             <div className="mt-4 space-y-3 text-sm text-slate-400">
               <a href="#agents" className="block hover:text-white transition">
                 {t.exploreAgents}
@@ -118,11 +119,11 @@ export default function Footer() {
               </Link>
 
               <Link href="/study" className="block hover:text-white transition">
-                Try Study Agent
+                {t.tryStudyAgent || "Try Study Agent"}
               </Link>
 
               <Link href="/finance" className="block hover:text-white transition">
-                Try Finance Coach
+                {t.tryFinanceAgent || "Try Finance Coach"}
               </Link>
 
               <Link href="/login" className="block hover:text-white transition">
@@ -137,6 +138,7 @@ export default function Footer() {
 
           <div>
             <h4 className="font-semibold">{t.about}</h4>
+
             <p className="mt-4 text-sm text-slate-400 leading-6">
               {t.aboutText}
             </p>
