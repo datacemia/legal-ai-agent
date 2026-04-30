@@ -16,7 +16,7 @@ const labels: any = {
 
     // ✅ UPDATED
     chooseDesc:
-      "Access all Runexa AI agents (Legal, Study, Finance, Business) with one subscription.",
+      "One account to access all Runexa AI agents (Legal, Study, Finance, Business).",
 
     available: "Available",
     coming: "Coming soon",
@@ -58,7 +58,7 @@ const labels: any = {
 
     // ✅ UPDATED
     chooseDesc:
-      "Accédez à tous les agents IA Runexa (juridique, étude, finance, business) avec un seul abonnement.",
+      "Un seul compte pour accéder à tous les agents IA Runexa (juridique, étude, finance, business).",
 
     available: "Disponible",
     coming: "Bientôt",
@@ -100,7 +100,7 @@ const labels: any = {
 
     // ✅ UPDATED
     chooseDesc:
-      "يمكنك الوصول إلى جميع وكلاء Runexa للذكاء الاصطناعي (القانوني، الدراسة، المالية، الأعمال) باشتراك واحد.",
+      "حساب واحد للوصول إلى جميع وكلاء Runexa للذكاء الاصطناعي (القانوني، الدراسة، المالية، الأعمال).",
 
     available: "متاح",
     coming: "قريباً",
