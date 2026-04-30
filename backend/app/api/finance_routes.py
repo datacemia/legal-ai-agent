@@ -1,6 +1,6 @@
 import json
 
-from fastapi import APIRouter, Depends, UploadFile, File, HTTPException
+from fastapi import APIRouter, Depends, UploadFile, File, HTTPException, Form
 from sqlalchemy.orm import Session
 
 from app.database import get_db
@@ -8,6 +8,7 @@ from app.utils.security import get_current_user
 from app.models.user import User
 from app.models.finance_analysis import FinanceAnalysis
 from app.schemas.finance_schema import FinanceHistoryItem
+
 from app.services.finance_agent.statement_parser import extract_statement_text
 from app.services.finance_agent.finance_ai_agent import analyze_bank_statement
 
@@ -15,6 +16,7 @@ from app.services.finance_agent.finance_ai_agent import analyze_bank_statement
 router = APIRouter(prefix="/finance", tags=["Finance"])
 
 
+# 🔹 OLD JSON API (keep as is)
 @router.post("/analyze")
 def analyze_finance(data: dict, current_user: User = Depends(get_current_user)):
     expenses = data.get("expenses", [])
@@ -44,9 +46,11 @@ def analyze_finance(data: dict, current_user: User = Depends(get_current_user)):
     }
 
 
+# 🔥 MAIN ROUTE (UPDATED)
 @router.post("/analyze-statement")
 async def analyze_statement(
     file: UploadFile = File(...),
+    output_language: str = Form("en"),  # ✅ NEW
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
@@ -64,7 +68,8 @@ async def analyze_statement(
             detail="Could not extract text from PDF.",
         )
 
-    result = analyze_bank_statement(text)
+    # ✅ PASS LANGUAGE TO AI
+    result = analyze_bank_statement(text, output_language)
 
     analysis = FinanceAnalysis(
         user_id=current_user.id,
@@ -79,6 +84,7 @@ async def analyze_statement(
     return result
 
 
+# 📜 HISTORY
 @router.get("/history", response_model=list[FinanceHistoryItem])
 def get_finance_history(
     db: Session = Depends(get_db),

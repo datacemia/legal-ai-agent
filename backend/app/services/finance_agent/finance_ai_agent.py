@@ -49,9 +49,28 @@ Never return null for financial_score. Always compute a score.
 """
 
 
-def build_user_prompt(statement_text: str) -> str:
+def get_language_name(output_language: str) -> str:
+    languages = {
+        "en": "English",
+        "fr": "French",
+        "ar": "Arabic",
+    }
+
+    return languages.get(output_language, "English")
+
+
+def build_user_prompt(statement_text: str, output_language: str = "en") -> str:
+    language_name = get_language_name(output_language)
+
     return f"""
 Analyze the following bank statement text.
+
+IMPORTANT LANGUAGE RULES:
+- Return the ENTIRE JSON content in this language: {language_name}.
+- All user-facing values must be written in {language_name}.
+- Keep JSON keys exactly in English.
+- Do not translate JSON keys.
+- Do not write anything outside JSON.
 
 STRICT RULES:
 - Deposits, credits, salary, refunds = income.
@@ -105,13 +124,19 @@ Bank statement:
 """
 
 
-def analyze_bank_statement(statement_text: str):
+def analyze_bank_statement(
+    statement_text: str,
+    output_language: str = "en",
+):
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         response_format={"type": "json_object"},
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": build_user_prompt(statement_text)},
+            {
+                "role": "user",
+                "content": build_user_prompt(statement_text, output_language),
+            },
         ],
         temperature=0.1,
     )

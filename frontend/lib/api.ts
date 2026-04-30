@@ -105,14 +105,17 @@ export async function createCheckoutSession() {
   return res.json();
 }
 
-// 2 deuxieme agent
 //
 // 💰 FINANCE AGENT API
 //
 
-export async function analyzeFinanceStatement(file: File) {
+export async function analyzeFinanceStatement(
+  file: File,
+  language: string = "en"
+) {
   const formData = new FormData();
   formData.append("file", file);
+  formData.append("output_language", language);
 
   const res = await fetch(`${API_URL}/finance/analyze-statement`, {
     method: "POST",
@@ -135,6 +138,10 @@ export async function getFinanceHistory() {
 
   return res.json();
 }
+
+//
+// 🎓 STUDY AGENT API
+//
 
 export async function getStudyHistory() {
   const res = await fetch(`${API_URL}/study/history`, {
