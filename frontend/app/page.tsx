@@ -72,7 +72,7 @@ const labels: any = {
   },
 };
 
-const agentLinks = ["/upload", "#", "#", "#"];
+const agentLinks = ["/upload", "#", "/finance", "#"];
 
 export default function HomePage() {
   const [language, setLanguage] = useState("en");
@@ -150,7 +150,7 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {t.agents.map((agent: string[], index: number) => {
-              const isAvailable = index === 0;
+              const isAvailable = index === 0 || index === 2;
 
               return (
                 <div
