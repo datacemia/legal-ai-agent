@@ -70,7 +70,6 @@ export default function Footer() {
               {t.footerDesc}
             </p>
 
-            {/* ✅ MULTILANGUAGE ADDRESS */}
             <p className="mt-4 text-xs text-slate-500 leading-5 whitespace-pre-line">
               {t.companyAddress}
             </p>
@@ -78,19 +77,28 @@ export default function Footer() {
 
           <div>
             <h4 className="font-semibold">{t.products}</h4>
+
             <div className="mt-4 space-y-3 text-sm text-slate-400">
-              <p>
+              <Link href="/upload" className="block hover:text-white transition">
                 {t.legalAgent}{" "}
                 <span className="text-green-400">· {t.available}</span>
-              </p>
-              <p>
+              </Link>
+
+              <Link href="/study" className="block hover:text-white transition">
+                Study Agent{" "}
+                <span className="text-green-400">· {t.available}</span>
+              </Link>
+
+              <Link href="/finance" className="block hover:text-white transition">
                 {t.financeAgent}{" "}
-                <span className="text-slate-500">· {t.comingSoon}</span>
-              </p>
+                <span className="text-green-400">· {t.available}</span>
+              </Link>
+
               <p>
                 {t.hrAgent}{" "}
                 <span className="text-slate-500">· {t.comingSoon}</span>
               </p>
+
               <p>
                 {t.businessAgent}{" "}
                 <span className="text-slate-500">· {t.comingSoon}</span>
@@ -104,12 +112,23 @@ export default function Footer() {
               <a href="#agents" className="block hover:text-white transition">
                 {t.exploreAgents}
               </a>
+
               <Link href="/upload" className="block hover:text-white transition">
                 {t.tryLegalAgent}
               </Link>
+
+              <Link href="/study" className="block hover:text-white transition">
+                Try Study Agent
+              </Link>
+
+              <Link href="/finance" className="block hover:text-white transition">
+                Try Finance Coach
+              </Link>
+
               <Link href="/login" className="block hover:text-white transition">
                 {t.login}
               </Link>
+
               <Link href="/register" className="block hover:text-white transition">
                 {t.register}
               </Link>
