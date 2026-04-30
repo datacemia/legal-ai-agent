@@ -38,8 +38,9 @@ export const translations: any = {
 
     products: "Products",
     legalAgent: "Legal Agent",
-    financeAgent: "Study Agent",
-    hrAgent: "Personal Finance Coach Agent",
+    studyAgent: "Study Agent",
+    financeAgent: "Personal Finance Coach Agent",
+    hrAgent: "HR Agent",
     businessAgent: "Business Decision Agent",
     available: "Available",
     comingSoon: "Coming soon",
@@ -47,6 +48,8 @@ export const translations: any = {
     platform: "Platform",
     exploreAgents: "Explore agents",
     tryLegalAgent: "Try Legal Agent",
+    tryStudyAgent: "Try Study Agent",
+    tryFinanceAgent: "Try Finance Coach",
 
     about: "About",
     aboutText:
@@ -76,8 +79,9 @@ export const translations: any = {
 
     products: "Produits",
     legalAgent: "Agent juridique",
-    financeAgent: "Agent étude",
-    hrAgent: "Agent coach financier personnel",
+    studyAgent: "Agent étude",
+    financeAgent: "Agent coach financier personnel",
+    hrAgent: "Agent RH",
     businessAgent: "Agent décision business",
     available: "Disponible",
     comingSoon: "Bientôt",
@@ -85,6 +89,8 @@ export const translations: any = {
     platform: "Plateforme",
     exploreAgents: "Explorer les agents",
     tryLegalAgent: "Tester l’agent juridique",
+    tryStudyAgent: "Tester l’agent étude",
+    tryFinanceAgent: "Tester le coach financier",
 
     about: "À propos",
     aboutText:
@@ -114,8 +120,9 @@ export const translations: any = {
 
     products: "المنتجات",
     legalAgent: "الوكيل القانوني",
-    financeAgent: "وكيل الدراسة",
-    hrAgent: "وكيل الإدارة المالية الشخصية",
+    studyAgent: "وكيل الدراسة",
+    financeAgent: "وكيل الإدارة المالية الشخصية",
+    hrAgent: "وكيل الموارد البشرية",
     businessAgent: "وكيل قرارات الأعمال",
     available: "متاح",
     comingSoon: "قريباً",
@@ -123,6 +130,8 @@ export const translations: any = {
     platform: "المنصة",
     exploreAgents: "استكشاف الوكلاء",
     tryLegalAgent: "تجربة الوكيل القانوني",
+    tryStudyAgent: "تجربة وكيل الدراسة",
+    tryFinanceAgent: "تجربة وكيل الإدارة المالية",
 
     about: "حول",
     aboutText:
