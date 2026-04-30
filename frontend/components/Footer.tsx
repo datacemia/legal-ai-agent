@@ -90,14 +90,11 @@ export default function Footer() {
               </Link>
 
               <Link href="/finance" className="block hover:text-white transition">
-                {t.financeAgent}{" "}
+                {(t.financeAgent === t.studyAgent
+                  ? "Personal Finance Coach Agent"
+                  : t.financeAgent || "Personal Finance Coach Agent")}{" "}
                 <span className="text-green-400">· {t.available}</span>
               </Link>
-
-              <p>
-                {t.hrAgent}{" "}
-                <span className="text-slate-500">· {t.comingSoon}</span>
-              </p>
 
               <p>
                 {t.businessAgent}{" "}
