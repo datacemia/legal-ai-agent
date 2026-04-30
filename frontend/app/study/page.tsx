@@ -4,6 +4,30 @@ import { useEffect, useState } from "react";
 import { getToken } from "../../lib/auth";
 import { getSavedLocale, setSavedLocale } from "../../lib/i18n";
 
+const LEVEL_LABELS: any = {
+  en: {
+    primary_school: "Primary school",
+    middle_school: "Middle school",
+    high_school: "High school",
+    vocational_training: "Vocational training",
+    university: "University",
+  },
+  fr: {
+    primary_school: "École primaire",
+    middle_school: "Collège",
+    high_school: "Lycée",
+    vocational_training: "Formation professionnelle",
+    university: "Université",
+  },
+  ar: {
+    primary_school: "المرحلة الابتدائية",
+    middle_school: "المرحلة الإعدادية",
+    high_school: "المرحلة الثانوية",
+    vocational_training: "التكوين المهني",
+    university: "الجامعة",
+  },
+};
+
 const labels: any = {
   en: {
     title: "Study Agent",
@@ -120,8 +144,7 @@ const labels: any = {
     subtitle:
       "ارفع ملف PDF لإنشاء ملخص، اختبار نظري، اختبار تطبيقي، بطاقات مراجعة وخطة دراسة.",
     howTitle: "كيف يعمل هذا الوكيل:",
-    how1:
-      "ارفع ملف الدراسة وسيحوّله وكيل الدراسة إلى تجربة تعلم تفاعلية.",
+    how1: "ارفع ملف الدراسة وسيحوّله وكيل الدراسة إلى تجربة تعلم تفاعلية.",
     how2:
       "قبل التحليل، اختر مستواك التعليمي ولغة النتائج. يقوم الوكيل بتكييف الصعوبة والمفردات والشرح والأسئلة حسب اختيارك.",
     items: [
@@ -140,8 +163,7 @@ const labels: any = {
     buyCredits: "شراء رصيد",
     chooseLevel: "اختر مستواك",
     selectLevel: "اختر المستوى التعليمي",
-    levelHelp:
-      "يساعد هذا وكيل الدراسة على تكييف الشرح والأسئلة مع مستواك.",
+    levelHelp: "يساعد هذا وكيل الدراسة على تكييف الشرح والأسئلة مع مستواك.",
     cancel: "إلغاء",
     continue: "متابعة",
     results: "النتائج",
@@ -192,6 +214,9 @@ export default function StudyPage() {
 
   const t = labels[language] || labels.en;
 
+  const getLevelLabel = (level: string) =>
+    LEVEL_LABELS[language]?.[level] || LEVEL_LABELS.en[level] || level;
+
   const handleAnalyze = async () => {
     if (!file || !educationLevel) return;
 
@@ -215,11 +240,7 @@ export default function StudyPage() {
         `${process.env.NEXT_PUBLIC_API_URL}/study/analyze`,
         {
           method: "POST",
-          headers: token
-            ? {
-                Authorization: `Bearer ${token}`,
-              }
-            : {},
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
           body: formData,
         }
       );
@@ -268,9 +289,6 @@ export default function StudyPage() {
   const score =
     totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
 
-  const formatLevel = (level: string) =>
-    level.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-
   const getScoreColor = () => {
     if (score >= 80) return "bg-green-50 text-green-700 border-green-200";
     if (score >= 50) return "bg-yellow-50 text-yellow-700 border-yellow-200";
@@ -279,19 +297,23 @@ export default function StudyPage() {
 
   const getScoreFeedback = () => {
     if (score >= 80) {
-      if (language === "fr") return "Excellent travail. Vous avez bien compris le contenu.";
+      if (language === "fr")
+        return "Excellent travail. Vous avez bien compris le contenu.";
       if (language === "ar") return "عمل ممتاز. لقد فهمت المحتوى جيداً.";
       return "Excellent work. You understood the material well.";
     }
 
     if (score >= 50) {
-      if (language === "fr") return "Bon effort. Relisez les explications puis réessayez.";
+      if (language === "fr")
+        return "Bon effort. Relisez les explications puis réessayez.";
       if (language === "ar") return "مجهود جيد. راجع الشروحات ثم أعد المحاولة.";
       return "Good effort. Review the explanations and retry.";
     }
 
-    if (language === "fr") return "Vous avez besoin de plus de pratique. Concentrez-vous sur les points clés et les flashcards.";
-    if (language === "ar") return "تحتاج إلى المزيد من التدريب. ركز على النقاط الأساسية وبطاقات المراجعة.";
+    if (language === "fr")
+      return "Vous avez besoin de plus de pratique. Concentrez-vous sur les points clés et les flashcards.";
+    if (language === "ar")
+      return "تحتاج إلى المزيد من التدريب. ركز على النقاط الأساسية وبطاقات المراجعة.";
     return "Needs more practice. Focus on the key points and flashcards.";
   };
 
@@ -454,9 +476,7 @@ export default function StudyPage() {
             </button>
 
             <button
-              onClick={() =>
-                setPaymentMessage(t.paymentMessage)
-              }
+              onClick={() => setPaymentMessage(t.paymentMessage)}
               className="w-full bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 transition"
             >
               {t.buyCredits}
@@ -484,11 +504,21 @@ export default function StudyPage() {
                 className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm"
               >
                 <option value="">{t.chooseLevel}</option>
-                <option value="primary_school">Primary school</option>
-                <option value="middle_school">Middle school</option>
-                <option value="high_school">High school</option>
-                <option value="vocational_training">Vocational training</option>
-                <option value="university">University</option>
+                <option value="primary_school">
+                  {getLevelLabel("primary_school")}
+                </option>
+                <option value="middle_school">
+                  {getLevelLabel("middle_school")}
+                </option>
+                <option value="high_school">
+                  {getLevelLabel("high_school")}
+                </option>
+                <option value="vocational_training">
+                  {getLevelLabel("vocational_training")}
+                </option>
+                <option value="university">
+                  {getLevelLabel("university")}
+                </option>
               </select>
 
               <div className="grid grid-cols-2 gap-3 pt-2">
@@ -526,7 +556,7 @@ export default function StudyPage() {
             <div className="flex flex-wrap gap-2">
               {educationLevel && (
                 <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 border border-blue-200">
-                  {t.level}: {formatLevel(educationLevel)}
+                  {t.level}: {getLevelLabel(educationLevel)}
                 </span>
               )}
 
