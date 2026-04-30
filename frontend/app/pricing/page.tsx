@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 
 export default function Pricing() {
@@ -36,22 +35,23 @@ export default function Pricing() {
             Simple pricing
           </h1>
           <p className="mt-4 text-slate-600">
-            Start with the Legal Agent. More specialized agents are coming soon, each with clear and transparent pricing.
+            Start with the Legal Agent. More specialized agents are coming soon,
+            each with clear and transparent pricing.
           </p>
         </div>
 
-        {/* NEW SECTION TITLE */}
+        {/* LEGAL AGENT SECTION */}
         <div className="text-center mt-16">
           <h2 className="text-xl font-semibold text-slate-900">
             Legal Agent Pricing
           </h2>
           <p className="mt-2 text-sm text-slate-500">
-            Analyze contracts, detect risky clauses, and get clear recommendations before you sign.
+            Analyze contracts, detect risky clauses, and get clear
+            recommendations before you sign.
           </p>
         </div>
 
         <div className="grid gap-8 md:grid-cols-4 mt-12">
-
           {/* FREE */}
           <div className="rounded-3xl border bg-white p-8 shadow-sm flex flex-col">
             <h2 className="text-lg font-semibold text-slate-900">Free</h2>
@@ -108,9 +108,7 @@ export default function Pricing() {
 
             <div className="mt-6 text-4xl font-bold text-slate-900">€5</div>
 
-            <p className="text-sm text-slate-500">
-              per contract analysis
-            </p>
+            <p className="text-sm text-slate-500">per contract analysis</p>
 
             <ul className="mt-6 space-y-3 text-sm text-slate-700">
               <li>✔ Everything in Free</li>
@@ -134,9 +132,7 @@ export default function Pricing() {
 
           {/* PRO */}
           <div className="rounded-3xl border bg-white p-8 shadow-sm flex flex-col">
-            <h2 className="text-lg font-semibold text-slate-900">
-              Pro
-            </h2>
+            <h2 className="text-lg font-semibold text-slate-900">Pro</h2>
 
             <span className="mt-2 text-xs text-slate-500">
               For professionals
@@ -148,9 +144,7 @@ export default function Pricing() {
 
             <div className="mt-6 text-4xl font-bold text-slate-900">€19</div>
 
-            <p className="text-sm text-slate-500">
-              per month
-            </p>
+            <p className="text-sm text-slate-500">per month</p>
 
             <ul className="mt-6 space-y-3 text-sm text-slate-700">
               <li>✔ Everything in Pay per contract</li>
@@ -169,9 +163,7 @@ export default function Pricing() {
 
           {/* PREMIUM */}
           <div className="rounded-3xl border bg-white p-8 shadow-sm flex flex-col">
-            <h2 className="text-lg font-semibold text-slate-900">
-              Premium
-            </h2>
+            <h2 className="text-lg font-semibold text-slate-900">Premium</h2>
 
             <p className="mt-2 text-sm text-slate-500">
               For teams and companies with advanced needs.
@@ -198,7 +190,13 @@ export default function Pricing() {
               Contact sales
             </a>
           </div>
+        </div>
 
+        {/* LEGAL DISCLAIMER */}
+        <div className="mx-auto max-w-3xl rounded-2xl border border-amber-200 bg-amber-50 p-5 text-center text-sm text-amber-800 mt-16">
+          ⚠️ Runexa does not replace a lawyer. The AI Legal Agent provides
+          contract understanding and risk information for informational purposes
+          only.
         </div>
 
         {/* FINANCE AGENT SECTION */}
@@ -207,12 +205,12 @@ export default function Pricing() {
             Finance Agent Pricing
           </h2>
           <p className="mt-2 text-sm text-slate-500">
-            Analyze bank statements, detect spending patterns, and get clear financial insights.
+            Analyze bank statements, detect spending patterns, and get clear
+            financial insights.
           </p>
         </div>
 
         <div className="grid gap-8 md:grid-cols-4 mt-12">
-
           {/* FREE */}
           <div className="rounded-3xl border bg-white p-8 shadow-sm flex flex-col">
             <h2 className="text-lg font-semibold text-slate-900">Free</h2>
@@ -264,9 +262,7 @@ export default function Pricing() {
 
             <div className="mt-6 text-4xl font-bold text-slate-900">€3</div>
 
-            <p className="text-sm text-slate-500">
-              per statement analysis
-            </p>
+            <p className="text-sm text-slate-500">per statement analysis</p>
 
             <ul className="mt-6 space-y-3 text-sm text-slate-700">
               <li>✔ Everything in Free</li>
@@ -285,9 +281,7 @@ export default function Pricing() {
 
           {/* PRO */}
           <div className="rounded-3xl border bg-white p-8 shadow-sm flex flex-col">
-            <h2 className="text-lg font-semibold text-slate-900">
-              Pro
-            </h2>
+            <h2 className="text-lg font-semibold text-slate-900">Pro</h2>
 
             <span className="mt-2 text-xs text-slate-500">
               For regular users
@@ -299,9 +293,7 @@ export default function Pricing() {
 
             <div className="mt-6 text-4xl font-bold text-slate-900">€15</div>
 
-            <p className="text-sm text-slate-500">
-              per month
-            </p>
+            <p className="text-sm text-slate-500">per month</p>
 
             <ul className="mt-6 space-y-3 text-sm text-slate-700">
               <li>✔ Everything in Pay per statement</li>
@@ -320,9 +312,7 @@ export default function Pricing() {
 
           {/* PREMIUM */}
           <div className="rounded-3xl border bg-white p-8 shadow-sm flex flex-col">
-            <h2 className="text-lg font-semibold text-slate-900">
-              Premium
-            </h2>
+            <h2 className="text-lg font-semibold text-slate-900">Premium</h2>
 
             <p className="mt-2 text-sm text-slate-500">
               For teams and advanced users.
@@ -348,13 +338,12 @@ export default function Pricing() {
               Contact sales
             </a>
           </div>
-
         </div>
 
+        {/* FINANCE DISCLAIMER */}
         <div className="mx-auto max-w-3xl rounded-2xl border border-amber-200 bg-amber-50 p-5 text-center text-sm text-amber-800 mt-16">
-          ⚠️ Runexa does not replace a lawyer or financial advisor. The AI Agents provide
-          contract understanding, financial insights, and risk information for informational purposes
-          only.
+          ⚠️ Runexa does not replace a financial advisor. The AI Finance Agent
+          provides financial insights for informational purposes only.
         </div>
       </div>
     </main>
