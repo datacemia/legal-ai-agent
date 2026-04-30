@@ -135,3 +135,11 @@ export async function getFinanceHistory() {
 
   return res.json();
 }
+
+export async function getStudyHistory() {
+  const res = await fetch(`${API_URL}/study/history`, {
+    headers: getAuthHeaders(),
+  });
+
+  return res.json();
+}

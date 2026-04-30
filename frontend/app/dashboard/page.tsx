@@ -255,6 +255,42 @@ export default function DashboardPage() {
 
         <div className="bg-white p-6 rounded-2xl border space-y-4">
           <div className="flex items-center justify-between gap-4">
+            <h2 className="text-xl font-semibold">Study Agent</h2>
+
+            <Link href="/study" className="text-sm text-blue-600">
+              Analyze new
+            </Link>
+          </div>
+
+          <div className="text-center py-8">
+            <h3 className="text-lg font-semibold">Learn faster with AI</h3>
+
+            <p className="text-slate-500 mt-2">
+              Upload your study materials to generate summaries, quizzes,
+              flashcards, and a personalized study plan.
+            </p>
+
+            <Link
+              href="/study"
+              className="inline-block mt-5 px-5 py-2 bg-slate-900 text-white rounded-lg"
+            >
+              Upload Study PDF
+            </Link>
+          </div>
+
+          <div className="flex gap-3 pt-2">
+            <Link href="/study" className="text-sm text-blue-600">
+              Analyze new
+            </Link>
+
+            <Link href="/study/history" className="text-sm text-slate-600">
+              View history
+            </Link>
+          </div>
+        </div>
+
+        <div className="bg-white p-6 rounded-2xl border space-y-4">
+          <div className="flex items-center justify-between gap-4">
             <h2 className="text-xl font-semibold">Personal Finance Coach</h2>
 
             <Link href="/finance" className="text-sm text-blue-600">

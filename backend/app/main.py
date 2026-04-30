@@ -4,8 +4,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 from dotenv import load_dotenv
 from app.models.finance_analysis import FinanceAnalysis
-
+from app.api.study_routes import router as study_router
+from app.models.study_analysis import StudyAnalysis
 load_dotenv()
+
+
 
 from app.config import FRONTEND_URL
 
@@ -80,3 +83,5 @@ def root():
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
+
+app.include_router(study_router)

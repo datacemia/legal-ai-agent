@@ -75,7 +75,7 @@ const labels: any = {
   },
 };
 
-const agentLinks = ["/upload", "#", "/finance", "#"];
+const agentLinks = ["/upload", "/study", "/finance", "#"];
 
 export default function HomePage() {
   const [language, setLanguage] = useState("en");
@@ -114,9 +114,7 @@ export default function HomePage() {
           </div>
 
           <p className="text-blue-600 font-semibold">{t.platform}</p>
-
           <h1 className="text-5xl font-bold leading-tight">{t.title}</h1>
-
           <p className="text-lg text-slate-600 max-w-3xl mx-auto">{t.desc}</p>
 
           <div className="flex flex-wrap justify-center gap-4">
@@ -127,24 +125,15 @@ export default function HomePage() {
               {t.explore}
             </a>
 
-            <Link
-              href="/upload"
-              className="px-6 py-3 bg-white border border-slate-200 rounded-xl font-semibold hover:bg-slate-100 transition"
-            >
+            <Link href="/upload" className="px-6 py-3 bg-white border border-slate-200 rounded-xl font-semibold hover:bg-slate-100 transition">
               {t.tryLegal}
             </Link>
 
-            <Link
-              href="/finance"
-              className="px-6 py-3 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition"
-            >
+            <Link href="/finance" className="px-6 py-3 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition">
               {t.tryFinance}
             </Link>
 
-            <Link
-              href="/pricing"
-              className="px-6 py-3 bg-white border border-slate-200 rounded-xl font-semibold hover:bg-slate-100 transition"
-            >
+            <Link href="/pricing" className="px-6 py-3 bg-white border border-slate-200 rounded-xl font-semibold hover:bg-slate-100 transition">
               {t.pricing}
             </Link>
           </div>
@@ -160,16 +149,15 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {t.agents.map((agent: string[], index: number) => {
-              const isAvailable = index === 0 || index === 2;
+              const isAvailable = index === 0 || index === 1 || index === 2;
 
               return (
-                <div
-                  key={agent[0]}
-                  className="bg-white p-6 rounded-2xl border shadow-sm flex flex-col justify-between"
-                >
+                <div key={agent[0]} className="bg-white p-6 rounded-2xl border shadow-sm flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between gap-3">
-                      <h3 className="text-xl font-bold">{agent[0]}</h3>
+                      <h3 className="text-xl font-bold whitespace-normal break-words">
+                        {agent[0]}
+                      </h3>
                       <span className="text-xs bg-slate-100 text-slate-600 px-3 py-1 rounded-full">
                         {isAvailable ? t.available : t.coming}
                       </span>
@@ -203,13 +191,9 @@ export default function HomePage() {
       <section className="px-6 py-16">
         <div className="max-w-5xl mx-auto bg-blue-600 text-white rounded-3xl p-10 text-center">
           <h2 className="text-3xl font-bold">{t.ctaTitle}</h2>
-
           <p className="mt-4 text-blue-100">{t.ctaDesc}</p>
 
-          <Link
-            href="/upload"
-            className="inline-block mt-6 px-6 py-3 bg-white text-blue-600 rounded-xl font-semibold"
-          >
+          <Link href="/upload" className="inline-block mt-6 px-6 py-3 bg-white text-blue-600 rounded-xl font-semibold">
             {t.ctaButton}
           </Link>
 
