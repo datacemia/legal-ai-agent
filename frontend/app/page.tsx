@@ -10,6 +10,7 @@ const labels: any = {
     desc: "Runexa provides AI agents that help you analyze documents, make smarter decisions, and move faster.",
     explore: "Explore agents",
     tryLegal: "Try Legal Agent",
+    tryFinance: "Try Finance Coach",
     choose: "Choose your AI agent",
     chooseDesc: "Start with Legal Agent today. More specialized agents are coming soon.",
     available: "Available",
@@ -32,6 +33,7 @@ const labels: any = {
     desc: "Runexa propose des agents IA qui vous aident à analyser vos documents, prendre de meilleures décisions et avancer plus vite.",
     explore: "Explorer les agents",
     tryLegal: "Tester l’agent juridique",
+    tryFinance: "Tester le coach financier",
     choose: "Choisissez votre agent IA",
     chooseDesc: "Commencez avec l’agent juridique. D’autres agents spécialisés arrivent bientôt.",
     available: "Disponible",
@@ -54,6 +56,7 @@ const labels: any = {
     desc: "توفر Runexa وكلاء ذكاء اصطناعي يساعدونك على تحليل المستندات واتخاذ قرارات أفضل والعمل بشكل أسرع.",
     explore: "استكشاف الوكلاء",
     tryLegal: "تجربة الوكيل القانوني",
+    tryFinance: "تجربة وكيل الإدارة المالية",
     choose: "اختر وكيلك الذكي",
     chooseDesc: "ابدأ بالوكيل القانوني اليوم. المزيد من الوكلاء المتخصصين قريباً.",
     available: "متاح",
@@ -116,7 +119,7 @@ export default function HomePage() {
 
           <p className="text-lg text-slate-600 max-w-3xl mx-auto">{t.desc}</p>
 
-          <div className="flex justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-4">
             <a
               href="#agents"
               className="px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition"
@@ -129,6 +132,13 @@ export default function HomePage() {
               className="px-6 py-3 bg-white border border-slate-200 rounded-xl font-semibold hover:bg-slate-100 transition"
             >
               {t.tryLegal}
+            </Link>
+
+            <Link
+              href="/finance"
+              className="px-6 py-3 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition"
+            >
+              {t.tryFinance}
             </Link>
 
             <Link
