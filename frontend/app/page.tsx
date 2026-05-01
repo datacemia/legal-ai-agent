@@ -45,6 +45,7 @@ const labels: any = {
     ctaDesc:
       "Runexa Systems is an AI agents platform that helps you analyze documents, learn faster, manage personal finances, and make smarter business decisions.",
     ctaButton: "Create your account",
+    disclaimer: "{t.disclaimer}",
     agents: [
       [
         "Legal Agent",
@@ -85,28 +86,29 @@ const labels: any = {
     open: "Ouvrir l’agent",
     pricing: "Voir les tarifs",
     enterpriseBadge: "Agents IA personnalisés",
-    enterpriseTitle: "Runexa Systems for Business",
+    enterpriseTitle: "Runexa Systems pour les entreprises",
     enterpriseSubtitle:
       "Des agents IA personnalisés pour vos équipes, vos données et vos workflows.",
     enterpriseDesc:
       "Nous concevons des agents IA sur mesure pour aider les entreprises à automatiser l’analyse documentaire, le reporting financier, le recrutement, la conformité et la prise de décision.",
-    enterprisePrimary: "Contact sales",
-    enterpriseSecondary: "Découvrir Runexa for Business",
+    enterprisePrimary: "Contacter l’équipe commerciale",
+    enterpriseSecondary: "Découvrir Runexa pour les entreprises",
     enterpriseCards: [
-      "Legal workflows",
-      "Finance reporting",
-      "HR screening",
-      "Business intelligence",
+      "Workflows juridiques",
+      "Reporting financier",
+      "Recrutement RH",
+      "Intelligence business",
     ],
     enterpriseSystem: "Système d’agents personnalisés",
     enterpriseWorkflow: "Workflow IA personnalisé",
     enterpriseFooter: "Workflows connectés → vision unifiée → décisions plus rapides",
     enterpriseTag: "Entreprise",
-    enterpriseHeader: "Runexa Business AI",
+    enterpriseHeader: "IA Business Runexa",
     ctaTitle: "Une plateforme. Plusieurs agents IA. Des résultats concrets.",
     ctaDesc:
       "Runexa Systems est une plateforme d’agents IA qui vous permet d’analyser vos documents, apprendre plus vite, gérer vos finances personnelles et prendre des décisions business plus intelligentes.",
     ctaButton: "Créer votre compte",
+    disclaimer: "Analyses générées par IA. Vérifiez toujours avant d’agir.",
     agents: [
       [
         "Agent juridique",
@@ -169,6 +171,7 @@ const labels: any = {
     ctaDesc:
       "Runexa Systems هي منصة وكلاء ذكاء اصطناعي تساعدك على تحليل المستندات، التعلم بشكل أسرع، إدارة أموالك الشخصية، واتخاذ قرارات أعمال أكثر ذكاءً.",
     ctaButton: "إنشاء حساب",
+    disclaimer: "تحليلات مدعومة بالذكاء الاصطناعي. تحقق دائماً قبل اتخاذ أي قرار.",
     agents: [
       [
         "الوكيل القانوني",
