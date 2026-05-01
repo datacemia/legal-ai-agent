@@ -25,7 +25,7 @@ const labels: any = {
     ctaTitle: "One platform. Multiple AI agents. Real business outcomes.",
     ctaDesc:
       "Runexa Systems is an AI agents platform that helps you analyze documents, learn faster, manage personal finances, and make smarter business decisions.",
-    ctaButton: "Start with Runexa Systems",
+    ctaButton: "Create your account",
     agents: [
       [
         "Legal Agent",
@@ -67,7 +67,7 @@ const labels: any = {
     ctaTitle: "Une plateforme. Plusieurs agents IA. Des résultats concrets.",
     ctaDesc:
       "Runexa Systems est une plateforme d’agents IA qui vous permet d’analyser vos documents, apprendre plus vite, gérer vos finances personnelles et prendre des décisions business plus intelligentes.",
-    ctaButton: "Commencer avec Runexa Systems",
+    ctaButton: "Créer votre compte",
     agents: [
       [
         "Agent juridique",
@@ -109,7 +109,7 @@ const labels: any = {
     ctaTitle: "منصة واحدة. عدة وكلاء ذكاء اصطناعي. نتائج عملية.",
     ctaDesc:
       "Runexa Systems هي منصة وكلاء ذكاء اصطناعي تساعدك على تحليل المستندات، التعلم بشكل أسرع، إدارة أموالك الشخصية، واتخاذ قرارات أعمال أكثر ذكاءً.",
-    ctaButton: "ابدأ مع Runexa Systems",
+    ctaButton: "إنشاء حساب",
     agents: [
       [
         "الوكيل القانوني",
@@ -255,7 +255,7 @@ export default function HomePage() {
           <h2 className="text-3xl font-bold">{t.ctaTitle}</h2>
           <p className="mt-4 text-blue-100">{t.ctaDesc}</p>
 
-          <Link href="/upload" className="inline-block mt-6 px-6 py-3 bg-white text-blue-600 rounded-xl font-semibold">
+          <Link href="/register" className="inline-block mt-6 px-6 py-3 bg-white text-blue-600 rounded-xl font-semibold">
             {t.ctaButton}
           </Link>
 
