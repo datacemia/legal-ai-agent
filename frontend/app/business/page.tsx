@@ -79,6 +79,8 @@ export default function BusinessPage() {
       risks: "Risks",
       opportunities: "Opportunities",
       actions: "Action plan",
+      noFile: "No file selected",
+      chooseFile: "Choose file",
     },
     fr: {
       title: "Agent décision business",
@@ -115,6 +117,8 @@ export default function BusinessPage() {
       risks: "Risques",
       opportunities: "Opportunités",
       actions: "Plan d’action",
+      noFile: "Aucun fichier sélectionné",
+      chooseFile: "Choisir un fichier",
     },
     ar: {
       title: "وكيل قرارات الأعمال",
@@ -148,6 +152,8 @@ export default function BusinessPage() {
       risks: "المخاطر",
       opportunities: "الفرص",
       actions: "خطة العمل",
+      noFile: "لم يتم اختيار ملف",
+      chooseFile: "اختيار ملف",
     },
   };
 
@@ -226,16 +232,33 @@ export default function BusinessPage() {
             <option value="ar">العربية</option>
           </select>
 
-          <input
-            type="file"
-            accept=".csv,.xlsx"
-            onChange={(e) => {
-              setFile(e.target.files?.[0] || null);
-              setResult(null);
-              setMessage("");
-            }}
-            className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm"
-          />
+          {/* UPDATED FILE INPUT */}
+          <div className="space-y-2">
+            <input
+              id="file-upload"
+              type="file"
+              accept=".csv,.xlsx"
+              onChange={(e) => {
+                setFile(e.target.files?.[0] || null);
+                setResult(null);
+                setMessage("");
+              }}
+              className="hidden"
+            />
+
+            <label
+              htmlFor="file-upload"
+              className="flex items-center justify-between cursor-pointer rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm hover:bg-slate-50"
+            >
+              <span className="text-slate-600">
+                {file ? file.name : t.noFile}
+              </span>
+
+              <span className="text-blue-600 font-medium">
+                {t.chooseFile}
+              </span>
+            </label>
+          </div>
 
           <button
             onClick={handleAnalyze}

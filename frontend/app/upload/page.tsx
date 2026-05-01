@@ -238,6 +238,7 @@ export default function UploadPage() {
         <div className="bg-white p-6 rounded-3xl shadow-sm border space-y-5">
           <UploadBox
             file={file}
+            language={language}
             onFileChange={(selected) => {
               setFile(selected);
               setFileName(selected?.name || "");

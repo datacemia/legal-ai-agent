@@ -39,6 +39,8 @@ const labels: any = {
     wasteDetected: "Waste detected",
     savingStrategies: "Saving strategies",
     riskNotes: "Risk notes",
+    noFile: "No file selected",
+    chooseFile: "Choose file",
   },
   fr: {
     title: "Coach financier personnel",
@@ -67,6 +69,8 @@ const labels: any = {
     wasteDetected: "Dépenses évitables détectées",
     savingStrategies: "Stratégies d’épargne",
     riskNotes: "Notes de risque",
+    noFile: "Aucun fichier sélectionné",
+    chooseFile: "Choisir un fichier",
   },
   ar: {
     title: "وكيل الإدارة المالية الشخصية",
@@ -95,6 +99,8 @@ const labels: any = {
     wasteDetected: "الهدر المكتشف",
     savingStrategies: "استراتيجيات الادخار",
     riskNotes: "ملاحظات المخاطر",
+    noFile: "لم يتم اختيار ملف",
+    chooseFile: "اختيار ملف",
   },
 };
 
@@ -202,16 +208,32 @@ export default function FinancePage() {
             <option value="ar">العربية</option>
           </select>
 
-          <input
-            type="file"
-            accept=".pdf"
-            onChange={(e) => {
-              setFile(e.target.files?.[0] || null);
-              setResult(null);
-              setPaymentMessage("");
-            }}
-            className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm"
-          />
+          <div className="space-y-2">
+            <input
+              id="file-upload"
+              type="file"
+              accept=".pdf"
+              onChange={(e) => {
+                setFile(e.target.files?.[0] || null);
+                setResult(null);
+                setPaymentMessage("");
+              }}
+              className="hidden"
+            />
+
+            <label
+              htmlFor="file-upload"
+              className="flex items-center justify-between cursor-pointer rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm hover:bg-slate-50"
+            >
+              <span className="text-slate-600">
+                {file ? file.name : t.noFile}
+              </span>
+
+              <span className="text-blue-600 font-medium">
+                {t.chooseFile}
+              </span>
+            </label>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <button

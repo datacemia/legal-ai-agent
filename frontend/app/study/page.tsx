@@ -83,6 +83,8 @@ const labels: any = {
     paymentMessage:
       "Stripe is not configured yet. Credit purchase will be available soon.",
     errorMessage: "Failed to connect to Study Agent API.",
+    noFile: "No file selected",
+    chooseFile: "Choose file",
   },
   fr: {
     title: "Agent étude",
@@ -138,6 +140,8 @@ const labels: any = {
     paymentMessage:
       "Stripe n’est pas encore configuré. L’achat de crédits sera bientôt disponible.",
     errorMessage: "Impossible de se connecter à l’API Study Agent.",
+    noFile: "Aucun fichier sélectionné",
+    chooseFile: "Choisir un fichier",
   },
   ar: {
     title: "وكيل الدراسة",
@@ -191,6 +195,8 @@ const labels: any = {
     paymentMessage:
       "Stripe غير مفعّل حالياً. شراء الرصيد سيكون متاحاً قريباً.",
     errorMessage: "تعذر الاتصال بواجهة Study Agent.",
+    noFile: "لم يتم اختيار ملف",
+    chooseFile: "اختيار ملف",
   },
 };
 
@@ -444,20 +450,36 @@ export default function StudyPage() {
             <option value="ar">العربية</option>
           </select>
 
-          <input
-            type="file"
-            accept=".pdf"
-            onChange={(e) => {
-              setFile(e.target.files?.[0] || null);
-              setResult(null);
-              setPaymentMessage("");
-              setSelectedAnswers({});
-              setQuizSubmitted(false);
-              setEducationLevel("");
-              setRetryCount(0);
-            }}
-            className="w-full rounded-xl border px-4 py-3"
-          />
+          <div className="space-y-2">
+            <input
+              id="file-upload"
+              type="file"
+              accept=".pdf"
+              onChange={(e) => {
+                setFile(e.target.files?.[0] || null);
+                setResult(null);
+                setPaymentMessage("");
+                setSelectedAnswers({});
+                setQuizSubmitted(false);
+                setEducationLevel("");
+                setRetryCount(0);
+              }}
+              className="hidden"
+            />
+
+            <label
+              htmlFor="file-upload"
+              className="flex items-center justify-between cursor-pointer rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm hover:bg-slate-50"
+            >
+              <span className="text-slate-600">
+                {file ? file.name : t.noFile}
+              </span>
+
+              <span className="text-blue-600 font-medium">
+                {t.chooseFile}
+              </span>
+            </label>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <button
