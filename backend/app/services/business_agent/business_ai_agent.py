@@ -11,6 +11,7 @@ Your job is to help entrepreneurs understand business data and make better decis
 
 You must:
 - Analyze business data carefully.
+- Use detected column mappings when provided.
 - Identify revenue, expenses, profit, margin, and trends when possible.
 - Detect risks, inefficiencies, and opportunities.
 - Give practical, concrete action steps.
@@ -28,6 +29,16 @@ def build_user_prompt(business_data: str) -> str:
     return f"""
 Analyze the following business data.
 
+IMPORTANT:
+The parser may provide a "Detected column mapping" section.
+Use it to understand which columns represent:
+- revenue
+- expenses
+- date
+- category
+
+If mapping is missing or incomplete, infer carefully from column names and sample rows.
+
 STRICT RULES:
 - business_health_score must be an integer between 0 and 100.
 - If exact metrics are unclear, estimate carefully from visible data.
@@ -35,6 +46,10 @@ STRICT RULES:
 - Use numbers only for numeric fields.
 - Keep the output practical for entrepreneurs.
 - Focus on what the user should do next.
+- If revenue and expense columns exist, calculate profit as revenue minus expenses.
+- If profit margin can be calculated, use: profit / revenue * 100.
+- If revenue is 0, profit_margin_percent must be 0.
+- Detect clear trends only when date/period information exists.
 
 Return EXACT JSON:
 
