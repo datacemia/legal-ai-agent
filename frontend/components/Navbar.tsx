@@ -104,6 +104,13 @@ export default function Navbar() {
             </Link>
           )}
 
+          <Link
+            href="/enterprise"
+            className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
+          >
+            {t.enterprise || "Business"}
+          </Link>
+
           {/* ✅ PRICING + BADGE */}
           <div className="relative">
             <Link
