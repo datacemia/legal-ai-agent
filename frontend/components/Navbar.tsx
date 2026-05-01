@@ -67,7 +67,6 @@ export default function Navbar() {
       className="sticky top-0 z-50 w-full border-b border-slate-200/70 bg-white/70 backdrop-blur-md"
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-
         {/* ✅ LOGO + SLOGAN */}
         <Link href="/" className="flex items-center gap-3">
           <Image
@@ -103,6 +102,13 @@ export default function Navbar() {
               {t.admin || "Admin"}
             </Link>
           )}
+
+          <Link
+            href="/pricing"
+            className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
+          >
+            {t.pricing || "Pricing"}
+          </Link>
 
           <Link
             href="/login"
