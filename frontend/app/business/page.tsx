@@ -44,63 +44,152 @@ export default function BusinessPage() {
 
   const score = Number(result?.business_health_score || 0);
 
+  const labels: any = {
+    en: {
+      title: "Business Decision Agent",
+      subtitle:
+        "Upload business CSV data to detect trends, risks, opportunities, and get a clear action plan.",
+      howTitle: "How this agent works:",
+      how1:
+        "Upload a CSV file with your business data such as revenue, expenses, dates, and categories.",
+      how2:
+        "The agent analyzes your numbers, estimates profit and margin, detects risks, identifies opportunities, and gives practical next steps.",
+      disclaimer:
+        "Results are for business decision support only. Always verify important decisions with a qualified professional.",
+      analyze: "Analyze business data",
+      loading: "Analyzing business data...",
+      results: "Results",
+      summary: "Summary",
+      score: "Business health score",
+      excellent: "Excellent",
+      excellentDesc:
+        "Your business is highly efficient with strong financial control.",
+      good: "Good",
+      goodDesc: "Your business is healthy but can still be optimized.",
+      moderate: "Moderate",
+      moderateDesc: "There are inefficiencies or risks that need attention.",
+      risky: "Risky",
+      riskyDesc:
+        "Your business has significant risks and needs urgent improvement.",
+      revenue: "Revenue estimate",
+      expenses: "Expenses estimate",
+      profit: "Profit estimate",
+      margin: "Profit margin",
+      insights: "Key insights",
+      risks: "Risks",
+      opportunities: "Opportunities",
+      actions: "Action plan",
+    },
+    fr: {
+      title: "Agent décision business",
+      subtitle:
+        "Téléchargez des données business CSV pour détecter les tendances, les risques, les opportunités et obtenir un plan d’action clair.",
+      howTitle: "Comment fonctionne cet agent :",
+      how1:
+        "Téléchargez un fichier CSV avec vos données business comme les revenus, les dépenses, les dates et les catégories.",
+      how2:
+        "L’agent analyse vos chiffres, estime le profit et la marge, détecte les risques, identifie les opportunités et propose des prochaines étapes pratiques.",
+      disclaimer:
+        "Les résultats servent uniquement d’aide à la décision business. Vérifiez toujours les décisions importantes avec un professionnel qualifié.",
+      analyze: "Analyser les données",
+      loading: "Analyse en cours...",
+      results: "Résultats",
+      summary: "Résumé",
+      score: "Score de santé business",
+      excellent: "Excellent",
+      excellentDesc:
+        "Votre business est très efficace avec un bon contrôle financier.",
+      good: "Bon",
+      goodDesc: "Votre business est sain mais peut encore être optimisé.",
+      moderate: "Modéré",
+      moderateDesc:
+        "Il existe des inefficacités ou des risques qui nécessitent votre attention.",
+      risky: "Risqué",
+      riskyDesc:
+        "Votre business présente des risques importants et nécessite une amélioration urgente.",
+      revenue: "Revenus estimés",
+      expenses: "Dépenses estimées",
+      profit: "Profit estimé",
+      margin: "Marge bénéficiaire",
+      insights: "Points clés",
+      risks: "Risques",
+      opportunities: "Opportunités",
+      actions: "Plan d’action",
+    },
+    ar: {
+      title: "وكيل قرارات الأعمال",
+      subtitle:
+        "ارفع بيانات الأعمال بصيغة CSV لاكتشاف الاتجاهات والمخاطر والفرص والحصول على خطة عمل واضحة.",
+      howTitle: "كيف يعمل هذا الوكيل:",
+      how1:
+        "ارفع ملف CSV يحتوي على بيانات عملك مثل الإيرادات والمصاريف والتواريخ والفئات.",
+      how2:
+        "يقوم الوكيل بتحليل الأرقام، وتقدير الربح والهامش، واكتشاف المخاطر، وتحديد الفرص، وتقديم خطوات عملية تالية.",
+      disclaimer:
+        "النتائج مخصصة لدعم قرارات الأعمال فقط. تحقق دائماً من القرارات المهمة مع مختص مؤهل.",
+      analyze: "تحليل البيانات",
+      loading: "جاري التحليل...",
+      results: "النتائج",
+      summary: "الملخص",
+      score: "مستوى صحة الأعمال",
+      excellent: "ممتاز",
+      excellentDesc: "عملك فعال جداً ولديه تحكم مالي قوي.",
+      good: "جيد",
+      goodDesc: "عملك في وضع جيد لكن يمكن تحسينه أكثر.",
+      moderate: "متوسط",
+      moderateDesc: "هناك أوجه قصور أو مخاطر تحتاج إلى الانتباه.",
+      risky: "خطير",
+      riskyDesc: "عملك لديه مخاطر كبيرة ويحتاج إلى تحسين عاجل.",
+      revenue: "الإيرادات المتوقعة",
+      expenses: "المصاريف المتوقعة",
+      profit: "الربح المتوقع",
+      margin: "هامش الربح",
+      insights: "النقاط الرئيسية",
+      risks: "المخاطر",
+      opportunities: "الفرص",
+      actions: "خطة العمل",
+    },
+  };
+
+  const t = labels[language] || labels.en;
+
   const getScoreMeta = (score: number) => {
     if (score >= 90) {
       return {
-        label: "Excellent",
+        label: t.excellent,
         color: "bg-green-600",
         text: "text-green-700",
-        desc: "Your business is highly efficient with strong financial control.",
+        desc: t.excellentDesc,
       };
     }
 
     if (score >= 70) {
       return {
-        label: "Good",
+        label: t.good,
         color: "bg-green-500",
         text: "text-green-600",
-        desc: "Your business is healthy but can still be optimized.",
+        desc: t.goodDesc,
       };
     }
 
     if (score >= 50) {
       return {
-        label: "Moderate",
+        label: t.moderate,
         color: "bg-yellow-500",
         text: "text-yellow-600",
-        desc: "There are inefficiencies or risks that need attention.",
+        desc: t.moderateDesc,
       };
     }
 
     return {
-      label: "Risky",
+      label: t.risky,
       color: "bg-red-500",
       text: "text-red-600",
-      desc: "Your business has significant risks and needs urgent improvement.",
+      desc: t.riskyDesc,
     };
   };
 
   const scoreMeta = getScoreMeta(score);
-
-  const labels: any = {
-    en: {
-      title: "Business Decision Agent",
-      analyze: "Analyze business data",
-      loading: "Analyzing business data...",
-    },
-    fr: {
-      title: "Agent décision business",
-      analyze: "Analyser les données",
-      loading: "Analyse en cours...",
-    },
-    ar: {
-      title: "وكيل قرارات الأعمال",
-      analyze: "تحليل البيانات",
-      loading: "جاري التحليل...",
-    },
-  };
-
-  const t = labels[language] || labels.en;
 
   return (
     <main
@@ -110,27 +199,16 @@ export default function BusinessPage() {
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="text-center">
           <h1 className="text-3xl font-bold">{t.title}</h1>
-          <p className="text-slate-500 mt-2">
-            Upload business CSV data to detect trends, risks, opportunities, and
-            get a clear action plan.
-          </p>
+          <p className="text-slate-500 mt-2">{t.subtitle}</p>
         </div>
 
         <div className="bg-white p-6 rounded-2xl border space-y-4">
           <div className="rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm text-slate-600 space-y-2">
             <p>
-              <strong>How this agent works:</strong> Upload a CSV file with your
-              business data such as revenue, expenses, dates, and categories.
+              <strong>{t.howTitle}</strong> {t.how1}
             </p>
-            <p>
-              The agent analyzes your numbers, estimates profit and margin,
-              detects risks, identifies opportunities, and gives practical next
-              steps.
-            </p>
-            <p className="text-xs text-slate-500">
-              Results are for business decision support only. Always verify
-              important decisions with a qualified professional.
-            </p>
+            <p>{t.how2}</p>
+            <p className="text-xs text-slate-500">{t.disclaimer}</p>
           </div>
 
           <select
@@ -176,20 +254,20 @@ export default function BusinessPage() {
 
         {result && (
           <div className="bg-white p-6 rounded-2xl border space-y-6">
-            <h2 className="text-xl font-semibold">Results</h2>
+            <h2 className="text-xl font-semibold">{t.results}</h2>
 
             {result.error ? (
               <p className="text-red-600">{result.error}</p>
             ) : (
               <>
                 <div>
-                  <strong>Summary:</strong>
+                  <strong>{t.summary}:</strong>
                   <p className="text-slate-600 mt-1">{result.summary}</p>
                 </div>
 
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <strong>Business health score:</strong>
+                    <strong>{t.score}:</strong>
                     <span
                       className={`px-3 py-1 rounded-full text-xs font-semibold text-white ${scoreMeta.color}`}
                     >
@@ -213,28 +291,28 @@ export default function BusinessPage() {
 
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="rounded-xl border bg-slate-50 p-4">
-                    <p className="text-sm text-slate-500">Revenue estimate</p>
+                    <p className="text-sm text-slate-500">{t.revenue}</p>
                     <p className="text-xl font-bold">
                       {result.metrics?.revenue_estimate}
                     </p>
                   </div>
 
                   <div className="rounded-xl border bg-slate-50 p-4">
-                    <p className="text-sm text-slate-500">Expenses estimate</p>
+                    <p className="text-sm text-slate-500">{t.expenses}</p>
                     <p className="text-xl font-bold">
                       {result.metrics?.expenses_estimate}
                     </p>
                   </div>
 
                   <div className="rounded-xl border bg-slate-50 p-4">
-                    <p className="text-sm text-slate-500">Profit estimate</p>
+                    <p className="text-sm text-slate-500">{t.profit}</p>
                     <p className="text-xl font-bold">
                       {result.metrics?.profit_estimate}
                     </p>
                   </div>
 
                   <div className="rounded-xl border bg-slate-50 p-4">
-                    <p className="text-sm text-slate-500">Profit margin</p>
+                    <p className="text-sm text-slate-500">{t.margin}</p>
                     <p className="text-xl font-bold">
                       {result.metrics?.profit_margin_percent}%
                     </p>
@@ -242,7 +320,7 @@ export default function BusinessPage() {
                 </div>
 
                 <div>
-                  <strong>Key insights:</strong>
+                  <strong>{t.insights}:</strong>
                   <ul className="list-disc ml-6 text-slate-700 mt-2">
                     {(result.key_insights || []).map(
                       (item: string, i: number) => (
@@ -253,7 +331,7 @@ export default function BusinessPage() {
                 </div>
 
                 <div>
-                  <strong>Risks:</strong>
+                  <strong>{t.risks}:</strong>
                   <ul className="list-disc ml-6 text-red-600 mt-2">
                     {(result.risks || []).map((item: string, i: number) => (
                       <li key={i}>{item}</li>
@@ -262,7 +340,7 @@ export default function BusinessPage() {
                 </div>
 
                 <div>
-                  <strong>Opportunities:</strong>
+                  <strong>{t.opportunities}:</strong>
                   <ul className="list-disc ml-6 text-green-600 mt-2">
                     {(result.opportunities || []).map(
                       (item: string, i: number) => (
@@ -273,7 +351,7 @@ export default function BusinessPage() {
                 </div>
 
                 <div>
-                  <strong>Action plan:</strong>
+                  <strong>{t.actions}:</strong>
                   <ol className="list-decimal ml-6 text-blue-700 mt-2">
                     {(result.action_plan || []).map(
                       (item: string, i: number) => (
