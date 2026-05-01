@@ -23,8 +23,37 @@ export default function EnterpriseContactPage() {
     setErrorMsg("");
   };
 
+  const isBusinessEmail = (email: string) => {
+    const blockedDomains = [
+      "gmail.com",
+      "yahoo.com",
+      "hotmail.com",
+      "outlook.com",
+      "live.com",
+      "icloud.com",
+      "aol.com",
+      "protonmail.com",
+      "proton.me",
+      "mail.com",
+      "gmx.com",
+      "yandex.com",
+    ];
+
+    const domain = email.split("@")[1]?.toLowerCase();
+
+    if (!domain) return false;
+
+    return !blockedDomains.includes(domain);
+  };
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
+    if (!isBusinessEmail(form.email)) {
+      setErrorMsg("Please use a company email address.");
+      setSuccess(false);
+      return;
+    }
 
     try {
       const res = await fetch(
