@@ -28,6 +28,44 @@ export default function BusinessPage() {
 
   const score = Number(result?.business_health_score || 0);
 
+  const getScoreMeta = (score: number) => {
+    if (score >= 90) {
+      return {
+        label: "Excellent",
+        color: "bg-green-600",
+        text: "text-green-700",
+        desc: "Your business is highly efficient with strong financial control.",
+      };
+    }
+
+    if (score >= 70) {
+      return {
+        label: "Good",
+        color: "bg-green-500",
+        text: "text-green-600",
+        desc: "Your business is healthy but can still be optimized.",
+      };
+    }
+
+    if (score >= 50) {
+      return {
+        label: "Moderate",
+        color: "bg-yellow-500",
+        text: "text-yellow-600",
+        desc: "There are inefficiencies or risks that need attention.",
+      };
+    }
+
+    return {
+      label: "Risky",
+      color: "bg-red-500",
+      text: "text-red-600",
+      desc: "Your business has significant risks and needs urgent improvement.",
+    };
+  };
+
+  const scoreMeta = getScoreMeta(score);
+
   return (
     <main className="min-h-screen bg-slate-50 px-4 py-10">
       <div className="max-w-4xl mx-auto space-y-8">
@@ -95,19 +133,23 @@ export default function BusinessPage() {
                   <p className="text-slate-600 mt-1">{result.summary}</p>
                 </div>
 
-                <div>
-                  <strong>Business health score:</strong>{" "}
-                  {result.business_health_score}/100
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <strong>Business health score:</strong>
+                    <span
+                      className={`px-3 py-1 rounded-full text-xs font-semibold text-white ${scoreMeta.color}`}
+                    >
+                      {scoreMeta.label}
+                    </span>
+                  </div>
 
-                  <div className="mt-3 h-3 bg-slate-200 rounded-full">
+                  <div className="text-sm text-slate-600">
+                    {score}/100 — {scoreMeta.desc}
+                  </div>
+
+                  <div className="h-3 bg-slate-200 rounded-full">
                     <div
-                      className={`h-3 rounded-full ${
-                        score >= 70
-                          ? "bg-green-500"
-                          : score >= 50
-                          ? "bg-yellow-500"
-                          : "bg-red-500"
-                      }`}
+                      className={`h-3 rounded-full ${scoreMeta.color}`}
                       style={{
                         width: `${Math.min(Math.max(score, 0), 100)}%`,
                       }}
