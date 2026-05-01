@@ -24,8 +24,8 @@ const labels: any = {
     pricing: "See pricing",
     ctaTitle: "One platform. Multiple AI agents. Real business outcomes.",
     ctaDesc:
-      "Start with contract analysis, then expand into learning, personal finance, and smarter business decisions.",
-    ctaButton: "Start with Legal Agent",
+      "Runexa Systems is an AI agents platform that helps you analyze documents, learn faster, manage personal finances, and make smarter business decisions.",
+    ctaButton: "Start with Runexa Systems",
     agents: [
       [
         "Legal Agent",
@@ -66,8 +66,8 @@ const labels: any = {
     pricing: "Voir les tarifs",
     ctaTitle: "Une plateforme. Plusieurs agents IA. Des résultats concrets.",
     ctaDesc:
-      "Commencez par l’analyse de contrats, puis développez vers l’apprentissage, la gestion financière personnelle et des décisions business plus intelligentes.",
-    ctaButton: "Commencer avec l’agent juridique",
+      "Runexa Systems est une plateforme d’agents IA qui vous permet d’analyser vos documents, apprendre plus vite, gérer vos finances personnelles et prendre des décisions business plus intelligentes.",
+    ctaButton: "Commencer avec Runexa Systems",
     agents: [
       [
         "Agent juridique",
@@ -108,8 +108,8 @@ const labels: any = {
     pricing: "عرض الأسعار",
     ctaTitle: "منصة واحدة. عدة وكلاء ذكاء اصطناعي. نتائج عملية.",
     ctaDesc:
-      "ابدأ بتحليل العقود، ثم توسع إلى التعلم والإدارة المالية الشخصية واتخاذ قرارات أعمال أكثر ذكاءً.",
-    ctaButton: "ابدأ بالوكيل القانوني",
+      "Runexa Systems هي منصة وكلاء ذكاء اصطناعي تساعدك على تحليل المستندات، التعلم بشكل أسرع، إدارة أموالك الشخصية، واتخاذ قرارات أعمال أكثر ذكاءً.",
+    ctaButton: "ابدأ مع Runexa Systems",
     agents: [
       [
         "الوكيل القانوني",
