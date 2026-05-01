@@ -67,7 +67,8 @@ export default function Navbar() {
       className="sticky top-0 z-50 w-full border-b border-slate-200/70 bg-white/70 backdrop-blur-md"
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        {/* ✅ LOGO + SLOGAN */}
+
+        {/* LOGO + SLOGAN */}
         <Link href="/" className="flex items-center gap-3">
           <Image
             src="/runexa.svg"
@@ -78,13 +79,13 @@ export default function Navbar() {
             className="h-10 w-auto object-contain"
           />
 
-          {/* slogan (desktop only) */}
           <span className="hidden sm:block text-xs text-slate-500 font-medium">
             {t.slogan}
           </span>
         </Link>
 
         <div className="flex items-center gap-5">
+
           {canSeeDashboard && (
             <Link
               href="/dashboard"
@@ -103,12 +104,19 @@ export default function Navbar() {
             </Link>
           )}
 
-          <Link
-            href="/pricing"
-            className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
-          >
-            {t.pricing || "Pricing"}
-          </Link>
+          {/* ✅ PRICING + BADGE */}
+          <div className="relative">
+            <Link
+              href="/pricing"
+              className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
+            >
+              {t.pricing || "Pricing"}
+            </Link>
+
+            <span className="absolute -top-2 -right-4 rounded-full bg-blue-600 px-2 py-0.5 text-[10px] font-semibold text-white">
+              NEW
+            </span>
+          </div>
 
           <Link
             href="/login"
