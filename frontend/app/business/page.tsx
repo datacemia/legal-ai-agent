@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { analyzeBusinessFile } from "../../lib/api";
-import { getSavedLocale } from "../../lib/i18n";
+import { getSavedLocale, setSavedLocale } from "../../lib/i18n";
 
 export default function BusinessPage() {
   const [file, setFile] = useState<File | null>(null);
@@ -103,7 +103,10 @@ export default function BusinessPage() {
   const t = labels[language] || labels.en;
 
   return (
-    <main className="min-h-screen bg-slate-50 px-4 py-10">
+    <main
+      dir={language === "ar" ? "rtl" : "ltr"}
+      className="min-h-screen bg-slate-50 px-4 py-10"
+    >
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="text-center">
           <h1 className="text-3xl font-bold">{t.title}</h1>
@@ -129,6 +132,21 @@ export default function BusinessPage() {
               important decisions with a qualified professional.
             </p>
           </div>
+
+          <select
+            value={language}
+            onChange={(e) => {
+              setLanguage(e.target.value);
+              setSavedLocale(e.target.value);
+              setResult(null);
+              setMessage("");
+            }}
+            className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+          >
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+            <option value="ar">العربية</option>
+          </select>
 
           <input
             type="file"
