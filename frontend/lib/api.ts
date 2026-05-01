@@ -150,3 +150,33 @@ export async function getStudyHistory() {
 
   return res.json();
 }
+
+//
+// 📊 BUSINESS AGENT API
+//
+
+export async function analyzeBusinessFile(file: File) {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const res = await fetch(`${API_URL}/business/analyze`, {
+    method: "POST",
+    headers: getAuthHeaders(),
+    body: formData,
+  });
+
+  if (!res.ok) {
+    const error = await res.json().catch(() => null);
+    throw new Error(error?.detail || `API error ${res.status}`);
+  }
+
+  return res.json();
+}
+
+export async function getBusinessHistory() {
+  const res = await fetch(`${API_URL}/business/history`, {
+    headers: getAuthHeaders(),
+  });
+
+  return res.json();
+}

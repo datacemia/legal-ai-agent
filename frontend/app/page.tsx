@@ -131,7 +131,7 @@ const labels: any = {
   },
 };
 
-const agentLinks = ["/upload", "/study", "/finance", "#"];
+const agentLinks = ["/upload", "/study", "/finance", "/business"];
 
 export default function HomePage() {
   const [language, setLanguage] = useState("en");
@@ -211,7 +211,7 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {t.agents.map((agent: string[], index: number) => {
-              const isAvailable = index <= 2;
+              const isAvailable = index <= 3;
 
               return (
                 <div key={agent[0]} className="bg-white p-6 rounded-2xl border shadow-sm flex flex-col justify-between">
