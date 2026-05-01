@@ -1,13 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { analyzeBusinessFile } from "../../lib/api";
+import { getSavedLocale } from "../../lib/i18n";
 
 export default function BusinessPage() {
   const [file, setFile] = useState<File | null>(null);
   const [result, setResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [language, setLanguage] = useState("en");
+
+  useEffect(() => {
+    setLanguage(getSavedLocale());
+
+    const handleLocaleChange = () => {
+      setLanguage(getSavedLocale());
+    };
+
+    window.addEventListener("locale-change", handleLocaleChange);
+
+    return () => {
+      window.removeEventListener("locale-change", handleLocaleChange);
+    };
+  }, []);
 
   const handleAnalyze = async () => {
     if (!file) return;
@@ -17,7 +33,7 @@ export default function BusinessPage() {
     setMessage("");
 
     try {
-      const data = await analyzeBusinessFile(file);
+      const data = await analyzeBusinessFile(file, language);
       setResult(data);
     } catch (error: any) {
       setMessage(error?.message || "Failed to analyze business file.");
@@ -66,11 +82,31 @@ export default function BusinessPage() {
 
   const scoreMeta = getScoreMeta(score);
 
+  const labels: any = {
+    en: {
+      title: "Business Decision Agent",
+      analyze: "Analyze business data",
+      loading: "Analyzing business data...",
+    },
+    fr: {
+      title: "Agent décision business",
+      analyze: "Analyser les données",
+      loading: "Analyse en cours...",
+    },
+    ar: {
+      title: "وكيل قرارات الأعمال",
+      analyze: "تحليل البيانات",
+      loading: "جاري التحليل...",
+    },
+  };
+
+  const t = labels[language] || labels.en;
+
   return (
     <main className="min-h-screen bg-slate-50 px-4 py-10">
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="text-center">
-          <h1 className="text-3xl font-bold">Business Decision Agent</h1>
+          <h1 className="text-3xl font-bold">{t.title}</h1>
           <p className="text-slate-500 mt-2">
             Upload business CSV data to detect trends, risks, opportunities, and
             get a clear action plan.
@@ -110,7 +146,7 @@ export default function BusinessPage() {
             disabled={!file || loading}
             className="w-full bg-slate-900 text-white py-3 rounded-xl disabled:bg-slate-400"
           >
-            {loading ? "Analyzing business data..." : "Analyze business data"}
+            {loading ? t.loading : t.analyze}
           </button>
 
           {message && (

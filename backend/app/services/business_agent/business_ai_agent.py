@@ -25,11 +25,30 @@ Your output is for decision support only.
 """
 
 
-def build_user_prompt(business_data: str) -> str:
+def get_language_name(output_language: str) -> str:
+    languages = {
+        "en": "English",
+        "fr": "French",
+        "ar": "Arabic",
+    }
+
+    return languages.get(output_language, "English")
+
+
+def build_user_prompt(business_data: str, output_language: str = "en") -> str:
+    language_name = get_language_name(output_language)
+
     return f"""
 Analyze the following business data.
 
-IMPORTANT:
+IMPORTANT LANGUAGE RULES:
+- Return the ENTIRE JSON content in this language: {language_name}.
+- All user-facing values must be written in {language_name}.
+- Keep JSON keys exactly in English.
+- Do not translate JSON keys.
+- Do not write anything outside JSON.
+
+IMPORTANT DATA RULES:
 The parser may provide a "Detected column mapping" section.
 Use it to understand which columns represent:
 - revenue
@@ -74,13 +93,19 @@ Business data:
 """
 
 
-def analyze_business_data(business_data: str):
+def analyze_business_data(
+    business_data: str,
+    output_language: str = "en",
+):
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         response_format={"type": "json_object"},
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": build_user_prompt(business_data)},
+            {
+                "role": "user",
+                "content": build_user_prompt(business_data, output_language),
+            },
         ],
         temperature=0.2,
     )

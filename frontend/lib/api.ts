@@ -155,9 +155,13 @@ export async function getStudyHistory() {
 // 📊 BUSINESS AGENT API
 //
 
-export async function analyzeBusinessFile(file: File) {
+export async function analyzeBusinessFile(
+  file: File,
+  language: string = "en"
+) {
   const formData = new FormData();
   formData.append("file", file);
+  formData.append("output_language", language);
 
   const res = await fetch(`${API_URL}/business/analyze`, {
     method: "POST",

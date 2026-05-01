@@ -1,6 +1,6 @@
 import json
 
-from fastapi import APIRouter, UploadFile, File, HTTPException, Depends
+from fastapi import APIRouter, UploadFile, File, Form, HTTPException, Depends
 from sqlalchemy.orm import Session
 
 from app.database import get_db
@@ -18,6 +18,7 @@ router = APIRouter(prefix="/business", tags=["Business"])
 @router.post("/analyze")
 async def analyze_business(
     file: UploadFile = File(...),
+    output_language: str = Form("en"),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
@@ -41,7 +42,7 @@ async def analyze_business(
             detail="Could not extract business data from file.",
         )
 
-    result = analyze_business_data(business_data)
+    result = analyze_business_data(business_data, output_language)
 
     analysis = BusinessAnalysis(
         user_id=current_user.id,
