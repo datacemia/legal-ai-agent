@@ -12,6 +12,7 @@ const labels: any = {
     tryLegal: "Try Legal Agent",
     tryStudy: "Try Study Agent",
     tryFinance: "Try Finance Coach",
+    tryBusiness: "Try Business Decision Agent",
     choose: "Choose your AI agent",
 
     // ✅ UPDATED
@@ -67,6 +68,7 @@ const labels: any = {
     tryLegal: "Tester l’agent juridique",
     tryStudy: "Tester l’agent étude",
     tryFinance: "Tester le coach financier",
+    tryBusiness: "Tester l’agent décision business",
     choose: "Choisissez votre agent IA",
 
     // ✅ UPDATED
@@ -123,6 +125,7 @@ const labels: any = {
     tryLegal: "تجربة الوكيل القانوني",
     tryStudy: "تجربة وكيل الدراسة",
     tryFinance: "تجربة وكيل الإدارة المالية",
+    tryBusiness: "تجربة وكيل قرارات الأعمال",
     choose: "اختر وكيلك الذكي",
 
     // ✅ UPDATED
@@ -236,8 +239,8 @@ export default function HomePage() {
               {t.tryFinance}
             </Link>
 
-            <Link href="/pricing" className="px-6 py-3 bg-white border border-slate-200 rounded-xl font-semibold hover:bg-slate-100 transition">
-              {t.pricing}
+            <Link href="/business" className="px-6 py-3 bg-white border border-slate-200 rounded-xl font-semibold hover:bg-slate-100 transition">
+              {t.tryBusiness}
             </Link>
           </div>
         </div>
