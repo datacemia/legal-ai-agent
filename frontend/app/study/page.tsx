@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getToken } from "../../lib/auth";
 import { getSavedLocale, setSavedLocale } from "../../lib/i18n";
 
@@ -62,6 +62,9 @@ const labels: any = {
     level: "Level",
     language: "Language",
     summary: "Summary",
+    writtenSummary: "Detailed Summary",
+    visualSummary: "Visual Summary",
+    visualDiagram: "Visual Diagram",
     keyPoints: "Key Points",
     quiz: "Quiz",
     theory: "Theoretical Questions",
@@ -119,6 +122,9 @@ const labels: any = {
     level: "Niveau",
     language: "Langue",
     summary: "Résumé",
+    writtenSummary: "Résumé détaillé",
+    visualSummary: "Résumé graphique",
+    visualDiagram: "Schéma visuel",
     keyPoints: "Points clés",
     quiz: "Quiz",
     theory: "Questions théoriques",
@@ -174,6 +180,9 @@ const labels: any = {
     level: "المستوى",
     language: "اللغة",
     summary: "الملخص",
+    writtenSummary: "ملخص مفصل",
+    visualSummary: "ملخص بصري",
+    visualDiagram: "مخطط بصري",
     keyPoints: "النقاط الأساسية",
     quiz: "الاختبار",
     theory: "أسئلة نظرية",
@@ -199,6 +208,99 @@ const labels: any = {
     chooseFile: "اختيار ملف",
   },
 };
+
+function isValidMermaid(code: string) {
+  return (
+    typeof code === "string" &&
+    code.trim().startsWith("mindmap") &&
+    code.includes("\n")
+  );
+}
+
+function fallbackDiagram() {
+  return `mindmap
+  root((Fallback))
+    Idea 1
+      Keyword
+    Idea 2
+      Keyword
+    Idea 3
+      Keyword`;
+}
+
+function MermaidDiagram({ chart }: { chart: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const renderDiagram = async () => {
+      if (!ref.current) return;
+
+      if (!chart) {
+        ref.current.innerHTML =
+          "<div class='animate-pulse h-40 bg-slate-100 rounded-xl'></div>";
+        return;
+      }
+
+      try {
+        const mermaid = (await import("mermaid")).default;
+
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: "default",
+          securityLevel: "loose",
+        });
+
+        const safeChart = isValidMermaid(chart) ? chart : fallbackDiagram();
+        const id = `mermaid-${Date.now()}-${Math.random()
+          .toString(36)
+          .slice(2)}`;
+
+        const { svg } = await mermaid.render(id, safeChart);
+
+        if (!cancelled && ref.current) {
+          ref.current.innerHTML = svg;
+        }
+      } catch (error) {
+        console.error("Mermaid render error:", error);
+
+        try {
+          const mermaid = (await import("mermaid")).default;
+          const fallbackId = `mermaid-fallback-${Date.now()}-${Math.random()
+            .toString(36)
+            .slice(2)}`;
+
+          const { svg } = await mermaid.render(
+            fallbackId,
+            fallbackDiagram()
+          );
+
+          if (!cancelled && ref.current) {
+            ref.current.innerHTML = svg;
+          }
+        } catch {
+          if (!cancelled && ref.current) {
+            ref.current.innerHTML =
+              "<p style='color:#64748b;font-size:14px'>Diagram unavailable</p>";
+          }
+        }
+      }
+    };
+
+    renderDiagram();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [chart]);
+
+  return (
+    <div className="bg-white border rounded-xl p-4 overflow-x-auto min-h-[300px]">
+      <div ref={ref} />
+    </div>
+  );
+}
 
 export default function StudyPage() {
   const [file, setFile] = useState<File | null>(null);
@@ -598,6 +700,33 @@ export default function StudyPage() {
               <strong>{t.summary}:</strong>
               <p className="text-slate-600 mt-1">{result.summary}</p>
             </div>
+
+            {result.written_summary && (
+              <div>
+                <strong>🧾 {t.writtenSummary}:</strong>
+                <p className="text-slate-600 mt-1 leading-relaxed">
+                  {result.written_summary}
+                </p>
+              </div>
+            )}
+
+            {result.visual_summary && (
+              <div>
+                <strong>📊 {t.visualSummary}:</strong>
+                <pre className="mt-2 bg-slate-50 border rounded-xl p-4 text-sm overflow-x-auto whitespace-pre-wrap">
+                  {result.visual_summary}
+                </pre>
+              </div>
+            )}
+
+            {result.visual_diagram && (
+              <div>
+                <strong>🧠 {t.visualDiagram}:</strong>
+                <div className="mt-2">
+                  <MermaidDiagram chart={result.visual_diagram} />
+                </div>
+              </div>
+            )}
 
             <div>
               <strong>{t.keyPoints}:</strong>
