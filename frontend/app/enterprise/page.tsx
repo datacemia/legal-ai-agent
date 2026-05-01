@@ -2,6 +2,125 @@
 
 import Link from "next/link";
 
+const agentCategories = [
+  {
+    title: "Legal AI Agents",
+    description: "Support legal, compliance, and risk teams with AI-powered document analysis.",
+    agents: [
+      {
+        name: "Legal AI Agent",
+        desc: "Analyze internal contracts, detect risks, and ensure compliance.",
+      },
+      {
+        name: "Contract Review Agent",
+        desc: "Review agreements, highlight key clauses, and identify negotiation points.",
+      },
+      {
+        name: "Compliance Agent",
+        desc: "Check documents and processes against internal rules and compliance requirements.",
+      },
+      {
+        name: "Risk Detection Agent",
+        desc: "Detect operational, legal, and contractual risks before they become costly.",
+      },
+    ],
+  },
+  {
+    title: "Finance AI Agents",
+    description: "Automate financial reporting, expense analysis, and decision support.",
+    agents: [
+      {
+        name: "Finance AI Agent",
+        desc: "Automate financial analysis and generate internal reports.",
+      },
+      {
+        name: "Expense Optimization Agent",
+        desc: "Detect unnecessary spending and suggest cost-saving opportunities.",
+      },
+      {
+        name: "Cashflow Forecast Agent",
+        desc: "Forecast cashflow trends and identify future liquidity risks.",
+      },
+      {
+        name: "Financial Reporting Agent",
+        desc: "Generate summaries, dashboards, and financial insights from business data.",
+      },
+    ],
+  },
+  {
+    title: "HR AI Agents",
+    description: "Improve hiring, screening, and employee management workflows.",
+    agents: [
+      {
+        name: "HR AI Agent",
+        desc: "Screen CVs and streamline recruitment.",
+      },
+      {
+        name: "CV Screening Agent",
+        desc: "Rank candidates based on role requirements, skills, and experience.",
+      },
+      {
+        name: "Interview Assistant Agent",
+        desc: "Generate interview questions and summarize candidate evaluations.",
+      },
+      {
+        name: "Employee Performance Agent",
+        desc: "Analyze employee feedback, performance notes, and development plans.",
+      },
+    ],
+  },
+  {
+    title: "Business AI Agents",
+    description: "Help leadership teams analyze data, monitor KPIs, and make better decisions.",
+    agents: [
+      {
+        name: "Business Decision Agent",
+        desc: "Analyze business data and support strategic decisions.",
+      },
+      {
+        name: "Market Analysis Agent",
+        desc: "Analyze market signals, competitors, and opportunities.",
+      },
+      {
+        name: "KPI Monitoring Agent",
+        desc: "Track business KPIs and highlight performance changes.",
+      },
+      {
+        name: "Strategy Recommendation Agent",
+        desc: "Generate strategic recommendations based on business data and goals.",
+      },
+    ],
+  },
+  {
+    title: "Document AI Agents",
+    description: "Process documents, invoices, reports, and operational files faster.",
+    agents: [
+      {
+        name: "Document Analysis Agent",
+        desc: "Extract key information from documents and summarize important points.",
+      },
+      {
+        name: "Invoice Processing Agent",
+        desc: "Read invoices, extract totals, detect anomalies, and support accounting workflows.",
+      },
+    ],
+  },
+  {
+    title: "Sales & Marketing AI Agents",
+    description: "Support growth teams with customer, sales, and campaign intelligence.",
+    agents: [
+      {
+        name: "Sales Insights Agent",
+        desc: "Analyze sales data, detect opportunities, and support pipeline decisions.",
+      },
+      {
+        name: "Customer Behavior Agent",
+        desc: "Understand customer patterns and identify growth opportunities.",
+      },
+    ],
+  },
+];
+
 export default function EnterprisePage() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900 px-6 py-16">
@@ -41,40 +160,46 @@ export default function EnterprisePage() {
 
       {/* AGENTS */}
       <section className="max-w-6xl mx-auto mt-20">
-        <h2 className="text-2xl font-bold text-center mb-10">
+        <h2 className="text-2xl font-bold text-center mb-4">
           What we build for your business
         </h2>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <p className="text-center text-slate-600 max-w-3xl mx-auto mb-10">
+          Runexa Systems builds custom AI agents for legal, finance, HR, business, document processing, sales, and marketing workflows.
+        </p>
 
-          <div className="bg-white p-6 rounded-2xl border">
-            <h3 className="font-semibold">Legal AI Agent</h3>
-            <p className="text-sm text-slate-600 mt-3">
-              Analyze internal contracts, detect risks, and ensure compliance.
-            </p>
-          </div>
+        <div className="space-y-10">
+          {agentCategories.map((category) => (
+            <div key={category.title} className="bg-white rounded-3xl border p-6 shadow-sm">
+              <div className="mb-6">
+                <h3 className="text-xl font-semibold text-slate-900">
+                  {category.title}
+                </h3>
 
-          <div className="bg-white p-6 rounded-2xl border">
-            <h3 className="font-semibold">Finance AI Agent</h3>
-            <p className="text-sm text-slate-600 mt-3">
-              Automate financial analysis and generate internal reports.
-            </p>
-          </div>
+                <p className="text-sm text-slate-600 mt-2">
+                  {category.description}
+                </p>
+              </div>
 
-          <div className="bg-white p-6 rounded-2xl border">
-            <h3 className="font-semibold">HR AI Agent</h3>
-            <p className="text-sm text-slate-600 mt-3">
-              Screen CVs and streamline recruitment.
-            </p>
-          </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {category.agents.map((agent) => (
+                  <div key={agent.name} className="rounded-2xl border bg-slate-50 p-5">
+                    <h4 className="font-semibold text-slate-900">
+                      {agent.name}
+                    </h4>
 
-          <div className="bg-white p-6 rounded-2xl border">
-            <h3 className="font-semibold">Business Decision Agent</h3>
-            <p className="text-sm text-slate-600 mt-3">
-              Analyze business data and support strategic decisions.
-            </p>
-          </div>
+                    <p className="text-sm text-slate-600 mt-3">
+                      {agent.desc}
+                    </p>
 
+                    <span className="inline-block mt-4 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 border border-blue-100">
+                      Custom agent
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -96,10 +221,10 @@ export default function EnterprisePage() {
         </h2>
 
         <div className="grid md:grid-cols-4 gap-6 text-sm text-slate-600 text-center">
-          <div>Understand your needs</div>
-          <div>Build your agents</div>
-          <div>Deploy & integrate</div>
-          <div>Scale with AI</div>
+          <div className="bg-white rounded-2xl border p-5">Understand your needs</div>
+          <div className="bg-white rounded-2xl border p-5">Build your agents</div>
+          <div className="bg-white rounded-2xl border p-5">Deploy & integrate</div>
+          <div className="bg-white rounded-2xl border p-5">Scale with AI</div>
         </div>
       </section>
 
