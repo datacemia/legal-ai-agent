@@ -87,7 +87,7 @@ export const translations: any = {
     businessAgent: "Agent décision business",
     available: "Disponible",
     comingSoon: "Bientôt",
-    pricing: "Tarifs",
+    
 
     platform: "Plateforme",
     exploreAgents: "Explorer les agents",
