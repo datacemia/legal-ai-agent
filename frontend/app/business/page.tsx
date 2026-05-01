@@ -42,6 +42,10 @@ export default function BusinessPage() {
     }
   };
 
+  const handleBuyCredits = () => {
+    setMessage(t.paymentMessage);
+  };
+
   const score = Number(result?.business_health_score || 0);
 
   const labels: any = {
@@ -58,6 +62,9 @@ export default function BusinessPage() {
         "Results are for business decision support only. Always verify important decisions with a qualified professional.",
       analyze: "Analyze business data",
       loading: "Analyzing business data...",
+      buyCredits: "Buy credits 💳",
+      paymentMessage:
+        "Stripe is not connected yet. Credit purchase will be available soon.",
       results: "Results",
       summary: "Summary",
       score: "Business health score",
@@ -95,6 +102,9 @@ export default function BusinessPage() {
         "Les résultats servent uniquement d’aide à la décision business. Vérifiez toujours les décisions importantes avec un professionnel qualifié.",
       analyze: "Analyser les données",
       loading: "Analyse en cours...",
+      buyCredits: "Acheter des crédits 💳",
+      paymentMessage:
+        "Stripe n’est pas encore connecté. L’achat de crédits sera bientôt disponible.",
       results: "Résultats",
       summary: "Résumé",
       score: "Score de santé business",
@@ -133,6 +143,9 @@ export default function BusinessPage() {
         "النتائج مخصصة لدعم قرارات الأعمال فقط. تحقق دائماً من القرارات المهمة مع مختص مؤهل.",
       analyze: "تحليل البيانات",
       loading: "جاري التحليل...",
+      buyCredits: "شراء رصيد 💳",
+      paymentMessage:
+        "Stripe غير متصل حالياً. شراء الرصيد سيكون متاحاً قريباً.",
       results: "النتائج",
       summary: "الملخص",
       score: "مستوى صحة الأعمال",
@@ -266,6 +279,13 @@ export default function BusinessPage() {
             className="w-full bg-slate-900 text-white py-3 rounded-xl disabled:bg-slate-400"
           >
             {loading ? t.loading : t.analyze}
+          </button>
+
+          <button
+            onClick={handleBuyCredits}
+            className="w-full bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 transition"
+          >
+            {t.buyCredits}
           </button>
 
           {message && (
