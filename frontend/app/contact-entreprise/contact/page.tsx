@@ -11,12 +11,16 @@ export default function EnterpriseContactPage() {
     size: "",
     useCase: "",
   });
+  const [success, setSuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleChange = (e: any) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     });
+    setSuccess(false);
+    setErrorMsg("");
   };
 
   const handleSubmit = async (e: any) => {
@@ -44,7 +48,8 @@ export default function EnterpriseContactPage() {
         throw new Error("Failed to send request");
       }
 
-      alert("Your request has been sent. Our team will contact you.");
+      setSuccess(true);
+      setErrorMsg("");
 
       setForm({
         name: "",
@@ -54,7 +59,8 @@ export default function EnterpriseContactPage() {
         useCase: "",
       });
     } catch (error) {
-      alert("Failed to send request. Please try again.");
+      setErrorMsg("Failed to send request. Please try again.");
+      setSuccess(false);
     }
   };
 
@@ -169,6 +175,18 @@ export default function EnterpriseContactPage() {
               className="w-full border rounded-xl px-4 py-3"
             />
           </div>
+
+          {success && (
+            <div className="rounded-xl bg-green-50 border border-green-200 text-green-700 px-4 py-3 text-sm">
+              Your request has been sent. Our team will contact you.
+            </div>
+          )}
+
+          {errorMsg && (
+            <div className="rounded-xl bg-red-50 border border-red-200 text-red-700 px-4 py-3 text-sm">
+              {errorMsg}
+            </div>
+          )}
 
           {/* SUBMIT */}
           <button
