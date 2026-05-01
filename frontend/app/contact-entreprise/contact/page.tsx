@@ -19,12 +19,37 @@ export default function EnterpriseContactPage() {
     });
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    console.log("Enterprise lead:", form);
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/contact/requests`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+        }
+      );
 
-    alert("Your request has been sent. Our team will contact you.");
+      if (!res.ok) {
+        throw new Error("Failed to send request");
+      }
+
+      alert("Your request has been sent. Our team will contact you.");
+
+      setForm({
+        name: "",
+        email: "",
+        company: "",
+        size: "",
+        useCase: "",
+      });
+    } catch (error) {
+      alert("Failed to send request. Please try again.");
+    }
   };
 
   return (
