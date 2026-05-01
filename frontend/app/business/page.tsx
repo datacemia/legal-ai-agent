@@ -58,7 +58,7 @@ export default function BusinessPage() {
 
           <input
             type="file"
-            accept=".csv"
+            accept=".csv,.xlsx"
             onChange={(e) => {
               setFile(e.target.files?.[0] || null);
               setResult(null);

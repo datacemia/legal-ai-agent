@@ -13,6 +13,7 @@ distro==1.9.0
 dnspython==2.8.0
 ecdsa==0.19.2
 email-validator==2.3.0
+et_xmlfile==2.0.0
 fastapi==0.111.0
 fastapi-cli==0.0.24
 greenlet==3.5.0
@@ -31,6 +32,7 @@ markdown-it-py==4.0.0
 MarkupSafe==3.0.3
 mdurl==0.1.2
 openai==2.33.0
+openpyxl==3.1.5
 orjson==3.11.8
 passlib==1.7.4
 pdfminer.six==20251230
@@ -42,6 +44,7 @@ pycparser==3.0
 pydantic==2.13.3
 pydantic_core==2.46.3
 Pygments==2.20.0
+PyMuPDF==1.27.2.3
 pypdfium2==5.7.1
 python-docx==1.2.0
 python-dotenv==1.2.2
@@ -67,4 +70,3 @@ urllib3==2.6.3
 uvicorn==0.30.0
 watchfiles==1.1.1
 websockets==16.0
-PyMuPDF

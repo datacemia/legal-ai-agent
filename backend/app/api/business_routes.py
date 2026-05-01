@@ -21,10 +21,13 @@ async def analyze_business(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    if not file.filename or not file.filename.lower().endswith(".csv"):
+    if not file.filename or not (
+        file.filename.lower().endswith(".csv")
+        or file.filename.lower().endswith(".xlsx")
+    ):
         raise HTTPException(
             status_code=400,
-            detail="Only CSV files are supported for Business Agent V1.",
+            detail="Only CSV or Excel (.xlsx) files are supported for Business Agent.",
         )
 
     try:
@@ -35,7 +38,7 @@ async def analyze_business(
     if not business_data.strip():
         raise HTTPException(
             status_code=400,
-            detail="Could not extract business data from CSV.",
+            detail="Could not extract business data from file.",
         )
 
     result = analyze_business_data(business_data)
