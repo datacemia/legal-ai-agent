@@ -24,13 +24,19 @@ export default function EnterpriseContactPage() {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/contact/requests`,
+        `${process.env.NEXT_PUBLIC_API_URL}/contact/`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(form),
+          body: JSON.stringify({
+            full_name: form.name,
+            email: form.email,
+            company_name: form.company,
+            company_size: form.size,
+            use_case: form.useCase,
+          }),
         }
       );
 
