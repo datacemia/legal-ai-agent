@@ -140,11 +140,11 @@ export default function EnterprisePage() {
         </p>
 
         <div className="flex justify-center gap-4 pt-4">
-          <Link href="/contact" className="px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold">
+          <Link href="/contact-entreprise/contact" className="px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold">
             Request a demo
           </Link>
 
-          <Link href="/contact" className="px-6 py-3 border rounded-xl font-semibold">
+          <Link href="/contact-entreprise/contact" className="px-6 py-3 border rounded-xl font-semibold">
             Contact sales
           </Link>
         </div>
@@ -254,7 +254,7 @@ export default function EnterprisePage() {
           Let’s build your custom AI agents.
         </p>
 
-        <Link href="/contact" className="inline-block mt-6 px-6 py-3 bg-white text-blue-600 rounded-xl font-semibold">
+        <Link href="/contact-entreprise/contact" className="inline-block mt-6 px-6 py-3 bg-white text-blue-600 rounded-xl font-semibold">
           Get started
         </Link>
       </section>
