@@ -96,10 +96,11 @@ export default function Footer() {
                 <span className="text-green-400">· {t.available}</span>
               </Link>
 
-              <p>
+              {/* ✅ UPDATED BUSINESS */}
+              <Link href="/business" className="block hover:text-white transition">
                 {t.businessAgent}{" "}
-                <span className="text-slate-500">· {t.comingSoon}</span>
-              </p>
+                <span className="text-green-400">· {t.available}</span>
+              </Link>
             </div>
           </div>
 
