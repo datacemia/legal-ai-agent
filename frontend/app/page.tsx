@@ -31,11 +31,26 @@ const labels: any = {
     enterprisePrimary: "Request a demo",
     enterpriseSecondary: "Explore business solutions",
     enterpriseCards: [
-      "Legal workflows",
-      "Finance reporting",
-      "HR screening",
-      "Business intelligence",
+      "العمليات القانونية والامتثال",
+      "التقارير والتحليل المالي",
+      "التوظيف والموارد البشرية",
+      "تحليل واتخاذ قرارات الأعمال",
     ],
+    enterpriseSystem: "نظام وكلاء مخصص",
+    enterpriseWorkflow: "سير عمل ذكي مخصص",
+    enterpriseFooter: "ربط العمليات → رؤية موحدة → قرارات أسرع",
+    enterpriseTag: "المؤسسات",
+    enterpriseHeader: "Runexa Business AI",
+    enterpriseSystem: "Système d’agents personnalisés",
+    enterpriseWorkflow: "Workflow IA personnalisé",
+    enterpriseFooter: "Workflows connectés → vision unifiée → décisions plus rapides",
+    enterpriseTag: "Entreprise",
+    enterpriseHeader: "Runexa Business AI",
+    enterpriseSystem: "Custom agent system",
+    enterpriseWorkflow: "Custom AI workflow",
+    enterpriseFooter: "Connected workflows → unified insights → faster decisions",
+    enterpriseTag: "Enterprise",
+    enterpriseHeader: "Runexa Business AI",
     ctaTitle: "One platform. Multiple AI agents. Real business outcomes.",
     ctaDesc:
       "Runexa Systems is an AI agents platform that helps you analyze documents, learn faster, manage personal finances, and make smarter business decisions.",
@@ -137,7 +152,7 @@ const labels: any = {
     open: "فتح الوكيل",
     pricing: "عرض الأسعار",
     enterpriseBadge: "وكلاء ذكاء اصطناعي مخصصون",
-    enterpriseTitle: "Runexa Systems for Business",
+    enterpriseTitle: "Runexa للأعمال",
     enterpriseSubtitle:
       "وكلاء ذكاء اصطناعي مخصصون لفرقك وبياناتك وسير عملك.",
     enterpriseDesc:
@@ -337,12 +352,12 @@ export default function HomePage() {
               <div className="rounded-3xl border border-slate-200 bg-slate-950 p-6 text-white shadow-xl">
                 <div className="flex items-center justify-between border-b border-white/10 pb-4">
                   <div>
-                    <p className="text-sm text-slate-400">Runexa Business AI</p>
-                    <p className="text-lg font-semibold">Custom agent system</p>
+                    <p className="text-sm text-slate-400">{t.enterpriseHeader}</p>
+                    <p className="text-lg font-semibold">{t.enterpriseSystem}</p>
                   </div>
 
                   <span className="rounded-full bg-green-500/10 px-3 py-1 text-xs font-medium text-green-300">
-                    Enterprise
+                    {t.enterpriseTag}
                   </span>
                 </div>
 
@@ -355,14 +370,14 @@ export default function HomePage() {
                       <div className="h-2 w-2 rounded-full bg-blue-400" />
                       <p className="mt-3 text-sm font-medium">{item}</p>
                       <p className="mt-2 text-xs text-slate-400">
-                        Custom AI workflow
+                        {t.enterpriseWorkflow}
                       </p>
                     </div>
                   ))}
                 </div>
 
                 <div className="mt-6 rounded-2xl border border-blue-400/20 bg-blue-500/10 p-4 text-sm text-blue-100">
-                  Connected workflows → unified insights → faster decisions
+                  {t.enterpriseFooter}
                 </div>
               </div>
             </div>
