@@ -22,6 +22,19 @@ const labels: any = {
     coming: "Coming soon",
     open: "Open agent",
     pricing: "See pricing",
+    enterpriseBadge: "Custom AI Agents",
+    enterpriseTitle: "Runexa for Business",
+    enterpriseSubtitle: "Custom AI agents built for your company.",
+    enterpriseDesc:
+      "We design AI agents tailored to your workflows, data, and business needs — helping your teams analyze faster, reduce risks, and make better decisions.",
+    enterprisePrimary: "Request a demo",
+    enterpriseSecondary: "Explore business solutions",
+    enterpriseCards: [
+      "Legal workflows",
+      "Finance reporting",
+      "HR screening",
+      "Business intelligence",
+    ],
     ctaTitle: "One platform. Multiple AI agents. Real business outcomes.",
     ctaDesc:
       "Runexa Systems is an AI agents platform that helps you analyze documents, learn faster, manage personal finances, and make smarter business decisions.",
@@ -64,6 +77,20 @@ const labels: any = {
     coming: "Bientôt",
     open: "Ouvrir l’agent",
     pricing: "Voir les tarifs",
+    enterpriseBadge: "Agents IA personnalisés",
+    enterpriseTitle: "Runexa Systems for Business",
+    enterpriseSubtitle:
+      "Des agents IA personnalisés pour vos équipes, vos données et vos workflows.",
+    enterpriseDesc:
+      "Nous concevons des agents IA sur mesure pour aider les entreprises à automatiser l’analyse documentaire, le reporting financier, le recrutement, la conformité et la prise de décision.",
+    enterprisePrimary: "Contact sales",
+    enterpriseSecondary: "Découvrir Runexa for Business",
+    enterpriseCards: [
+      "Legal workflows",
+      "Finance reporting",
+      "HR screening",
+      "Business intelligence",
+    ],
     ctaTitle: "Une plateforme. Plusieurs agents IA. Des résultats concrets.",
     ctaDesc:
       "Runexa Systems est une plateforme d’agents IA qui vous permet d’analyser vos documents, apprendre plus vite, gérer vos finances personnelles et prendre des décisions business plus intelligentes.",
@@ -106,6 +133,20 @@ const labels: any = {
     coming: "قريباً",
     open: "فتح الوكيل",
     pricing: "عرض الأسعار",
+    enterpriseBadge: "وكلاء ذكاء اصطناعي مخصصون",
+    enterpriseTitle: "Runexa Systems for Business",
+    enterpriseSubtitle:
+      "وكلاء ذكاء اصطناعي مخصصون لفرقك وبياناتك وسير عملك.",
+    enterpriseDesc:
+      "نصمم وكلاء ذكاء اصطناعي مخصصين لمساعدة الشركات على أتمتة تحليل المستندات، التقارير المالية، التوظيف، الامتثال، واتخاذ القرار.",
+    enterprisePrimary: "طلب عرض",
+    enterpriseSecondary: "استكشاف حلول الأعمال",
+    enterpriseCards: [
+      "Legal workflows",
+      "Finance reporting",
+      "HR screening",
+      "Business intelligence",
+    ],
     ctaTitle: "منصة واحدة. عدة وكلاء ذكاء اصطناعي. نتائج عملية.",
     ctaDesc:
       "Runexa Systems هي منصة وكلاء ذكاء اصطناعي تساعدك على تحليل المستندات، التعلم بشكل أسرع، إدارة أموالك الشخصية، واتخاذ قرارات أعمال أكثر ذكاءً.",
@@ -246,6 +287,82 @@ export default function HomePage() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-16">
+        <div className="max-w-6xl mx-auto">
+          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-slate-50" />
+
+            <div className="relative grid gap-10 p-8 md:p-12 lg:grid-cols-2 lg:items-center">
+              <div>
+                <span className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
+                  {t.enterpriseBadge}
+                </span>
+
+                <h2 className="mt-5 text-3xl font-bold tracking-tight text-slate-900">
+                  {t.enterpriseTitle}
+                </h2>
+
+                <p className="mt-3 text-lg font-medium text-slate-700">
+                  {t.enterpriseSubtitle}
+                </p>
+
+                <p className="mt-4 text-slate-600 leading-7">
+                  {t.enterpriseDesc}
+                </p>
+
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link
+                    href="/contact-entreprise/contact"
+                    className="rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700 transition"
+                  >
+                    {t.enterprisePrimary}
+                  </Link>
+
+                  <Link
+                    href="/enterprise"
+                    className="rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-900 hover:bg-slate-50 transition"
+                  >
+                    {t.enterpriseSecondary}
+                  </Link>
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-slate-200 bg-slate-950 p-6 text-white shadow-xl">
+                <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                  <div>
+                    <p className="text-sm text-slate-400">Runexa Business AI</p>
+                    <p className="text-lg font-semibold">Custom agent system</p>
+                  </div>
+
+                  <span className="rounded-full bg-green-500/10 px-3 py-1 text-xs font-medium text-green-300">
+                    Enterprise
+                  </span>
+                </div>
+
+                <div className="mt-6 grid grid-cols-2 gap-3">
+                  {t.enterpriseCards.map((item: string, index: number) => (
+                    <div
+                      key={index}
+                      className="rounded-2xl border border-white/10 bg-white/5 p-4"
+                    >
+                      <div className="h-2 w-2 rounded-full bg-blue-400" />
+                      <p className="mt-3 text-sm font-medium">{item}</p>
+                      <p className="mt-2 text-xs text-slate-400">
+                        Custom AI workflow
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-6 rounded-2xl border border-blue-400/20 bg-blue-500/10 p-4 text-sm text-blue-100">
+                  Connected workflows → unified insights → faster decisions
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
