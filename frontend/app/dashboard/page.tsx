@@ -6,6 +6,8 @@ import {
   getDocuments,
   createCheckoutSession,
   getFinanceHistory,
+  getStudyHistory,
+  getBusinessHistory,
 } from "../../lib/api";
 import { getToken } from "../../lib/auth";
 import RiskBadge from "../../components/RiskBadge";
@@ -36,6 +38,8 @@ const labels: any = {
 export default function DashboardPage() {
   const [documents, setDocuments] = useState<any[]>([]);
   const [financeData, setFinanceData] = useState<any[]>([]);
+  const [studyData, setStudyData] = useState<any[]>([]);
+  const [businessData, setBusinessData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
   const [locale, setLocale] = useState("en");
@@ -61,13 +65,9 @@ export default function DashboardPage() {
       return;
     }
 
-    const role = (localStorage.getItem("role") || "")
-      .toLowerCase()
-      .trim();
+    const role = (localStorage.getItem("role") || "").toLowerCase().trim();
 
-    const plan = (localStorage.getItem("plan") || "")
-      .toLowerCase()
-      .trim();
+    const plan = (localStorage.getItem("plan") || "").toLowerCase().trim();
 
     if (role === "admin") {
       window.location.href = "/admin";
@@ -99,10 +99,28 @@ export default function DashboardPage() {
         : finance?.data || finance?.results || [];
 
       setFinanceData(safeFinance);
+
+      const study = await getStudyHistory();
+
+      const safeStudy = Array.isArray(study)
+        ? study
+        : study?.data || study?.results || [];
+
+      setStudyData(safeStudy);
+
+      const business = await getBusinessHistory();
+
+      const safeBusiness = Array.isArray(business)
+        ? business
+        : business?.data || business?.results || [];
+
+      setBusinessData(safeBusiness);
     } catch (error) {
       console.error("Dashboard load error:", error);
       setDocuments([]);
       setFinanceData([]);
+      setStudyData([]);
+      setBusinessData([]);
       setMessage("Unable to load dashboard data.");
     } finally {
       setLoading(false);
@@ -163,7 +181,7 @@ export default function DashboardPage() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
           <div className="bg-white p-5 rounded-2xl border">
             <p className="text-sm text-slate-500">{t.total}</p>
             <p className="text-2xl font-bold">{documents.length}</p>
@@ -180,6 +198,16 @@ export default function DashboardPage() {
             <p className="text-sm text-slate-500">{t.progress}</p>
             <p className="text-2xl font-bold">
               {documents.filter((d) => d.status !== "completed").length}
+            </p>
+          </div>
+
+          <div className="bg-white p-5 rounded-2xl border">
+            <p className="text-sm text-slate-500">Total analyses</p>
+            <p className="text-2xl font-bold">
+              {documents.length +
+                financeData.length +
+                studyData.length +
+                businessData.length}
             </p>
           </div>
         </div>
@@ -228,9 +256,7 @@ export default function DashboardPage() {
                         <td className="p-4">{doc.language || "—"}</td>
                         <td className="p-4">
                           <RiskBadge
-                            risk={
-                              doc.status === "completed" ? "low" : "medium"
-                            }
+                            risk={doc.status === "completed" ? "low" : "medium"}
                           />
                         </td>
                         <td className="p-4">
@@ -262,21 +288,25 @@ export default function DashboardPage() {
             </Link>
           </div>
 
-          <div className="text-center py-8">
-            <h3 className="text-lg font-semibold">Learn faster with AI</h3>
-
-            <p className="text-slate-500 mt-2">
-              Upload your study materials to generate summaries, quizzes,
-              flashcards, and a personalized study plan.
-            </p>
-
-            <Link
-              href="/study"
-              className="inline-block mt-5 px-5 py-2 bg-slate-900 text-white rounded-lg"
-            >
-              Upload Study PDF
-            </Link>
-          </div>
+          {studyData.length === 0 ? (
+            <div className="text-center py-8">
+              <h3 className="text-lg font-semibold">No study analyses yet</h3>
+              <Link
+                href="/study"
+                className="mt-4 inline-block px-4 py-2 bg-slate-900 text-white rounded"
+              >
+                Upload Study PDF
+              </Link>
+            </div>
+          ) : (
+            <ul className="space-y-2">
+              {studyData.slice(0, 3).map((item) => (
+                <li key={item.id} className="text-sm border p-3 rounded-xl">
+                  {item.file_name}
+                </li>
+              ))}
+            </ul>
+          )}
 
           <div className="flex gap-3 pt-2">
             <Link href="/study" className="text-sm text-blue-600">
@@ -300,9 +330,7 @@ export default function DashboardPage() {
 
           {financeData.length === 0 ? (
             <div className="text-center py-8">
-              <h3 className="text-lg font-semibold">
-                No finance analyses yet
-              </h3>
+              <h3 className="text-lg font-semibold">No finance analyses yet</h3>
               <p className="text-slate-500 mt-2">
                 Upload your first bank statement to start analyzing.
               </p>
@@ -337,9 +365,7 @@ export default function DashboardPage() {
                           key={item.id}
                           className="border-t hover:bg-slate-50"
                         >
-                          <td className="p-4 font-medium">
-                            {item.file_name}
-                          </td>
+                          <td className="p-4 font-medium">{item.file_name}</td>
 
                           <td className="p-4">
                             <span className="inline-flex px-3 py-1 rounded-full bg-green-50 text-green-700 text-xs font-semibold border border-green-200">
@@ -378,6 +404,58 @@ export default function DashboardPage() {
             </Link>
 
             <Link href="/finance/history" className="text-sm text-slate-600">
+              View history
+            </Link>
+          </div>
+        </div>
+
+        <div className="bg-white p-6 rounded-2xl border space-y-4">
+          <div className="flex justify-between">
+            <h2 className="text-xl font-semibold">Business Decision Agent</h2>
+
+            <Link href="/business" className="text-sm text-blue-600">
+              Analyze new
+            </Link>
+          </div>
+
+          {businessData.length === 0 ? (
+            <div className="text-center py-8">
+              <h3>No business analyses yet</h3>
+
+              <Link
+                href="/business"
+                className="mt-4 inline-block px-4 py-2 bg-slate-900 text-white rounded"
+              >
+                Upload CSV / Excel
+              </Link>
+            </div>
+          ) : (
+            <div className="space-y-2">
+              {businessData.slice(0, 3).map((item) => {
+                const result =
+                  typeof item.result === "string"
+                    ? JSON.parse(item.result)
+                    : item.result;
+
+                return (
+                  <div key={item.id} className="border p-3 rounded-xl text-sm">
+                    <p className="font-medium">{item.file_name}</p>
+
+                    <p className="text-slate-500">
+                      Score: {result.business_health_score ?? "-"} / 100
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          <div className="flex gap-3 pt-2">
+            <Link href="/business" className="text-sm text-blue-600">
+              Analyze new
+            </Link>
+
+            <Link href="/business/history" className="text-sm text-slate-600">
               View history
             </Link>
           </div>
