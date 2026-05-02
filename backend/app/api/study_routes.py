@@ -31,6 +31,11 @@ async def analyze_study(
 
     text = await extract_study_text(file)
 
+    print("\n=== FINAL TEXT SENT TO AGENT ===")
+    print(text[:1000])
+    print("TEXT LENGTH:", len(text))
+    print("================================\n")
+
     if not text.strip():
         raise HTTPException(
             status_code=400,

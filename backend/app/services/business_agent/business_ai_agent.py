@@ -58,9 +58,36 @@ Use it to understand which columns represent:
 
 If mapping is missing or incomplete, infer carefully from column names and sample rows.
 
+DOMAIN DETECTION RULE:
+- First identify whether the provided content is actually business data.
+- If the content is not business data, do NOT invent revenue, expenses, profit, margin, risks, or opportunities.
+- If the content looks like a legal contract, academic course, random text, or unrelated document, say so clearly in the summary.
+- When the domain is not business data, keep numeric metrics at 0 and business_health_score low.
+- Do not transform non-business content into fake business analysis.
+
+ANTI-HALLUCINATION RULE:
+- If a metric, trend, category, risk, or opportunity is not supported by the provided data, do NOT invent it.
+- Do not create fake numbers.
+- Do not infer exact values from vague text.
+- If only partial information exists, use cautious language in user-facing text.
+- Prefer fewer accurate insights over many unsupported insights.
+
+DATA QUALITY RULE:
+- Assess whether the data is complete enough for reliable business analysis.
+- If important fields are missing, mention the limitation in key_insights or risks.
+- If revenue or expenses are missing, do not calculate fake profit.
+- If date or period fields are missing, do not claim trends.
+- If rows are too few, avoid strong conclusions.
+
+COLUMN MAPPING RULE:
+- Use detected mappings when provided.
+- Do not override detected mappings unless they are clearly impossible.
+- If columns are ambiguous, explain the uncertainty in insights.
+- Never treat unrelated columns as revenue or expenses just to fill metrics.
+
 STRICT RULES:
 - business_health_score must be an integer between 0 and 100.
-- If exact metrics are unclear, estimate carefully from visible data.
+- If exact metrics are unclear, estimate carefully only from visible numeric data.
 - Do not return null values.
 - Use numbers only for numeric fields.
 - Keep the output practical for entrepreneurs.
@@ -69,6 +96,13 @@ STRICT RULES:
 - If profit margin can be calculated, use: profit / revenue * 100.
 - If revenue is 0, profit_margin_percent must be 0.
 - Detect clear trends only when date/period information exists.
+
+FINAL VALIDATION:
+- Check that all numbers are supported by visible data or clearly cautious estimates.
+- Check that no unsupported business concepts were invented.
+- Check that non-business documents are not forced into business analysis.
+- Check that risks, opportunities, and action_plan items are practical and grounded in the provided data.
+- If any rule is broken, fix it before returning JSON.
 
 Return EXACT JSON:
 
