@@ -167,13 +167,56 @@ Rules:
 
 
 
+def normalize_output_language(output_language: str) -> str:
+    """
+    Single source of truth for supported output languages.
+    Default is English. This prevents accidental Arabic fallback when
+    the user selected French or when no language was provided.
+    """
+    if not isinstance(output_language, str):
+        return "en"
+
+    output_language = output_language.strip().lower()
+
+    if output_language in {"en", "fr", "ar"}:
+        return output_language
+
+    return "en"
+
+
 def get_language_name(output_language: str) -> str:
+    output_language = normalize_output_language(output_language)
+
     languages = {
         "en": "English",
         "fr": "French",
         "ar": "Arabic",
     }
     return languages.get(output_language, "English")
+
+
+def get_main_topic_label(output_language: str) -> str:
+    output_language = normalize_output_language(output_language)
+
+    if output_language == "fr":
+        return "Sujet principal"
+
+    if output_language == "ar":
+        return "الموضوع الرئيسي"
+
+    return "Main topic"
+
+
+def localized_title(output_language: str, en: str, fr: str, ar: str) -> str:
+    output_language = normalize_output_language(output_language)
+
+    if output_language == "fr":
+        return fr
+
+    if output_language == "ar":
+        return ar
+
+    return en
 
 
 def fallback_mermaid() -> str:
@@ -343,7 +386,7 @@ def truncate_label(label: str, max_len: int = 70) -> str:
 
 
 
-def detect_root_title(text: str, output_language: str = "ar") -> str:
+def detect_root_title(text: str, output_language: str = "en") -> str:
     """
     Stable root detector with language support.
     Works for:
@@ -351,20 +394,37 @@ def detect_root_title(text: str, output_language: str = "ar") -> str:
     - Arabic / Marketing 5.0 books
     - generic courses
     """
+    output_language = normalize_output_language(output_language)
+
     if not isinstance(text, str):
-        return "Main topic" if output_language == "fr" else "الموضوع الرئيسي"
+        return get_main_topic_label(output_language)
 
     fixed_text = light_ocr_fix(text)
     normalized = normalize_for_match(fixed_text)
 
     if "metier et formation" in normalized:
-        return "Métier et formation" if output_language == "fr" else "مهنة وتكوين"
+        return localized_title(
+            output_language,
+            en="Profession and Training",
+            fr="Métier et formation",
+            ar="مهنة وتكوين",
+        )
 
     if "marketing 5 0" in normalized or "التسويق 5.0" in fixed_text or "التسويق 5" in fixed_text:
-        return "Marketing 5.0" if output_language == "fr" else "التسويق 5.0"
+        return localized_title(
+            output_language,
+            en="Marketing 5.0",
+            fr="Marketing 5.0",
+            ar="التسويق 5.0",
+        )
 
     if "manuel" in normalized and "formation" in normalized:
-        return "Manuel de formation — Métiers vol" if output_language == "fr" else "دليل تدريب مهنة الطيران"
+        return localized_title(
+            output_language,
+            en="Training Manual — Aviation Jobs",
+            fr="Manuel de formation — Métiers vol",
+            ar="دليل تدريب مهنة الطيران",
+        )
 
     # Prefer first short uppercase French course title.
     for line in fixed_text.splitlines()[:20]:
@@ -386,7 +446,7 @@ def detect_root_title(text: str, output_language: str = "ar") -> str:
         if clean and 5 <= len(clean) <= 80 and not re.match(r"^[0-9٠-٩]+$", clean):
             return clean
 
-    return "Main topic" if output_language == "fr" else "الموضوع الرئيسي"
+    return get_main_topic_label(output_language)
 
 
 def extract_number(text: str) -> int:
@@ -2706,7 +2766,7 @@ def build_safe_tree_from_text(cleaned_text: str, output_language: str = "fr") ->
 
     return []
 
-def process_document_text(text: str, output_language: str = "ar") -> dict:
+def process_document_text(text: str, output_language: str = "en") -> dict:
     """
     Production-stable deterministic diagram pipeline.
 
@@ -2721,6 +2781,8 @@ def process_document_text(text: str, output_language: str = "ar") -> dict:
     - always tries Root -> Module -> Block -> Detail
     - generic for any course domain
     """
+    output_language = normalize_output_language(output_language)
+
     cleaned_text = light_ocr_fix(remove_ui_noise(text))
     root = detect_root_title(cleaned_text, output_language)
 
@@ -2968,6 +3030,7 @@ def normalize_result(result: dict) -> dict:
 
 
 def build_user_prompt(text: str, education_level: str, output_language: str) -> str:
+    output_language = normalize_output_language(output_language)
     language_name = get_language_name(output_language)
 
     pipeline = process_document_text(text, output_language)
@@ -3392,6 +3455,8 @@ def choose_best_visual_diagram(model_diagram: str, deterministic_diagram: str) -
     return deterministic_diagram
 
 def analyze_study_content(text: str, education_level: str, output_language: str = "en"):
+    output_language = normalize_output_language(output_language)
+
     try:
         response = client.chat.completions.create(
             model="gpt-4.1-mini",
