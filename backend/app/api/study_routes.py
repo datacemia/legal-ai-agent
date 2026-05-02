@@ -23,10 +23,11 @@ async def analyze_study(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    if not file.filename or not file.filename.lower().endswith(".pdf"):
+    # 🔥 FIX: support PDF + DOCX (rien d'autre changé)
+    if not file.filename or not file.filename.lower().endswith((".pdf", ".docx")):
         raise HTTPException(
             status_code=400,
-            detail="Only PDF files are allowed.",
+            detail="Only PDF and DOCX files are allowed.",
         )
 
     text = await extract_study_text(file)
@@ -39,7 +40,7 @@ async def analyze_study(
     if not text.strip():
         raise HTTPException(
             status_code=400,
-            detail="Could not extract text from PDF.",
+            detail="Could not extract text from file.",
         )
 
     result = analyze_study_content(text, education_level, output_language)

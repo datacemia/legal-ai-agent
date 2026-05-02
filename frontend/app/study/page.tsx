@@ -32,10 +32,10 @@ const labels: any = {
   en: {
     title: "Study Agent",
     subtitle:
-      "Upload a PDF to generate a summary, theoretical quiz, practical quiz, flashcards, and a study plan.",
+      "Upload a document to generate a summary, theoretical quiz, practical quiz, flashcards, and a study plan.",
     howTitle: "How this agent works:",
     how1:
-      "Upload your study PDF and let the Study Agent transform it into an interactive learning experience.",
+      "Upload your study document (PDF, Word, or scanned document) and let the Study Agent transform it into an interactive learning experience.",
     how2:
       "Before analysis, you select your learning level and output language. The agent adapts the difficulty, vocabulary, explanations, and questions to match your level and language.",
     items: [
@@ -65,6 +65,7 @@ const labels: any = {
     writtenSummary: "Detailed Summary",
     visualSummary: "Visual Summary",
     visualDiagram: "Visual Diagram",
+    diagramExplanations: "Diagram Explanations",
     keyPoints: "Key Points",
     quiz: "Quiz",
     theory: "Theoretical Questions",
@@ -87,15 +88,15 @@ const labels: any = {
       "Stripe is not configured yet. Credit purchase will be available soon.",
     errorMessage: "Failed to connect to Study Agent API.",
     noFile: "No file selected",
-    chooseFile: "Choose file",
+    chooseFile: "Choose a document (PDF, Word, or scanned)",
   },
   fr: {
     title: "Agent étude",
     subtitle:
-      "Téléchargez un PDF pour générer un résumé, un quiz théorique, un quiz pratique, des flashcards et un plan de révision.",
+      "Téléchargez un document pour générer un résumé, un quiz théorique, un quiz pratique, des flashcards et un plan de révision.",
     howTitle: "Comment fonctionne cet agent :",
     how1:
-      "Téléchargez votre PDF de cours et laissez l’agent étude le transformer en expérience d’apprentissage interactive.",
+      "Téléchargez votre document de cours (PDF, Word ou document scanné) et laissez l’agent étude le transformer en une expérience d’apprentissage interactive.",
     how2:
       "Avant l’analyse, vous choisissez votre niveau et la langue de sortie. L’agent adapte la difficulté, le vocabulaire, les explications et les questions.",
     items: [
@@ -125,6 +126,7 @@ const labels: any = {
     writtenSummary: "Résumé détaillé",
     visualSummary: "Résumé graphique",
     visualDiagram: "Schéma visuel",
+    diagramExplanations: "Explications du schéma",
     keyPoints: "Points clés",
     quiz: "Quiz",
     theory: "Questions théoriques",
@@ -147,14 +149,14 @@ const labels: any = {
       "Stripe n’est pas encore configuré. L’achat de crédits sera bientôt disponible.",
     errorMessage: "Impossible de se connecter à l’API Study Agent.",
     noFile: "Aucun fichier sélectionné",
-    chooseFile: "Choisir un fichier",
+    chooseFile: "Choisir un document (PDF, Word ou scanné)",
   },
   ar: {
     title: "وكيل الدراسة",
     subtitle:
-      "ارفع ملف PDF لإنشاء ملخص، اختبار نظري، اختبار تطبيقي، بطاقات مراجعة وخطة دراسة.",
+      "ارفع ملف دراسة لإنشاء ملخص، اختبار نظري، اختبار تطبيقي، بطاقات مراجعة وخطة دراسة.",
     howTitle: "كيف يعمل هذا الوكيل:",
-    how1: "ارفع ملف الدراسة وسيحوّله وكيل الدراسة إلى تجربة تعلم تفاعلية.",
+    how1: "ارفع ملف دراستك (PDF أو Word أو ملف ممسوح ضوئياً) وسيحوّله وكيل الدراسة إلى تجربة تعلم تفاعلية.",
     how2:
       "قبل التحليل، اختر مستواك التعليمي ولغة النتائج. يقوم الوكيل بتكييف الصعوبة والمفردات والشرح والأسئلة حسب اختيارك.",
     items: [
@@ -183,6 +185,7 @@ const labels: any = {
     writtenSummary: "ملخص مفصل",
     visualSummary: "ملخص بصري",
     visualDiagram: "مخطط بصري",
+    diagramExplanations: "شرح المخطط",
     keyPoints: "النقاط الأساسية",
     quiz: "الاختبار",
     theory: "أسئلة نظرية",
@@ -204,8 +207,8 @@ const labels: any = {
     paymentMessage:
       "Stripe غير مفعّل حالياً. شراء الرصيد سيكون متاحاً قريباً.",
     errorMessage: "تعذر الاتصال بواجهة Study Agent.",
-    noFile: "لم يتم اختيار ملف",
-    chooseFile: "اختيار ملف",
+    noFile: "لم يتم اختيار ملف (PDF أو Word أو ممسوح ضوئياً)",
+    chooseFile: "اختيار ملف (PDF أو Word أو ممسوح ضوئياً)",
   },
 };
 
@@ -228,8 +231,74 @@ function fallbackDiagram() {
       Keyword`;
 }
 
-function MermaidDiagram({ chart }: { chart: string }) {
+function normalizeExplanationKey(value: string) {
+  return String(value || "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
+function findDiagramExplanation(
+  explanations: Record<string, unknown> | undefined,
+  label: string | null
+) {
+  if (!explanations || !label) return null;
+
+  if (Object.prototype.hasOwnProperty.call(explanations, label)) {
+    return String(explanations[label]);
+  }
+
+  const normalizedLabel = normalizeExplanationKey(label);
+  const matchedEntry = Object.entries(explanations).find(
+    ([key]) => normalizeExplanationKey(key) === normalizedLabel
+  );
+
+  return matchedEntry ? String(matchedEntry[1]) : null;
+}
+
+function MermaidDiagram({
+  chart,
+  onNodeClick,
+}: {
+  chart: string;
+  onNodeClick?: (label: string) => void;
+}) {
   const ref = useRef<HTMLDivElement>(null);
+
+  const bindNodeClicks = () => {
+    if (!ref.current || !onNodeClick) return;
+
+    const textNodes = ref.current.querySelectorAll("svg text");
+
+    textNodes.forEach((node) => {
+      const label = (node.textContent || "").replace(/\s+/g, " ").trim();
+
+      if (!label) return;
+
+      const element = node as SVGTextElement;
+      element.style.cursor = "pointer";
+      element.setAttribute("role", "button");
+      element.setAttribute("tabindex", "0");
+      element.setAttribute("aria-label", label);
+
+      const activateNode = () => {
+        ref.current
+          ?.querySelectorAll("svg text")
+          .forEach((el) => ((el as SVGTextElement).style.fill = "#0f172a"));
+
+        element.style.fill = "#2563eb";
+        onNodeClick(label);
+      };
+
+      element.onclick = activateNode;
+      element.onkeydown = (event: KeyboardEvent) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          activateNode();
+        }
+      };
+    });
+  };
 
   useEffect(() => {
     let cancelled = false;
@@ -261,6 +330,7 @@ function MermaidDiagram({ chart }: { chart: string }) {
 
         if (!cancelled && ref.current) {
           ref.current.innerHTML = svg;
+          bindNodeClicks();
         }
       } catch (error) {
         console.error("Mermaid render error:", error);
@@ -278,6 +348,7 @@ function MermaidDiagram({ chart }: { chart: string }) {
 
           if (!cancelled && ref.current) {
             ref.current.innerHTML = svg;
+            bindNodeClicks();
           }
         } catch {
           if (!cancelled && ref.current) {
@@ -293,7 +364,7 @@ function MermaidDiagram({ chart }: { chart: string }) {
     return () => {
       cancelled = true;
     };
-  }, [chart]);
+  }, [chart, onNodeClick]);
 
   return (
     <div className="bg-white border rounded-xl p-4 overflow-x-auto min-h-[300px]">
@@ -315,12 +386,18 @@ export default function StudyPage() {
   );
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
+  const [selectedNode, setSelectedNode] = useState<string | null>(null);
 
   useEffect(() => {
     setLanguage(getSavedLocale());
   }, []);
 
   const t = labels[language] || labels.en;
+
+  const selectedNodeExplanation = findDiagramExplanation(
+    result?.diagram_explanations,
+    selectedNode
+  );
 
   const getLevelLabel = (level: string) =>
     LEVEL_LABELS[language]?.[level] || LEVEL_LABELS.en[level] || level;
@@ -335,6 +412,7 @@ export default function StudyPage() {
     setSelectedAnswers({});
     setQuizSubmitted(false);
     setRetryCount(0);
+    setSelectedNode(null);
 
     const formData = new FormData();
     formData.append("file", file);
@@ -544,6 +622,7 @@ export default function StudyPage() {
               setSelectedAnswers({});
               setQuizSubmitted(false);
               setRetryCount(0);
+              setSelectedNode(null);
             }}
             className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
           >
@@ -556,7 +635,7 @@ export default function StudyPage() {
             <input
               id="file-upload"
               type="file"
-              accept=".pdf"
+              accept=".pdf,.docx"
               onChange={(e) => {
                 setFile(e.target.files?.[0] || null);
                 setResult(null);
@@ -565,6 +644,7 @@ export default function StudyPage() {
                 setQuizSubmitted(false);
                 setEducationLevel("");
                 setRetryCount(0);
+                setSelectedNode(null);
               }}
               className="hidden"
             />
@@ -591,6 +671,7 @@ export default function StudyPage() {
                 setQuizSubmitted(false);
                 setPaymentMessage("");
                 setRetryCount(0);
+                setSelectedNode(null);
                 setShowLevelModal(true);
               }}
               disabled={!file || loading}
@@ -723,10 +804,60 @@ export default function StudyPage() {
               <div>
                 <strong>🧠 {t.visualDiagram}:</strong>
                 <div className="mt-2">
-                  <MermaidDiagram chart={result.visual_diagram} />
+                  <MermaidDiagram
+                    chart={result.visual_diagram}
+                    onNodeClick={(label) => setSelectedNode(label)}
+                  />
                 </div>
+
+                {selectedNode && (
+                  <div className="mt-4 rounded-xl border border-blue-200 bg-blue-50 p-4">
+                    <p className="text-xs font-medium uppercase tracking-wide text-blue-600">
+                      {t.diagramExplanations}
+                    </p>
+                    <h4 className="mt-1 font-semibold text-slate-900">
+                      {selectedNode}
+                    </h4>
+                    {selectedNodeExplanation ? (
+                      <p className="mt-1 text-sm text-slate-700">
+                        {selectedNodeExplanation}
+                      </p>
+                    ) : (
+                      <p className="mt-1 text-sm text-slate-500">
+                        {language === "fr"
+                          ? "Aucune explication disponible pour ce nœud."
+                          : language === "ar"
+                          ? "لا يوجد شرح متاح لهذه العقدة."
+                          : "No explanation available for this node."}
+                      </p>
+                    )}
+                  </div>
+                )}
               </div>
             )}
+
+            {result.diagram_explanations &&
+              Object.keys(result.diagram_explanations).length > 0 && (
+                <div className="mt-6">
+                  <strong>📘 {t.diagramExplanations}:</strong>
+
+                  <div className="mt-3 space-y-3">
+                    {Object.entries(result.diagram_explanations).map(
+                      ([label, explanation]) => (
+                        <div
+                          key={label}
+                          className="rounded-xl border p-4 bg-slate-50"
+                        >
+                          <h4 className="font-semibold">{label}</h4>
+                          <p className="text-sm text-slate-600 mt-1">
+                            {String(explanation)}
+                          </p>
+                        </div>
+                      )
+                    )}
+                  </div>
+                </div>
+              )}
 
             <div>
               <strong>{t.keyPoints}:</strong>

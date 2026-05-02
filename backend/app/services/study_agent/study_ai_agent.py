@@ -335,6 +335,13 @@ def light_ocr_fix(text: str) -> str:
         "dentrerprises": "d'entreprises",
         "dévaluation": "d'évaluation",
         "devaluation": "d'évaluation",
+        "Types dentreprises": "Types d’entreprises",
+        "types dentreprises": "types d’entreprises",
+        "Esprit déquipe": "Esprit d’équipe",
+        "esprit déquipe": "esprit d’équipe",
+        "HôtesseSteward": "Hôtesse/Steward",
+        "Hôtesse Steward": "Hôtesse/Steward",
+        "hôtesse steward": "Hôtesse/Steward",
     }
 
     for k, v in fixes.items():
@@ -355,7 +362,11 @@ def clean_toc_label(label):
     label = re.sub(r"(?<=\D)\s+[0-9٠-٩]{1,4}$", "", label).strip()
 
     # enlever ponctuation bizarre but keep Arabic, Latin, digits, colon, dash, dot, spaces
-    label = re.sub(r"[^\u0600-\u06FFa-zA-ZÀ-ÿ0-9٠-٩:\-–—\.\s]", "", label)
+    label = re.sub(
+        r"[^\u0600-\u06FFa-zA-ZÀ-ÿ0-9٠-٩:\-–—\.\s'’/]",
+        "",
+        label,
+    )
 
     # nettoyer espaces
     label = re.sub(r"\s+", " ", label)
@@ -3022,6 +3033,16 @@ def normalize_result(result: dict) -> dict:
 
     result["study_plan"] = safe_string_list(result.get("study_plan", []))
 
+    raw_diagram_explanations = result.get("diagram_explanations", {})
+    if isinstance(raw_diagram_explanations, dict):
+        result["diagram_explanations"] = {
+            safe_text(key).strip(): safe_text(value).strip()
+            for key, value in raw_diagram_explanations.items()
+            if safe_text(key).strip() and safe_text(value).strip()
+        }
+    else:
+        result["diagram_explanations"] = {}
+
     result["disclaimer"] = safe_text(
         result.get("disclaimer", "This is for educational support only.")
     )
@@ -3454,6 +3475,152 @@ def choose_best_visual_diagram(model_diagram: str, deterministic_diagram: str) -
 
     return deterministic_diagram
 
+
+def extract_mermaid_labels(mermaid: str) -> list[str]:
+    """
+    Extracts unique labels from a Mermaid mindmap.
+    Used to generate explanations outside the visual diagram.
+    """
+    if not isinstance(mermaid, str):
+        return []
+
+    labels = []
+    seen = set()
+
+    for line in mermaid.splitlines():
+        stripped = line.strip()
+
+        if not stripped or stripped == "mindmap":
+            continue
+
+        if stripped.startswith("root((") and stripped.endswith("))"):
+            label = stripped[len("root(("):-2].strip()
+        elif "((" in stripped and "))" in stripped:
+            label = stripped.split("((", 1)[1].split("))", 1)[0].strip()
+        else:
+            label = stripped
+
+        label = label.replace(":::part", "").replace(":::chapter", "").strip()
+        label = label.strip('"').strip("'").strip()
+        label = clean_toc_label(label)
+
+        if not label:
+            continue
+
+        key = normalize_for_match(label)
+        if not key or key in seen:
+            continue
+
+        seen.add(key)
+        labels.append(label)
+
+    return labels
+
+
+def generate_node_explanations(
+    visual_diagram: str,
+    source_text: str,
+    output_language: str = "en",
+) -> dict:
+    """
+    Generates short explanations for each Mermaid node label.
+
+    Important:
+    - Explanations are returned separately from visual_diagram.
+    - The diagram stays clean and short.
+    - Works for any course PDF/domain because labels come from the generated diagram.
+    - The model is instructed to use only the source text.
+    """
+    output_language = normalize_output_language(output_language)
+    labels = extract_mermaid_labels(visual_diagram)
+
+    if not labels:
+        return {}
+
+    language_name = get_language_name(output_language)
+
+    fallback_messages = {
+        "en": "This label is mentioned in the diagram, but the source text does not clearly explain it.",
+        "fr": "Ce libellé est mentionné dans le diagramme, mais le texte source ne l’explique pas clairement.",
+        "ar": "هذا العنصر مذكور في المخطط، لكن النص المصدر لا يشرحه بوضوح.",
+    }
+
+    prompt = f"""
+You are a strict educational explanation engine.
+
+Task:
+Generate a short explanation for each diagram label.
+
+Rules:
+- Use ONLY the provided source text.
+- Do NOT invent information.
+- Do NOT add external knowledge.
+- If the source text does not clearly explain a label, use this exact fallback sentence translated in the requested language:
+{fallback_messages.get(output_language, fallback_messages["en"])}
+- Keep each explanation short: 1 sentence maximum.
+- Return the explanations in {language_name}.
+- Keep the exact label keys unchanged.
+- Return ONLY valid JSON.
+
+JSON shape:
+{{
+  "explanations": {{
+    "label": "short explanation"
+  }}
+}}
+
+Labels:
+{json.dumps(labels, ensure_ascii=False)}
+
+Source text:
+{safe_text(source_text)[:12000]}
+"""
+
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4.1-mini",
+            response_format={"type": "json_object"},
+            messages=[
+                {"role": "system", "content": "Return only valid JSON. Do not invent content."},
+                {"role": "user", "content": prompt},
+            ],
+            temperature=0,
+        )
+
+        raw = response.choices[0].message.content
+        parsed = json.loads(raw)
+        explanations = parsed.get("explanations", {})
+
+        if not isinstance(explanations, dict):
+            return {}
+
+        clean_explanations = {}
+
+        # Keep only labels from the diagram. This prevents extra invented keys.
+        allowed = {normalize_for_match(label): label for label in labels}
+
+        for key, value in explanations.items():
+            clean_key = normalize_for_match(key)
+            if clean_key not in allowed:
+                continue
+
+            explanation = safe_text(value).strip()
+            if explanation:
+                clean_explanations[allowed[clean_key]] = explanation
+
+        # Ensure every label has a safe explanation entry.
+        fallback = fallback_messages.get(output_language, fallback_messages["en"])
+        for label in labels:
+            if label not in clean_explanations:
+                clean_explanations[label] = fallback
+
+        return clean_explanations
+
+    except Exception as e:
+        print("DIAGRAM EXPLANATIONS FALLBACK:", e)
+        fallback = fallback_messages.get(output_language, fallback_messages["en"])
+        return {label: fallback for label in labels}
+
 def analyze_study_content(text: str, education_level: str, output_language: str = "en"):
     output_language = normalize_output_language(output_language)
 
@@ -3494,6 +3661,7 @@ def analyze_study_content(text: str, education_level: str, output_language: str 
                     root=pipeline.get("root", "Main topic"),
                     output_language=output_language,
                 ),
+                "diagram_explanations": {},
                 "key_points": [],
                 "quiz": {},
                 "flashcards": [],
@@ -3517,6 +3685,12 @@ def analyze_study_content(text: str, education_level: str, output_language: str 
             deterministic_diagram=deterministic_diagram,
         )
 
+        result["diagram_explanations"] = generate_node_explanations(
+            visual_diagram=result.get("visual_diagram", ""),
+            source_text=text,
+            output_language=output_language,
+        )
+
         return normalize_result(result)
 
     except Exception as e:
@@ -3534,6 +3708,11 @@ def analyze_study_content(text: str, education_level: str, output_language: str 
             "written_summary": "The system could not fully analyze the content, but the response remains valid.",
             "visual_summary": "MAIN TOPIC\n│\n└── Partial content",
             "visual_diagram": diagram,
+            "diagram_explanations": generate_node_explanations(
+                visual_diagram=diagram,
+                source_text=text,
+                output_language=output_language,
+            ),
             "key_points": ["Partial content extracted"],
             "quiz": {},
             "flashcards": [],
