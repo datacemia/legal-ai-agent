@@ -7,7 +7,10 @@ import pytesseract
 import io
 
 # 🔥 IMPORTANT (Windows seulement)
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+import os
+
+if os.name == "nt":
+    pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 
 def fix_arabic_text(text: str) -> str:
