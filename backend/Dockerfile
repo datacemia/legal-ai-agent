@@ -1,4 +1,3 @@
-cat > backend/Dockerfile <<'EOF'
 FROM python:3.11-slim
 
 RUN apt-get update && apt-get install -y \
@@ -19,4 +18,3 @@ ENV TESSERACT_CMD=/usr/bin/tesseract
 ENV OCR_LANGS=ara+fra+eng
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
-EOF
