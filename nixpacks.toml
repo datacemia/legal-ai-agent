@@ -4,4 +4,4 @@ aptPkgs = [
   "tesseract-ocr-eng",
   "tesseract-ocr-fra",
   "tesseract-ocr-ara"
-]
+]# force railway rebuild
