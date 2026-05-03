@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { getToken } from "../../lib/auth";
 import { getSavedLocale, setSavedLocale } from "../../lib/i18n";
 
@@ -235,7 +235,10 @@ function normalizeExplanationKey(value: string) {
   return String(value || "")
     .replace(/\s+/g, " ")
     .trim()
-    .toLowerCase();
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^\p{L}\p{N}\s]/gu, "");
 }
 
 function findDiagramExplanation(
@@ -256,52 +259,484 @@ function findDiagramExplanation(
   return matchedEntry ? String(matchedEntry[1]) : null;
 }
 
+
+type VisualSummaryBlock = {
+  title: string;
+  items: string[];
+};
+
+function parseVisualSummary(value: any) {
+  if (!value) {
+    return {
+      title: "",
+      blocks: [] as VisualSummaryBlock[],
+    };
+  }
+
+  if (typeof value === "object" && !Array.isArray(value)) {
+    const rawBlocks = value.blocks || value.sections || value.items || [];
+
+    return {
+      title: String(value.title || value.subject || value.main_topic || ""),
+      blocks: Array.isArray(rawBlocks)
+        ? rawBlocks
+            .map((block: any) => ({
+              title: String(block.title || block.name || block.heading || "").trim(),
+              items: Array.isArray(block.items || block.points || block.children)
+                ? (block.items || block.points || block.children)
+                    .map((item: any) => String(item).trim())
+                    .filter(Boolean)
+                : [],
+            }))
+            .filter((block: VisualSummaryBlock) => block.title || block.items.length)
+        : [],
+    };
+  }
+
+  const rawLines = String(value)
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  const genericTitleLabels = [
+    "sujet principal",
+    "main topic",
+    "موضوع رئيسي",
+    "الموضوع الرئيسي",
+    "résumé graphique",
+    "visual summary",
+  ];
+
+  const isGenericTitleLabel = (line: string) => {
+    const normalized = normalizeExplanationKey(line);
+    return genericTitleLabels.some(
+      (label) => normalizeExplanationKey(label) === normalized
+    );
+  };
+
+  const isNumberOnly = (line: string) => /^[0-9]+[.)]?$/.test(line.trim());
+  const lines = rawLines.filter((line) => !isNumberOnly(line));
+
+  let title = "";
+  const blocks: VisualSummaryBlock[] = [];
+  let currentBlock: VisualSummaryBlock | null = null;
+
+  const splitDetails = (text: string) =>
+    text
+      .split(/[,;•|]+/)
+      .map((item) => item.trim())
+      .filter(Boolean);
+
+  const addItems = (items: string[]) => {
+    const cleanItems = items
+      .map((item) => item.replace(/^[-•*]+\s*/, "").trim())
+      .filter(Boolean);
+
+    if (!cleanItems.length) return;
+
+    if (!currentBlock) {
+      currentBlock = {
+        title: title || "Points clés",
+        items: [],
+      };
+      blocks.push(currentBlock);
+    }
+
+    currentBlock.items.push(...cleanItems);
+  };
+
+  const isLikelyBlockTitle = (line: string) => {
+    const cleanLine = line.replace(/^[-•*]+\s*/, "").trim();
+
+    if (!cleanLine) return false;
+    if (/^[IVXLCDM]+\s*[-–.]/i.test(cleanLine)) return true;
+    if (/^[0-9]+\s*[-–.]/.test(cleanLine)) return true;
+    if (cleanLine.includes(":")) return true;
+    if (cleanLine.length <= 55 && cleanLine[0] === cleanLine[0].toUpperCase()) {
+      return true;
+    }
+
+    return false;
+  };
+
+  const sameAsTitle = (line: string) => {
+    return (
+      title &&
+      normalizeExplanationKey(line) === normalizeExplanationKey(title)
+    );
+  };
+
+  lines.forEach((line) => {
+    const cleanLine = line.replace(/^[-•*]+\s*/, "").trim();
+    const isBullet = /^[-•*]+\s*/.test(line);
+
+    if (!cleanLine || isGenericTitleLabel(cleanLine)) return;
+
+    if (!title) {
+      title = cleanLine.replace(/:$/, "");
+      return;
+    }
+
+    if (sameAsTitle(cleanLine)) return;
+
+    if (isBullet) {
+      addItems([cleanLine]);
+      return;
+    }
+
+    const colonIndex = cleanLine.indexOf(":");
+
+    if (colonIndex > -1) {
+      const rawTitle = cleanLine.slice(0, colonIndex).trim();
+      const detailText = cleanLine.slice(colonIndex + 1).trim();
+
+      if (rawTitle && rawTitle.length <= 70) {
+        currentBlock = {
+          title: rawTitle.replace(/:$/, ""),
+          items: detailText ? splitDetails(detailText) : [],
+        };
+        blocks.push(currentBlock);
+        return;
+      }
+    }
+
+    if (isLikelyBlockTitle(cleanLine)) {
+      currentBlock = {
+        title: cleanLine.replace(/:$/, ""),
+        items: [],
+      };
+      blocks.push(currentBlock);
+      return;
+    }
+
+    addItems([cleanLine]);
+  });
+
+  if (!blocks.length && title) {
+    return {
+      title,
+      blocks: [
+        {
+          title: "Points clés",
+          items: lines
+            .filter((line) => !isGenericTitleLabel(line))
+            .filter(
+              (line) =>
+                normalizeExplanationKey(line) !== normalizeExplanationKey(title)
+            )
+            .map((line) => line.replace(/^[-•*]+\s*/, "").trim())
+            .filter(Boolean),
+        },
+      ],
+    };
+  }
+
+  return {
+    title,
+    blocks,
+  };
+}
+
+function VisualSummaryGraphic({
+  value,
+  language = "en",
+}: {
+  value: any;
+  language?: string;
+}) {
+  const visualSummary = parseVisualSummary(value);
+  const blocks = visualSummary.blocks.slice(0, 6);
+
+  const fallbackTitle =
+    language === "fr"
+      ? "Résumé du cours"
+      : language === "ar"
+      ? "ملخص الدرس"
+      : "Course summary";
+
+  const centerTitle = visualSummary.title || fallbackTitle;
+
+  return (
+    <div className="mt-3 rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-50 via-white to-blue-50 p-5 shadow-sm">
+      <div className="mx-auto mb-5 flex max-w-xl items-center justify-center">
+        <div className="rounded-3xl border border-blue-200 bg-blue-600 px-6 py-4 text-center text-white shadow-lg shadow-blue-100">
+          <p className="text-xs font-medium uppercase tracking-wide text-blue-100">
+            {language === "fr"
+              ? "Sujet principal"
+              : language === "ar"
+              ? "الموضوع الرئيسي"
+              : "Main topic"}
+          </p>
+          <h3 className="mt-1 text-lg font-bold leading-snug">{centerTitle}</h3>
+        </div>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {blocks.map((block, index) => (
+          <div
+            key={`${block.title}-${index}`}
+            className="relative rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+          >
+            <div className="mb-3 flex items-center gap-3">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-sm font-bold text-blue-700 ring-1 ring-blue-100">
+                {index + 1}
+              </div>
+              <h4 className="font-semibold leading-snug text-slate-900">
+                {block.title ||
+                  (language === "fr"
+                    ? "Idée clé"
+                    : language === "ar"
+                    ? "فكرة أساسية"
+                    : "Key idea")}
+              </h4>
+            </div>
+
+            {block.items.length > 0 && (
+              <div className="space-y-2">
+                {block.items.slice(0, 4).map((item, itemIndex) => (
+                  <div
+                    key={`${item}-${itemIndex}`}
+                    className="flex items-start gap-2 rounded-xl bg-slate-50 px-3 py-2 text-sm text-slate-700"
+                  >
+                    <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-blue-400" />
+                    <span className="leading-relaxed">{item}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function MermaidDiagram({
   chart,
   onNodeClick,
+  selectedLabel,
+  language = "en",
 }: {
   chart: string;
   onNodeClick?: (label: string) => void;
+  selectedLabel?: string | null;
+  language?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const lastActivationRef = useRef<{ label: string; time: number } | null>(null);
+  const [focusMode, setFocusMode] = useState(false);
+  const [zoom, setZoom] = useState(1);
 
-  const bindNodeClicks = () => {
-    if (!ref.current || !onNodeClick) return;
+  const ui = {
+    tip:
+      language === "fr"
+        ? "Astuce : cliquez sur un nœud pour voir son explication. Utilisez les boutons pour zoomer."
+        : language === "ar"
+        ? "نصيحة: اضغط على أي عقدة لعرض شرحها. استخدم الأزرار للتكبير."
+        : "Tip: click a node to see its explanation. Use the buttons to zoom.",
+    zoomIn: language === "fr" ? "Zoom +" : language === "ar" ? "تكبير +" : "Zoom +",
+    zoomOut: language === "fr" ? "Zoom -" : language === "ar" ? "تصغير -" : "Zoom -",
+    reset:
+      language === "fr" ? "Réinitialiser" : language === "ar" ? "إعادة ضبط" : "Reset",
+    focusOn:
+      language === "fr" ? "Focus activé" : language === "ar" ? "التركيز مفعل" : "Focus on",
+    focusOff:
+      language === "fr" ? "Focus désactivé" : language === "ar" ? "التركيز معطل" : "Focus off",
+  };
 
-    const textNodes = ref.current.querySelectorAll("svg text");
+  const getLabelFromElement = (element: Element | null) => {
+    return (element?.textContent || "").replace(/\s+/g, " ").trim();
+  };
 
-    textNodes.forEach((node) => {
-      const label = (node.textContent || "").replace(/\s+/g, " ").trim();
+  const getClickableLabelElements = () => {
+    if (!ref.current) return [] as Element[];
 
+    const candidates = Array.from(
+      ref.current.querySelectorAll(
+        "svg text, svg foreignObject, svg g[class*='mindmap'] text, svg g[class*='node'] text"
+      )
+    ) as Element[];
+
+    const seen = new Set<string>();
+
+    return candidates.filter((element) => {
+      const label = getLabelFromElement(element);
+      if (!label) return false;
+
+      const normalized = normalizeExplanationKey(label);
+      if (!normalized || seen.has(normalized)) return false;
+
+      const box = element.getBoundingClientRect();
+      if (!box.width && !box.height) return false;
+
+      seen.add(normalized);
+      return true;
+    });
+  };
+
+  const clearHighlights = () => {
+    if (!ref.current) return;
+
+    ref.current
+      .querySelectorAll(".runexa-diagram-active")
+      .forEach((el) => el.classList.remove("runexa-diagram-active"));
+
+    ref.current
+      .querySelectorAll(".runexa-diagram-active-text")
+      .forEach((el) => el.classList.remove("runexa-diagram-active-text"));
+
+    ref.current.querySelectorAll("svg text, svg foreignObject").forEach((el) => {
+      const svgElement = el as SVGElement;
+      svgElement.style.fill = "";
+      svgElement.style.fontWeight = "";
+      svgElement.style.textDecoration = "";
+    });
+
+    ref.current
+      .querySelectorAll("rect, polygon, circle, ellipse, path")
+      .forEach((shape) => {
+        const svgShape = shape as SVGElement;
+        svgShape.style.stroke = "";
+        svgShape.style.strokeWidth = "";
+        svgShape.style.opacity = "";
+        svgShape.style.filter = "";
+      });
+  };
+
+  const applyHighlight = (element: Element, label: string) => {
+    clearHighlights();
+
+    const group = element.closest("g") || element;
+
+    group.classList.add("runexa-diagram-active");
+    element.classList.add("runexa-diagram-active-text");
+
+    const svgElement = element as SVGElement;
+    svgElement.style.fill = "#2563eb";
+    svgElement.style.fontWeight = "900";
+    svgElement.style.textDecoration = "underline";
+
+    group.querySelectorAll("rect, polygon, circle, ellipse, path").forEach((shape) => {
+      const svgShape = shape as SVGElement;
+      svgShape.style.stroke = "#2563eb";
+      svgShape.style.strokeWidth = "3px";
+      svgShape.style.opacity = "1";
+      svgShape.style.filter = "drop-shadow(0 8px 18px rgba(37, 99, 235, 0.28))";
+    });
+
+    onNodeClick?.(label);
+  };
+
+  const activateLabel = (label: string) => {
+    const cleanLabel = String(label || "").replace(/\s+/g, " ").trim();
+    if (!cleanLabel) return;
+
+    const now = Date.now();
+    const last = lastActivationRef.current;
+
+    if (last && last.label === cleanLabel && now - last.time < 200) {
+      return;
+    }
+
+    lastActivationRef.current = { label: cleanLabel, time: now };
+
+    const normalizedLabel = normalizeExplanationKey(cleanLabel);
+    const element = getClickableLabelElements().find(
+      (candidate) => normalizeExplanationKey(getLabelFromElement(candidate)) === normalizedLabel
+    );
+
+    if (element) {
+      applyHighlight(element, cleanLabel);
+    } else {
+      onNodeClick?.(cleanLabel);
+    }
+  };
+
+  const getNearestLabelFromPoint = (clientX: number, clientY: number) => {
+    const elements = getClickableLabelElements();
+
+    let nearestLabel = "";
+    let nearestDistance = Number.POSITIVE_INFINITY;
+
+    for (const element of elements) {
+      const box = element.getBoundingClientRect();
+
+      if (!box.width && !box.height) continue;
+
+      const centerX = box.left + box.width / 2;
+      const centerY = box.top + box.height / 2;
+      const distance = Math.hypot(clientX - centerX, clientY - centerY);
+
+      if (distance < nearestDistance) {
+        nearestDistance = distance;
+        nearestLabel = getLabelFromElement(element);
+      }
+    }
+
+    return nearestDistance <= 120 ? nearestLabel : "";
+  };
+
+  const rebuildHtmlOverlay = () => {
+    if (!viewportRef.current || !overlayRef.current) return;
+
+    overlayRef.current.innerHTML = "";
+
+    const viewportBox = viewportRef.current.getBoundingClientRect();
+    const elements = getClickableLabelElements();
+
+    elements.forEach((element) => {
+      const label = getLabelFromElement(element);
       if (!label) return;
 
-      const element = node as SVGTextElement;
-      element.style.cursor = "pointer";
-      element.setAttribute("role", "button");
-      element.setAttribute("tabindex", "0");
-      element.setAttribute("aria-label", label);
+      const box = element.getBoundingClientRect();
+      if (!box.width && !box.height) return;
 
-      const activateNode = () => {
-        ref.current
-          ?.querySelectorAll("svg text")
-          .forEach((el) => ((el as SVGTextElement).style.fill = "#0f172a"));
+      const button = document.createElement("button");
+      button.type = "button";
+      button.setAttribute("aria-label", label);
+      button.setAttribute("title", label);
+      button.style.position = "absolute";
+      button.style.left = `${box.left - viewportBox.left - 12}px`;
+      button.style.top = `${box.top - viewportBox.top - 10}px`;
+      button.style.width = `${Math.max(box.width + 24, 48)}px`;
+      button.style.height = `${Math.max(box.height + 20, 32)}px`;
+      button.style.background = "transparent";
+      button.style.border = "0";
+      button.style.padding = "0";
+      button.style.margin = "0";
+      button.style.cursor = "pointer";
+      button.style.pointerEvents = "auto";
+      button.style.zIndex = "20";
 
-        element.style.fill = "#2563eb";
-        onNodeClick(label);
+      const trigger = (event: Event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        activateLabel(label);
       };
 
-      element.onclick = activateNode;
-      element.onkeydown = (event: KeyboardEvent) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          activateNode();
-        }
-      };
+      button.addEventListener("click", trigger, true);
+      button.addEventListener("pointerdown", trigger, true);
+      button.addEventListener("pointerup", trigger, true);
+
+      overlayRef.current?.appendChild(button);
     });
+  };
+
+  const handleViewportClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const label = getNearestLabelFromPoint(event.clientX, event.clientY);
+
+    if (!label) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    activateLabel(label);
   };
 
   useEffect(() => {
     let cancelled = false;
+    let resizeObserver: ResizeObserver | null = null;
 
     const renderDiagram = async () => {
       if (!ref.current) return;
@@ -330,7 +765,31 @@ function MermaidDiagram({
 
         if (!cancelled && ref.current) {
           ref.current.innerHTML = svg;
-          bindNodeClicks();
+
+          const svgElement = ref.current.querySelector("svg") as SVGSVGElement | null;
+
+          if (svgElement) {
+            svgElement.style.maxWidth = "none";
+            svgElement.style.width = "max-content";
+            svgElement.style.minWidth = "100%";
+            svgElement.style.height = "auto";
+            svgElement.style.cursor = "default";
+            svgElement.style.pointerEvents = "none";
+            svgElement.style.transformOrigin = "0 0";
+            svgElement.style.transform = `scale(${zoom})`;
+          }
+
+          getClickableLabelElements().forEach((element) => {
+            element.classList.add("runexa-diagram-text");
+            (element as SVGElement).style.cursor = "pointer";
+          });
+
+          window.setTimeout(rebuildHtmlOverlay, 80);
+
+          if (viewportRef.current) {
+            resizeObserver = new ResizeObserver(() => rebuildHtmlOverlay());
+            resizeObserver.observe(viewportRef.current);
+          }
         }
       } catch (error) {
         console.error("Mermaid render error:", error);
@@ -341,14 +800,11 @@ function MermaidDiagram({
             .toString(36)
             .slice(2)}`;
 
-          const { svg } = await mermaid.render(
-            fallbackId,
-            fallbackDiagram()
-          );
+          const { svg } = await mermaid.render(fallbackId, fallbackDiagram());
 
           if (!cancelled && ref.current) {
             ref.current.innerHTML = svg;
-            bindNodeClicks();
+            window.setTimeout(rebuildHtmlOverlay, 80);
           }
         } catch {
           if (!cancelled && ref.current) {
@@ -363,12 +819,130 @@ function MermaidDiagram({
 
     return () => {
       cancelled = true;
+
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
     };
-  }, [chart, onNodeClick]);
+  }, [chart]);
+
+  useEffect(() => {
+    const svgElement = ref.current?.querySelector("svg") as SVGSVGElement | null;
+
+    if (svgElement) {
+      svgElement.style.transform = `scale(${zoom})`;
+    }
+
+    window.setTimeout(rebuildHtmlOverlay, 80);
+  }, [zoom]);
+
+  useEffect(() => {
+    if (!selectedLabel) return;
+    activateLabel(selectedLabel);
+  }, [selectedLabel]);
 
   return (
-    <div className="bg-white border rounded-xl p-4 overflow-x-auto min-h-[300px]">
-      <div ref={ref} />
+    <div className="rounded-2xl border bg-white p-4 shadow-sm">
+      <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-xs text-slate-500">{ui.tip}</p>
+
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => setZoom((value) => Math.min(value + 0.25, 4))}
+            className="rounded-lg border px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50"
+          >
+            {ui.zoomIn}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setZoom((value) => Math.max(value - 0.25, 0.45))}
+            className="rounded-lg border px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50"
+          >
+            {ui.zoomOut}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setZoom(1)}
+            className="rounded-lg border px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50"
+          >
+            {ui.reset}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setFocusMode((prev) => !prev)}
+            className={`rounded-lg border px-3 py-1.5 text-xs font-medium transition ${
+              focusMode
+                ? "border-blue-300 bg-blue-50 text-blue-700"
+                : "text-slate-700 hover:bg-slate-50"
+            }`}
+          >
+            {focusMode ? ui.focusOn : ui.focusOff}
+          </button>
+        </div>
+      </div>
+
+      <div
+        ref={viewportRef}
+        onClick={handleViewportClick}
+        className={`runexa-diagram-viewport relative min-h-[360px] overflow-auto rounded-xl border bg-slate-50 p-4 ${
+          focusMode ? "runexa-focus-mode" : ""
+        }`}
+      >
+        <div ref={ref} className="runexa-diagram-canvas min-w-full" />
+        <div
+          ref={overlayRef}
+          className="absolute inset-0 z-20 pointer-events-none"
+        />
+      </div>
+
+      <style>{`
+        .runexa-diagram-viewport {
+          cursor: default;
+          user-select: none;
+        }
+
+        .runexa-diagram-viewport svg {
+          transition: transform 180ms ease;
+          transform-origin: 0 0;
+        }
+
+        .runexa-diagram-viewport svg,
+        .runexa-diagram-viewport svg * {
+          pointer-events: none !important;
+        }
+
+        .runexa-diagram-text {
+          transition: fill 160ms ease, opacity 160ms ease, font-weight 160ms ease;
+        }
+
+        .runexa-diagram-active-text {
+          fill: #2563eb !important;
+          font-weight: 900 !important;
+          text-decoration: underline;
+        }
+
+        .runexa-diagram-active rect,
+        .runexa-diagram-active polygon,
+        .runexa-diagram-active circle,
+        .runexa-diagram-active ellipse,
+        .runexa-diagram-active path {
+          stroke: #2563eb !important;
+          stroke-width: 3px !important;
+          filter: drop-shadow(0 8px 18px rgba(37, 99, 235, 0.28));
+        }
+
+        .runexa-focus-mode .runexa-diagram-text {
+          opacity: 0.28;
+        }
+
+        .runexa-focus-mode .runexa-diagram-active-text {
+          opacity: 1;
+        }
+      `}</style>
     </div>
   );
 }
@@ -502,6 +1076,10 @@ export default function StudyPage() {
       return "تحتاج إلى المزيد من التدريب. ركز على النقاط الأساسية وبطاقات المراجعة.";
     return "Needs more practice. Focus on the key points and flashcards.";
   };
+
+  const handleNodeClick = useCallback((label: string) => {
+    setSelectedNode(label);
+  }, []);
 
   const handleRetryQuiz = () => {
     if (retryCount >= 2) return;
@@ -794,9 +1372,10 @@ export default function StudyPage() {
             {result.visual_summary && (
               <div>
                 <strong>📊 {t.visualSummary}:</strong>
-                <pre className="mt-2 bg-slate-50 border rounded-xl p-4 text-sm overflow-x-auto whitespace-pre-wrap">
-                  {result.visual_summary}
-                </pre>
+                <VisualSummaryGraphic
+                  value={result.visual_summary}
+                  language={language}
+                />
               </div>
             )}
 
@@ -806,7 +1385,9 @@ export default function StudyPage() {
                 <div className="mt-2">
                   <MermaidDiagram
                     chart={result.visual_diagram}
-                    onNodeClick={(label) => setSelectedNode(label)}
+                    onNodeClick={handleNodeClick}
+                    selectedLabel={selectedNode}
+                    language={language}
                   />
                 </div>
 
@@ -835,29 +1416,6 @@ export default function StudyPage() {
                 )}
               </div>
             )}
-
-            {result.diagram_explanations &&
-              Object.keys(result.diagram_explanations).length > 0 && (
-                <div className="mt-6">
-                  <strong>📘 {t.diagramExplanations}:</strong>
-
-                  <div className="mt-3 space-y-3">
-                    {Object.entries(result.diagram_explanations).map(
-                      ([label, explanation]) => (
-                        <div
-                          key={label}
-                          className="rounded-xl border p-4 bg-slate-50"
-                        >
-                          <h4 className="font-semibold">{label}</h4>
-                          <p className="text-sm text-slate-600 mt-1">
-                            {String(explanation)}
-                          </p>
-                        </div>
-                      )
-                    )}
-                  </div>
-                </div>
-              )}
 
             <div>
               <strong>{t.keyPoints}:</strong>

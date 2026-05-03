@@ -10,7 +10,7 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 # Smart visual enrichment: Root -> Module -> source-supported children
 STRICT_STRUCTURE_MODE = False
 ENABLE_DEEP_DIAGRAM_MODE = False
-ENABLE_SMART_ENRICHMENT = True
+ENABLE_SMART_ENRICHMENT = True  # kept, but now compacted by universal diagram limits
 ENABLE_CHATGPT_LIKE_VISUAL = True
 
 SYSTEM_PROMPT = """
@@ -52,9 +52,16 @@ FINAL DIAGRAM QUALITY RULES:
 - Every final leaf must be explicit and understandable alone.
 - Avoid weak labels such as Contenu, Informations générales, Détails, Règles, Rapport, Documents associés, Situer, Par, Des.
 - Prefer informative blocks with children over generic category labels.
+- When a module contains related items, group them into meaningful educational blocks instead of showing a raw list.
+- Smart grouping must stay source-supported: group existing concepts, never invent new facts.
 - If a module has only weak labels, reduce it or use better supported concepts from the source.
 - Do not split meaningful phrases into isolated words.
 - Preserve complete terms such as Low cost, 30 heures, Évaluations écrites et orales.
+- For exam papers, worksheets, or evaluation documents, prefer the real pedagogical structure:
+  Root -> Source text / Comprehension / Written production / Evaluation criteria.
+- For lessons, prefer the real course structure:
+  Root -> Sections -> Subtopics -> Key details.
+- Do not mix text content, questions, and evaluation criteria under the same branch when the source separates them.
 
 
 1. NO INVENTION
@@ -71,11 +78,15 @@ FINAL DIAGRAM QUALITY RULES:
 
 4. HIERARCHY
 - Root -> Sections -> Concepts.
-- Max depth: 3.
+- Max depth: 2 levels below root.
+- Each node must have a maximum of 5 children.
+- Prefer fewer nodes with clear meaning over many nodes.
+- Target total diagram labels: 12 to 28 maximum.
 
 VISUAL RULE:
 - Parts must be visually dominant.
 - Chapters must be grouped under parts.
+- For exam/worksheet documents, keep Text, Questions/Comprehension, Written production, and Evaluation criteria as separate top-level branches when present.
 - Avoid flat structures only when true hierarchy exists.
 - Default SaaS diagram should stay clean and faithful, not over-detailed.
 - Default hybrid SaaS mode must prefer safe structure:
@@ -350,6 +361,438 @@ def light_ocr_fix(text: str) -> str:
     return text
 
 
+
+
+def merge_split_arabic_letters(value: str) -> str:
+    """
+    Controlled Arabic OCR merge.
+
+    Fixes common PDF glyph extraction like:
+    - ج ا ستعمالا لا ت -> استعمالات
+    - ع ﻼ ةق -> علاقة
+    - لا ش صخ -> الشخص
+
+    It avoids aggressive merging of all Arabic words because that can destroy
+    normal Arabic spacing.
+    """
+    if not isinstance(value, str):
+        return ""
+
+    # Specific high-confidence legal-course OCR fragments.
+    known_fragments = {
+        "ج ا ستعمالا لا ت": "استعمالات",
+        "ا ستعمالا لا ت": "استعمالات",
+        "استعمالا لا ت": "استعمالات",
+        "ع ﻼ ةق": "علاقة",
+        "ع ﻼ قات": "علاقات",
+        "ع ﻼ قتهم": "علاقتهم",
+        "ا جبارلإ": "الإجبار",
+        "وا جبارلإ": "والإجبار",
+        "أ رضية": "أرضية",
+        "الأ رضية": "الأرضية",
+        "الأ رض": "الأرض",
+        "طإ ﻼق": "إطلاق",
+        "إط ﻼق": "إطلاق",
+        "ثم ﻼ": "مثلا",
+        "ا خيرلأ": "الأخير",
+        "لا ش صخ": "الشخص",
+        "ا شخاص": "أشخاص",
+        "الأ شخاص": "الأشخاص",
+        "لأش خاص": "الأشخاص",
+        "طةالسلالعامة": "السلطة العامة",
+        "تكفلالسلطة": "تكفل السلطة",
+        "ىعل": "على",
+        "ىعلا": "على",
+        "نأ": "أن",
+        "ودق": "وقد",
+        "دق": "قد",
+        "ام وقع": "ما وقع",
+        "ام": "ما",
+        "مأ": "أو",
+        "وأ": "أو",
+        "مه الأشخاص": "هم الأشخاص",
+        "مأنجلاللجوء": "من أجل اللجوء",
+        "الت ريع": "التشريع",
+        "ش فتم": "فتم",
+        "عم تطور": "مع تطور",
+        "عم الوقت": "مع الوقت",
+        "مقت ض اها": "مقتضاها",
+        "هل نفسه": "له نفسه",
+        "أشخاص المخاطبين": "الأشخاص المخاطبين",
+        "خاصلأش": "الأشخاص",
+        "ض ءا حقه": "اقتضاء حقه",
+        "اقتاقتضاء": "اقتضاء",
+        "يف ": "في ",
+        " يف": " في",
+    }
+
+    for old, new in known_fragments.items():
+        value = value.replace(old, new)
+
+    # Merge isolated single Arabic letters only when they are followed by
+    # a word fragment and match common OCR cases.
+    value = re.sub(r"\bا\s+(?=ستعمال)", "ا", value)
+    value = re.sub(r"\bا\s+(?=جتماع)", "ا", value)
+    value = re.sub(r"\bا\s+(?=قتصاد)", "ا", value)
+    value = re.sub(r"\bا\s+(?=ختيار)", "ا", value)
+    value = re.sub(r"\bا\s+(?=حترام)", "ا", value)
+    value = re.sub(r"\bال\s+(?=[\u0600-\u06FF]{3,})", "ال", value)
+
+    # Fix split common prefixes without merging complete words globally.
+    value = re.sub(r"\bو\s+(?=[\u0600-\u06FF]{3,})", "و", value)
+    value = re.sub(r"\bف\s+(?=[\u0600-\u06FF]{3,})", "ف", value)
+    value = re.sub(r"\bب\s+(?=[\u0600-\u06FF]{3,})", "ب", value)
+    value = re.sub(r"\bك\s+(?=[\u0600-\u06FF]{3,})", "ك", value)
+    value = re.sub(r"\bل\s+(?=[\u0600-\u06FF]{3,})", "ل", value)
+
+    return value
+
+
+
+def normalize_arabic_unicode(text: str) -> str:
+    """
+    Universal Arabic Unicode normalization.
+
+    Safe for any domain:
+    - normalizes Arabic presentation forms
+    - removes invisible RTL/control chars
+    - normalizes Arabic punctuation spacing
+    - does not rewrite scientific/legal/medical terms
+    """
+    if not isinstance(text, str):
+        return ""
+
+    value = text
+
+    presentation_map = {
+        "ﻻ": "لا", "ﻷ": "لأ", "ﻹ": "لإ", "ﻵ": "لآ",
+        "ﺎ": "ا", "ﺍ": "ا", "ﺃ": "أ", "ﺇ": "إ", "ﺁ": "آ",
+        "ﺏ": "ب", "ﺑ": "ب", "ﺒ": "ب", "ﺐ": "ب",
+        "ﺕ": "ت", "ﺗ": "ت", "ﺘ": "ت", "ﺖ": "ت",
+        "ﺙ": "ث", "ﺛ": "ث", "ﺜ": "ث", "ﺚ": "ث",
+        "ﺝ": "ج", "ﺟ": "ج", "ﺠ": "ج", "ﺞ": "ج",
+        "ﺡ": "ح", "ﺣ": "ح", "ﺤ": "ح", "ﺢ": "ح",
+        "ﺥ": "خ", "ﺧ": "خ", "ﺨ": "خ", "ﺦ": "خ",
+        "ﺩ": "د", "ﺪ": "د",
+        "ﺫ": "ذ", "ﺬ": "ذ",
+        "ﺭ": "ر", "ﺮ": "ر",
+        "ﺯ": "ز", "ﺰ": "ز",
+        "ﺱ": "س", "ﺳ": "س", "ﺴ": "س", "ﺲ": "س",
+        "ﺵ": "ش", "ﺷ": "ش", "ﺸ": "ش", "ﺶ": "ش",
+        "ﺹ": "ص", "ﺻ": "ص", "ﺼ": "ص", "ﺺ": "ص",
+        "ﺽ": "ض", "ﺿ": "ض", "ﻀ": "ض", "ﺾ": "ض",
+        "ﻁ": "ط", "ﻃ": "ط", "ﻄ": "ط", "ﻂ": "ط",
+        "ﻅ": "ظ", "ﻇ": "ظ", "ﻈ": "ظ", "ﻆ": "ظ",
+        "ﻉ": "ع", "ﻋ": "ع", "ﻌ": "ع", "ﻊ": "ع",
+        "ﻍ": "غ", "ﻏ": "غ", "ﻐ": "غ", "ﻎ": "غ",
+        "ﻑ": "ف", "ﻓ": "ف", "ﻔ": "ف", "ﻒ": "ف",
+        "ﻕ": "ق", "ﻗ": "ق", "ﻘ": "ق", "ﻖ": "ق",
+        "ﻙ": "ك", "ﻛ": "ك", "ﻜ": "ك", "ﻚ": "ك",
+        "ﻝ": "ل", "ﻟ": "ل", "ﻠ": "ل", "ﻞ": "ل",
+        "ﻡ": "م", "ﻣ": "م", "ﻤ": "م", "ﻢ": "م",
+        "ﻥ": "ن", "ﻧ": "ن", "ﻨ": "ن", "ﻦ": "ن",
+        "ﻩ": "ه", "ﻫ": "ه", "ﻬ": "ه", "ﻪ": "ه",
+        "ﻭ": "و", "ﻮ": "و",
+        "ﻯ": "ى", "ﻰ": "ى",
+        "ﻱ": "ي", "ﻳ": "ي", "ﻴ": "ي", "ﻲ": "ي",
+        "ﺓ": "ة", "ﺔ": "ة",
+    }
+
+    for old, new in presentation_map.items():
+        value = value.replace(old, new)
+
+    value = re.sub(r"[\u200e\u200f\u202a-\u202e]", "", value)
+    value = value.replace(",", "،")
+    value = re.sub(r"\s+([،.؛:؟])", r"\1", value)
+    value = re.sub(r"([،.؛:؟])(?=\S)", r"\1 ", value)
+    value = re.sub(r"\s+", " ", value).strip()
+
+    return value
+
+
+def universal_arabic_ocr_score(text: str) -> float:
+    """
+    Scores how noisy Arabic OCR looks.
+
+    Domain-agnostic. It detects symptoms, not vocabulary:
+    - Arabic presentation forms
+    - isolated single-letter tokens
+    - broken lam/alef forms
+    - reversed common particles
+    - weird spacing around Arabic letters
+    """
+    if not isinstance(text, str) or not text.strip():
+        return 0.0
+
+    value = text
+    arabic_chars = re.findall(r"[\u0600-\u06FF]", value)
+    if not arabic_chars:
+        return 0.0
+
+    score = 0.0
+
+    presentation_forms = re.findall(r"[\uFB50-\uFDFF\uFE70-\uFEFF]", value)
+    score += min(0.35, len(presentation_forms) / max(len(arabic_chars), 1) * 2.5)
+
+    single_letter_tokens = re.findall(r"(?<![\u0600-\u06FF])[اأإآبتثجحخدذرزسشصضطظعغفقكلمنهوي](?![\u0600-\u06FF])", value)
+    score += min(0.25, len(single_letter_tokens) / max(len(value.split()), 1) * 1.5)
+
+    suspicious_patterns = [
+        r"\bيف\b", r"\bنع\b", r"\bيه\b", r"\bيأ\b", r"\bنأ\b", r"\bنإ\b",
+        r"\bىعل\b", r"\bلع\s*ى\b", r"\bلا\s+[شضطظعغفقكلمنهوي]",
+        r"[\u0600-\u06FF]\s+[ﻼﻷﻹﻵ]",
+        r"[\u0600-\u06FF]\s+[\u0600-\u06FF]\s+[\u0600-\u06FF]",
+    ]
+    for pattern in suspicious_patterns:
+        if re.search(pattern, value):
+            score += 0.06
+
+    return min(score, 1.0)
+
+
+def is_ocr_noisy(text: str, output_language: str = "en") -> bool:
+    """
+    Universal OCR noise detector.
+    """
+    output_language = normalize_output_language(output_language)
+
+    if not isinstance(text, str) or not text.strip():
+        return False
+
+    if output_language == "ar" or has_arabic_text(text):
+        return universal_arabic_ocr_score(text) >= 0.12
+
+    # Non-Arabic generic OCR symptoms.
+    odd_spacing = len(re.findall(r"\b[A-Za-zÀ-ÿ]\s+[A-Za-zÀ-ÿ]\b", text))
+    weird_chars = len(re.findall(r"[�□■]", text))
+    return odd_spacing >= 4 or weird_chars > 0
+
+
+def normalize_arabic_text_generic(text: str) -> str:
+    """
+    Universal deterministic Arabic OCR cleanup.
+
+    This is not course-specific:
+    - normalizes glyphs
+    - fixes common OCR direction inversions for short Arabic particles
+    - merges broken prefixes conservatively
+    - removes standalone section numbers inside explanations
+    """
+    if not isinstance(text, str):
+        return ""
+
+    value = normalize_arabic_unicode(light_ocr_fix(text))
+
+    # Generic short-token OCR inversions.
+    token_replacements = {
+        "يف": "في",
+        "نع": "عن",
+        "يه": "هي",
+        "يأ": "أي",
+        "نأ": "أن",
+        "نإ": "إن",
+        "مل": "لم",
+        "لب": "بل",
+        "لك": "كل",
+        "ىعل": "على",
+        "ىلا": "إلى",
+        "لإى": "إلى",
+        "إلىى": "إلى",
+    }
+
+    for wrong, right in token_replacements.items():
+        value = re.sub(rf"(?<![\u0600-\u06FF]){wrong}(?![\u0600-\u06FF])", right, value)
+
+    # Broken lam/alef and common Arabic prefixes. Conservative and domain-neutral.
+    value = re.sub(r"\bا\s+ل(?=[\u0600-\u06FF]{2,})", "ال", value)
+    value = re.sub(r"\bال\s+(?=[\u0600-\u06FF]{3,})", "ال", value)
+    value = re.sub(r"\bو\s+(?=[\u0600-\u06FF]{3,})", "و", value)
+    value = re.sub(r"\bف\s+(?=[\u0600-\u06FF]{3,})", "ف", value)
+    value = re.sub(r"\bب\s+(?=[\u0600-\u06FF]{3,})", "ب", value)
+    value = re.sub(r"\bك\s+(?=[\u0600-\u06FF]{3,})", "ك", value)
+    value = re.sub(r"\bل\s+(?=[\u0600-\u06FF]{3,})", "ل", value)
+
+    # Broken OCR hyphens between Arabic words.
+    value = re.sub(r"(?<=[\u0600-\u06FF])\s*[-–—]\s*(?=[\u0600-\u06FF])", " ", value)
+
+    # Universal high-confidence fragments, not tied to one domain.
+    high_confidence = {
+        "ع لا ق": "علاق",
+        "ع ﻼ ق": "علاق",
+        "ع لا ةق": "علاقة",
+        "ع ﻼ ةق": "علاقة",
+        "لا زمة": "لازمة",
+        "الأ فكار": "الأفكار",
+        "الأ رض": "الأرض",
+        "الأ شخاص": "الأشخاص",
+        "ل لأشخاص": "للأشخاص",
+        "ل الأشخاص": "للأشخاص",
+        "إ لا": "إلا",
+        "أ و": "أو",
+        "و أ": "وأ",
+        "أ ي": "أي",
+        "أ ن": "أن",
+        "إ ن": "إن",
+    }
+    for old, new in high_confidence.items():
+        value = value.replace(old, new)
+
+    # Remove standalone section numbers inside explanations, but preserve numbers attached to terms.
+    value = re.sub(r"(?<![\u0600-\u06FFA-Za-z])\b[0-9٠-٩]{1,2}\b(?![\u0600-\u06FFA-Za-z])", " ", value)
+
+    value = normalize_arabic_unicode(value)
+    return value
+
+
+def ai_clean_explanation_text(
+    text: str,
+    output_language: str = "en",
+    max_chars: int = 900,
+) -> str:
+    """
+    AI post-cleaner for OCR-damaged explanations.
+
+    It is used only after deterministic cleanup and only when noise remains.
+    It must preserve meaning and source content.
+    It must not add facts, examples, or external knowledge.
+    """
+    output_language = normalize_output_language(output_language)
+
+    if not isinstance(text, str) or not text.strip():
+        return ""
+
+    candidate = safe_truncate(text.strip(), max_chars)
+
+    # Avoid unnecessary API calls.
+    if not is_ocr_noisy(candidate, output_language):
+        return candidate
+
+    language_name = get_language_name(output_language)
+
+    try:
+        prompt = f"""
+You are an OCR cleanup engine.
+
+Clean the following extracted explanation text.
+
+Rules:
+- Fix OCR mistakes, broken spacing, broken Arabic letters, and punctuation.
+- Preserve the same meaning.
+- Do NOT add new facts.
+- Do NOT summarize beyond removing obvious OCR noise.
+- Do NOT translate.
+- Keep the output in {language_name}.
+- Return clean plain text only.
+- If the text is Arabic, make it readable Modern Standard Arabic while preserving the lesson meaning.
+
+Text:
+{candidate}
+"""
+
+        response = client.chat.completions.create(
+            model="gpt-4.1-mini",
+            messages=[
+                {"role": "system", "content": "You clean OCR text only. Do not add information."},
+                {"role": "user", "content": prompt},
+            ],
+            temperature=0,
+        )
+
+        cleaned = safe_text(response.choices[0].message.content).strip()
+        cleaned = cleaned.strip("`").strip()
+
+        if not cleaned:
+            return candidate
+
+        # Safety: reject if the model expands too much.
+        if len(cleaned) > max(len(candidate) * 1.8, max_chars + 200):
+            return candidate
+
+        return safe_truncate(cleaned, max_chars)
+
+    except Exception as e:
+        print("AI OCR CLEAN FALLBACK:", e)
+        return candidate
+
+
+def clean_explanation_universal(
+    explanation: str,
+    output_language: str = "en",
+    max_chars: int = 720,
+    use_ai: bool = True,
+) -> str:
+    """
+    Universal explanation cleaner for any course/domain.
+
+    Pipeline:
+    1. deterministic unicode/OCR normalization
+    2. noise detection
+    3. optional AI cleanup only if still noisy
+    4. final length + punctuation cleanup
+    """
+    output_language = normalize_output_language(output_language)
+
+    if not isinstance(explanation, str):
+        return ""
+
+    value = safe_text(explanation).strip()
+
+    if output_language == "ar" or has_arabic_text(value):
+        value = normalize_arabic_text_generic(value)
+    else:
+        value = light_ocr_fix(value)
+        value = re.sub(r"\s+", " ", value).strip()
+
+    if use_ai and is_ocr_noisy(value, output_language):
+        value = ai_clean_explanation_text(
+            value,
+            output_language=output_language,
+            max_chars=max_chars,
+        )
+
+    if output_language == "ar" or has_arabic_text(value):
+        value = normalize_arabic_unicode(value)
+
+    value = re.sub(r"\s+", " ", value).strip()
+
+    if len(value) > max_chars:
+        value = safe_truncate(value, max_chars)
+
+    return value
+
+
+def clean_arabic_ocr_text_for_display(text: str) -> str:
+    """
+    Backward-compatible wrapper.
+
+    Kept so the rest of the file does not break.
+    Delegates to the universal deterministic Arabic OCR normalizer.
+    """
+    return normalize_arabic_text_generic(text)
+
+
+def polish_explanation_for_display(
+    explanation: str,
+    output_language: str = "en",
+    max_chars: int = 720,
+) -> str:
+    """
+    Final user-facing cleanup for node explanations.
+
+    Universal version:
+    - works for any course/domain
+    - deterministic cleanup first
+    - AI OCR cleanup only when the text is still noisy
+    - preserves the document meaning
+    """
+    return clean_explanation_universal(
+        explanation=explanation,
+        output_language=output_language,
+        max_chars=max_chars,
+        use_ai=True,
+    )
+
+
 def clean_toc_label(label):
     if not isinstance(label, str):
         return ""
@@ -372,6 +815,191 @@ def clean_toc_label(label):
     label = re.sub(r"\s+", " ", label)
 
     return label.strip()
+
+
+def has_arabic_text(value: str) -> bool:
+    """
+    True when a label contains Arabic letters.
+    """
+    return bool(isinstance(value, str) and re.search(r"[\u0600-\u06FF]", value))
+
+
+def clean_mermaid_label(label: str, output_language: str = "en") -> str:
+    """
+    Final Mermaid label sanitizer.
+
+    Fixes Arabic/RTL Mermaid crashes by removing:
+    - raw numbering like "1-" / "٢-"
+    - brackets and parentheses inside labels
+    - Markdown/code characters
+    - Mermaid reserved/control symbols
+    - overly long RTL labels
+
+    It keeps the semantic meaning and works for Arabic, French and English.
+    """
+    if not isinstance(label, str):
+        return ""
+
+    output_language = normalize_output_language(output_language)
+
+    label = light_ocr_fix(label)
+    label = clean_toc_label(label)
+    label = strip_module_prefix(label)
+    label = re.sub(r"^[0-9٠-٩]+\s*[-–—.:)]\s*", "", label).strip()
+    label = re.sub(r"^[A-Za-z]\s*[-–—.:)]\s*", "", label).strip()
+
+    # Remove Mermaid/Markdown risky characters.
+    label = label.replace("`", "").replace("|", " ")
+    label = label.replace("<", " ").replace(">", " ")
+    label = label.replace("{", " ").replace("}", " ")
+    label = label.replace("[", " ").replace("]", " ")
+    label = label.replace("(", " ").replace(")", " ")
+    label = label.replace('"', "").replace("'", "’")
+
+    # Mermaid mindmap is sensitive to colon-heavy Arabic labels.
+    label = label.replace(":", " - ")
+    label = label.replace("؛", " ")
+    label = label.replace("،", " ")
+
+    # Remove control/invisible characters.
+    label = re.sub(r"[\u200e\u200f\u202a-\u202e]", "", label)
+    label = re.sub(r"\s+", " ", label).strip(" -–—.،؛:")
+
+    # Drop pure numeric labels that break the mindmap and add no meaning.
+    if not label or re.fullmatch(r"[0-9٠-٩]+", label):
+        return ""
+
+    # Keep Arabic nodes shorter; long RTL labels often break Mermaid layout/parser.
+    max_len = 42 if output_language == "ar" or has_arabic_text(label) else 60
+    label = safe_truncate(label, max_len)
+
+    return label.strip()
+
+
+def sanitize_mermaid_for_render(
+    diagram: str,
+    output_language: str = "en",
+    root_label: str = "",
+) -> str:
+    """
+    Rewrites a Mermaid mindmap into a parser-safe version.
+
+    This is intentionally conservative:
+    - preserves indentation/hierarchy
+    - sanitizes every label
+    - removes numeric junk nodes
+    - prevents duplicated root child
+    - ensures valid fallback if too little remains
+    """
+    output_language = normalize_output_language(output_language)
+
+    if not isinstance(diagram, str) or not diagram.strip():
+        return fallback_mermaid()
+
+    raw_lines = [line.rstrip() for line in diagram.splitlines() if line.strip()]
+    if not raw_lines:
+        return fallback_mermaid()
+
+    if raw_lines[0].strip() != "mindmap":
+        raw_lines.insert(0, "mindmap")
+
+    detected_root = safe_text(root_label).strip()
+    output = ["mindmap"]
+    seen_by_indent = {}
+    root_written = False
+
+    for raw in raw_lines[1:]:
+        stripped = raw.strip()
+        if not stripped or stripped == "mindmap":
+            continue
+
+        indent = len(raw) - len(raw.lstrip(" "))
+
+        root_match = re.match(r"root\s*\(\((.*?)\)\)\s*$", stripped)
+        if root_match:
+            raw_root = root_match.group(1).strip()
+            cleaned_root = clean_mermaid_label(detected_root or raw_root, output_language)
+            if not cleaned_root:
+                cleaned_root = get_main_topic_label(output_language)
+            if not root_written:
+                output.append(f"  root(({cleaned_root}))")
+                detected_root = cleaned_root
+                root_written = True
+            continue
+
+        # If model returned root label without root syntax, make first meaningful line a root.
+        if not root_written:
+            cleaned_root = clean_mermaid_label(detected_root or stripped, output_language)
+            if not cleaned_root:
+                cleaned_root = get_main_topic_label(output_language)
+            output.append(f"  root(({cleaned_root}))")
+            detected_root = cleaned_root
+            root_written = True
+            continue
+
+        label = stripped.replace(":::part", "").replace(":::chapter", "").strip()
+        label = re.sub(r"^[-•*]\s*", "", label).strip()
+        label = clean_mermaid_label(label, output_language)
+
+        if not label:
+            continue
+
+        # Prevent root duplication as child.
+        if normalize_for_match(label) == normalize_for_match(detected_root):
+            continue
+
+        # Mermaid mindmap supports indentation, but keep it even and bounded.
+        if indent < 4:
+            indent = 4
+        if indent > MAX_MERMAID_INDENT:
+            indent = MAX_MERMAID_INDENT
+        if indent % 2 != 0:
+            indent += 1
+
+        key = normalize_for_match(label)
+        indent_seen = seen_by_indent.setdefault(indent, set())
+        if key in indent_seen:
+            continue
+        indent_seen.add(key)
+
+        output.append(" " * indent + label)
+
+    if not root_written:
+        output.append(f"  root(({get_main_topic_label(output_language)}))")
+
+    if len(output) < 3:
+        return fallback_mermaid()
+
+    return "\n".join(output).strip()
+
+
+def fallback_mermaid_for_language(output_language: str = "en") -> str:
+    """
+    Language-aware Mermaid fallback.
+    """
+    output_language = normalize_output_language(output_language)
+
+    if output_language == "ar":
+        return """mindmap
+  root((الموضوع الرئيسي))
+    الفكرة الأولى
+      كلمة مفتاحية
+    الفكرة الثانية
+      كلمة مفتاحية
+    الفكرة الثالثة
+      كلمة مفتاحية"""
+
+    if output_language == "fr":
+        return """mindmap
+  root((Sujet principal))
+    Idée 1
+      Mot clé
+    Idée 2
+      Mot clé
+    Idée 3
+      Mot clé"""
+
+    return fallback_mermaid()
 
 
 def smart_truncate(label: str, max_len: int = 70) -> str:
@@ -1234,8 +1862,12 @@ def extract_module_body(text: str, module_label: str) -> str:
 # Mindmap quality controls
 MAX_NODE_WORDS = 4
 MIN_BLOCKS_PER_RICH_MODULE = 2
-MAX_BLOCKS_PER_MODULE = 3
-MAX_DETAILS_PER_BLOCK = 5
+MAX_BLOCKS_PER_MODULE = 2
+MAX_DETAILS_PER_BLOCK = 3
+MAX_TOP_LEVEL_NODES = 6
+MAX_CHILDREN_PER_NODE = 5
+MAX_TOTAL_MERMAID_LABELS = 28
+MAX_MERMAID_INDENT = 6  # root -> section -> subtopic only
 
 
 def simplify_label(label: str, output_language: str = "fr") -> str:
@@ -2181,7 +2813,7 @@ def normalize_blocks_with_ai(blocks, module_label: str = "", output_language: st
     )
 
 # Hybrid clustering controls
-ENABLE_OPENAI_LIKE_CLUSTERING = True
+ENABLE_OPENAI_LIKE_CLUSTERING = False  # disabled for stable, domain-agnostic diagrams
 AI_CLUSTER_MIN_ITEMS = 7
 AI_CLUSTER_MAX_ITEMS = 18
 _AI_CLUSTER_CACHE = {}
@@ -2308,6 +2940,160 @@ def hybrid_cluster_items(items, module_label: str = "", output_language: str = "
     _AI_CLUSTER_CACHE[cache_key] = deterministic
     return deterministic
 
+
+def smart_group_blocks(blocks, module_label: str = "", output_language: str = "fr") -> list[dict]:
+    """
+    Safe universal smart-grouping layer.
+
+    Purpose:
+    - Improve flat or weak mindmap blocks without breaking good structures.
+    - Work for any subject/domain.
+    - Use ONLY labels already extracted from the source-supported blocks.
+    - Never invent new leaf content.
+
+    Important behavior:
+    - If existing blocks already have meaningful labels and children, keep them.
+    - If blocks are flat/weak, regroup their items into universal educational categories.
+    - Preserve source-supported children and keep the diagram compact.
+    """
+    if not isinstance(blocks, list):
+        return []
+
+    cleaned_blocks = []
+    flat_items = []
+
+    weak_labels = {
+        "contenu", "content", "points cles", "points clés", "key points",
+        "details", "détails", "information", "informations", "elements", "éléments",
+        "autres", "others", "divers", "general", "général", "generalites", "généralités",
+    }
+
+    def is_meaningful_block(label: str, children: list) -> bool:
+        key = normalize_for_match(label)
+        if not key or key in {normalize_for_match(x) for x in weak_labels}:
+            return False
+        return isinstance(children, list) and len(children) >= 2
+
+    # 1) Keep meaningful source-supported blocks, flatten weak ones.
+    for block in blocks:
+        if isinstance(block, dict):
+            label = clean_node_label(block.get("label", ""), 60, output_language=output_language)
+            children = [
+                clean_node_label(child, 60, output_language=output_language)
+                for child in block.get("children", [])
+                if clean_node_label(child, 60, output_language=output_language)
+            ]
+            children = deduplicate_nodes(children)
+
+            if label and is_meaningful_block(label, children):
+                cleaned_blocks.append({"label": label, "children": children[:MAX_DETAILS_PER_BLOCK]})
+            else:
+                if label:
+                    flat_items.append(label)
+                flat_items.extend(children)
+        else:
+            item = clean_node_label(block, 60, output_language=output_language)
+            if item:
+                flat_items.append(item)
+
+    # If the existing structure is already pedagogically useful, keep it.
+    # This prevents regressions on courses that already render well.
+    if len(cleaned_blocks) >= 2 and len(flat_items) <= 2:
+        return cleaned_blocks[:MAX_BLOCKS_PER_MODULE]
+
+    flat_items = deduplicate_nodes([
+        clean_node_label(item, 60, output_language=output_language)
+        for item in flat_items
+        if clean_node_label(item, 60, output_language=output_language)
+    ])
+
+    if not flat_items:
+        return cleaned_blocks[:MAX_BLOCKS_PER_MODULE]
+
+    # 2) Universal semantic grouping, not domain-specific.
+    if output_language == "ar":
+        category_rules = [
+            ("المفاهيم", ["تعريف", "مفهوم", "مصطلح", "نظرية", "مبدأ"]),
+            ("المكونات", ["جزء", "مكون", "عنصر", "قسم"]),
+            ("الخصائص", ["خاصية", "ميزة", "صفة", "جودة", "مهارة", "كفاءة"]),
+            ("الشروط", ["شرط", "ظرف", "سياق", "عامل", "إجهاد", "تعب"]),
+            ("الأنواع", ["نوع", "تصنيف", "فئة", "شكل"]),
+            ("المسار", ["تطور", "مرحلة", "خطوة", "عملية", "انتقال"]),
+            ("القواعد", ["قاعدة", "قانون", "التزام", "مسؤولية", "حق"]),
+            ("التطبيقات", ["مثال", "تطبيق", "حالة", "استعمال"]),
+        ]
+        fallback_label = "محاور أساسية"
+    elif output_language == "en":
+        category_rules = [
+            ("Concepts", ["definition", "concept", "term", "principle", "theory"]),
+            ("Components", ["component", "part", "element", "section", "module"]),
+            ("Characteristics", ["quality", "skill", "feature", "property", "ability", "competence"]),
+            ("Conditions", ["condition", "constraint", "requirement", "factor", "stress", "fatigue"]),
+            ("Types", ["type", "category", "class", "classification", "model"]),
+            ("Process", ["process", "step", "stage", "evolution", "progression", "phase"]),
+            ("Rules", ["rule", "obligation", "right", "responsibility", "standard", "contract"]),
+            ("Applications", ["example", "case", "application", "use"]),
+        ]
+        fallback_label = "Core ideas"
+    else:
+        category_rules = [
+            ("Concepts", ["définition", "definition", "concept", "notion", "terme", "principe", "théorie"]),
+            ("Composants", ["composant", "partie", "élément", "section", "module"]),
+            ("Caractéristiques", ["qualité", "compétence", "caractéristique", "propriété", "aptitude", "capacité"]),
+            ("Conditions", ["condition", "contrainte", "exigence", "facteur", "stress", "fatigue"]),
+            ("Types", ["type", "catégorie", "classe", "classification", "modèle", "compagnie"]),
+            ("Processus", ["processus", "étape", "phase", "évolution", "progression", "parcours"]),
+            ("Règles", ["règle", "obligation", "droit", "responsabilité", "contrat", "norme"]),
+            ("Applications", ["exemple", "cas", "application", "usage"]),
+        ]
+        fallback_label = "Idées clés"
+
+    used = set()
+    grouped = []
+
+    for category_label, keywords in category_rules:
+        children = []
+        for item in flat_items:
+            item_key = normalize_for_match(item)
+            if item_key in used:
+                continue
+            if any(normalize_for_match(keyword) in item_key for keyword in keywords):
+                children.append(item)
+                used.add(item_key)
+
+        children = deduplicate_nodes(children)
+        if len(children) >= 2:
+            grouped.append({
+                "label": category_label,
+                "children": children[:MAX_DETAILS_PER_BLOCK],
+            })
+
+        if len(grouped) >= MAX_BLOCKS_PER_MODULE:
+            break
+
+    remaining = [item for item in flat_items if normalize_for_match(item) not in used]
+
+    # 3) Merge with existing meaningful blocks without exceeding display limits.
+    final_blocks = []
+    for block in cleaned_blocks:
+        final_blocks.append(block)
+        if len(final_blocks) >= MAX_BLOCKS_PER_MODULE:
+            break
+
+    for block in grouped:
+        if len(final_blocks) >= MAX_BLOCKS_PER_MODULE:
+            break
+        if normalize_for_match(block["label"]) not in {normalize_for_match(b.get("label", "")) for b in final_blocks}:
+            final_blocks.append(block)
+
+    if not final_blocks and remaining:
+        final_blocks.append({
+            "label": fallback_label,
+            "children": remaining[:MAX_DETAILS_PER_BLOCK],
+        })
+
+    return final_blocks[:MAX_BLOCKS_PER_MODULE]
+
 def enrich_modules(tree, text, output_language: str = "fr"):
     """
     95% quality generic mindmap enrichment.
@@ -2414,6 +3200,14 @@ def enrich_modules(tree, text, output_language: str = "fr"):
 
         # 4) Final quality pass.
         children = rebalance_blocks(
+            children,
+            module_label=module_label,
+            output_language=output_language,
+        )
+
+        # 4.1) Smart grouping pass.
+        # Safe universal layer: keeps good structures, only regroups weak/flat blocks.
+        children = smart_group_blocks(
             children,
             module_label=module_label,
             output_language=output_language,
@@ -2602,6 +3396,242 @@ def build_minimal_tree(keywords: list[str]) -> list[str]:
     return keywords[:8]
 
 
+
+
+def is_final_diagram_junk_label(label: str, root_label: str = "") -> bool:
+    """
+    Universal final filter for Mermaid labels.
+
+    Removes:
+    - duplicated root labels as children
+    - numeric-only nodes like "1"
+    - generic UI/summary labels
+    - very short broken OCR fragments
+
+    Keeps:
+    - real course concepts
+    - numeric units like "30 heures"
+    """
+    label = safe_text(label).strip()
+    if not label:
+        return True
+
+    label = label.strip(" .;:,،؛")
+    key = normalize_for_match(label)
+    root_key = normalize_for_match(root_label)
+
+    if not key:
+        return True
+
+    if root_key and key == root_key:
+        return True
+
+    if label.isdigit():
+        return True
+
+    weak_keys = {
+        "sujet principal",
+        "main topic",
+        "موضوع رئيسي",
+        "الموضوع الرئيسي",
+        "resume graphique",
+        "visual summary",
+        "cours",
+    }
+
+    if key in weak_keys:
+        return True
+
+    # Remove tiny broken labels, but keep numeric facts like "30 heures".
+    if len(label) < 3 and not any(ch.isdigit() for ch in label):
+        return True
+
+    return False
+
+
+def clean_final_mermaid_diagram(
+    diagram: str,
+    root_label: str = "",
+    output_language: str = "fr",
+) -> str:
+    """
+    Final universal post-processing for every Mermaid mindmap.
+
+    It does NOT invent content.
+    It only removes unsafe/noisy/duplicated nodes and keeps the existing hierarchy.
+    """
+    if not isinstance(diagram, str):
+        return fallback_mermaid()
+
+    raw_lines = [line.rstrip() for line in diagram.splitlines() if line.strip()]
+    if not raw_lines:
+        return fallback_mermaid()
+
+    if raw_lines[0].strip() != "mindmap":
+        raw_lines.insert(0, "mindmap")
+
+    detected_root = root_label
+
+    for line in raw_lines:
+        stripped = line.strip()
+        match = re.match(r"root\s*\(\((.*?)\)\)", stripped)
+        if match:
+            detected_root = detected_root or match.group(1).strip()
+            break
+
+    output = []
+    seen_by_indent = {}
+    root_written = False
+
+    for idx, line in enumerate(raw_lines):
+        stripped = line.strip()
+
+        if not stripped:
+            continue
+
+        if stripped == "mindmap":
+            if not output:
+                output.append("mindmap")
+            continue
+
+        if stripped.startswith("root(("):
+            if root_written:
+                continue
+            output.append(line)
+            root_written = True
+            continue
+
+        indent = len(line) - len(line.lstrip(" "))
+        label = stripped.replace(":::part", "").replace(":::chapter", "").strip()
+        label = clean_toc_label(label)
+        label = strip_module_prefix(label)
+        label = re.sub(r"\s+", " ", label).strip(" .;:,،؛")
+
+        if is_final_diagram_junk_label(label, detected_root):
+            continue
+
+        key = normalize_for_match(label)
+        if not key:
+            continue
+
+        # Deduplicate siblings at the same visual level.
+        indent_seen = seen_by_indent.setdefault(indent, set())
+        if key in indent_seen:
+            continue
+
+        indent_seen.add(key)
+        output.append(" " * indent + safe_truncate(label, 70))
+
+    if len(output) < 3:
+        return fallback_mermaid()
+
+    return "\n".join(output).strip()
+
+
+def compact_mermaid_diagram(
+    diagram: str,
+    max_top_level: int = MAX_TOP_LEVEL_NODES,
+    max_children: int = MAX_CHILDREN_PER_NODE,
+    max_total_labels: int = MAX_TOTAL_MERMAID_LABELS,
+    max_indent: int = MAX_MERMAID_INDENT,
+) -> str:
+    """
+    Universal Mermaid compactor.
+
+    Improvements:
+    - removes duplicated root as child
+    - removes numeric junk nodes like "1"
+    - limits density
+    - preserves Mermaid visual quality
+    """
+    if not isinstance(diagram, str) or not diagram.strip().startswith("mindmap"):
+        return diagram
+
+    raw_lines = [line.rstrip() for line in diagram.splitlines() if line.strip()]
+    if len(raw_lines) < 3:
+        return diagram
+
+    root_label = ""
+    for line in raw_lines:
+        stripped = line.strip()
+        match = re.match(r"root\s*\(\((.*?)\)\)", stripped)
+        if match:
+            root_label = match.group(1).strip()
+            break
+
+    output = []
+    seen_labels = set()
+    child_counts = {"root": 0}
+    parent_by_indent = {2: "root"}
+    total_labels = 0
+
+    for line in raw_lines:
+        stripped = line.strip()
+
+        if stripped == "mindmap":
+            output.append("mindmap")
+            continue
+
+        if stripped.startswith("root(("):
+            if any(existing.strip().startswith("root((") for existing in output):
+                continue
+            output.append(line)
+            parent_by_indent = {2: "root"}
+            continue
+
+        indent = len(line) - len(line.lstrip(" "))
+
+        # Keep only root -> section -> subtopic.
+        if indent > max_indent:
+            continue
+
+        label = stripped.replace(":::part", "").replace(":::chapter", "").strip()
+        label = clean_toc_label(label)
+        label = strip_module_prefix(label)
+        label = re.sub(r"\s+", " ", label).strip(" .;:,،؛")
+        label_key = normalize_for_match(label)
+
+        if not label_key:
+            continue
+
+        if is_final_diagram_junk_label(label, root_label):
+            continue
+
+        if label_key in seen_labels:
+            continue
+
+        if is_instruction_noise_label(label):
+            continue
+
+        parent_indent = 2 if indent <= 4 else 4
+        parent_key = parent_by_indent.get(parent_indent, "root")
+
+        if indent == 4 and child_counts.get("root", 0) >= max_top_level:
+            continue
+
+        if child_counts.get(parent_key, 0) >= max_children:
+            continue
+
+        if total_labels >= max_total_labels:
+            break
+
+        output.append(" " * indent + safe_truncate(label, 70))
+        seen_labels.add(label_key)
+        total_labels += 1
+
+        child_counts[parent_key] = child_counts.get(parent_key, 0) + 1
+        parent_by_indent[indent] = label_key
+        child_counts.setdefault(label_key, 0)
+
+        for known_indent in list(parent_by_indent.keys()):
+            if known_indent > indent:
+                parent_by_indent.pop(known_indent, None)
+
+    if len(output) < 3:
+        return diagram
+
+    return clean_final_mermaid_diagram("\n".join(output).strip(), root_label=root_label)
+
 def generate_mermaid(tree, root: str = "الموضوع الرئيسي", output_language: str = "fr") -> str:
     """
     Mermaid-safe generator with true 3-level support and simplified labels.
@@ -2676,7 +3706,7 @@ def generate_mermaid(tree, root: str = "الموضوع الرئيسي", output_l
             if label:
                 lines.append(f"    {smart_truncate(label, 70)}")
 
-    return "\n".join(lines)
+    return compact_mermaid_diagram("\n".join(lines))
 
 def is_bad_mermaid_fallback(diagram: str) -> bool:
     """
@@ -2981,19 +4011,38 @@ def clean_mermaid_duplicates(diagram: str) -> str:
     return "\n".join(cleaned_lines)
 
 
-def enforce_mermaid_template(diagram: str) -> str:
+def enforce_mermaid_template(
+    diagram: str,
+    output_language: str = "en",
+    root_label: str = "",
+) -> str:
     """
     Final Mermaid safety layer:
     - valid mindmap
     - real line breaks
     - no duplicate labels
+    - no duplicated root child
+    - no numeric junk nodes
+    - Arabic/RTL parser-safe labels
     - frontend-safe fallback
     """
+    output_language = normalize_output_language(output_language)
+
     diagram = fix_mermaid(diagram)
     diagram = clean_mermaid_duplicates(diagram)
+    diagram = clean_final_mermaid_diagram(
+        diagram,
+        root_label=root_label,
+        output_language=output_language,
+    )
+    diagram = sanitize_mermaid_for_render(
+        diagram,
+        output_language=output_language,
+        root_label=root_label,
+    )
 
     if not diagram.startswith("mindmap") or "\n" not in diagram:
-        return fallback_mermaid()
+        return fallback_mermaid_for_language(output_language)
 
     return diagram
 
@@ -3003,8 +4052,14 @@ def normalize_result(result: dict) -> dict:
 
     result["summary"] = safe_text(result.get("summary", ""))
     result["written_summary"] = safe_text(result.get("written_summary", ""))
-    result["visual_summary"] = safe_text(result.get("visual_summary", ""))
-    result["visual_diagram"] = enforce_mermaid_template(safe_text(result.get("visual_diagram", "")))
+    result["visual_summary"] = clean_visual_summary_text(safe_text(result.get("visual_summary", "")))
+    result_language = normalize_output_language(
+        safe_text(result.get("output_language", result.get("language", "")))
+    )
+    result["visual_diagram"] = enforce_mermaid_template(
+        safe_text(result.get("visual_diagram", "")),
+        output_language=result_language,
+    )
 
     result["key_points"] = safe_string_list(result.get("key_points", []))
 
@@ -3035,8 +4090,14 @@ def normalize_result(result: dict) -> dict:
 
     raw_diagram_explanations = result.get("diagram_explanations", {})
     if isinstance(raw_diagram_explanations, dict):
+        explanation_language = normalize_output_language(
+            safe_text(result.get("output_language", result.get("language", "")))
+        )
         result["diagram_explanations"] = {
-            safe_text(key).strip(): safe_text(value).strip()
+            safe_text(key).strip(): polish_explanation_for_display(
+                safe_text(value).strip(),
+                output_language=explanation_language,
+            )
             for key, value in raw_diagram_explanations.items()
             if safe_text(key).strip() and safe_text(value).strip()
         }
@@ -3069,9 +4130,16 @@ Analyze the following content.
 LANGUAGE: {output_language}
 
 FINAL DIAGRAM RULE:
-- Client-facing visual_diagram must be generated by the deterministic pipeline.
-- Use Root -> Module in default SaaS mode.
-- Never add unsupported body details as mindmap children. Controlled source-supported enrichment from deterministic pipeline is allowed.
+- Generate visual_diagram as a professional, domain-agnostic educational Mermaid mindmap.
+- Transform the document into a learning structure, not a copied worksheet.
+- Prefer a true hierarchy when the document has clear structure: Root -> Main sections -> Subtopics -> Key details.
+- Adapt the structure to the subject domain: literature, science, law, business, medicine, exam paper, or any other course type.
+- For exam papers or worksheets, group raw questions into learning skills such as source material, comprehension skills, language/style skills, writing task, and evaluation criteria.
+- For lessons or courses, separate branches according to the real lesson sections and subtopics.
+- Do NOT include scoring, points, question numbers, answer options, or raw commands such as recopy/complete/justify.
+- Do NOT create flat lists when a meaningful hierarchy exists.
+- Do NOT mix unrelated elements under the same branch.
+- Do NOT invent unsupported branches or details.
 - Never use Mermaid classDef/style syntax.
 
 PRIORITY:
@@ -3112,6 +4180,7 @@ TOC GOLDEN RULE:
 VISUAL RULE:
 - Parts must be visually dominant.
 - Chapters must be grouped under parts.
+- For exam/worksheet documents, keep Text, Questions/Comprehension, Written production, and Evaluation criteria as separate top-level branches when present.
 - Avoid flat structures only when true hierarchy exists.
 - Default SaaS diagram should stay clean and faithful, not over-detailed.
 - Default hybrid SaaS mode must prefer safe structure:
@@ -3436,6 +4505,11 @@ def diagram_quality_score(diagram: str) -> int:
     duplicates = len(normalized) - len(set(normalized))
     score -= duplicates * 12
 
+    # Reward common pedagogical structure for exams/worksheets when present.
+    normalized_diagram = normalize_for_match(" ".join(labels))
+    if any(term in normalized_diagram for term in ["comprehension", "production ecrite", "written production", "texte de base", "evaluation"]):
+        score += 20
+
     if is_bad_mermaid_fallback(diagram):
         score -= 200
 
@@ -3517,22 +4591,365 @@ def extract_mermaid_labels(mermaid: str) -> list[str]:
     return labels
 
 
-def generate_node_explanations(
-    visual_diagram: str,
+
+def clean_generated_explanations(
+    explanations: dict,
+    labels: list[str],
+    output_language: str = "en",
+) -> dict:
+    """
+    Final safety layer for diagram explanations.
+
+    Goals:
+    - Keep only labels that exist in the diagram.
+    - Remove low-quality generic explanations.
+    - Avoid repeated boilerplate that hurts product quality.
+    - Never invent new labels.
+    """
+    if not isinstance(explanations, dict):
+        return {}
+
+    output_language = normalize_output_language(output_language)
+
+    allowed = {normalize_for_match(label): label for label in labels if safe_text(label).strip()}
+    cleaned = {}
+    seen_values = set()
+
+    generic_patterns = [
+        "this label is mentioned",
+        "mentioned in the diagram",
+        "ce libellé est mentionné",
+        "mentionné dans le diagramme",
+        "هذا العنصر مذكور",
+        "مذكور في المخطط",
+        "une des",
+        "un type de",
+        "a kind of",
+        "one of the",
+    ]
+
+    for key, value in explanations.items():
+        clean_key = normalize_for_match(key)
+        if clean_key not in allowed:
+            continue
+
+        explanation = safe_text(value).strip()
+        if not explanation:
+            continue
+
+        explanation_key = normalize_for_match(explanation)
+        if not explanation_key:
+            continue
+
+        # Drop generic/boilerplate explanations. The UI already has a safe fallback.
+        lowered = explanation.lower()
+        normalized_value = normalize_for_match(explanation)
+        if any(pattern in lowered or normalize_for_match(pattern) in normalized_value for pattern in generic_patterns):
+            continue
+
+        # Avoid showing the same explanation repeatedly for many nodes.
+        if normalized_value in seen_values:
+            continue
+
+        seen_values.add(normalized_value)
+        cleaned[allowed[clean_key]] = explanation
+
+    return cleaned
+
+def split_source_lines_for_explanations(source_text: str) -> list[str]:
+    """
+    Prepares source text for extractive diagram explanations.
+
+    Keeps educational lines and removes obvious UI/noise.
+    """
+    if not isinstance(source_text, str):
+        return []
+
+    cleaned = remove_ui_noise(light_ocr_fix(source_text))
+    lines = []
+
+    for raw in cleaned.splitlines():
+        line = safe_text(raw).strip()
+        if not line:
+            continue
+
+        line = re.sub(r"\s+", " ", line).strip()
+
+        if len(line) <= 2:
+            continue
+
+        # Remove website/footer noise often present in course PDFs.
+        lower = line.lower()
+        if any(
+            noise in lower
+            for noise in [
+                "fsjescours.com",
+                "plus des cours",
+                "télécharger gratuitement",
+                "telecharger gratuitement",
+            ]
+        ):
+            continue
+
+        lines.append(line)
+
+    return lines
+
+
+def is_probable_explanation_stop_line(line: str, collected_count: int = 0) -> bool:
+    """
+    Conservative stop rule for extracted explanations.
+
+    We do NOT stop on useful subheadings immediately after a heading, because
+    branches such as "Droit public" / "Droit privé" are often the actual
+    explanation content.
+    """
+    if not isinstance(line, str):
+        return True
+
+    stripped = line.strip()
+    if not stripped:
+        return True
+
+    key = normalize_for_match(stripped)
+
+    hard_stops = [
+        "chapitre",
+        "chapter",
+        "section",
+        "premiere partie",
+        "deuxieme partie",
+        "troisieme partie",
+        "partie",
+        "الفصل",
+        "الجزء",
+    ]
+
+    # Stop at a new major heading only after at least one useful line.
+    if collected_count > 0 and any(key.startswith(stop) for stop in hard_stops):
+        return True
+
+    # Stop at clear page/course metadata.
+    if collected_count > 0 and any(
+        marker in key
+        for marker in [
+            "universite",
+            "faculte",
+            "annee universitaire",
+            "semestre",
+            "professeur",
+        ]
+    ):
+        return True
+
+    return False
+
+
+def extract_clean_explanation_snippet(lines: list[str], start_index: int, max_lines: int = 6, max_chars: int = 620) -> str:
+    """
+    Extracts a readable explanation snippet after a matched heading/label.
+    The output is extractive: it uses the document wording with light cleanup.
+    """
+    if not isinstance(lines, list) or start_index < 0:
+        return ""
+
+    collected = []
+
+    for line in lines[start_index + 1:start_index + 1 + max_lines + 4]:
+        if is_probable_explanation_stop_line(line, len(collected)):
+            break
+
+        clean = safe_text(line).strip()
+        clean = re.sub(r"^[•*-]\s*", "", clean).strip()
+        clean = re.sub(r"\s+", " ", clean).strip()
+
+        if not clean:
+            continue
+
+        # Avoid collecting raw questions as the main explanation.
+        key = normalize_for_match(clean)
+        if key.startswith("quelles sont") or key.startswith("comment peut"):
+            continue
+
+        collected.append(clean)
+
+        if len(" ".join(collected)) >= max_chars:
+            break
+
+        if len(collected) >= max_lines:
+            break
+
+    snippet = " ".join(collected)
+    snippet = re.sub(r"\s+", " ", snippet).strip()
+    snippet = polish_explanation_for_display(
+        snippet,
+        output_language="ar" if has_arabic_text(snippet) else "en",
+        max_chars=max_chars,
+    )
+
+    return snippet
+
+
+def score_line_for_label(label: str, line: str) -> int:
+    """
+    Scores how relevant a source line is for a diagram label.
+    """
+    label_key = normalize_for_match(label)
+    line_key = normalize_for_match(line)
+
+    if not label_key or not line_key:
+        return 0
+
+    score = 0
+
+    if label_key == line_key:
+        score += 100
+
+    if label_key in line_key:
+        score += 80
+
+    label_words = [w for w in label_key.split() if len(w) >= 4]
+    if label_words:
+        overlap = sum(1 for word in label_words if word in line_key)
+        score += overlap * 20
+
+    # Prefer heading-like lines.
+    if len(line.split()) <= 12:
+        score += 8
+
+    return score
+
+
+def extract_document_explanation_for_label(
+    label: str,
+    source_text: str,
+    output_language: str = "fr",
+) -> str:
+    """
+    Extracts a detailed explanation for one diagram node directly from the document.
+
+    Priority:
+    1. exact/near heading match + following local lines
+    2. best paragraph/sentence containing the label terms
+    3. empty string, so caller can fallback safely
+
+    No external knowledge is added.
+    """
+    label = safe_text(label).strip()
+    if not label or not isinstance(source_text, str):
+        return ""
+
+    lines = split_source_lines_for_explanations(source_text)
+    if not lines:
+        return ""
+
+    label_key = normalize_for_match(label)
+
+    # Avoid explaining generic root labels.
+    generic_roots = {
+        normalize_for_match("Sujet principal"),
+        normalize_for_match("Main topic"),
+        normalize_for_match("الموضوع الرئيسي"),
+    }
+    if label_key in generic_roots:
+        return ""
+
+    best_index = -1
+    best_score = 0
+
+    for idx, line in enumerate(lines):
+        score = score_line_for_label(label, line)
+
+        # Also match stripped versions: "Branches du Droit" vs "Les différentes branches du Droit".
+        stripped_label = strip_module_prefix(label)
+        if stripped_label and stripped_label != label:
+            score = max(score, score_line_for_label(stripped_label, line))
+
+        if score > best_score:
+            best_score = score
+            best_index = idx
+
+    # Strong local extraction when we found the heading or a strong concept line.
+    if best_index >= 0 and best_score >= 40:
+        snippet = extract_clean_explanation_snippet(
+            lines,
+            best_index,
+            max_lines=7,
+            max_chars=700,
+        )
+
+        # If the matched line itself is explanatory, include it too.
+        matched_line = re.sub(r"^[•*-]\s*", "", lines[best_index]).strip()
+        matched_key = normalize_for_match(matched_line)
+
+        if matched_line and label_key not in {
+            normalize_for_match(matched_line),
+            normalize_for_match(strip_module_prefix(matched_line)),
+        }:
+            if len(matched_line.split()) > 5:
+                snippet = f"{matched_line} {snippet}".strip()
+
+        snippet = re.sub(r"\s+", " ", snippet).strip()
+
+        if len(snippet) >= 45:
+            return polish_explanation_for_display(
+                snippet,
+                output_language=output_language,
+                max_chars=700,
+            )
+
+    # Sentence/paragraph fallback: find lines containing important label words.
+    label_words = [w for w in label_key.split() if len(w) >= 4]
+    candidates = []
+
+    for idx, line in enumerate(lines):
+        line_key = normalize_for_match(line)
+
+        if not line_key:
+            continue
+
+        overlap = sum(1 for word in label_words if word in line_key)
+
+        if label_key in line_key or overlap >= max(1, min(2, len(label_words))):
+            candidate = line.strip()
+
+            # Add one following line if it completes the idea.
+            if idx + 1 < len(lines):
+                next_line = lines[idx + 1].strip()
+                if next_line and not is_probable_explanation_stop_line(next_line, 1):
+                    if len(candidate) + len(next_line) < 650:
+                        candidate = f"{candidate} {next_line}"
+
+            candidates.append(candidate)
+
+    candidates = [
+        re.sub(r"\s+", " ", c).strip()
+        for c in candidates
+        if len(c.strip()) >= 45
+    ]
+
+    if candidates:
+        best = max(candidates, key=lambda value: score_line_for_label(label, value))
+        return polish_explanation_for_display(
+            best,
+            output_language=output_language,
+            max_chars=700,
+        )
+
+    return ""
+
+
+def generate_ai_node_explanations_fallback(
+    labels: list[str],
     source_text: str,
     output_language: str = "en",
 ) -> dict:
     """
-    Generates short explanations for each Mermaid node label.
+    Old AI fallback, used only when extractive document matching fails.
 
-    Important:
-    - Explanations are returned separately from visual_diagram.
-    - The diagram stays clean and short.
-    - Works for any course PDF/domain because labels come from the generated diagram.
-    - The model is instructed to use only the source text.
+    This keeps the app robust while making document extraction the default.
     """
     output_language = normalize_output_language(output_language)
-    labels = extract_mermaid_labels(visual_diagram)
 
     if not labels:
         return {}
@@ -3540,9 +4957,9 @@ def generate_node_explanations(
     language_name = get_language_name(output_language)
 
     fallback_messages = {
-        "en": "This label is mentioned in the diagram, but the source text does not clearly explain it.",
-        "fr": "Ce libellé est mentionné dans le diagramme, mais le texte source ne l’explique pas clairement.",
-        "ar": "هذا العنصر مذكور في المخطط، لكن النص المصدر لا يشرحه بوضوح.",
+        "en": "No precise explanation is available in the source text.",
+        "fr": "Aucune explication précise n’est disponible dans le document source.",
+        "ar": "لا يوجد شرح دقيق متاح في النص المصدر.",
     }
 
     prompt = f"""
@@ -3555,9 +4972,14 @@ Rules:
 - Use ONLY the provided source text.
 - Do NOT invent information.
 - Do NOT add external knowledge.
-- If the source text does not clearly explain a label, use this exact fallback sentence translated in the requested language:
+- Explain the concept in the context of the lesson/document, not as a generic dictionary definition.
+- When useful, explain WHY the concept matters for understanding the document.
+- If the source text does not clearly explain a label, use this exact fallback sentence in the requested language:
 {fallback_messages.get(output_language, fallback_messages["en"])}
 - Keep each explanation short: 1 sentence maximum.
+- Avoid repetitive generic wording such as "Une des...", "Un type de...", "This label...", "Ce libellé...", or equivalent.
+- Each explanation must add a specific detail from the source when available.
+- Do NOT explain that a label is "mentioned in the diagram".
 - Return the explanations in {language_name}.
 - Keep the exact label keys unchanged.
 - Return ONLY valid JSON.
@@ -3594,32 +5016,584 @@ Source text:
         if not isinstance(explanations, dict):
             return {}
 
-        clean_explanations = {}
-
-        # Keep only labels from the diagram. This prevents extra invented keys.
-        allowed = {normalize_for_match(label): label for label in labels}
-
-        for key, value in explanations.items():
-            clean_key = normalize_for_match(key)
-            if clean_key not in allowed:
-                continue
-
-            explanation = safe_text(value).strip()
-            if explanation:
-                clean_explanations[allowed[clean_key]] = explanation
-
-        # Ensure every label has a safe explanation entry.
-        fallback = fallback_messages.get(output_language, fallback_messages["en"])
-        for label in labels:
-            if label not in clean_explanations:
-                clean_explanations[label] = fallback
-
-        return clean_explanations
+        return clean_generated_explanations(
+            explanations=explanations,
+            labels=labels,
+            output_language=output_language,
+        )
 
     except Exception as e:
-        print("DIAGRAM EXPLANATIONS FALLBACK:", e)
-        fallback = fallback_messages.get(output_language, fallback_messages["en"])
-        return {label: fallback for label in labels}
+        print("DIAGRAM EXPLANATIONS AI FALLBACK:", e)
+        return {}
+
+
+def generate_node_explanations(
+    visual_diagram: str,
+    source_text: str,
+    output_language: str = "en",
+) -> dict:
+    """
+    Generates explanations for each Mermaid node label.
+
+    Updated behavior:
+    - First, extract explanations directly from the uploaded document.
+    - Make explanations a bit more detailed for click interactions.
+    - Use AI only as a fallback for labels that cannot be matched in the source.
+    - Never changes the diagram itself.
+    """
+    output_language = normalize_output_language(output_language)
+    labels = extract_mermaid_labels(visual_diagram)
+
+    if not labels:
+        return {}
+
+    explanations = {}
+    missing_labels = []
+
+    for label in labels:
+        explanation = extract_document_explanation_for_label(
+            label=label,
+            source_text=source_text,
+            output_language=output_language,
+        )
+
+        if explanation:
+            explanations[label] = explanation
+        else:
+            missing_labels.append(label)
+
+    if missing_labels:
+        ai_fallback = generate_ai_node_explanations_fallback(
+            labels=missing_labels,
+            source_text=source_text,
+            output_language=output_language,
+        )
+
+        for label, explanation in ai_fallback.items():
+            if label not in explanations and explanation:
+                explanations[label] = explanation
+
+    return clean_generated_explanations(
+        explanations=explanations,
+        labels=labels,
+        output_language=output_language,
+    )
+
+
+def is_instruction_noise_label(label: str) -> bool:
+    """
+    Generic noise detector for visual diagram labels.
+
+    This is intentionally not tied to one course. It removes exam/task
+    instructions, scoring fragments, and answer-option lists that make a
+    mindmap look like a copied worksheet instead of a learning map.
+    """
+    key = normalize_for_match(label)
+    if not key:
+        return True
+
+    noise_fragments = [
+        # scoring / evaluation mechanics
+        "points", "pts", "marks", "score", "bareme", "notation",
+        # raw instructions
+        "recopiez", "completez", "completer", "relevez", "justifiez",
+        "repondez", "choisissez", "cochez", "qcm", "question",
+        "questions", "answer", "answers", "choose", "complete",
+        # raw option/list fragments often copied from worksheets
+        "a b c", "option", "options", "vrai faux",
+    ]
+
+    if any(fragment in key for fragment in noise_fragments):
+        return True
+
+    # Labels that are mostly numbers are not educational concepts.
+    if re.fullmatch(r"[0-9٠-٩\s:/.-]+", safe_text(label).strip()):
+        return True
+
+    # Raw comma-separated answer choices are usually not concept labels.
+    if safe_text(label).count(",") >= 2 and len(safe_text(label).split()) <= 9:
+        return True
+
+    return False
+
+
+def clean_universal_diagram(diagram: str) -> str:
+    """
+    Cleans a Mermaid mindmap without changing its structure aggressively.
+    Keeps it valid, removes noisy instruction/scoring leaves, deduplicates labels,
+    and preserves the safest educational nodes.
+    """
+    if not isinstance(diagram, str) or not diagram.strip().startswith("mindmap"):
+        return diagram
+
+    output = []
+    seen = set()
+
+    for line in diagram.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+
+        if stripped == "mindmap" or stripped.startswith("root(("):
+            output.append(line.rstrip())
+            continue
+
+        label = stripped.replace(":::part", "").replace(":::chapter", "").strip()
+        label_key = normalize_for_match(label)
+
+        if label_key in seen:
+            continue
+
+        if is_instruction_noise_label(label):
+            continue
+
+        seen.add(label_key)
+        output.append(line.rstrip())
+
+    if len(output) < 3:
+        return diagram
+
+    return compact_mermaid_diagram(
+        clean_final_mermaid_diagram("\n".join(output).strip())
+    )
+
+
+def generate_universal_visual_diagram(source_text: str, output_language: str = "en") -> str:
+    """
+    LLM-based universal diagram pass.
+
+    Purpose:
+    - Keep the existing deterministic pipeline as fallback.
+    - Produce a more pedagogical, domain-agnostic diagram when possible.
+    - Avoid worksheet/exam raw instructions and scoring nodes.
+    - Stay valid for any course/domain: literature, science, law, business, medicine, etc.
+    """
+    output_language = normalize_output_language(output_language)
+    language_name = get_language_name(output_language)
+    source_text = safe_text(source_text)
+
+    prompt = f"""
+You are an expert teacher for any subject and any educational domain.
+
+Create a UNIVERSAL educational Mermaid mindmap from the source text.
+
+Core goal:
+Transform the document into a learning structure, not a copied worksheet.
+
+Universal structure rules:
+- Identify the main topic as the root.
+- Create 3 to 5 top-level branches based on the document's real structure.
+- Each branch must have 2 to 5 children maximum.
+- Max total labels: 24.
+- Max depth: root -> branches -> subtopics only.
+- Do NOT include every table-of-contents entry; select the most pedagogically important concepts.
+- Adapt branch names to the domain and source:
+  literature: text, characters, themes, style, interpretation
+  science: concept, components, process, evidence, applications
+  law: concept, rules, conditions, obligations, cases
+  business: concept, factors, process, tools, applications
+  exam/worksheet: source material, comprehension skills, language/style skills, writing task, evaluation criteria
+- Use only information visible in the source.
+- Do NOT invent concepts.
+- Do NOT include scoring, points, marks, question numbers, answer options, or raw exam commands.
+- Do NOT create nodes like "10 points", "4 words", "recopy", "complete", or raw multiple-choice lists.
+- Prefer understanding categories over raw questions.
+- Keep labels short, clear, and useful.
+- Max depth: root -> sections -> subtopics.
+- Return ONLY valid Mermaid mindmap text.
+- Output language: {language_name}.
+
+Source text:
+{source_text[:12000]}
+"""
+
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4.1-mini",
+            messages=[
+                {"role": "system", "content": "Return only Mermaid mindmap text. No markdown fences. No explanations."},
+                {"role": "user", "content": prompt},
+            ],
+            temperature=0,
+        )
+
+        diagram = safe_text(response.choices[0].message.content).strip()
+        diagram = fix_mermaid(diagram)
+        diagram = clean_universal_diagram(diagram)
+
+        if mermaid_has_real_content(diagram):
+            return diagram
+
+    except Exception as e:
+        print("UNIVERSAL DIAGRAM FALLBACK:", e)
+
+    return ""
+
+
+def universal_diagram_quality_score(diagram: str) -> int:
+    """
+    Scores diagrams for universal pedagogy.
+    This is separate from the legacy score because the product should prefer
+    learning categories over copied worksheet instructions.
+    """
+    base = diagram_quality_score(diagram)
+    if base < -900:
+        return base
+
+    labels = extract_mermaid_labels(diagram)
+    normalized = [normalize_for_match(label) for label in labels]
+    joined = " ".join(normalized)
+
+    score = base
+
+    # Penalize worksheet/exam mechanics and raw instructions in any domain.
+    for label in labels:
+        if is_instruction_noise_label(label):
+            score -= 45
+
+    # Reward universal learning categories.
+    universal_terms = [
+        "definition", "concept", "components", "process", "examples", "applications",
+        "structure", "theme", "analysis", "interpretation", "evaluation",
+        "comprehension", "production", "criteria",
+        "definition", "concept", "composants", "processus", "exemples", "applications",
+        "analyse", "interpretation", "criteres", "comprehension",
+        "تعريف", "مفهوم", "مكونات", "عملية", "أمثلة", "تطبيقات", "تحليل", "تقييم"
+    ]
+    score += sum(8 for term in universal_terms if term in joined)
+
+    # Prefer diagrams that are concise and not overloaded.
+    if 10 <= len(labels) <= 24:
+        score += 45
+    elif 25 <= len(labels) <= 28:
+        score += 10
+    elif len(labels) > 28:
+        score -= (len(labels) - 28) * 12
+    elif len(labels) < 8:
+        score -= 20
+
+    # Penalize excessive depth for the default product view.
+    for line in diagram.splitlines():
+        if line.startswith("        "):
+            score -= 8
+
+    return score
+
+
+
+def strip_toc_dots_and_page(label: str) -> str:
+    """
+    Cleans TOC lines such as:
+    1.2 Sommes . . . . . . . . 14
+    without destroying useful titles.
+    """
+    label = safe_text(label).strip()
+    label = light_ocr_fix(label)
+    label = re.sub(r"\.{2,}.*$", "", label).strip()
+    label = re.sub(r"\s+[0-9٠-٩]{1,4}$", "", label).strip()
+    label = clean_toc_label(label)
+    return label.strip()
+
+
+def is_roman_part_line(line: str) -> bool:
+    """
+    Detects explicit part markers:
+    I Partie A
+    II Partie B
+    Part I
+    الجزء الأول
+    """
+    if not isinstance(line, str):
+        return False
+
+    clean = strip_toc_dots_and_page(line)
+    key = normalize_for_match(clean)
+
+    if re.match(r"^(i|ii|iii|iv|v|vi|vii|viii|ix|x)\s+partie\b", key):
+        return True
+
+    if re.match(r"^part\s+(i|ii|iii|iv|v|vi|vii|viii|ix|x|\d+)\b", key):
+        return True
+
+    if "الجزء" in clean:
+        return True
+
+    return False
+
+
+def is_major_chapter_line(line: str) -> bool:
+    """
+    Detects major TOC chapter lines:
+    0 Conseils...
+    1 Calculs...
+    2 Bases...
+    but excludes subchapters:
+    1.1 ...
+    0.1 ...
+    """
+    if not isinstance(line, str):
+        return False
+
+    clean = strip_toc_dots_and_page(line)
+
+    if not clean:
+        return False
+
+    if re.match(r"^[0-9٠-٩]+\s+\S+", clean):
+        return True
+
+    if re.match(r"^chapter\s+[0-9٠-٩]+\s+\S+", clean, flags=re.IGNORECASE):
+        return True
+
+    if re.match(r"^chapitre\s+[0-9٠-٩]+\s+\S+", clean, flags=re.IGNORECASE):
+        return True
+
+    if re.match(r"^الفصل\s+[0-9٠-٩]+", clean):
+        return True
+
+    return False
+
+
+def is_subchapter_line(line: str) -> bool:
+    """
+    Detects subchapter TOC lines:
+    0.1 ...
+    1.2 ...
+    3.4 ...
+    """
+    clean = strip_toc_dots_and_page(line)
+    return bool(re.match(r"^[0-9٠-٩]+\.[0-9٠-٩]+\s+\S+", clean))
+
+
+def clean_major_toc_label(label: str, output_language: str = "fr") -> str:
+    """
+    Cleans major TOC labels while preserving meaning.
+    """
+    label = strip_toc_dots_and_page(label)
+
+    # Remove chapter/part technical prefixes.
+    label = re.sub(r"^[0-9٠-٩]+\s+", "", label).strip()
+    label = re.sub(r"^(chapitre|chapter)\s+[0-9٠-٩]+\s*", "", label, flags=re.IGNORECASE).strip()
+    label = re.sub(r"^[IVXLCDM]+\s+", "", label, flags=re.IGNORECASE).strip()
+
+    label = clean_node_label(label, 70, output_language=output_language)
+
+    return label
+
+
+def build_toc_overview_mermaid(
+    source_text: str,
+    root_label: str = "",
+    output_language: str = "fr",
+) -> str:
+    """
+    Small, safe, domain-agnostic structure fix.
+
+    When a PDF has a real table of contents, build a clean overview:
+    root -> intro / parts -> major chapters
+
+    This avoids flat diagrams and avoids the previous invasive structure fix.
+    It does not invent content; it only uses TOC lines already present.
+    """
+    if not isinstance(source_text, str) or not source_text.strip():
+        return ""
+
+    output_language = normalize_output_language(output_language)
+    cleaned_text = light_ocr_fix(remove_ui_noise(source_text))
+    toc = detect_table_of_contents(cleaned_text)
+
+    if not toc or len(toc) < 4:
+        return ""
+
+    root = safe_text(root_label).strip() or detect_root_title(cleaned_text, output_language)
+    root = clean_node_label(root, 60, output_language=output_language) or get_main_topic_label(output_language)
+
+    intro_label = localized_title(
+        output_language,
+        en="Getting started",
+        fr="Conseils pour bien commencer",
+        ar="منهجية البداية",
+    )
+
+    lines = ["mindmap", f"  root(({safe_truncate(root, 55)}))"]
+
+    intro_children = []
+    parts = []
+    current_part = None
+
+    for raw in toc[:90]:
+        clean = strip_toc_dots_and_page(raw)
+
+        if not clean:
+            continue
+
+        if is_roman_part_line(clean):
+            part_label = clean_major_toc_label(clean, output_language=output_language)
+            if not part_label:
+                continue
+
+            # Normalize simple part labels for readability.
+            if normalize_for_match(part_label) in {"partie a", "part a"}:
+                part_label = localized_title(output_language, "Part A", "Partie A", "الجزء أ")
+            elif normalize_for_match(part_label) in {"partie b", "part b"}:
+                part_label = localized_title(output_language, "Part B", "Partie B", "الجزء ب")
+
+            current_part = {
+                "label": part_label,
+                "children": [],
+            }
+            parts.append(current_part)
+            continue
+
+        if is_major_chapter_line(clean):
+            chapter_label = clean_major_toc_label(clean, output_language=output_language)
+
+            if not chapter_label:
+                continue
+
+            chapter_key = normalize_for_match(chapter_label)
+
+            # Chapter 0 / introduction belongs to intro before formal parts.
+            if current_part is None:
+                if chapter_key and chapter_key not in {normalize_for_match(intro_label)}:
+                    intro_children.append(chapter_label)
+                else:
+                    intro_children.append(chapter_label)
+            else:
+                current_part["children"].append(chapter_label)
+
+            continue
+
+        # Keep only the most important subchapters for the intro chapter.
+        if current_part is None and is_subchapter_line(clean) and len(intro_children) < 5:
+            sub_label = clean_major_toc_label(clean, output_language=output_language)
+            if sub_label:
+                intro_children.append(sub_label)
+
+    # Deduplicate and trim.
+    intro_children = deduplicate_nodes([
+        child for child in intro_children
+        if normalize_for_match(child) != normalize_for_match(intro_label)
+    ])[:5]
+
+    parts = [
+        {
+            "label": part["label"],
+            "children": deduplicate_nodes(part.get("children", []))[:6],
+        }
+        for part in parts
+        if part.get("label") and part.get("children")
+    ]
+
+    # If no parts were found, fallback to major chapters only.
+    if not parts:
+        chapters = []
+        for raw in toc:
+            if is_major_chapter_line(raw):
+                chapter = clean_major_toc_label(raw, output_language=output_language)
+                if chapter:
+                    chapters.append(chapter)
+
+        chapters = deduplicate_nodes(chapters)[:8]
+
+        if len(chapters) < 3:
+            return ""
+
+        for chapter in chapters:
+            lines.append(f"    {safe_truncate(chapter, 65)}")
+
+        return clean_final_mermaid_diagram(
+            "\n".join(lines),
+            root_label=root,
+            output_language=output_language,
+        )
+
+    if intro_children:
+        lines.append(f"    {safe_truncate(intro_label, 65)}")
+        for child in intro_children[:5]:
+            lines.append(f"      {safe_truncate(child, 65)}")
+
+    for part in parts[:3]:
+        lines.append(f"    {safe_truncate(part['label'], 65)}")
+        for child in part["children"][:6]:
+            lines.append(f"      {safe_truncate(child, 65)}")
+
+    diagram = "\n".join(lines)
+
+    if len(diagram.splitlines()) < 5:
+        return ""
+
+    return clean_final_mermaid_diagram(
+        diagram,
+        root_label=root,
+        output_language=output_language,
+    )
+
+
+def clean_visual_summary_text(value, output_language: str = "fr"):
+    """
+    Cleans visual_summary text only.
+
+    Removes:
+    - duplicated root/title lines
+    - numeric junk like "1"
+    - generic labels such as "Sujet principal" when repeated as content
+
+    Keeps the original simple string format for frontend compatibility.
+    """
+    if not isinstance(value, str):
+        return value
+
+    lines = [
+        safe_text(line).strip()
+        for line in value.splitlines()
+        if safe_text(line).strip()
+    ]
+
+    if not lines:
+        return value
+
+    cleaned = []
+    seen = set()
+
+    generic = {
+        normalize_for_match("Sujet principal"),
+        normalize_for_match("Main topic"),
+        normalize_for_match("الموضوع الرئيسي"),
+        normalize_for_match("Résumé graphique"),
+        normalize_for_match("Visual summary"),
+    }
+
+    for line in lines:
+        label = strip_toc_dots_and_page(line)
+        key = normalize_for_match(label)
+
+        if not label or not key:
+            continue
+
+        if label.isdigit():
+            continue
+
+        # Keep the first generic heading only if it is the very first line.
+        if key in generic and cleaned:
+            continue
+
+        if key in seen:
+            continue
+
+        seen.add(key)
+        cleaned.append(label)
+
+    return "\n".join(cleaned).strip() if cleaned else value
+
+
+def choose_best_visual_diagram_universal(*diagrams: str) -> str:
+    valid = [compact_mermaid_diagram(clean_universal_diagram(safe_text(diagram))) for diagram in diagrams if mermaid_has_real_content(safe_text(diagram))]
+
+    if not valid:
+        return fallback_mermaid()
+
+    return max(valid, key=universal_diagram_quality_score)
 
 def analyze_study_content(text: str, education_level: str, output_language: str = "en"):
     output_language = normalize_output_language(output_language)
@@ -3667,6 +5641,7 @@ def analyze_study_content(text: str, education_level: str, output_language: str 
                 "flashcards": [],
                 "study_plan": [],
                 "disclaimer": "This is for educational support only.",
+                "output_language": output_language,
             })
 
         # Keep model diagram before deterministic override.
@@ -3680,9 +5655,32 @@ def analyze_study_content(text: str, education_level: str, output_language: str 
             output_language=output_language,
         )
 
-        result["visual_diagram"] = choose_best_visual_diagram(
-            model_diagram=model_diagram,
-            deterministic_diagram=deterministic_diagram,
+        # Universal pedagogical diagram candidate.
+        # This keeps the system valid for any course/domain and avoids raw exam instructions.
+        universal_diagram = generate_universal_visual_diagram(
+            source_text=text,
+            output_language=output_language,
+        )
+
+        toc_overview_diagram = build_toc_overview_mermaid(
+            source_text=text,
+            root_label=pipeline.get("root", ""),
+            output_language=output_language,
+        )
+
+        if mermaid_has_real_content(toc_overview_diagram):
+            selected_diagram = toc_overview_diagram
+        else:
+            selected_diagram = choose_best_visual_diagram_universal(
+                universal_diagram,
+                model_diagram,
+                deterministic_diagram,
+            )
+
+        result["visual_diagram"] = enforce_mermaid_template(
+            selected_diagram,
+            output_language=output_language,
+            root_label=pipeline.get("root", ""),
         )
 
         result["diagram_explanations"] = generate_node_explanations(
@@ -3691,6 +5689,7 @@ def analyze_study_content(text: str, education_level: str, output_language: str 
             output_language=output_language,
         )
 
+        result["output_language"] = output_language
         return normalize_result(result)
 
     except Exception as e:
@@ -3717,6 +5716,7 @@ def analyze_study_content(text: str, education_level: str, output_language: str 
             "quiz": {},
             "flashcards": [],
             "study_plan": ["Review the available extracted content"],
-            "disclaimer": "This is for educational support only."
+            "disclaimer": "This is for educational support only.",
+            "output_language": output_language,
         })
 
