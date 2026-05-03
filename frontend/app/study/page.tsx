@@ -260,6 +260,147 @@ function findDiagramExplanation(
 }
 
 
+function sanitizeDiagramTitle(value: string, language: string) {
+  const fallback =
+    language === "ar"
+      ? "موضوع الدرس"
+      : language === "fr"
+      ? "Sujet du cours"
+      : "Course topic";
+
+  const cleaned = String(value || "")
+    .replace(/\s+/g, " ")
+    .replace(/[(){}\[\]|<>`"]+/g, "")
+    .trim();
+
+  if (!cleaned) return fallback;
+
+  return cleaned.slice(0, 55).trim() || fallback;
+}
+
+function extractDiagramTitle(result: any, language: string) {
+  if (!result) {
+    return language === "ar"
+      ? "موضوع الدرس"
+      : language === "fr"
+      ? "Sujet du cours"
+      : "Course topic";
+  }
+
+  const genericRootLabels = [
+    "الموضوع الرئيسي",
+    "موضوع رئيسي",
+    "Sujet principal",
+    "Main topic",
+    "Résumé graphique",
+    "Visual summary",
+  ];
+
+  const isGenericLabel = (value: string) => {
+    const normalized = normalizeExplanationKey(value);
+    return genericRootLabels.some(
+      (label) => normalizeExplanationKey(label) === normalized
+    );
+  };
+
+  const visualSummary = result?.visual_summary;
+  const candidates: string[] = [];
+
+  if (visualSummary && typeof visualSummary === "object" && !Array.isArray(visualSummary)) {
+    candidates.push(
+      String(
+        visualSummary.title ||
+          visualSummary.subject ||
+          visualSummary.main_topic ||
+          ""
+      )
+    );
+  }
+
+  if (typeof visualSummary === "string") {
+    const firstMeaningfulLine = visualSummary
+      .split("\n")
+      .map((line) => line.trim())
+      .find(Boolean);
+
+    if (firstMeaningfulLine) {
+      const colonIndex = firstMeaningfulLine.indexOf(":");
+
+      if (colonIndex > -1) {
+        const beforeColon = firstMeaningfulLine.slice(0, colonIndex).trim();
+        const afterColon = firstMeaningfulLine.slice(colonIndex + 1).trim();
+
+        if (isGenericLabel(beforeColon) && afterColon) {
+          candidates.push(afterColon);
+        } else {
+          candidates.push(firstMeaningfulLine);
+        }
+      } else {
+        candidates.push(firstMeaningfulLine);
+      }
+    }
+  }
+
+  candidates.push(result?.title, result?.topic, result?.main_topic);
+
+  const summary = String(result?.summary || "").trim();
+  if (summary) {
+    const summaryMatch = summary.match(
+      /(موضوع|حول|about|on|sur)\s+([^،,.؛:]{8,80})/i
+    );
+    candidates.push(summaryMatch?.[2] || summary);
+  }
+
+  const fallback =
+    language === "ar"
+      ? "موضوع الدرس"
+      : language === "fr"
+      ? "Sujet du cours"
+      : "Course topic";
+
+  const bestCandidate = candidates
+    .map((candidate) => String(candidate || "").trim())
+    .find((candidate) => candidate && !isGenericLabel(candidate));
+
+  return sanitizeDiagramTitle(bestCandidate || fallback, language);
+}
+
+function replaceRootLabel(chart: string, title: string) {
+  if (!chart || !title) return chart;
+
+  return chart.replace(/root\(\((.*?)\)\)/, `root((${title}))`);
+}
+
+function buildDiagramExplanationsForFixedRoot(
+  explanations: Record<string, unknown> | undefined,
+  title: string,
+  language: string
+) {
+  if (!explanations || !title) return explanations;
+
+  const genericKeys =
+    language === "ar"
+      ? ["الموضوع الرئيسي", "موضوع رئيسي"]
+      : language === "fr"
+      ? ["Sujet principal", "sujet principal"]
+      : ["Main topic", "main topic"];
+
+  const existingTitleExplanation = findDiagramExplanation(explanations, title);
+  if (existingTitleExplanation) return explanations;
+
+  const genericExplanation = genericKeys
+    .map((key) => findDiagramExplanation(explanations, key))
+    .find(Boolean);
+
+  if (!genericExplanation) return explanations;
+
+  return {
+    ...explanations,
+    [title]: genericExplanation,
+  };
+}
+
+
 type VisualSummaryBlock = {
   title: string;
   items: string[];
@@ -968,8 +1109,20 @@ export default function StudyPage() {
 
   const t = labels[language] || labels.en;
 
-  const selectedNodeExplanation = findDiagramExplanation(
+  const diagramTitle = result ? extractDiagramTitle(result, language) : "";
+
+  const fixedDiagram = result?.visual_diagram
+    ? replaceRootLabel(result.visual_diagram, diagramTitle)
+    : "";
+
+  const fixedDiagramExplanations = buildDiagramExplanationsForFixedRoot(
     result?.diagram_explanations,
+    diagramTitle,
+    language
+  );
+
+  const selectedNodeExplanation = findDiagramExplanation(
+    fixedDiagramExplanations,
     selectedNode
   );
 
@@ -1109,8 +1262,12 @@ export default function StudyPage() {
     const isCorrect = selected === q.correct_answer;
 
     return (
-      <div key={key} className="mt-3 rounded-xl border p-4 bg-white">
-        <p className="font-medium">
+      <div
+        key={key}
+        dir={language === "ar" ? "rtl" : "ltr"}
+        className="mt-3 rounded-xl border p-4 bg-white"
+      >
+        <p className={`${language === "ar" ? "text-right" : "text-left"} font-medium`}>
           {i + 1}. {q.question}
         </p>
 
@@ -1126,7 +1283,9 @@ export default function StudyPage() {
                 key={j}
                 type="button"
                 onClick={() => handleSelectAnswer(key, opt)}
-                className={`text-left rounded-xl border px-4 py-2 text-sm transition ${
+                className={`${
+                  language === "ar" ? "text-right" : "text-left"
+                } rounded-xl border px-4 py-2 text-sm transition ${
                   isRightAnswer
                     ? "bg-green-50 border-green-300 text-green-700"
                     : isWrongSelected
@@ -1384,7 +1543,7 @@ export default function StudyPage() {
                 <strong>🧠 {t.visualDiagram}:</strong>
                 <div className="mt-2">
                   <MermaidDiagram
-                    chart={result.visual_diagram}
+                    chart={fixedDiagram}
                     onNodeClick={handleNodeClick}
                     selectedLabel={selectedNode}
                     language={language}

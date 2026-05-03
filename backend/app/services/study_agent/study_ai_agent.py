@@ -5595,8 +5595,240 @@ def choose_best_visual_diagram_universal(*diagrams: str) -> str:
 
     return max(valid, key=universal_diagram_quality_score)
 
+
+
+# =========================
+# FINAL PRODUCTION CLEANUP BEFORE AGENT
+# =========================
+
+def clean_text_before_agent(text: str, output_language: str = "en") -> str:
+    """
+    Final production cleanup before sending extracted text to the study agent.
+
+    This function is intentionally safe and non-destructive:
+    - does NOT summarize
+    - does NOT translate
+    - does NOT change the course logic
+    - keeps questions, instructions, and learning content
+    - removes only obvious OCR/UI garbage lines and random Latin OCR noise in Arabic text
+
+    It is designed to reduce bad Mermaid roots such as root((M أمك))
+    without breaking PDF, OCR, DOCX, quiz, flashcards, or diagram logic.
+    """
+    if not isinstance(text, str):
+        return ""
+
+    output_language = normalize_output_language(output_language)
+    value = safe_text(text)
+
+    # Remove invisible bidi/control characters and normalize horizontal spaces.
+    value = re.sub(r"[\u200e\u200f\u202a-\u202e]", "", value)
+    value = re.sub(r"[ \t]+", " ", value)
+
+    cleaned_lines = []
+
+    for raw_line in value.splitlines():
+        line = raw_line.strip()
+        if not line:
+            continue
+
+        # Remove very short OCR/UI garbage lines only.
+        if len(line) <= 2:
+            continue
+
+        # Drop lines mostly made of symbols/numbers when they carry no useful text.
+        letters = re.findall(r"[\u0600-\u06FFA-Za-zÀ-ÿ]", line)
+        if len(letters) < 3 and len(line) < 24:
+            continue
+
+        # Arabic-dominant line: remove random Latin OCR tokens such as Lans/Juul/Gurl.
+        # Keep this conservative: only when Arabic clearly dominates the line.
+        if output_language == "ar" or has_arabic_text(line):
+            arabic_chars = len(re.findall(r"[\u0600-\u06FF]", line))
+            latin_chars = len(re.findall(r"[A-Za-z]", line))
+
+            if arabic_chars > latin_chars:
+                line = re.sub(r"\b[A-Za-z]{2,}\b", " ", line)
+
+        # Remove repeated OCR symbols but keep normal punctuation.
+        line = re.sub(r"[©®™]+", " ", line)
+        line = re.sub(r"\s+", " ", line).strip()
+
+        if line:
+            cleaned_lines.append(line)
+
+    value = "\n".join(cleaned_lines)
+
+    # Safe Arabic normalization after line filtering.
+    if output_language == "ar" or has_arabic_text(value):
+        value = normalize_arabic_unicode(value)
+
+    value = re.sub(r"\n{3,}", "\n\n", value)
+    value = re.sub(r"[ \t]+", " ", value)
+
+    return value.strip()
+
+
+
+def strip_leading_ocr_metadata_from_explanation(
+    value: str,
+    output_language: str = "en",
+) -> str:
+    """
+    Remove leading OCR/document header garbage from clickable explanations.
+
+    Conservative behavior:
+    - only targets leading metadata-like fragments
+    - keeps the explanation meaning
+    - does not change keys or diagram logic
+    - especially protects Arabic scanned exams from headers like:
+      "M أمك 10006 ... المترشح ... توقيع المراقب ..."
+    """
+    if not isinstance(value, str):
+        return ""
+
+    output_language = normalize_output_language(output_language)
+    text = safe_text(value).strip()
+    if not text:
+        return ""
+
+    # Normalize spaces first, but keep sentence boundaries readable.
+    text = re.sub(r"\s+", " ", text).strip()
+
+    # Strong leading exam/OCR metadata detector.
+    first_window = text[:320]
+    metadata_markers = [
+        "المترشح", "المترشحون", "الأكاديمية", "الامتحان", "البكالوريا",
+        "توقيع المراقب", "خاص بكتابة", "القطب", "الصفحة", "الدورة",
+        "النقطة", "المادة", "شهادة", "بيضاء سطات", "بيضاء-سطات",
+        "candidate", "exam", "page", "signature", "academy",
+        "candidat", "examen", "session", "académie", "matière",
+    ]
+    looks_like_header = any(marker.lower() in first_window.lower() for marker in metadata_markers)
+
+    # If a scanned Arabic header is at the beginning, keep from the first real task/content marker.
+    if looks_like_header or re.match(r"^[A-Za-z]\s+[\u0600-\u06FF]{2,}|^[A-Za-z0-9©> /|()\-:]+", text):
+        content_markers = [
+            "تأمل", "استفزك", "السند", "ورد", "حدد", "عرف", "استدل", "اذكر",
+            "يشير", "يناقش", "يتناول", "يوضح", "الإيمان", "الغيب", "العفة", "الأسرة",
+            "Source", "Text", "Question", "Exercise", "Lesson", "Definition",
+            "Texte", "Question", "Exercice", "Leçon", "Définition",
+        ]
+
+        positions = [text.find(marker) for marker in content_markers if text.find(marker) > 0]
+        if positions:
+            first_content = min(positions)
+            # Only strip a realistic leading header, not a normal first sentence.
+            if first_content <= 700:
+                text = text[first_content:].strip()
+
+    # Remove leftover compact OCR header tokens at the start only.
+    text = re.sub(
+        r"^(?:[A-Za-z]{1,4}\s*)?(?:[0-9©>_|/()\-:.،؛]+\s*){1,8}",
+        "",
+        text,
+    ).strip()
+
+    # Drop leading chunks that are still mostly metadata until content appears.
+    chunks = re.split(r"(?<=[.!؟])\s+|\s{2,}", text)
+    kept = []
+    for i, chunk in enumerate(chunks):
+        c = chunk.strip()
+        if not c:
+            continue
+
+        lower_c = c.lower()
+        is_metadata_chunk = any(marker.lower() in lower_c for marker in metadata_markers)
+        arabic_letters = len(re.findall(r"[\u0600-\u06FF]", c))
+        latin_letters = len(re.findall(r"[A-Za-z]", c))
+        digits_symbols = len(re.findall(r"[0-9©>|_/()\-]", c))
+
+        # Only skip metadata at the beginning. Once content starts, keep the rest.
+        if not kept and (is_metadata_chunk or (digits_symbols > arabic_letters and len(c) < 180)):
+            continue
+
+        # Arabic dominant explanation: remove random Latin OCR tokens inside the chunk.
+        if output_language == "ar" or has_arabic_text(c):
+            if arabic_letters > latin_letters:
+                c = re.sub(r"\b[A-Za-z]{2,}\b", " ", c)
+
+        c = re.sub(r"\s+", " ", c).strip()
+        if c:
+            kept.append(c)
+
+    text = " ".join(kept).strip() if kept else text
+    text = re.sub(r"\s+", " ", text).strip()
+
+    return text
+
+def clean_diagram_explanations_for_click(
+    diagram_explanations: dict,
+    output_language: str = "en",
+    max_chars: int = 520,
+) -> dict:
+    """
+    Final production cleanup for clickable diagram node explanations.
+
+    This is intentionally conservative:
+    - keeps the same keys so frontend node-click mapping does not break
+    - does not change diagram logic
+    - does not add facts or translate
+    - removes leftover OCR/UI noise from explanation values
+    - truncates safely for readable click popups/panels
+    """
+    output_language = normalize_output_language(output_language)
+
+    if not isinstance(diagram_explanations, dict):
+        return {}
+
+    cleaned = {}
+
+    for raw_key, raw_value in diagram_explanations.items():
+        key = safe_text(raw_key).strip()
+        value = safe_text(raw_value).strip()
+
+        if not key or not value:
+            continue
+
+        # Keep frontend mapping stable: only sanitize the value, not the key.
+        value = clean_text_before_agent(value, output_language=output_language)
+
+        # Remove leading scanned-document metadata that can leak into click panels.
+        value = strip_leading_ocr_metadata_from_explanation(
+            value,
+            output_language=output_language,
+        )
+
+        # Reuse the existing universal explanation cleaner if available in this file.
+        value = polish_explanation_for_display(
+            value,
+            output_language=output_language,
+            max_chars=max_chars,
+        )
+
+        # One last metadata strip after AI/deterministic polishing, because some OCR
+        # headers can survive as normal-looking Arabic text.
+        value = strip_leading_ocr_metadata_from_explanation(
+            value,
+            output_language=output_language,
+        )
+
+        value = re.sub(r"\s+", " ", safe_text(value)).strip()
+
+        if len(value) > max_chars:
+            value = safe_truncate(value, max_chars)
+
+        if value:
+            cleaned[key] = value
+
+    return cleaned
+
 def analyze_study_content(text: str, education_level: str, output_language: str = "en"):
     output_language = normalize_output_language(output_language)
+
+    # Final lightweight production cleanup.
+    # This does not change the analysis logic; it only removes OCR/UI noise before the agent.
+    text = clean_text_before_agent(text, output_language=output_language)
 
     try:
         response = client.chat.completions.create(
@@ -5689,6 +5921,13 @@ def analyze_study_content(text: str, education_level: str, output_language: str 
             output_language=output_language,
         )
 
+        # Final cleanup for dynamic clickable node explanations.
+        # Keeps node keys stable for the frontend while cleaning displayed values.
+        result["diagram_explanations"] = clean_diagram_explanations_for_click(
+            result.get("diagram_explanations", {}),
+            output_language=output_language,
+        )
+
         result["output_language"] = output_language
         return normalize_result(result)
 
@@ -5707,9 +5946,12 @@ def analyze_study_content(text: str, education_level: str, output_language: str 
             "written_summary": "The system could not fully analyze the content, but the response remains valid.",
             "visual_summary": "MAIN TOPIC\n│\n└── Partial content",
             "visual_diagram": diagram,
-            "diagram_explanations": generate_node_explanations(
-                visual_diagram=diagram,
-                source_text=text,
+            "diagram_explanations": clean_diagram_explanations_for_click(
+                generate_node_explanations(
+                    visual_diagram=diagram,
+                    source_text=text,
+                    output_language=output_language,
+                ),
                 output_language=output_language,
             ),
             "key_points": ["Partial content extracted"],
