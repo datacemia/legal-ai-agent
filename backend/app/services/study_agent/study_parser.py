@@ -1,6 +1,7 @@
 import os
 import io
 import re
+import traceback
 from io import BytesIO
 
 import fitz
@@ -13,16 +14,8 @@ from langdetect import detect
 from openai import OpenAI
 
 
-# =========================
-# OPENAI CLIENT
-# =========================
-
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-
-# =========================
-# TESSERACT CONFIG
-# =========================
 
 TESSERACT_CMD = os.getenv("TESSERACT_CMD")
 OCR_LANGS = os.getenv("OCR_LANGS", "ara+fra+eng")
@@ -38,10 +31,6 @@ elif os.name == "nt":
         r"C:\Program Files\Tesseract-OCR\tesseract.exe"
     )
 
-
-# =========================
-# BASIC CLEANING (SAFE)
-# =========================
 
 def fix_arabic_word_spacing(text: str) -> str:
     text = re.sub(r"\bال\s+([اأإآء-ي])", r"ال\1", text)
@@ -85,7 +74,6 @@ def normalize_ocr_text(text: str) -> str:
     text = fix_latin_spacing(text)
     text = fix_arabic_word_spacing(text)
     text = remove_ocr_noise(text)
-
     text = re.sub(r"[ \t]+", " ", text)
 
     return text.strip()
@@ -103,29 +91,16 @@ def clean_extracted_text(text: str) -> str:
     return "\n".join(lines)
 
 
-# =========================
-# LANGUAGE DETECTION
-# =========================
-
 def detect_language(text: str) -> str:
     try:
         return detect(text)
-    except:
+    except Exception:
         return "unknown"
 
 
-# =========================
-# AI CLEANING (SMART)
-# =========================
-
 def ai_clean_text(text: str, lang: str) -> str:
-    """
-    Intelligent cleanup using LLM.
-    Fix OCR mistakes WITHOUT changing meaning.
-    """
-
     if len(text) < 200:
-        return text  # skip small texts
+        return text
 
     prompt = f"""
 Clean this OCR text in {lang}.
@@ -156,10 +131,6 @@ Text:
         return text
 
 
-# =========================
-# DOCX
-# =========================
-
 def extract_docx_text(content: bytes) -> str:
     try:
         doc = Document(BytesIO(content))
@@ -181,20 +152,21 @@ def extract_docx_text(content: bytes) -> str:
 
         return clean_extracted_text("\n".join(text_parts))
 
-    except Exception as e:
-        print("DOCX error:", e)
+    except Exception:
+        print("=== DOCX ERROR ===")
+        traceback.print_exc()
         return ""
 
-
-# =========================
-# OCR PDF
-# =========================
 
 def extract_scanned_pdf_text(content: bytes) -> str:
     pdf = fitz.open(stream=content, filetype="pdf")
     pages_text = []
 
-    for page in pdf:
+    print("OCR pages count:", len(pdf))
+
+    for index, page in enumerate(pdf, start=1):
+        print(f"OCR page {index}...")
+
         pix = page.get_pixmap(matrix=fitz.Matrix(3, 3))
         img = Image.open(io.BytesIO(pix.tobytes("png")))
 
@@ -204,7 +176,11 @@ def extract_scanned_pdf_text(content: bytes) -> str:
             config=OCR_CONFIG
         )
 
+        print(f"OCR raw length page {index}:", len(text or ""))
+
         text = clean_extracted_text(text)
+
+        print(f"OCR cleaned length page {index}:", len(text or ""))
 
         if text:
             pages_text.append(text)
@@ -212,18 +188,19 @@ def extract_scanned_pdf_text(content: bytes) -> str:
     pdf.close()
     return "\n\n".join(pages_text)
 
-
-# =========================
-# PDF TEXT
-# =========================
 
 def extract_pdf_text(content: bytes) -> str:
     pdf = fitz.open(stream=content, filetype="pdf")
     pages_text = []
 
-    for page in pdf:
+    print("PDF pages count:", len(pdf))
+
+    for index, page in enumerate(pdf, start=1):
         text = page.get_text("text", sort=True)
+        print(f"Normal raw length page {index}:", len(text or ""))
+
         text = clean_extracted_text(text)
+        print(f"Normal cleaned length page {index}:", len(text or ""))
 
         if text:
             pages_text.append(text)
@@ -232,39 +209,59 @@ def extract_pdf_text(content: bytes) -> str:
     return "\n\n".join(pages_text)
 
 
-# =========================
-# MAIN ENTRY
-# =========================
-
 async def extract_study_text(file: UploadFile) -> str:
     content = await file.read()
     filename = (file.filename or "").lower()
 
+    print("=== FILE DEBUG ===")
+    print("FILENAME:", filename)
+    print("CONTENT SIZE:", len(content))
+    print("==================")
+
+    print("=== TESS DEBUG ===")
+    try:
+        print("VERSION:", pytesseract.get_tesseract_version())
+        print("LANGS:", pytesseract.get_languages(config=""))
+        print("OCR_LANGS ENV:", OCR_LANGS)
+    except Exception as e:
+        print("TESS ERROR:", e)
+    print("==================")
+
     try:
         if filename.endswith(".pdf"):
+            print("Trying normal PDF extraction...")
             text = extract_pdf_text(content)
+            print("Normal text length:", len(text or ""))
 
             if not text or len(text) < 80:
+                print("Falling back to OCR...")
                 text = extract_scanned_pdf_text(content)
+                print("OCR text length:", len(text or ""))
 
         elif filename.endswith(".docx"):
+            print("Trying DOCX extraction...")
             text = extract_docx_text(content)
+            print("DOCX text length:", len(text or ""))
 
         else:
+            print("Unsupported file type:", filename)
             return ""
 
         if not text:
+            print("No text extracted.")
             return ""
 
-        # 🔥 language detection
         lang = detect_language(text[:1000])
         print("Detected language:", lang)
 
-        # 🔥 AI smart cleaning
         text = ai_clean_text(text, lang)
+
+        print("Final extracted text length:", len(text or ""))
 
         return text.strip()
 
-    except Exception as e:
-        print("Error:", e)
+    except Exception:
+        print("=== FULL ERROR ===")
+        traceback.print_exc()
+        print("==================")
         return ""
