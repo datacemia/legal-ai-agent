@@ -1507,9 +1507,15 @@ export default function StudyPage() {
 
             <p>{t.how2}</p>
 
-            <ul className="list-disc ml-5 space-y-1">
+            <ul
+              className={`grid gap-1 text-sm ${
+                language === "ar" ? "list-disc pr-5" : "list-disc pl-5"
+              } sm:grid-cols-2`}
+            >
               {t.items.map((item: string, index: number) => (
-                <li key={index}>{item}</li>
+                <li key={index} className="leading-relaxed">
+                  {item}
+                </li>
               ))}
             </ul>
 
