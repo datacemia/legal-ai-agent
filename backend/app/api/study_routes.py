@@ -39,9 +39,16 @@ class StudyAttemptPayload(BaseModel):
     answers: List[Dict[str, Any]]
 
 
-def make_study_cache_key(file_bytes: bytes, education_level: str, output_language: str) -> str:
+def make_study_cache_key(
+    file_bytes: bytes,
+    education_level: str,
+    output_language: str,
+    weak_points: list[str] | None = None,
+) -> str:
     file_hash = hashlib.sha256(file_bytes).hexdigest()
-    raw_key = f"{file_hash}:{education_level}:{output_language}"
+    weak_key = "|".join(weak_points or [])
+
+    raw_key = f"{file_hash}:{education_level}:{output_language}:{weak_key}"
     return hashlib.sha256(raw_key.encode("utf-8")).hexdigest()
 
 
@@ -70,6 +77,47 @@ def get_cached_study_result(cache_key: str):
 
     except Exception:
         return None
+
+
+def get_user_weak_points(db: Session, user_id: int) -> list[str]:
+    attempts = (
+        db.query(StudyAttempt)
+        .filter(StudyAttempt.user_id == user_id)
+        .order_by(StudyAttempt.created_at.desc())
+        .limit(10)
+        .all()
+    )
+
+    weak_points = []
+
+    for attempt in attempts:
+        wp = attempt.weak_points
+
+        try:
+            if isinstance(wp, str):
+                wp = json.loads(wp)
+
+            if isinstance(wp, list):
+                weak_points.extend(wp)
+        except Exception:
+            pass
+
+    cleaned = []
+    seen = set()
+
+    for wp in weak_points:
+        wp = str(wp).strip()
+
+        if not wp or "???" in wp:
+            continue
+
+        key = wp.lower()
+
+        if key not in seen:
+            seen.add(key)
+            cleaned.append(wp)
+
+    return cleaned[:10]
 
 
 def save_study_result_cache(cache_key: str, result: dict):
@@ -105,10 +153,13 @@ async def analyze_study(
     # =========================
     file_bytes = await file.read()
 
+    user_weak_points = get_user_weak_points(db, current_user.id)
+
     cache_key = make_study_cache_key(
         file_bytes=file_bytes,
         education_level=education_level,
         output_language=output_language,
+        weak_points=user_weak_points,
     )
 
     cached_result = get_cached_study_result(cache_key)
@@ -140,7 +191,12 @@ async def analyze_study(
     # =========================
     # 🧠 AI
     # =========================
-    result = analyze_study_content(text, education_level, output_language)
+    result = analyze_study_content(
+        text=text,
+        education_level=education_level,
+        output_language=output_language,
+        weak_points=user_weak_points,
+    )
 
     # =========================
     # 💾 SAVE CACHE
@@ -242,7 +298,9 @@ def get_study_weak_points(
 
     for wp in weak_points:
         if wp and "???" not in wp:
-            cleaned.append(wp)
+            cleaned.append(str(wp).strip())
+
+    cleaned = list(dict.fromkeys(cleaned))
 
     return {
         "weak_points": cleaned[:20]

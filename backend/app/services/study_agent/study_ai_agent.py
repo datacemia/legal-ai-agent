@@ -2173,12 +2173,27 @@ def generate_study_summary_only(
     text: str,
     education_level: str = "university",
     output_language: str = "ar",
+    weak_points: list[str] | None = None,
 ) -> dict:
     if not isinstance(text, str) or not text.strip():
         return {"summary": ""}
 
     education_level = normalize_education_level(education_level)
     output_language = normalize_output_language(output_language)
+
+    weak_points = weak_points or []
+
+    weak_points_instruction = ""
+
+    if weak_points:
+        weak_points_instruction = f"""
+PERSONALIZATION RULE:
+The student previously made mistakes on these concepts:
+{", ".join(weak_points)}
+
+When generating explanations, quiz questions, flashcards, and study plan,
+focus more on these weak concepts while still covering the whole document.
+"""
 
     system_prompt = build_summary_prompt(output_language)
     language_instruction = get_language_instruction(output_language)
@@ -2189,6 +2204,8 @@ Output language code: {output_language}
 
 Mandatory language instruction:
 {language_instruction}
+
+{weak_points_instruction}
 
 Educational content:
 {text[:8000]}
@@ -2339,6 +2356,7 @@ def analyze_study_content(
     level: str = None,
     language: str = None,
     target_language: str = None,
+    weak_points: list[str] | None = None,
     **kwargs,
 ) -> dict:
     final_level = level or education_level or kwargs.get("education_level") or "university"
@@ -2356,4 +2374,5 @@ def analyze_study_content(
         text=text,
         education_level=final_level,
         output_language=final_language,
+        weak_points=weak_points or [],
     )
