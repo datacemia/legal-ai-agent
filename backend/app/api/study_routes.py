@@ -205,31 +205,6 @@ def save_study_attempt(
 
 
 # =========================
-# 📜 HISTORY
-# =========================
-@router.get("/history", response_model=list[StudyHistoryItem])
-def get_study_history(
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
-):
-    analyses = (
-        db.query(StudyAnalysis)
-        .filter(StudyAnalysis.user_id == current_user.id)
-        .order_by(StudyAnalysis.id.desc())
-        .all()
-    )
-
-    return [
-        {
-            "id": a.id,
-            "file_name": a.file_name,
-            "result": a.result,
-            "created_at": a.created_at,
-        }
-        for a in analyses
-    ]
-
-# =========================
 # 🎯 WEAK POINTS
 # =========================
 @router.get("/weak-points")
@@ -263,6 +238,38 @@ def get_study_weak_points(
         except Exception:
             pass
 
+    cleaned = []
+
+    for wp in weak_points:
+        if wp and "???" not in wp:
+            cleaned.append(wp)
+
     return {
-        "weak_points": weak_points[:20]
+        "weak_points": cleaned[:20]
     }
+
+
+# =========================
+# 📜 HISTORY
+# =========================
+@router.get("/history", response_model=list[StudyHistoryItem])
+def get_study_history(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    analyses = (
+        db.query(StudyAnalysis)
+        .filter(StudyAnalysis.user_id == current_user.id)
+        .order_by(StudyAnalysis.id.desc())
+        .all()
+    )
+
+    return [
+        {
+            "id": a.id,
+            "file_name": a.file_name,
+            "result": a.result,
+            "created_at": a.created_at,
+        }
+        for a in analyses
+    ]
