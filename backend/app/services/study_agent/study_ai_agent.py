@@ -2135,6 +2135,40 @@ def is_wrong_language(text, lang):
     return False
 
 
+
+def stabilize_result(result: dict, output_language: str) -> dict:
+    domain = detect_domain(result.get("detailed_summary", ""))
+
+    result["theoretical_quiz"] = fill_missing_quiz(
+        remove_duplicate_questions(result.get("theoretical_quiz", []))
+    )
+
+    result["practical_quiz"] = fill_missing_quiz(
+        remove_duplicate_questions(result.get("practical_quiz", []))
+    )
+
+    result["flashcards"] = remove_duplicate_flashcards(
+        fill_missing_flashcards(
+            remove_duplicate_flashcards(result.get("flashcards", []))
+        )
+    )
+
+    fixed_plan = []
+    for i, day in enumerate(result.get("study_plan", [])[:5]):
+        if not isinstance(day, dict):
+            continue
+
+        fixed_plan.append({
+            "day": day.get("day") or normalize_day_label(f"Day {i+1}", output_language),
+            "focus": day.get("focus") or enforce_output_language("Review key concepts", output_language),
+            "tasks": day.get("tasks", [])[:3],
+        })
+
+    result["study_plan"] = fixed_plan
+
+    return result
+
+
 def generate_study_summary_only(
     text: str,
     education_level: str = "university",
@@ -2286,6 +2320,10 @@ Educational content:
         }
 
         result["quality"] = quality_validate_study_response(result, output_language)
+
+        if result["quality"]["score"] < 95:
+            result = stabilize_result(result, output_language)
+            result["quality"] = quality_validate_study_response(result, output_language)
 
         return validate_study_response(result)
 

@@ -93,6 +93,15 @@ const labels: any = {
     errorMessage: "Failed to connect to Study Agent API.",
     noFile: "No file selected",
     chooseFile: "Choose a document (PDF, Word, or scanned)",
+    loadingSteps: {
+      extracting: "Extracting text...",
+      summary: "Generating summary...",
+      quiz: "Creating quiz...",
+      finalizing: "Finalizing...",
+      analyzing: "Analyzing...",
+    },
+    remaining: "remaining",
+    elapsed: "Elapsed",
   },
   fr: {
     title: "Agent étude",
@@ -158,6 +167,15 @@ const labels: any = {
     errorMessage: "Impossible de se connecter à l’API Study Agent.",
     noFile: "Aucun fichier sélectionné",
     chooseFile: "Choisir un document (PDF, Word ou scanné)",
+    loadingSteps: {
+      extracting: "Extraction du texte...",
+      summary: "Génération du résumé...",
+      quiz: "Création du quiz...",
+      finalizing: "Finalisation...",
+      analyzing: "Analyse en cours...",
+    },
+    remaining: "restantes",
+    elapsed: "Temps écoulé",
   },
   ar: {
     title: "وكيل الدراسة",
@@ -221,6 +239,15 @@ const labels: any = {
     errorMessage: "تعذر الاتصال بواجهة Study Agent.",
     noFile: "لم يتم اختيار ملف (PDF أو Word أو ممسوح ضوئياً)",
     chooseFile: "اختيار ملف (PDF أو Word أو ممسوح ضوئياً)",
+    loadingSteps: {
+      extracting: "جارٍ استخراج النص...",
+      summary: "جارٍ إنشاء الملخص...",
+      quiz: "جارٍ إنشاء الاختبار...",
+      finalizing: "جارٍ إنهاء العملية...",
+      analyzing: "جارٍ التحليل...",
+    },
+    remaining: "متبقية",
+    elapsed: "الوقت المنقضي",
   },
 };
 
@@ -1119,6 +1146,8 @@ export default function StudyPage() {
   const [startTime, setStartTime] = useState<number | null>(null);
   const [elapsed, setElapsed] = useState(0);
   const [remaining, setRemaining] = useState(90);
+  const [loadingStep, setLoadingStep] = useState("");
+  const [loadingProgress, setLoadingProgress] = useState(0);
   const [paymentMessage, setPaymentMessage] = useState("");
   const [showLevelModal, setShowLevelModal] = useState(false);
   const [educationLevel, setEducationLevel] = useState("");
@@ -1129,6 +1158,8 @@ export default function StudyPage() {
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
+
+  const t = labels[language] || labels.en;
 
   useEffect(() => {
     setLanguage(getSavedLocale());
@@ -1146,7 +1177,30 @@ export default function StudyPage() {
     return () => clearInterval(interval);
   }, [loading, startTime]);
 
-  const t = labels[language] || labels.en;
+  useEffect(() => {
+    if (!loading) return;
+
+    const timers = [
+      setTimeout(() => {
+        setLoadingStep(t.loadingSteps.extracting);
+        setLoadingProgress(15);
+      }, 0),
+      setTimeout(() => {
+        setLoadingStep(t.loadingSteps.summary);
+        setLoadingProgress(40);
+      }, 15000),
+      setTimeout(() => {
+        setLoadingStep(t.loadingSteps.quiz);
+        setLoadingProgress(70);
+      }, 35000),
+      setTimeout(() => {
+        setLoadingStep(t.loadingSteps.finalizing);
+        setLoadingProgress(90);
+      }, 60000),
+    ];
+
+    return () => timers.forEach(clearTimeout);
+  }, [loading, language, t.loadingSteps]);
 
   const diagramTitle = result ? extractDiagramTitle(result, language) : "";
 
@@ -1175,6 +1229,8 @@ export default function StudyPage() {
     setStartTime(Date.now());
     setElapsed(0);
     setRemaining(90);
+    setLoadingStep(t.loadingSteps.extracting);
+    setLoadingProgress(15);
     setShowLevelModal(false);
     setResult(null);
     setPaymentMessage("");
@@ -1215,6 +1271,8 @@ export default function StudyPage() {
         detail: t.errorMessage,
       });
     } finally {
+      setLoadingProgress(100);
+      setLoadingStep("");
       setLoading(false);
       setStartTime(null);
     }
@@ -1485,7 +1543,7 @@ export default function StudyPage() {
               {loading ? (
                 <>
                   <span className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>
-                  Analyzing...
+                  {t.loadingSteps.analyzing}
                 </>
               ) : (
                 t.analyze
@@ -1501,17 +1559,31 @@ export default function StudyPage() {
           </div>
 
           {loading && (
-            <div className="mt-3 text-center">
-              <p className="text-sm text-blue-500">
-                ⏳ {remaining > 0 ? `${remaining}s remaining` : "Finalizing..."}
-              </p>
-              <p className="text-xs text-slate-400">Elapsed: {elapsed}s</p>
+            <div className="mt-4 rounded-2xl border border-blue-100 bg-blue-50 p-4 text-center">
+              <div className="flex items-center justify-between gap-3 text-sm">
+                <span className="font-medium text-blue-700">{loadingStep}</span>
+                <span className="text-blue-600">
+                  {loadingProgress}%
+                </span>
+              </div>
 
-              <div className="mt-2 h-2 bg-slate-200 rounded-full overflow-hidden">
+              <div className="mt-3 h-2 bg-blue-100 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-blue-500 transition-all duration-1000"
-                  style={{ width: `${Math.min((elapsed / 90) * 100, 100)}%` }}
+                  className="h-full bg-blue-600 transition-all duration-700"
+                  style={{
+                    width: `${Math.max(
+                      loadingProgress,
+                      Math.min((elapsed / 90) * 100, 95)
+                    )}%`,
+                  }}
                 />
+              </div>
+
+              <div className="mt-2 flex justify-between text-xs text-slate-500">
+                <span>
+                  ⏳ {remaining > 0 ? `${remaining}s ${t.remaining}` : t.loadingSteps.finalizing}
+                </span>
+                <span>{t.elapsed}: {elapsed}s</span>
               </div>
             </div>
           )}
