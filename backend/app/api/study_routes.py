@@ -233,22 +233,36 @@ def get_study_history(
 # 🎯 WEAK POINTS
 # =========================
 @router.get("/weak-points")
-def get_weak_points(
+def get_study_weak_points(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
     attempts = (
         db.query(StudyAttempt)
         .filter(StudyAttempt.user_id == current_user.id)
+        .order_by(StudyAttempt.created_at.desc())
+        .limit(10)
         .all()
     )
 
     weak_points = []
 
     for attempt in attempts:
-        if attempt.weak_points:
-            weak_points.extend(attempt.weak_points)
+        wp = attempt.weak_points
+
+        if not wp:
+            continue
+
+        try:
+            if isinstance(wp, str):
+                wp = json.loads(wp)
+
+            if isinstance(wp, list):
+                weak_points.extend(wp)
+
+        except Exception:
+            pass
 
     return {
-        "weak_points": list(set(weak_points))
+        "weak_points": weak_points[:20]
     }
