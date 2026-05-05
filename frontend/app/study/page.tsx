@@ -1378,7 +1378,36 @@ export default function StudyPage() {
 
   const handleSubmitQuiz = () => {
     if (Object.keys(selectedAnswers).length < totalQuestions) return;
+
     setQuizSubmitted(true);
+
+    const answersPayload = allQuestions.map((q: any) => ({
+      question: q.question,
+      concept: q.question,
+      selected_answer: selectedAnswers[q.key],
+      correct_answer: q.correct_answer,
+      is_correct: selectedAnswers[q.key] === q.correct_answer,
+      type: q.type,
+    }));
+
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/study/attempt`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getToken()}`,
+      },
+      body: JSON.stringify({
+        document_hash: result?.document_hash || null,
+        language,
+        education_level: educationLevel,
+        score,
+        total_questions: totalQuestions,
+        correct_answers: correctAnswers,
+        answers: answersPayload,
+      }),
+    }).catch((error) => {
+      console.error("Failed to save study attempt:", error);
+    });
   };
 
   const renderQuestion = (q: any, i: number, type: "theory" | "practice") => {

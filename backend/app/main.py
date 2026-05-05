@@ -27,7 +27,7 @@ from app.models.analysis import AnalysisResult
 from app.models.payment import Payment
 from app.models.contact import ContactRequest
 from app.models.finance_analysis import FinanceAnalysis
-from app.models.study_analysis import StudyAnalysis
+from app.models.study_analysis import StudyAnalysis, StudyAttempt
 from app.models.business_analysis import BusinessAnalysis
 
 

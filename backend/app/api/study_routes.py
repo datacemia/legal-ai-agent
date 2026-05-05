@@ -2,14 +2,16 @@ import hashlib
 import json
 import time
 from pathlib import Path
+from typing import List, Dict, Any, Optional
 
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException, Depends
+from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.utils.security import get_current_user
 from app.models.user import User
-from app.models.study_analysis import StudyAnalysis
+from app.models.study_analysis import StudyAnalysis, StudyAttempt
 from app.schemas.study_schema import StudyHistoryItem
 
 from app.services.study_agent.study_parser import extract_study_text
@@ -27,6 +29,16 @@ CACHE_DIR.mkdir(parents=True, exist_ok=True)
 CACHE_TTL_SECONDS = 7 * 24 * 60 * 60  # 7 days
 
 
+class StudyAttemptPayload(BaseModel):
+    document_hash: Optional[str] = None
+    language: str
+    education_level: str
+    score: int
+    total_questions: int
+    correct_answers: int
+    answers: List[Dict[str, Any]]
+
+
 def make_study_cache_key(file_bytes: bytes, education_level: str, output_language: str) -> str:
     file_hash = hashlib.sha256(file_bytes).hexdigest()
     raw_key = f"{file_hash}:{education_level}:{output_language}"
@@ -39,7 +51,6 @@ def get_cached_study_result(cache_key: str):
     if not cache_file.exists():
         return None
 
-    # 🔥 TTL check
     age = time.time() - cache_file.stat().st_mtime
 
     if age > CACHE_TTL_SECONDS:
@@ -150,6 +161,47 @@ async def analyze_study(
     db.refresh(analysis)
 
     return result
+
+
+# =========================
+# 💾 SAVE STUDY ATTEMPT
+# =========================
+@router.post("/attempt")
+def save_study_attempt(
+    payload: StudyAttemptPayload,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    weak_points = []
+
+    for answer in payload.answers:
+        if not answer.get("is_correct"):
+            weak_points.append(
+                answer.get("concept")
+                or answer.get("question")
+                or "Unknown concept"
+            )
+
+    attempt = StudyAttempt(
+        user_id=current_user.id,
+        document_hash=payload.document_hash,
+        language=payload.language,
+        education_level=payload.education_level,
+        score=payload.score,
+        total_questions=payload.total_questions,
+        correct_answers=payload.correct_answers,
+        answers=payload.answers,
+        weak_points=weak_points,
+    )
+
+    db.add(attempt)
+    db.commit()
+    db.refresh(attempt)
+
+    return {
+        "saved": True,
+        "weak_points": weak_points,
+    }
 
 
 # =========================
