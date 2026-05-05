@@ -228,3 +228,27 @@ def get_study_history(
         }
         for a in analyses
     ]
+
+# =========================
+# 🎯 WEAK POINTS
+# =========================
+@router.get("/weak-points")
+def get_weak_points(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    attempts = (
+        db.query(StudyAttempt)
+        .filter(StudyAttempt.user_id == current_user.id)
+        .all()
+    )
+
+    weak_points = []
+
+    for attempt in attempts:
+        if attempt.weak_points:
+            weak_points.extend(attempt.weak_points)
+
+    return {
+        "weak_points": list(set(weak_points))
+    }
