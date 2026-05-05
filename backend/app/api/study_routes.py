@@ -153,7 +153,7 @@ async def analyze_study(
     analysis = StudyAnalysis(
         user_id=current_user.id,
         file_name=file.filename,
-        result=json.dumps(result, ensure_ascii=False),
+        result=result,
     )
 
     db.add(analysis)
@@ -223,7 +223,7 @@ def get_study_history(
         {
             "id": a.id,
             "file_name": a.file_name,
-            "result": json.loads(a.result),
+            "result": a.result,
             "created_at": a.created_at,
         }
         for a in analyses
