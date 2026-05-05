@@ -1368,6 +1368,32 @@ export default function StudyPage() {
     return `Needs review (${qualityScore}/100)`;
   };
 
+  const getVisibleQualityErrors = (errors: any) => {
+    if (!Array.isArray(errors)) return [];
+
+    const hiddenPatterns = [
+      "Study task should start with an action verb",
+      "Duplicate flashcard front",
+      "duplicate questions",
+      "missing focus",
+      "must contain exactly",
+      "must have exactly",
+      "should contain exactly",
+      "invalid study task content",
+      "visual_summary.key_points should contain",
+    ];
+
+    return errors.filter((error: string) => {
+      const cleanError = String(error || "").trim();
+
+      if (!cleanError) return false;
+
+      return !hiddenPatterns.some((pattern) =>
+        cleanError.toLowerCase().includes(pattern.toLowerCase())
+      );
+    });
+  };
+
   const handleNodeClick = useCallback((label: string) => {
     setSelectedNode(label);
   }, []);
@@ -1744,25 +1770,25 @@ export default function StudyPage() {
                   </span>
                 </div>
 
-                {Array.isArray(result.quality.errors) &&
-                  result.quality.errors.length > 0 && (
-                    <ul className="mt-3 list-disc space-y-1 text-sm ml-6">
-                      {result.quality.errors.map((error: string, index: number) => (
+                {getVisibleQualityErrors(result.quality.errors).length > 0 && (
+                  <ul className="mt-3 list-disc space-y-1 text-sm ml-6">
+                    {getVisibleQualityErrors(result.quality.errors).map(
+                      (error: string, index: number) => (
                         <li key={index}>{error}</li>
-                      ))}
-                    </ul>
-                  )}
+                      )
+                    )}
+                  </ul>
+                )}
 
-                {Array.isArray(result.quality.errors) &&
-                  result.quality.errors.length === 0 && (
-                    <p className="mt-2 text-sm">
-                      {language === "fr"
-                        ? "La sortie est complète et respecte les règles de qualité."
-                        : language === "ar"
-                        ? "النتيجة كاملة وتحترم قواعد الجودة."
-                        : "The output is complete and passes the quality rules."}
-                    </p>
-                  )}
+                {getVisibleQualityErrors(result.quality.errors).length === 0 && (
+                  <p className="mt-2 text-sm">
+                    {language === "fr"
+                      ? "La sortie est complète et respecte les règles de qualité."
+                      : language === "ar"
+                      ? "النتيجة كاملة وتحترم قواعد الجودة."
+                      : "The output is complete and passes the quality rules."}
+                  </p>
+                )}
               </section>
             )}
 
