@@ -81,6 +81,10 @@ const labels: any = {
     front: "Front",
     back: "Back",
     studyPlan: "Study Plan",
+    quality: "Quality",
+    qualityScore: "Quality score",
+    qualityValid: "Output validated",
+    qualityIssues: "Quality issues",
     correct: "Correct",
     incorrect: "Incorrect",
     answer: "Answer",
@@ -142,6 +146,10 @@ const labels: any = {
     front: "Recto",
     back: "Verso",
     studyPlan: "Plan de révision",
+    quality: "Qualité",
+    qualityScore: "Score qualité",
+    qualityValid: "Résultat validé",
+    qualityIssues: "Problèmes qualité",
     correct: "Correct",
     incorrect: "Incorrect",
     answer: "Réponse",
@@ -201,6 +209,10 @@ const labels: any = {
     front: "الوجه الأمامي",
     back: "الوجه الخلفي",
     studyPlan: "خطة الدراسة",
+    quality: "الجودة",
+    qualityScore: "درجة الجودة",
+    qualityValid: "تم التحقق من النتيجة",
+    qualityIssues: "ملاحظات الجودة",
     correct: "صحيح",
     incorrect: "غير صحيح",
     answer: "الإجابة",
@@ -416,6 +428,18 @@ function parseVisualSummary(value: any) {
 
   if (typeof value === "object" && !Array.isArray(value)) {
     const rawBlocks = value.blocks || value.sections || value.items || [];
+
+    if (Array.isArray(value.key_points)) {
+      return {
+        title: String(value.title || value.subject || value.main_topic || ""),
+        blocks: value.key_points
+          .map((point: any) => ({
+            title: String(point).trim(),
+            items: [],
+          }))
+          .filter((block: VisualSummaryBlock) => block.title),
+      };
+    }
 
     return {
       title: String(value.title || value.subject || value.main_topic || ""),
@@ -1092,6 +1116,9 @@ export default function StudyPage() {
   const [file, setFile] = useState<File | null>(null);
   const [result, setResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [startTime, setStartTime] = useState<number | null>(null);
+  const [elapsed, setElapsed] = useState(0);
+  const [remaining, setRemaining] = useState(90);
   const [paymentMessage, setPaymentMessage] = useState("");
   const [showLevelModal, setShowLevelModal] = useState(false);
   const [educationLevel, setEducationLevel] = useState("");
@@ -1106,6 +1133,18 @@ export default function StudyPage() {
   useEffect(() => {
     setLanguage(getSavedLocale());
   }, []);
+
+  useEffect(() => {
+    if (!loading || !startTime) return;
+
+    const interval = setInterval(() => {
+      const elapsedSec = Math.floor((Date.now() - startTime) / 1000);
+      setElapsed(elapsedSec);
+      setRemaining(Math.max(90 - elapsedSec, 0));
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [loading, startTime]);
 
   const t = labels[language] || labels.en;
 
@@ -1133,6 +1172,9 @@ export default function StudyPage() {
     if (!file || !educationLevel) return;
 
     setLoading(true);
+    setStartTime(Date.now());
+    setElapsed(0);
+    setRemaining(90);
     setShowLevelModal(false);
     setResult(null);
     setPaymentMessage("");
@@ -1174,12 +1216,12 @@ export default function StudyPage() {
       });
     } finally {
       setLoading(false);
+      setStartTime(null);
     }
   };
 
-  const theoryQuestions = result?.quiz?.theory_questions || [];
-  const practiceQuestions = result?.quiz?.practice_questions || [];
-
+  const theoryQuestions = result?.theoretical_quiz || [];
+  const practiceQuestions = result?.practical_quiz || [];
   const allQuestions = [
     ...theoryQuestions.map((q: any, index: number) => ({
       ...q,
@@ -1230,6 +1272,31 @@ export default function StudyPage() {
     return "Needs more practice. Focus on the key points and flashcards.";
   };
 
+  const getQualityColor = (quality: any) => {
+    const qualityScore = Number(quality?.score || 0);
+
+    if (qualityScore >= 90) return "bg-green-50 text-green-700 border-green-200";
+    if (qualityScore >= 80) return "bg-blue-50 text-blue-700 border-blue-200";
+    if (qualityScore >= 60) return "bg-yellow-50 text-yellow-700 border-yellow-200";
+    return "bg-red-50 text-red-700 border-red-200";
+  };
+
+  const getQualityLabel = (quality: any) => {
+    if (!quality) return "";
+
+    const qualityScore = Number(quality?.score || 0);
+
+    if (quality?.valid) {
+      if (language === "fr") return `Validé (${qualityScore}/100)`;
+      if (language === "ar") return `تم التحقق (${qualityScore}/100)`;
+      return `Validated (${qualityScore}/100)`;
+    }
+
+    if (language === "fr") return `À revoir (${qualityScore}/100)`;
+    if (language === "ar") return `يحتاج مراجعة (${qualityScore}/100)`;
+    return `Needs review (${qualityScore}/100)`;
+  };
+
   const handleNodeClick = useCallback((label: string) => {
     setSelectedNode(label);
   }, []);
@@ -1273,16 +1340,17 @@ export default function StudyPage() {
 
         <div className="grid gap-2 mt-3">
           {q.options.map((opt: string, j: number) => {
-            const isSelected = selected === opt;
-            const isRightAnswer = quizSubmitted && opt === q.correct_answer;
-            const isWrongSelected =
-              quizSubmitted && isSelected && opt !== q.correct_answer;
+            const optionLetter = ["A", "B", "C", "D"][j];
 
+            const isSelected = selected === optionLetter;
+            const isRightAnswer = quizSubmitted && optionLetter === q.correct_answer;
+            const isWrongSelected =
+             quizSubmitted && isSelected && optionLetter !== q.correct_answer;
             return (
               <button
                 key={j}
                 type="button"
-                onClick={() => handleSelectAnswer(key, opt)}
+                onClick={() => handleSelectAnswer(key, optionLetter)}
                 className={`${
                   language === "ar" ? "text-right" : "text-left"
                 } rounded-xl border px-4 py-2 text-sm transition ${
@@ -1412,9 +1480,16 @@ export default function StudyPage() {
                 setShowLevelModal(true);
               }}
               disabled={!file || loading}
-              className="w-full bg-slate-900 text-white py-3 rounded-xl disabled:bg-slate-400"
+              className="flex w-full items-center justify-center gap-2 bg-slate-900 text-white py-3 rounded-xl disabled:bg-slate-400"
             >
-              {loading ? "Analyzing..." : t.analyze}
+              {loading ? (
+                <>
+                  <span className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>
+                  Analyzing...
+                </>
+              ) : (
+                t.analyze
+              )}
             </button>
 
             <button
@@ -1424,6 +1499,22 @@ export default function StudyPage() {
               {t.buyCredits}
             </button>
           </div>
+
+          {loading && (
+            <div className="mt-3 text-center">
+              <p className="text-sm text-blue-500">
+                ⏳ {remaining > 0 ? `${remaining}s remaining` : "Finalizing..."}
+              </p>
+              <p className="text-xs text-slate-400">Elapsed: {elapsed}s</p>
+
+              <div className="mt-2 h-2 bg-slate-200 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-blue-500 transition-all duration-1000"
+                  style={{ width: `${Math.min((elapsed / 90) * 100, 100)}%` }}
+                />
+              </div>
+            </div>
+          )}
 
           {paymentMessage && (
             <p className="text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">
@@ -1512,18 +1603,59 @@ export default function StudyPage() {
                     : "العربية"}
                 </span>
               )}
+
+              {result.quality && (
+                <span
+                  className={`inline-flex rounded-full px-3 py-1 text-xs font-medium border ${getQualityColor(
+                    result.quality
+                  )}`}
+                >
+                  {t.qualityScore}: {Number(result.quality.score || 0)}/100
+                </span>
+              )}
             </div>
+
+            {result.quality && (
+              <section className={`rounded-2xl border p-4 ${getQualityColor(result.quality)}`}>
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                  <strong>✅ {t.quality}</strong>
+                  <span className="text-sm font-semibold">
+                    {getQualityLabel(result.quality)}
+                  </span>
+                </div>
+
+                {Array.isArray(result.quality.errors) &&
+                  result.quality.errors.length > 0 && (
+                    <ul className="mt-3 list-disc space-y-1 text-sm ml-6">
+                      {result.quality.errors.map((error: string, index: number) => (
+                        <li key={index}>{error}</li>
+                      ))}
+                    </ul>
+                  )}
+
+                {Array.isArray(result.quality.errors) &&
+                  result.quality.errors.length === 0 && (
+                    <p className="mt-2 text-sm">
+                      {language === "fr"
+                        ? "La sortie est complète et respecte les règles de qualité."
+                        : language === "ar"
+                        ? "النتيجة كاملة وتحترم قواعد الجودة."
+                        : "The output is complete and passes the quality rules."}
+                    </p>
+                  )}
+              </section>
+            )}
 
             <div>
               <strong>{t.summary}:</strong>
               <p className="text-slate-600 mt-1">{result.summary}</p>
             </div>
 
-            {result.written_summary && (
+            {result.detailed_summary && (
               <div>
                 <strong>🧾 {t.writtenSummary}:</strong>
                 <p className="text-slate-600 mt-1 leading-relaxed">
-                  {result.written_summary}
+                  {result.detailed_summary}
                 </p>
               </div>
             )}
@@ -1666,17 +1798,27 @@ export default function StudyPage() {
               </div>
             </div>
 
-            <div>
+            <section>
               <strong>{t.studyPlan}:</strong>
-              <ul className="list-disc ml-6">
-                {result.study_plan?.map((s: string, i: number) => (
-                  <li key={i}>{s}</li>
+
+              <ul className="mt-3 space-y-4">
+                {result.study_plan?.map((day: any, i: number) => (
+                  <li key={i} className="rounded-xl border bg-slate-50 p-4">
+                    <p className="font-semibold text-slate-900">{day.day}</p>
+                    <p className="mt-1 text-sm text-slate-600">{day.focus}</p>
+
+                    <ul className="mt-3 list-disc ml-6 space-y-1 text-sm text-slate-700">
+                      {day.tasks?.map((task: string, j: number) => (
+                        <li key={j}>{task}</li>
+                      ))}
+                    </ul>
+                  </li>
                 ))}
               </ul>
-            </div>
+            </section>
 
             <p className="text-xs text-slate-500 border-t pt-4">
-              {result.disclaimer}
+              {result.disclaimer || t.disclaimer}
             </p>
           </div>
         )}
