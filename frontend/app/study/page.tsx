@@ -28,6 +28,37 @@ const LEVEL_LABELS: any = {
   },
 };
 
+const FeatureIcon = ({ index }: { index: number }) => {
+  const icons = [
+    <path key="summary" d="M7 4.75h10M7 8.5h10M7 12.25h6M5.5 19.25h13a1.75 1.75 0 0 0 1.75-1.75v-11A1.75 1.75 0 0 0 18.5 4.75h-13A1.75 1.75 0 0 0 3.75 6.5v11a1.75 1.75 0 0 0 1.75 1.75Z" />,
+    <path key="audio" d="M5 14.25h3.25L13 18V6L8.25 9.75H5v4.5Zm11.5-5.5a4.5 4.5 0 0 1 0 6.5m2.5-9a8 8 0 0 1 0 11.5" />,
+    <path key="mindmap" d="M12 5.25v4.5m0 4.5v4.5M7.5 9.75h9M6.25 6.5h1.5a1.75 1.75 0 0 1 1.75 1.75A1.75 1.75 0 0 1 7.75 10h-1.5A1.75 1.75 0 0 1 4.5 8.25 1.75 1.75 0 0 1 6.25 6.5Zm10 0h1.5a1.75 1.75 0 0 1 1.75 1.75A1.75 1.75 0 0 1 17.75 10h-1.5a1.75 1.75 0 0 1-1.75-1.75 1.75 1.75 0 0 1 1.75-1.75ZM6.25 14h1.5a1.75 1.75 0 0 1 1.75 1.75 1.75 1.75 0 0 1-1.75 1.75h-1.5a1.75 1.75 0 0 1-1.75-1.75A1.75 1.75 0 0 1 6.25 14Zm10 0h1.5a1.75 1.75 0 0 1 1.75 1.75 1.75 1.75 0 0 1-1.75 1.75h-1.5a1.75 1.75 0 0 1-1.75-1.75A1.75 1.75 0 0 1 16.25 14Z" />,
+    <path key="target" d="M12 20.25a8.25 8.25 0 1 0 0-16.5 8.25 8.25 0 0 0 0 16.5Zm0-3.25a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0-3.25a1.75 1.75 0 1 0 0-3.5 1.75 1.75 0 0 0 0 3.5Z" />,
+    <path key="quiz" d="M8.25 7.25h7.5M8.25 12h7.5M8.25 16.75h4.5M5.25 7.25h.01M5.25 12h.01M5.25 16.75h.01M6 21h12a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2Z" />,
+    <path key="score" d="M6.5 12.5 10 16l7.5-8M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z" />,
+    <path key="cards" d="M7.25 6.25h9.5A2.25 2.25 0 0 1 19 8.5v7a2.25 2.25 0 0 1-2.25 2.25h-9.5A2.25 2.25 0 0 1 5 15.5v-7a2.25 2.25 0 0 1 2.25-2.25Zm2 3.25h5.5M9.25 13h3.5M3.75 9.25v8.25A2.75 2.75 0 0 0 6.5 20.25h8.25" />,
+    <path key="plan" d="M7 3.75v3M17 3.75v3M5.5 6.25h13A1.75 1.75 0 0 1 20.25 8v10.5a1.75 1.75 0 0 1-1.75 1.75h-13a1.75 1.75 0 0 1-1.75-1.75V8A1.75 1.75 0 0 1 5.5 6.25Zm-1.75 4.5h16.5M8 14h2.5M8 17h5" />,
+    <path key="weak" d="M12 3.75 20.25 18a1.5 1.5 0 0 1-1.3 2.25H5.05A1.5 1.5 0 0 1 3.75 18L12 3.75Zm0 5.5v4.25m0 3.25h.01" />,
+    <path key="adaptive" d="M5.5 12a6.5 6.5 0 0 1 11.25-4.44L18.75 9.5M18.5 12a6.5 6.5 0 0 1-11.25 4.44L5.25 14.5M18.75 6.25V9.5H15.5M5.25 17.75V14.5H8.5" />,
+    <path key="cache" d="M12 3.75c4.28 0 7.75 1.34 7.75 3s-3.47 3-7.75 3-7.75-1.34-7.75-3 3.47-3 7.75-3Zm-7.75 3v5.25c0 1.66 3.47 3 7.75 3s7.75-1.34 7.75-3V6.75m-15.5 5.25v5.25c0 1.66 3.47 3 7.75 3s7.75-1.34 7.75-3V12" />,
+  ];
+
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-5 w-5"
+      aria-hidden="true"
+    >
+      {icons[index] || icons[0]}
+    </svg>
+  );
+};
+
 const labels: any = {
   en: {
     title: "Study Agent",
@@ -1179,6 +1210,75 @@ export default function StudyPage() {
 
   const t = labels[language] || labels.en;
 
+  const featureStyles = [
+    {
+      icon: "from-blue-700 to-sky-500",
+      glow: "shadow-blue-200",
+      accent: "from-blue-600 to-sky-400",
+      hover: "hover:border-blue-200 hover:bg-blue-50/40",
+    },
+    {
+      icon: "from-cyan-700 to-teal-500",
+      glow: "shadow-cyan-200",
+      accent: "from-cyan-600 to-teal-400",
+      hover: "hover:border-cyan-200 hover:bg-cyan-50/40",
+    },
+    {
+      icon: "from-indigo-700 to-violet-500",
+      glow: "shadow-indigo-200",
+      accent: "from-indigo-600 to-violet-400",
+      hover: "hover:border-indigo-200 hover:bg-indigo-50/40",
+    },
+    {
+      icon: "from-emerald-700 to-green-500",
+      glow: "shadow-emerald-200",
+      accent: "from-emerald-600 to-green-400",
+      hover: "hover:border-emerald-200 hover:bg-emerald-50/40",
+    },
+    {
+      icon: "from-slate-800 to-slate-600",
+      glow: "shadow-slate-200",
+      accent: "from-slate-700 to-slate-400",
+      hover: "hover:border-slate-300 hover:bg-slate-50",
+    },
+    {
+      icon: "from-green-700 to-lime-500",
+      glow: "shadow-green-200",
+      accent: "from-green-600 to-lime-400",
+      hover: "hover:border-green-200 hover:bg-green-50/40",
+    },
+    {
+      icon: "from-amber-700 to-orange-500",
+      glow: "shadow-amber-200",
+      accent: "from-amber-600 to-orange-400",
+      hover: "hover:border-amber-200 hover:bg-amber-50/40",
+    },
+    {
+      icon: "from-purple-700 to-fuchsia-500",
+      glow: "shadow-purple-200",
+      accent: "from-purple-600 to-fuchsia-400",
+      hover: "hover:border-purple-200 hover:bg-purple-50/40",
+    },
+    {
+      icon: "from-rose-700 to-pink-500",
+      glow: "shadow-rose-200",
+      accent: "from-rose-600 to-pink-400",
+      hover: "hover:border-rose-200 hover:bg-rose-50/40",
+    },
+    {
+      icon: "from-violet-700 to-indigo-500",
+      glow: "shadow-violet-200",
+      accent: "from-violet-600 to-indigo-400",
+      hover: "hover:border-violet-200 hover:bg-violet-50/40",
+    },
+    {
+      icon: "from-teal-700 to-cyan-500",
+      glow: "shadow-teal-200",
+      accent: "from-teal-600 to-cyan-400",
+      hover: "hover:border-teal-200 hover:bg-teal-50/40",
+    },
+  ];
+
   useEffect(() => {
     setLanguage(getSavedLocale());
   }, []);
@@ -1595,37 +1695,36 @@ export default function StudyPage() {
 
             <div className="grid gap-3 sm:grid-cols-2">
               {t.items.map((item: string, index: number) => {
-                const icons = [
-                  "🧾",
-                  "🔊",
-                  "🧠",
-                  "🎯",
-                  "📝",
-                  "✅",
-                  "🃏",
-                  "📅",
-                  "📌",
-                  "🚀",
-                  "⚡",
-                ];
+                const style = featureStyles[index] || featureStyles[0];
 
                 return (
                   <div
                     key={index}
-                    className="group rounded-2xl border border-slate-200 bg-white/80 p-3 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:bg-blue-50/60 hover:shadow-md"
+                    className={`group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.06)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(15,23,42,0.10)] ${style.hover}`}
                   >
+                    <div
+                      className={`absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent ${style.accent} to-transparent opacity-0 transition group-hover:opacity-100`}
+                    />
+
                     <div
                       className={`flex items-start gap-3 ${
                         language === "ar" ? "text-right" : "text-left"
                       }`}
                     >
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-lg ring-1 ring-blue-100 transition group-hover:bg-white">
-                        {icons[index] || "✨"}
+                      <span
+                        className={`relative flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${style.icon} text-white shadow-sm ${style.glow} ring-1 ring-slate-900/5 transition group-hover:scale-105`}
+                      >
+                        <FeatureIcon index={index} />
                       </span>
 
-                      <p className="text-sm font-medium leading-relaxed text-slate-700">
-                        {item}
-                      </p>
+                      <div className="min-w-0">
+                        <p className="text-sm font-semibold leading-relaxed text-slate-900">
+                          {item}
+                        </p>
+                        <div
+                          className={`mt-2 h-1 w-10 rounded-full bg-gradient-to-r ${style.accent} opacity-70 transition group-hover:w-14`}
+                        />
+                      </div>
                     </div>
                   </div>
                 );
