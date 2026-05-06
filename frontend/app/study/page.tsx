@@ -1594,20 +1594,13 @@ export default function StudyPage() {
         const statusData = await statusRes.json();
 
         if (statusData.status === "completed") {
-          const audioPath = statusData.result?.audio_path;
+          const audioUrl = statusData.result?.audio_url;
 
-          if (!audioPath) {
-            throw new Error("Missing audio path");
+          if (!audioUrl) {
+            throw new Error("Missing audio URL");
           }
 
-          const audioRes = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/${audioPath}`
-          );
-
-          const blob = await audioRes.blob();
-          const url = URL.createObjectURL(blob);
-
-          setAudioUrl(url);
+          setAudioUrl(audioUrl);
 
           completed = true;
         }
