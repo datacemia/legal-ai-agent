@@ -1593,17 +1593,44 @@ export default function StudyPage() {
 
             <p>{t.how2}</p>
 
-            <ul
-              className={`grid gap-1 text-sm ${
-                language === "ar" ? "list-disc pr-5" : "list-disc pl-5"
-              } sm:grid-cols-2`}
-            >
-              {t.items.map((item: string, index: number) => (
-                <li key={index} className="leading-relaxed">
-                  {item}
-                </li>
-              ))}
-            </ul>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {t.items.map((item: string, index: number) => {
+                const icons = [
+                  "🧾",
+                  "🔊",
+                  "🧠",
+                  "🎯",
+                  "📝",
+                  "✅",
+                  "🃏",
+                  "📅",
+                  "📌",
+                  "🚀",
+                  "⚡",
+                ];
+
+                return (
+                  <div
+                    key={index}
+                    className="group rounded-2xl border border-slate-200 bg-white/80 p-3 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:bg-blue-50/60 hover:shadow-md"
+                  >
+                    <div
+                      className={`flex items-start gap-3 ${
+                        language === "ar" ? "text-right" : "text-left"
+                      }`}
+                    >
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-lg ring-1 ring-blue-100 transition group-hover:bg-white">
+                        {icons[index] || "✨"}
+                      </span>
+
+                      <p className="text-sm font-medium leading-relaxed text-slate-700">
+                        {item}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
 
             <p>{t.how3}</p>
 
