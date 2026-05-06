@@ -5,7 +5,6 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional
 
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException, Depends
-from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
@@ -17,7 +16,7 @@ from app.schemas.study_schema import StudyHistoryItem
 
 from app.services.study_agent.study_parser import extract_study_text
 from app.services.study_agent.study_ai_agent import analyze_study_content
-from app.services.study_agent.study_audio_service import generate_study_audio
+from app.services.job_service import create_job
 
 router = APIRouter(prefix="/study", tags=["Study"])
 
@@ -156,9 +155,6 @@ async def analyze_study(
             detail="Only PDF and DOCX files are allowed.",
         )
 
-    # =========================
-    # 🔥 CACHE CHECK
-    # =========================
     file_bytes = await file.read()
 
     user_weak_points = get_user_weak_points(db, current_user.id)
@@ -177,12 +173,8 @@ async def analyze_study(
 
     print("STUDY CACHE MISS:", cache_key)
 
-    # ⚠️ reset pointer
     await file.seek(0)
 
-    # =========================
-    # 📄 EXTRACTION
-    # =========================
     text = await extract_study_text(file)
 
     print("\n=== FINAL TEXT SENT TO AGENT ===")
@@ -196,9 +188,6 @@ async def analyze_study(
             detail="Could not extract text from file.",
         )
 
-    # =========================
-    # 🧠 AI
-    # =========================
     result = analyze_study_content(
         text=text,
         education_level=education_level,
@@ -206,14 +195,8 @@ async def analyze_study(
         weak_points=user_weak_points,
     )
 
-    # =========================
-    # 💾 SAVE CACHE
-    # =========================
     save_study_result_cache(cache_key, result)
 
-    # =========================
-    # 🗄️ DB SAVE
-    # =========================
     analysis = StudyAnalysis(
         user_id=current_user.id,
         file_name=file.filename,
@@ -316,32 +299,37 @@ def get_study_weak_points(
 
 
 # =========================
-# 🔊 GENERATE STUDY AUDIO
+# 🔊 GENERATE STUDY AUDIO JOB
 # =========================
 @router.post("/audio")
 def generate_audio(
     payload: StudyAudioPayload,
+    db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
     try:
-        audio_path = generate_study_audio(
-            text=payload.text,
-            language=payload.language,
-            voice=payload.voice,
+        job = create_job(
+            db=db,
+            user_id=current_user.id,
+            job_type="study_audio",
+            input_data={
+                "text": payload.text,
+                "language": payload.language,
+                "voice": payload.voice,
+            },
         )
 
-        return FileResponse(
-            audio_path,
-            media_type="audio/mpeg",
-            filename="study-audio.mp3",
-        )
+        return {
+            "job_id": job.id,
+            "status": job.status,
+        }
 
     except Exception as e:
-        print("STUDY AUDIO ERROR:", e)
+        print("STUDY AUDIO JOB ERROR:", e)
 
         raise HTTPException(
             status_code=500,
-            detail="Could not generate audio.",
+            detail="Could not create audio job.",
         )
 
 
