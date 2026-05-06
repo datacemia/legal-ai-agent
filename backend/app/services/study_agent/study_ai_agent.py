@@ -5,7 +5,7 @@ from typing import Dict, List
 from pydantic import BaseModel, Field
 from openai import OpenAI
 
-client = OpenAI()
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
 class VisualSummary(BaseModel):
