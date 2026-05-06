@@ -1,5 +1,9 @@
+import os
 import time
 from datetime import datetime
+
+print("OPENAI exists =", bool(os.getenv("OPENAI_API_KEY")))
+print("DATABASE exists =", bool(os.getenv("DATABASE_URL")))
 
 from app.database import SessionLocal
 from app.models.job import Job
