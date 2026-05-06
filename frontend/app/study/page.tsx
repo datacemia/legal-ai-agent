@@ -40,6 +40,7 @@ const labels: any = {
       "Before analysis, choose your education level and output language. The agent adapts summaries, explanations, quizzes, flashcards, and study plans to your level.",
     items: [
       "Structured summary and detailed explanation",
+      "Audio playback for the detailed summary",
       "Visual summary and interactive mind map",
       "Key learning points",
       "Theoretical and practical quizzes",
@@ -118,6 +119,7 @@ const labels: any = {
       "Avant l’analyse, choisissez votre niveau d’étude et la langue de sortie. L’agent adapte les résumés, explications, quiz, flashcards et plans de révision à votre niveau.",
     items: [
       "Résumé structuré et explication détaillée",
+      "Lecture audio du résumé détaillé",
       "Résumé visuel et carte mentale interactive",
       "Points clés à retenir",
       "Quiz théoriques et pratiques",
@@ -196,6 +198,7 @@ const labels: any = {
       "قبل التحليل، اختر مستواك التعليمي ولغة النتائج. يقوم الوكيل بتكييف الملخصات، الشروحات، الاختبارات، بطاقات المراجعة وخطة الدراسة حسب مستواك.",
     items: [
       "ملخص منظم وشرح مفصل",
+      "استماع صوتي للملخص المفصل",
       "ملخص بصري وخريطة ذهنية تفاعلية",
       "نقاط تعلم أساسية",
       "اختبارات نظرية وتطبيقية",
