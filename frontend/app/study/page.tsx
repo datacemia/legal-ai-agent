@@ -1594,7 +1594,9 @@ export default function StudyPage() {
         const statusData = await statusRes.json();
 
         if (statusData.status === "completed") {
-          const audioUrl = statusData.result?.audio_url;
+          const audioUrl =
+           statusData.result?.audio_url ||
+           statusData.result?.audio_path?.audio_url;
 
           if (!audioUrl) {
             throw new Error("Missing audio URL");
