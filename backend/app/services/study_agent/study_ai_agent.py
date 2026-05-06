@@ -189,7 +189,7 @@ def starts_with_action_verb(task: str, lang: str) -> bool:
 
     verbs_ar = [
         "اكتب", "سجل", "اشرح", "قارن", "حدد",
-        "طبق", "تطبيق", "اقترح", "ناقش", "قيم", "صف",
+        "طبق", "اقترح", "ناقش", "قيم", "صف",
         "اذكر", "حلل", "استخرج", "بين"
     ]
 
@@ -1907,41 +1907,6 @@ def clean_quiz_questions(questions):
     return clean[:5]
 
 
-def repair_quiz_length(quiz: list) -> list:
-    if not isinstance(quiz, list):
-        return []
-
-    # remove invalid
-    quiz = [q for q in quiz if isinstance(q, dict)]
-
-    # deduplicate
-    seen = set()
-    unique = []
-
-    for q in quiz:
-        text = str(q.get("question", "")).strip().lower()
-
-        if not text or text in seen:
-            continue
-
-        seen.add(text)
-        unique.append(q)
-
-    quiz = unique
-
-    # trim
-    if len(quiz) > 5:
-        quiz = quiz[:5]
-
-    # duplicate last valid question structure if missing
-    while len(quiz) < 5 and quiz:
-        base = dict(quiz[-1])
-        base["question"] += f" ({len(quiz) + 1})"
-        quiz.append(base)
-
-    return quiz
-
-
 def fill_missing_quiz(questions):
     if not isinstance(questions, list):
         return []
@@ -2370,14 +2335,6 @@ Educational content:
             "flashcards": flashcards,
             "study_plan": study_plan,
         }
-
-        result["theoretical_quiz"] = repair_quiz_length(
-            result.get("theoretical_quiz", [])
-        )
-
-        result["practical_quiz"] = repair_quiz_length(
-            result.get("practical_quiz", [])
-        )
 
         result["quality"] = quality_validate_study_response(result, output_language)
 
