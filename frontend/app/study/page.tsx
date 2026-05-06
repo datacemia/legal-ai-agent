@@ -1542,25 +1542,86 @@ export default function StudyPage() {
 
       const token = getToken();
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/study/audio`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({
-          text,
-          language,
-        }),
-      });
+      // 1. CREATE AUDIO JOB
+      const createRes = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/study/audio`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+          body: JSON.stringify({
+            text,
+            language,
+          }),
+        }
+      );
 
-      if (!res.ok) {
-        throw new Error("Audio generation failed");
+      if (!createRes.ok) {
+        throw new Error("Failed to create audio job");
       }
 
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-      setAudioUrl(url);
+      const createData = await createRes.json();
+
+      const jobId = createData.job_id;
+
+      if (!jobId) {
+        throw new Error("Missing job ID");
+      }
+
+      // 2. POLLING
+      let attempts = 0;
+      let completed = false;
+
+      while (attempts < 60 && !completed) {
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+
+        const statusRes = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/jobs/${jobId}`,
+          {
+            headers: token
+              ? { Authorization: `Bearer ${token}` }
+              : {},
+          }
+        );
+
+        if (!statusRes.ok) {
+          attempts++;
+          continue;
+        }
+
+        const statusData = await statusRes.json();
+
+        if (statusData.status === "completed") {
+          const audioPath = statusData.result?.audio_path;
+
+          if (!audioPath) {
+            throw new Error("Missing audio path");
+          }
+
+          const audioRes = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/${audioPath}`
+          );
+
+          const blob = await audioRes.blob();
+          const url = URL.createObjectURL(blob);
+
+          setAudioUrl(url);
+
+          completed = true;
+        }
+
+        if (statusData.status === "failed") {
+          throw new Error(statusData.error || "Audio job failed");
+        }
+
+        attempts++;
+      }
+
+      if (!completed) {
+        throw new Error("Audio generation timeout");
+      }
     } catch (error) {
       console.error("Audio error:", error);
     } finally {
