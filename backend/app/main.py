@@ -3,6 +3,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 from dotenv import load_dotenv
+from app.api.job_routes import router as job_router
+
 
 load_dotenv()
 
@@ -82,3 +84,5 @@ def root():
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
+
+app.include_router(job_router)
