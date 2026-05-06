@@ -1,35 +1,83 @@
 # =========================
+
 # Python
+
 # =========================
+
 backend/venv/
 venv/
-__pycache__/
+**pycache**/
 *.pyc
 
 # =========================
+
 # Database
+
 # =========================
+
 *.db
 
 # =========================
+
 # Environment (CRITICAL)
+
 # =========================
+
 .env
 .env.local
 frontend/.env.local
 
 # =========================
+
 # Uploads (CRITICAL)
+
 # =========================
+
 backend/uploads/
 
 # =========================
-# Node / Frontend
+
+# Generated AI / Results (IMPORTANT)
+
 # =========================
+
+backend/result_*.json
+backend/result_*.txt
+backend/result_*.csv
+backend/test_files/
+backend/test_results_part1/
+
+# =========================
+
+# Node / Frontend
+
+# =========================
+
 node_modules/
 .next/
 
 # =========================
-# Misc
+
+# Logs
+
 # =========================
+
+*.log
+
+# =========================
+
+# IDEs
+
+# =========================
+
+.vscode/
+.idea/
+
+# =========================
+
+# OS
+
+# =========================
+
 .DS_Store
+Thumbs.db
