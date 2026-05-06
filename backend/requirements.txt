@@ -69,7 +69,7 @@ ujson==5.12.0
 urllib3==2.6.3
 uvicorn==0.30.0
 watchfiles==1.1.1
-websockets==16.0
+websockets==12.0
 pytesseract
 pillow
 python-docx
