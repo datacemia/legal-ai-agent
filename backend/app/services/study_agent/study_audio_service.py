@@ -106,6 +106,17 @@ def generate_study_audio(
     voice: str | None = None,
 ) -> dict:
     language = normalize_audio_language(language)
+
+    print("SUPABASE_URL exists =", bool(os.getenv("SUPABASE_URL")))
+    print(
+        "SUPABASE_KEY starts =",
+        os.getenv("SUPABASE_SERVICE_ROLE_KEY", "")[:12],
+    )
+    print(
+        "OPENAI_KEY starts =",
+        os.getenv("OPENAI_API_KEY", "")[:8],
+    )
+
     text = clean_tts_text(text)
 
     if not text:
