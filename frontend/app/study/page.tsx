@@ -1186,6 +1186,38 @@ function MermaidDiagram({
   );
 }
 
+function resolveAudioUrl(payload: any): string {
+  const result = payload?.result;
+
+  if (typeof payload?.audio_url === "string") {
+    return payload.audio_url;
+  }
+
+  if (typeof result?.audio_url === "string") {
+    return result.audio_url;
+  }
+
+  if (typeof result?.audio_path === "string") {
+    return result.audio_path;
+  }
+
+  if (typeof result?.audio_path?.audio_url === "string") {
+    return result.audio_path.audio_url;
+  }
+
+  if (typeof result === "string") {
+    try {
+      const parsed = JSON.parse(result);
+      return resolveAudioUrl({ result: parsed });
+    } catch {
+      return "";
+    }
+  }
+
+  return "";
+}
+
+
 export default function StudyPage() {
   const [file, setFile] = useState<File | null>(null);
   const [result, setResult] = useState<any>(null);
@@ -1285,11 +1317,9 @@ export default function StudyPage() {
 
   useEffect(() => {
     return () => {
-      if (audioUrl) {
-        URL.revokeObjectURL(audioUrl);
-      }
+      setAudioUrl("");
     };
-  }, [audioUrl]);
+  }, []);
 
   useEffect(() => {
     if (!loading || !startTime) return;
@@ -1594,15 +1624,14 @@ export default function StudyPage() {
         const statusData = await statusRes.json();
 
         if (statusData.status === "completed") {
-          const audioUrl =
-           statusData.result?.audio_url ||
-           statusData.result?.audio_path?.audio_url;
+          const resolvedAudioUrl = resolveAudioUrl(statusData);
 
-          if (!audioUrl) {
+          if (!resolvedAudioUrl) {
+            console.error("Missing audio URL payload:", statusData);
             throw new Error("Missing audio URL");
           }
 
-          setAudioUrl(audioUrl);
+          setAudioUrl(resolvedAudioUrl);
 
           completed = true;
         }
@@ -1625,10 +1654,7 @@ export default function StudyPage() {
   };
 
   const stopAudio = () => {
-    if (audioUrl) {
-      URL.revokeObjectURL(audioUrl);
-      setAudioUrl("");
-    }
+    setAudioUrl("");
   };
 
   const handleSubmitQuiz = () => {
