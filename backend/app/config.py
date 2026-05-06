@@ -5,7 +5,19 @@ load_dotenv()
 
 APP_ENV = os.getenv("APP_ENV", "development")
 APP_NAME = os.getenv("APP_NAME", "Legal AI Agent")
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./legal_ai.db")
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL is missing")
+
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace(
+        "postgres://",
+        "postgresql://",
+        1,
+    )
+
 JWT_SECRET = os.getenv("JWT_SECRET", "change_me_later")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 MAX_FILE_SIZE_MB = int(os.getenv("MAX_FILE_SIZE_MB", "10"))
