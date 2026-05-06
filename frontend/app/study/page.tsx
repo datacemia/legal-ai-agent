@@ -1171,12 +1171,22 @@ export default function StudyPage() {
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
+  const [audioLoading, setAudioLoading] = useState(false);
+  const [audioUrl, setAudioUrl] = useState("");
 
   const t = labels[language] || labels.en;
 
   useEffect(() => {
     setLanguage(getSavedLocale());
   }, []);
+
+  useEffect(() => {
+    return () => {
+      if (audioUrl) {
+        URL.revokeObjectURL(audioUrl);
+      }
+    };
+  }, [audioUrl]);
 
   useEffect(() => {
     if (!loading || !startTime) return;
@@ -1251,6 +1261,7 @@ export default function StudyPage() {
     setQuizSubmitted(false);
     setRetryCount(0);
     setSelectedNode(null);
+    stopAudio();
 
     const formData = new FormData();
     formData.append("file", file);
@@ -1415,6 +1426,52 @@ export default function StudyPage() {
     }));
   };
 
+  const generateAudio = async (text: string) => {
+    if (!text) return;
+
+    setAudioLoading(true);
+
+    try {
+      if (audioUrl) {
+        URL.revokeObjectURL(audioUrl);
+        setAudioUrl("");
+      }
+
+      const token = getToken();
+
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/study/audio`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({
+          text,
+          language,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Audio generation failed");
+      }
+
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      setAudioUrl(url);
+    } catch (error) {
+      console.error("Audio error:", error);
+    } finally {
+      setAudioLoading(false);
+    }
+  };
+
+  const stopAudio = () => {
+    if (audioUrl) {
+      URL.revokeObjectURL(audioUrl);
+      setAudioUrl("");
+    }
+  };
+
   const handleSubmitQuiz = () => {
     if (Object.keys(selectedAnswers).length < totalQuestions) return;
 
@@ -1553,6 +1610,7 @@ export default function StudyPage() {
           <select
             value={language}
             onChange={(e) => {
+              stopAudio();
               setLanguage(e.target.value);
               setSavedLocale(e.target.value);
               setResult(null);
@@ -1574,6 +1632,7 @@ export default function StudyPage() {
               type="file"
               accept=".pdf,.docx"
               onChange={(e) => {
+                stopAudio();
                 setFile(e.target.files?.[0] || null);
                 setResult(null);
                 setPaymentMessage("");
@@ -1803,6 +1862,47 @@ export default function StudyPage() {
                 <p className="text-slate-600 mt-1 leading-relaxed">
                   {result.detailed_summary}
                 </p>
+
+                <div className="mt-3 flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => generateAudio(result.detailed_summary)}
+                    disabled={audioLoading}
+                    className="rounded-xl bg-blue-600 px-4 py-2 text-sm text-white disabled:bg-slate-400"
+                  >
+                    {audioLoading
+                      ? language === "fr"
+                        ? "Génération audio..."
+                        : language === "ar"
+                        ? "جاري إنشاء الصوت..."
+                        : "Generating audio..."
+                      : language === "fr"
+                      ? "🔊 Écouter"
+                      : language === "ar"
+                      ? "🔊 استمع"
+                      : "🔊 Listen"}
+                  </button>
+
+                  {audioUrl && (
+                    <button
+                      type="button"
+                      onClick={stopAudio}
+                      className="rounded-xl border px-4 py-2 text-sm text-slate-700"
+                    >
+                      {language === "fr"
+                        ? "Arrêter"
+                        : language === "ar"
+                        ? "إيقاف"
+                        : "Stop"}
+                    </button>
+                  )}
+                </div>
+
+                {audioUrl && (
+                  <audio controls autoPlay className="mt-3 w-full">
+                    <source src={audioUrl} type="audio/mpeg" />
+                  </audio>
+                )}
               </div>
             )}
 

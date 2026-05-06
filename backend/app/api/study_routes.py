@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional
 
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException, Depends
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
@@ -16,6 +17,7 @@ from app.schemas.study_schema import StudyHistoryItem
 
 from app.services.study_agent.study_parser import extract_study_text
 from app.services.study_agent.study_ai_agent import analyze_study_content
+from app.services.study_agent.study_audio_service import generate_study_audio
 
 router = APIRouter(prefix="/study", tags=["Study"])
 
@@ -37,6 +39,12 @@ class StudyAttemptPayload(BaseModel):
     total_questions: int
     correct_answers: int
     answers: List[Dict[str, Any]]
+
+
+class StudyAudioPayload(BaseModel):
+    text: str
+    language: str = "en"
+    voice: Optional[str] = None
 
 
 def make_study_cache_key(
@@ -305,6 +313,36 @@ def get_study_weak_points(
     return {
         "weak_points": cleaned[:20]
     }
+
+
+# =========================
+# 🔊 GENERATE STUDY AUDIO
+# =========================
+@router.post("/audio")
+def generate_audio(
+    payload: StudyAudioPayload,
+    current_user: User = Depends(get_current_user),
+):
+    try:
+        audio_path = generate_study_audio(
+            text=payload.text,
+            language=payload.language,
+            voice=payload.voice,
+        )
+
+        return FileResponse(
+            audio_path,
+            media_type="audio/mpeg",
+            filename="study-audio.mp3",
+        )
+
+    except Exception as e:
+        print("STUDY AUDIO ERROR:", e)
+
+        raise HTTPException(
+            status_code=500,
+            detail="Could not generate audio.",
+        )
 
 
 # =========================
