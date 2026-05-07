@@ -3,7 +3,6 @@ from datetime import datetime
 
 from app.database import SessionLocal
 from app.models.job import Job
-from app.models.user import User
 
 from app.services.study_agent.study_ai_agent import analyze_study_content
 from app.services.study_agent.study_audio_service import generate_study_audio
@@ -11,13 +10,13 @@ from app.services.study_agent.study_audio_service import generate_study_audio
 
 def process_job(job: Job, db):
     if job.job_type == "study_audio":
-        audio_path = generate_study_audio(
+        result = generate_study_audio(
             text=job.input.get("text", ""),
             language=job.input.get("language", "en"),
             voice=job.input.get("voice"),
         )
 
-        return {"audio_path": audio_path}
+        return result
 
     if job.job_type == "study_ai":
         result = analyze_study_content(
@@ -33,7 +32,7 @@ def process_job(job: Job, db):
 
 
 def run_worker():
-    print("Worker started")
+    print("Worker started", flush=True)
 
     while True:
         db = SessionLocal()
@@ -50,6 +49,11 @@ def run_worker():
                 time.sleep(2)
                 continue
 
+            print(
+                f"Processing job {job.id} type={job.job_type}",
+                flush=True,
+            )
+
             job.status = "running"
             job.started_at = datetime.utcnow()
             job.attempts += 1
@@ -61,14 +65,25 @@ def run_worker():
 
                 job.status = "completed"
                 job.result = result
+                job.error = None
                 job.completed_at = datetime.utcnow()
                 db.commit()
+
+                print(
+                    f"Completed job {job.id} type={job.job_type}",
+                    flush=True,
+                )
 
             except Exception as e:
                 job.status = "failed"
                 job.error = str(e)
                 job.completed_at = datetime.utcnow()
                 db.commit()
+
+                print(
+                    f"Failed job {job.id} type={job.job_type}: {e}",
+                    flush=True,
+                )
 
         finally:
             db.close()
