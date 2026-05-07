@@ -135,6 +135,9 @@ const labels: any = {
       quiz: "Creating quiz...",
       finalizing: "Finalizing...",
       analyzing: "Analyzing...",
+      analyzingStudy: "Analyzing study content...",
+      savingResult: "Saving study result...",
+      savingHistory: "Saving study history...",
     },
     remaining: "remaining",
     elapsed: "Elapsed",
@@ -214,6 +217,9 @@ const labels: any = {
       quiz: "Création du quiz...",
       finalizing: "Finalisation...",
       analyzing: "Analyse en cours...",
+      analyzingStudy: "Analyse du contenu...",
+      savingResult: "Sauvegarde du résultat...",
+      savingHistory: "Sauvegarde de l’historique...",
     },
     remaining: "restantes",
     elapsed: "Temps écoulé",
@@ -292,6 +298,9 @@ const labels: any = {
       quiz: "جارٍ إنشاء الاختبار...",
       finalizing: "جارٍ إنهاء العملية...",
       analyzing: "جارٍ التحليل...",
+      analyzingStudy: "جارٍ تحليل المحتوى...",
+      savingResult: "جارٍ حفظ النتيجة...",
+      savingHistory: "جارٍ حفظ سجل الدراسة...",
     },
     remaining: "متبقية",
     elapsed: "الوقت المنقضي",
@@ -1435,7 +1444,7 @@ export default function StudyPage() {
       let attempts = 0;
       let completed = false;
 
-      while (attempts < 120 && !completed) {
+      while (attempts < 90 && !completed) {
         await new Promise((resolve) => setTimeout(resolve, 2000));
 
         const statusRes = await fetch(
@@ -1455,7 +1464,15 @@ export default function StudyPage() {
 
         const statusData = await statusRes.json();
 
-        if (statusData.status === "running") {
+        if (typeof statusData.progress === "number") {
+          setLoadingProgress(statusData.progress);
+        }
+
+        if (statusData.status_message) {
+          setLoadingStep(statusData.status_message);
+        }
+
+        if (statusData.status === "running" && !statusData.status_message) {
           setLoadingStep(t.loadingSteps.summary);
           setLoadingProgress(45);
         }

@@ -28,6 +28,8 @@ def get_job_status(
         "id": job.id,
         "job_type": job.job_type,
         "status": job.status,
+        "progress": job.progress,
+        "status_message": job.status_message,
         "result": job.result,
         "error": job.error,
         "created_at": job.created_at,

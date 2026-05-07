@@ -6,6 +6,7 @@ from app.models.study_analysis import StudyAnalysis
 
 from app.services.study_agent.study_ai_agent import analyze_study_content
 from app.services.study_agent.study_audio_service import generate_study_audio
+from app.workers.progress import update_job_progress
 
 
 CACHE_DIR = Path("cache/study_results")
@@ -26,14 +27,22 @@ def save_study_result_cache(cache_key: str, result: dict):
 
 
 def handle_study_audio(job: Job, db):
-    return generate_study_audio(
+    update_job_progress(job, db, 20, "Generating study audio...")
+
+    result = generate_study_audio(
         text=job.input.get("text", ""),
         language=job.input.get("language", "en"),
         voice=job.input.get("voice"),
     )
 
+    update_job_progress(job, db, 95, "Audio ready.")
+
+    return result
+
 
 def handle_study_ai(job: Job, db):
+    update_job_progress(job, db, 20, "Analyzing study content...")
+
     result = analyze_study_content(
         text=job.input.get("text", ""),
         education_level=job.input.get("education_level", "university"),
@@ -41,10 +50,14 @@ def handle_study_ai(job: Job, db):
         weak_points=job.input.get("weak_points", []),
     )
 
+    update_job_progress(job, db, 75, "Saving study result...")
+
     cache_key = job.input.get("cache_key")
     file_name = job.input.get("file_name", "study_document")
 
     save_study_result_cache(cache_key, result)
+
+    update_job_progress(job, db, 85, "Saving study history...")
 
     analysis = StudyAnalysis(
         user_id=job.user_id,
@@ -55,5 +68,7 @@ def handle_study_ai(job: Job, db):
     db.add(analysis)
     db.commit()
     db.refresh(analysis)
+
+    update_job_progress(job, db, 95, "Finalizing...")
 
     return result
