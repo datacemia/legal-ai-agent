@@ -36,6 +36,7 @@ def run_worker():
                 db.query(Job)
                 .filter(Job.status == "pending")
                 .order_by(Job.created_at.asc())
+                .with_for_update(skip_locked=True)
                 .first()
             )
 
