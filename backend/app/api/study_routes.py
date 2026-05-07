@@ -188,26 +188,24 @@ async def analyze_study(
             detail="Could not extract text from file.",
         )
 
-    result = analyze_study_content(
-        text=text,
-        education_level=education_level,
-        output_language=output_language,
-        weak_points=user_weak_points,
-    )
-
-    save_study_result_cache(cache_key, result)
-
-    analysis = StudyAnalysis(
+    job = create_job(
+        db=db,
         user_id=current_user.id,
-        file_name=file.filename,
-        result=result,
+        job_type="study_ai",
+        input_data={
+            "text": text,
+            "education_level": education_level,
+            "output_language": output_language,
+            "weak_points": user_weak_points,
+            "cache_key": cache_key,
+            "file_name": file.filename,
+        },
     )
 
-    db.add(analysis)
-    db.commit()
-    db.refresh(analysis)
-
-    return result
+    return {
+        "job_id": job.id,
+        "status": job.status,
+    }
 
 
 # =========================

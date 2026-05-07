@@ -81,3 +81,18 @@ node_modules/
 
 .DS_Store
 Thumbs.db
+# AI cache
+backend/cache/
+
+# Audio generated
+*.mp3
+
+# Temp json
+attempt_*.json
+personalized.json
+weak_points.json
+
+# Local scripts
+backend/test_job.py
+backend/verify_test_user.py
+backend/clear_jobs.py

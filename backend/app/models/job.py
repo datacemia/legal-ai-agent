@@ -1,5 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text
-from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text, JSON
 from sqlalchemy.sql import func
 
 from app.database import Base
@@ -14,8 +13,8 @@ class Job(Base):
     job_type = Column(String, nullable=False)
     status = Column(String, nullable=False, default="pending")
 
-    input = Column(JSONB, nullable=False, default=dict)
-    result = Column(JSONB, nullable=True)
+    input = Column(JSON, nullable=False, default=dict)
+    result = Column(JSON, nullable=True)
 
     error = Column(Text, nullable=True)
     attempts = Column(Integer, nullable=False, default=0)

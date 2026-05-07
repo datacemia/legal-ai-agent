@@ -2,8 +2,8 @@ import hashlib
 import os
 from pathlib import Path
 
-import requests
 from openai import OpenAI
+from supabase import create_client
 
 client = OpenAI()
 
@@ -13,14 +13,14 @@ AUDIO_CACHE_DIR.mkdir(parents=True, exist_ok=True)
 SUPPORTED_TTS_LANGS = {"en", "fr", "ar"}
 
 
-def get_supabase_credentials():
+def get_supabase_client():
     supabase_url = os.getenv("SUPABASE_URL")
     supabase_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
 
     if not supabase_url or not supabase_key:
         raise ValueError("Missing Supabase storage environment variables")
 
-    return supabase_url, supabase_key
+    return create_client(supabase_url, supabase_key)
 
 
 def get_storage_bucket() -> str:
@@ -71,38 +71,31 @@ def make_audio_cache_key(text: str, language: str, voice: str) -> str:
 
 
 def upload_audio_to_supabase(local_path: Path, storage_path: str) -> str:
-    supabase_url, supabase_key = get_supabase_credentials()
+    supabase = get_supabase_client()
     bucket = get_storage_bucket()
-
-    upload_url = (
-        f"{supabase_url}/storage/v1/object/{bucket}/{storage_path}"
-    )
 
     with open(local_path, "rb") as f:
         audio_bytes = f.read()
 
-    response = requests.post(
-        upload_url,
-        headers={
-            "Authorization": f"Bearer {supabase_key}",
-            "apikey": supabase_key,
-            "Content-Type": "audio/mpeg",
-            "x-upsert": "true",
-        },
-        data=audio_bytes,
-        timeout=60,
-    )
-
-    if response.status_code not in [200, 201]:
-        raise ValueError(
-            f"Supabase upload failed: "
-            f"{response.status_code} - {response.text}"
+    try:
+        supabase.storage.from_(bucket).upload(
+            path=storage_path,
+            file=audio_bytes,
+            file_options={
+                "content-type": "audio/mpeg",
+                "upsert": "true",
+            },
         )
+    except Exception as e:
+        message = str(e).lower()
 
-    public_url = (
-        f"{supabase_url}/storage/v1/object/public/"
-        f"{bucket}/{storage_path}"
-    )
+        if "already exists" not in message and "duplicate" not in message:
+            raise
+
+    public_url = supabase.storage.from_(bucket).get_public_url(storage_path)
+
+    if not public_url:
+        raise ValueError("Could not generate public audio URL")
 
     return public_url
 

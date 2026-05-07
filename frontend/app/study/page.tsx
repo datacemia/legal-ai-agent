@@ -1384,7 +1384,7 @@ export default function StudyPage() {
     setLoading(true);
     setStartTime(Date.now());
     setElapsed(0);
-    setRemaining(90);
+    setRemaining(180);
     setLoadingStep(t.loadingSteps.extracting);
     setLoadingProgress(15);
     setShowLevelModal(false);
@@ -1404,6 +1404,12 @@ export default function StudyPage() {
     try {
       const token = getToken();
 
+      if (!token) {
+        throw new Error(
+          "You must be logged in to analyze documents."
+        );
+      }
+
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/study/analyze`,
         {
@@ -1416,19 +1422,66 @@ export default function StudyPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        setResult({
-          detail: data.detail || "Study analysis failed.",
-        });
-      } else {
+        throw new Error(data.detail || "Study analysis failed.");
+      }
+
+      if (!data.job_id) {
         setResult(data);
+        return;
+      }
+
+      const jobId = data.job_id;
+
+      let attempts = 0;
+      let completed = false;
+
+      while (attempts < 120 && !completed) {
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+
+        const statusRes = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/jobs/${jobId}`,
+          {
+            headers: token ? { Authorization: `Bearer ${token}` } : {},
+          }
+        );
+
+        if (!statusRes.ok) {
+          const errorData = await statusRes.json().catch(() => ({}));
+
+          throw new Error(
+            errorData.detail || "Could not check job status"
+          );
+        }
+
+        const statusData = await statusRes.json();
+
+        if (statusData.status === "running") {
+          setLoadingStep(t.loadingSteps.summary);
+          setLoadingProgress(45);
+        }
+
+        if (statusData.status === "completed") {
+          setResult(statusData.result);
+          setLoadingProgress(100);
+          completed = true;
+        }
+
+        if (statusData.status === "failed") {
+          throw new Error(statusData.error || "Study analysis failed.");
+        }
+
+        attempts++;
+      }
+
+      if (!completed) {
+        throw new Error("Study analysis timeout.");
       }
     } catch (error) {
       console.error("Study analysis error:", error);
       setResult({
-        detail: t.errorMessage,
+        detail: error instanceof Error ? error.message : t.errorMessage,
       });
     } finally {
-      setLoadingProgress(100);
       setLoadingStep("");
       setLoading(false);
       setStartTime(null);
