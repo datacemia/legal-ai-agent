@@ -3,6 +3,7 @@ from datetime import datetime
 
 from app.database import SessionLocal
 from app.models.job import Job
+from app.models.user import User
 
 from app.services.study_agent.study_ai_agent import analyze_study_content
 from app.services.study_agent.study_audio_service import generate_study_audio
