@@ -148,9 +148,12 @@ export default function UploadPage() {
   const [message, setMessage] = useState("");
   const [plan, setPlan] = useState("");
   const [role, setRole] = useState("");
+  const [creditsBalance, setCreditsBalance] = useState(0);
 
   const hasActiveAccess =
-    role === "admin" || ["paid", "pro", "premium"].includes(plan);
+    role === "admin" ||
+    ["paid", "pro", "premium"].includes(plan) ||
+    creditsBalance > 0;
 
   useEffect(() => {
     setLanguage(getSavedLocale());
@@ -161,9 +164,11 @@ export default function UploadPage() {
 
       setPlan(savedPlan.toLowerCase().trim());
       setRole(savedRole.toLowerCase().trim());
+      setCreditsBalance(Number(safeGetLocalStorage("credits_balance", "0")));
     };
 
     syncBillingState();
+    refreshUserBilling();
 
     window.addEventListener("storage", syncBillingState);
 
@@ -204,9 +209,11 @@ export default function UploadPage() {
       .toLowerCase()
       .trim();
 
+    const nextCreditsBalance = Number(data.credits_balance || 0);
+
     safeSetLocalStorage(
       "credits_balance",
-      String(data.credits_balance || 0)
+      String(nextCreditsBalance)
     );
 
     safeSetLocalStorage("plan", nextPlan);
@@ -214,6 +221,7 @@ export default function UploadPage() {
 
     setPlan(nextPlan);
     setRole(nextRole);
+    setCreditsBalance(nextCreditsBalance);
 
     window.dispatchEvent(new Event("storage"));
   };
