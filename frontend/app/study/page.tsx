@@ -4,6 +4,19 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { getToken } from "../../lib/auth";
 import { getSavedLocale, setSavedLocale } from "../../lib/i18n";
 
+const safeGetLocalStorage = (key: string, fallback = "") => {
+  if (typeof window === "undefined") return fallback;
+
+  return localStorage.getItem(key) || fallback;
+};
+
+const safeSetLocalStorage = (key: string, value: string) => {
+  if (typeof window === "undefined") return;
+
+  localStorage.setItem(key, value);
+};
+
+
 const LEVEL_LABELS: any = {
   en: {
     primary_school: "Primary school",
@@ -1356,19 +1369,19 @@ export default function StudyPage() {
 
     const syncBillingState = () => {
       setUserPlan(
-        (localStorage.getItem("plan") || "trial")
+        (safeGetLocalStorage("plan", "trial"))
           .toLowerCase()
           .trim()
       );
 
       setUserRole(
-        (localStorage.getItem("role") || "user")
+        (safeGetLocalStorage("role", "user"))
           .toLowerCase()
           .trim()
       );
 
       setCreditsBalance(
-        Number(localStorage.getItem("credits_balance") || 0)
+        Number(safeGetLocalStorage("credits_balance", "0"))
       );
     };
 
@@ -1446,7 +1459,7 @@ export default function StudyPage() {
     LEVEL_LABELS[language]?.[level] || LEVEL_LABELS.en[level] || level;
 
   const refreshUserBilling = async () => {
-    const token = getToken?.() || localStorage.getItem("token");
+    const token = getToken?.() || safeGetLocalStorage("token");
 
     if (!token) return;
 
@@ -1473,13 +1486,13 @@ export default function StudyPage() {
 
     const nextCreditsBalance = Number(data.credits_balance || 0);
 
-    localStorage.setItem(
+    safeSetLocalStorage(
       "credits_balance",
       String(nextCreditsBalance)
     );
 
-    localStorage.setItem("plan", nextPlan);
-    localStorage.setItem("role", nextRole);
+    safeSetLocalStorage("plan", nextPlan);
+    safeSetLocalStorage("role", nextRole);
 
     setUserPlan(nextPlan);
     setUserRole(nextRole);
