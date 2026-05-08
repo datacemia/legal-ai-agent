@@ -14,7 +14,7 @@ const agents = [
     slug: "finance",
     name: "Finance Agent",
     description: "Bank statements, spending patterns, waste, and savings.",
-    credits: 30,
+    credits: 7,
     gradient: "from-emerald-700 to-teal-500",
   },
   {
@@ -28,7 +28,7 @@ const agents = [
     slug: "business",
     name: "Business Agent",
     description: "Business data, risks, opportunities, and action plans.",
-    credits: 7,
+    credits: 30,
     gradient: "from-amber-700 to-orange-500",
   },
 ];
@@ -50,7 +50,7 @@ const creditPacks = [
   {
     name: "Scale",
     credits: 500,
-    price: "€49",
+    price: "€89",
     description: "Built for professionals and advanced workloads.",
   },
 ];
@@ -119,7 +119,7 @@ export default function Pricing() {
               href="#trials"
               className="w-full rounded-xl bg-white px-6 py-3 text-center text-sm font-bold text-slate-950 shadow-lg shadow-blue-950/30 transition hover:bg-blue-50 sm:w-auto"
             >
-              Start with $1 Trial
+              Activate any agent with a one-time $1 trial
             </a>
 
             <a
@@ -210,9 +210,14 @@ export default function Pricing() {
             <p className="text-sm font-bold uppercase tracking-[0.25em] text-blue-600">
               Section 2
             </p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight">
-              Global Credits
-            </h2>
+            <div className="mt-2 flex flex-wrap items-center gap-3">
+              <h2 className="text-3xl font-bold tracking-tight">
+                Global Credits
+              </h2>
+              <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700 ring-1 ring-emerald-100">
+                Most flexible
+              </span>
+            </div>
             <p className="mt-3 max-w-2xl text-slate-600">
               Buy credits once and use them on all Runexa agents. Credits are
               the flexible option for users who do not need a monthly plan.
@@ -285,22 +290,27 @@ export default function Pricing() {
               <div className="absolute right-0 top-0 h-48 w-48 rounded-full bg-blue-500/20 blur-3xl" />
 
               <div className="relative">
-                <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-blue-100">
-                  Global Pro
-                </span>
+                <div className="flex flex-wrap gap-2">
+                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-blue-100">
+                    Global Pro
+                  </span>
+                  <span className="rounded-full bg-blue-400/20 px-3 py-1 text-xs font-bold text-blue-100">
+                    Best for professionals
+                  </span>
+                </div>
 
                 <h3 className="mt-5 text-2xl font-bold">Pro</h3>
                 <p className="mt-2 text-slate-300">
-                  For individuals and professionals who use multiple agents.
+                  For individuals and professionals who use multiple agents regularly.
                 </p>
 
                 <div className="mt-7 flex items-end gap-2">
-                  <span className="text-5xl font-bold">€19</span>
+                  <span className="text-5xl font-bold">€49</span>
                   <span className="pb-2 text-slate-300">/month</span>
                 </div>
 
                 <ul className="mt-8 space-y-4 text-sm text-slate-100">
-                  <li>✔ 100 credits/month</li>
+                  <li>✔ 200 credits/month</li>
                   <li>✔ Usable on all agents</li>
                   <li>✔ Priority processing</li>
                   <li>✔ Access to Legal, Study, Finance, and Business agents</li>
