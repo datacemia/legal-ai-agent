@@ -40,6 +40,8 @@ const labels: any = {
     buyCredits: "Buy credits 💳",
     paymentMessage:
       "Stripe is not connected yet. $1 trial activation, credits, and Pro plan will be available soon.",
+    proMessage:
+      "Pro plan is not configured yet. Stripe will be activated soon.",
     trialInfo: "$1 trial per agent. You can also skip the trial and continue with global credits or a Pro plan.",
     startTrial: "Start $1 trial",
     upgradePro: "Upgrade to Pro",
@@ -75,6 +77,8 @@ const labels: any = {
     buyCredits: "Acheter des crédits 💳",
     paymentMessage:
       "Stripe n’est pas encore connecté. L’activation de l’essai à 1$, les crédits et le plan Pro seront bientôt disponibles.",
+    proMessage:
+      "Le plan Pro n’est pas encore configuré. Stripe sera bientôt activé.",
     trialInfo: "Essai à 1$ par agent. Vous pouvez aussi passer directement aux crédits globaux ou au plan Pro.",
     startTrial: "Activer l’essai à 1$",
     upgradePro: "Passer au plan Pro",
@@ -110,6 +114,8 @@ const labels: any = {
     buyCredits: "شراء رصيد 💳",
     paymentMessage:
       "Stripe غير متصل حالياً. تفعيل تجربة 1 دولار، الأرصدة وخطة Pro ستكون متاحة قريباً.",
+    proMessage:
+      "خطة Pro غير مفعلة حالياً. سيتم تفعيل Stripe قريباً.",
     trialInfo: "تجربة بقيمة 1 دولار لكل وكيل. يمكنك أيضاً المتابعة مباشرة بالأرصدة العامة أو خطة Pro.",
     startTrial: "تفعيل تجربة 1 دولار",
     upgradePro: "الترقية إلى Pro",
@@ -139,6 +145,7 @@ export default function FinancePage() {
   const [language, setLanguage] = useState("en");
   const [plan, setPlan] = useState("");
   const [role, setRole] = useState("");
+  const [creditsBalance, setCreditsBalance] = useState(0);
 
   useEffect(() => {
     setLanguage(getSavedLocale());
@@ -149,9 +156,11 @@ export default function FinancePage() {
 
       setPlan(savedPlan.toLowerCase().trim());
       setRole(savedRole.toLowerCase().trim());
+      setCreditsBalance(Number(safeGetLocalStorage("credits_balance", "0")));
     };
 
     syncBillingState();
+    refreshUserBilling();
 
     window.addEventListener("storage", syncBillingState);
 
@@ -163,7 +172,9 @@ export default function FinancePage() {
   const t = labels[language] || labels.en;
 
   const hasActiveAccess =
-    role === "admin" || ["paid", "pro", "premium"].includes(plan);
+    role === "admin" ||
+    ["paid", "pro", "premium"].includes(plan) ||
+    creditsBalance > 0;
 
   const primaryCtaLabel = hasActiveAccess
     ? t.analyze
@@ -231,9 +242,11 @@ export default function FinancePage() {
       .toLowerCase()
       .trim();
 
+    const nextCreditsBalance = Number(data.credits_balance || 0);
+
     safeSetLocalStorage(
       "credits_balance",
-      String(data.credits_balance || 0)
+      String(nextCreditsBalance)
     );
 
     safeSetLocalStorage("plan", nextPlan);
@@ -241,6 +254,7 @@ export default function FinancePage() {
 
     setPlan(nextPlan);
     setRole(nextRole);
+    setCreditsBalance(nextCreditsBalance);
 
     window.dispatchEvent(new Event("storage"));
   };
@@ -339,9 +353,11 @@ export default function FinancePage() {
             </label>
           </div>
 
-          <div className="rounded-xl border border-blue-100 bg-blue-50 p-3 text-sm text-blue-700">
-            {t.trialInfo}
-          </div>
+          {!hasActiveAccess && (
+            <div className="rounded-xl border border-blue-100 bg-blue-50 p-3 text-sm text-blue-700">
+              {t.trialInfo}
+            </div>
+          )}
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <button
@@ -363,9 +379,7 @@ export default function FinancePage() {
 
             <button
               onClick={() =>
-                setPaymentMessage(
-                  "Pro plan is not configured yet. Stripe will be activated soon."
-                )
+                setPaymentMessage(t.proMessage)
               }
               className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition"
             >

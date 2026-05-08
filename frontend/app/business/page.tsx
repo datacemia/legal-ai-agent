@@ -24,6 +24,7 @@ export default function BusinessPage() {
   const [language, setLanguage] = useState("en");
   const [plan, setPlan] = useState("");
   const [role, setRole] = useState("");
+  const [creditsBalance, setCreditsBalance] = useState(0);
 
   useEffect(() => {
     setLanguage(getSavedLocale());
@@ -34,6 +35,7 @@ export default function BusinessPage() {
 
       setPlan(savedPlan.toLowerCase().trim());
       setRole(savedRole.toLowerCase().trim());
+      setCreditsBalance(Number(safeGetLocalStorage("credits_balance", "0")));
     };
 
     syncBillingState();
@@ -80,9 +82,11 @@ export default function BusinessPage() {
       .toLowerCase()
       .trim();
 
+    const nextCreditsBalance = Number(data.credits_balance || 0);
+
     safeSetLocalStorage(
       "credits_balance",
-      String(data.credits_balance || 0)
+      String(nextCreditsBalance)
     );
 
     safeSetLocalStorage("plan", nextPlan);
@@ -90,6 +94,7 @@ export default function BusinessPage() {
 
     setPlan(nextPlan);
     setRole(nextRole);
+    setCreditsBalance(nextCreditsBalance);
 
     window.dispatchEvent(new Event("storage"));
   };
@@ -273,7 +278,9 @@ export default function BusinessPage() {
   const t = labels[language] || labels.en;
 
   const hasActiveAccess =
-    role === "admin" || ["paid", "pro", "premium"].includes(plan);
+    role === "admin" ||
+    ["paid", "pro", "premium"].includes(plan) ||
+    creditsBalance > 0;
 
   const primaryCtaLabel = hasActiveAccess
     ? t.analyze
@@ -380,9 +387,11 @@ export default function BusinessPage() {
             </label>
           </div>
 
-          <div className="rounded-xl border border-blue-100 bg-blue-50 p-3 text-sm text-blue-700">
-            {t.trialInfo}
-          </div>
+          {!hasActiveAccess && (
+            <div className="rounded-xl border border-blue-100 bg-blue-50 p-3 text-sm text-blue-700">
+              {t.trialInfo}
+            </div>
+          )}
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <button
