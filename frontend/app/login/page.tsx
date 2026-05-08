@@ -47,17 +47,28 @@ export default function LoginPage() {
         trackEvent("login");
         setToken(data.access_token);
 
+        localStorage.setItem(
+          "credits_balance",
+          String(data.user?.credits_balance || 0)
+        );
+
+        localStorage.setItem(
+          "plan",
+          data.user?.plan || "trial"
+        );
+
+        localStorage.setItem(
+          "role",
+          data.user?.role || data.role || "user"
+        );
+
         const role = (data.user?.role || data.role || "user")
           .toLowerCase()
           .trim();
 
-        localStorage.setItem("role", role);
-
         const plan = (data.user?.plan || "trial")
           .toLowerCase()
           .trim();
-
-        localStorage.setItem("plan", plan);
 
         if (role === "admin" || role === "business") {
           window.location.href = "/dashboard";

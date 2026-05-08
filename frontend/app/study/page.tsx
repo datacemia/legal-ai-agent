@@ -1263,8 +1263,24 @@ export default function StudyPage() {
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
   const [audioLoading, setAudioLoading] = useState(false);
   const [audioUrl, setAudioUrl] = useState("");
+  const [userPlan, setUserPlan] = useState("trial");
+  const [userRole, setUserRole] = useState("user");
+  const [creditsBalance, setCreditsBalance] = useState(0);
 
   const t = labels[language] || labels.en;
+
+  const hasCredits = creditsBalance > 0;
+
+  const hasActiveAccess =
+    userRole === "admin" ||
+    userPlan === "paid" ||
+    userPlan === "pro" ||
+    userPlan === "premium" ||
+    hasCredits;
+
+  const primaryCtaLabel = hasActiveAccess
+    ? t.analyze
+    : t.startTrial;
 
   const featureStyles = [
     {
@@ -1337,6 +1353,33 @@ export default function StudyPage() {
 
   useEffect(() => {
     setLanguage(getSavedLocale());
+
+    const syncBillingState = () => {
+      setUserPlan(
+        (localStorage.getItem("plan") || "trial")
+          .toLowerCase()
+          .trim()
+      );
+
+      setUserRole(
+        (localStorage.getItem("role") || "user")
+          .toLowerCase()
+          .trim()
+      );
+
+      setCreditsBalance(
+        Number(localStorage.getItem("credits_balance") || 0)
+      );
+    };
+
+    syncBillingState();
+    refreshUserBilling();
+
+    window.addEventListener("storage", syncBillingState);
+
+    return () => {
+      window.removeEventListener("storage", syncBillingState);
+    };
   }, []);
 
   useEffect(() => {
@@ -1402,6 +1445,49 @@ export default function StudyPage() {
   const getLevelLabel = (level: string) =>
     LEVEL_LABELS[language]?.[level] || LEVEL_LABELS.en[level] || level;
 
+  const refreshUserBilling = async () => {
+    const token = getToken?.() || localStorage.getItem("token");
+
+    if (!token) return;
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/users/me`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (!res.ok) return;
+
+    const data = await res.json();
+
+    const nextPlan = String(data.plan || "trial")
+      .toLowerCase()
+      .trim();
+
+    const nextRole = String(data.role || "user")
+      .toLowerCase()
+      .trim();
+
+    const nextCreditsBalance = Number(data.credits_balance || 0);
+
+    localStorage.setItem(
+      "credits_balance",
+      String(nextCreditsBalance)
+    );
+
+    localStorage.setItem("plan", nextPlan);
+    localStorage.setItem("role", nextRole);
+
+    setUserPlan(nextPlan);
+    setUserRole(nextRole);
+    setCreditsBalance(nextCreditsBalance);
+
+    window.dispatchEvent(new Event("storage"));
+  };
+
   const handleAnalyze = async () => {
     if (!file || !educationLevel) return;
 
@@ -1451,6 +1537,9 @@ export default function StudyPage() {
 
       if (!data.job_id) {
         setResult(data);
+
+        await refreshUserBilling();
+
         return;
       }
 
@@ -1494,6 +1583,9 @@ export default function StudyPage() {
 
         if (statusData.status === "completed") {
           setResult(statusData.result);
+
+          await refreshUserBilling();
+
           setLoadingProgress(100);
           completed = true;
         }
@@ -1995,7 +2087,7 @@ export default function StudyPage() {
                   {t.loadingSteps.analyzing}
                 </>
               ) : (
-                t.startTrial
+                primaryCtaLabel
               )}
             </button>
 

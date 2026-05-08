@@ -128,12 +128,82 @@ export default function UploadPage() {
   const [language, setLanguage] = useState("en");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [message, setMessage] = useState("");
+  const [userPlan, setUserPlan] = useState("trial");
+  const [userRole, setUserRole] = useState("user");
+
+  const hasActiveAccess =
+    userRole === "admin" ||
+    userPlan === "paid" ||
+    userPlan === "pro" ||
+    userPlan === "premium";
 
   useEffect(() => {
     setLanguage(getSavedLocale());
+
+    const syncBillingState = () => {
+      setUserPlan(
+        (localStorage.getItem("plan") || "trial")
+          .toLowerCase()
+          .trim()
+      );
+
+      setUserRole(
+        (localStorage.getItem("role") || "user")
+          .toLowerCase()
+          .trim()
+      );
+    };
+
+    syncBillingState();
+
+    window.addEventListener("storage", syncBillingState);
+
+    return () => {
+      window.removeEventListener("storage", syncBillingState);
+    };
   }, []);
 
   const t = labels[language] || labels.en;
+
+  const primaryButtonLabel = hasActiveAccess
+    ? t.analyzeButton
+    : t.signupCta;
+
+  const refreshUserBilling = async () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) return;
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/users/me`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (!res.ok) return;
+
+    const data = await res.json();
+
+    localStorage.setItem(
+      "credits_balance",
+      String(data.credits_balance || 0)
+    );
+
+    localStorage.setItem(
+      "plan",
+      data.plan || "trial"
+    );
+
+    localStorage.setItem(
+      "role",
+      data.role || "user"
+    );
+
+    window.dispatchEvent(new Event("storage"));
+  };
 
   const handleBuyCredit = async () => {
     const token = localStorage.getItem("token");
@@ -181,6 +251,8 @@ export default function UploadPage() {
       }
 
       setResult(analysis);
+
+      await refreshUserBilling();
     } catch (err: any) {
       const detail =
         err?.response?.data?.detail ||
@@ -288,7 +360,7 @@ export default function UploadPage() {
               disabled={!file}
               className="w-full rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800 disabled:bg-slate-400"
             >
-              {t.analyzeButton}
+              {primaryButtonLabel}
             </button>
 
             <button

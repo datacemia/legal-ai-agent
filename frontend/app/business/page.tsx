@@ -10,9 +10,29 @@ export default function BusinessPage() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [language, setLanguage] = useState("en");
+  const [userPlan, setUserPlan] = useState("trial");
+  const [userRole, setUserRole] = useState("user");
 
   useEffect(() => {
     setLanguage(getSavedLocale());
+
+    const syncBillingState = () => {
+      setUserPlan(
+        (localStorage.getItem("plan") || "trial")
+          .toLowerCase()
+          .trim()
+      );
+
+      setUserRole(
+        (localStorage.getItem("role") || "user")
+          .toLowerCase()
+          .trim()
+      );
+    };
+
+    syncBillingState();
+
+    window.addEventListener("storage", syncBillingState);
 
     const handleLocaleChange = () => {
       setLanguage(getSavedLocale());
@@ -20,10 +40,53 @@ export default function BusinessPage() {
 
     window.addEventListener("locale-change", handleLocaleChange);
 
+    refreshUserBilling();
+
     return () => {
+      window.removeEventListener("storage", syncBillingState);
       window.removeEventListener("locale-change", handleLocaleChange);
     };
   }, []);
+
+  const refreshUserBilling = async () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) return;
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/users/me`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (!res.ok) return;
+
+    const data = await res.json();
+
+    const nextPlan = String(data.plan || "trial")
+      .toLowerCase()
+      .trim();
+
+    const nextRole = String(data.role || "user")
+      .toLowerCase()
+      .trim();
+
+    localStorage.setItem(
+      "credits_balance",
+      String(data.credits_balance || 0)
+    );
+
+    localStorage.setItem("plan", nextPlan);
+    localStorage.setItem("role", nextRole);
+
+    setUserPlan(nextPlan);
+    setUserRole(nextRole);
+
+    window.dispatchEvent(new Event("storage"));
+  };
 
   const handleAnalyze = async () => {
     if (!file) return;
@@ -35,6 +98,8 @@ export default function BusinessPage() {
     try {
       const data = await analyzeBusinessFile(file, language);
       setResult(data);
+
+      await refreshUserBilling();
     } catch (error: any) {
       const errorMessage = error?.message || "Failed to analyze business file.";
 
@@ -195,6 +260,20 @@ export default function BusinessPage() {
 
   const t = labels[language] || labels.en;
 
+  const hasCredits =
+    Number(localStorage.getItem("credits_balance") || 0) > 0;
+
+  const hasActiveAccess =
+    userRole === "admin" ||
+    userPlan === "paid" ||
+    userPlan === "pro" ||
+    userPlan === "premium" ||
+    hasCredits;
+
+  const primaryCtaLabel = hasActiveAccess
+    ? t.analyze
+    : t.startTrial;
+
   const getScoreMeta = (score: number) => {
     if (score >= 90) {
       return {
@@ -306,7 +385,7 @@ export default function BusinessPage() {
               disabled={!file || loading}
               className="w-full bg-slate-900 text-white py-3 rounded-xl disabled:bg-slate-400"
             >
-              {loading ? t.loading : t.startTrial}
+              {loading ? t.loading : primaryCtaLabel}
             </button>
 
             <button

@@ -9,6 +9,7 @@ export default function Navbar() {
   const [isLogged, setIsLogged] = useState(false);
   const [role, setRole] = useState("");
   const [plan, setPlan] = useState("");
+  const [credits, setCredits] = useState<string | null>(null);
   const [locale, setLocale] = useState("en");
 
   const checkAuth = () => {
@@ -18,13 +19,16 @@ export default function Navbar() {
       .toLowerCase()
       .trim();
 
-    const savedPlan = (localStorage.getItem("plan") || "")
+    const savedPlan = (localStorage.getItem("plan") || "trial")
       .toLowerCase()
       .trim();
+
+    const savedCredits = localStorage.getItem("credits_balance");
 
     setIsLogged(!!token);
     setRole(savedRole);
     setPlan(savedPlan);
+    setCredits(savedCredits);
   };
 
   useEffect(() => {
@@ -49,17 +53,20 @@ export default function Navbar() {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
     localStorage.removeItem("plan");
+    localStorage.removeItem("credits_balance");
     setIsLogged(false);
     setRole("");
     setPlan("");
+    setCredits(null);
     window.location.href = "/login";
   };
 
   const t = translations[locale] || translations.en;
 
   const isAdmin = role === "admin";
+  const isPro = plan === "pro";
   const isPremium = plan === "premium";
-  const canSeeDashboard = isPremium;
+  const canSeeDashboard = isAdmin || isPro || isPremium;
 
   return (
     <header
@@ -125,19 +132,35 @@ export default function Navbar() {
             </span>
           </div>
 
-          <Link
-            href="/login"
-            className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
-          >
-            {t.login || "Login"}
-          </Link>
+          {!isLogged && (
+            <>
+              <Link
+                href="/login"
+                className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
+              >
+                {t.login || "Login"}
+              </Link>
 
-          <Link
-            href="/register"
-            className="rounded-xl bg-slate-900 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 transition"
-          >
-            {t.register || "Register"}
-          </Link>
+              <Link
+                href="/register"
+                className="rounded-xl bg-slate-900 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 transition"
+              >
+                {t.register || "Register"}
+              </Link>
+            </>
+          )}
+
+          {isLogged && credits !== null && (
+            <div className="hidden md:flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium text-slate-700 bg-white">
+              <span className="uppercase text-xs text-slate-500">
+                {plan || "trial"}
+              </span>
+
+              <span>
+                {credits} credits
+              </span>
+            </div>
+          )}
 
           {isLogged && (
             <button

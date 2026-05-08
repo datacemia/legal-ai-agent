@@ -13,6 +13,10 @@ AGENT_CREDIT_COSTS = {
     "business": 30,
 }
 
+
+ACTIVE_PLANS = {"paid", "pro", "premium"}
+
+
 def check_and_consume_agent_access(
     db: Session,
     user: User,
@@ -21,8 +25,11 @@ def check_and_consume_agent_access(
     if agent_slug not in AGENT_CREDIT_COSTS:
         raise HTTPException(status_code=400, detail="Unknown agent")
 
+    user_role = (user.role or "user").lower().strip()
+    user_plan = (user.plan or "trial").lower().strip()
+
     # Admin has free unlimited access
-    if user.role == "admin":
+    if user_role == "admin":
         usage = UsageLog(
             user_id=user.id,
             agent_slug=agent_slug,
@@ -38,11 +45,29 @@ def check_and_consume_agent_access(
             "credits_used": 0,
         }
 
+    # Paid plans have active access without $1 trial requirement
+    if user_plan in ACTIVE_PLANS:
+        usage = UsageLog(
+            user_id=user.id,
+            agent_slug=agent_slug,
+            access_type=user_plan,
+            credits_used=0,
+        )
+
+        db.add(usage)
+        db.commit()
+
+        return {
+            "access_type": user_plan,
+            "credits_used": 0,
+        }
+
     credit_cost = AGENT_CREDIT_COSTS[agent_slug]
+    credits_balance = int(user.credits_balance or 0)
 
     # Global credits usable across all agents
-    if user.credits_balance >= credit_cost:
-        user.credits_balance -= credit_cost
+    if credits_balance >= credit_cost:
+        user.credits_balance = credits_balance - credit_cost
 
         usage = UsageLog(
             user_id=user.id,

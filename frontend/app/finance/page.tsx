@@ -125,12 +125,46 @@ export default function FinancePage() {
   const [loading, setLoading] = useState(false);
   const [paymentMessage, setPaymentMessage] = useState("");
   const [language, setLanguage] = useState("en");
+  const [userPlan, setUserPlan] = useState("trial");
+  const [userRole, setUserRole] = useState("user");
 
   useEffect(() => {
     setLanguage(getSavedLocale());
+
+    const syncBillingState = () => {
+      setUserPlan(
+        (localStorage.getItem("plan") || "trial")
+          .toLowerCase()
+          .trim()
+      );
+
+      setUserRole(
+        (localStorage.getItem("role") || "user")
+          .toLowerCase()
+          .trim()
+      );
+    };
+
+    syncBillingState();
+
+    window.addEventListener("storage", syncBillingState);
+
+    return () => {
+      window.removeEventListener("storage", syncBillingState);
+    };
   }, []);
 
   const t = labels[language] || labels.en;
+
+  const hasActiveAccess =
+    userRole === "admin" ||
+    userPlan === "paid" ||
+    userPlan === "pro" ||
+    userPlan === "premium";
+
+  const primaryCtaLabel = hasActiveAccess
+    ? t.analyze
+    : t.startTrial;
 
   const COLORS = [
     "#22c55e",
@@ -168,6 +202,42 @@ export default function FinancePage() {
     }))
     .filter((item) => item.value > 0);
 
+  const refreshUserBilling = async () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) return;
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/users/me`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (!res.ok) return;
+
+    const data = await res.json();
+
+    localStorage.setItem(
+      "credits_balance",
+      String(data.credits_balance || 0)
+    );
+
+    localStorage.setItem(
+      "plan",
+      data.plan || "trial"
+    );
+
+    localStorage.setItem(
+      "role",
+      data.role || "user"
+    );
+
+    window.dispatchEvent(new Event("storage"));
+  };
+
   const handleAnalyze = async () => {
     if (!file) return;
 
@@ -178,6 +248,8 @@ export default function FinancePage() {
     try {
       const data = await analyzeFinanceStatement(file, language);
       setResult(data);
+
+      await refreshUserBilling();
     } catch (error) {
       console.error("Finance analysis error:", error);
 
@@ -270,7 +342,7 @@ export default function FinancePage() {
               disabled={!file || loading}
               className="w-full bg-slate-900 text-white py-3 rounded-xl disabled:bg-slate-400"
             >
-              {loading ? t.analyzing : t.startTrial}
+              {loading ? t.analyzing : primaryCtaLabel}
             </button>
 
             <button

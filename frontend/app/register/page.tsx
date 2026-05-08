@@ -54,6 +54,25 @@ export default function RegisterPage() {
       if (res.ok) {
         trackEvent("register");
 
+        if (data.access_token) {
+          localStorage.setItem("token", data.access_token);
+
+          localStorage.setItem(
+            "credits_balance",
+            String(data.user?.credits_balance || 0)
+          );
+
+          localStorage.setItem(
+            "plan",
+            data.user?.plan || "trial"
+          );
+
+          localStorage.setItem(
+            "role",
+            data.user?.role || "user"
+          );
+        }
+
         setMessageType("success");
         setMessage(
           "Account created. Please check your email to verify your account."
