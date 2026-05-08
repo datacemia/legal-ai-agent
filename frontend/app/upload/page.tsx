@@ -363,9 +363,11 @@ export default function UploadPage() {
             <option value="ar">العربية</option>
           </select>
 
-          <div className="rounded-xl border border-blue-100 bg-blue-50 p-3 text-sm text-blue-700">
-            {t.trialInfo}
-          </div>
+          {!hasActiveAccess && (
+            <div className="rounded-xl border border-blue-100 bg-blue-50 p-3 text-sm text-blue-700">
+              {t.trialInfo}
+            </div>
+          )}
 
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             <button
