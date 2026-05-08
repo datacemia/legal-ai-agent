@@ -322,11 +322,20 @@ const labels: any = {
   },
 };
 
+function normalizeMermaidChart(code: string) {
+  return String(code || "")
+    .replace(/```mermaid/gi, "")
+    .replace(/```/g, "")
+    .trim();
+}
+
 function isValidMermaid(code: string) {
+  const normalized = normalizeMermaidChart(code);
+
   return (
-    typeof code === "string" &&
-    code.trim().startsWith("mindmap") &&
-    code.includes("\n")
+    typeof normalized === "string" &&
+    normalized.startsWith("mindmap") &&
+    normalized.includes("\n")
   );
 }
 
@@ -1019,7 +1028,10 @@ function MermaidDiagram({
           securityLevel: "loose",
         });
 
-        const safeChart = isValidMermaid(chart) ? chart : fallbackDiagram();
+        const normalizedChart = normalizeMermaidChart(chart);
+        const safeChart = isValidMermaid(normalizedChart)
+          ? normalizedChart
+          : fallbackDiagram();
         const id = `mermaid-${Date.now()}-${Math.random()
           .toString(36)
           .slice(2)}`;
