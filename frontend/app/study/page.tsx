@@ -1615,6 +1615,8 @@ export default function StudyPage() {
     const hiddenPatterns = [
       "Study task should start with an action verb",
       "Duplicate flashcard front",
+      "Flashcard definition too long",
+      "flashcard definition too long",
       "duplicate questions",
       "missing focus",
       "must contain exactly",
