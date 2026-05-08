@@ -322,20 +322,11 @@ const labels: any = {
   },
 };
 
-function normalizeMermaidChart(code: string) {
-  return String(code || "")
-    .replace(/```mermaid/gi, "")
-    .replace(/```/g, "")
-    .trim();
-}
-
 function isValidMermaid(code: string) {
-  const normalized = normalizeMermaidChart(code);
-
   return (
-    typeof normalized === "string" &&
-    normalized.startsWith("mindmap") &&
-    normalized.includes("\n")
+    typeof code === "string" &&
+    code.trim().startsWith("mindmap") &&
+    code.includes("\n")
   );
 }
 
@@ -1028,10 +1019,7 @@ function MermaidDiagram({
           securityLevel: "loose",
         });
 
-        const normalizedChart = normalizeMermaidChart(chart);
-        const safeChart = isValidMermaid(normalizedChart)
-          ? normalizedChart
-          : fallbackDiagram();
+        const safeChart = isValidMermaid(chart) ? chart : fallbackDiagram();
         const id = `mermaid-${Date.now()}-${Math.random()
           .toString(36)
           .slice(2)}`;
@@ -1627,8 +1615,6 @@ export default function StudyPage() {
     const hiddenPatterns = [
       "Study task should start with an action verb",
       "Duplicate flashcard front",
-      "Flashcard definition too long",
-      "flashcard definition too long",
       "duplicate questions",
       "missing focus",
       "must contain exactly",
