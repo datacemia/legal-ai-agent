@@ -11,6 +11,18 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+const safeGetLocalStorage = (key: string, fallback = "") => {
+  if (typeof window === "undefined") return fallback;
+
+  return localStorage.getItem(key) || fallback;
+};
+
+const safeSetLocalStorage = (key: string, value: string) => {
+  if (typeof window === "undefined") return;
+
+  localStorage.setItem(key, value);
+};
+
 const labels: any = {
   en: {
     title: "Personal Finance Coach",
@@ -125,24 +137,18 @@ export default function FinancePage() {
   const [loading, setLoading] = useState(false);
   const [paymentMessage, setPaymentMessage] = useState("");
   const [language, setLanguage] = useState("en");
-  const [userPlan, setUserPlan] = useState("trial");
-  const [userRole, setUserRole] = useState("user");
+  const [plan, setPlan] = useState("");
+  const [role, setRole] = useState("");
 
   useEffect(() => {
     setLanguage(getSavedLocale());
 
     const syncBillingState = () => {
-      setUserPlan(
-        (localStorage.getItem("plan") || "trial")
-          .toLowerCase()
-          .trim()
-      );
+      const savedPlan = safeGetLocalStorage("plan");
+      const savedRole = safeGetLocalStorage("role");
 
-      setUserRole(
-        (localStorage.getItem("role") || "user")
-          .toLowerCase()
-          .trim()
-      );
+      setPlan(savedPlan.toLowerCase().trim());
+      setRole(savedRole.toLowerCase().trim());
     };
 
     syncBillingState();
@@ -157,10 +163,7 @@ export default function FinancePage() {
   const t = labels[language] || labels.en;
 
   const hasActiveAccess =
-    userRole === "admin" ||
-    userPlan === "paid" ||
-    userPlan === "pro" ||
-    userPlan === "premium";
+    role === "admin" || ["paid", "pro", "premium"].includes(plan);
 
   const primaryCtaLabel = hasActiveAccess
     ? t.analyze
@@ -203,7 +206,7 @@ export default function FinancePage() {
     .filter((item) => item.value > 0);
 
   const refreshUserBilling = async () => {
-    const token = localStorage.getItem("token");
+    const token = safeGetLocalStorage("token");
 
     if (!token) return;
 
@@ -220,20 +223,24 @@ export default function FinancePage() {
 
     const data = await res.json();
 
-    localStorage.setItem(
+    const nextPlan = String(data.plan || "trial")
+      .toLowerCase()
+      .trim();
+
+    const nextRole = String(data.role || "user")
+      .toLowerCase()
+      .trim();
+
+    safeSetLocalStorage(
       "credits_balance",
       String(data.credits_balance || 0)
     );
 
-    localStorage.setItem(
-      "plan",
-      data.plan || "trial"
-    );
+    safeSetLocalStorage("plan", nextPlan);
+    safeSetLocalStorage("role", nextRole);
 
-    localStorage.setItem(
-      "role",
-      data.role || "user"
-    );
+    setPlan(nextPlan);
+    setRole(nextRole);
 
     window.dispatchEvent(new Event("storage"));
   };

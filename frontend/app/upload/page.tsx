@@ -9,6 +9,18 @@ import RiskScore from "../../components/RiskScore";
 import UploadBox from "../../components/UploadBox";
 
 
+const safeGetLocalStorage = (key: string, fallback = "") => {
+  if (typeof window === "undefined") return fallback;
+
+  return localStorage.getItem(key) || fallback;
+};
+
+const safeSetLocalStorage = (key: string, value: string) => {
+  if (typeof window === "undefined") return;
+
+  localStorage.setItem(key, value);
+};
+
 const labels: any = {
   en: {
     pageTitle: "Analyze your contract",
@@ -18,6 +30,8 @@ const labels: any = {
     loginRequired: "Create an account to analyze your contract",
     analyzeButton: "Analyze Contract",
     buyCredit: "Buy credits",
+    proMessage:
+      "Pro plan is not configured yet. Stripe will be activated soon.",
     trialInfo: "$1 trial per agent. You can also skip the trial and continue with global credits or a Pro plan.",
     upgradePro: "Upgrade to Pro",
     trialUsed: "Trial already used for legal",
@@ -54,6 +68,8 @@ const labels: any = {
     loginRequired: "Créez un compte pour analyser votre contrat",
     analyzeButton: "Analyser le contrat",
     buyCredit: "Acheter des crédits",
+    proMessage:
+      "Le plan Pro n’est pas encore configuré. Stripe sera bientôt activé.",
     trialInfo: "Essai à 1$ par agent. Vous pouvez aussi passer directement aux crédits globaux ou au plan Pro.",
     upgradePro: "Passer au plan Pro",
     trialUsed: "Essai Legal déjà utilisé",
@@ -90,6 +106,8 @@ const labels: any = {
     loginRequired: "أنشئ حساباً لتحليل عقدك",
     analyzeButton: "تحليل العقد",
     buyCredit: "شراء أرصدة",
+    proMessage:
+      "خطة Pro غير مفعلة حالياً. سيتم تفعيل Stripe قريباً.",
     trialInfo: "تجربة بقيمة 1 دولار لكل وكيل. يمكنك أيضاً المتابعة مباشرة بالأرصدة العامة أو خطة Pro.",
     upgradePro: "الترقية إلى Pro",
     trialUsed: "تم استخدام تجربة الوكيل القانوني",
@@ -128,30 +146,21 @@ export default function UploadPage() {
   const [language, setLanguage] = useState("en");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [message, setMessage] = useState("");
-  const [userPlan, setUserPlan] = useState("trial");
-  const [userRole, setUserRole] = useState("user");
+  const [plan, setPlan] = useState("");
+  const [role, setRole] = useState("");
 
   const hasActiveAccess =
-    userRole === "admin" ||
-    userPlan === "paid" ||
-    userPlan === "pro" ||
-    userPlan === "premium";
+    role === "admin" || ["paid", "pro", "premium"].includes(plan);
 
   useEffect(() => {
     setLanguage(getSavedLocale());
 
     const syncBillingState = () => {
-      setUserPlan(
-        (localStorage.getItem("plan") || "trial")
-          .toLowerCase()
-          .trim()
-      );
+      const savedPlan = safeGetLocalStorage("plan");
+      const savedRole = safeGetLocalStorage("role");
 
-      setUserRole(
-        (localStorage.getItem("role") || "user")
-          .toLowerCase()
-          .trim()
-      );
+      setPlan(savedPlan.toLowerCase().trim());
+      setRole(savedRole.toLowerCase().trim());
     };
 
     syncBillingState();
@@ -170,7 +179,7 @@ export default function UploadPage() {
     : t.signupCta;
 
   const refreshUserBilling = async () => {
-    const token = localStorage.getItem("token");
+    const token = safeGetLocalStorage("token");
 
     if (!token) return;
 
@@ -187,26 +196,30 @@ export default function UploadPage() {
 
     const data = await res.json();
 
-    localStorage.setItem(
+    const nextPlan = String(data.plan || "trial")
+      .toLowerCase()
+      .trim();
+
+    const nextRole = String(data.role || "user")
+      .toLowerCase()
+      .trim();
+
+    safeSetLocalStorage(
       "credits_balance",
       String(data.credits_balance || 0)
     );
 
-    localStorage.setItem(
-      "plan",
-      data.plan || "trial"
-    );
+    safeSetLocalStorage("plan", nextPlan);
+    safeSetLocalStorage("role", nextRole);
 
-    localStorage.setItem(
-      "role",
-      data.role || "user"
-    );
+    setPlan(nextPlan);
+    setRole(nextRole);
 
     window.dispatchEvent(new Event("storage"));
   };
 
   const handleBuyCredit = async () => {
-    const token = localStorage.getItem("token");
+    const token = safeGetLocalStorage("token");
 
     if (!token) {
       window.location.href = "/register";
@@ -221,7 +234,7 @@ export default function UploadPage() {
   const handleUpload = async () => {
     if (!file) return;
 
-    const token = localStorage.getItem("token");
+    const token = safeGetLocalStorage("token");
 
     if (!token) {
       window.location.href = "/register";
@@ -372,7 +385,7 @@ export default function UploadPage() {
 
             <button
               onClick={() =>
-                setMessage("Pro plan is not configured yet. Stripe will be activated soon.")
+                setMessage(t.proMessage)
               }
               className="w-full rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-700"
             >

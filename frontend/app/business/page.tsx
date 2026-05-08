@@ -144,6 +144,8 @@ export default function BusinessPage() {
       buyCredits: "Buy credits 💳",
       paymentMessage:
         "Stripe is not connected yet. $1 trial activation, credits, and Pro plan will be available soon.",
+      proMessage:
+        "Pro plan is not configured yet. Stripe will be activated soon.",
       trialInfo: "$1 trial per agent. You can also skip the trial and continue with global credits or a Pro plan.",
       startTrial: "Start $1 trial",
       upgradePro: "Upgrade to Pro",
@@ -189,6 +191,8 @@ export default function BusinessPage() {
       buyCredits: "Acheter des crédits 💳",
       paymentMessage:
         "Stripe n’est pas encore connecté. L’activation de l’essai à 1$, les crédits et le plan Pro seront bientôt disponibles.",
+      proMessage:
+        "Le plan Pro n’est pas encore configuré. Stripe sera bientôt activé.",
       trialInfo: "Essai à 1$ par agent. Vous pouvez aussi passer directement aux crédits globaux ou au plan Pro.",
       startTrial: "Activer l’essai à 1$",
       upgradePro: "Passer au plan Pro",
@@ -235,6 +239,8 @@ export default function BusinessPage() {
       buyCredits: "شراء رصيد 💳",
       paymentMessage:
         "Stripe غير متصل حالياً. تفعيل تجربة 1 دولار، الأرصدة وخطة Pro ستكون متاحة قريباً.",
+      proMessage:
+        "خطة Pro غير مفعلة حالياً. سيتم تفعيل Stripe قريباً.",
       trialInfo: "تجربة بقيمة 1 دولار لكل وكيل. يمكنك أيضاً المتابعة مباشرة بالأرصدة العامة أو خطة Pro.",
       startTrial: "تفعيل تجربة 1 دولار",
       upgradePro: "الترقية إلى Pro",
@@ -396,7 +402,7 @@ export default function BusinessPage() {
 
             <button
               onClick={() =>
-                setMessage("Pro plan is not configured yet. Stripe will be activated soon.")
+                setMessage(t.proMessage)
               }
               className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition"
             >
