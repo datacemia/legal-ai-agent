@@ -112,6 +112,13 @@ export default function Navbar() {
           )}
 
           <Link
+            href="/labs/agent-0"
+            className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
+          >
+            Labs
+          </Link>
+
+          <Link
             href="/enterprise"
             className="text-sm font-medium text-slate-600 hover:text-slate-900 transition"
           >

@@ -33,6 +33,8 @@ const labels: any = {
     securitySecondary: "View security concept",
     securitySystem: "Smart security command center",
     securityFooter: "Cameras + sensors + GPS + AI reasoning → safer homes",
+    futureSystems: "Future AI Systems",
+    exploreAgent0: "Explore Agent 0",
     securityFeatures: [
       "Camera intelligence",
       "Sensor fusion",
@@ -117,6 +119,8 @@ const labels: any = {
     securitySecondary: "Voir le concept sécurité",
     securitySystem: "Centre de commande sécurité intelligent",
     securityFooter: "Caméras + capteurs + GPS + raisonnement IA → maisons plus sûres",
+    futureSystems: "Systèmes IA du futur",
+    exploreAgent0: "Explorer Agent 0",
     securityFeatures: [
       "Intelligence caméra",
       "Fusion de capteurs",
@@ -202,6 +206,8 @@ const labels: any = {
     securitySecondary: "عرض مفهوم الأمان",
     securitySystem: "مركز تحكم ذكي للأمان",
     securityFooter: "كاميرات + حساسات + GPS + تفكير ذكاء اصطناعي → منازل أكثر أماناً",
+    futureSystems: "أنظمة الذكاء الاصطناعي المستقبلية",
+    exploreAgent0: "استكشاف الوكيل 0",
     securityFeatures: [
       "ذكاء الكاميرا",
       "دمج الحساسات",
@@ -540,6 +546,70 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <section className="px-6 py-10">
+        <div className="max-w-6xl mx-auto">
+          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 p-8 md:p-12 text-white shadow-2xl">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.25),transparent_40%)]" />
+
+            <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+              <div className="max-w-3xl">
+                <span className="inline-flex rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold text-blue-100">
+                  Runexa Labs
+                </span>
+
+                <h2 className="mt-5 text-3xl md:text-4xl font-bold tracking-tight">
+                  {t.futureSystems}
+                </h2>
+
+                <p className="mt-4 text-slate-300 leading-7 text-lg">
+                  Agent 0 represents the future vision of autonomous AI systems for real-world environments, security orchestration, sensor intelligence, and proactive decision-making.
+                </p>
+
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link
+                    href="/labs/agent-0"
+                    className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-slate-950 hover:bg-slate-100 transition"
+                  >
+                    {t.exploreAgent0}
+                  </Link>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 min-w-[280px]">
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
+                  <div className="h-2 w-2 rounded-full bg-emerald-400" />
+                  <p className="mt-4 text-sm font-semibold">
+                    AI Security Layer
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
+                  <div className="h-2 w-2 rounded-full bg-blue-400" />
+                  <p className="mt-4 text-sm font-semibold">
+                    Sensor Intelligence
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
+                  <div className="h-2 w-2 rounded-full bg-violet-400" />
+                  <p className="mt-4 text-sm font-semibold">
+                    Autonomous Monitoring
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
+                  <div className="h-2 w-2 rounded-full bg-amber-400" />
+                  <p className="mt-4 text-sm font-semibold">
+                    Future Drone Systems
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
       <section className="px-6 py-16">
         <div className="max-w-5xl mx-auto bg-blue-600 text-white rounded-3xl p-10 text-center">
