@@ -7,12 +7,11 @@ from app.models.usage_log import UsageLog
 
 
 AGENT_CREDIT_COSTS = {
-    "legal": 5,
-    "finance": 3,
-    "study": 2,
-    "business": 7,
+    "legal": 12,
+    "finance": 7,
+    "study": 5,
+    "business": 30,
 }
-
 
 def check_and_consume_agent_access(
     db: Session,
