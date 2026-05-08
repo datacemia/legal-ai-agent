@@ -4,30 +4,36 @@ import { useEffect, useState } from "react";
 import { analyzeBusinessFile } from "../../lib/api";
 import { getSavedLocale, setSavedLocale } from "../../lib/i18n";
 
+const safeGetLocalStorage = (key: string, fallback = "") => {
+  if (typeof window === "undefined") return fallback;
+
+  return localStorage.getItem(key) || fallback;
+};
+
+const safeSetLocalStorage = (key: string, value: string) => {
+  if (typeof window === "undefined") return;
+
+  localStorage.setItem(key, value);
+};
+
 export default function BusinessPage() {
   const [file, setFile] = useState<File | null>(null);
   const [result, setResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [language, setLanguage] = useState("en");
-  const [userPlan, setUserPlan] = useState("trial");
-  const [userRole, setUserRole] = useState("user");
+  const [plan, setPlan] = useState("");
+  const [role, setRole] = useState("");
 
   useEffect(() => {
     setLanguage(getSavedLocale());
 
     const syncBillingState = () => {
-      setUserPlan(
-        (localStorage.getItem("plan") || "trial")
-          .toLowerCase()
-          .trim()
-      );
+      const savedPlan = safeGetLocalStorage("plan");
+      const savedRole = safeGetLocalStorage("role");
 
-      setUserRole(
-        (localStorage.getItem("role") || "user")
-          .toLowerCase()
-          .trim()
-      );
+      setPlan(savedPlan.toLowerCase().trim());
+      setRole(savedRole.toLowerCase().trim());
     };
 
     syncBillingState();
@@ -49,7 +55,7 @@ export default function BusinessPage() {
   }, []);
 
   const refreshUserBilling = async () => {
-    const token = localStorage.getItem("token");
+    const token = safeGetLocalStorage("token");
 
     if (!token) return;
 
@@ -74,16 +80,16 @@ export default function BusinessPage() {
       .toLowerCase()
       .trim();
 
-    localStorage.setItem(
+    safeSetLocalStorage(
       "credits_balance",
       String(data.credits_balance || 0)
     );
 
-    localStorage.setItem("plan", nextPlan);
-    localStorage.setItem("role", nextRole);
+    safeSetLocalStorage("plan", nextPlan);
+    safeSetLocalStorage("role", nextRole);
 
-    setUserPlan(nextPlan);
-    setUserRole(nextRole);
+    setPlan(nextPlan);
+    setRole(nextRole);
 
     window.dispatchEvent(new Event("storage"));
   };
@@ -260,15 +266,8 @@ export default function BusinessPage() {
 
   const t = labels[language] || labels.en;
 
-  const hasCredits =
-    Number(localStorage.getItem("credits_balance") || 0) > 0;
-
   const hasActiveAccess =
-    userRole === "admin" ||
-    userPlan === "paid" ||
-    userPlan === "pro" ||
-    userPlan === "premium" ||
-    hasCredits;
+    role === "admin" || ["paid", "pro", "premium"].includes(plan);
 
   const primaryCtaLabel = hasActiveAccess
     ? t.analyze
