@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 from dotenv import load_dotenv
+
 from app.api.job_routes import router as job_router
 
 
@@ -31,6 +32,8 @@ from app.models.contact import ContactRequest
 from app.models.finance_analysis import FinanceAnalysis
 from app.models.study_analysis import StudyAnalysis, StudyAttempt
 from app.models.business_analysis import BusinessAnalysis
+from app.models.agent_trial_usage import AgentTrialUsage
+from app.models.usage_log import UsageLog
 
 
 app = FastAPI(
@@ -74,6 +77,7 @@ app.include_router(contact_router)
 app.include_router(finance_router)
 app.include_router(study_router)
 app.include_router(business_router)
+app.include_router(job_router)
 
 
 @app.get("/")
@@ -84,5 +88,3 @@ def root():
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
-
-app.include_router(job_router)

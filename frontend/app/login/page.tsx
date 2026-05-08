@@ -53,7 +53,7 @@ export default function LoginPage() {
 
         localStorage.setItem("role", role);
 
-        const plan = (data.user?.plan || "free")
+        const plan = (data.user?.plan || "trial")
           .toLowerCase()
           .trim();
 

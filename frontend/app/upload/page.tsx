@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { uploadDocument, runAnalysis, createCheckoutSession } from "../../lib/api";
+import { uploadDocument, runAnalysis } from "../../lib/api";
 import { trackEvent } from "../../lib/track";
 import { getSavedLocale, setSavedLocale } from "../../lib/i18n";
 import RiskBadge from "../../components/RiskBadge";
@@ -14,10 +14,14 @@ const labels: any = {
     pageTitle: "Analyze your contract",
     loading: "Analyzing your contract...",
     file: "File",
-    signupCta: "Free analysis available after signup",
+    signupCta: "$1 trial activation required per agent",
     loginRequired: "Create an account to analyze your contract",
     analyzeButton: "Analyze Contract",
-    buyCredit: "Buy credit",
+    buyCredit: "Buy credits",
+    trialInfo: "$1 trial per agent. You can also skip the trial and continue with global credits or a Pro plan.",
+    upgradePro: "Upgrade to Pro",
+    trialUsed: "Trial already used for legal",
+    paymentRequired: "$1 Legal trial activation required",
     heroTitle: "Analyze your contracts in seconds",
     heroDesc:
       "Upload your document to detect risky clauses, identify key obligations, and get clear, actionable recommendations before you sign.",
@@ -40,16 +44,20 @@ const labels: any = {
     clause: "Clause",
     recommendation: "Recommendation",
     limitedNotice:
-      "Only 2 clauses are displayed in the free version. Upgrade to unlock full clause analysis.",
+      "Trial analysis may be limited. Continue with credits or Pro to unlock full usage.",
   },
   fr: {
     pageTitle: "Analyser votre contrat",
     loading: "Analyse de votre contrat en cours...",
     file: "Fichier",
-    signupCta: "Analyse gratuite disponible après inscription",
+    signupCta: "Activation de l’essai à 1$ requise par agent",
     loginRequired: "Créez un compte pour analyser votre contrat",
     analyzeButton: "Analyser le contrat",
-    buyCredit: "Acheter un crédit",
+    buyCredit: "Acheter des crédits",
+    trialInfo: "Essai à 1$ par agent. Vous pouvez aussi passer directement aux crédits globaux ou au plan Pro.",
+    upgradePro: "Passer au plan Pro",
+    trialUsed: "Essai Legal déjà utilisé",
+    paymentRequired: "Activation de l’essai Legal à 1$ requise",
     heroTitle: "Analysez vos contrats en quelques secondes",
     heroDesc:
       "Téléchargez votre document pour détecter les clauses risquées, identifier les obligations clés et obtenir des recommandations claires avant de signer.",
@@ -72,16 +80,20 @@ const labels: any = {
     clause: "Clause",
     recommendation: "Recommandation",
     limitedNotice:
-      "Seules 2 clauses sont affichées dans la version gratuite. Passez à la version complète pour débloquer toute l’analyse.",
+      "L’analyse d’essai peut être limitée. Continuez avec des crédits ou Pro pour débloquer l’usage complet.",
   },
   ar: {
     pageTitle: "تحليل العقد",
     loading: "جاري تحليل العقد...",
     file: "الملف",
-    signupCta: "تحليل مجاني متاح بعد إنشاء الحساب",
+    signupCta: "يلزم تفعيل تجربة 1 دولار لكل وكيل",
     loginRequired: "أنشئ حساباً لتحليل عقدك",
     analyzeButton: "تحليل العقد",
-    buyCredit: "شراء رصيد",
+    buyCredit: "شراء أرصدة",
+    trialInfo: "تجربة بقيمة 1 دولار لكل وكيل. يمكنك أيضاً المتابعة مباشرة بالأرصدة العامة أو خطة Pro.",
+    upgradePro: "الترقية إلى Pro",
+    trialUsed: "تم استخدام تجربة الوكيل القانوني",
+    paymentRequired: "يلزم تفعيل تجربة القانون بقيمة 1 دولار",
     heroTitle: "حلل عقودك في ثوانٍ",
     heroDesc:
       "ارفع مستندك لاكتشاف البنود الخطرة، وتحديد الالتزامات الأساسية، والحصول على توصيات واضحة قبل التوقيع.",
@@ -104,7 +116,7 @@ const labels: any = {
     clause: "بند",
     recommendation: "توصية",
     limitedNotice:
-      "يتم عرض بندين فقط في النسخة المجانية. قم بالترقية لفتح التحليل الكامل للبنود.",
+      "قد يكون تحليل التجربة محدوداً. تابع باستخدام الأرصدة أو Pro لفتح الاستخدام الكامل.",
   },
 };
 
@@ -131,14 +143,9 @@ export default function UploadPage() {
       return;
     }
 
-    const data = await createCheckoutSession();
-
-    if (data.checkout_url) {
-      window.location.href = data.checkout_url;
-      return;
-    }
-
-    setMessage(data.detail || "Payment is not configured yet.");
+    setMessage(
+      "Stripe is not configured yet. Credits and Pro plan will be available soon."
+    );
   };
 
   const handleUpload = async () => {
@@ -175,10 +182,19 @@ export default function UploadPage() {
 
       setResult(analysis);
     } catch (err: any) {
-      setMessage(
+      const detail =
         err?.response?.data?.detail ||
-          "Invalid file. Only PDF or DOCX allowed."
-      );
+        err?.message ||
+        "Invalid file. Only PDF or DOCX allowed.";
+
+      if (detail.includes("Trial already used")) {
+        setMessage(t.trialUsed);
+      } else if (detail.includes("$1 trial payment required")) {
+        setMessage(t.paymentRequired);
+      } else {
+        setMessage(detail);
+      }
+
       return;
     } finally {
       setLoading(false);
@@ -262,20 +278,35 @@ export default function UploadPage() {
             <option value="ar">العربية</option>
           </select>
 
-          <button
-            onClick={handleUpload}
-            disabled={!file}
-            className="w-full rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800 disabled:bg-slate-400"
-          >
-            {t.analyzeButton}
-          </button>
+          <div className="rounded-xl border border-blue-100 bg-blue-50 p-3 text-sm text-blue-700">
+            {t.trialInfo}
+          </div>
 
-          <button
-            onClick={handleBuyCredit}
-            className="w-full rounded-xl bg-green-600 px-6 py-3 text-sm font-semibold text-white hover:bg-green-700"
-          >
-            {t.buyCredit}
-          </button>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <button
+              onClick={handleUpload}
+              disabled={!file}
+              className="w-full rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800 disabled:bg-slate-400"
+            >
+              {t.analyzeButton}
+            </button>
+
+            <button
+              onClick={handleBuyCredit}
+              className="w-full rounded-xl bg-green-600 px-6 py-3 text-sm font-semibold text-white hover:bg-green-700"
+            >
+              {t.buyCredit}
+            </button>
+
+            <button
+              onClick={() =>
+                setMessage("Pro plan is not configured yet. Stripe will be activated soon.")
+              }
+              className="w-full rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-700"
+            >
+              {t.upgradePro}
+            </button>
+          </div>
 
           {message && (
             <div className="bg-red-50 text-red-700 border border-red-200 text-sm p-3 rounded-xl text-center">

@@ -10,6 +10,7 @@ from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.utils.security import get_current_user
+from app.utils.billing import check_and_consume_agent_access
 from app.models.user import User
 from app.models.study_analysis import StudyAnalysis, StudyAttempt
 from app.schemas.study_schema import StudyHistoryItem
@@ -155,6 +156,12 @@ async def analyze_study(
             detail="Only PDF and DOCX files are allowed.",
         )
 
+    billing = check_and_consume_agent_access(
+        db=db,
+        user=current_user,
+        agent_slug="study",
+    )
+
     file_bytes = await file.read()
 
     user_weak_points = get_user_weak_points(db, current_user.id)
@@ -199,6 +206,8 @@ async def analyze_study(
             "weak_points": user_weak_points,
             "cache_key": cache_key,
             "file_name": file.filename,
+            "access_type": billing["access_type"],
+            "credits_used": billing["credits_used"],
         },
     )
 

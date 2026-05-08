@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.utils.security import get_current_user
+from app.utils.billing import check_and_consume_agent_access
 from app.models.user import User
 from app.models.finance_analysis import FinanceAnalysis
 from app.schemas.finance_schema import FinanceHistoryItem
@@ -46,11 +47,11 @@ def analyze_finance(data: dict, current_user: User = Depends(get_current_user)):
     }
 
 
-# 🔥 MAIN ROUTE (UPDATED)
+# 🔥 MAIN ROUTE WITH BILLING
 @router.post("/analyze-statement")
 async def analyze_statement(
     file: UploadFile = File(...),
-    output_language: str = Form("en"),  # ✅ NEW
+    output_language: str = Form("en"),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
@@ -60,6 +61,12 @@ async def analyze_statement(
             detail="Only PDF bank statements are allowed.",
         )
 
+    billing = check_and_consume_agent_access(
+        db=db,
+        user=current_user,
+        agent_slug="finance",
+    )
+
     text = await extract_statement_text(file)
 
     if not text.strip():
@@ -68,13 +75,14 @@ async def analyze_statement(
             detail="Could not extract text from PDF.",
         )
 
-    # ✅ PASS LANGUAGE TO AI
     result = analyze_bank_statement(text, output_language)
 
     analysis = FinanceAnalysis(
         user_id=current_user.id,
         file_name=file.filename,
         result=json.dumps(result, ensure_ascii=False),
+        access_type=billing["access_type"],
+        credits_used=billing["credits_used"],
     )
 
     db.add(analysis)

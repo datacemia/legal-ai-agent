@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function Pricing() {
   const [message, setMessage] = useState("");
 
-  const handleStartFree = () => {
+  const handleStartTrial = (agentSlug: string) => {
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -13,7 +13,9 @@ export default function Pricing() {
       return;
     }
 
-    window.location.href = "/upload";
+    setMessage(
+      `$1 trial payment for ${agentSlug} is not configured yet. Stripe integration will be activated soon.`
+    );
   };
 
   const handleBuyCredits = () => {
@@ -38,6 +40,10 @@ export default function Pricing() {
             Start with the Legal Agent. More specialized agents are coming soon,
             each with clear and transparent pricing.
           </p>
+
+          <p className="mt-3 rounded-2xl border border-blue-100 bg-blue-50 px-4 py-3 text-sm font-medium text-blue-700">
+            Each AI agent requires its own one-time $1 trial activation.
+          </p>
         </div>
 
         {/* LEGAL AGENT SECTION */}
@@ -54,19 +60,19 @@ export default function Pricing() {
         <div className="grid gap-8 md:grid-cols-4 mt-12">
           {/* FREE */}
           <div className="rounded-3xl border bg-white p-8 shadow-sm flex flex-col">
-            <h2 className="text-lg font-semibold text-slate-900">Free</h2>
+            <h2 className="text-lg font-semibold text-slate-900">$1 Trial</h2>
 
             <span className="mt-2 text-xs text-slate-500">
-              Limited preview
+              One-time trial
             </span>
 
             <p className="mt-2 text-sm text-slate-500">
-              Get started and explore the Legal Agent.
+              Activate one trial contract analysis for the Legal Agent.
             </p>
 
-            <div className="mt-6 text-4xl font-bold text-slate-900">€0</div>
+            <div className="mt-6 text-4xl font-bold text-slate-900">$1</div>
 
-            <p className="text-sm text-slate-500">1 contract analysis</p>
+            <p className="text-sm text-slate-500">1 trial contract analysis</p>
 
             <ul className="mt-6 space-y-3 text-sm text-slate-700">
               <li>✔ AI Legal Agent access</li>
@@ -81,10 +87,10 @@ export default function Pricing() {
             </ul>
 
             <button
-              onClick={handleStartFree}
+              onClick={() => handleStartTrial("legal")}
               className="mt-auto block rounded-xl bg-slate-900 px-5 py-3 text-center font-semibold text-white hover:bg-slate-800 transition"
             >
-              Start for free
+              Start $1 trial
             </button>
           </div>
 
@@ -95,7 +101,7 @@ export default function Pricing() {
             </span>
 
             <h2 className="text-lg font-semibold text-slate-900">
-              Pay per contract
+              Pay as you go
             </h2>
 
             <span className="mt-2 text-xs text-blue-600 font-medium">
@@ -108,10 +114,10 @@ export default function Pricing() {
 
             <div className="mt-6 text-4xl font-bold text-slate-900">€5</div>
 
-            <p className="text-sm text-slate-500">per contract analysis</p>
+            <p className="text-sm text-slate-500">credits per contract analysis</p>
 
             <ul className="mt-6 space-y-3 text-sm text-slate-700">
-              <li>✔ Everything in Free</li>
+              <li>✔ Everything in $1 Trial</li>
               <li>✔ All clauses displayed</li>
               <li>✔ Recommendations for all clauses</li>
             </ul>
@@ -147,7 +153,7 @@ export default function Pricing() {
             <p className="text-sm text-slate-500">per month</p>
 
             <ul className="mt-6 space-y-3 text-sm text-slate-700">
-              <li>✔ Everything in Pay per contract</li>
+              <li>✔ Everything in Pay as you go</li>
               <li>✔ 20 contract analyses per month</li>
               <li>✔ Full clause recommendations</li>
               <li>✔ Priority processing</li>
@@ -166,7 +172,7 @@ export default function Pricing() {
             <h2 className="text-lg font-semibold text-slate-900">Premium</h2>
 
             <p className="mt-2 text-sm text-slate-500">
-              For teams and companies with advanced needs.
+              For multi-agent enterprise needs.
             </p>
 
             <div className="mt-6 text-4xl font-bold text-slate-900">
@@ -213,19 +219,19 @@ export default function Pricing() {
         <div className="grid gap-8 md:grid-cols-4 mt-12">
           {/* FREE */}
           <div className="rounded-3xl border bg-white p-8 shadow-sm flex flex-col">
-            <h2 className="text-lg font-semibold text-slate-900">Free</h2>
+            <h2 className="text-lg font-semibold text-slate-900">$1 Trial</h2>
 
             <span className="mt-2 text-xs text-slate-500">
-              Limited preview
+              One-time trial
             </span>
 
             <p className="mt-2 text-sm text-slate-500">
-              Explore the Finance Agent.
+              Activate one trial statement analysis for the Finance Agent.
             </p>
 
-            <div className="mt-6 text-4xl font-bold text-slate-900">€0</div>
+            <div className="mt-6 text-4xl font-bold text-slate-900">$1</div>
 
-            <p className="text-sm text-slate-500">1 statement analysis</p>
+            <p className="text-sm text-slate-500">1 trial statement analysis</p>
 
             <ul className="mt-6 space-y-3 text-sm text-slate-700">
               <li>✔ AI Finance Agent access</li>
@@ -235,10 +241,10 @@ export default function Pricing() {
             </ul>
 
             <button
-              onClick={handleStartFree}
+              onClick={() => handleStartTrial("finance")}
               className="mt-auto block rounded-xl bg-slate-900 px-5 py-3 text-center font-semibold text-white hover:bg-slate-800 transition"
             >
-              Start for free
+              Start $1 trial
             </button>
           </div>
 
@@ -249,7 +255,7 @@ export default function Pricing() {
             </span>
 
             <h2 className="text-lg font-semibold text-slate-900">
-              Pay per statement
+              Pay as you go
             </h2>
 
             <span className="mt-2 text-xs text-blue-600 font-medium">
@@ -262,10 +268,10 @@ export default function Pricing() {
 
             <div className="mt-6 text-4xl font-bold text-slate-900">€3</div>
 
-            <p className="text-sm text-slate-500">per statement analysis</p>
+            <p className="text-sm text-slate-500">credits per statement analysis</p>
 
             <ul className="mt-6 space-y-3 text-sm text-slate-700">
-              <li>✔ Everything in Free</li>
+              <li>✔ Everything in $1 Trial</li>
               <li>✔ Full spending breakdown</li>
               <li>✔ All categories</li>
               <li>✔ Full recommendations</li>
@@ -296,7 +302,7 @@ export default function Pricing() {
             <p className="text-sm text-slate-500">per month</p>
 
             <ul className="mt-6 space-y-3 text-sm text-slate-700">
-              <li>✔ Everything in Pay per statement</li>
+              <li>✔ Everything in Pay as you go</li>
               <li>✔ 20 analyses per month</li>
               <li>✔ Advanced insights</li>
               <li>✔ Priority processing</li>
@@ -315,7 +321,7 @@ export default function Pricing() {
             <h2 className="text-lg font-semibold text-slate-900">Premium</h2>
 
             <p className="mt-2 text-sm text-slate-500">
-              For teams and advanced users.
+              For multi-agent professional and team usage.
             </p>
 
             <div className="mt-6 text-4xl font-bold text-slate-900">
@@ -360,19 +366,19 @@ export default function Pricing() {
         <div className="grid gap-8 md:grid-cols-4 mt-12">
           {/* FREE */}
           <div className="rounded-3xl border bg-white p-8 shadow-sm flex flex-col">
-            <h2 className="text-lg font-semibold text-slate-900">Free</h2>
+            <h2 className="text-lg font-semibold text-slate-900">$1 Trial</h2>
 
             <span className="mt-2 text-xs text-slate-500">
-              Limited preview
+              One-time trial
             </span>
 
             <p className="mt-2 text-sm text-slate-500">
-              Discover how the Study Agent helps you learn faster.
+              Activate one trial study analysis with the Study Agent.
             </p>
 
-            <div className="mt-6 text-4xl font-bold text-slate-900">€0</div>
+            <div className="mt-6 text-4xl font-bold text-slate-900">$1</div>
 
-            <p className="text-sm text-slate-500">1 study analysis</p>
+            <p className="text-sm text-slate-500">1 trial study analysis</p>
 
             <ul className="mt-6 space-y-3 text-sm text-slate-700">
               <li>✔ Summary</li>
@@ -383,10 +389,10 @@ export default function Pricing() {
             </ul>
 
             <button
-              onClick={handleStartFree}
+              onClick={() => handleStartTrial("study")}
               className="mt-auto block rounded-xl bg-slate-900 px-5 py-3 text-center font-semibold text-white hover:bg-slate-800 transition"
             >
-              Start for free
+              Start $1 trial
             </button>
           </div>
 
@@ -397,7 +403,7 @@ export default function Pricing() {
             </span>
 
             <h2 className="text-lg font-semibold text-slate-900">
-              Pay per study
+              Pay as you go
             </h2>
 
             <span className="mt-2 text-xs text-blue-600 font-medium">
@@ -410,10 +416,10 @@ export default function Pricing() {
 
             <div className="mt-6 text-4xl font-bold text-slate-900">€2</div>
 
-            <p className="text-sm text-slate-500">per analysis</p>
+            <p className="text-sm text-slate-500">credits per analysis</p>
 
             <ul className="mt-6 space-y-3 text-sm text-slate-700">
-              <li>✔ Everything in Free</li>
+              <li>✔ Everything in $1 Trial</li>
               <li>✔ Full quiz (theory + practice)</li>
               <li>✔ Flashcards</li>
               <li>✔ Study plan</li>
@@ -466,7 +472,7 @@ export default function Pricing() {
             <h2 className="text-lg font-semibold text-slate-900">Premium</h2>
 
             <p className="mt-2 text-sm text-slate-500">
-              For advanced users and multi-agent access.
+              For multi-agent advanced learning and productivity.
             </p>
 
             <div className="mt-6 text-4xl font-bold text-slate-900">
@@ -510,19 +516,19 @@ export default function Pricing() {
         <div className="grid gap-8 md:grid-cols-4 mt-12">
           {/* FREE */}
           <div className="rounded-3xl border bg-white p-8 shadow-sm flex flex-col">
-            <h2 className="text-lg font-semibold text-slate-900">Free</h2>
+            <h2 className="text-lg font-semibold text-slate-900">$1 Trial</h2>
 
             <span className="mt-2 text-xs text-slate-500">
-              Limited preview
+              One-time trial
             </span>
 
             <p className="mt-2 text-sm text-slate-500">
-              Discover how the Business Agent works.
+              Activate one trial business analysis with the Business Agent.
             </p>
 
-            <div className="mt-6 text-4xl font-bold text-slate-900">€0</div>
+            <div className="mt-6 text-4xl font-bold text-slate-900">$1</div>
 
-            <p className="text-sm text-slate-500">1 business analysis</p>
+            <p className="text-sm text-slate-500">1 trial business analysis</p>
 
             <ul className="mt-6 space-y-3 text-sm text-slate-700">
               <li>✔ Business summary</li>
@@ -532,10 +538,10 @@ export default function Pricing() {
             </ul>
 
             <button
-              onClick={handleStartFree}
+              onClick={() => handleStartTrial("business")}
               className="mt-auto block rounded-xl bg-slate-900 px-5 py-3 text-center font-semibold text-white hover:bg-slate-800 transition"
             >
-              Start for free
+              Start $1 trial
             </button>
           </div>
 
@@ -546,7 +552,7 @@ export default function Pricing() {
             </span>
 
             <h2 className="text-lg font-semibold text-slate-900">
-              Pay per analysis
+              Pay as you go
             </h2>
 
             <span className="mt-2 text-xs text-blue-600 font-medium">
@@ -559,10 +565,10 @@ export default function Pricing() {
 
             <div className="mt-6 text-4xl font-bold text-slate-900">€7</div>
 
-            <p className="text-sm text-slate-500">per analysis</p>
+            <p className="text-sm text-slate-500">credits per analysis</p>
 
             <ul className="mt-6 space-y-3 text-sm text-slate-700">
-              <li>✔ Everything in Free</li>
+              <li>✔ Everything in $1 Trial</li>
               <li>✔ Full business metrics</li>
               <li>✔ Risks detection</li>
               <li>✔ Opportunities</li>
@@ -594,7 +600,7 @@ export default function Pricing() {
             <p className="text-sm text-slate-500">per month</p>
 
             <ul className="mt-6 space-y-3 text-sm text-slate-700">
-              <li>✔ Everything in Pay per analysis</li>
+              <li>✔ Everything in Pay as you go</li>
               <li>✔ 30 analyses per month</li>
               <li>✔ Advanced insights</li>
               <li>✔ Priority processing</li>
@@ -613,7 +619,7 @@ export default function Pricing() {
             <h2 className="text-lg font-semibold text-slate-900">Premium</h2>
 
             <p className="mt-2 text-sm text-slate-500">
-              For companies and advanced analytics needs.
+              For multi-agent enterprise analytics needs.
             </p>
 
             <div className="mt-6 text-4xl font-bold text-slate-900">

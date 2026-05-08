@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   getDocuments,
-  createCheckoutSession,
   getFinanceHistory,
   getStudyHistory,
   getBusinessHistory,
@@ -15,8 +14,12 @@ import RiskBadge from "../../components/RiskBadge";
 const labels: any = {
   en: {
     title: "Dashboard",
-    subtitle: "Manage your contract analyses.",
-    buy: "Buy credit",
+    subtitle:
+      "Manage analyses across all Runexa AI agents with global credits and subscriptions.",
+    buy: "Buy credits",
+    upgrade: "Upgrade to Pro",
+    credits: "Global credits",
+    plan: "Current plan",
     new: "New Analysis",
     loading: "Loading dashboard...",
     total: "Total documents",
@@ -74,8 +77,10 @@ export default function DashboardPage() {
       return;
     }
 
-    if (plan !== "premium") {
-      window.location.href = "/upload";
+    const allowedPlans = ["pro", "premium"];
+
+    if (role !== "admin" && !allowedPlans.includes(plan)) {
+      window.location.href = "/pricing";
       return;
     }
 
@@ -128,14 +133,9 @@ export default function DashboardPage() {
   }
 
   const handleBuyCredit = async () => {
-    const data = await createCheckoutSession();
-
-    if (data.checkout_url) {
-      window.location.href = data.checkout_url;
-      return;
-    }
-
-    setMessage(data.detail || "Payment is not configured yet.");
+    setMessage(
+      "Stripe is not configured yet. Credits and subscriptions will be available soon."
+    );
   };
 
   if (loading) {
@@ -158,12 +158,23 @@ export default function DashboardPage() {
             <p className="text-slate-500 mt-1">{t.subtitle}</p>
           </div>
 
-          <div className="flex gap-3">
+          <div className="flex flex-wrap gap-3">
             <button
               onClick={handleBuyCredit}
               className="px-5 py-2 bg-green-600 text-white rounded-xl"
             >
               {t.buy}
+            </button>
+
+            <button
+              onClick={() =>
+                setMessage(
+                  "Pro subscription is not configured yet. Stripe will be activated soon."
+                )
+              }
+              className="px-5 py-2 bg-blue-600 text-white rounded-xl"
+            >
+              {t.upgrade}
             </button>
 
             <Link
@@ -182,6 +193,20 @@ export default function DashboardPage() {
         )}
 
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+          <div className="bg-white p-5 rounded-2xl border">
+            <p className="text-sm text-slate-500">{t.plan}</p>
+            <p className="text-2xl font-bold uppercase">
+              {localStorage.getItem("plan") || "trial"}
+            </p>
+          </div>
+
+          <div className="bg-white p-5 rounded-2xl border">
+            <p className="text-sm text-slate-500">{t.credits}</p>
+            <p className="text-2xl font-bold">
+              {localStorage.getItem("credits_balance") || 0}
+            </p>
+          </div>
+
           <div className="bg-white p-5 rounded-2xl border">
             <p className="text-sm text-slate-500">{t.total}</p>
             <p className="text-2xl font-bold">{documents.length}</p>

@@ -27,7 +27,12 @@ const labels: any = {
     analyzing: "Analyzing statement...",
     buyCredits: "Buy credits 💳",
     paymentMessage:
-      "Stripe is not connected yet. Credit purchase will be available soon.",
+      "Stripe is not connected yet. $1 trial activation, credits, and Pro plan will be available soon.",
+    trialInfo: "$1 trial per agent. You can also skip the trial and continue with global credits or a Pro plan.",
+    startTrial: "Start $1 trial",
+    upgradePro: "Upgrade to Pro",
+    trialUsed: "Trial already used for finance",
+    paymentRequired: "$1 Finance trial activation required",
     apiError: "Failed to connect to the finance analysis API.",
     results: "Results",
     summary: "Summary",
@@ -57,7 +62,12 @@ const labels: any = {
     analyzing: "Analyse du relevé en cours...",
     buyCredits: "Acheter des crédits 💳",
     paymentMessage:
-      "Stripe n’est pas encore connecté. L’achat de crédits sera bientôt disponible.",
+      "Stripe n’est pas encore connecté. L’activation de l’essai à 1$, les crédits et le plan Pro seront bientôt disponibles.",
+    trialInfo: "Essai à 1$ par agent. Vous pouvez aussi passer directement aux crédits globaux ou au plan Pro.",
+    startTrial: "Activer l’essai à 1$",
+    upgradePro: "Passer au plan Pro",
+    trialUsed: "Essai Finance déjà utilisé",
+    paymentRequired: "Activation de l’essai Finance à 1$ requise",
     apiError: "Impossible de se connecter à l’API d’analyse financière.",
     results: "Résultats",
     summary: "Résumé",
@@ -87,7 +97,12 @@ const labels: any = {
     analyzing: "جاري تحليل الكشف...",
     buyCredits: "شراء رصيد 💳",
     paymentMessage:
-      "Stripe غير متصل حالياً. شراء الرصيد سيكون متاحاً قريباً.",
+      "Stripe غير متصل حالياً. تفعيل تجربة 1 دولار، الأرصدة وخطة Pro ستكون متاحة قريباً.",
+    trialInfo: "تجربة بقيمة 1 دولار لكل وكيل. يمكنك أيضاً المتابعة مباشرة بالأرصدة العامة أو خطة Pro.",
+    startTrial: "تفعيل تجربة 1 دولار",
+    upgradePro: "الترقية إلى Pro",
+    trialUsed: "تم استخدام تجربة وكيل المالية",
+    paymentRequired: "يلزم تفعيل تجربة المالية بقيمة 1 دولار",
     apiError: "تعذر الاتصال بواجهة تحليل المالية.",
     results: "النتائج",
     summary: "الملخص",
@@ -165,9 +180,19 @@ export default function FinancePage() {
       setResult(data);
     } catch (error) {
       console.error("Finance analysis error:", error);
-      setResult({
-        detail: t.apiError,
-      });
+
+      const errorMessage =
+        error instanceof Error ? error.message : t.apiError;
+
+      if (errorMessage.includes("Trial already used")) {
+        setPaymentMessage(t.trialUsed);
+      } else if (errorMessage.includes("$1 trial payment required")) {
+        setPaymentMessage(t.paymentRequired);
+      } else {
+        setResult({
+          detail: errorMessage,
+        });
+      }
     } finally {
       setLoading(false);
     }
@@ -235,13 +260,17 @@ export default function FinancePage() {
             </label>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="rounded-xl border border-blue-100 bg-blue-50 p-3 text-sm text-blue-700">
+            {t.trialInfo}
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <button
               onClick={handleAnalyze}
               disabled={!file || loading}
               className="w-full bg-slate-900 text-white py-3 rounded-xl disabled:bg-slate-400"
             >
-              {loading ? t.analyzing : t.analyze}
+              {loading ? t.analyzing : t.startTrial}
             </button>
 
             <button
@@ -251,6 +280,17 @@ export default function FinancePage() {
               <span className="flex items-center justify-center gap-2">
                 {t.buyCredits}
               </span>
+            </button>
+
+            <button
+              onClick={() =>
+                setPaymentMessage(
+                  "Pro plan is not configured yet. Stripe will be activated soon."
+                )
+              }
+              className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition"
+            >
+              {t.upgradePro}
             </button>
           </div>
 

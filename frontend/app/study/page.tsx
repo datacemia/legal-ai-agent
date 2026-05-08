@@ -125,7 +125,12 @@ const labels: any = {
     incorrect: "Incorrect",
     answer: "Answer",
     paymentMessage:
-      "Stripe is not configured yet. Credit purchase will be available soon.",
+      "Stripe is not configured yet. $1 trial activation, credits, and plans will be available soon.",
+    trialInfo: "$1 trial per agent. After your trial, continue with credits or a plan.",
+    startTrial: "Start $1 trial",
+    trialUsed: "Trial already used for study",
+    paymentRequired: "$1 Study trial activation required",
+    proDirect: "Want Pro directly? Pro and Premium plans will be available soon for all agents.",
     errorMessage: "Failed to connect to Study Agent API.",
     noFile: "No file selected",
     chooseFile: "Choose a document (PDF, Word, or scanned)",
@@ -207,7 +212,12 @@ const labels: any = {
     incorrect: "Incorrect",
     answer: "Réponse",
     paymentMessage:
-      "Stripe n’est pas encore configuré. L’achat de crédits sera bientôt disponible.",
+      "Stripe n’est pas encore configuré. L’activation de l’essai à 1$, les crédits et les abonnements seront bientôt disponibles.",
+    trialInfo: "Essai à 1$ par agent. Après l’essai, continuez avec des crédits ou un abonnement.",
+    startTrial: "Activer l’essai à 1$",
+    trialUsed: "Essai Study déjà utilisé",
+    paymentRequired: "Activation de l’essai Study à 1$ requise",
+    proDirect: "Vous voulez passer directement à Pro ? Les abonnements Pro et Premium seront bientôt disponibles pour tous les agents.",
     errorMessage: "Impossible de se connecter à l’API Study Agent.",
     noFile: "Aucun fichier sélectionné",
     chooseFile: "Choisir un document (PDF, Word ou scanné)",
@@ -288,7 +298,12 @@ const labels: any = {
     incorrect: "غير صحيح",
     answer: "الإجابة",
     paymentMessage:
-      "Stripe غير مفعّل حالياً. شراء الرصيد سيكون متاحاً قريباً.",
+      "Stripe غير مفعّل حالياً. تفعيل تجربة 1 دولار، الأرصدة والاشتراكات ستكون متاحة قريباً.",
+    trialInfo: "تجربة بقيمة 1 دولار لكل وكيل. بعد التجربة يمكنك المتابعة بالأرصدة أو الاشتراك.",
+    startTrial: "تفعيل تجربة 1 دولار",
+    trialUsed: "تم استخدام تجربة وكيل الدراسة",
+    paymentRequired: "يلزم تفعيل تجربة الدراسة بقيمة 1 دولار",
+    proDirect: "هل تريد الاشتراك في Pro مباشرة؟ ستتوفر خطط Pro و Premium قريباً لجميع الوكلاء.",
     errorMessage: "تعذر الاتصال بواجهة Study Agent.",
     noFile: "لم يتم اختيار ملف (PDF أو Word أو ممسوح ضوئياً)",
     chooseFile: "اختيار ملف (PDF أو Word أو ممسوح ضوئياً)",
@@ -1495,8 +1510,20 @@ export default function StudyPage() {
       }
     } catch (error) {
       console.error("Study analysis error:", error);
+
+      const errorMessage =
+        error instanceof Error ? error.message : t.errorMessage;
+
+      if (errorMessage.includes("Trial already used")) {
+        setPaymentMessage(t.trialUsed);
+      } else if (errorMessage.includes("$1 trial payment required")) {
+        setPaymentMessage(t.paymentRequired);
+      } else {
+        setPaymentMessage(errorMessage);
+      }
+
       setResult({
-        detail: error instanceof Error ? error.message : t.errorMessage,
+        detail: errorMessage,
       });
     } finally {
       setLoadingStep("");
@@ -1940,6 +1967,14 @@ export default function StudyPage() {
             </label>
           </div>
 
+          <div className="rounded-xl border border-blue-100 bg-blue-50 p-3 text-sm text-blue-700">
+            {t.trialInfo}
+          </div>
+
+          <p className="text-xs text-slate-500">
+            {t.proDirect}
+          </p>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <button
               onClick={() => {
@@ -1960,7 +1995,7 @@ export default function StudyPage() {
                   {t.loadingSteps.analyzing}
                 </>
               ) : (
-                t.analyze
+                t.startTrial
               )}
             </button>
 

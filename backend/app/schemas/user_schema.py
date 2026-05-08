@@ -14,12 +14,16 @@ class UserLogin(BaseModel):
 class UserResponse(BaseModel):
     id: int
     email: EmailStr
-    role: str
-    plan: str
-    free_analyses_used: int
-    analysis_credits: int
 
-    is_active: bool  # ✅ NEW FIELD
+    role: str
+
+    # trial, paid, pro, premium
+    plan: str
+
+    # global credits usable across all agents
+    credits_balance: int
+
+    is_active: bool
 
     class Config:
         from_attributes = True

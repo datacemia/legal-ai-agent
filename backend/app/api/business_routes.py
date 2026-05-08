@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.utils.security import get_current_user
+from app.utils.billing import check_and_consume_agent_access
 from app.models.user import User
 from app.models.business_analysis import BusinessAnalysis
 from app.schemas.business_schema import BusinessHistoryItem
@@ -31,6 +32,12 @@ async def analyze_business(
             detail="Only CSV or Excel (.xlsx) files are supported for Business Agent.",
         )
 
+    billing = check_and_consume_agent_access(
+        db=db,
+        user=current_user,
+        agent_slug="business",
+    )
+
     try:
         business_data = await extract_business_data(file)
     except ValueError as error:
@@ -48,6 +55,8 @@ async def analyze_business(
         user_id=current_user.id,
         file_name=file.filename,
         result=json.dumps(result, ensure_ascii=False),
+        access_type=billing["access_type"],
+        credits_used=billing["credits_used"],
     )
 
     db.add(analysis)

@@ -84,12 +84,11 @@ export default function RegisterPage() {
             </span>
 
             <h1 className="mt-8 text-4xl font-bold text-slate-950 xl:text-5xl">
-              Start using AI agents to get work done faster
+              Create one Runexa account for all AI agents
             </h1>
 
             <p className="mt-6 text-lg text-slate-600">
-              Runexa brings specialized AI agents for legal, finance, HR,
-              business, and more — all in one simple platform.
+              Create one Runexa account for all AI agents. Start with a $1 trial per agent, then continue with global credits or a plan. Runexa supports legal, study, finance, business, and future security agents.
             </p>
 
             <div className="mt-12 space-y-7">
@@ -140,7 +139,7 @@ export default function RegisterPage() {
             <div className="text-center">
               <h1 className="text-3xl font-bold">Create your account</h1>
               <p className="text-slate-500">
-                Start using AI agents to get work done faster
+                Start with a $1 trial per agent, then continue with global credits or a plan.
               </p>
             </div>
 

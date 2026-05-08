@@ -11,6 +11,10 @@ class StudyAnalysis(Base):
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     file_name = Column(String, nullable=False)
     result = Column(JSON, nullable=False)
+
+    access_type = Column(String, default="trial")
+    credits_used = Column(Integer, default=0)
+
     created_at = Column(DateTime, default=datetime.utcnow)
 
 

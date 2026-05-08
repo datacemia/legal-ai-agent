@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
@@ -8,7 +9,9 @@ from app.models.document import Document
 from app.models.analysis import AnalysisResult
 from app.models.user import User
 from app.schemas.analysis_schema import AnalysisResponse
+
 from app.utils.security import get_current_user
+from app.utils.billing import check_and_consume_agent_access
 
 from app.services.contract_parser import extract_text
 from app.services.text_cleaner import clean_text
@@ -24,7 +27,8 @@ from app.services.summary_service import (
 
 router = APIRouter(prefix="/analysis", tags=["Analysis"])
 
-# ================= AJOUT =================
+
+# ================= RATE LIMIT =================
 ANALYSIS_ATTEMPTS = {}
 MAX_ANALYSIS_ATTEMPTS = 3
 ANALYSIS_WINDOW_SECONDS = 60
@@ -34,6 +38,7 @@ def check_analysis_rate_limit(user_id: int):
     now = datetime.utcnow()
 
     attempts = ANALYSIS_ATTEMPTS.get(user_id, [])
+
     attempts = [
         attempt for attempt in attempts
         if (now - attempt).total_seconds() < ANALYSIS_WINDOW_SECONDS
@@ -46,10 +51,11 @@ def check_analysis_rate_limit(user_id: int):
         )
 
     attempts.append(now)
+
     ANALYSIS_ATTEMPTS[user_id] = attempts
-# ================= FIN AJOUT =================
 
 
+# ================= RUN ANALYSIS =================
 @router.post("/{document_id}/run", response_model=AnalysisResponse)
 def run_analysis(
     document_id: int,
@@ -73,78 +79,92 @@ def run_analysis(
             detail="Analysis already in progress",
         )
 
-    is_admin = current_user.role == "admin"
-
-    has_free_analysis = current_user.free_analyses_used < 1
-    has_paid_credit = current_user.analysis_credits > 0
-
-    if not is_admin and not has_free_analysis and not has_paid_credit:
-        raise HTTPException(
-            status_code=402,
-            detail="Payment required. Please buy an analysis credit.",
-        )
-
-    is_free_analysis = not is_admin and has_free_analysis
+    billing = check_and_consume_agent_access(
+        db=db,
+        user=current_user,
+        agent_slug="legal",
+    )
 
     if output_language not in ["en", "fr", "ar"]:
         output_language = "en"
 
     document.status = "processing"
+
     db.commit()
 
-    raw_text = extract_text(document.file_path, document.file_type)
+    raw_text = extract_text(
+        document.file_path,
+        document.file_type
+    )
+
     cleaned_text = clean_text(raw_text)
+
     detected_language = detect_language(cleaned_text)
+
     clauses = split_into_clauses(cleaned_text)
 
-    clause_results = analyze_contract_clauses(clauses, output_language)
-
-    if is_free_analysis:
-        visible_clause_results = clause_results[:2]
-    else:
-        visible_clause_results = clause_results
+    clause_results = analyze_contract_clauses(
+        clauses,
+        output_language
+    )
 
     global_risk = calculate_global_risk(clause_results)
-    summary = generate_summary(cleaned_text, output_language)
-    simplified = generate_simplified_version(cleaned_text, output_language)
 
-    if is_free_analysis:
-        recommendations = [
-            "Recommendations are limited to the 2 displayed clauses.",
-            "Upgrade to unlock recommendations for all clauses.",
-        ]
-    else:
-        recommendations = [
-            "Review all medium and high risk clauses.",
-            "Ask a lawyer before signing important contracts.",
-        ]
+    summary = generate_summary(
+        cleaned_text,
+        output_language
+    )
+
+    simplified = generate_simplified_version(
+        cleaned_text,
+        output_language
+    )
+
+    recommendations = [
+        "Review all medium and high risk clauses.",
+        "Ask a lawyer before signing important contracts.",
+    ]
 
     analysis = AnalysisResult(
         document_id=document.id,
+
         summary=summary,
-        clauses=json.dumps(visible_clause_results, ensure_ascii=False),
+
+        clauses=json.dumps(
+            clause_results,
+            ensure_ascii=False
+        ),
+
         risk_level=global_risk["risk_level"],
+
         risk_score=global_risk["risk_score"],
+
         simplified_version=simplified,
-        recommendations=json.dumps(recommendations, ensure_ascii=False),
+
+        recommendations=json.dumps(
+            recommendations,
+            ensure_ascii=False
+        ),
+
+        access_type=billing["access_type"],
+
+        credits_used=billing["credits_used"],
     )
 
     document.language = detected_language
+
     document.status = "completed"
 
-    if not is_admin:
-        if has_free_analysis:
-            current_user.free_analyses_used += 1
-        else:
-            current_user.analysis_credits -= 1
-
     db.add(analysis)
+
     db.commit()
+
     db.refresh(analysis)
 
     return analysis
 
 
+# ================= GET ANALYSIS =================
 @router.get("/{document_id}", response_model=AnalysisResponse)
 def get_analysis(
     document_id: int,
