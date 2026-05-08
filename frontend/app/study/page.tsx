@@ -139,6 +139,8 @@ const labels: any = {
     answer: "Answer",
     paymentMessage:
       "Stripe is not configured yet. $1 trial activation, credits, and plans will be available soon.",
+    proMessage:
+      "Pro plan is not configured yet. Stripe will be activated soon.",
     trialInfo: "$1 trial per agent. After your trial, continue with credits or a plan.",
     startTrial: "Start $1 trial",
     trialUsed: "Trial already used for study",
@@ -226,6 +228,8 @@ const labels: any = {
     answer: "Réponse",
     paymentMessage:
       "Stripe n’est pas encore configuré. L’activation de l’essai à 1$, les crédits et les abonnements seront bientôt disponibles.",
+    proMessage:
+      "Le plan Pro n’est pas encore configuré. Stripe sera bientôt activé.",
     trialInfo: "Essai à 1$ par agent. Après l’essai, continuez avec des crédits ou un abonnement.",
     startTrial: "Activer l’essai à 1$",
     trialUsed: "Essai Study déjà utilisé",
@@ -312,6 +316,8 @@ const labels: any = {
     answer: "الإجابة",
     paymentMessage:
       "Stripe غير مفعّل حالياً. تفعيل تجربة 1 دولار، الأرصدة والاشتراكات ستكون متاحة قريباً.",
+    proMessage:
+      "خطة Pro غير مفعلة حالياً. سيتم تفعيل Stripe قريباً.",
     trialInfo: "تجربة بقيمة 1 دولار لكل وكيل. بعد التجربة يمكنك المتابعة بالأرصدة أو الاشتراك.",
     startTrial: "تفعيل تجربة 1 دولار",
     trialUsed: "تم استخدام تجربة وكيل الدراسة",
@@ -2072,9 +2078,11 @@ export default function StudyPage() {
             </label>
           </div>
 
-          <div className="rounded-xl border border-blue-100 bg-blue-50 p-3 text-sm text-blue-700">
-            {t.trialInfo}
-          </div>
+          {!hasActiveAccess && (
+            <div className="rounded-xl border border-blue-100 bg-blue-50 p-3 text-sm text-blue-700">
+              {t.trialInfo}
+            </div>
+          )}
 
           <p className="text-xs text-slate-500">
             {t.proDirect}
