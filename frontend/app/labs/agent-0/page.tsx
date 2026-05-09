@@ -52,7 +52,7 @@ export default function AgentZeroPage() {
 
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
-              href="/register"
+              href="/labs/agent-0/waitlist"
               className="rounded-xl bg-white px-6 py-3 font-semibold text-slate-950 hover:bg-slate-100"
             >
               Join Waitlist
