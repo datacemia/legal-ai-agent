@@ -9,9 +9,16 @@ export default function StudyHistoryPage() {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await getStudyHistory();
-      setData(Array.isArray(res) ? res : []);
-      setLoading(false);
+      try {
+        const res = await getStudyHistory();
+
+        setData(Array.isArray(res) ? res : []);
+      } catch (error) {
+        console.error("Study history load failed:", error);
+        setData([]);
+      } finally {
+        setLoading(false);
+      }
     }
 
     fetchData();
