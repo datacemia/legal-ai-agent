@@ -383,7 +383,7 @@ export default function DashboardPage() {
               Analyze new
             </Link>
 
-            <Link href="/history" className="text-sm text-slate-600">
+            <Link href="/upload/history" className="text-sm text-slate-600">
               View history
             </Link>
           </div>
