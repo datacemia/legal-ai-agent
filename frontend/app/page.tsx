@@ -309,33 +309,353 @@ export default function HomePage() {
             {t.desc}
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="#agents"
-              className="px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition"
-            >
-              {t.explore}
-            </a>
+          <div className="relative mt-10">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-100/40 via-transparent to-emerald-100/30 blur-3xl" />
 
-            <a href="#agent-0" className="px-6 py-3 bg-slate-900 text-white rounded-xl font-semibold hover:bg-slate-800 transition">
-              {t.trySecurity}
-            </a>
+            <div className="relative rounded-[32px] border border-slate-200/80 bg-white/80 p-6 shadow-[0_20px_80px_rgba(15,23,42,0.08)] backdrop-blur-xl md:p-10">
+              <div className="mb-8 flex justify-center">
+                <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-5 py-2 text-sm font-semibold text-blue-700">
+                  <span>👥</span>
+                  <span>
+                    {language === "fr"
+                      ? "Pour particuliers & professionnels"
+                      : language === "ar"
+                      ? "للأفراد والمحترفين"
+                      : "For individuals & professionals"}
+                  </span>
+                </div>
+              </div>
 
-            <Link href="/upload" className="px-6 py-3 bg-white border border-slate-200 rounded-xl font-semibold hover:bg-slate-100 transition">
-              {t.tryLegal}
-            </Link>
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-5">
+                <a
+                  href="#agents"
+                  className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 to-blue-700 p-6 text-white shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-blue-200"
+                >
+                  <div className="absolute inset-0 bg-white/5 opacity-0 transition group-hover:opacity-100" />
 
-            <Link href="/study" className="px-6 py-3 bg-white border border-slate-200 rounded-xl font-semibold hover:bg-slate-100 transition">
-              {t.tryStudy}
-            </Link>
+                  <div className="relative flex items-start justify-between">
+                    <div className="space-y-2 text-left">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 text-2xl backdrop-blur">
+                        ✨
+                      </div>
 
-            <Link href="/finance" className="px-6 py-3 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition">
-              {t.tryFinance}
-            </Link>
+                      <div>
+                        <h3 className="text-lg font-bold">{t.explore}</h3>
 
-            <Link href="/business" className="px-6 py-3 bg-white border border-slate-200 rounded-xl font-semibold hover:bg-slate-100 transition">
-              {t.tryBusiness}
-            </Link>
+                        <p className="mt-1 text-sm text-blue-100">
+                          {language === "fr"
+                            ? "Tous les agents IA"
+                            : language === "ar"
+                            ? "كل وكلاء الذكاء الاصطناعي"
+                            : "All AI agents"}
+                        </p>
+                      </div>
+                    </div>
+
+                    <span className="text-2xl transition group-hover:translate-x-1">
+                      →
+                    </span>
+                  </div>
+
+                  <div className="mt-5 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-blue-100">
+                    {language === "fr"
+                      ? "Pour tous"
+                      : language === "ar"
+                      ? "للجميع"
+                      : "For everyone"}
+                  </div>
+                </a>
+
+                <a
+                  href="#agent-0"
+                  className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-black to-slate-900 p-6 text-white shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-slate-300"
+                >
+                  <div className="relative flex items-start justify-between">
+                    <div className="space-y-2 text-left">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-2xl backdrop-blur">
+                        🛡️
+                      </div>
+
+                      <div>
+                        <h3 className="text-lg font-bold">{t.trySecurity}</h3>
+
+                        <p className="mt-1 text-sm text-slate-300">
+                          Agent 0 · {t.coming}
+                        </p>
+                      </div>
+                    </div>
+
+                    <span className="text-2xl transition group-hover:translate-x-1">
+                      →
+                    </span>
+                  </div>
+
+                  <div className="mt-5 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-slate-200">
+                    {language === "fr"
+                      ? "Bientôt disponible"
+                      : language === "ar"
+                      ? "قريباً"
+                      : "Coming soon"}
+                  </div>
+                </a>
+
+                <Link
+                  href="/upload"
+                  className="group rounded-3xl border border-slate-200 bg-white p-6 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-blue-100"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="space-y-2 text-left">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-2xl">
+                        ⚖️
+                      </div>
+
+                      <div>
+                        <h3 className="text-lg font-bold text-slate-900">
+                          {t.tryLegal}
+                        </h3>
+
+                        <p className="mt-1 text-sm text-slate-500">
+                          {language === "fr"
+                            ? "Essai unique à 1 $"
+                            : language === "ar"
+                            ? "تجربة مقابل 1 دولار"
+                            : "$1 one-time trial"}
+                        </p>
+                      </div>
+                    </div>
+
+                    <span className="text-2xl text-blue-600 transition group-hover:translate-x-1">
+                      →
+                    </span>
+                  </div>
+
+                  <div className="mt-5 inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+                    {language === "fr"
+                      ? "Particuliers & professionnels"
+                      : language === "ar"
+                      ? "للأفراد والمحترفين"
+                      : "Individuals & professionals"}
+                  </div>
+                </Link>
+
+                <Link
+                  href="/study"
+                  className="group rounded-3xl border border-slate-200 bg-white p-6 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-violet-100"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="space-y-2 text-left">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-50 text-2xl">
+                        🎓
+                      </div>
+
+                      <div>
+                        <h3 className="text-lg font-bold text-slate-900">
+                          {t.tryStudy}
+                        </h3>
+
+                        <p className="mt-1 text-sm text-slate-500">
+                          {language === "fr"
+                            ? "Essai unique à 1 $"
+                            : language === "ar"
+                            ? "تجربة مقابل 1 دولار"
+                            : "$1 one-time trial"}
+                        </p>
+                      </div>
+                    </div>
+
+                    <span className="text-2xl text-violet-600 transition group-hover:translate-x-1">
+                      →
+                    </span>
+                  </div>
+
+                  <div className="mt-5 inline-flex rounded-full bg-violet-50 px-3 py-1 text-xs font-medium text-violet-700">
+                    {language === "fr"
+                      ? "Usage personnel & pro"
+                      : language === "ar"
+                      ? "استخدام شخصي واحترافي"
+                      : "Personal & professional"}
+                  </div>
+                </Link>
+
+                <Link
+                  href="/finance"
+                  className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-500 to-green-600 p-6 text-white shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-emerald-200"
+                >
+                  <div className="absolute inset-0 bg-white/5 opacity-0 transition group-hover:opacity-100" />
+
+                  <div className="relative flex items-start justify-between">
+                    <div className="space-y-2 text-left">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 text-2xl backdrop-blur">
+                        📊
+                      </div>
+
+                      <div>
+                        <h3 className="text-lg font-bold">{t.tryFinance}</h3>
+
+                        <p className="mt-1 text-sm text-emerald-100">
+                          {language === "fr"
+                            ? "Essai unique à 1 $"
+                            : language === "ar"
+                            ? "تجربة مقابل 1 دولار"
+                            : "$1 one-time trial"}
+                        </p>
+                      </div>
+                    </div>
+
+                    <span className="text-2xl transition group-hover:translate-x-1">
+                      →
+                    </span>
+                  </div>
+
+                  <div className="mt-5 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-emerald-50">
+                    {language === "fr"
+                      ? "Pour particuliers"
+                      : language === "ar"
+                      ? "للأفراد"
+                      : "For individuals"}
+                  </div>
+                </Link>
+              </div>
+
+              <div className="mt-5 flex justify-center">
+                <Link
+                  href="/business"
+                  className="group w-full max-w-md rounded-3xl border border-slate-200 bg-white p-6 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-orange-100"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-start gap-4 text-left">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-50 text-2xl">
+                        💼
+                      </div>
+
+                      <div>
+                        <h3 className="text-lg font-bold text-slate-900">
+                          {t.tryBusiness}
+                        </h3>
+
+                        <p className="mt-1 text-sm text-slate-500">
+                          {language === "fr"
+                            ? "Essai unique à 1 $"
+                            : language === "ar"
+                            ? "تجربة مقابل 1 دولار"
+                            : "$1 one-time trial"}
+                        </p>
+                      </div>
+                    </div>
+
+                    <span className="text-2xl text-orange-600 transition group-hover:translate-x-1">
+                      →
+                    </span>
+                  </div>
+
+                  <div className="mt-5 inline-flex rounded-full bg-orange-50 px-3 py-1 text-xs font-medium text-orange-700">
+                    {language === "fr"
+                      ? "Pour professionnels & entreprises"
+                      : language === "ar"
+                      ? "للمحترفين والشركات"
+                      : "For professionals & companies"}
+                  </div>
+                </Link>
+              </div>
+
+              <div className="mt-8 grid grid-cols-1 gap-4 border-t border-slate-200 pt-6 md:grid-cols-4">
+                <div className="flex items-center gap-3 text-left">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-xl">
+                    🛡️
+                  </div>
+
+                  <div>
+                    <p className="font-semibold text-slate-900">
+                      {language === "fr"
+                        ? "Essai unique à 1 $"
+                        : language === "ar"
+                        ? "تجربة مقابل 1 دولار"
+                        : "$1 one-time trial"}
+                    </p>
+
+                    <p className="text-sm text-slate-500">
+                      {language === "fr"
+                        ? "Sans abonnement obligatoire"
+                        : language === "ar"
+                        ? "بدون اشتراك إجباري"
+                        : "No mandatory subscription"}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 text-left">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-50 text-xl">
+                    🔒
+                  </div>
+
+                  <div>
+                    <p className="font-semibold text-slate-900">
+                      {language === "fr"
+                        ? "Sécurisé & confidentiel"
+                        : language === "ar"
+                        ? "آمن وسري"
+                        : "Secure & private"}
+                    </p>
+
+                    <p className="text-sm text-slate-500">
+                      {language === "fr"
+                        ? "Vos données sont protégées"
+                        : language === "ar"
+                        ? "بياناتك محمية"
+                        : "Your data is protected"}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 text-left">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 text-xl">
+                    ⚡
+                  </div>
+
+                  <div>
+                    <p className="font-semibold text-slate-900">
+                      {language === "fr"
+                        ? "Activation instantanée"
+                        : language === "ar"
+                        ? "تفعيل فوري"
+                        : "Instant activation"}
+                    </p>
+
+                    <p className="text-sm text-slate-500">
+                      {language === "fr"
+                        ? "Accès immédiat après activation"
+                        : language === "ar"
+                        ? "وصول مباشر بعد التفعيل"
+                        : "Immediate access"}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 text-left">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-xl">
+                    🌐
+                  </div>
+
+                  <div>
+                    <p className="font-semibold text-slate-900">
+                      {language === "fr"
+                        ? "Crédits globaux"
+                        : language === "ar"
+                        ? "رصيد موحد"
+                        : "Global credits"}
+                    </p>
+
+                    <p className="text-sm text-slate-500">
+                      {language === "fr"
+                        ? "Utilisables sur tous les agents"
+                        : language === "ar"
+                        ? "صالحة لكل الوكلاء"
+                        : "Works across all agents"}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
