@@ -24,7 +24,7 @@ def get_job_input(job: Job) -> dict:
     data = getattr(job, "input_data", None)
 
     if data is None:
-      data = getattr(job, "input", None)
+        data = getattr(job, "input", None)
 
     if isinstance(data, str):
         try:

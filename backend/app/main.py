@@ -48,9 +48,11 @@ allowed_origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "http://192.168.100.10:3000",
+    "https://runexa.ai",
+    "https://www.runexa.ai",
 ]
 
-if FRONTEND_URL:
+if FRONTEND_URL and FRONTEND_URL not in allowed_origins:
     allowed_origins.append(FRONTEND_URL)
 
 app.add_middleware(
