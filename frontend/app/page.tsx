@@ -366,7 +366,7 @@ export default function HomePage() {
 
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link
-                    href="/register"
+                    href="/labs/agent-0/waitlist"
                     className="rounded-xl bg-white px-5 py-3 text-sm font-semibold text-slate-950 hover:bg-slate-100 transition"
                   >
                     {t.securityPrimary}
