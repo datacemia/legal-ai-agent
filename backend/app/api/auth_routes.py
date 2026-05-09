@@ -106,7 +106,13 @@ async def google_callback(request: Request, db: Session = Depends(get_db)):
     access_token = create_access_token({"sub": str(user.id)})
 
     return RedirectResponse(
-        url=f"{FRONTEND_URL}/oauth-success?token={access_token}&role={user.role}"
+        url=(
+            f"{FRONTEND_URL}/oauth-success"
+            f"?token={access_token}"
+            f"&role={user.role}"
+            f"&plan={user.plan}"
+            f"&credits_balance={user.credits_balance}"
+        )
     )
 
 
@@ -148,7 +154,13 @@ async def microsoft_callback(request: Request, db: Session = Depends(get_db)):
     access_token = create_access_token({"sub": str(user.id)})
 
     return RedirectResponse(
-        url=f"{FRONTEND_URL}/oauth-success?token={access_token}&role={user.role}"
+        url=(
+            f"{FRONTEND_URL}/oauth-success"
+            f"?token={access_token}"
+            f"&role={user.role}"
+            f"&plan={user.plan}"
+            f"&credits_balance={user.credits_balance}"
+        )
     )
 
 

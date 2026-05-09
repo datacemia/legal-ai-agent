@@ -7,13 +7,25 @@ export default function OAuthSuccess() {
     const params = new URLSearchParams(window.location.search);
 
     const token = params.get("token");
-    const role = params.get("role");
+    const role = (params.get("role") || "user")
+      .toLowerCase()
+      .trim();
+
+    const plan = (params.get("plan") || "trial")
+      .toLowerCase()
+      .trim();
+
+    const credits = params.get("credits_balance") || "0";
 
     if (token) {
       localStorage.setItem("token", token);
-      localStorage.setItem("role", role || "user");
+      localStorage.setItem("role", role);
+      localStorage.setItem("plan", plan);
+      localStorage.setItem("credits_balance", credits);
 
-      if (role === "admin" || role === "business") {
+      if (role === "admin") {
+        window.location.href = "/admin";
+      } else if (["paid", "pro", "premium"].includes(plan)) {
         window.location.href = "/dashboard";
       } else {
         window.location.href = "/upload";
@@ -21,5 +33,9 @@ export default function OAuthSuccess() {
     }
   }, []);
 
-  return <p>Logging you in...</p>;
+  return (
+    <main className="min-h-screen flex items-center justify-center bg-white">
+      <p className="text-slate-600">Logging you in...</p>
+    </main>
+  );
 }
