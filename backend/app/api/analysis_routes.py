@@ -164,6 +164,54 @@ def run_analysis(
     return analysis
 
 
+# ================= ANALYSIS HISTORY =================
+# IMPORTANT:
+# This route must stay BEFORE "/{document_id}".
+# Otherwise FastAPI may interpret "history" as document_id.
+@router.get("/history")
+def get_analysis_history(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    analyses = (
+        db.query(AnalysisResult)
+        .join(Document, Document.id == AnalysisResult.document_id)
+        .filter(Document.user_id == current_user.id)
+        .order_by(AnalysisResult.id.desc())
+        .all()
+    )
+
+    items = []
+
+    for a in analyses:
+        clauses = a.clauses
+
+        if isinstance(clauses, str):
+            try:
+                clauses = json.loads(clauses)
+            except Exception:
+                clauses = []
+
+        document = getattr(a, "document", None)
+
+        items.append(
+            {
+                "id": a.id,
+                "document_id": a.document_id,
+                "file_name": document.file_name if document else None,
+                "file_type": document.file_type if document else None,
+                "summary": a.summary,
+                "risk_score": a.risk_score,
+                "clauses": clauses,
+                "language": document.language if document else None,
+                "status": document.status if document else None,
+                "created_at": a.created_at,
+            }
+        )
+
+    return items
+
+
 # ================= GET ANALYSIS =================
 @router.get("/{document_id}", response_model=AnalysisResponse)
 def get_analysis(
@@ -190,42 +238,3 @@ def get_analysis(
         raise HTTPException(status_code=404, detail="Analysis not found")
 
     return analysis
-
-
-@router.get("/history")
-def get_analysis_history(
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
-):
-    analyses = (
-        db.query(AnalysisResult)
-        .join(Document, Document.id == AnalysisResult.document_id)
-        .filter(Document.user_id == current_user.id)
-        .order_by(AnalysisResult.id.desc())
-        .all()
-    )
-
-    items = []
-
-    for a in analyses:
-        clauses = a.clauses
-
-        if isinstance(clauses, str):
-            try:
-                clauses = json.loads(clauses)
-            except:
-                clauses = []
-
-        items.append(
-            {
-                "id": a.id,
-                "file_name": a.document.file_name,
-                "summary": a.summary,
-                "risk_score": a.risk_score,
-                "clauses": clauses,
-                "language": a.document.language,
-                "created_at": a.created_at,
-            }
-        )
-
-    return items

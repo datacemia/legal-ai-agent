@@ -19,3 +19,4 @@ export function removeToken() {
     localStorage.removeItem(TOKEN_KEY);
   }
 }
+

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getDocuments } from "../../../lib/api";
+import { getAnalysisHistory } from "../../../lib/api";
 
 export default function LegalHistoryPage() {
   const [data, setData] = useState<any[]>([]);
@@ -10,7 +10,7 @@ export default function LegalHistoryPage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await getDocuments();
+        const res = await getAnalysisHistory();
         setData(Array.isArray(res) ? res : []);
       } catch (error) {
         console.error("Legal history load failed:", error);
@@ -43,36 +43,36 @@ export default function LegalHistoryPage() {
                 key={item.id}
                 className="bg-white border rounded-xl p-5 shadow-sm"
               >
-                <div className="flex justify-between items-center mb-3 gap-4">
-                  <h2 className="font-semibold">
-                    {item.file_name}
-                  </h2>
+                <div className="flex justify-between items-center mb-2 gap-4">
+                  <h2 className="font-semibold">{item.file_name}</h2>
 
                   <span className="text-sm text-slate-500 whitespace-nowrap">
                     {new Date(item.created_at).toLocaleDateString()}
                   </span>
                 </div>
 
+                <p className="text-sm text-slate-600 mb-4">
+                  {item.summary || "No summary available."}
+                </p>
+
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
                   <div className="rounded-xl bg-slate-50 border px-3 py-2">
-                    <span className="text-slate-500">Type:</span>{" "}
+                    <span className="text-slate-500">Risk score:</span>{" "}
+                    <strong>{item.risk_score ?? "-"}/100</strong>
+                  </div>
+
+                  <div className="rounded-xl bg-slate-50 border px-3 py-2">
+                    <span className="text-slate-500">Clauses:</span>{" "}
                     <strong>
-                      {item.file_type?.toUpperCase() || "PDF"}
+                      {Array.isArray(item.clauses)
+                        ? item.clauses.length
+                        : 0}
                     </strong>
                   </div>
 
                   <div className="rounded-xl bg-slate-50 border px-3 py-2">
                     <span className="text-slate-500">Language:</span>{" "}
-                    <strong>
-                      {item.language || "—"}
-                    </strong>
-                  </div>
-
-                  <div className="rounded-xl bg-slate-50 border px-3 py-2">
-                    <span className="text-slate-500">Status:</span>{" "}
-                    <strong>
-                      {item.status || "completed"}
-                    </strong>
+                    <strong>{item.language || "EN"}</strong>
                   </div>
                 </div>
 
