@@ -70,7 +70,9 @@ export default function LoginPage() {
           .toLowerCase()
           .trim();
 
-        if (role === "admin" || role === "business") {
+        if (role === "admin") {
+          window.location.href = "/admin";
+        } else if (["paid", "pro", "premium"].includes(plan)) {
           window.location.href = "/dashboard";
         } else {
           window.location.href = "/upload";
