@@ -190,3 +190,42 @@ def get_analysis(
         raise HTTPException(status_code=404, detail="Analysis not found")
 
     return analysis
+
+
+@router.get("/history")
+def get_analysis_history(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    analyses = (
+        db.query(AnalysisResult)
+        .join(Document, Document.id == AnalysisResult.document_id)
+        .filter(Document.user_id == current_user.id)
+        .order_by(AnalysisResult.id.desc())
+        .all()
+    )
+
+    items = []
+
+    for a in analyses:
+        clauses = a.clauses
+
+        if isinstance(clauses, str):
+            try:
+                clauses = json.loads(clauses)
+            except:
+                clauses = []
+
+        items.append(
+            {
+                "id": a.id,
+                "file_name": a.document.file_name,
+                "summary": a.summary,
+                "risk_score": a.risk_score,
+                "clauses": clauses,
+                "language": a.document.language,
+                "created_at": a.created_at,
+            }
+        )
+
+    return items

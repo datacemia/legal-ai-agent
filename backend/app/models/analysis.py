@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
+from sqlalchemy.orm import relationship
 from datetime import datetime
 
 from app.database import Base
@@ -33,3 +34,5 @@ class AnalysisResult(Base):
     credits_used = Column(Integer, default=0)
 
     created_at = Column(DateTime, default=datetime.utcnow)
+
+    document = relationship("Document")
