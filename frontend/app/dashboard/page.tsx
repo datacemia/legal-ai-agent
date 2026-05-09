@@ -82,6 +82,7 @@ export default function DashboardPage() {
         );
 
         const user = await res.json();
+        console.log("DASHBOARD USER:", user);
 
         if (!res.ok) {
           window.location.href = "/login";
