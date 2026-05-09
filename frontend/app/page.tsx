@@ -2,6 +2,18 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import {
+  Sparkles,
+  ShieldCheck,
+  Scale,
+  GraduationCap,
+  BarChart3,
+  BriefcaseBusiness,
+  Users,
+  Lock,
+  Zap,
+  Globe,
+} from "lucide-react";
 
 const labels: any = {
   en: {
@@ -315,7 +327,7 @@ export default function HomePage() {
             <div className="relative rounded-[32px] border border-slate-200/80 bg-white/80 p-6 shadow-[0_20px_80px_rgba(15,23,42,0.08)] backdrop-blur-xl md:p-10">
               <div className="mb-8 flex justify-center">
                 <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-5 py-2 text-sm font-semibold text-blue-700">
-                  <span>👥</span>
+                  <span><Users className="h-4 w-4" /></span>
                   <span>
                     {language === "fr"
                       ? "Pour particuliers & professionnels"
@@ -336,7 +348,7 @@ export default function HomePage() {
                   <div className="relative flex items-start justify-between">
                     <div className="space-y-2 text-left">
                       <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 text-2xl backdrop-blur">
-                        ✨
+                        <Sparkles className="h-7 w-7" />
                       </div>
 
                       <div>
@@ -373,7 +385,7 @@ export default function HomePage() {
                   <div className="relative flex items-start justify-between">
                     <div className="space-y-2 text-left">
                       <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-2xl backdrop-blur">
-                        🛡️
+                        <ShieldCheck className="h-7 w-7" />
                       </div>
 
                       <div>
@@ -406,7 +418,7 @@ export default function HomePage() {
                   <div className="flex items-start justify-between">
                     <div className="space-y-2 text-left">
                       <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-2xl">
-                        ⚖️
+                        <Scale className="h-7 w-7 text-blue-700" />
                       </div>
 
                       <div>
@@ -445,7 +457,7 @@ export default function HomePage() {
                   <div className="flex items-start justify-between">
                     <div className="space-y-2 text-left">
                       <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-50 text-2xl">
-                        🎓
+                        <GraduationCap className="h-7 w-7 text-violet-700" />
                       </div>
 
                       <div>
@@ -486,7 +498,7 @@ export default function HomePage() {
                   <div className="relative flex items-start justify-between">
                     <div className="space-y-2 text-left">
                       <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 text-2xl backdrop-blur">
-                        📊
+                        <BarChart3 className="h-7 w-7" />
                       </div>
 
                       <div>
@@ -525,7 +537,7 @@ export default function HomePage() {
                   <div className="flex items-start justify-between">
                     <div className="flex items-start gap-4 text-left">
                       <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-50 text-2xl">
-                        💼
+                        <BriefcaseBusiness className="h-7 w-7 text-orange-700" />
                       </div>
 
                       <div>
@@ -561,7 +573,7 @@ export default function HomePage() {
               <div className="mt-8 grid grid-cols-1 gap-4 border-t border-slate-200 pt-6 md:grid-cols-4">
                 <div className="flex items-center gap-3 text-left">
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-xl">
-                    🛡️
+                    <ShieldCheck className="h-7 w-7" />
                   </div>
 
                   <div>
@@ -585,7 +597,7 @@ export default function HomePage() {
 
                 <div className="flex items-center gap-3 text-left">
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-50 text-xl">
-                    🔒
+                    <Lock className="h-6 w-6 text-violet-700" />
                   </div>
 
                   <div>
@@ -609,7 +621,7 @@ export default function HomePage() {
 
                 <div className="flex items-center gap-3 text-left">
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 text-xl">
-                    ⚡
+                    <Zap className="h-6 w-6 text-emerald-700" />
                   </div>
 
                   <div>
@@ -633,7 +645,7 @@ export default function HomePage() {
 
                 <div className="flex items-center gap-3 text-left">
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-xl">
-                    🌐
+                    <Globe className="h-6 w-6 text-blue-700" />
                   </div>
 
                   <div>
