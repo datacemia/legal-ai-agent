@@ -55,7 +55,7 @@ def list_documents(
     current_user: User = Depends(get_current_user),
 ):
     # ✅ UPDATED: allow premium plan
-    allowed_plans = ["premium"]
+    allowed_plans = ["paid", "pro", "premium"]
 
     if (
         current_user.role != "admin"
