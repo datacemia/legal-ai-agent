@@ -2,6 +2,9 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
+from app.api.agent0_waitlist_routes import router as agent0_waitlist_router
+from app.models.agent0_waitlist import Agent0Waitlist
+
 from dotenv import load_dotenv
 
 from app.api.job_routes import router as job_router
@@ -88,3 +91,6 @@ def root():
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
+
+
+app.include_router(agent0_waitlist_router)
