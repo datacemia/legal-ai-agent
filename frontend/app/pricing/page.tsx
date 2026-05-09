@@ -340,10 +340,10 @@ export default function Pricing() {
               <p className="mt-2 text-sm text-slate-500">tailored pricing</p>
 
               <ul className="mt-8 space-y-4 text-sm text-slate-700">
-                <li>✔ Team access</li>
+                <li>✔ Team workspace</li>
+                <li>✔ Organization dashboard</li>
+                <li>✔ Multi-user access</li>
                 <li>✔ Custom credits</li>
-                <li>✔ Admin dashboard</li>
-                <li>✔ Future agents</li>
                 <li>✔ Priority support</li>
               </ul>
 
