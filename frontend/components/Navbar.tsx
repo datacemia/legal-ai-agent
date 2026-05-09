@@ -64,9 +64,12 @@ export default function Navbar() {
   const t = translations[locale] || translations.en;
 
   const isAdmin = role === "admin";
+  const isPaid = plan === "paid";
   const isPro = plan === "pro";
   const isPremium = plan === "premium";
-  const canSeeDashboard = isAdmin || isPro || isPremium;
+
+  const canSeeDashboard =
+    isAdmin || isPaid || isPro || isPremium;
 
   return (
     <header
