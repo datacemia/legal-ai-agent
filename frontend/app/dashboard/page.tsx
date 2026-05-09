@@ -77,7 +77,7 @@ export default function DashboardPage() {
       return;
     }
 
-    const allowedPlans = ["pro", "premium"];
+    const allowedPlans = ["paid", "pro", "premium"];
 
     if (role !== "admin" && !allowedPlans.includes(plan)) {
       window.location.href = "/pricing";
