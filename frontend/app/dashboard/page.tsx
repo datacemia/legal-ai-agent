@@ -57,6 +57,14 @@ export default function DashboardPage() {
     }
   };
 
+  const parseBusinessResult = (value: any) => {
+    try {
+      return typeof value === "string" ? JSON.parse(value) : value || {};
+    } catch {
+      return {};
+    }
+  };
+
   useEffect(() => {
     const saved = localStorage.getItem("locale") || "en";
     setLocale(saved);
@@ -226,12 +234,6 @@ export default function DashboardPage() {
               {t.upgrade}
             </button>
 
-            <Link
-              href="/upload"
-              className="px-5 py-2 bg-slate-900 text-white rounded-xl"
-            >
-              {t.new}
-            </Link>
           </div>
         </div>
 
@@ -241,41 +243,41 @@ export default function DashboardPage() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-          <div className="bg-white p-5 rounded-2xl border">
+        <div className="grid grid-cols-2 lg:grid-cols-6 gap-4">
+          <div className="bg-white p-5 rounded-2xl border shadow-sm">
             <p className="text-sm text-slate-500">{t.plan}</p>
             <p className="text-2xl font-bold uppercase">
               {localStorage.getItem("plan") || "trial"}
             </p>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border">
+          <div className="bg-white p-5 rounded-2xl border shadow-sm">
             <p className="text-sm text-slate-500">{t.credits}</p>
             <p className="text-2xl font-bold">
               {localStorage.getItem("credits_balance") || 0}
             </p>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border">
+          <div className="bg-white p-5 rounded-2xl border shadow-sm">
             <p className="text-sm text-slate-500">{t.total}</p>
             <p className="text-2xl font-bold">{documents.length}</p>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border">
+          <div className="bg-white p-5 rounded-2xl border shadow-sm">
             <p className="text-sm text-slate-500">{t.completed}</p>
             <p className="text-2xl font-bold">
               {documents.filter((d) => d.status === "completed").length}
             </p>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border">
+          <div className="bg-white p-5 rounded-2xl border shadow-sm">
             <p className="text-sm text-slate-500">{t.progress}</p>
             <p className="text-2xl font-bold">
               {documents.filter((d) => d.status !== "completed").length}
             </p>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border">
+          <div className="bg-white p-5 rounded-2xl border shadow-sm">
             <p className="text-sm text-slate-500">Total analyses</p>
             <p className="text-2xl font-bold">
               {documents.length +
@@ -286,7 +288,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-2xl border space-y-4">
+        <div className="bg-white p-6 rounded-2xl border shadow-sm space-y-4">
           <div className="flex items-center justify-between gap-4">
             <h2 className="text-xl font-semibold">Legal Agent</h2>
 
@@ -308,52 +310,44 @@ export default function DashboardPage() {
               </Link>
             </div>
           ) : (
-            <div className="overflow-hidden rounded-2xl border">
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead className="bg-slate-100 text-slate-600">
-                    <tr>
-                      <th className="p-4 text-start">{t.document}</th>
-                      <th className="p-4 text-start">{t.type}</th>
-                      <th className="p-4 text-start">{t.language}</th>
-                      <th className="p-4 text-start">{t.status}</th>
-                      <th className="p-4 text-start">{t.date}</th>
-                      <th className="p-4 text-end">{t.action}</th>
-                    </tr>
-                  </thead>
+            <ul className="space-y-2">
+              {documents.slice(0, 3).map((doc) => (
+                <li
+                  key={doc.id}
+                  className="text-sm border p-3 rounded-xl flex items-center justify-between gap-3"
+                >
+                  <div className="min-w-0">
+                    <p className="font-medium truncate">{doc.file_name}</p>
+                    <p className="text-slate-500 mt-1">
+                      {doc.file_type?.toUpperCase() || "PDF"} · {doc.language || "—"}
+                    </p>
+                  </div>
 
-                  <tbody>
-                    {documents.map((doc) => (
-                      <tr key={doc.id} className="border-t hover:bg-slate-50">
-                        <td className="p-4 font-medium">{doc.file_name}</td>
-                        <td className="p-4">{doc.file_type?.toUpperCase()}</td>
-                        <td className="p-4">{doc.language || "—"}</td>
-                        <td className="p-4">
-                          <RiskBadge
-                            risk={doc.status === "completed" ? "low" : "medium"}
-                          />
-                        </td>
-                        <td className="p-4">
-                          {new Date(doc.created_at).toLocaleDateString()}
-                        </td>
-                        <td className="p-4 text-end">
-                          <Link
-                            href={`/document/${doc.id}`}
-                            className="text-blue-600"
-                          >
-                            {t.view}
-                          </Link>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+                  <div className="flex items-center gap-3 shrink-0">
+                    <RiskBadge
+                      risk={doc.status === "completed" ? "low" : "medium"}
+                    />
+
+                    <Link
+                      href={`/document/${doc.id}`}
+                      className="text-blue-600"
+                    >
+                      {t.view}
+                    </Link>
+                  </div>
+                </li>
+              ))}
+            </ul>
           )}
+
+          <div className="flex gap-3 pt-2">
+            <Link href="/upload" className="text-sm text-blue-600">
+              Analyze new
+            </Link>
+          </div>
         </div>
 
-        <div className="bg-white p-6 rounded-2xl border space-y-4">
+        <div className="bg-white p-6 rounded-2xl border shadow-sm space-y-4">
           <div className="flex items-center justify-between gap-4">
             <h2 className="text-xl font-semibold">Study Agent</h2>
 
@@ -367,7 +361,7 @@ export default function DashboardPage() {
               <h3 className="text-lg font-semibold">No study analyses yet</h3>
               <Link
                 href="/study"
-                className="mt-4 inline-block px-4 py-2 bg-slate-900 text-white rounded"
+                className="mt-4 inline-block px-4 py-2 bg-slate-900 text-white rounded-lg"
               >
                 Upload Study PDF
               </Link>
@@ -393,7 +387,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-2xl border space-y-4">
+        <div className="bg-white p-6 rounded-2xl border shadow-sm space-y-4">
           <div className="flex items-center justify-between gap-4">
             <h2 className="text-xl font-semibold">Personal Finance Coach</h2>
 
@@ -417,59 +411,38 @@ export default function DashboardPage() {
               </Link>
             </div>
           ) : (
-            <div className="overflow-hidden rounded-2xl border">
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead className="bg-slate-100 text-slate-600">
-                    <tr>
-                      <th className="p-4 text-start">Statement</th>
-                      <th className="p-4 text-start">Score</th>
-                      <th className="p-4 text-start">Spending</th>
-                      <th className="p-4 text-start">Date</th>
-                      <th className="p-4 text-end">Action</th>
-                    </tr>
-                  </thead>
+            <ul className="space-y-2">
+              {financeData.slice(0, 3).map((item) => {
+                const result = parseFinanceResult(item.result);
 
-                  <tbody>
-                    {financeData.slice(0, 3).map((item) => {
-                      const result = parseFinanceResult(item.result);
+                return (
+                  <li
+                    key={item.id}
+                    className="text-sm border p-3 rounded-xl flex items-center justify-between gap-3"
+                  >
+                    <div className="min-w-0">
+                      <p className="font-medium truncate">{item.file_name}</p>
+                      <p className="text-slate-500 mt-1">
+                        Spending: {result.total_spending_estimate ?? "-"}
+                      </p>
+                    </div>
 
-                      return (
-                        <tr
-                          key={item.id}
-                          className="border-t hover:bg-slate-50"
-                        >
-                          <td className="p-4 font-medium">{item.file_name}</td>
+                    <div className="flex items-center gap-3 shrink-0">
+                      <span className="inline-flex px-3 py-1 rounded-full bg-green-50 text-green-700 text-xs font-semibold border border-green-200">
+                        {result.financial_score ?? "-"}/100
+                      </span>
 
-                          <td className="p-4">
-                            <span className="inline-flex px-3 py-1 rounded-full bg-green-50 text-green-700 text-xs font-semibold border border-green-200">
-                              {result.financial_score ?? "-"}/100
-                            </span>
-                          </td>
-
-                          <td className="p-4">
-                            {result.total_spending_estimate ?? "-"}
-                          </td>
-
-                          <td className="p-4">
-                            {new Date(item.created_at).toLocaleDateString()}
-                          </td>
-
-                          <td className="p-4 text-end">
-                            <Link
-                              href="/finance/history"
-                              className="text-blue-600"
-                            >
-                              View
-                            </Link>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+                      <Link
+                        href="/finance/history"
+                        className="text-blue-600"
+                      >
+                        View
+                      </Link>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
           )}
 
           <div className="flex gap-3 pt-2">
@@ -483,8 +456,8 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-2xl border space-y-4">
-          <div className="flex justify-between">
+        <div className="bg-white p-6 rounded-2xl border shadow-sm space-y-4">
+          <div className="flex items-center justify-between gap-4">
             <h2 className="text-xl font-semibold">Business Decision Agent</h2>
 
             <Link href="/business" className="text-sm text-blue-600">
@@ -494,11 +467,11 @@ export default function DashboardPage() {
 
           {businessData.length === 0 ? (
             <div className="text-center py-8">
-              <h3>No business analyses yet</h3>
+              <h3 className="text-lg font-semibold">No business analyses yet</h3>
 
               <Link
                 href="/business"
-                className="mt-4 inline-block px-4 py-2 bg-slate-900 text-white rounded"
+                className="mt-4 inline-block px-4 py-2 bg-slate-900 text-white rounded-lg"
               >
                 Upload CSV / Excel
               </Link>
@@ -506,10 +479,7 @@ export default function DashboardPage() {
           ) : (
             <div className="space-y-2">
               {businessData.slice(0, 3).map((item) => {
-                const result =
-                  typeof item.result === "string"
-                    ? JSON.parse(item.result)
-                    : item.result;
+                const result = parseBusinessResult(item.result);
 
                 return (
                   <div key={item.id} className="border p-3 rounded-xl text-sm">
