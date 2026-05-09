@@ -68,23 +68,56 @@ export default function DashboardPage() {
       return;
     }
 
-    const role = (localStorage.getItem("role") || "").toLowerCase().trim();
+    async function verifyAccessAndLoad() {
+      try {
+        const token = getToken();
 
-    const plan = (localStorage.getItem("plan") || "").toLowerCase().trim();
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000"}/users/me`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-    if (role === "admin") {
-      window.location.href = "/admin";
-      return;
+        const user = await res.json();
+
+        if (!res.ok) {
+          window.location.href = "/login";
+          return;
+        }
+
+        const role = (user.role || "user").toLowerCase().trim();
+        const plan = (user.plan || "trial").toLowerCase().trim();
+
+        localStorage.setItem("role", role);
+        localStorage.setItem("plan", plan);
+        localStorage.setItem(
+          "credits_balance",
+          String(user.credits_balance || 0)
+        );
+
+        if (role === "admin") {
+          window.location.href = "/admin";
+          return;
+        }
+
+        const allowedPlans = ["paid", "pro", "premium"];
+
+        if (!allowedPlans.includes(plan)) {
+          window.location.href = "/pricing";
+          return;
+        }
+
+        loadDashboard();
+      } catch (error) {
+        console.error("Dashboard access check failed:", error);
+        window.location.href = "/login";
+      }
     }
 
-    const allowedPlans = ["paid", "pro", "premium"];
-
-    if (role !== "admin" && !allowedPlans.includes(plan)) {
-      window.location.href = "/pricing";
-      return;
-    }
-
-    loadDashboard();
+    verifyAccessAndLoad();
   }, []);
 
   async function loadDashboard() {
