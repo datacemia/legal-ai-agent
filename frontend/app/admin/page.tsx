@@ -93,12 +93,21 @@ export default function AdminPage() {
             </p>
           </div>
 
-          <a
-            href="/admin/agent0-waitlist"
-            className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800"
-          >
-            Agent 0 Waitlist
-          </a>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href="/admin/agent0-waitlist"
+              className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800"
+            >
+              Agent 0 Waitlist
+            </a>
+
+            <a
+              href="/admin/contact-requests"
+              className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700"
+            >
+              Contact Requests
+            </a>
+          </div>
         </div>
 
         <div className="grid gap-4 md:grid-cols-3">
