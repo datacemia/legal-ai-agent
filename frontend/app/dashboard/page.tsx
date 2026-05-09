@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   getDocuments,
+  getAnalysisHistory,
   getFinanceHistory,
   getStudyHistory,
   getBusinessHistory,
@@ -40,6 +41,7 @@ const labels: any = {
 
 export default function DashboardPage() {
   const [documents, setDocuments] = useState<any[]>([]);
+  const [legalData, setLegalData] = useState<any[]>([]);
   const [financeData, setFinanceData] = useState<any[]>([]);
   const [studyData, setStudyData] = useState<any[]>([]);
   const [businessData, setBusinessData] = useState<any[]>([]);
@@ -63,6 +65,20 @@ export default function DashboardPage() {
     } catch {
       return {};
     }
+  };
+
+  const getLegalFileName = (item: any) => {
+    return (
+      item?.file_name ||
+      item?.document?.file_name ||
+      item?.document_name ||
+      item?.name ||
+      "Legal analysis"
+    );
+  };
+
+  const getLegalDocumentId = (item: any) => {
+    return item?.document_id || item?.document?.id || item?.id;
   };
 
   useEffect(() => {
@@ -142,6 +158,19 @@ export default function DashboardPage() {
       } catch (e) {
         console.error("Documents load failed:", e);
         setDocuments([]);
+      }
+
+      try {
+        const legal = await getAnalysisHistory();
+
+        setLegalData(
+          Array.isArray(legal)
+            ? legal
+            : legal?.data || legal?.results || []
+        );
+      } catch (e) {
+        console.error("Legal history failed:", e);
+        setLegalData([]);
       }
 
       try {
@@ -280,7 +309,7 @@ export default function DashboardPage() {
           <div className="bg-white p-5 rounded-2xl border shadow-sm">
             <p className="text-sm text-slate-500">Total analyses</p>
             <p className="text-2xl font-bold">
-              {documents.length +
+              {(legalData.length || documents.length) +
                 financeData.length +
                 studyData.length +
                 businessData.length}
@@ -297,7 +326,7 @@ export default function DashboardPage() {
             </Link>
           </div>
 
-          {documents.length === 0 ? (
+          {(legalData.length || documents.length) === 0 ? (
             <div className="text-center py-8">
               <h3 className="text-lg font-semibold">{t.emptyTitle}</h3>
               <p className="text-slate-500 mt-2">{t.emptyDesc}</p>
@@ -311,38 +340,51 @@ export default function DashboardPage() {
             </div>
           ) : (
             <ul className="space-y-2">
-              {documents.slice(0, 3).map((doc) => (
-                <li
-                  key={doc.id}
-                  className="text-sm border p-3 rounded-xl flex items-center justify-between gap-3"
-                >
-                  <div className="min-w-0">
-                    <p className="font-medium truncate">{doc.file_name}</p>
-                    <p className="text-slate-500 mt-1">
-                      {doc.file_type?.toUpperCase() || "PDF"} · {doc.language || "—"}
-                    </p>
-                  </div>
+              {(legalData.length ? legalData : documents).slice(0, 3).map((item) => {
+                const documentId = getLegalDocumentId(item);
 
-                  <div className="flex items-center gap-3 shrink-0">
-                    <RiskBadge
-                      risk={doc.status === "completed" ? "low" : "medium"}
-                    />
+                return (
+                  <li
+                    key={item.id}
+                    className="text-sm border p-3 rounded-xl flex items-center justify-between gap-3"
+                  >
+                    <div className="min-w-0">
+                      <p className="font-medium truncate">
+                        {getLegalFileName(item)}
+                      </p>
+                      <p className="text-slate-500 mt-1">
+                        {(item.file_type || item.document?.file_type || "PDF").toUpperCase()} ·{" "}
+                        {item.language || item.document?.language || "—"}
+                      </p>
+                    </div>
 
-                    <Link
-                      href={`/document/${doc.id}`}
-                      className="text-blue-600"
-                    >
-                      {t.view}
-                    </Link>
-                  </div>
-                </li>
-              ))}
+                    <div className="flex items-center gap-3 shrink-0">
+                      <RiskBadge
+                        risk={item.status === "completed" ? "low" : "medium"}
+                      />
+
+                      {documentId && (
+                        <Link
+                          href={`/document/${documentId}`}
+                          className="text-blue-600"
+                        >
+                          {t.view}
+                        </Link>
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           )}
 
           <div className="flex gap-3 pt-2">
             <Link href="/upload" className="text-sm text-blue-600">
               Analyze new
+            </Link>
+
+            <Link href="/history" className="text-sm text-slate-600">
+              View history
             </Link>
           </div>
         </div>
