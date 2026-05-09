@@ -89,44 +89,59 @@ export default function DashboardPage() {
 
   async function loadDashboard() {
     try {
-      const docs = await getDocuments();
+      try {
+        const docs = await getDocuments();
 
-      const safeDocs = Array.isArray(docs)
-        ? docs
-        : docs?.data || docs?.results || [];
+        setDocuments(
+          Array.isArray(docs)
+            ? docs
+            : docs?.data || docs?.results || []
+        );
+      } catch (e) {
+        console.error("Documents load failed:", e);
+        setDocuments([]);
+      }
 
-      setDocuments(safeDocs);
+      try {
+        const finance = await getFinanceHistory();
 
-      const finance = await getFinanceHistory();
+        setFinanceData(
+          Array.isArray(finance)
+            ? finance
+            : finance?.data || finance?.results || []
+        );
+      } catch (e) {
+        console.error("Finance history failed:", e);
+        setFinanceData([]);
+      }
 
-      const safeFinance = Array.isArray(finance)
-        ? finance
-        : finance?.data || finance?.results || [];
+      try {
+        const study = await getStudyHistory();
 
-      setFinanceData(safeFinance);
+        setStudyData(
+          Array.isArray(study)
+            ? study
+            : study?.data || study?.results || []
+        );
+      } catch (e) {
+        console.error("Study history failed:", e);
+        setStudyData([]);
+      }
 
-      const study = await getStudyHistory();
+      try {
+        const business = await getBusinessHistory();
 
-      const safeStudy = Array.isArray(study)
-        ? study
-        : study?.data || study?.results || [];
+        setBusinessData(
+          Array.isArray(business)
+            ? business
+            : business?.data || business?.results || []
+        );
+      } catch (e) {
+        console.error("Business history failed:", e);
+        setBusinessData([]);
+      }
 
-      setStudyData(safeStudy);
-
-      const business = await getBusinessHistory();
-
-      const safeBusiness = Array.isArray(business)
-        ? business
-        : business?.data || business?.results || [];
-
-      setBusinessData(safeBusiness);
-    } catch (error) {
-      console.error("Dashboard load error:", error);
-      setDocuments([]);
-      setFinanceData([]);
-      setStudyData([]);
-      setBusinessData([]);
-      setMessage("Unable to load dashboard data.");
+      setMessage("");
     } finally {
       setLoading(false);
     }
