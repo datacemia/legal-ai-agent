@@ -338,21 +338,21 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-5">
+              <div className="grid grid-cols-2 gap-4 lg:grid-cols-6">
                 <a
                   href="#agents"
-                  className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 to-blue-700 p-6 text-white shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-blue-200"
+                  className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 to-blue-700 p-4 xl:p-5 text-white shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-blue-200"
                 >
                   <div className="absolute inset-0 bg-white/5 opacity-0 transition group-hover:opacity-100" />
 
                   <div className="relative flex items-start justify-between">
                     <div className="space-y-2 text-left">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 text-2xl backdrop-blur">
-                        <Sparkles className="h-7 w-7" />
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15 text-2xl backdrop-blur">
+                        <Sparkles className="h-6 w-6" />
                       </div>
 
                       <div>
-                        <h3 className="text-lg font-bold">{t.explore}</h3>
+                        <h3 className="text-base font-bold">{t.explore}</h3>
 
                         <p className="mt-1 text-sm text-blue-100">
                           {language === "fr"
@@ -380,16 +380,16 @@ export default function HomePage() {
 
                 <a
                   href="#agent-0"
-                  className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-black to-slate-900 p-6 text-white shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-slate-300"
+                  className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-black to-slate-900 p-4 xl:p-5 text-white shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-slate-300"
                 >
                   <div className="relative flex items-start justify-between">
                     <div className="space-y-2 text-left">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-2xl backdrop-blur">
-                        <ShieldCheck className="h-7 w-7" />
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-2xl backdrop-blur">
+                        <ShieldCheck className="h-6 w-6" />
                       </div>
 
                       <div>
-                        <h3 className="text-lg font-bold">{t.trySecurity}</h3>
+                        <h3 className="text-base font-bold">{t.trySecurity}</h3>
 
                         <p className="mt-1 text-sm text-slate-300">
                           Agent 0 · {t.coming}
@@ -413,16 +413,16 @@ export default function HomePage() {
 
                 <Link
                   href="/upload"
-                  className="group rounded-3xl border border-slate-200 bg-white p-6 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-blue-100"
+                  className="group rounded-3xl border border-slate-200 bg-white p-4 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-blue-100"
                 >
                   <div className="flex items-start justify-between">
                     <div className="space-y-2 text-left">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-2xl">
-                        <Scale className="h-7 w-7 text-blue-700" />
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-2xl">
+                        <Scale className="h-6 w-6 text-blue-700" />
                       </div>
 
                       <div>
-                        <h3 className="text-lg font-bold text-slate-900">
+                        <h3 className="text-base font-bold text-slate-900">
                           {t.tryLegal}
                         </h3>
 
@@ -452,16 +452,16 @@ export default function HomePage() {
 
                 <Link
                   href="/study"
-                  className="group rounded-3xl border border-slate-200 bg-white p-6 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-violet-100"
+                  className="group rounded-3xl border border-slate-200 bg-white p-4 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-violet-100"
                 >
                   <div className="flex items-start justify-between">
                     <div className="space-y-2 text-left">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-50 text-2xl">
-                        <GraduationCap className="h-7 w-7 text-violet-700" />
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-50 text-2xl">
+                        <GraduationCap className="h-6 w-6 text-violet-700" />
                       </div>
 
                       <div>
-                        <h3 className="text-lg font-bold text-slate-900">
+                        <h3 className="text-base font-bold text-slate-900">
                           {t.tryStudy}
                         </h3>
 
@@ -491,18 +491,18 @@ export default function HomePage() {
 
                 <Link
                   href="/finance"
-                  className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-500 to-green-600 p-6 text-white shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-emerald-200"
+                  className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-500 to-green-600 p-4 xl:p-5 text-white shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-emerald-200"
                 >
                   <div className="absolute inset-0 bg-white/5 opacity-0 transition group-hover:opacity-100" />
 
                   <div className="relative flex items-start justify-between">
                     <div className="space-y-2 text-left">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 text-2xl backdrop-blur">
-                        <BarChart3 className="h-7 w-7" />
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15 text-2xl backdrop-blur">
+                        <BarChart3 className="h-6 w-6" />
                       </div>
 
                       <div>
-                        <h3 className="text-lg font-bold">{t.tryFinance}</h3>
+                        <h3 className="text-base font-bold">{t.tryFinance}</h3>
 
                         <p className="mt-1 text-sm text-emerald-100">
                           {language === "fr"
@@ -527,21 +527,18 @@ export default function HomePage() {
                       : "For individuals"}
                   </div>
                 </Link>
-              </div>
-
-              <div className="mt-5 flex justify-center">
                 <Link
                   href="/business"
-                  className="group w-full max-w-md rounded-3xl border border-slate-200 bg-white p-6 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-orange-100"
+                  className="group rounded-3xl border border-slate-200 bg-white p-4 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-orange-100"
                 >
                   <div className="flex items-start justify-between">
-                    <div className="flex items-start gap-4 text-left">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-50 text-2xl">
-                        <BriefcaseBusiness className="h-7 w-7 text-orange-700" />
+                    <div className="space-y-2 text-left">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 text-2xl">
+                        <BriefcaseBusiness className="h-6 w-6 text-orange-700" />
                       </div>
 
                       <div>
-                        <h3 className="text-lg font-bold text-slate-900">
+                        <h3 className="text-base font-bold text-slate-900">
                           {t.tryBusiness}
                         </h3>
 
@@ -562,18 +559,18 @@ export default function HomePage() {
 
                   <div className="mt-5 inline-flex rounded-full bg-orange-50 px-3 py-1 text-xs font-medium text-orange-700">
                     {language === "fr"
-                      ? "Pour professionnels & entreprises"
+                      ? "Pro & entreprises"
                       : language === "ar"
                       ? "للمحترفين والشركات"
-                      : "For professionals & companies"}
+                      : "Pros & companies"}
                   </div>
                 </Link>
               </div>
 
-              <div className="mt-8 grid grid-cols-1 gap-4 border-t border-slate-200 pt-6 md:grid-cols-4">
+              <div className="mt-8 grid grid-cols-2 gap-4 border-t border-slate-200 pt-6 lg:grid-cols-4">
                 <div className="flex items-center gap-3 text-left">
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-xl">
-                    <ShieldCheck className="h-7 w-7" />
+                    <ShieldCheck className="h-6 w-6" />
                   </div>
 
                   <div>
