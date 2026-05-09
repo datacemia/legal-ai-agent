@@ -48,6 +48,15 @@ export async function getAnalysis(documentId: number) {
   return res.json();
 }
 
+// ✅ ANALYSIS HISTORY
+export async function getAnalysisHistory() {
+  const res = await fetch(`${API_URL}/analysis/history`, {
+    headers: getAuthHeaders(),
+  });
+
+  return res.json();
+}
+
 export async function getDocuments() {
   const res = await fetch(`${API_URL}/documents/`, {
     headers: getAuthHeaders(),
