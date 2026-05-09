@@ -9,9 +9,12 @@ import os
 
 sys.path.append(os.path.abspath("backend"))
 
+from app.config import DATABASE_URL
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
+config.set_main_option("sqlalchemy.url", DATABASE_URL)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
@@ -38,6 +41,7 @@ from app.models.agent0_waitlist import Agent0Waitlist
 from app.models.organization import Organization
 from app.models.organization_member import OrganizationMember
 from app.models.organization_usage_log import OrganizationUsageLog
+
 target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
@@ -51,7 +55,7 @@ def run_migrations_offline() -> None:
 
     This configures the context with just a URL
     and not an Engine, though an Engine is acceptable
-    here as well.  By skipping the Engine creation
+    here as well. By skipping the Engine creation
     we don't even need a DBAPI to be available.
 
     Calls to context.execute() here emit the given string to the
@@ -85,7 +89,8 @@ def run_migrations_online() -> None:
 
     with connectable.connect() as connection:
         context.configure(
-            connection=connection, target_metadata=target_metadata
+            connection=connection,
+            target_metadata=target_metadata,
         )
 
         with context.begin_transaction():
