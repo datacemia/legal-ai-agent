@@ -10,7 +10,6 @@ import {
   getBusinessHistory,
 } from "../../lib/api";
 import { getToken } from "../../lib/auth";
-import RiskBadge from "../../components/RiskBadge";
 
 const labels: any = {
   en: {
@@ -342,7 +341,7 @@ export default function DashboardPage() {
                 return (
                   <li
                     key={item.id}
-                    className="text-sm border p-3 rounded-xl flex items-center justify-between gap-3"
+                    className="text-sm border p-3 rounded-xl"
                   >
                     <div className="min-w-0">
                       <p className="font-medium truncate">
@@ -354,20 +353,7 @@ export default function DashboardPage() {
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-3 shrink-0">
-                      <RiskBadge
-                        risk={item.status === "completed" ? "low" : "medium"}
-                      />
 
-                      {documentId && (
-                        <Link
-                          href={`/document/${documentId}`}
-                          className="text-blue-600"
-                        >
-                          {t.view}
-                        </Link>
-                      )}
-                    </div>
                   </li>
                 );
               })}
