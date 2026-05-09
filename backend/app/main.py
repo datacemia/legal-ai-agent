@@ -4,7 +4,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 from app.api.agent0_waitlist_routes import router as agent0_waitlist_router
 from app.models.agent0_waitlist import Agent0Waitlist
-
+from app.models.organization import Organization
+from app.models.organization_member import OrganizationMember
+from app.models.organization_usage_log import OrganizationUsageLog
+from app.api.enterprise_routes import router as enterprise_router
 from dotenv import load_dotenv
 
 from app.api.job_routes import router as job_router
@@ -96,3 +99,4 @@ def health_check():
 
 
 app.include_router(agent0_waitlist_router)
+app.include_router(enterprise_router)

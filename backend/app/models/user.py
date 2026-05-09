@@ -8,6 +8,7 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
+
     email = Column(String, unique=True, index=True, nullable=False)
     password_hash = Column(String, nullable=False)
 
@@ -23,10 +24,18 @@ class User(Base):
     last_verification_email_sent_at = Column(DateTime, nullable=True)
     last_reset_email_sent_at = Column(DateTime, nullable=True)
 
+    # Platform roles:
+    # user
+    # admin
+    # enterprise_admin
     role = Column(String, default="user")
 
-    # Global subscription plan:
-    # trial, paid, pro, premium
+    # Global subscription plans:
+    # trial
+    # paid
+    # pro
+    # premium
+    # enterprise
     plan = Column(String, default="trial")
 
     # Global credits usable across all operational agents

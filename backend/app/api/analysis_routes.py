@@ -12,6 +12,7 @@ from app.schemas.analysis_schema import AnalysisResponse
 
 from app.utils.security import get_current_user
 from app.utils.billing import check_and_consume_agent_access
+from app.services.enterprise_service import consume_enterprise_credits
 
 from app.services.contract_parser import extract_text
 from app.services.text_cleaner import clean_text
@@ -26,6 +27,8 @@ from app.services.summary_service import (
 )
 
 router = APIRouter(prefix="/analysis", tags=["Analysis"])
+
+LEGAL_AGENT_CREDITS = 40
 
 
 # ================= RATE LIMIT =================
@@ -79,11 +82,25 @@ def run_analysis(
             detail="Analysis already in progress",
         )
 
-    billing = check_and_consume_agent_access(
+    enterprise_consumed = consume_enterprise_credits(
         db=db,
         user=current_user,
         agent_slug="legal",
+        credits_used=LEGAL_AGENT_CREDITS,
+        request_type="analysis",
     )
+
+    if enterprise_consumed:
+        billing = {
+            "access_type": "enterprise",
+            "credits_used": LEGAL_AGENT_CREDITS,
+        }
+    else:
+        billing = check_and_consume_agent_access(
+            db=db,
+            user=current_user,
+            agent_slug="legal",
+        )
 
     if output_language not in ["en", "fr", "ar"]:
         output_language = "en"

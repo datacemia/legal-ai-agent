@@ -18,8 +18,11 @@ from app.schemas.study_schema import StudyHistoryItem
 from app.services.study_agent.study_parser import extract_study_text
 from app.services.study_agent.study_ai_agent import analyze_study_content
 from app.services.job_service import create_job
+from app.services.enterprise_service import consume_enterprise_credits
 
 router = APIRouter(prefix="/study", tags=["Study"])
+
+STUDY_AGENT_CREDITS = 25
 
 
 # =========================
@@ -156,11 +159,25 @@ async def analyze_study(
             detail="Only PDF and DOCX files are allowed.",
         )
 
-    billing = check_and_consume_agent_access(
+    enterprise_consumed = consume_enterprise_credits(
         db=db,
         user=current_user,
         agent_slug="study",
+        credits_used=STUDY_AGENT_CREDITS,
+        request_type="analysis",
     )
+
+    if enterprise_consumed:
+        billing = {
+            "access_type": "enterprise",
+            "credits_used": STUDY_AGENT_CREDITS,
+        }
+    else:
+        billing = check_and_consume_agent_access(
+            db=db,
+            user=current_user,
+            agent_slug="study",
+        )
 
     file_bytes = await file.read()
 
