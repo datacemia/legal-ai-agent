@@ -55,11 +55,23 @@ export default function AdminPage() {
   return (
     <main className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-6xl mx-auto space-y-8">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-          <p className="text-gray-500 mt-1">
-            Manage users, roles, and analysis credits.
-          </p>
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">
+              Admin Dashboard
+            </h1>
+
+            <p className="text-gray-500 mt-1">
+              Manage users, roles, credits, and waitlists.
+            </p>
+          </div>
+
+          <a
+            href="/admin/agent0-waitlist"
+            className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800"
+          >
+            Agent 0 Waitlist
+          </a>
         </div>
 
         <div className="bg-white border rounded-2xl overflow-hidden">
