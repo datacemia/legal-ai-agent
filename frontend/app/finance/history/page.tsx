@@ -32,9 +32,16 @@ export default function FinanceHistoryPage() {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await getFinanceHistory();
-      setData(res);
-      setLoading(false);
+      try {
+        const res = await getFinanceHistory();
+
+        setData(Array.isArray(res) ? res : []);
+      } catch (error) {
+        console.error("Finance history load failed:", error);
+        setData([]);
+      } finally {
+        setLoading(false);
+      }
     }
 
     fetchData();
@@ -54,9 +61,14 @@ export default function FinanceHistoryPage() {
         ) : (
           <div className="grid gap-4">
             {data.map((item) => {
-              const score = item.result.financial_score ?? 0;
+              const result =
+                typeof item.result === "string"
+                  ? JSON.parse(item.result)
+                  : item.result || {};
+
+              const score = result.financial_score ?? 0;
               const currencySymbol = getCurrencySymbol(
-                item.result.currency_detected
+                result.currency_detected
               );
 
               return (
@@ -73,14 +85,14 @@ export default function FinanceHistoryPage() {
                   </div>
 
                   <p className="text-sm text-slate-600 mb-3">
-                    {item.result.summary}
+                    {result.summary}
                   </p>
 
                   <div className="flex justify-between items-center">
                     <div>
                       <span className="text-sm text-slate-500">Score:</span>{" "}
                       <strong className={getScoreColor(score)}>
-                        {item.result.financial_score ?? "-"}
+                        {result.financial_score ?? "-"}
                       </strong>
                     </div>
 
@@ -88,7 +100,7 @@ export default function FinanceHistoryPage() {
                       <span className="text-sm text-slate-500">Spending:</span>{" "}
                       <strong>
                         {currencySymbol}{" "}
-                        {item.result.total_spending_estimate ?? "-"}
+                        {result.total_spending_estimate ?? "-"}
                       </strong>
                     </div>
                   </div>
