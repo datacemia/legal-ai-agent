@@ -355,12 +355,24 @@ def get_study_history(
         .all()
     )
 
-    return [
-        {
-            "id": a.id,
-            "file_name": a.file_name,
-            "result": a.result,
-            "created_at": a.created_at,
-        }
-        for a in analyses
-    ]
+    items = []
+
+    for a in analyses:
+        result = a.result
+
+        if isinstance(result, str):
+            try:
+                result = json.loads(result)
+            except Exception:
+                result = {}
+
+        items.append(
+            {
+                "id": a.id,
+                "file_name": a.file_name,
+                "result": result,
+                "created_at": a.created_at,
+            }
+        )
+
+    return items
