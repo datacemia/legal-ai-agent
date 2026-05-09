@@ -3,13 +3,44 @@
 import { useState } from "react";
 import Link from "next/link";
 
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+
 export default function AgentZeroWaitlistPage() {
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Stripe / backend / email integration later
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const payload = {
+      full_name: String(formData.get("full_name") || ""),
+      email: String(formData.get("email") || ""),
+      country: String(formData.get("country") || ""),
+      profile: String(formData.get("profile") || ""),
+      interest_level: String(formData.get("interest_level") || ""),
+      protect_target: String(formData.get("protect_target") || ""),
+      message: String(formData.get("message") || ""),
+      consent: true,
+    };
+
+    const res = await fetch(`${API_URL}/agent0-waitlist/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert(data.detail || "Failed to submit waitlist form.");
+      return;
+    }
+
     setSubmitted(true);
   };
 
