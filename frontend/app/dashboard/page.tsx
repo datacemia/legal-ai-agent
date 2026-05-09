@@ -318,12 +318,8 @@ export default function DashboardPage() {
         </div>
 
         <div className="bg-white p-6 rounded-2xl border shadow-sm space-y-4">
-          <div className="flex items-center justify-between gap-4">
+          <div>
             <h2 className="text-xl font-semibold">Legal Agent</h2>
-
-            <Link href="/upload" className="text-sm text-blue-600">
-              Analyze new
-            </Link>
           </div>
 
           {(legalData.length || documents.length) === 0 ? (
@@ -390,12 +386,8 @@ export default function DashboardPage() {
         </div>
 
         <div className="bg-white p-6 rounded-2xl border shadow-sm space-y-4">
-          <div className="flex items-center justify-between gap-4">
+          <div>
             <h2 className="text-xl font-semibold">Study Agent</h2>
-
-            <Link href="/study" className="text-sm text-blue-600">
-              Analyze new
-            </Link>
           </div>
 
           {studyData.length === 0 ? (
@@ -430,12 +422,8 @@ export default function DashboardPage() {
         </div>
 
         <div className="bg-white p-6 rounded-2xl border shadow-sm space-y-4">
-          <div className="flex items-center justify-between gap-4">
+          <div>
             <h2 className="text-xl font-semibold">Personal Finance Coach</h2>
-
-            <Link href="/finance" className="text-sm text-blue-600">
-              Analyze new
-            </Link>
           </div>
 
           {financeData.length === 0 ? (
@@ -499,12 +487,8 @@ export default function DashboardPage() {
         </div>
 
         <div className="bg-white p-6 rounded-2xl border shadow-sm space-y-4">
-          <div className="flex items-center justify-between gap-4">
+          <div>
             <h2 className="text-xl font-semibold">Business Decision Agent</h2>
-
-            <Link href="/business" className="text-sm text-blue-600">
-              Analyze new
-            </Link>
           </div>
 
           {businessData.length === 0 ? (
