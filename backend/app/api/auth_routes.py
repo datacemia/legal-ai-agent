@@ -16,8 +16,6 @@ from authlib.integrations.starlette_client import OAuth
 from app.config import FRONTEND_URL
 from app.database import get_db
 from app.models.user import User
-from app.models.enterprise_invitation import EnterpriseInvitation
-from app.models.organization_member import OrganizationMember
 from app.schemas.user_schema import UserCreate, UserLogin, UserResponse, TokenResponse
 from app.utils.security import hash_password, verify_password, create_access_token
 
@@ -50,56 +48,6 @@ def check_login_rate_limit(email: str):
     attempts.append(now)
     LOGIN_ATTEMPTS[email] = attempts
 # ================= FIN AJOUT =================
-
-
-# ================= ENTERPRISE INVITE AUTO ACCEPT =================
-
-def auto_accept_enterprise_invites_for_user(db: Session, user: User):
-    """
-    If a pending enterprise invitation exists for this user's email,
-    automatically create the organization membership.
-
-    Safe behavior:
-    - Does nothing for normal users without invitations.
-    - Does not duplicate memberships.
-    - Only accepts invitations with status='pending'.
-    """
-    if not user or not user.email:
-        return
-
-    email = user.email.strip().lower()
-
-    pending_invites = (
-        db.query(EnterpriseInvitation)
-        .filter(
-            EnterpriseInvitation.email == email,
-            EnterpriseInvitation.status == "pending",
-        )
-        .all()
-    )
-
-    for invitation in pending_invites:
-        existing_membership = (
-            db.query(OrganizationMember)
-            .filter(
-                OrganizationMember.organization_id == invitation.organization_id,
-                OrganizationMember.user_id == user.id,
-            )
-            .first()
-        )
-
-        if not existing_membership:
-            db.add(
-                OrganizationMember(
-                    organization_id=invitation.organization_id,
-                    user_id=user.id,
-                    role=invitation.role,
-                    status="active",
-                )
-            )
-
-        invitation.status = "accepted"
-        invitation.accepted_at = datetime.utcnow()
 
 
 # ================= OAUTH =================
@@ -139,7 +87,7 @@ async def google_callback(request: Request, db: Session = Depends(get_db)):
     token = await oauth.google.authorize_access_token(request)
     user_info = token.get("userinfo")
 
-    email = user_info["email"].strip().lower()
+    email = user_info["email"]
 
     user = db.query(User).filter(User.email == email).first()
 
@@ -154,9 +102,6 @@ async def google_callback(request: Request, db: Session = Depends(get_db)):
         db.add(user)
         db.commit()
         db.refresh(user)
-
-        auto_accept_enterprise_invites_for_user(db, user)
-        db.commit()
 
     access_token = create_access_token({"sub": str(user.id)})
 
@@ -192,8 +137,6 @@ async def microsoft_callback(request: Request, db: Session = Depends(get_db)):
     if not email:
         raise HTTPException(status_code=400, detail="Microsoft email not found")
 
-    email = email.strip().lower()
-
     user = db.query(User).filter(User.email == email).first()
 
     if not user:
@@ -207,9 +150,6 @@ async def microsoft_callback(request: Request, db: Session = Depends(get_db)):
         db.add(user)
         db.commit()
         db.refresh(user)
-
-        auto_accept_enterprise_invites_for_user(db, user)
-        db.commit()
 
     access_token = create_access_token({"sub": str(user.id)})
 
@@ -331,9 +271,7 @@ If you did not request this, ignore this email.
 
 @router.post("/register", response_model=UserResponse)
 def register(user: UserCreate, db: Session = Depends(get_db)):
-    normalized_email = user.email.strip().lower()
-
-    existing_user = db.query(User).filter(User.email == normalized_email).first()
+    existing_user = db.query(User).filter(User.email == user.email).first()
 
     if existing_user:
         raise HTTPException(status_code=400, detail="Email already registered")
@@ -345,7 +283,7 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
     token = secrets.token_urlsafe(32)
 
     new_user = User(
-        email=normalized_email,
+        email=user.email,
         password_hash=hash_password(user.password),
         is_active=True,
         email_verified=False,
@@ -356,9 +294,6 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-
-    auto_accept_enterprise_invites_for_user(db, new_user)
-    db.commit()
 
     send_verification_email(new_user.email, token)
 
@@ -386,8 +321,7 @@ def verify_email(token: str, db: Session = Depends(get_db)):
 def login(user: UserLogin, db: Session = Depends(get_db)):
     check_login_rate_limit(user.email)
 
-    email = user.email.strip().lower()
-    existing_user = db.query(User).filter(User.email == email).first()
+    existing_user = db.query(User).filter(User.email == user.email).first()
 
     if not existing_user:
         raise HTTPException(status_code=400, detail="Invalid credentials")
@@ -417,8 +351,7 @@ def token_login(
 ):
     check_login_rate_limit(form_data.username)
 
-    email = form_data.username.strip().lower()
-    existing_user = db.query(User).filter(User.email == email).first()
+    existing_user = db.query(User).filter(User.email == form_data.username).first()
 
     if not existing_user:
         raise HTTPException(status_code=400, detail="Invalid credentials")
@@ -444,7 +377,7 @@ def token_login(
 
 @router.post("/resend-verification")
 def resend_verification(payload: dict, db: Session = Depends(get_db)):
-    email = payload.get("email", "").strip().lower()
+    email = payload.get("email", "").strip()
 
     user = db.query(User).filter(User.email == email).first()
 
