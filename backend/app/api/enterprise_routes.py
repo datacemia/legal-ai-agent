@@ -218,12 +218,10 @@ def invite_enterprise_member(
     )
 
     if not existing_user:
-        return {
-            "success": True,
-            "message": "User does not exist yet. Invitation pending.",
-            "email": payload.email,
-        }
-
+        raise HTTPException(
+            status_code=404,
+            detail="User must create a Runexa account before being invited",
+        )
     existing_membership = (
         db.query(OrganizationMember)
         .filter(
