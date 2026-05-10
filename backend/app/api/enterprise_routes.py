@@ -218,10 +218,12 @@ def invite_enterprise_member(
     )
 
     if not existing_user:
-        raise HTTPException(
-            status_code=404,
-            detail="User must create a Runexa account before being invited",
-        )
+        return {
+            "success": True,
+            "message": "User does not exist yet. Invitation pending.",
+            "email": payload.email,
+        }
+
     existing_membership = (
         db.query(OrganizationMember)
         .filter(
@@ -251,7 +253,7 @@ def invite_enterprise_member(
     db.commit()
     db.refresh(invitation)
 
-    accept_url = f"{FRONTEND_URL}/entreprises/accept?token={token}"
+    accept_url = f"{FRONTEND_URL}/enterprises/accept?token={token}"
 
     organization = (
         db.query(Organization)
