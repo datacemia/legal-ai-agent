@@ -89,7 +89,7 @@ export default function AdminPage() {
             </h1>
 
             <p className="text-gray-500 mt-1">
-              Manage users, roles, credits, and waitlists.
+              Manage users, roles, credits, waitlists, and enterprise accounts.
             </p>
           </div>
 
@@ -106,6 +106,13 @@ export default function AdminPage() {
               className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700"
             >
               Contact Requests
+            </a>
+
+            <a
+              href="/admin/enterprises"
+              className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white hover:bg-emerald-700"
+            >
+              Enterprise Accounts
             </a>
           </div>
         </div>

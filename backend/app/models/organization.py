@@ -14,6 +14,9 @@ class Organization(Base):
     # public unique identifier
     slug = Column(String, unique=True, index=True, nullable=False)
 
+    # active, suspended
+    status = Column(String, default="active", nullable=False)
+
     # enterprise credits shared by organization
     credits_balance = Column(Integer, default=0, nullable=False)
 

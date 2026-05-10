@@ -1,4 +1,5 @@
 from sqlalchemy import (
+    Boolean,
     Column,
     Integer,
     String,
@@ -12,8 +13,8 @@ from sqlalchemy.sql import func
 from app.database import Base
 
 
-class OrganizationMember(Base):
-    __tablename__ = "organization_members"
+class OrganizationAgent(Base):
+    __tablename__ = "organization_agents"
 
     id = Column(Integer, primary_key=True, index=True)
 
@@ -23,17 +24,11 @@ class OrganizationMember(Base):
         nullable=False,
     )
 
-    user_id = Column(
-        Integer,
-        ForeignKey("users.id"),
-        nullable=False,
-    )
+    # legal, study, finance, business
+    agent_slug = Column(String, nullable=False)
 
-    # owner, admin, member
-    role = Column(String, default="member", nullable=False)
-
-    # invited, active, suspended
-    status = Column(String, default="active", nullable=False)
+    # enabled / disabled for this enterprise
+    enabled = Column(Boolean, default=True, nullable=False)
 
     created_at = Column(
         DateTime(timezone=True),
@@ -41,10 +36,15 @@ class OrganizationMember(Base):
         nullable=False,
     )
 
+    updated_at = Column(
+        DateTime(timezone=True),
+        onupdate=func.now(),
+    )
+
     __table_args__ = (
         UniqueConstraint(
             "organization_id",
-            "user_id",
-            name="uq_organization_user",
+            "agent_slug",
+            name="uq_organization_agent",
         ),
     )
