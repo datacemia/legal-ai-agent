@@ -12,13 +12,6 @@ export default function AcceptEnterpriseInvitePage() {
   useEffect(() => {
     const acceptInvite = async () => {
       try {
-        const token = localStorage.getItem("token");
-
-        if (!token) {
-          window.location.href = "/login";
-          return;
-        }
-
         const params = new URLSearchParams(window.location.search);
         const inviteToken = params.get("token");
 
@@ -28,19 +21,24 @@ export default function AcceptEnterpriseInvitePage() {
           return;
         }
 
-        const res = await fetch(
-          `${API_URL}/enterprise/accept-invite`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-              token: inviteToken,
-            }),
-          }
-        );
+        const authToken = localStorage.getItem("token");
+
+        if (!authToken) {
+          localStorage.setItem("enterprise_invite_token", inviteToken);
+          window.location.href = "/login";
+          return;
+        }
+
+        const res = await fetch(`${API_URL}/enterprise/accept-invite`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
+          body: JSON.stringify({
+            token: inviteToken,
+          }),
+        });
 
         const data = await res.json();
 
@@ -51,14 +49,15 @@ export default function AcceptEnterpriseInvitePage() {
         }
 
         localStorage.setItem("enterprise_member", "true");
+        localStorage.setItem("role", "enterprise_member");
 
         setMessage("Invitation accepted. Redirecting...");
 
         setTimeout(() => {
           window.location.href = "/entreprises/dashboard";
         }, 1500);
-
       } catch (err) {
+        console.error(err);
         setMessage("Unexpected error.");
       } finally {
         setLoading(false);

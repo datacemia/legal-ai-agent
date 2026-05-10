@@ -47,6 +47,14 @@ export default function LoginPage() {
         trackEvent("login");
         setToken(data.access_token);
 
+        const inviteToken = localStorage.getItem("enterprise_invite_token");
+
+        if (inviteToken) {
+          localStorage.removeItem("enterprise_invite_token");
+          window.location.href = `/entreprises/accept?token=${inviteToken}`;
+          return;
+        }
+
         localStorage.setItem(
           "credits_balance",
           String(data.user?.credits_balance || 0)
