@@ -186,18 +186,20 @@ export default function Navbar() {
             </>
           )}
 
-          {isLogged && credits !== null && (
-            <div className="hidden items-center gap-2 rounded-full border bg-white px-4 py-2 text-sm font-medium text-slate-700 md:flex">
+          {isLogged &&
+            credits !== null &&
+            !canSeeEnterprise && (
+              <div className="hidden items-center gap-2 rounded-full border bg-white px-4 py-2 text-sm font-medium text-slate-700 md:flex">
 
-              <span className="text-xs uppercase text-slate-500">
-                {plan || "trial"}
-              </span>
+                <span className="text-xs uppercase text-slate-500">
+                  {plan || "trial"}
+                </span>
 
-              <span>
-                {credits} credits
-              </span>
-            </div>
-          )}
+                <span>
+                  {credits} credits
+                </span>
+              </div>
+            )}
 
           {isLogged && (
             <button
