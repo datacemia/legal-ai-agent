@@ -28,7 +28,7 @@ from app.services.summary_service import (
 
 router = APIRouter(prefix="/analysis", tags=["Analysis"])
 
-LEGAL_AGENT_CREDITS = 40
+LEGAL_AGENT_CREDITS = 8
 
 
 # ================= RATE LIMIT =================

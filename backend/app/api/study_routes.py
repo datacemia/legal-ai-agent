@@ -22,7 +22,7 @@ from app.services.enterprise_service import consume_enterprise_credits
 
 router = APIRouter(prefix="/study", tags=["Study"])
 
-STUDY_AGENT_CREDITS = 25
+STUDY_AGENT_CREDITS = 3
 
 
 # =========================

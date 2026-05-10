@@ -23,14 +23,14 @@ const connectedAgents = [
     slug: "legal",
     name: "Legal Agent",
     href: "/upload",
-    credits: 12,
+    credits: 8,
     description: "Analyze contracts, clauses, obligations, and legal risks.",
   },
   {
     slug: "study",
     name: "Study Agent",
     href: "/study",
-    credits: 5,
+    credits: 3,
     description: "Summaries, quizzes, flashcards, and study plans.",
   },
   
@@ -38,7 +38,7 @@ const connectedAgents = [
     slug: "business",
     name: "Business Decision Agent",
     href: "/business",
-    credits: 30,
+    credits: 20,
     description: "Business risks, opportunities, decisions, and action plans.",
   },
 ];

@@ -16,7 +16,7 @@ from app.services.enterprise_service import consume_enterprise_credits
 
 router = APIRouter(prefix="/business", tags=["Business"])
 
-BUSINESS_AGENT_CREDITS = 30
+BUSINESS_AGENT_CREDITS = 20
 
 
 @router.post("/analyze")
