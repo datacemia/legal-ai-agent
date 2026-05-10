@@ -112,7 +112,7 @@ export default function Navbar() {
 
         <div className="flex items-center gap-5">
 
-          {canSeeDashboard && (
+          {canSeeDashboard && !canSeeEnterprise && (
             <Link
               href="/dashboard"
               className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
