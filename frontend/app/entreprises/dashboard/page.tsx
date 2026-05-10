@@ -93,10 +93,6 @@ export default function EntreprisesDashboardPage() {
 
       const meData = await meRes.json();
 
-      if (meData?.user?.role !== "enterprise_admin") {
-        window.location.href = "/dashboard";
-        return;
-      }
 
       const membersData = membersRes.ok ? await membersRes.json() : [];
       const usageData = usageRes.ok ? await usageRes.json() : null;
