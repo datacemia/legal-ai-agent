@@ -63,8 +63,6 @@ def send_enterprise_invite_email(
     from_email = os.getenv("SMTP_FROM_EMAIL", smtp_user)
     from_name = os.getenv("SMTP_FROM_NAME", "Runexa")
 
-
-
     if not smtp_host or not smtp_user or not smtp_password:
         print("SMTP not configured. Enterprise invite:", login_url)
         return
@@ -214,6 +212,12 @@ def invite_enterprise_member(
         raise HTTPException(status_code=404, detail="Organization not found")
 
     invite_email = payload.email.strip().lower()
+
+    if not invite_email:
+        raise HTTPException(
+            status_code=400,
+            detail="Email is required",
+        )
 
     existing_user = (
         db.query(User)
