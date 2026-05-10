@@ -1,6 +1,8 @@
 import os
 import ssl
 import smtplib
+import secrets
+from datetime import datetime
 from email.message import EmailMessage
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -11,6 +13,7 @@ from app.database import get_db
 from app.models.user import User
 from app.models.organization import Organization
 from app.models.organization_member import OrganizationMember
+from app.models.enterprise_invitation import EnterpriseInvitation
 from app.utils.security import get_current_user
 from app.models.organization_usage_log import OrganizationUsageLog
 
@@ -49,6 +52,7 @@ def send_enterprise_invite_email(
     to_email: str,
     organization_name: str,
     role: str,
+    accept_url: str,
 ):
     login_url = f"{FRONTEND_URL}/login"
 
@@ -78,9 +82,9 @@ You have been added to the Runexa enterprise workspace:
 
 Your organization role is: {role}
 
-Log in here to access your enterprise workspace:
+Accept your invitation here:
 
-{login_url}
+{accept_url}
 
 If you were not expecting this invitation, you can ignore this email.
 """
@@ -183,6 +187,10 @@ class EnterpriseInviteRequest(BaseModel):
     role: str = "member"
 
 
+class EnterpriseAcceptInviteRequest(BaseModel):
+    token: str
+
+
 @router.post("/invite")
 def invite_enterprise_member(
     payload: EnterpriseInviteRequest,
@@ -231,16 +239,21 @@ def invite_enterprise_member(
             detail="User is already in this organization",
         )
 
-    new_member = OrganizationMember(
+    token = secrets.token_urlsafe(32)
+
+    invitation = EnterpriseInvitation(
         organization_id=membership.organization_id,
-        user_id=existing_user.id,
+        email=existing_user.email,
         role=payload.role,
-        status="active",
+        token=token,
+        status="pending",
     )
 
-    db.add(new_member)
+    db.add(invitation)
     db.commit()
-    db.refresh(new_member)
+    db.refresh(invitation)
+
+    accept_url = f"{FRONTEND_URL}/entreprises/accept?token={token}"
 
     organization = (
         db.query(Organization)
@@ -252,13 +265,76 @@ def invite_enterprise_member(
         to_email=existing_user.email,
         organization_name=organization.name if organization else "Runexa Enterprise",
         role=payload.role,
+        accept_url=accept_url,
     )
 
     return {
         "success": True,
-        "message": "Member invited successfully",
+        "message": "Invitation email sent. Waiting for user acceptance.",
+        "invitation_id": invitation.id,
+    }
+
+
+@router.post("/accept-invite")
+def accept_enterprise_invite(
+    payload: EnterpriseAcceptInviteRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    invitation = (
+        db.query(EnterpriseInvitation)
+        .filter(
+            EnterpriseInvitation.token == payload.token,
+            EnterpriseInvitation.status == "pending",
+        )
+        .first()
+    )
+
+    if not invitation:
+        raise HTTPException(status_code=404, detail="Invalid or expired invitation")
+
+    if current_user.email.lower() != invitation.email.lower():
+        raise HTTPException(
+            status_code=403,
+            detail="This invitation belongs to another email",
+        )
+
+    existing_membership = (
+        db.query(OrganizationMember)
+        .filter(
+            OrganizationMember.organization_id == invitation.organization_id,
+            OrganizationMember.user_id == current_user.id,
+        )
+        .first()
+    )
+
+    if existing_membership:
+        invitation.status = "accepted"
+        invitation.accepted_at = datetime.utcnow()
+        db.commit()
+        return {"success": True, "message": "Invitation already accepted"}
+
+    new_member = OrganizationMember(
+        organization_id=invitation.organization_id,
+        user_id=current_user.id,
+        role=invitation.role,
+        status="active",
+    )
+
+    invitation.status = "accepted"
+    invitation.accepted_at = datetime.utcnow()
+
+    db.add(new_member)
+    db.commit()
+    db.refresh(new_member)
+
+    return {
+        "success": True,
+        "message": "Enterprise invitation accepted",
         "member_id": new_member.id,
     }
+
+
 @router.get("/usage")
 def get_enterprise_usage(
     db: Session = Depends(get_db),
