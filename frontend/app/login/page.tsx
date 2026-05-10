@@ -70,10 +70,35 @@ export default function LoginPage() {
           .toLowerCase()
           .trim();
 
+        let isEnterpriseMember = false;
+
+        try {
+          const enterpriseResponse = await fetch(
+            `${API_URL}/enterprise/me`,
+            {
+              headers: {
+                Authorization: `Bearer ${data.access_token}`,
+              },
+            }
+          );
+
+          if (enterpriseResponse.ok) {
+            isEnterpriseMember = true;
+            localStorage.setItem("enterprise_member", "true");
+          } else {
+            localStorage.removeItem("enterprise_member");
+          }
+        } catch {
+          localStorage.removeItem("enterprise_member");
+        }
+
         if (role === "admin") {
           window.location.href = "/admin";
 
-        } else if (role === "enterprise_admin") {
+        } else if (
+          role === "enterprise_admin" ||
+          isEnterpriseMember
+        ) {
           window.location.href = "/entreprises/dashboard";
 
         } else if (["paid", "pro", "premium"].includes(plan)) {
