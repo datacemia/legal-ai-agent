@@ -1,6 +1,12 @@
+import os
+import ssl
+import smtplib
+from email.message import EmailMessage
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
+from app.config import FRONTEND_URL
 from app.database import get_db
 from app.models.user import User
 from app.models.organization import Organization
@@ -37,6 +43,60 @@ def require_enterprise_member(
         )
 
     return membership
+
+
+def send_enterprise_invite_email(
+    to_email: str,
+    organization_name: str,
+    role: str,
+):
+    login_url = f"{FRONTEND_URL}/login"
+
+    smtp_host = os.getenv("SMTP_HOST")
+    smtp_port = int(os.getenv("SMTP_PORT", "465"))
+    smtp_user = os.getenv("SMTP_USERNAME")
+    smtp_password = os.getenv("SMTP_PASSWORD")
+    from_email = os.getenv("SMTP_FROM_EMAIL", smtp_user)
+    from_name = os.getenv("SMTP_FROM_NAME", "Runexa")
+
+    if not smtp_host or not smtp_user or not smtp_password:
+        print("SMTP not configured. Enterprise invite:", login_url)
+        return
+
+    msg = EmailMessage()
+    msg["Subject"] = f"You have been invited to {organization_name}"
+    msg["From"] = f"{from_name} <{from_email}>"
+    msg["To"] = to_email
+
+    msg.set_content(
+        f"""
+Hello,
+
+You have been added to the Runexa enterprise workspace:
+
+{organization_name}
+
+Your organization role is: {role}
+
+Log in here to access your enterprise workspace:
+
+{login_url}
+
+If you were not expecting this invitation, you can ignore this email.
+"""
+    )
+
+    context = ssl.create_default_context()
+
+    try:
+        with smtplib.SMTP_SSL(smtp_host, smtp_port, context=context) as server:
+            server.login(smtp_user, smtp_password)
+            server.send_message(msg)
+
+        print("Enterprise invite email sent to:", to_email)
+
+    except Exception as e:
+        print("SMTP ENTERPRISE INVITE ERROR:", repr(e))
 
 
 @router.get("/me")
@@ -181,6 +241,18 @@ def invite_enterprise_member(
     db.add(new_member)
     db.commit()
     db.refresh(new_member)
+
+    organization = (
+        db.query(Organization)
+        .filter(Organization.id == membership.organization_id)
+        .first()
+    )
+
+    send_enterprise_invite_email(
+        to_email=existing_user.email,
+        organization_name=organization.name if organization else "Runexa Enterprise",
+        role=payload.role,
+    )
 
     return {
         "success": True,
