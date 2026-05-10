@@ -52,6 +52,7 @@ export default function EntreprisesDashboardPage() {
   const [inviteRole, setInviteRole] = useState("member");
   const [inviteMessage, setInviteMessage] = useState("");
   const [inviteLoading, setInviteLoading] = useState(false);
+  const [memberActionLoading, setMemberActionLoading] = useState<number | null>(null);
 
   const fetchEnterpriseData = async () => {
     setLoading(true);
@@ -155,6 +156,124 @@ export default function EntreprisesDashboardPage() {
       setInviteMessage("Error inviting member");
     } finally {
       setInviteLoading(false);
+    }
+  };
+
+  const handleUpdateRole = async (
+    memberId: number,
+    role: string
+  ) => {
+    try {
+      setMemberActionLoading(memberId);
+
+      const token = localStorage.getItem("token");
+
+      const res = await fetch(
+        `${API_URL}/enterprise/members/${memberId}/role`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            role,
+          }),
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.detail || "Unable to update role");
+        return;
+      }
+
+      fetchEnterpriseData();
+    } catch (err) {
+      alert("Failed to update role");
+    } finally {
+      setMemberActionLoading(null);
+    }
+  };
+
+  const handleSuspendMember = async (
+    memberId: number,
+    currentStatus: string
+  ) => {
+    try {
+      setMemberActionLoading(memberId);
+
+      const token = localStorage.getItem("token");
+
+      const nextStatus =
+        currentStatus === "active" ? "suspended" : "active";
+
+      const res = await fetch(
+        `${API_URL}/enterprise/members/${memberId}/suspend`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            status: nextStatus,
+          }),
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.detail || "Unable to update member status");
+        return;
+      }
+
+      fetchEnterpriseData();
+    } catch (err) {
+      alert("Failed to update member status");
+    } finally {
+      setMemberActionLoading(null);
+    }
+  };
+
+  const handleRemoveMember = async (memberId: number) => {
+    const confirmed = window.confirm(
+      "Remove this member from the organization?"
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    try {
+      setMemberActionLoading(memberId);
+
+      const token = localStorage.getItem("token");
+
+      const res = await fetch(
+        `${API_URL}/enterprise/members/${memberId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.detail || "Unable to remove member");
+        return;
+      }
+
+      fetchEnterpriseData();
+    } catch (err) {
+      alert("Failed to remove member");
+    } finally {
+      setMemberActionLoading(null);
     }
   };
 
@@ -393,13 +512,61 @@ export default function EntreprisesDashboardPage() {
                       </p>
                     </div>
 
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap items-center gap-2">
                       <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-slate-200">
                         {member.role}
                       </span>
-                      <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-300">
+
+                      <span
+                        className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                          member.status === "active"
+                            ? "bg-emerald-500/10 text-emerald-300"
+                            : "bg-red-500/10 text-red-300"
+                        }`}
+                      >
                         {member.status}
                       </span>
+
+                      {isOwnerOrAdmin && member.role !== "owner" && (
+                        <>
+                          <select
+                            value={member.role}
+                            disabled={memberActionLoading === member.id}
+                            onChange={(e) =>
+                              handleUpdateRole(member.id, e.target.value)
+                            }
+                            className="rounded-xl border border-white/10 bg-slate-900 px-3 py-2 text-xs text-white"
+                          >
+                            <option value="member">member</option>
+                            <option value="admin">admin</option>
+                          </select>
+
+                          <button
+                            onClick={() =>
+                              handleSuspendMember(
+                                member.id,
+                                member.status
+                              )
+                            }
+                            disabled={memberActionLoading === member.id}
+                            className="rounded-xl border border-amber-500/20 bg-amber-500/10 px-3 py-2 text-xs font-semibold text-amber-200 hover:bg-amber-500/20"
+                          >
+                            {member.status === "active"
+                              ? "Suspend"
+                              : "Activate"}
+                          </button>
+
+                          <button
+                            onClick={() =>
+                              handleRemoveMember(member.id)
+                            }
+                            disabled={memberActionLoading === member.id}
+                            className="rounded-xl border border-red-500/20 bg-red-500/10 px-3 py-2 text-xs font-semibold text-red-200 hover:bg-red-500/20"
+                          >
+                            Remove
+                          </button>
+                        </>
+                      )}
                     </div>
                   </div>
                 ))

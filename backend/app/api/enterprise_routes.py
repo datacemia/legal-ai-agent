@@ -191,6 +191,14 @@ class EnterpriseAcceptInviteRequest(BaseModel):
     token: str
 
 
+class EnterpriseUpdateMemberRoleRequest(BaseModel):
+    role: str
+
+
+class EnterpriseSuspendMemberRequest(BaseModel):
+    status: str
+
+
 @router.post("/invite")
 def invite_enterprise_member(
     payload: EnterpriseInviteRequest,
@@ -359,6 +367,128 @@ def accept_enterprise_invite(
         "success": True,
         "message": "Enterprise invitation accepted",
         "member_id": new_member.id,
+    }
+
+
+@router.patch("/members/{member_id}/role")
+def update_enterprise_member_role(
+    member_id: int,
+    payload: EnterpriseUpdateMemberRoleRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    require_enterprise_admin(current_user)
+
+    membership = require_enterprise_member(db, current_user)
+
+    target_member = (
+        db.query(OrganizationMember)
+        .filter(
+            OrganizationMember.id == member_id,
+            OrganizationMember.organization_id == membership.organization_id,
+        )
+        .first()
+    )
+
+    if not target_member:
+        raise HTTPException(status_code=404, detail="Member not found")
+
+    if target_member.role == "owner":
+        raise HTTPException(status_code=403, detail="Owner role cannot be modified")
+
+    allowed_roles = ["member", "admin"]
+
+    if payload.role not in allowed_roles:
+        raise HTTPException(status_code=400, detail="Invalid role")
+
+    target_member.role = payload.role
+
+    db.commit()
+    db.refresh(target_member)
+
+    return {
+        "success": True,
+        "message": "Member role updated",
+        "member_id": target_member.id,
+        "role": target_member.role,
+    }
+
+
+@router.patch("/members/{member_id}/suspend")
+def suspend_enterprise_member(
+    member_id: int,
+    payload: EnterpriseSuspendMemberRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    require_enterprise_admin(current_user)
+
+    membership = require_enterprise_member(db, current_user)
+
+    target_member = (
+        db.query(OrganizationMember)
+        .filter(
+            OrganizationMember.id == member_id,
+            OrganizationMember.organization_id == membership.organization_id,
+        )
+        .first()
+    )
+
+    if not target_member:
+        raise HTTPException(status_code=404, detail="Member not found")
+
+    if target_member.role == "owner":
+        raise HTTPException(status_code=403, detail="Owner cannot be suspended")
+
+    allowed_statuses = ["active", "suspended"]
+
+    if payload.status not in allowed_statuses:
+        raise HTTPException(status_code=400, detail="Invalid status")
+
+    target_member.status = payload.status
+
+    db.commit()
+    db.refresh(target_member)
+
+    return {
+        "success": True,
+        "message": "Member status updated",
+        "member_id": target_member.id,
+        "status": target_member.status,
+    }
+
+
+@router.delete("/members/{member_id}")
+def remove_enterprise_member(
+    member_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    require_enterprise_admin(current_user)
+
+    membership = require_enterprise_member(db, current_user)
+
+    target_member = (
+        db.query(OrganizationMember)
+        .filter(
+            OrganizationMember.id == member_id,
+            OrganizationMember.organization_id == membership.organization_id,
+        )
+        .first()
+    )
+
+    if not target_member:
+        raise HTTPException(status_code=404, detail="Member not found")
+
+    if target_member.role == "owner":
+        raise HTTPException(status_code=403, detail="Owner cannot be removed")
+
+    db.delete(target_member)
+    db.commit()
+
+    return {
+        "success": True,
+        "message": "Member removed successfully",
     }
 
 
