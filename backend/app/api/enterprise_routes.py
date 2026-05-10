@@ -16,6 +16,7 @@ from app.models.organization_member import OrganizationMember
 from app.models.enterprise_invitation import EnterpriseInvitation
 from app.utils.security import get_current_user
 from app.models.organization_usage_log import OrganizationUsageLog
+from app.models.organization_agent import OrganizationAgent
 
 router = APIRouter(prefix="/enterprise", tags=["Enterprise"])
 
@@ -119,6 +120,15 @@ def get_enterprise_me(
     if not organization:
         raise HTTPException(status_code=404, detail="Organization not found")
 
+    enabled_agents = (
+        db.query(OrganizationAgent)
+        .filter(
+            OrganizationAgent.organization_id == organization.id,
+            OrganizationAgent.enabled == True,
+        )
+        .all()
+    )
+
     return {
         "user": {
             "id": current_user.id,
@@ -131,6 +141,13 @@ def get_enterprise_me(
             "slug": organization.slug,
             "plan_name": organization.plan_name,
             "credits_balance": organization.credits_balance,
+            "enabled_agents": [
+                {
+                    "slug": agent.agent_slug,
+                    "credits_per_analysis": agent.credits_per_analysis,
+                }
+                for agent in enabled_agents
+            ],
         },
         "membership": {
             "id": membership.id,
