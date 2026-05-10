@@ -33,7 +33,6 @@ const connectedAgents = [
     credits: 3,
     description: "Summaries, quizzes, flashcards, and study plans.",
   },
-  
   {
     slug: "business",
     name: "Business Decision Agent",
@@ -93,8 +92,16 @@ export default function EntreprisesDashboardPage() {
 
       const meData = await meRes.json();
 
+      let membersData = [];
 
-      const membersData = membersRes.ok ? await membersRes.json() : [];
+      if (membersRes.ok) {
+        membersData = await membersRes.json();
+      } else if (membersRes.status === 403) {
+        membersData = [];
+      } else {
+        membersData = [];
+      }
+
       const usageData = usageRes.ok ? await usageRes.json() : null;
 
       setEnterprise(meData);
@@ -144,6 +151,13 @@ export default function EntreprisesDashboardPage() {
   const user = enterprise?.user;
   const membership = enterprise?.membership;
 
+  const isOwnerOrAdmin =
+    user?.role === "enterprise_admin" ||
+    membership?.role === "owner" ||
+    membership?.role === "admin";
+
+  const memberCount = members.length || (membership ? 1 : 0);
+
   return (
     <main className="min-h-screen bg-slate-950 text-white">
       <section className="border-b border-white/10 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900">
@@ -174,10 +188,12 @@ export default function EntreprisesDashboardPage() {
                 Refresh
               </button>
 
-              <button className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-slate-950 hover:bg-blue-50">
-                <MailPlus className="h-4 w-4" />
-                Invite member
-              </button>
+              {isOwnerOrAdmin && (
+                <button className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-slate-950 hover:bg-blue-50">
+                  <MailPlus className="h-4 w-4" />
+                  Invite member
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -185,9 +201,27 @@ export default function EntreprisesDashboardPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-8">
         <div className="grid gap-5 md:grid-cols-4">
-          <MetricCard icon={<Building2 className="h-5 w-5" />} label="Plan" value={org?.plan_name || "enterprise"} subtext={`Workspace slug: ${org?.slug}`} />
-          <MetricCard icon={<CreditCard className="h-5 w-5" />} label="Credits" value={org?.credits_balance ?? 0} subtext="Shared organization balance" />
-          <MetricCard icon={<Users className="h-5 w-5" />} label="Members" value={members.length} subtext="Active team access" />
+          <MetricCard
+            icon={<Building2 className="h-5 w-5" />}
+            label="Plan"
+            value={org?.plan_name || "enterprise"}
+            subtext={`Workspace slug: ${org?.slug}`}
+          />
+
+          <MetricCard
+            icon={<CreditCard className="h-5 w-5" />}
+            label="Credits"
+            value={org?.credits_balance ?? 0}
+            subtext="Shared organization balance"
+          />
+
+          <MetricCard
+            icon={<Users className="h-5 w-5" />}
+            label="Members"
+            value={memberCount}
+            subtext="Active team access"
+          />
+
           <MetricCard
             icon={<Activity className="h-5 w-5" />}
             label="Usage"
@@ -210,7 +244,7 @@ export default function EntreprisesDashboardPage() {
             </span>
           </div>
 
-          <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {connectedAgents.map((agent) => (
               <Link
                 key={agent.slug}
@@ -236,7 +270,7 @@ export default function EntreprisesDashboardPage() {
                 </p>
 
                 <p className="mt-4 text-sm font-semibold text-blue-100">
-                  {agent.credits} credits / analysis
+                  {agent.credits} enterprise credits / analysis
                 </p>
 
                 <div className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-blue-300 transition group-hover:text-blue-200">
@@ -254,49 +288,68 @@ export default function EntreprisesDashboardPage() {
               <div>
                 <h2 className="text-2xl font-bold">Team members</h2>
                 <p className="mt-1 text-sm text-slate-400">
-                  Manage organization access and enterprise roles.
+                  {isOwnerOrAdmin
+                    ? "Manage organization access and enterprise roles."
+                    : "Your organization membership and workspace access."}
                 </p>
               </div>
 
               <span className="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-semibold text-blue-200">
-                {members.length} member{members.length > 1 ? "s" : ""}
+                {memberCount} member{memberCount > 1 ? "s" : ""}
               </span>
             </div>
 
             <div className="mt-5 space-y-3">
-              {members.map((member) => (
-                <div
-                  key={member.id}
-                  className="flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4 md:flex-row md:items-center md:justify-between"
-                >
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <p className="font-semibold">{member.email}</p>
-                      {member.role === "owner" && (
-                        <Crown className="h-4 w-4 text-amber-300" />
-                      )}
+              {members.length > 0 ? (
+                members.map((member) => (
+                  <div
+                    key={member.id}
+                    className="flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4 md:flex-row md:items-center md:justify-between"
+                  >
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <p className="font-semibold">{member.email}</p>
+                        {member.role === "owner" && (
+                          <Crown className="h-4 w-4 text-amber-300" />
+                        )}
+                      </div>
+                      <p className="mt-1 text-sm text-slate-400">
+                        User ID #{member.user_id} · Member ID #{member.id}
+                      </p>
                     </div>
-                    <p className="mt-1 text-sm text-slate-400">
-                      User ID #{member.user_id} · Member ID #{member.id}
-                    </p>
-                  </div>
 
-                  <div className="flex flex-wrap gap-2">
-                    <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-slate-200">
-                      {member.role}
-                    </span>
-                    <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-300">
-                      {member.status}
-                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-slate-200">
+                        {member.role}
+                      </span>
+                      <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-300">
+                        {member.status}
+                      </span>
+                    </div>
                   </div>
+                ))
+              ) : (
+                <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                  <p className="font-semibold">{user?.email}</p>
+                  <p className="mt-1 text-sm text-slate-400">
+                    Platform role: {user?.role}
+                  </p>
+                  <p className="mt-1 text-sm text-slate-400">
+                    Organization role: {membership?.role || "member"}
+                  </p>
+                  {!isOwnerOrAdmin && (
+                    <p className="mt-3 text-xs text-slate-500">
+                      Full member list is available to organization owners/admins.
+                    </p>
+                  )}
                 </div>
-              ))}
+              )}
             </div>
           </div>
 
           <aside className="space-y-6">
             <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-              <h2 className="text-xl font-bold">Current admin</h2>
+              <h2 className="text-xl font-bold">Current user</h2>
               <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
                 <p className="font-semibold">{user?.email}</p>
                 <p className="mt-1 text-sm text-slate-400">
@@ -315,9 +368,9 @@ export default function EntreprisesDashboardPage() {
               <div className="mt-4 space-y-3 text-sm text-blue-100">
                 <p>✔ Organization-level credits</p>
                 <p>✔ Team member access</p>
-                <p>✔ Enterprise admin gate</p>
-                <p>✔ Ready for invite flow</p>
+                <p>✔ Enterprise workspace access</p>
                 <p>✔ Ready for usage analytics</p>
+                {isOwnerOrAdmin && <p>✔ Ready for invite flow</p>}
               </div>
             </div>
           </aside>
