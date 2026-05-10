@@ -293,7 +293,6 @@ def accept_enterprise_invite(
         db.query(EnterpriseInvitation)
         .filter(
             EnterpriseInvitation.token == payload.token,
-            EnterpriseInvitation.status == "pending",
         )
         .first()
     )
@@ -306,6 +305,15 @@ def accept_enterprise_invite(
             status_code=403,
             detail="This invitation belongs to another email",
         )
+
+    if invitation.status == "accepted":
+        # The invitation may already have been accepted automatically during signup.
+        # Return success instead of showing "Invalid or expired invitation" on the frontend.
+        if current_user.role == "user":
+            current_user.role = "enterprise_member"
+            db.commit()
+
+        return {"success": True, "message": "Invitation already accepted"}
 
     existing_membership = (
         db.query(OrganizationMember)
