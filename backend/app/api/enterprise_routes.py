@@ -17,13 +17,10 @@ def require_enterprise_admin(current_user: User):
     return current_user
 
 
-@router.get("/me")
-def get_enterprise_me(
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
+def require_enterprise_member(
+    db: Session,
+    current_user: User,
 ):
-    require_enterprise_admin(current_user)
-
     membership = (
         db.query(OrganizationMember)
         .filter(
@@ -34,7 +31,20 @@ def get_enterprise_me(
     )
 
     if not membership:
-        raise HTTPException(status_code=404, detail="No organization found")
+        raise HTTPException(
+            status_code=403,
+            detail="Enterprise membership required",
+        )
+
+    return membership
+
+
+@router.get("/me")
+def get_enterprise_me(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    membership = require_enterprise_member(db, current_user)
 
     organization = (
         db.query(Organization)
@@ -182,19 +192,7 @@ def get_enterprise_usage(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    require_enterprise_admin(current_user)
-
-    membership = (
-        db.query(OrganizationMember)
-        .filter(
-            OrganizationMember.user_id == current_user.id,
-            OrganizationMember.status == "active",
-        )
-        .first()
-    )
-
-    if not membership:
-        raise HTTPException(status_code=404, detail="Organization not found")
+    membership = require_enterprise_member(db, current_user)
 
     logs = (
         db.query(OrganizationUsageLog, User)
@@ -224,19 +222,7 @@ def get_enterprise_usage_summary(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    require_enterprise_admin(current_user)
-
-    membership = (
-        db.query(OrganizationMember)
-        .filter(
-            OrganizationMember.user_id == current_user.id,
-            OrganizationMember.status == "active",
-        )
-        .first()
-    )
-
-    if not membership:
-        raise HTTPException(status_code=404, detail="Organization not found")
+    membership = require_enterprise_member(db, current_user)
 
     logs = (
         db.query(OrganizationUsageLog)
