@@ -126,11 +126,13 @@ export default function DashboardPage() {
           window.location.href = "/admin";
           return;
         }
-        if (role === "enterprise_admin") {
+        const isEnterpriseMember =
+          localStorage.getItem("enterprise_member") === "true";
+
+        if (role === "enterprise_admin" || isEnterpriseMember) {
           window.location.href = "/entreprises/dashboard";
           return;
         }
-
         const allowedPlans = ["paid", "pro", "premium"];
 
         if (!allowedPlans.includes(plan)) {
