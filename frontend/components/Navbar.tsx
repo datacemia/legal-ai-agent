@@ -10,6 +10,7 @@ export default function Navbar() {
   const [role, setRole] = useState("");
   const [plan, setPlan] = useState("");
   const [credits, setCredits] = useState<string | null>(null);
+  const [isEnterpriseMember, setIsEnterpriseMember] = useState(false);
   const [locale, setLocale] = useState("en");
 
   const checkAuth = () => {
@@ -25,10 +26,14 @@ export default function Navbar() {
 
     const savedCredits = localStorage.getItem("credits_balance");
 
+    const savedEnterpriseMember =
+      localStorage.getItem("enterprise_member") === "true";
+
     setIsLogged(!!token);
     setRole(savedRole);
     setPlan(savedPlan);
     setCredits(savedCredits);
+    setIsEnterpriseMember(savedEnterpriseMember);
   };
 
   useEffect(() => {
@@ -54,11 +59,13 @@ export default function Navbar() {
     localStorage.removeItem("role");
     localStorage.removeItem("plan");
     localStorage.removeItem("credits_balance");
+    localStorage.removeItem("enterprise_member");
 
     setIsLogged(false);
     setRole("");
     setPlan("");
     setCredits(null);
+    setIsEnterpriseMember(false);
 
     window.location.href = "/login";
   };
@@ -67,6 +74,7 @@ export default function Navbar() {
 
   const isAdmin = role === "admin";
   const isEnterpriseAdmin = role === "enterprise_admin";
+  const canSeeEnterprise = isEnterpriseAdmin || isEnterpriseMember;
 
   const isPaid = plan === "paid";
   const isPro = plan === "pro";
@@ -74,7 +82,7 @@ export default function Navbar() {
 
   const canSeeDashboard =
     isAdmin ||
-    isEnterpriseAdmin ||
+    canSeeEnterprise ||
     isPaid ||
     isPro ||
     isPremium;
@@ -114,7 +122,7 @@ export default function Navbar() {
           )}
 
           {/* ✅ ENTERPRISE DASHBOARD */}
-          {isEnterpriseAdmin && (
+          {canSeeEnterprise && (
             <Link
               href="/entreprises/dashboard"
               className="text-sm font-semibold text-blue-600 transition hover:text-blue-700"
