@@ -33,13 +33,7 @@ const connectedAgents = [
     credits: 5,
     description: "Summaries, quizzes, flashcards, and study plans.",
   },
-  {
-    slug: "finance",
-    name: "Finance Coach Agent",
-    href: "/finance",
-    credits: 7,
-    description: "Analyze spending, bank statements, waste, and savings.",
-  },
+  
   {
     slug: "business",
     name: "Business Decision Agent",
