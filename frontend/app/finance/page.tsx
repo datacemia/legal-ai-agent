@@ -173,6 +173,8 @@ export default function FinancePage() {
 
   const hasActiveAccess =
     role === "admin" ||
+    role === "enterprise_admin" ||
+    role === "enterprise_member" ||
     ["paid", "pro", "premium"].includes(plan) ||
     creditsBalance > 0;
 
