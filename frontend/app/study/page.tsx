@@ -1292,6 +1292,8 @@ export default function StudyPage() {
 
   const hasActiveAccess =
     userRole === "admin" ||
+    userRole === "enterprise_admin" ||
+    userRole === "enterprise_member" ||
     userPlan === "paid" ||
     userPlan === "pro" ||
     userPlan === "premium" ||
