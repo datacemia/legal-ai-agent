@@ -319,6 +319,12 @@ def accept_enterprise_invite(
     if existing_membership:
         invitation.status = "accepted"
         invitation.accepted_at = datetime.utcnow()
+
+        # Keep the platform role aligned with enterprise access.
+        # Do not downgrade admins or other elevated roles.
+        if current_user.role == "user":
+            current_user.role = "enterprise_member"
+
         db.commit()
         return {"success": True, "message": "Invitation already accepted"}
 
@@ -331,6 +337,11 @@ def accept_enterprise_invite(
 
     invitation.status = "accepted"
     invitation.accepted_at = datetime.utcnow()
+
+    # Keep the platform role aligned with enterprise access.
+    # Do not downgrade admins or other elevated roles.
+    if current_user.role == "user":
+        current_user.role = "enterprise_member"
 
     db.add(new_member)
     db.commit()

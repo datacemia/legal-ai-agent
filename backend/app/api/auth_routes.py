@@ -59,8 +59,9 @@ def auto_accept_enterprise_invites_for_user(db: Session, user: User):
 
     Safe behavior:
     - does nothing if there is no pending invitation for this email
-    - does not change the user's platform role
     - avoids duplicate OrganizationMember rows
+    - only upgrades the platform role from "user" to "enterprise_member"
+      and never downgrades admins or other elevated roles
     """
     invite_email = user.email.strip().lower()
 
@@ -95,6 +96,11 @@ def auto_accept_enterprise_invites_for_user(db: Session, user: User):
                     status="active",
                 )
             )
+
+        # Keep the platform role aligned with enterprise access.
+        # Do not downgrade admins or other elevated roles.
+        if user.role == "user":
+            user.role = "enterprise_member"
 
         invitation.status = "accepted"
         invitation.accepted_at = datetime.utcnow()
@@ -154,6 +160,7 @@ async def google_callback(request: Request, db: Session = Depends(get_db)):
         db.add(user)
         db.commit()
         db.refresh(user)
+        auto_accept_enterprise_invites_for_user(db, user)
 
     access_token = create_access_token({"sub": str(user.id)})
 
@@ -202,6 +209,7 @@ async def microsoft_callback(request: Request, db: Session = Depends(get_db)):
         db.add(user)
         db.commit()
         db.refresh(user)
+        auto_accept_enterprise_invites_for_user(db, user)
 
     access_token = create_access_token({"sub": str(user.id)})
 
