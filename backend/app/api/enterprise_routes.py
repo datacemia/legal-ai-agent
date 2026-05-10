@@ -63,6 +63,12 @@ def send_enterprise_invite_email(
     from_email = os.getenv("SMTP_FROM_EMAIL", smtp_user)
     from_name = os.getenv("SMTP_FROM_NAME", "Runexa")
 
+    print("SMTP_HOST:", smtp_host)
+    print("SMTP_PORT:", smtp_port)
+    print("SMTP_USER:", smtp_user)
+    print("FROM_EMAIL:", from_email)
+    print("TO_EMAIL:", to_email)
+
     if not smtp_host or not smtp_user or not smtp_password:
         print("SMTP not configured. Enterprise invite:", login_url)
         return
