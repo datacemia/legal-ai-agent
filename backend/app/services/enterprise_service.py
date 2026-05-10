@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
 from app.models.organization import Organization
@@ -34,6 +35,12 @@ def consume_enterprise_credits(
     if not organization:
         return False
 
+    if organization.credits_balance < credits_used:
+        raise HTTPException(
+            status_code=402,
+            detail="Insufficient enterprise credits",
+        )
+
     organization.credits_balance -= credits_used
 
     usage_log = OrganizationUsageLog(
@@ -46,5 +53,6 @@ def consume_enterprise_credits(
 
     db.add(usage_log)
     db.commit()
+    db.refresh(organization)
 
     return True
