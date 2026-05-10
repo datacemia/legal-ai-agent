@@ -16,6 +16,8 @@ from authlib.integrations.starlette_client import OAuth
 from app.config import FRONTEND_URL
 from app.database import get_db
 from app.models.user import User
+from app.models.enterprise_invitation import EnterpriseInvitation
+from app.models.organization_member import OrganizationMember
 from app.schemas.user_schema import UserCreate, UserLogin, UserResponse, TokenResponse
 from app.utils.security import hash_password, verify_password, create_access_token
 
@@ -48,6 +50,56 @@ def check_login_rate_limit(email: str):
     attempts.append(now)
     LOGIN_ATTEMPTS[email] = attempts
 # ================= FIN AJOUT =================
+
+
+
+
+def auto_accept_enterprise_invites_for_user(db: Session, user: User):
+    """Attach a newly created user to any pending enterprise invitations.
+
+    Safe behavior:
+    - does nothing if there is no pending invitation for this email
+    - does not change the user's platform role
+    - avoids duplicate OrganizationMember rows
+    """
+    invite_email = user.email.strip().lower()
+
+    pending_invites = (
+        db.query(EnterpriseInvitation)
+        .filter(
+            EnterpriseInvitation.email == invite_email,
+            EnterpriseInvitation.status == "pending",
+        )
+        .all()
+    )
+
+    if not pending_invites:
+        return
+
+    for invitation in pending_invites:
+        existing_membership = (
+            db.query(OrganizationMember)
+            .filter(
+                OrganizationMember.organization_id == invitation.organization_id,
+                OrganizationMember.user_id == user.id,
+            )
+            .first()
+        )
+
+        if not existing_membership:
+            db.add(
+                OrganizationMember(
+                    organization_id=invitation.organization_id,
+                    user_id=user.id,
+                    role=invitation.role,
+                    status="active",
+                )
+            )
+
+        invitation.status = "accepted"
+        invitation.accepted_at = datetime.utcnow()
+
+    db.commit()
 
 
 # ================= OAUTH =================
@@ -294,6 +346,8 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
+
+    auto_accept_enterprise_invites_for_user(db, new_user)
 
     send_verification_email(new_user.email, token)
 
