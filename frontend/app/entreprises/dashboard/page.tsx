@@ -48,6 +48,10 @@ export default function EntreprisesDashboardPage() {
   const [usageSummary, setUsageSummary] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [inviteEmail, setInviteEmail] = useState("");
+  const [inviteRole, setInviteRole] = useState("member");
+  const [inviteMessage, setInviteMessage] = useState("");
+  const [inviteLoading, setInviteLoading] = useState(false);
 
   const fetchEnterpriseData = async () => {
     setLoading(true);
@@ -111,6 +115,46 @@ export default function EntreprisesDashboardPage() {
       setError(err.message || "Unable to load enterprise dashboard.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleInvite = async () => {
+    try {
+      setInviteLoading(true);
+      setInviteMessage("");
+
+      const token = localStorage.getItem("token");
+
+      const res = await fetch(
+        `${API_URL}/enterprise/invite`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            email: inviteEmail.trim(),
+            role: inviteRole,
+          }),
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setInviteMessage(data.detail || "Invite failed");
+        return;
+      }
+
+      setInviteMessage("Member invited successfully");
+      setInviteEmail("");
+
+      fetchEnterpriseData();
+    } catch (err) {
+      setInviteMessage("Error inviting member");
+    } finally {
+      setInviteLoading(false);
     }
   };
 
@@ -189,10 +233,41 @@ export default function EntreprisesDashboardPage() {
               </button>
 
               {isOwnerOrAdmin && (
-                <button className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-slate-950 hover:bg-blue-50">
-                  <MailPlus className="h-4 w-4" />
-                  Invite member
-                </button>
+                <div className="flex flex-col gap-3">
+                  <div className="flex gap-2">
+                    <input
+                      type="email"
+                      placeholder="member@email.com"
+                      value={inviteEmail}
+                      onChange={(e) => setInviteEmail(e.target.value)}
+                      className="rounded-xl border border-white/10 bg-white/10 px-4 py-2 text-sm text-white outline-none"
+                    />
+
+                    <select
+                      value={inviteRole}
+                      onChange={(e) => setInviteRole(e.target.value)}
+                      className="rounded-xl border border-white/10 bg-slate-900 px-3 py-2 text-sm text-white"
+                    >
+                      <option value="member">member</option>
+                      <option value="admin">admin</option>
+                    </select>
+
+                    <button
+                      onClick={handleInvite}
+                      disabled={inviteLoading}
+                      className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-slate-950 hover:bg-blue-50 disabled:cursor-not-allowed disabled:opacity-70"
+                    >
+                      <MailPlus className="h-4 w-4" />
+                      {inviteLoading ? "Inviting..." : "Invite member"}
+                    </button>
+                  </div>
+
+                  {inviteMessage && (
+                    <p className="text-sm text-blue-100">
+                      {inviteMessage}
+                    </p>
+                  )}
+                </div>
               )}
             </div>
           </div>
