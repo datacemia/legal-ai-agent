@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import {
   Building2,
@@ -10,10 +11,43 @@ import {
   MailPlus,
   Crown,
   RefreshCw,
+  Bot,
+  ArrowRight,
 } from "lucide-react";
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+
+const connectedAgents = [
+  {
+    slug: "legal",
+    name: "Legal Agent",
+    href: "/upload",
+    credits: 12,
+    description: "Analyze contracts, clauses, obligations, and legal risks.",
+  },
+  {
+    slug: "study",
+    name: "Study Agent",
+    href: "/study",
+    credits: 5,
+    description: "Summaries, quizzes, flashcards, and study plans.",
+  },
+  {
+    slug: "finance",
+    name: "Finance Coach Agent",
+    href: "/finance",
+    credits: 7,
+    description: "Analyze spending, bank statements, waste, and savings.",
+  },
+  {
+    slug: "business",
+    name: "Business Decision Agent",
+    href: "/business",
+    credits: 30,
+    description: "Business risks, opportunities, decisions, and action plans.",
+  },
+];
 
 export default function EntreprisesDashboardPage() {
   const [enterprise, setEnterprise] = useState<any>(null);
@@ -170,6 +204,58 @@ export default function EntreprisesDashboardPage() {
             value={usageSummary?.total_requests ?? 0}
             subtext={`${usageSummary?.total_credits_used ?? 0} credits used`}
           />
+        </div>
+
+        <div className="mt-8 rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-2xl">
+          <div className="flex flex-col justify-between gap-4 border-b border-white/10 pb-5 md:flex-row md:items-center">
+            <div>
+              <h2 className="text-2xl font-bold">Connected AI Agents</h2>
+              <p className="mt-1 text-sm text-slate-400">
+                Test all connected Runexa agents using shared enterprise organization credits.
+              </p>
+            </div>
+
+            <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-300">
+              {connectedAgents.length} agents connected
+            </span>
+          </div>
+
+          <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {connectedAgents.map((agent) => (
+              <Link
+                key={agent.slug}
+                href={agent.href}
+                className="group rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:-translate-y-1 hover:border-blue-400/30 hover:bg-white/[0.07]"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-200">
+                    <Bot className="h-5 w-5" />
+                  </div>
+
+                  <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-300">
+                    Connected
+                  </span>
+                </div>
+
+                <h3 className="mt-5 text-lg font-bold text-white">
+                  {agent.name}
+                </h3>
+
+                <p className="mt-2 min-h-[72px] text-sm leading-6 text-slate-400">
+                  {agent.description}
+                </p>
+
+                <p className="mt-4 text-sm font-semibold text-blue-100">
+                  {agent.credits} credits / analysis
+                </p>
+
+                <div className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-blue-300 transition group-hover:text-blue-200">
+                  Open agent
+                  <ArrowRight className="h-4 w-4" />
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-[1.4fr_0.8fr]">
