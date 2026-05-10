@@ -211,39 +211,40 @@ def invite_enterprise_member(
     if not membership:
         raise HTTPException(status_code=404, detail="Organization not found")
 
+    invite_email = payload.email.strip().lower()
+
     existing_user = (
         db.query(User)
-        .filter(User.email == payload.email)
+        .filter(User.email == invite_email)
         .first()
     )
 
-    if not existing_user:
-        return {
-            "success": True,
-            "message": "User does not exist yet. Invitation pending.",
-            "email": payload.email,
-        }
-
-    existing_membership = (
-        db.query(OrganizationMember)
-        .filter(
-            OrganizationMember.organization_id == membership.organization_id,
-            OrganizationMember.user_id == existing_user.id,
+    # If the user already exists, make sure they are not already
+    # a member of this organization.
+    if existing_user:
+        existing_membership = (
+            db.query(OrganizationMember)
+            .filter(
+                OrganizationMember.organization_id == membership.organization_id,
+                OrganizationMember.user_id == existing_user.id,
+            )
+            .first()
         )
-        .first()
-    )
 
-    if existing_membership:
-        raise HTTPException(
-            status_code=400,
-            detail="User is already in this organization",
-        )
+        if existing_membership:
+            raise HTTPException(
+                status_code=400,
+                detail="User is already in this organization",
+            )
 
     token = secrets.token_urlsafe(32)
 
+    # Create an invitation even if the user account does not exist yet.
+    # This allows the invited person to receive the email, create an account,
+    # then accept the invitation with the same email address.
     invitation = EnterpriseInvitation(
         organization_id=membership.organization_id,
-        email=existing_user.email,
+        email=invite_email,
         role=payload.role,
         token=token,
         status="pending",
@@ -262,7 +263,7 @@ def invite_enterprise_member(
     )
 
     send_enterprise_invite_email(
-        to_email=existing_user.email,
+        to_email=invite_email,
         organization_name=organization.name if organization else "Runexa Enterprise",
         role=payload.role,
         accept_url=accept_url,
@@ -272,6 +273,7 @@ def invite_enterprise_member(
         "success": True,
         "message": "Invitation email sent. Waiting for user acceptance.",
         "invitation_id": invitation.id,
+        "email": invite_email,
     }
 
 
