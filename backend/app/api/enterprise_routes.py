@@ -142,10 +142,7 @@ def get_enterprise_me(
             "plan_name": organization.plan_name,
             "credits_balance": organization.credits_balance,
             "enabled_agents": [
-                {
-                    "slug": agent.agent_slug,
-                    "credits_per_analysis": agent.credits_per_analysis,
-                }
+                agent.agent_slug
                 for agent in enabled_agents
             ],
         },

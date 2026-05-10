@@ -18,29 +18,36 @@ import {
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
 
-const connectedAgents = [
+const AGENT_CATALOG: Record<
+  string,
   {
-    slug: "legal",
+    name: string;
+    href: string;
+    description: string;
+  }
+> = {
+  legal: {
     name: "Legal Agent",
     href: "/upload",
-    credits: 8,
     description: "Analyze contracts, clauses, obligations, and legal risks.",
   },
-  {
-    slug: "study",
+  study: {
     name: "Study Agent",
     href: "/study",
-    credits: 3,
     description: "Summaries, quizzes, flashcards, and study plans.",
   },
-  {
-    slug: "business",
+  finance: {
+    name: "Finance Coach Agent",
+    href: "/finance",
+    description: "Analyze spending, bank statements, waste, and savings.",
+  },
+  business: {
     name: "Business Decision Agent",
     href: "/business",
-    credits: 20,
     description: "Business risks, opportunities, decisions, and action plans.",
   },
-];
+};
+
 
 export default function EntreprisesDashboardPage() {
   const [enterprise, setEnterprise] = useState<any>(null);
@@ -314,6 +321,21 @@ export default function EntreprisesDashboardPage() {
   const user = enterprise?.user;
   const membership = enterprise?.membership;
 
+  const enabledAgentSlugs = Array.isArray(org?.enabled_agents)
+    ? org.enabled_agents
+    : [];
+
+  const connectedAgents = enabledAgentSlugs
+    .map((slug: string) => ({
+      slug,
+      ...(AGENT_CATALOG[slug] || {
+        name: `${slug} Agent`,
+        href: `/${slug}`,
+        description: `${slug} enterprise agent`,
+      }),
+    }))
+    .filter((agent: any) => Boolean(agent.slug));
+
   const isOwnerOrAdmin =
     user?.role === "enterprise_admin" ||
     membership?.role === "owner" ||
@@ -439,40 +461,42 @@ export default function EntreprisesDashboardPage() {
           </div>
 
           <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {connectedAgents.map((agent) => (
-              <Link
-                key={agent.slug}
-                href={agent.href}
-                className="group rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:-translate-y-1 hover:border-blue-400/30 hover:bg-white/[0.07]"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-200">
-                    <Bot className="h-5 w-5" />
+            {connectedAgents.length > 0 ? (
+              connectedAgents.map((agent: any) => (
+                <Link
+                  key={agent.slug}
+                  href={agent.href}
+                  className="group rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:-translate-y-1 hover:border-blue-400/30 hover:bg-white/[0.07]"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-200">
+                      <Bot className="h-5 w-5" />
+                    </div>
+
+                    <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-300">
+                      Connected
+                    </span>
                   </div>
 
-                  <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-300">
-                    Connected
-                  </span>
-                </div>
+                  <h3 className="mt-5 text-lg font-bold text-white">
+                    {agent.name}
+                  </h3>
 
-                <h3 className="mt-5 text-lg font-bold text-white">
-                  {agent.name}
-                </h3>
+                  <p className="mt-2 min-h-[72px] text-sm leading-6 text-slate-400">
+                    {agent.description}
+                  </p>
 
-                <p className="mt-2 min-h-[72px] text-sm leading-6 text-slate-400">
-                  {agent.description}
-                </p>
-
-                <p className="mt-4 text-sm font-semibold text-blue-100">
-                  {agent.credits} enterprise credits / analysis
-                </p>
-
-                <div className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-blue-300 transition group-hover:text-blue-200">
-                  Open agent
-                  <ArrowRight className="h-4 w-4" />
-                </div>
-              </Link>
-            ))}
+                  <div className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-blue-300 transition group-hover:text-blue-200">
+                    Open agent
+                    <ArrowRight className="h-4 w-4" />
+                  </div>
+                </Link>
+              ))
+            ) : (
+              <div className="rounded-2xl border border-dashed border-white/10 p-6 text-sm text-slate-400 md:col-span-2 xl:col-span-3">
+                No agents are enabled for this enterprise workspace yet.
+              </div>
+            )}
           </div>
         </div>
 
