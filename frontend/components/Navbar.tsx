@@ -127,7 +127,7 @@ export default function Navbar() {
               href="/entreprises/dashboard"
               className="text-sm font-semibold text-blue-600 transition hover:text-blue-700"
             >
-              Enterprise
+              Dashboard
             </Link>
           )}
 
