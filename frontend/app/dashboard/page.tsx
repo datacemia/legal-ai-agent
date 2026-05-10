@@ -126,6 +126,10 @@ export default function DashboardPage() {
           window.location.href = "/admin";
           return;
         }
+        if (role === "enterprise_admin") {
+          window.location.href = "/entreprises/dashboard";
+          return;
+        }
 
         const allowedPlans = ["paid", "pro", "premium"];
 

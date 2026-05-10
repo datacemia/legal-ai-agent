@@ -72,8 +72,13 @@ export default function LoginPage() {
 
         if (role === "admin") {
           window.location.href = "/admin";
+
+        } else if (role === "enterprise_admin") {
+          window.location.href = "/entreprises/dashboard";
+
         } else if (["paid", "pro", "premium"].includes(plan)) {
           window.location.href = "/dashboard";
+
         } else {
           window.location.href = "/upload";
         }
