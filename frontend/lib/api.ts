@@ -37,7 +37,20 @@ export async function runAnalysis(
     }
   );
 
-  return res.json();
+  const data = await res.json();
+
+  if (!res.ok) {
+    const error: any = new Error(data.detail || `API error ${res.status}`);
+
+    error.response = {
+      status: res.status,
+      data,
+    };
+
+    throw error;
+  }
+
+  return data;
 }
 
 export async function getAnalysis(documentId: number) {
