@@ -8,6 +8,7 @@ from app.models.organization import Organization
 from app.models.organization_member import OrganizationMember
 from app.models.organization_usage_log import OrganizationUsageLog
 from app.api.enterprise_routes import router as enterprise_router
+from app.api.enterprise_agent_access_routes import router as enterprise_agent_access_router
 from dotenv import load_dotenv
 
 from app.api.job_routes import router as job_router
@@ -100,3 +101,4 @@ def health_check():
 
 app.include_router(agent0_waitlist_router)
 app.include_router(enterprise_router)
+app.include_router(enterprise_agent_access_router)

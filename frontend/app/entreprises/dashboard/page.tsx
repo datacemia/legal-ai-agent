@@ -60,6 +60,8 @@ export default function EntreprisesDashboardPage() {
   const [inviteMessage, setInviteMessage] = useState("");
   const [inviteLoading, setInviteLoading] = useState(false);
   const [memberActionLoading, setMemberActionLoading] = useState<number | null>(null);
+  const [memberAgentAccess, setMemberAgentAccess] = useState<Record<number, any[]>>({});
+  const [agentAccessLoading, setAgentAccessLoading] = useState<number | null>(null);
 
   const fetchEnterpriseData = async () => {
     setLoading(true);
@@ -118,6 +120,12 @@ export default function EntreprisesDashboardPage() {
 
       setEnterprise(meData);
       setMembers(Array.isArray(membersData) ? membersData : []);
+
+      if (Array.isArray(membersData)) {
+        membersData.forEach((member: any) => {
+          fetchMemberAgentAccess(member.id);
+        });
+      }
       setUsageSummary(usageData);
     } catch (err: any) {
       setError(err.message || "Unable to load enterprise dashboard.");
@@ -281,6 +289,68 @@ export default function EntreprisesDashboardPage() {
       alert("Failed to remove member");
     } finally {
       setMemberActionLoading(null);
+    }
+  };
+
+  const fetchMemberAgentAccess = async (memberId: number) => {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch(
+      `${API_URL}/enterprise/member-agent-access/${memberId}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+
+    if (!res.ok) return;
+
+    const data = await res.json();
+
+    setMemberAgentAccess((prev) => ({
+      ...prev,
+      [memberId]: data,
+    }));
+  };
+
+  const handleSaveAgentAccess = async (
+    memberId: number,
+    agentSlug: string,
+    isEnabled: boolean,
+    quota: number
+  ) => {
+    try {
+      setAgentAccessLoading(memberId);
+
+      const token = localStorage.getItem("token");
+
+      const res = await fetch(
+        `${API_URL}/enterprise/member-agent-access/${memberId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            agent_slug: agentSlug,
+            is_enabled: isEnabled,
+            analysis_quota: quota,
+          }),
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.detail || "Unable to save agent access");
+        return;
+      }
+
+      await fetchMemberAgentAccess(memberId);
+    } catch (err) {
+      alert("Failed to save agent access");
+    } finally {
+      setAgentAccessLoading(null);
     }
   };
 
@@ -592,6 +662,67 @@ export default function EntreprisesDashboardPage() {
                         </>
                       )}
                     </div>
+
+                    {isOwnerOrAdmin && (
+                      <div className="w-full rounded-2xl border border-white/10 bg-slate-950/40 p-4">
+                        <p className="mb-3 text-sm font-bold text-slate-200">
+                          Agent access & quotas
+                        </p>
+
+                        <div className="grid gap-3 md:grid-cols-3">
+                          {(memberAgentAccess[member.id] || []).map((agent: any) => (
+                            <div
+                              key={agent.agent_slug}
+                              className="rounded-xl border border-white/10 bg-white/[0.04] p-3"
+                            >
+                              <p className="font-semibold capitalize">
+                                {agent.agent_slug}
+                              </p>
+
+                              <p className="mt-1 text-xs text-slate-400">
+                                Used: {agent.analyses_used} / {agent.analysis_quota}
+                              </p>
+
+                              <label className="mt-3 flex items-center gap-2 text-xs text-slate-300">
+                                <input
+                                  type="checkbox"
+                                  defaultChecked={agent.is_enabled}
+                                  onChange={(e) => {
+                                    agent.is_enabled = e.target.checked;
+                                  }}
+                                />
+                                Enabled
+                              </label>
+
+                              <input
+                                type="number"
+                                min={0}
+                                defaultValue={agent.analysis_quota}
+                                onChange={(e) => {
+                                  agent.analysis_quota = Number(e.target.value);
+                                }}
+                                className="mt-3 w-full rounded-lg border border-white/10 bg-slate-900 px-3 py-2 text-xs text-white"
+                              />
+
+                              <button
+                                onClick={() =>
+                                  handleSaveAgentAccess(
+                                    member.id,
+                                    agent.agent_slug,
+                                    agent.is_enabled,
+                                    agent.analysis_quota
+                                  )
+                                }
+                                disabled={agentAccessLoading === member.id}
+                                className="mt-3 w-full rounded-lg bg-blue-600 px-3 py-2 text-xs font-bold text-white hover:bg-blue-500 disabled:opacity-60"
+                              >
+                                Save
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ))
               ) : (

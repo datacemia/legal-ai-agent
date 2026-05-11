@@ -9,6 +9,8 @@ import os
 
 sys.path.append(os.path.abspath("backend"))
 
+
+
 from app.config import DATABASE_URL
 
 # this is the Alembic Config object, which provides
@@ -41,7 +43,7 @@ from app.models.agent0_waitlist import Agent0Waitlist
 from app.models.organization import Organization
 from app.models.organization_member import OrganizationMember
 from app.models.organization_usage_log import OrganizationUsageLog
-
+from app.models.organization_member_agent_access import OrganizationMemberAgentAccess
 target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,

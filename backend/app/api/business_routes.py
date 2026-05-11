@@ -12,7 +12,11 @@ from app.schemas.business_schema import BusinessHistoryItem
 
 from app.services.business_agent.business_parser import extract_business_data
 from app.services.business_agent.business_ai_agent import analyze_business_data
-from app.services.enterprise_service import consume_enterprise_credits
+from app.services.enterprise_service import (
+    check_enterprise_agent_access,
+    consume_enterprise_agent_quota,
+    consume_enterprise_credits,
+)
 
 router = APIRouter(prefix="/business", tags=["Business"])
 
@@ -35,19 +39,25 @@ async def analyze_business(
             detail="Only CSV or Excel (.xlsx) files are supported for Business Agent.",
         )
 
-    enterprise_consumed = consume_enterprise_credits(
+    enterprise_context = check_enterprise_agent_access(
         db=db,
         user=current_user,
         agent_slug="business",
-        credits_used=BUSINESS_AGENT_CREDITS,
-        request_type="analysis",
     )
 
-    if enterprise_consumed:
-        billing = {
-            "access_type": "enterprise",
-            "credits_used": BUSINESS_AGENT_CREDITS,
-        }
+    if enterprise_context:
+        consume_enterprise_agent_quota(
+            db=db,
+            access=enterprise_context["access"],
+        )
+
+        billing = consume_enterprise_credits(
+            db=db,
+            user=current_user,
+            agent_slug="business",
+            credits_used=BUSINESS_AGENT_CREDITS,
+            request_type="analysis",
+        )
     else:
         billing = check_and_consume_agent_access(
             db=db,

@@ -6,6 +6,7 @@ from app.models.organization_agent import OrganizationAgent
 from app.models.organization_member import OrganizationMember
 from app.models.organization_usage_log import OrganizationUsageLog
 from app.models.user import User
+from app.models.organization_member_agent_access import OrganizationMemberAgentAccess
 
 
 def get_active_enterprise_membership(
@@ -121,3 +122,69 @@ def consume_enterprise_credits(
         "organization_id": organization.id,
         "organization_credits_balance": organization.credits_balance,
     }
+
+
+def check_enterprise_agent_access(
+    db: Session,
+    user: User,
+    agent_slug: str,
+):
+    membership = (
+        db.query(OrganizationMember)
+        .filter(
+            OrganizationMember.user_id == user.id,
+            OrganizationMember.status == "active",
+        )
+        .first()
+    )
+
+    if not membership:
+        return None
+
+    access = (
+        db.query(OrganizationMemberAgentAccess)
+        .filter(
+            OrganizationMemberAgentAccess.organization_id == membership.organization_id,
+            OrganizationMemberAgentAccess.member_id == membership.id,
+            OrganizationMemberAgentAccess.user_id == user.id,
+            OrganizationMemberAgentAccess.agent_slug == agent_slug,
+        )
+        .first()
+    )
+
+    if not access:
+        raise HTTPException(
+            status_code=403,
+            detail="Enterprise agent access not configured",
+        )
+
+    if not access.is_enabled:
+        raise HTTPException(
+            status_code=403,
+            detail="Agent disabled for this member",
+        )
+
+    if access.analysis_quota <= 0:
+        raise HTTPException(
+            status_code=403,
+            detail="No quota assigned for this agent",
+        )
+
+    if access.analyses_used >= access.analysis_quota:
+        raise HTTPException(
+            status_code=402,
+            detail="Agent quota exceeded",
+        )
+
+    return {
+        "membership": membership,
+        "access": access,
+    }
+
+
+def consume_enterprise_agent_quota(
+    db: Session,
+    access: OrganizationMemberAgentAccess,
+):
+    access.analyses_used += 1
+    db.flush()
