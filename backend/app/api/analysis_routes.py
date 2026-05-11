@@ -18,13 +18,13 @@ from app.services.enterprise_service import (
     consume_enterprise_credits,
 )
 
-from app.services.contract_parser import extract_text
+from app.services.contract_agent.contract_parser import extract_text
 from app.services.text_cleaner import clean_text
-from app.services.clause_splitter import split_into_clauses
+from app.services.contract_agent.clause_splitter import split_into_clauses
 from app.services.language_service import detect_language
-from app.services.contract_agent import analyze_contract_clauses
+from app.services.contract_agent.contract_agent import analyze_contract_clauses
 
-from app.services.summary_service import (
+from app.services.contract_agent.summary_service import (
     generate_summary,
     calculate_global_risk,
     generate_simplified_version,
@@ -130,12 +130,26 @@ def run_analysis(
 
     clauses = split_into_clauses(cleaned_text)
 
+    print("\n=== CLAUSES DEBUG ===")
+    print("CLAUSES COUNT:", len(clauses))
+
+    for i, c in enumerate(clauses[:10]):
+        print(f"\n--- CLAUSE {i + 1} ---")
+        print(c[:500])
+
+    print("=====================\n")
+
     clause_results = analyze_contract_clauses(
         clauses,
         output_language
     )
 
     global_risk = calculate_global_risk(clause_results)
+
+    print("\n=== LEGAL SUMMARY TEXT DEBUG ===")
+    print(cleaned_text[:3000])
+    print("TEXT LENGTH:", len(cleaned_text))
+    print("================================\n")
 
     summary = generate_summary(
         cleaned_text,

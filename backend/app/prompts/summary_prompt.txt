@@ -11,20 +11,85 @@ Return ONLY valid JSON:
   "payment_terms": "string",
   "main_obligations": ["string"],
   "global_summary": "string",
-  "important_points": ["string"]
+  "important_points": ["string"],
+  "missing_clauses": [],
+  "dangerous_patterns": [],
+  "contract_score": 0,
+  "overall_balance": "",
+  "negotiation_priorities": [],
+  "key_risks": [],
+  "practical_decision": "",
+  "jurisdiction_detected": "",
+  "jurisdiction_note": "",
+  "recommended_actions": [],
+  "contract_complexity": "low | medium | high"
 }
 
-Rules:
-- Do not give legal advice.
-- Use simple language.
-- If information is missing, write "Not specified".
-- Respond in the requested output language.
+Extraction requirements:
 
+- Extract the exact contract type if mentioned.
+- Extract the names of all parties if clearly mentioned.
+- Extract payment terms if mentioned.
+- Extract contract duration if mentioned.
+- Extract termination notice periods if mentioned.
+- Extract confidentiality obligations if mentioned.
+- Extract non-compete obligations if mentioned.
+- Extract intellectual property ownership if mentioned.
+- Extract applicable law or jurisdiction if mentioned.
+
+Important:
+- Do NOT return "Not specified" if the information clearly exists in the contract.
+- Use the exact names and details from the contract whenever possible.
+- Pay special attention to Arabic legal contracts and numbered clauses.
+- Arabic section titles like "المادة", "الدفع", "السرية", "إنهاء العقد", "الملكية الفكرية", and "القانون الواجب التطبيق" contain important legal information.
+
+Rules:
+- Do not give definitive legal advice.
+- Give practical contract-risk analysis and recommend professional legal review for important decisions.
+- Use simple language.
+- Keep all JSON keys in English.
+- Only translate the content values.
+- Do not include markdown.
+- Do not include explanations outside the JSON.
+- If information is missing:
+  - use "Not specified" in English
+  - use "Non spécifié" in French
+  - use "غير محدد" in Arabic
+- Respond in the requested output language.
+- Detect missing important clauses.
+- Detect dangerous combinations or patterns.
+- Evaluate the balance of the contract.
+- Give practical negotiation priorities.
+- Estimate a contract quality score from 0 to 100.
+- If contract_score is returned, it must be an integer between 0 and 100.
+- Explain the main risks before signing.
+- Give a practical decision summary for the user.
+- Focus on practical business risks and real-world consequences.
+- Prioritize actionable insights over theoretical legal explanations.
+- Explain what the contract means for the user before signing.
+
+The default output language is English.
+
+If the requested output language is:
+- en: respond fully in English
+- fr: respond fully in French
+- ar: respond fully in Arabic
+
+Do not mix languages.
+
+The analysis must work for any:
+- country
+- jurisdiction
+- contract type
+- legal/business domain
+
+If the jurisdiction or country is not clearly mentioned, do not assume it.
+Instead, say that the jurisdiction is not specified.
 
 IMPORTANT:
-- Use ONLY the language of the input contract
-- Do NOT mix languages
-- ALL section titles must be translated
-- Examples:
-  French → "Résumé", "Obligations principales", "Points clés", "Points à surveiller"
-  Arabic → "ملخص", "الالتزامات الرئيسية", "النقاط الرئيسية", "نقاط يجب الانتباه لها"
+- Use ONLY the requested output language for content values.
+- Do NOT mix languages.
+- ALL JSON keys must remain in English.
+- Do NOT translate JSON keys.
+- Do NOT include markdown.
+- Do NOT include text before or after the JSON.

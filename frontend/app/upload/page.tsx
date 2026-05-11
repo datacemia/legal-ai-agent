@@ -57,6 +57,9 @@ const labels: any = {
     clauses: "Clauses Analysis",
     clause: "Clause",
     recommendation: "Recommendation",
+    negotiationAdvice: "Negotiation Advice",
+    saferAlternative: "Safer Alternative",
+    negotiationPriority: "Negotiation Priority",
     limitedNotice:
       "Trial analysis may be limited. Continue with credits or Pro to unlock full usage.",
   },
@@ -95,6 +98,9 @@ const labels: any = {
     clauses: "Analyse des clauses",
     clause: "Clause",
     recommendation: "Recommandation",
+    negotiationAdvice: "Conseil de négociation",
+    saferAlternative: "Alternative plus sûre",
+    negotiationPriority: "Priorité de négociation",
     limitedNotice:
       "L’analyse d’essai peut être limitée. Continuez avec des crédits ou Pro pour débloquer l’usage complet.",
   },
@@ -133,6 +139,9 @@ const labels: any = {
     clauses: "تحليل البنود",
     clause: "بند",
     recommendation: "توصية",
+    negotiationAdvice: "نصيحة تفاوض",
+    saferAlternative: "صياغة أكثر أماناً",
+    negotiationPriority: "أولوية التفاوض",
     limitedNotice:
       "قد يكون تحليل التجربة محدوداً. تابع باستخدام الأرصدة أو Pro لفتح الاستخدام الكامل.",
   },
@@ -503,7 +512,7 @@ export default function UploadPage() {
                   >
                     <div className="flex justify-between">
                       <span>
-                        {t.clause} {index + 1}
+                        {clause.title || `${t.clause} ${index + 1}`}
                       </span>
                       <RiskBadge risk={clause.risk_level} language={language} />
                     </div>
@@ -513,10 +522,51 @@ export default function UploadPage() {
                     </p>
 
                     {openIndex === index && (
-                      <div className="mt-3 text-sm text-slate-600">
-                        <p>
-                          {t.recommendation}: {clause.recommendation}
-                        </p>
+                      <div className="mt-4 space-y-4 text-sm">
+
+                        <div>
+                          <h4 className="font-semibold text-slate-900">
+                            {t.recommendation}
+                          </h4>
+
+                          <p className="text-slate-600 mt-1">
+                            {clause.recommendation}
+                          </p>
+                        </div>
+
+                        {clause.negotiation_advice && (
+                          <div className="bg-amber-50 border border-amber-200 rounded-xl p-3">
+                            <h4 className="font-semibold text-amber-900">
+                              {t.negotiationAdvice}
+                            </h4>
+
+                            <p className="text-amber-800 mt-1">
+                              {clause.negotiation_advice}
+                            </p>
+                          </div>
+                        )}
+
+                        {clause.safer_alternative && (
+                          <div className="bg-green-50 border border-green-200 rounded-xl p-3">
+                            <h4 className="font-semibold text-green-900">
+                              {t.saferAlternative}
+                            </h4>
+
+                            <div className="whitespace-pre-wrap text-green-800 mt-2 text-sm leading-6">
+                              {clause.safer_alternative}
+                            </div>
+                          </div>
+                        )}
+
+                        {clause.negotiation_priority && (
+                          <div className="text-xs">
+                            <span className="font-semibold">
+                              {t.negotiationPriority}:
+                            </span>{" "}
+                            {clause.negotiation_priority}
+                          </div>
+                        )}
+
                       </div>
                     )}
                   </div>

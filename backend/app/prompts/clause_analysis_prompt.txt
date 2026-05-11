@@ -12,18 +12,29 @@ The JSON must follow this exact structure:
   "explanation_simple": "Explain the clause in simple human language.",
   "why_it_matters": "Explain why this clause matters for the user.",
   "recommendation": "Give a practical recommendation.",
-  "confidence": "low | medium | high"
+  "confidence": "low | medium | high",
+  "safer_alternative": "Provide a safer rewritten version of the clause if the clause is risky. Otherwise return an empty string.",
+  "negotiation_advice": "Explain what the user should negotiate or pay attention to before signing.",
+  "negotiation_priority": "low | medium | high"
 }
 
 Rules:
 - Do not give legal advice.
 - Do not say you are a lawyer.
-- Be clear and simple.
-- If the clause is dangerous, explain why.
+- Be clear, practical, and simple.
+- Focus on real-world contract risks.
+- Explain what this clause REALLY means for the user.
+- If the clause is dangerous, explain why clearly.
+- If the clause is unbalanced, mention it.
+- If appropriate, provide a safer rewritten version.
+- negotiation_advice must be practical and actionable.
 - If uncertain, use confidence = low.
+- Return JSON only.
+- Do not include markdown.
+- Do not include explanations outside the JSON.
 - Respond in the requested output language.
 
 IMPORTANT:
-- Use ONLY the language of the input contract
-- Do NOT mix languages in the response
-- Section titles must also be written in the same language (no English labels like "Summary", "Key points", etc.)
+- Use ONLY the language of the input contract.
+- Do NOT mix languages in the response.
+- Section titles and explanations must use the same language.
