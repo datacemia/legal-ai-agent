@@ -107,7 +107,37 @@ export default function BusinessPage() {
     setMessage("");
 
     try {
-      const data = await analyzeBusinessFile(file, language);
+      let data;
+
+      try {
+        data = await analyzeBusinessFile(file, language);
+      } catch (error: any) {
+        const status = error?.response?.status;
+        const detail =
+          error?.response?.data?.detail ||
+          error?.message ||
+          "Failed to analyze business file.";
+
+        if (status === 402) {
+          setMessage(
+            "Your enterprise quota for this AI agent has been exceeded. Please contact your organization administrator."
+          );
+          return;
+        }
+
+        if (status === 403) {
+          setMessage(detail || "Access denied");
+          return;
+        }
+
+        if (status === 429) {
+          setMessage("Too many requests. Please try again later.");
+          return;
+        }
+
+        throw error;
+      }
+
       setResult(data);
 
       await refreshUserBilling();

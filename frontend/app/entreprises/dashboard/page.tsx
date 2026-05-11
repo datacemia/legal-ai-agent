@@ -392,7 +392,9 @@ export default function EntreprisesDashboardPage() {
   const membership = enterprise?.membership;
 
   const enabledAgentSlugs = Array.isArray(org?.enabled_agents)
-    ? org.enabled_agents
+    ? org.enabled_agents.filter(
+        (slug: string) => slug !== "finance"
+      )
     : [];
 
   const connectedAgents = enabledAgentSlugs

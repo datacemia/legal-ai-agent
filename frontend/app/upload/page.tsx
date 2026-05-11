@@ -265,7 +265,36 @@ export default function UploadPage() {
         throw new Error("Upload failed");
       }
 
-      const analysis = await runAnalysis(doc.id, language);
+      let analysis;
+
+      try {
+        analysis = await runAnalysis(doc.id, language);
+      } catch (err: any) {
+        const status = err?.response?.status;
+        const detail =
+          err?.response?.data?.detail ||
+          err?.message ||
+          "Analysis failed";
+
+        if (status === 402) {
+          setMessage(
+            "Your enterprise quota for this AI agent has been exceeded. Please contact your organization administrator."
+          );
+          return;
+        }
+
+        if (status === 403) {
+          setMessage(detail || "Access denied");
+          return;
+        }
+
+        if (status === 429) {
+          setMessage("Too many requests. Please try again later.");
+          return;
+        }
+
+        throw err;
+      }
 
       if (analysis.detail?.includes("Payment required")) {
         setMessage("You used your free analysis. Please buy one analysis credit.");

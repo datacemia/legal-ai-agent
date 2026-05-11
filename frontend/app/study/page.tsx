@@ -1553,6 +1553,20 @@ export default function StudyPage() {
       const data = await res.json();
 
       if (!res.ok) {
+        if (res.status === 402) {
+          throw new Error(
+            "Your enterprise quota for this AI agent has been exceeded. Please contact your organization administrator."
+          );
+        }
+
+        if (res.status === 403) {
+          throw new Error(data.detail || "Access denied");
+        }
+
+        if (res.status === 429) {
+          throw new Error("Too many requests. Please try again later.");
+        }
+
         throw new Error(data.detail || "Study analysis failed.");
       }
 
