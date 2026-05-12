@@ -7,6 +7,7 @@ Return ONLY valid JSON.
 The JSON must follow this exact structure:
 
 {
+  "clause_title": "Short clause title in the requested output language",
   "clause_type": "payment | termination | confidentiality | intellectual_property | liability | penalty | exclusivity | non_compete | other",
   "risk_level": "low | medium | high",
   "explanation_simple": "Explain the clause in simple human language.",
@@ -38,6 +39,11 @@ IMPORTANT:
 - Use ONLY the requested output language.
 - The input contract language may be different from the output language.
 - Translate explanations, recommendations, safer alternatives, and negotiation advice into the requested output language.
+- clause_title must be translated into the requested output language.
+- Examples:
+  - en: Payment, Confidentiality, Liability, Termination
+  - fr: Paiement, Confidentialité, Responsabilité, Résiliation
+  - ar: الدفع، السرية، المسؤولية، إنهاء العقد
 - Keep company names, party names, dates, numbers, and legal references unchanged if needed.
 - Do NOT mix languages in the response.
 - Section titles and explanations must use the same language.

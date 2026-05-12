@@ -39,7 +39,9 @@ Extraction requirements:
 
 Important:
 - Do NOT return "Not specified" if the information clearly exists in the contract.
-- Use the exact names and details from the contract whenever possible.
+- Use exact party names, dates, numbers, deadlines, amounts, and legal references when needed.
+- But translate all explanations, obligations, risks, summaries, recommendations, and extracted meanings into the requested output language.
+- Do not copy full source-language sentences into the output.
 - Pay special attention to Arabic legal contracts and numbered clauses.
 - Arabic section titles like "المادة", "الدفع", "السرية", "إنهاء العقد", "الملكية الفكرية", and "القانون الواجب التطبيق" contain important legal information.
 
