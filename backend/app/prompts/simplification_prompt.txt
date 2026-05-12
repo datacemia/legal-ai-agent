@@ -157,6 +157,8 @@ STRICT FACTUALITY RULES:
 - Do NOT say the contract creates non-compete obligations unless the contract explicitly restricts competition, competing work, competing business, or similar activity.
 - Do NOT say the contract creates exclusivity unless the contract explicitly uses exclusive, exclusivity, sole provider, sole supplier, or equivalent language.
 - If something is missing, do not present it as a warning.
+- Do not present missing or absent clauses as warnings.
+- If a clause is not present, do not mention it in things_to_watch unless its absence creates a clear material risk for this contract type.
 - Missing information may be mentioned only as the localized equivalent of "Not specified".
 - Every item in things_to_watch must be directly supported by the contract text.
 - Avoid generic legal warnings.
