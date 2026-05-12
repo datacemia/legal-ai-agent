@@ -290,3 +290,33 @@ def generate_simplified_version(text: str, language: str = "en") -> str:
 
     data = generate_simplified_version_data(text, language)
     return render_simplified_text(data, language)
+
+def calculate_global_risk(analysis_results: list[dict]) -> dict:
+    high_count = sum(
+        1
+        for item in analysis_results
+        if item.get("risk_level") == "high"
+    )
+
+    medium_count = sum(
+        1
+        for item in analysis_results
+        if item.get("risk_level") == "medium"
+    )
+
+    if high_count > 0:
+        return {
+            "risk_level": "high",
+            "risk_score": 80,
+        }
+
+    if medium_count > 0:
+        return {
+            "risk_level": "medium",
+            "risk_score": 50,
+        }
+
+    return {
+        "risk_level": "low",
+        "risk_score": 20,
+    }
