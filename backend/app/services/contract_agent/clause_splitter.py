@@ -133,6 +133,8 @@ def is_low_value_clause(clause: str) -> bool:
     text = clause.lower().strip()
 
     low_value_patterns = [
+
+        # English
         "now, therefore",
         "now therefore",
         "in consideration of the foregoing",
@@ -140,9 +142,22 @@ def is_low_value_clause(clause: str) -> bool:
         "good and valuable consideration",
         "receipt and sufficiency",
         "hereby expressly acknowledged",
-        "article and section headings",
         "headings are for reference only",
         "for reference only",
+
+        # French
+        "en considération de ce qui précède",
+        "les titres sont fournis à titre indicatif",
+        "à titre indicatif uniquement",
+        "les intitulés des articles",
+        "sans affecter l’interprétation",
+
+        # Arabic
+        "بناء على ما سبق",
+        "وعليه",
+        "مقابل الوعود المتبادلة",
+        "تعتبر العناوين لأغراض مرجعية فقط",
+        "لا تؤثر العناوين على تفسير",
     ]
 
     return any(pattern in text for pattern in low_value_patterns)
