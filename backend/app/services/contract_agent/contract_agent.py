@@ -481,6 +481,44 @@ def validate_clause_type(
 
 
 
+def validate_quoted_text(
+    analysis: dict,
+    clause_text: str,
+) -> dict:
+
+    quoted = (
+        analysis.get("quoted_text", "")
+        .strip()
+    )
+
+    if not quoted:
+        return analysis
+
+    clause_lower = clause_text.lower()
+
+    quoted_lower = quoted.lower()
+
+    # Quote not actually found in clause
+    if quoted_lower not in clause_lower:
+
+        analysis["quoted_text"] = (
+            clause_text[:300].strip()
+        )
+
+        if analysis.get("confidence") == "high":
+            analysis["confidence"] = "medium"
+
+    # Extremely short quotes are unreliable
+    if len(quoted.split()) < 6:
+
+        analysis["quoted_text"] = (
+            clause_text[:300].strip()
+        )
+
+    return analysis
+
+
+
 def calculate_clause_importance(
     analysis: dict,
     clause_text: str,
@@ -586,6 +624,11 @@ def analyze_contract_clauses(
         )
 
         analysis = validate_clause_type(
+            analysis,
+            clause,
+        )
+
+        analysis = validate_quoted_text(
             analysis,
             clause,
         )
