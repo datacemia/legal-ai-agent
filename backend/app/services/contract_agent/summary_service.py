@@ -52,6 +52,41 @@ def extract_jurisdiction(text: str) -> dict:
     }
 
 
+def remove_jurisdiction_false_actions(data: dict) -> dict:
+    remove_terms = [
+        "governing law",
+        "jurisdiction",
+        "dispute resolution",
+        "arbitration",
+        "droit applicable",
+        "juridiction",
+        "résolution des litiges",
+        "arbitrage",
+        "القانون الواجب التطبيق",
+        "الاختصاص",
+        "حل النزاعات",
+        "التحكيم",
+    ]
+
+    for key in [
+        "recommended_actions",
+        "negotiation_priorities",
+        "missing_clauses",
+    ]:
+        items = data.get(key, [])
+
+        data[key] = [
+            item for item in items
+            if not any(
+                term in item.lower()
+                for term in remove_terms
+            )
+        ]
+
+    return data
+
+
+
 def get_labels(language: str = "en") -> dict:
     labels = {
         "en": {
@@ -261,6 +296,12 @@ Contract text:
             filtered.append(item)
 
         data["missing_clauses"] = filtered
+
+    if (
+        jurisdiction_data.get("governing_law")
+        or jurisdiction_data.get("dispute_location")
+    ):
+        data = remove_jurisdiction_false_actions(data)
 
     data = normalize_contract_summary(data, language)
 
