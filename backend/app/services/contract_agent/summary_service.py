@@ -136,6 +136,78 @@ def detect_balancing_protections(
 
 
 
+def apply_balancing_protections(
+    summary_data: dict,
+    protections: dict,
+) -> dict:
+
+    # -------------------
+    # Termination balancing
+    # -------------------
+
+    if (
+        protections.get("cure_period")
+        or protections.get("arbitration")
+        or protections.get("severance")
+    ):
+
+        risk_filters = [
+            "sudden termination",
+            "unilateral termination",
+            "unexpected job loss",
+            "without clear recourse",
+            "vague termination",
+        ]
+
+        for field in [
+            "key_risks",
+            "dangerous_patterns",
+            "things_to_watch",
+        ]:
+
+            items = summary_data.get(field, [])
+
+            summary_data[field] = [
+                item for item in items
+                if not any(
+                    rf in item.lower()
+                    for rf in risk_filters
+                )
+            ]
+
+    # -------------------
+    # Liability balancing
+    # -------------------
+
+    if (
+        protections.get("insurance")
+    ):
+
+        liability_filters = [
+            "financial exposure",
+            "lack of protection",
+            "personal liability",
+        ]
+
+        for field in [
+            "key_risks",
+            "dangerous_patterns",
+        ]:
+
+            items = summary_data.get(field, [])
+
+            summary_data[field] = [
+                item for item in items
+                if not any(
+                    rf in item.lower()
+                    for rf in liability_filters
+                )
+            ]
+
+    return summary_data
+
+
+
 def remove_jurisdiction_false_actions(data: dict) -> dict:
     remove_terms = [
         "governing law",
@@ -323,26 +395,10 @@ Contract text:
         [text]
     )
 
-    if protections["arbitration"]:
-        data["key_risks"] = [
-            r for r in data.get("key_risks", [])
-            if "dispute" not in r.lower()
-        ]
-
-    if protections["cure_period"]:
-        data["dangerous_patterns"] = [
-            d for d in data.get(
-                "dangerous_patterns",
-                []
-            )
-            if "immediate termination" not in d.lower()
-        ]
-
-    if protections["severance"]:
-        data["key_risks"] = [
-            r for r in data.get("key_risks", [])
-            if "sudden termination" not in r.lower()
-        ]
+    data = apply_balancing_protections(
+        data,
+        protections,
+    )
 
     jurisdiction_data = extract_jurisdiction(text)
 
