@@ -772,6 +772,90 @@ def calculate_clause_importance(
 
 
 
+def detect_balancing_protections(
+    clauses: list[str],
+) -> dict:
+
+    text = "\n".join(clauses).lower()
+
+    protections = {
+        "arbitration": False,
+        "cure_period": False,
+        "severance": False,
+        "insurance": False,
+        "limitation_scope": False,
+    }
+
+    arbitration_patterns = [
+        "arbitration",
+        "arbitrage",
+        "تحكيم",
+    ]
+
+    cure_patterns = [
+        "cure within",
+        "period to cure",
+        "diligently pursue a cure",
+
+        "délai de correction",
+
+        "مهلة لتصحيح",
+    ]
+
+    severance_patterns = [
+        "lump sum",
+        "severance",
+        "salary continuation",
+
+        "indemnité",
+
+        "تعويض",
+    ]
+
+    insurance_patterns = [
+        "liability insurance",
+        "insured",
+
+        "assurance responsabilité",
+
+        "تأمين",
+    ]
+
+    limitation_patterns = [
+        "except as provided",
+        "notwithstanding",
+        "does not include",
+
+        "sauf",
+        "ne comprend pas",
+
+        "لا يشمل",
+    ]
+
+    for p in arbitration_patterns:
+        if p in text:
+            protections["arbitration"] = True
+
+    for p in cure_patterns:
+        if p in text:
+            protections["cure_period"] = True
+
+    for p in severance_patterns:
+        if p in text:
+            protections["severance"] = True
+
+    for p in insurance_patterns:
+        if p in text:
+            protections["insurance"] = True
+
+    for p in limitation_patterns:
+        if p in text:
+            protections["limitation_scope"] = True
+
+    return protections
+
+
+
 def analyze_contract_clauses(
     clauses: list[str],
     language: str = "en",

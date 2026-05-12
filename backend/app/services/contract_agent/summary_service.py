@@ -52,6 +52,90 @@ def extract_jurisdiction(text: str) -> dict:
     }
 
 
+def detect_balancing_protections(
+    clauses: list[str],
+) -> dict:
+
+    text = "\n".join(clauses).lower()
+
+    protections = {
+        "arbitration": False,
+        "cure_period": False,
+        "severance": False,
+        "insurance": False,
+        "limitation_scope": False,
+    }
+
+    arbitration_patterns = [
+        "arbitration",
+        "arbitrage",
+        "تحكيم",
+    ]
+
+    cure_patterns = [
+        "cure within",
+        "period to cure",
+        "diligently pursue a cure",
+
+        "délai de correction",
+
+        "مهلة لتصحيح",
+    ]
+
+    severance_patterns = [
+        "lump sum",
+        "severance",
+        "salary continuation",
+
+        "indemnité",
+
+        "تعويض",
+    ]
+
+    insurance_patterns = [
+        "liability insurance",
+        "insured",
+
+        "assurance responsabilité",
+
+        "تأمين",
+    ]
+
+    limitation_patterns = [
+        "except as provided",
+        "notwithstanding",
+        "does not include",
+
+        "sauf",
+        "ne comprend pas",
+
+        "لا يشمل",
+    ]
+
+    for p in arbitration_patterns:
+        if p in text:
+            protections["arbitration"] = True
+
+    for p in cure_patterns:
+        if p in text:
+            protections["cure_period"] = True
+
+    for p in severance_patterns:
+        if p in text:
+            protections["severance"] = True
+
+    for p in insurance_patterns:
+        if p in text:
+            protections["insurance"] = True
+
+    for p in limitation_patterns:
+        if p in text:
+            protections["limitation_scope"] = True
+
+    return protections
+
+
+
 def remove_jurisdiction_false_actions(data: dict) -> dict:
     remove_terms = [
         "governing law",
@@ -234,6 +318,31 @@ Contract text:
     except Exception as e:
         print("SUMMARY AI ERROR:", str(e))
         return build_empty_summary(language)
+
+    protections = detect_balancing_protections(
+        [text]
+    )
+
+    if protections["arbitration"]:
+        data["key_risks"] = [
+            r for r in data.get("key_risks", [])
+            if "dispute" not in r.lower()
+        ]
+
+    if protections["cure_period"]:
+        data["dangerous_patterns"] = [
+            d for d in data.get(
+                "dangerous_patterns",
+                []
+            )
+            if "immediate termination" not in d.lower()
+        ]
+
+    if protections["severance"]:
+        data["key_risks"] = [
+            r for r in data.get("key_risks", [])
+            if "sudden termination" not in r.lower()
+        ]
 
     jurisdiction_data = extract_jurisdiction(text)
 
