@@ -213,6 +213,46 @@ def analyze_clause(clause: str, language: str = "en") -> dict:
     return ai_result
 
 
+def should_force_red_flag_false(
+    clause_title: str,
+    clause_text: str,
+) -> bool:
+
+    text = (
+        f"{clause_title} {clause_text}"
+    ).lower()
+
+    safe_patterns = [
+
+        # Standard intro
+        "employment agreement",
+        "acceptance of employment",
+        "subject to the terms",
+        "effective as of",
+        "parties agree",
+        "mutual promises",
+
+        # Basic duration
+        "term of employment",
+        "term of agreement",
+
+        # Notices
+        "notices",
+
+        # Headings/reference
+        "headings are for reference",
+
+        # Generic acceptance
+        "accept such employment",
+
+    ]
+
+    return any(
+        pattern in text
+        for pattern in safe_patterns
+    )
+
+
 def analyze_contract_clauses(
     clauses: list[str],
     language: str = "en",
@@ -222,6 +262,13 @@ def analyze_contract_clauses(
 
     for clause in clauses[:max_clauses]:
         analysis = analyze_clause(clause, language)
+
+        if should_force_red_flag_false(
+            analysis.get("clause_title", ""),
+            clause,
+        ):
+            analysis["red_flag"] = False
+            analysis["red_flag_reason"] = ""
 
         title = analysis.get("clause_title") or extract_clause_title(clause)
 
