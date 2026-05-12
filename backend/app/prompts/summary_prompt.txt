@@ -372,3 +372,13 @@ Examples:
 - employer powers may be balanced by employee compensation protections
 
 Avoid presenting risks in isolation when the contract contains balancing protections.
+
+BALANCING RULE:
+When identifying a risk, check whether another clause reduces or balances that risk.
+Do not describe a risk as severe if the contract includes meaningful safeguards.
+
+Examples:
+- termination risk may be reduced by cure periods, notice periods, arbitration review, or compensation protections
+- confidentiality risk may be reduced by public-information carve-outs
+- liability risk may be reduced by insurance, indemnity, or caps
+- assignment risk may be reduced by successor-obligation language
