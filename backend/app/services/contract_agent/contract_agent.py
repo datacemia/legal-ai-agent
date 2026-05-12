@@ -508,6 +508,45 @@ def validate_clause_type(
 
 
 
+def validate_protective_clause(
+    analysis: dict,
+    clause_text: str,
+) -> dict:
+
+    text = clause_text.lower()
+
+    protective_patterns = [
+        "will maintain insurance",
+        "liability insurance",
+        "named insured",
+        "coverage",
+        "shall indemnify",
+        "indemnification",
+
+        "assurance responsabilité",
+        "assuré",
+        "indemniser",
+
+        "تأمين",
+        "تعويض",
+    ]
+
+    if any(p in text for p in protective_patterns):
+
+        if analysis.get("red_flag"):
+            analysis["red_flag"] = False
+            analysis["red_flag_reason"] = ""
+
+        if (
+            "financial strain"
+            in analysis.get("legal_insight", "").lower()
+        ):
+            analysis["legal_insight"] = ""
+
+    return analysis
+
+
+
 def validate_quoted_text(
     analysis: dict,
     clause_text: str,
@@ -872,6 +911,11 @@ def analyze_contract_clauses(
         )
 
         analysis = validate_clause_type(
+            analysis,
+            clause,
+        )
+
+        analysis = validate_protective_clause(
             analysis,
             clause,
         )
