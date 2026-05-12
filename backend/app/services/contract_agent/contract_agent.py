@@ -563,6 +563,42 @@ def validate_protective_clause(
 
 
 
+def validate_explicit_permission_clause(
+    analysis: dict,
+    clause_text: str,
+) -> dict:
+
+    text = clause_text.lower()
+
+    permission_patterns = [
+        "will continue to be engaged",
+        "not be considered a conflict",
+        "will not be deemed",
+        "so long as",
+        "express written consent",
+
+        "autorisé",
+        "ne sera pas considéré",
+        "à condition que",
+
+        "مسموح",
+        "لا يعتبر",
+        "بشرط أن",
+    ]
+
+    if any(p in text for p in permission_patterns):
+
+        if analysis.get("red_flag"):
+            analysis["red_flag"] = False
+            analysis["red_flag_reason"] = ""
+
+        if analysis.get("risk_level") == "high":
+            analysis["risk_level"] = "medium"
+
+    return analysis
+
+
+
 def validate_quoted_text(
     analysis: dict,
     clause_text: str,
@@ -932,6 +968,11 @@ def analyze_contract_clauses(
         )
 
         analysis = validate_protective_clause(
+            analysis,
+            clause,
+        )
+
+        analysis = validate_explicit_permission_clause(
             analysis,
             clause,
         )
