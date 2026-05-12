@@ -194,6 +194,28 @@ export default function UploadPage() {
     ? t.analyzeButton
     : t.signupCta;
 
+  const getFavoursBadgeClass = (favours: string) => {
+    const normalized = String(favours || "").toLowerCase().trim();
+
+    if (
+      ["employer", "company", "client", "vendor"].includes(normalized)
+    ) {
+      return "bg-red-100 text-red-800";
+    }
+
+    if (
+      ["employee", "contractor"].includes(normalized)
+    ) {
+      return "bg-blue-100 text-blue-800";
+    }
+
+    if (normalized === "balanced") {
+      return "bg-green-100 text-green-800";
+    }
+
+    return "bg-gray-100 text-gray-700";
+  };
+
   const refreshUserBilling = async () => {
     const token = safeGetLocalStorage("token");
 
@@ -511,11 +533,54 @@ export default function UploadPage() {
                     }
                   >
                     <div className="flex justify-between">
-                      <span>
-                        {clause.title || `${t.clause} ${index + 1}`}
-                      </span>
-                      <RiskBadge risk={clause.risk_level} language={language} />
+                      <div>
+                        <span>
+                          {clause.title || `${t.clause} ${index + 1}`}
+                        </span>
+
+                        {clause.clause_reference && (
+                          <div className="text-xs text-gray-500 mt-1">
+                            {clause.clause_reference}
+                          </div>
+                        )}
+                      </div>
+
+                      <RiskBadge
+                        risk={clause.risk_level}
+                        language={language}
+                      />
                     </div>
+
+                    {clause.favours && (
+                      <div className="mt-2 text-xs font-medium text-gray-600">
+                        Favours:{" "}
+                        <span
+                          className={`inline-flex rounded-full px-2 py-0.5 text-xs font-semibold capitalize ${getFavoursBadgeClass(
+                            clause.favours
+                          )}`}
+                        >
+                          {clause.favours}
+                        </span>
+                      </div>
+                    )}
+
+                    {clause.red_flag && (
+                      <div className="mt-4 rounded-xl border border-red-300 bg-red-50 p-4">
+                        <div className="font-bold text-red-800">
+                          🚨 Red Flag
+                        </div>
+
+                        <div className="mt-1 text-sm text-red-700">
+                          {clause.red_flag_reason}
+                        </div>
+                      </div>
+                    )}
+
+                    {clause.quoted_text && (
+                      <div className="mt-4 rounded-xl border border-gray-200 bg-gray-50 p-4 italic text-sm text-gray-700">
+                        “{clause.quoted_text}”
+                      </div>
+                    )}
 
                     <p className="mt-2 text-sm">
                       {clause.explanation_simple}
@@ -542,6 +607,30 @@ export default function UploadPage() {
                             <p className="text-amber-800 mt-1">
                               {clause.negotiation_advice}
                             </p>
+                          </div>
+                        )}
+
+                        {clause.legal_insight && (
+                          <div className="mt-4 rounded-xl border border-blue-200 bg-blue-50 p-4">
+                            <div className="font-semibold text-blue-900">
+                              Legal Insight
+                            </div>
+
+                            <div className="mt-1 text-sm text-blue-800">
+                              {clause.legal_insight}
+                            </div>
+                          </div>
+                        )}
+
+                        {clause.market_comparison && (
+                          <div className="mt-4 rounded-xl border border-purple-200 bg-purple-50 p-4">
+                            <div className="font-semibold text-purple-900">
+                              Market Comparison
+                            </div>
+
+                            <div className="mt-1 text-sm text-purple-800">
+                              {clause.market_comparison}
+                            </div>
                           </div>
                         )}
 

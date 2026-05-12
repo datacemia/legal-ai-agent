@@ -12,15 +12,34 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 def normalize_clause_result(ai_result: dict) -> dict:
     return {
         "clause_title": ai_result.get("clause_title", ""),
+        "clause_reference": ai_result.get(
+            "clause_reference",
+            ""
+        ),
+        "quoted_text": ai_result.get(
+            "quoted_text",
+            ""
+        ),
         "clause_type": ai_result.get("clause_type", "other"),
         "risk_level": ai_result.get("risk_level", "low"),
         "explanation_simple": ai_result.get("explanation_simple", ""),
         "why_it_matters": ai_result.get("why_it_matters", ""),
+        "legal_insight": ai_result.get("legal_insight", ""),
+        "favours": ai_result.get("favours", "unclear"),
+        "market_comparison": ai_result.get(
+            "market_comparison",
+            ""
+        ),
+        "red_flag": ai_result.get("red_flag", False),
+        "red_flag_reason": ai_result.get("red_flag_reason", ""),
         "recommendation": ai_result.get("recommendation", ""),
         "confidence": ai_result.get("confidence", "low"),
         "safer_alternative": ai_result.get("safer_alternative", ""),
         "negotiation_advice": ai_result.get("negotiation_advice", ""),
-        "negotiation_priority": ai_result.get("negotiation_priority", "medium"),
+        "negotiation_priority": ai_result.get(
+            "negotiation_priority",
+            "medium"
+        ),
     }
 
 
@@ -50,11 +69,18 @@ Clause:
     except Exception:
         ai_result = {
             "clause_title": "",
+            "clause_reference": "",
+            "quoted_text": "",
             "clause_type": "unknown",
             "risk_level": "low",
             "explanation_simple": "Could not parse AI response",
-            "recommendation": "Review manually",
             "why_it_matters": "Not specified",
+            "legal_insight": "",
+            "favours": "unclear",
+            "market_comparison": "",
+            "red_flag": False,
+            "red_flag_reason": "",
+            "recommendation": "Review manually",
             "confidence": "low",
             "safer_alternative": "",
             "negotiation_advice": "Review this clause manually.",
@@ -93,7 +119,10 @@ def analyze_contract_clauses(
         analysis = analyze_clause(clause, language)
 
         results.append({
-            "title": analysis.get("clause_title") or extract_clause_title(clause),
+            "title": (
+                analysis.get("clause_title")
+                or extract_clause_title(clause)
+            ),
             "original_text": clause[:1000],
             **analysis,
         })

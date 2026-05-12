@@ -8,10 +8,17 @@ The JSON must follow this exact structure:
 
 {
   "clause_title": "Short clause title in the requested output language",
+  "clause_reference": "",
+  "quoted_text": "",
   "clause_type": "payment | termination | confidentiality | intellectual_property | liability | penalty | exclusivity | non_compete | other",
   "risk_level": "low | medium | high",
   "explanation_simple": "Explain the clause in simple human language.",
   "why_it_matters": "Explain why this clause matters for the user.",
+  "legal_insight": "Explain the deeper legal or business implication of this clause.",
+  "favours": "Which party benefits most from this clause.",
+  "market_comparison": "Compare the clause against common market practice.",
+  "red_flag": false,
+  "red_flag_reason": "",
   "recommendation": "Give a practical recommendation.",
   "confidence": "low | medium | high",
   "safer_alternative": "Provide a safer rewritten version of the clause if the clause is risky. Otherwise return an empty string.",
@@ -35,6 +42,86 @@ Rules:
 - Do not include explanations outside the JSON.
 - Respond in the requested output language.
 
+LEGAL INSIGHT REQUIREMENTS:
+
+- Explain the hidden legal, financial, operational, or negotiation impact of the clause.
+- Identify leverage imbalance when relevant.
+- Detect unusually broad, vague, one-sided, or aggressive language.
+- Explain real-world consequences before signing.
+- Focus on practical business implications, not legal theory.
+- If the clause is standard/common, explicitly say so.
+- If the clause is unusually favorable to one party, explain why.
+
+FAVOURS ANALYSIS RULES:
+
+- Identify which party benefits most from the clause.
+- Use practical business interpretation, not formal legal theory.
+- Examples:
+  - employer
+  - employee
+  - company
+  - contractor
+  - client
+  - vendor
+  - balanced
+  - unclear
+
+- If the clause creates asymmetric leverage, explain it.
+- If both parties benefit equally, return "balanced".
+- If impossible to determine, return "unclear".
+
+MARKET COMPARISON RULES:
+
+- Compare the clause against common business and legal market standards.
+- Explain whether the clause is:
+  - standard
+  - aggressive
+  - unusually broad
+  - unusually restrictive
+  - employee-friendly
+  - employer-friendly
+  - investor-friendly
+  - balanced
+
+- Focus on practical commercial standards.
+- If the clause is common in the market, explicitly say so.
+- If uncertain, say that market comparison confidence is limited.
+
+RED FLAG RULES:
+
+Set red_flag = true when the clause contains:
+- unlimited liability
+- vague termination powers
+- broad IP assignment
+- excessive non-compete duration
+- unilateral amendment rights
+- automatic renewal traps
+- broad indemnification
+- arbitration waivers
+- unclear payment obligations
+- severe penalty clauses
+- asymmetric assignment rights
+- one-sided obligations
+- unusually aggressive legal language
+
+If red_flag = true:
+- explain the specific issue clearly in red_flag_reason
+- focus on practical business and legal consequences
+
+CITATION RULES:
+
+- Extract the visible clause title, article number, or section number if available.
+- Examples:
+  - Section 4.2
+  - Article 7
+  - المادة 5
+  - Clause 8
+
+- quoted_text should contain the most important sentence or excerpt from the clause.
+- Keep quoted_text concise.
+- Do not invent references that do not exist.
+- If no visible reference exists, return an empty string.
+
 IMPORTANT:
 - Use ONLY the requested output language.
 - The input contract language may be different from the output language.
@@ -49,7 +136,9 @@ IMPORTANT:
 - Section titles and explanations must use the same language.
 
 CRITICAL:
-- explanation_simple, why_it_matters, recommendation,
-  safer_alternative, negotiation_advice, and clause_title
+- explanation_simple, why_it_matters, legal_insight, recommendation,
+  safer_alternative, negotiation_advice, clause_title,
+  market_comparison, and red_flag_reason
   MUST be entirely written in the requested output language.
+- quoted_text and clause_reference may remain in the original contract language.
 - Mixed-language responses are forbidden.
