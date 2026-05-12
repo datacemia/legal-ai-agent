@@ -93,6 +93,14 @@ Identify whether the agreement appears to involve:
 - investment/funding
 - licensing/IP transfer
 - partnership/joint venture
+- SaaS/software agreements
+- NDA/confidentiality agreements
+- distribution/reseller agreements
+- sales/purchase agreements
+- lease/rental agreements
+- loan/financing agreements
+- agency/representation agreements
+- shareholder/investment agreements
 
 Adjust analysis accordingly.
 
@@ -328,3 +336,20 @@ STRICT FACTUALITY RULES:
 
 - Avoid generic AI legal warnings.
 - Focus only on materially supported risks.
+
+LIMITED CONTEXT RULE:
+The contract text may be incomplete, truncated, or missing schedules/exhibits.
+Do not assume missing sections exist unless explicitly referenced.
+Reduce confidence when material context appears missing.
+
+RISK CALIBRATION RULE:
+Do not present ordinary commercial risk as severe legal danger.
+Differentiate between:
+- standard commercial exposure
+- materially aggressive legal exposure
+
+Only escalate issues that create meaningful financial, operational, or litigation risk.
+
+MATERIALITY RANKING RULE:
+Prioritize the most economically and operationally important clauses.
+Do not give equal analytical weight to introductory or administrative clauses.

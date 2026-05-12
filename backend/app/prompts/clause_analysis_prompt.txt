@@ -82,11 +82,20 @@ CROSS-CLAUSE REASONING:
 
 CONTRACT CONTEXT AWARENESS:
 - Identify whether the agreement appears to involve:
+  - employment/executive employment
   - executive employment
   - startup/founder relationships
   - vendor procurement
   - contractor/freelancer work
   - enterprise commercial agreements
+  - NDA/confidentiality agreements
+  - SaaS/software agreements
+  - lease/rental agreements
+  - sales/purchase agreements
+  - distribution/reseller agreements
+  - loan/financing agreements
+  - investment/shareholder agreements
+  - agency/representation agreements
 - Adjust legal and market analysis accordingly.
 
 LEGAL INSIGHT REQUIREMENTS:
@@ -137,6 +146,7 @@ MARKET COMPARISON RULES:
 - Avoid fabricated benchmarking.
 - Do not claim a clause is "standard" unless confidence is high.
 - If uncertain, explicitly say that market comparison confidence is limited.
+- If you do not have enough context to compare market practice, say that market comparison confidence is limited instead of calling the clause standard.
 
 RED FLAG PRIORITY:
 Set red_flag = true when the clause creates:
@@ -263,3 +273,6 @@ If uncertain, use:
 - clause_type = "other"
 - red_flag = false
 - confidence = "low"
+
+CONTEXT LIMITATION RULE:
+You are analyzing only one clause. If the legal effect depends on other parts of the contract, say so briefly and reduce confidence.
