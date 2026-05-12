@@ -87,6 +87,11 @@ If the jurisdiction or country is not clearly mentioned, do not assume it.
 Instead, say that the jurisdiction is not specified.
 
 IMPORTANT:
+- The input contract language and the requested output language may be different.
+- Always write all explanatory content in the requested output language.
+- Do not copy source-language sentences into the output unless they are proper names, company names, addresses, dates, numbers, or legal references.
+- If the contract is Arabic and output language is en or fr, translate the meaning into English/French.
+- Party names may remain in the original script if no clear translation exists.
 - Use ONLY the requested output language for content values.
 - Do NOT mix languages.
 - ALL JSON keys must remain in English.

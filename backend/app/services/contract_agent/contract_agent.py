@@ -11,6 +11,7 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 
 def normalize_clause_result(ai_result: dict) -> dict:
     return {
+        "clause_title": ai_result.get("clause_title", ""),
         "clause_type": ai_result.get("clause_type", "other"),
         "risk_level": ai_result.get("risk_level", "low"),
         "explanation_simple": ai_result.get("explanation_simple", ""),
@@ -48,6 +49,7 @@ Clause:
 
     except Exception:
         ai_result = {
+            "clause_title": "",
             "clause_type": "unknown",
             "risk_level": "low",
             "explanation_simple": "Could not parse AI response",
@@ -88,10 +90,12 @@ def analyze_contract_clauses(
     results = []
 
     for clause in clauses[:10]:
+        analysis = analyze_clause(clause, language)
+
         results.append({
-            "title": extract_clause_title(clause),
+            "title": analysis.get("clause_title") or extract_clause_title(clause),
             "original_text": clause[:1000],
-            **analyze_clause(clause, language)
+            **analysis,
         })
 
     return results

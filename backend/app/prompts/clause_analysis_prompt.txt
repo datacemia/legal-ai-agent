@@ -35,6 +35,9 @@ Rules:
 - Respond in the requested output language.
 
 IMPORTANT:
-- Use ONLY the language of the input contract.
+- Use ONLY the requested output language.
+- The input contract language may be different from the output language.
+- Translate explanations, recommendations, safer alternatives, and negotiation advice into the requested output language.
+- Keep company names, party names, dates, numbers, and legal references unchanged if needed.
 - Do NOT mix languages in the response.
 - Section titles and explanations must use the same language.
