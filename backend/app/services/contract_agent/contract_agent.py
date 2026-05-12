@@ -593,7 +593,14 @@ def validate_explicit_permission_clause(
             analysis["red_flag_reason"] = ""
 
         if analysis.get("risk_level") == "high":
+
             analysis["risk_level"] = "medium"
+
+        elif analysis.get("risk_level") == "medium":
+
+            analysis["risk_level"] = "low"
+
+            analysis["negotiation_priority"] = "low"
 
     return analysis
 
@@ -955,6 +962,7 @@ def detect_protective_beneficiary(
 
     protective_patterns = [
         "company will maintain insurance",
+        "will maintain officers and directors liability insurance",
         "company shall indemnify",
         "company will reimburse",
         "coverage for",
