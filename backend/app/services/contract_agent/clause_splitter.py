@@ -129,6 +129,25 @@ def clean_clause_text(text: str) -> str:
     return text.strip()
 
 
+def is_low_value_clause(clause: str) -> bool:
+    text = clause.lower().strip()
+
+    low_value_patterns = [
+        "now, therefore",
+        "now therefore",
+        "in consideration of the foregoing",
+        "mutual promises",
+        "good and valuable consideration",
+        "receipt and sufficiency",
+        "hereby expressly acknowledged",
+        "article and section headings",
+        "headings are for reference only",
+        "for reference only",
+    ]
+
+    return any(pattern in text for pattern in low_value_patterns)
+
+
 def split_into_clauses(text: str) -> List[str]:
     """
     Split a contract into logical clauses.
@@ -139,6 +158,7 @@ def split_into_clauses(text: str) -> List[str]:
     - Better duplicate filtering
     - Avoid tiny garbage clauses
     - Better malformed PDF handling
+    - Skip low-value boilerplate clauses
     """
 
     if not text or not text.strip():
@@ -218,6 +238,7 @@ def split_into_clauses(text: str) -> List[str]:
 
         seen.add(normalized)
 
-        cleaned_clauses.append(clause)
+        if not is_low_value_clause(clause):
+            cleaned_clauses.append(clause)
 
     return cleaned_clauses
