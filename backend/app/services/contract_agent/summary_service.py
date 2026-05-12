@@ -65,6 +65,10 @@ def get_labels(language: str = "en") -> dict:
             "negotiation_priorities": "Negotiation Priorities",
             "recommended_actions": "Recommended Actions",
             "practical_decision": "Practical Decision",
+            "contract_insights": "Contract Insights",
+            "hidden_risks": "Hidden Risks",
+            "power_dynamics": "Power Dynamics",
+            "cross_clause_issues": "Cross-Clause Issues",
         },
         "fr": {
             "type": "Type",
@@ -90,6 +94,10 @@ def get_labels(language: str = "en") -> dict:
             "negotiation_priorities": "Priorités de négociation",
             "recommended_actions": "Actions recommandées",
             "practical_decision": "Décision pratique",
+            "contract_insights": "Analyse globale du contrat",
+            "hidden_risks": "Risques cachés",
+            "power_dynamics": "Rapport de force",
+            "cross_clause_issues": "Problèmes entre clauses",
         },
         "ar": {
             "type": "النوع",
@@ -115,6 +123,10 @@ def get_labels(language: str = "en") -> dict:
             "negotiation_priorities": "أولويات التفاوض",
             "recommended_actions": "الإجراءات الموصى بها",
             "practical_decision": "القرار العملي",
+            "contract_insights": "رؤى حول العقد",
+            "hidden_risks": "المخاطر الخفية",
+            "power_dynamics": "ديناميكيات القوة",
+            "cross_clause_issues": "مشكلات بين البنود",
         },
     }
 
@@ -195,6 +207,10 @@ Contract text:
                     if language == "fr"
                     else "Low"
                 ),
+                "contract_insights": [],
+                "hidden_risks": [],
+                "power_dynamics": [],
+                "cross_clause_issues": [],
             }
 
         if language == "ar":
@@ -234,6 +250,14 @@ Contract text:
         dangerous_patterns = data.get("dangerous_patterns", [])
 
         contract_score = data.get("contract_score", 0)
+
+        contract_insights = data.get("contract_insights", [])
+
+        hidden_risks = data.get("hidden_risks", [])
+
+        power_dynamics = data.get("power_dynamics", [])
+
+        cross_clause_issues = data.get("cross_clause_issues", [])
 
         overall_balance = data.get("overall_balance", "")
 
@@ -361,6 +385,22 @@ Contract text:
 
         if jurisdiction_note:
             output += f"{t['jurisdiction_note']}: {jurisdiction_note}\n"
+
+        if contract_insights:
+            output += f"\n{t.get('contract_insights', 'Contract Insights')}:\n"
+            output += "\n".join([f"- {item}" for item in contract_insights])
+
+        if hidden_risks:
+            output += f"\n\n{t.get('hidden_risks', 'Hidden Risks')}:\n"
+            output += "\n".join([f"- {item}" for item in hidden_risks])
+
+        if power_dynamics:
+            output += f"\n\n{t.get('power_dynamics', 'Power Dynamics')}:\n"
+            output += "\n".join([f"- {item}" for item in power_dynamics])
+
+        if cross_clause_issues:
+            output += f"\n\n{t.get('cross_clause_issues', 'Cross-Clause Issues')}:\n"
+            output += "\n".join([f"- {item}" for item in cross_clause_issues])
 
         output += "\n"
 

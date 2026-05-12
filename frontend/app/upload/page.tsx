@@ -504,7 +504,9 @@ export default function UploadPage() {
           <div className="space-y-6">
             <div className="bg-white p-6 rounded-3xl border">
               <h2 className="text-xl font-semibold">{t.summary}</h2>
-              <p className="mt-4">{result.summary}</p>
+              <div className="mt-4 whitespace-pre-wrap text-sm leading-7 text-slate-700">
+                {result.summary}
+              </div>
             </div>
 
             <RiskScore score={result.risk_score} language={language} />
