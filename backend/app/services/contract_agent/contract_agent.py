@@ -66,7 +66,13 @@ Clause:
         content = response.choices[0].message.content
         ai_result = json.loads(content)
 
-    except Exception:
+    except Exception as e:
+        print("CLAUSE AI ERROR:", str(e))
+        print(
+            "RAW CONTENT:",
+            content if "content" in locals() else None
+        )
+
         ai_result = {
             "clause_title": "",
             "clause_reference": "",
