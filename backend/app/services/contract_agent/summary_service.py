@@ -17,6 +17,27 @@ def get_not_specified(language: str) -> str:
     return "Not specified"
 
 
+def normalize_missing_value(value: str, language: str) -> str:
+    missing_values = [
+        "Not specified",
+        "غير محدد",
+        "Non spécifié",
+        "undefined",
+        "unknown",
+    ]
+
+    if not value or str(value).strip() in missing_values:
+        if language == "fr":
+            return "Non spécifié"
+
+        if language == "ar":
+            return "غير محدد"
+
+        return "Not specified"
+
+    return value
+
+
 def get_labels(language: str = "en") -> dict:
     labels = {
         "en": {
@@ -291,6 +312,36 @@ Contract text:
             or str(jurisdiction_detected).lower() == "not specified"
         ):
             jurisdiction_detected = get_not_specified(language)
+
+        contract_type = normalize_missing_value(
+            contract_type,
+            language
+        )
+
+        duration = normalize_missing_value(
+            duration,
+            language
+        )
+
+        payment_terms = normalize_missing_value(
+            payment_terms,
+            language
+        )
+
+        overall_balance = normalize_missing_value(
+            overall_balance,
+            language
+        )
+
+        jurisdiction_detected = normalize_missing_value(
+            jurisdiction_detected,
+            language
+        )
+
+        jurisdiction_note = normalize_missing_value(
+            jurisdiction_note,
+            language
+        )
 
         output = f"{t['type']}: {contract_type}\n"
         output += f"{t['parties']}: {', '.join(parties)}\n"
