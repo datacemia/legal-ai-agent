@@ -825,6 +825,15 @@ def analyze_contract_clauses(
             )
         )
 
+        if (
+            analysis.get("risk_level") == "medium"
+            and not analysis.get("red_flag")
+            and analysis.get("clause_type") == "other"
+            and analysis.get("importance_score", 0) < 50
+        ):
+            analysis["risk_level"] = "low"
+            analysis["negotiation_priority"] = "low"
+
         if analysis.get("importance_score", 0) < 10:
             continue
 
