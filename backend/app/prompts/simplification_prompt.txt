@@ -175,3 +175,4 @@ Do not mention post-employment restrictions unless the contract explicitly conta
 - restrictive covenants
 
 Do not infer employment restrictions from confidentiality clauses alone.
+Do not say there is no remedy, penalty, or recourse if the contract contains compensation, cure period, arbitration review, indemnity, insurance, refund, replacement, service credit, or other corrective mechanism.
