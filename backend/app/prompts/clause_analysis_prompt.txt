@@ -47,3 +47,9 @@ IMPORTANT:
 - Keep company names, party names, dates, numbers, and legal references unchanged if needed.
 - Do NOT mix languages in the response.
 - Section titles and explanations must use the same language.
+
+CRITICAL:
+- explanation_simple, why_it_matters, recommendation,
+  safer_alternative, negotiation_advice, and clause_title
+  MUST be entirely written in the requested output language.
+- Mixed-language responses are forbidden.

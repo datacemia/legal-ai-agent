@@ -100,3 +100,26 @@ IMPORTANT:
 - Do NOT translate JSON keys.
 - Do NOT include markdown.
 - Do NOT include text before or after the JSON.
+
+
+CRITICAL LANGUAGE RULES:
+
+- ALL output values MUST be written in the requested output language.
+- NEVER leave Arabic text in French or English outputs.
+- NEVER leave French text in Arabic or English outputs.
+- NEVER leave English text in Arabic or French outputs.
+- Translate ALL summaries, explanations, obligations, risks, recommendations, negotiation priorities, and descriptive fields.
+- The ONLY content allowed to remain untranslated:
+  - company names
+  - legal entity names
+  - addresses
+  - dates
+  - numbers
+  - legal references
+- If output language is French:
+  - all sentences MUST be fully in French.
+- If output language is English:
+  - all sentences MUST be fully in English.
+- If output language is Arabic:
+  - all sentences MUST be fully in Arabic.
+- Mixed-language output is forbidden.
