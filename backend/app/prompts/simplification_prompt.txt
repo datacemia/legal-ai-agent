@@ -198,3 +198,11 @@ if the contract contains:
 - indemnity
 
 Only describe the remaining risk in balanced terms.
+
+Do not list absent clauses in things_to_watch.
+Do not mention missing arbitration, automatic renewal, unilateral amendment, IP assignment, non-compete, exclusivity, penalties, or post-employment restrictions unless the contract explicitly contains them or their absence creates a clear material risk.
+
+If a clause is absent, do not convert absence into a warning.
+
+Before saying something is not mentioned, check the full contract text.
+If the contract contains arbitration, governing law, amendment-by-both-parties, insurance, indemnity, cure period, or compensation remedy, do not say it is missing.
