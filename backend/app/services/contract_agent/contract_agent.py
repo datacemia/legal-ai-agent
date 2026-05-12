@@ -825,6 +825,9 @@ def analyze_contract_clauses(
             )
         )
 
+        if analysis.get("importance_score", 0) < 10:
+            continue
+
         results.append({
             "title": title,
             "original_text": clause[:1000],
