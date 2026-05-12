@@ -72,6 +72,8 @@ def remove_jurisdiction_false_actions(data: dict) -> dict:
         "recommended_actions",
         "negotiation_priorities",
         "missing_clauses",
+        "key_risks",
+        "dangerous_patterns",
     ]:
         items = data.get(key, [])
 

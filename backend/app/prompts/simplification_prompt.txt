@@ -71,7 +71,7 @@ KEY POINTS RULES:
 - Each point should be concise and actionable.
 
 THINGS TO WATCH RULES:
-Include:
+Include only if explicitly present in the contract text:
 - vague termination rights
 - aggressive confidentiality terms
 - broad intellectual property assignment
@@ -150,7 +150,13 @@ STRICT FACTUALITY RULES:
   - arbitration
   - intellectual property transfer
   unless clearly written in the contract.
+- Do NOT say the contract contains unilateral amendment rights unless the contract explicitly says one party may amend, modify, update, or change terms without the other party's consent.
+- Do NOT say the contract contains automatic renewal unless the contract explicitly says the agreement renews automatically, continues automatically, or renews unless notice is given.
+- Do NOT say the contract contains arbitration unless the contract explicitly mentions arbitration, arbitral rules, arbitrator, or an arbitration center.
+- Do NOT say the contract transfers intellectual property unless the contract explicitly mentions assignment, transfer, ownership, work product, intellectual property, copyright, patent, trademark, or similar IP language.
+- Do NOT say the contract creates non-compete obligations unless the contract explicitly restricts competition, competing work, competing business, or similar activity.
+- Do NOT say the contract creates exclusivity unless the contract explicitly uses exclusive, exclusivity, sole provider, sole supplier, or equivalent language.
 - If something is missing, do not present it as a warning.
-- Missing information may be mentioned only as "Not specified".
+- Missing information may be mentioned only as the localized equivalent of "Not specified".
 - Every item in things_to_watch must be directly supported by the contract text.
 - Avoid generic legal warnings.
