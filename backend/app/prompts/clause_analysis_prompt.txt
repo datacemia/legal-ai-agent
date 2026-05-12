@@ -245,3 +245,21 @@ CITATION RULES:
 - Keep quoted_text concise.
 - Do not invent references.
 - If no visible reference exists, return an empty string.
+
+CRITICAL FACTUALITY RULE:
+
+Do not classify a clause as:
+- non-compete
+- exclusivity
+- automatic renewal
+- unilateral amendment
+- penalty
+- arbitration waiver
+unless those concepts are explicitly stated in the clause text.
+
+Never infer hidden legal restrictions that are not directly written.
+
+If uncertain, use:
+- clause_type = "other"
+- red_flag = false
+- confidence = "low"

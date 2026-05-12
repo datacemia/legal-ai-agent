@@ -301,3 +301,30 @@ Use:
 - medium
 - high
 only.
+
+STRICT FACTUALITY RULES:
+
+- Never mention a clause, risk, obligation, restriction, renewal, penalty, or right unless it is explicitly present in the contract text.
+
+- Do NOT infer or speculate about:
+  - automatic renewal
+  - unilateral amendment rights
+  - hidden fees
+  - non-compete obligations
+  - exclusivity
+  - penalties
+  - arbitration waivers
+  - intellectual property transfer
+  unless clearly written in the contract.
+
+- If a clause is missing, only mention it in "Missing Clauses".
+- Do not transform missing clauses into existing risks.
+- Never invent legal provisions.
+
+- Every risk, warning, and recommendation must be directly supported by the contract text.
+
+- If uncertain, say:
+  "Not clearly specified in the contract."
+
+- Avoid generic AI legal warnings.
+- Focus only on materially supported risks.
