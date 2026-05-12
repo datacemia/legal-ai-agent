@@ -176,3 +176,25 @@ Do not mention post-employment restrictions unless the contract explicitly conta
 
 Do not infer employment restrictions from confidentiality clauses alone.
 Do not say there is no remedy, penalty, or recourse if the contract contains compensation, cure period, arbitration review, indemnity, insurance, refund, replacement, service credit, or other corrective mechanism.
+
+STRICT BALANCING RULE:
+Before adding any item to things_to_watch, verify whether another clause reduces that risk.
+
+Do not mention:
+- sudden job loss
+- no recourse
+- no remedy
+- unclear post-employment restrictions
+- future job limitations
+
+if the contract contains:
+- cure period
+- arbitration review
+- compensation remedy
+- severance or lump sum payment
+- confidentiality carve-out
+- explicit permission after termination
+- insurance
+- indemnity
+
+Only describe the remaining risk in balanced terms.
