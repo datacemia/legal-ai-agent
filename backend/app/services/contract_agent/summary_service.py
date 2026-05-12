@@ -1,5 +1,4 @@
 import json
-import re
 from openai import OpenAI
 
 from app.config import OPENAI_API_KEY
@@ -38,24 +37,6 @@ def normalize_missing_value(value: str, language: str) -> str:
 
     return value
 
-
-def contains_arabic(text: str) -> bool:
-    return bool(re.search(r'[\u0600-\u06FF]', text))
-
-
-def force_output_language(value: str, language: str) -> str:
-    if not isinstance(value, str):
-        return value
-
-    # French output must not contain Arabic
-    if language == "fr" and contains_arabic(value):
-        return get_not_specified(language)
-
-    # English output must not contain Arabic
-    if language == "en" and contains_arabic(value):
-        return get_not_specified(language)
-
-    return value
 
 
 def get_labels(language: str = "en") -> dict:
@@ -185,41 +166,6 @@ Contract text:
 
         try:
             data = json.loads(content)
-
-            text_fields = [
-                "contract_type",
-                "duration",
-                "payment_terms",
-                "global_summary",
-                "overall_balance",
-                "practical_decision",
-                "jurisdiction_detected",
-                "jurisdiction_note",
-            ]
-
-            for field in text_fields:
-                if field in data:
-                    data[field] = force_output_language(
-                        data[field],
-                        language
-                    )
-
-            list_fields = [
-                "main_obligations",
-                "important_points",
-                "missing_clauses",
-                "dangerous_patterns",
-                "negotiation_priorities",
-                "key_risks",
-                "recommended_actions",
-            ]
-
-            for field in list_fields:
-                if field in data and isinstance(data[field], list):
-                    data[field] = [
-                        force_output_language(item, language)
-                        for item in data[field]
-                    ]
 
         except Exception:
             not_specified = get_not_specified(language)
@@ -501,18 +447,6 @@ Contract text:
 
         content = response.choices[0].message.content
         data = json.loads(content)
-
-        data["simplified_version"] = force_output_language(
-            data.get("simplified_version", ""),
-            language
-        )
-
-        for key in ["key_points", "things_to_watch"]:
-            if key in data and isinstance(data[key], list):
-                data[key] = [
-                    force_output_language(item, language)
-                    for item in data[key]
-                ]
 
         simplified = data.get("simplified_version", "")
         key_points = data.get("key_points", [])
