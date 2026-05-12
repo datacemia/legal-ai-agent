@@ -947,6 +947,33 @@ def detect_balancing_protections(
 
 
 
+def detect_protective_beneficiary(
+    clause_text: str,
+) -> bool:
+
+    text = clause_text.lower()
+
+    protective_patterns = [
+        "company will maintain insurance",
+        "company shall indemnify",
+        "company will reimburse",
+        "coverage for",
+        "named insured",
+
+        "la société indemnisera",
+        "la société maintiendra",
+
+        "تلتزم الشركة",
+        "تقوم الشركة بالتعويض",
+    ]
+
+    return any(
+        p in text
+        for p in protective_patterns
+    )
+
+
+
 def analyze_contract_clauses(
     clauses: list[str],
     language: str = "en",
@@ -997,6 +1024,15 @@ def analyze_contract_clauses(
 
             analysis["red_flag"] = False
             analysis["red_flag_reason"] = ""
+
+        if detect_protective_beneficiary(clause):
+
+            analysis["favours"] = "employee"
+
+            if analysis.get("risk_level") == "medium":
+                analysis["risk_level"] = "low"
+
+            analysis["negotiation_priority"] = "low"
 
         title = (
             analysis.get("clause_title")
