@@ -1,32 +1,127 @@
+import os
 import re
+from typing import Optional
+
 import fitz
-import pdfplumber 
+import pdfplumber
 from docx import Document
 
 MAX_PAGES = 20
 MAX_CHARS = 200_000
 
 
+ARABIC_FIXES = {
+    "لالستشارات": "للاستشارات",
+    "األطراف": "الأطراف",
+    "األضرار": "الأضرار",
+    "اإلنهاء": "الإنهاء",
+    "اإلخلال": "الإخلال",
+    "اإلتفاق": "الاتفاق",
+    "األول": "الأول",
+    "األولى": "الأولى",
+}
+
+
 def clean_text(text: str) -> str:
-    text = re.sub(r'\n{3,}', '\n\n', text)
+    if not text:
+        return ""
 
-    text = re.sub(r'[ \t]+', ' ', text)
+    text = text.replace("\x00", " ")
 
-    text = re.sub(r'Page\s+\d+', '', text, flags=re.IGNORECASE)
+    text = re.sub(r"[ \t]+", " ", text)
+    text = re.sub(r"\n[ \t]+", "\n", text)
+    text = re.sub(r"[ \t]+\n", "\n", text)
 
-    text = re.sub(r'\b\d+\s*\|\s*Page\b', '', text)
+    text = re.sub(r"\n{3,}", "\n\n", text)
 
-    text = re.sub(r'_{3,}', '', text)
+    # Remove common page markers
+    text = re.sub(r"(?im)^\s*page\s+\d+\s*$", "", text)
+    text = re.sub(r"(?im)^\s*\d+\s*\|\s*page\s*$", "", text)
+    text = re.sub(r"(?im)^\s*صفحة\s+\d+\s*$", "", text)
 
-    text = text.replace("لالستشارات", "للاستشارات")
-    text = text.replace("األطراف", "الأطراف")
-    text = text.replace("األضرار", "الأضرار")
+    # Remove long signature/underline artifacts
+    text = re.sub(r"_{3,}", "", text)
+    text = re.sub(r"-{5,}", "", text)
 
-    return text.strip()
+    for wrong, correct in ARABIC_FIXES.items():
+        text = text.replace(wrong, correct)
+
+    return text.strip()[:MAX_CHARS]
 
 
-def extract_text_from_pdf(file_path: str) -> str:
-    text = ""
+def text_quality_score(text: str) -> int:
+    if not text or not text.strip():
+        return 0
+
+    score = 0
+    stripped = text.strip()
+
+    if len(stripped) > 500:
+        score += 30
+    elif len(stripped) > 100:
+        score += 15
+
+    if "\n" in stripped:
+        score += 10
+
+    if re.search(r"\b(agreement|contract|article|section|clause)\b", stripped, re.I):
+        score += 20
+
+    if re.search(r"(المادة|العقد|الاتفاق|البند|الطرف)", stripped):
+        score += 20
+
+    if re.search(r"\d+(\.\d+)?", stripped):
+        score += 10
+
+    # Penalize extraction noise
+    weird_chars = len(re.findall(r"[�□■●◆]", stripped))
+    if weird_chars > 10:
+        score -= 20
+
+    very_short_lines = [
+        line for line in stripped.splitlines()
+        if 0 < len(line.strip()) <= 2
+    ]
+    if len(very_short_lines) > 30:
+        score -= 15
+
+    return max(score, 0)
+
+
+def extract_text_from_pdf_pymupdf(file_path: str) -> str:
+    try:
+        doc = fitz.open(file_path)
+    except Exception as e:
+        raise ValueError(f"Failed to open PDF with PyMuPDF: {e}")
+
+    text_parts = []
+
+    try:
+        total_pages = min(len(doc), MAX_PAGES)
+
+        for page_num in range(total_pages):
+            page = doc.load_page(page_num)
+            page_text = page.get_text("text") or ""
+
+            if page_text.strip():
+                text_parts.append(page_text)
+
+            if sum(len(part) for part in text_parts) > MAX_CHARS:
+                break
+
+    finally:
+        doc.close()
+
+    text = clean_text("\n".join(text_parts))
+
+    if not text:
+        raise ValueError("Empty or unreadable PDF with PyMuPDF")
+
+    return text
+
+
+def extract_text_from_pdf_pdfplumber(file_path: str) -> str:
+    text_parts = []
 
     try:
         with pdfplumber.open(file_path) as pdf:
@@ -35,74 +130,109 @@ def extract_text_from_pdf(file_path: str) -> str:
             for i in range(total_pages):
                 page = pdf.pages[i]
 
-                page_text = page.extract_text()
-                if page_text:
-                    text += page_text + "\n"
+                page_text = page.extract_text(
+                    x_tolerance=1,
+                    y_tolerance=3,
+                ) or ""
 
-                if len(text) > MAX_CHARS:
+                if page_text.strip():
+                    text_parts.append(page_text)
+
+                if sum(len(part) for part in text_parts) > MAX_CHARS:
                     break
 
-    except Exception:
-        raise ValueError("Failed to process PDF")
+    except Exception as e:
+        raise ValueError(f"Failed to process PDF with pdfplumber: {e}")
 
-    if not text.strip():
-        raise ValueError("Empty or unreadable PDF")
+    text = clean_text("\n".join(text_parts))
 
-    return clean_text(text)
+    if not text:
+        raise ValueError("Empty or unreadable PDF with pdfplumber")
+
+    return text
 
 
-def extract_text_from_pdf_pymupdf(file_path: str) -> str:
-    text = ""
+def extract_text_from_pdf(file_path: str) -> str:
+    candidates = []
 
-    try:
-        doc = fitz.open(file_path)
+    for extractor in (
+        extract_text_from_pdf_pymupdf,
+        extract_text_from_pdf_pdfplumber,
+    ):
+        try:
+            extracted = extractor(file_path)
+            candidates.append(extracted)
+        except Exception:
+            continue
 
-        total_pages = min(len(doc), MAX_PAGES)
+    if not candidates:
+        raise ValueError("Failed to extract readable text from PDF")
 
-        for page_num in range(total_pages):
-            page = doc.load_page(page_num)
+    best_text = max(candidates, key=text_quality_score)
 
-            page_text = page.get_text()
+    if text_quality_score(best_text) < 20:
+        raise ValueError("PDF text quality is too low or unreadable")
 
-            if page_text:
-                text += page_text + "\n"
+    return best_text
 
-            if len(text) > MAX_CHARS:
-                break
 
-    except Exception:
-        raise ValueError("Failed to process PDF with PyMuPDF")
+def extract_docx_tables(doc: Document) -> list[str]:
+    table_texts = []
 
-    if not text.strip():
-        raise ValueError("Empty or unreadable PDF")
+    for table in doc.tables:
+        rows = []
 
-    return clean_text(text)
+        for row in table.rows:
+            cells = [
+                cell.text.strip()
+                for cell in row.cells
+                if cell.text and cell.text.strip()
+            ]
+
+            if cells:
+                rows.append(" | ".join(cells))
+
+        if rows:
+            table_texts.append("\n".join(rows))
+
+    return table_texts
 
 
 def extract_text_from_docx(file_path: str) -> str:
     try:
         doc = Document(file_path)
-        paragraphs = [p.text for p in doc.paragraphs if p.text.strip()]
-        text = "\n".join(paragraphs)
 
-    except Exception:
-        raise ValueError("Failed to process DOCX")
+        paragraphs = [
+            p.text.strip()
+            for p in doc.paragraphs
+            if p.text and p.text.strip()
+        ]
 
-    if not text.strip():
+        tables = extract_docx_tables(doc)
+
+        text = "\n".join(paragraphs + tables)
+
+    except Exception as e:
+        raise ValueError(f"Failed to process DOCX: {e}")
+
+    text = clean_text(text)
+
+    if not text:
         raise ValueError("Empty or unreadable DOCX")
 
-    return clean_text(text)
+    return text
 
 
-def extract_text(file_path: str, file_type: str) -> str:
-    if file_type == "pdf":
-        try:
-            return extract_text_from_pdf_pymupdf(file_path)
+def extract_text(file_path: str, file_type: Optional[str]) -> str:
+    if not file_path or not os.path.exists(file_path):
+        raise ValueError("File does not exist")
 
-        except Exception:
-            return extract_text_from_pdf(file_path)
+    normalized_type = (file_type or "").lower().strip().replace(".", "")
 
-    if file_type == "docx":
+    if normalized_type == "pdf":
+        return extract_text_from_pdf(file_path)
+
+    if normalized_type == "docx":
         return extract_text_from_docx(file_path)
 
     raise ValueError("Unsupported file type")

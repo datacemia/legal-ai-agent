@@ -1,42 +1,14 @@
-import json
-from openai import OpenAI
-
-from app.config import OPENAI_API_KEY
 from app.utils.prompt_loader import load_prompt
-
-client = OpenAI(api_key=OPENAI_API_KEY)
-
-
-def get_not_specified(language: str) -> str:
-    if language == "fr":
-        return "Non spécifié"
-
-    if language == "ar":
-        return "غير محدد"
-
-    return "Not specified"
+from app.services.contract_agent.ai_client import call_json_ai
+from app.services.contract_agent.summary_normalizer import (
+    get_not_specified,
+    normalize_contract_summary,
+    normalize_simplified_contract,
+)
 
 
-def normalize_missing_value(value: str, language: str) -> str:
-    missing_values = [
-        "Not specified",
-        "غير محدد",
-        "Non spécifié",
-        "undefined",
-        "unknown",
-    ]
-
-    if not value or str(value).strip() in missing_values:
-        if language == "fr":
-            return "Non spécifié"
-
-        if language == "ar":
-            return "غير محدد"
-
-        return "Not specified"
-
-    return value
-
+MAX_SUMMARY_CHARS = 12_000
+MAX_SIMPLIFICATION_CHARS = 12_000
 
 
 def get_labels(language: str = "en") -> dict:
@@ -53,7 +25,6 @@ def get_labels(language: str = "en") -> dict:
             "no_text": "No text found.",
             "summary_unavailable": "Summary unavailable. Preview:",
             "simplified_unavailable": "Simplified version unavailable. Preview:",
-            "not_specified": "Not specified",
             "contract_score": "Contract Score",
             "contract_complexity": "Contract Complexity",
             "overall_balance": "Overall Balance",
@@ -65,10 +36,6 @@ def get_labels(language: str = "en") -> dict:
             "negotiation_priorities": "Negotiation Priorities",
             "recommended_actions": "Recommended Actions",
             "practical_decision": "Practical Decision",
-            "contract_insights": "Contract Insights",
-            "hidden_risks": "Hidden Risks",
-            "power_dynamics": "Power Dynamics",
-            "cross_clause_issues": "Cross-Clause Issues",
         },
         "fr": {
             "type": "Type",
@@ -82,7 +49,6 @@ def get_labels(language: str = "en") -> dict:
             "no_text": "Aucun texte trouvé.",
             "summary_unavailable": "Résumé indisponible. Aperçu :",
             "simplified_unavailable": "Version simplifiée indisponible. Aperçu :",
-            "not_specified": "Non spécifié",
             "contract_score": "Score du contrat",
             "contract_complexity": "Complexité du contrat",
             "overall_balance": "Équilibre du contrat",
@@ -94,10 +60,6 @@ def get_labels(language: str = "en") -> dict:
             "negotiation_priorities": "Priorités de négociation",
             "recommended_actions": "Actions recommandées",
             "practical_decision": "Décision pratique",
-            "contract_insights": "Analyse globale du contrat",
-            "hidden_risks": "Risques cachés",
-            "power_dynamics": "Rapport de force",
-            "cross_clause_issues": "Problèmes entre clauses",
         },
         "ar": {
             "type": "النوع",
@@ -111,7 +73,6 @@ def get_labels(language: str = "en") -> dict:
             "no_text": "لم يتم العثور على نص.",
             "summary_unavailable": "الملخص غير متاح. معاينة:",
             "simplified_unavailable": "النسخة المبسطة غير متاحة. معاينة:",
-            "not_specified": "غير محدد",
             "contract_score": "درجة العقد",
             "contract_complexity": "تعقيد العقد",
             "overall_balance": "توازن العقد",
@@ -123,37 +84,168 @@ def get_labels(language: str = "en") -> dict:
             "negotiation_priorities": "أولويات التفاوض",
             "recommended_actions": "الإجراءات الموصى بها",
             "practical_decision": "القرار العملي",
-            "contract_insights": "رؤى حول العقد",
-            "hidden_risks": "المخاطر الخفية",
-            "power_dynamics": "ديناميكيات القوة",
-            "cross_clause_issues": "مشكلات بين البنود",
         },
     }
 
     return labels.get(language, labels["en"])
 
 
-def calculate_global_risk(analysis_results: list[dict]) -> dict:
-    high_count = sum(1 for item in analysis_results if item["risk_level"] == "high")
-    medium_count = sum(1 for item in analysis_results if item["risk_level"] == "medium")
+def translate_complexity(value: str, language: str) -> str:
+    mapping = {
+        "en": {"low": "Low", "medium": "Medium", "high": "High"},
+        "fr": {"low": "Faible", "medium": "Moyenne", "high": "Élevée"},
+        "ar": {"low": "منخفض", "medium": "متوسط", "high": "مرتفع"},
+    }
 
-    if high_count > 0:
-        return {"risk_level": "high", "risk_score": 80}
+    return mapping.get(language, mapping["en"]).get(value, value)
 
-    if medium_count > 0:
-        return {"risk_level": "medium", "risk_score": 50}
 
-    return {"risk_level": "low", "risk_score": 20}
+def build_empty_summary(language: str = "en") -> dict:
+    ns = get_not_specified(language)
+
+    return normalize_contract_summary(
+        {
+            "contract_type": ns,
+            "parties": [ns],
+            "duration": ns,
+            "payment_terms": ns,
+            "main_obligations": [],
+            "global_summary": ns,
+            "important_points": [],
+            "missing_clauses": [],
+            "dangerous_patterns": [],
+            "contract_score": 0,
+            "overall_balance": ns,
+            "negotiation_priorities": [],
+            "key_risks": [],
+            "practical_decision": ns,
+            "jurisdiction_detected": ns,
+            "jurisdiction_note": ns,
+            "recommended_actions": [],
+            "contract_complexity": "medium",
+        },
+        language,
+    )
+
+
+def generate_summary_data(text: str, language: str = "en") -> dict:
+    """
+    New structured summary function.
+
+    Returns a clean dict that can later be rendered by the frontend.
+    generate_summary() below still returns text for backward compatibility.
+    """
+
+    if not text or not text.strip():
+        return build_empty_summary(language)
+
+    prompt_template = load_prompt("summary_prompt.txt")
+    contract_text = text[:MAX_SUMMARY_CHARS]
+
+    prompt = f"""
+{prompt_template}
+
+Output language: {language}
+
+Contract text:
+{contract_text}
+""".strip()
+
+    try:
+        data = call_json_ai(prompt)
+    except Exception as e:
+        print("SUMMARY AI ERROR:", str(e))
+        return build_empty_summary(language)
+
+    return normalize_contract_summary(data, language)
+
+
+def render_summary_text(data: dict, language: str = "en") -> str:
+    """
+    Backward-compatible text renderer.
+
+    Keep this while your frontend still expects a formatted string.
+    Later, your frontend should render generate_summary_data() directly.
+    """
+
+    t = get_labels(language)
+
+    output = ""
+    output += f"{t['type']}: {data['contract_type']}\n"
+    output += f"{t['parties']}: {', '.join(data['parties'])}\n"
+    output += f"{t['duration']}: {data['duration']}\n"
+    output += f"{t['payment']}: {data['payment_terms']}\n\n"
+
+    output += f"{t['summary']}:\n{data['global_summary']}\n\n"
+    output += f"{t['contract_score']}: {data['contract_score']}/100\n"
+    output += (
+        f"{t['contract_complexity']}: "
+        f"{translate_complexity(data['contract_complexity'], language)}\n"
+    )
+    output += f"{t['overall_balance']}: {data['overall_balance']}\n"
+    output += f"{t['jurisdiction']}: {data['jurisdiction_detected']}\n"
+
+    if data.get("jurisdiction_note"):
+        output += f"{t['jurisdiction_note']}: {data['jurisdiction_note']}\n"
+
+    sections = [
+        ("main_obligations", "main_obligations"),
+        ("important_points", "key_points"),
+        ("missing_clauses", "missing_clauses"),
+        ("dangerous_patterns", "dangerous_patterns"),
+        ("key_risks", "key_risks"),
+        ("negotiation_priorities", "negotiation_priorities"),
+        ("recommended_actions", "recommended_actions"),
+    ]
+
+    for data_key, label_key in sections:
+        items = data.get(data_key, [])
+        if items:
+            output += f"\n{t[label_key]}:\n"
+            output += "\n".join([f"- {item}" for item in items])
+            output += "\n"
+
+    if data.get("practical_decision"):
+        output += f"\n{t['practical_decision']}:\n"
+        output += data["practical_decision"]
+
+    return output.strip()
 
 
 def generate_summary(text: str, language: str = "en") -> str:
-    t = get_labels(language)
+    """
+    Backward-compatible function.
 
-    if not text:
-        return t["no_text"]
+    Your current app can keep calling this and receiving a string.
+    """
 
-    prompt_template = load_prompt("summary_prompt.txt")
-    contract_text = text[:6000]
+    data = generate_summary_data(text, language)
+    return render_summary_text(data, language)
+
+
+def build_empty_simplified(language: str = "en") -> dict:
+    ns = get_not_specified(language)
+
+    return normalize_simplified_contract(
+        {
+            "simplified_version": ns,
+            "key_points": [],
+            "things_to_watch": [],
+        },
+        language,
+    )
+
+
+def generate_simplified_version_data(text: str, language: str = "en") -> dict:
+    """
+    Structured simplification result.
+    """
+
+    if not text or not text.strip():
+        return build_empty_simplified(language)
+
+    prompt_template = load_prompt("simplification_prompt.txt")
+    contract_text = text[:MAX_SIMPLIFICATION_CHARS]
 
     prompt = f"""
 {prompt_template}
@@ -162,348 +254,39 @@ Output language: {language}
 
 Contract text:
 {contract_text}
-"""
+""".strip()
 
     try:
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "user", "content": prompt}
-            ],
-            temperature=0.2,
-            response_format={"type": "json_object"}
-        )
+        data = call_json_ai(prompt)
+    except Exception as e:
+        print("SIMPLIFICATION AI ERROR:", str(e))
+        return build_empty_simplified(language)
 
-        content = response.choices[0].message.content
+    return normalize_simplified_contract(data, language)
 
-        try:
-            data = json.loads(content)
 
-        except Exception:
-            not_specified = get_not_specified(language)
+def render_simplified_text(data: dict, language: str = "en") -> str:
+    t = get_labels(language)
 
-            data = {
-                "contract_type": not_specified,
-                "parties": [not_specified],
-                "duration": not_specified,
-                "payment_terms": not_specified,
-                "main_obligations": [not_specified],
-                "global_summary": not_specified,
-                "important_points": [not_specified],
-                "missing_clauses": [],
-                "dangerous_patterns": [],
-                "contract_score": 0,
-                "overall_balance": not_specified,
-                "negotiation_priorities": [],
-                "key_risks": [],
-                "practical_decision": not_specified,
-                "jurisdiction_detected": not_specified,
-                "jurisdiction_note": not_specified,
-                "recommended_actions": [],
-                "contract_complexity": (
-                    "منخفض"
-                    if language == "ar"
-                    else "Faible"
-                    if language == "fr"
-                    else "Low"
-                ),
-                "contract_insights": [],
-                "hidden_risks": [],
-                "power_dynamics": [],
-                "cross_clause_issues": [],
-            }
+    output = data.get("simplified_version", "")
 
-        if language == "ar":
-            for key in [
-                "global_summary",
-                "practical_decision",
-            ]:
-                value = data.get(key)
+    if data.get("key_points"):
+        output += f"\n\n{t['key_points']}:\n"
+        output += "\n".join([f"- {item}" for item in data["key_points"]])
 
-                if isinstance(value, str):
-                    if "Not specified" in value:
-                        data[key] = "غير محدد"
+    if data.get("things_to_watch"):
+        output += f"\n\n{t['things_to_watch']}:\n"
+        output += "\n".join([f"- {item}" for item in data["things_to_watch"]])
 
-        summary = data.get("global_summary", "")
-        contract_type = data.get(
-            "contract_type",
-            get_not_specified(language)
-        )
-        parties = data.get(
-            "parties",
-            [get_not_specified(language)]
-        )
-        duration = data.get(
-            "duration",
-            get_not_specified(language)
-        )
-        payment_terms = data.get(
-            "payment_terms",
-            get_not_specified(language)
-        )
-        main_obligations = data.get("main_obligations", [])
-
-        important_points = data.get("important_points", [])
-
-        missing_clauses = data.get("missing_clauses", [])
-
-        dangerous_patterns = data.get("dangerous_patterns", [])
-
-        contract_score = data.get("contract_score", 0)
-
-        contract_insights = data.get("contract_insights", [])
-
-        hidden_risks = data.get("hidden_risks", [])
-
-        power_dynamics = data.get("power_dynamics", [])
-
-        cross_clause_issues = data.get("cross_clause_issues", [])
-
-        overall_balance = data.get("overall_balance", "")
-
-        negotiation_priorities = data.get(
-            "negotiation_priorities",
-            []
-        )
-
-        key_risks = data.get("key_risks", [])
-
-        practical_decision = data.get(
-            "practical_decision",
-            ""
-        )
-
-        jurisdiction_detected = data.get(
-            "jurisdiction_detected",
-            get_not_specified(language)
-        )
-
-        jurisdiction_note = data.get(
-            "jurisdiction_note",
-            ""
-        )
-
-        recommended_actions = data.get(
-            "recommended_actions",
-            []
-        )
-
-        contract_complexity = data.get(
-            "contract_complexity",
-            "medium"
-        )
-
-        complexity_map = {
-            "en": {
-                "low": "Low",
-                "medium": "Medium",
-                "high": "High",
-            },
-            "fr": {
-                "low": "Faible",
-                "medium": "Moyenne",
-                "high": "Élevée",
-            },
-            "ar": {
-                "low": "منخفض",
-                "medium": "متوسط",
-                "high": "مرتفع",
-            }
-        }
-
-        contract_complexity = complexity_map.get(
-            language,
-            complexity_map["en"]
-        ).get(contract_complexity, contract_complexity)
-
-        # 🔥 FIX: translate missing values
-        if not contract_type or str(contract_type).lower() == "not specified":
-            contract_type = get_not_specified(language)
-
-        if (
-            not parties
-            or not isinstance(parties, list)
-            or all(str(p).lower() == "not specified" for p in parties)
-        ):
-            parties = [get_not_specified(language)]
-
-        if not duration or str(duration).lower() == "not specified":
-            duration = get_not_specified(language)
-
-        if not payment_terms or str(payment_terms).lower() == "not specified":
-            payment_terms = get_not_specified(language)
-
-        if (
-            not jurisdiction_detected
-            or str(jurisdiction_detected).lower() == "not specified"
-        ):
-            jurisdiction_detected = get_not_specified(language)
-
-        contract_type = normalize_missing_value(
-            contract_type,
-            language
-        )
-
-        duration = normalize_missing_value(
-            duration,
-            language
-        )
-
-        payment_terms = normalize_missing_value(
-            payment_terms,
-            language
-        )
-
-        overall_balance = normalize_missing_value(
-            overall_balance,
-            language
-        )
-
-        jurisdiction_detected = normalize_missing_value(
-            jurisdiction_detected,
-            language
-        )
-
-        jurisdiction_note = normalize_missing_value(
-            jurisdiction_note,
-            language
-        )
-
-        output = f"{t['type']}: {contract_type}\n"
-        output += f"{t['parties']}: {', '.join(parties)}\n"
-        output += f"{t['duration']}: {duration}\n"
-        output += f"{t['payment']}: {payment_terms}\n\n"
-
-        output += f"{t['summary']}:\n{summary}\n\n"
-        output += f"{t['contract_score']}: {contract_score}/100\n"
-
-        output += f"{t['contract_complexity']}: {contract_complexity}\n"
-
-        output += f"{t['overall_balance']}: {overall_balance}\n"
-
-        output += f"{t['jurisdiction']}: {jurisdiction_detected}\n"
-
-        if jurisdiction_note:
-            output += f"{t['jurisdiction_note']}: {jurisdiction_note}\n"
-
-        if contract_insights:
-            output += f"\n{t.get('contract_insights', 'Contract Insights')}:\n"
-            output += "\n".join([f"- {item}" for item in contract_insights])
-
-        if hidden_risks:
-            output += f"\n\n{t.get('hidden_risks', 'Hidden Risks')}:\n"
-            output += "\n".join([f"- {item}" for item in hidden_risks])
-
-        if power_dynamics:
-            output += f"\n\n{t.get('power_dynamics', 'Power Dynamics')}:\n"
-            output += "\n".join([f"- {item}" for item in power_dynamics])
-
-        if cross_clause_issues:
-            output += f"\n\n{t.get('cross_clause_issues', 'Cross-Clause Issues')}:\n"
-            output += "\n".join([f"- {item}" for item in cross_clause_issues])
-
-        output += "\n"
-
-        if main_obligations:
-            output += f"{t['main_obligations']}:\n"
-            output += "\n".join([f"- {item}" for item in main_obligations])
-
-        if important_points:
-            output += f"\n\n{t['key_points']}:\n"
-            output += "\n".join(
-                [f"- {item}" for item in important_points]
-            )
-
-        if missing_clauses:
-            output += f"\n\n{t['missing_clauses']}:\n"
-            output += "\n".join(
-                [f"- {item}" for item in missing_clauses]
-            )
-
-        if dangerous_patterns:
-            output += f"\n\n{t['dangerous_patterns']}:\n"
-            output += "\n".join(
-                [f"- {item}" for item in dangerous_patterns]
-            )
-
-        if key_risks:
-            output += f"\n\n{t['key_risks']}:\n"
-            output += "\n".join(
-                [f"- {item}" for item in key_risks]
-            )
-
-        if negotiation_priorities:
-            output += f"\n\n{t['negotiation_priorities']}:\n"
-            output += "\n".join(
-                [f"- {item}" for item in negotiation_priorities]
-            )
-
-        if recommended_actions:
-            output += f"\n\n{t['recommended_actions']}:\n"
-            output += "\n".join(
-                [f"- {item}" for item in recommended_actions]
-            )
-
-        if practical_decision:
-            output += (
-                f"\n\n{t['practical_decision']}:\n"
-                f"{practical_decision}"
-            )
-
-        return output
-
-    except Exception:
-        preview = text[:700]
-        return f"{t['summary_unavailable']} {preview}..."
+    return output.strip()
 
 
 def generate_simplified_version(text: str, language: str = "en") -> str:
-    t = get_labels(language)
+    """
+    Backward-compatible function.
 
-    if not text:
-        return t["no_text"]
+    Your current app can keep calling this and receiving a string.
+    """
 
-    prompt_template = load_prompt("simplification_prompt.txt")
-    contract_text = text[:6000]
-
-    prompt = f"""
-{prompt_template}
-
-Output language: {language}
-
-Contract text:
-{contract_text}
-"""
-
-    try:
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "user", "content": prompt}
-            ],
-            temperature=0.2,
-            response_format={"type": "json_object"}
-        )
-
-        content = response.choices[0].message.content
-        data = json.loads(content)
-
-        simplified = data.get("simplified_version", "")
-        key_points = data.get("key_points", [])
-        things_to_watch = data.get("things_to_watch", [])
-
-        output = simplified
-
-        if key_points:
-            output += f"\n\n{t['key_points']}:\n"
-            output += "\n".join([f"- {item}" for item in key_points])
-
-        if things_to_watch:
-            output += f"\n\n{t['things_to_watch']}:\n"
-            output += "\n".join([f"- {item}" for item in things_to_watch])
-
-        return output
-
-    except Exception:
-        preview = text[:1200]
-        return f"{t['simplified_unavailable']} {preview}..."
+    data = generate_simplified_version_data(text, language)
+    return render_simplified_text(data, language)
