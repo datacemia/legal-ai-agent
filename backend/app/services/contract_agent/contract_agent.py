@@ -523,89 +523,103 @@ def calculate_clause_importance(
     analysis: dict,
     clause_text: str,
 ) -> int:
-
     score = 0
-
     text = clause_text.lower()
-
-    # -------------------
-    # Risk weight
-    # -------------------
 
     if analysis.get("risk_level") == "high":
         score += 40
-
     elif analysis.get("risk_level") == "medium":
         score += 20
 
-    # -------------------
-    # Red flags
-    # -------------------
-
     if analysis.get("red_flag"):
         score += 30
-
-    # -------------------
-    # Important clause types
-    # -------------------
 
     important_types = {
         "termination",
         "liability",
         "intellectual_property",
         "payment",
+        "confidentiality",
         "non_compete",
+        "exclusivity",
+        "penalty",
     }
 
-    if (
-        analysis.get("clause_type")
-        in important_types
-    ):
+    if analysis.get("clause_type") in important_types:
         score += 25
 
-    # -------------------
-    # Material keywords
-    # -------------------
+    high_materiality_patterns = [
+        # Money / payment exposure
+        "lump sum", "severance", "bonus", "penalty", "liquidated damages",
+        "late payment", "unpaid", "refund", "fee", "commission",
+        "montant forfaitaire", "indemnité", "pénalité", "retard de paiement",
+        "مبلغ مقطوع", "تعويض", "غرامة", "تأخير الدفع",
 
-    material_keywords = [
-        "change of control",
-        "constructive termination",
-        "arbitration",
-        "indemnification",
-        "confidential",
-        "intellectual property",
-        "bonus",
-        "salary",
-        "severance",
-        "equity",
-        "vested",
-        "termination",
-        "exclusive",
+        # Termination / control
+        "termination", "terminate", "change of control", "constructive termination",
+        "résiliation", "mettre fin", "changement de contrôle",
+        "إنهاء", "فسخ", "تغيير السيطرة",
+
+        # Liability / indemnity
+        "liability", "indemnify", "indemnification", "damages", "irreparable injury",
+        "responsabilité", "indemniser", "dommages",
+        "مسؤولية", "تعويض", "أضرار",
+
+        # IP / ownership
+        "intellectual property", "assign any and all rights", "ownership",
+        "propriété intellectuelle", "cession des droits", "titularité",
+        "الملكية الفكرية", "التنازل عن الحقوق", "ملكية",
+
+        # Confidentiality / restrictions
+        "confidential information", "trade secrets", "non-compete", "exclusive",
+        "informations confidentielles", "secret commercial", "non-concurrence", "exclusivité",
+        "معلومات سرية", "أسرار تجارية", "عدم المنافسة", "حصري",
+
+        # Dispute / jurisdiction
+        "arbitration", "court", "governing law", "jurisdiction",
+        "arbitrage", "tribunal", "droit applicable", "juridiction",
+        "تحكيم", "محكمة", "القانون الواجب التطبيق", "الاختصاص",
+
+        # Assignment / unilateral control
+        "assign this agreement", "unilateral", "sole discretion", "automatic renewal",
+        "cession du contrat", "unilatéral", "seule discrétion", "renouvellement automatique",
+        "التنازل عن العقد", "منفرد", "تقديره المطلق", "التجديد التلقائي",
     ]
 
-    for keyword in material_keywords:
-
-        if keyword in text:
-            score += 10
-
-    # -------------------
-    # Boilerplate penalty
-    # -------------------
-
-    boilerplate = [
-        "employment agreement",
-        "acceptance of employment",
-        "subject to terms",
-        "headings are for reference",
-        "mutual promises",
-    ]
-
-    for pattern in boilerplate:
-
+    for pattern in high_materiality_patterns:
         if pattern in text:
-            score -= 25
+            score += 40
+
+    boilerplate_patterns = [
+        # English
+        "whereas",
+        "now therefore",
+        "good and valuable consideration",
+        "receipt and sufficiency",
+        "for reference only",
+        "desires to enter into",
+        "desires to employ",
+        "accept such employment",
+
+        # French
+        "considérant que",
+        "en foi de quoi",
+        "à titre indicatif",
+        "les titres sont fournis",
+
+        # Arabic
+        "حيث إن",
+        "بناء على ما سبق",
+        "وعليه",
+        "لأغراض مرجعية فقط",
+    ]
+
+    for pattern in boilerplate_patterns:
+        if pattern in text:
+            score -= 30
 
     return score
+
 
 
 def analyze_contract_clauses(
