@@ -102,6 +102,31 @@ IMPORTANT:
 - Do NOT include text before or after the JSON.
 
 
+
+Applicable law / jurisdiction rule:
+
+- Generic phrases such as:
+  - "applicable laws"
+  - "laws in force"
+  - "القوانين المعمول بها"
+  - "lois en vigueur"
+do NOT count as a specific jurisdiction.
+
+- A jurisdiction is considered specified ONLY if the contract explicitly mentions:
+  - a country
+  - a state
+  - a court
+  - an arbitration center
+  - or a governing law.
+
+- If no specific jurisdiction is identified:
+  - use "Not specified" in English
+  - use "Non spécifié" in French
+  - use "غير محدد" in Arabic
+
+- Do not leave untranslated Arabic verbs, connectors, obligations, or descriptive phrases inside French or English sentences.
+- Mixed-script sentences are forbidden unless the untranslated text is a true legal entity name.
+
 CRITICAL LANGUAGE RULES:
 
 - ALL output values MUST be written in the requested output language.
@@ -123,3 +148,12 @@ CRITICAL LANGUAGE RULES:
 - If output language is Arabic:
   - all sentences MUST be fully in Arabic.
 - Mixed-language output is forbidden.
+
+General translation rule for entities:
+
+- Do not translate real company names, personal names, addresses, registration numbers, dates, amounts, or legal references.
+- Translate generic role words around names into the requested output language.
+- If a party name contains a generic legal word such as "Company", "Société", "شركة", "LLC", "Ltd", keep the legal name stable, but make the surrounding sentence fully translated.
+- Never leave generic words like "الطرفان" untranslated when output language is English or French.
+- For French output, use "les deux parties" instead of source-language equivalents.
+- For English output, use "both parties" instead of source-language equivalents.
