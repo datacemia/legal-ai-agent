@@ -183,6 +183,14 @@ missing_clauses should identify important missing protections such as:
 
 Only mention clauses genuinely expected for the contract type.
 
+MISSING CLAUSES RULE:
+Only mention a clause as "missing" if:
+- it is commonly expected for this specific contract type
+AND
+- its absence creates meaningful legal or operational risk.
+
+Do not treat optional or uncommon clauses as missing problems.
+
 CONTRACT SCORE RULES:
 contract_score measures overall business fairness and structural quality.
 
@@ -353,3 +361,14 @@ Only escalate issues that create meaningful financial, operational, or litigatio
 MATERIALITY RANKING RULE:
 Prioritize the most economically and operationally important clauses.
 Do not give equal analytical weight to introductory or administrative clauses.
+
+BALANCING ANALYSIS RULE:
+When identifying a risk, also evaluate whether another clause in the contract reduces or balances that risk.
+
+Examples:
+- broad termination rights may be balanced by severance protections
+- confidentiality obligations may be limited by carve-outs
+- arbitration clauses may reduce litigation exposure
+- employer powers may be balanced by employee compensation protections
+
+Avoid presenting risks in isolation when the contract contains balancing protections.

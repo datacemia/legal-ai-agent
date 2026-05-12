@@ -205,6 +205,11 @@ Contract text:
             jurisdiction_data["governing_law"]
         )
 
+        data["jurisdiction_note"] = (
+            f"The contract is governed by "
+            f"{jurisdiction_data['governing_law']} law."
+        )
+
         missing = data.get("missing_clauses", [])
 
         filtered = []
@@ -226,6 +231,14 @@ Contract text:
         data["missing_clauses"] = filtered
 
     if jurisdiction_data["dispute_location"]:
+        if not data.get("jurisdiction_note"):
+            data["jurisdiction_note"] = ""
+
+        data["jurisdiction_note"] += (
+            f" Disputes are resolved in "
+            f"{jurisdiction_data['dispute_location']}."
+        )
+
         missing = data.get("missing_clauses", [])
 
         filtered = []
@@ -249,7 +262,9 @@ Contract text:
 
         data["missing_clauses"] = filtered
 
-    return normalize_contract_summary(data, language)
+    data = normalize_contract_summary(data, language)
+
+    return data
 
 
 def render_summary_text(data: dict, language: str = "en") -> str:
