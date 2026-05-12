@@ -1,3 +1,5 @@
+import re
+
 from app.utils.prompt_loader import load_prompt
 from app.services.contract_agent.ai_client import call_json_ai
 from app.services.contract_agent.summary_normalizer import (
@@ -9,6 +11,45 @@ from app.services.contract_agent.summary_normalizer import (
 
 MAX_SUMMARY_CHARS = 12_000
 MAX_SIMPLIFICATION_CHARS = 12_000
+
+
+def extract_jurisdiction(text: str) -> dict:
+    text_lower = text.lower()
+
+    governing_law_patterns = [
+        r"laws of the state of ([a-zA-Z\s]+)",
+        r"governed by the laws of ([a-zA-Z\s]+)",
+        r"governed under the laws of ([a-zA-Z\s]+)",
+        r"laws of ([a-zA-Z\s]+)",
+    ]
+
+    arbitration_patterns = [
+        r"arbitrated.*?in ([a-zA-Z\s,]+)",
+        r"resolved.*?in ([a-zA-Z\s,]+)",
+        r"courts of ([a-zA-Z\s,]+)",
+    ]
+
+    governing_law = None
+    dispute_location = None
+
+    for pattern in governing_law_patterns:
+        match = re.search(pattern, text_lower)
+
+        if match:
+            governing_law = match.group(1).strip().title()
+            break
+
+    for pattern in arbitration_patterns:
+        match = re.search(pattern, text_lower)
+
+        if match:
+            dispute_location = match.group(1).strip().title()
+            break
+
+    return {
+        "governing_law": governing_law,
+        "dispute_location": dispute_location,
+    }
 
 
 def get_labels(language: str = "en") -> dict:
@@ -157,6 +198,57 @@ Contract text:
         print("SUMMARY AI ERROR:", str(e))
         return build_empty_summary(language)
 
+    jurisdiction_data = extract_jurisdiction(text)
+
+    if jurisdiction_data["governing_law"]:
+        data["jurisdiction_detected"] = (
+            jurisdiction_data["governing_law"]
+        )
+
+        missing = data.get("missing_clauses", [])
+
+        filtered = []
+
+        for item in missing:
+            item_lower = item.lower()
+
+            if "governing law" in item_lower:
+                continue
+
+            if "juridiction" in item_lower:
+                continue
+
+            if "القانون" in item_lower:
+                continue
+
+            filtered.append(item)
+
+        data["missing_clauses"] = filtered
+
+    if jurisdiction_data["dispute_location"]:
+        missing = data.get("missing_clauses", [])
+
+        filtered = []
+
+        for item in missing:
+            item_lower = item.lower()
+
+            if "dispute" in item_lower:
+                continue
+
+            if "arbitration" in item_lower:
+                continue
+
+            if "litige" in item_lower:
+                continue
+
+            if "نزاع" in item_lower:
+                continue
+
+            filtered.append(item)
+
+        data["missing_clauses"] = filtered
+
     return normalize_contract_summary(data, language)
 
 
@@ -290,6 +382,7 @@ def generate_simplified_version(text: str, language: str = "en") -> str:
 
     data = generate_simplified_version_data(text, language)
     return render_simplified_text(data, language)
+
 
 def calculate_global_risk(analysis_results: list[dict]) -> dict:
     high_count = sum(
