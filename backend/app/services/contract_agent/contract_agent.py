@@ -546,6 +546,129 @@ def validate_quoted_text(
 
 
 
+def calibrate_risk_level(
+    analysis: dict,
+    clause_text: str,
+) -> dict:
+
+    text = clause_text.lower()
+
+    clause_type = analysis.get("clause_type")
+
+    red_flag = analysis.get("red_flag")
+
+    # -------------------
+    # Low-materiality / informational clauses
+    # -------------------
+
+    low_materiality_patterns = [
+
+        # Generic informational terms
+        "effective as of",
+        "notice address",
+        "contact information",
+        "headings",
+        "table of contents",
+        "reference only",
+        "entire agreement",
+
+        # Payment/admin
+        "invoice number",
+        "billing address",
+        "payment date",
+
+        # French
+        "à titre indicatif",
+        "adresse de notification",
+        "intégralité de l'accord",
+
+        # Arabic
+        "لأغراض مرجعية فقط",
+        "عنوان الإشعار",
+        "الاتفاق الكامل",
+    ]
+
+    informational_types = {
+        "other",
+    }
+
+    if (
+        not red_flag
+        and clause_type in informational_types
+    ):
+
+        for pattern in low_materiality_patterns:
+
+            if pattern in text:
+
+                analysis["risk_level"] = "low"
+
+                if analysis.get(
+                    "negotiation_priority"
+                ) == "medium":
+
+                    analysis[
+                        "negotiation_priority"
+                    ] = "low"
+
+                break
+
+    # -------------------
+    # High-risk validation
+    # -------------------
+
+    if analysis.get("risk_level") == "high":
+
+        high_risk_patterns = [
+
+            # Liability / indemnity
+            "unlimited liability",
+            "indemnify",
+            "indemnification",
+            "waiver of liability",
+
+            # Restrictions
+            "non-compete",
+            "exclusive",
+            "exclusivity",
+
+            # Financial penalties
+            "liquidated damages",
+            "penalty",
+            "fine",
+
+            # IP transfer
+            "assign any and all rights",
+            "irrevocable",
+
+            # French
+            "responsabilité illimitée",
+            "non-concurrence",
+            "exclusivité",
+            "pénalité",
+            "cession des droits",
+
+            # Arabic
+            "مسؤولية غير محدودة",
+            "عدم المنافسة",
+            "حصري",
+            "غرامة",
+            "التنازل عن الحقوق",
+        ]
+
+        matched = any(
+            pattern in text
+            for pattern in high_risk_patterns
+        )
+
+        if not matched and not red_flag:
+
+            analysis["risk_level"] = "medium"
+
+    return analysis
+
+
+
 def calculate_clause_importance(
     analysis: dict,
     clause_text: str,
@@ -670,6 +793,11 @@ def analyze_contract_clauses(
         )
 
         analysis = validate_quoted_text(
+            analysis,
+            clause,
+        )
+
+        analysis = calibrate_risk_level(
             analysis,
             clause,
         )
