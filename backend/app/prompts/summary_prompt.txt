@@ -373,6 +373,8 @@ Examples:
 
 Avoid presenting risks in isolation when the contract contains balancing protections.
 
+- If a risk is reduced by another clause, do not describe it as broad, severe, unilateral, or without recourse. Explain the remaining risk only in balanced terms.
+
 BALANCING RULE:
 When identifying a risk, check whether another clause reduces or balances that risk.
 Do not describe a risk as severe if the contract includes meaningful safeguards.
