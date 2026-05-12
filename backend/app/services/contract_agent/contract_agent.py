@@ -537,11 +537,27 @@ def validate_protective_clause(
             analysis["red_flag"] = False
             analysis["red_flag_reason"] = ""
 
-        if (
-            "financial strain"
-            in analysis.get("legal_insight", "").lower()
-        ):
-            analysis["legal_insight"] = ""
+        protective_negative_patterns = [
+            "financial strain",
+            "claims exceed",
+            "leaving the employee exposed",
+            "employee exposed",
+            "financial exposure",
+            "personally exposed",
+        ]
+
+        legal_insight = analysis.get(
+            "legal_insight",
+            ""
+        )
+
+        for pattern in protective_negative_patterns:
+
+            if pattern in legal_insight.lower():
+
+                analysis["legal_insight"] = ""
+
+                break
 
     return analysis
 

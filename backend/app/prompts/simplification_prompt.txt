@@ -167,3 +167,11 @@ BALANCED RISK LANGUAGE RULE:
 - If a risk is reduced by another clause, do not describe it as broad, severe, unilateral, or without recourse.
 - Explain the remaining risk only in balanced terms.
 - For things_to_watch, mention only the real remaining concern after considering any cure period, arbitration review, severance, compensation, carve-out, insurance, or limitation language.
+
+Do not mention post-employment restrictions unless the contract explicitly contains:
+- non-compete obligations
+- non-solicitation obligations
+- post-termination restrictions
+- restrictive covenants
+
+Do not infer employment restrictions from confidentiality clauses alone.
