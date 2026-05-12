@@ -16,7 +16,10 @@ CRITICAL OUTPUT RULES:
 - Do not include explanations outside JSON.
 - Do not add extra keys.
 - Always return all fields.
-- If information is missing, use "Not specified".
+- If information is missing:
+  - use "Not specified" in English
+  - use "Non spécifié" in French
+  - use "غير محدد" in Arabic
 - Do not hallucinate missing clauses or obligations.
 - Do not change the legal meaning.
 
@@ -135,3 +138,19 @@ NOT:
 - a clause-by-clause summary
 - a legal memo
 - a legal disclaimer
+
+STRICT FACTUALITY RULES:
+- Never mention a risk, clause, obligation, restriction, renewal, penalty, or right unless it is explicitly present in the contract text.
+- Do NOT infer or speculate about:
+  - automatic renewal
+  - unilateral amendment rights
+  - penalties
+  - non-compete obligations
+  - exclusivity
+  - arbitration
+  - intellectual property transfer
+  unless clearly written in the contract.
+- If something is missing, do not present it as a warning.
+- Missing information may be mentioned only as "Not specified".
+- Every item in things_to_watch must be directly supported by the contract text.
+- Avoid generic legal warnings.

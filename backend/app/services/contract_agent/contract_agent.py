@@ -418,6 +418,69 @@ def should_force_red_flag_false(
     )
 
 
+
+def validate_clause_type(
+    analysis: dict,
+    clause_text: str,
+) -> dict:
+
+    text = clause_text.lower()
+
+    clause_type = analysis.get("clause_type")
+
+    explicit_patterns = {
+        "non_compete": [
+            "non-compete",
+            "non compete",
+            "shall not compete",
+            "cannot compete",
+            "may not compete",
+            "restriction on competition",
+            "restrictive covenant",
+
+            "عدم المنافسة",
+            "non-concurrence",
+        ],
+
+        "exclusivity": [
+            "exclusive",
+            "exclusivity",
+            "sole provider",
+
+            "حصري",
+            "exclusivité",
+        ],
+
+        "penalty": [
+            "penalty",
+            "liquidated damages",
+            "fine",
+
+            "غرامة",
+            "pénalité",
+        ],
+    }
+
+    if clause_type in explicit_patterns:
+
+        matched = any(
+            pattern in text
+            for pattern in explicit_patterns[clause_type]
+        )
+
+        if not matched:
+            analysis["clause_type"] = "other"
+
+            if analysis.get("confidence") == "high":
+                analysis["confidence"] = "medium"
+
+            analysis["red_flag"] = False
+            analysis["red_flag_reason"] = ""
+
+    return analysis
+
+
+
 def calculate_clause_importance(
     analysis: dict,
     clause_text: str,
@@ -520,6 +583,11 @@ def analyze_contract_clauses(
         analysis = analyze_clause(
             clause,
             language,
+        )
+
+        analysis = validate_clause_type(
+            analysis,
+            clause,
         )
 
         if should_force_red_flag_false(
