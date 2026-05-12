@@ -521,8 +521,7 @@ export default function UploadPage() {
                       {clause.explanation_simple}
                     </p>
 
-                    {openIndex === index && (
-                      <div className="mt-4 space-y-4 text-sm">
+                    <div className="mt-4 space-y-4 text-sm">
 
                         <div>
                           <h4 className="font-semibold text-slate-900">
@@ -568,7 +567,6 @@ export default function UploadPage() {
                         )}
 
                       </div>
-                    )}
                   </div>
                 ))}
               </div>
