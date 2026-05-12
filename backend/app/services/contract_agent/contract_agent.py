@@ -429,26 +429,33 @@ def validate_clause_type(
     clause_type = analysis.get("clause_type")
 
     explicit_patterns = {
+
         "non_compete": [
             "non-compete",
             "non compete",
             "shall not compete",
-            "cannot compete",
             "may not compete",
+            "cannot compete",
             "restriction on competition",
             "restrictive covenant",
 
-            "عدم المنافسة",
             "non-concurrence",
+            "clause de non-concurrence",
+
+            "عدم المنافسة",
         ],
 
         "exclusivity": [
             "exclusive",
             "exclusivity",
             "sole provider",
+            "exclusive rights",
+
+            "exclusivité",
+            "exclusif",
 
             "حصري",
-            "exclusivité",
+            "حصرية",
         ],
 
         "penalty": [
@@ -456,26 +463,46 @@ def validate_clause_type(
             "liquidated damages",
             "fine",
 
-            "غرامة",
             "pénalité",
+            "amende",
+
+            "غرامة",
         ],
     }
 
-    if clause_type in explicit_patterns:
+    # No validation needed
+    if clause_type not in explicit_patterns:
+        return analysis
 
-        matched = any(
-            pattern in text
-            for pattern in explicit_patterns[clause_type]
+    matched = any(
+        pattern in text
+        for pattern in explicit_patterns[clause_type]
+    )
+
+    # HARD RESET if unsupported
+    if not matched:
+
+        analysis["clause_type"] = "other"
+
+        analysis["red_flag"] = False
+
+        analysis["red_flag_reason"] = ""
+
+        analysis["risk_level"] = "low"
+
+        analysis["confidence"] = "low"
+
+        analysis["recommendation"] = ""
+
+        analysis["negotiation_advice"] = ""
+
+        analysis["safer_alternative"] = ""
+
+        analysis["legal_insight"] = (
+            "The clause does not explicitly contain "
+            "a legally identifiable "
+            f"{clause_type.replace('_', ' ')} provision."
         )
-
-        if not matched:
-            analysis["clause_type"] = "other"
-
-            if analysis.get("confidence") == "high":
-                analysis["confidence"] = "medium"
-
-            analysis["red_flag"] = False
-            analysis["red_flag_reason"] = ""
 
     return analysis
 
