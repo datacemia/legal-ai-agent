@@ -25,6 +25,17 @@ ALLOWED_CONFIDENCE = {"low", "medium", "high"}
 ALLOWED_PRIORITY = {"low", "medium", "high"}
 
 
+SPECULATIVE_PATTERNS = [
+    "may not fully protect",
+    "could lead to",
+    "might create",
+    "future employment opportunities",
+    "automatic renewal",
+    "additional protections",
+    "more comprehensive",
+]
+
+
 def safe_str(value: Any) -> str:
     if value is None:
         return ""
@@ -371,7 +382,37 @@ def analyze_clause(
         language,
     )
 
+    ai_result = remove_speculative_analysis(
+        ai_result
+    )
+
     return ai_result
+
+
+def remove_speculative_analysis(
+    analysis: dict,
+) -> dict:
+
+    fields = [
+        "legal_insight",
+        "recommendation",
+        "negotiation_advice",
+        "market_comparison",
+    ]
+
+    for field in fields:
+
+        value = analysis.get(field, "")
+
+        for pattern in SPECULATIVE_PATTERNS:
+
+            if pattern.lower() in value.lower():
+
+                analysis[field] = ""
+
+                break
+
+    return analysis
 
 
 def should_force_red_flag_false(
