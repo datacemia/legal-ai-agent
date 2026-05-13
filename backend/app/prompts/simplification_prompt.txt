@@ -71,6 +71,14 @@ KEY POINTS RULES:
 - Each point should be concise and actionable.
 
 THINGS TO WATCH RULES:
+Do not mention absent clauses as warnings.
+
+Do not mention post-employment restrictions, non-compete, non-solicitation, exclusivity, automatic renewal, arbitration, unilateral amendment, penalties, or IP assignment as "missing", "unclear", or "not specified" unless:
+- the contract explicitly contains that clause; or
+- its absence creates a clear material risk for this exact contract.
+
+Never convert absence into a warning by default.
+
 Include only if explicitly present in the contract text:
 - vague termination rights
 - aggressive confidentiality terms

@@ -540,10 +540,14 @@ def validate_protective_clause(
         protective_negative_patterns = [
             "financial strain",
             "claims exceed",
+            "claims exceeding",
+            "exceeding the coverage limit",
+            "coverage limit",
             "leaving the employee exposed",
             "employee exposed",
             "financial exposure",
             "personally exposed",
+            "personal liability",
         ]
 
         legal_insight = analysis.get(
