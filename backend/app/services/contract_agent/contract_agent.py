@@ -1232,6 +1232,46 @@ def apply_conceptual_risk_calibration(
     analysis["risk_escalated"] = has_escalator
     analysis["risk_reduced"] = has_reducer
 
+    if baseline == "limited_liability":
+
+        standard_liability_patterns = [
+            "limited to the total amount paid",
+            "limited to amounts paid",
+            "plafonnée au montant payé",
+            "limitée au montant total payé",
+            "حد المسؤولية",
+        ]
+
+        severe_liability_patterns = [
+            "gross negligence excluded",
+            "intentional misconduct excluded",
+            "all damages excluded",
+            "indirect damages only",
+            "faute lourde exclue",
+            "dol exclu",
+        ]
+
+        standard_cap = any(
+            p in text
+            for p in standard_liability_patterns
+        )
+
+        severe_cap = any(
+            p in text
+            for p in severe_liability_patterns
+        )
+
+        if standard_cap and not severe_cap:
+
+            analysis["red_flag"] = False
+            analysis["red_flag_reason"] = ""
+
+            if analysis.get("risk_level") == "high":
+                analysis["risk_level"] = "medium"
+
+            if analysis.get("negotiation_priority") == "high":
+                analysis["negotiation_priority"] = "medium"
+
     if baseline in LOW_RISK_CLAUSES:
 
         if not has_escalator:
