@@ -25,6 +25,83 @@ ALLOWED_CONFIDENCE = {"low", "medium", "high"}
 ALLOWED_PRIORITY = {"low", "medium", "high"}
 
 
+LOW_RISK_CLAUSES = [
+    "governing_law",
+    "venue",
+    "payment_schedule",
+    "standard_confidentiality",
+    "fixed_term",
+    "ip_after_payment",
+    "mutual_termination_notice",
+]
+
+MEDIUM_RISK_CLAUSES = [
+    "limited_liability",
+    "broad_confidentiality",
+    "vague_payment_trigger",
+    "asymmetrical_termination",
+]
+
+HIGH_RISK_CLAUSES = [
+    "unlimited_liability",
+    "unilateral_amendment",
+    "automatic_renewal_trap",
+    "perpetual_non_compete",
+    "broad_ip_assignment",
+    "severe_penalties",
+]
+
+RISK_ESCALATORS = [
+    "unilateral",
+    "perpetual",
+    "unlimited",
+    "without notice",
+    "without remedy",
+    "sole discretion",
+    "irreversible",
+
+    "unilatéral",
+    "perpétuel",
+    "illimité",
+    "sans préavis",
+    "sans recours",
+    "seule discrétion",
+    "irréversible",
+
+    "منفرد",
+    "دائم",
+    "غير محدود",
+    "دون إشعار",
+    "دون تعويض",
+]
+
+RISK_REDUCERS = [
+    "notice period",
+    "mutual termination",
+    "cure period",
+    "arbitration",
+    "insurance",
+    "liability cap",
+    "compensation remedy",
+
+    "préavis",
+    "résiliation mutuelle",
+    "délai de correction",
+    "arbitrage",
+    "assurance",
+    "plafond de responsabilité",
+    "indemnisation",
+
+    "إشعار",
+    "إنهاء متبادل",
+    "مهلة تصحيح",
+    "تحكيم",
+    "تأمين",
+    "حد المسؤولية",
+    "تعويض",
+]
+
+
 SPECULATIVE_PATTERNS = [
     "may not fully protect",
     "could lead to",
@@ -922,6 +999,332 @@ def validate_quoted_text(
 
 
 
+def detect_clause_baseline(
+    analysis: dict,
+    clause_text: str,
+) -> str:
+
+    text = clause_text.lower()
+
+    low_patterns = {
+        "governing_law": [
+            "governing law",
+            "droit français",
+            "droit applicable",
+            "القانون الواجب التطبيق",
+        ],
+        "venue": [
+            "venue",
+            "jurisdiction",
+            "tribunaux compétents",
+            "tribunaux compétents de paris",
+            "juridiction",
+            "محكمة",
+            "الاختصاص",
+        ],
+        "payment_schedule": [
+            "payment schedule",
+            "payment date",
+            "invoice",
+            "échéancier de paiement",
+            "date de paiement",
+            "facture",
+            "جدول الدفع",
+            "فاتورة",
+        ],
+        "standard_confidentiality": [
+            "confidentiality",
+            "confidential information",
+            "confidentialité",
+            "information confidentielle",
+            "سرية",
+            "معلومات سرية",
+        ],
+        "fixed_term": [
+            "term of this agreement",
+            "fixed term",
+            "durée du contrat",
+            "durée déterminée",
+            "مدة العقد",
+        ],
+        "ip_after_payment": [
+            "transfer of ownership upon full payment",
+            "ownership transfers after full payment",
+            "assignment after payment",
+            "cession après paiement",
+            "transfert de propriété après paiement",
+            "الملكية بعد السداد",
+        ],
+        "mutual_termination_notice": [
+            "mutual termination",
+            "either party may terminate",
+            "notice period",
+            "préavis",
+            "résiliation mutuelle",
+            "إنهاء متبادل",
+        ],
+    }
+
+    medium_patterns = {
+        "limited_liability": [
+            "limitation of liability",
+            "liability cap",
+            "responsabilité limitée",
+            "plafond de responsabilité",
+            "حد المسؤولية",
+        ],
+        "broad_confidentiality": [
+            "all confidential information",
+            "toute information confidentielle",
+            "جميع المعلومات السرية",
+        ],
+        "vague_payment_trigger": [
+            "subject to approval",
+            "at discretion",
+            "déclenchement du paiement",
+            "à sa discrétion",
+            "حسب تقديره",
+        ],
+        "asymmetrical_termination": [
+            "company may terminate",
+            "client may terminate",
+            "la société peut résilier",
+            "le client peut résilier",
+            "يجوز للشركة إنهاء",
+        ],
+    }
+
+    high_patterns = {
+        "unlimited_liability": [
+            "unlimited liability",
+            "responsabilité illimitée",
+            "مسؤولية غير محدودة",
+        ],
+        "unilateral_amendment": [
+            "may amend at any time",
+            "unilaterally amend",
+            "modifier unilatéralement",
+            "تعديل من جانب واحد",
+        ],
+        "automatic_renewal_trap": [
+            "automatic renewal unless",
+            "renouvellement automatique sauf",
+            "تجديد تلقائي ما لم",
+        ],
+        "perpetual_non_compete": [
+            "perpetual non-compete",
+            "non-compete forever",
+            "non-concurrence perpétuelle",
+            "عدم منافسة دائم",
+        ],
+        "broad_ip_assignment": [
+            "assign any and all rights",
+            "all intellectual property",
+            "cession de tous les droits",
+            "التنازل عن جميع الحقوق",
+        ],
+        "severe_penalties": [
+            "liquidated damages",
+            "severe penalty",
+            "pénalité sévère",
+            "dommages-intérêts forfaitaires",
+            "تعويضات مقطوعة",
+        ],
+    }
+
+    for label, patterns in high_patterns.items():
+        if any(p in text for p in patterns):
+            return label
+
+    for label, patterns in medium_patterns.items():
+        if any(p in text for p in patterns):
+            return label
+
+    for label, patterns in low_patterns.items():
+        if any(p in text for p in patterns):
+            return label
+
+    clause_type = analysis.get("clause_type", "other")
+
+    if clause_type == "penalty":
+        return "severe_penalties"
+
+    if clause_type == "non_compete":
+        return "perpetual_non_compete" if "perpetual" in text else "asymmetrical_termination"
+
+    if clause_type == "intellectual_property":
+
+        broad_ip_patterns = [
+            "assign any and all rights",
+            "all intellectual property",
+            "irrevocable",
+            "perpetual",
+            "cession de tous les droits",
+            "irrévocable",
+            "perpétuel",
+            "التنازل عن جميع الحقوق",
+            "غير قابل للإلغاء",
+            "دائم",
+        ]
+
+        if any(
+            pattern in text
+            for pattern in broad_ip_patterns
+        ):
+            return "broad_ip_assignment"
+
+        return "ip_after_payment"
+
+    if clause_type == "liability":
+        return "limited_liability"
+
+    if clause_type == "confidentiality":
+        return "standard_confidentiality"
+
+    if clause_type == "payment":
+        return "payment_schedule"
+
+    if clause_type == "termination":
+        return "mutual_termination_notice"
+
+    return "other"
+
+
+def apply_conceptual_risk_calibration(
+    analysis: dict,
+    clause_text: str,
+) -> dict:
+
+    text = clause_text.lower()
+
+    baseline = detect_clause_baseline(
+        analysis,
+        clause_text,
+    )
+
+    has_escalator = any(
+        pattern in text
+        for pattern in RISK_ESCALATORS
+    )
+
+    has_reducer = any(
+        pattern in text
+        for pattern in RISK_REDUCERS
+    )
+
+    analysis["risk_baseline"] = baseline
+    analysis["risk_escalated"] = has_escalator
+    analysis["risk_reduced"] = has_reducer
+
+    if baseline in LOW_RISK_CLAUSES:
+
+        if not has_escalator:
+
+            analysis["red_flag"] = False
+            analysis["red_flag_reason"] = ""
+
+            if analysis.get("risk_level") in {"high", "medium"}:
+                analysis["risk_level"] = "low"
+
+            analysis["negotiation_priority"] = "low"
+
+        elif analysis.get("risk_level") == "high":
+
+            analysis["risk_level"] = "medium"
+
+            if analysis.get("negotiation_priority") == "high":
+                analysis["negotiation_priority"] = "medium"
+
+    elif baseline in MEDIUM_RISK_CLAUSES:
+
+        if has_reducer and not has_escalator:
+
+            if analysis.get("risk_level") == "high":
+                analysis["risk_level"] = "medium"
+
+            analysis["red_flag"] = False
+            analysis["red_flag_reason"] = ""
+
+        elif not has_escalator and analysis.get("risk_level") == "high":
+
+            analysis["risk_level"] = "medium"
+
+    elif baseline in HIGH_RISK_CLAUSES:
+
+        if has_reducer and not has_escalator:
+
+            if analysis.get("risk_level") == "high":
+                analysis["risk_level"] = "medium"
+
+        else:
+
+            if analysis.get("risk_level") == "low":
+                analysis["risk_level"] = "medium"
+
+    if has_reducer and analysis.get("risk_level") == "high":
+
+        analysis["risk_level"] = "medium"
+
+        if analysis.get("negotiation_priority") == "high":
+            analysis["negotiation_priority"] = "medium"
+
+    return analysis
+
+
+def normalize_importance_score(
+    results: list[dict],
+) -> int:
+
+    risk_weights = {
+        "low": 0,
+        "medium": 8,
+        "high": 20,
+    }
+
+    materiality_weights = {
+        "low": 8,
+        "medium": 16,
+        "high": 24,
+    }
+
+    if not results:
+        return 0
+
+    total_risk_points = 0
+    total_materiality_points = 0
+
+    for item in results:
+
+        risk_level = item.get("risk_level", "low")
+        materiality_level = item.get(
+            "materiality_level",
+            "medium",
+        )
+
+        total_risk_points += risk_weights.get(
+            risk_level,
+            0,
+        )
+
+        total_materiality_points += materiality_weights.get(
+            materiality_level,
+            16,
+        )
+
+    if total_materiality_points <= 0:
+        return 0
+
+    return round(
+        min(
+            100,
+            (
+                total_risk_points
+                / total_materiality_points
+            ) * 100,
+        )
+    )
+
+
 def calibrate_risk_level(
     analysis: dict,
     clause_text: str,
@@ -1232,105 +1635,163 @@ def calibrate_risk_level(
 
 
 
+def detect_clause_materiality(
+    analysis: dict,
+    clause_text: str,
+) -> str:
+
+    text = clause_text.lower()
+
+    high_materiality_patterns = [
+        "payment",
+        "bonus",
+        "termination",
+        "liability",
+        "intellectual property",
+        "ownership",
+        "confidentiality",
+        "non-compete",
+        "exclusivity",
+        "penalty",
+        "liquidated damages",
+
+        "paiement",
+        "prime",
+        "résiliation",
+        "responsabilité",
+        "propriété intellectuelle",
+        "confidentialité",
+        "non-concurrence",
+        "exclusivité",
+        "pénalité",
+
+        "دفع",
+        "مكافأة",
+        "إنهاء",
+        "مسؤولية",
+        "ملكية فكرية",
+        "سرية",
+        "عدم المنافسة",
+        "حصري",
+        "غرامة",
+    ]
+
+    medium_materiality_patterns = [
+        "governing law",
+        "jurisdiction",
+        "venue",
+        "notice",
+        "term",
+        "fixed term",
+
+        "droit applicable",
+        "droit français",
+        "juridiction",
+        "tribunaux compétents",
+        "préavis",
+        "durée",
+
+        "القانون الواجب التطبيق",
+        "الاختصاص",
+        "إشعار",
+        "مدة",
+    ]
+
+    if any(
+        pattern in text
+        for pattern in high_materiality_patterns
+    ):
+        return "high"
+
+    if any(
+        pattern in text
+        for pattern in medium_materiality_patterns
+    ):
+        return "medium"
+
+    clause_type = analysis.get("clause_type", "other")
+
+    if clause_type in {
+        "payment",
+        "termination",
+        "confidentiality",
+        "intellectual_property",
+        "liability",
+        "penalty",
+        "exclusivity",
+        "non_compete",
+    }:
+        return "high"
+
+    return "low"
+
+
 def calculate_clause_importance(
     analysis: dict,
     clause_text: str,
 ) -> int:
-    score = 0
+
     text = clause_text.lower()
 
-    if analysis.get("risk_level") == "high":
-        score += 40
-    elif analysis.get("risk_level") == "medium":
-        score += 20
+    baseline = analysis.get(
+        "risk_baseline",
+        detect_clause_baseline(analysis, clause_text),
+    )
 
-    if analysis.get("red_flag"):
-        score += 30
+    materiality_level = detect_clause_materiality(
+        analysis,
+        clause_text,
+    )
 
-    important_types = {
-        "termination",
-        "liability",
-        "intellectual_property",
-        "payment",
-        "confidentiality",
-        "non_compete",
-        "exclusivity",
-        "penalty",
+    analysis["materiality_level"] = materiality_level
+
+    materiality_points = {
+        "low": 8,
+        "medium": 16,
+        "high": 24,
     }
 
-    if analysis.get("clause_type") in important_types:
+    risk_points = {
+        "low": 0,
+        "medium": 18,
+        "high": 45,
+    }
+
+    score = materiality_points.get(
+        materiality_level,
+        16,
+    )
+
+    score += risk_points.get(
+        analysis.get("risk_level", "low"),
+        0,
+    )
+
+    # Baseline calibrates legal risk, not business importance.
+    if baseline in LOW_RISK_CLAUSES:
+        score -= 20
+
+    elif baseline in MEDIUM_RISK_CLAUSES:
+        score += 5
+
+    elif baseline in HIGH_RISK_CLAUSES:
+        score += 20
+
+    if analysis.get("risk_escalated"):
         score += 25
 
-    high_materiality_patterns = [
-        # Money / payment exposure
-        "lump sum", "severance", "bonus", "penalty", "liquidated damages",
-        "late payment", "unpaid", "refund", "fee", "commission",
-        "montant forfaitaire", "indemnité", "pénalité", "retard de paiement",
-        "مبلغ مقطوع", "تعويض", "غرامة", "تأخير الدفع",
+    if analysis.get("risk_reduced"):
+        score -= 20
 
-        # Termination / control
-        "termination", "terminate", "change of control", "constructive termination",
-        "résiliation", "mettre fin", "changement de contrôle",
-        "إنهاء", "فسخ", "تغيير السيطرة",
+    if analysis.get("red_flag"):
+        score += 25
 
-        # Liability / indemnity
-        "liability", "indemnify", "indemnification", "damages", "irreparable injury",
-        "responsabilité", "indemniser", "dommages",
-        "مسؤولية", "تعويض", "أضرار",
-
-        # IP / ownership
-        "intellectual property", "assign any and all rights", "ownership",
-        "propriété intellectuelle", "cession des droits", "titularité",
-        "الملكية الفكرية", "التنازل عن الحقوق", "ملكية",
-
-        # Confidentiality / restrictions
-        "confidential information", "trade secrets", "non-compete", "exclusive",
-        "informations confidentielles", "secret commercial", "non-concurrence", "exclusivité",
-        "معلومات سرية", "أسرار تجارية", "عدم المنافسة", "حصري",
-
-        # Dispute / jurisdiction
-        "arbitration", "court", "governing law", "jurisdiction",
-        "arbitrage", "tribunal", "droit applicable", "juridiction",
-        "تحكيم", "محكمة", "القانون الواجب التطبيق", "الاختصاص",
-
-        # Assignment / unilateral control
-        "assign this agreement", "unilateral", "sole discretion", "automatic renewal",
-        "cession du contrat", "unilatéral", "seule discrétion", "renouvellement automatique",
-        "التنازل عن العقد", "منفرد", "تقديره المطلق", "التجديد التلقائي",
-    ]
-
-    for pattern in high_materiality_patterns:
-        if pattern in text:
-            score += 40
-
-    boilerplate_patterns = [
-        # English
-        "whereas",
-        "now therefore",
-        "good and valuable consideration",
-        "receipt and sufficiency",
-        "for reference only",
-        "desires to enter into",
-        "desires to employ",
-        "accept such employment",
-
-        # French
-        "considérant que",
-        "en foi de quoi",
-        "à titre indicatif",
-        "les titres sont fournis",
-
-        # Arabic
-        "حيث إن",
-        "بناء على ما سبق",
-        "وعليه",
-        "لأغراض مرجعية فقط",
-    ]
-
-    for pattern in boilerplate_patterns:
-        if pattern in text:
-            score -= 30
-
+    if (
+        baseline == "limited_liability"
+        and not analysis.get("risk_escalated")
+        and analysis.get("favours") != "unclear"
+    ):
+        score -= 15
 
     standard_clause_patterns = [
         "tribunaux compétents de paris",
@@ -1339,8 +1800,6 @@ def calculate_clause_importance(
         "confidentiality",
         "responsabilité limitée",
         "limitation of liability",
-        "renouvellement automatique",
-        "automatic renewal",
         "assurance",
         "insurance",
     ]
@@ -1350,9 +1809,20 @@ def calculate_clause_importance(
         for pattern in standard_clause_patterns
     ):
 
-        score -= 25
+        if not analysis.get("risk_escalated"):
+            score -= 15
 
-
+    # Automatic renewal is not globally standard-safe.
+    # It is only reduced when there is no trap/escalator language.
+    if (
+        (
+            "automatic renewal" in text
+            or "renouvellement automatique" in text
+        )
+        and baseline != "automatic_renewal_trap"
+        and not analysis.get("risk_escalated")
+    ):
+        score -= 10
 
     if (
         "tribunaux compétents de paris" in text
@@ -1360,7 +1830,10 @@ def calculate_clause_importance(
     ):
         score = min(score, 20)
 
-    return score
+    return max(
+        0,
+        min(score, 100),
+    )
 
 
 
@@ -1521,6 +1994,11 @@ def analyze_contract_clauses(
             clause,
         )
 
+        analysis = apply_conceptual_risk_calibration(
+            analysis,
+            clause,
+        )
+
         if should_force_red_flag_false(
             analysis.get(
                 "clause_title",
@@ -1541,6 +2019,19 @@ def analyze_contract_clauses(
 
             analysis["negotiation_priority"] = "low"
 
+        if (
+            analysis.get("risk_level") == "medium"
+            and not analysis.get("red_flag")
+            and analysis.get("clause_type") == "other"
+            and analysis.get("risk_baseline") in LOW_RISK_CLAUSES
+        ):
+            analysis["risk_level"] = "low"
+            analysis["negotiation_priority"] = "low"
+
+        if analysis.get("risk_level") == "low":
+
+            analysis["negotiation_priority"] = "low"
+
         title = (
             analysis.get("clause_title")
             or extract_clause_title(clause)
@@ -1553,21 +2044,8 @@ def analyze_contract_clauses(
             )
         )
 
-        if (
-            analysis.get("risk_level") == "medium"
-            and not analysis.get("red_flag")
-            and analysis.get("clause_type") == "other"
-            and analysis.get("importance_score", 0) < 50
-        ):
-            analysis["risk_level"] = "low"
-            analysis["negotiation_priority"] = "low"
-
         if analysis.get("importance_score", 0) < 10:
             continue
-
-        if analysis.get("risk_level") == "low":
-
-            analysis["negotiation_priority"] = "low"
 
         results.append({
             "title": title,
@@ -1601,4 +2079,13 @@ def analyze_contract_clauses(
         seen_quotes.add(quote)
         deduped.append(item)
 
-    return deduped[:12]
+    deduped = deduped[:12]
+
+    normalized_contract_score = normalize_importance_score(
+        deduped
+    )
+
+    for item in deduped:
+        item["normalized_contract_score"] = normalized_contract_score
+
+    return deduped
