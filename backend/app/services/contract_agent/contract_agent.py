@@ -280,6 +280,16 @@ SPECULATIVE_PATTERNS = [
     "even in case of negligence",
     "dommages indirects",
     "indirect damages",
+    "dommages potentiels",
+    "potential damages",
+    "protection adéquate",
+    "adequate protection",
+    "besoins opérationnels",
+    "operational needs",
+    "option de renouvellement",
+    "renewal option",
+    "prolongation est souhaitée",
+    "extension is desired",
 ]
 
 
