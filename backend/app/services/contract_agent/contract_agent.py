@@ -2270,7 +2270,8 @@ def analyze_contract_clauses(
         seen_quotes.add(quote)
         deduped.append(item)
 
-    deduped = deduped[:12]
+    # Keep all deduplicated clauses.
+    # Do not truncate results; sorting by importance_score is preserved.
 
     normalized_contract_score = normalize_importance_score(
         deduped
