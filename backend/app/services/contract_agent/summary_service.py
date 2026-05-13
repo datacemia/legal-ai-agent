@@ -286,6 +286,47 @@ def remove_balanced_termination_dangers(
     return data
 
 
+def remove_false_missing_payment_deadline(
+    data: dict,
+    full_text: str,
+) -> dict:
+
+    text = full_text.lower()
+
+    payment_mechanism_terms = [
+        "salary",
+        "bonus",
+        "reimburse",
+        "payment",
+        "compensation",
+        "paid",
+        "invoice",
+
+        "salaire",
+        "paiement",
+        "remboursement",
+        "compensation",
+
+        "راتب",
+        "دفع",
+        "تعويض",
+        "سداد",
+    ]
+
+    if any(
+        term in text
+        for term in payment_mechanism_terms
+    ):
+
+        data["missing_clauses"] = [
+            clause
+            for clause in data.get("missing_clauses", [])
+            if "payment deadline" not in clause.lower()
+        ]
+
+    return data
+
+
 def remove_jurisdiction_false_actions(data: dict) -> dict:
     remove_terms = [
         "governing law",
@@ -554,6 +595,11 @@ Contract text:
     )
 
     data = remove_balanced_termination_dangers(
+        data,
+        text,
+    )
+
+    data = remove_false_missing_payment_deadline(
         data,
         text,
     )
