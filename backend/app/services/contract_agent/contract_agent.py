@@ -206,7 +206,6 @@ SPECULATIVE_PATTERNS = [
     "enhance protection",
     "types of claims included",
     "robust in many industries",
-    "financial exposure",
     "adequate coverage",
     "more favorable payout",
     "higher aggregate limit",
@@ -256,8 +255,6 @@ SPECULATIVE_PATTERNS = [
     "not cover all damages",
     "entièrement protégé",
     "fully protected",
-    "conséquences juridiques",
-    "legal consequences",
     "clause de renouvellement",
     "renewal clause",
     "continuité des relations commerciales",
@@ -278,12 +275,8 @@ SPECULATIVE_PATTERNS = [
     "protect financial interests",
     "même en cas de négligence",
     "even in case of negligence",
-    "dommages indirects",
-    "indirect damages",
     "dommages potentiels",
     "potential damages",
-    "protection adéquate",
-    "adequate protection",
     "besoins opérationnels",
     "operational needs",
     "option de renouvellement",
@@ -302,6 +295,13 @@ SPECULATIVE_PATTERNS = [
 RESTRICTED_RECOMMENDATION_ONLY_PATTERNS = [
     "responsabilité illimitée",
     "unlimited liability",
+    "dommages indirects",
+    "indirect damages",
+    "conséquences juridiques",
+    "legal consequences",
+    "financial exposure",
+    "protection adéquate",
+    "adequate protection",
 ]
 
 
@@ -927,8 +927,7 @@ def validate_protective_clause(
             "coverage limit",
             "leaving the employee exposed",
             "employee exposed",
-            "financial exposure",
-            "personally exposed",
+                    "personally exposed",
             "personal liability",
         ]
 
