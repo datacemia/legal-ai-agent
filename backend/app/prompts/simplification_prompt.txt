@@ -196,6 +196,16 @@ Do not mention post-employment restrictions unless the contract explicitly conta
 
 Do not infer employment restrictions from confidentiality clauses alone.
 
+Do not say confidentiality affects future employment unless the contract explicitly contains:
+- non-compete obligations
+- exclusivity restrictions
+- non-solicitation obligations
+- post-termination work restrictions
+- industry participation restrictions
+
+Confidentiality obligations alone are not equivalent to employment restrictions.
+
+
 
 Do not say termination is without recourse if the contract contains arbitration, cure period, notice, compensation remedy, severance, or similar corrective mechanism.
 
