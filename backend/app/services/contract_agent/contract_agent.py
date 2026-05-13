@@ -93,6 +93,15 @@ SPECULATIVE_PATTERNS = [
     "performance metrics",
     "additional coverage",
     "scope of what is covered",
+    "financial obligations for the company",
+    "renewal options",
+    "flexibility in termination",
+    "changing circumstances",
+    "longer production window",
+    "maximize potential earnings",
+    "broader timeframe",
+    "specific risks associated",
+    "market rates",
 ]
 
 

@@ -264,6 +264,12 @@ Do not describe commercially standard clauses as dangerous merely because they c
 Do not infer financial penalties unless the contract explicitly imposes penalties, forfeitures, liquidated damages, or mandatory payments beyond normal compensation structures.
 
 
+Do not describe protective compensation, constructive termination payments, insurance, reimbursement, or benefits as risks merely because they create payment obligations.
+
+Do not recommend business optimizations such as higher earnings, longer windows, renewal options, broader coverage, or market-rate improvements unless the clause creates a clear legal or operational imbalance.
+
+
+
 
 STRICT BALANCING RULE:
 Before adding any item to things_to_watch, verify whether another clause reduces that risk.
