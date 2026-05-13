@@ -290,6 +290,12 @@ SPECULATIVE_PATTERNS = [
     "renewal option",
     "prolongation est souhaitée",
     "extension is desired",
+    "مكان محايد",
+    "neutral venue",
+    "خيار التحكيم",
+    "arbitration alternative",
+    "مناسب لجميع الأطراف",
+    "appropriate for all parties",
 ]
 
 
@@ -1650,6 +1656,8 @@ def calibrate_risk_level(
     safe_jurisdiction_patterns = [
         "tribunaux compétents de paris",
         "droit français",
+        "المحاكم المختصة بمدينة الدار البيضاء",
+        "قوانين المملكة المغربية",
     ]
 
     if any(
