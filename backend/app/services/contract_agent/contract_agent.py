@@ -46,6 +46,25 @@ SPECULATIVE_PATTERNS = [
     "more flexibility",
     "enhance compensation",
     "competitive compensation",
+    "competitive salary",
+    "retain talent",
+    "better financial outcomes",
+    "more favorable terms",
+    "tiered bonus",
+    "review policy details",
+    "align with company goals",
+    "industry standards",
+    "attract and retain",
+    "comprehensive coverage",
+]
+
+
+GENERIC_NEGOTIATION_PATTERNS = [
+    "consider negotiating",
+    "ensure that",
+    "review the policy",
+    "more favorable",
+    "better protection",
 ]
 
 
@@ -418,9 +437,22 @@ def remove_speculative_analysis(
 
         value = analysis.get(field, "")
 
+        lowered = value.lower()
+
+        if any(
+            p in lowered
+            for p in GENERIC_NEGOTIATION_PATTERNS
+        ):
+
+            if analysis.get("risk_level") == "low":
+
+                analysis[field] = ""
+
+                continue
+
         for pattern in SPECULATIVE_PATTERNS:
 
-            if pattern.lower() in value.lower():
+            if pattern.lower() in lowered:
 
                 analysis[field] = ""
 
