@@ -69,6 +69,13 @@ SPECULATIVE_PATTERNS = [
     "more favorable payment terms",
     "more favorable termination conditions",
     "effective decision-making",
+    "limit future opportunities",
+    "future opportunities",
+    "higher maximum bonus",
+    "extending the eligibility period",
+    "longer-term performance metrics",
+    "unexpected early termination",
+    "without significant cause",
 ]
 
 
