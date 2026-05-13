@@ -223,6 +223,41 @@ Do not say there is no remedy, penalty, or recourse if the contract contains com
 
 
 
+
+
+UNIVERSAL ANALYSIS PRINCIPLES:
+
+Analyze contracts using universal legal and commercial concepts.
+
+Never assume:
+- US-specific legal standards
+- employment-specific assumptions
+- industry-specific norms
+- jurisdiction-specific expectations
+
+The analysis must work for:
+- any country
+- any legal system
+- any contract domain
+- any commercial sector
+- multilingual contracts
+
+Do not generate speculative business optimization advice.
+
+Distinguish clearly between:
+- legal risk
+- operational imbalance
+- commercially standard clauses
+- optional business improvements
+
+Commercially standard clauses should not be treated as dangerous unless they create:
+- clear financial exposure
+- material operational imbalance
+- unilateral power imbalance
+- severe restriction
+- disproportionate liability
+- explicit legal disadvantage
+
 RISK CALIBRATION RULES:
 
 Do not frame protective clauses as dangers.

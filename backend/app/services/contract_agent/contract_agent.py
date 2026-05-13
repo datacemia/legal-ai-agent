@@ -102,6 +102,17 @@ SPECULATIVE_PATTERNS = [
     "broader timeframe",
     "specific risks associated",
     "market rates",
+    "cash flow stability",
+    "financial interests",
+    "more favorable termination rights",
+    "adequate coverage limits",
+    "various potential claims",
+    "specific coverage amounts",
+    "higher bonus cap",
+    "company growth",
+    "enhance protection",
+    "types of claims included",
+    "robust in many industries",
 ]
 
 
@@ -121,6 +132,11 @@ GENERIC_AI_PATTERNS = [
     "evaluate the implications",
     "to avoid ambiguity",
     "to avoid disputes",
+    "ensure adequate",
+    "highlight the importance",
+    "protect financial interests",
+    "enhance protection",
+    "justify a higher",
 ]
 
 
