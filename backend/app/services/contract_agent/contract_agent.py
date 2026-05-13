@@ -33,6 +33,19 @@ SPECULATIVE_PATTERNS = [
     "automatic renewal",
     "additional protections",
     "more comprehensive",
+    "broader coverage",
+    "more types of claims",
+    "additional liability",
+    "higher coverage",
+    "salary review",
+    "salary reviews",
+    "performance bonus",
+    "performance bonuses",
+    "minimum production threshold",
+    "additional flexibility",
+    "more flexibility",
+    "enhance compensation",
+    "competitive compensation",
 ]
 
 
@@ -398,6 +411,7 @@ def remove_speculative_analysis(
         "recommendation",
         "negotiation_advice",
         "market_comparison",
+        "safer_alternative",
     ]
 
     for field in fields:
