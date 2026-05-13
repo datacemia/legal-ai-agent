@@ -30,6 +30,9 @@ from app.services.contract_agent.summary_service import (
     calculate_global_risk,
     generate_simplified_version,
 )
+from app.services.contract_agent.validator import (
+    validate_contract_result,
+)
 
 router = APIRouter(prefix="/analysis", tags=["Analysis"])
 
@@ -64,7 +67,7 @@ def check_analysis_rate_limit(user_id: int):
 
 
 # ================= RUN ANALYSIS =================
-@router.post("/{document_id}/run", response_model=AnalysisResponse)
+@router.post("/{document_id}/run")
 def run_analysis(
     document_id: int,
     output_language: str = "en",
@@ -212,13 +215,17 @@ def run_analysis(
         "id": analysis.id,
         "document_id": analysis.document_id,
         "summary": analysis.summary,
-        "clauses": json.loads(analysis.clauses),
+
+        "clauses": clause_results,
+
         "risk_level": analysis.risk_level,
         "risk_score": analysis.risk_score,
-        "simplified_version": analysis.simplified_version,
-        "recommendations": json.loads(analysis.recommendations),
 
-        "quality_check": summary_data.get("quality_check"),
+        "simplified_version": analysis.simplified_version,
+
+        "recommendations": recommendations,
+
+        "created_at": analysis.created_at,
 
         "contract_quality_score": summary_data.get(
             "contract_quality_score"
@@ -236,6 +243,10 @@ def run_analysis(
             "jurisdiction_detected"
         ),
     }
+
+    response["quality_check"] = validate_contract_result(
+        response
+    )
 
     return response
 

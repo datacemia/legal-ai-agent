@@ -2,10 +2,10 @@ from typing import Any
 
 
 REQUIRED_FIELDS = [
-    "contract_type",
-    "global_summary",
-    "contract_score",
-    "overall_balance",
+    "summary",
+    "clauses",
+    "risk_score",
+    "simplified_version",
 ]
 
 
@@ -20,11 +20,18 @@ def validate_contract_result(result: dict) -> dict:
             issues.append(f"Missing field: {field}")
             score -= 10
 
-    contract_score = result.get("contract_score")
+    contract_score = result.get(
+        "contract_quality_score"
+    )
 
-    if not isinstance(contract_score, int):
-        issues.append("contract_score must be integer")
-        score -= 15
+    if (
+        contract_score is not None
+        and not isinstance(contract_score, int)
+    ):
+        issues.append(
+            "contract_quality_score must be integer"
+        )
+        score -= 10
 
     clauses = result.get("clauses", [])
 
@@ -32,7 +39,7 @@ def validate_contract_result(result: dict) -> dict:
         issues.append("No clauses extracted")
         score -= 20
 
-    summary = str(result.get("global_summary", ""))
+    summary = str(result.get("summary", ""))
 
     if len(summary) < 40:
         issues.append("Summary too short")
