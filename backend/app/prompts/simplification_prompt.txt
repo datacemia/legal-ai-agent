@@ -387,3 +387,15 @@ Avoid emotionally loaded wording such as:
 unless the clause creates a clearly one-sided, abusive, or legally disproportionate structure.
 
 Prefer factual legal explanations over emotional or persuasive wording.
+
+Do not recommend commercial continuity, renewal strategies,
+business continuity planning, or contract extensions unless
+the contract creates a clear operational dependency,
+automatic renewal trap, exclusivity lock-in,
+or legally significant continuity risk.
+
+Avoid generic warnings such as:
+- may not fully protect
+- legal consequences
+- fully protected
+unless explicitly supported by the contract text.

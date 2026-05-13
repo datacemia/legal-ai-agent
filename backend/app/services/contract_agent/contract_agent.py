@@ -252,6 +252,16 @@ SPECULATIVE_PATTERNS = [
     "déséquilibre de pouvoir",
     "laissant le client vulnérable",
     "leaving the client vulnerable",
+    "ne pas couvrir tous les dommages",
+    "not cover all damages",
+    "entièrement protégé",
+    "fully protected",
+    "conséquences juridiques",
+    "legal consequences",
+    "clause de renouvellement",
+    "renewal clause",
+    "continuité des relations commerciales",
+    "business continuity",
 ]
 
 
