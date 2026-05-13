@@ -249,6 +249,15 @@ SPECULATIVE_PATTERNS = [
     "relation contractuelle est critique",
     "ne répondent pas aux attentes",
     "trouver un remplaçant",
+    "déséquilibre de pouvoir",
+    "laissant le client vulnérable",
+    "leaving the client vulnerable",
+]
+
+
+RESTRICTED_RECOMMENDATION_ONLY_PATTERNS = [
+    "responsabilité illimitée",
+    "unlimited liability",
 ]
 
 
@@ -685,6 +694,20 @@ def remove_speculative_analysis(
                 analysis[field] = ""
 
                 break
+
+        if field in {
+            "recommendation",
+            "negotiation_advice",
+            "safer_alternative",
+        }:
+
+            for pattern in RESTRICTED_RECOMMENDATION_ONLY_PATTERNS:
+
+                if pattern.lower() in lowered:
+
+                    analysis[field] = ""
+
+                    break
 
     return analysis
 

@@ -376,3 +376,14 @@ Never describe termination as sudden job loss if the contract contains notice, c
 Do not describe protective payments, severance, vesting, insurance, or constructive termination compensation as financial exposure unless they create a disproportionate or one-sided burden.
 
 Do not recommend reducing insurance coverage when the clause protects the beneficiary and the cost is borne by the other party.
+Use neutral legal language.
+
+Avoid emotionally loaded wording such as:
+- vulnerable
+- unfairly exposed
+- imbalance of power
+- excessive disadvantage
+
+unless the clause creates a clearly one-sided, abusive, or legally disproportionate structure.
+
+Prefer factual legal explanations over emotional or persuasive wording.
