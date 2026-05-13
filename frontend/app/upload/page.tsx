@@ -46,11 +46,28 @@ const labels: any = {
       "Clear executive summary",
       "Practical recommendations before signing",
     ],
+    whatYouGetDescriptions: [
+      "Identify clauses that may impact liability, ownership, payment obligations, or termination rights.",
+      "Evaluate legal and operational exposure before signing the agreement.",
+      "Receive a structured executive summary with practical implications.",
+      "Get actionable recommendations and negotiation guidance.",
+    ],
+    whatYouGetBadges: [
+      "Clauses",
+      "Risk",
+      "Summary",
+      "Negotiation",
+    ],
     howItWorks: "How it works",
     howItWorksItems: [
       "Upload the contract",
       "Choose the report language",
       "Receive a structured analysis",
+    ],
+    workflowDescriptions: [
+      "Secure PDF and DOCX upload",
+      "AI-powered contract intelligence",
+      "Structured legal analysis in seconds",
     ],
     summary: "Summary",
     simplified: "Simplified Version",
@@ -91,11 +108,28 @@ const labels: any = {
       "Synthèse exécutive claire",
       "Recommandations pratiques avant signature",
     ],
+    whatYouGetDescriptions: [
+      "Identifier les clauses pouvant impacter la responsabilité, la propriété, les paiements ou la résiliation.",
+      "Évaluer les risques juridiques et opérationnels avant signature.",
+      "Recevoir une synthèse structurée avec les implications pratiques.",
+      "Obtenir des recommandations concrètes et des conseils de négociation.",
+    ],
+    whatYouGetBadges: [
+      "Clauses",
+      "Risques",
+      "Résumé",
+      "Négociation",
+    ],
     howItWorks: "Fonctionnement",
     howItWorksItems: [
       "Importez le contrat",
       "Choisissez la langue du rapport",
       "Recevez une analyse structurée",
+    ],
+    workflowDescriptions: [
+      "Import sécurisé des fichiers PDF et DOCX",
+      "Analyse intelligente du contrat",
+      "Rapport structuré en quelques secondes",
     ],
     summary: "Résumé",
     simplified: "Version simplifiée",
@@ -136,11 +170,28 @@ const labels: any = {
       "ملخص تنفيذي واضح",
       "توصيات عملية قبل التوقيع",
     ],
+    whatYouGetDescriptions: [
+      "تحديد البنود التي قد تؤثر على المسؤولية، الملكية، الدفع أو إنهاء العقد.",
+      "تقييم المخاطر القانونية والتشغيلية قبل التوقيع.",
+      "الحصول على ملخص منظم مع الآثار العملية المهمة.",
+      "اقتراح توصيات عملية ونقاط تفاوض واضحة.",
+    ],
+    whatYouGetBadges: [
+      "البنود",
+      "المخاطر",
+      "الملخص",
+      "التفاوض",
+    ],
     howItWorks: "آلية العمل",
     howItWorksItems: [
       "ارفع العقد",
       "اختر لغة التقرير",
       "احصل على تحليل منظم",
+    ],
+    workflowDescriptions: [
+      "رفع آمن لملفات PDF و DOCX",
+      "تحليل ذكي لمحتوى العقد",
+      "تقرير منظم خلال ثوانٍ",
     ],
     summary: "الملخص",
     simplified: "نسخة مبسطة",
@@ -569,25 +620,12 @@ export default function UploadPage() {
                   </h3>
 
                   <p className="mt-3 text-sm leading-7 text-slate-600">
-                    {index === 0 &&
-                      "Identify contract clauses that may materially impact obligations, liability, ownership, or termination rights."}
-
-                    {index === 1 &&
-                      "Evaluate contractual exposure and detect operational or financial risks before signature."}
-
-                    {index === 2 &&
-                      "Receive a structured executive summary covering key obligations and practical implications."}
-
-                    {index === 3 &&
-                      "Get practical recommendations and negotiation guidance for sensitive provisions."}
+                    {t.whatYouGetDescriptions[index]}
                   </p>
 
                   <div className="mt-6">
                     <span className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
-                      {index === 0 && "Clauses"}
-                      {index === 1 && "Risk"}
-                      {index === 2 && "Summary"}
-                      {index === 3 && "Negotiation"}
+                      {t.whatYouGetBadges[index]}
                     </span>
                   </div>
 
@@ -621,14 +659,7 @@ export default function UploadPage() {
                     </h4>
 
                     <div className="mt-3 text-sm text-slate-500">
-                      {index === 0 &&
-                        "Secure PDF and DOCX upload"}
-
-                      {index === 1 &&
-                        "AI-powered contract intelligence"}
-
-                      {index === 2 &&
-                        "Structured legal analysis in seconds"}
+                      {t.workflowDescriptions[index]}
                     </div>
 
                   </div>
