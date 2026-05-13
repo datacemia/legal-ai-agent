@@ -82,6 +82,17 @@ SPECULATIVE_PATTERNS = [
     "tiered payment structure",
     "aggregate coverage limits",
     "cash flow impacts",
+    "more flexible termination options",
+    "potential lock-in",
+    "realistic and achievable",
+    "financial penalties",
+    "increased risk for the employer",
+    "higher premiums",
+    "stricter terms",
+    "above average for many industries",
+    "performance metrics",
+    "additional coverage",
+    "scope of what is covered",
 ]
 
 

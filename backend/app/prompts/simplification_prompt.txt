@@ -259,6 +259,12 @@ unless the existing clause creates a clear material imbalance or operational ris
 Avoid speculative commercial recommendations.
 
 
+Do not describe commercially standard clauses as dangerous merely because they create financial obligations, fixed terms, insurance costs, or performance incentives.
+
+Do not infer financial penalties unless the contract explicitly imposes penalties, forfeitures, liquidated damages, or mandatory payments beyond normal compensation structures.
+
+
+
 STRICT BALANCING RULE:
 Before adding any item to things_to_watch, verify whether another clause reduces that risk.
 
