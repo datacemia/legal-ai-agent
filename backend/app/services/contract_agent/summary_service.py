@@ -376,10 +376,10 @@ def remove_jurisdiction_false_actions(data: dict) -> dict:
 
 def remove_alarmist_language(
     data: dict,
-    contract_score: int,
+    contract_quality_score: int,
 ) -> dict:
 
-    if contract_score >= 60:
+    if contract_quality_score >= 60:
         return data
 
     fields = [
@@ -425,7 +425,7 @@ def get_labels(language: str = "en") -> dict:
             "no_text": "No text found.",
             "summary_unavailable": "Summary unavailable. Preview:",
             "simplified_unavailable": "Simplified version unavailable. Preview:",
-            "contract_score": "Contract Score",
+            "contract_quality_score": "Contract Quality",
             "contract_complexity": "Contract Complexity",
             "overall_balance": "Overall Balance",
             "jurisdiction": "Jurisdiction",
@@ -449,7 +449,7 @@ def get_labels(language: str = "en") -> dict:
             "no_text": "Aucun texte trouvé.",
             "summary_unavailable": "Résumé indisponible. Aperçu :",
             "simplified_unavailable": "Version simplifiée indisponible. Aperçu :",
-            "contract_score": "Score du contrat",
+            "contract_quality_score": "Qualité du contrat",
             "contract_complexity": "Complexité du contrat",
             "overall_balance": "Équilibre du contrat",
             "jurisdiction": "Juridiction",
@@ -473,7 +473,7 @@ def get_labels(language: str = "en") -> dict:
             "no_text": "لم يتم العثور على نص.",
             "summary_unavailable": "الملخص غير متاح. معاينة:",
             "simplified_unavailable": "النسخة المبسطة غير متاحة. معاينة:",
-            "contract_score": "درجة العقد",
+            "contract_quality_score": "جودة العقد",
             "contract_complexity": "تعقيد العقد",
             "overall_balance": "توازن العقد",
             "jurisdiction": "الاختصاص القضائي",
@@ -514,7 +514,7 @@ def build_empty_summary(language: str = "en") -> dict:
             "important_points": [],
             "missing_clauses": [],
             "dangerous_patterns": [],
-            "contract_score": 0,
+            "contract_quality_score": 0,
             "overall_balance": ns,
             "negotiation_priorities": [],
             "key_risks": [],
@@ -653,9 +653,17 @@ Contract text:
 
     data = normalize_contract_summary(data, language)
 
+    if (
+        "contract_quality_score" not in data
+        and "contract_score" in data
+    ):
+        data["contract_quality_score"] = data.pop(
+            "contract_score"
+        )
+
     data = remove_alarmist_language(
         data,
-        data.get("contract_score", 0),
+        data.get("contract_quality_score", 0),
     )
 
     return data
@@ -678,7 +686,7 @@ def render_summary_text(data: dict, language: str = "en") -> str:
     output += f"{t['payment']}: {data['payment_terms']}\n\n"
 
     output += f"{t['summary']}:\n{data['global_summary']}\n\n"
-    output += f"{t['contract_score']}: {data['contract_score']}/100\n"
+    output += f"{t['contract_quality_score']}: {data['contract_quality_score']}/100\n"
     output += (
         f"{t['contract_complexity']}: "
         f"{translate_complexity(data['contract_complexity'], language)}\n"
