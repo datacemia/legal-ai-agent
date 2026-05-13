@@ -143,6 +143,10 @@ SPECULATIVE_PATTERNS = [
     "tiered coverage structure",
     "sudden job loss",
     "financial stability",
+    "renewal automatique",
+    "renouvellement automatique",
+    "pénalités de retard",
+    "late payment penalties",
 ]
 
 
@@ -1109,6 +1113,30 @@ def calibrate_risk_level(
             if analysis.get("negotiation_priority") == "high":
                 analysis["negotiation_priority"] = "medium"
 
+
+    # -------------------
+    # Standard / safe jurisdiction clauses
+    # -------------------
+
+    safe_jurisdiction_patterns = [
+        "tribunaux compétents de paris",
+        "droit français",
+    ]
+
+    if any(
+        p in text
+        for p in safe_jurisdiction_patterns
+    ):
+
+        analysis["red_flag"] = False
+        analysis["red_flag_reason"] = ""
+
+        if analysis.get("risk_level") == "medium":
+            analysis["risk_level"] = "low"
+
+        if analysis.get("negotiation_priority") == "medium":
+            analysis["negotiation_priority"] = "low"
+
     # -------------------
     # High-risk validation
     # -------------------
@@ -1263,6 +1291,35 @@ def calculate_clause_importance(
     for pattern in boilerplate_patterns:
         if pattern in text:
             score -= 30
+
+
+    standard_clause_patterns = [
+        "tribunaux compétents de paris",
+        "droit français",
+        "confidentialité",
+        "confidentiality",
+        "responsabilité limitée",
+        "limitation of liability",
+        "renouvellement automatique",
+        "automatic renewal",
+        "assurance",
+        "insurance",
+    ]
+
+    if any(
+        pattern in text
+        for pattern in standard_clause_patterns
+    ):
+
+        score -= 25
+
+
+
+    if (
+        "tribunaux compétents de paris" in text
+        or "droit français" in text
+    ):
+        score = min(score, 20)
 
     return score
 
