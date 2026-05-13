@@ -2235,19 +2235,8 @@ def analyze_contract_clauses(
             )
         )
 
-        must_show_baselines = {
-            "payment_schedule",
-            "ip_after_payment",
-            "mutual_termination_notice",
-            "limited_liability",
-            "venue",
-        }
-
-        if (
-            analysis.get("importance_score", 0) < 10
-            and analysis.get("risk_baseline") not in must_show_baselines
-        ):
-            continue
+        # Keep all analyzed clauses, including low-risk clauses.
+        # Low-risk clauses are useful for transparency in FR/EN/AR.
 
         results.append({
             "title": title,
