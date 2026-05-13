@@ -25,6 +25,13 @@ const labels: any = {
   en: {
     pageTitle: "Analyze your contract",
     loading: "Analyzing your contract...",
+    loadingSteps: {
+      extracting: "Extracting contract text...",
+      summary: "Generating summary...",
+      clauses: "Analyzing clauses...",
+      finalizing: "Finalizing report...",
+    },
+    elapsed: "Elapsed",
     file: "File",
     signupCta: "$1 trial activation required per agent",
     loginRequired: "Create an account to analyze your contract",
@@ -87,6 +94,13 @@ const labels: any = {
   fr: {
     pageTitle: "Analyser votre contrat",
     loading: "Analyse de votre contrat en cours...",
+    loadingSteps: {
+      extracting: "Extraction du texte du contrat...",
+      summary: "Génération du résumé...",
+      clauses: "Analyse des clauses...",
+      finalizing: "Finalisation du rapport...",
+    },
+    elapsed: "Temps écoulé",
     file: "Fichier",
     signupCta: "Activation de l’essai à 1$ requise par agent",
     loginRequired: "Créez un compte pour analyser votre contrat",
@@ -149,6 +163,13 @@ const labels: any = {
   ar: {
     pageTitle: "تحليل العقد",
     loading: "جاري تحليل العقد...",
+    loadingSteps: {
+      extracting: "استخراج نص العقد...",
+      summary: "إنشاء الملخص...",
+      clauses: "تحليل البنود...",
+      finalizing: "إنهاء التقرير...",
+    },
+    elapsed: "الوقت المنقضي",
     file: "الملف",
     signupCta: "يلزم تفعيل تجربة 1 دولار لكل وكيل",
     loginRequired: "أنشئ حساباً لتحليل عقدك",
@@ -263,6 +284,8 @@ export default function UploadPage() {
   const [fileName, setFileName] = useState("");
   const [result, setResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [loadingStep, setLoadingStep] = useState("");
+  const [loadingProgress, setLoadingProgress] = useState(0);
   const [language, setLanguage] = useState("en");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [message, setMessage] = useState("");
@@ -300,6 +323,31 @@ export default function UploadPage() {
   }, []);
 
   const t = labels[language] || labels.en;
+
+  useEffect(() => {
+    if (!loading) return;
+
+    const timers = [
+      setTimeout(() => {
+        setLoadingStep(t.loadingSteps.extracting);
+        setLoadingProgress(15);
+      }, 0),
+      setTimeout(() => {
+        setLoadingStep(t.loadingSteps.summary);
+        setLoadingProgress(40);
+      }, 8000),
+      setTimeout(() => {
+        setLoadingStep(t.loadingSteps.clauses);
+        setLoadingProgress(70);
+      }, 18000),
+      setTimeout(() => {
+        setLoadingStep(t.loadingSteps.finalizing);
+        setLoadingProgress(90);
+      }, 30000),
+    ];
+
+    return () => timers.forEach(clearTimeout);
+  }, [loading, language]);
 
   const primaryButtonLabel = hasActiveAccess
     ? t.analyzeButton
@@ -397,6 +445,8 @@ export default function UploadPage() {
 
     try {
       setLoading(true);
+      setLoadingStep(t.loadingSteps.extracting);
+      setLoadingProgress(15);
       setResult(null);
       setMessage("");
       setOpenIndex(null);
@@ -464,6 +514,8 @@ export default function UploadPage() {
       return;
     } finally {
       setLoading(false);
+      setLoadingStep("");
+      setLoadingProgress(0);
     }
   };
 
@@ -487,11 +539,30 @@ export default function UploadPage() {
   if (loading) {
     return (
       <main className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
-        <div className="bg-white p-8 rounded-2xl shadow-sm border text-center space-y-4 w-full max-w-sm">
-          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="font-medium text-slate-900">{t.loading}</p>
+        <div className="bg-white p-8 rounded-3xl shadow-sm border text-center space-y-5 w-full max-w-md">
+          <div className="w-14 h-14 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto" />
+
+          <p className="font-semibold text-slate-900">
+            {t.loading}
+          </p>
+
+          <p className="text-sm text-slate-500">
+            {loadingStep}
+          </p>
+
+          <div className="h-2 w-full rounded-full bg-slate-100 overflow-hidden">
+            <div
+              className="h-full rounded-full bg-blue-600 transition-all duration-700"
+              style={{ width: `${loadingProgress}%` }}
+            />
+          </div>
+
+          <p className="text-xs text-slate-400">
+            {loadingProgress}%
+          </p>
+
           {fileName && (
-            <p className="text-sm text-slate-500">
+            <p className="text-xs text-slate-500">
               {t.file}: {fileName}
             </p>
           )}
