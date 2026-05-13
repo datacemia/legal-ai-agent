@@ -43,9 +43,9 @@ const labels: any = {
     upgradePro: "Upgrade to Pro",
     trialUsed: "Trial already used for legal",
     paymentRequired: "$1 Legal trial activation required",
-    heroTitle: "Analyze your contracts in seconds",
+    heroTitle: "AI-powered contract review",
     heroDesc:
-      "Upload your document to detect risky clauses, identify key obligations, and get clear, actionable recommendations before you sign.",
+      "Get a clear view of contract risks, sensitive clauses, obligations, and practical recommendations before signing.",
     whatYouGet: "Contract intelligence at a glance",
     whatYouGetItems: [
       "Sensitive clause analysis",
@@ -76,10 +76,10 @@ const labels: any = {
       "AI-powered contract intelligence",
       "Structured legal analysis in seconds",
     ],
-    quality: "Quality",
-    qualityScore: "Quality score",
-    qualityValid: "Validated result",
-    qualityIssues: "Quality issues",
+    quality: "Analysis quality",
+    qualityScore: "Analysis quality score",
+    qualityValid: "Analysis output validated",
+    qualityIssues: "Analysis quality issues",
     summary: "Summary",
     simplified: "Simplified Version",
     clauses: "Clauses Analysis",
@@ -94,6 +94,8 @@ const labels: any = {
     redFlag: "Red Flag",
     limitedNotice:
       "Trial analysis may be limited. Continue with credits or Pro to unlock full usage.",
+    viewDetails: "View details",
+    hideDetails: "Hide details",
   },
   fr: {
     pageTitle: "Analyser votre contrat",
@@ -116,9 +118,9 @@ const labels: any = {
     upgradePro: "Passer au plan Pro",
     trialUsed: "Essai Legal déjà utilisé",
     paymentRequired: "Activation de l’essai Legal à 1$ requise",
-    heroTitle: "Analysez vos contrats en quelques secondes",
+    heroTitle: "Analyse contractuelle assistée par IA",
     heroDesc:
-      "Téléchargez votre document pour détecter les clauses risquées, identifier les obligations clés et obtenir des recommandations claires avant de signer.",
+      "Obtenez une lecture claire des risques, des clauses sensibles, des obligations et des recommandations pratiques avant signature.",
     whatYouGet: "Informations contractuelles clés",
     whatYouGetItems: [
       "Analyse des clauses sensibles",
@@ -149,10 +151,10 @@ const labels: any = {
       "Analyse intelligente du contrat",
       "Rapport structuré en quelques secondes",
     ],
-    quality: "Qualité",
-    qualityScore: "Score qualité",
-    qualityValid: "Résultat validé",
-    qualityIssues: "Problèmes détectés",
+    quality: "Qualité de l’analyse",
+    qualityScore: "Score qualité de l’analyse",
+    qualityValid: "Résultat d’analyse validé",
+    qualityIssues: "Points qualité détectés",
     summary: "Résumé",
     simplified: "Version simplifiée",
     clauses: "Analyse des clauses",
@@ -167,6 +169,8 @@ const labels: any = {
     redFlag: "Alerte",
     limitedNotice:
       "L’analyse d’essai peut être limitée. Continuez avec des crédits ou Pro pour débloquer l’usage complet.",
+    viewDetails: "Voir les détails",
+    hideDetails: "Masquer les détails",
   },
   ar: {
     pageTitle: "تحليل العقد",
@@ -189,9 +193,9 @@ const labels: any = {
     upgradePro: "الترقية إلى Pro",
     trialUsed: "تم استخدام تجربة الوكيل القانوني",
     paymentRequired: "يلزم تفعيل تجربة القانون بقيمة 1 دولار",
-    heroTitle: "حلل عقودك في ثوانٍ",
+    heroTitle: "تحليل تعاقدي مدعوم بالذكاء الاصطناعي",
     heroDesc:
-      "ارفع مستندك لاكتشاف البنود الخطرة، وتحديد الالتزامات الأساسية، والحصول على توصيات واضحة قبل التوقيع.",
+      "احصل على تقييم واضح للمخاطر والبنود الحساسة والالتزامات والتوصيات العملية قبل التوقيع.",
     whatYouGet: "رؤى تعاقدية فورية",
     whatYouGetItems: [
       "تحليل البنود الحساسة",
@@ -222,10 +226,10 @@ const labels: any = {
       "تحليل ذكي لمحتوى العقد",
       "تقرير منظم خلال ثوانٍ",
     ],
-    quality: "الجودة",
-    qualityScore: "درجة الجودة",
-    qualityValid: "تم التحقق من النتيجة",
-    qualityIssues: "ملاحظات الجودة",
+    quality: "جودة التحليل",
+    qualityScore: "درجة جودة التحليل",
+    qualityValid: "تم التحقق من نتيجة التحليل",
+    qualityIssues: "ملاحظات جودة التحليل",
     summary: "الملخص",
     simplified: "نسخة مبسطة",
     clauses: "تحليل البنود",
@@ -240,6 +244,8 @@ const labels: any = {
     redFlag: "تنبيه مهم",
     limitedNotice:
       "قد يكون تحليل التجربة محدوداً. تابع باستخدام الأرصدة أو Pro لفتح الاستخدام الكامل.",
+    viewDetails: "عرض التفاصيل",
+    hideDetails: "إخفاء التفاصيل",
   },
 };
 
@@ -289,6 +295,30 @@ const translateEnum = (value: string, language: string) => {
   };
 
   return map[language]?.[normalized] || value;
+};
+
+const EnterpriseIcon = ({ index }: { index: number }) => {
+  const paths = [
+    <path key="doc" d="M7 3.75h6.25L18 8.5v11.75H7A2.25 2.25 0 0 1 4.75 18V6A2.25 2.25 0 0 1 7 3.75Zm6 0V8.5h5" />,
+    <path key="shield" d="M12 3.75 19.25 6.5v5.25c0 4.25-2.85 7.1-7.25 8.5-4.4-1.4-7.25-4.25-7.25-8.5V6.5L12 3.75Zm-3 8 2 2 4-4" />,
+    <path key="chart" d="M4.75 19.25h14.5M7.25 16.25v-5.5M12 16.25v-9.5M16.75 16.25v-3.5" />,
+    <path key="briefcase" d="M8.75 7.25V6A2.25 2.25 0 0 1 11 3.75h2A2.25 2.25 0 0 1 15.25 6v1.25M4.75 9.5h14.5v8.25A2.25 2.25 0 0 1 17 20H7a2.25 2.25 0 0 1-2.25-2.25V9.5Zm0 0A2.25 2.25 0 0 1 7 7.25h10a2.25 2.25 0 0 1 2.25 2.25" />,
+  ];
+
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-6 w-6"
+      aria-hidden="true"
+    >
+      {paths[index] || paths[0]}
+    </svg>
+  );
 };
 
 export default function UploadPage() {
@@ -691,11 +721,8 @@ export default function UploadPage() {
                   className="group rounded-3xl border border-slate-200 bg-white/90 p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                 >
 
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-2xl">
-                    {index === 0 && "📄"}
-                    {index === 1 && "🛡️"}
-                    {index === 2 && "📊"}
-                    {index === 3 && "🤝"}
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100 transition group-hover:bg-blue-600 group-hover:text-white">
+                    <EnterpriseIcon index={index} />
                   </div>
 
                   <h3 className="mt-6 text-lg font-semibold text-slate-900">
@@ -759,7 +786,7 @@ export default function UploadPage() {
         {result && !result.authRequired && (
           <div className="space-y-6">
             {result?.quality_check && (
-              <div className="rounded-2xl border bg-white p-5 shadow-sm mb-6">
+              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm mb-6">
 
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-semibold">
@@ -809,9 +836,11 @@ export default function UploadPage() {
 
             <RiskScore score={result.risk_score} language={language} />
 
-            <div className="bg-blue-50 p-6 rounded-3xl border">
-              <h2 className="text-xl font-semibold">{t.simplified}</h2>
-              <p className="mt-4">{result.simplified_version}</p>
+            <div className="rounded-3xl border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-slate-50 p-6 shadow-sm">
+              <h2 className="text-xl font-semibold text-slate-900">{t.simplified}</h2>
+              <div className="mt-4 whitespace-pre-wrap text-sm leading-8 text-slate-700">
+                {result.simplified_version}
+              </div>
             </div>
 
             <div className="bg-white p-6 rounded-3xl border">
@@ -824,17 +853,20 @@ export default function UploadPage() {
               )}
 
               <div className="space-y-4">
-                {clauses.map((clause: any, index: number) => (
+                {clauses.map((clause: any, index: number) => {
+                  const isOpen = openIndex === index;
+
+                  return (
                   <div
                     key={index}
-                    className="border rounded-2xl p-4 cursor-pointer"
+                    className={`rounded-3xl border p-5 cursor-pointer transition-all duration-200 ${isOpen ? "border-blue-200 bg-blue-50/20 shadow-sm" : "border-slate-200 bg-white hover:border-blue-100 hover:shadow-sm"}` }
                     onClick={() =>
                       setOpenIndex(openIndex === index ? null : index)
                     }
                   >
-                    <div className="flex justify-between">
+                    <div className="flex items-start justify-between gap-4">
                       <div>
-                        <span>
+                        <span className="font-semibold text-slate-900">
                           {clause.title || `${t.clause} ${index + 1}`}
                         </span>
 
@@ -882,10 +914,18 @@ export default function UploadPage() {
                       </div>
                     )}
 
-                    <p className="mt-2 text-sm">
+                    <p className="mt-3 text-sm leading-6 text-slate-600">
                       {clause.explanation_simple}
                     </p>
 
+                    <button
+                      type="button"
+                      className="mt-4 inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+                    >
+                      {isOpen ? t.hideDetails : t.viewDetails}
+                    </button>
+
+                    {isOpen && (
                     <div className="mt-4 space-y-4 text-sm">
 
                         <div>
@@ -956,8 +996,10 @@ export default function UploadPage() {
                         )}
 
                       </div>
+                    )}
                   </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>
