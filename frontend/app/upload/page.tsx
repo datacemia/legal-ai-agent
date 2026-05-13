@@ -532,7 +532,6 @@ export default function UploadPage() {
 
       if (analysis.detail?.includes("Payment required")) {
         setMessage("You used your free analysis. Please buy one analysis credit.");
-        window.location.href = "/pricing";
         return;
       }
 
@@ -576,41 +575,6 @@ export default function UploadPage() {
   } catch (e) {
     console.error("Clause parsing error:", e);
     clauses = [];
-  }
-
-  if (loading) {
-    return (
-      <main className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
-        <div className="bg-white p-8 rounded-3xl shadow-sm border text-center space-y-5 w-full max-w-md">
-          <div className="w-14 h-14 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto" />
-
-          <p className="font-semibold text-slate-900">
-            {t.loading}
-          </p>
-
-          <p className="text-sm text-slate-500">
-            {loadingStep}
-          </p>
-
-          <div className="h-2 w-full rounded-full bg-slate-100 overflow-hidden">
-            <div
-              className="h-full rounded-full bg-blue-600 transition-all duration-700"
-              style={{ width: `${loadingProgress}%` }}
-            />
-          </div>
-
-          <p className="text-xs text-slate-400">
-            {loadingProgress}%
-          </p>
-
-          {fileName && (
-            <p className="text-xs text-slate-500">
-              {t.file}: {fileName}
-            </p>
-          )}
-        </div>
-      </main>
-    );
   }
 
   return (
@@ -666,10 +630,10 @@ export default function UploadPage() {
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             <button
               onClick={handleUpload}
-              disabled={!file}
+              disabled={!file || loading}
               className="w-full rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800 disabled:bg-slate-400"
             >
-              {primaryButtonLabel}
+              {loading ? t.loading : primaryButtonLabel}
             </button>
 
             <button
@@ -692,6 +656,26 @@ export default function UploadPage() {
           {message && (
             <div className="bg-red-50 text-red-700 border border-red-200 text-sm p-3 rounded-xl text-center">
               {message}
+            </div>
+          )}
+
+          {loading && (
+            <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4">
+              <div className="flex items-center justify-between text-sm">
+                <span className="font-medium text-blue-900">
+                  {loadingStep || t.loading}
+                </span>
+                <span className="text-blue-700">
+                  {loadingProgress}%
+                </span>
+              </div>
+
+              <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-white">
+                <div
+                  className="h-full rounded-full bg-blue-600 transition-all duration-700"
+                  style={{ width: `${loadingProgress}%` }}
+                />
+              </div>
             </div>
           )}
         </div>
