@@ -61,6 +61,14 @@ SPECULATIVE_PATTERNS = [
     "industry standards",
     "attract and retain",
     "comprehensive coverage",
+    "comprehensive protection",
+    "future acquisitions",
+    "market conditions",
+    "potential gaps",
+    "business needs",
+    "more favorable payment terms",
+    "more favorable termination conditions",
+    "effective decision-making",
 ]
 
 
@@ -70,6 +78,16 @@ GENERIC_NEGOTIATION_PATTERNS = [
     "review the policy",
     "more favorable",
     "better protection",
+]
+
+
+GENERIC_AI_PATTERNS = [
+    "ensure clarity",
+    "ensure comprehensive",
+    "consider negotiating",
+    "evaluate the implications",
+    "to avoid ambiguity",
+    "to avoid disputes",
 ]
 
 
@@ -447,6 +465,17 @@ def remove_speculative_analysis(
         if any(
             p in lowered
             for p in GENERIC_NEGOTIATION_PATTERNS
+        ):
+
+            if analysis.get("risk_level") == "low":
+
+                analysis[field] = ""
+
+                continue
+
+        if any(
+            p in lowered
+            for p in GENERIC_AI_PATTERNS
         ):
 
             if analysis.get("risk_level") == "low":
