@@ -266,6 +266,20 @@ SPECULATIVE_PATTERNS = [
     "delay contract termination",
     "risques potentiels",
     "potential risks",
+    "protections adéquates",
+    "adequate protections",
+    "options de renouvellement",
+    "renewal options",
+    "conditions de renouvellement",
+    "renewal terms",
+    "prolonger la relation contractuelle",
+    "extend the contractual relationship",
+    "protéger les intérêts financiers",
+    "protect financial interests",
+    "même en cas de négligence",
+    "even in case of negligence",
+    "dommages indirects",
+    "indirect damages",
 ]
 
 
