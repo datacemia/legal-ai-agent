@@ -571,8 +571,6 @@ def validate_explicit_permission_clause(
     text = clause_text.lower()
 
     permission_patterns = [
-        "will continue to be engaged",
-        "not be considered a conflict",
         "permitted",
         "allowed",
         "authorized",
@@ -580,7 +578,9 @@ def validate_explicit_permission_clause(
         "will not be considered",
         "so long as",
         "provided that",
-        "express written consent",
+        "will continue to be engaged",
+        "engaged in other business activities",
+        "other business activities",
 
         "autorisé",
         "permis",
@@ -599,6 +599,7 @@ def validate_explicit_permission_clause(
         analysis["red_flag_reason"] = ""
         analysis["risk_level"] = "low"
         analysis["negotiation_priority"] = "low"
+        analysis["legal_insight"] = ""
 
         permission_negative_patterns = [
             "divided attention",
