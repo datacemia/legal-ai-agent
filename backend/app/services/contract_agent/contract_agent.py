@@ -131,6 +131,11 @@ SPECULATIVE_PATTERNS = [
     "potential liabilities faced",
     "other potential liabilities",
     "additional types of coverage",
+    "remove the cap",
+    "enhance motivation",
+    "capping the financial obligation",
+    "cash flow risks",
+    "impacts the employer's financial obligations",
 ]
 
 

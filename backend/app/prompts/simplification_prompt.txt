@@ -371,3 +371,4 @@ Avoid phrases about:
 unless the contract explicitly creates a material legal imbalance or operational risk.
 
 The system must analyze actual contractual exposure, not hypothetical business optimization.
+Do not recommend removing caps, increasing incentives, changing coverage amounts, or adjusting financial structures unless the clause creates a clear legal risk, not just a possible business preference.
