@@ -532,33 +532,115 @@ export default function UploadPage() {
           )}
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
-          <div className="bg-white p-6 rounded-3xl shadow-sm border">
-            <h2 className="text-lg font-semibold text-slate-900">
-              {t.whatYouGet}
-            </h2>
+        <section className="relative overflow-hidden rounded-[32px] border border-slate-200 bg-white px-6 py-14 shadow-sm">
 
-            <ul className="mt-4 space-y-3 text-sm text-slate-600">
+          <div className="absolute right-0 top-0 h-72 w-72 bg-blue-100/40 blur-3xl" />
+          <div className="absolute left-0 bottom-0 h-72 w-72 bg-indigo-100/30 blur-3xl" />
+
+          <div className="relative z-10">
+
+            <div className="mx-auto max-w-3xl text-center">
+              <h2 className="text-4xl font-semibold tracking-tight text-slate-900">
+                {t.whatYouGet}
+              </h2>
+
+              <p className="mt-4 text-lg leading-8 text-slate-600">
+                {t.heroDesc}
+              </p>
+            </div>
+
+            <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+
               {t.whatYouGetItems.map((item: string, index: number) => (
-                <li key={index}>• {item}</li>
+                <div
+                  key={index}
+                  className="group rounded-3xl border border-slate-200 bg-white/90 p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                >
+
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-2xl">
+                    {index === 0 && "📄"}
+                    {index === 1 && "🛡️"}
+                    {index === 2 && "📊"}
+                    {index === 3 && "🤝"}
+                  </div>
+
+                  <h3 className="mt-6 text-lg font-semibold text-slate-900">
+                    {item}
+                  </h3>
+
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    {index === 0 &&
+                      "Identify contract clauses that may materially impact obligations, liability, ownership, or termination rights."}
+
+                    {index === 1 &&
+                      "Evaluate contractual exposure and detect operational or financial risks before signature."}
+
+                    {index === 2 &&
+                      "Receive a structured executive summary covering key obligations and practical implications."}
+
+                    {index === 3 &&
+                      "Get practical recommendations and negotiation guidance for sensitive provisions."}
+                  </p>
+
+                  <div className="mt-6">
+                    <span className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
+                      {index === 0 && "Clauses"}
+                      {index === 1 && "Risk"}
+                      {index === 2 && "Summary"}
+                      {index === 3 && "Negotiation"}
+                    </span>
+                  </div>
+
+                </div>
               ))}
-            </ul>
+
+            </div>
+
+            <div className="mt-16 rounded-[28px] border border-slate-200 bg-slate-50 px-6 py-10">
+
+              <div className="text-center">
+                <h3 className="text-2xl font-semibold text-slate-900">
+                  {t.howItWorks}
+                </h3>
+              </div>
+
+              <div className="mt-10 grid gap-8 md:grid-cols-3">
+
+                {t.howItWorksItems.map((item: string, index: number) => (
+                  <div
+                    key={index}
+                    className="relative text-center"
+                  >
+
+                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-blue-200 bg-white text-lg font-semibold text-blue-700 shadow-sm">
+                      {index + 1}
+                    </div>
+
+                    <h4 className="mt-5 text-lg font-semibold text-slate-900">
+                      {item}
+                    </h4>
+
+                    <div className="mt-3 text-sm text-slate-500">
+                      {index === 0 &&
+                        "Secure PDF and DOCX upload"}
+
+                      {index === 1 &&
+                        "AI-powered contract intelligence"}
+
+                      {index === 2 &&
+                        "Structured legal analysis in seconds"}
+                    </div>
+
+                  </div>
+                ))}
+
+              </div>
+
+            </div>
+
           </div>
 
-          <div className="bg-white p-6 rounded-3xl shadow-sm border">
-            <h2 className="text-lg font-semibold text-slate-900">
-              {t.howItWorks}
-            </h2>
-
-            <ol className="mt-4 space-y-3 text-sm text-slate-600">
-              {t.howItWorksItems.map((item: string, index: number) => (
-                <li key={index}>
-                  {index + 1}. {item}
-                </li>
-              ))}
-            </ol>
-          </div>
-        </div>
+        </section>
 
         {result && !result.authRequired && (
           <div className="space-y-6">
