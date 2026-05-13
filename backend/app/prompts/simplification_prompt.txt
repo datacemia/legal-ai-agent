@@ -209,6 +209,10 @@ Confidentiality obligations alone are not equivalent to employment restrictions.
 
 Do not say termination is without recourse if the contract contains arbitration, cure period, notice, compensation remedy, severance, or similar corrective mechanism.
 
+Do not say termination is without recourse if the contract contains arbitration, cure period, notice, compensation remedy, severance, vesting, or similar protection.
+
+Do not say confidentiality limits future opportunities unless future work, competition, clients, solicitation, or industry activity is explicitly restricted.
+
 Do not say confidentiality limits future employment unless the contract explicitly restricts future work, competition, solicitation, or industry activity.
 
 Do not say confidentiality may limit future opportunities unless the contract explicitly restricts future work, clients, industry activity, competition, or solicitation.

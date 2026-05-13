@@ -76,6 +76,12 @@ SPECULATIVE_PATTERNS = [
     "longer-term performance metrics",
     "unexpected early termination",
     "without significant cause",
+    "without much recourse",
+    "higher guaranteed bonus",
+    "capping the financial obligations",
+    "tiered payment structure",
+    "aggregate coverage limits",
+    "cash flow impacts",
 ]
 
 
