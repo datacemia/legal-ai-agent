@@ -60,6 +60,10 @@ const labels: any = {
     negotiationAdvice: "Negotiation Advice",
     saferAlternative: "Safer Alternative",
     negotiationPriority: "Negotiation Priority",
+    favours: "Favours",
+    legalInsight: "Legal Insight",
+    marketComparison: "Market Comparison",
+    redFlag: "Red Flag",
     limitedNotice:
       "Trial analysis may be limited. Continue with credits or Pro to unlock full usage.",
   },
@@ -101,6 +105,10 @@ const labels: any = {
     negotiationAdvice: "Conseil de négociation",
     saferAlternative: "Alternative plus sûre",
     negotiationPriority: "Priorité de négociation",
+    favours: "Favorise",
+    legalInsight: "Analyse juridique",
+    marketComparison: "Comparaison avec le marché",
+    redFlag: "Alerte",
     limitedNotice:
       "L’analyse d’essai peut être limitée. Continuez avec des crédits ou Pro pour débloquer l’usage complet.",
   },
@@ -142,9 +150,61 @@ const labels: any = {
     negotiationAdvice: "نصيحة تفاوض",
     saferAlternative: "صياغة أكثر أماناً",
     negotiationPriority: "أولوية التفاوض",
+    favours: "يميل لصالح",
+    legalInsight: "تحليل قانوني",
+    marketComparison: "مقارنة بالسوق",
+    redFlag: "تنبيه مهم",
     limitedNotice:
       "قد يكون تحليل التجربة محدوداً. تابع باستخدام الأرصدة أو Pro لفتح الاستخدام الكامل.",
   },
+};
+
+const translateEnum = (value: string, language: string) => {
+  const normalized = String(value || "").toLowerCase().trim();
+
+  const map: any = {
+    en: {
+      low: "Low",
+      medium: "Medium",
+      high: "High",
+      balanced: "Balanced",
+      employer: "Employer",
+      employee: "Employee",
+      company: "Company",
+      contractor: "Contractor",
+      vendor: "Vendor",
+      client: "Client",
+      unclear: "Unclear",
+    },
+    fr: {
+      low: "Faible",
+      medium: "Moyen",
+      high: "Élevé",
+      balanced: "Équilibré",
+      employer: "Employeur",
+      employee: "Employé",
+      company: "Entreprise",
+      contractor: "Contractant",
+      vendor: "Fournisseur",
+      client: "Client",
+      unclear: "Peu clair",
+    },
+    ar: {
+      low: "منخفض",
+      medium: "متوسط",
+      high: "مرتفع",
+      balanced: "متوازن",
+      employer: "صاحب العمل",
+      employee: "الموظف",
+      company: "الشركة",
+      contractor: "المتعاقد",
+      vendor: "المورّد",
+      client: "العميل",
+      unclear: "غير واضح",
+    },
+  };
+
+  return map[language]?.[normalized] || value;
 };
 
 export default function UploadPage() {
@@ -555,13 +615,13 @@ export default function UploadPage() {
 
                     {clause.favours && (
                       <div className="mt-2 text-xs font-medium text-gray-600">
-                        Favours:{" "}
+                        {t.favours}:{" "}
                         <span
                           className={`inline-flex rounded-full px-2 py-0.5 text-xs font-semibold capitalize ${getFavoursBadgeClass(
                             clause.favours
                           )}`}
                         >
-                          {clause.favours}
+                          {translateEnum(clause.favours, language)}
                         </span>
                       </div>
                     )}
@@ -569,7 +629,7 @@ export default function UploadPage() {
                     {clause.red_flag && (
                       <div className="mt-4 rounded-xl border border-red-300 bg-red-50 p-4">
                         <div className="font-bold text-red-800">
-                          🚨 Red Flag
+                          🚨 {t.redFlag}
                         </div>
 
                         <div className="mt-1 text-sm text-red-700">
@@ -615,7 +675,7 @@ export default function UploadPage() {
                         {clause.legal_insight && (
                           <div className="mt-4 rounded-xl border border-blue-200 bg-blue-50 p-4">
                             <div className="font-semibold text-blue-900">
-                              Legal Insight
+                              {t.legalInsight}
                             </div>
 
                             <div className="mt-1 text-sm text-blue-800">
@@ -627,7 +687,7 @@ export default function UploadPage() {
                         {clause.market_comparison && (
                           <div className="mt-4 rounded-xl border border-purple-200 bg-purple-50 p-4">
                             <div className="font-semibold text-purple-900">
-                              Market Comparison
+                              {t.marketComparison}
                             </div>
 
                             <div className="mt-1 text-sm text-purple-800">
@@ -653,7 +713,7 @@ export default function UploadPage() {
                             <span className="font-semibold">
                               {t.negotiationPriority}:
                             </span>{" "}
-                            {clause.negotiation_priority}
+                            {translateEnum(clause.negotiation_priority, language)}
                           </div>
                         )}
 
