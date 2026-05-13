@@ -7,6 +7,9 @@ from app.services.contract_agent.summary_normalizer import (
     normalize_contract_summary,
     normalize_simplified_contract,
 )
+from app.services.contract_agent.validator import (
+    validate_contract_result,
+)
 
 
 MAX_SUMMARY_CHARS = 12_000
@@ -702,6 +705,10 @@ Contract text:
         data,
         data.get("contract_quality_score", 0),
     )
+
+    quality_check = validate_contract_result(data)
+
+    data["quality_check"] = quality_check
 
     return data
 

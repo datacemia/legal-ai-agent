@@ -76,6 +76,10 @@ const labels: any = {
       "AI-powered contract intelligence",
       "Structured legal analysis in seconds",
     ],
+    quality: "Quality",
+    qualityScore: "Quality score",
+    qualityValid: "Validated result",
+    qualityIssues: "Quality issues",
     summary: "Summary",
     simplified: "Simplified Version",
     clauses: "Clauses Analysis",
@@ -145,6 +149,10 @@ const labels: any = {
       "Analyse intelligente du contrat",
       "Rapport structuré en quelques secondes",
     ],
+    quality: "Qualité",
+    qualityScore: "Score qualité",
+    qualityValid: "Résultat validé",
+    qualityIssues: "Problèmes détectés",
     summary: "Résumé",
     simplified: "Version simplifiée",
     clauses: "Analyse des clauses",
@@ -214,6 +222,10 @@ const labels: any = {
       "تحليل ذكي لمحتوى العقد",
       "تقرير منظم خلال ثوانٍ",
     ],
+    quality: "الجودة",
+    qualityScore: "درجة الجودة",
+    qualityValid: "تم التحقق من النتيجة",
+    qualityIssues: "ملاحظات الجودة",
     summary: "الملخص",
     simplified: "نسخة مبسطة",
     clauses: "تحليل البنود",
@@ -746,6 +758,48 @@ export default function UploadPage() {
 
         {result && !result.authRequired && (
           <div className="space-y-6">
+            {result?.quality_check && (
+              <div className="rounded-2xl border bg-white p-5 shadow-sm mb-6">
+
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-semibold">
+                    {t.quality}
+                  </h3>
+
+                  <span
+                    className={`rounded-full px-3 py-1 text-sm font-medium ${
+                      result.quality_check.valid
+                        ? "bg-green-100 text-green-700"
+                        : "bg-yellow-100 text-yellow-700"
+                    }`}
+                  >
+                    {result.quality_check.score}/100
+                  </span>
+                </div>
+
+                <p className="mt-3 text-sm text-slate-600">
+                  {result.quality_check.valid
+                    ? t.qualityValid
+                    : t.qualityIssues}
+                </p>
+
+                {result.quality_check.issues?.length > 0 && (
+                  <ul className="mt-3 space-y-2">
+                    {result.quality_check.issues.map(
+                      (issue: string, index: number) => (
+                        <li
+                          key={index}
+                          className="text-sm text-slate-500"
+                        >
+                          • {issue}
+                        </li>
+                      )
+                    )}
+                  </ul>
+                )}
+              </div>
+            )}
+
             <div className="bg-white p-6 rounded-3xl border">
               <h2 className="text-xl font-semibold">{t.summary}</h2>
               <div className="mt-4 whitespace-pre-wrap text-sm leading-7 text-slate-700">
