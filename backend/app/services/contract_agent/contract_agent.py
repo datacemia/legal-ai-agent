@@ -567,6 +567,40 @@ def validate_protective_clause(
 
 
 
+def validate_standard_market_protection(
+    analysis: dict,
+    clause_text: str,
+) -> dict:
+
+    text = clause_text.lower()
+
+    standard_protection_patterns = [
+        "liability insurance",
+        "indemnify",
+        "expense reimbursement",
+        "paid vacation",
+        "benefit plans",
+        "health insurance",
+
+        "assurance",
+        "indemnisation",
+        "remboursement",
+
+        "تأمين",
+        "تعويض",
+        "سداد المصاريف",
+    ]
+
+    if any(p in text for p in standard_protection_patterns):
+
+        if analysis.get("risk_level") == "medium":
+            analysis["risk_level"] = "low"
+
+        analysis["negotiation_priority"] = "low"
+
+    return analysis
+
+
 def validate_explicit_permission_clause(
     analysis: dict,
     clause_text: str,
@@ -1092,6 +1126,11 @@ def analyze_contract_clauses(
         )
 
         analysis = validate_protective_clause(
+            analysis,
+            clause,
+        )
+
+        analysis = validate_standard_market_protection(
             analysis,
             clause,
         )
