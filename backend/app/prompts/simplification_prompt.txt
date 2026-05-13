@@ -356,3 +356,18 @@ If a clause is absent, do not convert absence into a warning.
 
 Before saying something is not mentioned, check the full contract text.
 If the contract contains arbitration, governing law, amendment-by-both-parties, insurance, indemnity, cure period, or compensation remedy, do not say it is missing.
+
+Do not generate generic business coaching language.
+
+Avoid phrases about:
+- fair compensation
+- adequate protection
+- financial safety nets
+- stable expectations
+- maximizing opportunities
+- enhancing protection
+- improving flexibility
+
+unless the contract explicitly creates a material legal imbalance or operational risk.
+
+The system must analyze actual contractual exposure, not hypothetical business optimization.

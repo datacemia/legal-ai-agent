@@ -123,6 +123,14 @@ SPECULATIVE_PATTERNS = [
     "enhance coverage",
     "claims that could exceed",
     "lower limits",
+    "financial safety net",
+    "full protection",
+    "stable financial expectation",
+    "fair compensation",
+    "excessive financial risk",
+    "potential liabilities faced",
+    "other potential liabilities",
+    "additional types of coverage",
 ]
 
 
@@ -151,6 +159,11 @@ GENERIC_AI_PATTERNS = [
     "appears competitive",
     "generally favorable",
     "avoid ambiguity",
+    "focus on defining",
+    "to ensure fair",
+    "to avoid excessive",
+    "providing a stable",
+    "to ensure full",
 ]
 
 
