@@ -289,6 +289,12 @@ SPECULATIVE_PATTERNS = [
     "arbitration alternative",
     "مناسب لجميع الأطراف",
     "appropriate for all parties",
+    "قد يسبب مشاكل",
+    "may cause problems",
+    "إذا لم يتم التخطيط",
+    "if not properly planned",
+    "operational disruption",
+    "اضطراب تشغيلي",
 ]
 
 
@@ -2229,7 +2235,18 @@ def analyze_contract_clauses(
             )
         )
 
-        if analysis.get("importance_score", 0) < 10:
+        must_show_baselines = {
+            "payment_schedule",
+            "ip_after_payment",
+            "mutual_termination_notice",
+            "limited_liability",
+            "venue",
+        }
+
+        if (
+            analysis.get("importance_score", 0) < 10
+            and analysis.get("risk_baseline") not in must_show_baselines
+        ):
             continue
 
         results.append({

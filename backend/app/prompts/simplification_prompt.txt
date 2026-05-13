@@ -409,3 +409,9 @@ Avoid generic alarmist wording such as:
 unless explicitly justified by the contract text.
 
 Use factual legal explanations instead of speculative or persuasive language.
+Avoid speculative operational or business warnings unless
+the contract explicitly creates operational dependency,
+service continuity obligations,
+or asymmetrical termination rights.
+
+Use neutral legal explanations instead of business-risk assumptions.
