@@ -62,6 +62,44 @@ def extract_jurisdiction(text: str) -> dict:
     }
 
 
+def build_jurisdiction_note(
+    governing_law,
+    dispute_location,
+    language,
+):
+    parts = []
+
+    if governing_law:
+        if language == "fr":
+            parts.append(
+                f"Le contrat est régi par le droit de {governing_law}."
+            )
+        elif language == "ar":
+            parts.append(
+                f"يخضع العقد لقوانين {governing_law}."
+            )
+        else:
+            parts.append(
+                f"The contract is governed by {governing_law} law."
+            )
+
+    if dispute_location:
+        if language == "fr":
+            parts.append(
+                f"Les litiges sont résolus à {dispute_location}."
+            )
+        elif language == "ar":
+            parts.append(
+                f"يتم حل النزاعات في {dispute_location}."
+            )
+        else:
+            parts.append(
+                f"Disputes are resolved in {dispute_location}."
+            )
+
+    return " ".join(parts)
+
+
 def detect_balancing_protections(
     clauses: list[str],
 ) -> dict:
@@ -573,9 +611,10 @@ Contract text:
             jurisdiction_data["governing_law"]
         )
 
-        data["jurisdiction_note"] = (
-            f"The contract is governed by "
-            f"{jurisdiction_data['governing_law']} law."
+        data["jurisdiction_note"] = build_jurisdiction_note(
+            jurisdiction_data.get("governing_law"),
+            jurisdiction_data.get("dispute_location"),
+            language,
         )
 
         missing = data.get("missing_clauses", [])
@@ -599,12 +638,10 @@ Contract text:
         data["missing_clauses"] = filtered
 
     if jurisdiction_data["dispute_location"]:
-        if not data.get("jurisdiction_note"):
-            data["jurisdiction_note"] = ""
-
-        data["jurisdiction_note"] += (
-            f" Disputes are resolved in "
-            f"{jurisdiction_data['dispute_location']}."
+        data["jurisdiction_note"] = build_jurisdiction_note(
+            jurisdiction_data.get("governing_law"),
+            jurisdiction_data.get("dispute_location"),
+            language,
         )
 
         missing = data.get("missing_clauses", [])

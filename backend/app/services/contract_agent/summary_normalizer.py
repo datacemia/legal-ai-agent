@@ -71,6 +71,49 @@ def normalize_complexity(value: Any) -> str:
     return "medium"
 
 
+def translate_balance(value: Any, language: str) -> str:
+    value = normalize_missing_value(value, language)
+    normalized = value.lower().strip()
+
+    mappings = {
+        "balanced": {
+            "en": "Balanced",
+            "fr": "Équilibré",
+            "ar": "متوازن",
+        },
+        "slightly employer-friendly": {
+            "en": "Slightly Employer-Friendly",
+            "fr": "Légèrement favorable à l’employeur",
+            "ar": "يميل قليلاً لصالح صاحب العمل",
+        },
+        "employer-friendly": {
+            "en": "Employer-Friendly",
+            "fr": "Favorable à l’employeur",
+            "ar": "لصالح صاحب العمل",
+        },
+        "employee-friendly": {
+            "en": "Employee-Friendly",
+            "fr": "Favorable للموظف",
+            "ar": "لصالح الموظف",
+        },
+        "client-friendly": {
+            "en": "Client-Friendly",
+            "fr": "Favorable au client",
+            "ar": "لصالح العميل",
+        },
+        "vendor-friendly": {
+            "en": "Vendor-Friendly",
+            "fr": "Favorable au fournisseur",
+            "ar": "لصالح المورّد",
+        },
+    }
+
+    if normalized in mappings:
+        return mappings[normalized].get(language, mappings[normalized]["en"])
+
+    return value
+
+
 def normalize_contract_summary(data: dict, language: str = "en") -> dict:
     not_specified = get_not_specified(language)
 
@@ -85,7 +128,7 @@ def normalize_contract_summary(data: dict, language: str = "en") -> dict:
         "missing_clauses": normalize_list(data.get("missing_clauses")),
         "dangerous_patterns": normalize_list(data.get("dangerous_patterns")),
         "contract_score": clamp_score(data.get("contract_score")),
-        "overall_balance": normalize_missing_value(data.get("overall_balance"), language),
+        "overall_balance": translate_balance(data.get("overall_balance"), language),
         "negotiation_priorities": normalize_list(data.get("negotiation_priorities")),
         "key_risks": normalize_list(data.get("key_risks")),
         "practical_decision": normalize_missing_value(data.get("practical_decision"), language),

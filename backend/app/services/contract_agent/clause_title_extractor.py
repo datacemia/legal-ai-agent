@@ -25,16 +25,16 @@ def extract_clause_title(text: str) -> str:
 
     patterns = [
         # Arabic
-        r"(?:المادة|البند|الفقرة)\s*[\d\.]+\s*[-–:\.]?\s*(.+)",
+        r"^(?:المادة|البند|الفقرة)\s*[\d\.]+\s*[-–:\.]?\s*([^\n\r]+)",
 
         # English
-        r"(?:Article|ARTICLE|Section|SECTION|Clause|CLAUSE)\s*[\d\.]+\s*[-–:\.]?\s*(.+)",
+        r"^(?:Article|ARTICLE|Section|SECTION|Clause|CLAUSE)\s*[\d\.]+\s*[-–:\.]?\s*([^\n\r]+)",
 
         # French
-        r"(?:Article|ARTICLE|Section|SECTION|Clause|CLAUSE)\s*[\d\.]+\s*[-–:\.]?\s*(.+)",
+        r"^(?:Article|ARTICLE|Section|SECTION|Clause|CLAUSE)\s*[\d\.]+\s*[-–:\.]?\s*([^\n\r]+)",
 
         # Numeric only
-        r"^\s*[\d\.]+\s*[-–:\.]?\s*(.+)",
+        r"^\s*[\d\.]+\s*[-–:\.]?\s*([^\n\r]+)",
 
         # ALL CAPS titles
         r"^([A-Z][A-Z\s&/,()-]{3,})$",
