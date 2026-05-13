@@ -147,6 +147,15 @@ SPECULATIVE_PATTERNS = [
     "renouvellement automatique",
     "pénalités de retard",
     "late payment penalties",
+    "pénalités pour retard de paiement",
+    "mesures de sécurité appropriées",
+    "préavis plus long",
+    "droit français est le plus favorable",
+    "transfert de propriété immédiat",
+    "droits de rétention",
+    "relation contractuelle est critique",
+    "ne répondent pas aux attentes",
+    "trouver un remplaçant",
 ]
 
 
@@ -1136,6 +1145,36 @@ def calibrate_risk_level(
 
         if analysis.get("negotiation_priority") == "medium":
             analysis["negotiation_priority"] = "low"
+
+
+    # -------------------
+    # IP transfer after payment protection
+    # -------------------
+
+    ip_transfer_patterns = [
+        "transfer of ownership upon full payment",
+        "ownership transfers after full payment",
+        "assignment after payment",
+        "cession après paiement",
+        "transfert de propriété après paiement",
+        "transfer of property after payment",
+        "الملكية بعد السداد",
+    ]
+
+    if any(
+        p in text
+        for p in ip_transfer_patterns
+    ):
+
+        analysis["red_flag"] = False
+        analysis["red_flag_reason"] = ""
+
+        if analysis.get("risk_level") == "high":
+            analysis["risk_level"] = "medium"
+
+        if analysis.get("negotiation_priority") == "high":
+            analysis["negotiation_priority"] = "medium"
+
 
     # -------------------
     # High-risk validation
