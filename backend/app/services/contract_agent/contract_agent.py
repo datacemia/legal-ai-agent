@@ -52,27 +52,43 @@ HIGH_RISK_CLAUSES = [
 ]
 
 RISK_ESCALATORS = [
-    "unilateral",
-    "perpetual",
-    "unlimited",
-    "without notice",
+    # Contextual legal / operational escalators.
+    # Avoid generic words alone like "unlimited" because
+    # "unlimited access" is not the same as "unlimited liability".
+    "unlimited liability",
+    "perpetual restriction",
+    "unilateral amendment",
+    "without cure period",
+    "without notice termination",
     "without remedy",
     "sole discretion",
-    "irreversible",
+    "irreversible assignment",
+    "irrevocable assignment",
+    "perpetual non-compete",
+    "unilateral termination",
 
-    "unilatéral",
-    "perpétuel",
-    "illimité",
-    "sans préavis",
+    "responsabilité illimitée",
+    "restriction perpétuelle",
+    "modification unilatérale",
+    "sans délai de correction",
+    "résiliation sans préavis",
     "sans recours",
     "seule discrétion",
-    "irréversible",
+    "cession irréversible",
+    "cession irrévocable",
+    "non-concurrence perpétuelle",
+    "résiliation unilatérale",
 
-    "منفرد",
-    "دائم",
-    "غير محدود",
-    "دون إشعار",
+    "مسؤولية غير محدودة",
+    "قيد دائم",
+    "تعديل من جانب واحد",
+    "دون مهلة تصحيح",
+    "إنهاء دون إشعار",
     "دون تعويض",
+    "تقديره المطلق",
+    "تنازل غير قابل للإلغاء",
+    "عدم منافسة دائم",
+    "إنهاء من جانب واحد",
 ]
 
 RISK_REDUCERS = [
@@ -1642,6 +1658,49 @@ def detect_clause_materiality(
 
     text = clause_text.lower()
 
+    broad_confidentiality_patterns = [
+        "trade secret",
+        "trade secrets",
+        "all confidential information",
+        "perpetual confidentiality",
+        "confidentiality obligations survive indefinitely",
+        "indefinitely confidential",
+
+        "secret commercial",
+        "secrets commerciaux",
+        "toute information confidentielle",
+        "confidentialité perpétuelle",
+        "obligations de confidentialité survivent indéfiniment",
+        "confidentiel indéfiniment",
+
+        "سر تجاري",
+        "أسرار تجارية",
+        "جميع المعلومات السرية",
+        "سرية دائمة",
+        "تظل التزامات السرية إلى أجل غير مسمى",
+    ]
+
+    standard_confidentiality_patterns = [
+        "confidentiality",
+        "confidential information",
+        "confidentialité",
+        "information confidentielle",
+        "سرية",
+        "معلومات سرية",
+    ]
+
+    if any(
+        pattern in text
+        for pattern in broad_confidentiality_patterns
+    ):
+        return "high"
+
+    if any(
+        pattern in text
+        for pattern in standard_confidentiality_patterns
+    ):
+        return "medium"
+
     high_materiality_patterns = [
         "payment",
         "bonus",
@@ -1649,7 +1708,6 @@ def detect_clause_materiality(
         "liability",
         "intellectual property",
         "ownership",
-        "confidentiality",
         "non-compete",
         "exclusivity",
         "penalty",
@@ -1660,7 +1718,6 @@ def detect_clause_materiality(
         "résiliation",
         "responsabilité",
         "propriété intellectuelle",
-        "confidentialité",
         "non-concurrence",
         "exclusivité",
         "pénalité",
@@ -1670,7 +1727,6 @@ def detect_clause_materiality(
         "إنهاء",
         "مسؤولية",
         "ملكية فكرية",
-        "سرية",
         "عدم المنافسة",
         "حصري",
         "غرامة",
@@ -1711,10 +1767,12 @@ def detect_clause_materiality(
 
     clause_type = analysis.get("clause_type", "other")
 
+    if clause_type == "confidentiality":
+        return "medium"
+
     if clause_type in {
         "payment",
         "termination",
-        "confidentiality",
         "intellectual_property",
         "liability",
         "penalty",
@@ -1791,7 +1849,7 @@ def calculate_clause_importance(
         and not analysis.get("risk_escalated")
         and analysis.get("favours") != "unclear"
     ):
-        score -= 15
+        score -= 25
 
     standard_clause_patterns = [
         "tribunaux compétents de paris",
@@ -1800,8 +1858,8 @@ def calculate_clause_importance(
         "confidentiality",
         "responsabilité limitée",
         "limitation of liability",
-        "assurance",
-        "insurance",
+        "assurance responsabilité",
+        "liability insurance",
     ]
 
     if any(
@@ -1813,13 +1871,24 @@ def calculate_clause_importance(
             score -= 15
 
     # Automatic renewal is not globally standard-safe.
-    # It is only reduced when there is no trap/escalator language.
+    # It is reduced only when the clause clearly gives
+    # an opt-out or cancellation right with notice.
+    safe_renewal_patterns = [
+        "may opt out with notice",
+        "cancel with notice",
+        "résiliation avec préavis",
+        "يمكن الإلغاء بإشعار",
+    ]
+
     if (
         (
             "automatic renewal" in text
             or "renouvellement automatique" in text
         )
-        and baseline != "automatic_renewal_trap"
+        and any(
+            pattern in text
+            for pattern in safe_renewal_patterns
+        )
         and not analysis.get("risk_escalated")
     ):
         score -= 10
@@ -2019,6 +2088,9 @@ def analyze_contract_clauses(
 
             analysis["negotiation_priority"] = "low"
 
+        # Only downgrade generic clauses when the conceptual baseline
+        # is explicitly low-risk. This avoids hiding real medium-risk
+        # "other" clauses that do not match a safe baseline.
         if (
             analysis.get("risk_level") == "medium"
             and not analysis.get("red_flag")
