@@ -729,6 +729,73 @@ def calibrate_risk_level(
 
                 break
 
+
+    # -------------------
+    # Calculation / metric clauses
+    # -------------------
+
+    calculation_patterns = [
+        "counted toward",
+        "calculated based on",
+        "maximum bonus",
+        "threshold",
+        "limit applicable",
+
+        "plafond",
+        "calculé sur",
+        "seuil",
+
+        "حد أقصى",
+        "يحسب على",
+        "عتبة",
+    ]
+
+    explicit_high_risk_patterns = [
+        "penalty",
+        "liquidated damages",
+        "fine",
+        "exclusive",
+        "exclusivity",
+        "non-compete",
+        "restriction",
+        "restrictive covenant",
+        "unlimited liability",
+        "indemnify",
+        "indemnification",
+
+        "pénalité",
+        "amende",
+        "exclusivité",
+        "non-concurrence",
+        "responsabilité illimitée",
+        "indemniser",
+
+        "غرامة",
+        "حصري",
+        "عدم المنافسة",
+        "مسؤولية غير محدودة",
+        "تعويض",
+    ]
+
+    if any(p in text for p in calculation_patterns):
+
+        explicit_high_risk = any(
+            p in text
+            for p in explicit_high_risk_patterns
+        )
+
+        if not explicit_high_risk:
+
+            if analysis.get("red_flag"):
+
+                analysis["red_flag"] = False
+                analysis["red_flag_reason"] = ""
+
+            if analysis.get("risk_level") == "medium":
+
+                analysis["risk_level"] = "low"
+                analysis["negotiation_priority"] = "low"
+
     # -------------------
     # High-risk validation
     # -------------------
