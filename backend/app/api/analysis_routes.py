@@ -26,6 +26,7 @@ from app.services.contract_agent.contract_agent import analyze_contract_clauses
 
 from app.services.contract_agent.summary_service import (
     generate_summary,
+    generate_summary_data,
     calculate_global_risk,
     generate_simplified_version,
 )
@@ -151,6 +152,11 @@ def run_analysis(
     print("TEXT LENGTH:", len(cleaned_text))
     print("================================\n")
 
+    summary_data = generate_summary_data(
+        cleaned_text,
+        output_language
+    )
+
     summary = generate_summary(
         cleaned_text,
         output_language
@@ -202,7 +208,36 @@ def run_analysis(
 
     db.refresh(analysis)
 
-    return analysis
+    response = {
+        "id": analysis.id,
+        "document_id": analysis.document_id,
+        "summary": analysis.summary,
+        "clauses": json.loads(analysis.clauses),
+        "risk_level": analysis.risk_level,
+        "risk_score": analysis.risk_score,
+        "simplified_version": analysis.simplified_version,
+        "recommendations": json.loads(analysis.recommendations),
+
+        "quality_check": summary_data.get("quality_check"),
+
+        "contract_quality_score": summary_data.get(
+            "contract_quality_score"
+        ),
+
+        "overall_balance": summary_data.get(
+            "overall_balance"
+        ),
+
+        "contract_complexity": summary_data.get(
+            "contract_complexity"
+        ),
+
+        "jurisdiction_detected": summary_data.get(
+            "jurisdiction_detected"
+        ),
+    }
+
+    return response
 
 
 # ================= ANALYSIS HISTORY =================
