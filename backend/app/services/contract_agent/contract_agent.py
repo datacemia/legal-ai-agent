@@ -96,7 +96,7 @@ RISK_REDUCERS = [
     "mutual termination",
     "cure period",
     "arbitration",
-    "insurance",
+    "liability insurance",
     "liability cap",
     "compensation remedy",
 
@@ -104,7 +104,7 @@ RISK_REDUCERS = [
     "résiliation mutuelle",
     "délai de correction",
     "arbitrage",
-    "assurance",
+    "assurance responsabilité",
     "plafond de responsabilité",
     "indemnisation",
 
@@ -1655,8 +1655,12 @@ def calibrate_risk_level(
     safe_jurisdiction_patterns = [
         "tribunaux compétents de paris",
         "droit français",
+        "courts of paris",
+        "french law",
         "المحاكم المختصة بمدينة الدار البيضاء",
         "قوانين المملكة المغربية",
+        "courts of casablanca",
+        "laws of morocco",
     ]
 
     if any(
@@ -1962,8 +1966,9 @@ def calculate_clause_importance(
     standard_clause_patterns = [
         "tribunaux compétents de paris",
         "droit français",
-        "confidentialité",
-        "confidentiality",
+        "standard confidentiality",
+        "information confidentielle",
+        "confidential information",
         "responsabilité limitée",
         "limitation of liability",
         "assurance responsabilité",
