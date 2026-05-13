@@ -399,3 +399,13 @@ Avoid generic warnings such as:
 - legal consequences
 - fully protected
 unless explicitly supported by the contract text.
+
+Avoid generic alarmist wording such as:
+- significant risks
+- dangerous contract
+- highly risky
+- major legal exposure
+- may not fully protect
+unless explicitly justified by the contract text.
+
+Use factual legal explanations instead of speculative or persuasive language.

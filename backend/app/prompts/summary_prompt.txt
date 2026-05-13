@@ -384,3 +384,38 @@ Examples:
 - confidentiality risk may be reduced by public-information carve-outs
 - liability risk may be reduced by insurance, indemnity, or caps
 - assignment risk may be reduced by successor-obligation language
+
+Do not describe a contract as containing significant,
+major, severe, dangerous, or highly risky issues unless
+the contract includes clearly disproportionate or abusive legal structures.
+
+Examples of genuinely high-risk structures include:
+- unlimited liability
+- unilateral amendment rights
+- hidden fees
+- severe financial penalties
+- perpetual restrictions
+- automatic renewal traps
+- broad irreversible intellectual property assignments
+- exclusivity lock-ins
+- strong one-sided termination rights
+- multiple combined medium/high-risk clauses
+
+Standard contractual mechanisms alone do NOT justify
+alarmist summaries.
+
+The following are often standard across many jurisdictions,
+industries, and contract types:
+- limitation of liability caps
+- confidentiality obligations
+- fixed contract duration
+- notice periods
+- governing law clauses
+- venue clauses
+- intellectual property transfer after payment
+
+Use neutral, factual, and proportional legal language.
+
+Avoid exaggerated executive summaries for balanced contracts.
+
+Do not present negotiable standard clauses as dangerous by default.

@@ -12,6 +12,16 @@ from app.services.contract_agent.summary_normalizer import (
 MAX_SUMMARY_CHARS = 12_000
 MAX_SIMPLIFICATION_CHARS = 12_000
 
+SUMMARY_SPECULATIVE_PATTERNS = [
+    "risques significatifs",
+    "significant risks",
+    "major legal exposure",
+    "dangerous contract",
+    "highly risky",
+    "serious legal risk",
+    "critical legal concern",
+]
+
 
 def extract_jurisdiction(text: str) -> dict:
     text_lower = text.lower()
@@ -364,6 +374,43 @@ def remove_jurisdiction_false_actions(data: dict) -> dict:
 
 
 
+def remove_alarmist_language(
+    data: dict,
+    contract_score: int,
+) -> dict:
+
+    if contract_score >= 60:
+        return data
+
+    fields = [
+        "global_summary",
+        "practical_decision",
+        "overall_balance",
+    ]
+
+    for field in fields:
+
+        value = data.get(field, "")
+
+        lowered = value.lower()
+
+        for pattern in SUMMARY_SPECULATIVE_PATTERNS:
+
+            if pattern in lowered:
+
+                value = value.replace(
+                    pattern,
+                    ""
+                )
+
+        data[field] = " ".join(
+            value.split()
+        )
+
+    return data
+
+
+
 def get_labels(language: str = "en") -> dict:
     labels = {
         "en": {
@@ -605,6 +652,11 @@ Contract text:
     )
 
     data = normalize_contract_summary(data, language)
+
+    data = remove_alarmist_language(
+        data,
+        data.get("contract_score", 0),
+    )
 
     return data
 
