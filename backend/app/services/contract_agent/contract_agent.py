@@ -136,6 +136,13 @@ SPECULATIVE_PATTERNS = [
     "capping the financial obligation",
     "cash flow risks",
     "impacts the employer's financial obligations",
+    "lower minimum coverage",
+    "financial burden on the employee",
+    "employee's compensation package",
+    "above average for standard employment agreements",
+    "tiered coverage structure",
+    "sudden job loss",
+    "financial stability",
 ]
 
 
@@ -1481,4 +1488,21 @@ def analyze_contract_clauses(
         reverse=True,
     )
 
-    return results[:12]
+    seen_quotes = set()
+    deduped = []
+
+    for item in results:
+
+        quote = (
+            item.get("quoted_text", "")
+            .lower()
+            .strip()
+        )[:80]
+
+        if quote and quote in seen_quotes:
+            continue
+
+        seen_quotes.add(quote)
+        deduped.append(item)
+
+    return deduped[:12]
