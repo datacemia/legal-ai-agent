@@ -709,6 +709,12 @@ def remove_speculative_analysis(
         "safer_alternative",
     ]
 
+    if analysis.get("risk_level") == "low":
+        for field in fields:
+            analysis[field] = ""
+
+        return analysis
+
     for field in fields:
 
         value = analysis.get(field, "")
