@@ -573,34 +573,32 @@ def validate_explicit_permission_clause(
     permission_patterns = [
         "will continue to be engaged",
         "not be considered a conflict",
+        "permitted",
+        "allowed",
+        "authorized",
         "will not be deemed",
+        "will not be considered",
         "so long as",
+        "provided that",
         "express written consent",
 
         "autorisé",
+        "permis",
         "ne sera pas considéré",
         "à condition que",
 
         "مسموح",
+        "مرخص",
         "لا يعتبر",
         "بشرط أن",
     ]
 
     if any(p in text for p in permission_patterns):
 
-        if analysis.get("red_flag"):
-            analysis["red_flag"] = False
-            analysis["red_flag_reason"] = ""
-
-        if analysis.get("risk_level") == "high":
-
-            analysis["risk_level"] = "medium"
-
-        elif analysis.get("risk_level") == "medium":
-
-            analysis["risk_level"] = "low"
-
-            analysis["negotiation_priority"] = "low"
+        analysis["red_flag"] = False
+        analysis["red_flag_reason"] = ""
+        analysis["risk_level"] = "low"
+        analysis["negotiation_priority"] = "low"
 
         permission_negative_patterns = [
             "divided attention",
