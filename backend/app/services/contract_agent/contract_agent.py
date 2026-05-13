@@ -875,6 +875,72 @@ def calibrate_risk_level(
                 analysis["risk_level"] = "low"
                 analysis["negotiation_priority"] = "low"
 
+
+    # -------------------
+    # Payment calculation / bonus mechanics
+    # -------------------
+
+    payment_calculation_patterns = [
+        "bonus",
+        "commercial quantities",
+        "production",
+        "threshold",
+        "maximum bonus",
+        "performance-based",
+
+        "prime",
+        "seuil",
+        "production",
+
+        "مكافأة",
+        "إنتاج",
+        "حد أقصى",
+    ]
+
+    severe_payment_risk_patterns = [
+        "penalty",
+        "liquidated damages",
+        "unlimited liability",
+        "sole discretion",
+        "unilateral",
+        "must pay",
+        "shall pay regardless",
+        "impossible payment",
+
+        "pénalité",
+        "responsabilité illimitée",
+        "seule discrétion",
+        "unilatéral",
+
+        "غرامة",
+        "مسؤولية غير محدودة",
+        "تقديره المطلق",
+    ]
+
+    if (
+        analysis.get("clause_type") == "payment"
+        and any(
+            p in text
+            for p in payment_calculation_patterns
+        )
+    ):
+
+        severe_payment_risk = any(
+            p in text
+            for p in severe_payment_risk_patterns
+        )
+
+        if not severe_payment_risk:
+
+            analysis["red_flag"] = False
+            analysis["red_flag_reason"] = ""
+
+            if analysis.get("risk_level") == "high":
+                analysis["risk_level"] = "medium"
+
+            if analysis.get("negotiation_priority") == "high":
+                analysis["negotiation_priority"] = "medium"
+
     # -------------------
     # High-risk validation
     # -------------------
