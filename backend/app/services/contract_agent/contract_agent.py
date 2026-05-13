@@ -602,6 +602,25 @@ def validate_explicit_permission_clause(
 
             analysis["negotiation_priority"] = "low"
 
+        permission_negative_patterns = [
+            "divided attention",
+            "loyalty",
+            "outside business",
+        ]
+
+        legal_insight = analysis.get(
+            "legal_insight",
+            ""
+        )
+
+        for pattern in permission_negative_patterns:
+
+            if pattern in legal_insight.lower():
+
+                analysis["legal_insight"] = ""
+
+                break
+
     return analysis
 
 
@@ -1065,6 +1084,10 @@ def analyze_contract_clauses(
 
         if analysis.get("importance_score", 0) < 10:
             continue
+
+        if analysis.get("risk_level") == "low":
+
+            analysis["negotiation_priority"] = "low"
 
         results.append({
             "title": title,
