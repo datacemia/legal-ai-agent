@@ -208,6 +208,39 @@ def apply_balancing_protections(
 
 
 
+def remove_protective_constructive_termination_danger(
+    data: dict,
+    full_text: str,
+) -> dict:
+
+    text = full_text.lower()
+
+    protective_termination_terms = [
+        "constructive termination",
+        "lump sum",
+        "fully vested",
+        "compensation",
+        "indemnité",
+        "تعويض",
+    ]
+
+    if (
+        "constructive termination" in text
+        and any(
+            term in text
+            for term in protective_termination_terms
+        )
+    ):
+
+        data["dangerous_patterns"] = [
+            item
+            for item in data.get("dangerous_patterns", [])
+            if "constructive termination" not in item.lower()
+        ]
+
+    return data
+
+
 def remove_jurisdiction_false_actions(data: dict) -> dict:
     remove_terms = [
         "governing law",
@@ -469,6 +502,11 @@ Contract text:
         or jurisdiction_data.get("dispute_location")
     ):
         data = remove_jurisdiction_false_actions(data)
+
+    data = remove_protective_constructive_termination_danger(
+        data,
+        text,
+    )
 
     data = normalize_contract_summary(data, language)
 
