@@ -113,6 +113,16 @@ SPECULATIVE_PATTERNS = [
     "enhance protection",
     "types of claims included",
     "robust in many industries",
+    "financial exposure",
+    "adequate coverage",
+    "more favorable payout",
+    "higher aggregate limit",
+    "competitive for executive roles",
+    "operational stability",
+    "potential misuse",
+    "enhance coverage",
+    "claims that could exceed",
+    "lower limits",
 ]
 
 
@@ -137,6 +147,10 @@ GENERIC_AI_PATTERNS = [
     "protect financial interests",
     "enhance protection",
     "justify a higher",
+    "seek to enhance",
+    "appears competitive",
+    "generally favorable",
+    "avoid ambiguity",
 ]
 
 

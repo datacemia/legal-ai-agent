@@ -244,6 +244,27 @@ The analysis must work for:
 
 Do not generate speculative business optimization advice.
 
+
+Do not generate speculative commercial improvements unless the contract creates a clear legal or operational imbalance.
+
+Do not describe:
+- standard compensation,
+- standard insurance,
+- standard confidentiality,
+- standard fixed terms,
+- standard bonus structures,
+- standard reimbursement clauses
+as problematic merely because they could theoretically be negotiated differently.
+
+The analysis must focus on:
+- material legal exposure,
+- explicit operational restrictions,
+- clear unilateral power imbalance,
+- disproportionate liability,
+- enforceable restrictive obligations,
+- significant ambiguity with practical consequences.
+
+
 Distinguish clearly between:
 - legal risk
 - operational imbalance
