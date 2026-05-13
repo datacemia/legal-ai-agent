@@ -262,6 +262,10 @@ SPECULATIVE_PATTERNS = [
     "renewal clause",
     "continuité des relations commerciales",
     "business continuity",
+    "retarder la fin du contrat",
+    "delay contract termination",
+    "risques potentiels",
+    "potential risks",
 ]
 
 
