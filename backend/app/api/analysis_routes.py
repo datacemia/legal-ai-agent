@@ -142,16 +142,16 @@ def run_analysis(
             "error": "unsupported_document",
             "message": {
                 "en": (
-                    "This document does not appear to be a legal contract. "
-                    "Please upload a contract or agreement."
+                    "The file was uploaded successfully, but its content does not appear "
+                    "to be a contract or legal agreement. Please upload a contract document."
                 ),
                 "fr": (
-                    "Ce document ne semble pas être un contrat juridique. "
-                    "Veuillez importer un contrat ou un accord."
+                    "Le fichier a bien été importé, mais son contenu ne semble pas être "
+                    "un contrat ou un accord juridique. Veuillez importer un document contractuel."
                 ),
                 "ar": (
-                    "لا يبدو أن هذا المستند عقداً قانونياً. "
-                    "يرجى رفع عقد أو اتفاقية."
+                    "تم رفع الملف بنجاح، لكن محتواه لا يبدو أنه عقد أو اتفاقية قانونية. "
+                    "يرجى رفع مستند تعاقدي."
                 ),
             }.get(output_language, "Unsupported document"),
         }
