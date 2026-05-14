@@ -2489,6 +2489,24 @@ def analyze_contract_clauses(
             analysis["market_comparison"] = ""
             analysis["safer_alternative"] = ""
 
+        quoted_text = str(
+            analysis.get("quoted_text", "")
+        ).strip()
+
+        weak_context = (
+            len(quoted_text.split()) < 12
+        )
+
+        if weak_context:
+            analysis["risk_level"] = "low"
+            analysis["negotiation_priority"] = "low"
+
+            analysis["negotiation_advice"] = ""
+            analysis["safer_alternative"] = ""
+
+            if not analysis.get("legal_insight"):
+                analysis["legal_insight"] = ""
+
         # Keep all analyzed clauses, including low-risk clauses.
         # Low-risk clauses are useful for transparency in FR/EN/AR.
 
