@@ -835,9 +835,7 @@ def render_simplified_text(data: dict, language: str = "en") -> str:
 
     output = data.get("simplified_version", "")
 
-    if data.get("key_points"):
-        output += f"\n\n{t['key_points']}:\n"
-        output += "\n".join([f"- {item}" for item in data["key_points"]])
+    # key_points intentionally hidden in simplified rendering.
 
     if data.get("things_to_watch"):
         output += f"\n\n{t['things_to_watch']}:\n"
