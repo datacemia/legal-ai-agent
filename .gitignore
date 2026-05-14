@@ -96,3 +96,6 @@ weak_points.json
 backend/test_job.py
 backend/verify_test_user.py
 backend/clear_jobs.py
+
+# Local QA contract test files
+backend/test_contracts/

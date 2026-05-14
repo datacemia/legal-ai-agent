@@ -346,4 +346,10 @@ def split_into_clauses(text: str) -> List[str]:
         if not is_low_value_clause(clause):
             cleaned_clauses.append(clause)
 
+    if not cleaned_clauses:
+        fallback = clean_clause_text(text)
+
+        if len(fallback) > 80:
+            return [fallback]
+
     return cleaned_clauses
