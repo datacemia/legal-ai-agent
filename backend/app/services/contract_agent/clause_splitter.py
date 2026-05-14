@@ -192,6 +192,30 @@ def clean_clause_text(text: str) -> str:
 def is_low_value_clause(clause: str) -> bool:
     text = clause.lower().strip()
 
+    normalized = re.sub(r"\s+", " ", text).strip()
+
+    # Standalone document titles
+    document_title_patterns = [
+        r"^amended and restated .* agreement$",
+        r"^credit agreement$",
+        r"^loan agreement$",
+        r"^service agreement$",
+        r"^employment agreement$",
+        r"^non-disclosure agreement$",
+
+        r"^contrat .*",
+        r"^accord .*",
+
+        r"^اتفاقية .*",
+        r"^عقد .*",
+    ]
+
+    if any(
+        re.match(pattern, normalized, re.IGNORECASE)
+        for pattern in document_title_patterns
+    ):
+        return True
+
     low_value_patterns = [
 
         # English
