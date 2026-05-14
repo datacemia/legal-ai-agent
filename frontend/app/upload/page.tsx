@@ -72,7 +72,7 @@ const labels: any = {
       "Receive a structured analysis",
     ],
     workflowDescriptions: [
-      "Secure PDF and DOCX upload",
+      "Secure PDF, DOCX & scanned document upload",
       "AI-powered contract intelligence",
       "Structured legal analysis in seconds",
     ],
@@ -147,7 +147,7 @@ const labels: any = {
       "Recevez une analyse structurée",
     ],
     workflowDescriptions: [
-      "Import sécurisé des fichiers PDF et DOCX",
+      "Import sécurisé de PDF, DOCX et documents scannés",
       "Analyse intelligente du contrat",
       "Rapport structuré en quelques secondes",
     ],
@@ -222,7 +222,7 @@ const labels: any = {
       "احصل على تحليل منظم",
     ],
     workflowDescriptions: [
-      "رفع آمن لملفات PDF و DOCX",
+      "رفع آمن لملفات PDF و DOCX والمستندات الممسوحة ضوئياً",
       "تحليل ذكي لمحتوى العقد",
       "تقرير منظم خلال ثوانٍ",
     ],
