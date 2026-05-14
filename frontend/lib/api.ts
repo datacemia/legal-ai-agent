@@ -53,7 +53,7 @@ if (!res.ok) {
 }
 
 return data;
-
+}
 export async function getAnalysis(documentId: number) {
   const res = await fetch(`${API_URL}/analysis/${documentId}`, {
     headers: getAuthHeaders(),
