@@ -36,6 +36,48 @@ def is_table_of_contents_line(line: str) -> bool:
     )
 
 
+
+def is_structural_attachment_heading(line: str) -> bool:
+    """
+    Detect annexes, exhibits, schedules, appendices,
+    templates and attachment headings.
+
+    These are structural document sections,
+    not operational legal clauses.
+    """
+
+    line = normalize_line(line).lower()
+
+    patterns = [
+
+        # -------------------------
+        # ENGLISH
+        # -------------------------
+
+        r"^(exhibit|schedule|annex|appendix)\s+[a-z0-9\-]+",
+        r"^(form of)\s+",
+
+        # -------------------------
+        # FRENCH
+        # -------------------------
+
+        r"^(annexe|appendice)\s+[a-z0-9\-]+",
+        r"^(modèle de|formulaire de)\s+",
+
+        # -------------------------
+        # ARABIC
+        # -------------------------
+
+        r"^(ملحق|مرفق)\s*[\w\d\-]*",
+        r"^(نموذج)\s+",
+    ]
+
+    return any(
+        re.search(pattern, line, re.IGNORECASE)
+        for pattern in patterns
+    )
+
+
 def is_clause_heading(line: str) -> bool:
     """
     Detect whether a line is likely a contract clause heading.
@@ -209,6 +251,9 @@ def split_into_clauses(text: str) -> List[str]:
     for line in lines:
 
         if is_table_of_contents_line(line):
+            continue
+
+        if is_structural_attachment_heading(line):
             continue
 
         # New heading detected
