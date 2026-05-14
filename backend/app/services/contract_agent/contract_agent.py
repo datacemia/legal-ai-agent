@@ -2340,6 +2340,38 @@ def analyze_contract_clauses(
             )
         )
 
+        definition_keywords = [
+            "defined terms",
+            "definition",
+            "definitions",
+            "means",
+            "shall mean",
+
+            "définition",
+            "définitions",
+            "désigne",
+            "signifie",
+
+            "التعريفات",
+            "تعريف",
+            "يقصد به",
+            "يعني",
+        ]
+
+        lowered_clause = clause.lower()
+
+        definition_matches = sum(
+            1 for keyword in definition_keywords
+            if keyword in lowered_clause
+        )
+
+        if definition_matches >= 2:
+            analysis["risk_level"] = "low"
+            analysis["negotiation_priority"] = "low"
+            analysis["favours"] = "balanced"
+            analysis["negotiation_advice"] = ""
+            analysis["safer_alternative"] = ""
+
         # Keep all analyzed clauses, including low-risk clauses.
         # Low-risk clauses are useful for transparency in FR/EN/AR.
 
