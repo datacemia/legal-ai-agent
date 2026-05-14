@@ -947,14 +947,16 @@ export default function UploadPage() {
                       {clause.explanation_simple}
                     </p>
 
-                    <button
-                      type="button"
-                      className="mt-4 inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
-                    >
-                      {isOpen ? t.hideDetails : t.viewDetails}
-                    </button>
+                    {clause.has_details && (
+                      <button
+                        type="button"
+                        className="mt-4 inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+                      >
+                        {isOpen ? t.hideDetails : t.viewDetails}
+                      </button>
+                    )}
 
-                    {isOpen && (
+                    {isOpen && clause.has_details && (
                     <div className="mt-4 space-y-4 text-sm">
 
                         {clause.recommendation && (

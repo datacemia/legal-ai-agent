@@ -2521,13 +2521,23 @@ def analyze_contract_clauses(
             if not analysis.get("legal_insight"):
                 analysis["legal_insight"] = ""
 
+        detail_fields = [
+            "recommendation",
+            "negotiation_advice",
+            "legal_insight",
+            "market_comparison",
+            "safer_alternative",
+        ]
+
+        analysis["has_details"] = any(
+            str(analysis.get(field, "")).strip()
+            for field in detail_fields
+        )
+
         meaningful_content = any([
             analysis.get("quoted_text"),
-            analysis.get("recommendation"),
-            analysis.get("negotiation_advice"),
-            analysis.get("legal_insight"),
-            analysis.get("market_comparison"),
-            analysis.get("safer_alternative"),
+            analysis.get("explanation_simple"),
+            analysis["has_details"],
         ])
 
         if not meaningful_content:
