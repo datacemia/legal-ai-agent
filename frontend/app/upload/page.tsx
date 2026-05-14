@@ -869,7 +869,7 @@ export default function UploadPage() {
                       />
                     </div>
 
-                    {clause.favours && (
+                    {clause.favours && clause.favours !== "balanced" && (
                       <div className="mt-2 text-xs font-medium text-gray-600">
                         {t.favours}:{" "}
                         <span
@@ -895,33 +895,39 @@ export default function UploadPage() {
                     )}
 
                     {clause.quoted_text && (
-                      <details className="mt-4 group">
-                        <summary className="cursor-pointer list-none inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700">
-                          <span>
-                            {language === "fr"
-                              ? "Voir le texte original"
-                              : language === "ar"
-                              ? "عرض النص الأصلي"
-                              : "View original text"}
-                          </span>
-
-                          <svg
-                            className="ml-2 h-3.5 w-3.5 transition-transform group-open:rotate-180"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </summary>
-
-                        <div className="mt-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 italic text-sm leading-7 text-slate-700">
+                      clause.detected_language === language ? (
+                        <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-4 italic text-sm leading-7 text-slate-700">
                           “{clause.quoted_text}”
                         </div>
-                      </details>
+                      ) : (
+                        <details className="mt-4 group">
+                          <summary className="cursor-pointer list-none inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700">
+                            <span>
+                              {language === "fr"
+                                ? "Voir le texte original"
+                                : language === "ar"
+                                ? "عرض النص الأصلي"
+                                : "View original text"}
+                            </span>
+
+                            <svg
+                              className="ml-2 h-3.5 w-3.5 transition-transform group-open:rotate-180"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </summary>
+
+                          <div className="mt-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 italic text-sm leading-7 text-slate-700">
+                            “{clause.quoted_text}”
+                          </div>
+                        </details>
+                      )
                     )}
 
                     <p className="mt-3 text-sm leading-6 text-slate-600">
