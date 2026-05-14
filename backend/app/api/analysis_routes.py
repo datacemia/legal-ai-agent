@@ -34,6 +34,10 @@ from app.services.contract_agent.validator import (
     validate_contract_result,
 )
 
+from app.services.contract_agent.validator import (
+    is_probably_contract,
+)
+
 router = APIRouter(prefix="/analysis", tags=["Analysis"])
 
 LEGAL_AGENT_CREDITS = 8
@@ -129,6 +133,28 @@ def run_analysis(
     )
 
     cleaned_text = clean_text(raw_text)
+
+    if not is_probably_contract(cleaned_text):
+        document.status = "rejected"
+        db.commit()
+
+        return {
+            "error": "unsupported_document",
+            "message": {
+                "en": (
+                    "This document does not appear to be a legal contract. "
+                    "Please upload a contract or agreement."
+                ),
+                "fr": (
+                    "Ce document ne semble pas être un contrat juridique. "
+                    "Veuillez importer un contrat ou un accord."
+                ),
+                "ar": (
+                    "لا يبدو أن هذا المستند عقداً قانونياً. "
+                    "يرجى رفع عقد أو اتفاقية."
+                ),
+            }.get(output_language, "Unsupported document"),
+        }
 
     detected_language = detect_language(cleaned_text)
 

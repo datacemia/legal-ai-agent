@@ -52,3 +52,51 @@ def validate_contract_result(result: dict) -> dict:
         "score": score,
         "issues": issues,
     }
+
+def is_probably_contract(text: str) -> bool:
+    text = str(text or "").lower()
+
+    legal_keywords = [
+        # English
+        "contract",
+        "agreement",
+        "party",
+        "parties",
+        "payment",
+        "termination",
+        "liability",
+        "clause",
+        "governing law",
+
+        # French
+        "contrat",
+        "accord",
+        "partie",
+        "parties",
+        "paiement",
+        "résiliation",
+        "responsabilité",
+        "clause",
+        "droit applicable",
+
+        # Arabic
+        "العقد",
+        "عقد",
+        "الطرف",
+        "الأطراف",
+        "المادة",
+        "البند",
+        "الدفع",
+        "السداد",
+        "الفسخ",
+        "إنهاء",
+        "الالتزام",
+        "القانون",
+    ]
+
+    score = sum(
+        1 for keyword in legal_keywords
+        if keyword in text
+    )
+
+    return score >= 3
