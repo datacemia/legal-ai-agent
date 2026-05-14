@@ -541,7 +541,9 @@ export default function UploadPage() {
     } catch (err: any) {
       const detail =
         err?.response?.data?.detail ||
-        err?.message ||
+        (err?.message === "Failed to fetch"
+          ? "The server completed the request, but the browser could not read the response. Please retry once."
+          : err?.message) ||
         "Invalid file. Only PDF or DOCX allowed.";
 
       if (detail.includes("Trial already used")) {

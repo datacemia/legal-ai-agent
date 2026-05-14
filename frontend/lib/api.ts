@@ -37,21 +37,22 @@ export async function runAnalysis(
     }
   );
 
-  const data = await res.json();
+  const data = await res.json().catch(() => null);
 
-  if (!res.ok) {
-    const error: any = new Error(data.detail || `API error ${res.status}`);
+if (!res.ok) {
+  const error: any = new Error(
+    data?.detail || `API error ${res.status}`
+  );
 
-    error.response = {
-      status: res.status,
-      data,
-    };
+  error.response = {
+    status: res.status,
+    data,
+  };
 
-    throw error;
-  }
-
-  return data;
+  throw error;
 }
+
+return data;
 
 export async function getAnalysis(documentId: number) {
   const res = await fetch(`${API_URL}/analysis/${documentId}`, {
