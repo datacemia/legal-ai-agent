@@ -871,7 +871,13 @@ export default function UploadPage() {
                       </div>
 
                       <RiskBadge
-                        risk={clause.risk_level}
+                        risk={
+                          clause.explanation_simple?.includes(
+                            "organizational or administrative"
+                          )
+                            ? "informational"
+                            : clause.risk_level
+                        }
                         language={language}
                       />
                     </div>

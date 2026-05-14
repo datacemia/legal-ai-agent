@@ -13,6 +13,23 @@ export default function RiskBadge({ risk, language = "en" }: Props) {
 
   const normalizedRisk = risk?.toLowerCase();
 
+  if (normalizedRisk === "informational") {
+    const informationalLabels: any = {
+      en: "Informational",
+      fr: "Informatif",
+      ar: "معلوماتي",
+    };
+
+    return (
+      <span
+        dir={normalizedLanguage === "ar" ? "rtl" : "ltr"}
+        className="px-3 py-1 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800"
+      >
+        {informationalLabels[normalizedLanguage] || informationalLabels.en}
+      </span>
+    );
+  }
+
   const colors: Record<string, string> = {
     low: "bg-green-100 text-green-700",
     medium: "bg-yellow-100 text-yellow-800",

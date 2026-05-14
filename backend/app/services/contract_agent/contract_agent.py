@@ -2521,6 +2521,18 @@ def analyze_contract_clauses(
             if not analysis.get("legal_insight"):
                 analysis["legal_insight"] = ""
 
+        meaningful_content = any([
+            analysis.get("quoted_text"),
+            analysis.get("recommendation"),
+            analysis.get("negotiation_advice"),
+            analysis.get("legal_insight"),
+            analysis.get("market_comparison"),
+            analysis.get("safer_alternative"),
+        ])
+
+        if not meaningful_content:
+            continue
+
         # Keep all analyzed clauses, including low-risk clauses.
         # Low-risk clauses are useful for transparency in FR/EN/AR.
 
