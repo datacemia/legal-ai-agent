@@ -25,8 +25,8 @@ from app.services.language_service import detect_language
 from app.services.contract_agent.contract_agent import analyze_contract_clauses
 
 from app.services.contract_agent.summary_service import (
-    generate_summary,
     generate_summary_data,
+    render_summary_text,
     calculate_global_risk,
     generate_simplified_version,
 )
@@ -160,8 +160,8 @@ def run_analysis(
         output_language
     )
 
-    summary = generate_summary(
-        cleaned_text,
+    summary = render_summary_text(
+        summary_data,
         output_language
     )
 

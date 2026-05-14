@@ -81,6 +81,11 @@ def translate_balance(value: Any, language: str) -> str:
             "fr": "Équilibré",
             "ar": "متوازن",
         },
+        "متوازن": {
+            "en": "Balanced",
+            "fr": "Équilibré",
+            "ar": "متوازن",
+        },
         "slightly employer-friendly": {
             "en": "Slightly Employer-Friendly",
             "fr": "Légèrement favorable à l’employeur",
@@ -91,12 +96,27 @@ def translate_balance(value: Any, language: str) -> str:
             "fr": "Favorable à l’employeur",
             "ar": "لصالح صاحب العمل",
         },
+        "لصالح صاحب العمل": {
+            "en": "Employer-Friendly",
+            "fr": "Favorable à l’employeur",
+            "ar": "لصالح صاحب العمل",
+        },
         "employee-friendly": {
             "en": "Employee-Friendly",
-            "fr": "Favorable للموظف",
+            "fr": "Favorable à l’employé",
+            "ar": "لصالح الموظف",
+        },
+        "لصالح الموظف": {
+            "en": "Employee-Friendly",
+            "fr": "Favorable à l’employé",
             "ar": "لصالح الموظف",
         },
         "client-friendly": {
+            "en": "Client-Friendly",
+            "fr": "Favorable au client",
+            "ar": "لصالح العميل",
+        },
+        "لصالح العميل": {
             "en": "Client-Friendly",
             "fr": "Favorable au client",
             "ar": "لصالح العميل",
