@@ -951,15 +951,17 @@ export default function UploadPage() {
                     {isOpen && (
                     <div className="mt-4 space-y-4 text-sm">
 
-                        <div>
-                          <h4 className="font-semibold text-slate-900">
-                            {t.recommendation}
-                          </h4>
+                        {clause.recommendation && (
+                          <div>
+                            <h4 className="font-semibold text-slate-900">
+                              {t.recommendation}
+                            </h4>
 
-                          <p className="text-slate-600 mt-1">
-                            {clause.recommendation}
-                          </p>
-                        </div>
+                            <p className="text-slate-600 mt-1">
+                              {clause.recommendation}
+                            </p>
+                          </div>
+                        )}
 
                         {clause.negotiation_advice && (
                           <div className="bg-amber-50 border border-amber-200 rounded-xl p-3">
