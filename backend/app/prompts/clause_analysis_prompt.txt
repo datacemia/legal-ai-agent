@@ -34,7 +34,8 @@ CRITICAL OUTPUT RULES:
 - Do not add additional keys.
 - Keep all JSON keys exactly as provided.
 - Always return every field.
-- If information is unavailable, return an empty string.
+- If a field is not directly applicable, provide a short practical explanation instead of an empty string.
+- Only red_flag_reason may be empty when red_flag is false.
 - quoted_text must remain concise.
 - Do not invent clause references.
 - Do not hallucinate legal facts.
