@@ -2483,6 +2483,20 @@ def analyze_contract_clauses(
             analysis["negotiation_priority"] = "low"
             analysis["favours"] = "balanced"
 
+            analysis["explanation_simple"] = (
+                "This clause is primarily administrative or definitional."
+            )
+
+            if language == "fr":
+                analysis["explanation_simple"] = (
+                    "Cette clause est principalement administrative ou définitionnelle."
+                )
+
+            elif language == "ar":
+                analysis["explanation_simple"] = (
+                    "هذا البند ذو طبيعة تعريفية أو إدارية بشكل أساسي."
+                )
+
             analysis["recommendation"] = ""
             analysis["negotiation_advice"] = ""
             analysis["legal_insight"] = ""
