@@ -33,6 +33,7 @@ LOW_RISK_CLAUSES = [
     "fixed_term",
     "ip_after_payment",
     "mutual_termination_notice",
+    "administrative_amendment",
 ]
 
 MEDIUM_RISK_CLAUSES = [
@@ -1195,6 +1196,22 @@ def detect_clause_baseline(
             "résiliation mutuelle",
             "إنهاء متبادل",
         ],
+        "administrative_amendment": [
+            "amended and restated",
+            "restatement of existing",
+            "restated agreement",
+            "amendment and restatement",
+            "amendment to the agreement",
+
+            "modifié et reformulé",
+            "modification de l’accord",
+            "modification du contrat",
+
+            "معدل ومعاد صياغته",
+            "إعادة صياغة",
+            "تعديل الاتفاقية",
+            "تعديل العقد",
+        ],
     }
 
     medium_patterns = {
@@ -2230,6 +2247,49 @@ def analyze_contract_clauses(
             analysis,
             clause,
         )
+
+        ADMINISTRATIVE_KEYWORDS = [
+            "assignment",
+            "acceptance",
+            "commitment",
+            "schedule",
+            "exhibit",
+            "appendix",
+            "definition",
+            "effective date",
+            "reference",
+            "designation",
+            "form of",
+
+            "cession",
+            "acceptation",
+            "engagement",
+            "annexe",
+            "définition",
+            "date d’effet",
+
+            "التنازل",
+            "القبول",
+            "الالتزام",
+            "ملحق",
+            "تعريف",
+        ]
+
+        if (
+            analysis.get("risk_level") == "medium"
+            and not analysis.get("red_flag")
+        ):
+            lowered = clause.lower()
+
+            matches = sum(
+                1 for keyword in ADMINISTRATIVE_KEYWORDS
+                if keyword in lowered
+            )
+
+            if matches >= 2:
+                analysis["risk_level"] = "low"
+                analysis["negotiation_priority"] = "low"
+                analysis["favours"] = "balanced"
 
         if should_force_red_flag_false(
             analysis.get(
