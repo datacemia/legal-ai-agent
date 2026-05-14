@@ -736,6 +736,14 @@ def analyze_clause(
         ai_result
     )
 
+    if is_truncated_clause(clause):
+        ai_result["confidence"] = "low"
+        ai_result["red_flag"] = False
+        ai_result["red_flag_reason"] = ""
+
+        if ai_result.get("risk_level") == "high":
+            ai_result["risk_level"] = "medium"
+
     return ai_result
 
 
@@ -1130,6 +1138,66 @@ def validate_quoted_text(
 
     return analysis
 
+
+
+def is_truncated_clause(
+    clause_text: str,
+) -> bool:
+    """
+    Detect clauses that look cut off by OCR/PDF extraction.
+
+    This is a quality rule, not a business-risk rule.
+    """
+
+    text = safe_str(clause_text)
+
+    if not text:
+        return False
+
+    lowered = text.lower().strip()
+
+    truncated_endings = [
+        ",",
+        ";",
+        ":",
+        "(",
+        "[",
+        "{",
+        "and",
+        "or",
+        "including",
+        "including but not limited to",
+        "et",
+        "ou",
+        "notamment",
+        "y compris",
+        "و",
+        "أو",
+        "بما في ذلك",
+    ]
+
+    if any(
+        lowered.endswith(ending)
+        for ending in truncated_endings
+    ):
+        return True
+
+    opening_pairs = [
+        ("(", ")"),
+        ("[", "]"),
+        ("{", "}"),
+        ("“", "”"),
+        ('"', '"'),
+    ]
+
+    for opener, closer in opening_pairs:
+        if opener == closer:
+            if text.count(opener) % 2 != 0:
+                return True
+        elif text.count(opener) > text.count(closer):
+            return True
+
+    return False
 
 
 def detect_clause_baseline(
@@ -2369,6 +2437,7 @@ def analyze_contract_clauses(
             analysis["risk_level"] = "low"
             analysis["negotiation_priority"] = "low"
             analysis["favours"] = "balanced"
+            analysis["recommendation"] = ""
             analysis["negotiation_advice"] = ""
             analysis["safer_alternative"] = ""
 
