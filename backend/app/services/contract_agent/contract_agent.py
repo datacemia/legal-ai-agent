@@ -368,6 +368,42 @@ def safe_bool(value: Any) -> bool:
     return False
 
 
+def localize_clause_reference(
+    reference: str,
+    language: str,
+) -> str:
+
+    if not reference:
+        return ""
+
+    reference = str(reference).strip()
+
+    replacements = {
+        "en": {
+            "المادة": "Article",
+            "البند": "Clause",
+            "الفقرة": "Section",
+        },
+        "fr": {
+            "المادة": "Article",
+            "البند": "Clause",
+            "الفقرة": "Section",
+        },
+        "ar": {
+            "Article": "المادة",
+            "Clause": "البند",
+            "Section": "الفقرة",
+        },
+    }
+
+    localized = reference
+
+    for source_text, target_text in replacements.get(language, {}).items():
+        localized = localized.replace(source_text, target_text)
+
+    return localized
+
+
 def clamp_enum(
     value: Any,
     allowed: set[str],
@@ -452,8 +488,11 @@ def normalize_clause_result(
             ai_result.get("clause_title")
         ),
 
-        "clause_reference": safe_str(
-            ai_result.get("clause_reference")
+        "clause_reference": localize_clause_reference(
+            safe_str(
+                ai_result.get("clause_reference")
+            ),
+            ai_result.get("language", "en"),
         ),
 
         "quoted_text": safe_str(
@@ -673,6 +712,8 @@ def analyze_clause(
         ai_result = fallback_clause_result(
             language
         )
+
+    ai_result["language"] = language
 
     ai_result = normalize_clause_result(
         ai_result

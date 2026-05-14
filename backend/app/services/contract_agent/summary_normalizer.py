@@ -34,14 +34,37 @@ def normalize_missing_value(value: Any, language: str) -> str:
     return value
 
 
-def normalize_list(value: Any) -> list[str]:
+def normalize_list(value: Any, language: str) -> list[str]:
     if not value:
         return []
 
-    if isinstance(value, list):
-        return [str(item).strip() for item in value if str(item).strip()]
+    missing_values = {
+        "",
+        "not specified",
+        "non spécifié",
+        "غير محدد",
+        "undefined",
+        "unknown",
+        "none",
+        "null",
+    }
 
-    return [str(value).strip()]
+    items = value if isinstance(value, list) else [value]
+
+    cleaned = []
+
+    for item in items:
+        item_str = str(item).strip()
+
+        if not item_str:
+            continue
+
+        if item_str.lower() in missing_values:
+            continue
+
+        cleaned.append(item_str)
+
+    return cleaned
 
 
 def clamp_score(score: Any) -> int:
@@ -139,22 +162,22 @@ def normalize_contract_summary(data: dict, language: str = "en") -> dict:
 
     raw = {
         "contract_type": normalize_missing_value(data.get("contract_type"), language),
-        "parties": normalize_list(data.get("parties")) or [not_specified],
+        "parties": normalize_list(data.get("parties"), language) or [not_specified],
         "duration": normalize_missing_value(data.get("duration"), language),
         "payment_terms": normalize_missing_value(data.get("payment_terms"), language),
-        "main_obligations": normalize_list(data.get("main_obligations")),
+        "main_obligations": normalize_list(data.get("main_obligations"), language),
         "global_summary": normalize_missing_value(data.get("global_summary"), language),
-        "important_points": normalize_list(data.get("important_points")),
-        "missing_clauses": normalize_list(data.get("missing_clauses")),
-        "dangerous_patterns": normalize_list(data.get("dangerous_patterns")),
+        "important_points": normalize_list(data.get("important_points"), language),
+        "missing_clauses": normalize_list(data.get("missing_clauses"), language),
+        "dangerous_patterns": normalize_list(data.get("dangerous_patterns"), language),
         "contract_score": clamp_score(data.get("contract_score")),
         "overall_balance": translate_balance(data.get("overall_balance"), language),
-        "negotiation_priorities": normalize_list(data.get("negotiation_priorities")),
-        "key_risks": normalize_list(data.get("key_risks")),
+        "negotiation_priorities": normalize_list(data.get("negotiation_priorities"), language),
+        "key_risks": normalize_list(data.get("key_risks"), language),
         "practical_decision": normalize_missing_value(data.get("practical_decision"), language),
         "jurisdiction_detected": normalize_missing_value(data.get("jurisdiction_detected"), language),
         "jurisdiction_note": normalize_missing_value(data.get("jurisdiction_note"), language),
-        "recommended_actions": normalize_list(data.get("recommended_actions")),
+        "recommended_actions": normalize_list(data.get("recommended_actions"), language),
         "contract_complexity": normalize_complexity(data.get("contract_complexity")),
     }
 
@@ -165,8 +188,8 @@ def normalize_contract_summary(data: dict, language: str = "en") -> dict:
 def normalize_simplified_contract(data: dict, language: str = "en") -> dict:
     raw = {
         "simplified_version": normalize_missing_value(data.get("simplified_version"), language),
-        "key_points": normalize_list(data.get("key_points")),
-        "things_to_watch": normalize_list(data.get("things_to_watch")),
+        "key_points": normalize_list(data.get("key_points"), language),
+        "things_to_watch": normalize_list(data.get("things_to_watch"), language),
     }
 
     validated = SimplifiedContract(**raw)
