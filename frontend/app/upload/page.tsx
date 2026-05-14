@@ -503,6 +503,13 @@ export default function UploadPage() {
 
       try {
         analysis = await runAnalysis(doc.id, language);
+
+        if (analysis?.error === "unsupported_document") {
+          setMessage(analysis.message);
+          setResult(null);
+          setLoading(false);
+          return;
+        }
       } catch (err: any) {
         const status = err?.response?.status;
         const detail =
