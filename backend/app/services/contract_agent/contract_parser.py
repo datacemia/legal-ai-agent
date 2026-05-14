@@ -6,6 +6,11 @@ import fitz
 import pdfplumber
 from docx import Document
 
+from app.services.shared.ocr_service import (
+    extract_pdf_text,
+    extract_scanned_pdf_text,
+)
+
 MAX_PAGES = 20
 MAX_CHARS = 200_000
 
@@ -153,7 +158,22 @@ def extract_text_from_pdf_pdfplumber(file_path: str) -> str:
 
 
 def extract_text_from_pdf(file_path: str) -> str:
+    with open(file_path, "rb") as file:
+        content = file.read()
+
     candidates = []
+
+    try:
+        text = extract_pdf_text(content)
+
+        if not text or len(text) < 80:
+            print("LEGAL OCR FALLBACK...")
+            text = extract_scanned_pdf_text(content)
+
+        if text:
+            candidates.append(clean_text(text))
+    except Exception as e:
+        print("Shared PDF/OCR extraction failed:", e)
 
     for extractor in (
         extract_text_from_pdf_pymupdf,
