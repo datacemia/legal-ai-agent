@@ -2441,6 +2441,33 @@ def analyze_contract_clauses(
             analysis["negotiation_advice"] = ""
             analysis["safer_alternative"] = ""
 
+        normalized_clause = " ".join(
+            clause.strip().split()
+        )
+
+        word_count = len(normalized_clause.split())
+
+        fragment_like = (
+            word_count < 12
+            or normalized_clause.endswith(",")
+            or normalized_clause.endswith(";")
+            or normalized_clause.isupper()
+        )
+
+        if fragment_like:
+            analysis["risk_level"] = "low"
+            analysis["negotiation_priority"] = "low"
+            analysis["favours"] = "balanced"
+
+            analysis["recommendation"] = (
+                "This text appears to be a heading or incomplete clause fragment."
+            )
+
+            analysis["negotiation_advice"] = ""
+            analysis["legal_insight"] = ""
+            analysis["market_comparison"] = ""
+            analysis["safer_alternative"] = ""
+
         # Keep all analyzed clauses, including low-risk clauses.
         # Low-risk clauses are useful for transparency in FR/EN/AR.
 
