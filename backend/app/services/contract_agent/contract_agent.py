@@ -2468,6 +2468,24 @@ def analyze_contract_clauses(
             analysis["market_comparison"] = ""
             analysis["safer_alternative"] = ""
 
+        lowered_clause = clause.lower()
+
+        definition_or_fragment = (
+            " means " in lowered_clause
+            or " shall mean " in lowered_clause
+            or len(lowered_clause.split()) < 20
+        )
+
+        if (
+            definition_or_fragment
+            and analysis.get("risk_level") in {"medium", "high"}
+        ):
+            analysis["risk_level"] = "low"
+            analysis["red_flag"] = False
+            analysis["red_flag_reason"] = ""
+            analysis["negotiation_priority"] = "low"
+            analysis["favours"] = "balanced"
+
         # Keep all analyzed clauses, including low-risk clauses.
         # Low-risk clauses are useful for transparency in FR/EN/AR.
 
