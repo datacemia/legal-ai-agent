@@ -18,6 +18,24 @@ def normalize_line(line: str) -> str:
     return line
 
 
+def is_table_of_contents_line(line: str) -> bool:
+    """
+    Detect table-of-contents lines from PDFs.
+    """
+
+    line = normalize_line(line)
+
+    toc_patterns = [
+        r"\.{5,}\s*\d+$",
+        r"\.{3,}\s*\d+\s*$",
+    ]
+
+    return any(
+        re.search(pattern, line)
+        for pattern in toc_patterns
+    )
+
+
 def is_clause_heading(line: str) -> bool:
     """
     Detect whether a line is likely a contract clause heading.
@@ -189,6 +207,9 @@ def split_into_clauses(text: str) -> List[str]:
     current_clause = []
 
     for line in lines:
+
+        if is_table_of_contents_line(line):
+            continue
 
         # New heading detected
         if is_clause_heading(line):
