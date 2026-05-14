@@ -2269,6 +2269,7 @@ def analyze_contract_clauses(
         if analysis.get("risk_level") == "low":
 
             analysis["negotiation_priority"] = "low"
+            analysis["favours"] = "balanced"
 
         title = (
             analysis.get("clause_title")

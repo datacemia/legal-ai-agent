@@ -30,10 +30,10 @@ def extract_jurisdiction(text: str) -> dict:
     text_lower = text.lower()
 
     governing_law_patterns = [
-        r"laws of the state of ([a-zA-Z\s]+)",
-        r"governed by the laws of ([a-zA-Z\s]+)",
-        r"governed under the laws of ([a-zA-Z\s]+)",
-        r"laws of ([a-zA-Z\s]+)",
+        r"laws of the state of ([a-zA-Z\s]{2,40})(?:\.|,|;|\n)",
+        r"governed by the laws of ([a-zA-Z\s]{2,40})(?:\.|,|;|\n)",
+        r"governed under the laws of ([a-zA-Z\s]{2,40})(?:\.|,|;|\n)",
+        r"laws of ([a-zA-Z\s]{2,40})(?:\.|,|;|\n)",
     ]
 
     arbitration_patterns = [
@@ -50,6 +50,11 @@ def extract_jurisdiction(text: str) -> dict:
 
         if match:
             governing_law = match.group(1).strip().title()
+
+            if len(governing_law.split()) > 6:
+                governing_law = None
+                continue
+
             break
 
     for pattern in arbitration_patterns:
