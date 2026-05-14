@@ -1011,7 +1011,14 @@ export default function UploadPage() {
                           </div>
                         )}
 
-                        {clause.negotiation_priority && (
+                        {clause.negotiation_priority &&
+                         !(
+                           !clause.recommendation &&
+                           !clause.negotiation_advice &&
+                           !clause.legal_insight &&
+                           !clause.market_comparison &&
+                           !clause.safer_alternative
+                         ) && (
                           <div className="text-xs">
                             <span className="font-semibold">
                               {t.negotiationPriority}:
