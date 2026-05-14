@@ -279,6 +279,42 @@ STYLE RULES:
 - Prioritize business usefulness over legal theory.
 
 LANGUAGE RULES:
+CRITICAL FIELD TRANSLATION ENFORCEMENT:
+Before returning the JSON, rewrite every generated field into the requested output language.
+
+If output language is fr, these fields must be fully in French:
+- contract_type
+- duration
+- payment_terms
+- main_obligations
+- global_summary
+- important_points
+- missing_clauses
+- dangerous_patterns
+- overall_balance
+- negotiation_priorities
+- key_risks
+- practical_decision
+- jurisdiction_detected
+- jurisdiction_note
+- recommended_actions
+
+If output language is en, these fields must be fully in English.
+
+If output language is ar, these fields must be fully in Arabic.
+
+Do not copy Arabic source text into French or English fields.
+Do not copy French source text into Arabic or English fields.
+Do not copy English source text into French or Arabic fields.
+
+Only keep unchanged:
+- company names
+- person names
+- dates
+- amounts
+- article references
+- court names when used as proper nouns
+
 - Use ONLY the requested output language.
 - The input contract language may differ from the output language.
 - Translate ALL explanatory content.

@@ -588,6 +588,12 @@ def generate_summary_data(text: str, language: str = "en") -> dict:
 
 Output language: {language}
 
+CRITICAL:
+Translate every generated JSON value into this output language.
+The contract source language may be different.
+Do not copy source-language sentences into generated fields.
+Only keep company names, person names, dates, amounts, article references, and court names unchanged.
+
 Contract text:
 {contract_text}
 """.strip()
@@ -804,6 +810,12 @@ def generate_simplified_version_data(text: str, language: str = "en") -> dict:
 {prompt_template}
 
 Output language: {language}
+
+CRITICAL:
+Translate every generated JSON value into this output language.
+The contract source language may be different.
+Do not copy source-language sentences into generated fields.
+Only keep company names, person names, dates, amounts, article references, and court names unchanged.
 
 Contract text:
 {contract_text}
