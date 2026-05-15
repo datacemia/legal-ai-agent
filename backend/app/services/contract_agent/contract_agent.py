@@ -27,6 +27,9 @@ from app.services.contract_agent.clause_dependency_graph import (
 from app.services.contract_agent.executive_summary import (
     build_executive_summary,
 )
+from app.services.contract_agent.executive_risk_narrative import (
+    build_executive_risk_narrative,
+)
 from app.services.contract_agent.enterprise_audit import (
     generate_enterprise_audit,
 )
@@ -1222,6 +1225,8 @@ def analyze_clause(
     ai_result["clause_title"] = normalize_final_clause_title(
         ai_result.get("clause_title", "")
     )
+
+    ai_result["title"] = ai_result["clause_title"]
 
     ai_result = apply_rule_based_risk(
         ai_result,
@@ -3040,7 +3045,9 @@ def _analyze_contract_clauses_impl(
         )
 
         title = normalize_final_clause_title(title)
+
         analysis["clause_title"] = title
+        analysis["title"] = title
 
         clause_text = clause
 
@@ -3991,11 +3998,17 @@ class ClauseAnalysisPipeline:
             dependency_graph,
         )
 
+        executive_risk_narrative = build_executive_risk_narrative(
+            executive_summary,
+            self.language,
+        )
+
         return {
             "results": results,
             "contract_timeline": contract_timeline,
             "dependency_graph": dependency_graph,
             "executive_summary": executive_summary,
+            "executive_risk_narrative": executive_risk_narrative,
         }
 
 
