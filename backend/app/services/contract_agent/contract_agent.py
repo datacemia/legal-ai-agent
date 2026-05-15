@@ -6,14 +6,71 @@ from openai import OpenAI
 from app.config import OPENAI_API_KEY
 from app.services.contract_agent.risk_engine import analyze_risk
 from app.services.contract_agent.clause_title_extractor import extract_clause_title
+from app.services.contract_agent.cross_clause_analysis import (
+    analyze_cross_clause_risks,
+)
+from app.services.contract_agent.cross_clause_conflicts import (
+    detect_cross_clause_conflicts,
+)
+from app.services.contract_agent.obligation_extractor import (
+    extract_contract_obligations,
+)
+from app.services.contract_agent.timeline_extractor import (
+    extract_contract_timeline,
+)
+from app.services.contract_agent.enterprise_audit import (
+    generate_enterprise_audit,
+)
+from app.services.contract_agent.semantic_negotiation import (
+    get_semantic_negotiation,
+)
+from app.services.contract_agent.legal_reasoning_templates import (
+    get_reasoning_for_text,
+)
+from app.services.contract_agent.contract_taxonomy import (
+    CLAUSE_TYPES,
+    CLAUSE_PRIORITY_ORDER,
+    detect_clause_type_from_taxonomy,
+    get_all_critical_terms,
+    has_clause_type_signal,
+    is_critical_clause_text,
+)
+from app.services.contract_agent.jurisdiction_profiles import (
+    detect_jurisdiction,
+)
 from app.utils.prompt_loader import load_prompt
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 
 ALLOWED_CLAUSE_TYPES = {
-    "payment", "termination", "confidentiality", "intellectual_property",
-    "liability", "penalty", "exclusivity", "non_compete", "other"
+    "payment",
+    "termination",
+    "confidentiality",
+    "intellectual_property",
+    "liability",
+    "limitation_of_liability",
+    "indemnity",
+    "penalty",
+    "exclusivity",
+    "non_compete",
+    "data_protection",
+    "arbitration",
+    "governing_law",
+    "jurisdiction",
+    "venue",
+    "warranty",
+    "service_level",
+    "insurance",
+    "assignment",
+    "amendment",
+    "renewal",
+    "default",
+    "security",
+    "maintenance",
+    "repair",
+    "covenant",
+    "other",
 }
 
 ALLOWED_RISK_LEVELS = {"low", "medium", "high"}
@@ -23,6 +80,117 @@ ALLOWED_FAVOURS = {
 }
 ALLOWED_CONFIDENCE = {"low", "medium", "high"}
 ALLOWED_PRIORITY = {"low", "medium", "high"}
+
+
+CLAUSE_SIGNAL_GROUPS = {
+    "critical": [
+        "termination",
+        "default",
+        "acceleration",
+        "liability",
+        "confidentiality",
+        "data protection",
+        "service level",
+        "governing law",
+        "indemnity",
+        "security",
+        "payment",
+        "pricing",
+        "maintenance",
+        "repair",
+        "covenants",
+        "loan amount",
+        "principal amount",
+        "interest",
+
+        "résiliation",
+        "défaut",
+        "responsabilité",
+        "confidentialité",
+        "protection des données",
+        "niveau de service",
+        "droit applicable",
+        "paiement",
+        "prix",
+        "maintenance",
+        "réparations",
+        "montant du prêt",
+        "capital",
+        "intérêt",
+
+        "فسخ",
+        "إنهاء",
+        "الإخلال",
+        "المسؤولية",
+        "السرية",
+        "حماية البيانات",
+        "مستوى الخدمة",
+        "القانون الواجب التطبيق",
+        "الدفع",
+        "الأسعار",
+        "الصيانة",
+        "الإصلاحات",
+        "التعهدات",
+        "مبلغ القرض",
+        "رأس المال",
+        "الفائدة",
+    ],
+    "financial": [
+        "payment",
+        "pricing",
+        "interest",
+        "late payment",
+        "bonus",
+        "invoice",
+        "paiement",
+        "prix",
+        "intérêt",
+        "retard de paiement",
+        "prime",
+        "facture",
+        "الدفع",
+        "الأسعار",
+        "الفائدة",
+        "تأخر الدفع",
+        "مكافأة",
+        "فاتورة",
+    ],
+    "termination": [
+        "termination",
+        "default",
+        "acceleration",
+        "cure period",
+        "notice period",
+        "résiliation",
+        "défaut",
+        "délai de correction",
+        "préavis",
+        "فسخ",
+        "إنهاء",
+        "الإخلال",
+        "مهلة تصحيح",
+        "إشعار",
+    ],
+    "definitions": [
+        "defined terms",
+        "definition",
+        "definitions",
+        "means",
+        "shall mean",
+        "désigne",
+        "signifie",
+        "définition",
+        "définitions",
+        "يقصد به",
+        "يعني",
+        "تعريف",
+        "التعريفات",
+    ],
+}
+
+
+def get_clause_signal_terms(group: str) -> list[str]:
+    return CLAUSE_SIGNAL_GROUPS.get(group, [])
 
 
 LOW_RISK_CLAUSES = [
@@ -687,6 +855,229 @@ def apply_rule_based_risk(
     return ai_result
 
 
+
+def apply_reasoning_quality_gate(
+    analysis: dict,
+    clause_text: str,
+    language: str,
+) -> dict:
+    """
+    Final deterministic text-quality gate only.
+
+    This function intentionally does NOT modify:
+    - risk_level
+    - red_flag
+    - red_flag_reason
+    - negotiation_priority
+    - favours
+
+    Risk/business calibration must stay in the dedicated risk and
+    calibration functions.
+    """
+
+    text = safe_str(clause_text).lower()
+
+    detail_fields = [
+        "recommendation",
+        "negotiation_advice",
+        "legal_insight",
+        "market_comparison",
+        "safer_alternative",
+    ]
+
+    dangerous_terms = [
+        "dangerous",
+        "hazardous",
+        "illegal",
+        "unlawful",
+        "criminal",
+        "fraud",
+        "dangerous activity",
+
+        "dangereux",
+        "illégal",
+        "fraude",
+
+        "خطير",
+        "خطيرة",
+        "مخالفة",
+        "غير قانوني",
+        "احتيال",
+    ]
+
+    cleanup_fields = [
+        "explanation_simple",
+        "recommendation",
+        "legal_insight",
+        "negotiation_advice",
+        "market_comparison",
+        "safer_alternative",
+    ]
+
+    for field in cleanup_fields:
+        value = safe_str(
+            analysis.get(field)
+        )
+
+        lowered_value = value.lower()
+
+        for term in dangerous_terms:
+            if (
+                term in lowered_value
+                and term not in text
+            ):
+                analysis[field] = ""
+                break
+
+    hallucination_guard = {
+        "illegal activity": [
+            "illegal",
+            "unlawful",
+            "criminal",
+            "crime",
+            "activité illégale",
+            "illégal",
+            "criminel",
+            "نشاط غير قانوني",
+            "غير قانوني",
+            "جريمة",
+        ],
+        "fraud": [
+            "fraud",
+            "fraudulent",
+            "misrepresentation",
+            "fraude",
+            "frauduleux",
+            "احتيال",
+            "تدليس",
+        ],
+        "abusive conduct": [
+            "abusive",
+            "abuse",
+            "bad faith",
+            "abusif",
+            "abus",
+            "سلوك تعسفي",
+            "تعسف",
+        ],
+        "penalties": [
+            "penalty",
+            "fine",
+            "liquidated damages",
+            "late payment penalty",
+            "pénalité",
+            "amende",
+            "dommages-intérêts forfaitaires",
+            "غرامة",
+            "جزاء",
+            "تعويضات مقطوعة",
+        ],
+        "obligations": [
+            "shall",
+            "must",
+            "is required to",
+            "obligation",
+            "obligé",
+            "doit",
+            "est tenu",
+            "يلتزم",
+            "يجب",
+            "التزام",
+        ],
+    }
+
+    for concept, evidence_terms in hallucination_guard.items():
+        concept_present = any(
+            term in text
+            for term in evidence_terms
+        )
+
+        if concept_present:
+            continue
+
+        for field in detail_fields + [
+            "explanation_simple",
+            "why_it_matters",
+        ]:
+            value = safe_str(
+                analysis.get(field)
+            )
+
+            if concept in value.lower():
+                analysis[field] = ""
+
+    generic_detail_phrases = [
+        "avoid disputes",
+        "future disputes",
+        "ensure clarity",
+        "consider negotiating",
+        "market standards",
+        "potential disputes",
+        "may lead to",
+        "could impact",
+        "more favorable",
+        "business growth",
+        "operational flexibility",
+        "sets the foundation",
+        "while this clause is standard",
+        "avoid ambiguity",
+        "market conditions change",
+        "cash flow is a concern",
+        "work-life balance",
+
+        "éviter les litiges",
+        "éviter toute ambiguïté",
+        "assurer la clarté",
+        "envisager de négocier",
+        "normes du marché",
+        "risques potentiels",
+        "conditions du marché",
+
+        "تجنب النزاعات",
+        "تجنب الغموض",
+        "ضمان الوضوح",
+        "معايير السوق",
+        "مخاطر محتملة",
+        "ظروف السوق",
+    ]
+
+    for field in detail_fields:
+        value = safe_str(
+            analysis.get(field)
+        ).lower()
+
+        if any(
+            phrase in value
+            for phrase in generic_detail_phrases
+        ):
+            analysis[field] = ""
+
+    analysis["has_details"] = any(
+        safe_str(
+            analysis.get(field)
+        )
+        for field in detail_fields
+    )
+
+    if (
+        not safe_str(analysis.get("explanation_simple"))
+        and analysis.get("risk_level") in {"medium", "high"}
+    ):
+        analysis["explanation_simple"] = (
+            "This clause may create important legal or "
+            "commercial obligations."
+            if language == "en"
+            else
+            "Cette clause peut créer des obligations "
+            "juridiques ou commerciales importantes."
+            if language == "fr"
+            else
+            "قد تنشئ هذه المادة التزامات قانونية أو "
+            "تجارية مهمة."
+        )
+
+    return analysis
+
 def analyze_clause(
     clause: str,
     language: str = "en",
@@ -863,6 +1254,7 @@ def should_force_red_flag_false(
 def validate_clause_type(
     analysis: dict,
     clause_text: str,
+    language: str = "en",
 ) -> dict:
 
     text = clause_text.lower()
@@ -939,10 +1331,26 @@ def validate_clause_type(
 
         analysis["safer_alternative"] = ""
 
-        analysis["legal_insight"] = (
-            "The clause does not explicitly contain "
-            "a legally identifiable "
-            f"{clause_type.replace('_', ' ')} provision."
+        unsupported_messages = {
+            "en": (
+                "The clause does not explicitly contain "
+                "a legally identifiable "
+                f"{clause_type.replace('_', ' ')} provision."
+            ),
+            "fr": (
+                "La clause ne contient pas explicitement "
+                "une disposition juridiquement identifiable de type "
+                f"{clause_type.replace('_', ' ')}."
+            ),
+            "ar": (
+                "لا يتضمن هذا البند صراحةً حكماً قانونياً "
+                f"يمكن تصنيفه على أنه {clause_type.replace('_', ' ')}."
+            ),
+        }
+
+        analysis["legal_insight"] = unsupported_messages.get(
+            language,
+            unsupported_messages["en"],
         )
 
     return analysis
@@ -2073,7 +2481,11 @@ def calculate_clause_importance(
     )
 
     # Baseline calibrates legal risk, not business importance.
-    if baseline in LOW_RISK_CLAUSES:
+    # Do not reduce importance when the clause contains explicit escalation.
+    if (
+        baseline in LOW_RISK_CLAUSES
+        and not analysis.get("risk_escalated")
+    ):
         score -= 20
 
     elif baseline in MEDIUM_RISK_CLAUSES:
@@ -2266,11 +2678,124 @@ def detect_protective_beneficiary(
 
 
 
-def analyze_contract_clauses(
+
+
+def extract_reasoning_evidence(
+    clause_text: str,
+    max_length: int = 160,
+) -> str:
+
+    text = str(clause_text or "").strip()
+
+    if not text:
+        return ""
+
+    text = " ".join(text.split())
+
+    return text[:max_length]
+
+
+
+def compute_analysis_metadata(
+    analysis: dict,
+    clause_text: str,
+    title: str = "",
+) -> dict:
+    """
+    Compute derived display/search metadata in one place.
+
+    This avoids scattering has_details / signal checks across the
+    clause-analysis loop.
+    """
+
+    detail_fields = [
+        "recommendation",
+        "negotiation_advice",
+        "legal_insight",
+        "market_comparison",
+        "safer_alternative",
+    ]
+
+    combined_text = f"{title} {clause_text}".lower()
+
+    has_details = any(
+        safe_str(
+            analysis.get(field)
+        )
+        for field in detail_fields
+    )
+
+    has_reasoning = any([
+        safe_str(analysis.get("explanation_simple")),
+        safe_str(analysis.get("why_it_matters")),
+        safe_str(analysis.get("legal_insight")),
+    ])
+
+    has_negotiation = bool(
+        safe_str(
+            analysis.get("negotiation_advice")
+        )
+    )
+
+    has_legal_signal = any(
+        term in combined_text
+        for term in get_clause_signal_terms("critical")
+    )
+
+    has_semantic_signal = any([
+        has_legal_signal,
+        analysis.get("risk_level") in {"medium", "high"},
+        bool(analysis.get("red_flag")),
+        bool(analysis.get("risk_escalated")),
+    ])
+
+    evidence_strength = "low"
+
+    if analysis.get("risk_level") in {"medium", "high"}:
+        evidence_strength = "medium"
+
+    if analysis.get("red_flag") or analysis.get("risk_escalated"):
+        evidence_strength = "high"
+
+    analysis["has_details"] = any([
+        has_details,
+        has_reasoning,
+        has_negotiation,
+        has_semantic_signal,
+    ])
+
+    analysis["has_reasoning"] = has_reasoning
+    analysis["has_negotiation"] = has_negotiation
+    analysis["has_semantic_signal"] = has_semantic_signal
+    analysis["has_legal_signal"] = has_legal_signal
+    analysis["evidence_strength"] = evidence_strength
+
+    return analysis
+
+
+def _analyze_contract_clauses_impl(
     clauses: list[str],
     language: str = "en",
     max_clauses: int = 25,
 ) -> list[dict]:
+
+    critical_terms = get_clause_signal_terms("critical")
+
+    full_contract_text = " ".join([
+        str(c)
+        for c in clauses
+    ]).lower()
+
+    jurisdiction_profile = detect_jurisdiction(
+        full_contract_text
+    )
+
+    contract_domain_reasoning = (
+        get_reasoning_for_text(
+            full_contract_text,
+            language,
+        )
+    )
 
     results = []
 
@@ -2284,6 +2809,7 @@ def analyze_contract_clauses(
         analysis = validate_clause_type(
             analysis,
             clause,
+            language,
         )
 
         analysis = validate_protective_clause(
@@ -2315,6 +2841,18 @@ def analyze_contract_clauses(
             analysis,
             clause,
         )
+
+        if analysis.get("risk_level") in {"medium", "high"}:
+            semantic_negotiation = get_semantic_negotiation(
+                analysis,
+                language=language,
+            )
+
+            if semantic_negotiation:
+                analysis["negotiation_advice"] = semantic_negotiation
+
+        else:
+            analysis["negotiation_advice"] = ""
 
         ADMINISTRATIVE_KEYWORDS = [
             "assignment",
@@ -2357,7 +2895,6 @@ def analyze_contract_clauses(
             if matches >= 2:
                 analysis["risk_level"] = "low"
                 analysis["negotiation_priority"] = "low"
-                analysis["favours"] = "balanced"
 
         if should_force_red_flag_false(
             analysis.get(
@@ -2391,15 +2928,108 @@ def analyze_contract_clauses(
             analysis["risk_level"] = "low"
             analysis["negotiation_priority"] = "low"
 
-        if analysis.get("risk_level") == "low":
-
-            analysis["negotiation_priority"] = "low"
-            analysis["favours"] = "balanced"
-
         title = (
             analysis.get("clause_title")
             or extract_clause_title(clause)
         )
+
+        clause_text = clause
+
+        analysis = compute_analysis_metadata(
+            analysis,
+            clause_text,
+            title,
+        )
+
+        if (
+            analysis.get("risk_level") == "low"
+            and not analysis.get("has_legal_signal")
+            and not analysis.get("has_semantic_signal")
+        ):
+            analysis["negotiation_priority"] = "low"
+
+        medium_risk_keywords = [
+            "terminate immediately",
+            "confidentiality",
+            "limitation of liability",
+            "late payment penalty",
+            "default",
+            "acceleration",
+            "exclusive",
+            "non-exclusive",
+            "interest rate",
+            "liability cap",
+
+            "résiliation immédiate",
+            "confidentialité",
+            "limitation de responsabilité",
+            "défaut",
+            "taux d'intérêt",
+
+            "فسخ",
+            "سرية",
+            "المسؤولية",
+            "الإخلال",
+            "الفائدة",
+        ]
+
+        combined = " ".join([
+            title,
+            clause_text,
+        ]).lower()
+
+        keyword_match = any(
+            k in combined
+            for k in medium_risk_keywords
+        )
+
+        risky_wording_terms = [
+            "immediately",
+            "without notice",
+            "without cure",
+            "sole discretion",
+            "unilateral",
+            "late payment penalty",
+            "acceleration",
+            "exclusive",
+            "non-compete",
+            "unlimited",
+            "material breach",
+
+            "immédiatement",
+            "sans préavis",
+            "sans délai de correction",
+            "seule discrétion",
+            "unilatéral",
+            "pénalité",
+            "défaut",
+            "exclusif",
+
+            "فوري",
+            "دون إشعار",
+            "دون مهلة",
+            "تقديره المطلق",
+            "من جانب واحد",
+            "غرامة",
+            "إخلال جوهري",
+            "حصري",
+        ]
+
+        risky_wording_match = any(
+            term in combined
+            for term in risky_wording_terms
+        )
+
+        if (
+            analysis.get("risk_level") == "low"
+            and keyword_match
+            and (
+                analysis.get("risk_escalated")
+                or analysis.get("red_flag")
+                or risky_wording_match
+            )
+        ):
+            analysis["risk_level"] = "medium"
 
         analysis["importance_score"] = (
             calculate_clause_importance(
@@ -2433,10 +3063,13 @@ def analyze_contract_clauses(
             if keyword in lowered_clause
         )
 
-        if definition_matches >= 2:
+        if (
+            definition_matches >= 2
+            and analysis.get("risk_level") == "low"
+            and analysis.get("materiality_level") != "high"
+        ):
             analysis["risk_level"] = "low"
             analysis["negotiation_priority"] = "low"
-            analysis["favours"] = "balanced"
             analysis["recommendation"] = ""
             analysis["negotiation_advice"] = ""
             analysis["safer_alternative"] = ""
@@ -2447,17 +3080,26 @@ def analyze_contract_clauses(
 
         word_count = len(normalized_clause.split())
 
+        critical_short_clause = any(
+            term in normalized_clause.lower()
+            for term in get_clause_signal_terms("critical")
+        )
+
         fragment_like = (
-            word_count < 12
-            or normalized_clause.endswith(",")
-            or normalized_clause.endswith(";")
-            or normalized_clause.isupper()
+            not critical_short_clause
+            and (
+                normalized_clause.endswith(",")
+                or normalized_clause.endswith(";")
+                or (
+                    normalized_clause.isupper()
+                    and word_count <= 8
+                )
+            )
         )
 
         if fragment_like:
             analysis["risk_level"] = "low"
             analysis["negotiation_priority"] = "low"
-            analysis["favours"] = "balanced"
 
             analysis["recommendation"] = (
                 "This text appears to be a heading or incomplete clause fragment."
@@ -2473,15 +3115,60 @@ def analyze_contract_clauses(
         definition_or_fragment = (
             " means " in lowered_clause
             or " shall mean " in lowered_clause
-            or len(lowered_clause.split()) < 20
+            or " désigne " in lowered_clause
+            or " signifie " in lowered_clause
+            or " يقصد به " in lowered_clause
+            or " يعني " in lowered_clause
         )
 
-        if definition_or_fragment:
+        critical_definition_terms = [
+            "breach",
+            "default",
+            "liability",
+            "payment",
+            "termination",
+            "indemnity",
+            "material breach",
+            "acceleration",
+            "confidentiality",
+            "intellectual property",
+            "data protection",
+            "service level",
+
+            "manquement",
+            "défaut",
+            "responsabilité",
+            "paiement",
+            "résiliation",
+            "indemnisation",
+            "confidentialité",
+            "propriété intellectuelle",
+            "protection des données",
+            "niveau de service",
+
+            "إخلال",
+            "الإخلال",
+            "المسؤولية",
+            "الدفع",
+            "فسخ",
+            "إنهاء",
+            "تعويض",
+            "السرية",
+            "الملكية الفكرية",
+            "حماية البيانات",
+            "مستوى الخدمة",
+        ]
+
+        is_critical_definition = any(
+            term in lowered_clause
+            for term in critical_definition_terms
+        )
+
+        if definition_or_fragment and not is_critical_definition:
             analysis["risk_level"] = "low"
             analysis["red_flag"] = False
             analysis["red_flag_reason"] = ""
             analysis["negotiation_priority"] = "low"
-            analysis["favours"] = "balanced"
 
             analysis["explanation_simple"] = (
                 "This clause is primarily administrative or definitional."
@@ -2508,13 +3195,12 @@ def analyze_contract_clauses(
         ).strip()
 
         weak_context = (
-            len(quoted_text.split()) < 12
+            not analysis.get("has_legal_signal")
+            and not analysis.get("risk_escalated")
+            and len(quoted_text.split()) < 6
         )
 
         if weak_context:
-            analysis["risk_level"] = "low"
-            analysis["negotiation_priority"] = "low"
-
             analysis["negotiation_advice"] = ""
             analysis["safer_alternative"] = ""
 
@@ -2529,26 +3215,460 @@ def analyze_contract_clauses(
             "safer_alternative",
         ]
 
-        analysis["has_details"] = any(
-            str(analysis.get(field, "")).strip()
-            for field in detail_fields
-        )
+        always_important_keywords = [
+            # English
+            "default",
+            "termination",
+            "liability",
+            "confidentiality",
+            "interest",
+            "payment",
+            "penalty",
+            "indemnity",
+
+            "maintenance",
+            "repair",
+
+            "governing law",
+            "exclusive",
+            "non-compete",
+
+            # French
+            "défaut",
+            "résiliation",
+            "responsabilité",
+            "confidentialité",
+            "paiement",
+            "pénalité",
+            "indemnisation",
+
+            "maintenance",
+            "réparation",
+            "entretien",
+
+            "droit applicable",
+            "exclusif",
+
+            # Arabic
+            "فسخ",
+            "إنهاء",
+            "المسؤولية",
+            "السرية",
+            "الدفع",
+            "غرامة",
+            "تعويض",
+
+            "صيانة",
+            "إصلاحات",
+
+            "القانون",
+            "حصري",
+        ]
+
+        combined_text = " ".join([
+            title,
+            clause_text,
+        ]).lower()
+
+        important_keywords = [
+            "termination",
+            "default",
+            "payment",
+            "liability",
+            "confidentiality",
+            "intellectual property",
+
+            "résiliation",
+            "défaut",
+            "paiement",
+            "responsabilité",
+
+            "فسخ",
+            "الإخلال",
+            "الدفع",
+            "الملكية الفكرية",
+        ]
 
         meaningful_content = any([
             analysis.get("quoted_text"),
             analysis.get("explanation_simple"),
-            analysis["has_details"],
+            any(
+                safe_str(analysis.get(field))
+                for field in detail_fields
+            ),
         ])
 
         if not meaningful_content:
             continue
 
+        generic_detail_phrases = [
+            "avoid disputes",
+            "future disputes",
+            "ensure clarity",
+            "consider negotiating",
+            "potential disputes",
+            "may lead to",
+            "could impact",
+            "market standards",
+            "more favorable",
+            "business growth",
+            "operational flexibility",
+        ]
+
+        generic_detail_phrases = [
+            "while this clause is standard",
+            "could lead to disputes",
+            "potential disputes",
+            "may limit",
+            "could impact",
+            "may face",
+            "may create",
+            "standard but",
+            "avoid ambiguity",
+            "ensure clarity",
+            "consider negotiating",
+
+            "peut limiter",
+            "pourrait",
+            "peut entraîner",
+            "risques potentiels",
+            "éviter toute ambiguïté",
+
+            "قد",
+            "يمكن أن",
+            "قد يؤدي",
+        ]
+
+        detail_fields = [
+            "recommendation",
+            "negotiation_advice",
+            "legal_insight",
+            "market_comparison",
+            "safer_alternative",
+        ]
+
+        for field in detail_fields:
+            value = str(
+                analysis.get(field, "")
+            ).lower()
+
+            if any(
+                phrase in value
+                for phrase in generic_detail_phrases
+            ):
+                analysis[field] = ""
+
         # Keep all analyzed clauses, including low-risk clauses.
         # Low-risk clauses are useful for transparency in FR/EN/AR.
+
+        important_clause_keywords = [
+            "termination", "default", "acceleration", "liability",
+            "confidentiality", "intellectual property", "data protection",
+            "service level", "maintenance", "repair",
+
+            "résiliation", "défaut", "responsabilité",
+            "confidentialité", "propriété intellectuelle",
+            "protection des données", "disponibilité", "entretien",
+
+            "فسخ", "إنهاء", "الإخلال", "المسؤولية",
+            "السرية", "الملكية الفكرية", "حماية البيانات",
+            "مستوى الخدمة", "الصيانة", "الإصلاحات",
+        ]
+
+        combined_text = f"{title} {clause}".lower()
+
+        domain_reasoning = contract_domain_reasoning
+
+        domain_reasoning_allowed = (
+            analysis.get("risk_level") in {"medium", "high"}
+            or any(
+                safe_str(analysis.get(field))
+                for field in detail_fields
+            )
+            or any(
+                k in combined_text
+                for k in critical_terms
+            )
+        )
+
+        if any(
+            k in combined_text
+            for k in important_clause_keywords
+        ):
+            if (
+                "administrative"
+                in analysis.get(
+                    "explanation_simple",
+                    ""
+                ).lower()
+            ):
+                analysis["explanation_simple"] = (
+                    "This clause contains operational or legal obligations."
+                    if language == "en"
+                    else
+                    "Cette clause contient des obligations juridiques ou opérationnelles."
+                    if language == "fr"
+                    else
+                    "تتضمن هذه المادة التزامات قانونية أو تشغيلية."
+                )
+
+        if (
+            analysis.get("risk_level") in {"medium", "high"}
+            and not analysis.get("legal_insight")
+        ):
+            analysis["legal_insight"] = (
+                "This clause should be reviewed because it may affect legal, financial, or operational obligations."
+                if language == "en"
+                else
+                "Cette clause doit être examinée car elle peut affecter des obligations juridiques, financières ou opérationnelles."
+                if language == "fr"
+                else
+                "ينبغي مراجعة هذه المادة لأنها قد تؤثر على الالتزامات القانونية أو المالية أو التشغيلية."
+            )
+
+        medium_risk_terms = [
+            "material breach", "default", "acceleration", "late payment",
+            "termination", "confidentiality", "liability cap",
+            "service level", "data protection",
+
+            "manquement important", "défaut", "résiliation",
+            "retard de paiement", "confidentialité",
+            "plafond de responsabilité", "protection des données",
+
+            "إخلال جوهري", "الإخلال", "فسخ", "إنهاء",
+            "تأخر الدفع", "السرية", "حد المسؤولية",
+            "حماية البيانات",
+        ]
+
+        if (
+            analysis.get("risk_level") == "low"
+            and any(
+                term in combined_text
+                for term in medium_risk_terms
+            )
+        ):
+            analysis["risk_level"] = "medium"
+
+        clause_type_text = f"{title} {clause}".lower()
+
+        critical_terms = [
+            "termination",
+            "default",
+            "acceleration",
+            "liability",
+            "confidentiality",
+            "data protection",
+            "service level",
+            "governing law",
+            "indemnity",
+            "security",
+
+            "résiliation",
+            "défaut",
+            "responsabilité",
+            "confidentialité",
+            "protection des données",
+            "niveau de service",
+            "droit applicable",
+
+            "فسخ",
+            "إنهاء",
+            "الإخلال",
+            "المسؤولية",
+            "السرية",
+            "حماية البيانات",
+            "مستوى الخدمة",
+            "القانون الواجب التطبيق",
+            "payment",
+
+            "pricing",
+
+            "maintenance",
+
+            "repair",
+
+            "covenants",
+
+            "paiement",
+
+            "prix",
+
+            "maintenance",
+
+            "réparations",
+
+            "الدفع",
+
+            "الأسعار",
+
+            "الصيانة",
+
+            "الإصلاحات",
+
+            "التعهدات",
+
+        ]
+
+        if any(
+            t in clause_type_text
+            for t in critical_terms
+        ):
+
+            maintenance_terms = [
+                "maintenance",
+                "repair",
+                "صيانة",
+                "إصلاح",
+            ]
+
+            excluded_contexts = [
+                "service level",
+                "sla",
+                "uptime",
+                "disponibilité",
+                "payment",
+                "pricing",
+                "الدفع",
+                "الأسعار",
+                "مستوى الخدمة",
+            ]
+
+            disable_maintenance_override = (
+                "service level" in clause_type_text
+                or "uptime" in clause_type_text
+                or "disponibilité" in clause_type_text
+                or "مستوى الخدمة" in clause_type_text
+            )
+
+            if (
+                not disable_maintenance_override
+                and any(
+                    term in clause_type_text
+                    for term in maintenance_terms
+                )
+                and not any(
+                    term in clause_type_text
+                    for term in excluded_contexts
+                )
+            ):
+                analysis["explanation_simple"] = (
+                    "This clause allocates maintenance and repair "
+                    "responsibilities between the parties."
+                    if language == "en"
+                    else
+                    "Cette clause répartit les responsabilités de "
+                    "maintenance et de réparation entre les parties."
+                    if language == "fr"
+                    else
+                    "تحدد هذه المادة توزيع مسؤوليات الصيانة "
+                    "والإصلاح بين الأطراف."
+                )
+
+            elif (
+                "administrative"
+                in analysis.get(
+                    "explanation_simple",
+                    ""
+                ).lower()
+                or
+                "تعريفية"
+                in analysis.get(
+                    "explanation_simple",
+                    ""
+                )
+            ):
+                analysis["explanation_simple"] = (
+                    "This clause defines operational responsibilities, "
+                    "maintenance obligations, or commercial duties."
+                    if language == "en"
+                    else
+                    "Cette clause définit des responsabilités "
+                    "opérationnelles, des obligations de maintenance "
+                    "ou des engagements commerciaux."
+                    if language == "fr"
+                    else
+                    "تحدد هذه المادة التزامات تشغيلية أو مسؤوليات "
+                    "صيانة أو التزامات تجارية."
+                )
+
+            if not analysis.get("recommendation"):
+                analysis["recommendation"] = (
+                    "Review the allocation of obligations and risk exposure in this clause."
+                    if language == "en"
+                    else
+                    "Examiner attentivement la répartition des obligations et des risques dans cette clause."
+                    if language == "fr"
+                    else
+                    "ينبغي مراجعة توزيع الالتزامات والمخاطر في هذه المادة بعناية."
+                )
+        high_risk_terms = [
+            "unlimited liability",
+            "acceleration",
+            "immediate termination",
+            "exclusive jurisdiction",
+            "data breach",
+            "security incident",
+            "cross default",
+
+            "responsabilité illimitée",
+            "résiliation immédiate",
+            "violation de données",
+
+            "مسؤولية غير محدودة",
+            "إنهاء فوري",
+            "اختراق البيانات",
+        ]
+
+        if any(
+            term in clause_type_text
+            for term in high_risk_terms
+        ):
+            analysis["risk_level"] = "high"
+
+        if (
+            domain_reasoning_allowed
+            and not analysis.get("legal_insight")
+            and domain_reasoning.get("reasoning")
+        ):
+            analysis["legal_insight"] = (
+                domain_reasoning["reasoning"]
+            )
+
+        meaningful_legal_signals = [
+            "exclusive",
+            "non-exclusive",
+            "termination",
+            "payment",
+            "confidentiality",
+            "liability",
+            "distribution",
+        ]
+
+
+        analysis = compute_analysis_metadata(
+            analysis,
+            clause_text,
+            title,
+        )
+
+        analysis = apply_reasoning_quality_gate(
+            analysis,
+            clause_text,
+            language,
+        )
+
+        analysis = compute_analysis_metadata(
+            analysis,
+            clause_text,
+            title,
+        )
 
         results.append({
             "title": title,
             "original_text": clause[:1000],
+            "reasoning_evidence": extract_reasoning_evidence(
+                clause_text
+            ),
             **analysis,
         })
 
@@ -2589,3 +3709,71 @@ def analyze_contract_clauses(
         item["normalized_contract_score"] = normalized_contract_score
 
     return deduped
+
+
+class ClauseAnalysisPipeline:
+    """
+    Explicit orchestration wrapper for clause analysis.
+
+    The heavy deterministic helpers remain pure functions, while this
+    object makes the analysis entrypoint testable and easier to extend.
+    """
+
+    def __init__(
+        self,
+        clauses: list[str],
+        language: str = "en",
+        max_clauses: int = 25,
+    ) -> None:
+        self.clauses = clauses
+        self.language = language
+        self.max_clauses = max_clauses
+
+    def run_detection(self) -> list[dict]:
+        return _analyze_contract_clauses_impl(
+            self.clauses,
+            self.language,
+            self.max_clauses,
+        )
+
+    def run_validation(self, results: list[dict]) -> list[dict]:
+        return results
+
+    def run_risk(self, results: list[dict]) -> list[dict]:
+        return results
+
+    def run_calibration(self, results: list[dict]) -> list[dict]:
+        return results
+
+    def run_negotiation(self, results: list[dict]) -> list[dict]:
+        return results
+
+    def run_scoring(self, results: list[dict]) -> list[dict]:
+        return results
+
+    def run_cleanup(self, results: list[dict]) -> list[dict]:
+        return results
+
+    def run(self) -> list[dict]:
+        results = self.run_detection()
+        results = self.run_validation(results)
+        results = self.run_risk(results)
+        results = self.run_calibration(results)
+        results = self.run_negotiation(results)
+        results = self.run_scoring(results)
+        results = self.run_cleanup(results)
+
+        return results
+
+
+def analyze_contract_clauses(
+    clauses: list[str],
+    language: str = "en",
+    max_clauses: int = 25,
+) -> list[dict]:
+    return ClauseAnalysisPipeline(
+        clauses=clauses,
+        language=language,
+        max_clauses=max_clauses,
+    ).run()
+

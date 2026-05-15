@@ -2,6 +2,37 @@ import re
 from typing import List
 
 
+def normalize_arabic_title(title: str) -> str:
+    title = title.strip()
+
+    replacements = {
+        "المحل استعمال": "استعمال المحل",
+        "تجاري كراء عقد": "عقد كراء تجاري",
+        "الأداء عدم": "عدم الأداء",
+        "الشراء أهداف": "أهداف الشراء",
+        "الفكرية الملكية": "الملكية الفكرية",
+        "والدفع الأسعار": "الأسعار والدفع",
+        "الإصلاحات الصيانة": "الصيانة والإصلاحات",
+        "السداد الفائدة": "الفائدة والسداد",
+        "الإخلال حالات": "حالات الإخلال",
+        "الدفع الرسوم": "الرسوم والدفع",
+        "البيانات حماية": "حماية البيانات",
+        "المسؤولية تحديد": "تحديد المسؤولية",
+        "الخدمة مستوى": "مستوى الخدمة",
+        "العقد إنهاء": "إنهاء العقد",
+        "المهام الوظيفة": "الوظيفة والمهام",
+        "التطبيق الواجب القانون": "القانون الواجب التطبيق",
+        "المكافأة الأجر": "الأجر والمكافأة",
+        "تجاري قرض عقد": "عقد قرض تجاري",
+        "توزيع عقد": "عقد توزيع",
+        "سحابية برمجية خدمات عقد": "عقد خدمات برمجية سحابية",
+        "القرض مبلغ": "مبلغ القرض",
+    }
+
+    return replacements.get(title, title)
+
+
+
 def normalize_line(line: str) -> str:
     """
     Normalize OCR/PDF extracted text.
@@ -350,6 +381,93 @@ def split_into_clauses(text: str) -> List[str]:
         fallback = clean_clause_text(text)
 
         if len(fallback) > 80:
-            return [fallback]
+            cleaned_clauses = [fallback]
+
+    # Fallback simple title splitter
+    if len(cleaned_clauses) <= 1:
+        fallback_parts = re.split(
+            r"\n(?=[A-ZÀ-ÖØ-Þ\u0600-\u06FF][^\n]{3,60}\n)",
+            text
+        )
+
+        if len(fallback_parts) > 2:
+            fallback_clauses = []
+
+            for part in fallback_parts:
+                part = part.strip()
+
+                if len(part) < 40:
+                    continue
+
+                lines = [
+                    line.strip()
+                    for line in part.splitlines()
+                    if line.strip()
+                ]
+
+                if len(lines) < 2:
+                    continue
+
+                title = lines[0][:80].strip()
+                title = normalize_arabic_title(title)
+                body = "\n".join(lines[1:]).strip()
+
+                clause_text = clean_clause_text(
+                    "\n".join([
+                        title,
+                        body,
+                    ])
+                )
+
+                if len(clause_text) > 40:
+                    fallback_clauses.append(clause_text)
+
+            if len(fallback_clauses) > len(cleaned_clauses):
+                cleaned_clauses = fallback_clauses
+
+    # Fallback semantic splitter for weak PDFs
+    if len(cleaned_clauses) <= 1:
+
+        fallback_parts = re.split(
+            r"\n(?=[A-ZÀ-ÖØ-Þ\u0600-\u06FF][^\n]{3,80}\n)",
+            text
+        )
+
+        fallback_clauses = []
+
+        for part in fallback_parts:
+            part = part.strip()
+
+            if len(part) < 60:
+                continue
+
+            lines = [
+                l.strip()
+                for l in part.splitlines()
+                if l.strip()
+            ]
+
+            if len(lines) < 2:
+                continue
+
+            title = lines[0][:120].strip()
+            title = normalize_arabic_title(title)
+            body = "\n".join(lines[1:]).strip()
+
+            if len(body) < 40:
+                continue
+
+            clause_text = clean_clause_text(
+                "\n".join([
+                    title,
+                    body,
+                ])
+            )
+
+            if len(clause_text) > 60:
+                fallback_clauses.append(clause_text)
+
+        if len(fallback_clauses) > len(cleaned_clauses):
+            cleaned_clauses = fallback_clauses
 
     return cleaned_clauses

@@ -4,6 +4,53 @@ Your task is to analyze ONE contract clause.
 
 Return ONLY valid JSON.
 
+
+Never invent facts, obligations, penalties, illegal conduct,
+dangerous activities, restrictions, or rights that are not
+explicitly stated in the clause text.
+
+If the clause does not contain enough information,
+explicitly say that the clause lacks sufficient detail.
+
+Do not infer:
+- illegal activities
+- fraud
+- criminal conduct
+- hidden penalties
+- abusive intent
+unless explicitly written in the clause.
+
+Do not exaggerate legal or financial risks.
+Keep the analysis proportional to the actual clause content.
+
+Every risk, recommendation, or legal concern
+must be directly supported by the clause text.
+
+Do not infer hidden intent or unstated risks.
+
+Keep analysis proportional to the actual clause.
+
+Do not generate negotiation advice
+for ordinary administrative clauses.
+
+
+Do not generate negotiation advice unless the clause contains a concrete negotiation issue, such as:
+- unilateral rights
+- vague wording
+- financial penalties
+- exclusivity
+- uncapped liability
+- automatic renewal
+- indemnification
+- broad termination rights
+- non-compete obligations
+- acceleration clauses
+- missing cure period
+- short payment default notice
+
+If the clause is ordinary, balanced, administrative, or merely descriptive, leave negotiation_advice empty.
+
+
 The JSON must follow this exact structure:
 
 {
@@ -191,6 +238,38 @@ Assign HIGH only when the clause:
 - affects ownership or IP
 - creates long-term restrictions
 Avoid assigning HIGH to boilerplate clauses.
+
+STRICT DETAIL RULES:
+- Do not generate recommendations for:
+  - party identification
+  - governing law
+  - standard payment timing
+  - standard confidentiality
+  - standard lease duration
+  - standard salary clauses
+  - standard definitions
+
+unless the clause contains:
+  - penalties
+  - vague wording
+  - unilateral rights
+  - uncapped liability
+  - exclusivity
+  - acceleration
+  - automatic renewal
+  - unusual obligations
+
+- Do not invent negotiation advice.
+- Only provide recommendation, negotiation_advice, legal_insight, market_comparison, or safer_alternative when the clause contains a concrete legal or commercial issue.
+- For ordinary clauses such as party identification, standard payment timing, standard governing law, ordinary confidentiality, ordinary salary, ordinary rent, standard maintenance allocation, or standard invoice payment, keep details empty unless there is a specific imbalance, penalty, unilateral right, vague obligation, uncapped liability, missing cure period, or explicit restriction.
+- Avoid generic phrases such as:
+  - avoid disputes
+  - ensure clarity
+  - consider negotiating
+  - potential disputes
+  - may lead to
+  - could impact
+  - market standards
 
 ANTI-FILLER RULES:
 Avoid generic recommendations such as:

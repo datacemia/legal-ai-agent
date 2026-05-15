@@ -40,19 +40,23 @@ def validate_contract_result(result: dict) -> dict:
         score -= 20
 
     speculative_terms = [
-        "may",
-        "could",
-        "possibility",
-        "potential",
-        "limited recourse",
-        "may have limited recourse",
+        "could lead to disputes",
+        "potential disputes",
+        "may lead to disputes",
+        "may create uncertainty",
+        "could create uncertainty",
+        "may limit options",
+        "could favor one party",
+        "could disadvantage",
 
-        "peut",
-        "pourrait",
-        "potentiel",
+        "pourrait entraîner des litiges",
+        "risques potentiels",
+        "peut créer une incertitude",
+        "peut limiter les options",
 
-        "قد",
-        "يمكن",
+        "قد يؤدي إلى نزاعات",
+        "قد يخلق غموضاً",
+        "قد يحد من الخيارات",
     ]
 
     weak_detail_count = 0
@@ -74,7 +78,17 @@ def validate_contract_result(result: dict) -> dict:
             ):
                 weak_detail_count += 1
 
-    if weak_detail_count:
+    if weak_detail_count >= 5:
+        issues.append(
+            f"Too many speculative clause analyses: "
+            f"{weak_detail_count}"
+        )
+        score -= min(
+            25,
+            weak_detail_count * 5
+        )
+
+    elif weak_detail_count:
         issues.append(
             f"Speculative clause analysis: "
             f"{weak_detail_count}"
@@ -100,7 +114,7 @@ def validate_contract_result(result: dict) -> dict:
         issues.append("Document does not look like a contract")
         score -= 40
 
-    weak_detail_count = 0
+    empty_detail_count = 0
 
     if isinstance(clauses, list):
         for clause in clauses:
@@ -112,23 +126,36 @@ def validate_contract_result(result: dict) -> dict:
                 )
             ).lower()
 
-            if has_details and not any([
-                clause.get("recommendation"),
-                clause.get("negotiation_advice"),
-                clause.get("legal_insight"),
-                clause.get("market_comparison"),
-                clause.get("safer_alternative"),
-            ]):
-                weak_detail_count += 1
+            if (
+                has_details
+                and clause.get("risk_level") != "low"
+                and not any([
+                    clause.get("recommendation"),
+                    clause.get("negotiation_advice"),
+                    clause.get("legal_insight"),
+                    clause.get("market_comparison"),
+                    clause.get("safer_alternative"),
+                ])
+            ):
+                empty_detail_count += 1
 
-            if "may" in explanation or "could" in explanation:
-                weak_detail_count += 1
+            generic_phrases = [
+                "important legal or commercial obligations",
+                "operational or legal obligations",
+                "should be reviewed",
+            ]
 
-    if weak_detail_count:
+            if any(
+                p in explanation
+                for p in generic_phrases
+            ):
+                empty_detail_count += 1
+
+    if empty_detail_count:
         issues.append(
-            f"Weak clause details: {weak_detail_count}"
+            f"Weak clause details: {empty_detail_count}"
         )
-        score -= min(20, weak_detail_count * 5)
+        score -= min(20, empty_detail_count * 5)
 
     score = max(0, min(score, 100))
 

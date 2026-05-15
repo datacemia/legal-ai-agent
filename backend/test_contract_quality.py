@@ -56,10 +56,18 @@ def main():
 
             clauses = split_into_clauses(text)
 
+            language = "en"
+
+            if file.name.startswith("fr_"):
+                language = "fr"
+
+            elif file.name.startswith("ar_"):
+                language = "ar"
+
             analyzed_clauses = (
                 analyze_contract_clauses(
                     clauses,
-                    language="en",
+                    language=language,
                     max_clauses=25,
                 )
             )

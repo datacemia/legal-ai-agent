@@ -1,82 +1,77 @@
 import re
 
 
-def extract_clause_title(text: str) -> str:
+def extract_clause_title(clause_text: str) -> str:
     """
-    Extract a clean clause title from multilingual contracts.
+    Extract a short clause title from raw clause text.
 
-    Supports:
-    - Arabic
-    - English
-    - French
-    - Numeric clauses
-    - Standalone uppercase titles
-    - Section references with or without separators
-
-    Returns:
-    - Clean clause title
-    - "Clause" fallback if nothing reliable found
+    This function is intentionally deterministic and lightweight:
+    - uses the first meaningful short line when available
+    - removes numbering prefixes
+    - supports English, French, and Arabic clause headings
+    - avoids returning overly long titles
     """
 
-    if not text or not text.strip():
-        return "Clause"
+    text = str(clause_text or "").strip()
 
-    text = text.strip()
+    if not text:
+        return ""
 
-    patterns = [
-        # Arabic
-        r"^(?:المادة|البند|الفقرة)\s*[\d\.]+\s*[-–:\.]?\s*([^\n\r]+)",
-
-        # English
-        r"^(?:Article|ARTICLE|Section|SECTION|Clause|CLAUSE)\s*[\d\.]+\s*[-–:\.]?\s*([^\n\r]+)",
-
-        # French
-        r"^(?:Article|ARTICLE|Section|SECTION|Clause|CLAUSE)\s*[\d\.]+\s*[-–:\.]?\s*([^\n\r]+)",
-
-        # Numeric only
-        r"^\s*[\d\.]+\s*[-–:\.]?\s*([^\n\r]+)",
-
-        # ALL CAPS titles
-        r"^([A-Z][A-Z\s&/,()-]{3,})$",
-    ]
-
-    for pattern in patterns:
-        match = re.search(pattern, text, re.MULTILINE)
-
-        if match:
-            title = match.group(1).strip()
-
-            # Cleanup
-            title = re.sub(r"\s+", " ", title)
-            title = re.sub(r"^[\-–:\.\s]+", "", title)
-            title = re.sub(r"[\-–:\.\s]+$", "", title)
-
-            # Avoid garbage extraction
-            if (
-                title
-                and len(title) <= 120
-                and not re.fullmatch(r"[\d\W_]+", title)
-            ):
-                return title
-
-    # Fallback to first meaningful short line
     lines = [
         line.strip()
         for line in text.splitlines()
         if line.strip()
     ]
 
+    if not lines:
+        return ""
+
+    candidate_lines = []
+
     for line in lines[:5]:
-        clean = re.sub(r"\s+", " ", line)
+        cleaned = line.strip()
 
-        # Skip very long paragraphs
-        if len(clean) > 120:
+        if len(cleaned) < 3:
             continue
 
-        # Skip obvious legal body text
-        if len(clean.split()) > 15:
+        if len(cleaned) > 120:
             continue
 
-        return clean
+        candidate_lines.append(cleaned)
 
-    return "Clause"
+    if not candidate_lines:
+        return ""
+
+    first_line = candidate_lines[0]
+
+    # Remove common numbering prefixes:
+    # 1. Title
+    # 1) Title
+    # Article 1 - Title
+    # Clause 2: Title
+    # المادة 3: العنوان
+    first_line = re.sub(
+        r"^\s*(article|clause|section)\s+\d+\s*[-:.–—]?\s*",
+        "",
+        first_line,
+        flags=re.IGNORECASE,
+    )
+
+    first_line = re.sub(
+        r"^\s*(المادة|البند|الفقرة)\s*\d*\s*[-:.–—]?\s*",
+        "",
+        first_line,
+    )
+
+    first_line = re.sub(
+        r"^\s*\d+(\.\d+)*\s*[).:-]?\s*",
+        "",
+        first_line,
+    )
+
+    first_line = first_line.strip(" -–—:.")
+
+    if len(first_line) > 120:
+        first_line = first_line[:120].strip()
+
+    return first_line
