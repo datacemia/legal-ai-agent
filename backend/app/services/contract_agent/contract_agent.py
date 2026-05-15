@@ -43,6 +43,27 @@ from app.utils.prompt_loader import load_prompt
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 
+AR_TITLE_FIXES = {
+    "القرض مبلغ - 1 المادة": "مبلغ القرض",
+    "والدفع الرسوم": "الرسوم والدفع",
+    "الخدمة مستوى": "مستوى الخدمة",
+    "المكافأة الأجر": "الأجر والمكافأة",
+    "التجاري المحل - 1 المادة": "المحل التجاري",
+    "الأداء عدم": "عدم الأداء",
+}
+
+
+def normalize_final_clause_title(
+    title: str,
+) -> str:
+    title = extract_clause_title(title)
+
+    return AR_TITLE_FIXES.get(
+        title.strip(),
+        title,
+    )
+
+
 ALLOWED_CLAUSE_TYPES = {
     "payment",
     "termination",
@@ -885,6 +906,23 @@ def apply_reasoning_quality_gate(
         "safer_alternative",
     ]
 
+    UNSUPPORTED_MARKET_PHRASES = [
+        "may be considered high",
+        "above market",
+        "below market",
+        "market standard",
+        "standard for the industry",
+        "standard practice",
+        "industry standard",
+        "common practice",
+        "peut être considéré comme élevé",
+        "supérieur au marché",
+        "normes du marché",
+        "pratique courante",
+        "pratique standard",
+        "ممارسة شائعة",
+    ]
+
     dangerous_terms = [
         "dangerous",
         "hazardous",
@@ -1063,18 +1101,53 @@ def apply_reasoning_quality_gate(
         not safe_str(analysis.get("explanation_simple"))
         and analysis.get("risk_level") in {"medium", "high"}
     ):
-        analysis["explanation_simple"] = (
-            "This clause may create important legal or "
-            "commercial obligations."
-            if language == "en"
-            else
-            "Cette clause peut créer des obligations "
-            "juridiques ou commerciales importantes."
-            if language == "fr"
-            else
-            "قد تنشئ هذه المادة التزامات قانونية أو "
-            "تجارية مهمة."
-        )
+        combined = " ".join([
+            safe_str(analysis.get("clause_title")),
+            safe_str(analysis.get("title")),
+            safe_str(analysis.get("clause_type")),
+            safe_str(analysis.get("quoted_text")),
+            safe_str(clause_text),
+        ]).lower()
+
+        if "service level" in combined or "niveau de service" in combined or "مستوى الخدمة" in combined:
+            analysis["explanation_simple"] = (
+                "The clause defines uptime or service performance obligations."
+                if language == "en"
+                else
+                "Cette clause définit les obligations de disponibilité ou de performance du service."
+                if language == "fr"
+                else
+                "تحدد هذه المادة التزامات التوفر أو أداء الخدمة."
+            )
+
+        elif "fees" in combined or "payment" in combined or "paiement" in combined or "الدفع" in combined or "الرسوم" in combined:
+            analysis["explanation_simple"] = (
+                "The clause defines payment timing and financial obligations."
+                if language == "en"
+                else
+                "Cette clause définit les délais de paiement et les obligations financières."
+                if language == "fr"
+                else
+                "تحدد هذه المادة مواعيد الدفع والالتزامات المالية."
+            )
+
+        else:
+            analysis["explanation_simple"] = ""
+
+    for field in [
+        "legal_insight",
+        "recommendation",
+        "market_comparison",
+    ]:
+        value = str(
+            analysis.get(field, "")
+        ).lower()
+
+        if any(
+            p in value
+            for p in UNSUPPORTED_MARKET_PHRASES
+        ):
+            analysis[field] = ""
 
     return analysis
 
@@ -1116,6 +1189,10 @@ def analyze_clause(
         ai_result["clause_title"] = (
             extract_clause_title(clause)
         )
+
+    ai_result["clause_title"] = normalize_final_clause_title(
+        ai_result.get("clause_title", "")
+    )
 
     ai_result = apply_rule_based_risk(
         ai_result,
@@ -2933,6 +3010,9 @@ def _analyze_contract_clauses_impl(
             or extract_clause_title(clause)
         )
 
+        title = normalize_final_clause_title(title)
+        analysis["clause_title"] = title
+
         clause_text = clause
 
         analysis = compute_analysis_metadata(
@@ -2977,6 +3057,32 @@ def _analyze_contract_clauses_impl(
             title,
             clause_text,
         ]).lower()
+
+        if (
+            "non-exclusive" in combined
+            or "non exclusive" in combined
+            or "غير حصري" in combined
+            or "non exclusif" in combined
+        ):
+            if analysis.get("risk_level") == "high":
+                analysis["risk_level"] = "medium"
+
+        standard_payment_safe = any(
+            term in combined
+            for term in [
+                "30 days",
+                "within thirty days",
+                "fixed monthly fee",
+                "monthly fee",
+                "payable within",
+                "dans un délai de 30 jours",
+                "montant fixe mensuel",
+                "paiement mensuel",
+                "دفع خلال",
+                "ثلاثين يوم",
+                "رسوم شهرية",
+            ]
+        )
 
         keyword_match = any(
             k in combined
@@ -3023,6 +3129,7 @@ def _analyze_contract_clauses_impl(
         if (
             analysis.get("risk_level") == "low"
             and keyword_match
+            and not standard_payment_safe
             and (
                 analysis.get("risk_escalated")
                 or analysis.get("red_flag")
@@ -3591,16 +3698,12 @@ def _analyze_contract_clauses_impl(
                     "صيانة أو التزامات تجارية."
                 )
 
-            if not analysis.get("recommendation"):
-                analysis["recommendation"] = (
-                    "Review the allocation of obligations and risk exposure in this clause."
-                    if language == "en"
-                    else
-                    "Examiner attentivement la répartition des obligations et des risques dans cette clause."
-                    if language == "fr"
-                    else
-                    "ينبغي مراجعة توزيع الالتزامات والمخاطر في هذه المادة بعناية."
-                )
+            if (
+                not analysis.get("recommendation")
+                and analysis.get("risk_level") in {"medium", "high"}
+                and analysis.get("clause_type") not in {"other"}
+            ):
+                analysis["recommendation"] = ""
         high_risk_terms = [
             "unlimited liability",
             "acceleration",
@@ -3651,6 +3754,22 @@ def _analyze_contract_clauses_impl(
             title,
         )
 
+        generic_recommendations = [
+            "review allocation of obligations and risk exposure",
+            "examiner attentivement la répartition des obligations",
+            "ينبغي مراجعة توزيع الالتزامات والمخاطر",
+        ]
+
+        recommendation = (
+            analysis.get("recommendation") or ""
+        ).lower()
+
+        if (
+            any(g in recommendation for g in generic_recommendations)
+            and analysis.get("risk_level") == "low"
+        ):
+            analysis["recommendation"] = ""
+
         analysis = apply_reasoning_quality_gate(
             analysis,
             clause_text,
@@ -3662,6 +3781,36 @@ def _analyze_contract_clauses_impl(
             clause_text,
             title,
         )
+
+        for field in [
+            "legal_insight",
+            "negotiation_advice",
+            "recommendation",
+        ]:
+            if not analysis.get(field):
+                analysis[field] = ""
+
+        if (
+            not analysis.get("explanation")
+            and not analysis.get("explanation_simple")
+            and analysis.get("risk_level") == "low"
+        ):
+            analysis["explanation_simple"] = (
+                "This clause appears administrative or operational in nature."
+                if language == "en"
+                else
+                "Cette clause semble principalement administrative ou opérationnelle."
+                if language == "fr"
+                else
+                "تبدو هذه المادة ذات طبيعة إدارية أو تشغيلية."
+            )
+            analysis["explanation"] = analysis["explanation_simple"]
+
+        if title in {"استعمال المحل", "Use of Premises", "Usage des locaux"}:
+            analysis["risk_level"] = "low"
+            analysis["red_flag"] = False
+            analysis["red_flag_reason"] = ""
+            analysis["negotiation_advice"] = ""
 
         results.append({
             "title": title,

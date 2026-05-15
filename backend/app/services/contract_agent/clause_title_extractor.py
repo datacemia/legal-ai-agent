@@ -1,6 +1,23 @@
 import re
 
 
+AR_TITLE_FIXES = {
+    "المحل استعمال": "استعمال المحل",
+    "الفكرية الملكية": "الملكية الفكرية",
+    "المهام الوظيفة": "الوظيفة والمهام",
+    "السداد الفائدة": "الفائدة والسداد",
+    "البيانات حماية": "حماية البيانات",
+    "المسؤولية تحديد": "تحديد المسؤولية",
+    "التطبيق الواجب القانون": "القانون الواجب التطبيق",
+    "التجاري المحل - 1 المادة": "المحل التجاري",
+    "الأداء عدم": "عدم الأداء",
+    "القرض مبلغ - 1 المادة": "مبلغ القرض",
+    "والدفع الرسوم": "الرسوم والدفع",
+    "الخدمة مستوى": "مستوى الخدمة",
+    "المكافأة الأجر": "الأجر والمكافأة",
+}
+
+
 def extract_clause_title(clause_text: str) -> str:
     """
     Extract a short clause title from raw clause text.
@@ -73,5 +90,8 @@ def extract_clause_title(clause_text: str) -> str:
 
     if len(first_line) > 120:
         first_line = first_line[:120].strip()
+
+    if first_line.strip() in AR_TITLE_FIXES:
+        first_line = AR_TITLE_FIXES[first_line.strip()]
 
     return first_line
