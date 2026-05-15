@@ -64,13 +64,32 @@ def main():
             elif file.name.startswith("ar_"):
                 language = "ar"
 
-            analyzed_clauses = (
+            analysis_result = (
                 analyze_contract_clauses(
                     clauses,
                     language=language,
                     max_clauses=25,
                 )
             )
+
+            dependency_graph = {}
+
+            if isinstance(analysis_result, dict):
+                analyzed_clauses = analysis_result.get(
+                    "clauses",
+                    analysis_result.get(
+                        "results",
+                        [],
+                    ),
+                )
+
+                dependency_graph = analysis_result.get(
+                    "dependency_graph",
+                    {},
+                )
+
+            else:
+                analyzed_clauses = analysis_result
 
             result = {
                 "summary": (
@@ -79,6 +98,8 @@ def main():
                 ),
 
                 "clauses": analyzed_clauses,
+
+                "dependency_graph": dependency_graph,
 
                 "risk_score": 50,
 
@@ -112,6 +133,16 @@ def main():
             )
 
             print(
+                "DEPENDENCY EDGES:",
+                len(
+                    dependency_graph.get(
+                        "edges",
+                        [],
+                    )
+                ),
+            )
+
+            print(
                 "QUALITY SCORE:",
                 quality.get("score"),
             )
@@ -134,7 +165,8 @@ def main():
 
                 print(
                     "TITLE:",
-                    clause.get("title"),
+                    clause.get("title")
+                    or clause.get("clause_title"),
                 )
 
                 print(

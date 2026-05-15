@@ -94,4 +94,7 @@ def extract_clause_title(clause_text: str) -> str:
     if first_line.strip() in AR_TITLE_FIXES:
         first_line = AR_TITLE_FIXES[first_line.strip()]
 
+    if not first_line.strip():
+        return "Untitled Clause"
+
     return first_line

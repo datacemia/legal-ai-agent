@@ -5,6 +5,9 @@ from openai import OpenAI
 
 from app.config import OPENAI_API_KEY
 from app.services.contract_agent.risk_engine import analyze_risk
+from app.services.contract_agent.risk_explainer import (
+    build_risk_explanation,
+)
 from app.services.contract_agent.clause_title_extractor import extract_clause_title
 from app.services.contract_agent.cross_clause_analysis import (
     analyze_cross_clause_risks,
@@ -17,6 +20,12 @@ from app.services.contract_agent.obligation_extractor import (
 )
 from app.services.contract_agent.timeline_extractor import (
     extract_contract_timeline,
+)
+from app.services.contract_agent.clause_dependency_graph import (
+    build_clause_dependency_graph,
+)
+from app.services.contract_agent.executive_summary import (
+    build_executive_summary,
 )
 from app.services.contract_agent.enterprise_audit import (
     generate_enterprise_audit,
@@ -915,12 +924,24 @@ def apply_reasoning_quality_gate(
         "standard practice",
         "industry standard",
         "common practice",
+        "competitive",
+        "too high",
+        "too low",
+
         "peut être considéré comme élevé",
         "supérieur au marché",
         "normes du marché",
         "pratique courante",
         "pratique standard",
+        "élevé",
+        "faible",
+
         "ممارسة شائعة",
+        "مرتفع",
+        "plus compétitif",
+        "أكثر تنافسية",
+        "pratiques du marché",
+        "market practice",
     ]
 
     dangerous_terms = [
@@ -1109,15 +1130,23 @@ def apply_reasoning_quality_gate(
             safe_str(clause_text),
         ]).lower()
 
-        if "service level" in combined or "niveau de service" in combined or "مستوى الخدمة" in combined:
+        if (
+            "service level" in combined
+            or "uptime" in combined
+            or "niveau de service" in combined
+            or "disponibilité" in combined
+            or "مستوى الخدمة" in combined
+            or "الجاهزية" in combined
+            or "توفر الخدمة" in combined
+        ):
             analysis["explanation_simple"] = (
-                "The clause defines uptime or service performance obligations."
+                "The clause defines uptime or service availability obligations."
                 if language == "en"
                 else
-                "Cette clause définit les obligations de disponibilité ou de performance du service."
+                "La clause définit les engagements de disponibilité du service."
                 if language == "fr"
                 else
-                "تحدد هذه المادة التزامات التوفر أو أداء الخدمة."
+                "تحدد هذه المادة التزامات توفر الخدمة أو نسبة الجاهزية."
             )
 
         elif "fees" in combined or "payment" in combined or "paiement" in combined or "الدفع" in combined or "الرسوم" in combined:
@@ -3812,6 +3841,44 @@ def _analyze_contract_clauses_impl(
             analysis["red_flag_reason"] = ""
             analysis["negotiation_advice"] = ""
 
+        analysis = build_risk_explanation(
+            analysis,
+            clause_text,
+        )
+
+        if not analysis.get("legal_insight"):
+
+            if analysis.get("risk_level") == "medium":
+
+                analysis["legal_insight"] = (
+                    "This clause may create legal or operational exposure."
+                    if language == "en"
+                    else (
+                        "Cette clause peut créer une exposition juridique ou opérationnelle."
+                        if language == "fr"
+                        else (
+                            "قد تنشئ هذه المادة تعرضاً قانونياً أو تشغيلياً."
+                        )
+                    )
+                )
+
+            elif analysis.get("risk_level") == "low":
+
+                analysis["legal_insight"] = (
+                    "No significant legal imbalance detected."
+                    if language == "en"
+                    else (
+                        "Aucun déséquilibre juridique significatif détecté."
+                        if language == "fr"
+                        else (
+                            "لم يتم رصد اختلال قانوني جوهري."
+                        )
+                    )
+                )
+
+        if not analysis.get("title"):
+            analysis["title"] = "Untitled Clause"
+
         results.append({
             "title": title,
             "original_text": clause[:1000],
@@ -3903,7 +3970,7 @@ class ClauseAnalysisPipeline:
     def run_cleanup(self, results: list[dict]) -> list[dict]:
         return results
 
-    def run(self) -> list[dict]:
+    def run(self) -> dict:
         results = self.run_detection()
         results = self.run_validation(results)
         results = self.run_risk(results)
@@ -3912,7 +3979,24 @@ class ClauseAnalysisPipeline:
         results = self.run_scoring(results)
         results = self.run_cleanup(results)
 
-        return results
+        contract_timeline = extract_contract_timeline(
+            results,
+            language=self.language,
+        )
+
+        dependency_graph = build_clause_dependency_graph(results)
+
+        executive_summary = build_executive_summary(
+            results,
+            dependency_graph,
+        )
+
+        return {
+            "results": results,
+            "contract_timeline": contract_timeline,
+            "dependency_graph": dependency_graph,
+            "executive_summary": executive_summary,
+        }
 
 
 def analyze_contract_clauses(
