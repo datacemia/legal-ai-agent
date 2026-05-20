@@ -25,6 +25,28 @@ from app.services.contract_agent.validator import (
 from app.workers.progress import update_job_progress
 
 
+def get_job_input(job: Job) -> dict:
+    """
+    Safely read job input data.
+
+    Some code creates jobs using input_data.
+    Older code uses input. This supports both.
+    """
+
+    data = getattr(job, "input_data", None)
+
+    if data is None:
+        data = getattr(job, "input", None)
+
+    if isinstance(data, str):
+        try:
+            data = json.loads(data)
+        except Exception:
+            data = {}
+
+    return data if isinstance(data, dict) else {}
+
+
 def legal_progress_message(key: str, language: str) -> str:
     messages = {
         "loading": {
@@ -76,10 +98,13 @@ def legal_progress_message(key: str, language: str) -> str:
 
 
 def handle_contract_ai(job: Job, db):
-    document_id = job.input.get("document_id")
-    output_language = job.input.get("output_language", "en")
-    access_type = job.input.get("access_type")
-    credits_used = job.input.get("credits_used", 0)
+    input_data = get_job_input(job)
+
+    document_id = input_data.get("document_id")
+    output_language = input_data.get("output_language", "en")
+    access_type = input_data.get("access_type")
+    credits_used = input_data.get("credits_used", 0)
+    document_text = input_data.get("document_text")
 
     if output_language not in ["en", "fr", "ar"]:
         output_language = "en"
@@ -103,10 +128,13 @@ def handle_contract_ai(job: Job, db):
         legal_progress_message("extracting", output_language),
     )
 
-    raw_text = extract_text(
-        document.file_path,
-        document.file_type,
-    )
+    if document_text:
+        raw_text = document_text
+    else:
+        raw_text = extract_text(
+            document.file_path,
+            document.file_type,
+        )
 
     cleaned_text = clean_text(raw_text)
 
