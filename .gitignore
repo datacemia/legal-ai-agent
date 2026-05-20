@@ -99,3 +99,7 @@ backend/clear_jobs.py
 
 # Local QA contract test files
 backend/test_contracts/
+backend/debug_output/
+backend/quality_runs/
+backend/quality_audit_report.json
+backend/contract.docx

@@ -1,5 +1,6 @@
 import os
 import re
+from collections import Counter
 from typing import Optional
 
 import fitz
@@ -25,6 +26,65 @@ ARABIC_FIXES = {
     "األول": "الأول",
     "األولى": "الأولى",
 }
+
+
+def looks_like_clause_heading(line: str) -> bool:
+    """
+    Protect real clause headings across English, French,
+    Arabic and generic numbered legal documents.
+    """
+
+    if not line:
+        return False
+
+    normalized = line.strip()
+
+    heading_patterns = [
+        r"^(article|section|clause)\s+\d+(\.\d+)*",
+        r"^(ARTICLE|SECTION|CLAUSE)\s+\d+(\.\d+)*",
+        r"^\d{1,3}(\.\d+)*[\).\-:]?\s+\S+",
+        r"^(المادة|البند|الفقرة)\s*\d+",
+        r"^[A-Z][A-Z\s&/,()\-]{4,}$",
+    ]
+
+    return any(
+        re.search(pattern, normalized, re.IGNORECASE)
+        for pattern in heading_patterns
+    )
+
+
+def remove_repeated_noise_blocks(
+    text: str,
+    min_repetition: int = 3,
+) -> str:
+
+    if not text:
+        return ""
+
+    lines = [
+        line.strip()
+        for line in text.splitlines()
+        if line.strip()
+    ]
+
+    counter = Counter(lines)
+
+    cleaned = []
+
+    for line in lines:
+
+        repeated_noise = (
+            counter[line] >= min_repetition
+            and len(line) > 40
+            and not looks_like_clause_heading(line)
+        )
+
+        if repeated_noise:
+            continue
+
+        cleaned.append(line)
+
+    return "\n".join(cleaned)
 
 
 def clean_text(text: str) -> str:
@@ -193,6 +253,8 @@ def extract_text_from_pdf(file_path: str) -> str:
     if text_quality_score(best_text) < 20:
         raise ValueError("PDF text quality is too low or unreadable")
 
+    best_text = remove_repeated_noise_blocks(best_text)
+
     return best_text
 
 
@@ -239,6 +301,8 @@ def extract_text_from_docx(file_path: str) -> str:
 
     if not text:
         raise ValueError("Empty or unreadable DOCX")
+
+    text = remove_repeated_noise_blocks(text)
 
     return text
 

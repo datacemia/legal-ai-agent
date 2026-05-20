@@ -1,6 +1,16 @@
 import re
 from typing import List
 
+from app.services.contract_agent.legal_document_engine import (
+    parse_legal_document,
+    parse_legal_document_objects,
+)
+
+from app.services.contract_agent.document_structure_builder import (
+    build_document_structure,
+    flatten_structure_to_clauses,
+)
+
 
 def normalize_arabic_title(title: str) -> str:
     title = title.strip()
@@ -225,6 +235,37 @@ def is_low_value_clause(clause: str) -> bool:
 
     normalized = re.sub(r"\s+", " ", text).strip()
 
+    noise_signals = [
+
+        # ENGLISH
+        "not intended as advice",
+        "professional services",
+        "consult competent counsel",
+        "for reference only",
+
+        # FRENCH
+        "à titre informatif",
+        "consultez un professionnel",
+        "services professionnels",
+
+        # ARABIC
+        "استشارة قانونية",
+        "خدمات مهنية",
+        "لأغراض مرجعية فقط",
+    ]
+
+    noise_hits = sum(
+        1
+        for signal in noise_signals
+        if signal in normalized
+    )
+
+    if (
+        noise_hits >= 2
+        and len(normalized) < 1200
+    ):
+        return True
+
     # Standalone document titles
     document_title_patterns = [
         r"^amended and restated .* agreement$",
@@ -293,6 +334,17 @@ def split_into_clauses(text: str) -> List[str]:
 
     if not text or not text.strip():
         return []
+
+    engine_clauses = parse_legal_document(text)
+
+    if len(engine_clauses) >= 3:
+        return engine_clauses
+
+    structure = build_document_structure(text)
+    structured_clauses = flatten_structure_to_clauses(structure)
+
+    if len(structured_clauses) >= 3:
+        return structured_clauses
 
     lines = [
         normalize_line(line)
@@ -471,3 +523,46 @@ def split_into_clauses(text: str) -> List[str]:
             cleaned_clauses = fallback_clauses
 
     return cleaned_clauses
+
+
+def split_into_clause_objects(
+    text: str,
+) -> list[dict]:
+    """
+    Return structured clause objects while preserving hierarchy metadata.
+
+    Primary path:
+    - legal_document_engine.parse_legal_document_objects()
+
+    Fallback path:
+    - existing split_into_clauses() string splitter
+    - wrap each string into a normalized object shape
+    """
+
+    if not text or not text.strip():
+        return []
+
+    objects = parse_legal_document_objects(text)
+
+    if len(objects) >= 3:
+        return objects
+
+    clauses = split_into_clauses(text)
+
+    return [
+        {
+            "id": f"fallback_{i}",
+            "title": clause.split("\n")[0][:120],
+            "text": clause,
+            "level": 1,
+            "depth": 1,
+            "parent_id": None,
+            "parent_clause_id": None,
+            "semantic_parent": None,
+            "section_path": [],
+            "children": [],
+            "confidence": 0.3,
+        }
+        for i, clause in enumerate(clauses)
+    ]
+

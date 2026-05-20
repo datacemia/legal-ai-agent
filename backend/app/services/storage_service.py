@@ -10,6 +10,7 @@ ALLOWED_CONTENT_TYPES = {
     "application/pdf",
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     "text/plain",
+    "application/octet-stream",
 }
 
 
@@ -25,7 +26,8 @@ def save_upload_file(file: UploadFile) -> str:
         raise ValueError("File type not allowed")
 
     if file.content_type not in ALLOWED_CONTENT_TYPES:
-        raise ValueError("Invalid file content type")
+        if extension not in ALLOWED_EXTENSIONS:
+            raise ValueError("Invalid file content type")
 
     content = file.file.read()
 

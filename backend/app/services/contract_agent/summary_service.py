@@ -860,16 +860,28 @@ def generate_simplified_version(text: str, language: str = "en") -> str:
     return render_simplified_text(data, language)
 
 
-def calculate_global_risk(analysis_results: list[dict]) -> dict:
+def calculate_global_risk(clause_results):
+    if not isinstance(clause_results, list):
+        return {
+            "risk_level": "low",
+            "risk_score": 20,
+        }
+
+    clause_results = [
+        item
+        for item in clause_results
+        if isinstance(item, dict)
+    ]
+
     high_count = sum(
         1
-        for item in analysis_results
+        for item in clause_results
         if item.get("risk_level") == "high"
     )
 
     medium_count = sum(
         1
-        for item in analysis_results
+        for item in clause_results
         if item.get("risk_level") == "medium"
     )
 

@@ -24,11 +24,23 @@ from app.services.contract_agent.timeline_extractor import (
 from app.services.contract_agent.clause_dependency_graph import (
     build_clause_dependency_graph,
 )
+from app.services.contract_agent.legal_relation_graph import (
+    build_legal_relation_graph,
+)
+from app.services.contract_agent.clause_grouping_engine import (
+    build_clause_groups,
+)
+from app.services.contract_agent.contradiction_detector import (
+    detect_contract_contradictions,
+)
 from app.services.contract_agent.executive_summary import (
     build_executive_summary,
 )
 from app.services.contract_agent.executive_risk_narrative import (
     build_executive_risk_narrative,
+)
+from app.services.contract_agent.executive_report_builder import (
+    build_executive_report,
 )
 from app.services.contract_agent.enterprise_audit import (
     generate_enterprise_audit,
@@ -50,9 +62,39 @@ from app.services.contract_agent.contract_taxonomy import (
 from app.services.contract_agent.jurisdiction_profiles import (
     detect_jurisdiction,
 )
+from app.services.contract_agent.clause_splitter import (
+    split_into_clause_objects,
+)
 from app.utils.prompt_loader import load_prompt
 
 client = OpenAI(api_key=OPENAI_API_KEY)
+
+
+ENABLE_DEPENDENCY_GRAPH = True
+ENABLE_LEGAL_RELATION_GRAPH = True
+
+
+def remove_repeated_sample_policy_disclaimer(text: str) -> str:
+    if not text:
+        return ""
+
+    lines = text.splitlines()
+    cleaned = []
+
+    skip_phrases = [
+        "Disclaimer: This Sample Policy is not intended",
+        "It is provided with the understanding",
+        "Readers should consult competent counsel",
+        "professional services of their own choosing",
+    ]
+
+    for line in lines:
+        if any(p in line for p in skip_phrases):
+            continue
+
+        cleaned.append(line)
+
+    return "\n".join(cleaned).strip()
 
 
 AR_TITLE_FIXES = {
@@ -570,6 +612,58 @@ def safe_bool(value: Any) -> bool:
     return False
 
 
+def track_change(
+    analysis: dict,
+    field: str,
+    old,
+    new,
+    source: str,
+) -> None:
+    """
+    Centralized mutation tracker.
+
+    This records why a field changed while preserving the normal
+    analysis dictionary shape used by the frontend/API.
+    """
+
+    if old == new:
+        return
+
+    analysis[field] = new
+
+    analysis.setdefault(
+        "_meta",
+        {},
+    )
+
+    analysis["_meta"].setdefault(
+        "changes",
+        [],
+    ).append({
+        "field": field,
+        "from": old,
+        "to": new,
+        "source": source,
+    })
+
+
+
+def mutate_analysis(
+    analysis: dict,
+    *,
+    field: str,
+    value,
+    source: str,
+) -> None:
+    track_change(
+        analysis,
+        field=field,
+        old=analysis.get(field),
+        new=value,
+        source=source,
+    )
+
+
 def localize_clause_reference(
     reference: str,
     language: str,
@@ -851,18 +945,45 @@ def apply_rule_based_risk(
 
     if rule_level == "high":
 
-        ai_result["risk_level"] = "high"
-        ai_result["negotiation_priority"] = "high"
+        track_change(
+            ai_result,
+            field="risk_level",
+            old=ai_result.get("risk_level"),
+            new="high",
+            source="apply_rule_based_risk",
+        )
+
+        ai_result["_meta"][
+            "risk_modified_by"
+        ].append(
+            "apply_rule_based_risk"
+        )
+
+        track_change(
+            ai_result,
+            field="negotiation_priority",
+            old=ai_result.get("negotiation_priority"),
+            new="high",
+            source="apply_rule_based_risk",
+        )
 
         if not ai_result.get("red_flag"):
-            ai_result["red_flag"] = True
+            mutate_analysis(
+                ai_result,
+                field="red_flag",
+                value=True,
+                source="apply_rule_based_risk",
+            )
 
         if not ai_result.get("red_flag_reason"):
 
-            ai_result["red_flag_reason"] = (
-                safe_str(
+            mutate_analysis(
+                ai_result,
+                field="red_flag_reason",
+                value=safe_str(
                     rule_result.get("trigger")
-                )
+                ),
+                source="apply_rule_based_risk",
             )
 
     elif (
@@ -870,20 +991,42 @@ def apply_rule_based_risk(
         and ai_result.get("risk_level") == "low"
     ):
 
-        ai_result["risk_level"] = "medium"
+        track_change(
+            ai_result,
+            field="risk_level",
+            old=ai_result.get("risk_level"),
+            new="medium",
+            source="apply_rule_based_risk",
+        )
+
+        ai_result["_meta"][
+            "risk_modified_by"
+        ].append(
+            "apply_rule_based_risk"
+        )
 
         if (
             ai_result.get(
                 "negotiation_priority"
             ) == "low"
         ):
-            ai_result[
-                "negotiation_priority"
-            ] = "medium"
+            track_change(
+                ai_result,
+                field="negotiation_priority",
+                old=ai_result.get("negotiation_priority"),
+                new="medium",
+                source="apply_rule_based_risk",
+            )
 
     ai_result["trigger"] = rule_result.get(
         "trigger"
     )
+
+    print("\nDEBUG FINAL INSIGHT")
+    print("TITLE:", ai_result.get("clause_title"))
+    print("TYPE:", ai_result.get("clause_type"))
+    print("HAS_CONTEXT:", ai_result.get("has_contextual_reasoning"))
+    print("LEGAL:", ai_result.get("legal_insight"))
 
     return ai_result
 
@@ -1216,6 +1359,29 @@ def analyze_clause(
         ai_result
     )
 
+    # -------------------------------------------------
+    # Taxonomy fallback classification
+    # -------------------------------------------------
+
+    taxonomy_type = detect_clause_type_from_taxonomy(clause)
+
+    if taxonomy_type != "other":
+        current_type = ai_result.get("clause_type")
+
+        if current_type == "other":
+            ai_result["clause_type"] = taxonomy_type
+
+        elif not has_clause_type_signal(clause, current_type):
+            ai_result["clause_type"] = taxonomy_type
+            ai_result["confidence"] = "medium"
+
+    ai_result["_meta"] = {
+        "risk_modified_by": [],
+        "reasoning_modified_by": [],
+        "cleanup_applied": [],
+        "changes": [],
+    }
+
     if not ai_result["clause_title"]:
 
         ai_result["clause_title"] = (
@@ -1233,6 +1399,76 @@ def analyze_clause(
         clause,
         language,
     )
+
+    reasoning = get_reasoning_for_text(
+        clause,
+        language,
+        title=ai_result.get("clause_title", ""),
+    )
+
+    if reasoning:
+        if reasoning.get("legal_insight"):
+            ai_result["legal_insight"] = reasoning.get("legal_insight")
+
+        if reasoning.get("recommendation"):
+            ai_result["recommendation"] = reasoning.get("recommendation")
+
+        if reasoning.get("negotiation"):
+            ai_result["negotiation_advice"] = reasoning.get("negotiation")
+
+        if reasoning.get("contextual_reasoning"):
+            ai_result["has_contextual_reasoning"] = True
+
+    if not ai_result.get(
+        "explanation_simple"
+    ):
+
+        legal_insight = str(
+            ai_result.get(
+                "legal_insight",
+                "",
+            )
+        ).strip()
+
+        if legal_insight:
+            ai_result[
+                "explanation_simple"
+            ] = legal_insight
+
+    title_text = ai_result.get("clause_title", "").lower()
+
+    combined_text = f"{title_text} {clause}".lower()
+
+    if (
+        "confidentiality" in combined_text
+        or "confidential information" in combined_text
+        or "confidentialité" in combined_text
+        or "information confidentielle" in combined_text
+        or "السرية" in combined_text
+        or "معلومات سرية" in combined_text
+    ):
+        conf_reasoning = get_reasoning_for_text(
+            clause,
+            language,
+            title="Confidentiality",
+        )
+
+        if conf_reasoning.get("legal_insight"):
+            ai_result["legal_insight"] = (
+                conf_reasoning["legal_insight"]
+            )
+
+        if conf_reasoning.get("recommendation"):
+            ai_result["recommendation"] = (
+                conf_reasoning["recommendation"]
+            )
+
+        if conf_reasoning.get("negotiation"):
+            ai_result["negotiation_advice"] = (
+                conf_reasoning["negotiation"]
+            )
+
+        ai_result["has_contextual_reasoning"] = True
 
     ai_result = remove_speculative_analysis(
         ai_result
@@ -2670,10 +2906,9 @@ def calculate_clause_importance(
     ):
         score = min(score, 20)
 
-    return max(
-        0,
-        min(score, 100),
-    )
+    score = max(15, min(score, 90))
+
+    return score
 
 
 
@@ -2803,6 +3038,8 @@ def extract_reasoning_evidence(
 
     text = " ".join(text.split())
 
+    text = remove_repeated_sample_policy_disclaimer(text)
+
     return text[:max_length]
 
 
@@ -2884,17 +3121,58 @@ def compute_analysis_metadata(
     return analysis
 
 
+
+def attach_clause_object_metadata(
+    analysis: dict,
+    clause_obj: dict,
+) -> dict:
+    """
+    Preserve hierarchical legal-document metadata on every analyzed clause.
+    """
+
+    analysis.update({
+        "clause_id": clause_obj.get("id"),
+        "parent_id": clause_obj.get("parent_id"),
+        "parent_clause_id": clause_obj.get("parent_clause_id"),
+        "depth": clause_obj.get("depth"),
+        "level": clause_obj.get("level"),
+        "section_path": clause_obj.get("section_path", []),
+        "children": clause_obj.get("children", []),
+        "semantic_parent": clause_obj.get("semantic_parent"),
+        "confidence_score": clause_obj.get("confidence"),
+        "lineage": clause_obj.get("lineage", []),
+    })
+
+    return analysis
+
+
 def _analyze_contract_clauses_impl(
-    clauses: list[str],
+    clauses: list[str] | list[dict],
     language: str = "en",
     max_clauses: int = 25,
 ) -> list[dict]:
 
     critical_terms = get_clause_signal_terms("critical")
 
+    if clauses and isinstance(clauses[0], dict):
+        clause_objects = clauses
+    else:
+        full_text_for_objects = "\n\n".join([
+            str(c)
+            for c in clauses
+        ])
+
+        clause_objects = split_into_clause_objects(
+            full_text_for_objects,
+        )
+
     full_contract_text = " ".join([
-        str(c)
-        for c in clauses
+        str(
+            c.get("text", "")
+            if isinstance(c, dict)
+            else c
+        )
+        for c in clause_objects
     ]).lower()
 
     jurisdiction_profile = detect_jurisdiction(
@@ -2910,11 +3188,20 @@ def _analyze_contract_clauses_impl(
 
     results = []
 
-    for clause in clauses[:max_clauses]:
+    for clause_obj in clause_objects[:max_clauses]:
+
+        clause = str(
+            clause_obj.get("text", "")
+        )
 
         analysis = analyze_clause(
             clause,
             language,
+        )
+
+        analysis = attach_clause_object_metadata(
+            analysis,
+            clause_obj,
         )
 
         analysis = validate_clause_type(
@@ -3991,7 +4278,29 @@ class ClauseAnalysisPipeline:
             language=self.language,
         )
 
-        dependency_graph = build_clause_dependency_graph(results)
+        if ENABLE_DEPENDENCY_GRAPH:
+            dependency_graph = build_clause_dependency_graph(
+                results
+            )
+        else:
+            dependency_graph = {
+                "nodes": [],
+                "edges": [],
+            }
+
+        if ENABLE_LEGAL_RELATION_GRAPH:
+            legal_relation_graph = build_legal_relation_graph(
+                results
+            )
+        else:
+            legal_relation_graph = {
+                "nodes": [],
+                "edges": [],
+            }
+
+        clause_groups = build_clause_groups(results)
+
+        contradictions = detect_contract_contradictions(results)
 
         executive_summary = build_executive_summary(
             results,
@@ -4003,13 +4312,24 @@ class ClauseAnalysisPipeline:
             self.language,
         )
 
-        return {
-            "results": results,
+        final_result = {
+            "clauses": {
+                "results": results,
+            },
             "contract_timeline": contract_timeline,
             "dependency_graph": dependency_graph,
+            "legal_relation_graph": legal_relation_graph,
+            "clause_groups": clause_groups,
             "executive_summary": executive_summary,
             "executive_risk_narrative": executive_risk_narrative,
+            "contradictions": contradictions,
         }
+        final_result["executive_report"] = build_executive_report(
+            final_result,
+            self.language,
+        )
+
+        return final_result
 
 
 def analyze_contract_clauses(

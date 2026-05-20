@@ -7,6 +7,7 @@ import { getSavedLocale, setSavedLocale } from "../../lib/i18n";
 import RiskBadge from "../../components/RiskBadge";
 import RiskScore from "../../components/RiskScore";
 import UploadBox from "../../components/UploadBox";
+import ExecutiveDashboard from "../../components/ExecutiveDashboard";
 
 
 const safeGetLocalStorage = (key: string, fallback = "") => {
@@ -43,7 +44,7 @@ const labels: any = {
     upgradePro: "Upgrade to Pro",
     trialUsed: "Trial already used for legal",
     paymentRequired: "$1 Legal trial activation required",
-    heroTitle: "AI-powered contract review",
+    heroTitle: "AI Legal Intelligence Platform",
     heroDesc:
       "Get a clear view of contract risks, sensitive clauses, obligations, and practical recommendations before signing.",
     whatYouGet: "Contract intelligence at a glance",
@@ -118,7 +119,7 @@ const labels: any = {
     upgradePro: "Passer au plan Pro",
     trialUsed: "Essai Legal déjà utilisé",
     paymentRequired: "Activation de l’essai Legal à 1$ requise",
-    heroTitle: "Analyse contractuelle assistée par IA",
+    heroTitle: "Plateforme d’intelligence juridique IA",
     heroDesc:
       "Obtenez une lecture claire des risques, des clauses sensibles, des obligations et des recommandations pratiques avant signature.",
     whatYouGet: "Informations contractuelles clés",
@@ -193,7 +194,7 @@ const labels: any = {
     upgradePro: "الترقية إلى Pro",
     trialUsed: "تم استخدام تجربة الوكيل القانوني",
     paymentRequired: "يلزم تفعيل تجربة القانون بقيمة 1 دولار",
-    heroTitle: "تحليل تعاقدي مدعوم بالذكاء الاصطناعي",
+    heroTitle: "منصة ذكاء قانوني مدعومة بالذكاء الاصطناعي",
     heroDesc:
       "احصل على تقييم واضح للمخاطر والبنود الحساسة والالتزامات والتوصيات العملية قبل التوقيع.",
     whatYouGet: "رؤى تعاقدية فورية",
@@ -297,6 +298,159 @@ const translateEnum = (value: string, language: string) => {
   return map[language]?.[normalized] || value;
 };
 
+
+
+const UI_TRANSLATIONS: any = {
+  en: {
+    overview: "Overview",
+    clauses: "Clauses",
+    graphs: "Graphs",
+    topRisks: "Top Risks",
+    executiveNarrative: "Executive Narrative",
+    dependencyGraph: "Dependency Graph",
+    legalRelationGraph: "Legal Relation Graph",
+    clauseGroups: "Clause Groups",
+    structuredDomains: "Structured legal domains",
+    noCriticalRisks: "No critical legal risks detected",
+    enterpriseGrade: "Enterprise-grade",
+    all: "All",
+    high: "High",
+    medium: "Medium",
+    low: "Low",
+    documentPreamble: "Document Preamble",
+  },
+  fr: {
+    overview: "Vue d’ensemble",
+    clauses: "Clauses",
+    graphs: "Graphiques",
+    topRisks: "Principaux risques",
+    executiveNarrative: "Résumé exécutif",
+    dependencyGraph: "Graphe des dépendances",
+    legalRelationGraph: "Graphe des relations juridiques",
+    clauseGroups: "Groupes de clauses",
+    structuredDomains: "Domaines juridiques structurés",
+    noCriticalRisks: "Aucun risque juridique critique détecté",
+    enterpriseGrade: "Niveau entreprise",
+    all: "Tous",
+    high: "Élevé",
+    medium: "Moyen",
+    low: "Faible",
+    documentPreamble: "Préambule du contrat",
+  },
+  ar: {
+    overview: "نظرة عامة",
+    clauses: "البنود",
+    graphs: "الرسوم البيانية",
+    topRisks: "أهم المخاطر",
+    executiveNarrative: "السرد التنفيذي",
+    dependencyGraph: "مخطط التبعيات",
+    legalRelationGraph: "مخطط العلاقات القانونية",
+    clauseGroups: "مجموعات البنود",
+    structuredDomains: "المجالات القانونية المنظمة",
+    noCriticalRisks: "لم يتم اكتشاف مخاطر قانونية حرجة",
+    enterpriseGrade: "بمستوى المؤسسات",
+    all: "الكل",
+    high: "مرتفع",
+    medium: "متوسط",
+    low: "منخفض",
+    documentPreamble: "مقدمة العقد",
+  },
+};
+
+const GROUP_TRANSLATIONS: any = {
+  en: {
+    other: "Other",
+    performance_service_obligations: "Performance & Service Obligations",
+    compensation_payment: "Compensation & Payment",
+    confidentiality_data: "Confidentiality & Data",
+    ip_ownership_license: "IP Ownership & Licensing",
+    dispute_jurisdiction_arbitration: "Disputes & Arbitration",
+    liability_indemnity_insurance: "Liability, Indemnity & Insurance",
+    termination: "Termination",
+    confidentiality: "Confidentiality",
+  },
+  fr: {
+    other: "Autres",
+    performance_service_obligations: "Obligations de service et de performance",
+    compensation_payment: "Rémunération et paiements",
+    confidentiality_data: "Confidentialité et données",
+    ip_ownership_license: "Propriété intellectuelle et licences",
+    dispute_jurisdiction_arbitration: "Litiges et arbitrage",
+    liability_indemnity_insurance: "Responsabilité, indemnisation et assurance",
+    termination: "Résiliation",
+    confidentiality: "Confidentialité",
+  },
+  ar: {
+    other: "أخرى",
+    performance_service_obligations: "التزامات الأداء والخدمات",
+    compensation_payment: "التعويضات والمدفوعات",
+    confidentiality_data: "السرية والبيانات",
+    ip_ownership_license: "الملكية الفكرية والتراخيص",
+    dispute_jurisdiction_arbitration: "النزاعات والتحكيم",
+    liability_indemnity_insurance: "المسؤولية والتعويض والتأمين",
+    termination: "إنهاء العقد",
+    confidentiality: "السرية",
+  },
+};
+
+const translateGroupLabel = (
+  value: string,
+  language: string,
+) => {
+  return (
+    GROUP_TRANSLATIONS?.[language]?.[value] ||
+    GROUP_TRANSLATIONS?.en?.[value] ||
+    value
+  );
+};
+
+const uiText = (
+  key: string,
+  language: string,
+) => {
+  const fallbackMap: any = {
+    enterpriseGrade: {
+      en: "Enterprise-grade",
+      fr: "Niveau entreprise",
+      ar: "بمستوى المؤسسات",
+    },
+    all: {
+      en: "All",
+      fr: "Tous",
+      ar: "الكل",
+    },
+    high: {
+      en: "High",
+      fr: "Élevé",
+      ar: "مرتفع",
+    },
+    medium: {
+      en: "Medium",
+      fr: "Moyen",
+      ar: "متوسط",
+    },
+    low: {
+      en: "Low",
+      fr: "Faible",
+      ar: "منخفض",
+    },
+    documentPreamble: {
+      en: "Document Preamble",
+      fr: "Préambule du contrat",
+      ar: "مقدمة العقد",
+    },
+  };
+
+  return (
+    UI_TRANSLATIONS?.[language]?.[key] ||
+    fallbackMap?.[key]?.[language] ||
+    UI_TRANSLATIONS?.en?.[key] ||
+    fallbackMap?.[key]?.en ||
+    key
+  );
+};
+
+
 const EnterpriseIcon = ({ index }: { index: number }) => {
   const paths = [
     <path key="doc" d="M7 3.75h6.25L18 8.5v11.75H7A2.25 2.25 0 0 1 4.75 18V6A2.25 2.25 0 0 1 7 3.75Zm6 0V8.5h5" />,
@@ -330,10 +484,14 @@ export default function UploadPage() {
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [language, setLanguage] = useState("en");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [activeTab, setActiveTab] = useState("overview");
+  const [riskFilter, setRiskFilter] = useState("medium");
   const [message, setMessage] = useState("");
   const [plan, setPlan] = useState("");
   const [role, setRole] = useState("");
   const [creditsBalance, setCreditsBalance] = useState(0);
+  const [analysisStartedAt, setAnalysisStartedAt] = useState<number | null>(null);
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
 
   const hasActiveAccess =
     role === "admin" ||
@@ -391,9 +549,105 @@ export default function UploadPage() {
     return () => timers.forEach(clearTimeout);
   }, [loading, language]);
 
+  useEffect(() => {
+    if (!loading || !analysisStartedAt) return;
+
+    const interval = window.setInterval(() => {
+      setElapsedSeconds(
+        Math.max(
+          0,
+          Math.floor((Date.now() - analysisStartedAt) / 1000)
+        )
+      );
+    }, 1000);
+
+    return () => window.clearInterval(interval);
+  }, [loading, analysisStartedAt]);
+
   const primaryButtonLabel = hasActiveAccess
     ? t.analyzeButton
     : t.signupCta;
+
+  const loadingTimeline = [
+    {
+      key: "extracting",
+      label: t.loadingSteps.extracting,
+      threshold: 15,
+    },
+    {
+      key: "summary",
+      label: t.loadingSteps.summary,
+      threshold: 40,
+    },
+    {
+      key: "clauses",
+      label: t.loadingSteps.clauses,
+      threshold: 70,
+    },
+    {
+      key: "finalizing",
+      label: t.loadingSteps.finalizing,
+      threshold: 90,
+    },
+  ];
+
+  const liveMetrics = [
+    {
+      label:
+        language === "fr"
+          ? "Texte sécurisé"
+          : language === "ar"
+          ? "النص مؤمّن"
+          : "Secure text",
+      value:
+        loadingProgress >= 15
+          ? language === "fr"
+            ? "OK"
+            : language === "ar"
+            ? "تم"
+            : "OK"
+          : "—",
+    },
+    {
+      label:
+        language === "fr"
+          ? "Résumé exécutif"
+          : language === "ar"
+          ? "الملخص التنفيذي"
+          : "Executive summary",
+      value:
+        loadingProgress >= 40
+          ? language === "fr"
+            ? "En préparation"
+            : language === "ar"
+            ? "قيد التحضير"
+            : "Preparing"
+          : "—",
+    },
+    {
+      label:
+        language === "fr"
+          ? "Analyse des clauses"
+          : language === "ar"
+          ? "تحليل البنود"
+          : "Clause analysis",
+      value:
+        loadingProgress >= 70
+          ? language === "fr"
+            ? "Avancé"
+            : language === "ar"
+            ? "متقدم"
+            : "Advanced"
+          : "—",
+    },
+  ];
+
+  const formatElapsed = (seconds: number) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+
+    return `${minutes}:${String(remainingSeconds).padStart(2, "0")}`;
+  };
 
   const getFavoursBadgeClass = (favours: string) => {
     const normalized = String(favours || "").toLowerCase().trim();
@@ -486,12 +740,16 @@ export default function UploadPage() {
     trackEvent("upload_document");
 
     try {
+      setAnalysisStartedAt(Date.now());
+      setElapsedSeconds(0);
       setLoading(true);
       setLoadingStep(t.loadingSteps.extracting);
       setLoadingProgress(15);
       setResult(null);
       setMessage("");
       setOpenIndex(null);
+      setActiveTab("overview");
+      setRiskFilter("all");
 
       const doc = await uploadDocument(file);
 
@@ -566,6 +824,7 @@ export default function UploadPage() {
       setLoading(false);
       setLoadingStep("");
       setLoadingProgress(0);
+      setAnalysisStartedAt(null);
     }
   };
 
@@ -574,12 +833,23 @@ export default function UploadPage() {
 
   try {
     if (result?.clauses && !result?.authRequired) {
-      const parsed = Array.isArray(result.clauses)
-        ? result.clauses
-        : JSON.parse(result.clauses);
+      if (Array.isArray(result.clauses)) {
+        clauses = result.clauses;
+      } else if (Array.isArray(result.clauses?.results)) {
+        clauses = result.clauses.results;
+      } else if (Array.isArray(result.clauses?.clauses?.results)) {
+        clauses = result.clauses.clauses.results;
+      } else if (typeof result.clauses === "string") {
+        const parsed = JSON.parse(result.clauses);
 
-      clauses = parsed;
-      isLimited = parsed.length === 2;
+        if (Array.isArray(parsed)) {
+          clauses = parsed;
+        } else if (Array.isArray(parsed?.results)) {
+          clauses = parsed.results;
+        }
+      }
+
+      isLimited = clauses.length === 2;
     }
   } catch (e) {
     console.error("Clause parsing error:", e);
@@ -613,6 +883,8 @@ export default function UploadPage() {
               setResult(null);
               setMessage("");
               setOpenIndex(null);
+              setActiveTab("overview");
+              setRiskFilter("all");
             }}
           />
 
@@ -670,13 +942,19 @@ export default function UploadPage() {
 
           {loading && (
             <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4">
-              <div className="flex items-center justify-between text-sm">
+              <div className="flex items-center justify-between gap-4 text-sm">
                 <span className="font-medium text-blue-900">
                   {loadingStep || t.loading}
                 </span>
-                <span className="text-blue-700">
-                  {loadingProgress}%
-                </span>
+
+                <div className="flex items-center gap-3 text-blue-700">
+                  <span>
+                    {t.elapsed}: {formatElapsed(elapsedSeconds)}
+                  </span>
+                  <span>
+                    {loadingProgress}%
+                  </span>
+                </div>
               </div>
 
               <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-white">
@@ -685,96 +963,65 @@ export default function UploadPage() {
                   style={{ width: `${loadingProgress}%` }}
                 />
               </div>
+
+              <div className="mt-5 grid gap-3 md:grid-cols-4">
+                {loadingTimeline.map((step, index) => {
+                  const completed = loadingProgress >= step.threshold;
+                  const active =
+                    !completed &&
+                    loadingProgress >=
+                      (loadingTimeline[index - 1]?.threshold || 0);
+
+                  return (
+                    <div
+                      key={step.key}
+                      className={`rounded-xl border p-3 text-xs ${
+                        completed
+                          ? "border-green-200 bg-green-50 text-green-800"
+                          : active
+                          ? "border-blue-200 bg-white text-blue-800"
+                          : "border-slate-200 bg-white/70 text-slate-500"
+                      }`}
+                    >
+                      <div className="font-semibold">
+                        {completed ? "✓" : active ? "⏳" : "○"} {step.label}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                {liveMetrics.map((metric) => (
+                  <div
+                    key={metric.label}
+                    className="rounded-xl border border-blue-100 bg-white p-3"
+                  >
+                    <div className="text-xs text-slate-500">
+                      {metric.label}
+                    </div>
+                    <div className="mt-1 text-sm font-semibold text-slate-900">
+                      {metric.value}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-5 space-y-3">
+                {[0, 1, 2].map((item) => (
+                  <div
+                    key={item}
+                    className="animate-pulse rounded-2xl border border-blue-100 bg-white p-4"
+                  >
+                    <div className="h-3 w-1/3 rounded-full bg-slate-200" />
+                    <div className="mt-3 h-3 w-full rounded-full bg-slate-100" />
+                    <div className="mt-2 h-3 w-2/3 rounded-full bg-slate-100" />
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </div>
-
-        <section className="relative overflow-hidden rounded-[32px] border border-slate-200 bg-white px-6 py-14 shadow-sm">
-
-          <div className="absolute right-0 top-0 h-72 w-72 bg-blue-100/40 blur-3xl" />
-          <div className="absolute left-0 bottom-0 h-72 w-72 bg-indigo-100/30 blur-3xl" />
-
-          <div className="relative z-10">
-
-            <div className="mx-auto max-w-3xl text-center">
-              <h2 className="text-4xl font-semibold tracking-tight text-slate-900">
-                {t.whatYouGet}
-              </h2>
-
-              <p className="mt-4 text-lg leading-8 text-slate-600">
-                {t.heroDesc}
-              </p>
-            </div>
-
-            <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-
-              {t.whatYouGetItems.map((item: string, index: number) => (
-                <div
-                  key={index}
-                  className="group rounded-3xl border border-slate-200 bg-white/90 p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-                >
-
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100 transition group-hover:bg-blue-600 group-hover:text-white">
-                    <EnterpriseIcon index={index} />
-                  </div>
-
-                  <h3 className="mt-6 text-lg font-semibold text-slate-900">
-                    {item}
-                  </h3>
-
-                  <p className="mt-3 text-sm leading-7 text-slate-600">
-                    {t.whatYouGetDescriptions[index]}
-                  </p>
-
-                  <div className="mt-6">
-                    <span className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
-                      {t.whatYouGetBadges[index]}
-                    </span>
-                  </div>
-
-                </div>
-              ))}
-
-            </div>
-
-            <div className="mt-16 rounded-[28px] border border-slate-200 bg-slate-50 px-6 py-10">
-
-              <div className="text-center">
-                <h3 className="text-2xl font-semibold text-slate-900">
-                  {t.howItWorks}
-                </h3>
-              </div>
-
-              <div className="mt-10 grid gap-8 md:grid-cols-3">
-
-                {t.howItWorksItems.map((item: string, index: number) => (
-                  <div
-                    key={index}
-                    className="relative text-center"
-                  >
-
-                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-blue-200 bg-white text-lg font-semibold text-blue-700 shadow-sm">
-                      {index + 1}
-                    </div>
-
-                    <h4 className="mt-5 text-lg font-semibold text-slate-900">
-                      {item}
-                    </h4>
-
-                    <div className="mt-3 text-sm text-slate-500">
-                      {t.workflowDescriptions[index]}
-                    </div>
-
-                  </div>
-                ))}
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </section>
 
         {result && !result.authRequired && (
           <div className="space-y-6">
@@ -786,15 +1033,23 @@ export default function UploadPage() {
                     {t.quality}
                   </h3>
 
-                  <span
-                    className={`rounded-full px-3 py-1 text-sm font-medium ${
-                      result.quality_check.valid
-                        ? "bg-green-100 text-green-700"
-                        : "bg-yellow-100 text-yellow-700"
-                    }`}
-                  >
-                    {result.quality_check.score}/100
-                  </span>
+                  <div className="flex items-center">
+                    <span
+                      className={`rounded-full px-3 py-1 text-sm font-medium ${
+                        result.quality_check.valid
+                          ? "bg-green-100 text-green-700"
+                          : "bg-yellow-100 text-yellow-700"
+                      }`}
+                    >
+                      {result.quality_check.score}/100
+                    </span>
+
+                    {result.quality_check.score >= 90 && (
+                      <span className="ml-2 rounded-full bg-green-100 px-2 py-1 text-xs text-green-700">
+                        {uiText("enterpriseGrade", language)}
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 <p className="mt-3 text-sm text-slate-600">
@@ -820,23 +1075,62 @@ export default function UploadPage() {
               </div>
             )}
 
-            <div className="bg-white p-6 rounded-3xl border">
-              <h2 className="text-xl font-semibold">{t.summary}</h2>
-              <div className="mt-4 whitespace-pre-wrap text-sm leading-7 text-slate-700">
-                {result.summary}
-              </div>
-            </div>
-
             <RiskScore score={result.risk_score} language={language} />
 
-            <div className="rounded-3xl border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-slate-50 p-6 shadow-sm">
-              <h2 className="text-xl font-semibold text-slate-900">{t.simplified}</h2>
-              <div className="mt-4 whitespace-pre-wrap text-sm leading-8 text-slate-700">
-                {result.simplified_version}
-              </div>
+            <div className="flex flex-wrap gap-2 mb-6">
+              {[
+                ["overview", uiText("overview", language)],
+                ["clauses", `${uiText("clauses", language)} (${clauses.length})`],
+                ["graphs", uiText("graphs", language)],
+              ].map(([key, label]) => (
+                <button
+                  key={key}
+                  onClick={() => setActiveTab(key)}
+                  className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+                    activeTab === key
+                      ? "bg-blue-600 text-white shadow-sm"
+                      : "bg-white border text-slate-700 hover:bg-slate-50"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
             </div>
+            {activeTab === "overview" && (
+              <>
+                <ExecutiveDashboard
+                  result={result}
+                  language={language}
+                  showGraphs={false}
+                />
 
-            <div className="bg-white p-6 rounded-3xl border">
+                <div className="rounded-3xl border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-slate-50 p-6 shadow-sm">
+                  <h2 className="text-xl font-semibold text-slate-900">{t.simplified}</h2>
+                  <div className="mt-4 whitespace-pre-wrap text-sm leading-8 text-slate-700">
+                    {result.simplified_version}
+                  </div>
+                </div>
+
+                <div className="bg-white p-6 rounded-3xl border">
+                  <h2 className="text-xl font-semibold">{t.summary}</h2>
+                  <div className="mt-4 whitespace-pre-wrap text-sm leading-7 text-slate-700">
+                    {result.summary}
+                  </div>
+                </div>
+              </>
+            )}
+
+            {activeTab === "graphs" && (
+              <ExecutiveDashboard
+                result={result}
+                language={language}
+                showGraphs={true}
+              />
+            )}
+
+
+            {activeTab === "clauses" && (
+              <div className="bg-white p-6 rounded-3xl border">
               <h2 className="text-xl font-semibold mb-4">{t.clauses}</h2>
 
               {isLimited && (
@@ -845,22 +1139,53 @@ export default function UploadPage() {
                 </div>
               )}
 
+              <div className="flex gap-2 mb-5">
+                {["all", "high", "medium", "low"].map((level) => (
+                  <button
+                    key={level}
+                    onClick={() => setRiskFilter(level)}
+                    className={`rounded-full px-3 py-1 text-sm ${
+                      riskFilter === level
+                        ? "bg-blue-600 text-white shadow-sm"
+                        : "bg-slate-100"
+                    }`}
+                  >
+                    {level === "all"
+                      ? uiText("all", language)
+                      : level === "high"
+                      ? translateEnum("high", language)
+                      : level === "medium"
+                      ? translateEnum("medium", language)
+                      : translateEnum("low", language)}
+                  </button>
+                ))}
+              </div>
+
               <div className="space-y-4">
-                {clauses.map((clause: any, index: number) => {
+                {clauses
+                  .filter((clause: any) => {
+                    if (riskFilter === "all") return true;
+
+                    return (
+                      String(clause.risk_level).toLowerCase() === riskFilter
+                    );
+                  })
+                  .map((clause: any, index: number) => {
                   const isOpen = openIndex === index;
+                  const localizedTitle =
+                    clause.title === "Document Preamble"
+                      ? uiText("documentPreamble", language)
+                      : clause.title;
 
                   return (
                   <div
                     key={index}
-                    className={`rounded-3xl border p-5 cursor-pointer transition-all duration-200 ${isOpen ? "border-blue-200 bg-blue-50/20 shadow-sm" : "border-slate-200 bg-white hover:border-blue-100 hover:shadow-sm"}` }
-                    onClick={() =>
-                      setOpenIndex(openIndex === index ? null : index)
-                    }
+                    className={`rounded-3xl border p-5 transition-all duration-200 ${isOpen ? "border-blue-200 bg-blue-50/20 shadow-sm" : "border-slate-200 bg-white hover:border-blue-100 hover:shadow-sm"}` }
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <span className="font-semibold text-slate-900">
-                          {clause.title || `${t.clause} ${index + 1}`}
+                          {localizedTitle || `${t.clause} ${index + 1}`}
                         </span>
 
                         {clause.clause_reference && (
@@ -943,13 +1268,16 @@ export default function UploadPage() {
                       )
                     )}
 
-                    <p className="mt-3 text-sm leading-6 text-slate-600">
+                    <p className="mt-3 line-clamp-4 text-[13px] leading-6 text-slate-600">
                       {clause.explanation_simple}
                     </p>
 
                     {clause.has_details && (
                       <button
                         type="button"
+                        onClick={() =>
+                          setOpenIndex(openIndex === index ? null : index)
+                        }
                         className="mt-4 inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
                       >
                         {isOpen ? t.hideDetails : t.viewDetails}
@@ -959,7 +1287,8 @@ export default function UploadPage() {
                     {isOpen && clause.has_details && (
                     <div className="mt-4 space-y-4 text-sm">
 
-                        {clause.recommendation && (
+                        {clause.recommendation &&
+                         !clause.recommendation.includes("Confirm that the clause is consistent") && (
                           <div>
                             <h4 className="font-semibold text-slate-900">
                               {t.recommendation}
@@ -983,7 +1312,9 @@ export default function UploadPage() {
                           </div>
                         )}
 
-                        {clause.legal_insight && (
+                        {clause.legal_insight &&
+                         !clause.legal_insight.includes("No significant legal imbalance detected") &&
+                         !clause.legal_insight.includes("This clause creates contractual obligations") && (
                           <div className="mt-4 rounded-xl border border-blue-200 bg-blue-50 p-4">
                             <div className="font-semibold text-blue-900">
                               {t.legalInsight}
@@ -1013,7 +1344,7 @@ export default function UploadPage() {
                               {t.saferAlternative}
                             </h4>
 
-                            <div className="whitespace-pre-wrap text-green-800 mt-2 text-sm leading-6">
+                            <div className="whitespace-pre-wrap text-green-800 mt-2 text-[13px] leading-6">
                               {clause.safer_alternative}
                             </div>
                           </div>
@@ -1042,6 +1373,7 @@ export default function UploadPage() {
                 })}
               </div>
             </div>
+            )}
           </div>
         )}
       </div>

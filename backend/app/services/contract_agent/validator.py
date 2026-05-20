@@ -9,6 +9,57 @@ REQUIRED_FIELDS = [
 ]
 
 
+def get_clause_text(clause: dict) -> str:
+    return " ".join([
+        str(clause.get("title", "")),
+        str(clause.get("clause_title", "")),
+        str(clause.get("original_text", "")),
+        str(clause.get("quoted_text", "")),
+    ]).lower()
+
+
+GENERIC_TYPE_KEYWORDS = {
+    "payment": [
+        "payment", "salary", "bonus", "fee", "price",
+        "compensation", "invoice", "pay", "reimburse",
+        "paiement", "salaire", "prime", "prix", "facture",
+        "الدفع", "السداد", "الأجر", "الراتب", "المبلغ",
+    ],
+    "termination": [
+        "terminate", "termination", "expire", "breach",
+        "résiliation", "expiration", "rupture",
+        "إنهاء", "فسخ", "انتهاء", "إخلال",
+    ],
+    "confidentiality": [
+        "confidential", "secret", "non-disclosure",
+        "confidentiel", "secret",
+        "سري", "سرية", "معلومات سرية",
+    ],
+    "liability": [
+        "liability", "indemnify", "damages", "claim",
+        "responsabilité", "indemnisation", "dommages",
+        "مسؤولية", "تعويض", "أضرار",
+    ],
+    "governing_law": [
+        "governing law", "jurisdiction", "laws of",
+        "droit applicable", "juridiction",
+        "القانون الواجب", "الاختصاص", "القانون",
+    ],
+    "intellectual_property": [
+        "intellectual property", "copyright", "patent",
+        "invention", "license",
+        "propriété intellectuelle", "brevet", "licence",
+        "الملكية الفكرية", "براءة", "ترخيص",
+    ],
+    "corporate_governance": [
+        "board of directors", "shareholder", "voting",
+        "fiduciary", "director",
+        "conseil d'administration", "actionnaire",
+        "مجلس الإدارة", "المساهم", "تصويت",
+    ],
+}
+
+
 def validate_contract_result(result: dict) -> dict:
     issues = []
     score = 100
@@ -104,9 +155,32 @@ def validate_contract_result(result: dict) -> dict:
         issues.append("Summary too short")
         score -= 10
 
-    text_length = result.get("text_length", 0)
+    text = str(
+        result.get("text", "")
+        or result.get("full_text", "")
+        or result.get("raw_text", "")
+        or ""
+    )
 
-    if text_length < 150:
+    clauses_count = 0
+
+    if isinstance(clauses, list):
+        clauses_count = len(clauses)
+
+    elif isinstance(clauses, dict):
+        if isinstance(clauses.get("results"), list):
+            clauses_count = len(clauses.get("results"))
+
+        elif isinstance(clauses.get("clauses"), dict):
+            nested_results = clauses.get("clauses", {}).get("results", [])
+
+            if isinstance(nested_results, list):
+                clauses_count = len(nested_results)
+
+    if (
+        len(text.strip()) < 500
+        and clauses_count < 3
+    ):
         issues.append("Very little text extracted")
         score -= 30
 
@@ -119,12 +193,12 @@ def validate_contract_result(result: dict) -> dict:
     if isinstance(clauses, list):
         for clause in clauses:
             has_details = clause.get("has_details")
-            explanation = str(
-                clause.get(
-                    "explanation_simple",
-                    ""
-                )
-            ).lower()
+            combined_details = " ".join([
+                str(clause.get("explanation_simple", "")),
+                str(clause.get("legal_insight", "")),
+                str(clause.get("recommendation", "")),
+                str(clause.get("negotiation_advice", "")),
+            ]).lower()
 
             if (
                 has_details
@@ -145,9 +219,20 @@ def validate_contract_result(result: dict) -> dict:
                 "should be reviewed",
             ]
 
-            if any(
-                p in explanation
-                for p in generic_phrases
+            has_strong_detail = any([
+                clause.get("legal_insight"),
+                clause.get("recommendation"),
+                clause.get("negotiation_advice"),
+                clause.get("market_comparison"),
+                clause.get("safer_alternative"),
+            ])
+
+            if (
+                not has_strong_detail
+                and any(
+                    p in combined_details
+                    for p in generic_phrases
+                )
             ):
                 empty_detail_count += 1
 
@@ -156,6 +241,36 @@ def validate_contract_result(result: dict) -> dict:
             f"Weak clause details: {empty_detail_count}"
         )
         score -= min(20, empty_detail_count * 5)
+
+    semantic_mismatch_count = 0
+
+    if isinstance(clauses, list):
+        for clause in clauses:
+            clause_type = str(
+                clause.get("clause_type", "")
+            ).lower()
+
+            keywords = GENERIC_TYPE_KEYWORDS.get(
+                clause_type
+            )
+
+            if not keywords:
+                continue
+
+            clause_text = get_clause_text(clause)
+
+            if clause_text and not any(
+                keyword in clause_text
+                for keyword in keywords
+            ):
+                semantic_mismatch_count += 1
+
+    if semantic_mismatch_count:
+        issues.append(
+            f"Possible clause type mismatches: "
+            f"{semantic_mismatch_count}"
+        )
+        score -= min(15, semantic_mismatch_count * 3)
 
     score = max(0, min(score, 100))
 

@@ -7,27 +7,32 @@ liability, confidentiality, termination, SLA, indemnity, payment,
 exclusivity, and governing law.
 """
 
+from app.services.contract_agent.legal_ontology import (
+    detect_legal_domains,
+)
+
+
 SUPPORTED_LANGUAGES = {"en", "fr", "ar"}
 
 
-LIABILITY_NEGOTIATION = {
-    "en": (
-        "Consider negotiating liability caps, exclusions for indirect "
-        "damages, and carve-outs for fraud, wilful misconduct, or "
-        "confidentiality breaches."
-    ),
-    "fr": (
-        "Envisager de négocier des plafonds de responsabilité, "
-        "l'exclusion des dommages indirects et des exceptions en "
-        "cas de fraude, faute intentionnelle ou violation de "
-        "confidentialité."
-    ),
-    "ar": (
-        "يمكن التفاوض على حدود للمسؤولية، واستبعاد الأضرار غير "
-        "المباشرة، مع استثناءات لحالات الاحتيال أو الخطأ العمدي "
-        "أو خرق السرية."
-    ),
+BOILERPLATE_CLAUSES = {
+    "headings",
+    "notices",
+    "governing law",
+    "employment agreement",
 }
+
+
+GENERIC_LEGAL_INSIGHTS = {
+    "This clause creates contractual obligations or operational requirements that should be reviewed in the context of the overall agreement.",
+    "This clause creates contractual obligations.",
+}
+
+
+GENERIC_RECOMMENDATIONS = {
+    "Confirm that the clause is consistent with the commercial intent, operational process, and overall risk allocation.",
+}
+
 
 
 def get_language(language: str) -> str:
@@ -109,13 +114,20 @@ CLAUSE_REASONING_TEMPLATES = {
     "confidentiality": {
         "signals": [
             "confidentiality",
+            "confidentiality obligations",
             "confidential information",
+            "non-disclosure",
+            "nda",
+            "proprietary information",
+            "post-employment obligations",
             "trade secret",
             "survive termination",
             "confidentialité",
+            "obligations de confidentialité",
             "information confidentielle",
             "secret commercial",
             "السرية",
+            "التزامات السرية",
             "معلومات سرية",
             "سر تجاري",
         ],
@@ -553,26 +565,501 @@ CLAUSE_REASONING_TEMPLATES = {
             ),
         },
     },
+
+    "general": {
+        "signals": [],
+
+        "legal_insight": {
+            "en": (
+                "This clause creates contractual obligations or operational "
+                "requirements that should be reviewed in the context of the "
+                "overall agreement."
+            ),
+            "fr": (
+                "Cette clause crée des obligations contractuelles ou "
+                "opérationnelles qui doivent être examinées dans le contexte "
+                "global du contrat."
+            ),
+            "ar": (
+                "تنشئ هذه المادة التزامات تعاقدية أو تشغيلية ينبغي "
+                "مراجعتها ضمن السياق العام للعقد."
+            ),
+        },
+
+        "recommendation": {
+            "en": (
+                "Confirm that the clause is consistent with the commercial "
+                "intent, operational process, and overall risk allocation."
+            ),
+            "fr": (
+                "Vérifier que cette clause est cohérente avec l'objectif "
+                "commercial, les processus opérationnels et la répartition "
+                "globale des risques."
+            ),
+            "ar": (
+                "ينبغي التأكد من توافق هذه المادة مع الهدف التجاري "
+                "والإجراءات التشغيلية والتوزيع العام للمخاطر."
+            ),
+        },
+
+        "negotiation": {
+            "en": "",
+            "fr": "",
+            "ar": "",
+        },
+    },
 }
 
 
-def detect_clause_type_from_text(text: str) -> str:
+
+RISK_REASON_TEMPLATES = {
+    "termination": [
+        {
+            "risk_pattern": [
+                "without cause",
+                "sans motif",
+                "دون سبب",
+            ],
+            "risk_level": "medium",
+            "legal_consequence": {
+                "en": (
+                    "The clause grants unilateral termination rights without "
+                    "requiring objective justification, which may expose the "
+                    "affected party to sudden contract loss or reduced bargaining leverage."
+                ),
+                "fr": (
+                    "La clause accorde un droit de résiliation unilatérale sans "
+                    "justification objective, ce qui peut exposer la partie concernée "
+                    "à une rupture soudaine du contrat ou à une perte de pouvoir de négociation."
+                ),
+                "ar": (
+                    "يمنح هذا البند حق الإنهاء من جانب واحد دون اشتراط مبرر موضوعي، "
+                    "مما قد يعرّض الطرف المتأثر لفقدان العقد بشكل مفاجئ أو إضعاف موقفه التفاوضي."
+                ),
+            },
+        },
+        {
+            "risk_pattern": [
+                "immediate termination",
+                "terminate immediately",
+                "résiliation immédiate",
+                "إنهاء فوري",
+                "فسخ فوري",
+            ],
+            "risk_level": "high",
+            "legal_consequence": {
+                "en": (
+                    "The clause allows immediate termination, so the absence or "
+                    "shortness of notice and cure protections may create operational "
+                    "or financial exposure."
+                ),
+                "fr": (
+                    "La clause permet une résiliation immédiate ; l'absence ou la "
+                    "brièveté du préavis et des possibilités de régularisation peut "
+                    "créer une exposition opérationnelle ou financière."
+                ),
+                "ar": (
+                    "يسمح هذا البند بالإنهاء الفوري، ولذلك فإن غياب الإشعار أو "
+                    "مهلة المعالجة قد يخلق تعرضاً تشغيلياً أو مالياً."
+                ),
+            },
+        },
+        {
+            "risk_pattern": [
+                "cure period",
+                "notice period",
+                "délai de régularisation",
+                "préavis",
+                "مهلة معالجة",
+                "إشعار",
+            ],
+            "risk_level": "medium",
+            "legal_consequence": {
+                "en": (
+                    "The clause includes procedural safeguards such as notice or "
+                    "a cure period, but the timing, required detail, and consequences "
+                    "should still be reviewed carefully."
+                ),
+                "fr": (
+                    "La clause prévoit des garanties procédurales comme un préavis "
+                    "ou un délai de régularisation, mais les délais, le niveau de détail "
+                    "requis et les conséquences doivent être examinés attentivement."
+                ),
+                "ar": (
+                    "يتضمن البند ضمانات إجرائية مثل الإشعار أو مهلة المعالجة، "
+                    "لكن يجب مراجعة المدة والتفاصيل المطلوبة والآثار المترتبة بعناية."
+                ),
+            },
+        },
+    ],
+    "payment": [
+        {
+            "risk_pattern": [
+                "late payment",
+                "interest",
+                "penalty",
+                "retard de paiement",
+                "intérêt",
+                "pénalité",
+                "تأخر الدفع",
+                "فائدة",
+                "غرامة",
+            ],
+            "risk_level": "medium",
+            "legal_consequence": {
+                "en": (
+                    "The clause may impose financial consequences for delayed or failed "
+                    "payment, so deadlines, interest, penalties, tax treatment, and "
+                    "dispute rights should be clear."
+                ),
+                "fr": (
+                    "La clause peut imposer des conséquences financières en cas de retard "
+                    "ou défaut de paiement ; les échéances, intérêts, pénalités, traitement "
+                    "fiscal et droits de contestation doivent être clairs."
+                ),
+                "ar": (
+                    "قد يفرض هذا البند آثاراً مالية عند التأخر أو الإخفاق في الدفع، "
+                    "لذلك يجب توضيح الآجال والفوائد والغرامات والمعالجة الضريبية وحقوق الاعتراض."
+                ),
+            },
+        },
+    ],
+    "confidentiality": [
+        {
+            "risk_pattern": [
+                "survive termination",
+                "after termination",
+                "thereafter",
+                "survie",
+                "après résiliation",
+                "بعد الإنهاء",
+                "تظل",
+            ],
+            "risk_level": "medium",
+            "legal_consequence": {
+                "en": (
+                    "The confidentiality obligation may continue after the agreement ends, "
+                    "so duration, scope, exceptions, and permitted disclosures should be "
+                    "clearly defined."
+                ),
+                "fr": (
+                    "L'obligation de confidentialité peut se poursuivre après la fin du contrat ; "
+                    "la durée, la portée, les exceptions et les divulgations autorisées doivent "
+                    "être clairement définies."
+                ),
+                "ar": (
+                    "قد تستمر التزامات السرية بعد انتهاء العقد، لذلك يجب تحديد المدة والنطاق "
+                    "والاستثناءات وحالات الإفصاح المسموح بها بوضوح."
+                ),
+            },
+        },
+    ],
+    "liability": [
+        {
+            "risk_pattern": [
+                "unlimited liability",
+                "responsabilité illimitée",
+                "مسؤولية غير محدودة",
+            ],
+            "risk_level": "high",
+            "legal_consequence": {
+                "en": (
+                    "The clause may create uncapped financial exposure, which can exceed "
+                    "the contract value and materially increase legal or commercial risk."
+                ),
+                "fr": (
+                    "La clause peut créer une exposition financière non plafonnée, susceptible "
+                    "de dépasser la valeur du contrat et d'accroître fortement le risque juridique "
+                    "ou commercial."
+                ),
+                "ar": (
+                    "قد يخلق هذا البند تعرضاً مالياً غير محدود قد يتجاوز قيمة العقد ويزيد "
+                    "المخاطر القانونية أو التجارية بشكل كبير."
+                ),
+            },
+        },
+        {
+            "risk_pattern": [
+                "indirect damages",
+                "consequential damages",
+                "dommages indirects",
+                "أضرار غير مباشرة",
+            ],
+            "risk_level": "medium",
+            "legal_consequence": {
+                "en": (
+                    "The clause affects recovery of indirect or consequential losses, so exclusions "
+                    "and carve-outs should be checked against the transaction risk."
+                ),
+                "fr": (
+                    "La clause affecte la réparation des dommages indirects ou consécutifs ; les "
+                    "exclusions et exceptions doivent être vérifiées au regard du risque de l'opération."
+                ),
+                "ar": (
+                    "يؤثر هذا البند على التعويض عن الأضرار غير المباشرة أو التبعية، لذلك يجب "
+                    "مراجعة الاستثناءات وفقاً لمخاطر المعاملة."
+                ),
+            },
+        },
+    ],
+    "indemnity": [
+        {
+            "risk_pattern": [
+                "defend",
+                "hold harmless",
+                "third-party claims",
+                "défendre",
+                "tenir indemne",
+                "réclamations de tiers",
+                "الدفاع عن",
+                "مطالبات الغير",
+            ],
+            "risk_level": "medium",
+            "legal_consequence": {
+                "en": (
+                    "The clause may require one party to cover defense costs or third-party claims, "
+                    "so notice, control of defense, settlement rights, and liability limits should "
+                    "be reviewed."
+                ),
+                "fr": (
+                    "La clause peut imposer la prise en charge des frais de défense ou des réclamations "
+                    "de tiers ; il faut vérifier l'avis, le contrôle de la défense, les transactions "
+                    "et les limites de responsabilité."
+                ),
+                "ar": (
+                    "قد يفرض هذا البند تحمل تكاليف الدفاع أو مطالبات الغير، لذلك يجب مراجعة الإشعار "
+                    "والسيطرة على الدفاع وحقوق التسوية وحدود المسؤولية."
+                ),
+            },
+        },
+    ],
+    "sla": [
+        {
+            "risk_pattern": [
+                "uptime",
+                "availability",
+                "service credit",
+                "disponibilité",
+                "crédit de service",
+                "التوافر",
+                "تعويض الخدمة",
+            ],
+            "risk_level": "medium",
+            "legal_consequence": {
+                "en": (
+                    "The clause defines measurable service commitments, so measurement periods, "
+                    "exclusions, credits, reporting, and repeated-failure remedies should be clear."
+                ),
+                "fr": (
+                    "La clause définit des engagements de service mesurables ; les périodes de mesure, "
+                    "exclusions, crédits, reporting et recours en cas d'échecs répétés doivent être clairs."
+                ),
+                "ar": (
+                    "يحدد هذا البند التزامات خدمة قابلة للقياس، لذلك يجب توضيح فترات القياس "
+                    "والاستثناءات والتعويضات والتقارير ووسائل المعالجة عند تكرار الإخفاق."
+                ),
+            },
+        },
+    ],
+    "exclusivity": [
+        {
+            "risk_pattern": [
+                "exclusive",
+                "exclusivity",
+                "sole provider",
+                "exclusif",
+                "exclusivité",
+                "حصري",
+                "حصرية",
+            ],
+            "risk_level": "medium",
+            "legal_consequence": {
+                "en": (
+                    "The clause may restrict work with alternative partners, suppliers, customers, "
+                    "or territories, so duration, scope, performance conditions, and carve-outs "
+                    "should be reviewed."
+                ),
+                "fr": (
+                    "La clause peut limiter le recours à d'autres partenaires, fournisseurs, clients "
+                    "ou territoires ; la durée, la portée, les conditions de performance et les exceptions "
+                    "doivent être vérifiées."
+                ),
+                "ar": (
+                    "قد يقيّد هذا البند التعامل مع شركاء أو موردين أو عملاء أو مناطق بديلة، لذلك يجب "
+                    "مراجعة المدة والنطاق وشروط الأداء والاستثناءات."
+                ),
+            },
+        },
+    ],
+    "governing_law": [
+        {
+            "risk_pattern": [
+                "arbitration",
+                "jurisdiction",
+                "venue",
+                "arbitrage",
+                "juridiction",
+                "tribunaux",
+                "تحكيم",
+                "اختصاص",
+                "محكمة",
+            ],
+            "risk_level": "low",
+            "legal_consequence": {
+                "en": (
+                    "The clause determines where and how disputes are resolved, so enforceability, "
+                    "cost, language, and practical access to the forum should be checked."
+                ),
+                "fr": (
+                    "La clause détermine où et comment les litiges seront résolus ; il faut vérifier "
+                    "l'exécution, le coût, la langue et l'accès pratique au forum."
+                ),
+                "ar": (
+                    "يحدد هذا البند مكان وطريقة حل النزاعات، لذلك يجب مراجعة قابلية التنفيذ والتكلفة "
+                    "واللغة وسهولة الوصول إلى الجهة المختصة."
+                ),
+            },
+        },
+    ],
+}
+
+
+def get_contextual_risk_reasoning(
+    clause_type: str,
+    text: str,
+    language: str = "en",
+) -> dict:
+    language = get_language(language)
     normalized = str(text or "").lower()
+
+    for template in RISK_REASON_TEMPLATES.get(clause_type, []):
+        risk_pattern = [
+            str(signal).lower()
+            for signal in template.get("risk_pattern", [])
+        ]
+
+        if any(signal in normalized for signal in risk_pattern):
+            return {
+                "clause_type": clause_type,
+                "risk_level": template.get("risk_level", "medium"),
+                "legal_insight": template["legal_consequence"].get(
+                    language,
+                    template["legal_consequence"].get("en", ""),
+                ),
+                "contextual_reasoning": True,
+            }
+
+    return {}
+
+def normalize_clause_title(
+    title: str,
+) -> str:
+
+    normalized = str(title or "").lower().strip()
+
+    replacements = {
+        "termination for cause":
+            "termination",
+
+        "constructive termination":
+            "termination",
+
+        "termination without cause":
+            "termination",
+
+        "confidentiality obligations":
+            "confidentiality",
+
+        "governing law":
+            "governing_law",
+
+        "notices":
+            "general",
+
+        "expense reimbursement":
+            "payment",
+
+        "change of control":
+            "termination",
+    }
+
+    for source, target in replacements.items():
+        if source in normalized:
+            return target
+
+    return normalized.replace(" ", "_")
+
+
+def detect_clause_type_from_text(
+    text: str,
+    title: str = "",
+) -> str:
+
+    normalized_clause_title = normalize_clause_title(
+        title
+    )
+
+    if normalized_clause_title in CLAUSE_REASONING_TEMPLATES:
+        return normalized_clause_title
+
+    normalized_text = str(text or "").lower()
+    normalized_title = str(title or "").lower()
+
+    # only first 500 chars matter
+    intro_text = normalized_text[:500]
 
     best_clause_type = "general"
     best_score = 0
 
     for clause_type, template in CLAUSE_REASONING_TEMPLATES.items():
-        score = sum(
-            1 for signal in template["signals"]
-            if signal.lower() in normalized
+
+        signals = [
+            s.lower()
+            for s in template["signals"]
+        ]
+
+        title_score = sum(
+            5
+            for signal in signals
+            if signal in normalized_title
         )
 
-        if score > best_score:
-            best_score = score
+        intro_score = sum(
+            2
+            for signal in signals
+            if signal in intro_text
+        )
+
+        # full body is intentionally weak
+        body_score = sum(
+            0.25
+            for signal in signals
+            if signal in normalized_text
+        )
+
+        total_score = (
+            title_score
+            + intro_score
+            + body_score
+        )
+
+        if total_score > best_score:
+            best_score = total_score
             best_clause_type = clause_type
 
-    return best_clause_type if best_score else "general"
+    # avoid weak accidental matches
+    if best_score < 3:
+
+        ontology_domains = detect_legal_domains(
+            text
+        )
+
+        if ontology_domains:
+            return ontology_domains[0]
+
+        return "general"
+
+    return best_clause_type
 
 
 def get_clause_reasoning(
@@ -612,18 +1099,77 @@ def get_clause_reasoning(
 def get_clause_reasoning_for_text(
     text: str,
     language: str = "en",
+    title: str = "",
 ) -> dict:
-    clause_type = detect_clause_type_from_text(text)
+    clause_type = detect_clause_type_from_text(
+        text,
+        title=title,
+    )
 
-    return get_clause_reasoning(
+    base_reasoning = get_clause_reasoning(
         clause_type,
         language,
     )
+
+    contextual_reasoning = get_contextual_risk_reasoning(
+        clause_type,
+        text,
+        language,
+    )
+
+    if contextual_reasoning:
+        base_reasoning["legal_insight"] = contextual_reasoning.get(
+            "legal_insight",
+            base_reasoning.get("legal_insight", ""),
+        )
+        base_reasoning["risk_level"] = contextual_reasoning.get(
+            "risk_level",
+            base_reasoning.get("risk_level", "medium"),
+        )
+        base_reasoning["contextual_reasoning"] = True
+    else:
+        base_reasoning["contextual_reasoning"] = False
+
+    normalized_title = str(title or "").lower().strip()
+
+    if normalized_title in BOILERPLATE_CLAUSES:
+        base_reasoning["recommendation"] = ""
+
+    if (
+        base_reasoning.get("legal_insight")
+        ==
+        base_reasoning.get("recommendation")
+    ):
+        base_reasoning["recommendation"] = ""
+
+    legal_insight = str(
+        base_reasoning.get(
+            "legal_insight",
+            "",
+        )
+    ).strip()
+
+    if legal_insight in GENERIC_LEGAL_INSIGHTS:
+        base_reasoning["legal_insight"] = ""
+
+    recommendation = str(
+        base_reasoning.get(
+            "recommendation",
+            "",
+        )
+    ).strip()
+
+    if recommendation in GENERIC_RECOMMENDATIONS:
+        base_reasoning["recommendation"] = ""
+
+    return base_reasoning
 def get_reasoning_for_text(
     text: str,
     language: str = "en",
+    title: str = "",
 ) -> dict:
     return get_clause_reasoning_for_text(
-        text,
-        language,
+        text=text,
+        language=language,
+        title=title,
     )

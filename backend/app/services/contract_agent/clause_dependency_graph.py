@@ -28,6 +28,9 @@ def append_edge_once(
     })
 
 
+MAX_OUTBOUND_EDGES = 6
+
+
 def build_clause_dependency_graph(clauses: list[dict]) -> dict:
     nodes = []
     edges = []
@@ -43,15 +46,22 @@ def build_clause_dependency_graph(clauses: list[dict]) -> dict:
             "risk_level": clause.get("risk_level", "low"),
         })
 
+    explicit_payment_failure_terms = [
+        "failure to pay",
+        "non-payment",
+        "unpaid",
+        "payment default",
+    ]
+
     dependency_rules = [
-        ("termination", "payment", "Termination may be triggered by payment failure."),
-        ("default", "remedies", "Default clauses often activate remedies."),
         ("liability", "data_protection", "Data protection breaches may be excluded from liability caps."),
         ("liability", "confidentiality", "Confidentiality breaches may be excluded from liability caps."),
         ("intellectual_property", "confidentiality", "IP rights may depend on confidential information handling."),
         ("service_level", "liability", "Service failures may affect liability exposure."),
         ("payment", "service_level", "Payment issues may affect service access or continuity."),
     ]
+
+    edge_count_by_node = {}
 
     for source_type, target_type, reason in dependency_rules:
         source_nodes = [
@@ -66,13 +76,26 @@ def build_clause_dependency_graph(clauses: list[dict]) -> dict:
 
         for source in source_nodes:
             for target in target_nodes:
-                if source["id"] != target["id"]:
-                    append_edge_once(
-                        edges,
-                        source["id"],
-                        target["id"],
-                        reason,
-                    )
+                if source["id"] == target["id"]:
+                    continue
+
+                source_id = source["id"]
+                count = edge_count_by_node.get(source_id, 0)
+
+                if count >= MAX_OUTBOUND_EDGES:
+                    continue
+
+                before_count = len(edges)
+
+                append_edge_once(
+                    edges,
+                    source_id,
+                    target["id"],
+                    reason,
+                )
+
+                if len(edges) > before_count:
+                    edge_count_by_node[source_id] = count + 1
 
     for source in nodes:
         source_clause = clauses[source["id"]]
@@ -90,6 +113,12 @@ def build_clause_dependency_graph(clauses: list[dict]) -> dict:
             if source["id"] == target["id"]:
                 continue
 
+            source_id = source["id"]
+            count = edge_count_by_node.get(source_id, 0)
+
+            if count >= MAX_OUTBOUND_EDGES:
+                continue
+
             target_clause = clauses[target["id"]]
 
             target_text = (
@@ -104,26 +133,43 @@ def build_clause_dependency_graph(clauses: list[dict]) -> dict:
             combined_text = f"{source_text} {target_text}"
 
             if (
-                "payment" in combined_text
-                and "termination" in combined_text
+                "termination" in combined_text
+                and any(
+                    term in combined_text
+                    for term in explicit_payment_failure_terms
+                )
             ):
+                before_count = len(edges)
+
                 append_edge_once(
                     edges,
-                    source["id"],
+                    source_id,
                     target["id"],
                     "payment failure may trigger termination",
                 )
+
+                if len(edges) > before_count:
+                    edge_count_by_node[source_id] = count + 1
+
+                continue
 
             if (
                 "liability" in combined_text
                 and "confidentiality" in combined_text
             ):
+                before_count = len(edges)
+
                 append_edge_once(
                     edges,
-                    source["id"],
+                    source_id,
                     target["id"],
                     "confidentiality breach may affect liability exposure",
                 )
+
+                if len(edges) > before_count:
+                    edge_count_by_node[source_id] = count + 1
+
+                continue
 
             if (
                 (
@@ -133,26 +179,19 @@ def build_clause_dependency_graph(clauses: list[dict]) -> dict:
                 )
                 and "security" in combined_text
             ):
+                before_count = len(edges)
+
                 append_edge_once(
                     edges,
-                    source["id"],
+                    source_id,
                     target["id"],
                     "data obligations may depend on security safeguards",
                 )
 
-            if (
-                "breach" in combined_text
-                and (
-                    "remedies" in combined_text
-                    or "remedy" in combined_text
-                )
-            ):
-                append_edge_once(
-                    edges,
-                    source["id"],
-                    target["id"],
-                    "breach may activate contractual remedies",
-                )
+                if len(edges) > before_count:
+                    edge_count_by_node[source_id] = count + 1
+
+                continue
 
     deduped_edges = []
     seen_edges = set()

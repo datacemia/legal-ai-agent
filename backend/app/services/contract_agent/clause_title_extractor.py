@@ -95,6 +95,17 @@ def extract_clause_title(clause_text: str) -> str:
         first_line = AR_TITLE_FIXES[first_line.strip()]
 
     if not first_line.strip():
+        cleaned = re.sub(
+            r"\s+",
+            " ",
+            text,
+        ).strip(" -–—:.")
+
+        words = cleaned.split()
+
+        if len(words) >= 2:
+            return " ".join(words[:2])
+
         return "Untitled Clause"
 
     return first_line
