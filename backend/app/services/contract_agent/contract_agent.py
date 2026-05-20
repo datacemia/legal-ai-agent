@@ -877,6 +877,15 @@ def build_clause_prompt(
 
 Output language: {language}
 
+LANGUAGE CONSISTENCY RULES:
+- All generated clause titles, explanations, insights, recommendations, risk narratives, and user-facing labels must be written in the requested output language.
+- Do not keep source-language clause titles unless they are official article references, proper legal names, dates, amounts, or court names.
+- If a clause title or legal domain appears in a different source language, translate it into the requested output language.
+- Avoid generic party labels like "first party", "second party", "premier partie", "deuxième partie", "الطرف الأول", or "الطرف الثاني" when the contract identifies the parties.
+- Use the extracted party names or readable localized/transliterated display names whenever possible.
+- Preserve legal identity: names, dates, amounts, article references, and court names must remain accurate.
+- Mixed-language explanatory output is forbidden.
+
 Analyze this single clause only.
 
 Clause:

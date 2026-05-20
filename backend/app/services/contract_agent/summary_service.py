@@ -26,6 +26,230 @@ SUMMARY_SPECULATIVE_PATTERNS = [
 ]
 
 
+
+def contains_arabic(text: str) -> bool:
+    return any(
+        "\u0600" <= char <= "\u06FF"
+        for char in str(text or "")
+    )
+
+
+def contains_latin_letters(text: str) -> bool:
+    return any(
+        ("a" <= char.lower() <= "z")
+        for char in str(text or "")
+    )
+
+
+def language_mismatch_score(
+    value,
+    language: str,
+) -> int:
+    """
+    Lightweight multilingual consistency detector.
+
+    This does not try to perfectly identify a language.
+    It only detects obvious cross-language leakage:
+    - Arabic text inside FR/EN generated fields
+    - Latin-heavy text inside AR generated fields
+
+    Names, dates, amounts, article references, and court names are
+    allowed to remain as-is by the repair prompt.
+    """
+
+    if value is None:
+        return 0
+
+    if isinstance(value, list):
+        return sum(
+            language_mismatch_score(item, language)
+            for item in value
+        )
+
+    if isinstance(value, dict):
+        return sum(
+            language_mismatch_score(item, language)
+            for item in value.values()
+        )
+
+    text = str(value or "").strip()
+
+    if not text:
+        return 0
+
+    if language in {"en", "fr"}:
+        return 1 if contains_arabic(text) else 0
+
+    if language == "ar":
+        latin_letters = sum(
+            1 for char in text
+            if "a" <= char.lower() <= "z"
+        )
+
+        # Allow short legal references / acronyms / party names.
+        return 1 if latin_letters >= 12 else 0
+
+    return 0
+
+
+def needs_language_repair(
+    data: dict,
+    language: str,
+    fields: list[str],
+) -> bool:
+    for field in fields:
+        if language_mismatch_score(
+            data.get(field),
+            language,
+        ):
+            return True
+
+    return False
+
+
+SUMMARY_LANGUAGE_FIELDS = [
+    "contract_type",
+    "duration",
+    "payment_terms",
+    "main_obligations",
+    "global_summary",
+    "important_points",
+    "missing_clauses",
+    "dangerous_patterns",
+    "overall_balance",
+    "negotiation_priorities",
+    "key_risks",
+    "practical_decision",
+    "jurisdiction_detected",
+    "jurisdiction_note",
+    "recommended_actions",
+]
+
+SIMPLIFIED_LANGUAGE_FIELDS = [
+    "simplified_version",
+    "key_points",
+    "things_to_watch",
+]
+
+
+def repair_summary_language(
+    data: dict,
+    language: str,
+) -> dict:
+    """
+    Repair only language leakage in summary JSON values.
+
+    This is intentionally narrow:
+    - no new legal facts
+    - no risk changes
+    - no structure changes
+    - no extra keys
+    """
+
+    if not needs_language_repair(
+        data,
+        language,
+        SUMMARY_LANGUAGE_FIELDS,
+    ):
+        return data
+
+    prompt = f"""
+You are a strict multilingual legal JSON repair engine.
+
+Output language: {language}
+
+TASK:
+Rewrite ONLY the JSON values so that all user-facing generated text is in the requested output language.
+
+RULES:
+- Return ONLY valid JSON.
+- Keep the exact same keys.
+- Do not add keys.
+- Do not remove keys.
+- Do not change the legal meaning.
+- Do not invent facts.
+- Do not add risks, obligations, clauses, warnings, or recommendations.
+- Preserve company names, person names, dates, amounts, article references, addresses, and court names when they are legal identifiers.
+- Translate surrounding explanatory text into the requested output language.
+- Avoid generic party labels like "first party", "second party", "premier partie", "deuxième partie", "الطرف الأول", or "الطرف الثاني" when a party name is available.
+- Mixed-language output is forbidden except for preserved legal identifiers.
+
+JSON to repair:
+{data}
+""".strip()
+
+    try:
+        repaired = call_json_ai(prompt)
+
+        if isinstance(repaired, dict):
+            for key in data.keys():
+                if key in repaired:
+                    data[key] = repaired[key]
+
+    except Exception as e:
+        print("SUMMARY LANGUAGE REPAIR ERROR:", str(e))
+
+    return data
+
+
+def repair_simplified_language(
+    data: dict,
+    language: str,
+) -> dict:
+    """
+    Repair only language leakage in simplified JSON values.
+    """
+
+    if not needs_language_repair(
+        data,
+        language,
+        SIMPLIFIED_LANGUAGE_FIELDS,
+    ):
+        return data
+
+    prompt = f"""
+You are a strict multilingual legal JSON repair engine.
+
+Output language: {language}
+
+TASK:
+Rewrite ONLY the JSON values so that all generated explanatory text is in the requested output language.
+
+RULES:
+- Return ONLY valid JSON.
+- Keep exactly these keys: simplified_version, key_points, things_to_watch.
+- Do not add keys.
+- Do not remove keys.
+- Do not change the legal meaning.
+- Do not invent facts.
+- Do not add risks, obligations, warnings, or recommendations.
+- Preserve company names, person names, dates, amounts, article references, addresses, and court names when they are legal identifiers.
+- Translate surrounding explanatory text into the requested output language.
+- Avoid generic party labels like "first party", "second party", "premier partie", "deuxième partie", "الطرف الأول", or "الطرف الثاني" when a party name is available.
+- Mixed-language output is forbidden except for preserved legal identifiers.
+
+JSON to repair:
+{data}
+""".strip()
+
+    try:
+        repaired = call_json_ai(prompt)
+
+        if isinstance(repaired, dict):
+            for key in [
+                "simplified_version",
+                "key_points",
+                "things_to_watch",
+            ]:
+                if key in repaired:
+                    data[key] = repaired[key]
+
+    except Exception as e:
+        print("SIMPLIFIED LANGUAGE REPAIR ERROR:", str(e))
+
+    return data
+
+
 def extract_jurisdiction(text: str) -> dict:
     text_lower = text.lower()
 
@@ -597,7 +821,18 @@ CRITICAL:
 Translate every generated JSON value into this output language.
 The contract source language may be different.
 Do not copy source-language sentences into generated fields.
-Only keep company names, person names, dates, amounts, article references, and court names unchanged.
+Preserve the legal identity of company names and person names.
+If the output language is different from the source language, provide a readable localized/transliterated display name when possible, while keeping the original legal name if needed.
+Dates, amounts, article references, and court names must remain accurate.
+
+LANGUAGE CONSISTENCY ENFORCEMENT:
+Before returning JSON, verify every generated value.
+For output language "fr", generated values must be in French.
+For output language "en", generated values must be in English.
+For output language "ar", generated values must be in Arabic.
+Do not copy source-language sentences into generated fields.
+Clause titles, contract type, duration, payment terms, obligations, summaries, risks, and practical decision must be translated into the requested output language.
+Mixed-language explanatory output is forbidden.
 
 Contract text:
 {contract_text}
@@ -608,6 +843,11 @@ Contract text:
     except Exception as e:
         print("SUMMARY AI ERROR:", str(e))
         return build_empty_summary(language)
+
+    data = repair_summary_language(
+        data,
+        language,
+    )
 
     protections = detect_balancing_protections(
         [text]
@@ -820,7 +1060,18 @@ CRITICAL:
 Translate every generated JSON value into this output language.
 The contract source language may be different.
 Do not copy source-language sentences into generated fields.
-Only keep company names, person names, dates, amounts, article references, and court names unchanged.
+Preserve the legal identity of company names and person names.
+If the output language is different from the source language, provide a readable localized/transliterated display name when possible, while keeping the original legal name if needed.
+Dates, amounts, article references, and court names must remain accurate.
+
+LANGUAGE CONSISTENCY ENFORCEMENT:
+Before returning JSON, verify every generated value.
+For output language "fr", generated values must be in French.
+For output language "en", generated values must be in English.
+For output language "ar", generated values must be in Arabic.
+Do not copy source-language sentences into generated fields.
+Clause titles, contract type, duration, payment terms, obligations, summaries, risks, and practical decision must be translated into the requested output language.
+Mixed-language explanatory output is forbidden.
 
 Contract text:
 {contract_text}
@@ -831,6 +1082,11 @@ Contract text:
     except Exception as e:
         print("SIMPLIFICATION AI ERROR:", str(e))
         return build_empty_simplified(language)
+
+    data = repair_simplified_language(
+        data,
+        language,
+    )
 
     return normalize_simplified_contract(data, language)
 

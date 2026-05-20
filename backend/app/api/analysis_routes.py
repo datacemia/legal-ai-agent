@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models.document import Document
 from app.models.analysis import AnalysisResult
+from app.models.job import Job
 from app.models.user import User
 from app.schemas.analysis_schema import AnalysisResponse
 
@@ -18,32 +19,14 @@ from app.services.enterprise_service import (
     consume_enterprise_credits,
 )
 
-from app.services.contract_agent.contract_parser import extract_text
-from app.services.text_cleaner import clean_text
-from app.services.contract_agent.clause_splitter import split_into_clauses
-from app.services.language_service import detect_language
-from app.services.contract_agent.contract_agent import analyze_contract_clauses
-
-from app.services.contract_agent.summary_service import (
-    generate_summary_data,
-    render_summary_text,
-    calculate_global_risk,
-    generate_simplified_version,
-)
-from app.services.contract_agent.validator import (
-    validate_contract_result,
-)
-
-from app.services.contract_agent.validator import (
-    is_probably_contract,
-)
-
 router = APIRouter(prefix="/analysis", tags=["Analysis"])
 
 LEGAL_AGENT_CREDITS = 8
 
 
-# ================= RATE LIMIT =================
+# =========================
+# RATE LIMIT
+# =========================
 ANALYSIS_ATTEMPTS = {}
 MAX_ANALYSIS_ATTEMPTS = 20
 ANALYSIS_WINDOW_SECONDS = 60
@@ -55,7 +38,8 @@ def check_analysis_rate_limit(user_id: int):
     attempts = ANALYSIS_ATTEMPTS.get(user_id, [])
 
     attempts = [
-        attempt for attempt in attempts
+        attempt
+        for attempt in attempts
         if (now - attempt).total_seconds() < ANALYSIS_WINDOW_SECONDS
     ]
 
@@ -66,11 +50,12 @@ def check_analysis_rate_limit(user_id: int):
         )
 
     attempts.append(now)
-
     ANALYSIS_ATTEMPTS[user_id] = attempts
 
 
-# ================= RUN ANALYSIS =================
+# =========================
+# RUN ANALYSIS ASYNC JOB
+# =========================
 @router.post("/{document_id}/run")
 def run_analysis(
     document_id: int,
@@ -124,163 +109,39 @@ def run_analysis(
         output_language = "en"
 
     document.status = "processing"
-
     db.commit()
+    db.refresh(document)
 
-    raw_text = extract_text(
-        document.file_path,
-        document.file_type
+    job = Job(
+        user_id=current_user.id,
+        job_type="contract_ai",
+        status="pending",
+        progress=0,
+        status_message="Queued legal analysis...",
+        input={
+            "document_id": document.id,
+            "output_language": output_language,
+            "access_type": billing.get("access_type"),
+            "credits_used": billing.get("credits_used", 0),
+        },
     )
 
-    cleaned_text = clean_text(raw_text)
-
-    if not is_probably_contract(cleaned_text):
-        document.status = "rejected"
-        db.commit()
-
-        return {
-            "error": "unsupported_document",
-            "message": {
-                "en": (
-                    "The file was uploaded successfully, but its content does not appear "
-                    "to be a contract or legal agreement. Please upload a contract document."
-                ),
-                "fr": (
-                    "Le fichier a bien été importé, mais son contenu ne semble pas être "
-                    "un contrat ou un accord juridique. Veuillez importer un document contractuel."
-                ),
-                "ar": (
-                    "تم رفع الملف بنجاح، لكن محتواه لا يبدو أنه عقد أو اتفاقية قانونية. "
-                    "يرجى رفع مستند تعاقدي."
-                ),
-            }.get(output_language, "Unsupported document"),
-        }
-
-    detected_language = detect_language(cleaned_text)
-
-    clauses = split_into_clauses(cleaned_text)
-
-    print("\n=== CLAUSES DEBUG ===")
-    print("CLAUSES COUNT:", len(clauses))
-
-    for i, c in enumerate(clauses[:10]):
-        print(f"\n--- CLAUSE {i + 1} ---")
-        print(c[:500])
-
-    print("=====================\n")
-
-    clause_results = analyze_contract_clauses(
-        clauses,
-        output_language
-    )
-
-    global_risk = calculate_global_risk(clause_results)
-
-    print("\n=== LEGAL SUMMARY TEXT DEBUG ===")
-    print(cleaned_text[:3000])
-    print("TEXT LENGTH:", len(cleaned_text))
-    print("================================\n")
-
-    summary_data = generate_summary_data(
-        cleaned_text,
-        output_language
-    )
-
-    summary = render_summary_text(
-        summary_data,
-        output_language
-    )
-
-    simplified = generate_simplified_version(
-        cleaned_text,
-        output_language
-    )
-
-    recommendations = [
-        "Review all medium and high risk clauses.",
-        "Ask a lawyer before signing important contracts.",
-    ]
-
-    analysis = AnalysisResult(
-        document_id=document.id,
-
-        summary=summary,
-
-        clauses=json.dumps(
-            clause_results,
-            ensure_ascii=False
-        ),
-
-        risk_level=global_risk["risk_level"],
-
-        risk_score=global_risk["risk_score"],
-
-        simplified_version=simplified,
-
-        recommendations=json.dumps(
-            recommendations,
-            ensure_ascii=False
-        ),
-
-        access_type=billing["access_type"],
-
-        credits_used=billing["credits_used"],
-    )
-
-    document.language = detected_language
-
-    document.status = "completed"
-
-    db.add(analysis)
-
+    db.add(job)
     db.commit()
+    db.refresh(job)
 
-    db.refresh(analysis)
-
-    response = {
-        "id": analysis.id,
-        "document_id": analysis.document_id,
-        "summary": analysis.summary,
-
-        "clauses": clause_results,
-
-        "risk_level": analysis.risk_level,
-        "risk_score": analysis.risk_score,
-
-        "simplified_version": analysis.simplified_version,
-
-        "recommendations": recommendations,
-
-        "created_at": analysis.created_at,
-
-        "contract_quality_score": summary_data.get(
-            "contract_quality_score"
-        ),
-
-        "overall_balance": summary_data.get(
-            "overall_balance"
-        ),
-
-        "contract_complexity": summary_data.get(
-            "contract_complexity"
-        ),
-
-        "jurisdiction_detected": summary_data.get(
-            "jurisdiction_detected"
-        ),
+    return {
+        "job_id": job.id,
+        "status": job.status,
     }
 
-    response["quality_check"] = validate_contract_result(
-        response
-    )
 
-    return response
-
-
-# ================= ANALYSIS HISTORY =================
+# =========================
+# ANALYSIS HISTORY
 # IMPORTANT:
-# This route must stay BEFORE "/{document_id}".
-# Otherwise FastAPI may interpret "history" as document_id.
+# This route must stay BEFORE '/{document_id}'.
+# Otherwise FastAPI may interpret 'history' as document_id.
+# =========================
 @router.get("/history")
 def get_analysis_history(
     db: Session = Depends(get_db),
@@ -296,8 +157,8 @@ def get_analysis_history(
 
     items = []
 
-    for a in analyses:
-        clauses = a.clauses
+    for analysis in analyses:
+        clauses = analysis.clauses
 
         if isinstance(clauses, str):
             try:
@@ -305,27 +166,29 @@ def get_analysis_history(
             except Exception:
                 clauses = []
 
-        document = getattr(a, "document", None)
+        document = getattr(analysis, "document", None)
 
         items.append(
             {
-                "id": a.id,
-                "document_id": a.document_id,
+                "id": analysis.id,
+                "document_id": analysis.document_id,
                 "file_name": document.file_name if document else None,
                 "file_type": document.file_type if document else None,
-                "summary": a.summary,
-                "risk_score": a.risk_score,
+                "summary": analysis.summary,
+                "risk_score": analysis.risk_score,
                 "clauses": clauses,
                 "language": document.language if document else None,
                 "status": document.status if document else None,
-                "created_at": a.created_at,
+                "created_at": analysis.created_at,
             }
         )
 
     return items
 
 
-# ================= GET ANALYSIS =================
+# =========================
+# GET ANALYSIS
+# =========================
 @router.get("/{document_id}", response_model=AnalysisResponse)
 def get_analysis(
     document_id: int,

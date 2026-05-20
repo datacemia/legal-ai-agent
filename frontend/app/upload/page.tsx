@@ -22,6 +22,15 @@ const safeSetLocalStorage = (key: string, value: string) => {
   localStorage.setItem(key, value);
 };
 
+const safeRemoveLocalStorage = (key: string) => {
+  if (typeof window === "undefined") return;
+
+  localStorage.removeItem(key);
+};
+
+const LEGAL_LAST_RESULT_KEY = "legal_last_result";
+const LEGAL_LAST_LANGUAGE_KEY = "legal_last_language";
+
 const labels: any = {
   en: {
     pageTitle: "Analyze your contract",
@@ -249,6 +258,70 @@ const labels: any = {
     hideDetails: "إخفاء التفاصيل",
   },
 };
+
+const JOB_UI_TRANSLATIONS: any = {
+  en: {
+    job: "Job",
+    status: "Status",
+    started: "Started",
+    completed: "Completed",
+    pending: "Pending",
+    running: "Running",
+    completedStatus: "Completed",
+    failed: "Failed",
+    remaining: "Remaining",
+    estimated: "Estimated",
+  },
+  fr: {
+    job: "Job",
+    status: "Statut",
+    started: "Début",
+    completed: "Fin",
+    pending: "En attente",
+    running: "En cours",
+    completedStatus: "Terminé",
+    failed: "Échec",
+    remaining: "Restant",
+    estimated: "Estimé",
+  },
+  ar: {
+    job: "المهمة",
+    status: "الحالة",
+    started: "بدأت",
+    completed: "اكتملت",
+    pending: "قيد الانتظار",
+    running: "قيد المعالجة",
+    completedStatus: "مكتمل",
+    failed: "فشل",
+    remaining: "المتبقي",
+    estimated: "تقديري",
+  },
+};
+
+const jobText = (
+  key: string,
+  language: string,
+) => {
+  return (
+    JOB_UI_TRANSLATIONS?.[language]?.[key] ||
+    JOB_UI_TRANSLATIONS?.en?.[key] ||
+    key
+  );
+};
+
+const translateJobStatus = (
+  status: string,
+  language: string,
+) => {
+  const normalized = String(status || "").toLowerCase().trim();
+
+  if (normalized === "completed") {
+    return jobText("completedStatus", language);
+  }
+
+  return jobText(normalized, language);
+};
+
 
 const translateEnum = (value: string, language: string) => {
   const normalized = String(value || "").toLowerCase().trim();
@@ -492,6 +565,10 @@ export default function UploadPage() {
   const [creditsBalance, setCreditsBalance] = useState(0);
   const [analysisStartedAt, setAnalysisStartedAt] = useState<number | null>(null);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const [jobId, setJobId] = useState<number | null>(null);
+  const [jobStatus, setJobStatus] = useState("");
+  const [jobStartedAt, setJobStartedAt] = useState("");
+  const [jobCompletedAt, setJobCompletedAt] = useState("");
 
   const hasActiveAccess =
     role === "admin" ||
@@ -501,7 +578,25 @@ export default function UploadPage() {
     creditsBalance > 0;
 
   useEffect(() => {
-    setLanguage(getSavedLocale());
+    const savedLocale = getSavedLocale();
+
+    setLanguage(savedLocale);
+
+    const savedResult = safeGetLocalStorage(LEGAL_LAST_RESULT_KEY);
+    const savedResultLanguage = safeGetLocalStorage(LEGAL_LAST_LANGUAGE_KEY);
+
+    if (savedResult) {
+      try {
+        setResult(JSON.parse(savedResult));
+
+        if (savedResultLanguage) {
+          setLanguage(savedResultLanguage);
+        }
+      } catch {
+        safeRemoveLocalStorage(LEGAL_LAST_RESULT_KEY);
+        safeRemoveLocalStorage(LEGAL_LAST_LANGUAGE_KEY);
+      }
+    }
 
     const syncBillingState = () => {
       const savedPlan = safeGetLocalStorage("plan");
@@ -523,31 +618,6 @@ export default function UploadPage() {
   }, []);
 
   const t = labels[language] || labels.en;
-
-  useEffect(() => {
-    if (!loading) return;
-
-    const timers = [
-      setTimeout(() => {
-        setLoadingStep(t.loadingSteps.extracting);
-        setLoadingProgress(15);
-      }, 0),
-      setTimeout(() => {
-        setLoadingStep(t.loadingSteps.summary);
-        setLoadingProgress(40);
-      }, 8000),
-      setTimeout(() => {
-        setLoadingStep(t.loadingSteps.clauses);
-        setLoadingProgress(70);
-      }, 18000),
-      setTimeout(() => {
-        setLoadingStep(t.loadingSteps.finalizing);
-        setLoadingProgress(90);
-      }, 30000),
-    ];
-
-    return () => timers.forEach(clearTimeout);
-  }, [loading, language]);
 
   useEffect(() => {
     if (!loading || !analysisStartedAt) return;
@@ -638,6 +708,12 @@ export default function UploadPage() {
             : language === "ar"
             ? "متقدم"
             : "Advanced"
+          : loadingProgress >= 50
+          ? language === "fr"
+            ? "En cours"
+            : language === "ar"
+            ? "قيد المعالجة"
+            : "In progress"
           : "—",
     },
   ];
@@ -647,6 +723,87 @@ export default function UploadPage() {
     const remainingSeconds = seconds % 60;
 
     return `${minutes}:${String(remainingSeconds).padStart(2, "0")}`;
+  };
+
+  const parseBackendDate = (value: string) => {
+    if (!value) return null;
+
+    const normalized = /Z$|[+-]\d{2}:\d{2}$/.test(value)
+      ? value
+      : `${value}Z`;
+
+    const parsed = new Date(normalized);
+
+    if (Number.isNaN(parsed.getTime())) {
+      return null;
+    }
+
+    return parsed;
+  };
+
+  const formatJobDateTime = (value: string) => {
+    const parsed = parseBackendDate(value);
+
+    if (!parsed) return "—";
+
+    return parsed.toLocaleTimeString();
+  };
+
+  const getRealJobElapsed = () => {
+    const startedDate = parseBackendDate(jobStartedAt);
+
+    if (!startedDate) {
+      return formatElapsed(elapsedSeconds);
+    }
+
+    const completedDate = parseBackendDate(jobCompletedAt);
+
+    const ended = completedDate
+      ? completedDate.getTime()
+      : Date.now();
+
+    return formatElapsed(
+      Math.max(
+        0,
+        Math.floor((ended - startedDate.getTime()) / 1000)
+      )
+    );
+  };
+
+  const getEstimatedRemaining = () => {
+    const startedDate = parseBackendDate(jobStartedAt);
+
+    if (
+      !startedDate ||
+      loadingProgress < 70 ||
+      loadingProgress >= 100 ||
+      jobStatus === "completed" ||
+      jobStatus === "failed"
+    ) {
+      return null;
+    }
+
+    const elapsed = Math.max(
+      0,
+      Math.floor(
+        (Date.now() - startedDate.getTime()) / 1000
+      )
+    );
+
+    if (elapsed < 15) {
+      return null;
+    }
+
+    const estimatedTotal = Math.floor(
+      elapsed / (loadingProgress / 100)
+    );
+
+    const remaining = Math.max(
+      0,
+      estimatedTotal - elapsed
+    );
+
+    return formatElapsed(remaining);
   };
 
   const getFavoursBadgeClass = (favours: string) => {
@@ -744,7 +901,11 @@ export default function UploadPage() {
       setElapsedSeconds(0);
       setLoading(true);
       setLoadingStep(t.loadingSteps.extracting);
-      setLoadingProgress(15);
+      setLoadingProgress(0);
+      setJobId(null);
+      setJobStatus("");
+      setJobStartedAt("");
+      setJobCompletedAt("");
       setResult(null);
       setMessage("");
       setOpenIndex(null);
@@ -768,6 +929,97 @@ export default function UploadPage() {
           setLoading(false);
           return;
         }
+
+        if (analysis?.job_id) {
+          const token = safeGetLocalStorage("token");
+          const jobId = analysis.job_id;
+
+          setJobId(jobId);
+          setJobStatus(analysis.status || "pending");
+          setLoadingStep(
+            analysis.status_message || t.loadingSteps.extracting
+          );
+          setLoadingProgress(
+            typeof analysis.progress === "number"
+              ? analysis.progress
+              : 0
+          );
+
+          let attempts = 0;
+          let completed = false;
+
+          while (attempts < 120 && !completed) {
+            await new Promise((resolve) =>
+              setTimeout(resolve, 2000)
+            );
+
+            const statusRes = await fetch(
+              `${process.env.NEXT_PUBLIC_API_URL}/jobs/${jobId}`,
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+
+            if (!statusRes.ok) {
+              throw new Error(
+                "Could not check legal analysis status"
+              );
+            }
+
+            const statusData = await statusRes.json();
+
+            setJobId(statusData.id || jobId);
+            setJobStatus(statusData.status || "");
+
+            if (statusData.started_at) {
+              setJobStartedAt(statusData.started_at);
+            }
+
+            if (statusData.completed_at) {
+              setJobCompletedAt(statusData.completed_at);
+            }
+
+            if (
+              typeof statusData.progress === "number"
+            ) {
+              setLoadingProgress(statusData.progress);
+            }
+
+            if (statusData.status_message) {
+              setLoadingStep(
+                statusData.status_message
+              );
+            }
+
+            if (
+              statusData.status === "completed"
+            ) {
+              analysis = statusData.result;
+              completed = true;
+              break;
+            }
+
+            if (
+              statusData.status === "failed"
+            ) {
+              throw new Error(
+                statusData.error ||
+                  "Legal analysis failed"
+              );
+            }
+
+            attempts++;
+          }
+
+          if (!completed) {
+            throw new Error(
+              "Legal analysis timeout"
+            );
+          }
+        }
+
       } catch (err: any) {
         const status = err?.response?.status;
         const detail =
@@ -802,6 +1054,16 @@ export default function UploadPage() {
 
       setResult(analysis);
 
+      safeSetLocalStorage(
+        LEGAL_LAST_RESULT_KEY,
+        JSON.stringify(analysis)
+      );
+
+      safeSetLocalStorage(
+        LEGAL_LAST_LANGUAGE_KEY,
+        language
+      );
+
       await refreshUserBilling();
     } catch (err: any) {
       const detail =
@@ -823,7 +1085,6 @@ export default function UploadPage() {
     } finally {
       setLoading(false);
       setLoadingStep("");
-      setLoadingProgress(0);
       setAnalysisStartedAt(null);
     }
   };
@@ -881,6 +1142,8 @@ export default function UploadPage() {
               setFile(selected);
               setFileName(selected?.name || "");
               setResult(null);
+              safeRemoveLocalStorage(LEGAL_LAST_RESULT_KEY);
+              safeRemoveLocalStorage(LEGAL_LAST_LANGUAGE_KEY);
               setMessage("");
               setOpenIndex(null);
               setActiveTab("overview");
@@ -894,6 +1157,8 @@ export default function UploadPage() {
               setLanguage(e.target.value);
               setSavedLocale(e.target.value);
               setResult(null);
+              safeRemoveLocalStorage(LEGAL_LAST_RESULT_KEY);
+              safeRemoveLocalStorage(LEGAL_LAST_LANGUAGE_KEY);
             }}
             className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
           >
@@ -947,10 +1212,17 @@ export default function UploadPage() {
                   {loadingStep || t.loading}
                 </span>
 
-                <div className="flex items-center gap-3 text-blue-700">
+                <div className="flex flex-wrap items-center gap-3 text-blue-700">
                   <span>
-                    {t.elapsed}: {formatElapsed(elapsedSeconds)}
+                    {t.elapsed}: {getRealJobElapsed()}
                   </span>
+
+                  {getEstimatedRemaining() && (
+                    <span>
+                      {jobText("remaining", language)}: {getEstimatedRemaining()}
+                    </span>
+                  )}
+
                   <span>
                     {loadingProgress}%
                   </span>
@@ -963,6 +1235,48 @@ export default function UploadPage() {
                   style={{ width: `${loadingProgress}%` }}
                 />
               </div>
+
+              {(jobId || jobStatus || jobStartedAt || jobCompletedAt) && (
+                <div className="mt-4 grid gap-3 sm:grid-cols-4">
+                  <div className="rounded-xl border border-blue-100 bg-white p-3">
+                    <div className="text-xs text-slate-500">
+                      {jobText("job", language)}
+                    </div>
+                    <div className="mt-1 text-sm font-semibold text-slate-900">
+                      {jobId ? `#${jobId}` : "—"}
+                    </div>
+                  </div>
+
+                  <div className="rounded-xl border border-blue-100 bg-white p-3">
+                    <div className="text-xs text-slate-500">
+                      {jobText("status", language)}
+                    </div>
+                    <div className="mt-1 text-sm font-semibold text-slate-900">
+                      {jobStatus
+                        ? translateJobStatus(jobStatus, language)
+                        : "—"}
+                    </div>
+                  </div>
+
+                  <div className="rounded-xl border border-blue-100 bg-white p-3">
+                    <div className="text-xs text-slate-500">
+                      {jobText("started", language)}
+                    </div>
+                    <div className="mt-1 text-sm font-semibold text-slate-900">
+                      {formatJobDateTime(jobStartedAt)}
+                    </div>
+                  </div>
+
+                  <div className="rounded-xl border border-blue-100 bg-white p-3">
+                    <div className="text-xs text-slate-500">
+                      {jobText("completed", language)}
+                    </div>
+                    <div className="mt-1 text-sm font-semibold text-slate-900">
+                      {formatJobDateTime(jobCompletedAt)}
+                    </div>
+                  </div>
+                </div>
+              )}
 
               <div className="mt-5 grid gap-3 md:grid-cols-4">
                 {loadingTimeline.map((step, index) => {

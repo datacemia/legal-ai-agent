@@ -10,11 +10,16 @@ from app.workers.handlers.study_handler import (
     handle_study_audio,
 )
 
+from app.workers.handlers.contract_handler import (
+    handle_contract_ai,
+)
+
 
 def process_job(job: Job, db):
     handlers = {
         "study_audio": handle_study_audio,
         "study_ai": handle_study_ai,
+        "contract_ai": handle_contract_ai,
     }
 
     handler = handlers.get(job.job_type)
@@ -58,6 +63,8 @@ def run_worker():
                 job.status = "completed"
                 job.result = result
                 job.error = None
+                job.progress = 100
+                job.status_message = "Completed"
                 job.completed_at = datetime.utcnow()
                 db.commit()
 
@@ -66,6 +73,7 @@ def run_worker():
             except Exception as e:
                 job.status = "failed"
                 job.error = str(e)
+                job.status_message = "Failed"
                 job.completed_at = datetime.utcnow()
                 db.commit()
 
