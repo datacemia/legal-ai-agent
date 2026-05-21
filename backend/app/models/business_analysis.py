@@ -1,4 +1,5 @@
 from sqlalchemy import (
+    Boolean,
     Column,
     DateTime,
     ForeignKey,
@@ -158,21 +159,24 @@ class BusinessAnalysis(Base):
     # Feature flags for dashboards / exports
     # =========================
 
-    # Stored as integer for broad DB compatibility:
-    # 1 = true, 0 = false.
+    # PostgreSQL-safe booleans.
+    # SQLite previously accepted 1/0, but PostgreSQL requires true/false.
     has_charts = Column(
-        Integer,
-        default=1,
+        Boolean,
+        default=True,
+        nullable=False,
     )
 
     has_forecast = Column(
-        Integer,
-        default=0,
+        Boolean,
+        default=False,
+        nullable=False,
     )
 
     has_ai_narrative = Column(
-        Integer,
-        default=1,
+        Boolean,
+        default=True,
+        nullable=False,
     )
 
     created_at = Column(
