@@ -1,0 +1,421 @@
+from typing import Any
+
+
+def _to_float(value: Any) -> float:
+    if value is None:
+        return 0.0
+
+    if isinstance(value, bool):
+        return 0.0
+
+    if isinstance(value, (int, float)):
+        return float(value)
+
+    try:
+        return float(str(value).replace(",", ".").strip())
+    except Exception:
+        return 0.0
+
+
+def _clamp(value: float, minimum: float = 0.0, maximum: float = 100.0) -> float:
+    return max(minimum, min(maximum, value))
+
+
+def _score_profit_margin(profit_margin_percent: float) -> dict[str, Any]:
+    """
+    Profit margin score.
+    Strong margins improve business health.
+    Negative margins heavily penalize the score.
+    """
+
+    if profit_margin_percent >= 35:
+        score = 100
+        signal = "excellent_margin"
+        label = "Excellent profit margin."
+    elif profit_margin_percent >= 20:
+        score = 85
+        signal = "healthy_margin"
+        label = "Healthy profit margin."
+    elif profit_margin_percent >= 10:
+        score = 65
+        signal = "moderate_margin"
+        label = "Moderate profit margin."
+    elif profit_margin_percent >= 0:
+        score = 45
+        signal = "thin_margin"
+        label = "Thin profit margin."
+    else:
+        score = 10
+        signal = "negative_margin"
+        label = "Negative profit margin."
+
+    return {
+        "score": score,
+        "signal": signal,
+        "label": label,
+        "value": round(profit_margin_percent, 2),
+    }
+
+
+def _score_growth(growth_rate_percent: float) -> dict[str, Any]:
+    """
+    Growth score.
+    Rewards sustainable growth, not extreme or negative movement.
+    """
+
+    if growth_rate_percent >= 30:
+        score = 90
+        signal = "very_high_growth"
+        label = "Very strong growth."
+    elif growth_rate_percent >= 10:
+        score = 85
+        signal = "healthy_growth"
+        label = "Healthy growth."
+    elif growth_rate_percent >= 3:
+        score = 70
+        signal = "moderate_growth"
+        label = "Moderate growth."
+    elif growth_rate_percent >= -3:
+        score = 55
+        signal = "flat_growth"
+        label = "Flat growth."
+    elif growth_rate_percent >= -15:
+        score = 35
+        signal = "declining_growth"
+        label = "Revenue is declining."
+    else:
+        score = 15
+        signal = "severe_decline"
+        label = "Severe revenue decline."
+
+    return {
+        "score": score,
+        "signal": signal,
+        "label": label,
+        "value": round(growth_rate_percent, 2),
+    }
+
+
+def _score_cashflow(cashflow_status: str) -> dict[str, Any]:
+    normalized = str(cashflow_status or "").lower().strip()
+
+    if normalized == "positive":
+        score = 90
+        signal = "positive_cashflow"
+        label = "Positive cashflow."
+    elif normalized == "negative":
+        score = 15
+        signal = "negative_cashflow"
+        label = "Negative cashflow."
+    else:
+        score = 50
+        signal = "unknown_cashflow"
+        label = "Cashflow status is unclear."
+
+    return {
+        "score": score,
+        "signal": signal,
+        "label": label,
+        "value": normalized or "unknown",
+    }
+
+
+def _score_churn(churn_rate_percent: float) -> dict[str, Any]:
+    """
+    Churn scoring for SaaS/subscription-like businesses.
+    Lower churn is better.
+    """
+
+    if churn_rate_percent <= 0:
+        score = 70
+        signal = "churn_unknown_or_zero"
+        label = "Churn is zero or unavailable."
+    elif churn_rate_percent <= 3:
+        score = 95
+        signal = "excellent_churn"
+        label = "Excellent churn level."
+    elif churn_rate_percent <= 7:
+        score = 80
+        signal = "healthy_churn"
+        label = "Healthy churn level."
+    elif churn_rate_percent <= 12:
+        score = 55
+        signal = "elevated_churn"
+        label = "Elevated churn."
+    elif churn_rate_percent <= 20:
+        score = 35
+        signal = "high_churn"
+        label = "High churn."
+    else:
+        score = 15
+        signal = "critical_churn"
+        label = "Critical churn level."
+
+    return {
+        "score": score,
+        "signal": signal,
+        "label": label,
+        "value": round(churn_rate_percent, 2),
+    }
+
+
+def _score_roas(roas: float) -> dict[str, Any]:
+    """
+    ROAS score.
+    If no ad spend exists, neutral score.
+    """
+
+    if roas <= 0:
+        score = 50
+        signal = "roas_unavailable"
+        label = "ROAS unavailable."
+    elif roas >= 5:
+        score = 95
+        signal = "excellent_roas"
+        label = "Excellent ROAS."
+    elif roas >= 3:
+        score = 80
+        signal = "healthy_roas"
+        label = "Healthy ROAS."
+    elif roas >= 1.5:
+        score = 55
+        signal = "weak_roas"
+        label = "Weak ROAS."
+    elif roas >= 1:
+        score = 35
+        signal = "low_roas"
+        label = "Low ROAS."
+    else:
+        score = 15
+        signal = "unprofitable_ads"
+        label = "Advertising appears unprofitable."
+
+    return {
+        "score": score,
+        "signal": signal,
+        "label": label,
+        "value": round(roas, 2),
+    }
+
+
+def _score_cac_efficiency(cac: float, revenue_per_customer: float) -> dict[str, Any]:
+    """
+    CAC efficiency.
+    If CAC is unavailable, neutral score.
+    """
+
+    if cac <= 0 or revenue_per_customer <= 0:
+        return {
+            "score": 50,
+            "signal": "cac_efficiency_unavailable",
+            "label": "CAC efficiency unavailable.",
+            "value": {
+                "cac": round(cac, 2),
+                "revenue_per_customer": round(revenue_per_customer, 2),
+            },
+        }
+
+    ratio = cac / revenue_per_customer
+
+    if ratio <= 0.25:
+        score = 95
+        signal = "excellent_cac_efficiency"
+        label = "Excellent CAC efficiency."
+    elif ratio <= 0.5:
+        score = 80
+        signal = "healthy_cac_efficiency"
+        label = "Healthy CAC efficiency."
+    elif ratio <= 0.85:
+        score = 60
+        signal = "moderate_cac_efficiency"
+        label = "Moderate CAC efficiency."
+    elif ratio <= 1.2:
+        score = 35
+        signal = "weak_cac_efficiency"
+        label = "Weak CAC efficiency."
+    else:
+        score = 15
+        signal = "critical_cac_efficiency"
+        label = "CAC may be too high."
+
+    return {
+        "score": score,
+        "signal": signal,
+        "label": label,
+        "value": {
+            "cac": round(cac, 2),
+            "revenue_per_customer": round(revenue_per_customer, 2),
+            "cac_to_revenue_per_customer_ratio": round(ratio, 2),
+        },
+    }
+
+
+def _score_data_quality(data_quality_score: float) -> dict[str, Any]:
+    if data_quality_score >= 90:
+        score = 100
+        signal = "excellent_data_quality"
+        label = "Excellent data quality."
+    elif data_quality_score >= 75:
+        score = 80
+        signal = "good_data_quality"
+        label = "Good data quality."
+    elif data_quality_score >= 50:
+        score = 55
+        signal = "limited_data_quality"
+        label = "Limited data quality."
+    else:
+        score = 25
+        signal = "poor_data_quality"
+        label = "Poor data quality."
+
+    return {
+        "score": score,
+        "signal": signal,
+        "label": label,
+        "value": round(data_quality_score, 2),
+    }
+
+
+def calculate_backend_health_score(
+    core_kpis: dict[str, Any] | None = None,
+    advanced_kpis: dict[str, Any] | None = None,
+    data_quality: dict[str, Any] | None = None,
+    business_model: str = "general",
+) -> dict[str, Any]:
+    """
+    Deterministic backend health scoring.
+
+    This should override AI-generated business_health_score.
+
+    Score dimensions:
+    - Profit margin
+    - Revenue growth
+    - Cashflow
+    - Churn
+    - ROAS
+    - CAC efficiency
+    - Data quality
+    """
+
+    core_kpis = core_kpis or {}
+    advanced_kpis = advanced_kpis or {}
+    data_quality = data_quality or {}
+
+    profit_margin = _to_float(core_kpis.get("profit_margin_percent"))
+    growth_rate = _to_float(core_kpis.get("growth_rate_percent"))
+    cashflow_status = str(core_kpis.get("cashflow_status") or "unknown")
+
+    churn_rate = _to_float(advanced_kpis.get("churn_rate_percent"))
+    roas = _to_float(advanced_kpis.get("roas"))
+    cac = _to_float(advanced_kpis.get("cac"))
+    revenue_per_customer = _to_float(advanced_kpis.get("revenue_per_customer"))
+    data_quality_score = _to_float(data_quality.get("score", 50))
+
+    components = {
+        "profit_margin": _score_profit_margin(profit_margin),
+        "growth": _score_growth(growth_rate),
+        "cashflow": _score_cashflow(cashflow_status),
+        "churn": _score_churn(churn_rate),
+        "roas": _score_roas(roas),
+        "cac_efficiency": _score_cac_efficiency(cac, revenue_per_customer),
+        "data_quality": _score_data_quality(data_quality_score),
+    }
+
+    normalized_model = str(business_model or "general").lower().strip()
+
+    if normalized_model == "saas":
+        weights = {
+            "profit_margin": 0.20,
+            "growth": 0.20,
+            "cashflow": 0.15,
+            "churn": 0.18,
+            "roas": 0.10,
+            "cac_efficiency": 0.10,
+            "data_quality": 0.07,
+        }
+
+    elif normalized_model == "ecommerce":
+        weights = {
+            "profit_margin": 0.24,
+            "growth": 0.18,
+            "cashflow": 0.18,
+            "churn": 0.06,
+            "roas": 0.18,
+            "cac_efficiency": 0.09,
+            "data_quality": 0.07,
+        }
+
+    else:
+        weights = {
+            "profit_margin": 0.25,
+            "growth": 0.20,
+            "cashflow": 0.20,
+            "churn": 0.08,
+            "roas": 0.10,
+            "cac_efficiency": 0.10,
+            "data_quality": 0.07,
+        }
+
+    weighted_score = 0.0
+
+    for key, weight in weights.items():
+        weighted_score += components[key]["score"] * weight
+
+    score = int(round(_clamp(weighted_score)))
+
+    if score >= 85:
+        rating = "excellent"
+    elif score >= 70:
+        rating = "healthy"
+    elif score >= 55:
+        rating = "moderate"
+    elif score >= 40:
+        rating = "weak"
+    else:
+        rating = "critical"
+
+    strengths = []
+    warnings = []
+
+    for component in components.values():
+        component_score = component["score"]
+
+        if component_score >= 80:
+            strengths.append(component["label"])
+        elif component_score <= 40:
+            warnings.append(component["label"])
+
+    return {
+        "score": score,
+        "rating": rating,
+        "components": components,
+        "weights": weights,
+        "strengths": strengths[:5],
+        "warnings": warnings[:5],
+        "source": "backend_health_scoring",
+    }
+
+
+def apply_backend_health_score(
+    result: dict[str, Any],
+    detected_kpis: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Mutates and returns result with deterministic backend health score.
+
+    Use after backend KPIs have been calculated and injected.
+    """
+
+    detected_kpis = detected_kpis or {}
+
+    health = calculate_backend_health_score(
+        core_kpis=detected_kpis.get("core_kpis", {}),
+        advanced_kpis=detected_kpis.get("advanced_kpis", {}),
+        data_quality=detected_kpis.get("data_quality", {}),
+        business_model=detected_kpis.get("business_model", result.get("business_model", "general")),
+    )
+
+    result["business_health_score"] = health["score"]
+    result["business_health"] = health
+
+    return result
