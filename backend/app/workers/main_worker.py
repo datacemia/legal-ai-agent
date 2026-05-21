@@ -1,5 +1,5 @@
 import time
-from datetime import datetime
+from datetime import UTC, datetime
 
 from app.database import SessionLocal
 from app.models.job import Job
@@ -14,12 +14,21 @@ from app.workers.handlers.contract_handler import (
     handle_contract_ai,
 )
 
+from app.workers.handlers.business_handler import (
+    handle_business_ai,
+)
+
+
+def utc_now():
+    return datetime.now(UTC)
+
 
 def process_job(job: Job, db):
     handlers = {
         "study_audio": handle_study_audio,
         "study_ai": handle_study_ai,
         "contract_ai": handle_contract_ai,
+        "business_ai": handle_business_ai,
     }
 
     handler = handlers.get(job.job_type)
@@ -52,7 +61,7 @@ def run_worker():
             print(f"Processing job {job.id} type={job.job_type}", flush=True)
 
             job.status = "running"
-            job.started_at = datetime.utcnow()
+            job.started_at = utc_now()
             job.attempts += 1
             db.commit()
             db.refresh(job)
@@ -65,7 +74,7 @@ def run_worker():
                 job.error = None
                 job.progress = 100
                 job.status_message = "Completed"
-                job.completed_at = datetime.utcnow()
+                job.completed_at = utc_now()
                 db.commit()
 
                 print(f"Completed job {job.id} type={job.job_type}", flush=True)
@@ -74,7 +83,7 @@ def run_worker():
                 job.status = "failed"
                 job.error = str(e)
                 job.status_message = "Failed"
-                job.completed_at = datetime.utcnow()
+                job.completed_at = utc_now()
                 db.commit()
 
                 print(f"Failed job {job.id} type={job.job_type}: {e}", flush=True)

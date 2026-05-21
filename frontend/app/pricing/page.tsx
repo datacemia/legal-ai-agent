@@ -37,20 +37,20 @@ const creditPacks = [
   {
     name: "Starter",
     credits: 50,
-    price: "€9",
+    price: "$9",
     description: "Perfect for testing multiple Runexa agents.",
   },
   {
     name: "Growth",
     credits: 150,
-    price: "€24",
+    price: "$24",
     description: "Best value for regular multi-agent usage.",
     highlighted: true,
   },
   {
     name: "Scale",
     credits: 500,
-    price: "€89",
+    price: "$89",
     description: "Built for professionals and advanced workloads.",
   },
 ];
@@ -305,7 +305,7 @@ export default function Pricing() {
                 </p>
 
                 <div className="mt-7 flex items-end gap-2">
-                  <span className="text-5xl font-bold">€49</span>
+                  <span className="text-5xl font-bold">$49</span>
                   <span className="pb-2 text-slate-300">/month</span>
                 </div>
 

@@ -1105,11 +1105,19 @@ function LoadingPanel({
   progress,
   step,
   elapsedSeconds,
+  jobId,
+  jobStatus,
+  jobStartedAt,
+  jobCompletedAt,
 }: {
   language: Locale;
   progress: number;
   step: string;
   elapsedSeconds: number;
+  jobId?: number | null;
+  jobStatus?: string;
+  jobStartedAt?: string;
+  jobCompletedAt?: string;
 }) {
   const text = {
     en: {
@@ -1119,6 +1127,14 @@ function LoadingPanel({
       decision: "Decision layer",
       final: "Final report",
       seconds: "s",
+      job: "Job",
+      status: "Status",
+      started: "Started",
+      completed: "Completed",
+      pending: "Pending",
+      running: "Running",
+      completedStatus: "Completed",
+      failed: "Failed",
     },
     fr: {
       elapsed: "Temps écoulé",
@@ -1127,6 +1143,14 @@ function LoadingPanel({
       decision: "Couche décisionnelle",
       final: "Rapport final",
       seconds: "s",
+      job: "Job",
+      status: "Statut",
+      started: "Début",
+      completed: "Fin",
+      pending: "En attente",
+      running: "En cours",
+      completedStatus: "Terminé",
+      failed: "Échec",
     },
     ar: {
       elapsed: "الوقت المنقضي",
@@ -1135,6 +1159,14 @@ function LoadingPanel({
       decision: "طبقة القرار",
       final: "التقرير النهائي",
       seconds: "ث",
+      job: "المهمة",
+      status: "الحالة",
+      started: "بدأت",
+      completed: "اكتملت",
+      pending: "قيد الانتظار",
+      running: "قيد المعالجة",
+      completedStatus: "مكتمل",
+      failed: "فشل",
     },
   }[language];
 
@@ -1144,6 +1176,31 @@ function LoadingPanel({
     { label: text.decision, threshold: 75 },
     { label: text.final, threshold: 95 },
   ];
+
+  const formatJobDateTime = (value?: string) => {
+    if (!value) return "—";
+
+    const normalized = /Z$|[+-]\d{2}:\d{2}$/.test(value)
+      ? value
+      : `${value}Z`;
+
+    const parsed = new Date(normalized);
+
+    if (Number.isNaN(parsed.getTime())) {
+      return "—";
+    }
+
+    return parsed.toLocaleTimeString();
+  };
+
+  const translateJobStatus = (status?: string) => {
+    const normalized = String(status || "").toLowerCase().trim();
+
+    if (!normalized) return "—";
+    if (normalized === "completed") return text.completedStatus;
+
+    return (text as any)[normalized] || status;
+  };
 
   return (
     <div className="rounded-3xl border border-blue-100 bg-blue-50 p-5">
@@ -1169,6 +1226,50 @@ function LoadingPanel({
           style={{ width: `${progress}%` }}
         />
       </div>
+
+      {(jobId || jobStatus || jobStartedAt || jobCompletedAt) && (
+        <div className="mt-4 grid gap-3 sm:grid-cols-4">
+          <div className="rounded-2xl border border-blue-100 bg-white p-3">
+            <div className="text-xs text-slate-500">
+              {text.job}
+            </div>
+
+            <div className="mt-1 text-sm font-black text-slate-900">
+              {jobId ? `#${jobId}` : "—"}
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-blue-100 bg-white p-3">
+            <div className="text-xs text-slate-500">
+              {text.status}
+            </div>
+
+            <div className="mt-1 text-sm font-black text-slate-900">
+              {translateJobStatus(jobStatus)}
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-blue-100 bg-white p-3">
+            <div className="text-xs text-slate-500">
+              {text.started}
+            </div>
+
+            <div className="mt-1 text-sm font-black text-slate-900">
+              {formatJobDateTime(jobStartedAt)}
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-blue-100 bg-white p-3">
+            <div className="text-xs text-slate-500">
+              {text.completed}
+            </div>
+
+            <div className="mt-1 text-sm font-black text-slate-900">
+              {formatJobDateTime(jobCompletedAt)}
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="mt-5 grid gap-3 md:grid-cols-4">
         {steps.map((item, index) => {
@@ -1282,6 +1383,10 @@ export default function BusinessPage() {
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [exporting, setExporting] = useState<"pdf" | "pptx" | null>(null);
   const [exportMessage, setExportMessage] = useState("");
+  const [jobId, setJobId] = useState<number | null>(null);
+  const [jobStatus, setJobStatus] = useState("");
+  const [jobStartedAt, setJobStartedAt] = useState("");
+  const [jobCompletedAt, setJobCompletedAt] = useState("");
 
   useEffect(() => {
     setLanguage(getSavedLocale());
@@ -1354,41 +1459,6 @@ export default function BusinessPage() {
     return () => window.clearInterval(interval);
   }, [loading, startedAt]);
 
-  useEffect(() => {
-    if (!loading) {
-      return;
-    }
-
-    const interval = window.setInterval(() => {
-      setLoadingProgress((current) => {
-        if (current < 20) return current + 4;
-        if (current < 45) return current + 3;
-        if (current < 75) return current + 2;
-        if (current < 92) return current + 1;
-        return current;
-      });
-    }, 700);
-
-    return () => window.clearInterval(interval);
-  }, [loading]);
-
-  useEffect(() => {
-    const locale = getLocale(language);
-    const t = labels[locale] || labels.en;
-
-    if (loadingProgress < 20) {
-      setLoadingStep(t.loadingSteps.quality);
-    } else if (loadingProgress < 45) {
-      setLoadingStep(t.loadingSteps.kpis);
-    } else if (loadingProgress < 75) {
-      setLoadingStep(t.loadingSteps.forecast);
-    } else if (loadingProgress < 95) {
-      setLoadingStep(t.loadingSteps.decision);
-    } else {
-      setLoadingStep(t.loadingSteps.finalizing);
-    }
-  }, [loadingProgress, language]);
-
   const refreshUserBilling = async () => {
     const token = safeGetLocalStorage("token");
 
@@ -1447,19 +1517,44 @@ export default function BusinessPage() {
     );
   };
 
+  const parseBackendDateToMs = (value: string) => {
+    if (!value) {
+      return null;
+    }
+
+    const normalized = /Z$|[+-]\d{2}:\d{2}$/.test(value)
+      ? value
+      : `${value}Z`;
+
+    const parsed = new Date(normalized).getTime();
+
+    if (Number.isNaN(parsed)) {
+      return null;
+    }
+
+    return parsed;
+  };
+
   const handleAnalyze = async () => {
     if (!file) {
       setMessage(t.noFile);
       return;
     }
 
+    const token = safeGetLocalStorage("token");
+
     setLoading(true);
     setResult(null);
     setMessage("");
     setLoadingProgress(0);
-    setLoadingStep("");
+    setLoadingStep(t.loadingSteps.quality);
     setStartedAt(Date.now());
     setElapsedSeconds(0);
+    setJobId(null);
+    setJobStatus("");
+    setJobStartedAt("");
+    setJobCompletedAt("");
+    clearLastBusinessAnalysis();
 
     try {
       let data;
@@ -1504,9 +1599,99 @@ export default function BusinessPage() {
         throw error;
       }
 
-      setLoadingProgress(100);
+      if (data?.job_id) {
+        const currentJobId = data.job_id;
 
-      const token = safeGetLocalStorage("token");
+        setJobId(currentJobId);
+        setJobStatus(data.status || "pending");
+        setLoadingProgress(
+          typeof data.progress === "number"
+            ? data.progress
+            : 0
+        );
+        setLoadingStep(
+          data.status_message || t.loadingSteps.quality
+        );
+
+        let attempts = 0;
+        let completed = false;
+
+        while (attempts < 180 && !completed) {
+          await new Promise((resolve) =>
+            setTimeout(resolve, 2000)
+          );
+
+          const statusResponse = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/jobs/${currentJobId}`,
+            {
+              headers: {
+                ...(token
+                  ? {
+                      Authorization: `Bearer ${token}`,
+                    }
+                  : {}),
+              },
+            }
+          );
+
+          if (!statusResponse.ok) {
+            throw new Error(
+              "Could not check business analysis status."
+            );
+          }
+
+          const statusData = await statusResponse.json();
+
+          setJobId(statusData.id || currentJobId);
+          setJobStatus(statusData.status || "");
+
+          if (statusData.started_at) {
+            setJobStartedAt(statusData.started_at);
+
+            const startedMs = parseBackendDateToMs(statusData.started_at);
+
+            if (startedMs) {
+              setStartedAt(startedMs);
+            }
+          }
+
+          if (statusData.completed_at) {
+            setJobCompletedAt(statusData.completed_at);
+          }
+
+          if (typeof statusData.progress === "number") {
+            setLoadingProgress(statusData.progress);
+          }
+
+          if (statusData.status_message) {
+            setLoadingStep(statusData.status_message);
+          }
+
+          if (statusData.status === "completed") {
+            data = statusData.result;
+            completed = true;
+            break;
+          }
+
+          if (statusData.status === "failed") {
+            throw new Error(
+              statusData.error ||
+                "Business analysis failed."
+            );
+          }
+
+          attempts++;
+        }
+
+        if (!completed) {
+          throw new Error(
+            "Business analysis timeout."
+          );
+        }
+      } else {
+        setLoadingProgress(100);
+      }
+
       const savedAnalysisId =
         data?.analysis_id ||
         data?.business_analysis_id ||
@@ -1518,6 +1703,7 @@ export default function BusinessPage() {
         analysis_id: savedAnalysisId || data?.analysis_id,
       };
 
+      setLoadingProgress(100);
       setResult(nextResult);
 
       saveLastBusinessAnalysis(
@@ -2062,6 +2248,8 @@ export default function BusinessPage() {
               onChange={(e) => {
                 const selectedFile = e.target.files?.[0] || null;
                 setFile(selectedFile);
+                setResult(null);
+                clearLastBusinessAnalysis();
                 setMessage("");
                 setExportMessage("");
               }}
@@ -2105,6 +2293,10 @@ export default function BusinessPage() {
               progress={loadingProgress}
               step={loadingStep || t.loading}
               elapsedSeconds={elapsedSeconds}
+              jobId={jobId}
+              jobStatus={jobStatus}
+              jobStartedAt={jobStartedAt}
+              jobCompletedAt={jobCompletedAt}
             />
           )}
         </SectionShell>

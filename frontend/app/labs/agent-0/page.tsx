@@ -20,8 +20,8 @@ const features = [
     desc: "Transform raw events into clear risk levels, explanations, and recommended actions.",
   },
   {
-    title: "Drone-ready Monitoring",
-    desc: "Future architecture for autonomous aerial inspection and perimeter awareness.",
+    title: "Smart Home Automation Ready",
+    desc: "Future-ready architecture for smart home automation, intelligent monitoring, and connected safety systems.",
   },
   {
     title: "Privacy-first Architecture",
@@ -47,7 +47,7 @@ export default function AgentZeroPage() {
 
           <p className="mt-6 max-w-3xl text-xl leading-8 text-slate-300">
             The future AI safety infrastructure for homes, sensors, cameras,
-            GPS, and autonomous monitoring.
+            GPS, and intelligent home monitoring.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
@@ -75,7 +75,7 @@ export default function AgentZeroPage() {
               Intelligent Safety Command Center
             </p>
             <h2 className="mt-3 text-3xl font-bold md:text-4xl">
-              One AI layer for cameras, sensors, GPS, alerts, and future drones.
+              One AI layer for cameras, sensors, GPS, alerts, and future smart home systems.
             </h2>
           </div>
 

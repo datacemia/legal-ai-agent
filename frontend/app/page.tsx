@@ -38,7 +38,7 @@ const labels: any = {
     pricing: "See pricing",
     securityBadge: "Agent 0 · Coming soon",
     securityTitle: "Runexa Home Security Agent",
-    securitySubtitle: "An AI guardian for smart homes, cameras, sensors, GPS, and future drone surveillance.",
+    securitySubtitle: "An AI guardian for smart homes, cameras, sensors, GPS, and future smart home automation features.",
     securityDesc:
       "Agent 0 is designed to understand what is happening at home: unusual movement, unknown visitors, open doors, GPS presence, sensor alerts, and real-time risk levels — before turning events into clear actions.",
     securityPrimary: "Join the waitlist",
@@ -52,7 +52,7 @@ const labels: any = {
       "Sensor fusion",
       "GPS geofencing",
       "Smart alerts",
-      "Drone-ready module",
+      "Smart-home-ready module",
       "Privacy-first design",
     ],
     enterpriseBadge: "Custom AI Agents",
@@ -82,7 +82,7 @@ const labels: any = {
     agents: [
       [
         "Agent 0 · Home Security",
-        "AI-powered home security with cameras, sensors, GPS geofencing, smart alerts, and future drone surveillance.",
+        "AI-powered home security with cameras, sensors, GPS geofencing, smart alerts, and future smart home automation features.",
       ],
       [
         "Legal Agent",
@@ -139,7 +139,7 @@ const labels: any = {
       "Fusion de capteurs",
       "Géofencing GPS",
       "Alertes intelligentes",
-      "Module prêt pour drone",
+      "Module maison intelligente",
       "Confidentialité d’abord",
     ],
     enterpriseBadge: "Agents IA personnalisés",
@@ -213,7 +213,7 @@ const labels: any = {
     pricing: "عرض الأسعار",
     securityBadge: "الوكيل 0 · قريباً",
     securityTitle: "وكيل Runexa لأمان المنزل",
-    securitySubtitle: "حارس ذكي للمنازل الذكية والكاميرات والحساسات وGPS والمراقبة المستقبلية بالطائرات الصغيرة.",
+    securitySubtitle: "حارس ذكي للمنازل الذكية والكاميرات والحساسات وGPS وميزات أتمتة المنازل الذكية المستقبلية.",
     securityDesc:
       "تم تصميم الوكيل 0 لفهم ما يحدث في المنزل: حركة غير عادية، زوار غير معروفين، أبواب مفتوحة، وجود عبر GPS، تنبيهات الحساسات ومستوى الخطر في الوقت الحقيقي — ثم تحويل الأحداث إلى إجراءات واضحة.",
     securityPrimary: "الانضمام إلى قائمة الانتظار",
@@ -227,7 +227,7 @@ const labels: any = {
       "دمج الحساسات",
       "تحديد النطاق عبر GPS",
       "تنبيهات ذكية",
-      "وحدة جاهزة للطائرة الصغيرة",
+      "وحدة جاهزة للمنزل الذكي",
       "الخصوصية أولاً",
     ],
     enterpriseBadge: "وكلاء ذكاء اصطناعي مخصصون",
@@ -933,7 +933,7 @@ export default function HomePage() {
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
                   <div className="h-2 w-2 rounded-full bg-amber-400" />
                   <p className="mt-4 text-sm font-semibold">
-                    Future Drone Systems
+                    Future Smart Home Systems
                   </p>
                 </div>
               </div>
