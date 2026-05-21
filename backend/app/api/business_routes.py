@@ -1,9 +1,5 @@
 import json
-import os
-from pathlib import Path
-from uuid import uuid4
 
-import requests
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException, Depends
 from sqlalchemy.orm import Session
 
@@ -16,6 +12,8 @@ from app.models.job import Job
 from app.models.business_analysis import BusinessAnalysis
 
 from app.schemas.business_schema import BusinessHistoryItem
+
+from app.services.business_agent.business_parser import extract_business_data
 
 from app.services.enterprise_service import (
     check_enterprise_agent_access,
@@ -30,94 +28,16 @@ router = APIRouter(
 )
 
 BUSINESS_AGENT_CREDITS = 30
-BUSINESS_STORAGE_BUCKET = os.getenv(
-    "SUPABASE_BUSINESS_BUCKET",
-    "business-files",
-)
 
 
-def _get_supabase_config():
-    supabase_url = os.getenv("SUPABASE_URL")
-    service_role_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
-
-    if not supabase_url or not service_role_key:
-        raise HTTPException(
-            status_code=500,
-            detail="Supabase storage is not configured.",
+def _make_json_safe(value):
+    return json.loads(
+        json.dumps(
+            value,
+            ensure_ascii=False,
+            default=str,
         )
-
-    return supabase_url.rstrip("/"), service_role_key
-
-
-def _safe_business_file_name(original_name: str) -> str:
-    suffix = Path(original_name or "business_file").suffix.lower()
-
-    if suffix not in [".csv", ".xlsx"]:
-        suffix = ".csv"
-
-    return f"{uuid4().hex}{suffix}"
-
-
-def _business_storage_path(user_id: int, original_name: str) -> str:
-    safe_name = _safe_business_file_name(original_name)
-
-    return f"user-{user_id}/{safe_name}"
-
-
-async def _upload_business_file_to_supabase(
-    file: UploadFile,
-    user_id: int,
-) -> dict:
-    supabase_url, service_role_key = _get_supabase_config()
-    storage_path = _business_storage_path(
-        user_id=user_id,
-        original_name=file.filename or "business_file",
     )
-
-    content = await file.read()
-
-    if not content:
-        raise HTTPException(
-            status_code=400,
-            detail="Uploaded file is empty.",
-        )
-
-    upload_url = (
-        f"{supabase_url}/storage/v1/object/"
-        f"{BUSINESS_STORAGE_BUCKET}/{storage_path}"
-    )
-
-    response = requests.post(
-        upload_url,
-        headers={
-            "Authorization": f"Bearer {service_role_key}",
-            "apikey": service_role_key,
-            "Content-Type": (
-                file.content_type
-                or "application/octet-stream"
-            ),
-            "x-upsert": "true",
-        },
-        data=content,
-        timeout=60,
-    )
-
-    if response.status_code not in [200, 201]:
-        raise HTTPException(
-            status_code=500,
-            detail=(
-                "Failed to upload business file to storage: "
-                f"{response.text}"
-            ),
-        )
-
-    return {
-        "storage_bucket": BUSINESS_STORAGE_BUCKET,
-        "storage_path": storage_path,
-        "file_name": file.filename,
-        "content_type": file.content_type,
-        "size_bytes": len(content),
-    }
 
 
 @router.post("/analyze")
@@ -167,10 +87,27 @@ async def analyze_business(
             agent_slug="business",
         )
 
-    storage_data = await _upload_business_file_to_supabase(
-        file=file,
-        user_id=current_user.id,
-    )
+    try:
+        parsed_data = await extract_business_data(file)
+        parsed_data = _make_json_safe(parsed_data)
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=400,
+            detail=str(error),
+        )
+
+    except Exception as error:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Could not read uploaded business file: {str(error)}",
+        )
+
+    if not parsed_data:
+        raise HTTPException(
+            status_code=400,
+            detail="Could not extract business data from file.",
+        )
 
     job = Job(
         user_id=current_user.id,
@@ -183,11 +120,9 @@ async def analyze_business(
             "ar": "تمت إضافة تحليل الأعمال إلى قائمة الانتظار...",
         }.get(output_language, "Queued business analysis..."),
         input={
-            "storage_bucket": storage_data["storage_bucket"],
-            "storage_path": storage_data["storage_path"],
-            "file_name": storage_data["file_name"],
-            "content_type": storage_data["content_type"],
-            "size_bytes": storage_data["size_bytes"],
+            "parsed_data": parsed_data,
+            "file_name": file.filename,
+            "content_type": file.content_type,
             "output_language": output_language,
             "access_type": billing.get("access_type"),
             "credits_used": billing.get("credits_used", 0),

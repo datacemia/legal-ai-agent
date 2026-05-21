@@ -1,16 +1,9 @@
-import asyncio
-import io
 import json
-import os
 from typing import Any
-
-import requests
-from fastapi import UploadFile
 
 from app.models.job import Job
 from app.models.business_analysis import BusinessAnalysis
 
-from app.services.business_agent.business_parser import extract_business_data
 from app.services.business_agent.business_ai_agent import analyze_business_data
 from app.services.business_agent.business_kpi_detector import (
     detect_business_model,
@@ -34,14 +27,14 @@ from app.workers.progress import update_job_progress
 def business_progress_message(key: str, language: str) -> str:
     messages = {
         "loading": {
-            "en": "Loading business file...",
-            "fr": "Chargement du fichier business...",
-            "ar": "جارٍ تحميل ملف الأعمال...",
+            "en": "Loading business data...",
+            "fr": "Chargement des données business...",
+            "ar": "جارٍ تحميل بيانات الأعمال...",
         },
         "parsing": {
-            "en": "Parsing business data...",
-            "fr": "Lecture des données business...",
-            "ar": "جارٍ قراءة بيانات الأعمال...",
+            "en": "Preparing business data...",
+            "fr": "Préparation des données business...",
+            "ar": "جارٍ تجهيز بيانات الأعمال...",
         },
         "detecting": {
             "en": "Detecting business model and KPIs...",
@@ -176,59 +169,24 @@ def _force_backend_financial_truth(
     return result
 
 
-def _run_async(coro):
-    try:
-        return asyncio.run(coro)
-    except RuntimeError:
-        loop = asyncio.new_event_loop()
-        try:
-            return loop.run_until_complete(coro)
-        finally:
-            loop.close()
+def _normalize_parsed_business_data(parsed_data: Any):
+    if isinstance(parsed_data, str):
+        return {
+            "raw_preview": parsed_data,
+            "normalized_rows": [],
+            "column_mapping": {},
+            "columns": [],
+            "row_count": 0,
+        }
 
+    if not isinstance(parsed_data, dict):
+        raise ValueError("Invalid parsed business data.")
 
-def _load_business_file_from_supabase(
-    storage_bucket: str,
-    storage_path: str,
-    file_name: str,
-) -> UploadFile:
-    if not storage_bucket or not storage_path:
-        raise ValueError("Business file storage path is missing")
-
-    supabase_url = os.getenv("SUPABASE_URL")
-    service_role_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
-
-    if not supabase_url or not service_role_key:
-        raise ValueError("Supabase storage is not configured")
-
-    download_url = (
-        f"{supabase_url.rstrip('/')}/storage/v1/object/"
-        f"{storage_bucket}/{storage_path}"
-    )
-
-    response = requests.get(
-        download_url,
-        headers={
-            "Authorization": f"Bearer {service_role_key}",
-            "apikey": service_role_key,
-        },
-        timeout=60,
-    )
-
-    if response.status_code != 200:
-        raise ValueError(
-            f"Could not download business file: {response.text}"
-        )
-
-    return UploadFile(
-        filename=file_name,
-        file=io.BytesIO(response.content),
-    )
+    return parsed_data
 
 
 def handle_business_ai(job: Job, db):
-    storage_bucket = job.input.get("storage_bucket")
-    storage_path = job.input.get("storage_path")
+    parsed_data = job.input.get("parsed_data")
     file_name = job.input.get("file_name", "business_file")
     output_language = job.input.get("output_language", "en")
     access_type = job.input.get("access_type")
@@ -239,146 +197,119 @@ def handle_business_ai(job: Job, db):
 
     update_job_progress(job, db, 8, business_progress_message("loading", output_language))
 
-    upload_file = _load_business_file_from_supabase(
-        storage_bucket=storage_bucket,
-        storage_path=storage_path,
-        file_name=file_name,
+    if not parsed_data:
+        raise ValueError("Business parsed data is missing from job input")
+
+    update_job_progress(job, db, 15, business_progress_message("parsing", output_language))
+
+    parsed_data = _normalize_parsed_business_data(parsed_data)
+
+    raw_preview = parsed_data.get("raw_preview", "")
+    normalized_rows = parsed_data.get("normalized_rows", [])
+    normalized_rows = normalize_money_columns(normalized_rows)
+    column_mapping = parsed_data.get("column_mapping", {})
+    columns = parsed_data.get("columns", [])
+    row_count = parsed_data.get("row_count", len(normalized_rows))
+
+    if not raw_preview.strip():
+        raise ValueError("Business data preview is empty.")
+
+    update_job_progress(job, db, 28, business_progress_message("detecting", output_language))
+
+    business_model = detect_business_model(columns=columns, rows=normalized_rows)
+    detected_kpis = detect_business_kpis(
+        business_model=business_model,
+        rows=normalized_rows,
+        column_mapping=column_mapping,
     )
 
+    update_job_progress(job, db, 42, business_progress_message("analyzing", output_language))
+
     try:
-        update_job_progress(job, db, 15, business_progress_message("parsing", output_language))
-
-        try:
-            parsed_data = _run_async(extract_business_data(upload_file))
-        except ValueError as error:
-            raise ValueError(str(error))
-        except Exception as error:
-            raise RuntimeError(f"Failed to parse business file: {str(error)}")
-
-        if not parsed_data:
-            raise ValueError("Could not extract business data from file.")
-
-        if isinstance(parsed_data, str):
-            raw_preview = parsed_data
-            normalized_rows = []
-            column_mapping = {}
-            columns = []
-            row_count = 0
-        else:
-            raw_preview = parsed_data.get("raw_preview", "")
-            normalized_rows = parsed_data.get("normalized_rows", [])
-            normalized_rows = normalize_money_columns(normalized_rows)
-            column_mapping = parsed_data.get("column_mapping", {})
-            columns = parsed_data.get("columns", [])
-            row_count = parsed_data.get("row_count", len(normalized_rows))
-
-        if not raw_preview.strip():
-            raise ValueError("Business data preview is empty.")
-
-        update_job_progress(job, db, 28, business_progress_message("detecting", output_language))
-
-        business_model = detect_business_model(columns=columns, rows=normalized_rows)
-        detected_kpis = detect_business_kpis(
-            business_model=business_model,
-            rows=normalized_rows,
-            column_mapping=column_mapping,
-        )
-
-        update_job_progress(job, db, 42, business_progress_message("analyzing", output_language))
-
-        try:
-            result = analyze_business_data(
-                business_data=raw_preview,
-                backend_kpis=detected_kpis,
-                output_language=output_language,
-            )
-        except TypeError:
-            result = analyze_business_data(
-                business_data=raw_preview,
-                output_language=output_language,
-            )
-        except Exception as error:
-            result = _build_safe_ai_fallback()
-            result["data_quality"]["limitations"].append(
-                f"AI analysis failed: {str(error)}"
-            )
-
-        if not isinstance(result, dict):
-            result = _build_safe_ai_fallback()
-
-        result = _force_backend_financial_truth(result, detected_kpis, business_model)
-
-        update_job_progress(job, db, 58, business_progress_message("charts", output_language))
-
-        charts = build_business_charts(rows=normalized_rows, column_mapping=column_mapping)
-        forecast = forecast_business_performance(rows=normalized_rows, column_mapping=column_mapping)
-
-        result["charts"] = charts
-        result["forecast"] = forecast
-
-        update_job_progress(job, db, 72, business_progress_message("intelligence", output_language))
-
-        result = apply_backend_health_score(result=result, detected_kpis=detected_kpis)
-        result = attach_business_anomalies_v2(
-            result=result,
-            detected_kpis=detected_kpis,
-            forecast=forecast,
-            strictness="professional",
-        )
-        result = build_business_decision_layer(result=result, detected_kpis=detected_kpis)
-
-        result["file_metadata"] = {
-            "file_name": file_name,
-            "storage_bucket": storage_bucket,
-            "storage_path": storage_path,
-            "rows_count": row_count,
-            "columns": columns,
-            "column_mapping": column_mapping,
-            "output_language": output_language,
-        }
-
-        result = attach_business_memory(db=db, user_id=job.user_id, current_result=result)
-        result = _force_backend_financial_truth(result, detected_kpis, business_model)
-        result = apply_backend_health_score(result=result, detected_kpis=detected_kpis)
-        result = attach_business_anomalies_v2(
-            result=result,
-            detected_kpis=detected_kpis,
-            forecast=forecast,
-            strictness="professional",
-        )
-        result = build_business_decision_layer(result=result, detected_kpis=detected_kpis)
-        result = attach_currency_to_result(result=result, rows=normalized_rows, default_currency="USD")
-
-        update_job_progress(job, db, 85, business_progress_message("localizing", output_language))
-
-        result = translate_business_analysis_payload(payload=result, language=output_language)
-
-        update_job_progress(job, db, 92, business_progress_message("saving", output_language))
-
-        analysis = BusinessAnalysis(
-            user_id=job.user_id,
-            file_name=file_name,
-            result=json.dumps(result, ensure_ascii=False),
-            business_model=str(result.get("business_model", "general")),
-            business_health_score=int(result.get("business_health_score", 0) or 0),
-            access_type=access_type,
-            credits_used=credits_used,
+        result = analyze_business_data(
+            business_data=raw_preview,
+            backend_kpis=detected_kpis,
             output_language=output_language,
-            rows_count=row_count,
+        )
+    except TypeError:
+        result = analyze_business_data(
+            business_data=raw_preview,
+            output_language=output_language,
+        )
+    except Exception as error:
+        result = _build_safe_ai_fallback()
+        result["data_quality"]["limitations"].append(
+            f"AI analysis failed: {str(error)}"
         )
 
-        db.add(analysis)
-        db.commit()
-        db.refresh(analysis)
+    if not isinstance(result, dict):
+        result = _build_safe_ai_fallback()
 
-        result["analysis_id"] = analysis.id
+    result = _force_backend_financial_truth(result, detected_kpis, business_model)
 
-        update_job_progress(job, db, 96, business_progress_message("finalizing", output_language))
+    update_job_progress(job, db, 58, business_progress_message("charts", output_language))
 
-        return result
+    charts = build_business_charts(rows=normalized_rows, column_mapping=column_mapping)
+    forecast = forecast_business_performance(rows=normalized_rows, column_mapping=column_mapping)
 
-    finally:
-        try:
-            upload_file.file.close()
-        except Exception:
-            pass
+    result["charts"] = charts
+    result["forecast"] = forecast
+
+    update_job_progress(job, db, 72, business_progress_message("intelligence", output_language))
+
+    result = apply_backend_health_score(result=result, detected_kpis=detected_kpis)
+    result = attach_business_anomalies_v2(
+        result=result,
+        detected_kpis=detected_kpis,
+        forecast=forecast,
+        strictness="professional",
+    )
+    result = build_business_decision_layer(result=result, detected_kpis=detected_kpis)
+
+    result["file_metadata"] = {
+        "file_name": file_name,
+        "rows_count": row_count,
+        "columns": columns,
+        "column_mapping": column_mapping,
+        "output_language": output_language,
+    }
+
+    result = attach_business_memory(db=db, user_id=job.user_id, current_result=result)
+    result = _force_backend_financial_truth(result, detected_kpis, business_model)
+    result = apply_backend_health_score(result=result, detected_kpis=detected_kpis)
+    result = attach_business_anomalies_v2(
+        result=result,
+        detected_kpis=detected_kpis,
+        forecast=forecast,
+        strictness="professional",
+    )
+    result = build_business_decision_layer(result=result, detected_kpis=detected_kpis)
+    result = attach_currency_to_result(result=result, rows=normalized_rows, default_currency="USD")
+
+    update_job_progress(job, db, 85, business_progress_message("localizing", output_language))
+
+    result = translate_business_analysis_payload(payload=result, language=output_language)
+
+    update_job_progress(job, db, 92, business_progress_message("saving", output_language))
+
+    analysis = BusinessAnalysis(
+        user_id=job.user_id,
+        file_name=file_name,
+        result=json.dumps(result, ensure_ascii=False),
+        business_model=str(result.get("business_model", "general")),
+        business_health_score=int(result.get("business_health_score", 0) or 0),
+        access_type=access_type,
+        credits_used=credits_used,
+        output_language=output_language,
+        rows_count=row_count,
+    )
+
+    db.add(analysis)
+    db.commit()
+    db.refresh(analysis)
+
+    result["analysis_id"] = analysis.id
+
+    update_job_progress(job, db, 96, business_progress_message("finalizing", output_language))
+
+    return result
