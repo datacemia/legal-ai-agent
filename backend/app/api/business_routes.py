@@ -1,8 +1,9 @@
 import json
-import shutil
+import os
 from pathlib import Path
 from uuid import uuid4
 
+import requests
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException, Depends
 from sqlalchemy.orm import Session
 
@@ -29,23 +30,94 @@ router = APIRouter(
 )
 
 BUSINESS_AGENT_CREDITS = 30
-BUSINESS_UPLOAD_DIR = Path("uploads/business_jobs")
-BUSINESS_UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+BUSINESS_STORAGE_BUCKET = os.getenv(
+    "SUPABASE_BUSINESS_BUCKET",
+    "business-files",
+)
+
+
+def _get_supabase_config():
+    supabase_url = os.getenv("SUPABASE_URL")
+    service_role_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
+
+    if not supabase_url or not service_role_key:
+        raise HTTPException(
+            status_code=500,
+            detail="Supabase storage is not configured.",
+        )
+
+    return supabase_url.rstrip("/"), service_role_key
 
 
 def _safe_business_file_name(original_name: str) -> str:
-    suffix = Path(original_name).suffix.lower()
+    suffix = Path(original_name or "business_file").suffix.lower()
+
+    if suffix not in [".csv", ".xlsx"]:
+        suffix = ".csv"
+
     return f"{uuid4().hex}{suffix}"
 
 
-def _save_business_upload(file: UploadFile) -> str:
-    safe_name = _safe_business_file_name(file.filename or "business_file")
-    output_path = BUSINESS_UPLOAD_DIR / safe_name
+def _business_storage_path(user_id: int, original_name: str) -> str:
+    safe_name = _safe_business_file_name(original_name)
 
-    with output_path.open("wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
+    return f"user-{user_id}/{safe_name}"
 
-    return str(output_path)
+
+async def _upload_business_file_to_supabase(
+    file: UploadFile,
+    user_id: int,
+) -> dict:
+    supabase_url, service_role_key = _get_supabase_config()
+    storage_path = _business_storage_path(
+        user_id=user_id,
+        original_name=file.filename or "business_file",
+    )
+
+    content = await file.read()
+
+    if not content:
+        raise HTTPException(
+            status_code=400,
+            detail="Uploaded file is empty.",
+        )
+
+    upload_url = (
+        f"{supabase_url}/storage/v1/object/"
+        f"{BUSINESS_STORAGE_BUCKET}/{storage_path}"
+    )
+
+    response = requests.post(
+        upload_url,
+        headers={
+            "Authorization": f"Bearer {service_role_key}",
+            "apikey": service_role_key,
+            "Content-Type": (
+                file.content_type
+                or "application/octet-stream"
+            ),
+            "x-upsert": "true",
+        },
+        data=content,
+        timeout=60,
+    )
+
+    if response.status_code not in [200, 201]:
+        raise HTTPException(
+            status_code=500,
+            detail=(
+                "Failed to upload business file to storage: "
+                f"{response.text}"
+            ),
+        )
+
+    return {
+        "storage_bucket": BUSINESS_STORAGE_BUCKET,
+        "storage_path": storage_path,
+        "file_name": file.filename,
+        "content_type": file.content_type,
+        "size_bytes": len(content),
+    }
 
 
 @router.post("/analyze")
@@ -95,13 +167,10 @@ async def analyze_business(
             agent_slug="business",
         )
 
-    try:
-        file_path = _save_business_upload(file)
-    except Exception as error:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Failed to save business file: {str(error)}",
-        )
+    storage_data = await _upload_business_file_to_supabase(
+        file=file,
+        user_id=current_user.id,
+    )
 
     job = Job(
         user_id=current_user.id,
@@ -114,8 +183,11 @@ async def analyze_business(
             "ar": "تمت إضافة تحليل الأعمال إلى قائمة الانتظار...",
         }.get(output_language, "Queued business analysis..."),
         input={
-            "file_path": file_path,
-            "file_name": file.filename,
+            "storage_bucket": storage_data["storage_bucket"],
+            "storage_path": storage_data["storage_path"],
+            "file_name": storage_data["file_name"],
+            "content_type": storage_data["content_type"],
+            "size_bytes": storage_data["size_bytes"],
             "output_language": output_language,
             "access_type": billing.get("access_type"),
             "credits_used": billing.get("credits_used", 0),

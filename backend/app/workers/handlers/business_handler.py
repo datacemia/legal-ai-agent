@@ -1,8 +1,10 @@
 import asyncio
+import io
 import json
-from pathlib import Path
+import os
 from typing import Any
 
+import requests
 from fastapi import UploadFile
 
 from app.models.job import Job
@@ -185,20 +187,48 @@ def _run_async(coro):
             loop.close()
 
 
-def _load_saved_file_as_upload(file_path: str, file_name: str) -> UploadFile:
-    path = Path(file_path)
+def _load_business_file_from_supabase(
+    storage_bucket: str,
+    storage_path: str,
+    file_name: str,
+) -> UploadFile:
+    if not storage_bucket or not storage_path:
+        raise ValueError("Business file storage path is missing")
 
-    if not path.exists():
-        raise ValueError("Business file not found")
+    supabase_url = os.getenv("SUPABASE_URL")
+    service_role_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
+
+    if not supabase_url or not service_role_key:
+        raise ValueError("Supabase storage is not configured")
+
+    download_url = (
+        f"{supabase_url.rstrip('/')}/storage/v1/object/"
+        f"{storage_bucket}/{storage_path}"
+    )
+
+    response = requests.get(
+        download_url,
+        headers={
+            "Authorization": f"Bearer {service_role_key}",
+            "apikey": service_role_key,
+        },
+        timeout=60,
+    )
+
+    if response.status_code != 200:
+        raise ValueError(
+            f"Could not download business file: {response.text}"
+        )
 
     return UploadFile(
         filename=file_name,
-        file=open(path, "rb"),
+        file=io.BytesIO(response.content),
     )
 
 
 def handle_business_ai(job: Job, db):
-    file_path = job.input.get("file_path")
+    storage_bucket = job.input.get("storage_bucket")
+    storage_path = job.input.get("storage_path")
     file_name = job.input.get("file_name", "business_file")
     output_language = job.input.get("output_language", "en")
     access_type = job.input.get("access_type")
@@ -209,7 +239,11 @@ def handle_business_ai(job: Job, db):
 
     update_job_progress(job, db, 8, business_progress_message("loading", output_language))
 
-    upload_file = _load_saved_file_as_upload(file_path=file_path, file_name=file_name)
+    upload_file = _load_business_file_from_supabase(
+        storage_bucket=storage_bucket,
+        storage_path=storage_path,
+        file_name=file_name,
+    )
 
     try:
         update_job_progress(job, db, 15, business_progress_message("parsing", output_language))
@@ -295,6 +329,8 @@ def handle_business_ai(job: Job, db):
 
         result["file_metadata"] = {
             "file_name": file_name,
+            "storage_bucket": storage_bucket,
+            "storage_path": storage_path,
             "rows_count": row_count,
             "columns": columns,
             "column_mapping": column_mapping,
