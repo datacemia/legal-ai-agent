@@ -72,6 +72,20 @@ export default function Navbar() {
 
   const t = translations[locale] || translations.en;
 
+  const navbarSlogan =
+    locale === "fr"
+      ? "Des agents IA spécialisés pour le travail réel"
+      : locale === "ar"
+      ? "وكلاء ذكاء اصطناعي متخصصون للعمل الواقعي"
+      : "Specialized AI agents for real-world work";
+
+  const enterpriseLabel =
+    locale === "fr"
+      ? "Entreprise"
+      : locale === "ar"
+      ? "المؤسسات"
+      : "Enterprise";
+
   const isAdmin = role === "admin";
   const isEnterpriseAdmin = role === "enterprise_admin";
   const canSeeEnterprise = isEnterpriseAdmin || isEnterpriseMember;
@@ -98,15 +112,15 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-3">
           <Image
             src="/runexa.svg"
-            alt="Runexa Systems"
+            alt="Runexa AI Workspace"
             width={300}
             height={90}
             priority
-            className="h-10 w-auto object-contain"
+            className="h-12 w-auto object-contain"
           />
 
-          <span className="hidden sm:block text-xs font-medium text-slate-500">
-            {t.slogan}
+          <span className="hidden lg:block text-xs font-medium text-slate-500">
+            {navbarSlogan}
           </span>
         </Link>
 
@@ -141,6 +155,13 @@ export default function Navbar() {
           )}
 
           <Link
+            href="/#agents"
+            className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
+          >
+            {t.agents || "Agents"}
+          </Link>
+
+          <Link
             href="/labs/agent-0"
             className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
           >
@@ -151,22 +172,16 @@ export default function Navbar() {
             href="/enterprise"
             className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
           >
-            {t.enterprise || "Business"}
+            {t.enterprise || "Enterprise"}
           </Link>
 
           {/* PRICING */}
-          <div className="relative">
-            <Link
-              href="/pricing"
-              className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
-            >
-              {t.pricing || "Pricing"}
-            </Link>
-
-            <span className="absolute -right-4 -top-2 rounded-full bg-blue-600 px-2 py-0.5 text-[10px] font-semibold text-white">
-              {t.new || "NEW"}
-            </span>
-          </div>
+          <Link
+            href="/pricing"
+            className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
+          >
+            {t.pricing || "Pricing"}
+          </Link>
 
           {!isLogged && (
             <>
@@ -191,7 +206,7 @@ export default function Navbar() {
             !canSeeEnterprise && (
               <div className="hidden items-center gap-2 rounded-full border bg-white px-4 py-2 text-sm font-medium text-slate-700 md:flex">
 
-                <span className="text-xs uppercase text-slate-500">
+                <span className="rounded-full bg-slate-100 px-2 py-1 text-[10px] font-semibold uppercase text-slate-700">
                   {plan || "trial"}
                 </span>
 

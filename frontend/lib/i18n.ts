@@ -23,10 +23,10 @@ export function setSavedLocale(locale: string) {
 
 export const translations: any = {
   en: {
-    slogan: "AI agents that get things done",
+    slogan: "Specialized AI agents for real-world work",
     dashboard: "Dashboard",
     admin: "Admin",
-    enterprise: "Business",
+    enterprise: "Enterprise",
     pricing: "Pricing",
     logout: "Logout",
     login: "Login",
@@ -468,10 +468,10 @@ export const translations: any = {
   },
 
   fr: {
-    slogan: "Des agents IA qui vous aident à avancer",
+    slogan: "Des agents IA spécialisés pour le travail réel",
     dashboard: "Tableau de bord",
     admin: "Admin",
-    enterprise: "Entreprises",
+    enterprise: "Entreprise",
     pricing: "Tarifs",
     logout: "Déconnexion",
     login: "Connexion",
@@ -913,10 +913,10 @@ export const translations: any = {
   },
 
   ar: {
-    slogan: "وكلاء ذكاء اصطناعي يساعدونك على إنجاز العمل",
+    slogan: "وكلاء ذكاء اصطناعي متخصصون للعمل الواقعي",
     dashboard: "لوحة التحكم",
     admin: "الإدارة",
-    enterprise: "الأعمال",
+    enterprise: "المؤسسات",
     pricing: "الأسعار",
     logout: "تسجيل الخروج",
     login: "تسجيل الدخول",
