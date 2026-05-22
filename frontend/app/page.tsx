@@ -50,7 +50,7 @@ const labels: any = {
     securityFeatures: [
       "Camera intelligence",
       "Sensor fusion",
-      "GPS geofencing",
+      "géorepérage GPS",
       "Smart alerts",
       "Smart-home-ready module",
       "Privacy-first design",
@@ -59,19 +59,19 @@ const labels: any = {
     enterpriseTitle: "Runexa for Business",
     enterpriseSubtitle: "Custom AI agents built for your company.",
     enterpriseDesc:
-      "We design AI agents tailored to your workflows, data, and business needs — helping your teams analyze faster, reduce risks, and make better decisions.",
+      "We design AI agents tailored to your flux de travails, data, and business needs — helping your teams analyze faster, reduce risks, and make better decisions.",
     enterprisePrimary: "Request a demo",
     enterpriseSecondary: "Explore business solutions",
     enterpriseCards: [
       "Team workspace",
-      "Organization dashboard",
+      "Organization tableau de bord",
       "Multi-user access",
       "Custom credits",
       "Priority support",
     ],
     enterpriseSystem: "Custom agent system",
-    enterpriseWorkflow: "Custom AI workflow",
-    enterpriseFooter: "Connected workflows → unified insights → faster decisions",
+    enterpriseWorkflow: "Custom AI flux de travail",
+    enterpriseFooter: "Connected flux de travails → unified insights → faster decisions",
     enterpriseTag: "Enterprise",
     enterpriseHeader: "Runexa Business AI",
     ctaTitle: "One platform. Multiple AI agents. Real business outcomes.",
@@ -79,10 +79,21 @@ const labels: any = {
       "Runexa Systems is an AI agents platform that helps you analyze documents, learn faster, manage personal finances, and make smarter business decisions.",
     ctaButton: "Create your account",
     disclaimer: "AI-powered insights. Always verify before you act.",
+    trialLine:
+      "$1 trial per agent · Global credits · Pro and Premium plans for all agents",
+    labsBadge: "Runexa Labs",
+    labsDesc:
+      "Agent 0 represents the future vision of autonomous AI systems for real-world environments, security orchestration, sensor intelligence, and proactive decision-making.",
+    labsCards: [
+      "AI Security Layer",
+      "Sensor Intelligence",
+      "Autonomous Monitoring",
+      "Future Smart Home Systems",
+    ],
     agents: [
       [
         "Agent 0 · Home Security",
-        "AI-powered home security with cameras, sensors, GPS geofencing, smart alerts, and future smart home automation features.",
+        "AI-powered home security with cameras, sensors, géorepérage GPS, smart alerts, and future smart home automation features.",
       ],
       [
         "Runexa Legal Agent",
@@ -145,7 +156,7 @@ const labels: any = {
     enterpriseBadge: "Agents IA personnalisés",
     enterpriseTitle: "Runexa Systems pour les entreprises",
     enterpriseSubtitle:
-      "Des agents IA personnalisés pour vos équipes, vos données et vos workflows.",
+      "Des agents IA personnalisés pour vos équipes, vos données et vos flux de travails.",
     enterpriseDesc:
       "Nous concevons des agents IA sur mesure pour aider les entreprises à automatiser l’analyse documentaire, le reporting financier, le recrutement, la conformité et la prise de décision.",
     enterprisePrimary: "Contacter l’équipe commerciale",
@@ -158,7 +169,7 @@ const labels: any = {
       "Support prioritaire",
     ],
     enterpriseSystem: "Système d’agents personnalisés",
-    enterpriseWorkflow: "Workflow IA personnalisé",
+    enterpriseWorkflow: "Flux de travail IA personnalisé",
     enterpriseFooter: "Workflows connectés → vision unifiée → décisions plus rapides",
     enterpriseTag: "Entreprise",
     enterpriseHeader: "IA Business Runexa",
@@ -167,6 +178,17 @@ const labels: any = {
       "Runexa Systems est une plateforme d’agents IA qui vous permet d’analyser vos documents, apprendre plus vite, gérer vos finances personnelles et prendre des décisions business plus intelligentes.",
     ctaButton: "Créer votre compte",
     disclaimer: "Analyses générées par IA. Vérifiez toujours avant d’agir.",
+    trialLine:
+      "Essai à 1 $ par agent · Crédits globaux · Plans Pro et Premium pour tous les agents",
+    labsBadge: "Runexa Labs",
+    labsDesc:
+      "Agent 0 représente la vision future des systèmes IA autonomes pour les environnements réels, l’orchestration de la sécurité, l’intelligence des capteurs et la prise de décision proactive.",
+    labsCards: [
+      "Couche de sécurité IA",
+      "Intelligence des capteurs",
+      "Surveillance autonome",
+      "Futurs systèmes de maison intelligente",
+    ],
     agents: [
       [
         "Agent 0 · Sécurité domestique",
@@ -255,6 +277,17 @@ const labels: any = {
       "Runexa Systems هي منصة وكلاء ذكاء اصطناعي تساعدك على تحليل المستندات، التعلم بشكل أسرع، إدارة أموالك الشخصية، واتخاذ قرارات أعمال أكثر ذكاءً.",
     ctaButton: "إنشاء حساب",
     disclaimer: "تحليلات مدعومة بالذكاء الاصطناعي. تحقق دائماً قبل اتخاذ أي قرار.",
+    trialLine:
+      "تجربة بقيمة 1 دولار لكل وكيل · أرصدة موحدة · خطط Pro وPremium لجميع الوكلاء",
+    labsBadge: "مختبرات Runexa",
+    labsDesc:
+      "يمثل الوكيل 0 الرؤية المستقبلية لأنظمة الذكاء الاصطناعي الذاتية في البيئات الواقعية، وتنظيم الأمان، وذكاء الحساسات، واتخاذ القرارات الاستباقية.",
+    labsCards: [
+      "طبقة أمان بالذكاء الاصطناعي",
+      "ذكاء الحساسات",
+      "مراقبة ذاتية",
+      "أنظمة منزل ذكي مستقبلية",
+    ],
     agents: [
       [
         "الوكيل 0 · أمان المنزل",
@@ -752,7 +785,7 @@ export default function HomePage() {
             <h2 className="text-3xl font-bold">{t.choose}</h2>
             <p className="mt-3 text-slate-600">{t.chooseDesc}</p>
             <p className="mt-2 text-sm text-slate-500">
-              $1 trial per agent · Global credits · Pro and Premium plans for all agents
+              {t.trialLine}
             </p>
           </div>
 
@@ -774,7 +807,11 @@ export default function HomePage() {
 
                     {isAvailable && (
                       <div className="mt-3 inline-flex w-fit rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
-                        $1 Trial
+                        {language === "fr"
+                          ? "Essai à 1 $"
+                          : language === "ar"
+                          ? "تجربة مقابل 1 دولار"
+                          : "$1 Trial"}
                       </div>
                     )}
 
@@ -887,7 +924,7 @@ export default function HomePage() {
             <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
               <div className="max-w-3xl">
                 <span className="inline-flex rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold text-blue-100">
-                  Runexa Labs
+                  {t.labsBadge}
                 </span>
 
                 <h2 className="mt-5 text-3xl md:text-4xl font-bold tracking-tight">
@@ -895,7 +932,7 @@ export default function HomePage() {
                 </h2>
 
                 <p className="mt-4 text-slate-300 leading-7 text-lg">
-                  Agent 0 represents the future vision of autonomous AI systems for real-world environments, security orchestration, sensor intelligence, and proactive decision-making.
+                  {t.labsDesc}
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-3">
@@ -909,33 +946,26 @@ export default function HomePage() {
               </div>
 
               <div className="grid grid-cols-2 gap-4 min-w-[280px]">
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
-                  <div className="h-2 w-2 rounded-full bg-emerald-400" />
-                  <p className="mt-4 text-sm font-semibold">
-                    AI Security Layer
-                  </p>
-                </div>
+                {t.labsCards.map((item: string, index: number) => {
+                  const dotColors = [
+                    "bg-emerald-400",
+                    "bg-blue-400",
+                    "bg-violet-400",
+                    "bg-amber-400",
+                  ];
 
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
-                  <div className="h-2 w-2 rounded-full bg-blue-400" />
-                  <p className="mt-4 text-sm font-semibold">
-                    Sensor Intelligence
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
-                  <div className="h-2 w-2 rounded-full bg-violet-400" />
-                  <p className="mt-4 text-sm font-semibold">
-                    Autonomous Monitoring
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
-                  <div className="h-2 w-2 rounded-full bg-amber-400" />
-                  <p className="mt-4 text-sm font-semibold">
-                    Future Smart Home Systems
-                  </p>
-                </div>
+                  return (
+                    <div
+                      key={item}
+                      className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur"
+                    >
+                      <div
+                        className={`h-2 w-2 rounded-full ${dotColors[index]}`}
+                      />
+                      <p className="mt-4 text-sm font-semibold">{item}</p>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
