@@ -103,3 +103,4 @@ backend/debug_output/
 backend/quality_runs/
 backend/quality_audit_report.json
 backend/contract.docx
+backend/statement.pdf

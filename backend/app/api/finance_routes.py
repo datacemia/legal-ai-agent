@@ -13,6 +13,20 @@ from app.schemas.finance_schema import FinanceHistoryItem
 from app.services.finance_agent.statement_parser import extract_statement_text
 from app.services.finance_agent.finance_ai_agent import analyze_bank_statement
 
+# 🔥 Finance OS V2 modules
+from app.services.finance_agent.transaction_extractor import extract_transactions
+from app.services.finance_agent.subscription_detector import detect_recurring_subscriptions
+from app.services.finance_agent.budget_engine import build_recommended_budget
+from app.services.finance_agent.forecasting import predict_cashflow
+from app.services.finance_agent.scoring import calculate_financial_scores
+from app.services.finance_agent.charts_builder import build_financial_charts
+from app.services.finance_agent.savings_opportunities import (
+    detect_savings_opportunities,
+)
+from app.services.finance_agent.insights_engine import (
+    generate_financial_insights,
+)
+
 
 router = APIRouter(prefix="/finance", tags=["Finance"])
 
@@ -47,7 +61,7 @@ def analyze_finance(data: dict, current_user: User = Depends(get_current_user)):
     }
 
 
-# 🔥 MAIN ROUTE WITH BILLING
+# 🔥 MAIN ROUTE WITH BILLING + FINANCE OS V2
 @router.post("/analyze-statement")
 async def analyze_statement(
     file: UploadFile = File(...),
@@ -75,7 +89,58 @@ async def analyze_statement(
             detail="Could not extract text from PDF.",
         )
 
-    result = analyze_bank_statement(text, output_language)
+    # 🔥 1. Main AI analysis
+    result_ai = analyze_bank_statement(text, output_language)
+
+    fallback_income = result_ai.get("total_income_estimate")
+
+    # 🔥 2. Finance OS V2 features
+    transactions = extract_transactions(text)
+    subscriptions = detect_recurring_subscriptions(transactions)
+
+    savings_opportunities = detect_savings_opportunities(
+        transactions=transactions,
+        subscriptions=subscriptions,
+    )
+
+    budget = build_recommended_budget(
+        transactions=transactions,
+        fallback_income=fallback_income,
+    )
+
+    forecast = predict_cashflow(
+        transactions=transactions,
+        fallback_income=fallback_income,
+    )
+
+    scores = calculate_financial_scores(
+        transactions=transactions,
+        subscriptions=subscriptions,
+        fallback_income=fallback_income,
+    )
+
+    insights = generate_financial_insights(
+        transactions=transactions,
+        subscriptions=subscriptions,
+        scores=scores,
+        forecast=forecast,
+        opportunities=savings_opportunities,
+    )
+
+    charts = build_financial_charts(transactions)
+
+    # 🔥 3. Final combined result
+    result = {
+        **result_ai,
+        "transactions": transactions,
+        "charts": charts,
+        "subscriptions_detected": subscriptions,
+        "savings_opportunities": savings_opportunities,
+        "recommended_budget": budget,
+        "cashflow_forecast": forecast,
+        "financial_habit_scores": scores,
+        "financial_insights": insights,
+    }
 
     analysis = FinanceAnalysis(
         user_id=current_user.id,

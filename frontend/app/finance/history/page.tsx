@@ -50,6 +50,63 @@ export default function FinanceHistoryPage() {
   return (
     <main className="min-h-screen bg-slate-50 px-4 py-10">
       <div className="max-w-5xl mx-auto space-y-6">
+        <div className="rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 text-white p-8 shadow-xl">
+          <div className="flex flex-wrap gap-2 mb-4">
+            <span className="px-3 py-1 rounded-full bg-white/10 text-xs">
+              AI Financial Intelligence
+            </span>
+
+            <span className="px-3 py-1 rounded-full bg-white/10 text-xs">
+              Personal & Enterprise
+            </span>
+
+            <span className="px-3 py-1 rounded-full bg-white/10 text-xs">
+              Finance OS
+            </span>
+          </div>
+
+          <h1 className="text-4xl font-bold leading-tight">
+            AI Financial Operating System
+          </h1>
+
+          <p className="text-slate-300 mt-4 max-w-3xl">
+            Analyze bank statements, detect subscriptions,
+            forecast cashflow, monitor spending habits,
+            and generate intelligent financial insights
+            for both individuals and businesses.
+          </p>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+            <div className="rounded-2xl bg-white/5 p-4">
+              <p className="text-2xl font-bold">AI</p>
+              <p className="text-sm text-slate-300">
+                Smart analysis
+              </p>
+            </div>
+
+            <div className="rounded-2xl bg-white/5 p-4">
+              <p className="text-2xl font-bold">PDF</p>
+              <p className="text-sm text-slate-300">
+                Statement parsing
+              </p>
+            </div>
+
+            <div className="rounded-2xl bg-white/5 p-4">
+              <p className="text-2xl font-bold">B2C</p>
+              <p className="text-sm text-slate-300">
+                Personal finance
+              </p>
+            </div>
+
+            <div className="rounded-2xl bg-white/5 p-4">
+              <p className="text-2xl font-bold">B2B</p>
+              <p className="text-sm text-slate-300">
+                Enterprise ready
+              </p>
+            </div>
+          </div>
+        </div>
+
         <h1 className="text-3xl font-bold text-center">
           Finance Analysis History
         </h1>

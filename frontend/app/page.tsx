@@ -17,148 +17,118 @@ import {
 
 const labels: any = {
   en: {
-    platform: "Runexa AI Agents Platform",
-    title: "AI agents that help you get work done faster.",
-    desc: "Runexa provides AI agents that help you analyze documents, make smarter decisions, and move faster.",
-    explore: "Explore agents",
+    platform: "Runexa AI Workspace",
+    title: "Specialized AI agents for legal, finance, study, and business work.",
+    desc: "Runexa helps individuals and professionals analyze documents, understand financial data, learn faster, and make smarter business decisions.",
+    explore: "Explore AI Agents",
+    pricing: "View Pricing",
+    trustLine: "$1 trial per agent · Global credits · Secure AI workspace",
     tryLegal: "Runexa Legal Agent",
-    tryStudy: "Runexa Study Agent",
     tryFinance: "Runexa Finance Coach",
+    tryStudy: "Runexa Study Agent",
     tryBusiness: "Runexa Business Decision Agent",
-    trySecurity: "Preview Security Agent",
     choose: "Choose your AI agent",
-
-    // ✅ UPDATED
     chooseDesc:
-      "One Runexa account for all AI agents. Activate each agent with a one-time $1 trial, then continue with global credits or a plan.",
-
+      "One Runexa account for specialized AI agents. Analyze legal documents, improve your finances, learn faster, and make smarter business decisions.",
     available: "Available",
-    coming: "Coming soon",
     open: "Open agent",
-    pricing: "See pricing",
-    securityBadge: "Agent 0 · Coming soon",
-    securityTitle: "Runexa Home Security Agent",
-    securitySubtitle: "An AI guardian for smart homes, cameras, sensors, GPS, and future smart home automation features.",
-    securityDesc:
-      "Agent 0 is designed to understand what is happening at home: unusual movement, unknown visitors, open doors, GPS presence, sensor alerts, and real-time risk levels — before turning events into clear actions.",
-    securityPrimary: "Join the waitlist",
-    securitySecondary: "View security concept",
-    securitySystem: "Smart security command center",
-    securityFooter: "Cameras + sensors + GPS + AI reasoning → safer homes",
-    futureSystems: "Future AI Systems",
-    exploreAgent0: "Explore Agent 0",
-    securityFeatures: [
-      "Camera intelligence",
-      "Sensor fusion",
-      "géorepérage GPS",
-      "Smart alerts",
-      "Smart-home-ready module",
-      "Privacy-first design",
+    howTitle: "How Runexa works",
+    howSteps: [
+      "Upload your documents or data",
+      "Runexa AI analyzes the content",
+      "Receive actionable insights and recommendations",
     ],
-    enterpriseBadge: "Custom AI Agents",
-    enterpriseTitle: "Runexa for Business",
-    enterpriseSubtitle: "Custom AI agents built for your company.",
+    trustCards: [
+      ["Secure & private", "Your data is protected"],
+      ["Global credits", "Works across all agents"],
+      ["Instant access", "Start using agents quickly"],
+      ["Built for real work", "Individuals and professionals"],
+    ],
+    enterpriseBadge: "Custom AI Systems",
+    enterpriseTitle: "Runexa for Organizations",
+    enterpriseSubtitle: "Custom AI systems for teams and companies.",
     enterpriseDesc:
-      "We design AI agents tailored to your flux de travails, data, and business needs — helping your teams analyze faster, reduce risks, and make better decisions.",
+      "Runexa helps organizations automate document analysis, financial reporting, learning workflows, and strategic decision-making.",
     enterprisePrimary: "Request a demo",
     enterpriseSecondary: "Explore business solutions",
     enterpriseCards: [
       "Team workspace",
-      "Organization tableau de bord",
+      "Organization dashboard",
       "Multi-user access",
       "Custom credits",
       "Priority support",
     ],
-    enterpriseSystem: "Custom agent system",
-    enterpriseWorkflow: "Custom AI flux de travail",
-    enterpriseFooter: "Connected flux de travails → unified insights → faster decisions",
+    enterpriseSystem: "Custom AI system",
+    enterpriseWorkflow: "AI workflow",
+    enterpriseFooter: "Connected workflows → unified insights → faster decisions",
     enterpriseTag: "Enterprise",
     enterpriseHeader: "Runexa Business AI",
-    ctaTitle: "One platform. Multiple AI agents. Real business outcomes.",
+    ctaTitle: "One platform. Multiple AI agents. Real-world results.",
     ctaDesc:
-      "Runexa Systems is an AI agents platform that helps you analyze documents, learn faster, manage personal finances, and make smarter business decisions.",
+      "Runexa Systems is an AI workspace platform for legal, finance, study, and business productivity.",
     ctaButton: "Create your account",
     disclaimer: "AI-powered insights. Always verify before you act.",
-    trialLine:
-      "$1 trial per agent · Global credits · Pro and Premium plans for all agents",
-    labsBadge: "Runexa Labs",
-    labsDesc:
-      "Agent 0 represents the future vision of autonomous AI systems for real-world environments, security orchestration, sensor intelligence, and proactive decision-making.",
-    labsCards: [
-      "AI Security Layer",
-      "Sensor Intelligence",
-      "Autonomous Monitoring",
-      "Future Smart Home Systems",
-    ],
     agents: [
       [
-        "Agent 0 · Home Security",
-        "AI-powered home security with cameras, sensors, géorepérage GPS, smart alerts, and future smart home automation features.",
-      ],
-      [
         "Runexa Legal Agent",
-        "Analyze contracts, detect risky clauses, and get clear recommendations before you sign.",
-      ],
-      [
-        "Runexa Study Agent",
-        "Analyze study materials, generate summaries, quizzes, and smart revision plans.",
+        "Detect risky clauses before signing contracts.",
+        "/upload",
+        "legal",
       ],
       [
         "Runexa Finance Coach",
-        "Analyze your expenses, detect waste, and provide actionable saving strategies.",
+        "Understand where your money goes and improve your financial habits.",
+        "/finance",
+        "finance",
+      ],
+      [
+        "Runexa Study Agent",
+        "Learn faster with AI-generated summaries and revision plans.",
+        "/study",
+        "study",
       ],
       [
         "Runexa Business Decision Agent",
-        "Analyze business data, detect trends, and support smarter strategic decisions.",
+        "Get AI support for smarter strategic decisions.",
+        "/business",
+        "business",
       ],
     ],
   },
 
   fr: {
-    platform: "Plateforme d’agents IA Runexa",
-    title: "Des agents IA pour travailler plus vite.",
-    desc: "Runexa propose des agents IA qui vous aident à analyser vos documents, prendre de meilleures décisions et avancer plus vite.",
-    explore: "Explorer les agents",
-    tryLegal: "Runexa Legal Agent",
-    tryStudy: "Runexa Study Agent",
-    tryFinance: "Runexa Finance Coach",
-    tryBusiness: "Runexa Business Decision Agent",
-    trySecurity: "Voir l’agent sécurité",
-    choose: "Choisissez votre agent IA",
-
-    // ✅ UPDATED
-    chooseDesc:
-      "Un seul compte Runexa pour tous les agents IA. Activez chaque agent avec un essai unique à 1$, puis continuez avec des crédits globaux ou un abonnement.",
-
-    available: "Disponible",
-    coming: "Bientôt",
-    open: "Ouvrir l’agent",
+    platform: "Espace IA Runexa",
+    title: "Des agents IA spécialisés pour le juridique, la finance, les études et le business.",
+    desc: "Runexa aide les particuliers et les professionnels à analyser des documents, comprendre leurs finances, apprendre plus vite et prendre de meilleures décisions business.",
+    explore: "Explorer les agents IA",
     pricing: "Voir les tarifs",
-    securityBadge: "Agent 0 · Bientôt",
-    securityTitle: "Agent IA de sécurité domestique Runexa",
-    securitySubtitle: "Un gardien IA pour maison intelligente, caméras, capteurs, GPS et future surveillance par drone.",
-    securityDesc:
-      "Agent 0 est conçu pour comprendre ce qui se passe à la maison : mouvements inhabituels, visiteurs inconnus, portes ouvertes, présence GPS, alertes capteurs et niveau de risque en temps réel — puis transformer ces événements en actions claires.",
-    securityPrimary: "Rejoindre la liste d’attente",
-    securitySecondary: "Voir le concept sécurité",
-    securitySystem: "Centre de commande sécurité intelligent",
-    securityFooter: "Caméras + capteurs + GPS + raisonnement IA → maisons plus sûres",
-    futureSystems: "Systèmes IA du futur",
-    exploreAgent0: "Explorer Agent 0",
-    securityFeatures: [
-      "Intelligence caméra",
-      "Fusion de capteurs",
-      "Géofencing GPS",
-      "Alertes intelligentes",
-      "Module maison intelligente",
-      "Confidentialité d’abord",
+    trustLine: "Essai à 1 $ par agent · Crédits globaux · Espace IA sécurisé",
+    tryLegal: "Runexa Legal Agent",
+    tryFinance: "Runexa Finance Coach",
+    tryStudy: "Runexa Study Agent",
+    tryBusiness: "Runexa Business Decision Agent",
+    choose: "Choisissez votre agent IA",
+    chooseDesc:
+      "Un seul compte Runexa pour des agents IA spécialisés. Analysez vos documents juridiques, améliorez vos finances, apprenez plus vite et prenez de meilleures décisions business.",
+    available: "Disponible",
+    open: "Ouvrir l’agent",
+    howTitle: "Comment fonctionne Runexa",
+    howSteps: [
+      "Téléchargez vos documents ou données",
+      "L’IA Runexa analyse le contenu",
+      "Recevez des recommandations exploitables",
     ],
-    enterpriseBadge: "Agents IA personnalisés",
-    enterpriseTitle: "Runexa Systems pour les entreprises",
-    enterpriseSubtitle:
-      "Des agents IA personnalisés pour vos équipes, vos données et vos flux de travails.",
+    trustCards: [
+      ["Sécurisé et confidentiel", "Vos données sont protégées"],
+      ["Crédits globaux", "Utilisables sur tous les agents"],
+      ["Accès instantané", "Commencez rapidement"],
+      ["Conçu pour le travail réel", "Particuliers et professionnels"],
+    ],
+    enterpriseBadge: "Systèmes IA personnalisés",
+    enterpriseTitle: "Runexa pour les organisations",
+    enterpriseSubtitle: "Des systèmes IA personnalisés pour les équipes et les entreprises.",
     enterpriseDesc:
-      "Nous concevons des agents IA sur mesure pour aider les entreprises à automatiser l’analyse documentaire, le reporting financier, le recrutement, la conformité et la prise de décision.",
+      "Runexa aide les organisations à automatiser l’analyse documentaire, le reporting financier, les workflows d’apprentissage et la prise de décision stratégique.",
     enterprisePrimary: "Contacter l’équipe commerciale",
     enterpriseSecondary: "Découvrir Runexa pour les entreprises",
     enterpriseCards: [
@@ -168,96 +138,77 @@ const labels: any = {
       "Crédits personnalisés",
       "Support prioritaire",
     ],
-    enterpriseSystem: "Système d’agents personnalisés",
-    enterpriseWorkflow: "Flux de travail IA personnalisé",
+    enterpriseSystem: "Système IA personnalisé",
+    enterpriseWorkflow: "Workflow IA",
     enterpriseFooter: "Workflows connectés → vision unifiée → décisions plus rapides",
     enterpriseTag: "Entreprise",
     enterpriseHeader: "IA Business Runexa",
     ctaTitle: "Une plateforme. Plusieurs agents IA. Des résultats concrets.",
     ctaDesc:
-      "Runexa Systems est une plateforme d’agents IA qui vous permet d’analyser vos documents, apprendre plus vite, gérer vos finances personnelles et prendre des décisions business plus intelligentes.",
+      "Runexa Systems est un espace IA pour le juridique, la finance, les études et la productivité business.",
     ctaButton: "Créer votre compte",
     disclaimer: "Analyses générées par IA. Vérifiez toujours avant d’agir.",
-    trialLine:
-      "Essai à 1 $ par agent · Crédits globaux · Plans Pro et Premium pour tous les agents",
-    labsBadge: "Runexa Labs",
-    labsDesc:
-      "Agent 0 représente la vision future des systèmes IA autonomes pour les environnements réels, l’orchestration de la sécurité, l’intelligence des capteurs et la prise de décision proactive.",
-    labsCards: [
-      "Couche de sécurité IA",
-      "Intelligence des capteurs",
-      "Surveillance autonome",
-      "Futurs systèmes de maison intelligente",
-    ],
     agents: [
       [
-        "Agent 0 · Sécurité domestique",
-        "Sécurité domestique par IA avec caméras, capteurs, géofencing GPS, alertes intelligentes et future surveillance par drone.",
-      ],
-      [
         "Runexa Legal Agent",
-        "Analysez vos contrats, détectez les clauses à risque et obtenez des recommandations claires.",
-      ],
-      [
-        "Runexa Study Agent",
-        "Analysez vos cours, générez des résumés, quiz et plans de révision intelligents.",
+        "Détectez les clauses à risque avant de signer vos contrats.",
+        "/upload",
+        "legal",
       ],
       [
         "Runexa Finance Coach",
-        "Analysez vos dépenses, détectez le gaspillage et recevez des stratégies d’épargne concrètes.",
+        "Comprenez où va votre argent et améliorez vos habitudes financières.",
+        "/finance",
+        "finance",
+      ],
+      [
+        "Runexa Study Agent",
+        "Apprenez plus vite grâce aux résumés IA et aux plans de révision intelligents.",
+        "/study",
+        "study",
       ],
       [
         "Runexa Business Decision Agent",
-        "Analysez vos données business, identifiez les tendances et prenez de meilleures décisions stratégiques.",
+        "Obtenez une assistance IA pour prendre de meilleures décisions stratégiques.",
+        "/business",
+        "business",
       ],
     ],
   },
 
   ar: {
-    platform: "منصة Runexa للوكلاء الذكيين",
-    title: "وكلاء ذكاء اصطناعي يساعدونك على إنجاز العمل بسرعة.",
-    desc: "توفر Runexa وكلاء ذكاء اصطناعي يساعدونك على تحليل المستندات واتخاذ قرارات أفضل والعمل بشكل أسرع.",
-    explore: "استكشاف الوكلاء",
-    tryLegal: "Runexa Legal Agent",
-    tryStudy: "Runexa Study Agent",
-    tryFinance: "Runexa Finance Coach",
-    tryBusiness: "Runexa Business Decision Agent",
-    trySecurity: "معاينة وكيل الأمان",
-    choose: "اختر وكيلك الذكي",
-
-    // ✅ UPDATED
-    chooseDesc:
-      "حساب Runexa واحد لجميع الوكلاء. فعّل كل وكيل بتجربة واحدة بقيمة 1 دولار، ثم تابع باستخدام الأرصدة العامة أو الاشتراك.",
-
-    available: "متاح",
-    coming: "قريباً",
-    open: "فتح الوكيل",
+    platform: "مساحة Runexa للذكاء الاصطناعي",
+    title: "وكلاء ذكاء اصطناعي متخصصون في القانون والمالية والدراسة والأعمال.",
+    desc: "تساعد Runexa الأفراد والمحترفين على تحليل المستندات وفهم البيانات المالية والتعلم بشكل أسرع واتخاذ قرارات أعمال أكثر ذكاءً.",
+    explore: "استكشاف وكلاء الذكاء الاصطناعي",
     pricing: "عرض الأسعار",
-    securityBadge: "الوكيل 0 · قريباً",
-    securityTitle: "وكيل Runexa لأمان المنزل",
-    securitySubtitle: "حارس ذكي للمنازل الذكية والكاميرات والحساسات وGPS وميزات أتمتة المنازل الذكية المستقبلية.",
-    securityDesc:
-      "تم تصميم الوكيل 0 لفهم ما يحدث في المنزل: حركة غير عادية، زوار غير معروفين، أبواب مفتوحة، وجود عبر GPS، تنبيهات الحساسات ومستوى الخطر في الوقت الحقيقي — ثم تحويل الأحداث إلى إجراءات واضحة.",
-    securityPrimary: "الانضمام إلى قائمة الانتظار",
-    securitySecondary: "عرض مفهوم الأمان",
-    securitySystem: "مركز تحكم ذكي للأمان",
-    securityFooter: "كاميرات + حساسات + GPS + تفكير ذكاء اصطناعي → منازل أكثر أماناً",
-    futureSystems: "أنظمة الذكاء الاصطناعي المستقبلية",
-    exploreAgent0: "استكشاف الوكيل 0",
-    securityFeatures: [
-      "ذكاء الكاميرا",
-      "دمج الحساسات",
-      "تحديد النطاق عبر GPS",
-      "تنبيهات ذكية",
-      "وحدة جاهزة للمنزل الذكي",
-      "الخصوصية أولاً",
+    trustLine: "تجربة مقابل 1 دولار لكل وكيل · أرصدة موحدة · مساحة ذكاء اصطناعي آمنة",
+    tryLegal: "Runexa Legal Agent",
+    tryFinance: "Runexa Finance Coach",
+    tryStudy: "Runexa Study Agent",
+    tryBusiness: "Runexa Business Decision Agent",
+    choose: "اختر وكيلك الذكي",
+    chooseDesc:
+      "حساب Runexa واحد لوكلاء ذكاء اصطناعي متخصصين. حلل المستندات القانونية، افهم أموالك، تعلّم أسرع، واتخذ قرارات أعمال أفضل.",
+    available: "متاح",
+    open: "فتح الوكيل",
+    howTitle: "كيف تعمل Runexa",
+    howSteps: [
+      "قم برفع مستنداتك أو بياناتك",
+      "يقوم ذكاء Runexa بتحليل المحتوى",
+      "احصل على توصيات ورؤى قابلة للتنفيذ",
     ],
-    enterpriseBadge: "وكلاء ذكاء اصطناعي مخصصون",
-    enterpriseTitle: "Runexa للأعمال",
-    enterpriseSubtitle:
-      "وكلاء ذكاء اصطناعي مخصصون لفرقك وبياناتك وسير عملك.",
+    trustCards: [
+      ["آمن وخاص", "بياناتك محمية"],
+      ["أرصدة موحدة", "صالحة لكل الوكلاء"],
+      ["وصول فوري", "ابدأ بسرعة"],
+      ["مصمم للعمل الواقعي", "للأفراد والمحترفين"],
+    ],
+    enterpriseBadge: "أنظمة ذكاء اصطناعي مخصصة",
+    enterpriseTitle: "Runexa للمؤسسات",
+    enterpriseSubtitle: "أنظمة ذكاء اصطناعي مخصصة للفرق والشركات.",
     enterpriseDesc:
-      "نصمم وكلاء ذكاء اصطناعي مخصصين لمساعدة الشركات على أتمتة تحليل المستندات، التقارير المالية، التوظيف، الامتثال، واتخاذ القرار.",
+      "تساعد Runexa المؤسسات على أتمتة تحليل المستندات والتقارير المالية وعمليات التعلم واتخاذ القرارات الاستراتيجية.",
     enterprisePrimary: "طلب عرض",
     enterpriseSecondary: "استكشاف حلول الأعمال",
     enterpriseCards: [
@@ -267,53 +218,79 @@ const labels: any = {
       "أرصدة مخصصة",
       "دعم ذو أولوية",
     ],
-    enterpriseSystem: "نظام وكلاء مخصص",
-    enterpriseWorkflow: "سير عمل ذكي مخصص",
+    enterpriseSystem: "نظام ذكاء اصطناعي مخصص",
+    enterpriseWorkflow: "سير عمل ذكي",
     enterpriseFooter: "ربط العمليات → رؤية موحدة → قرارات أسرع",
     enterpriseTag: "المؤسسات",
     enterpriseHeader: "Runexa Business AI",
-    ctaTitle: "منصة واحدة. عدة وكلاء ذكاء اصطناعي. نتائج عملية.",
+    ctaTitle: "منصة واحدة. عدة وكلاء ذكاء اصطناعي. نتائج واقعية.",
     ctaDesc:
-      "Runexa Systems هي منصة وكلاء ذكاء اصطناعي تساعدك على تحليل المستندات، التعلم بشكل أسرع، إدارة أموالك الشخصية، واتخاذ قرارات أعمال أكثر ذكاءً.",
+      "Runexa Systems هي مساحة ذكاء اصطناعي للقانون والمالية والدراسة وإنتاجية الأعمال.",
     ctaButton: "إنشاء حساب",
     disclaimer: "تحليلات مدعومة بالذكاء الاصطناعي. تحقق دائماً قبل اتخاذ أي قرار.",
-    trialLine:
-      "تجربة بقيمة 1 دولار لكل وكيل · أرصدة موحدة · خطط Pro وPremium لجميع الوكلاء",
-    labsBadge: "مختبرات Runexa",
-    labsDesc:
-      "يمثل الوكيل 0 الرؤية المستقبلية لأنظمة الذكاء الاصطناعي الذاتية في البيئات الواقعية، وتنظيم الأمان، وذكاء الحساسات، واتخاذ القرارات الاستباقية.",
-    labsCards: [
-      "طبقة أمان بالذكاء الاصطناعي",
-      "ذكاء الحساسات",
-      "مراقبة ذاتية",
-      "أنظمة منزل ذكي مستقبلية",
-    ],
     agents: [
       [
-        "الوكيل 0 · أمان المنزل",
-        "أمان منزلي مدعوم بالذكاء الاصطناعي مع كاميرات وحساسات وتحديد نطاق GPS وتنبيهات ذكية ومراقبة مستقبلية بالطائرات الصغيرة.",
-      ],
-      [
         "Runexa Legal Agent",
-        "حلل العقود، واكتشف البنود الخطرة، واحصل على توصيات واضحة.",
-      ],
-      [
-        "Runexa Study Agent",
-        "حلل المواد الدراسية، وأنشئ ملخصات واختبارات وخطط مراجعة ذكية.",
+        "اكتشف البنود الخطرة قبل توقيع العقود.",
+        "/upload",
+        "legal",
       ],
       [
         "Runexa Finance Coach",
-        "حلل مصاريفك، واكتشف الهدر، واحصل على استراتيجيات ادخار فعالة.",
+        "افهم أين تذهب أموالك وحسّن عاداتك المالية.",
+        "/finance",
+        "finance",
+      ],
+      [
+        "Runexa Study Agent",
+        "تعلّم بشكل أسرع باستخدام الملخصات وخطط المراجعة المدعومة بالذكاء الاصطناعي.",
+        "/study",
+        "study",
       ],
       [
         "Runexa Business Decision Agent",
-        "حلل بيانات الأعمال، واكتشف الاتجاهات، واتخذ قرارات استراتيجية أفضل.",
+        "احصل على دعم بالذكاء الاصطناعي لاتخاذ قرارات استراتيجية أكثر ذكاءً.",
+        "/business",
+        "business",
       ],
     ],
   },
 };
 
-const agentLinks = ["/security", "/upload", "/study", "/finance", "/business"];
+const agentStyles: any = {
+  legal: {
+    icon: Scale,
+    card: "border-slate-200 bg-white hover:shadow-blue-100",
+    iconBox: "bg-blue-50",
+    iconColor: "text-blue-700",
+    arrow: "text-blue-600",
+    badge: "bg-blue-50 text-blue-700",
+  },
+  finance: {
+    icon: BarChart3,
+    card: "bg-gradient-to-br from-emerald-500 to-green-600 text-white hover:shadow-emerald-200",
+    iconBox: "bg-white/15 backdrop-blur",
+    iconColor: "text-white",
+    arrow: "text-white",
+    badge: "bg-white/10 text-emerald-50",
+  },
+  study: {
+    icon: GraduationCap,
+    card: "border-slate-200 bg-white hover:shadow-violet-100",
+    iconBox: "bg-violet-50",
+    iconColor: "text-violet-700",
+    arrow: "text-violet-600",
+    badge: "bg-violet-50 text-violet-700",
+  },
+  business: {
+    icon: BriefcaseBusiness,
+    card: "border-slate-200 bg-white hover:shadow-orange-100",
+    iconBox: "bg-orange-50",
+    iconColor: "text-orange-700",
+    arrow: "text-orange-600",
+    badge: "bg-orange-50 text-orange-700",
+  },
+};
 
 export default function HomePage() {
   const [language, setLanguage] = useState("en");
@@ -321,6 +298,7 @@ export default function HomePage() {
 
   useEffect(() => {
     const saved = localStorage.getItem("locale");
+
     if (saved && labels[saved]) {
       setLanguage(saved);
     }
@@ -357,6 +335,24 @@ export default function HomePage() {
             {t.desc}
           </p>
 
+          <div className="flex flex-col sm:flex-row justify-center gap-3">
+            <a
+              href="#agents"
+              className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-700 transition"
+            >
+              {t.explore}
+            </a>
+
+            <Link
+              href="/pricing"
+              className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-900 hover:bg-slate-50 transition"
+            >
+              {t.pricing}
+            </Link>
+          </div>
+
+          <p className="text-sm text-slate-500">{t.trustLine}</p>
+
           <div className="relative mt-10">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-100/40 via-transparent to-emerald-100/30 blur-3xl" />
 
@@ -374,7 +370,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4 lg:grid-cols-6">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5">
                 <a
                   href="#agents"
                   className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 to-blue-700 p-4 xl:p-5 text-white shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-blue-200"
@@ -392,10 +388,10 @@ export default function HomePage() {
 
                         <p className="mt-1 text-sm text-blue-100">
                           {language === "fr"
-                            ? "Tous les agents IA"
+                            ? "Agents spécialisés"
                             : language === "ar"
-                            ? "كل وكلاء الذكاء الاصطناعي"
-                            : "All AI agents"}
+                            ? "وكلاء متخصصون"
+                            : "Specialized agents"}
                         </p>
                       </div>
                     </div>
@@ -407,372 +403,87 @@ export default function HomePage() {
 
                   <div className="mt-5 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-blue-100">
                     {language === "fr"
-                      ? "Pour tous"
+                      ? "Espace IA"
                       : language === "ar"
-                      ? "للجميع"
-                      : "For everyone"}
+                      ? "مساحة ذكاء اصطناعي"
+                      : "AI workspace"}
                   </div>
                 </a>
 
-                <a
-                  href="#agent-0"
-                  className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-black to-slate-900 p-4 xl:p-5 text-white shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-slate-300"
-                >
-                  <div className="relative flex items-start justify-between">
-                    <div className="space-y-2 text-left">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-2xl backdrop-blur">
-                        <ShieldCheck className="h-6 w-6" />
-                      </div>
+                {t.agents.map((agent: string[]) => {
+                  const style = agentStyles[agent[3]];
+                  const Icon = style.icon;
+                  const isDark = agent[3] === "finance";
 
-                      <div>
-                        <h3 className="text-base font-bold">{t.trySecurity}</h3>
-
-                        <p className="mt-1 text-sm text-slate-300">
-                          Agent 0 · {t.coming}
-                        </p>
-                      </div>
-                    </div>
-
-                    <span className="text-2xl transition group-hover:translate-x-1">
-                      →
-                    </span>
-                  </div>
-
-                  <div className="mt-5 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-slate-200">
-                    {language === "fr"
-                      ? "Bientôt disponible"
-                      : language === "ar"
-                      ? "قريباً"
-                      : "Coming soon"}
-                  </div>
-                </a>
-
-                <Link
-                  href="/upload"
-                  className="group rounded-3xl border border-slate-200 bg-white p-4 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-blue-100"
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="space-y-2 text-left">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-2xl">
-                        <Scale className="h-6 w-6 text-blue-700" />
-                      </div>
-
-                      <div>
-                        <h3 className="text-base font-bold text-slate-900">
-                          {t.tryLegal}
-                        </h3>
-
-                        <p className="mt-1 text-sm text-slate-500">
-                          {language === "fr"
-                            ? "Essai unique à 1 $"
-                            : language === "ar"
-                            ? "تجربة مقابل 1 دولار"
-                            : "$1 one-time trial"}
-                        </p>
-                      </div>
-                    </div>
-
-                    <span className="text-2xl text-blue-600 transition group-hover:translate-x-1">
-                      →
-                    </span>
-                  </div>
-
-                  <div className="mt-5 inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
-                    {language === "fr"
-                      ? "Particuliers & professionnels"
-                      : language === "ar"
-                      ? "للأفراد والمحترفين"
-                      : "Individuals & professionals"}
-                  </div>
-                </Link>
-
-                <Link
-                  href="/study"
-                  className="group rounded-3xl border border-slate-200 bg-white p-4 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-violet-100"
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="space-y-2 text-left">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-50 text-2xl">
-                        <GraduationCap className="h-6 w-6 text-violet-700" />
-                      </div>
-
-                      <div>
-                        <h3 className="text-base font-bold text-slate-900">
-                          {t.tryStudy}
-                        </h3>
-
-                        <p className="mt-1 text-sm text-slate-500">
-                          {language === "fr"
-                            ? "Essai unique à 1 $"
-                            : language === "ar"
-                            ? "تجربة مقابل 1 دولار"
-                            : "$1 one-time trial"}
-                        </p>
-                      </div>
-                    </div>
-
-                    <span className="text-2xl text-violet-600 transition group-hover:translate-x-1">
-                      →
-                    </span>
-                  </div>
-
-                  <div className="mt-5 inline-flex rounded-full bg-violet-50 px-3 py-1 text-xs font-medium text-violet-700">
-                    {language === "fr"
-                      ? "Usage personnel & pro"
-                      : language === "ar"
-                      ? "استخدام شخصي واحترافي"
-                      : "Personal & professional"}
-                  </div>
-                </Link>
-
-                <Link
-                  href="/finance"
-                  className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-500 to-green-600 p-4 xl:p-5 text-white shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-emerald-200"
-                >
-                  <div className="absolute inset-0 bg-white/5 opacity-0 transition group-hover:opacity-100" />
-
-                  <div className="relative flex items-start justify-between">
-                    <div className="space-y-2 text-left">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15 text-2xl backdrop-blur">
-                        <BarChart3 className="h-6 w-6" />
-                      </div>
-
-                      <div>
-                        <h3 className="text-base font-bold">{t.tryFinance}</h3>
-
-                        <p className="mt-1 text-sm text-emerald-100">
-                          {language === "fr"
-                            ? "Essai unique à 1 $"
-                            : language === "ar"
-                            ? "تجربة مقابل 1 دولار"
-                            : "$1 one-time trial"}
-                        </p>
-                      </div>
-                    </div>
-
-                    <span className="text-2xl transition group-hover:translate-x-1">
-                      →
-                    </span>
-                  </div>
-
-                  <div className="mt-5 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-emerald-50">
-                    {language === "fr"
-                      ? "Pour particuliers"
-                      : language === "ar"
-                      ? "للأفراد"
-                      : "For individuals"}
-                  </div>
-                </Link>
-                <Link
-                  href="/business"
-                  className="group rounded-3xl border border-slate-200 bg-white p-4 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-orange-100"
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="space-y-2 text-left">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 text-2xl">
-                        <BriefcaseBusiness className="h-6 w-6 text-orange-700" />
-                      </div>
-
-                      <div>
-                        <h3 className="text-base font-bold text-slate-900">
-                          {t.tryBusiness}
-                        </h3>
-
-                        <p className="mt-1 text-sm text-slate-500">
-                          {language === "fr"
-                            ? "Essai unique à 1 $"
-                            : language === "ar"
-                            ? "تجربة مقابل 1 دولار"
-                            : "$1 one-time trial"}
-                        </p>
-                      </div>
-                    </div>
-
-                    <span className="text-2xl text-orange-600 transition group-hover:translate-x-1">
-                      →
-                    </span>
-                  </div>
-
-                  <div className="mt-5 inline-flex rounded-full bg-orange-50 px-3 py-1 text-xs font-medium text-orange-700">
-                    {language === "fr"
-                      ? "Pro & entreprises"
-                      : language === "ar"
-                      ? "للمحترفين والشركات"
-                      : "Pros & companies"}
-                  </div>
-                </Link>
-              </div>
-
-              <div className="mt-8 grid grid-cols-2 gap-4 border-t border-slate-200 pt-6 lg:grid-cols-4">
-                <div className="flex items-center gap-3 text-left">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-xl">
-                    <ShieldCheck className="h-6 w-6" />
-                  </div>
-
-                  <div>
-                    <p className="font-semibold text-slate-900">
-                      {language === "fr"
-                        ? "Essai unique à 1 $"
-                        : language === "ar"
-                        ? "تجربة مقابل 1 دولار"
-                        : "$1 one-time trial"}
-                    </p>
-
-                    <p className="text-sm text-slate-500">
-                      {language === "fr"
-                        ? "Sans abonnement obligatoire"
-                        : language === "ar"
-                        ? "بدون اشتراك إجباري"
-                        : "No mandatory subscription"}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3 text-left">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-50 text-xl">
-                    <Lock className="h-6 w-6 text-violet-700" />
-                  </div>
-
-                  <div>
-                    <p className="font-semibold text-slate-900">
-                      {language === "fr"
-                        ? "Sécurisé & confidentiel"
-                        : language === "ar"
-                        ? "آمن وسري"
-                        : "Secure & private"}
-                    </p>
-
-                    <p className="text-sm text-slate-500">
-                      {language === "fr"
-                        ? "Vos données sont protégées"
-                        : language === "ar"
-                        ? "بياناتك محمية"
-                        : "Your data is protected"}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3 text-left">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 text-xl">
-                    <Zap className="h-6 w-6 text-emerald-700" />
-                  </div>
-
-                  <div>
-                    <p className="font-semibold text-slate-900">
-                      {language === "fr"
-                        ? "Activation instantanée"
-                        : language === "ar"
-                        ? "تفعيل فوري"
-                        : "Instant activation"}
-                    </p>
-
-                    <p className="text-sm text-slate-500">
-                      {language === "fr"
-                        ? "Accès immédiat après activation"
-                        : language === "ar"
-                        ? "وصول مباشر بعد التفعيل"
-                        : "Immediate access"}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3 text-left">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-xl">
-                    <Globe className="h-6 w-6 text-blue-700" />
-                  </div>
-
-                  <div>
-                    <p className="font-semibold text-slate-900">
-                      {language === "fr"
-                        ? "Crédits globaux"
-                        : language === "ar"
-                        ? "رصيد موحد"
-                        : "Global credits"}
-                    </p>
-
-                    <p className="text-sm text-slate-500">
-                      {language === "fr"
-                        ? "Utilisables sur tous les agents"
-                        : language === "ar"
-                        ? "صالحة لكل الوكلاء"
-                        : "Works across all agents"}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      <section id="agent-0" className="px-6 py-12">
-        <div className="max-w-6xl mx-auto">
-          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 text-white shadow-xl">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-slate-950 to-emerald-500/10" />
-
-            <div className="relative grid gap-10 p-8 md:p-12 lg:grid-cols-2 lg:items-center">
-              <div>
-                <span className="inline-flex rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold text-blue-100">
-                  {t.securityBadge}
-                </span>
-
-                <h2 className="mt-5 text-3xl md:text-4xl font-bold tracking-tight">
-                  {t.securityTitle}
-                </h2>
-
-                <p className="mt-3 text-lg font-medium text-blue-100">
-                  {t.securitySubtitle}
-                </p>
-
-                <p className="mt-4 text-slate-300 leading-7">
-                  {t.securityDesc}
-                </p>
-
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <Link
-                    href="/labs/agent-0/waitlist"
-                    className="rounded-xl bg-white px-5 py-3 text-sm font-semibold text-slate-950 hover:bg-slate-100 transition"
-                  >
-                    {t.securityPrimary}
-                  </Link>
-
-                  <Link
-                    href="/labs/agent-0"
-                    className="rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10 transition"
-                  >
-                    {t.securitySecondary}
-                  </Link>
-                </div>
-              </div>
-
-              <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur">
-                <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                  <div>
-                    <p className="text-sm text-slate-400">Runexa Agent 0</p>
-                    <p className="text-lg font-semibold">{t.securitySystem}</p>
-                  </div>
-
-                  <span className="rounded-full bg-amber-400/10 px-3 py-1 text-xs font-medium text-amber-200">
-                    {t.coming}
-                  </span>
-                </div>
-
-                <div className="mt-6 grid grid-cols-2 gap-3">
-                  {t.securityFeatures.map((item: string, index: number) => (
-                    <div
-                      key={index}
-                      className="rounded-2xl border border-white/10 bg-slate-900/60 p-4"
+                  return (
+                    <Link
+                      key={agent[0]}
+                      href={agent[2]}
+                      className={`group relative overflow-hidden rounded-3xl p-4 shadow-lg transition duration-300 hover:-translate-y-1 ${style.card}`}
                     >
-                      <div className="h-2 w-2 rounded-full bg-emerald-400" />
-                      <p className="mt-3 text-sm font-medium">{item}</p>
-                    </div>
-                  ))}
-                </div>
+                      {isDark && (
+                        <div className="absolute inset-0 bg-white/5 opacity-0 transition group-hover:opacity-100" />
+                      )}
 
-                <div className="mt-6 rounded-2xl border border-emerald-400/20 bg-emerald-500/10 p-4 text-sm text-emerald-100">
-                  {t.securityFooter}
-                </div>
+                      <div className="relative flex items-start justify-between">
+                        <div className="space-y-2 text-left">
+                          <div className={`flex h-12 w-12 items-center justify-center rounded-2xl text-2xl ${style.iconBox}`}>
+                            <Icon className={`h-6 w-6 ${style.iconColor}`} />
+                          </div>
+
+                          <div>
+                            <h3 className={`text-base font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
+                              {agent[0]}
+                            </h3>
+
+                            <p className={`mt-1 text-sm ${isDark ? "text-emerald-100" : "text-slate-500"}`}>
+                              {agent[1]}
+                            </p>
+                          </div>
+                        </div>
+
+                        <span className={`text-2xl transition group-hover:translate-x-1 ${style.arrow}`}>
+                          →
+                        </span>
+                      </div>
+
+                      <div className={`mt-5 inline-flex rounded-full px-3 py-1 text-xs font-medium ${style.badge}`}>
+                        {t.available}
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              <div className="mt-8 grid grid-cols-1 gap-4 border-t border-slate-200 pt-6 md:grid-cols-2 lg:grid-cols-4">
+                {t.trustCards.map((card: string[], index: number) => {
+                  const icons = [Lock, Globe, Zap, ShieldCheck];
+                  const colors = [
+                    "bg-violet-50 text-violet-700",
+                    "bg-blue-50 text-blue-700",
+                    "bg-emerald-50 text-emerald-700",
+                    "bg-blue-50 text-blue-700",
+                  ];
+                  const Icon = icons[index];
+
+                  return (
+                    <div key={card[0]} className="flex items-center gap-3 text-left">
+                      <div className={`flex h-12 w-12 items-center justify-center rounded-2xl text-xl ${colors[index]}`}>
+                        <Icon className="h-6 w-6" />
+                      </div>
+
+                      <div>
+                        <p className="font-semibold text-slate-900">
+                          {card[0]}
+                        </p>
+
+                        <p className="text-sm text-slate-500">
+                          {card[1]}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -783,59 +494,81 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-bold">{t.choose}</h2>
-            <p className="mt-3 text-slate-600">{t.chooseDesc}</p>
-            <p className="mt-2 text-sm text-slate-500">
-              {t.trialLine}
+            <p className="mt-3 text-slate-600 max-w-3xl mx-auto">
+              {t.chooseDesc}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
-            {t.agents.map((agent: string[], index: number) => {
-              const isAvailable = index >= 1;
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {t.agents.map((agent: string[]) => {
+              const style = agentStyles[agent[3]];
+              const Icon = style.icon;
 
               return (
-                <div key={agent[0]} className="bg-white p-6 rounded-2xl border shadow-sm flex flex-col justify-between">
+                <div
+                  key={agent[0]}
+                  className="bg-white p-6 rounded-2xl border shadow-sm flex flex-col justify-between"
+                >
                   <div>
                     <div className="flex items-center justify-between gap-3">
-                      <h3 className="text-xl font-bold">
-                        {agent[0]}
-                      </h3>
+                      <div className={`flex h-11 w-11 items-center justify-center rounded-2xl ${style.iconBox}`}>
+                        <Icon className={`h-6 w-6 ${style.iconColor}`} />
+                      </div>
+
                       <span className="text-xs bg-slate-100 text-slate-600 px-3 py-1 rounded-full">
-                        {isAvailable ? t.available : t.coming}
+                        {t.available}
                       </span>
                     </div>
 
-                    {isAvailable && (
-                      <div className="mt-3 inline-flex w-fit rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
-                        {language === "fr"
-                          ? "Essai à 1 $"
-                          : language === "ar"
-                          ? "تجربة مقابل 1 دولار"
-                          : "$1 Trial"}
-                      </div>
-                    )}
+                    <h3 className="mt-4 text-xl font-bold">
+                      {agent[0]}
+                    </h3>
 
                     <p className="mt-4 text-slate-600">{agent[1]}</p>
                   </div>
 
-                  {isAvailable ? (
-                    <Link
-                      href={agentLinks[index]}
-                      className="inline-block mt-6 text-center px-4 py-2 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition"
-                    >
-                      {t.open}
-                    </Link>
-                  ) : (
-                    <button
-                      disabled
-                      className="mt-6 px-4 py-2 bg-slate-100 text-slate-400 rounded-xl font-semibold"
-                    >
-                      {t.coming}
-                    </button>
-                  )}
+                  <Link
+                    href={agent[2]}
+                    className="inline-block mt-6 text-center px-4 py-2 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition"
+                  >
+                    {t.open}
+                  </Link>
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-12">
+        <div className="max-w-6xl mx-auto">
+          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-slate-50" />
+
+            <div className="relative p-8 md:p-12">
+              <div className="text-center mb-10">
+                <h2 className="text-3xl font-bold text-slate-900">
+                  {t.howTitle}
+                </h2>
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-3">
+                {t.howSteps.map((step: string, index: number) => (
+                  <div
+                    key={step}
+                    className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+                  >
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">
+                      {index + 1}
+                    </div>
+
+                    <p className="mt-4 font-semibold text-slate-900">
+                      {step}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -916,73 +649,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="px-6 py-10">
-        <div className="max-w-6xl mx-auto">
-          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 p-8 md:p-12 text-white shadow-2xl">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.25),transparent_40%)]" />
-
-            <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
-              <div className="max-w-3xl">
-                <span className="inline-flex rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold text-blue-100">
-                  {t.labsBadge}
-                </span>
-
-                <h2 className="mt-5 text-3xl md:text-4xl font-bold tracking-tight">
-                  {t.futureSystems}
-                </h2>
-
-                <p className="mt-4 text-slate-300 leading-7 text-lg">
-                  {t.labsDesc}
-                </p>
-
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <Link
-                    href="/labs/agent-0"
-                    className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-slate-950 hover:bg-slate-100 transition"
-                  >
-                    {t.exploreAgent0}
-                  </Link>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4 min-w-[280px]">
-                {t.labsCards.map((item: string, index: number) => {
-                  const dotColors = [
-                    "bg-emerald-400",
-                    "bg-blue-400",
-                    "bg-violet-400",
-                    "bg-amber-400",
-                  ];
-
-                  return (
-                    <div
-                      key={item}
-                      className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur"
-                    >
-                      <div
-                        className={`h-2 w-2 rounded-full ${dotColors[index]}`}
-                      />
-                      <p className="mt-4 text-sm font-semibold">{item}</p>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
       <section className="px-6 py-16">
         <div className="max-w-5xl mx-auto bg-blue-600 text-white rounded-3xl p-10 text-center">
           <h2 className="text-3xl font-bold">{t.ctaTitle}</h2>
           <p className="mt-4 text-blue-100">{t.ctaDesc}</p>
 
-          <Link href="/register" className="inline-block mt-6 px-6 py-3 bg-white text-blue-600 rounded-xl font-semibold">
+          <Link
+            href="/register"
+            className="inline-block mt-6 px-6 py-3 bg-white text-blue-600 rounded-xl font-semibold"
+          >
             {t.ctaButton}
           </Link>
 
-          <p className="mt-8 text-center text-sm text-slate-500 max-w-2xl mx-auto">
+          <p className="mt-8 text-center text-sm text-blue-100 max-w-2xl mx-auto">
             {t.disclaimer}
           </p>
         </div>

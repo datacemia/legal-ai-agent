@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import jsPDF from "jspdf";
 import { analyzeFinanceStatement } from "../../lib/api";
 import { getSavedLocale, setSavedLocale } from "../../lib/i18n";
 import {
@@ -9,6 +10,15 @@ import {
   Cell,
   Tooltip,
   ResponsiveContainer,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  AreaChart,
+  Area,
+  BarChart,
+  Bar,
 } from "recharts";
 
 const safeGetLocalStorage = (key: string, fallback = "") => {
@@ -211,12 +221,11 @@ export default function FinancePage() {
     return currencySymbol ? `${currencySymbol} ${amount}` : `${amount}`;
   };
 
-  const chartData = Object.entries(result?.main_categories || {})
-    .map(([name, value]) => ({
-      name,
-      value: Number(value),
-    }))
-    .filter((item) => item.value > 0);
+  const chartData =
+    result?.charts?.category_breakdown?.map((item: any) => ({
+      name: item.category,
+      value: Number(item.amount),
+    })) || [];
 
   const refreshUserBilling = async () => {
     const token = safeGetLocalStorage("token");
@@ -291,6 +300,127 @@ export default function FinancePage() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const exportFinanceReportPdf = () => {
+    if (!result) return;
+
+    const doc = new jsPDF();
+    let y = 18;
+
+    const addLine = (gap = 8) => {
+      y += gap;
+
+      if (y > 280) {
+        doc.addPage();
+        y = 18;
+      }
+    };
+
+    doc.setFontSize(20);
+    doc.text("Runexa Personal Finance AI Report", 14, y);
+
+    addLine(8);
+    doc.setFontSize(10);
+    doc.text(`Generated: ${new Date().toLocaleDateString()}`, 14, y);
+
+    addLine(12);
+    doc.setFontSize(13);
+    doc.text("Executive Summary", 14, y);
+
+    addLine(8);
+    doc.setFontSize(10);
+    doc.text(doc.splitTextToSize(result.summary || "-", 180), 14, y);
+
+    addLine(22);
+    doc.setFontSize(13);
+    doc.text("Financial Overview", 14, y);
+
+    addLine(8);
+    doc.setFontSize(10);
+    doc.text(`Income: ${formatMoney(result.cashflow_forecast?.monthly_income)}`, 14, y);
+    addLine(7);
+    doc.text(`Expenses: ${formatMoney(result.cashflow_forecast?.monthly_expenses)}`, 14, y);
+    addLine(7);
+    doc.text(`Net Cashflow: ${formatMoney(result.cashflow_forecast?.net_cashflow)}`, 14, y);
+    addLine(7);
+    doc.text(`Financial Habits Score: ${result.financial_habit_scores?.overall_financial_habits_score ?? "-"}/100`, 14, y);
+
+    addLine(12);
+    doc.setFontSize(13);
+    doc.text("AI Savings Opportunities", 14, y);
+
+    addLine(8);
+    doc.setFontSize(10);
+
+    (result.savings_opportunities || []).forEach((item: any) => {
+      doc.text(
+        `${item.issue}: ${formatMoney(item.estimated_monthly_savings)} / month`,
+        14,
+        y
+      );
+
+      addLine(6);
+
+      doc.text(
+        doc.splitTextToSize(item.recommendation || "-", 180),
+        18,
+        y
+      );
+
+      addLine(8);
+    });
+
+    addLine(4);
+    doc.setFontSize(13);
+    doc.text("Detected Subscriptions", 14, y);
+
+    addLine(8);
+    doc.setFontSize(10);
+
+    (result.subscriptions_detected || []).forEach((sub: any) => {
+      doc.text(
+        `${sub.name}: ${formatMoney(sub.monthly_cost)} / month | Yearly: ${formatMoney(sub.yearly_cost_estimate)}`,
+        14,
+        y
+      );
+
+      addLine(7);
+    });
+
+    addLine(6);
+    doc.setFontSize(13);
+    doc.text("Recommended Budget", 14, y);
+
+    addLine(8);
+    doc.setFontSize(10);
+    doc.text(`Needs: ${formatMoney(result.recommended_budget?.needs)}`, 14, y);
+
+    addLine(7);
+    doc.text(`Wants: ${formatMoney(result.recommended_budget?.wants)}`, 14, y);
+
+    addLine(7);
+    doc.text(`Savings Target: ${formatMoney(result.recommended_budget?.savings_target)}`, 14, y);
+
+    addLine(7);
+    doc.text(`Emergency Fund: ${formatMoney(result.recommended_budget?.emergency_fund_target)}`, 14, y);
+
+    addLine(7);
+    doc.text(`Status: ${result.recommended_budget?.status || "-"}`, 14, y);
+
+    addLine(12);
+    doc.setFontSize(9);
+
+    doc.text(
+      doc.splitTextToSize(
+        "Disclaimer: This report is informational only and does not replace professional financial advice.",
+        180
+      ),
+      14,
+      y
+    );
+
+    doc.save("runexa-personal-finance-report.pdf");
   };
 
   return (
@@ -400,6 +530,13 @@ export default function FinancePage() {
           <div className="bg-white p-6 rounded-2xl border space-y-4">
             <h2 className="text-xl font-semibold">{t.results}</h2>
 
+            <button
+              onClick={exportFinanceReportPdf}
+              className="rounded-xl bg-slate-900 px-4 py-2 text-sm text-white hover:bg-slate-800"
+            >
+              Export PDF Report
+            </button>
+
             {result.detail ? (
               <p className="text-red-600">{result.detail}</p>
             ) : (
@@ -446,6 +583,558 @@ export default function FinancePage() {
                   <strong>{t.totalSpending}:</strong>{" "}
                   {formatMoney(result.total_spending_estimate)}
                 </p>
+
+                {/* KPI CARDS */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                  <div className="rounded-2xl border bg-slate-50 p-4">
+                    <p className="text-sm text-slate-500">
+                      Monthly Income
+                    </p>
+
+                    <h3 className="text-2xl font-bold text-green-600 mt-1">
+                      {formatMoney(
+                        result.cashflow_forecast?.monthly_income
+                      )}
+                    </h3>
+                  </div>
+
+                  <div className="rounded-2xl border bg-slate-50 p-4">
+                    <p className="text-sm text-slate-500">
+                      Monthly Expenses
+                    </p>
+
+                    <h3 className="text-2xl font-bold text-red-600 mt-1">
+                      {formatMoney(
+                        result.cashflow_forecast?.monthly_expenses
+                      )}
+                    </h3>
+                  </div>
+
+                  <div className="rounded-2xl border bg-slate-50 p-4">
+                    <p className="text-sm text-slate-500">
+                      Net Cashflow
+                    </p>
+
+                    <h3
+                      className={`text-2xl font-bold mt-1 ${
+                        (result.cashflow_forecast?.net_cashflow || 0) >= 0
+                          ? "text-green-600"
+                          : "text-red-600"
+                      }`}
+                    >
+                      {formatMoney(
+                        result.cashflow_forecast?.net_cashflow
+                      )}
+                    </h3>
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border bg-slate-50 p-5">
+                  <p className="text-sm text-slate-500">
+                    Financial Habits Score
+                  </p>
+
+                  <div className="mt-2 flex items-end gap-2">
+                    <h3 className="text-4xl font-bold text-blue-600">
+                      {result.financial_habit_scores?.overall_financial_habits_score ?? 0}
+                    </h3>
+                    <span className="text-slate-500 mb-1">/100</span>
+                  </div>
+
+                  <p className="text-sm text-slate-500 mt-2">
+                    Saving behavior:{" "}
+                    {result.financial_habit_scores?.saving_behavior ?? 0}/100
+                  </p>
+
+                  <p className="text-sm text-slate-500">
+                    Subscription control:{" "}
+                    {result.financial_habit_scores?.subscription_control ?? 0}/100
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border bg-slate-50 p-5">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-slate-500">
+                        Cashflow Forecast
+                      </p>
+
+                      <h3
+                        className={`text-2xl font-bold mt-1 ${
+                          result.cashflow_forecast?.trend === "negative"
+                            ? "text-red-600"
+                            : result.cashflow_forecast?.trend === "risky"
+                            ? "text-yellow-600"
+                            : "text-green-600"
+                        }`}
+                      >
+                        {result.cashflow_forecast?.trend ?? "unknown"}
+                      </h3>
+                    </div>
+
+                    <div className="text-right">
+                      <p className="text-sm text-slate-500">
+                        Days Until Risk
+                      </p>
+
+                      <p className="text-xl font-semibold">
+                        {result.cashflow_forecast?.days_until_cash_risk ?? "-"}
+                      </p>
+                    </div>
+                  </div>
+
+                  <p className="text-sm text-slate-600 mt-4">
+                    {result.cashflow_forecast?.message}
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border bg-slate-50 p-5">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-slate-500">
+                        Recommended Budget
+                      </p>
+
+                      <h3 className="text-2xl font-bold text-slate-800 mt-1">
+                        {result.recommended_budget?.status ?? "unknown"}
+                      </h3>
+                    </div>
+
+                    <div className="text-right">
+                      <p className="text-sm text-slate-500">
+                        Savings Target
+                      </p>
+
+                      <p className="text-xl font-semibold text-green-600">
+                        {formatMoney(
+                          result.recommended_budget?.savings_target
+                        )}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-5">
+                    <div>
+                      <p className="text-xs text-slate-500">
+                        Needs
+                      </p>
+
+                      <p className="font-semibold">
+                        {formatMoney(
+                          result.recommended_budget?.needs
+                        )}
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="text-xs text-slate-500">
+                        Wants
+                      </p>
+
+                      <p className="font-semibold">
+                        {formatMoney(
+                          result.recommended_budget?.wants
+                        )}
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="text-xs text-slate-500">
+                        Emergency Fund
+                      </p>
+
+                      <p className="font-semibold">
+                        {formatMoney(
+                          result.recommended_budget?.emergency_fund_target
+                        )}
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="text-xs text-slate-500">
+                        Safe Spending
+                      </p>
+
+                      <p className="font-semibold">
+                        {formatMoney(
+                          result.recommended_budget?.max_safe_spending
+                        )}
+                      </p>
+                    </div>
+                  </div>
+
+                  <p className="text-sm text-slate-600 mt-4">
+                    {result.recommended_budget?.message}
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border bg-slate-50 p-5">
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <p className="text-sm text-slate-500">
+                        Detected Subscriptions
+                      </p>
+
+                      <h3 className="text-2xl font-bold text-slate-800 mt-1">
+                        {result.subscriptions_detected?.length ?? 0}
+                      </h3>
+                    </div>
+
+                    <div className="text-right">
+                      <p className="text-sm text-slate-500">
+                        Monthly Total
+                      </p>
+
+                      <p className="text-xl font-semibold text-red-600">
+                        {formatMoney(
+                          result.financial_habit_scores?.metrics?.subscription_total
+                        )}
+                      </p>
+                    </div>
+                  </div>
+
+                  {result.subscriptions_detected?.length > 0 ? (
+                    <div className="space-y-3">
+                      {result.subscriptions_detected.map(
+                        (sub: any, index: number) => (
+                          <div
+                            key={index}
+                            className="flex items-center justify-between rounded-xl border bg-white px-4 py-3"
+                          >
+                            <div>
+                              <p className="font-medium">
+                                {sub.name}
+                              </p>
+
+                              <p className="text-xs text-slate-500">
+                                {sub.transactions_count} transactions
+                              </p>
+                            </div>
+
+                            <div className="text-right">
+                              <p className="font-semibold text-red-600">
+                                {formatMoney(sub.monthly_cost)}
+                              </p>
+
+                              <p className="text-xs text-slate-500">
+                                / month
+                              </p>
+                            </div>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  ) : (
+                    <p className="text-sm text-slate-500">
+                      No recurring subscriptions detected.
+                    </p>
+                  )}
+                </div>
+
+                <div className="rounded-2xl border bg-slate-50 p-5">
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <p className="text-sm text-slate-500">
+                        AI Savings Opportunities
+                      </p>
+
+                      <h3 className="text-2xl font-bold text-green-600 mt-1">
+                        {formatMoney(
+                          Number(
+                            (result.savings_opportunities || []).reduce(
+                              (sum: number, item: any) =>
+                                sum + Number(item.estimated_monthly_savings || 0),
+                              0
+                            ).toFixed(2)
+                          )
+                        )}
+                      </h3>
+
+                      <p className="text-xs text-slate-500 mt-1">
+                        Estimated monthly savings
+                      </p>
+                    </div>
+
+                    <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700">
+                      AI detected
+                    </span>
+                  </div>
+
+                  {result.savings_opportunities?.length > 0 ? (
+                    <div className="space-y-3">
+                      {result.savings_opportunities.map(
+                        (item: any, index: number) => (
+                          <div
+                            key={index}
+                            className="rounded-xl border bg-white p-4"
+                          >
+                            <div className="flex items-start justify-between gap-4">
+                              <div>
+                                <p className="font-medium text-slate-800">
+                                  {item.issue}
+                                </p>
+
+                                <p className="text-sm text-slate-500 mt-1">
+                                  {item.recommendation}
+                                </p>
+                              </div>
+
+                              <div className="text-right shrink-0">
+                                <p className="font-semibold text-green-600">
+                                  {formatMoney(item.estimated_monthly_savings)}
+                                </p>
+
+                                <p className="text-xs text-slate-500">
+                                  / month
+                                </p>
+                              </div>
+                            </div>
+
+                            <span
+                              className={`mt-3 inline-flex rounded-full px-3 py-1 text-xs font-medium ${
+                                item.severity === "high"
+                                  ? "bg-red-100 text-red-700"
+                                  : item.severity === "medium"
+                                  ? "bg-yellow-100 text-yellow-700"
+                                  : "bg-slate-100 text-slate-700"
+                              }`}
+                            >
+                              {item.severity}
+                            </span>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  ) : (
+                    <p className="text-sm text-slate-500">
+                      No major savings opportunities detected.
+                    </p>
+                  )}
+                </div>
+
+                <div className="rounded-2xl border bg-slate-50 p-5">
+                  <div className="mb-4">
+                    <p className="text-sm text-slate-500">
+                      AI Financial Insights
+                    </p>
+
+                    <h3 className="text-2xl font-bold text-slate-800 mt-1">
+                      Smart Money Coach
+                    </h3>
+                  </div>
+
+                  {result.financial_insights?.length > 0 ? (
+                    <div className="space-y-3">
+                      {result.financial_insights.map(
+                        (insight: any, index: number) => (
+                          <div
+                            key={index}
+                            className={`rounded-xl border p-4 ${
+                              insight.type === "positive"
+                                ? "bg-green-50 border-green-200"
+                                : insight.type === "warning"
+                                ? "bg-red-50 border-red-200"
+                                : "bg-blue-50 border-blue-200"
+                            }`}
+                          >
+                            <div className="flex items-start gap-3">
+                              <div className="text-xl">
+                                {insight.type === "positive"
+                                  ? "✅"
+                                  : insight.type === "warning"
+                                  ? "⚠️"
+                                  : "💡"}
+                              </div>
+
+                              <div>
+                                <p className="font-semibold text-slate-800">
+                                  {insight.title}
+                                </p>
+
+                                <p className="text-sm text-slate-600 mt-1">
+                                  {insight.message}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  ) : (
+                    <p className="text-sm text-slate-500">
+                      No AI insights available yet.
+                    </p>
+                  )}
+                </div>
+
+                <div className="rounded-2xl border bg-white p-5">
+                  <div className="mb-4">
+                    <p className="text-sm text-slate-500">
+                      Spending Over Time
+                    </p>
+
+                    <h3 className="text-xl font-bold mt-1">
+                      Expense Evolution
+                    </h3>
+                  </div>
+
+                  <div className="h-80">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <AreaChart
+                        data={result.charts?.spending_over_time || []}
+                      >
+                        <defs>
+                          <linearGradient
+                            id="spendingGradient"
+                            x1="0"
+                            y1="0"
+                            x2="0"
+                            y2="1"
+                          >
+                            <stop
+                              offset="5%"
+                              stopColor="#2563eb"
+                              stopOpacity={0.4}
+                            />
+                            <stop
+                              offset="95%"
+                              stopColor="#2563eb"
+                              stopOpacity={0.05}
+                            />
+                          </linearGradient>
+                        </defs>
+
+                        <CartesianGrid
+                          strokeDasharray="3 3"
+                          vertical={false}
+                        />
+
+                        <XAxis dataKey="date" />
+
+                        <YAxis />
+
+                        <Tooltip />
+
+                        <Area
+                          type="monotone"
+                          dataKey="amount"
+                          stroke="#2563eb"
+                          fillOpacity={1}
+                          fill="url(#spendingGradient)"
+                        />
+                      </AreaChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border bg-white p-5">
+                  <div className="mb-4">
+                    <p className="text-sm text-slate-500">
+                      Net Cashflow Over Time
+                    </p>
+
+                    <h3 className="text-xl font-bold mt-1">
+                      Daily Cashflow Trend
+                    </h3>
+                  </div>
+
+                  <div className="h-80">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart
+                        data={result.charts?.net_cashflow_over_time || []}
+                      >
+                        <CartesianGrid
+                          strokeDasharray="3 3"
+                          vertical={false}
+                        />
+
+                        <XAxis dataKey="date" />
+                        <YAxis />
+                        <Tooltip />
+
+                        <Line
+                          type="monotone"
+                          dataKey="amount"
+                          stroke="#16a34a"
+                          strokeWidth={3}
+                          dot
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border bg-white p-5">
+                  <div className="mb-4">
+                    <p className="text-sm text-slate-500">
+                      Subscription Growth
+                    </p>
+
+                    <h3 className="text-xl font-bold mt-1">
+                      Recurring Spending Trend
+                    </h3>
+                  </div>
+
+                  <div className="h-80">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart
+                        data={result.charts?.subscription_growth || []}
+                      >
+                        <CartesianGrid
+                          strokeDasharray="3 3"
+                          vertical={false}
+                        />
+
+                        <XAxis dataKey="date" />
+                        <YAxis />
+                        <Tooltip />
+
+                        <Bar
+                          dataKey="amount"
+                          fill="#f97316"
+                          radius={[8, 8, 0, 0]}
+                        />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border bg-white p-5">
+                  <div className="mb-4">
+                    <p className="text-sm text-slate-500">
+                      Savings Evolution
+                    </p>
+
+                    <h3 className="text-xl font-bold mt-1">
+                      Running Net Balance
+                    </h3>
+                  </div>
+
+                  <div className="h-80">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart
+                        data={result.charts?.savings_evolution || []}
+                      >
+                        <CartesianGrid
+                          strokeDasharray="3 3"
+                          vertical={false}
+                        />
+
+                        <XAxis dataKey="date" />
+                        <YAxis />
+                        <Tooltip />
+
+                        <Line
+                          type="monotone"
+                          dataKey="amount"
+                          stroke="#7c3aed"
+                          strokeWidth={3}
+                          dot
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
 
                 <div>
                   <strong>{t.mainCategories}:</strong>
