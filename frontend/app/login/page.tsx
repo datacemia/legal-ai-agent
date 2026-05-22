@@ -1,17 +1,161 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { setToken } from "../../lib/auth";
 import { trackEvent } from "../../lib/track";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
 
+const labels: any = {
+  en: {
+    badge: "AI agents that get things done",
+    welcomeBack: "Welcome back",
+    leftDescription:
+      "Log in to your account and continue using AI agents to get work done faster.",
+    featureAgentsTitle: "Specialized AI Agents",
+    featureAgentsDesc:
+      "Access powerful agents built for your business needs.",
+    featureSecurityTitle: "Secure & Private",
+    featureSecurityDesc:
+      "Your data is protected with enterprise-grade security.",
+    featureProductivityTitle: "Save Time, Get More Done",
+    featureProductivityDesc:
+      "Automate complex tasks and focus on what matters most.",
+
+    loginTitle: "Login",
+    loginSubtitle: "Welcome back! Please login to your account.",
+    google: "Continue with Google",
+    microsoft: "Continue with Microsoft",
+    separator: "or continue with email",
+    emailLabel: "Email address",
+    emailPlaceholder: "you@example.com",
+    passwordLabel: "Password",
+    passwordPlaceholder: "Enter your password",
+    remember: "Remember me",
+    forgot: "Forgot password?",
+    loginButton: "Login",
+    noAccount: "Don’t have an account?",
+    createAccount: "Create account",
+    resendVerification: "Resend verification email",
+
+    invalidCredentials: "Incorrect email or password",
+    verifyEmail: "Please verify your email before login",
+    loginFailed: "Login failed",
+    serverError: "Error connecting to server",
+    enterEmailFirst: "Enter your email first",
+    verificationSent: "Verification email request sent.",
+  },
+
+  fr: {
+    badge: "Des agents IA pour avancer plus vite",
+    welcomeBack: "Bon retour",
+    leftDescription:
+      "Connectez-vous à votre compte et continuez à utiliser vos agents IA pour travailler plus vite.",
+    featureAgentsTitle: "Agents IA spécialisés",
+    featureAgentsDesc:
+      "Accédez à des agents puissants conçus pour vos besoins métier.",
+    featureSecurityTitle: "Sécurisé et confidentiel",
+    featureSecurityDesc:
+      "Vos données sont protégées avec une sécurité de niveau entreprise.",
+    featureProductivityTitle: "Gagnez du temps, avancez plus vite",
+    featureProductivityDesc:
+      "Automatisez les tâches complexes et concentrez-vous sur l’essentiel.",
+
+    loginTitle: "Connexion",
+    loginSubtitle: "Bon retour ! Connectez-vous à votre compte.",
+    google: "Continuer avec Google",
+    microsoft: "Continuer avec Microsoft",
+    separator: "ou continuer avec l’e-mail",
+    emailLabel: "Adresse e-mail",
+    emailPlaceholder: "vous@exemple.com",
+    passwordLabel: "Mot de passe",
+    passwordPlaceholder: "Entrez votre mot de passe",
+    remember: "Se souvenir de moi",
+    forgot: "Mot de passe oublié ?",
+    loginButton: "Se connecter",
+    noAccount: "Vous n’avez pas de compte ?",
+    createAccount: "Créer un compte",
+    resendVerification: "Renvoyer l’e-mail de vérification",
+
+    invalidCredentials: "E-mail ou mot de passe incorrect",
+    verifyEmail: "Veuillez vérifier votre e-mail avant de vous connecter",
+    loginFailed: "Échec de la connexion",
+    serverError: "Erreur de connexion au serveur",
+    enterEmailFirst: "Entrez d’abord votre e-mail",
+    verificationSent: "Demande d’e-mail de vérification envoyée.",
+  },
+
+  ar: {
+    badge: "وكلاء ذكاء اصطناعي يساعدونك على الإنجاز",
+    welcomeBack: "مرحباً بعودتك",
+    leftDescription:
+      "سجّل الدخول إلى حسابك وواصل استخدام وكلاء الذكاء الاصطناعي لإنجاز العمل بسرعة أكبر.",
+    featureAgentsTitle: "وكلاء ذكاء اصطناعي متخصصون",
+    featureAgentsDesc:
+      "استخدم وكلاء أقوياء مصممين لاحتياجات عملك.",
+    featureSecurityTitle: "آمن وخاص",
+    featureSecurityDesc:
+      "بياناتك محمية بأمان من مستوى المؤسسات.",
+    featureProductivityTitle: "وفّر الوقت وأنجز أكثر",
+    featureProductivityDesc:
+      "أتمت المهام المعقدة وركّز على ما يهم.",
+
+    loginTitle: "تسجيل الدخول",
+    loginSubtitle: "مرحباً بعودتك! يرجى تسجيل الدخول إلى حسابك.",
+    google: "المتابعة باستخدام Google",
+    microsoft: "المتابعة باستخدام Microsoft",
+    separator: "أو المتابعة باستخدام البريد الإلكتروني",
+    emailLabel: "البريد الإلكتروني",
+    emailPlaceholder: "you@example.com",
+    passwordLabel: "كلمة المرور",
+    passwordPlaceholder: "أدخل كلمة المرور",
+    remember: "تذكرني",
+    forgot: "هل نسيت كلمة المرور؟",
+    loginButton: "تسجيل الدخول",
+    noAccount: "ليس لديك حساب؟",
+    createAccount: "إنشاء حساب",
+    resendVerification: "إعادة إرسال بريد التحقق",
+
+    invalidCredentials: "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+    verifyEmail: "يرجى التحقق من بريدك الإلكتروني قبل تسجيل الدخول",
+    loginFailed: "فشل تسجيل الدخول",
+    serverError: "خطأ في الاتصال بالخادم",
+    enterEmailFirst: "أدخل بريدك الإلكتروني أولاً",
+    verificationSent: "تم إرسال طلب بريد التحقق.",
+  },
+};
+
 export default function LoginPage() {
+  const [language, setLanguage] = useState("en");
+  const t = labels[language] || labels.en;
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState<"success" | "error">("error");
+
+  useEffect(() => {
+    const saved = localStorage.getItem("locale");
+
+    if (saved && labels[saved]) {
+      setLanguage(saved);
+    }
+
+    const handleLocaleChange = () => {
+      const nextLocale = localStorage.getItem("locale");
+
+      if (nextLocale && labels[nextLocale]) {
+        setLanguage(nextLocale);
+      }
+    };
+
+    window.addEventListener("locale-change", handleLocaleChange);
+
+    return () => {
+      window.removeEventListener("locale-change", handleLocaleChange);
+    };
+  }, []);
 
   const handleLogin = async () => {
     try {
@@ -34,11 +178,11 @@ export default function LoginPage() {
         setMessageType("error");
 
         if (data.detail === "Invalid credentials") {
-          setMessage("Incorrect email or password");
+          setMessage(t.invalidCredentials);
         } else if (data.detail?.includes("verify")) {
-          setMessage("Please verify your email before login");
+          setMessage(t.verifyEmail);
         } else {
-          setMessage(data.detail || "Login failed");
+          setMessage(data.detail || t.loginFailed);
         }
         return;
       }
@@ -117,31 +261,33 @@ export default function LoginPage() {
         }
       } else {
         setMessageType("error");
-        setMessage("Login failed");
+        setMessage(t.loginFailed);
       }
     } catch (err) {
       console.error(err);
       setMessageType("error");
-      setMessage("Error connecting to server");
+      setMessage(t.serverError);
     }
   };
 
   return (
-    <main className="min-h-screen bg-white text-slate-950">
+    <main
+      dir={language === "ar" ? "rtl" : "ltr"}
+      className="min-h-screen bg-white text-slate-950"
+    >
       <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2">
         <section className="relative hidden overflow-hidden bg-gradient-to-br from-blue-50 via-white to-indigo-50 px-10 py-12 lg:flex lg:flex-col lg:justify-center xl:px-20">
           <div className="max-w-xl">
             <span className="inline-flex rounded-full bg-blue-100 px-4 py-2 text-sm font-medium text-blue-700">
-              AI agents that get things done
+              {t.badge}
             </span>
 
             <h1 className="mt-8 text-4xl font-bold leading-tight tracking-tight text-slate-950 xl:text-5xl">
-              Welcome back
+              {t.welcomeBack}
             </h1>
 
             <p className="mt-6 text-lg leading-8 text-slate-600">
-              Log in to your account and continue using AI agents to get work
-              done faster.
+              {t.leftDescription}
             </p>
 
             <div className="mt-12 space-y-7">
@@ -151,10 +297,10 @@ export default function LoginPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-950">
-                    Specialized AI Agents
+                    {t.featureAgentsTitle}
                   </h3>
                   <p className="mt-1 text-slate-600">
-                    Access powerful agents built for your business needs.
+                    {t.featureAgentsDesc}
                   </p>
                 </div>
               </div>
@@ -165,10 +311,10 @@ export default function LoginPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-950">
-                    Secure & Private
+                    {t.featureSecurityTitle}
                   </h3>
                   <p className="mt-1 text-slate-600">
-                    Your data is protected with enterprise-grade security.
+                    {t.featureSecurityDesc}
                   </p>
                 </div>
               </div>
@@ -179,10 +325,10 @@ export default function LoginPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-950">
-                    Save Time, Get More Done
+                    {t.featureProductivityTitle}
                   </h3>
                   <p className="mt-1 text-slate-600">
-                    Automate complex tasks and focus on what matters most.
+                    {t.featureProductivityDesc}
                   </p>
                 </div>
               </div>
@@ -198,10 +344,10 @@ export default function LoginPage() {
           <div className="w-full max-w-xl rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/70 sm:p-8 lg:p-10">
             <div className="text-center">
               <h1 className="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
-                Login
+                {t.loginTitle}
               </h1>
               <p className="mt-3 text-sm text-slate-500 sm:text-base">
-                Welcome back! Please login to your account.
+                {t.loginSubtitle}
               </p>
             </div>
 
@@ -214,7 +360,7 @@ export default function LoginPage() {
               >
                 <span className="flex items-center gap-3">
                   <span className="text-lg">G</span>
-                  Continue with Google
+                  {t.google}
                 </span>
               </button>
 
@@ -226,7 +372,7 @@ export default function LoginPage() {
               >
                 <span className="flex items-center gap-3">
                   <span className="text-lg">▦</span>
-                  Continue with Microsoft
+                  {t.microsoft}
                 </span>
               </button>
             </div>
@@ -234,7 +380,7 @@ export default function LoginPage() {
             <div className="my-7 flex items-center gap-4">
               <div className="h-px flex-1 bg-slate-200" />
               <span className="text-xs text-slate-500">
-                or continue with email
+                {t.separator}
               </span>
               <div className="h-px flex-1 bg-slate-200" />
             </div>
@@ -254,11 +400,11 @@ export default function LoginPage() {
             <div className="space-y-5">
               <div>
                 <label className="mb-2 block text-sm font-medium text-slate-700">
-                  Email address
+                  {t.emailLabel}
                 </label>
                 <input
                   type="email"
-                  placeholder="you@example.com"
+                  placeholder={t.emailPlaceholder}
                   className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-950 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -267,11 +413,11 @@ export default function LoginPage() {
 
               <div>
                 <label className="mb-2 block text-sm font-medium text-slate-700">
-                  Password
+                  {t.passwordLabel}
                 </label>
                 <input
                   type="password"
-                  placeholder="Enter your password"
+                  placeholder={t.passwordPlaceholder}
                   className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-950 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -284,14 +430,14 @@ export default function LoginPage() {
                     type="checkbox"
                     className="h-4 w-4 rounded border-slate-300"
                   />
-                  Remember me
+                  {t.remember}
                 </label>
 
                 <a
                   href="/forgot-password"
                   className="text-sm font-medium text-blue-600 hover:text-blue-700"
                 >
-                  Forgot password?
+                  {t.forgot}
                 </a>
               </div>
 
@@ -299,18 +445,18 @@ export default function LoginPage() {
                 onClick={handleLogin}
                 className="w-full rounded-xl bg-slate-950 py-3 font-semibold text-white shadow-lg transition hover:bg-slate-800"
               >
-                Login
+                {t.loginButton}
               </button>
             </div>
 
             <div className="mt-7 space-y-4 text-center">
               <p className="text-sm text-slate-500">
-                Don&apos;t have an account?{" "}
+                {t.noAccount}{" "}
                 <a
                   href="/register"
                   className="font-medium text-blue-600 hover:text-blue-700"
                 >
-                  Create account
+                  {t.createAccount}
                 </a>
               </p>
 
@@ -319,7 +465,7 @@ export default function LoginPage() {
                   try {
                     if (!email.trim()) {
                       setMessageType("error");
-                      setMessage("Enter your email first");
+                      setMessage(t.enterEmailFirst);
                       return;
                     }
 
@@ -340,17 +486,17 @@ export default function LoginPage() {
                     setMessage(
                       data.message ||
                         data.detail ||
-                        "Verification email request sent."
+                        t.verificationSent
                     );
                   } catch (err) {
                     console.error(err);
                     setMessageType("error");
-                    setMessage("Error connecting to server");
+                    setMessage(t.serverError);
                   }
                 }}
                 className="text-sm font-medium text-blue-600 hover:text-blue-700"
               >
-                Resend verification email
+                {t.resendVerification}
               </button>
             </div>
           </div>
