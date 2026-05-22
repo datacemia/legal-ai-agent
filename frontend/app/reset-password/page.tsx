@@ -1,17 +1,161 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
 
+const labels: any = {
+  en: {
+    badge: "AI agents that get things done",
+    heroTitle: "Secure your account with a new password",
+    heroDescription:
+      "Choose a strong password to protect your account and keep your data safe.",
+    featureSecurityTitle: "Stronger Security",
+    featureSecurityDesc:
+      "A strong password keeps your account and data protected.",
+    featureExperienceTitle: "Better Experience",
+    featureExperienceDesc:
+      "Secure access means uninterrupted productivity with your AI agents.",
+    featureControlTitle: "You’re in Control",
+    featureControlDesc:
+      "Update your password anytime to stay in control.",
+
+    title: "Reset password",
+    subtitle: "Enter your new password below.",
+    newPassword: "New password",
+    passwordPlaceholder: "Enter new password",
+    passwordMustContain: "Password must contain:",
+    resetPassword: "Reset password",
+    backToLogin: "← Back to login",
+    loading: "Loading...",
+
+    invalidLink: "Invalid reset link.",
+    passwordRequirements: "Password does not meet the requirements.",
+    success: "Password updated successfully. Redirecting...",
+    requestFailed: "Request failed",
+    serverError: "Error connecting to server",
+
+    rules: [
+      "At least 12 characters",
+      "One uppercase letter",
+      "One lowercase letter",
+      "One number",
+      "One special character",
+    ],
+  },
+
+  fr: {
+    badge: "Des agents IA pour avancer plus vite",
+    heroTitle: "Sécurisez votre compte avec un nouveau mot de passe",
+    heroDescription:
+      "Choisissez un mot de passe fort pour protéger votre compte et garder vos données en sécurité.",
+    featureSecurityTitle: "Sécurité renforcée",
+    featureSecurityDesc:
+      "Un mot de passe fort protège votre compte et vos données.",
+    featureExperienceTitle: "Meilleure expérience",
+    featureExperienceDesc:
+      "Un accès sécurisé vous permet de continuer à travailler sans interruption avec vos agents IA.",
+    featureControlTitle: "Vous gardez le contrôle",
+    featureControlDesc:
+      "Vous pouvez mettre à jour votre mot de passe à tout moment.",
+
+    title: "Réinitialiser le mot de passe",
+    subtitle: "Entrez votre nouveau mot de passe ci-dessous.",
+    newPassword: "Nouveau mot de passe",
+    passwordPlaceholder: "Entrez le nouveau mot de passe",
+    passwordMustContain: "Le mot de passe doit contenir :",
+    resetPassword: "Réinitialiser le mot de passe",
+    backToLogin: "← Retour à la connexion",
+    loading: "Chargement...",
+
+    invalidLink: "Lien de réinitialisation invalide.",
+    passwordRequirements: "Le mot de passe ne respecte pas les exigences.",
+    success: "Mot de passe mis à jour avec succès. Redirection...",
+    requestFailed: "La requête a échoué",
+    serverError: "Erreur de connexion au serveur",
+
+    rules: [
+      "Au moins 12 caractères",
+      "Une lettre majuscule",
+      "Une lettre minuscule",
+      "Un chiffre",
+      "Un caractère spécial",
+    ],
+  },
+
+  ar: {
+    badge: "وكلاء ذكاء اصطناعي يساعدونك على الإنجاز",
+    heroTitle: "أمّن حسابك بكلمة مرور جديدة",
+    heroDescription:
+      "اختر كلمة مرور قوية لحماية حسابك والحفاظ على أمان بياناتك.",
+    featureSecurityTitle: "أمان أقوى",
+    featureSecurityDesc:
+      "كلمة المرور القوية تساعد على حماية حسابك وبياناتك.",
+    featureExperienceTitle: "تجربة أفضل",
+    featureExperienceDesc:
+      "الوصول الآمن يعني إنتاجية مستمرة مع وكلاء الذكاء الاصطناعي.",
+    featureControlTitle: "أنت تتحكم في حسابك",
+    featureControlDesc:
+      "يمكنك تحديث كلمة المرور في أي وقت للحفاظ على التحكم بحسابك.",
+
+    title: "إعادة تعيين كلمة المرور",
+    subtitle: "أدخل كلمة المرور الجديدة أدناه.",
+    newPassword: "كلمة المرور الجديدة",
+    passwordPlaceholder: "أدخل كلمة المرور الجديدة",
+    passwordMustContain: "يجب أن تحتوي كلمة المرور على:",
+    resetPassword: "إعادة تعيين كلمة المرور",
+    backToLogin: "← الرجوع إلى تسجيل الدخول",
+    loading: "جاري التحميل...",
+
+    invalidLink: "رابط إعادة التعيين غير صالح.",
+    passwordRequirements: "كلمة المرور لا تستوفي المتطلبات.",
+    success: "تم تحديث كلمة المرور بنجاح. جارٍ إعادة التوجيه...",
+    requestFailed: "فشل الطلب",
+    serverError: "خطأ في الاتصال بالخادم",
+
+    rules: [
+      "12 حرفًا على الأقل",
+      "حرف كبير واحد",
+      "حرف صغير واحد",
+      "رقم واحد",
+      "رمز خاص واحد",
+    ],
+  },
+};
+
 function ResetPasswordContent() {
   const params = useSearchParams();
   const token = params.get("token");
+  const [language, setLanguage] = useState("en");
+  const t = labels[language] || labels.en;
+
   const [password, setPassword] = useState("");
 
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState<"success" | "error">("success");
+
+  useEffect(() => {
+    const saved = localStorage.getItem("locale");
+
+    if (saved && labels[saved]) {
+      setLanguage(saved);
+    }
+
+    const handleLocaleChange = () => {
+      const nextLocale = localStorage.getItem("locale");
+
+      if (nextLocale && labels[nextLocale]) {
+        setLanguage(nextLocale);
+      }
+    };
+
+    window.addEventListener("locale-change", handleLocaleChange);
+
+    return () => {
+      window.removeEventListener("locale-change", handleLocaleChange);
+    };
+  }, []);
 
   const isValid =
     password.length >= 12 &&
@@ -21,13 +165,13 @@ function ResetPasswordContent() {
     /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
   const passwordRules = [
-    { icon: "12+", label: "At least 12 characters", valid: password.length >= 12 },
-    { icon: "Aa", label: "One uppercase letter", valid: /[A-Z]/.test(password) },
-    { icon: "aa", label: "One lowercase letter", valid: /[a-z]/.test(password) },
-    { icon: "1", label: "One number", valid: /\d/.test(password) },
+    { icon: "12+", label: t.rules[0], valid: password.length >= 12 },
+    { icon: "Aa", label: t.rules[1], valid: /[A-Z]/.test(password) },
+    { icon: "aa", label: t.rules[2], valid: /[a-z]/.test(password) },
+    { icon: "1", label: t.rules[3], valid: /\d/.test(password) },
     {
       icon: "#",
-      label: "One special character",
+      label: t.rules[4],
       valid: /[!@#$%^&*(),.?":{}|<>]/.test(password),
     },
   ];
@@ -35,13 +179,13 @@ function ResetPasswordContent() {
   const handle = async () => {
     if (!token) {
       setMessageType("error");
-      setMessage("Invalid reset link.");
+      setMessage(t.invalidLink);
       return;
     }
 
     if (!isValid) {
       setMessageType("error");
-      setMessage("Password does not meet the requirements.");
+      setMessage(t.passwordRequirements);
       return;
     }
 
@@ -56,7 +200,7 @@ function ResetPasswordContent() {
 
       if (res.ok) {
         setMessageType("success");
-        setMessage("Password updated successfully. Redirecting...");
+        setMessage(t.success);
 
         setTimeout(() => {
           window.location.href = "/login";
@@ -66,30 +210,32 @@ function ResetPasswordContent() {
       }
 
       setMessageType("error");
-      setMessage(data.detail || data.message || "Request failed");
+      setMessage(data.detail || data.message || t.requestFailed);
     } catch (error) {
       console.error(error);
       setMessageType("error");
-      setMessage("Error connecting to server");
+      setMessage(t.serverError);
     }
   };
 
   return (
-    <main className="min-h-screen bg-white text-slate-950">
+    <main
+      dir={language === "ar" ? "rtl" : "ltr"}
+      className="min-h-screen bg-white text-slate-950"
+    >
       <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2">
         <section className="relative hidden overflow-hidden bg-gradient-to-br from-blue-50 via-white to-indigo-50 px-10 py-12 lg:flex lg:flex-col lg:justify-center xl:px-20">
           <div className="max-w-xl">
             <span className="inline-flex rounded-full bg-blue-100 px-4 py-2 text-sm font-medium text-blue-700">
-              AI agents that get things done
+              {t.badge}
             </span>
 
             <h1 className="mt-8 text-4xl font-bold leading-tight tracking-tight text-slate-950 xl:text-5xl">
-              Secure your account with a new password
+              {t.heroTitle}
             </h1>
 
             <p className="mt-6 text-lg leading-8 text-slate-600">
-              Choose a strong password to protect your account and keep your
-              data safe.
+              {t.heroDescription}
             </p>
 
             <div className="mt-12 space-y-7">
@@ -99,10 +245,10 @@ function ResetPasswordContent() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-950">
-                    Stronger Security
+                    {t.featureSecurityTitle}
                   </h3>
                   <p className="mt-1 text-slate-600">
-                    A strong password keeps your account and data protected.
+                    {t.featureSecurityDesc}
                   </p>
                 </div>
               </div>
@@ -113,11 +259,10 @@ function ResetPasswordContent() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-950">
-                    Better Experience
+                    {t.featureExperienceTitle}
                   </h3>
                   <p className="mt-1 text-slate-600">
-                    Secure access means uninterrupted productivity with your AI
-                    agents.
+                    {t.featureExperienceDesc}
                   </p>
                 </div>
               </div>
@@ -128,10 +273,10 @@ function ResetPasswordContent() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-950">
-                    You&apos;re in Control
+                    {t.featureControlTitle}
                   </h3>
                   <p className="mt-1 text-slate-600">
-                    Update your password anytime to stay in control.
+                    {t.featureControlDesc}
                   </p>
                 </div>
               </div>
@@ -151,11 +296,11 @@ function ResetPasswordContent() {
               </div>
 
               <h1 className="mt-6 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
-                Reset password
+                {t.title}
               </h1>
 
               <p className="mt-3 text-sm text-slate-500 sm:text-base">
-                Enter your new password below.
+                {t.subtitle}
               </p>
             </div>
 
@@ -174,11 +319,11 @@ function ResetPasswordContent() {
             <div className="mt-8 space-y-5">
               <div>
                 <label className="mb-2 block text-sm font-medium text-slate-700">
-                  New password
+                  {t.newPassword}
                 </label>
                 <input
                   type="password"
-                  placeholder="Enter new password"
+                  placeholder={t.passwordPlaceholder}
                   className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-950 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -187,7 +332,7 @@ function ResetPasswordContent() {
 
               <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm">
                 <p className="mb-4 font-semibold text-slate-950">
-                  Password must contain:
+                  {t.passwordMustContain}
                 </p>
 
                 <div className="space-y-3">
@@ -227,7 +372,7 @@ function ResetPasswordContent() {
                     : "bg-slate-400 cursor-not-allowed"
                 }`}
               >
-                Reset password
+                {t.resetPassword}
               </button>
             </div>
 
@@ -236,7 +381,7 @@ function ResetPasswordContent() {
                 href="/login"
                 className="font-medium text-blue-600 hover:text-blue-700"
               >
-                ← Back to login
+                {t.backToLogin}
               </a>
             </p>
           </div>
@@ -248,7 +393,7 @@ function ResetPasswordContent() {
 
 export default function ResetPage() {
   return (
-    <Suspense fallback={<p>Loading...</p>}>
+    <Suspense fallback={<p>{labels.en.loading}</p>}>
       <ResetPasswordContent />
     </Suspense>
   );
