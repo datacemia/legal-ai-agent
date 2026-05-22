@@ -240,6 +240,74 @@ export const translations: any = {
       "Runexa Systems LLC may update these Terms from time to time. Updated Terms will be posted on this page with a revised “Last updated” date.",
 
     termsContactTitle: "13. Contact",
+
+    acceptableUseTitle: "Acceptable Use Policy",
+    acceptableUseUpdated: "Last updated: May 2026",
+
+    acceptableUseOverviewTitle: "1. Overview",
+    acceptableUseOverviewText1:
+      "This Acceptable Use Policy (“Policy”) governs the use of services, products, software, AI agents, and platforms operated by Runexa Systems LLC (“Runexa”).",
+
+    acceptableUseOverviewText2:
+      "By using Runexa services, you agree to comply with this Policy.",
+
+    acceptableUseComplianceTitle: "2. Compliance With Laws",
+    acceptableUseComplianceText:
+      "You may only use the services in compliance with applicable laws, regulations, and third-party rights.",
+
+    acceptableUseProhibitedTitle: "3. Prohibited Activities",
+    acceptableUseProhibitedIntro:
+      "You may not use Runexa services for:",
+
+    acceptableUseProhibited1:
+      "Illegal, fraudulent, or deceptive activity",
+
+    acceptableUseProhibited2:
+      "Malware, phishing, hacking, unauthorized access, or cyber abuse",
+
+    acceptableUseProhibited3:
+      "Harassment, threats, abuse, discrimination, or harmful conduct",
+
+    acceptableUseProhibited4:
+      "Uploading or processing content that violates intellectual property, privacy, confidentiality, or contractual rights",
+
+    acceptableUseProhibited5:
+      "Impersonation, identity fraud, or misleading representations",
+
+    acceptableUseProhibited6:
+      "Unauthorized surveillance, monitoring, or tracking of individuals",
+
+    acceptableUseProhibited7:
+      "Generating harmful, dangerous, or unlawful content",
+
+    acceptableUseProhibited8:
+      "Attempting to reverse engineer, disrupt, overload, or bypass the platform or security protections",
+
+    acceptableUseProhibited9:
+      "Using automated systems to abuse, scrape, spam, or excessively overload the services",
+
+    acceptableUseAiTitle: "4. AI Usage Restrictions",
+    acceptableUseAiText1:
+      "AI-generated outputs may not be used as the sole basis for legal, financial, medical, employment, security, or other high-impact decisions without independent human review.",
+
+    acceptableUseAiText2:
+      "Users remain fully responsible for verifying outputs before relying on them.",
+
+    acceptableUseResponsibilityTitle: "5. User Responsibility",
+    acceptableUseResponsibilityText:
+      "Users are responsible for all content uploaded, processed, generated, or shared through the services and for ensuring they have the legal right to use such content.",
+
+    acceptableUseEnforcementTitle: "6. Enforcement",
+    acceptableUseEnforcementText:
+      "Runexa Systems LLC may investigate suspected violations of this Policy and may suspend, restrict, or terminate access to the services at its sole discretion.",
+
+    acceptableUseReportingTitle: "7. Reporting Violations",
+    acceptableUseReportingText:
+      "Suspected violations or abuse may be reported to:",
+
+    acceptableUseChangesTitle: "8. Changes",
+    acceptableUseChangesText:
+      "Runexa Systems LLC may update this Policy at any time. Updated versions will be posted with a revised “Last updated” date.",
   },
 
   fr: {
@@ -460,6 +528,74 @@ export const translations: any = {
       "Runexa Systems LLC peut mettre à jour ces Conditions de temps à autre. Les Conditions mises à jour seront publiées sur cette page avec une date de « Dernière mise à jour » révisée.",
 
     termsContactTitle: "13. Contact",
+
+    acceptableUseTitle: "Politique d’utilisation acceptable",
+    acceptableUseUpdated: "Dernière mise à jour : mai 2026",
+
+    acceptableUseOverviewTitle: "1. Présentation",
+    acceptableUseOverviewText1:
+      "Cette Politique d’utilisation acceptable (« Politique ») régit l’utilisation des services, produits, logiciels, agents IA et plateformes exploités par Runexa Systems LLC (« Runexa »).",
+
+    acceptableUseOverviewText2:
+      "En utilisant les services Runexa, vous acceptez de respecter cette Politique.",
+
+    acceptableUseComplianceTitle: "2. Respect des lois",
+    acceptableUseComplianceText:
+      "Vous ne pouvez utiliser les services qu’en conformité avec les lois applicables, réglementations et droits des tiers.",
+
+    acceptableUseProhibitedTitle: "3. Activités interdites",
+    acceptableUseProhibitedIntro:
+      "Vous ne pouvez pas utiliser les services Runexa pour :",
+
+    acceptableUseProhibited1:
+      "Une activité illégale, frauduleuse ou trompeuse",
+
+    acceptableUseProhibited2:
+      "Des logiciels malveillants, phishing, piratage, accès non autorisé ou abus cyber",
+
+    acceptableUseProhibited3:
+      "Le harcèlement, les menaces, abus, discriminations ou comportements nuisibles",
+
+    acceptableUseProhibited4:
+      "Téléverser ou traiter du contenu violant la propriété intellectuelle, la vie privée, la confidentialité ou des droits contractuels",
+
+    acceptableUseProhibited5:
+      "L’usurpation d’identité, fraude identitaire ou représentations trompeuses",
+
+    acceptableUseProhibited6:
+      "La surveillance, le suivi ou l’espionnage non autorisé d’individus",
+
+    acceptableUseProhibited7:
+      "La génération de contenu nuisible, dangereux ou illégal",
+
+    acceptableUseProhibited8:
+      "Tenter de contourner, perturber, surcharger ou compromettre la plateforme ou ses protections de sécurité",
+
+    acceptableUseProhibited9:
+      "Utiliser des systèmes automatisés pour abuser, scraper, spammer ou surcharger excessivement les services",
+
+    acceptableUseAiTitle: "4. Restrictions liées à l’IA",
+    acceptableUseAiText1:
+      "Les résultats générés par l’IA ne peuvent pas être utilisés comme seule base pour des décisions juridiques, financières, médicales, professionnelles, de sécurité ou autres décisions à fort impact sans examen humain indépendant.",
+
+    acceptableUseAiText2:
+      "Les utilisateurs restent entièrement responsables de la vérification des résultats avant de s’y fier.",
+
+    acceptableUseResponsibilityTitle: "5. Responsabilité de l’utilisateur",
+    acceptableUseResponsibilityText:
+      "Les utilisateurs sont responsables de tout contenu téléversé, traité, généré ou partagé via les services et doivent s’assurer qu’ils disposent des droits légaux nécessaires pour utiliser ce contenu.",
+
+    acceptableUseEnforcementTitle: "6. Application",
+    acceptableUseEnforcementText:
+      "Runexa Systems LLC peut enquêter sur les violations présumées de cette Politique et peut suspendre, restreindre ou résilier l’accès aux services à sa seule discrétion.",
+
+    acceptableUseReportingTitle: "7. Signalement des violations",
+    acceptableUseReportingText:
+      "Les violations ou abus présumés peuvent être signalés à :",
+
+    acceptableUseChangesTitle: "8. Modifications",
+    acceptableUseChangesText:
+      "Runexa Systems LLC peut mettre à jour cette Politique à tout moment. Les versions mises à jour seront publiées avec une date de « Dernière mise à jour » révisée.",
   },
 
   ar: {
@@ -680,6 +816,74 @@ export const translations: any = {
       "يجوز لـ Runexa Systems LLC تحديث هذه الشروط من وقت لآخر. سيتم نشر الشروط المحدثة على هذه الصفحة مع تاريخ “آخر تحديث” معدل.",
 
     termsContactTitle: "13. الاتصال",
+
+    acceptableUseTitle: "سياسة الاستخدام المقبول",
+    acceptableUseUpdated: "آخر تحديث: مايو 2026",
+
+    acceptableUseOverviewTitle: "1. نظرة عامة",
+    acceptableUseOverviewText1:
+      "تنظم سياسة الاستخدام المقبول هذه («السياسة») استخدام الخدمات والمنتجات والبرمجيات ووكلاء الذكاء الاصطناعي والمنصات التي تديرها Runexa Systems LLC («Runexa»).",
+
+    acceptableUseOverviewText2:
+      "باستخدام خدمات Runexa، فإنك توافق على الالتزام بهذه السياسة.",
+
+    acceptableUseComplianceTitle: "2. الامتثال للقوانين",
+    acceptableUseComplianceText:
+      "لا يجوز لك استخدام الخدمات إلا بما يتوافق مع القوانين المعمول بها واللوائح وحقوق الأطراف الثالثة.",
+
+    acceptableUseProhibitedTitle: "3. الأنشطة المحظورة",
+    acceptableUseProhibitedIntro:
+      "لا يجوز استخدام خدمات Runexa من أجل:",
+
+    acceptableUseProhibited1:
+      "الأنشطة غير القانونية أو الاحتيالية أو المضللة",
+
+    acceptableUseProhibited2:
+      "البرمجيات الخبيثة أو التصيد الاحتيالي أو الاختراق أو الوصول غير المصرح به أو إساءة الاستخدام السيبراني",
+
+    acceptableUseProhibited3:
+      "المضايقة أو التهديدات أو الإساءة أو التمييز أو السلوك الضار",
+
+    acceptableUseProhibited4:
+      "رفع أو معالجة محتوى ينتهك الملكية الفكرية أو الخصوصية أو السرية أو الحقوق التعاقدية",
+
+    acceptableUseProhibited5:
+      "انتحال الهوية أو الاحتيال أو التمثيل المضلل",
+
+    acceptableUseProhibited6:
+      "المراقبة أو التتبع غير المصرح به للأفراد",
+
+    acceptableUseProhibited7:
+      "إنشاء محتوى ضار أو خطير أو غير قانوني",
+
+    acceptableUseProhibited8:
+      "محاولة إجراء هندسة عكسية أو تعطيل أو تجاوز المنصة أو وسائل الحماية الأمنية",
+
+    acceptableUseProhibited9:
+      "استخدام الأنظمة الآلية لإساءة الاستخدام أو جمع البيانات أو إرسال الرسائل المزعجة أو تحميل الخدمات بشكل مفرط",
+
+    acceptableUseAiTitle: "4. قيود استخدام الذكاء الاصطناعي",
+    acceptableUseAiText1:
+      "لا يجوز استخدام المخرجات الناتجة عن الذكاء الاصطناعي كأساس وحيد لاتخاذ قرارات قانونية أو مالية أو طبية أو وظيفية أو أمنية أو قرارات عالية التأثير دون مراجعة بشرية مستقلة.",
+
+    acceptableUseAiText2:
+      "يبقى المستخدمون مسؤولين بالكامل عن التحقق من المخرجات قبل الاعتماد عليها.",
+
+    acceptableUseResponsibilityTitle: "5. مسؤولية المستخدم",
+    acceptableUseResponsibilityText:
+      "المستخدمون مسؤولون عن جميع المحتويات التي يتم رفعها أو معالجتها أو إنشاؤها أو مشاركتها عبر الخدمات، وعن التأكد من امتلاكهم الحق القانوني لاستخدام هذا المحتوى.",
+
+    acceptableUseEnforcementTitle: "6. التنفيذ",
+    acceptableUseEnforcementText:
+      "يجوز لـ Runexa Systems LLC التحقيق في الانتهاكات المشتبه بها لهذه السياسة، وقد تقوم بتعليق أو تقييد أو إنهاء الوصول إلى الخدمات وفقًا لتقديرها الخاص.",
+
+    acceptableUseReportingTitle: "7. الإبلاغ عن الانتهاكات",
+    acceptableUseReportingText:
+      "يمكن الإبلاغ عن الانتهاكات أو إساءة الاستخدام المشتبه بها عبر:",
+
+    acceptableUseChangesTitle: "8. التغييرات",
+    acceptableUseChangesText:
+      "يجوز لـ Runexa Systems LLC تحديث هذه السياسة في أي وقت. سيتم نشر الإصدارات المحدثة مع تاريخ «آخر تحديث» معدل.",
   },
 };
 
