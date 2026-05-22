@@ -1,16 +1,160 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { trackEvent } from "../../lib/track";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
 
+const labels: any = {
+  en: {
+    badge: "AI agents that get things done",
+    leftTitle: "Create one Runexa account for all AI agents",
+    leftDescription:
+      "Create one Runexa account for all AI agents. Start with a $1 trial per agent, then continue with global credits or a plan. Runexa supports legal, study, finance, business, and future security agents.",
+    featureAgentsTitle: "Specialized AI Agents",
+    featureAgentsDesc:
+      "Access powerful agents built for your business needs.",
+    featureSecurityTitle: "Secure & Private",
+    featureSecurityDesc:
+      "Your data is protected with enterprise-grade security.",
+    featureProductivityTitle: "Save Time, Get More Done",
+    featureProductivityDesc:
+      "Automate complex tasks and focus on what matters most.",
+
+    title: "Create your account",
+    subtitle:
+      "Start with a $1 trial per agent, then continue with global credits or a plan.",
+    emailPlaceholder: "you@example.com",
+    passwordPlaceholder: "Create a strong password",
+    createAccount: "Create account",
+    alreadyHaveAccount: "Already have an account?",
+    login: "Log in",
+
+    enterEmailPassword: "Please enter email and password",
+    accountCreated:
+      "Account created. Please check your email to verify your account.",
+    registrationFailed: "Registration failed",
+    serverError: "Error connecting to server",
+
+    passwordRules: [
+      "At least 12 characters",
+      "One uppercase letter",
+      "One lowercase letter",
+      "One number",
+      "One special character",
+    ],
+  },
+
+  fr: {
+    badge: "Des agents IA pour avancer plus vite",
+    leftTitle: "Un seul compte Runexa pour tous vos agents IA",
+    leftDescription:
+      "Créez un seul compte Runexa pour accéder à tous les agents IA. Commencez avec un essai à 1 $ par agent, puis continuez avec des crédits globaux ou un abonnement. Runexa prend en charge les agents juridique, étude, finance, business et les futurs agents sécurité.",
+    featureAgentsTitle: "Agents IA spécialisés",
+    featureAgentsDesc:
+      "Accédez à des agents puissants conçus pour vos besoins métier.",
+    featureSecurityTitle: "Sécurisé et confidentiel",
+    featureSecurityDesc:
+      "Vos données sont protégées avec une sécurité de niveau entreprise.",
+    featureProductivityTitle: "Gagnez du temps, avancez plus vite",
+    featureProductivityDesc:
+      "Automatisez les tâches complexes et concentrez-vous sur l’essentiel.",
+
+    title: "Créer votre compte",
+    subtitle:
+      "Commencez avec un essai à 1 $ par agent, puis continuez avec des crédits globaux ou un abonnement.",
+    emailPlaceholder: "vous@exemple.com",
+    passwordPlaceholder: "Créez un mot de passe sécurisé",
+    createAccount: "Créer un compte",
+    alreadyHaveAccount: "Vous avez déjà un compte ?",
+    login: "Se connecter",
+
+    enterEmailPassword: "Veuillez entrer votre e-mail et votre mot de passe",
+    accountCreated:
+      "Compte créé. Veuillez vérifier votre e-mail pour activer votre compte.",
+    registrationFailed: "Échec de l’inscription",
+    serverError: "Erreur de connexion au serveur",
+
+    passwordRules: [
+      "Au moins 12 caractères",
+      "Une lettre majuscule",
+      "Une lettre minuscule",
+      "Un chiffre",
+      "Un caractère spécial",
+    ],
+  },
+
+  ar: {
+    badge: "وكلاء ذكاء اصطناعي يساعدونك على الإنجاز",
+    leftTitle: "حساب Runexa واحد لجميع وكلاء الذكاء الاصطناعي",
+    leftDescription:
+      "أنشئ حساب Runexa واحدًا للوصول إلى جميع وكلاء الذكاء الاصطناعي. ابدأ بتجربة بقيمة 1 دولار لكل وكيل، ثم تابع باستخدام الأرصدة العامة أو الاشتراك. يدعم Runexa الوكلاء القانونيين، الدراسة، المالية، الأعمال، ووكلاء الأمان المستقبليين.",
+    featureAgentsTitle: "وكلاء ذكاء اصطناعي متخصصون",
+    featureAgentsDesc:
+      "استخدم وكلاء أقوياء مصممين لاحتياجات عملك.",
+    featureSecurityTitle: "آمن وخاص",
+    featureSecurityDesc:
+      "بياناتك محمية بأمان من مستوى المؤسسات.",
+    featureProductivityTitle: "وفّر الوقت وأنجز أكثر",
+    featureProductivityDesc:
+      "أتمت المهام المعقدة وركّز على ما يهم.",
+
+    title: "إنشاء حسابك",
+    subtitle:
+      "ابدأ بتجربة بقيمة 1 دولار لكل وكيل، ثم تابع باستخدام الأرصدة العامة أو الاشتراك.",
+    emailPlaceholder: "you@example.com",
+    passwordPlaceholder: "أنشئ كلمة مرور قوية",
+    createAccount: "إنشاء حساب",
+    alreadyHaveAccount: "لديك حساب بالفعل؟",
+    login: "تسجيل الدخول",
+
+    enterEmailPassword: "يرجى إدخال البريد الإلكتروني وكلمة المرور",
+    accountCreated:
+      "تم إنشاء الحساب. يرجى التحقق من بريدك الإلكتروني لتفعيل الحساب.",
+    registrationFailed: "فشل إنشاء الحساب",
+    serverError: "خطأ في الاتصال بالخادم",
+
+    passwordRules: [
+      "12 حرفًا على الأقل",
+      "حرف كبير واحد",
+      "حرف صغير واحد",
+      "رقم واحد",
+      "رمز خاص واحد",
+    ],
+  },
+};
+
 export default function RegisterPage() {
+  const [language, setLanguage] = useState("en");
+  const t = labels[language] || labels.en;
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState<"success" | "error">("success");
+
+  useEffect(() => {
+    const saved = localStorage.getItem("locale");
+
+    if (saved && labels[saved]) {
+      setLanguage(saved);
+    }
+
+    const handleLocaleChange = () => {
+      const nextLocale = localStorage.getItem("locale");
+
+      if (nextLocale && labels[nextLocale]) {
+        setLanguage(nextLocale);
+      }
+    };
+
+    window.addEventListener("locale-change", handleLocaleChange);
+
+    return () => {
+      window.removeEventListener("locale-change", handleLocaleChange);
+    };
+  }, []);
 
   const isValid =
     password.length >= 12 &&
@@ -20,12 +164,12 @@ export default function RegisterPage() {
     /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
   const passwordRules = [
-    { label: "At least 12 characters", valid: password.length >= 12 },
-    { label: "One uppercase letter", valid: /[A-Z]/.test(password) },
-    { label: "One lowercase letter", valid: /[a-z]/.test(password) },
-    { label: "One number", valid: /\d/.test(password) },
+    { label: t.passwordRules[0], valid: password.length >= 12 },
+    { label: t.passwordRules[1], valid: /[A-Z]/.test(password) },
+    { label: t.passwordRules[2], valid: /[a-z]/.test(password) },
+    { label: t.passwordRules[3], valid: /\d/.test(password) },
     {
-      label: "One special character",
+      label: t.passwordRules[4],
       valid: /[!@#$%^&*(),.?":{}|<>]/.test(password),
     },
   ];
@@ -34,7 +178,7 @@ export default function RegisterPage() {
     try {
       if (!email.trim() || !password) {
         setMessageType("error");
-        setMessage("Please enter email and password");
+        setMessage(t.enterEmailPassword);
         return;
       }
 
@@ -74,40 +218,41 @@ export default function RegisterPage() {
         }
 
         setMessageType("success");
-        setMessage(
-          "Account created. Please check your email to verify your account."
-        );
+        setMessage(t.accountCreated);
 
         setTimeout(() => {
           window.location.href = "/login";
         }, 1500);
       } else {
         setMessageType("error");
-        setMessage(data.detail || "Registration failed");
+        setMessage(data.detail || t.registrationFailed);
       }
     } catch (err) {
       console.error(err);
       setMessageType("error");
-      setMessage("Error connecting to server");
+      setMessage(t.serverError);
     }
   };
 
   return (
-    <main className="min-h-screen bg-white text-slate-950">
+    <main
+      dir={language === "ar" ? "rtl" : "ltr"}
+      className="min-h-screen bg-white text-slate-950"
+    >
       <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2">
         {/* LEFT */}
         <section className="relative hidden overflow-hidden bg-gradient-to-br from-blue-50 via-white to-indigo-50 px-10 py-12 lg:flex lg:flex-col lg:justify-center xl:px-20">
           <div className="max-w-xl">
             <span className="inline-flex rounded-full bg-blue-100 px-4 py-2 text-sm font-medium text-blue-700">
-              AI agents that get things done
+              {t.badge}
             </span>
 
             <h1 className="mt-8 text-4xl font-bold text-slate-950 xl:text-5xl">
-              Create one Runexa account for all AI agents
+              {t.leftTitle}
             </h1>
 
             <p className="mt-6 text-lg text-slate-600">
-              Create one Runexa account for all AI agents. Start with a $1 trial per agent, then continue with global credits or a plan. Runexa supports legal, study, finance, business, and future security agents.
+              {t.leftDescription}
             </p>
 
             <div className="mt-12 space-y-7">
@@ -116,9 +261,9 @@ export default function RegisterPage() {
                   ⚡
                 </div>
                 <div>
-                  <h3 className="font-semibold">Specialized AI Agents</h3>
+                  <h3 className="font-semibold">{t.featureAgentsTitle}</h3>
                   <p className="text-slate-600">
-                    Access powerful agents built for your business needs.
+                    {t.featureAgentsDesc}
                   </p>
                 </div>
               </div>
@@ -128,9 +273,9 @@ export default function RegisterPage() {
                   🛡️
                 </div>
                 <div>
-                  <h3 className="font-semibold">Secure & Private</h3>
+                  <h3 className="font-semibold">{t.featureSecurityTitle}</h3>
                   <p className="text-slate-600">
-                    Your data is protected with enterprise-grade security.
+                    {t.featureSecurityDesc}
                   </p>
                 </div>
               </div>
@@ -141,10 +286,10 @@ export default function RegisterPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold">
-                    Save Time, Get More Done
+                    {t.featureProductivityTitle}
                   </h3>
                   <p className="text-slate-600">
-                    Automate complex tasks and focus on what matters most.
+                    {t.featureProductivityDesc}
                   </p>
                 </div>
               </div>
@@ -156,20 +301,28 @@ export default function RegisterPage() {
         <section className="flex items-center justify-center bg-slate-50 px-4 py-10 lg:bg-white">
           <div className="w-full max-w-xl rounded-3xl border bg-white p-6 shadow-xl">
             <div className="text-center">
-              <h1 className="text-3xl font-bold">Create your account</h1>
+              <h1 className="text-3xl font-bold">{t.title}</h1>
               <p className="text-slate-500">
-                Start with a $1 trial per agent, then continue with global credits or a plan.
+                {t.subtitle}
               </p>
             </div>
 
             {message && (
-              <div className="mt-5 text-sm">{message}</div>
+              <div
+                className={`mt-5 rounded-xl border px-4 py-3 text-sm ${
+                  messageType === "success"
+                    ? "border-green-200 bg-green-50 text-green-700"
+                    : "border-red-200 bg-red-50 text-red-700"
+                }`}
+              >
+                {message}
+              </div>
             )}
 
             <div className="space-y-5 mt-6">
               <input
                 type="email"
-                placeholder="you@example.com"
+                placeholder={t.emailPlaceholder}
                 className="w-full border px-4 py-3 rounded-xl"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -177,7 +330,7 @@ export default function RegisterPage() {
 
               <input
                 type="password"
-                placeholder="Create a strong password"
+                placeholder={t.passwordPlaceholder}
                 className="w-full border px-4 py-3 rounded-xl"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -203,14 +356,14 @@ export default function RegisterPage() {
                 disabled={!isValid}
                 className="w-full bg-black text-white py-3 rounded-xl disabled:bg-gray-400"
               >
-                Create account
+                {t.createAccount}
               </button>
             </div>
 
             <p className="mt-6 text-center text-sm">
-              Already have an account?{" "}
+              {t.alreadyHaveAccount}{" "}
               <a href="/login" className="text-blue-600">
-                Log in
+                {t.login}
               </a>
             </p>
           </div>
