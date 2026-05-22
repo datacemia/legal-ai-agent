@@ -308,6 +308,163 @@ export const translations: any = {
     acceptableUseChangesTitle: "8. Changes",
     acceptableUseChangesText:
       "Runexa Systems LLC may update this Policy at any time. Updated versions will be posted with a revised “Last updated” date.",
+
+    aiDisclaimerTitle: "AI Disclaimer & Transparency",
+    aiDisclaimerUpdated: "Last updated: May 2026",
+
+    aiDisclaimerOverviewTitle: "1. Overview",
+    aiDisclaimerOverviewText1:
+      "Runexa Systems LLC provides AI-powered tools and agents designed to assist users with document analysis, learning support, financial insights, business analysis, and related tasks.",
+    aiDisclaimerOverviewText2:
+      "AI systems are probabilistic technologies and may produce inaccurate, incomplete, inconsistent, or misleading outputs.",
+
+    aiDisclaimerAdviceTitle: "2. No Professional Advice",
+    aiDisclaimerAdviceText1:
+      "Runexa AI agents do not provide legal, financial, accounting, tax, medical, investment, security, or other regulated professional advice.",
+    aiDisclaimerAdviceText2:
+      "AI-generated outputs should not be considered a substitute for qualified professionals or independent human judgment.",
+
+    aiDisclaimerLimitationsTitle: "3. AI Limitations",
+    aiDisclaimerLimitations1:
+      "AI outputs may contain factual inaccuracies or hallucinations",
+    aiDisclaimerLimitations2:
+      "AI systems may omit important context, risks, or details",
+    aiDisclaimerLimitations3:
+      "AI-generated summaries, recommendations, or classifications may be incomplete or misleading",
+    aiDisclaimerLimitations4:
+      "AI systems may generate outdated information or incorrect interpretations",
+    aiDisclaimerLimitations5:
+      "AI outputs may vary between requests and are not guaranteed to be consistent",
+
+    aiDisclaimerReviewTitle: "4. Human Review Required",
+    aiDisclaimerReviewText1:
+      "Users are solely responsible for independently reviewing, verifying, and validating all outputs before relying on them or taking action.",
+    aiDisclaimerReviewText2:
+      "AI outputs should not be used as the sole basis for legal, financial, employment, educational, medical, security, compliance, or other high-impact decisions.",
+
+    aiDisclaimerResponsibilityTitle: "5. User Responsibility",
+    aiDisclaimerResponsibilityText:
+      "Users remain fully responsible for how they use AI-generated outputs, including any decisions, actions, interpretations, or consequences resulting from use of the services.",
+
+    aiDisclaimerGuaranteesTitle: "6. No Guarantees",
+    aiDisclaimerGuaranteesText:
+      "Runexa Systems LLC does not guarantee the accuracy, completeness, reliability, legality, availability, or fitness of AI-generated outputs for any purpose.",
+
+    aiDisclaimerImprovementTitle: "7. Continuous Improvement",
+    aiDisclaimerImprovementText:
+      "AI systems may evolve, change, improve, or behave differently over time as models, infrastructure, and safety systems are updated.",
+
+    aiDisclaimerContactTitle: "8. Contact",
+
+    cookiesTitle: "Cookie Policy",
+    cookiesUpdated: "Last updated: May 2026",
+
+    cookiesOverviewTitle: "1. Overview",
+    cookiesOverviewText:
+      "This Cookie Policy explains how Runexa Systems LLC (“Runexa”, “we”, “our”, or “us”) uses cookies and similar technologies when you access or use our services, websites, and AI platforms.",
+
+    cookiesWhatTitle: "2. What Are Cookies",
+    cookiesWhatText:
+      "Cookies are small text files stored on your device by your web browser. Cookies help websites recognize users, maintain sessions, remember preferences, and improve functionality and security.",
+
+    cookiesTypesTitle: "3. Types of Cookies We Use",
+
+    cookiesEssentialTitle: "3.1 Essential Cookies",
+    cookiesEssentialText:
+      "These cookies are necessary for the operation of the services, including authentication, account access, security, and session management.",
+
+    cookiesAnalyticsTitle: "3.2 Performance and Analytics Cookies",
+    cookiesAnalyticsText:
+      "These cookies help us understand how users interact with the platform, improve reliability, monitor performance, and detect technical issues.",
+
+    cookiesPreferenceTitle: "3.3 Preference Cookies",
+    cookiesPreferenceText:
+      "These cookies may store user preferences such as language settings, interface preferences, or session-related choices.",
+
+    cookiesSecurityTitle: "3.4 Security Cookies",
+    cookiesSecurityText:
+      "Security-related cookies may be used to prevent fraud, abuse, unauthorized access, and suspicious activity.",
+
+    cookiesThirdPartyTitle: "4. Third-Party Services",
+    cookiesThirdPartyText:
+      "Some cookies may be placed by third-party providers that support infrastructure, analytics, authentication, hosting, AI processing, or payment services used by Runexa Systems LLC.",
+
+    cookiesManagingTitle: "5. Managing Cookies",
+    cookiesManagingText:
+      "Most web browsers allow users to control, disable, or delete cookies through browser settings. Disabling cookies may affect functionality, availability, or performance of certain services.",
+
+    cookiesTrackTitle: "6. Do Not Track",
+    cookiesTrackText:
+      "Some browsers offer “Do Not Track” settings. Because there is no universally accepted standard for these signals, our services may not respond to all Do Not Track requests.",
+
+    cookiesChangesTitle: "7. Changes",
+    cookiesChangesText:
+      "Runexa Systems LLC may update this Cookie Policy from time to time. Updated versions will be posted with a revised “Last updated” date.",
+
+    cookiesContactTitle: "8. Contact",
+
+    refundTitle: "Refund Policy",
+    refundUpdated: "Last updated: May 2026",
+
+    refundOverviewTitle: "1. Overview",
+    refundOverviewText:
+      "This Refund Policy applies to purchases, credits, subscriptions, trials, and other paid services offered by Runexa Systems LLC.",
+
+    refundTrialsTitle: "2. Trials and Credits",
+    refundTrialsText1:
+      "Trial purchases, activation fees, AI credits, and usage-based purchases are generally non-refundable unless required by applicable law.",
+    refundTrialsText2:
+      "Users are responsible for reviewing product descriptions and pricing before purchasing.",
+
+    refundSubscriptionTitle: "3. Subscription Services",
+    refundSubscriptionText1:
+      "Subscription plans may renew automatically unless canceled before the next billing cycle.",
+    refundSubscriptionText2:
+      "Users may cancel subscriptions at any time, but fees already paid are generally non-refundable.",
+
+    refundChargesTitle: "4. Failed or Duplicate Charges",
+    refundChargesText:
+      "If you believe you were charged incorrectly, charged multiple times, or experienced a billing error, please contact us for review.",
+
+    refundAbuseTitle: "5. Chargebacks and Abuse",
+    refundAbuseText:
+      "Fraudulent chargebacks, payment abuse, or attempts to improperly reverse payments may result in suspension or termination of access to the services.",
+
+    refundAvailabilityTitle: "6. Service Availability",
+    refundAvailabilityText:
+      "Temporary outages, AI inaccuracies, delays, model limitations, or feature changes do not automatically qualify for refunds.",
+
+    refundExceptionsTitle: "7. Exceptions",
+    refundExceptionsText:
+      "Runexa Systems LLC may, at its sole discretion, provide refunds, credits, or account adjustments in exceptional situations.",
+
+    refundChangesTitle: "8. Changes",
+    refundChangesText:
+      "Runexa Systems LLC may update this Refund Policy from time to time. Updated versions will be posted with a revised “Last updated” date.",
+
+    refundContactTitle: "9. Contact",
+
+    companyInfoTitle: "Company Information",
+    companyInfoUpdated: "Last updated: May 2026",
+
+    companySectionTitle: "1. Company",
+    companySectionText:
+      "AI agents platform providing AI-powered tools and services.",
+
+    companyAddressTitle: "2. Registered Address",
+
+    companyContactTitle: "3. Contact Information",
+    companyContactText: "General Contact",
+
+    companyServicesTitle: "4. Services",
+    companyServicesText:
+      "Runexa Systems LLC develops and operates AI-powered tools, applications, AI agents, and related software services.",
+
+    companyLawTitle: "5. Governing Law",
+    companyLawText:
+      "Services provided by Runexa Systems LLC are governed by the laws of the State of Wyoming, United States.",
+
+
   },
 
   fr: {
@@ -596,6 +753,163 @@ export const translations: any = {
     acceptableUseChangesTitle: "8. Modifications",
     acceptableUseChangesText:
       "Runexa Systems LLC peut mettre à jour cette Politique à tout moment. Les versions mises à jour seront publiées avec une date de « Dernière mise à jour » révisée.",
+
+    aiDisclaimerTitle: "Avertissement et transparence sur l’IA",
+    aiDisclaimerUpdated: "Dernière mise à jour : mai 2026",
+
+    aiDisclaimerOverviewTitle: "1. Présentation",
+    aiDisclaimerOverviewText1:
+      "Runexa Systems LLC fournit des outils et agents alimentés par l’IA conçus pour aider les utilisateurs dans l’analyse de documents, le support d’apprentissage, les analyses financières, les analyses business et d’autres tâches associées.",
+    aiDisclaimerOverviewText2:
+      "Les systèmes d’IA sont des technologies probabilistes pouvant produire des résultats inexacts, incomplets, incohérents ou trompeurs.",
+
+    aiDisclaimerAdviceTitle: "2. Absence de conseil professionnel",
+    aiDisclaimerAdviceText1:
+      "Les agents IA de Runexa ne fournissent pas de conseils juridiques, financiers, comptables, fiscaux, médicaux, d’investissement, de sécurité ou autres conseils professionnels réglementés.",
+    aiDisclaimerAdviceText2:
+      "Les résultats générés par l’IA ne doivent pas être considérés comme un substitut à des professionnels qualifiés ou au jugement humain indépendant.",
+
+    aiDisclaimerLimitationsTitle: "3. Limites de l’IA",
+    aiDisclaimerLimitations1:
+      "Les résultats IA peuvent contenir des erreurs factuelles ou des hallucinations",
+    aiDisclaimerLimitations2:
+      "Les systèmes IA peuvent omettre des contextes, risques ou détails importants",
+    aiDisclaimerLimitations3:
+      "Les résumés, recommandations ou classifications générés par l’IA peuvent être incomplets ou trompeurs",
+    aiDisclaimerLimitations4:
+      "Les systèmes IA peuvent générer des informations obsolètes ou des interprétations incorrectes",
+    aiDisclaimerLimitations5:
+      "Les résultats IA peuvent varier entre les requêtes et ne sont pas garantis cohérents",
+
+    aiDisclaimerReviewTitle: "4. Vérification humaine requise",
+    aiDisclaimerReviewText1:
+      "Les utilisateurs sont seuls responsables de l’examen, de la vérification et de la validation indépendants de tous les résultats avant de s’y fier ou d’agir.",
+    aiDisclaimerReviewText2:
+      "Les résultats IA ne doivent pas être utilisés comme seule base pour des décisions juridiques, financières, professionnelles, éducatives, médicales, de sécurité, de conformité ou autres décisions à fort impact.",
+
+    aiDisclaimerResponsibilityTitle: "5. Responsabilité de l’utilisateur",
+    aiDisclaimerResponsibilityText:
+      "Les utilisateurs restent entièrement responsables de la manière dont ils utilisent les résultats générés par l’IA, y compris les décisions, actions, interprétations ou conséquences résultant de l’utilisation des services.",
+
+    aiDisclaimerGuaranteesTitle: "6. Absence de garanties",
+    aiDisclaimerGuaranteesText:
+      "Runexa Systems LLC ne garantit pas l’exactitude, l’exhaustivité, la fiabilité, la légalité, la disponibilité ou l’adéquation des résultats générés par l’IA à un usage particulier.",
+
+    aiDisclaimerImprovementTitle: "7. Amélioration continue",
+    aiDisclaimerImprovementText:
+      "Les systèmes IA peuvent évoluer, changer, s’améliorer ou se comporter différemment au fil du temps à mesure que les modèles, infrastructures et systèmes de sécurité sont mis à jour.",
+
+    aiDisclaimerContactTitle: "8. Contact",
+
+    cookiesTitle: "Politique relative aux cookies",
+    cookiesUpdated: "Dernière mise à jour : mai 2026",
+
+    cookiesOverviewTitle: "1. Présentation",
+    cookiesOverviewText:
+      "Cette Politique relative aux cookies explique comment Runexa Systems LLC (« Runexa », « nous », « notre » ou « nos ») utilise les cookies et technologies similaires lorsque vous accédez à nos services, sites web et plateformes IA ou les utilisez.",
+
+    cookiesWhatTitle: "2. Que sont les cookies",
+    cookiesWhatText:
+      "Les cookies sont de petits fichiers texte stockés sur votre appareil par votre navigateur web. Ils aident les sites web à reconnaître les utilisateurs, maintenir les sessions, mémoriser les préférences et améliorer les fonctionnalités et la sécurité.",
+
+    cookiesTypesTitle: "3. Types de cookies que nous utilisons",
+
+    cookiesEssentialTitle: "3.1 Cookies essentiels",
+    cookiesEssentialText:
+      "Ces cookies sont nécessaires au fonctionnement des services, notamment l’authentification, l’accès au compte, la sécurité et la gestion des sessions.",
+
+    cookiesAnalyticsTitle: "3.2 Cookies de performance et d’analyse",
+    cookiesAnalyticsText:
+      "Ces cookies nous aident à comprendre comment les utilisateurs interagissent avec la plateforme, à améliorer la fiabilité, surveiller les performances et détecter les problèmes techniques.",
+
+    cookiesPreferenceTitle: "3.3 Cookies de préférences",
+    cookiesPreferenceText:
+      "Ces cookies peuvent stocker les préférences utilisateur telles que les paramètres de langue, les préférences d’interface ou les choix liés aux sessions.",
+
+    cookiesSecurityTitle: "3.4 Cookies de sécurité",
+    cookiesSecurityText:
+      "Les cookies liés à la sécurité peuvent être utilisés pour prévenir la fraude, les abus, l’accès non autorisé et les activités suspectes.",
+
+    cookiesThirdPartyTitle: "4. Services tiers",
+    cookiesThirdPartyText:
+      "Certains cookies peuvent être placés par des prestataires tiers qui prennent en charge l’infrastructure, l’analyse, l’authentification, l’hébergement, le traitement IA ou les services de paiement utilisés par Runexa Systems LLC.",
+
+    cookiesManagingTitle: "5. Gestion des cookies",
+    cookiesManagingText:
+      "La plupart des navigateurs web permettent aux utilisateurs de contrôler, désactiver ou supprimer les cookies via les paramètres du navigateur. La désactivation des cookies peut affecter les fonctionnalités, la disponibilité ou les performances de certains services.",
+
+    cookiesTrackTitle: "6. Do Not Track",
+    cookiesTrackText:
+      "Certains navigateurs proposent des paramètres « Do Not Track ». Comme il n’existe pas de norme universellement acceptée pour ces signaux, nos services peuvent ne pas répondre à toutes les demandes Do Not Track.",
+
+    cookiesChangesTitle: "7. Modifications",
+    cookiesChangesText:
+      "Runexa Systems LLC peut mettre à jour cette Politique relative aux cookies de temps à autre. Les versions mises à jour seront publiées avec une date de « Dernière mise à jour » révisée.",
+
+    cookiesContactTitle: "8. Contact",
+
+    refundTitle: "Politique de remboursement",
+    refundUpdated: "Dernière mise à jour : mai 2026",
+
+    refundOverviewTitle: "1. Présentation",
+    refundOverviewText:
+      "Cette Politique de remboursement s’applique aux achats, crédits, abonnements, essais et autres services payants proposés par Runexa Systems LLC.",
+
+    refundTrialsTitle: "2. Essais et crédits",
+    refundTrialsText1:
+      "Les achats d’essai, frais d’activation, crédits IA et achats basés sur l’utilisation sont généralement non remboursables sauf si la loi applicable l’exige.",
+    refundTrialsText2:
+      "Les utilisateurs sont responsables de consulter les descriptions des produits et les tarifs avant l’achat.",
+
+    refundSubscriptionTitle: "3. Services d’abonnement",
+    refundSubscriptionText1:
+      "Les abonnements peuvent être renouvelés automatiquement sauf annulation avant le prochain cycle de facturation.",
+    refundSubscriptionText2:
+      "Les utilisateurs peuvent annuler leur abonnement à tout moment, mais les frais déjà payés sont généralement non remboursables.",
+
+    refundChargesTitle: "4. Paiements échoués ou en double",
+    refundChargesText:
+      "Si vous pensez avoir été facturé incorrectement, facturé plusieurs fois ou avoir subi une erreur de facturation, veuillez nous contacter pour examen.",
+
+    refundAbuseTitle: "5. Contestations et abus",
+    refundAbuseText:
+      "Les contestations frauduleuses, abus de paiement ou tentatives d’annulation abusive des paiements peuvent entraîner la suspension ou la résiliation de l’accès aux services.",
+
+    refundAvailabilityTitle: "6. Disponibilité du service",
+    refundAvailabilityText:
+      "Les interruptions temporaires, erreurs IA, retards, limitations des modèles ou modifications des fonctionnalités ne donnent pas automatiquement droit à un remboursement.",
+
+    refundExceptionsTitle: "7. Exceptions",
+    refundExceptionsText:
+      "Runexa Systems LLC peut, à sa seule discrétion, accorder des remboursements, crédits ou ajustements de compte dans des situations exceptionnelles.",
+
+    refundChangesTitle: "8. Modifications",
+    refundChangesText:
+      "Runexa Systems LLC peut mettre à jour cette Politique de remboursement de temps à autre. Les versions mises à jour seront publiées avec une date de « Dernière mise à jour » révisée.",
+
+    refundContactTitle: "9. Contact",
+
+    companyInfoTitle: "Informations société",
+    companyInfoUpdated: "Dernière mise à jour : mai 2026",
+
+    companySectionTitle: "1. Société",
+    companySectionText:
+      "Plateforme d’agents IA fournissant des outils et services alimentés par l’intelligence artificielle.",
+
+    companyAddressTitle: "2. Adresse enregistrée",
+
+    companyContactTitle: "3. Informations de contact",
+    companyContactText: "Contact général",
+
+    companyServicesTitle: "4. Services",
+    companyServicesText:
+      "Runexa Systems LLC développe et exploite des outils alimentés par l’IA, des applications, des agents IA et des services logiciels associés.",
+
+    companyLawTitle: "5. Droit applicable",
+    companyLawText:
+      "Les services fournis par Runexa Systems LLC sont régis par les lois de l’État du Wyoming, États-Unis.",
+
+
   },
 
   ar: {
@@ -884,6 +1198,163 @@ export const translations: any = {
     acceptableUseChangesTitle: "8. التغييرات",
     acceptableUseChangesText:
       "يجوز لـ Runexa Systems LLC تحديث هذه السياسة في أي وقت. سيتم نشر الإصدارات المحدثة مع تاريخ «آخر تحديث» معدل.",
+
+    aiDisclaimerTitle: "إخلاء المسؤولية والشفافية الخاصة بالذكاء الاصطناعي",
+    aiDisclaimerUpdated: "آخر تحديث: مايو 2026",
+
+    aiDisclaimerOverviewTitle: "1. نظرة عامة",
+    aiDisclaimerOverviewText1:
+      "توفر Runexa Systems LLC أدوات ووكلاء مدعومين بالذكاء الاصطناعي لمساعدة المستخدمين في تحليل المستندات ودعم التعلم والتحليلات المالية وتحليل الأعمال والمهام ذات الصلة.",
+    aiDisclaimerOverviewText2:
+      "أنظمة الذكاء الاصطناعي تقنيات احتمالية وقد تنتج مخرجات غير دقيقة أو غير مكتملة أو غير متسقة أو مضللة.",
+
+    aiDisclaimerAdviceTitle: "2. لا توجد نصائح مهنية",
+    aiDisclaimerAdviceText1:
+      "لا يقدم وكلاء Runexa للذكاء الاصطناعي نصائح قانونية أو مالية أو محاسبية أو ضريبية أو طبية أو استثمارية أو أمنية أو أي نصائح مهنية منظمة أخرى.",
+    aiDisclaimerAdviceText2:
+      "لا ينبغي اعتبار المخرجات الناتجة عن الذكاء الاصطناعي بديلاً عن المهنيين المؤهلين أو الحكم البشري المستقل.",
+
+    aiDisclaimerLimitationsTitle: "3. حدود الذكاء الاصطناعي",
+    aiDisclaimerLimitations1:
+      "قد تحتوي مخرجات الذكاء الاصطناعي على أخطاء أو هلوسات",
+    aiDisclaimerLimitations2:
+      "قد تغفل أنظمة الذكاء الاصطناعي سياقات أو مخاطر أو تفاصيل مهمة",
+    aiDisclaimerLimitations3:
+      "قد تكون الملخصات أو التوصيات أو التصنيفات الناتجة عن الذكاء الاصطناعي غير مكتملة أو مضللة",
+    aiDisclaimerLimitations4:
+      "قد تولد أنظمة الذكاء الاصطناعي معلومات قديمة أو تفسيرات غير صحيحة",
+    aiDisclaimerLimitations5:
+      "قد تختلف مخرجات الذكاء الاصطناعي بين الطلبات ولا يوجد ضمان لاتساقها",
+
+    aiDisclaimerReviewTitle: "4. المراجعة البشرية مطلوبة",
+    aiDisclaimerReviewText1:
+      "المستخدمون مسؤولون وحدهم عن مراجعة جميع المخرجات والتحقق منها واعتمادها بشكل مستقل قبل الاعتماد عليها أو اتخاذ أي إجراء.",
+    aiDisclaimerReviewText2:
+      "لا ينبغي استخدام مخرجات الذكاء الاصطناعي كأساس وحيد لاتخاذ قرارات قانونية أو مالية أو وظيفية أو تعليمية أو طبية أو أمنية أو تنظيمية أو أي قرارات عالية التأثير.",
+
+    aiDisclaimerResponsibilityTitle: "5. مسؤولية المستخدم",
+    aiDisclaimerResponsibilityText:
+      "يبقى المستخدمون مسؤولين بالكامل عن كيفية استخدامهم للمخرجات الناتجة عن الذكاء الاصطناعي، بما في ذلك أي قرارات أو إجراءات أو تفسيرات أو عواقب ناتجة عن استخدام الخدمات.",
+
+    aiDisclaimerGuaranteesTitle: "6. عدم وجود ضمانات",
+    aiDisclaimerGuaranteesText:
+      "لا تضمن Runexa Systems LLC دقة أو اكتمال أو موثوقية أو قانونية أو توفر أو ملاءمة المخرجات الناتجة عن الذكاء الاصطناعي لأي غرض.",
+
+    aiDisclaimerImprovementTitle: "7. التحسين المستمر",
+    aiDisclaimerImprovementText:
+      "قد تتطور أنظمة الذكاء الاصطناعي أو تتغير أو تتحسن أو تتصرف بشكل مختلف مع مرور الوقت مع تحديث النماذج والبنية التحتية وأنظمة الأمان.",
+
+    aiDisclaimerContactTitle: "8. الاتصال",
+
+    cookiesTitle: "سياسة ملفات تعريف الارتباط",
+    cookiesUpdated: "آخر تحديث: مايو 2026",
+
+    cookiesOverviewTitle: "1. نظرة عامة",
+    cookiesOverviewText:
+      "توضح سياسة ملفات تعريف الارتباط هذه كيفية استخدام Runexa Systems LLC («Runexa» أو «نحن») لملفات تعريف الارتباط والتقنيات المشابهة عند الوصول إلى خدماتنا أو مواقعنا أو منصات الذكاء الاصطناعي أو استخدامها.",
+
+    cookiesWhatTitle: "2. ما هي ملفات تعريف الارتباط",
+    cookiesWhatText:
+      "ملفات تعريف الارتباط هي ملفات نصية صغيرة يخزنها متصفح الويب على جهازك. تساعد هذه الملفات المواقع على التعرف على المستخدمين والحفاظ على الجلسات وتذكر التفضيلات وتحسين الوظائف والأمان.",
+
+    cookiesTypesTitle: "3. أنواع ملفات تعريف الارتباط التي نستخدمها",
+
+    cookiesEssentialTitle: "3.1 ملفات تعريف الارتباط الأساسية",
+    cookiesEssentialText:
+      "هذه الملفات ضرورية لتشغيل الخدمات، بما في ذلك المصادقة والوصول إلى الحساب والأمان وإدارة الجلسات.",
+
+    cookiesAnalyticsTitle: "3.2 ملفات الأداء والتحليلات",
+    cookiesAnalyticsText:
+      "تساعدنا هذه الملفات على فهم كيفية تفاعل المستخدمين مع المنصة وتحسين الموثوقية ومراقبة الأداء واكتشاف المشكلات التقنية.",
+
+    cookiesPreferenceTitle: "3.3 ملفات التفضيلات",
+    cookiesPreferenceText:
+      "قد تخزن هذه الملفات تفضيلات المستخدم مثل إعدادات اللغة أو تفضيلات الواجهة أو الخيارات المتعلقة بالجلسة.",
+
+    cookiesSecurityTitle: "3.4 ملفات الأمان",
+    cookiesSecurityText:
+      "قد تُستخدم ملفات تعريف الارتباط المتعلقة بالأمان لمنع الاحتيال وإساءة الاستخدام والوصول غير المصرح به والأنشطة المشبوهة.",
+
+    cookiesThirdPartyTitle: "4. خدمات الطرف الثالث",
+    cookiesThirdPartyText:
+      "قد يتم وضع بعض ملفات تعريف الارتباط بواسطة مزودي خدمات تابعين لجهات خارجية يدعمون البنية التحتية أو التحليلات أو المصادقة أو الاستضافة أو معالجة الذكاء الاصطناعي أو خدمات الدفع التي تستخدمها Runexa Systems LLC.",
+
+    cookiesManagingTitle: "5. إدارة ملفات تعريف الارتباط",
+    cookiesManagingText:
+      "تسمح معظم متصفحات الويب للمستخدمين بالتحكم في ملفات تعريف الارتباط أو تعطيلها أو حذفها من خلال إعدادات المتصفح. قد يؤثر تعطيل ملفات تعريف الارتباط على وظائف بعض الخدمات أو توفرها أو أدائها.",
+
+    cookiesTrackTitle: "6. عدم التتبع",
+    cookiesTrackText:
+      "تقدم بعض المتصفحات إعدادات “Do Not Track”. ونظرًا لعدم وجود معيار مقبول عالميًا لهذه الإشارات، فقد لا تستجيب خدماتنا لجميع طلبات عدم التتبع.",
+
+    cookiesChangesTitle: "7. التغييرات",
+    cookiesChangesText:
+      "يجوز لـ Runexa Systems LLC تحديث سياسة ملفات تعريف الارتباط هذه من وقت لآخر. سيتم نشر الإصدارات المحدثة مع تاريخ “آخر تحديث” معدل.",
+
+    cookiesContactTitle: "8. الاتصال",
+
+    refundTitle: "سياسة الاسترداد",
+    refundUpdated: "آخر تحديث: مايو 2026",
+
+    refundOverviewTitle: "1. نظرة عامة",
+    refundOverviewText:
+      "تنطبق سياسة الاسترداد هذه على المشتريات والأرصدة والاشتراكات والتجارب والخدمات المدفوعة الأخرى التي تقدمها Runexa Systems LLC.",
+
+    refundTrialsTitle: "2. التجارب والأرصدة",
+    refundTrialsText1:
+      "عمليات الشراء التجريبية ورسوم التفعيل وأرصدة الذكاء الاصطناعي والمشتريات القائمة على الاستخدام غير قابلة للاسترداد عمومًا ما لم يتطلب القانون المعمول به خلاف ذلك.",
+    refundTrialsText2:
+      "المستخدمون مسؤولون عن مراجعة أوصاف المنتجات والأسعار قبل الشراء.",
+
+    refundSubscriptionTitle: "3. خدمات الاشتراك",
+    refundSubscriptionText1:
+      "قد يتم تجديد خطط الاشتراك تلقائيًا ما لم يتم إلغاؤها قبل دورة الفوترة التالية.",
+    refundSubscriptionText2:
+      "يمكن للمستخدمين إلغاء الاشتراكات في أي وقت، لكن الرسوم المدفوعة مسبقًا غير قابلة للاسترداد عمومًا.",
+
+    refundChargesTitle: "4. الرسوم المكررة أو الفاشلة",
+    refundChargesText:
+      "إذا كنت تعتقد أنه تم تحصيل رسوم منك بشكل غير صحيح أو عدة مرات أو حدث خطأ في الفوترة، يرجى التواصل معنا للمراجعة.",
+
+    refundAbuseTitle: "5. إساءة الاستخدام واسترجاع المدفوعات",
+    refundAbuseText:
+      "قد تؤدي عمليات استرجاع المدفوعات الاحتيالية أو إساءة استخدام الدفع أو محاولات عكس المدفوعات بشكل غير صحيح إلى تعليق أو إنهاء الوصول إلى الخدمات.",
+
+    refundAvailabilityTitle: "6. توفر الخدمة",
+    refundAvailabilityText:
+      "الانقطاعات المؤقتة أو أخطاء الذكاء الاصطناعي أو التأخيرات أو قيود النماذج أو تغييرات الميزات لا تؤهل تلقائيًا للحصول على استرداد.",
+
+    refundExceptionsTitle: "7. الاستثناءات",
+    refundExceptionsText:
+      "يجوز لـ Runexa Systems LLC، وفقًا لتقديرها الخاص، تقديم استردادات أو أرصدة أو تعديلات على الحساب في الحالات الاستثنائية.",
+
+    refundChangesTitle: "8. التغييرات",
+    refundChangesText:
+      "يجوز لـ Runexa Systems LLC تحديث سياسة الاسترداد هذه من وقت لآخر. سيتم نشر الإصدارات المحدثة مع تاريخ “آخر تحديث” معدل.",
+
+    refundContactTitle: "9. الاتصال",
+
+    companyInfoTitle: "معلومات الشركة",
+    companyInfoUpdated: "آخر تحديث: مايو 2026",
+
+    companySectionTitle: "1. الشركة",
+    companySectionText:
+      "منصة وكلاء ذكاء اصطناعي توفر أدوات وخدمات مدعومة بالذكاء الاصطناعي.",
+
+    companyAddressTitle: "2. العنوان المسجل",
+
+    companyContactTitle: "3. معلومات الاتصال",
+    companyContactText: "الاتصال العام",
+
+    companyServicesTitle: "4. الخدمات",
+    companyServicesText:
+      "تقوم Runexa Systems LLC بتطوير وتشغيل أدوات وتطبيقات ووكلاء ذكاء اصطناعي وخدمات برمجية مرتبطة بها.",
+
+    companyLawTitle: "5. القانون الحاكم",
+    companyLawText:
+      "تخضع الخدمات المقدمة من Runexa Systems LLC لقوانين ولاية وايومنغ، الولايات المتحدة.",
+
+
   },
 };
 
