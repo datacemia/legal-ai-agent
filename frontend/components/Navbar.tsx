@@ -127,7 +127,7 @@ export default function Navbar() {
               href="/entreprises/dashboard"
               className="text-sm font-semibold text-blue-600 transition hover:text-blue-700"
             >
-              Dashboard
+              {t.dashboard || "Dashboard"}
             </Link>
           )}
 
@@ -144,7 +144,7 @@ export default function Navbar() {
             href="/labs/agent-0"
             className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
           >
-            Labs
+            {t.labs || "Labs"}
           </Link>
 
           <Link
@@ -164,7 +164,7 @@ export default function Navbar() {
             </Link>
 
             <span className="absolute -right-4 -top-2 rounded-full bg-blue-600 px-2 py-0.5 text-[10px] font-semibold text-white">
-              NEW
+              {t.new || "NEW"}
             </span>
           </div>
 
@@ -196,7 +196,7 @@ export default function Navbar() {
                 </span>
 
                 <span>
-                  {credits} credits
+                  {credits} {t.credits || "credits"}
                 </span>
               </div>
             )}
