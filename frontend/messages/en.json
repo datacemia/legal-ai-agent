@@ -1,0 +1,24 @@
+comingSoon: "Coming soon",
+
+platform: "Platform",
+exploreAgents: "Explore agents",
+tryLegalAgent: "Try Legal Agent",
+tryStudyAgent: "Try Study Agent",
+tryFinanceAgent: "Try Finance Coach",
+
+about: "About",
+aboutText:
+  "Runexa Systems is a platform of AI agents that help users analyze documents, learn faster, manage personal finance, and make smarter business decisions.",
+
+developedBy: "Developed by Dr. Rachid Ejjami",
+copyright: "© 2026 Runexa Systems LLC. All rights reserved.",
+
+privacy: "Privacy Policy",
+terms: "Terms of Service",
+contact: "Contact",
+
+securityTitle: "Security",
+securityUpdated: "Last Updated: May 2026",
+securityOverviewTitle: "1. Overview",
+securityOverviewText:
+  "Runexa Systems LLC is committed to maintaining reasonable technical, organizational, and administrative safeguards designed to protect user information, platform integrity, and AI infrastructure.",

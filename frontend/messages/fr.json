@@ -1,0 +1,39 @@
+securityTitle: "Sécurité",
+securityUpdated: "Dernière mise à jour : mai 2026",
+securityOverviewTitle: "1. Présentation",
+securityOverviewText:
+  "Runexa Systems LLC s’engage à maintenir des mesures techniques, organisationnelles et administratives raisonnables afin de protéger les informations des utilisateurs, l’intégrité de la plateforme et l’infrastructure IA.",
+securityInfrastructureTitle: "2. Infrastructure et hébergement",
+securityInfrastructureText:
+  "Les services Runexa peuvent utiliser des fournisseurs sécurisés d’infrastructure cloud, d’hébergement, de bases de données, de services IA et de paiement afin d’exploiter la plateforme.",
+
+securityEncryptionTitle: "3. Chiffrement et connexions sécurisées",
+securityEncryptionText:
+  "Les données transmises entre les utilisateurs et la plateforme peuvent être protégées via des protocoles de communication chiffrés tels que HTTPS et TLS lorsque cela est applicable.",
+
+securityAccessTitle: "4. Contrôles d’accès",
+securityAccessText:
+  "L’accès aux systèmes, comptes, infrastructures et outils opérationnels peut être limité au personnel autorisé et protégé par des mécanismes d’authentification et de sécurité.",
+
+securityMonitoringTitle: "5. Surveillance et prévention des abus",
+securityMonitoringText:
+  "Runexa Systems LLC peut surveiller l’activité de la plateforme, les journaux, les tentatives d’accès et le comportement système afin de détecter les abus, fraudes, accès non autorisés ou menaces de sécurité.",
+
+securityPaymentTitle: "6. Sécurité des paiements",
+securityPaymentText:
+  "Les paiements peuvent être traités par des prestataires tiers de confiance. Runexa Systems LLC ne stocke pas les informations complètes des cartes de paiement sur ses propres serveurs.",
+
+securityUserTitle: "7. Responsabilité de l’utilisateur",
+securityUserText1:
+  "Les utilisateurs sont responsables de la confidentialité de leurs comptes, mots de passe, appareils et informations téléchargées.",
+
+securityUserText2:
+  "Les utilisateurs doivent éviter de télécharger des informations hautement sensibles sauf si cela est nécessaire et que des protections appropriées sont en place.",
+
+securityGuaranteeTitle: "8. Aucune garantie de sécurité absolue",
+securityGuaranteeText:
+  "Bien que Runexa Systems LLC mette en œuvre des mesures de protection raisonnables, aucune plateforme internet, logiciel, système IA ou système de stockage ne peut être garanti totalement sécurisé.",
+
+securityReportTitle: "9. Signalement des problèmes de sécurité",
+securityReportText:
+  "Les problèmes de sécurité, vulnérabilités ou abus suspects peuvent être signalés à :",
