@@ -29,16 +29,34 @@ export default function Footer() {
       terms: "Terms",
       privacy: "Privacy Policy",
       productTerms: "Product Terms",
+      acceptableUse: "Acceptable Use",
+      aiDisclaimer: "AI Disclaimer",
+      cookies: "Cookie Policy",
+      refunds: "Refund Policy",
+      security: "Security",
+      company: "Company Information",
     },
     fr: {
       terms: "Conditions",
       privacy: "Confidentialité",
       productTerms: "Conditions produit",
+      acceptableUse: "Utilisation acceptable",
+      aiDisclaimer: "Avertissement IA",
+      cookies: "Politique cookies",
+      refunds: "Remboursements",
+      security: "Sécurité",
+      company: "Informations société",
     },
     ar: {
       terms: "الشروط",
       privacy: "الخصوصية",
       productTerms: "شروط المنتج",
+      acceptableUse: "الاستخدام المقبول",
+      aiDisclaimer: "إخلاء مسؤولية الذكاء الاصطناعي",
+      cookies: "سياسة ملفات تعريف الارتباط",
+      refunds: "سياسة الاسترداد",
+      security: "الأمان",
+      company: "معلومات الشركة",
     },
   };
 
@@ -155,15 +173,39 @@ export default function Footer() {
               {legal.terms}
             </Link>
 
-            <a href="/privacy" className="hover:text-white transition">
+            <Link href="/privacy" className="hover:text-white transition">
               {legal.privacy}
-            </a>
+            </Link>
 
             <Link
               href="/products/ai-legal-agent/terms"
               className="hover:text-white transition"
             >
               {legal.productTerms}
+            </Link>
+
+            <Link href="/legal/acceptable-use" className="hover:text-white transition">
+              {legal.acceptableUse}
+            </Link>
+
+            <Link href="/legal/ai-disclaimer" className="hover:text-white transition">
+              {legal.aiDisclaimer}
+            </Link>
+
+            <Link href="/legal/cookies" className="hover:text-white transition">
+              {legal.cookies}
+            </Link>
+
+            <Link href="/legal/refunds" className="hover:text-white transition">
+              {legal.refunds}
+            </Link>
+
+            <Link href="/security" className="hover:text-white transition">
+              {legal.security}
+            </Link>
+
+            <Link href="/legal/company" className="hover:text-white transition">
+              {legal.company}
             </Link>
           </div>
         </div>
