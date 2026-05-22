@@ -1,62 +1,459 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const agents = [
-  {
-    slug: "legal",
-    name: "Legal Agent",
-    description: "Contracts, risky clauses, obligations, and recommendations.",
-    credits: 12,
-    gradient: "from-slate-950 to-blue-700",
-  },
-  {
-    slug: "finance",
-    name: "Finance Agent",
-    description: "Bank statements, spending patterns, waste, and savings.",
-    credits: 7,
-    gradient: "from-emerald-700 to-teal-500",
-  },
-  {
-    slug: "study",
-    name: "Study Agent",
-    description: "Summaries, quizzes, flashcards, audio, and study plans.",
-    credits: 5,
-    gradient: "from-indigo-700 to-violet-500",
-  },
-  {
-    slug: "business",
-    name: "Business Agent",
-    description: "Business data, risks, opportunities, and action plans.",
-    credits: 30,
-    gradient: "from-amber-700 to-orange-500",
-  },
-];
+type Language = "en" | "fr" | "ar";
 
-const creditPacks = [
-  {
-    name: "Starter",
-    credits: 50,
-    price: "$9",
-    description: "Perfect for testing multiple Runexa agents.",
+type Agent = {
+  slug: string;
+  name: string;
+  description: string;
+  credits: number;
+  gradient: string;
+};
+
+type CreditPack = {
+  name: string;
+  credits: number;
+  price: string;
+  description: string;
+  highlighted?: boolean;
+};
+
+const labels: Record<Language, any> = {
+  en: {
+    badge: "Global pricing for every Runexa AI agent",
+    title: "One account. All agents. Simple global billing.",
+    desc: "One Runexa account gives access to all agents. Activate any agent with a one-time $1 trial, or skip trials and continue with global credits or a Pro/Premium plan.",
+    activateTrialCta: "Activate any agent with a one-time $1 trial",
+    viewPlans: "View Pro & Premium",
+    section1: "Section 1",
+    section2: "Section 2",
+    section3: "Section 3",
+    section4: "Section 4",
+    trialsTitle: "$1 Trials by Agent",
+    trialsDesc:
+      "Each agent has its own one-time $1 activation. Try exactly the agent you need before using global credits or a plan.",
+    trialsBadge: "$1 trial per agent · one-time activation",
+    oneTimeTrial: "one-time trial",
+    trialAnalysis: "1 trial analysis for this agent",
+    startTrial: "Start trial",
+    creditsTitle: "Global Credits",
+    mostFlexible: "Most flexible",
+    creditsDesc:
+      "Buy credits once and use them on all Runexa agents. Credits are the flexible option for users who do not need a monthly plan.",
+    bestValue: "Best value",
+    oneTime: "one-time",
+    globalCredits: "global credits",
+    buyCredits: "Buy credits",
+    plansTitle: "Pro / Premium Plans",
+    plansDesc:
+      "One global subscription covers all agents. No separate Pro plan per agent.",
+    globalPro: "Global Pro",
+    bestForProfessionals: "Best for professionals",
+    proDesc:
+      "For individuals and professionals who use multiple agents regularly.",
+    month: "/month",
+    proFeatures: [
+      "200 credits/month",
+      "Usable on all agents",
+      "Priority processing",
+      "Access to Legal, Study, Finance, and Business agents",
+      "Future agents included when available",
+    ],
+    upgradePro: "Upgrade to Pro",
+    enterprise: "Enterprise",
+    premiumDesc: "For teams, companies, schools, and multi-user organizations.",
+    custom: "Custom",
+    tailoredPricing: "tailored pricing",
+    premiumFeatures: [
+      "Team workspace",
+      "Organization dashboard",
+      "Multi-user access",
+      "Custom credits",
+      "Priority support",
+    ],
+    contactSales: "Contact sales",
+    creditCostsTitle: "Agent credit costs",
+    creditCostsDesc:
+      "Credits are global. The same balance works across every agent.",
+    creditsPerAnalysis: "credits / analysis",
+    infoCards: [
+      {
+        title: "Trials are optional",
+        desc: "You can activate a $1 trial for one agent or skip directly to credits or Pro.",
+      },
+      {
+        title: "Credits are global",
+        desc: "Buy once and use the same balance for Legal, Study, Finance, or Business.",
+      },
+      {
+        title: "Pro is global",
+        desc: "One monthly Pro plan includes credits usable across all agents.",
+      },
+    ],
+    disclaimer:
+      "⚠️ Runexa AI agents provide informational and decision-support output. Always verify important legal, financial, academic, or business decisions with qualified professionals or official sources.",
+    messages: {
+      trial: (agentName: string) =>
+        `$1 trial payment for ${agentName} is not configured yet. Stripe integration will be activated soon.`,
+      credits:
+        "Stripe is not configured yet. Global credits will be available soon.",
+      pro: "Pro subscription is not configured yet. Stripe will be activated soon.",
+    },
+    agents: [
+      {
+        slug: "legal",
+        name: "Runexa Legal Agent",
+        description:
+          "Contracts, risky clauses, obligations, and recommendations.",
+        credits: 12,
+        gradient: "from-slate-950 to-blue-700",
+      },
+      {
+        slug: "finance",
+        name: "Runexa Finance Coach",
+        description: "Bank statements, spending patterns, waste, and savings.",
+        credits: 7,
+        gradient: "from-emerald-700 to-teal-500",
+      },
+      {
+        slug: "study",
+        name: "Runexa Study Agent",
+        description: "Summaries, quizzes, flashcards, audio, and study plans.",
+        credits: 5,
+        gradient: "from-indigo-700 to-violet-500",
+      },
+      {
+        slug: "business",
+        name: "Runexa Business Decision Agent",
+        description: "Business data, risks, opportunities, and action plans.",
+        credits: 30,
+        gradient: "from-amber-700 to-orange-500",
+      },
+    ] as Agent[],
+    creditPacks: [
+      {
+        name: "Starter",
+        credits: 50,
+        price: "$9",
+        description: "Perfect for testing multiple Runexa agents.",
+      },
+      {
+        name: "Growth",
+        credits: 150,
+        price: "$24",
+        description: "Best value for regular multi-agent usage.",
+        highlighted: true,
+      },
+      {
+        name: "Scale",
+        credits: 500,
+        price: "$89",
+        description: "Built for professionals and advanced workloads.",
+      },
+    ] as CreditPack[],
   },
-  {
-    name: "Growth",
-    credits: 150,
-    price: "$24",
-    description: "Best value for regular multi-agent usage.",
-    highlighted: true,
+
+  fr: {
+    badge: "Tarification globale pour tous les agents IA Runexa",
+    title: "Un compte. Tous les agents. Une facturation simple et globale.",
+    desc: "Un seul compte Runexa donne accès à tous les agents. Activez l’agent de votre choix avec un essai unique à 1 $, ou passez directement aux crédits globaux ou à un plan Pro/Premium.",
+    activateTrialCta: "Activer un agent avec un essai unique à 1 $",
+    viewPlans: "Voir Pro & Premium",
+    section1: "Section 1",
+    section2: "Section 2",
+    section3: "Section 3",
+    section4: "Section 4",
+    trialsTitle: "Essais à 1 $ par agent",
+    trialsDesc:
+      "Chaque agent dispose de sa propre activation unique à 1 $. Essayez exactement l’agent dont vous avez besoin avant d’utiliser des crédits globaux ou un abonnement.",
+    trialsBadge: "Essai à 1 $ par agent · activation unique",
+    oneTimeTrial: "essai unique",
+    trialAnalysis: "1 analyse d’essai pour cet agent",
+    startTrial: "Démarrer l’essai",
+    creditsTitle: "Crédits globaux",
+    mostFlexible: "Le plus flexible",
+    creditsDesc:
+      "Achetez des crédits une seule fois et utilisez-les sur tous les agents Runexa. Les crédits sont l’option flexible pour les utilisateurs qui n’ont pas besoin d’un abonnement mensuel.",
+    bestValue: "Meilleur choix",
+    oneTime: "paiement unique",
+    globalCredits: "crédits globaux",
+    buyCredits: "Acheter des crédits",
+    plansTitle: "Plans Pro / Premium",
+    plansDesc:
+      "Un seul abonnement global couvre tous les agents. Aucun plan Pro séparé par agent.",
+    globalPro: "Global Pro",
+    bestForProfessionals: "Idéal pour les professionnels",
+    proDesc:
+      "Pour les particuliers et professionnels qui utilisent régulièrement plusieurs agents.",
+    month: "/mois",
+    proFeatures: [
+      "200 crédits/mois",
+      "Utilisables sur tous les agents",
+      "Traitement prioritaire",
+      "Accès aux agents Legal, Study, Finance et Business",
+      "Futurs agents inclus dès leur disponibilité",
+    ],
+    upgradePro: "Passer à Pro",
+    enterprise: "Entreprise",
+    premiumDesc:
+      "Pour les équipes, entreprises, écoles et organisations multi-utilisateurs.",
+    custom: "Sur mesure",
+    tailoredPricing: "tarification personnalisée",
+    premiumFeatures: [
+      "Espace équipe",
+      "Tableau de bord organisation",
+      "Accès multi-utilisateurs",
+      "Crédits personnalisés",
+      "Support prioritaire",
+    ],
+    contactSales: "Contacter l’équipe commerciale",
+    creditCostsTitle: "Coût en crédits par agent",
+    creditCostsDesc:
+      "Les crédits sont globaux. Le même solde fonctionne sur chaque agent.",
+    creditsPerAnalysis: "crédits / analyse",
+    infoCards: [
+      {
+        title: "Les essais sont optionnels",
+        desc: "Vous pouvez activer un essai à 1 $ pour un agent ou passer directement aux crédits ou au plan Pro.",
+      },
+      {
+        title: "Les crédits sont globaux",
+        desc: "Achetez une fois et utilisez le même solde pour Legal, Study, Finance ou Business.",
+      },
+      {
+        title: "Pro est global",
+        desc: "Un seul plan Pro mensuel inclut des crédits utilisables sur tous les agents.",
+      },
+    ],
+    disclaimer:
+      "⚠️ Les agents IA Runexa fournissent des analyses informatives et d’aide à la décision. Vérifiez toujours les décisions juridiques, financières, académiques ou commerciales importantes auprès de professionnels qualifiés ou de sources officielles.",
+    messages: {
+      trial: (agentName: string) =>
+        `Le paiement d’essai à 1 $ pour ${agentName} n’est pas encore configuré. L’intégration Stripe sera activée bientôt.`,
+      credits:
+        "Stripe n’est pas encore configuré. Les crédits globaux seront disponibles bientôt.",
+      pro: "L’abonnement Pro n’est pas encore configuré. Stripe sera activé bientôt.",
+    },
+    agents: [
+      {
+        slug: "legal",
+        name: "Runexa Legal Agent",
+        description:
+          "Contrats, clauses à risque, obligations et recommandations claires.",
+        credits: 12,
+        gradient: "from-slate-950 to-blue-700",
+      },
+      {
+        slug: "finance",
+        name: "Runexa Finance Coach",
+        description:
+          "Relevés bancaires, habitudes de dépenses, gaspillage et économies.",
+        credits: 7,
+        gradient: "from-emerald-700 to-teal-500",
+      },
+      {
+        slug: "study",
+        name: "Runexa Study Agent",
+        description: "Résumés, quiz, flashcards, audio et plans de révision.",
+        credits: 5,
+        gradient: "from-indigo-700 to-violet-500",
+      },
+      {
+        slug: "business",
+        name: "Runexa Business Decision Agent",
+        description:
+          "Données business, risques, opportunités et plans d’action.",
+        credits: 30,
+        gradient: "from-amber-700 to-orange-500",
+      },
+    ] as Agent[],
+    creditPacks: [
+      {
+        name: "Starter",
+        credits: 50,
+        price: "$9",
+        description: "Parfait pour tester plusieurs agents Runexa.",
+      },
+      {
+        name: "Growth",
+        credits: 150,
+        price: "$24",
+        description:
+          "Le meilleur choix pour une utilisation régulière multi-agents.",
+        highlighted: true,
+      },
+      {
+        name: "Scale",
+        credits: 500,
+        price: "$89",
+        description: "Conçu pour les professionnels et les charges avancées.",
+      },
+    ] as CreditPack[],
   },
-  {
-    name: "Scale",
-    credits: 500,
-    price: "$89",
-    description: "Built for professionals and advanced workloads.",
+
+  ar: {
+    badge: "تسعير موحّد لجميع وكلاء Runexa للذكاء الاصطناعي",
+    title: "حساب واحد. جميع الوكلاء. فوترة عالمية بسيطة.",
+    desc: "يمنحك حساب Runexa واحد الوصول إلى جميع الوكلاء. فعّل أي وكيل بتجربة واحدة بقيمة 1 دولار، أو انتقل مباشرة إلى الأرصدة الموحّدة أو خطة Pro/Premium.",
+    activateTrialCta: "تفعيل أي وكيل بتجربة واحدة بقيمة 1 دولار",
+    viewPlans: "عرض Pro وPremium",
+    section1: "القسم 1",
+    section2: "القسم 2",
+    section3: "القسم 3",
+    section4: "القسم 4",
+    trialsTitle: "تجارب بقيمة 1 دولار حسب الوكيل",
+    trialsDesc:
+      "لكل وكيل تفعيل تجريبي خاص بقيمة 1 دولار لمرة واحدة. جرّب الوكيل الذي تحتاجه قبل استخدام الأرصدة الموحّدة أو الاشتراك.",
+    trialsBadge: "تجربة 1 دولار لكل وكيل · تفعيل لمرة واحدة",
+    oneTimeTrial: "تجربة لمرة واحدة",
+    trialAnalysis: "تحليل تجريبي واحد لهذا الوكيل",
+    startTrial: "بدء التجربة",
+    creditsTitle: "الأرصدة الموحّدة",
+    mostFlexible: "الأكثر مرونة",
+    creditsDesc:
+      "اشترِ الأرصدة مرة واحدة واستخدمها على جميع وكلاء Runexa. الأرصدة هي الخيار المرن للمستخدمين الذين لا يحتاجون إلى اشتراك شهري.",
+    bestValue: "أفضل قيمة",
+    oneTime: "دفعة واحدة",
+    globalCredits: "أرصدة موحّدة",
+    buyCredits: "شراء الأرصدة",
+    plansTitle: "خطط Pro / Premium",
+    plansDesc:
+      "اشتراك عالمي واحد يغطي جميع الوكلاء. لا توجد خطة Pro منفصلة لكل وكيل.",
+    globalPro: "Global Pro",
+    bestForProfessionals: "الأفضل للمحترفين",
+    proDesc: "للأفراد والمحترفين الذين يستخدمون عدة وكلاء بانتظام.",
+    month: "/شهر",
+    proFeatures: [
+      "200 رصيد/شهر",
+      "صالحة للاستخدام على جميع الوكلاء",
+      "معالجة ذات أولوية",
+      "الوصول إلى وكلاء Legal وStudy وFinance وBusiness",
+      "تشمل الوكلاء المستقبليين عند توفرهم",
+    ],
+    upgradePro: "الترقية إلى Pro",
+    enterprise: "المؤسسات",
+    premiumDesc: "للفرق والشركات والمدارس والمؤسسات متعددة المستخدمين.",
+    custom: "مخصص",
+    tailoredPricing: "تسعير مخصص",
+    premiumFeatures: [
+      "مساحة عمل الفريق",
+      "لوحة تحكم المؤسسة",
+      "وصول متعدد المستخدمين",
+      "أرصدة مخصصة",
+      "دعم ذو أولوية",
+    ],
+    contactSales: "التواصل مع فريق المبيعات",
+    creditCostsTitle: "تكلفة الأرصدة حسب الوكيل",
+    creditCostsDesc: "الأرصدة موحّدة. نفس الرصيد يعمل على كل وكيل.",
+    creditsPerAnalysis: "رصيد / تحليل",
+    infoCards: [
+      {
+        title: "التجارب اختيارية",
+        desc: "يمكنك تفعيل تجربة بقيمة 1 دولار لوكيل واحد أو الانتقال مباشرة إلى الأرصدة أو خطة Pro.",
+      },
+      {
+        title: "الأرصدة موحّدة",
+        desc: "اشترِ مرة واحدة واستخدم نفس الرصيد مع Legal أو Study أو Finance أو Business.",
+      },
+      {
+        title: "خطة Pro موحّدة",
+        desc: "خطة Pro شهرية واحدة تتضمن أرصدة قابلة للاستخدام على جميع الوكلاء.",
+      },
+    ],
+    disclaimer:
+      "⚠️ يقدم وكلاء Runexa للذكاء الاصطناعي مخرجات معلوماتية وداعمة لاتخاذ القرار. تحقق دائماً من القرارات القانونية أو المالية أو الأكاديمية أو التجارية المهمة مع مختصين مؤهلين أو مصادر رسمية.",
+    messages: {
+      trial: (agentName: string) =>
+        `دفع تجربة 1 دولار لـ ${agentName} غير مفعّل بعد. سيتم تفعيل تكامل Stripe قريباً.`,
+      credits: "Stripe غير مفعّل بعد. ستصبح الأرصدة الموحّدة متاحة قريباً.",
+      pro: "اشتراك Pro غير مفعّل بعد. سيتم تفعيل Stripe قريباً.",
+    },
+    agents: [
+      {
+        slug: "legal",
+        name: "Runexa Legal Agent",
+        description: "العقود، البنود الخطرة، الالتزامات، والتوصيات الواضحة.",
+        credits: 12,
+        gradient: "from-slate-950 to-blue-700",
+      },
+      {
+        slug: "finance",
+        name: "Runexa Finance Coach",
+        description:
+          "الكشوفات البنكية، أنماط الإنفاق، الهدر، واستراتيجيات الادخار.",
+        credits: 7,
+        gradient: "from-emerald-700 to-teal-500",
+      },
+      {
+        slug: "study",
+        name: "Runexa Study Agent",
+        description: "ملخصات، اختبارات، بطاقات مراجعة، صوت، وخطط دراسة.",
+        credits: 5,
+        gradient: "from-indigo-700 to-violet-500",
+      },
+      {
+        slug: "business",
+        name: "Runexa Business Decision Agent",
+        description: "بيانات الأعمال، المخاطر، الفرص، وخطط العمل.",
+        credits: 30,
+        gradient: "from-amber-700 to-orange-500",
+      },
+    ] as Agent[],
+    creditPacks: [
+      {
+        name: "Starter",
+        credits: 50,
+        price: "$9",
+        description: "مثالي لاختبار عدة وكلاء من Runexa.",
+      },
+      {
+        name: "Growth",
+        credits: 150,
+        price: "$24",
+        description: "أفضل قيمة للاستخدام المنتظم لعدة وكلاء.",
+        highlighted: true,
+      },
+      {
+        name: "Scale",
+        credits: 500,
+        price: "$89",
+        description: "مصمم للمحترفين والمهام المتقدمة.",
+      },
+    ] as CreditPack[],
   },
-];
+};
 
 export default function Pricing() {
+  const [language, setLanguage] = useState<Language>("en");
   const [message, setMessage] = useState("");
+
+  const t = labels[language] || labels.en;
+  const agents = t.agents as Agent[];
+  const creditPacks = t.creditPacks as CreditPack[];
+
+  useEffect(() => {
+    const saved = localStorage.getItem("locale") as Language | null;
+
+    if (saved && labels[saved]) {
+      setLanguage(saved);
+    }
+
+    const handleLocaleChange = () => {
+      const updated = localStorage.getItem("locale") as Language | null;
+
+      if (updated && labels[updated]) {
+        setLanguage(updated);
+      }
+    };
+
+    window.addEventListener("locale-change", handleLocaleChange);
+
+    return () => {
+      window.removeEventListener("locale-change", handleLocaleChange);
+    };
+  }, []);
 
   const requireAuth = () => {
     const token = localStorage.getItem("token");
@@ -69,49 +466,44 @@ export default function Pricing() {
     return true;
   };
 
-  const handleStartTrial = (agentSlug: string) => {
+  const handleStartTrial = (agentName: string) => {
     if (!requireAuth()) return;
 
-    setMessage(
-      `$1 trial payment for ${agentSlug} is not configured yet. Stripe integration will be activated soon.`
-    );
+    setMessage(t.messages.trial(agentName));
   };
 
   const handleBuyCredits = () => {
     if (!requireAuth()) return;
 
-    setMessage(
-      "Stripe is not configured yet. Global credits will be available soon."
-    );
+    setMessage(t.messages.credits);
   };
 
   const handleUpgradePro = () => {
     if (!requireAuth()) return;
 
-    setMessage(
-      "Pro subscription is not configured yet. Stripe will be activated soon."
-    );
+    setMessage(t.messages.pro);
   };
 
   return (
-    <main className="min-h-screen bg-white text-slate-950">
+    <main
+      dir={language === "ar" ? "rtl" : "ltr"}
+      className="min-h-screen bg-white text-slate-950"
+    >
       <section className="relative overflow-hidden border-b border-slate-200 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900">
         <div className="absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-500/20 blur-3xl" />
         <div className="absolute bottom-0 right-10 h-72 w-72 rounded-full bg-cyan-400/10 blur-3xl" />
 
         <div className="relative mx-auto max-w-6xl px-6 py-20 text-center sm:py-24">
           <span className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-blue-100 backdrop-blur">
-            Global pricing for every Runexa AI agent
+            {t.badge}
           </span>
 
           <h1 className="mx-auto mt-7 max-w-4xl text-4xl font-bold tracking-tight text-white sm:text-6xl">
-            One account. All agents. Simple global billing.
+            {t.title}
           </h1>
 
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-blue-100">
-            One Runexa account gives access to all agents. Activate any agent
-            with a one-time $1 trial, or skip trials and continue with global
-            credits or a Pro/Premium plan.
+            {t.desc}
           </p>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -119,14 +511,14 @@ export default function Pricing() {
               href="#trials"
               className="w-full rounded-xl bg-white px-6 py-3 text-center text-sm font-bold text-slate-950 shadow-lg shadow-blue-950/30 transition hover:bg-blue-50 sm:w-auto"
             >
-              Activate any agent with a one-time $1 trial
+              {t.activateTrialCta}
             </a>
 
             <a
               href="#plans"
               className="w-full rounded-xl border border-white/20 bg-white/10 px-6 py-3 text-center text-sm font-bold text-white backdrop-blur transition hover:bg-white/15 sm:w-auto"
             >
-              View Pro & Premium
+              {t.viewPlans}
             </a>
           </div>
         </div>
@@ -143,19 +535,16 @@ export default function Pricing() {
           <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.25em] text-blue-600">
-                Section 1
+                {t.section1}
               </p>
               <h2 className="mt-2 text-3xl font-bold tracking-tight">
-                $1 Trials by Agent
+                {t.trialsTitle}
               </h2>
-              <p className="mt-3 max-w-2xl text-slate-600">
-                Each agent has its own one-time $1 activation. Try exactly the
-                agent you need before using global credits or a plan.
-              </p>
+              <p className="mt-3 max-w-2xl text-slate-600">{t.trialsDesc}</p>
             </div>
 
             <div className="rounded-2xl border border-blue-100 bg-blue-50 px-4 py-3 text-sm font-semibold text-blue-700">
-              $1 trial per agent · one-time activation
+              {t.trialsBadge}
             </div>
           </div>
 
@@ -185,19 +574,19 @@ export default function Pricing() {
                   <div className="mt-5">
                     <span className="text-4xl font-bold">$1</span>
                     <span className="ml-2 text-sm text-slate-500">
-                      one-time trial
+                      {t.oneTimeTrial}
                     </span>
                   </div>
 
                   <p className="mt-2 text-sm text-slate-500">
-                    1 trial analysis for this agent
+                    {t.trialAnalysis}
                   </p>
 
                   <button
-                    onClick={() => handleStartTrial(agent.slug)}
+                    onClick={() => handleStartTrial(agent.name)}
                     className="mt-6 rounded-xl bg-slate-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-slate-800"
                   >
-                    Start {agent.name.split(" ")[0]} Trial
+                    {t.startTrial}
                   </button>
                 </div>
               </div>
@@ -208,20 +597,17 @@ export default function Pricing() {
         <section className="mt-20 space-y-8">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.25em] text-blue-600">
-              Section 2
+              {t.section2}
             </p>
             <div className="mt-2 flex flex-wrap items-center gap-3">
               <h2 className="text-3xl font-bold tracking-tight">
-                Global Credits
+                {t.creditsTitle}
               </h2>
               <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700 ring-1 ring-emerald-100">
-                Most flexible
+                {t.mostFlexible}
               </span>
             </div>
-            <p className="mt-3 max-w-2xl text-slate-600">
-              Buy credits once and use them on all Runexa agents. Credits are
-              the flexible option for users who do not need a monthly plan.
-            </p>
+            <p className="mt-3 max-w-2xl text-slate-600">{t.creditsDesc}</p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
@@ -236,7 +622,7 @@ export default function Pricing() {
               >
                 {pack.highlighted && (
                   <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-blue-600 px-3 py-1 text-xs font-bold text-white">
-                    Best value
+                    {t.bestValue}
                   </span>
                 )}
 
@@ -248,12 +634,12 @@ export default function Pricing() {
                 <div className="mt-6 flex items-end gap-2">
                   <span className="text-4xl font-bold">{pack.price}</span>
                   <span className="pb-1 text-sm text-slate-500">
-                    one-time
+                    {t.oneTime}
                   </span>
                 </div>
 
                 <p className="mt-2 text-sm font-semibold text-slate-700">
-                  {pack.credits} global credits
+                  {pack.credits} {t.globalCredits}
                 </p>
 
                 <button
@@ -264,7 +650,7 @@ export default function Pricing() {
                       : "bg-slate-950 text-white hover:bg-slate-800"
                   }`}
                 >
-                  Buy credits
+                  {t.buyCredits}
                 </button>
               </div>
             ))}
@@ -274,15 +660,12 @@ export default function Pricing() {
         <section id="plans" className="mt-20">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.25em] text-blue-600">
-              Section 3
+              {t.section3}
             </p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight">
-              Pro / Premium Plans
+              {t.plansTitle}
             </h2>
-            <p className="mt-3 max-w-2xl text-slate-600">
-              One global subscription covers all agents. No separate Pro plan
-              per agent.
-            </p>
+            <p className="mt-3 max-w-2xl text-slate-600">{t.plansDesc}</p>
           </div>
 
           <div className="mt-8 grid gap-6 lg:grid-cols-2">
@@ -292,66 +675,58 @@ export default function Pricing() {
               <div className="relative">
                 <div className="flex flex-wrap gap-2">
                   <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-blue-100">
-                    Global Pro
+                    {t.globalPro}
                   </span>
                   <span className="rounded-full bg-blue-400/20 px-3 py-1 text-xs font-bold text-blue-100">
-                    Best for professionals
+                    {t.bestForProfessionals}
                   </span>
                 </div>
 
                 <h3 className="mt-5 text-2xl font-bold">Pro</h3>
-                <p className="mt-2 text-slate-300">
-                  For individuals and professionals who use multiple agents regularly.
-                </p>
+                <p className="mt-2 text-slate-300">{t.proDesc}</p>
 
                 <div className="mt-7 flex items-end gap-2">
                   <span className="text-5xl font-bold">$49</span>
-                  <span className="pb-2 text-slate-300">/month</span>
+                  <span className="pb-2 text-slate-300">{t.month}</span>
                 </div>
 
                 <ul className="mt-8 space-y-4 text-sm text-slate-100">
-                  <li>✔ 200 credits/month</li>
-                  <li>✔ Usable on all agents</li>
-                  <li>✔ Priority processing</li>
-                  <li>✔ Access to Legal, Study, Finance, and Business agents</li>
-                  <li>✔ Future agents included when available</li>
+                  {t.proFeatures.map((feature: string) => (
+                    <li key={feature}>✔ {feature}</li>
+                  ))}
                 </ul>
 
                 <button
                   onClick={handleUpgradePro}
                   className="mt-8 w-full rounded-xl bg-white px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-blue-50"
                 >
-                  Upgrade to Pro
+                  {t.upgradePro}
                 </button>
               </div>
             </div>
 
             <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
               <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700">
-                Enterprise
+                {t.enterprise}
               </span>
 
               <h3 className="mt-5 text-2xl font-bold">Premium</h3>
-              <p className="mt-2 text-slate-600">
-                For teams, companies, schools, and multi-user organizations.
-              </p>
+              <p className="mt-2 text-slate-600">{t.premiumDesc}</p>
 
-              <div className="mt-7 text-5xl font-bold">Custom</div>
-              <p className="mt-2 text-sm text-slate-500">tailored pricing</p>
+              <div className="mt-7 text-5xl font-bold">{t.custom}</div>
+              <p className="mt-2 text-sm text-slate-500">{t.tailoredPricing}</p>
 
               <ul className="mt-8 space-y-4 text-sm text-slate-700">
-                <li>✔ Team workspace</li>
-                <li>✔ Organization dashboard</li>
-                <li>✔ Multi-user access</li>
-                <li>✔ Custom credits</li>
-                <li>✔ Priority support</li>
+                {t.premiumFeatures.map((feature: string) => (
+                  <li key={feature}>✔ {feature}</li>
+                ))}
               </ul>
 
               <a
                 href="/contact"
                 className="mt-8 block w-full rounded-xl border border-slate-300 px-5 py-3 text-center text-sm font-bold text-slate-950 transition hover:bg-slate-50"
               >
-                Contact sales
+                {t.contactSales}
               </a>
             </div>
           </div>
@@ -361,14 +736,12 @@ export default function Pricing() {
           <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
             <div className="border-b border-slate-200 bg-slate-50 p-6">
               <p className="text-sm font-bold uppercase tracking-[0.25em] text-blue-600">
-                Section 4
+                {t.section4}
               </p>
               <h2 className="mt-2 text-3xl font-bold tracking-tight">
-                Agent credit costs
+                {t.creditCostsTitle}
               </h2>
-              <p className="mt-3 text-slate-600">
-                Credits are global. The same balance works across every agent.
-              </p>
+              <p className="mt-3 text-slate-600">{t.creditCostsDesc}</p>
             </div>
 
             <div className="divide-y divide-slate-100">
@@ -385,7 +758,7 @@ export default function Pricing() {
                   </div>
 
                   <div className="rounded-2xl bg-slate-950 px-5 py-3 text-center text-sm font-bold text-white">
-                    {agent.credits} credits / analysis
+                    {agent.credits} {t.creditsPerAnalysis}
                   </div>
                 </div>
               ))}
@@ -394,28 +767,19 @@ export default function Pricing() {
         </section>
 
         <section className="mt-16 grid gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-600">
-            <strong className="block text-slate-950">Trials are optional</strong>
-            You can activate a $1 trial for one agent or skip directly to
-            credits or Pro.
-          </div>
-
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-600">
-            <strong className="block text-slate-950">Credits are global</strong>
-            Buy once and use the same balance for Legal, Study, Finance, or
-            Business.
-          </div>
-
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-600">
-            <strong className="block text-slate-950">Pro is global</strong>
-            One monthly Pro plan includes credits usable across all agents.
-          </div>
+          {t.infoCards.map((card: { title: string; desc: string }) => (
+            <div
+              key={card.title}
+              className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-600"
+            >
+              <strong className="block text-slate-950">{card.title}</strong>
+              {card.desc}
+            </div>
+          ))}
         </section>
 
         <div className="mt-16 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-center text-sm text-amber-800">
-          ⚠️ Runexa AI agents provide informational and decision-support output.
-          Always verify important legal, financial, academic, or business
-          decisions with qualified professionals or official sources.
+          {t.disclaimer}
         </div>
       </div>
     </main>
