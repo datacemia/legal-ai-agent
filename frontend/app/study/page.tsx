@@ -74,10 +74,10 @@ const FeatureIcon = ({ index }: { index: number }) => {
 
 const labels: any = {
   en: {
-    title: "Study Agent",
+    title: "AI Study Workspace",
     subtitle:
-      "Upload a document to generate a summary, theoretical quiz, practical quiz, flashcards, and a study plan.",
-    howTitle: "What the Study Agent does:",
+      "Upload study material to generate AI summaries, quizzes, flashcards, audio, and a personalized revision plan.",
+    howTitle: "What the AI Study Workspace does:",
     how1:
       "Upload a PDF, Word document, or scanned study file. The Study Agent turns it into a complete, personalized learning workspace in minutes.",
     how2:
@@ -99,7 +99,7 @@ const labels: any = {
       "After each quiz, the system identifies your weak points and uses them to personalize future learning sessions.",
     disclaimer:
       "Runexa Study Agent is designed to support learning and revision. Always verify important academic information with your teacher, institution, or official course materials.",
-    analyze: "Analyze",
+    analyze: "Generate Study Report",
     buyCredits: "Buy credits",
     chooseLevel: "Choose your level",
     selectLevel: "Select education level",
@@ -138,9 +138,9 @@ const labels: any = {
     incorrect: "Incorrect",
     answer: "Answer",
     paymentMessage:
-      "Stripe is not configured yet. $1 trial activation, credits, and plans will be available soon.",
+      "Payments are temporarily unavailable during platform rollout. $1 trial activation, credits, and plans will be available soon.",
     proMessage:
-      "Pro plan is not configured yet. Stripe will be activated soon.",
+      "Pro plan is not configured yet. Payments are temporarily unavailable during platform rollout.",
     trialInfo: "$1 trial per agent. After your trial, continue with credits or a plan.",
     startTrial: "Start $1 trial",
     trialUsed: "Trial already used for study",
@@ -161,12 +161,15 @@ const labels: any = {
     },
     remaining: "remaining",
     elapsed: "Elapsed",
+    studyWorkflow: "Upload → AI study analysis → Personalized revision",
+    generateStudyWorkspace:
+      "Generate a complete AI study workspace in minutes.",
   },
   fr: {
-    title: "Agent étude",
+    title: "Espace d’étude IA",
     subtitle:
-      "Téléchargez un document pour générer un résumé, un quiz théorique, un quiz pratique, des flashcards et un plan de révision.",
-    howTitle: "Ce que fait l’Agent étude :",
+      "Téléchargez un support de cours pour générer des résumés IA, des quiz, des flashcards, de l’audio et un plan de révision personnalisé.",
+    howTitle: "Ce que fait l’espace d’étude IA :",
     how1:
       "Téléchargez un PDF, un document Word ou un fichier scanné. L’Agent étude le transforme en espace d’apprentissage complet et personnalisé en quelques minutes.",
     how2:
@@ -188,7 +191,7 @@ const labels: any = {
       "Après chaque quiz, le système identifie vos points faibles et les utilise pour personnaliser vos prochaines sessions d’apprentissage.",
     disclaimer:
       "Runexa Study Agent est conçu pour accompagner l’apprentissage et la révision. Vérifiez toujours les informations académiques importantes avec votre enseignant, votre établissement ou vos supports officiels.",
-    analyze: "Analyser",
+    analyze: "Générer le rapport d’étude IA",
     buyCredits: "Acheter des crédits",
     chooseLevel: "Choisissez votre niveau",
     selectLevel: "Sélectionnez le niveau d’étude",
@@ -227,9 +230,9 @@ const labels: any = {
     incorrect: "Incorrect",
     answer: "Réponse",
     paymentMessage:
-      "Stripe n’est pas encore configuré. L’activation de l’essai à 1$, les crédits et les abonnements seront bientôt disponibles.",
+      "Les paiements sont temporairement indisponibles pendant le déploiement de la plateforme. L’activation de l’essai à 1$, les crédits et les abonnements seront bientôt disponibles.",
     proMessage:
-      "Le plan Pro n’est pas encore configuré. Stripe sera bientôt activé.",
+      "Le plan Pro n’est pas encore configuré. Les paiements sont temporairement indisponibles pendant le déploiement de la plateforme.",
     trialInfo: "Essai à 1$ par agent. Après l’essai, continuez avec des crédits ou un abonnement.",
     startTrial: "Activer l’essai à 1$",
     trialUsed: "Essai Study déjà utilisé",
@@ -250,12 +253,15 @@ const labels: any = {
     },
     remaining: "restantes",
     elapsed: "Temps écoulé",
+    studyWorkflow: "Téléversement → Analyse IA → Révision personnalisée",
+    generateStudyWorkspace:
+      "Générez un espace d’étude IA complet en quelques minutes.",
   },
   ar: {
-    title: "وكيل الدراسة",
+    title: "مساحة الدراسة بالذكاء الاصطناعي",
     subtitle:
-      "ارفع ملف دراسة لإنشاء ملخص، اختبار نظري، اختبار تطبيقي، بطاقات مراجعة وخطة دراسة.",
-    howTitle: "ما الذي يقدمه وكيل الدراسة:",
+      "ارفع محتوى دراسي لإنشاء ملخصات بالذكاء الاصطناعي واختبارات وبطاقات مراجعة وصوت وخطة مراجعة مخصصة.",
+    howTitle: "ما الذي تقدمه مساحة الدراسة الذكية:",
     how1:
       "ارفع ملف PDF أو Word أو مستنداً ممسوحاً ضوئياً. يحوّله وكيل الدراسة إلى مساحة تعلم كاملة وشخصية خلال دقائق.",
     how2:
@@ -277,7 +283,7 @@ const labels: any = {
       "بعد كل اختبار، يحدد النظام نقاط ضعفك ويستخدمها لتخصيص جلسات التعلم القادمة.",
     disclaimer:
       "تم تصميم Runexa Study Agent لدعم التعلم والمراجعة. تحقق دائماً من المعلومات الأكاديمية المهمة مع أستاذك أو مؤسستك أو المراجع الرسمية.",
-    analyze: "تحليل",
+    analyze: "إنشاء تقرير الدراسة الذكي",
     buyCredits: "شراء رصيد",
     chooseLevel: "اختر مستواك",
     selectLevel: "اختر المستوى التعليمي",
@@ -315,9 +321,9 @@ const labels: any = {
     incorrect: "غير صحيح",
     answer: "الإجابة",
     paymentMessage:
-      "Stripe غير مفعّل حالياً. تفعيل تجربة 1 دولار، الأرصدة والاشتراكات ستكون متاحة قريباً.",
+      "المدفوعات غير متاحة مؤقتاً أثناء إطلاق المنصة. تفعيل تجربة 1 دولار، الأرصدة والاشتراكات ستكون متاحة قريباً.",
     proMessage:
-      "خطة Pro غير مفعلة حالياً. سيتم تفعيل Stripe قريباً.",
+      "خطة Pro غير مفعلة حالياً. المدفوعات غير متاحة مؤقتاً أثناء إطلاق المنصة.",
     trialInfo: "تجربة بقيمة 1 دولار لكل وكيل. بعد التجربة يمكنك المتابعة بالأرصدة أو الاشتراك.",
     startTrial: "تفعيل تجربة 1 دولار",
     trialUsed: "تم استخدام تجربة وكيل الدراسة",
@@ -338,6 +344,9 @@ const labels: any = {
     },
     remaining: "متبقية",
     elapsed: "الوقت المنقضي",
+    studyWorkflow: "رفع الملف → تحليل دراسي بالذكاء الاصطناعي → مراجعة مخصصة",
+    generateStudyWorkspace:
+      "أنشئ مساحة دراسة ذكية كاملة خلال دقائق.",
   },
 };
 
@@ -1267,7 +1276,7 @@ export default function StudyPage() {
   const [loading, setLoading] = useState(false);
   const [startTime, setStartTime] = useState<number | null>(null);
   const [elapsed, setElapsed] = useState(0);
-  const [remaining, setRemaining] = useState(90);
+  const [remaining, setRemaining] = useState(360);
   const [loadingStep, setLoadingStep] = useState("");
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [paymentMessage, setPaymentMessage] = useState("");
@@ -1415,7 +1424,7 @@ export default function StudyPage() {
     const interval = setInterval(() => {
       const elapsedSec = Math.floor((Date.now() - startTime) / 1000);
       setElapsed(elapsedSec);
-      setRemaining(Math.max(90 - elapsedSec, 0));
+      setRemaining(Math.max(360 - elapsedSec, 0));
     }, 1000);
 
     return () => clearInterval(interval);
@@ -1515,7 +1524,7 @@ export default function StudyPage() {
     setLoading(true);
     setStartTime(Date.now());
     setElapsed(0);
-    setRemaining(180);
+    setRemaining(360);
     setLoadingStep(t.loadingSteps.extracting);
     setLoadingProgress(15);
     setShowLevelModal(false);
@@ -1583,7 +1592,7 @@ export default function StudyPage() {
       let attempts = 0;
       let completed = false;
 
-      while (attempts < 90 && !completed) {
+      while (attempts < 180 && !completed) {
         await new Promise((resolve) => setTimeout(resolve, 2000));
 
         const statusRes = await fetch(
@@ -1633,7 +1642,9 @@ export default function StudyPage() {
       }
 
       if (!completed) {
-        throw new Error("Study analysis timeout.");
+        throw new Error(
+          "Study analysis is taking longer than expected. Please try again with a shorter document or retry in a moment."
+        );
       }
     } catch (error) {
       console.error("Study analysis error:", error);
@@ -1983,16 +1994,25 @@ export default function StudyPage() {
   return (
     <main
       dir={language === "ar" ? "rtl" : "ltr"}
-      className="min-h-screen bg-slate-50 px-4 py-10"
+      className="min-h-screen bg-slate-50 px-4 py-16 sm:py-20"
     >
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="text-center">
-          <h1 className="text-3xl font-bold">{t.title}</h1>
-          <p className="text-slate-500 mt-2">{t.subtitle}</p>
+          <h1 className="text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
+            {t.title}
+          </h1>
+
+          <p className="mx-auto mt-4 max-w-3xl text-slate-500">
+            {t.subtitle}
+          </p>
+
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-3 text-sm font-medium text-slate-500">
+            {t.studyWorkflow}
+          </div>
         </div>
 
-        <div className="bg-white p-6 rounded-2xl border space-y-4">
-          <div className="rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm text-slate-600 space-y-3">
+        <div className="bg-white p-6 rounded-2xl border space-y-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
+          <div className="rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm text-slate-600 space-y-3 transition-all duration-300 hover:border-blue-200 hover:bg-white hover:shadow-md">
             <p>
               <strong>{t.howTitle}</strong> {t.how1}
             </p>
@@ -2006,7 +2026,7 @@ export default function StudyPage() {
                 return (
                   <div
                     key={index}
-                    className={`group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.06)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(15,23,42,0.10)] ${style.hover}`}
+                    className={`group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(15,23,42,0.10)] ${style.hover}`}
                   >
                     <div
                       className={`absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent ${style.accent} to-transparent opacity-0 transition group-hover:opacity-100`}
@@ -2082,7 +2102,7 @@ export default function StudyPage() {
 
             <label
               htmlFor="file-upload"
-              className="flex items-center justify-between cursor-pointer rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm hover:bg-slate-50"
+              className="flex items-center justify-between cursor-pointer rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm transition-all duration-300 hover:border-blue-200 hover:bg-slate-50 hover:shadow-md"
             >
               <span className="text-slate-600">
                 {file ? file.name : t.noFile}
@@ -2104,6 +2124,10 @@ export default function StudyPage() {
             {t.proDirect}
           </p>
 
+          <p className="text-sm text-slate-500">
+            {t.generateStudyWorkspace}
+          </p>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <button
               onClick={() => {
@@ -2116,7 +2140,7 @@ export default function StudyPage() {
                 setShowLevelModal(true);
               }}
               disabled={!file || loading}
-              className="flex w-full items-center justify-center gap-2 bg-slate-900 text-white py-3 rounded-xl disabled:bg-slate-400"
+              className="flex w-full items-center justify-center gap-2 bg-slate-900 text-white py-3 rounded-xl transition-all duration-300 hover:bg-slate-800 hover:shadow-xl disabled:bg-slate-400 disabled:hover:shadow-none"
             >
               {loading ? (
                 <>
@@ -2233,7 +2257,7 @@ export default function StudyPage() {
         )}
 
         {result && result.summary && (
-          <div className="bg-white p-6 rounded-2xl border space-y-6">
+          <div className="bg-white p-6 rounded-2xl border space-y-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
             <h2 className="text-xl font-semibold">{t.results}</h2>
 
             <div className="flex flex-wrap gap-2">

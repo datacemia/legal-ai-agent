@@ -48,7 +48,7 @@ const labels: any = {
     analyzeButton: "Analyze Contract",
     buyCredit: "Buy credits",
     proMessage:
-      "Pro plan is not configured yet. Stripe will be activated soon.",
+      "Payments are temporarily unavailable during platform rollout. Pro access will be available soon.",
     trialInfo: "$1 trial per agent. You can also skip the trial and continue with global credits or a Pro plan.",
     upgradePro: "Upgrade to Pro",
     trialUsed: "Trial already used for legal",
@@ -104,6 +104,22 @@ const labels: any = {
     redFlag: "Red Flag",
     limitedNotice:
       "Trial analysis may be limited. Continue with credits or Pro to unlock full usage.",
+    heroStats:
+      "OCR-ready • Enterprise-grade • Structured legal analysis",
+    sampleOutputTitle: "Sample AI analysis",
+    sampleOutputSubtitle:
+      "Preview the kind of structured legal intelligence Runexa generates.",
+    sampleRiskScore: "Risk score preview",
+    sampleRiskLevel: "Medium risk",
+    sampleClauseTitle: "Sensitive clause detected",
+    sampleClauseText:
+      "Broad termination rights may create operational uncertainty if notice periods are unclear.",
+    sampleAdviceTitle: "Negotiation advice",
+    sampleAdviceText:
+      "Request clearer notice periods, mutual termination rights, and written cure opportunities.",
+    sampleSummaryTitle: "Executive summary",
+    sampleSummaryText:
+      "Runexa highlights risk exposure, practical obligations, and negotiation priorities before signing.",
     viewDetails: "View details",
     hideDetails: "Hide details",
   },
@@ -123,7 +139,7 @@ const labels: any = {
     analyzeButton: "Analyser le contrat",
     buyCredit: "Acheter des crédits",
     proMessage:
-      "Le plan Pro n’est pas encore configuré. Stripe sera bientôt activé.",
+      "Les paiements sont temporairement indisponibles pendant le déploiement de la plateforme. L’accès Pro sera bientôt disponible.",
     trialInfo: "Essai à 1$ par agent. Vous pouvez aussi passer directement aux crédits globaux ou au plan Pro.",
     upgradePro: "Passer au plan Pro",
     trialUsed: "Essai Legal déjà utilisé",
@@ -179,6 +195,22 @@ const labels: any = {
     redFlag: "Alerte",
     limitedNotice:
       "L’analyse d’essai peut être limitée. Continuez avec des crédits ou Pro pour débloquer l’usage complet.",
+    heroStats:
+      "OCR-ready • Niveau entreprise • Analyse juridique structurée",
+    sampleOutputTitle: "Exemple d’analyse IA",
+    sampleOutputSubtitle:
+      "Aperçu du type d’intelligence juridique structurée générée par Runexa.",
+    sampleRiskScore: "Aperçu du score de risque",
+    sampleRiskLevel: "Risque moyen",
+    sampleClauseTitle: "Clause sensible détectée",
+    sampleClauseText:
+      "Des droits de résiliation trop larges peuvent créer une incertitude opérationnelle si les délais de préavis sont flous.",
+    sampleAdviceTitle: "Conseil de négociation",
+    sampleAdviceText:
+      "Demandez des délais de préavis plus clairs, des droits réciproques et des possibilités de correction écrites.",
+    sampleSummaryTitle: "Résumé exécutif",
+    sampleSummaryText:
+      "Runexa met en évidence l’exposition au risque, les obligations pratiques et les priorités de négociation avant signature.",
     viewDetails: "Voir les détails",
     hideDetails: "Masquer les détails",
   },
@@ -198,7 +230,7 @@ const labels: any = {
     analyzeButton: "تحليل العقد",
     buyCredit: "شراء أرصدة",
     proMessage:
-      "خطة Pro غير مفعلة حالياً. سيتم تفعيل Stripe قريباً.",
+      "المدفوعات غير متاحة مؤقتاً أثناء إطلاق المنصة. سيتوفر وصول Pro قريباً.",
     trialInfo: "تجربة بقيمة 1 دولار لكل وكيل. يمكنك أيضاً المتابعة مباشرة بالأرصدة العامة أو خطة Pro.",
     upgradePro: "الترقية إلى Pro",
     trialUsed: "تم استخدام تجربة الوكيل القانوني",
@@ -254,6 +286,22 @@ const labels: any = {
     redFlag: "تنبيه مهم",
     limitedNotice:
       "قد يكون تحليل التجربة محدوداً. تابع باستخدام الأرصدة أو Pro لفتح الاستخدام الكامل.",
+    heroStats:
+      "جاهز للتعرف الضوئي OCR • بمستوى المؤسسات • تحليل قانوني منظم",
+    sampleOutputTitle: "مثال على تحليل الذكاء الاصطناعي",
+    sampleOutputSubtitle:
+      "معاينة لنوع الذكاء القانوني المنظم الذي تولده Runexa.",
+    sampleRiskScore: "معاينة درجة المخاطر",
+    sampleRiskLevel: "مخاطر متوسطة",
+    sampleClauseTitle: "تم اكتشاف بند حساس",
+    sampleClauseText:
+      "قد تؤدي حقوق الإنهاء الواسعة إلى عدم وضوح تشغيلي إذا كانت فترات الإشعار غير محددة.",
+    sampleAdviceTitle: "نصيحة تفاوض",
+    sampleAdviceText:
+      "اطلب فترات إشعار أوضح، وحقوق إنهاء متبادلة، وفرص تصحيح مكتوبة.",
+    sampleSummaryTitle: "ملخص تنفيذي",
+    sampleSummaryText:
+      "تُبرز Runexa التعرض للمخاطر والالتزامات العملية وأولويات التفاوض قبل التوقيع.",
     viewDetails: "عرض التفاصيل",
     hideDetails: "إخفاء التفاصيل",
   },
@@ -880,7 +928,7 @@ export default function UploadPage() {
     }
 
     setMessage(
-      "Stripe is not configured yet. Credits and Pro plan will be available soon."
+      "Payments are temporarily unavailable during platform rollout. Credits and Pro access will be available soon."
     );
   };
 
@@ -1120,7 +1168,7 @@ export default function UploadPage() {
   return (
     <main
       dir={language === "ar" ? "rtl" : "ltr"}
-      className="min-h-screen bg-slate-50 px-4 py-8 sm:px-6"
+      className="min-h-screen bg-slate-50 px-4 py-12 sm:px-6 sm:py-16"
     >
       <div className="max-w-5xl mx-auto space-y-8">
 
@@ -1132,9 +1180,13 @@ export default function UploadPage() {
           <p className="mt-4 text-base leading-7 text-slate-600">
             {t.heroDesc}
           </p>
+
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-3 text-sm font-medium text-slate-500">
+            {t.heroStats}
+          </div>
         </div>
 
-        <div className="bg-white p-6 rounded-3xl shadow-sm border space-y-5">
+        <div className="bg-gradient-to-b from-white to-slate-50/80 p-6 rounded-3xl shadow-sm border space-y-5 transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
           <UploadBox
             file={file}
             language={language}
@@ -1177,14 +1229,14 @@ export default function UploadPage() {
             <button
               onClick={handleUpload}
               disabled={!file || loading}
-              className="w-full rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800 disabled:bg-slate-400"
+              className="w-full rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-slate-800 hover:shadow-xl disabled:bg-slate-400 disabled:hover:shadow-none"
             >
               {loading ? t.loading : primaryButtonLabel}
             </button>
 
             <button
               onClick={handleBuyCredit}
-              className="w-full rounded-xl bg-green-600 px-6 py-3 text-sm font-semibold text-white hover:bg-green-700"
+              className="w-full rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-800 transition-all duration-300 hover:border-blue-200 hover:bg-slate-50 hover:shadow-md"
             >
               {t.buyCredit}
             </button>
@@ -1193,7 +1245,7 @@ export default function UploadPage() {
               onClick={() =>
                 setMessage(t.proMessage)
               }
-              className="w-full rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-700"
+              className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:shadow-xl"
             >
               {t.upgradePro}
             </button>
@@ -1309,7 +1361,7 @@ export default function UploadPage() {
                 {liveMetrics.map((metric) => (
                   <div
                     key={metric.label}
-                    className="rounded-xl border border-blue-100 bg-white p-3"
+                    className="rounded-xl border border-blue-100 bg-white p-3 transition-all duration-300 hover:border-blue-200 hover:shadow-md"
                   >
                     <div className="text-xs text-slate-500">
                       {metric.label}
@@ -1335,6 +1387,75 @@ export default function UploadPage() {
               </div>
             </div>
           )}
+        </div>
+
+        <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-sm font-medium text-blue-600">
+                {t.sampleOutputTitle}
+              </p>
+
+              <h2 className="mt-1 text-xl font-semibold text-slate-900">
+                {t.whatYouGet}
+              </h2>
+
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-500">
+                {t.sampleOutputSubtitle}
+              </p>
+            </div>
+
+            <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
+              {uiText("enterpriseGrade", language)}
+            </span>
+          </div>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-4">
+            <div className="rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-4">
+              <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+                {t.sampleRiskScore}
+              </p>
+
+              <div className="mt-3 flex items-end gap-2">
+                <span className="text-3xl font-bold text-amber-600">62</span>
+                <span className="mb-1 text-sm text-slate-500">/100</span>
+              </div>
+
+              <p className="mt-2 text-sm font-medium text-amber-700">
+                {t.sampleRiskLevel}
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
+              <p className="text-sm font-semibold text-amber-900">
+                {t.sampleClauseTitle}
+              </p>
+
+              <p className="mt-2 text-sm leading-6 text-amber-800">
+                {t.sampleClauseText}
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-blue-200 bg-blue-50 p-4">
+              <p className="text-sm font-semibold text-blue-900">
+                {t.sampleAdviceTitle}
+              </p>
+
+              <p className="mt-2 text-sm leading-6 text-blue-800">
+                {t.sampleAdviceText}
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <p className="text-sm font-semibold text-slate-900">
+                {t.sampleSummaryTitle}
+              </p>
+
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                {t.sampleSummaryText}
+              </p>
+            </div>
+          </div>
         </div>
 
         {result && !result.authRequired && (
@@ -1425,7 +1546,7 @@ export default function UploadPage() {
                   </div>
                 </div>
 
-                <div className="bg-white p-6 rounded-3xl border">
+                <div className="bg-white p-6 rounded-3xl border shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
                   <h2 className="text-xl font-semibold">{t.summary}</h2>
                   <div className="mt-4 whitespace-pre-wrap text-sm leading-7 text-slate-700">
                     {result.summary}
@@ -1444,7 +1565,7 @@ export default function UploadPage() {
 
 
             {activeTab === "clauses" && (
-              <div className="bg-white p-6 rounded-3xl border">
+              <div className="bg-white p-6 rounded-3xl border shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
               <h2 className="text-xl font-semibold mb-4">{t.clauses}</h2>
 
               {isLimited && (

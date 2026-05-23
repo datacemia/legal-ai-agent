@@ -1076,7 +1076,7 @@ function InfoCard({
   index: number;
 }) {
   return (
-    <div className="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+    <div className="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:bg-blue-50/30 hover:shadow-md">
       <div className="mb-4 flex items-center justify-between gap-3">
         <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-950 text-sm font-black text-white">
           {index + 1}
@@ -1222,7 +1222,7 @@ function LoadingPanel({
 
       <div className="mt-4 h-2 overflow-hidden rounded-full bg-white">
         <div
-          className="h-full rounded-full bg-blue-600 transition-all duration-700"
+          className="h-full animate-pulse rounded-full bg-blue-600 transition-all duration-700"
           style={{ width: `${progress}%` }}
         />
       </div>
@@ -1321,7 +1321,7 @@ function SectionShell({
 }) {
   return (
     <section
-      className={`rounded-[2rem] border border-slate-200 bg-white/95 p-6 shadow-sm ring-1 ring-slate-950/[0.02] backdrop-blur md:p-8 ${className}`}
+      className={`rounded-[2rem] border border-slate-200 bg-white/95 p-6 shadow-sm ring-1 ring-slate-950/[0.02] backdrop-blur transition-all duration-300 hover:border-blue-200 hover:shadow-md md:p-8 ${className}`}
     >
       {children}
     </section>
@@ -1795,6 +1795,7 @@ export default function BusinessPage() {
   const labels: Record<Locale, Record<string, any>> = {
     en: {
       title: "Business Decision Intelligence",
+      heroPower: "AI-powered executive analysis for modern businesses",
       subtitle:
         "Upload business data to receive a data-verified executive analysis with KPIs, risks, opportunities, forecasts, and priority decisions.",
       eyebrow: "Universal AI business agent",
@@ -1836,6 +1837,12 @@ export default function BusinessPage() {
       dataTypes: "Supported business data",
       enterpriseReady: "Public & enterprise-ready",
       trustedData: "Numbers stay backend-calculated. AI explains, the backend verifies.",
+      supportedFiles: "Supported: CSV, XLSX, XLS",
+      maxSize: "Max size: 25MB",
+      executiveDashboardLabel: "Executive AI Decision Dashboard",
+      statusHealthy: "Healthy",
+      statusStable: "Stable",
+      statusCritical: "Critical",
       whatYouGetItems: [
         "Executive business summary",
         "Financial KPI calculation",
@@ -1887,6 +1894,7 @@ export default function BusinessPage() {
 
     fr: {
       title: "Intelligence décisionnelle business",
+      heroPower: "Analyse exécutive IA pour entreprises modernes",
       subtitle:
         "Importez vos données business pour recevoir une analyse exécutive vérifiée par les données avec KPIs, risques, opportunités, prévisions et décisions prioritaires.",
       eyebrow: "Agent business IA universel",
@@ -1928,6 +1936,12 @@ export default function BusinessPage() {
       dataTypes: "Données business prises en charge",
       enterpriseReady: "Prêt public & entreprise",
       trustedData: "Les chiffres restent calculés par le backend. L’IA explique, le backend vérifie.",
+      supportedFiles: "Formats supportés : CSV, XLSX, XLS",
+      maxSize: "Taille max : 25MB",
+      executiveDashboardLabel: "Dashboard exécutif IA",
+      statusHealthy: "Sain",
+      statusStable: "Stable",
+      statusCritical: "Critique",
       whatYouGetItems: [
         "Résumé exécutif business",
         "Calcul des KPIs financiers",
@@ -1979,6 +1993,7 @@ export default function BusinessPage() {
 
     ar: {
       title: "ذكاء قرارات الأعمال",
+      heroPower: "تحليل تنفيذي ذكي للشركات الحديثة",
       subtitle:
         "ارفع بيانات الأعمال للحصول على تحليل تنفيذي موثوق بالبيانات يتضمن المؤشرات والمخاطر والفرص والتوقعات والقرارات ذات الأولوية.",
       eyebrow: "وكيل أعمال ذكي عالمي",
@@ -2020,6 +2035,12 @@ export default function BusinessPage() {
       dataTypes: "أنواع بيانات الأعمال المدعومة",
       enterpriseReady: "جاهز للاستخدام العام والمؤسسات",
       trustedData: "الأرقام تُحسب في النظام الخلفي. الذكاء الاصطناعي يشرح، والنظام الخلفي يتحقق.",
+      supportedFiles: "الملفات المدعومة: CSV, XLSX, XLS",
+      maxSize: "الحجم الأقصى: 25MB",
+      executiveDashboardLabel: "لوحة القرارات التنفيذية الذكية",
+      statusHealthy: "صحي",
+      statusStable: "مستقر",
+      statusCritical: "حرج",
       whatYouGetItems: [
         "ملخص تنفيذي للأعمال",
         "حساب مؤشرات الأداء المالية",
@@ -2087,6 +2108,29 @@ export default function BusinessPage() {
     return "bg-red-500";
   };
 
+  const getBusinessHealthStatus = (score: number) => {
+    if (score >= 80) {
+      return {
+        label: t.statusHealthy,
+        className: "border-green-200 bg-green-50 text-green-700",
+      };
+    }
+
+    if (score >= 60) {
+      return {
+        label: t.statusStable,
+        className: "border-amber-200 bg-amber-50 text-amber-700",
+      };
+    }
+
+    return {
+      label: t.statusCritical,
+      className: "border-red-200 bg-red-50 text-red-700",
+    };
+  };
+
+  const healthStatus = getBusinessHealthStatus(score);
+
   const decision =
     result?.smart_insights?.most_important_decision;
   const keyInsights = asArray(
@@ -2119,7 +2163,7 @@ export default function BusinessPage() {
         locale === "ar" ? "tracking-normal" : ""
       }`}
     >
-      <div className="mx-auto max-w-7xl space-y-10">
+      <div className="mx-auto max-w-[1500px] space-y-10">
         {/* Hero */}
         <section className="overflow-hidden rounded-[2.25rem] border border-slate-200 bg-white/95 shadow-sm ring-1 ring-slate-950/[0.02] backdrop-blur">
           <div className="grid gap-8 p-6 md:p-8 lg:grid-cols-[1.35fr_0.85fr] lg:p-10">
@@ -2140,6 +2184,10 @@ export default function BusinessPage() {
                 {t.title}
               </h1>
 
+              <p className="mt-4 text-sm font-semibold text-blue-600 md:text-base">
+                {t.heroPower}
+              </p>
+
               <p className={`mt-5 max-w-3xl text-[15px] text-slate-600 md:text-base ${
                 locale === "ar" ? "leading-8" : "leading-7"
               }`}>
@@ -2153,12 +2201,15 @@ export default function BusinessPage() {
               </p>
             </div>
 
-            <div className="rounded-[2rem] border border-slate-800 bg-slate-950 p-6 text-white shadow-xl shadow-slate-950/10">
-              <p className="text-sm font-semibold text-slate-300">
-                {t.dataTypes}
-              </p>
+            <div className="relative overflow-hidden rounded-[2rem] border border-slate-800 bg-slate-950 p-6 text-white shadow-xl shadow-slate-950/10">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-emerald-500/10" />
 
-              <div className="mt-5 grid gap-3">
+              <div className="relative">
+                <p className="text-sm font-semibold text-slate-300">
+                  {t.dataTypes}
+                </p>
+
+                <div className="mt-5 grid gap-3">
                 {t.dataTypeItems.map((item: string, index: number) => (
                   <div
                     key={item}
@@ -2173,6 +2224,7 @@ export default function BusinessPage() {
                     </p>
                   </div>
                 ))}
+                </div>
               </div>
             </div>
           </div>
@@ -2269,6 +2321,16 @@ export default function BusinessPage() {
                 {t.chooseFile}
               </span>
             </label>
+
+            <div className="flex flex-wrap gap-2 text-xs font-semibold text-slate-500">
+              <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
+                {t.supportedFiles}
+              </span>
+
+              <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
+                {t.maxSize}
+              </span>
+            </div>
           </div>
 
           <button
@@ -2305,9 +2367,15 @@ export default function BusinessPage() {
         {result && (
           <SectionShell className="space-y-8">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <h2 className="text-2xl font-black text-slate-950">
-                {t.results}
-              </h2>
+              <div>
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-500">
+                  {t.executiveDashboardLabel}
+                </p>
+
+                <h2 className="mt-2 text-2xl font-black text-slate-950">
+                  {t.results}
+                </h2>
+              </div>
 
               <div className="flex flex-wrap items-center gap-2">
                 {result.backend_truth?.source && (
@@ -2323,7 +2391,7 @@ export default function BusinessPage() {
                   type="button"
                   onClick={() => handleExport("pdf")}
                   disabled={exporting !== null}
-                  className="rounded-full bg-slate-950 px-4 py-2 text-xs font-bold text-white transition hover:bg-slate-800 disabled:bg-slate-400"
+                  className="rounded-full bg-slate-950 px-4 py-2 text-xs font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-md disabled:translate-y-0 disabled:bg-slate-400 disabled:shadow-none"
                 >
                   {exporting === "pdf" ? t.exportingPdf : t.exportPdf}
                 </button>
@@ -2332,7 +2400,7 @@ export default function BusinessPage() {
                   type="button"
                   onClick={() => handleExport("pptx")}
                   disabled={exporting !== null}
-                  className="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-800 transition hover:bg-slate-50 disabled:text-slate-400"
+                  className="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-50 hover:shadow-md disabled:translate-y-0 disabled:text-slate-400 disabled:shadow-none"
                 >
                   {exporting === "pptx" ? t.exportingPptx : t.exportPptx}
                 </button>

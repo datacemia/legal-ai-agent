@@ -39,6 +39,32 @@ const labels: any = {
     title: "Personal Finance Coach",
     subtitle:
       "Upload your bank statement PDF to analyze spending, detect waste, and get saving strategies.",
+    heroSupport:
+      "AI-powered financial insights, subscription detection, savings analysis, and personalized coaching.",
+    uploadBadges: ["PDF bank statements", "Private analysis", "Multi-language"],
+    sampleOutputTitle: "See example AI financial analysis",
+    sampleOutputSubtitle:
+      "Preview the kind of insights Runexa generates from a bank statement.",
+    sampleNarrativeTitle: "AI Narrative Summary",
+    sampleNarrative:
+      "Your financial profile shows stable income and positive cashflow, but recurring subscriptions and discretionary spending may reduce long-term savings potential.",
+    sampleSavingsTitle: "AI Savings Opportunity",
+    sampleSavings:
+      "Review unused subscriptions first. Small recurring charges can become meaningful monthly savings.",
+    sampleCoachTitle: "Smart Money Coach",
+    sampleCoach:
+      "Ask follow-up questions, request a savings plan, or understand your score in plain language.",
+    exportPdf: "Export Executive PDF Report",
+    chartInsightSpending:
+      "AI interpretation: spending patterns help reveal peaks, habits, and possible budget pressure.",
+    chartInsightCashflow:
+      "AI interpretation: daily cashflow shows whether income timing is safely covering expenses.",
+    chartInsightSubscriptions:
+      "AI interpretation: recurring costs can quietly increase and reduce long-term savings.",
+    chartInsightSavings:
+      "AI interpretation: running balance highlights whether your financial position is improving over time.",
+    coachSubtitle: "Continue your financial analysis conversation",
+    coachSecure: "Analysis saved securely",
     howTitle: "How this agent works:",
     how1:
       "Upload a bank statement PDF and the Personal Finance Coach will extract visible transactions, estimate income, spending, transfers, and categorize expenses.",
@@ -50,9 +76,9 @@ const labels: any = {
     analyzing: "Analyzing statement...",
     buyCredits: "Buy credits 💳",
     paymentMessage:
-      "Stripe is not connected yet. $1 trial activation, credits, and Pro plan will be available soon.",
+      "Payments are temporarily unavailable during platform rollout. $1 trial activation, credits, and Pro plan will be available soon.",
     proMessage:
-      "Pro plan is not configured yet. Stripe will be activated soon.",
+      "Payments are temporarily unavailable during platform rollout. Pro access will be available soon.",
     trialInfo: "$1 trial per agent. You can also skip the trial and continue with global credits or a Pro plan.",
     startTrial: "Start $1 trial",
     upgradePro: "Upgrade to Pro",
@@ -76,6 +102,32 @@ const labels: any = {
     title: "Coach financier personnel",
     subtitle:
       "Téléchargez votre relevé bancaire PDF pour analyser vos dépenses, détecter le gaspillage et obtenir des stratégies d’épargne.",
+    heroSupport:
+      "Analyse financière IA, détection des abonnements, stratégies d’épargne et coaching personnalisé.",
+    uploadBadges: ["Relevés bancaires PDF", "Analyse privée", "Multilingue"],
+    sampleOutputTitle: "Voir un exemple d’analyse financière IA",
+    sampleOutputSubtitle:
+      "Aperçu du type d’insights que Runexa génère à partir d’un relevé bancaire.",
+    sampleNarrativeTitle: "Résumé narratif IA",
+    sampleNarrative:
+      "Votre profil financier montre des revenus stables et un cashflow positif, mais les abonnements récurrents et les dépenses discrétionnaires peuvent réduire votre potentiel d’épargne à long terme.",
+    sampleSavingsTitle: "Opportunité d’épargne IA",
+    sampleSavings:
+      "Analysez d’abord les abonnements inutilisés. Les petits frais récurrents peuvent devenir des économies mensuelles importantes.",
+    sampleCoachTitle: "Coach financier intelligent",
+    sampleCoach:
+      "Posez des questions, demandez un plan d’épargne ou comprenez votre score en langage clair.",
+    exportPdf: "Exporter le rapport exécutif PDF",
+    chartInsightSpending:
+      "Interprétation IA : les tendances de dépenses révèlent les pics, habitudes et pressions budgétaires possibles.",
+    chartInsightCashflow:
+      "Interprétation IA : le cashflow quotidien montre si le timing des revenus couvre les dépenses en sécurité.",
+    chartInsightSubscriptions:
+      "Interprétation IA : les coûts récurrents peuvent augmenter discrètement et réduire l’épargne long terme.",
+    chartInsightSavings:
+      "Interprétation IA : le solde courant montre si votre position financière s’améliore dans le temps.",
+    coachSubtitle: "Continuez votre conversation d’analyse financière",
+    coachSecure: "Analyse sauvegardée en toute sécurité",
     howTitle: "Comment fonctionne cet agent :",
     how1:
       "Téléchargez un relevé bancaire PDF. Le coach financier extrait les transactions visibles, estime les revenus, les dépenses, les transferts et classe les dépenses par catégorie.",
@@ -87,9 +139,9 @@ const labels: any = {
     analyzing: "Analyse du relevé en cours...",
     buyCredits: "Acheter des crédits 💳",
     paymentMessage:
-      "Stripe n’est pas encore connecté. L’activation de l’essai à 1$, les crédits et le plan Pro seront bientôt disponibles.",
+      "Les paiements sont temporairement indisponibles pendant le déploiement de la plateforme. L’activation de l’essai à 1$, les crédits et le plan Pro seront bientôt disponibles.",
     proMessage:
-      "Le plan Pro n’est pas encore configuré. Stripe sera bientôt activé.",
+      "Les paiements sont temporairement indisponibles pendant le déploiement de la plateforme. L’accès Pro sera bientôt disponible.",
     trialInfo: "Essai à 1$ par agent. Vous pouvez aussi passer directement aux crédits globaux ou au plan Pro.",
     startTrial: "Activer l’essai à 1$",
     upgradePro: "Passer au plan Pro",
@@ -113,6 +165,32 @@ const labels: any = {
     title: "وكيل الإدارة المالية الشخصية",
     subtitle:
       "ارفع كشف حسابك البنكي بصيغة PDF لتحليل المصاريف، كشف الهدر، والحصول على استراتيجيات ادخار.",
+    heroSupport:
+      "تحليل مالي بالذكاء الاصطناعي، كشف الاشتراكات، استراتيجيات الادخار، وتوجيه مالي ذكي.",
+    uploadBadges: ["كشوفات بنكية PDF", "تحليل خاص", "متعدد اللغات"],
+    sampleOutputTitle: "شاهد مثالاً لتحليل مالي بالذكاء الاصطناعي",
+    sampleOutputSubtitle:
+      "معاينة لنوع الرؤى التي تولدها Runexa من كشف الحساب البنكي.",
+    sampleNarrativeTitle: "ملخص سردي ذكي",
+    sampleNarrative:
+      "يُظهر ملفك المالي دخلاً مستقراً وتدفقاً نقدياً إيجابياً، لكن الاشتراكات المتكررة والإنفاق الاختياري قد يقللان من القدرة على الادخار على المدى الطويل.",
+    sampleSavingsTitle: "فرصة ادخار ذكية",
+    sampleSavings:
+      "راجع الاشتراكات غير المستخدمة أولاً. الرسوم الصغيرة المتكررة قد تتحول إلى وفورات شهرية مهمة.",
+    sampleCoachTitle: "مدرب مالي ذكي",
+    sampleCoach:
+      "اطرح أسئلة متابعة، اطلب خطة ادخار، أو افهم نتيجتك المالية بلغة واضحة.",
+    exportPdf: "تصدير تقرير PDF تنفيذي",
+    chartInsightSpending:
+      "تفسير الذكاء الاصطناعي: أنماط الإنفاق تكشف الذروات والعادات وضغط الميزانية المحتمل.",
+    chartInsightCashflow:
+      "تفسير الذكاء الاصطناعي: التدفق النقدي اليومي يوضح ما إذا كان توقيت الدخل يغطي النفقات بأمان.",
+    chartInsightSubscriptions:
+      "تفسير الذكاء الاصطناعي: التكاليف المتكررة قد ترتفع تدريجياً وتقلل الادخار طويل المدى.",
+    chartInsightSavings:
+      "تفسير الذكاء الاصطناعي: الرصيد الجاري يوضح ما إذا كان وضعك المالي يتحسن بمرور الوقت.",
+    coachSubtitle: "تابع محادثة التحليل المالي",
+    coachSecure: "تم حفظ التحليل بأمان",
     howTitle: "كيف يعمل هذا الوكيل:",
     how1:
       "ارفع كشف حساب بنكي PDF وسيقوم وكيل الإدارة المالية باستخراج المعاملات الظاهرة، وتقدير الدخل، المصاريف، التحويلات، وتصنيف النفقات.",
@@ -124,9 +202,9 @@ const labels: any = {
     analyzing: "جاري تحليل الكشف...",
     buyCredits: "شراء رصيد 💳",
     paymentMessage:
-      "Stripe غير متصل حالياً. تفعيل تجربة 1 دولار، الأرصدة وخطة Pro ستكون متاحة قريباً.",
+      "المدفوعات غير متاحة مؤقتاً أثناء إطلاق المنصة. تفعيل تجربة 1 دولار، الأرصدة وخطة Pro ستكون متاحة قريباً.",
     proMessage:
-      "خطة Pro غير مفعلة حالياً. سيتم تفعيل Stripe قريباً.",
+      "المدفوعات غير متاحة مؤقتاً أثناء إطلاق المنصة. سيتوفر وصول Pro قريباً.",
     trialInfo: "تجربة بقيمة 1 دولار لكل وكيل. يمكنك أيضاً المتابعة مباشرة بالأرصدة العامة أو خطة Pro.",
     startTrial: "تفعيل تجربة 1 دولار",
     upgradePro: "الترقية إلى Pro",
@@ -233,9 +311,16 @@ export default function FinancePage() {
     })) || [];
 
   const quickQuestions = [
-    "How can I save more money?",
-    "What are my biggest expenses?",
-    "Am I financially healthy?",
+    result?.subscriptions_detected?.length > 0
+      ? "What subscriptions should I cancel first?"
+      : "How can I save more money?",
+    result?.cashflow_forecast?.trend === "negative" ||
+    result?.cashflow_forecast?.trend === "risky"
+      ? "How can I avoid cashflow risk?"
+      : "What are my biggest expenses?",
+    (result?.financial_habit_scores?.overall_financial_habits_score || 100) < 60
+      ? "Why is my financial score low?"
+      : "Am I financially healthy?",
     "Explain my financial score",
     "Create a 30-day savings plan",
   ];
@@ -358,12 +443,6 @@ export default function FinancePage() {
     const token = safeGetLocalStorage("token");
     const analysisId = result?.id;
 
-    console.log("CHAT DEBUG:", {
-      tokenExists: !!token,
-      analysisId,
-      finalQuestion,
-    });
-
     if (!token || !analysisId || !finalQuestion?.trim()) return;
 
     setChatLoading(true);
@@ -385,8 +464,6 @@ export default function FinancePage() {
       });
 
       const data = await res.json();
-
-      console.log("CHAT RESPONSE:", res.status, data);
 
       if (!res.ok) {
         throw new Error(data.detail || "Finance chat failed");
@@ -542,21 +619,89 @@ export default function FinancePage() {
   return (
     <main
       dir={language === "ar" ? "rtl" : "ltr"}
-      className="min-h-screen bg-slate-50 px-4 py-10"
+      className="min-h-screen bg-slate-50 px-4 py-12 sm:py-16"
     >
-      <div className="max-w-3xl mx-auto space-y-8">
+      <div className="max-w-4xl mx-auto space-y-8">
         <div className="text-center">
-          <h1 className="text-3xl font-bold">{t.title}</h1>
-          <p className="text-slate-500 mt-2">{t.subtitle}</p>
+          <h1 className="text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
+            {t.title}
+          </h1>
+
+          <p className="mx-auto mt-4 max-w-3xl text-slate-500">
+            {t.subtitle}
+          </p>
+
+          <p className="mx-auto mt-4 max-w-3xl text-sm font-medium text-slate-600">
+            {t.heroSupport}
+          </p>
         </div>
 
-        <div className="bg-white p-6 rounded-2xl border space-y-4">
-          <div className="rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm text-slate-600 space-y-2">
+        <div className="rounded-2xl border bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-sm font-medium text-blue-600">
+                {t.sampleOutputTitle}
+              </p>
+              <h2 className="mt-1 text-xl font-semibold text-slate-900">
+                AI Financial Intelligence Preview
+              </h2>
+              <p className="mt-2 text-sm leading-6 text-slate-500">
+                {t.sampleOutputSubtitle}
+              </p>
+            </div>
+            <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700">
+              AI preview
+            </span>
+          </div>
+
+          <div className="mt-5 grid gap-4 md:grid-cols-3">
+            <div className="rounded-2xl border bg-slate-50 p-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
+              <p className="text-sm font-semibold text-slate-800">
+                {t.sampleNarrativeTitle}
+              </p>
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                {t.sampleNarrative}
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-green-200 bg-green-50 p-4">
+              <p className="text-sm font-semibold text-green-800">
+                {t.sampleSavingsTitle}
+              </p>
+              <p className="mt-2 text-sm leading-6 text-green-700">
+                {t.sampleSavings}
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-blue-200 bg-blue-50 p-4">
+              <p className="text-sm font-semibold text-blue-800">
+                {t.sampleCoachTitle}
+              </p>
+              <p className="mt-2 text-sm leading-6 text-blue-700">
+                {t.sampleCoach}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-b from-white to-slate-50/80 p-6 rounded-2xl border space-y-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
+          <div className="rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm text-slate-600 space-y-2 transition-all duration-300 hover:border-blue-200 hover:bg-white hover:shadow-md">
             <p>
               <strong>{t.howTitle}</strong> {t.how1}
             </p>
             <p>{t.how2}</p>
             <p className="text-xs text-slate-500">{t.disclaimer}</p>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            {t.uploadBadges.map((badge: string) => (
+              <span
+                key={badge}
+                className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600"
+              >
+                {badge}
+              </span>
+            ))}
           </div>
 
           <select
@@ -592,7 +737,7 @@ export default function FinancePage() {
 
             <label
               htmlFor="file-upload"
-              className="flex items-center justify-between cursor-pointer rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm hover:bg-slate-50"
+              className="flex items-center justify-between cursor-pointer rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm transition-all duration-300 hover:border-blue-200 hover:bg-slate-50 hover:shadow-md"
             >
               <span className="text-slate-600">
                 {file ? file.name : t.noFile}
@@ -614,14 +759,14 @@ export default function FinancePage() {
             <button
               onClick={handleAnalyze}
               disabled={!file || loading}
-              className="w-full bg-slate-900 text-white py-3 rounded-xl disabled:bg-slate-400"
+              className="w-full rounded-xl bg-slate-900 py-3 text-white transition-all duration-300 hover:bg-slate-800 hover:shadow-xl disabled:bg-slate-400 disabled:hover:shadow-none"
             >
               {loading ? t.analyzing : primaryCtaLabel}
             </button>
 
             <button
               onClick={() => setPaymentMessage(t.paymentMessage)}
-              className="w-full bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 transition"
+              className="w-full rounded-xl border border-slate-300 bg-white py-3 text-slate-800 transition-all duration-300 hover:border-blue-200 hover:bg-slate-50 hover:shadow-md"
             >
               <span className="flex items-center justify-center gap-2">
                 {t.buyCredits}
@@ -632,7 +777,7 @@ export default function FinancePage() {
               onClick={() =>
                 setPaymentMessage(t.proMessage)
               }
-              className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition"
+              className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 py-3 text-white transition-all duration-300 hover:shadow-xl"
             >
               {t.upgradePro}
             </button>
@@ -646,23 +791,28 @@ export default function FinancePage() {
         </div>
 
         {result && (
-          <div className="bg-white p-6 rounded-2xl border space-y-4">
+          <div className="bg-white p-6 rounded-2xl border space-y-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
             <h2 className="text-xl font-semibold">{t.results}</h2>
 
             <button
               onClick={exportFinanceReportPdf}
-              className="rounded-xl bg-slate-900 px-4 py-2 text-sm text-white hover:bg-slate-800"
+              className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white transition-all duration-300 hover:bg-slate-800 hover:shadow-md"
             >
-              Export PDF Report
+              {t.exportPdf}
             </button>
 
             {result.detail ? (
               <p className="text-red-600">{result.detail}</p>
             ) : (
               <>
-                <p>
-                  <strong>{t.summary}:</strong> {result.summary}
-                </p>
+                <div className="rounded-2xl border bg-blue-50 p-5">
+                  <p className="text-sm text-blue-700">
+                    AI Narrative Summary
+                  </p>
+                  <p className="mt-2 text-sm leading-7 text-slate-700">
+                    {result.summary}
+                  </p>
+                </div>
 
                 <p>
                   <strong>{t.currency}:</strong>{" "}
@@ -705,7 +855,7 @@ export default function FinancePage() {
 
                 {/* KPI CARDS */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-                  <div className="rounded-2xl border bg-slate-50 p-4">
+                  <div className="rounded-2xl border bg-slate-50 p-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                     <p className="text-sm text-slate-500">
                       Monthly Income
                     </p>
@@ -717,7 +867,7 @@ export default function FinancePage() {
                     </h3>
                   </div>
 
-                  <div className="rounded-2xl border bg-slate-50 p-4">
+                  <div className="rounded-2xl border bg-slate-50 p-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                     <p className="text-sm text-slate-500">
                       Monthly Expenses
                     </p>
@@ -729,7 +879,7 @@ export default function FinancePage() {
                     </h3>
                   </div>
 
-                  <div className="rounded-2xl border bg-slate-50 p-4">
+                  <div className="rounded-2xl border bg-slate-50 p-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                     <p className="text-sm text-slate-500">
                       Net Cashflow
                     </p>
@@ -748,7 +898,7 @@ export default function FinancePage() {
                   </div>
                 </div>
 
-                <div className="rounded-2xl border bg-slate-50 p-5">
+                <div className="rounded-2xl border bg-slate-50 p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                   <p className="text-sm text-slate-500">
                     Financial Habits Score
                   </p>
@@ -771,7 +921,7 @@ export default function FinancePage() {
                   </p>
                 </div>
 
-                <div className="rounded-2xl border bg-slate-50 p-5">
+                <div className="rounded-2xl border bg-slate-50 p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-slate-500">
@@ -807,7 +957,7 @@ export default function FinancePage() {
                   </p>
                 </div>
 
-                <div className="rounded-2xl border bg-slate-50 p-5">
+                <div className="rounded-2xl border bg-slate-50 p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-slate-500">
@@ -887,7 +1037,7 @@ export default function FinancePage() {
                   </p>
                 </div>
 
-                <div className="rounded-2xl border bg-slate-50 p-5">
+                <div className="rounded-2xl border bg-slate-50 p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                   <div className="flex items-center justify-between mb-4">
                     <div>
                       <p className="text-sm text-slate-500">
@@ -918,7 +1068,7 @@ export default function FinancePage() {
                         (sub: any, index: number) => (
                           <div
                             key={index}
-                            className="flex items-center justify-between rounded-xl border bg-white px-4 py-3"
+                            className="flex items-center justify-between rounded-xl border bg-white px-4 py-3 transition-all duration-300 hover:border-blue-200 hover:shadow-md"
                           >
                             <div>
                               <p className="font-medium">
@@ -950,7 +1100,7 @@ export default function FinancePage() {
                   )}
                 </div>
 
-                <div className="rounded-2xl border bg-slate-50 p-5">
+                <div className="rounded-2xl border bg-slate-50 p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                   <div className="flex items-center justify-between mb-4">
                     <div>
                       <p className="text-sm text-slate-500">
@@ -985,7 +1135,7 @@ export default function FinancePage() {
                         (item: any, index: number) => (
                           <div
                             key={index}
-                            className="rounded-xl border bg-white p-4"
+                            className="rounded-xl border bg-white p-4 transition-all duration-300 hover:border-blue-200 hover:shadow-md"
                           >
                             <div className="flex items-start justify-between gap-4">
                               <div>
@@ -1031,7 +1181,7 @@ export default function FinancePage() {
                   )}
                 </div>
 
-                <div className="rounded-2xl border bg-slate-50 p-5">
+                <div className="rounded-2xl border bg-slate-50 p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                   <div className="mb-4">
                     <p className="text-sm text-slate-500">
                       AI Financial Insights
@@ -1086,7 +1236,7 @@ export default function FinancePage() {
                   )}
                 </div>
 
-                <div className="rounded-2xl border bg-white p-5">
+                <div className="rounded-2xl border bg-white p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                   <div className="mb-4">
                     <p className="text-sm text-slate-500">
                       Spending Over Time
@@ -1144,9 +1294,13 @@ export default function FinancePage() {
                       </AreaChart>
                     </ResponsiveContainer>
                   </div>
+
+                  <p className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-600">
+                    {t.chartInsightSpending}
+                  </p>
                 </div>
 
-                <div className="rounded-2xl border bg-white p-5">
+                <div className="rounded-2xl border bg-white p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                   <div className="mb-4">
                     <p className="text-sm text-slate-500">
                       Net Cashflow Over Time
@@ -1181,9 +1335,13 @@ export default function FinancePage() {
                       </LineChart>
                     </ResponsiveContainer>
                   </div>
+
+                  <p className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-600">
+                    {t.chartInsightCashflow}
+                  </p>
                 </div>
 
-                <div className="rounded-2xl border bg-white p-5">
+                <div className="rounded-2xl border bg-white p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                   <div className="mb-4">
                     <p className="text-sm text-slate-500">
                       Subscription Growth
@@ -1216,9 +1374,13 @@ export default function FinancePage() {
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
+
+                  <p className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-600">
+                    {t.chartInsightSubscriptions}
+                  </p>
                 </div>
 
-                <div className="rounded-2xl border bg-white p-5">
+                <div className="rounded-2xl border bg-white p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                   <div className="mb-4">
                     <p className="text-sm text-slate-500">
                       Savings Evolution
@@ -1253,6 +1415,10 @@ export default function FinancePage() {
                       </LineChart>
                     </ResponsiveContainer>
                   </div>
+
+                  <p className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-600">
+                    {t.chartInsightSavings}
+                  </p>
                 </div>
 
                 <div>
@@ -1350,15 +1516,25 @@ export default function FinancePage() {
                   </ul>
                 </div>
 
-                <div className="rounded-2xl border bg-white p-6 shadow-sm">
-                  <div className="mb-5">
-                    <p className="text-sm text-slate-500">
-                      AI Financial Coach
-                    </p>
+                <div className="rounded-2xl border bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
+                  <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <p className="text-sm text-slate-500">
+                        AI Financial Coach
+                      </p>
 
-                    <h3 className="text-2xl font-bold text-slate-800">
-                      Ask your finance assistant
-                    </h3>
+                      <h3 className="text-2xl font-bold text-slate-800">
+                        Ask your finance assistant
+                      </h3>
+
+                      <p className="mt-2 text-sm text-slate-500">
+                        {t.coachSubtitle}
+                      </p>
+                    </div>
+
+                    <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700">
+                      {t.coachSecure}
+                    </span>
                   </div>
 
                   <div className="flex flex-wrap gap-2 mb-5">
@@ -1368,7 +1544,7 @@ export default function FinancePage() {
                         onClick={() =>
                           sendFinanceQuestion(q)
                         }
-                        className="rounded-full border px-3 py-2 text-sm hover:bg-slate-100"
+                        className="rounded-full border px-3 py-2 text-sm transition-all duration-300 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
                       >
                         {q}
                       </button>
@@ -1450,7 +1626,7 @@ export default function FinancePage() {
                         sendFinanceQuestion()
                       }
                       disabled={chatLoading}
-                      className="rounded-xl bg-blue-600 px-5 py-3 text-white hover:bg-blue-700 disabled:bg-blue-300"
+                      className="rounded-xl bg-blue-600 px-5 py-3 text-white transition-all duration-300 hover:bg-blue-700 hover:shadow-md disabled:bg-blue-300 disabled:hover:shadow-none"
                     >
                       Send
                     </button>
