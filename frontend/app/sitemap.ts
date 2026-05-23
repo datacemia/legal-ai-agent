@@ -38,6 +38,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
 
     {
+      url: "https://runexa.ai/enterprise-ai",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+
+    {
       url: "https://runexa.ai/pricing",
       lastModified: new Date(),
       changeFrequency: "monthly",
