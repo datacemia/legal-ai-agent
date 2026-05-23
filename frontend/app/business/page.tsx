@@ -1837,7 +1837,7 @@ export default function BusinessPage() {
       dataTypes: "Supported business data",
       enterpriseReady: "Public & enterprise-ready",
       trustedData: "Numbers stay backend-calculated. AI explains, the backend verifies.",
-      supportedFiles: "Supported: CSV, XLSX, XLS",
+      supportedFiles: "Supported: CSV, XLSX",
       maxSize: "Max size: 25MB",
       executiveDashboardLabel: "Executive AI Decision Dashboard",
       statusHealthy: "Healthy",
@@ -1936,7 +1936,7 @@ export default function BusinessPage() {
       dataTypes: "Données business prises en charge",
       enterpriseReady: "Prêt public & entreprise",
       trustedData: "Les chiffres restent calculés par le backend. L’IA explique, le backend vérifie.",
-      supportedFiles: "Formats supportés : CSV, XLSX, XLS",
+      supportedFiles: "Formats supportés : CSV, XLSX",
       maxSize: "Taille max : 25MB",
       executiveDashboardLabel: "Dashboard exécutif IA",
       statusHealthy: "Sain",
@@ -2035,7 +2035,7 @@ export default function BusinessPage() {
       dataTypes: "أنواع بيانات الأعمال المدعومة",
       enterpriseReady: "جاهز للاستخدام العام والمؤسسات",
       trustedData: "الأرقام تُحسب في النظام الخلفي. الذكاء الاصطناعي يشرح، والنظام الخلفي يتحقق.",
-      supportedFiles: "الملفات المدعومة: CSV, XLSX, XLS",
+      supportedFiles: "الملفات المدعومة: CSV, XLSX",
       maxSize: "الحجم الأقصى: 25MB",
       executiveDashboardLabel: "لوحة القرارات التنفيذية الذكية",
       statusHealthy: "صحي",
@@ -2295,7 +2295,7 @@ export default function BusinessPage() {
             <input
               id="file-upload"
               type="file"
-              accept=".csv,.xlsx,.xls"
+              accept=".csv,.xlsx"
               className="hidden"
               onChange={(e) => {
                 const selectedFile = e.target.files?.[0] || null;
