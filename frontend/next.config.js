@@ -1,3 +1,5 @@
+/** @type {import('next').NextConfig} */
+
 const securityHeaders = [
   {
     key: "X-Frame-Options",
@@ -15,9 +17,13 @@ const securityHeaders = [
     key: "Strict-Transport-Security",
     value: "max-age=63072000; includeSubDomains; preload",
   },
+  {
+    key: "Permissions-Policy",
+    value: "camera=(), microphone=(), geolocation=()",
+  },
 ];
 
-module.exports = {
+const nextConfig = {
   async headers() {
     return [
       {
@@ -26,4 +32,22 @@ module.exports = {
       },
     ];
   },
+
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "www.runexa.ai",
+          },
+        ],
+        destination: "https://runexa.ai/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
+
+module.exports = nextConfig;

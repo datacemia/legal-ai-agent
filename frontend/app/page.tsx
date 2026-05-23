@@ -68,6 +68,47 @@ const labels: any = {
       "Runexa Systems is an AI workspace platform for legal, finance, study, and business productivity.",
     ctaButton: "Create your account",
     disclaimer: "AI-powered insights. Always verify before you act.",
+    seoTitle: "Enterprise AI Workspace",
+    seoHeading:
+      "AI agents for document analysis, finance, study, and business intelligence",
+    seoDesc:
+      "Runexa Systems provides specialized AI agents for AI document analysis, AI contract review, financial analysis, study assistance, business intelligence, and enterprise AI workflow automation.",
+    seoItems: [
+      "AI document analysis",
+      "AI contract review",
+      "AI financial analysis",
+      "AI study assistant",
+      "AI business intelligence",
+      "Enterprise AI workflows",
+    ],
+    faqTitle: "FAQ",
+    faqHeading: "Frequently asked questions",
+    faqItems: [
+      [
+        "What is an AI agent?",
+        "An AI agent is a specialized AI system designed to complete a specific workflow, such as contract review, financial analysis, study planning, or business intelligence.",
+      ],
+      [
+        "How does Runexa work?",
+        "Upload a document or business file, choose the AI agent, and receive structured insights, summaries, risks, recommendations, and reports.",
+      ],
+      [
+        "Is Runexa secure?",
+        "Runexa is designed as a secure AI workspace for private document analysis and professional workflows.",
+      ],
+      [
+        "Can businesses use Runexa?",
+        "Yes. Runexa supports enterprise AI workflows, team workspaces, organization dashboards, custom credits, and business intelligence use cases.",
+      ],
+      [
+        "What can Runexa analyze?",
+        "Runexa can analyze legal documents, bank statements, study materials, and structured business data depending on the selected AI agent.",
+      ],
+      [
+        "Does Runexa replace professionals?",
+        "No. Runexa provides informational and decision-support output. Important decisions should be verified with qualified professionals.",
+      ],
+    ],
     agents: [
       [
         "Runexa Legal Agent",
@@ -148,6 +189,47 @@ const labels: any = {
       "Runexa Systems est un espace IA pour le juridique, la finance, les études et la productivité business.",
     ctaButton: "Créer votre compte",
     disclaimer: "Analyses générées par IA. Vérifiez toujours avant d’agir.",
+    seoTitle: "Espace IA entreprise",
+    seoHeading:
+      "Agents IA pour l’analyse documentaire, la finance, les études et la business intelligence",
+    seoDesc:
+      "Runexa Systems propose des agents IA spécialisés pour l’analyse de documents, l’analyse de contrats, l’analyse financière, l’assistance aux études, la business intelligence et l’automatisation des workflows IA en entreprise.",
+    seoItems: [
+      "Analyse documentaire IA",
+      "Analyse de contrats IA",
+      "Analyse financière IA",
+      "Assistant d’étude IA",
+      "Business intelligence IA",
+      "Workflows IA entreprise",
+    ],
+    faqTitle: "FAQ",
+    faqHeading: "Questions fréquentes",
+    faqItems: [
+      [
+        "Qu’est-ce qu’un agent IA ?",
+        "Un agent IA est un système spécialisé conçu pour réaliser un workflow précis, comme l’analyse de contrats, l’analyse financière, la planification d’étude ou la business intelligence.",
+      ],
+      [
+        "Comment fonctionne Runexa ?",
+        "Importez un document ou un fichier business, choisissez l’agent IA, puis recevez des insights structurés, résumés, risques, recommandations et rapports.",
+      ],
+      [
+        "Runexa est-il sécurisé ?",
+        "Runexa est conçu comme un espace IA sécurisé pour l’analyse privée de documents et les workflows professionnels.",
+      ],
+      [
+        "Les entreprises peuvent-elles utiliser Runexa ?",
+        "Oui. Runexa prend en charge les workflows IA entreprise, les espaces équipe, les dashboards organisation, les crédits personnalisés et la business intelligence.",
+      ],
+      [
+        "Que peut analyser Runexa ?",
+        "Runexa peut analyser des documents juridiques, des relevés bancaires, des supports d’étude et des données business structurées selon l’agent choisi.",
+      ],
+      [
+        "Runexa remplace-t-il les professionnels ?",
+        "Non. Runexa fournit une aide informative et décisionnelle. Les décisions importantes doivent être vérifiées avec des professionnels qualifiés.",
+      ],
+    ],
     agents: [
       [
         "Runexa Legal Agent",
@@ -228,6 +310,47 @@ const labels: any = {
       "Runexa Systems هي مساحة ذكاء اصطناعي للقانون والمالية والدراسة وإنتاجية الأعمال.",
     ctaButton: "إنشاء حساب",
     disclaimer: "تحليلات مدعومة بالذكاء الاصطناعي. تحقق دائماً قبل اتخاذ أي قرار.",
+    seoTitle: "مساحة ذكاء اصطناعي للمؤسسات",
+    seoHeading:
+      "وكلاء ذكاء اصطناعي لتحليل المستندات والمالية والدراسة وذكاء الأعمال",
+    seoDesc:
+      "تقدم Runexa Systems وكلاء ذكاء اصطناعي متخصصين لتحليل المستندات، مراجعة العقود، التحليل المالي، المساعدة في الدراسة، ذكاء الأعمال، وأتمتة سير العمل بالذكاء الاصطناعي داخل المؤسسات.",
+    seoItems: [
+      "تحليل المستندات بالذكاء الاصطناعي",
+      "مراجعة العقود بالذكاء الاصطناعي",
+      "التحليل المالي بالذكاء الاصطناعي",
+      "مساعد دراسة ذكي",
+      "ذكاء الأعمال بالذكاء الاصطناعي",
+      "سير عمل ذكي للمؤسسات",
+    ],
+    faqTitle: "الأسئلة الشائعة",
+    faqHeading: "أسئلة متكررة",
+    faqItems: [
+      [
+        "ما هو وكيل الذكاء الاصطناعي؟",
+        "وكيل الذكاء الاصطناعي هو نظام متخصص مصمم لتنفيذ مهمة محددة مثل مراجعة العقود، التحليل المالي، تخطيط الدراسة أو ذكاء الأعمال.",
+      ],
+      [
+        "كيف تعمل Runexa؟",
+        "ارفع مستنداً أو ملف بيانات، اختر الوكيل الذكي، ثم احصل على رؤى منظمة وملخصات ومخاطر وتوصيات وتقارير.",
+      ],
+      [
+        "هل Runexa آمنة؟",
+        "تم تصميم Runexa كمساحة ذكاء اصطناعي آمنة لتحليل المستندات الخاصة وسير العمل المهني.",
+      ],
+      [
+        "هل يمكن للشركات استخدام Runexa؟",
+        "نعم. تدعم Runexa سير العمل الذكي للمؤسسات، مساحات الفرق، لوحات تحكم المؤسسات، الأرصدة المخصصة وذكاء الأعمال.",
+      ],
+      [
+        "ما الذي يمكن لـ Runexa تحليله؟",
+        "يمكن لـ Runexa تحليل المستندات القانونية، كشوفات الحساب البنكية، مواد الدراسة والبيانات business المنظمة حسب الوكيل المختار.",
+      ],
+      [
+        "هل تعوض Runexa الخبراء؟",
+        "لا. تقدم Runexa مخرجات معلوماتية وداعمة للقرار. يجب التحقق من القرارات المهمة مع مختصين مؤهلين.",
+      ],
+    ],
     agents: [
       [
         "Runexa Legal Agent",
@@ -568,6 +691,67 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <section className="px-6 py-12">
+        <div className="max-w-6xl mx-auto">
+          <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm md:p-12">
+            <p className="text-sm font-semibold text-blue-600">
+              {t.seoTitle}
+            </p>
+
+            <h2 className="mt-3 text-3xl font-bold text-slate-900">
+              {t.seoHeading}
+            </h2>
+
+            <p className="mt-4 max-w-4xl text-slate-600 leading-7">
+              {t.seoDesc}
+            </p>
+
+            <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {t.seoItems.map((item: string) => (
+                <div
+                  key={item}
+                  className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700"
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-12">
+        <div className="max-w-6xl mx-auto">
+          <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm md:p-12">
+            <p className="text-sm font-semibold text-blue-600">
+              {t.faqTitle}
+            </p>
+
+            <h2 className="mt-3 text-3xl font-bold text-slate-900">
+              {t.faqHeading}
+            </h2>
+
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
+              {t.faqItems.map((item: string[]) => (
+                <div
+                  key={item[0]}
+                  className="rounded-2xl border border-slate-200 bg-slate-50 p-5"
+                >
+                  <h3 className="font-bold text-slate-900">
+                    {item[0]}
+                  </h3>
+
+                  <p className="mt-2 text-sm leading-6 text-slate-600">
+                    {item[1]}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
