@@ -8,10 +8,12 @@ from app.utils.security import get_current_user
 from app.utils.billing import check_and_consume_agent_access
 from app.models.user import User
 from app.models.finance_analysis import FinanceAnalysis
+from app.models.finance_chat_message import FinanceChatMessage
 from app.schemas.finance_schema import FinanceHistoryItem
 
 from app.services.finance_agent.statement_parser import extract_statement_text
 from app.services.finance_agent.finance_ai_agent import analyze_bank_statement
+from app.services.finance_agent.finance_chat_agent import answer_finance_question
 
 # 🔥 Finance OS V2 modules
 from app.services.finance_agent.transaction_extractor import extract_transactions
@@ -25,6 +27,9 @@ from app.services.finance_agent.savings_opportunities import (
 )
 from app.services.finance_agent.insights_engine import (
     generate_financial_insights,
+)
+from app.services.finance_agent.alerts_engine import (
+    generate_financial_alerts,
 )
 
 
@@ -119,6 +124,13 @@ async def analyze_statement(
         fallback_income=fallback_income,
     )
 
+    alerts = generate_financial_alerts(
+        transactions=transactions,
+        subscriptions=subscriptions,
+        forecast=forecast,
+        scores=scores,
+    )
+
     insights = generate_financial_insights(
         transactions=transactions,
         subscriptions=subscriptions,
@@ -139,6 +151,7 @@ async def analyze_statement(
         "recommended_budget": budget,
         "cashflow_forecast": forecast,
         "financial_habit_scores": scores,
+        "financial_alerts": alerts,
         "financial_insights": insights,
     }
 
@@ -154,7 +167,120 @@ async def analyze_statement(
     db.commit()
     db.refresh(analysis)
 
+    result["id"] = analysis.id
+
     return result
+
+
+# 💬 FINANCE CHAT COACH
+@router.post("/chat")
+def chat_with_finance_coach(
+    data: dict,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    analysis_id = data.get("analysis_id")
+    question = data.get("question")
+    output_language = data.get("output_language", "en")
+
+    if not analysis_id:
+        raise HTTPException(
+            status_code=400,
+            detail="analysis_id is required.",
+        )
+
+    if not question:
+        raise HTTPException(
+            status_code=400,
+            detail="question is required.",
+        )
+
+    analysis = (
+        db.query(FinanceAnalysis)
+        .filter(
+            FinanceAnalysis.id == analysis_id,
+            FinanceAnalysis.user_id == current_user.id,
+        )
+        .first()
+    )
+
+    if not analysis:
+        raise HTTPException(
+            status_code=404,
+            detail="Finance analysis not found.",
+        )
+
+    analysis_result = json.loads(analysis.result)
+
+    response = answer_finance_question(
+        analysis_result=analysis_result,
+        question=question,
+        output_language=output_language,
+    )
+
+    user_message = FinanceChatMessage(
+        user_id=current_user.id,
+        analysis_id=analysis_id,
+        role="user",
+        content=question,
+    )
+
+    assistant_message = FinanceChatMessage(
+        user_id=current_user.id,
+        analysis_id=analysis_id,
+        role="assistant",
+        content=response["answer"],
+    )
+
+    db.add(user_message)
+    db.add(assistant_message)
+
+    db.commit()
+
+    return response
+
+
+# 💬 FINANCE CHAT HISTORY
+@router.get("/chat/history/{analysis_id}")
+def get_finance_chat_history(
+    analysis_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    analysis = (
+        db.query(FinanceAnalysis)
+        .filter(
+            FinanceAnalysis.id == analysis_id,
+            FinanceAnalysis.user_id == current_user.id,
+        )
+        .first()
+    )
+
+    if not analysis:
+        raise HTTPException(
+            status_code=404,
+            detail="Finance analysis not found.",
+        )
+
+    messages = (
+        db.query(FinanceChatMessage)
+        .filter(
+            FinanceChatMessage.analysis_id == analysis_id,
+            FinanceChatMessage.user_id == current_user.id,
+        )
+        .order_by(FinanceChatMessage.id.asc())
+        .all()
+    )
+
+    return [
+        {
+            "id": message.id,
+            "role": message.role,
+            "content": message.content,
+            "created_at": message.created_at,
+        }
+        for message in messages
+    ]
 
 
 # 📜 HISTORY

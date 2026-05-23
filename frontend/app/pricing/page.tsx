@@ -8,6 +8,7 @@ type Agent = {
   slug: string;
   name: string;
   description: string;
+  trialOutcome: string;
   credits: number;
   gradient: string;
 };
@@ -24,19 +25,50 @@ const labels: Record<Language, any> = {
   en: {
     badge: "Global pricing for every Runexa AI agent",
     title: "One account. All agents. Simple global billing.",
-    desc: "One Runexa account gives access to all agents. Activate any agent with a one-time $1 trial, or skip trials and continue with global credits or a Pro/Premium plan.",
+    desc: "Access every Runexa AI agent with one account. Start with a $1 trial, global credits, or a Pro subscription.",
+    socialProof: "Used for legal analysis, personal finance, learning, and business decisions.",
+    workflowLine: "Built for real-world AI workflows.",
+    powerUserBadge: "Recommended for power users",
     activateTrialCta: "Activate any agent with a one-time $1 trial",
     viewPlans: "View Pro & Premium",
-    section1: "Section 1",
-    section2: "Section 2",
-    section3: "Section 3",
-    section4: "Section 4",
+    audience: "For individuals, professionals, and organizations",
+    trustedWorkflow: "Upload → AI analysis → actionable insights",
+    whyTitle: "Why people use Runexa",
+    whyCards: [
+      {
+        title: "Detect risky contract clauses",
+        desc: "Review contracts and obligations before signing.",
+      },
+      {
+        title: "Understand spending habits",
+        desc: "Find waste, subscriptions, and financial patterns.",
+      },
+      {
+        title: "Learn faster",
+        desc: "Turn study material into summaries and revision systems.",
+      },
+      {
+        title: "Make smarter business decisions",
+        desc: "Analyze opportunities, risks, and strategic choices.",
+      },
+    ],
+    mostPopular: "Most popular",
+    microTrust: [
+      "🔒 Secure AI workspace",
+      "🌍 Global access",
+      "⚡ Fast AI analysis",
+    ],
+    section1: "Start with a $1 AI trial",
+    section2: "Global AI credits",
+    section3: "Professional plans",
+    section4: "Credit usage by AI agent",
     trialsTitle: "$1 Trials by Agent",
     trialsDesc:
       "Each agent has its own one-time $1 activation. Try exactly the agent you need before using global credits or a plan.",
-    trialsBadge: "$1 trial per agent · one-time activation",
+    trialsBadge: "Choose the agent you need",
     oneTimeTrial: "one-time trial",
-    trialAnalysis: "1 trial analysis for this agent",
+    trialAnalysis: "One focused AI analysis",
+    trialReassurance: "Instant activation when payments are available.",
     startTrial: "Start trial",
     creditsTitle: "Global Credits",
     mostFlexible: "Most flexible",
@@ -51,6 +83,7 @@ const labels: Record<Language, any> = {
       "One global subscription covers all agents. No separate Pro plan per agent.",
     globalPro: "Global Pro",
     bestForProfessionals: "Best for professionals",
+    proValueNote: "For regular users of multiple AI agents.",
     proDesc:
       "For individuals and professionals who use multiple agents regularly.",
     month: "/month",
@@ -67,16 +100,17 @@ const labels: Record<Language, any> = {
     custom: "Custom",
     tailoredPricing: "tailored pricing",
     premiumFeatures: [
-      "Team workspace",
-      "Organization dashboard",
-      "Multi-user access",
-      "Custom credits",
+      "Secure workspaces",
+      "Team collaboration",
+      "Private AI workflows",
+      "Organization management",
       "Priority support",
     ],
     contactSales: "Contact sales",
     creditCostsTitle: "Agent credit costs",
     creditCostsDesc:
       "Credits are global. The same balance works across every agent.",
+    creditComplexityNote: "The cost depends on the complexity of the AI analysis.",
     creditsPerAnalysis: "credits / analysis",
     infoCards: [
       {
@@ -96,38 +130,42 @@ const labels: Record<Language, any> = {
       "⚠️ Runexa AI agents provide informational and decision-support output. Always verify important legal, financial, academic, or business decisions with qualified professionals or official sources.",
     messages: {
       trial: (agentName: string) =>
-        `$1 trial payment for ${agentName} is not configured yet. Stripe integration will be activated soon.`,
+        `$1 trial payment for ${agentName} is not configured yet. Payments are temporarily unavailable during platform rollout.`,
       credits:
-        "Stripe is not configured yet. Global credits will be available soon.",
-      pro: "Pro subscription is not configured yet. Stripe will be activated soon.",
+        "Payments are temporarily unavailable during platform rollout. Global credits will be available soon.",
+      pro: "Pro subscription is not configured yet. Payments are temporarily unavailable during platform rollout.",
     },
     agents: [
       {
         slug: "legal",
         name: "Runexa Legal Agent",
         description:
-          "Contracts, risky clauses, obligations, and recommendations.",
+          "Detect risky clauses before signing contracts.",
+        trialOutcome: "Analyze one contract",
         credits: 12,
         gradient: "from-slate-950 to-blue-700",
       },
       {
         slug: "finance",
         name: "Runexa Finance Coach",
-        description: "Bank statements, spending patterns, waste, and savings.",
+        description: "Understand spending, reduce waste, and improve financial habits.",
+        trialOutcome: "Analyze one bank statement",
         credits: 7,
         gradient: "from-emerald-700 to-teal-500",
       },
       {
         slug: "study",
         name: "Runexa Study Agent",
-        description: "Summaries, quizzes, flashcards, audio, and study plans.",
+        description: "Learn faster with AI summaries and revision systems.",
+        trialOutcome: "Generate one AI study session",
         credits: 5,
         gradient: "from-indigo-700 to-violet-500",
       },
       {
         slug: "business",
         name: "Runexa Business Decision Agent",
-        description: "Business data, risks, opportunities, and action plans.",
+        description: "Analyze opportunities, risks, and strategic decisions.",
+        trialOutcome: "Run one business analysis",
         credits: 30,
         gradient: "from-amber-700 to-orange-500",
       },
@@ -158,19 +196,50 @@ const labels: Record<Language, any> = {
   fr: {
     badge: "Tarification globale pour tous les agents IA Runexa",
     title: "Un compte. Tous les agents. Une facturation simple et globale.",
-    desc: "Un seul compte Runexa donne accès à tous les agents. Activez l’agent de votre choix avec un essai unique à 1 $, ou passez directement aux crédits globaux ou à un plan Pro/Premium.",
+    desc: "Accédez à tous les agents IA Runexa avec un seul compte. Commencez avec un essai à 1 $, des crédits globaux ou un abonnement Pro.",
+    socialProof: "Utilisé pour l’analyse juridique, la finance personnelle, l’apprentissage et les décisions business.",
+    workflowLine: "Conçu pour les workflows IA du monde réel.",
+    powerUserBadge: "Recommandé pour les utilisateurs avancés",
     activateTrialCta: "Activer un agent avec un essai unique à 1 $",
     viewPlans: "Voir Pro & Premium",
-    section1: "Section 1",
-    section2: "Section 2",
-    section3: "Section 3",
-    section4: "Section 4",
+    audience: "Pour les particuliers, les professionnels et les organisations",
+    trustedWorkflow: "Téléversement → Analyse IA → Insights actionnables",
+    whyTitle: "Pourquoi utiliser Runexa",
+    whyCards: [
+      {
+        title: "Détecter les clauses risquées",
+        desc: "Analysez les contrats et obligations avant signature.",
+      },
+      {
+        title: "Comprendre les dépenses",
+        desc: "Identifiez le gaspillage, les abonnements et les habitudes financières.",
+      },
+      {
+        title: "Apprendre plus vite",
+        desc: "Transformez vos contenus en résumés et systèmes de révision.",
+      },
+      {
+        title: "Décider plus intelligemment",
+        desc: "Analysez les opportunités, les risques et les choix stratégiques.",
+      },
+    ],
+    mostPopular: "Le plus populaire",
+    microTrust: [
+      "🔒 Espace IA sécurisé",
+      "🌍 Accès global",
+      "⚡ Analyse IA rapide",
+    ],
+    section1: "Commencez avec un essai IA à 1 $",
+    section2: "Crédits IA globaux",
+    section3: "Plans professionnels",
+    section4: "Utilisation des crédits par agent IA",
     trialsTitle: "Essais à 1 $ par agent",
     trialsDesc:
       "Chaque agent dispose de sa propre activation unique à 1 $. Essayez exactement l’agent dont vous avez besoin avant d’utiliser des crédits globaux ou un abonnement.",
-    trialsBadge: "Essai à 1 $ par agent · activation unique",
+    trialsBadge: "Choisissez l’agent dont vous avez besoin",
     oneTimeTrial: "essai unique",
-    trialAnalysis: "1 analyse d’essai pour cet agent",
+    trialAnalysis: "Une analyse IA ciblée",
+    trialReassurance: "Activation instantanée dès disponibilité des paiements.",
     startTrial: "Démarrer l’essai",
     creditsTitle: "Crédits globaux",
     mostFlexible: "Le plus flexible",
@@ -185,6 +254,7 @@ const labels: Record<Language, any> = {
       "Un seul abonnement global couvre tous les agents. Aucun plan Pro séparé par agent.",
     globalPro: "Global Pro",
     bestForProfessionals: "Idéal pour les professionnels",
+    proValueNote: "Pour les utilisateurs réguliers de plusieurs agents IA.",
     proDesc:
       "Pour les particuliers et professionnels qui utilisent régulièrement plusieurs agents.",
     month: "/mois",
@@ -202,16 +272,17 @@ const labels: Record<Language, any> = {
     custom: "Sur mesure",
     tailoredPricing: "tarification personnalisée",
     premiumFeatures: [
-      "Espace équipe",
-      "Tableau de bord organisation",
-      "Accès multi-utilisateurs",
-      "Crédits personnalisés",
+      "Workspaces sécurisés",
+      "Collaboration équipe",
+      "Workflows IA privés",
+      "Gestion organisationnelle",
       "Support prioritaire",
     ],
     contactSales: "Contacter l’équipe commerciale",
     creditCostsTitle: "Coût en crédits par agent",
     creditCostsDesc:
       "Les crédits sont globaux. Le même solde fonctionne sur chaque agent.",
+    creditComplexityNote: "Le coût dépend de la complexité de l’analyse IA.",
     creditsPerAnalysis: "crédits / analyse",
     infoCards: [
       {
@@ -231,17 +302,18 @@ const labels: Record<Language, any> = {
       "⚠️ Les agents IA Runexa fournissent des analyses informatives et d’aide à la décision. Vérifiez toujours les décisions juridiques, financières, académiques ou commerciales importantes auprès de professionnels qualifiés ou de sources officielles.",
     messages: {
       trial: (agentName: string) =>
-        `Le paiement d’essai à 1 $ pour ${agentName} n’est pas encore configuré. L’intégration Stripe sera activée bientôt.`,
+        `Le paiement d’essai à 1 $ pour ${agentName} n’est pas encore configuré. Les paiements sont temporairement indisponibles pendant le déploiement de la plateforme.`,
       credits:
-        "Stripe n’est pas encore configuré. Les crédits globaux seront disponibles bientôt.",
-      pro: "L’abonnement Pro n’est pas encore configuré. Stripe sera activé bientôt.",
+        "Les paiements sont temporairement indisponibles pendant le déploiement de la plateforme. Les crédits globaux seront bientôt disponibles.",
+      pro: "L’abonnement Pro n’est pas encore configuré. Les paiements sont temporairement indisponibles pendant le déploiement de la plateforme.",
     },
     agents: [
       {
         slug: "legal",
         name: "Runexa Legal Agent",
         description:
-          "Contrats, clauses à risque, obligations et recommandations claires.",
+          "Détectez les clauses risquées avant de signer des contrats.",
+        trialOutcome: "Analyser un contrat",
         credits: 12,
         gradient: "from-slate-950 to-blue-700",
       },
@@ -249,14 +321,16 @@ const labels: Record<Language, any> = {
         slug: "finance",
         name: "Runexa Finance Coach",
         description:
-          "Relevés bancaires, habitudes de dépenses, gaspillage et économies.",
+          "Comprenez vos dépenses, réduisez le gaspillage et améliorez vos habitudes financières.",
+        trialOutcome: "Analyser un relevé bancaire",
         credits: 7,
         gradient: "from-emerald-700 to-teal-500",
       },
       {
         slug: "study",
         name: "Runexa Study Agent",
-        description: "Résumés, quiz, flashcards, audio et plans de révision.",
+        description: "Apprenez plus vite avec des résumés IA et des systèmes de révision.",
+        trialOutcome: "Générer une session d’étude IA",
         credits: 5,
         gradient: "from-indigo-700 to-violet-500",
       },
@@ -264,7 +338,8 @@ const labels: Record<Language, any> = {
         slug: "business",
         name: "Runexa Business Decision Agent",
         description:
-          "Données business, risques, opportunités et plans d’action.",
+          "Analysez les opportunités, les risques et les décisions stratégiques.",
+        trialOutcome: "Lancer une analyse business",
         credits: 30,
         gradient: "from-amber-700 to-orange-500",
       },
@@ -294,21 +369,52 @@ const labels: Record<Language, any> = {
   },
 
   ar: {
-    badge: "تسعير موحّد لجميع وكلاء Runexa للذكاء الاصطناعي",
-    title: "حساب واحد. جميع الوكلاء. فوترة عالمية بسيطة.",
-    desc: "يمنحك حساب Runexa واحد الوصول إلى جميع الوكلاء. فعّل أي وكيل بتجربة واحدة بقيمة 1 دولار، أو انتقل مباشرة إلى الأرصدة الموحّدة أو خطة Pro/Premium.",
+    badge: "منصة موحّدة لجميع وكلاء Runexa الذكية",
+    title: "حساب واحد. جميع الوكلاء. تجربة موحّدة.",
+    desc: "من حساب واحد، يمكنك الوصول إلى جميع وكلاء Runexa الذكية. ابدأ بتجربة 1 دولار أو استخدم الأرصدة الموحّدة أو خطة Pro.",
+    socialProof: "يُستخدم للتحليل القانوني، والمالية الشخصية، والتعلّم، وقرارات الأعمال.",
+    workflowLine: "مصمم لسير العمل الحقيقي بالذكاء الاصطناعي.",
+    powerUserBadge: "موصى به للمستخدمين المتقدمين",
     activateTrialCta: "تفعيل أي وكيل بتجربة واحدة بقيمة 1 دولار",
     viewPlans: "عرض Pro وPremium",
-    section1: "القسم 1",
-    section2: "القسم 2",
-    section3: "القسم 3",
-    section4: "القسم 4",
+    audience: "للأفراد والمحترفين والمؤسسات",
+    trustedWorkflow: "رفع الملفات → تحليل بالذكاء الاصطناعي → رؤى قابلة للتنفيذ",
+    whyTitle: "لماذا يختار المستخدمون Runexa",
+    whyCards: [
+      {
+        title: "اكتشاف البنود الخطرة",
+        desc: "راجع العقود والالتزامات قبل التوقيع.",
+      },
+      {
+        title: "فهم عادات الإنفاق",
+        desc: "اكتشف الهدر والاشتراكات والأنماط المالية.",
+      },
+      {
+        title: "التعلّم بشكل أسرع",
+        desc: "حوّل المحتوى الدراسي إلى ملخصات وأنظمة مراجعة.",
+      },
+      {
+        title: "قرارات أعمال أذكى",
+        desc: "حلّل الفرص والمخاطر والخيارات الاستراتيجية.",
+      },
+    ],
+    mostPopular: "الأكثر شعبية",
+    microTrust: [
+      "🔒 مساحة ذكاء اصطناعي آمنة",
+      "🌍 وصول عالمي",
+      "⚡ تحليل سريع بالذكاء الاصطناعي",
+    ],
+    section1: "ابدأ بتجربة ذكاء اصطناعي مقابل 1 دولار",
+    section2: "أرصدة ذكاء اصطناعي موحّدة",
+    section3: "خطط احترافية",
+    section4: "استخدام الأرصدة حسب وكيل الذكاء الاصطناعي",
     trialsTitle: "تجارب بقيمة 1 دولار حسب الوكيل",
     trialsDesc:
       "لكل وكيل تفعيل تجريبي خاص بقيمة 1 دولار لمرة واحدة. جرّب الوكيل الذي تحتاجه قبل استخدام الأرصدة الموحّدة أو الاشتراك.",
-    trialsBadge: "تجربة 1 دولار لكل وكيل · تفعيل لمرة واحدة",
+    trialsBadge: "اختر الوكيل الذي تحتاجه",
     oneTimeTrial: "تجربة لمرة واحدة",
-    trialAnalysis: "تحليل تجريبي واحد لهذا الوكيل",
+    trialAnalysis: "تحليل ذكاء اصطناعي مركّز",
+    trialReassurance: "تفعيل فوري عند توفر المدفوعات.",
     startTrial: "بدء التجربة",
     creditsTitle: "الأرصدة الموحّدة",
     mostFlexible: "الأكثر مرونة",
@@ -323,6 +429,7 @@ const labels: Record<Language, any> = {
       "اشتراك عالمي واحد يغطي جميع الوكلاء. لا توجد خطة Pro منفصلة لكل وكيل.",
     globalPro: "Global Pro",
     bestForProfessionals: "الأفضل للمحترفين",
+    proValueNote: "للمستخدمين المنتظمين لعدة وكلاء ذكاء اصطناعي.",
     proDesc: "للأفراد والمحترفين الذين يستخدمون عدة وكلاء بانتظام.",
     month: "/شهر",
     proFeatures: [
@@ -338,15 +445,16 @@ const labels: Record<Language, any> = {
     custom: "مخصص",
     tailoredPricing: "تسعير مخصص",
     premiumFeatures: [
-      "مساحة عمل الفريق",
-      "لوحة تحكم المؤسسة",
-      "وصول متعدد المستخدمين",
-      "أرصدة مخصصة",
+      "مساحات عمل آمنة",
+      "تعاون الفرق",
+      "سير عمل ذكاء اصطناعي خاص",
+      "إدارة المؤسسات",
       "دعم ذو أولوية",
     ],
     contactSales: "التواصل مع فريق المبيعات",
     creditCostsTitle: "تكلفة الأرصدة حسب الوكيل",
     creditCostsDesc: "الأرصدة موحّدة. نفس الرصيد يعمل على كل وكيل.",
+    creditComplexityNote: "تعتمد التكلفة على تعقيد تحليل الذكاء الاصطناعي.",
     creditsPerAnalysis: "رصيد / تحليل",
     infoCards: [
       {
@@ -366,15 +474,16 @@ const labels: Record<Language, any> = {
       "⚠️ يقدم وكلاء Runexa للذكاء الاصطناعي مخرجات معلوماتية وداعمة لاتخاذ القرار. تحقق دائماً من القرارات القانونية أو المالية أو الأكاديمية أو التجارية المهمة مع مختصين مؤهلين أو مصادر رسمية.",
     messages: {
       trial: (agentName: string) =>
-        `دفع تجربة 1 دولار لـ ${agentName} غير مفعّل بعد. سيتم تفعيل تكامل Stripe قريباً.`,
-      credits: "Stripe غير مفعّل بعد. ستصبح الأرصدة الموحّدة متاحة قريباً.",
-      pro: "اشتراك Pro غير مفعّل بعد. سيتم تفعيل Stripe قريباً.",
+        `دفع تجربة 1 دولار لـ ${agentName} غير مفعّل بعد. المدفوعات غير متاحة مؤقتاً أثناء إطلاق المنصة.`,
+      credits: "المدفوعات غير متاحة مؤقتاً أثناء إطلاق المنصة. ستصبح الأرصدة الموحّدة متاحة قريباً.",
+      pro: "اشتراك Pro غير مفعّل بعد. المدفوعات غير متاحة مؤقتاً أثناء إطلاق المنصة.",
     },
     agents: [
       {
         slug: "legal",
         name: "Runexa Legal Agent",
-        description: "العقود، البنود الخطرة، الالتزامات، والتوصيات الواضحة.",
+        description: "اكتشف البنود الخطرة قبل توقيع العقود.",
+        trialOutcome: "تحليل عقد واحد",
         credits: 12,
         gradient: "from-slate-950 to-blue-700",
       },
@@ -382,21 +491,24 @@ const labels: Record<Language, any> = {
         slug: "finance",
         name: "Runexa Finance Coach",
         description:
-          "الكشوفات البنكية، أنماط الإنفاق، الهدر، واستراتيجيات الادخار.",
+          "افهم الإنفاق، قلّل الهدر، وحسّن العادات المالية.",
+        trialOutcome: "تحليل كشف بنكي واحد",
         credits: 7,
         gradient: "from-emerald-700 to-teal-500",
       },
       {
         slug: "study",
         name: "Runexa Study Agent",
-        description: "ملخصات، اختبارات، بطاقات مراجعة، صوت، وخطط دراسة.",
+        description: "تعلّم أسرع مع ملخصات الذكاء الاصطناعي وأنظمة المراجعة.",
+        trialOutcome: "إنشاء جلسة دراسة ذكية",
         credits: 5,
         gradient: "from-indigo-700 to-violet-500",
       },
       {
         slug: "business",
         name: "Runexa Business Decision Agent",
-        description: "بيانات الأعمال، المخاطر، الفرص، وخطط العمل.",
+        description: "حلّل الفرص والمخاطر والقرارات الاستراتيجية.",
+        trialOutcome: "إجراء تحليل أعمال واحد",
         credits: 30,
         gradient: "from-amber-700 to-orange-500",
       },
@@ -493,7 +605,7 @@ export default function Pricing() {
         <div className="absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-500/20 blur-3xl" />
         <div className="absolute bottom-0 right-10 h-72 w-72 rounded-full bg-cyan-400/10 blur-3xl" />
 
-        <div className="relative mx-auto max-w-6xl px-6 py-20 text-center sm:py-24">
+        <div className="relative mx-auto max-w-6xl px-6 py-24 text-center sm:py-32">
           <span className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-blue-100 backdrop-blur">
             {t.badge}
           </span>
@@ -506,6 +618,18 @@ export default function Pricing() {
             {t.desc}
           </p>
 
+          <p className="mt-4 text-sm font-semibold text-blue-100/90">
+            {t.audience}
+          </p>
+
+          <p className="mx-auto mt-3 max-w-2xl text-sm text-blue-100/80">
+            {t.socialProof}
+          </p>
+
+          <div className="mx-auto mt-6 inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-blue-100 backdrop-blur">
+            {t.trustedWorkflow}
+          </div>
+
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
               href="#trials"
@@ -516,7 +640,7 @@ export default function Pricing() {
 
             <a
               href="#plans"
-              className="w-full rounded-xl border border-white/20 bg-white/10 px-6 py-3 text-center text-sm font-bold text-white backdrop-blur transition hover:bg-white/15 sm:w-auto"
+              className="w-full rounded-xl border border-white/20 bg-white/5 px-6 py-3 text-center text-sm font-bold text-blue-100/90 backdrop-blur transition hover:bg-white/10 sm:w-auto"
             >
               {t.viewPlans}
             </a>
@@ -530,6 +654,28 @@ export default function Pricing() {
             {message}
           </div>
         )}
+
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight">
+            {t.whyTitle}
+          </h2>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-4">
+            {t.whyCards.map((item: { title: string; desc: string }) => (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm text-slate-600 transition-all duration-300 hover:border-blue-200 hover:bg-white hover:shadow-md"
+              >
+                <strong className="block text-slate-950">
+                  ✔ {item.title}
+                </strong>
+                <span className="mt-2 block leading-6">
+                  {item.desc}
+                </span>
+              </div>
+            ))}
+          </div>
+        </section>
 
         <section id="trials" className="space-y-8">
           <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
@@ -552,7 +698,7 @@ export default function Pricing() {
             {agents.map((agent) => (
               <div
                 key={agent.slug}
-                className="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+                className="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
               >
                 <div className={`h-2 bg-gradient-to-r ${agent.gradient}`} />
 
@@ -567,19 +713,16 @@ export default function Pricing() {
                     {agent.name}
                   </h3>
 
-                  <p className="mt-2 min-h-[72px] text-sm leading-6 text-slate-600">
+                  <p className="mt-2 min-h-[60px] text-sm leading-6 text-slate-600">
                     {agent.description}
                   </p>
 
                   <div className="mt-5">
                     <span className="text-4xl font-bold">$1</span>
-                    <span className="ml-2 text-sm text-slate-500">
-                      {t.oneTimeTrial}
-                    </span>
                   </div>
 
-                  <p className="mt-2 text-sm text-slate-500">
-                    {t.trialAnalysis}
+                  <p className="mt-2 text-sm font-medium text-slate-600">
+                    {agent.trialOutcome}
                   </p>
 
                   <button
@@ -614,16 +757,21 @@ export default function Pricing() {
             {creditPacks.map((pack) => (
               <div
                 key={pack.name}
-                className={`relative rounded-3xl border bg-white p-8 shadow-sm ${
+                className={`relative rounded-3xl border bg-white p-8 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl ${
                   pack.highlighted
-                    ? "border-blue-600 shadow-xl shadow-blue-100"
-                    : "border-slate-200"
+                    ? "scale-[1.02] border-blue-600 bg-gradient-to-b from-white to-blue-50/40 shadow-2xl shadow-blue-100 ring-2 ring-blue-500/20"
+                    : "scale-[0.98] border-slate-200"
                 }`}
               >
                 {pack.highlighted && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-blue-600 px-3 py-1 text-xs font-bold text-white">
-                    {t.bestValue}
-                  </span>
+                  <div className="absolute -top-3 left-1/2 flex -translate-x-1/2 gap-2">
+                    <span className="rounded-full bg-blue-600 px-3 py-1 text-xs font-bold text-white">
+                      {t.bestValue}
+                    </span>
+                    <span className="rounded-full bg-slate-950 px-3 py-1 text-xs font-bold text-white">
+                      {t.mostPopular}
+                    </span>
+                  </div>
                 )}
 
                 <h3 className="text-lg font-bold">{pack.name}</h3>
@@ -680,7 +828,17 @@ export default function Pricing() {
                   <span className="rounded-full bg-blue-400/20 px-3 py-1 text-xs font-bold text-blue-100">
                     {t.bestForProfessionals}
                   </span>
+                  <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-slate-950">
+                    {t.mostPopular}
+                  </span>
+                  <span className="rounded-full bg-emerald-400/20 px-3 py-1 text-xs font-bold text-emerald-100">
+                    {t.powerUserBadge}
+                  </span>
                 </div>
+
+                <p className="mt-4 text-sm font-semibold text-blue-100/90">
+                  {t.proValueNote}
+                </p>
 
                 <h3 className="mt-5 text-2xl font-bold">Pro</h3>
                 <p className="mt-2 text-slate-300">{t.proDesc}</p>
@@ -705,7 +863,7 @@ export default function Pricing() {
               </div>
             </div>
 
-            <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+            <div className="rounded-3xl border border-slate-300 bg-gradient-to-b from-white to-slate-50 p-8 shadow-sm">
               <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700">
                 {t.enterprise}
               </span>
@@ -742,6 +900,9 @@ export default function Pricing() {
                 {t.creditCostsTitle}
               </h2>
               <p className="mt-3 text-slate-600">{t.creditCostsDesc}</p>
+              <p className="mt-2 text-sm text-slate-500">
+                {t.creditComplexityNote}
+              </p>
             </div>
 
             <div className="divide-y divide-slate-100">
@@ -777,6 +938,21 @@ export default function Pricing() {
             </div>
           ))}
         </section>
+
+        <section className="mt-16 grid gap-4 md:grid-cols-3">
+          {t.microTrust.map((item: string) => (
+            <div
+              key={item}
+              className="rounded-2xl border border-slate-200 bg-white p-5 text-center text-sm font-medium text-slate-700 shadow-sm"
+            >
+              {item}
+            </div>
+          ))}
+        </section>
+
+        <p className="mt-10 text-center text-sm font-medium text-slate-500">
+          {t.workflowLine}
+        </p>
 
         <div className="mt-16 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-center text-sm text-amber-800">
           {t.disclaimer}

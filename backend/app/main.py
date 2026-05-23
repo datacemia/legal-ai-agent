@@ -37,6 +37,7 @@ from app.models.business_analysis import BusinessAnalysis
 from app.models.contact import ContactRequest
 from app.models.document import Document
 from app.models.finance_analysis import FinanceAnalysis
+from app.models.finance_chat_message import FinanceChatMessage
 from app.models.organization import Organization
 from app.models.organization_member import OrganizationMember
 from app.models.organization_usage_log import OrganizationUsageLog

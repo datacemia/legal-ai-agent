@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import jsPDF from "jspdf";
+import ReactMarkdown from "react-markdown";
 import { analyzeFinanceStatement } from "../../lib/api";
 import { getSavedLocale, setSavedLocale } from "../../lib/i18n";
 import {
@@ -156,6 +157,10 @@ export default function FinancePage() {
   const [plan, setPlan] = useState("");
   const [role, setRole] = useState("");
   const [creditsBalance, setCreditsBalance] = useState(0);
+  const [chatMessages, setChatMessages] = useState<any[]>([]);
+  const [chatInput, setChatInput] = useState("");
+  const [chatLoading, setChatLoading] = useState(false);
+  const [suggestedQuestions, setSuggestedQuestions] = useState<string[]>([]);
 
   useEffect(() => {
     setLanguage(getSavedLocale());
@@ -227,6 +232,14 @@ export default function FinancePage() {
       value: Number(item.amount),
     })) || [];
 
+  const quickQuestions = [
+    "How can I save more money?",
+    "What are my biggest expenses?",
+    "Am I financially healthy?",
+    "Explain my financial score",
+    "Create a 30-day savings plan",
+  ];
+
   const refreshUserBilling = async () => {
     const token = safeGetLocalStorage("token");
 
@@ -270,16 +283,54 @@ export default function FinancePage() {
     window.dispatchEvent(new Event("storage"));
   };
 
+  const loadFinanceChatHistory = async (analysisId: number) => {
+    try {
+      const token = safeGetLocalStorage("token");
+      const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+      const res = await fetch(
+        `${API_URL}/finance/chat/history/${analysisId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!res.ok) return;
+
+      const data = await res.json();
+
+      setChatMessages(
+        Array.isArray(data)
+          ? data.map((item: any) => ({
+              role: item.role,
+              content: item.content,
+            }))
+          : []
+      );
+    } catch (error) {
+      console.error("Chat history load failed:", error);
+    }
+  };
+
   const handleAnalyze = async () => {
     if (!file) return;
 
     setLoading(true);
     setResult(null);
     setPaymentMessage("");
+    setChatMessages([]);
+    setChatInput("");
+    setSuggestedQuestions([]);
 
     try {
       const data = await analyzeFinanceStatement(file, language);
       setResult(data);
+
+      if (data?.id) {
+        await loadFinanceChatHistory(data.id);
+      }
 
       await refreshUserBilling();
     } catch (error) {
@@ -299,6 +350,71 @@ export default function FinancePage() {
       }
     } finally {
       setLoading(false);
+    }
+  };
+
+  const sendFinanceQuestion = async (question?: string) => {
+    const finalQuestion = question || chatInput;
+    const token = safeGetLocalStorage("token");
+    const analysisId = result?.id;
+
+    console.log("CHAT DEBUG:", {
+      tokenExists: !!token,
+      analysisId,
+      finalQuestion,
+    });
+
+    if (!token || !analysisId || !finalQuestion?.trim()) return;
+
+    setChatLoading(true);
+
+    try {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+      const res = await fetch(`${API_URL}/finance/chat`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          analysis_id: analysisId,
+          question: finalQuestion,
+          output_language: language,
+        }),
+      });
+
+      const data = await res.json();
+
+      console.log("CHAT RESPONSE:", res.status, data);
+
+      if (!res.ok) {
+        throw new Error(data.detail || "Finance chat failed");
+      }
+
+      setChatMessages((prev) => [
+        ...prev,
+        {
+          role: "user",
+          content: finalQuestion,
+        },
+        {
+          role: "assistant",
+          content: data.answer,
+        },
+      ]);
+
+      setSuggestedQuestions(
+        Array.isArray(data.suggested_questions)
+          ? data.suggested_questions
+          : []
+      );
+
+      setChatInput("");
+    } catch (error) {
+      console.error("Finance chat error:", error);
+    } finally {
+      setChatLoading(false);
     }
   };
 
@@ -467,6 +583,9 @@ export default function FinancePage() {
                 setFile(e.target.files?.[0] || null);
                 setResult(null);
                 setPaymentMessage("");
+                setChatMessages([]);
+                setChatInput("");
+                setSuggestedQuestions([]);
               }}
               className="hidden"
             />
@@ -1229,6 +1348,113 @@ export default function FinancePage() {
                       )
                     )}
                   </ul>
+                </div>
+
+                <div className="rounded-2xl border bg-white p-6 shadow-sm">
+                  <div className="mb-5">
+                    <p className="text-sm text-slate-500">
+                      AI Financial Coach
+                    </p>
+
+                    <h3 className="text-2xl font-bold text-slate-800">
+                      Ask your finance assistant
+                    </h3>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 mb-5">
+                    {quickQuestions.map((q) => (
+                      <button
+                        key={q}
+                        onClick={() =>
+                          sendFinanceQuestion(q)
+                        }
+                        className="rounded-full border px-3 py-2 text-sm hover:bg-slate-100"
+                      >
+                        {q}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="space-y-4 mb-5 max-h-[400px] overflow-y-auto">
+                    {chatMessages.map(
+                      (message, index) => (
+                        <div
+                          key={index}
+                          className={`rounded-2xl p-4 ${
+                            message.role === "user"
+                              ? "bg-slate-100"
+                              : "bg-blue-50 border border-blue-100"
+                          }`}
+                        >
+                          <p className="text-sm font-semibold mb-1">
+                            {message.role === "user"
+                              ? "You"
+                              : "Runexa AI"}
+                          </p>
+
+                          <div className="prose prose-sm max-w-none text-slate-700">
+                            <ReactMarkdown>
+                              {message.content}
+                            </ReactMarkdown>
+                          </div>
+                        </div>
+                      )
+                    )}
+
+                    {chatLoading && (
+                      <div className="rounded-2xl bg-blue-50 border border-blue-100 p-4">
+                        <p className="text-sm text-slate-500">
+                          Runexa AI is thinking...
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  {suggestedQuestions.length > 0 && (
+                    <div className="mb-5">
+                      <p className="text-xs uppercase tracking-wide text-slate-500 mb-2">
+                        Suggested follow-up questions
+                      </p>
+
+                      <div className="flex flex-wrap gap-2">
+                        {suggestedQuestions.map((q, index) => (
+                          <button
+                            key={index}
+                            onClick={() => sendFinanceQuestion(q)}
+                            className="rounded-full bg-blue-50 border border-blue-200 px-3 py-2 text-sm text-blue-700 hover:bg-blue-100"
+                          >
+                            {q}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="flex gap-2">
+                    <input
+                      value={chatInput}
+                      onChange={(e) =>
+                        setChatInput(e.target.value)
+                      }
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          sendFinanceQuestion();
+                        }
+                      }}
+                      placeholder="Ask about your finances..."
+                      className="flex-1 rounded-xl border px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+
+                    <button
+                      onClick={() =>
+                        sendFinanceQuestion()
+                      }
+                      disabled={chatLoading}
+                      className="rounded-xl bg-blue-600 px-5 py-3 text-white hover:bg-blue-700 disabled:bg-blue-300"
+                    >
+                      Send
+                    </button>
+                  </div>
                 </div>
 
                 {result.disclaimer && (
