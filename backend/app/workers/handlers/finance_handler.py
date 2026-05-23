@@ -1,4 +1,5 @@
 import json
+import fitz
 
 from app.models.job import Job
 from app.models.finance_analysis import FinanceAnalysis
@@ -118,6 +119,8 @@ def handle_finance_ai(job: Job, db):
     input_data = get_job_input(job)
 
     file_path = input_data.get("file_path")
+    file_bytes_hex = input_data.get("file_bytes")
+
     file_name = input_data.get("file_name")
     user_id = input_data.get("user_id")
     output_language = input_data.get("output_language", "en")
@@ -127,8 +130,10 @@ def handle_finance_ai(job: Job, db):
     if output_language not in ["en", "fr", "ar"]:
         output_language = "en"
 
-    if not file_path:
-        raise ValueError("file_path is required for finance analysis job")
+    if not file_path and not file_bytes_hex:
+        raise ValueError(
+            "file_path or file_bytes is required for finance analysis job"
+        )
 
     if not file_name:
         file_name = "bank_statement.pdf"
@@ -153,7 +158,15 @@ def handle_finance_ai(job: Job, db):
         finance_progress_message("extracting", output_language),
     )
 
-    text = extract_statement_text_from_path(file_path)
+    if file_bytes_hex:
+        content = bytes.fromhex(file_bytes_hex)
+        text = ""
+
+        with fitz.open(stream=content, filetype="pdf") as doc:
+            for page in doc:
+                text += page.get_text()
+    else:
+        text = extract_statement_text_from_path(str(file_path))
 
     if not text or not text.strip():
         raise ValueError("Could not extract text from PDF.")

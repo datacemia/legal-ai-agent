@@ -107,7 +107,7 @@ async def analyze_statement(
         progress=0,
         status_message="Finance analysis queued...",
         input={
-            "file_path": file_path,
+            "file_bytes": content.hex(),
             "file_name": file.filename,
             "user_id": current_user.id,
             "output_language": output_language,
