@@ -1,4 +1,6 @@
 import json
+import os
+import uuid
 
 from fastapi import APIRouter, Depends, UploadFile, File, HTTPException, Form
 from sqlalchemy.orm import Session
@@ -9,6 +11,7 @@ from app.utils.billing import check_and_consume_agent_access
 from app.models.user import User
 from app.models.finance_analysis import FinanceAnalysis
 from app.models.finance_chat_message import FinanceChatMessage
+from app.models.job import Job
 from app.schemas.finance_schema import FinanceHistoryItem
 
 from app.services.finance_agent.statement_parser import extract_statement_text
@@ -86,90 +89,43 @@ async def analyze_statement(
         agent_slug="finance",
     )
 
-    text = await extract_statement_text(file)
+    upload_dir = "storage/finance"
+    os.makedirs(upload_dir, exist_ok=True)
 
-    if not text.strip():
-        raise HTTPException(
-            status_code=400,
-            detail="Could not extract text from PDF.",
-        )
+    unique_name = f"{uuid.uuid4()}.pdf"
+    file_path = os.path.join(upload_dir, unique_name)
 
-    # 🔥 1. Main AI analysis
-    result_ai = analyze_bank_statement(text, output_language)
+    content = await file.read()
 
-    fallback_income = result_ai.get("total_income_estimate")
+    with open(file_path, "wb") as buffer:
+        buffer.write(content)
 
-    # 🔥 2. Finance OS V2 features
-    transactions = extract_transactions(text)
-    subscriptions = detect_recurring_subscriptions(transactions)
-
-    savings_opportunities = detect_savings_opportunities(
-        transactions=transactions,
-        subscriptions=subscriptions,
-    )
-
-    budget = build_recommended_budget(
-        transactions=transactions,
-        fallback_income=fallback_income,
-    )
-
-    forecast = predict_cashflow(
-        transactions=transactions,
-        fallback_income=fallback_income,
-    )
-
-    scores = calculate_financial_scores(
-        transactions=transactions,
-        subscriptions=subscriptions,
-        fallback_income=fallback_income,
-    )
-
-    alerts = generate_financial_alerts(
-        transactions=transactions,
-        subscriptions=subscriptions,
-        forecast=forecast,
-        scores=scores,
-    )
-
-    insights = generate_financial_insights(
-        transactions=transactions,
-        subscriptions=subscriptions,
-        scores=scores,
-        forecast=forecast,
-        opportunities=savings_opportunities,
-    )
-
-    charts = build_financial_charts(transactions)
-
-    # 🔥 3. Final combined result
-    result = {
-        **result_ai,
-        "transactions": transactions,
-        "charts": charts,
-        "subscriptions_detected": subscriptions,
-        "savings_opportunities": savings_opportunities,
-        "recommended_budget": budget,
-        "cashflow_forecast": forecast,
-        "financial_habit_scores": scores,
-        "financial_alerts": alerts,
-        "financial_insights": insights,
-    }
-
-    analysis = FinanceAnalysis(
+    job = Job(
         user_id=current_user.id,
-        file_name=file.filename,
-        result=json.dumps(result, ensure_ascii=False),
-        access_type=billing["access_type"],
-        credits_used=billing["credits_used"],
+        job_type="finance_ai",
+        status="pending",
+        progress=0,
+        status_message="Finance analysis queued...",
+        input={
+            "file_path": file_path,
+            "file_name": file.filename,
+            "user_id": current_user.id,
+            "output_language": output_language,
+            "access_type": billing["access_type"],
+            "credits_used": billing["credits_used"],
+        },
     )
 
-    db.add(analysis)
+    db.add(job)
     db.commit()
-    db.refresh(analysis)
+    db.refresh(job)
 
-    result["id"] = analysis.id
-
-    return result
+    return {
+        "job_id": job.id,
+        "status": job.status,
+        "progress": job.progress,
+        "status_message": job.status_message,
+    }
 
 
 # 💬 FINANCE CHAT COACH

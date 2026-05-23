@@ -18,6 +18,10 @@ from app.workers.handlers.business_handler import (
     handle_business_ai,
 )
 
+from app.workers.handlers.finance_handler import (
+    handle_finance_ai,
+)
+
 
 def utc_now():
     return datetime.now(UTC)
@@ -29,6 +33,7 @@ def process_job(job: Job, db):
         "study_ai": handle_study_ai,
         "contract_ai": handle_contract_ai,
         "business_ai": handle_business_ai,
+        "finance_ai": handle_finance_ai,
     }
 
     handler = handlers.get(job.job_type)

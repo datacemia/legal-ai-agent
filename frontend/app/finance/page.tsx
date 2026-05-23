@@ -74,6 +74,15 @@ const labels: any = {
       "Results are informational only and do not replace professional financial advice.",
     analyze: "Analyze statement",
     analyzing: "Analyzing statement...",
+    queued: "Finance analysis queued...",
+    elapsed: "Elapsed",
+    seconds: "s",
+    loadingStages: [
+      "Extracting statement text",
+      "Detecting transactions",
+      "Building financial forecast",
+      "Generating AI insights",
+    ],
     buyCredits: "Buy credits 💳",
     paymentMessage:
       "Payments are temporarily unavailable during platform rollout. $1 trial activation, credits, and Pro plan will be available soon.",
@@ -137,6 +146,15 @@ const labels: any = {
       "Les résultats sont fournis à titre informatif uniquement et ne remplacent pas un conseil financier professionnel.",
     analyze: "Analyser le relevé",
     analyzing: "Analyse du relevé en cours...",
+    queued: "Analyse financière en file d’attente...",
+    elapsed: "Temps écoulé",
+    seconds: "s",
+    loadingStages: [
+      "Extraction du relevé",
+      "Détection des transactions",
+      "Construction des prévisions",
+      "Génération des insights IA",
+    ],
     buyCredits: "Acheter des crédits 💳",
     paymentMessage:
       "Les paiements sont temporairement indisponibles pendant le déploiement de la plateforme. L’activation de l’essai à 1$, les crédits et le plan Pro seront bientôt disponibles.",
@@ -200,6 +218,15 @@ const labels: any = {
       "النتائج معلوماتية فقط ولا تُعد بديلاً عن الاستشارة المالية المهنية.",
     analyze: "تحليل الكشف",
     analyzing: "جاري تحليل الكشف...",
+    queued: "تمت إضافة التحليل المالي إلى قائمة الانتظار...",
+    elapsed: "الوقت المنقضي",
+    seconds: "ث",
+    loadingStages: [
+      "استخراج نص الكشف",
+      "كشف المعاملات",
+      "إنشاء التوقعات المالية",
+      "توليد الرؤى الذكية",
+    ],
     buyCredits: "شراء رصيد 💳",
     paymentMessage:
       "المدفوعات غير متاحة مؤقتاً أثناء إطلاق المنصة. تفعيل تجربة 1 دولار، الأرصدة وخطة Pro ستكون متاحة قريباً.",
@@ -239,6 +266,12 @@ export default function FinancePage() {
   const [chatInput, setChatInput] = useState("");
   const [chatLoading, setChatLoading] = useState(false);
   const [suggestedQuestions, setSuggestedQuestions] = useState<string[]>([]);
+  const [jobId, setJobId] = useState<number | null>(null);
+  const [jobStatus, setJobStatus] = useState("");
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [loadingStep, setLoadingStep] = useState("");
+  const [startedAt, setStartedAt] = useState<number | null>(null);
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
 
   useEffect(() => {
     setLanguage(getSavedLocale());
@@ -261,6 +294,18 @@ export default function FinancePage() {
       window.removeEventListener("storage", syncBillingState);
     };
   }, []);
+
+  useEffect(() => {
+    if (!loading || !startedAt) return;
+
+    const interval = window.setInterval(() => {
+      setElapsedSeconds(
+        Math.max(0, Math.floor((Date.now() - startedAt) / 1000))
+      );
+    }, 1000);
+
+    return () => window.clearInterval(interval);
+  }, [loading, startedAt]);
 
   const t = labels[language] || labels.en;
 
@@ -408,9 +453,88 @@ export default function FinancePage() {
     setChatMessages([]);
     setChatInput("");
     setSuggestedQuestions([]);
+    setJobId(null);
+    setJobStatus("");
+    setLoadingProgress(0);
+    setLoadingStep(t.queued);
+    setStartedAt(Date.now());
+    setElapsedSeconds(0);
 
     try {
-      const data = await analyzeFinanceStatement(file, language);
+      let data = await analyzeFinanceStatement(file, language);
+
+      if (data?.job_id) {
+        const currentJobId = data.job_id;
+
+        setJobId(currentJobId);
+        setJobStatus(data.status || "pending");
+        setLoadingProgress(
+          typeof data.progress === "number" ? data.progress : 0
+        );
+        setLoadingStep(data.status_message || t.queued);
+
+        const token = safeGetLocalStorage("token");
+        const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+        let attempts = 0;
+        let completed = false;
+
+        while (attempts < 180 && !completed) {
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+
+          const statusResponse = await fetch(
+            `${API_URL}/jobs/${currentJobId}`,
+            {
+              headers: {
+                ...(token
+                  ? {
+                      Authorization: `Bearer ${token}`,
+                    }
+                  : {}),
+              },
+            }
+          );
+
+          if (!statusResponse.ok) {
+            throw new Error("Could not check finance analysis status.");
+          }
+
+          const statusData = await statusResponse.json();
+
+          setJobId(statusData.id || currentJobId);
+          setJobStatus(statusData.status || "");
+
+          if (typeof statusData.progress === "number") {
+            setLoadingProgress(statusData.progress);
+          }
+
+          if (statusData.status_message) {
+            setLoadingStep(statusData.status_message);
+          }
+
+          if (statusData.status === "completed") {
+            data = statusData.result;
+            completed = true;
+            break;
+          }
+
+          if (statusData.status === "failed") {
+            throw new Error(
+              statusData.error || "Finance analysis failed."
+            );
+          }
+
+          attempts++;
+        }
+
+        if (!completed) {
+          throw new Error(
+            "Finance analysis is taking longer than expected. Please retry in a moment."
+          );
+        }
+      }
+
+      setLoadingProgress(100);
       setResult(data);
 
       if (data?.id) {
@@ -435,6 +559,7 @@ export default function FinancePage() {
       }
     } finally {
       setLoading(false);
+      setStartedAt(null);
     }
   };
 
@@ -787,6 +912,65 @@ export default function FinancePage() {
             <p className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">
               {paymentMessage}
             </p>
+          )}
+
+          {loading && (
+            <div className="rounded-2xl border border-blue-100 bg-blue-50 p-5">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="font-semibold text-blue-950">
+                    {loadingStep || t.analyzing}
+                  </p>
+
+                  <p className="text-sm text-blue-700">
+                    {t.elapsed}: {elapsedSeconds}{t.seconds}
+                    {jobId ? ` · Job #${jobId}` : ""}
+                    {jobStatus ? ` · ${jobStatus}` : ""}
+                  </p>
+                </div>
+
+                <span className="rounded-full bg-white px-3 py-1 text-sm font-bold text-blue-700">
+                  {loadingProgress}%
+                </span>
+              </div>
+
+              <div className="mt-4 h-2 overflow-hidden rounded-full bg-white">
+                <div
+                  className="h-full animate-pulse rounded-full bg-blue-600 transition-all duration-700"
+                  style={{
+                    width: `${Math.min(
+                      Math.max(loadingProgress || 0, 0),
+                      100
+                    )}%`,
+                  }}
+                />
+              </div>
+
+              <div className="mt-5 grid gap-3 md:grid-cols-4">
+                {t.loadingStages.map((stage: string, index: number) => {
+                  const thresholds = [20, 45, 70, 90];
+                  const done = loadingProgress >= thresholds[index];
+                  const active =
+                    !done &&
+                    loadingProgress >= (thresholds[index - 1] || 0);
+
+                  return (
+                    <div
+                      key={stage}
+                      className={`rounded-xl border p-3 text-xs font-medium ${
+                        done
+                          ? "border-green-200 bg-green-50 text-green-800"
+                          : active
+                          ? "border-blue-200 bg-white text-blue-800"
+                          : "border-slate-200 bg-white/70 text-slate-500"
+                      }`}
+                    >
+                      {done ? "✓" : active ? "⏳" : "○"} {stage}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           )}
         </div>
 

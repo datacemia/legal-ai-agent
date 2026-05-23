@@ -12,3 +12,13 @@ async def extract_statement_text(file: UploadFile) -> str:
             text += page.get_text()
 
     return text
+
+
+def extract_statement_text_from_path(file_path: str) -> str:
+    text = ""
+
+    with fitz.open(file_path) as doc:
+        for page in doc:
+            text += page.get_text()
+
+    return text
