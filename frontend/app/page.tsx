@@ -740,7 +740,7 @@ export default function HomePage() {
                     </p>
 
                     <p className="text-lg font-semibold">
-                      AI Recommendations
+                      {language === "fr" ? "Recommandations IA" : language === "ar" ? "توصيات الذكاء الاصطناعي" : "AI Recommendations"}
                     </p>
                   </div>
 
@@ -751,10 +751,29 @@ export default function HomePage() {
 
                 <div className="mt-6 space-y-4">
                   {[
-                    "Review liability clause in vendor contract",
-                    "Reduce recurring subscription expenses",
-                    "Improve study consistency this week",
-                    "Monitor operational business risks",
+                    language === "fr"
+                      ? "Vérifier la clause de responsabilité du contrat fournisseur"
+                      : language === "ar"
+                      ? "مراجعة بند المسؤولية في عقد المورد"
+                      : "Review liability clause in vendor contract",
+
+                    language === "fr"
+                      ? "Réduire les dépenses d’abonnements récurrents"
+                      : language === "ar"
+                      ? "تقليل نفقات الاشتراكات المتكررة"
+                      : "Reduce recurring subscription expenses",
+
+                    language === "fr"
+                      ? "Améliorer la régularité des études cette semaine"
+                      : language === "ar"
+                      ? "تحسين انتظام الدراسة هذا الأسبوع"
+                      : "Improve study consistency this week",
+
+                    language === "fr"
+                      ? "Surveiller les risques opérationnels business"
+                      : language === "ar"
+                      ? "مراقبة المخاطر التشغيلية للأعمال"
+                      : "Monitor operational business risks",
                   ].map((item) => (
                     <div
                       key={item}
@@ -770,7 +789,7 @@ export default function HomePage() {
                 </div>
 
                 <div className="mt-6 rounded-2xl border border-blue-400/20 bg-blue-500/10 p-4 text-sm text-blue-100">
-                  Unified AI workflows → faster analysis → smarter decisions
+                  {language === "fr" ? "Workflows IA unifiés → analyses plus rapides → décisions plus intelligentes" : language === "ar" ? "سير عمل موحد بالذكاء الاصطناعي → تحليل أسرع → قرارات أذكى" : "Unified AI workflows → faster analysis → smarter decisions"}
                 </div>
               </div>
             </div>
