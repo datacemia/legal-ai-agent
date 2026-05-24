@@ -1,5 +1,4 @@
 import json
-import os
 import uuid
 
 from fastapi import (
@@ -20,6 +19,10 @@ from app.services.api_usage_service import record_api_usage
 from app.services.quota_service import require_api_quota
 from app.services.rate_limit_service import check_api_rate_limit
 from app.services.business_agent.business_parser import extract_business_data
+from app.services.cloud_storage_service import (
+    download_api_file_from_cloud,
+    upload_api_file_to_cloud,
+)
 from app.services.contract_agent.contract_parser import extract_text
 
 
@@ -100,23 +103,16 @@ async def api_legal_analyze(
         required_credits=required_credits,
     )
 
-    upload_dir = "storage/legal"
-    os.makedirs(upload_dir, exist_ok=True)
-
-    ext = os.path.splitext(file.filename or "")[1].lower() or ".pdf"
-    stored_name = f"{uuid.uuid4()}{ext}"
-    file_path = os.path.join(upload_dir, stored_name)
-
-    content = await file.read()
-
-    with open(file_path, "wb") as f:
-        f.write(content)
+    uploaded = await upload_api_file_to_cloud(
+        file=file,
+        folder="upload",
+    )
 
     document = Document(
         user_id=user.id,
-        file_name=file.filename,
-        file_path=file_path,
-        file_type=ext.replace(".", ""),
+        file_name=uploaded["file_name"],
+        file_path=uploaded["storage_path"],
+        file_type=uploaded["ext"].replace(".", ""),
         status="pending",
     )
 
@@ -132,6 +128,9 @@ async def api_legal_analyze(
         status_message="Legal API analysis queued...",
         input={
             "document_id": document.id,
+            "storage_bucket": uploaded["storage_bucket"],
+            "storage_path": uploaded["storage_path"],
+            "content_type": uploaded["content_type"],
             "output_language": output_language,
             "access_type": "api",
             "credits_used": required_credits,
@@ -185,17 +184,10 @@ async def api_finance_analyze(
         required_credits=required_credits,
     )
 
-    upload_dir = "storage/finance"
-    os.makedirs(upload_dir, exist_ok=True)
-
-    ext = os.path.splitext(file.filename or "")[1].lower() or ".pdf"
-    stored_name = f"{uuid.uuid4()}{ext}"
-    file_path = os.path.join(upload_dir, stored_name)
-
-    content = await file.read()
-
-    with open(file_path, "wb") as f:
-        f.write(content)
+    uploaded = await upload_api_file_to_cloud(
+        file=file,
+        folder="finance",
+    )
 
     job = Job(
         user_id=user.id,
@@ -204,8 +196,10 @@ async def api_finance_analyze(
         progress=0,
         status_message="Finance API analysis queued...",
         input={
-            "file_path": file_path,
-            "file_name": file.filename,
+            "storage_bucket": uploaded["storage_bucket"],
+            "storage_path": uploaded["storage_path"],
+            "file_name": uploaded["file_name"],
+            "content_type": uploaded["content_type"],
             "user_id": user.id,
             "output_language": output_language,
             "access_type": "api",
@@ -254,17 +248,10 @@ async def api_business_analyze(
 
     required_credits = 30
 
-    upload_dir = "storage/business"
-    os.makedirs(upload_dir, exist_ok=True)
-
-    ext = os.path.splitext(file.filename or "")[1].lower() or ".csv"
-    stored_name = f"{uuid.uuid4()}{ext}"
-    file_path = os.path.join(upload_dir, stored_name)
-
-    content = await file.read()
-
-    with open(file_path, "wb") as f:
-        f.write(content)
+    uploaded = await upload_api_file_to_cloud(
+        file=file,
+        folder="business",
+    )
 
     await file.seek(0)
 
@@ -334,8 +321,10 @@ async def api_business_analyze(
         status_message="Business API analysis queued...",
         input={
             "parsed_data": parsed_data,
-            "file_name": file.filename,
-            "content_type": file.content_type,
+            "storage_bucket": uploaded["storage_bucket"],
+            "storage_path": uploaded["storage_path"],
+            "file_name": uploaded["file_name"],
+            "content_type": uploaded["content_type"],
             "output_language": output_language,
             "access_type": "api",
             "credits_used": required_credits,
@@ -384,19 +373,17 @@ async def api_study_analyze(
 
     required_credits = 5
 
-    upload_dir = "storage/study"
-    os.makedirs(upload_dir, exist_ok=True)
+    uploaded = await upload_api_file_to_cloud(
+        file=file,
+        folder="study",
+    )
 
-    ext = os.path.splitext(file.filename or "")[1].lower() or ".pdf"
-    stored_name = f"{uuid.uuid4()}{ext}"
-    file_path = os.path.join(upload_dir, stored_name)
+    file_path = download_api_file_from_cloud(
+        storage_path=uploaded["storage_path"],
+        suffix=uploaded["ext"],
+    )
 
-    content = await file.read()
-
-    with open(file_path, "wb") as f:
-        f.write(content)
-
-    file_type = ext.replace(".", "")
+    file_type = uploaded["ext"].replace(".", "")
 
     try:
         extracted_text = extract_text(
@@ -451,7 +438,9 @@ async def api_study_analyze(
         input={
             "text": extracted_text,
             "file_path": file_path,
-            "file_name": file.filename,
+            "storage_bucket": uploaded["storage_bucket"],
+            "storage_path": uploaded["storage_path"],
+            "file_name": uploaded["file_name"],
             "user_id": user.id,
             "education_level": education_level,
             "output_language": output_language,

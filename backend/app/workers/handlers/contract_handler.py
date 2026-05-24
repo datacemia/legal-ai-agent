@@ -5,6 +5,7 @@ from app.models.document import Document
 from app.models.analysis import AnalysisResult
 
 from app.services.contract_agent.contract_parser import extract_text
+from app.services.cloud_storage_service import download_api_file_from_cloud
 from app.services.text_cleaner import clean_text
 from app.services.contract_agent.clause_splitter import split_into_clauses
 from app.services.language_service import detect_language
@@ -105,6 +106,7 @@ def handle_contract_ai(job: Job, db):
     access_type = input_data.get("access_type")
     credits_used = input_data.get("credits_used", 0)
     document_text = input_data.get("document_text")
+    storage_path = input_data.get("storage_path")
 
     if output_language not in ["en", "fr", "ar"]:
         output_language = "en"
@@ -131,8 +133,16 @@ def handle_contract_ai(job: Job, db):
     if document_text:
         raw_text = document_text
     else:
+        file_path = document.file_path
+
+        if storage_path:
+            file_path = download_api_file_from_cloud(
+                storage_path=str(storage_path),
+                suffix=f".{document.file_type}",
+            )
+
         raw_text = extract_text(
-            document.file_path,
+            file_path,
             document.file_type,
         )
 

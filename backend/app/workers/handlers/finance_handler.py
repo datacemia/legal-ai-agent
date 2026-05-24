@@ -5,6 +5,7 @@ from app.models.job import Job
 from app.models.finance_analysis import FinanceAnalysis
 
 from app.services.finance_agent.statement_parser import extract_statement_text_from_path
+from app.services.cloud_storage_service import download_api_file_from_cloud
 from app.services.finance_agent.finance_ai_agent import analyze_bank_statement
 from app.services.finance_agent.transaction_extractor import extract_transactions
 from app.services.finance_agent.subscription_detector import detect_recurring_subscriptions
@@ -120,6 +121,7 @@ def handle_finance_ai(job: Job, db):
 
     file_path = input_data.get("file_path")
     file_bytes_hex = input_data.get("file_bytes")
+    storage_path = input_data.get("storage_path")
 
     file_name = input_data.get("file_name")
     user_id = input_data.get("user_id")
@@ -130,9 +132,9 @@ def handle_finance_ai(job: Job, db):
     if output_language not in ["en", "fr", "ar"]:
         output_language = "en"
 
-    if not file_path and not file_bytes_hex:
+    if not file_path and not file_bytes_hex and not storage_path:
         raise ValueError(
-            "file_path or file_bytes is required for finance analysis job"
+            "file_path, file_bytes, or storage_path is required for finance analysis job"
         )
 
     if not file_name:
@@ -166,6 +168,12 @@ def handle_finance_ai(job: Job, db):
             for page in doc:
                 text += page.get_text()
     else:
+        if storage_path:
+            file_path = download_api_file_from_cloud(
+                storage_path=str(storage_path),
+                suffix=".pdf",
+            )
+
         text = extract_statement_text_from_path(str(file_path))
 
     if not text or not text.strip():
