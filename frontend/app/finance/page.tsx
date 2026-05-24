@@ -779,32 +779,80 @@ export default function FinancePage() {
             </span>
           </div>
 
-          <div className="mt-5 grid gap-4 md:grid-cols-3">
-            <div className="rounded-2xl border bg-slate-50 p-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
-              <p className="text-sm font-semibold text-slate-800">
-                {t.sampleNarrativeTitle}
+          <div className="mt-6 grid gap-4 lg:grid-cols-4">
+            <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
+              <p className="text-sm font-semibold text-emerald-900">
+                Financial score
               </p>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
-                {t.sampleNarrative}
-              </p>
+
+              <div className="mt-3 flex items-end gap-2">
+                <span className="text-4xl font-bold text-emerald-700">78</span>
+                <span className="mb-1 text-sm text-emerald-700">/100</span>
+              </div>
+
+              <div className="mt-4 h-2 overflow-hidden rounded-full bg-white">
+                <div className="h-full w-[78%] rounded-full bg-emerald-600" />
+              </div>
             </div>
 
-            <div className="rounded-2xl border border-green-200 bg-green-50 p-4">
-              <p className="text-sm font-semibold text-green-800">
-                {t.sampleSavingsTitle}
+            <div className="rounded-2xl border border-slate-200 bg-white p-4">
+              <p className="text-sm font-semibold text-slate-900">
+                Spending breakdown
               </p>
-              <p className="mt-2 text-sm leading-6 text-green-700">
-                {t.sampleSavings}
+
+              <div className="mt-4 flex items-center justify-center">
+                <div className="h-28 w-28 rounded-full bg-[conic-gradient(#22c55e_0_38%,#3b82f6_38%_62%,#f59e0b_62%_82%,#ef4444_82%_100%)]" />
+              </div>
+
+              <div className="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-600">
+                <span>● Needs</span>
+                <span>● Bills</span>
+                <span>● Subscriptions</span>
+                <span>● Other</span>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-red-200 bg-red-50 p-4">
+              <p className="text-sm font-semibold text-red-900">
+                Subscriptions detected
               </p>
+
+              <div className="mt-4 space-y-3">
+                {[
+                  ["Hostinger", "$19.99"],
+                  ["Railway", "$7.39"],
+                  ["Streaming", "$12.99"],
+                ].map(([name, amount]) => (
+                  <div
+                    key={name}
+                    className="flex items-center justify-between rounded-xl bg-white px-3 py-2 text-sm"
+                  >
+                    <span className="font-medium text-slate-700">{name}</span>
+                    <span className="font-semibold text-red-600">{amount}</span>
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div className="rounded-2xl border border-blue-200 bg-blue-50 p-4">
-              <p className="text-sm font-semibold text-blue-800">
-                {t.sampleCoachTitle}
+              <p className="text-sm font-semibold text-blue-900">
+                Savings opportunities
               </p>
-              <p className="mt-2 text-sm leading-6 text-blue-700">
-                {t.sampleCoach}
-              </p>
+
+              <div className="mt-4 space-y-3">
+                {[
+                  "Cancel unused subscriptions",
+                  "Reduce discretionary spending",
+                  "Set monthly savings target",
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="rounded-xl bg-white px-3 py-2 text-sm text-blue-800"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
