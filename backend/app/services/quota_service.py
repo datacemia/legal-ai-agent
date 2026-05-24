@@ -5,6 +5,9 @@ from app.models.user import User
 
 
 def require_api_access(user: User):
+    if getattr(user, "role", None) == "admin":
+        return
+
     if not user.api_enabled:
         raise HTTPException(
             status_code=402,
@@ -19,6 +22,9 @@ def require_api_access(user: User):
 
 
 def check_api_credits(user: User, required_credits: int):
+    if getattr(user, "role", None) == "admin":
+        return
+
     balance = int(user.api_credits_balance or 0)
 
     if balance < required_credits:
@@ -37,6 +43,9 @@ def consume_api_credits(
     user: User,
     credits: int,
 ):
+    if getattr(user, "role", None) == "admin":
+        return int(user.api_credits_balance or 0)
+
     current_balance = int(user.api_credits_balance or 0)
 
     if current_balance < credits:
