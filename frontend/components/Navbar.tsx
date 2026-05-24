@@ -94,6 +94,13 @@ export default function Navbar() {
       ? "وكلاء ذكاء اصطناعي متخصصون للعمل الواقعي"
       : "Specialized AI agents for real-world work";
 
+  const enterpriseLabel =
+    locale === "fr"
+      ? "Entreprise"
+      : locale === "ar"
+      ? "المؤسسات"
+      : "Enterprise";
+
   const solutionsLabel =
     locale === "fr"
       ? "Solutions"
@@ -163,12 +170,12 @@ export default function Navbar() {
     isPremium;
 
   const mobileLinkClass =
-    "flex min-h-[48px] w-full items-center justify-between rounded-2xl px-4 py-3 text-base font-semibold text-slate-800 transition hover:bg-slate-50";
+    "block rounded-xl px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50 hover:text-slate-950";
 
   return (
     <header
       dir={locale === "ar" ? "rtl" : "ltr"}
-      className="sticky top-0 z-50 w-full border-b border-slate-200/70 bg-white/80 backdrop-blur-md"
+      className="sticky top-0 z-50 w-full border-b border-slate-200/70 bg-white/70 backdrop-blur-md"
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
 
@@ -188,7 +195,6 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* DESKTOP NAV */}
         <div className="hidden items-center gap-5 lg:flex">
 
           {canSeeDashboard && !canSeeEnterprise && (
@@ -200,6 +206,7 @@ export default function Navbar() {
             </Link>
           )}
 
+          {/* ✅ ENTERPRISE DASHBOARD */}
           {canSeeEnterprise && (
             <Link
               href="/entreprises/dashboard"
@@ -251,6 +258,7 @@ export default function Navbar() {
             {insightsLabel}
           </Link>
 
+
           <Link
             href="/developers"
             className="hidden xl:flex items-center rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 shadow-sm transition hover:bg-blue-100"
@@ -289,6 +297,7 @@ export default function Navbar() {
             {t.enterprise || "Enterprise"}
           </Link>
 
+          {/* PRICING */}
           <Link
             href="/pricing"
             className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
@@ -339,50 +348,29 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* MOBILE HAMBURGER */}
         <button
           type="button"
           onClick={() => setIsMobileMenuOpen((value) => !value)}
           aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={isMobileMenuOpen}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-800 shadow-sm transition hover:bg-slate-50 lg:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 lg:hidden"
         >
-          <span className="sr-only">
-            {isMobileMenuOpen ? "Close menu" : "Open menu"}
-          </span>
-
-          <span className="relative h-5 w-5">
-            <span
-              className={`absolute left-0 top-1 block h-0.5 w-5 rounded-full bg-slate-800 transition ${
-                isMobileMenuOpen ? "translate-y-1.5 rotate-45" : ""
-              }`}
-            />
-            <span
-              className={`absolute left-0 top-2.5 block h-0.5 w-5 rounded-full bg-slate-800 transition ${
-                isMobileMenuOpen ? "opacity-0" : ""
-              }`}
-            />
-            <span
-              className={`absolute left-0 top-4 block h-0.5 w-5 rounded-full bg-slate-800 transition ${
-                isMobileMenuOpen ? "-translate-y-1.5 -rotate-45" : ""
-              }`}
-            />
+          <span className="text-2xl leading-none">
+            {isMobileMenuOpen ? "×" : "☰"}
           </span>
         </button>
       </div>
 
-      {/* MOBILE NAV */}
       {isMobileMenuOpen && (
-        <div className="border-t border-slate-200 bg-white px-4 py-4 shadow-xl lg:hidden">
-          <nav className="mx-auto flex max-w-7xl flex-col gap-1">
+        <div className="border-t border-slate-200 bg-white px-4 py-4 shadow-lg lg:hidden">
+          <nav className="mx-auto flex max-w-7xl flex-col gap-1 text-sm font-medium text-slate-700">
             {canSeeDashboard && !canSeeEnterprise && (
               <Link
                 href="/dashboard"
                 onClick={closeMobileMenu}
                 className={mobileLinkClass}
               >
-                <span>{t.dashboard || "Dashboard"}</span>
-                <span className="text-slate-400">›</span>
+                {t.dashboard || "Dashboard"}
               </Link>
             )}
 
@@ -392,8 +380,7 @@ export default function Navbar() {
                 onClick={closeMobileMenu}
                 className={mobileLinkClass}
               >
-                <span>{t.dashboard || "Dashboard"}</span>
-                <span className="text-slate-400">›</span>
+                {t.dashboard || "Dashboard"}
               </Link>
             )}
 
@@ -403,8 +390,7 @@ export default function Navbar() {
                 onClick={closeMobileMenu}
                 className={mobileLinkClass}
               >
-                <span>{t.admin || "Admin"}</span>
-                <span className="text-slate-400">›</span>
+                {t.admin || "Admin"}
               </Link>
             )}
 
@@ -413,11 +399,11 @@ export default function Navbar() {
                 type="button"
                 onClick={() => setIsMobileSolutionsOpen((value) => !value)}
                 aria-expanded={isMobileSolutionsOpen}
-                className={mobileLinkClass}
+                className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50 hover:text-slate-950"
               >
                 <span>{solutionsLabel}</span>
                 <span
-                  className={`text-slate-400 transition ${
+                  className={`text-xs transition ${
                     isMobileSolutionsOpen ? "rotate-180" : ""
                   }`}
                 >
@@ -426,13 +412,13 @@ export default function Navbar() {
               </button>
 
               {isMobileSolutionsOpen && (
-                <div className="mb-2 ml-3 mt-1 grid gap-1 border-l border-slate-200 pl-3">
+                <div className="mt-1 rounded-2xl bg-slate-50 p-2">
                   {solutionLinks.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
                       onClick={closeMobileMenu}
-                      className="rounded-xl px-4 py-3 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-slate-950"
+                      className="block rounded-xl px-4 py-3 text-sm font-medium text-slate-600 transition hover:bg-white hover:text-slate-950"
                     >
                       {item.label}
                     </Link>
@@ -446,8 +432,7 @@ export default function Navbar() {
               onClick={closeMobileMenu}
               className={mobileLinkClass}
             >
-              <span>{insightsLabel}</span>
-              <span className="text-slate-400">›</span>
+              {insightsLabel}
             </Link>
 
             <Link
@@ -455,14 +440,11 @@ export default function Navbar() {
               onClick={closeMobileMenu}
               className={mobileLinkClass}
             >
-              <span>
-                {locale === "fr"
-                  ? "Plateforme développeur"
-                  : locale === "ar"
-                  ? "منصة المطورين"
-                  : "Developer Platform"}
-              </span>
-              <span className="text-slate-400">›</span>
+              {locale === "fr"
+                ? "Plateforme développeur"
+                : locale === "ar"
+                ? "منصة المطورين"
+                : "Developer Platform"}
             </Link>
 
             {apiEnabled && (
@@ -471,14 +453,11 @@ export default function Navbar() {
                 onClick={closeMobileMenu}
                 className={mobileLinkClass}
               >
-                <span>
-                  {locale === "fr"
-                    ? "Dashboard API"
-                    : locale === "ar"
-                    ? "لوحة API"
-                    : "API Dashboard"}
-                </span>
-                <span className="text-slate-400">›</span>
+                {locale === "fr"
+                  ? "Dashboard API"
+                  : locale === "ar"
+                  ? "لوحة API"
+                  : "API Dashboard"}
               </Link>
             )}
 
@@ -487,8 +466,7 @@ export default function Navbar() {
               onClick={closeMobileMenu}
               className={mobileLinkClass}
             >
-              <span>{t.labs || "Labs"}</span>
-              <span className="text-slate-400">›</span>
+              {t.labs || "Labs"}
             </Link>
 
             <Link
@@ -496,8 +474,7 @@ export default function Navbar() {
               onClick={closeMobileMenu}
               className={mobileLinkClass}
             >
-              <span>{t.enterprise || "Enterprise"}</span>
-              <span className="text-slate-400">›</span>
+              {t.enterprise || "Enterprise"}
             </Link>
 
             <Link
@@ -505,16 +482,15 @@ export default function Navbar() {
               onClick={closeMobileMenu}
               className={mobileLinkClass}
             >
-              <span>{t.pricing || "Pricing"}</span>
-              <span className="text-slate-400">›</span>
+              {t.pricing || "Pricing"}
             </Link>
 
             {!isLogged && (
-              <div className="mt-3 grid gap-3 border-t border-slate-100 pt-4">
+              <div className="mt-2 grid gap-2 border-t border-slate-100 pt-3">
                 <Link
                   href="/login"
                   onClick={closeMobileMenu}
-                  className="flex min-h-[48px] items-center justify-center rounded-2xl border border-slate-200 px-4 py-3 text-base font-semibold text-slate-800 transition hover:bg-slate-50"
+                  className={mobileLinkClass}
                 >
                   {t.login || "Login"}
                 </Link>
@@ -522,7 +498,7 @@ export default function Navbar() {
                 <Link
                   href="/register"
                   onClick={closeMobileMenu}
-                  className="flex min-h-[48px] items-center justify-center rounded-2xl bg-slate-900 px-4 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-slate-800"
+                  className="block rounded-xl bg-slate-900 px-4 py-3 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800"
                 >
                   {t.register || "Register"}
                 </Link>
@@ -530,7 +506,7 @@ export default function Navbar() {
             )}
 
             {isLogged && credits !== null && !canSeeEnterprise && (
-              <div className="mt-3 flex min-h-[48px] items-center justify-between rounded-2xl border bg-white px-4 py-3 text-sm text-slate-700">
+              <div className="mt-2 flex items-center justify-between rounded-2xl border bg-white px-4 py-3 text-sm text-slate-700">
                 <span className="rounded-full bg-slate-100 px-2 py-1 text-[10px] font-semibold uppercase text-slate-700">
                   {plan || "trial"}
                 </span>
@@ -544,7 +520,7 @@ export default function Navbar() {
             {isLogged && (
               <button
                 onClick={handleLogout}
-                className="mt-3 flex min-h-[48px] items-center justify-center rounded-2xl bg-slate-100 px-4 py-3 text-base font-semibold text-slate-700 transition hover:bg-slate-200"
+                className="mt-2 rounded-xl bg-slate-100 px-4 py-3 text-left text-sm font-medium text-slate-700 transition hover:bg-slate-200"
               >
                 {t.logout || "Logout"}
               </button>
