@@ -13,6 +13,7 @@ export default function Navbar() {
   const [isEnterpriseMember, setIsEnterpriseMember] = useState(false);
   const [apiEnabled, setApiEnabled] = useState(false);
   const [locale, setLocale] = useState("en");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const checkAuth = () => {
     const token = localStorage.getItem("token");
@@ -73,6 +74,7 @@ export default function Navbar() {
     setCredits(null);
     setIsEnterpriseMember(false);
     setApiEnabled(false);
+    setIsMobileMenuOpen(false);
 
     window.location.href = "/login";
   };
@@ -336,7 +338,173 @@ export default function Navbar() {
             </button>
           )}
         </div>
+
+        <button
+          type="button"
+          onClick={() => setIsMobileMenuOpen((value) => !value)}
+          aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={isMobileMenuOpen}
+          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 lg:hidden"
+        >
+          <span className="text-2xl leading-none">
+            {isMobileMenuOpen ? "×" : "☰"}
+          </span>
+        </button>
       </div>
+
+      {isMobileMenuOpen && (
+        <div className="border-t border-slate-200 bg-white px-4 py-4 shadow-lg lg:hidden">
+          <nav className="mx-auto flex max-w-7xl flex-col gap-2 text-sm font-medium text-slate-700">
+            {canSeeDashboard && !canSeeEnterprise && (
+              <Link
+                href="/dashboard"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="rounded-xl px-3 py-2 transition hover:bg-slate-50 hover:text-slate-950"
+              >
+                {t.dashboard || "Dashboard"}
+              </Link>
+            )}
+
+            {canSeeEnterprise && (
+              <Link
+                href="/entreprises/dashboard"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="rounded-xl px-3 py-2 font-semibold text-blue-600 transition hover:bg-blue-50 hover:text-blue-700"
+              >
+                {t.dashboard || "Dashboard"}
+              </Link>
+            )}
+
+            {isAdmin && (
+              <Link
+                href="/admin"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="rounded-xl px-3 py-2 transition hover:bg-slate-50 hover:text-slate-950"
+              >
+                {t.admin || "Admin"}
+              </Link>
+            )}
+
+            <div className="rounded-2xl bg-slate-50 p-3">
+              <p className="mb-2 text-xs font-bold uppercase tracking-wide text-slate-500">
+                {solutionsLabel}
+              </p>
+
+              <div className="grid gap-1">
+                {solutionLinks.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="rounded-xl px-3 py-2 transition hover:bg-white hover:text-slate-950"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <Link
+              href="/blog"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="rounded-xl px-3 py-2 transition hover:bg-slate-50 hover:text-slate-950"
+            >
+              {insightsLabel}
+            </Link>
+
+            <Link
+              href="/developers"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="rounded-xl px-3 py-2 transition hover:bg-slate-50 hover:text-slate-950"
+            >
+              {locale === "fr"
+                ? "Plateforme développeur"
+                : locale === "ar"
+                ? "منصة المطورين"
+                : "Developer Platform"}
+            </Link>
+
+            {apiEnabled && (
+              <Link
+                href="/api-dashboard"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="rounded-xl px-3 py-2 transition hover:bg-slate-50 hover:text-slate-950"
+              >
+                {locale === "fr"
+                  ? "Dashboard API"
+                  : locale === "ar"
+                  ? "لوحة API"
+                  : "API Dashboard"}
+              </Link>
+            )}
+
+            <Link
+              href="/labs/agent-0"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="rounded-xl px-3 py-2 transition hover:bg-slate-50 hover:text-slate-950"
+            >
+              {t.labs || "Labs"}
+            </Link>
+
+            <Link
+              href="/enterprise"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="rounded-xl px-3 py-2 transition hover:bg-slate-50 hover:text-slate-950"
+            >
+              {t.enterprise || "Enterprise"}
+            </Link>
+
+            <Link
+              href="/pricing"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="rounded-xl px-3 py-2 transition hover:bg-slate-50 hover:text-slate-950"
+            >
+              {t.pricing || "Pricing"}
+            </Link>
+
+            {!isLogged && (
+              <div className="mt-2 grid gap-2 border-t border-slate-100 pt-3">
+                <Link
+                  href="/login"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="rounded-xl px-3 py-2 transition hover:bg-slate-50 hover:text-slate-950"
+                >
+                  {t.login || "Login"}
+                </Link>
+
+                <Link
+                  href="/register"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="rounded-xl bg-slate-900 px-4 py-2 text-center font-semibold text-white shadow-sm transition hover:bg-slate-800"
+                >
+                  {t.register || "Register"}
+                </Link>
+              </div>
+            )}
+
+            {isLogged && credits !== null && !canSeeEnterprise && (
+              <div className="mt-2 flex items-center justify-between rounded-2xl border bg-white px-4 py-3 text-sm text-slate-700">
+                <span className="rounded-full bg-slate-100 px-2 py-1 text-[10px] font-semibold uppercase text-slate-700">
+                  {plan || "trial"}
+                </span>
+
+                <span>
+                  {credits} {t.credits || "credits"}
+                </span>
+              </div>
+            )}
+
+            {isLogged && (
+              <button
+                onClick={handleLogout}
+                className="mt-2 rounded-xl bg-slate-100 px-4 py-2 text-left text-sm font-medium text-slate-700 transition hover:bg-slate-200"
+              >
+                {t.logout || "Logout"}
+              </button>
+            )}
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
