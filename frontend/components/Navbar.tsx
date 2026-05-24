@@ -214,13 +214,6 @@ export default function Navbar() {
             </Link>
           )}
 
-          <Link
-            href="/#agents"
-            className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
-          >
-            {t.agents || "Agents"}
-          </Link>
-
           <div className="group relative">
             <button
               type="button"
