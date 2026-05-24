@@ -974,16 +974,25 @@ export default function Pricing() {
                   ))}
                 </ul>
 
-                <button
-                  onClick={handleBuyCredits}
-                  className={`mt-8 w-full rounded-xl px-5 py-3 text-sm font-bold transition ${
-                    plan.highlighted
-                      ? "bg-blue-600 text-white hover:bg-blue-700"
-                      : "bg-slate-950 text-white hover:bg-slate-800"
-                  }`}
-                >
-                  {plan.name === "Enterprise API" ? "Contact Sales" : "Start API Plan"}
-                </button>
+                {plan.name === "Enterprise API" ? (
+                  <a
+                    href="/contact"
+                    className="mt-8 block w-full rounded-xl border border-slate-300 px-5 py-3 text-center text-sm font-bold text-slate-950 transition hover:bg-slate-50"
+                  >
+                    Contact Sales
+                  </a>
+                ) : (
+                  <button
+                    onClick={handleBuyCredits}
+                    className={`mt-8 w-full rounded-xl px-5 py-3 text-sm font-bold transition ${
+                      plan.highlighted
+                        ? "bg-blue-600 text-white hover:bg-blue-700"
+                        : "bg-slate-950 text-white hover:bg-slate-800"
+                    }`}
+                  >
+                    Start API Plan
+                  </button>
+                )}
               </div>
             ))}
           </div>
