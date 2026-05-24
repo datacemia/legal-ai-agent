@@ -2363,6 +2363,125 @@ export default function BusinessPage() {
           )}
         </SectionShell>
 
+
+        {/* AI BUSINESS PREVIEW */}
+
+        <div className="grid gap-4 lg:grid-cols-4">
+          {/* KPI DASHBOARD */}
+          <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="flex items-center justify-between">
+              <p className="text-sm font-semibold text-slate-600">
+                KPI Dashboard
+              </p>
+
+              <span className="rounded-full bg-emerald-100 px-2 py-1 text-xs font-bold text-emerald-700">
+                LIVE
+              </span>
+            </div>
+
+            <div className="mt-5 grid grid-cols-2 gap-3">
+              {[
+                ["Revenue", "+18%"],
+                ["Profit", "+11%"],
+                ["Growth", "+24%"],
+                ["Churn", "-4%"],
+              ].map(([label, value]) => (
+                <div
+                  key={label}
+                  className="rounded-2xl bg-slate-50 p-3"
+                >
+                  <p className="text-xs text-slate-500">
+                    {label}
+                  </p>
+
+                  <p className="mt-1 text-lg font-black text-slate-900">
+                    {value}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* BUSINESS INSIGHTS */}
+          <div className="rounded-3xl border border-blue-200 bg-blue-50 p-5 shadow-sm">
+            <p className="text-sm font-semibold text-blue-900">
+              Business insights
+            </p>
+
+            <div className="mt-4 space-y-3">
+              {[
+                "Revenue trend accelerating",
+                "Marketing efficiency improving",
+                "Customer retention stable",
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="rounded-2xl bg-white px-3 py-2 text-sm text-blue-800"
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* AI RECOMMENDATIONS */}
+          <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-5 shadow-sm">
+            <p className="text-sm font-semibold text-emerald-900">
+              AI recommendations
+            </p>
+
+            <div className="mt-4 space-y-3">
+              {[
+                "Increase high-performing ad budget",
+                "Reduce software overhead",
+                "Focus on retention campaigns",
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="rounded-2xl bg-white px-3 py-2 text-sm text-emerald-800"
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* RISK MATRIX */}
+          <div className="rounded-3xl border border-red-200 bg-red-50 p-5 shadow-sm">
+            <div className="flex items-center justify-between">
+              <p className="text-sm font-semibold text-red-900">
+                Risk matrix
+              </p>
+
+              <span className="rounded-full bg-white px-2 py-1 text-xs font-bold text-red-700">
+                Medium Risk
+              </span>
+            </div>
+
+            <div className="mt-5 grid grid-cols-2 gap-2">
+              {[
+                ["Cashflow", "Low"],
+                ["Churn", "Medium"],
+                ["Expenses", "Low"],
+                ["Growth", "Healthy"],
+              ].map(([label, value]) => (
+                <div
+                  key={label}
+                  className="rounded-2xl bg-white p-3"
+                >
+                  <p className="text-xs text-slate-500">
+                    {label}
+                  </p>
+
+                  <p className="mt-1 text-sm font-bold text-slate-900">
+                    {value}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {/* Results */}
         {result && (
           <SectionShell className="space-y-8">
