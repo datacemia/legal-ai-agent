@@ -621,6 +621,161 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+
+      </section>
+
+      <section className="px-6 pb-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="relative overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_20px_80px_rgba(15,23,42,0.08)]">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-emerald-50" />
+
+            <div className="relative grid gap-8 p-6 md:grid-cols-2 md:p-10">
+              <div className="space-y-5">
+                <div>
+                  <p className="text-sm font-semibold text-blue-600">
+                    {language === "fr"
+                      ? "Aperçu de l’espace IA"
+                      : language === "ar"
+                      ? "معاينة مساحة الذكاء الاصطناعي"
+                      : "AI Workspace Preview"}
+                  </p>
+
+                  <h2 className="mt-3 text-3xl font-bold text-slate-900">
+                    {language === "fr"
+                      ? "Analyse intelligente pour le juridique, la finance et le business"
+                      : language === "ar"
+                      ? "تحليل ذكي للقانون والمالية والأعمال"
+                      : "Intelligent analysis for legal, finance, and business"}
+                  </h2>
+
+                  <p className="mt-4 text-slate-600 leading-7">
+                    {language === "fr"
+                      ? "Runexa combine plusieurs agents IA spécialisés dans un espace de travail unifié."
+                      : language === "ar"
+                      ? "تجمع Runexa عدة وكلاء ذكاء اصطناعي متخصصين داخل مساحة عمل موحدة."
+                      : "Runexa combines multiple specialized AI agents inside a unified workspace."}
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                    <p className="text-sm text-slate-500">
+                      {language === "fr"
+                        ? "Score de risque"
+                        : language === "ar"
+                        ? "مستوى المخاطر"
+                        : "Risk score"}
+                    </p>
+
+                    <p className="mt-2 text-3xl font-bold text-blue-600">
+                      82/100
+                    </p>
+
+                    <p className="mt-2 text-sm text-slate-500">
+                      Legal AI
+                    </p>
+                  </div>
+
+                  <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                    <p className="text-sm text-slate-500">
+                      {language === "fr"
+                        ? "Santé financière"
+                        : language === "ar"
+                        ? "الصحة المالية"
+                        : "Financial health"}
+                    </p>
+
+                    <p className="mt-2 text-3xl font-bold text-emerald-600">
+                      74%
+                    </p>
+
+                    <p className="mt-2 text-sm text-slate-500">
+                      Finance AI
+                    </p>
+                  </div>
+
+                  <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                    <p className="text-sm text-slate-500">
+                      {language === "fr"
+                        ? "Progression étude"
+                        : language === "ar"
+                        ? "تقدم الدراسة"
+                        : "Study progress"}
+                    </p>
+
+                    <p className="mt-2 text-3xl font-bold text-violet-600">
+                      91%
+                    </p>
+
+                    <p className="mt-2 text-sm text-slate-500">
+                      Study AI
+                    </p>
+                  </div>
+
+                  <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                    <p className="text-sm text-slate-500">
+                      {language === "fr"
+                        ? "Business insights"
+                        : language === "ar"
+                        ? "رؤى الأعمال"
+                        : "Business insights"}
+                    </p>
+
+                    <p className="mt-2 text-3xl font-bold text-orange-600">
+                      12
+                    </p>
+
+                    <p className="mt-2 text-sm text-slate-500">
+                      Business AI
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-3xl bg-slate-950 p-6 text-white shadow-2xl">
+                <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                  <div>
+                    <p className="text-sm text-slate-400">
+                      Runexa AI Workspace
+                    </p>
+
+                    <p className="text-lg font-semibold">
+                      AI Recommendations
+                    </p>
+                  </div>
+
+                  <span className="rounded-full bg-green-500/10 px-3 py-1 text-xs font-medium text-green-300">
+                    Live
+                  </span>
+                </div>
+
+                <div className="mt-6 space-y-4">
+                  {[
+                    "Review liability clause in vendor contract",
+                    "Reduce recurring subscription expenses",
+                    "Improve study consistency this week",
+                    "Monitor operational business risks",
+                  ].map((item) => (
+                    <div
+                      key={item}
+                      className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 p-4"
+                    >
+                      <div className="mt-1 h-2 w-2 rounded-full bg-blue-400" />
+
+                      <p className="text-sm text-slate-200">
+                        {item}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-6 rounded-2xl border border-blue-400/20 bg-blue-500/10 p-4 text-sm text-blue-100">
+                  Unified AI workflows → faster analysis → smarter decisions
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section id="agents" className="px-6 py-12">
