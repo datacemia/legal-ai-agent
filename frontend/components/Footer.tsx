@@ -129,7 +129,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold">AI Agents</h4>
+            <h4 className="font-semibold">Resources</h4>
 
             <div className="mt-4 space-y-3 text-sm text-slate-400">
               <Link href="/legal-ai" className="block hover:text-white transition">
@@ -147,43 +147,14 @@ export default function Footer() {
               <Link href="/business-ai" className="block hover:text-white transition">
                 Business AI
               </Link>
-            </div>
-          </div>
 
-          <div>
-            <h4 className="font-semibold">
-              {locale === "fr"
-                ? "Ressources"
-                : locale === "ar"
-                ? "الموارد"
-                : "Resources"}
-            </h4>
-
-            <div className="mt-4 space-y-3 text-sm text-slate-400">
               <Link
                 href="/blog"
                 className="block hover:text-white transition"
               >
-                {locale === "fr"
-                  ? "Blog"
-                  : locale === "ar"
-                  ? "المدونة"
-                  : "Blog"}
+                Blog
               </Link>
-            </div>
-          </div>
 
-
-          <div>
-            <h4 className="font-semibold">
-              {locale === "fr"
-                ? "Développeurs"
-                : locale === "ar"
-                ? "المطورون"
-                : "Developers"}
-            </h4>
-
-            <div className="mt-4 space-y-3 text-sm text-slate-400">
               <Link
                 href="/developers"
                 className="block hover:text-white transition"
