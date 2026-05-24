@@ -74,7 +74,7 @@ export default function Footer() {
       className="bg-slate-950 text-white px-6 py-14"
     >
       <div className="max-w-7xl mx-auto">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-7">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <Link href="/" className="inline-flex">
               <Image
