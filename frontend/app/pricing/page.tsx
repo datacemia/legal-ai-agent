@@ -891,6 +891,105 @@ export default function Pricing() {
         </section>
 
         <section className="mt-20">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-[0.25em] text-blue-600">
+              Runexa API
+            </p>
+            <h2 className="mt-2 text-3xl font-bold tracking-tight">
+              API Plans for Developers
+            </h2>
+            <p className="mt-3 max-w-2xl text-slate-600">
+              Runexa API is a separate paid product for developers and companies who want
+              to integrate AI agents into their own apps, dashboards, and workflows.
+            </p>
+          </div>
+
+          <div className="mt-8 grid gap-6 lg:grid-cols-3">
+            {[
+              {
+                name: "API Starter",
+                price: "$29",
+                credits: "100 API credits",
+                rate: "10 requests/minute",
+                desc: "For developers testing Runexa API integrations.",
+                features: [
+                  "Legal AI API",
+                  "Finance AI API",
+                  "Study AI API",
+                  "Business AI API",
+                  "Async job processing",
+                ],
+              },
+              {
+                name: "API Pro",
+                price: "$99",
+                credits: "500 API credits",
+                rate: "60 requests/minute",
+                desc: "For production workflows and regular API usage.",
+                highlighted: true,
+                features: [
+                  "Everything in API Starter",
+                  "Higher API limits",
+                  "Production-ready workflows",
+                  "Priority processing",
+                  "Usage tracking",
+                ],
+              },
+              {
+                name: "Enterprise API",
+                price: "Custom",
+                credits: "Custom API credits",
+                rate: "Custom rate limits",
+                desc: "For organizations with private workflows and scale needs.",
+                features: [
+                  "Custom AI workflows",
+                  "Team API access",
+                  "Private infrastructure options",
+                  "Priority support",
+                  "Enterprise onboarding",
+                ],
+              },
+            ].map((plan) => (
+              <div
+                key={plan.name}
+                className={`rounded-3xl border p-8 shadow-sm transition-all duration-300 hover:shadow-xl ${
+                  plan.highlighted
+                    ? "border-blue-600 bg-blue-50 ring-2 ring-blue-500/20"
+                    : "border-slate-200 bg-white"
+                }`}
+              >
+                <h3 className="text-xl font-bold">{plan.name}</h3>
+                <p className="mt-3 text-sm leading-6 text-slate-600">{plan.desc}</p>
+
+                <div className="mt-6 text-4xl font-bold">{plan.price}</div>
+
+                <div className="mt-5 space-y-2 text-sm font-semibold text-slate-700">
+                  <p>{plan.credits}</p>
+                  <p>{plan.rate}</p>
+                </div>
+
+                <ul className="mt-6 space-y-3 text-sm text-slate-600">
+                  {plan.features.map((feature) => (
+                    <li key={feature}>✔ {feature}</li>
+                  ))}
+                </ul>
+
+                <button
+                  onClick={handleBuyCredits}
+                  className={`mt-8 w-full rounded-xl px-5 py-3 text-sm font-bold transition ${
+                    plan.highlighted
+                      ? "bg-blue-600 text-white hover:bg-blue-700"
+                      : "bg-slate-950 text-white hover:bg-slate-800"
+                  }`}
+                >
+                  {plan.name === "Enterprise API" ? "Contact Sales" : "Start API Plan"}
+                </button>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-20">
           <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
             <div className="border-b border-slate-200 bg-slate-50 p-6">
               <p className="text-sm font-bold uppercase tracking-[0.25em] text-blue-600">

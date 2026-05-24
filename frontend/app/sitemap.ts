@@ -87,6 +87,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
 
     {
+      url: "https://runexa.ai/developers",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+
+    {
+      url: "https://runexa.ai/api",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+
+    {
+      url: "https://runexa.ai/docs",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+
+    {
       url: "https://runexa.ai/pricing",
       lastModified: new Date(),
       changeFrequency: "monthly",

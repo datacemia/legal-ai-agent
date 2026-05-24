@@ -41,4 +41,17 @@ class User(Base):
     # Global credits usable across all operational agents
     credits_balance = Column(Integer, default=0)
 
+    # API access is a separate paid product
+    api_enabled = Column(Boolean, default=False)
+
+    # API subscription plan:
+    # none
+    # api_starter
+    # api_pro
+    # api_enterprise
+    api_plan = Column(String, default="none")
+
+    # API-only credits, separate from app credits
+    api_credits_balance = Column(Integer, default=0)
+
     created_at = Column(DateTime, default=datetime.utcnow)

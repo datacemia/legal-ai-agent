@@ -11,6 +11,7 @@ export default function Navbar() {
   const [plan, setPlan] = useState("");
   const [credits, setCredits] = useState<string | null>(null);
   const [isEnterpriseMember, setIsEnterpriseMember] = useState(false);
+  const [apiEnabled, setApiEnabled] = useState(false);
   const [locale, setLocale] = useState("en");
 
   const checkAuth = () => {
@@ -29,11 +30,15 @@ export default function Navbar() {
     const savedEnterpriseMember =
       localStorage.getItem("enterprise_member") === "true";
 
+    const savedApiEnabled =
+      localStorage.getItem("api_enabled") === "true";
+
     setIsLogged(!!token);
     setRole(savedRole);
     setPlan(savedPlan);
     setCredits(savedCredits);
     setIsEnterpriseMember(savedEnterpriseMember);
+    setApiEnabled(savedApiEnabled);
   };
 
   useEffect(() => {
@@ -60,12 +65,14 @@ export default function Navbar() {
     localStorage.removeItem("plan");
     localStorage.removeItem("credits_balance");
     localStorage.removeItem("enterprise_member");
+    localStorage.removeItem("api_enabled");
 
     setIsLogged(false);
     setRole("");
     setPlan("");
     setCredits(null);
     setIsEnterpriseMember(false);
+    setApiEnabled(false);
 
     window.location.href = "/login";
   };
@@ -246,6 +253,31 @@ export default function Navbar() {
           >
             {insightsLabel}
           </Link>
+
+
+          <Link
+            href="/developers"
+            className="hidden xl:flex items-center rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 shadow-sm transition hover:bg-blue-100"
+          >
+            {locale === "fr"
+              ? "Plateforme développeur"
+              : locale === "ar"
+              ? "منصة المطورين"
+              : "Developer Platform"}
+          </Link>
+
+          {apiEnabled && (
+            <Link
+              href="/api-dashboard"
+              className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
+            >
+              {locale === "fr"
+                ? "Dashboard API"
+                : locale === "ar"
+                ? "لوحة API"
+                : "API Dashboard"}
+            </Link>
+          )}
 
           <Link
             href="/labs/agent-0"

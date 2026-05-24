@@ -29,6 +29,9 @@ from app.api.payment_routes import router as payment_router
 from app.api.study_routes import router as study_router
 from app.api.user_routes import router as user_router
 
+from app.api import api_keys
+from app.api import public_api
+
 # Import models so SQLAlchemy registers all tables before create_all().
 from app.models.agent0_waitlist import Agent0Waitlist
 from app.models.agent_trial_usage import AgentTrialUsage
@@ -97,6 +100,8 @@ app.include_router(payment_router)
 app.include_router(user_router)
 app.include_router(admin_router)
 app.include_router(contact_router)
+app.include_router(api_keys.router)
+app.include_router(public_api.router)
 
 
 # =========================

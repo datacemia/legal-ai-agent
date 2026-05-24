@@ -7,9 +7,15 @@ import { getSavedLocale, translations } from "../lib/i18n";
 
 export default function Footer() {
   const [locale, setLocale] = useState("en");
+  const [apiEnabled, setApiEnabled] = useState(false);
 
   useEffect(() => {
     setLocale(getSavedLocale());
+
+    const savedApiEnabled =
+      localStorage.getItem("api_enabled") === "true";
+
+    setApiEnabled(savedApiEnabled);
 
     const handleLocaleChange = () => {
       setLocale(getSavedLocale());
@@ -68,7 +74,7 @@ export default function Footer() {
       className="bg-slate-950 text-white px-6 py-14"
     >
       <div className="max-w-7xl mx-auto">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-6">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-7">
           <div>
             <Link href="/" className="inline-flex">
               <Image
@@ -164,6 +170,53 @@ export default function Footer() {
                   ? "المدونة"
                   : "Blog"}
               </Link>
+            </div>
+          </div>
+
+
+          <div>
+            <h4 className="font-semibold">
+              {locale === "fr"
+                ? "Développeurs"
+                : locale === "ar"
+                ? "المطورون"
+                : "Developers"}
+            </h4>
+
+            <div className="mt-4 space-y-3 text-sm text-slate-400">
+              <Link
+                href="/developers"
+                className="block hover:text-white transition"
+              >
+                Developers
+              </Link>
+
+              <Link
+                href="/api"
+                className="block hover:text-white transition"
+              >
+                API
+              </Link>
+
+              <Link
+                href="/docs"
+                className="block hover:text-white transition"
+              >
+                Docs
+              </Link>
+
+              {apiEnabled && (
+                <Link
+                  href="/api-dashboard"
+                  className="block hover:text-white transition"
+                >
+                  {locale === "fr"
+                    ? "Dashboard API"
+                    : locale === "ar"
+                    ? "لوحة API"
+                    : "API Dashboard"}
+                </Link>
+              )}
             </div>
           </div>
 
