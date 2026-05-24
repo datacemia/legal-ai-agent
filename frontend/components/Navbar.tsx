@@ -169,7 +169,7 @@ export default function Navbar() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
 
         {/* LOGO */}
-        <Link href="/" className="flex items-center gap-3">
+        <Link href="/" className="flex shrink-0 items-center gap-3">
           <Image
             src="/runexa.svg"
             alt="Runexa AI Workspace"
@@ -184,7 +184,7 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <div className="flex items-center gap-5">
+        <div className="hidden items-center gap-5 lg:flex">
 
           {canSeeDashboard && !canSeeEnterprise && (
             <Link
