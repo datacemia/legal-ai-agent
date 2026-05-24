@@ -1410,50 +1410,70 @@ export default function UploadPage() {
             </span>
           </div>
 
-          <div className="mt-6 grid gap-4 md:grid-cols-4">
-            <div className="rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-4">
+          <div className="mt-6 grid gap-4 lg:grid-cols-3">
+            <div className="rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-5">
               <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
                 {t.sampleRiskScore}
               </p>
 
-              <div className="mt-3 flex items-end gap-2">
-                <span className="text-3xl font-bold text-amber-600">62</span>
+              <div className="mt-4 flex items-end gap-2">
+                <span className="text-4xl font-bold text-amber-600">62</span>
                 <span className="mb-1 text-sm text-slate-500">/100</span>
               </div>
 
-              <p className="mt-2 text-sm font-medium text-amber-700">
+              <p className="mt-2 text-sm font-semibold text-amber-700">
                 {t.sampleRiskLevel}
               </p>
+
+              <div className="mt-4 rounded-xl bg-amber-50 p-3 text-xs leading-5 text-amber-800">
+                {t.sampleSummaryText}
+              </div>
             </div>
 
-            <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
-              <p className="text-sm font-semibold text-amber-900">
+            <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5 lg:col-span-1">
+              <p className="text-sm font-bold text-amber-900">
                 {t.sampleClauseTitle}
               </p>
 
-              <p className="mt-2 text-sm leading-6 text-amber-800">
-                {t.sampleClauseText}
+              <div className="mt-4 rounded-xl border-l-4 border-amber-500 bg-white p-4 text-sm leading-7 text-slate-700">
+                “{t.sampleClauseText}”
+              </div>
+
+              <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-amber-700">
+                {language === "fr"
+                  ? "Signal de risque"
+                  : language === "ar"
+                  ? "إشارة مخاطر"
+                  : "Risk signal"}
               </p>
             </div>
 
-            <div className="rounded-2xl border border-blue-200 bg-blue-50 p-4">
-              <p className="text-sm font-semibold text-blue-900">
+            <div className="rounded-2xl border border-blue-200 bg-blue-50 p-5">
+              <p className="text-sm font-bold text-blue-900">
                 {t.sampleAdviceTitle}
               </p>
 
-              <p className="mt-2 text-sm leading-6 text-blue-800">
+              <p className="mt-3 text-sm leading-6 text-blue-800">
                 {t.sampleAdviceText}
               </p>
-            </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <p className="text-sm font-semibold text-slate-900">
-                {t.sampleSummaryTitle}
-              </p>
+              <div className="mt-4 rounded-xl border border-green-200 bg-green-50 p-3">
+                <p className="text-xs font-semibold text-green-800">
+                  {language === "fr"
+                    ? "Extraction des obligations"
+                    : language === "ar"
+                    ? "استخراج الالتزامات"
+                    : "Obligation extraction"}
+                </p>
 
-              <p className="mt-2 text-sm leading-6 text-slate-600">
-                {t.sampleSummaryText}
-              </p>
+                <p className="mt-1 text-xs leading-5 text-green-700">
+                  {language === "fr"
+                    ? "Période de préavis, droits de résiliation, possibilité de correction et exigences d’approbation écrite."
+                    : language === "ar"
+                    ? "فترة الإشعار، حقوق الإنهاء، إمكانية المعالجة، ومتطلبات الموافقة الكتابية."
+                    : "Notice period, termination rights, cure opportunity, and written approval requirements."}
+                </p>
+              </div>
             </div>
           </div>
         </div>
