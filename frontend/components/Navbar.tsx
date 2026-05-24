@@ -93,6 +93,13 @@ export default function Navbar() {
       ? "الحلول"
       : "Solutions";
 
+  const insightsLabel =
+    locale === "fr"
+      ? "Insights"
+      : locale === "ar"
+      ? "الرؤى"
+      : "Insights";
+
   const solutionLinks = [
     {
       label:
@@ -232,6 +239,13 @@ export default function Navbar() {
               ))}
             </div>
           </div>
+
+          <Link
+            href="/blog"
+            className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
+          >
+            {insightsLabel}
+          </Link>
 
           <Link
             href="/labs/agent-0"

@@ -68,7 +68,7 @@ export default function Footer() {
       className="bg-slate-950 text-white px-6 py-14"
     >
       <div className="max-w-7xl mx-auto">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-6">
           <div>
             <Link href="/" className="inline-flex">
               <Image
@@ -140,6 +140,29 @@ export default function Footer() {
 
               <Link href="/business-ai" className="block hover:text-white transition">
                 Business AI
+              </Link>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-semibold">
+              {locale === "fr"
+                ? "Ressources"
+                : locale === "ar"
+                ? "الموارد"
+                : "Resources"}
+            </h4>
+
+            <div className="mt-4 space-y-3 text-sm text-slate-400">
+              <Link
+                href="/blog"
+                className="block hover:text-white transition"
+              >
+                {locale === "fr"
+                  ? "Blog"
+                  : locale === "ar"
+                  ? "المدونة"
+                  : "Blog"}
               </Link>
             </div>
           </div>

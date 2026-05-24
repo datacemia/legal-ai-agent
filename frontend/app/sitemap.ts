@@ -45,6 +45,48 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
 
     {
+      url: "https://runexa.ai/blog",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+
+    {
+      url: "https://runexa.ai/blog/ai-contract-analysis",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+
+    {
+      url: "https://runexa.ai/blog/ai-finance-analysis",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+
+    {
+      url: "https://runexa.ai/blog/ai-study-assistant",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+
+    {
+      url: "https://runexa.ai/blog/enterprise-ai-workflows",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+
+    {
+      url: "https://runexa.ai/blog/ai-business-intelligence",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+
+    {
       url: "https://runexa.ai/pricing",
       lastModified: new Date(),
       changeFrequency: "monthly",

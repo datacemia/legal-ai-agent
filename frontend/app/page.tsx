@@ -22,6 +22,7 @@ const labels: any = {
     desc: "Runexa helps individuals and professionals analyze documents, understand financial data, learn faster, and make smarter business decisions.",
     explore: "Explore AI Agents",
     pricing: "View Pricing",
+    blog: "Insights",
     trustLine: "$1 trial per agent · Global credits · Secure AI workspace",
     tryLegal: "Runexa Legal Agent",
     tryFinance: "Runexa Finance Coach",
@@ -143,6 +144,7 @@ const labels: any = {
     desc: "Runexa aide les particuliers et les professionnels à analyser des documents, comprendre leurs finances, apprendre plus vite et prendre de meilleures décisions business.",
     explore: "Explorer les agents IA",
     pricing: "Voir les tarifs",
+    blog: "Insights",
     trustLine: "Essai à 1 $ par agent · Crédits globaux · Espace IA sécurisé",
     tryLegal: "Runexa Legal Agent",
     tryFinance: "Runexa Finance Coach",
@@ -264,6 +266,7 @@ const labels: any = {
     desc: "تساعد Runexa الأفراد والمحترفين على تحليل المستندات وفهم البيانات المالية والتعلم بشكل أسرع واتخاذ قرارات أعمال أكثر ذكاءً.",
     explore: "استكشاف وكلاء الذكاء الاصطناعي",
     pricing: "عرض الأسعار",
+    blog: "الرؤى",
     trustLine: "تجربة مقابل 1 دولار لكل وكيل · أرصدة موحدة · مساحة ذكاء اصطناعي آمنة",
     tryLegal: "Runexa Legal Agent",
     tryFinance: "Runexa Finance Coach",
@@ -471,6 +474,13 @@ export default function HomePage() {
               className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-900 hover:bg-slate-50 transition"
             >
               {t.pricing}
+            </Link>
+
+            <Link
+              href="/blog"
+              className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-900 hover:bg-slate-50 transition"
+            >
+              {t.blog}
             </Link>
           </div>
 
