@@ -1,7 +1,31 @@
 "use client";
 
 import Link from "next/link";
+import type { Metadata } from "next";
 import { useEffect, useState } from "react";
+
+export const metadata: Metadata = {
+  title:
+    "Enterprise AI Agents & Custom AI Workflows | Runexa",
+
+  description:
+    "Runexa builds enterprise AI agents for legal analysis, finance intelligence, HR automation, business workflows, and document processing.",
+
+  keywords: [
+    "enterprise AI",
+    "custom AI agents",
+    "AI workflows",
+    "enterprise AI platform",
+    "business AI automation",
+    "AI agents for companies",
+    "legal AI enterprise",
+    "finance AI enterprise",
+  ],
+
+  alternates: {
+    canonical: "https://runexa.ai/enterprise",
+  },
+};
 
 const labels: any = {
   en: {
@@ -683,6 +707,20 @@ export default function EnterprisePage() {
           {t.ctaButton}
         </Link>
       </section>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "Runexa Systems",
+            url: "https://runexa.ai",
+            description:
+              "Enterprise AI platform building custom AI agents for legal, finance, HR, business, and document workflows.",
+          }),
+        }}
+      />
     </main>
   );
 }

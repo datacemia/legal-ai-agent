@@ -5,6 +5,17 @@ export const metadata: Metadata = {
   title: "AI Financial Analysis & Personal Finance Coach | Runexa",
   description:
     "Analyze bank statements, spending patterns, subscriptions, savings opportunities, and financial habits with Runexa Finance Coach.",
+  keywords: [
+    "AI financial analysis",
+    "personal finance AI",
+    "AI finance coach",
+    "bank statement analysis AI",
+    "AI budgeting assistant",
+    "subscription detection AI",
+  ],
+  alternates: {
+    canonical: "https://runexa.ai/finance-ai",
+  },
 };
 
 export default function FinanceAIPage() {
@@ -32,7 +43,7 @@ export default function FinanceAIPage() {
           </Link>
 
           <Link
-           href="/pricing"
+            href="/pricing"
             className="rounded-xl border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-900 hover:bg-slate-50"
           >
             View Pricing
@@ -42,14 +53,31 @@ export default function FinanceAIPage() {
 
       <section className="mx-auto mt-16 grid max-w-6xl gap-6 md:grid-cols-4">
         {[
-          ["Bank statement analysis", "Upload PDF bank statements and receive structured financial insights."],
-          ["Subscription detection", "Find recurring charges and review possible subscription waste."],
-          ["Savings opportunities", "Identify practical ways to reduce expenses and improve cashflow."],
-          ["AI finance coach", "Ask follow-up questions and get personalized explanations from your analysis."],
+          [
+            "Bank statement analysis",
+            "Upload PDF bank statements and receive structured financial insights.",
+          ],
+          [
+            "Subscription detection",
+            "Find recurring charges and review possible subscription waste.",
+          ],
+          [
+            "Savings opportunities",
+            "Identify practical ways to reduce expenses and improve cashflow.",
+          ],
+          [
+            "AI finance coach",
+            "Ask follow-up questions and get personalized explanations from your analysis.",
+          ],
         ].map(([title, desc]) => (
-          <div key={title} className="rounded-2xl border bg-white p-6 shadow-sm">
+          <div
+            key={title}
+            className="rounded-2xl border bg-white p-6 shadow-sm"
+          >
             <h2 className="font-bold">{title}</h2>
-            <p className="mt-3 text-sm leading-6 text-slate-600">{desc}</p>
+            <p className="mt-3 text-sm leading-6 text-slate-600">
+              {desc}
+            </p>
           </div>
         ))}
       </section>
@@ -102,6 +130,26 @@ export default function FinanceAIPage() {
           ))}
         </div>
       </section>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "Runexa Finance Coach",
+            applicationCategory: "FinanceApplication",
+            operatingSystem: "Web",
+            description:
+              "AI finance coach for bank statement analysis, subscription detection, savings opportunities, and financial habits.",
+            url: "https://runexa.ai/finance-ai",
+            publisher: {
+              "@type": "Organization",
+              name: "Runexa Systems",
+            },
+          }),
+        }}
+      />
     </main>
   );
 }

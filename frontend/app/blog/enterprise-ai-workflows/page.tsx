@@ -5,6 +5,18 @@ export const metadata: Metadata = {
   title: "Enterprise AI Workflows: How Organizations Use AI Systems | Runexa",
   description:
     "Learn how enterprise AI workflows help organizations automate analysis, improve decision-making, and scale operational intelligence.",
+  keywords: [
+    "enterprise AI",
+    "AI workflows",
+    "enterprise AI platform",
+    "AI operations",
+    "AI business workflows",
+    "enterprise automation",
+  ],
+  alternates: {
+    canonical:
+      "https://runexa.ai/blog/enterprise-ai-workflows",
+  },
 };
 
 export default function EnterpriseAIWorkflowsArticle() {
@@ -178,6 +190,28 @@ export default function EnterpriseAIWorkflowsArticle() {
             Explore Enterprise AI
           </Link>
         </section>
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              headline:
+                "Enterprise AI Workflows: How Organizations Use AI Systems",
+              description:
+                "Learn how enterprise AI workflows help organizations automate analysis, improve decision-making, and scale operational intelligence.",
+              author: {
+                "@type": "Person",
+                name: "Dr. Rachid Ejjami",
+              },
+              publisher: {
+                "@type": "Organization",
+                name: "Runexa Systems",
+              },
+            }),
+          }}
+        />
       </article>
     </main>
   );

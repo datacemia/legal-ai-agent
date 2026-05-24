@@ -5,6 +5,17 @@ export const metadata: Metadata = {
   title: "AI Contract Analysis: How AI Helps Review Legal Documents | Runexa",
   description:
     "Learn how AI contract analysis helps identify risky clauses, summarize obligations, and support legal document review workflows.",
+  keywords: [
+    "AI contract analysis",
+    "AI legal review",
+    "contract risk analysis",
+    "legal AI software",
+    "AI contract analyzer",
+  ],
+  alternates: {
+    canonical:
+      "https://runexa.ai/blog/ai-contract-analysis",
+  },
 };
 
 export default function AIContractAnalysisArticle() {
@@ -166,6 +177,28 @@ export default function AIContractAnalysisArticle() {
             Upload Contract
           </Link>
         </section>
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              headline:
+                "AI Contract Analysis: How AI Helps Review Legal Documents",
+              description:
+                "Learn how AI contract analysis helps identify risky clauses, summarize obligations, and support legal document review workflows.",
+              author: {
+                "@type": "Person",
+                name: "Dr. Rachid Ejjami",
+              },
+              publisher: {
+                "@type": "Organization",
+                name: "Runexa Systems",
+              },
+            }),
+          }}
+        />
       </article>
     </main>
   );

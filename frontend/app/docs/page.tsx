@@ -5,6 +5,19 @@ export const metadata: Metadata = {
   title: "Runexa Docs | AI Agent API Documentation",
   description:
     "Developer documentation for Runexa AI agent APIs, async jobs, authentication, endpoints, and structured analysis responses.",
+  keywords: [
+    "Runexa API",
+    "AI API documentation",
+    "legal AI API",
+    "finance AI API",
+    "business AI API",
+    "study AI API",
+    "AI jobs API",
+    "enterprise AI API",
+  ],
+  alternates: {
+    canonical: "https://runexa.ai/docs",
+  },
 };
 
 export default function DocsPage() {
@@ -49,6 +62,7 @@ export default function DocsPage() {
               ["Finance AI", "#finance"],
               ["Legal AI", "#legal"],
               ["Business AI", "#business"],
+              ["Study AI", "#study"],
               ["Jobs API", "#jobs-api"],
               ["Errors", "#errors"],
               ["Rate limits", "#rate-limits"],
@@ -104,7 +118,8 @@ export default function DocsPage() {
               <p className="text-slate-400">Base URL</p>
 
               <pre className="mt-4 overflow-x-auto text-blue-300">
-{`https://api.runexa.ai
+{`Production:
+https://api.runexa.ai
 
 Local:
 http://127.0.0.1:8000`}
@@ -127,7 +142,7 @@ http://127.0.0.1:8000`}
             </pre>
 
             <pre className="mt-6 overflow-x-auto rounded-2xl bg-slate-950 p-5 text-sm text-slate-100">
-{`curl -X GET "http://127.0.0.1:8000/v1/test-api-key" \\
+{`curl -X GET "https://api.runexa.ai/v1/test-api-key" \\
   -H "Authorization: Bearer rk_live_xxxxxxxxx"`}
             </pre>
           </section>
@@ -201,7 +216,7 @@ http://127.0.0.1:8000`}
             </div>
 
             <pre className="mt-8 overflow-x-auto rounded-2xl bg-slate-950 p-5 text-sm text-slate-100">
-{`curl -X POST "http://127.0.0.1:8000/v1/finance/analyze" \\
+{`curl -X POST "https://api.runexa.ai/v1/finance/analyze" \\
   -H "Authorization: Bearer rk_live_xxxxxxxxx" \\
   -F "file=@statement.pdf" \\
   -F "output_language=en"`}
@@ -247,7 +262,7 @@ http://127.0.0.1:8000`}
             </div>
 
             <pre className="mt-8 overflow-x-auto rounded-2xl bg-slate-950 p-5 text-sm text-slate-100">
-{`curl -X POST "http://127.0.0.1:8000/v1/legal/analyze" \\
+{`curl -X POST "https://api.runexa.ai/v1/legal/analyze" \\
   -H "Authorization: Bearer rk_live_xxxxxxxxx" \\
   -F "file=@contract.pdf" \\
   -F "output_language=en"`}
@@ -291,7 +306,7 @@ http://127.0.0.1:8000`}
             </div>
 
             <pre className="mt-8 overflow-x-auto rounded-2xl bg-slate-950 p-5 text-sm text-slate-100">
-{`curl -X POST "http://127.0.0.1:8000/v1/business/analyze" \\
+{`curl -X POST "https://api.runexa.ai/v1/business/analyze" \\
   -H "Authorization: Bearer rk_live_xxxxxxxxx" \\
   -F "file=@business.xlsx" \\
   -F "output_language=en"`}
@@ -303,6 +318,51 @@ http://127.0.0.1:8000`}
   "status": "pending",
   "credits_used": 30,
   "remaining_api_credits": 22
+}`}
+            </pre>
+          </section>
+
+          <section
+            id="study"
+            className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm"
+          >
+            <div className="flex items-center justify-between">
+              <h2 className="text-3xl font-bold">Study AI</h2>
+
+              <span className="rounded-full bg-violet-100 px-3 py-1 text-xs font-bold text-violet-700">
+                POST /v1/study/analyze
+              </span>
+            </div>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              {[
+                "Study documents",
+                "Summaries",
+                "Quizzes and flashcards",
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="rounded-2xl border border-violet-200 bg-violet-50 p-4"
+                >
+                  <p className="font-semibold text-violet-900">{item}</p>
+                </div>
+              ))}
+            </div>
+
+            <pre className="mt-8 overflow-x-auto rounded-2xl bg-slate-950 p-5 text-sm text-slate-100">
+{`curl -X POST "https://api.runexa.ai/v1/study/analyze" \\
+  -H "Authorization: Bearer rk_live_xxxxxxxxx" \\
+  -F "file=@study.pdf" \\
+  -F "output_language=en" \\
+  -F "education_level=university"`}
+            </pre>
+
+            <pre className="mt-6 overflow-x-auto rounded-2xl bg-slate-950 p-5 text-sm text-slate-100">
+{`{
+  "job_id": 14,
+  "status": "pending",
+  "credits_used": 5,
+  "remaining_api_credits": 17
 }`}
             </pre>
           </section>
@@ -448,6 +508,26 @@ http://127.0.0.1:8000`}
           </section>
         </div>
       </section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "TechArticle",
+            headline: "Runexa AI Agent API Documentation",
+            description:
+              "Developer documentation for Runexa AI APIs including legal AI, finance AI, business intelligence, and study automation.",
+            author: {
+              "@type": "Person",
+              name: "Dr. Rachid Ejjami",
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "Runexa Systems",
+            },
+          }),
+        }}
+      />
     </main>
   );
 }

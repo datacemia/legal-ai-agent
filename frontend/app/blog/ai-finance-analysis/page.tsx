@@ -5,6 +5,17 @@ export const metadata: Metadata = {
   title: "AI Finance Analysis: Understanding Spending, Savings & Cashflow | Runexa",
   description:
     "Learn how AI finance analysis helps users understand spending patterns, subscriptions, savings opportunities, and financial habits.",
+  keywords: [
+    "AI finance analysis",
+    "AI budgeting assistant",
+    "bank statement AI",
+    "AI personal finance",
+    "AI spending analysis",
+  ],
+  alternates: {
+    canonical:
+      "https://runexa.ai/blog/ai-finance-analysis",
+  },
 };
 
 export default function AIFinanceAnalysisArticle() {
@@ -166,6 +177,28 @@ export default function AIFinanceAnalysisArticle() {
             Upload Bank Statement
           </Link>
         </section>
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              headline:
+                "AI Finance Analysis: Understanding Spending, Savings & Cashflow",
+              description:
+                "Learn how AI finance analysis helps users understand spending patterns, subscriptions, savings opportunities, and financial habits.",
+              author: {
+                "@type": "Person",
+                name: "Dr. Rachid Ejjami",
+              },
+              publisher: {
+                "@type": "Organization",
+                name: "Runexa Systems",
+              },
+            }),
+          }}
+        />
       </article>
     </main>
   );

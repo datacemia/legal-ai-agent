@@ -2,38 +2,56 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Runexa Blog | Enterprise AI Insights",
+  title:
+    "Runexa AI Blog | Legal AI, Finance AI, Business Intelligence & Study AI",
   description:
     "Insights about AI contract analysis, finance AI, business intelligence, AI workflows, and enterprise AI systems.",
+  keywords: [
+    "AI blog",
+    "legal AI",
+    "finance AI",
+    "AI business intelligence",
+    "AI study assistant",
+    "enterprise AI",
+    "AI workflows",
+  ],
+  alternates: {
+    canonical: "https://runexa.ai/blog",
+  },
 };
 
 const articles = [
   {
     title: "AI Contract Analysis",
+    category: "Legal AI",
     href: "/blog/ai-contract-analysis",
     description:
       "How AI helps analyze contracts, risky clauses, and legal obligations.",
   },
   {
     title: "AI Finance Analysis",
+    category: "Finance AI",
     href: "/blog/ai-finance-analysis",
     description:
       "Using AI to understand spending patterns, subscriptions, and financial habits.",
   },
   {
     title: "AI Study Assistant",
+    category: "Study AI",
     href: "/blog/ai-study-assistant",
     description:
       "How AI improves summaries, quizzes, flashcards, and learning workflows.",
   },
   {
     title: "Enterprise AI Workflows",
+    category: "Enterprise AI",
     href: "/blog/enterprise-ai-workflows",
     description:
       "How organizations build AI workflows for business operations and decision support.",
   },
   {
     title: "AI Business Intelligence",
+    category: "Business AI",
     href: "/blog/ai-business-intelligence",
     description:
       "Using AI to analyze business data, risks, and strategic opportunities.",
@@ -64,7 +82,11 @@ export default function BlogPage() {
               href={article.href}
               className="rounded-3xl border bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
             >
-              <h2 className="text-2xl font-bold">
+              <p className="text-sm font-semibold text-blue-600">
+                {article.category}
+              </p>
+
+              <h2 className="mt-3 text-2xl font-bold">
                 {article.title}
               </h2>
 
@@ -78,6 +100,33 @@ export default function BlogPage() {
             </Link>
           ))}
         </div>
+
+        <section className="mt-20 rounded-3xl bg-blue-600 p-10 text-white">
+          <h2 className="text-3xl font-bold">
+            Explore enterprise AI workflows with Runexa
+          </h2>
+
+          <p className="mt-4 max-w-2xl text-blue-100">
+            Analyze contracts, financial statements, business data,
+            and study materials with specialized AI agents.
+          </p>
+
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Link
+              href="/pricing"
+              className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-blue-600"
+            >
+              View Pricing
+            </Link>
+
+            <Link
+              href="/developers"
+              className="rounded-xl border border-blue-300 px-6 py-3 text-sm font-semibold text-white"
+            >
+              Developers
+            </Link>
+          </div>
+        </section>
       </section>
     </main>
   );

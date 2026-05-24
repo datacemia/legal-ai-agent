@@ -5,6 +5,20 @@ export const metadata: Metadata = {
   title: "AI Study Assistant: Smarter Learning With AI Workflows | Runexa",
   description:
     "Learn how AI study assistants help generate summaries, quizzes, flashcards, and structured learning workflows.",
+
+  keywords: [
+    "AI study assistant",
+    "AI learning assistant",
+    "AI flashcards",
+    "AI quiz generation",
+    "AI study workflows",
+    "AI learning platform",
+  ],
+
+  alternates: {
+    canonical:
+      "https://runexa.ai/blog/ai-study-assistant",
+  },
 };
 
 export default function AIStudyAssistantArticle() {
@@ -164,6 +178,28 @@ export default function AIStudyAssistantArticle() {
             Start Studying
           </Link>
         </section>
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              headline:
+                "AI Study Assistant: Smarter Learning With AI Workflows",
+              description:
+                "Learn how AI study assistants help generate summaries, quizzes, flashcards, and structured learning workflows.",
+              author: {
+                "@type": "Person",
+                name: "Dr. Rachid Ejjami",
+              },
+              publisher: {
+                "@type": "Organization",
+                name: "Runexa Systems",
+              },
+            }),
+          }}
+        />
       </article>
     </main>
   );

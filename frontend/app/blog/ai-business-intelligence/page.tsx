@@ -5,6 +5,16 @@ export const metadata: Metadata = {
   title: "AI Business Intelligence: Turning Data Into Better Decisions | Runexa",
   description:
     "Learn how AI business intelligence helps teams analyze data, detect risks, identify opportunities, and improve strategic decision-making.",
+  keywords: [
+    "AI business intelligence",
+    "business AI",
+    "AI KPI analysis",
+    "AI analytics",
+    "business decision support",
+  ],
+  alternates: {
+    canonical: "https://runexa.ai/blog/ai-business-intelligence",
+  },
 };
 
 export default function AIBusinessIntelligenceArticle() {
@@ -152,6 +162,30 @@ export default function AIBusinessIntelligenceArticle() {
             Analyze Business Data
           </Link>
         </section>
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              headline:
+                "AI Business Intelligence: Turning Data Into Better Decisions",
+              description:
+                "Learn how AI business intelligence helps teams analyze data, detect risks, identify opportunities, and improve strategic decision-making.",
+              datePublished: "2026-05-24",
+              dateModified: "2026-05-24",
+              author: {
+                "@type": "Person",
+                name: "Dr. Rachid Ejjami",
+              },
+              publisher: {
+                "@type": "Organization",
+                name: "Runexa Systems",
+              },
+            }),
+          }}
+        />
       </article>
     </main>
   );

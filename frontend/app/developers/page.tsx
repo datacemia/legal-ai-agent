@@ -5,6 +5,18 @@ export const metadata: Metadata = {
   title: "Runexa Developers | Build With AI Agents",
   description:
     "Build with Runexa AI agents for legal analysis, finance intelligence, study workflows, and business decision support.",
+  keywords: [
+    "Runexa API",
+    "AI agents API",
+    "legal AI API",
+    "finance AI API",
+    "business AI API",
+    "study AI API",
+    "AI workflow API",
+  ],
+  alternates: {
+    canonical: "https://runexa.ai/developers",
+  },
 };
 
 export default function DevelopersPage() {
@@ -42,14 +54,31 @@ export default function DevelopersPage() {
 
       <section className="mx-auto mt-16 grid max-w-6xl gap-6 md:grid-cols-4">
         {[
-          ["Legal AI", "Analyze contracts, risky clauses, obligations, and recommendations."],
-          ["Finance AI", "Analyze statements, subscriptions, spending, and savings opportunities."],
-          ["Study AI", "Generate summaries, quizzes, flashcards, and study plans."],
-          ["Business AI", "Analyze KPIs, risks, opportunities, and strategic decisions."],
+          [
+            "Legal AI",
+            "Analyze contracts, risky clauses, obligations, and recommendations.",
+          ],
+          [
+            "Finance AI",
+            "Analyze statements, subscriptions, spending, and savings opportunities.",
+          ],
+          [
+            "Study AI",
+            "Generate summaries, quizzes, flashcards, and study plans.",
+          ],
+          [
+            "Business AI",
+            "Analyze KPIs, risks, opportunities, and strategic decisions.",
+          ],
         ].map(([title, desc]) => (
-          <div key={title} className="rounded-2xl border bg-white p-6 shadow-sm">
+          <div
+            key={title}
+            className="rounded-2xl border bg-white p-6 shadow-sm"
+          >
             <h2 className="font-bold">{title}</h2>
-            <p className="mt-3 text-sm leading-6 text-slate-600">{desc}</p>
+            <p className="mt-3 text-sm leading-6 text-slate-600">
+              {desc}
+            </p>
           </div>
         ))}
       </section>
@@ -69,14 +98,32 @@ export default function DevelopersPage() {
             ["2", "Receive a job ID while Runexa processes the AI workflow."],
             ["3", "Poll the job status and retrieve structured analysis results."],
           ].map(([num, text]) => (
-            <div key={num} className="rounded-2xl border border-white/10 bg-white/5 p-5">
+            <div
+              key={num}
+              className="rounded-2xl border border-white/10 bg-white/5 p-5"
+            >
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-sm font-bold">
                 {num}
               </div>
-              <p className="mt-4 text-sm leading-6 text-slate-200">{text}</p>
+              <p className="mt-4 text-sm leading-6 text-slate-200">
+                {text}
+              </p>
             </div>
           ))}
         </div>
+      </section>
+
+      <section className="mx-auto mt-16 max-w-6xl rounded-3xl border bg-white p-8 shadow-sm md:p-12">
+        <h2 className="text-3xl font-bold">Authentication</h2>
+
+        <p className="mt-4 max-w-3xl leading-8 text-slate-600">
+          Runexa API requests use bearer token authentication. Include your API
+          key in the Authorization header for every request.
+        </p>
+
+        <pre className="mt-6 overflow-x-auto rounded-2xl bg-slate-950 p-5 text-sm text-slate-100">
+{`Authorization: Bearer rk_live_xxx`}
+        </pre>
       </section>
 
       <section className="mx-auto mt-16 max-w-6xl rounded-3xl border bg-white p-8 shadow-sm md:p-12">
@@ -88,11 +135,11 @@ Authorization: Bearer RUNEXA_API_KEY
 
 Response:
 {
-  "job_id": "job_123",
+  "job_id": 123,
   "status": "pending"
 }
 
-GET /v1/jobs/job_123
+GET /v1/jobs/123
 
 Response:
 {
