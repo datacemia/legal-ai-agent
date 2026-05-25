@@ -11,6 +11,7 @@ from app.config import FRONTEND_URL
 from app.database import Base, engine
 
 from app.api.agent0_waitlist_routes import router as agent0_waitlist_router
+from app.api.admin_api_routes import router as admin_api_management_router
 from app.api.admin_routes import router as admin_router
 from app.api.analysis_routes import router as analysis_router
 from app.api.auth_routes import router as auth_router
@@ -36,6 +37,8 @@ from app.api import public_api
 from app.models.agent0_waitlist import Agent0Waitlist
 from app.models.agent_trial_usage import AgentTrialUsage
 from app.models.analysis import AnalysisResult
+from app.models.api_key import ApiKey
+from app.models.api_usage import ApiUsage
 from app.models.business_analysis import BusinessAnalysis
 from app.models.contact import ContactRequest
 from app.models.document import Document
@@ -100,6 +103,7 @@ app.include_router(payment_router)
 app.include_router(user_router)
 app.include_router(admin_router)
 app.include_router(contact_router)
+app.include_router(admin_api_management_router)
 app.include_router(api_keys.router)
 app.include_router(public_api.router)
 
