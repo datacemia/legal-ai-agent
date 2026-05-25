@@ -15,7 +15,7 @@ type ApiKey = {
 
 type ApiUsage = {
   id: number;
-  api_key_id: number;
+  api_key_id: number | null;
   endpoint: string;
   agent: string;
   credits_used: number;
@@ -24,7 +24,7 @@ type ApiUsage = {
 };
 
 const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+  process.env.NEXT_PUBLIC_API_URL || "https://api.runexa.ai";
 
 export default function ApiDashboardPage() {
   const [keys, setKeys] = useState<ApiKey[]>([]);
@@ -43,26 +43,38 @@ export default function ApiDashboardPage() {
       return;
     }
 
-    setLoading(true);
+    const apiEnabled =
+      localStorage.getItem("api_enabled") === "true";
 
-    const [keysRes, usageRes] = await Promise.all([
-      fetch(`${API_URL}/api-keys`, {
-        headers: { Authorization: `Bearer ${token}` },
-      }),
-      fetch(`${API_URL}/api-keys/usage`, {
-        headers: { Authorization: `Bearer ${token}` },
-      }),
-    ]);
-
-    if (!keysRes.ok || !usageRes.ok) {
-      setMessage("Could not load API dashboard data.");
-      setLoading(false);
+    if (!apiEnabled) {
+      window.location.href = "/pricing";
       return;
     }
 
-    setKeys(await keysRes.json());
-    setUsage(await usageRes.json());
-    setLoading(false);
+    setLoading(true);
+
+    try {
+      const [keysRes, usageRes] = await Promise.all([
+        fetch(`${API_URL}/api-keys`, {
+          headers: { Authorization: `Bearer ${token}` },
+        }),
+        fetch(`${API_URL}/api-keys/usage`, {
+          headers: { Authorization: `Bearer ${token}` },
+        }),
+      ]);
+
+      if (!keysRes.ok || !usageRes.ok) {
+        setMessage("Could not load API dashboard data.");
+        return;
+      }
+
+      setKeys(await keysRes.json());
+      setUsage(await usageRes.json());
+    } catch {
+      setMessage("Could not connect to the API server.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function createKey() {
@@ -110,24 +122,6 @@ export default function ApiDashboardPage() {
     loadData();
   }, []);
 
-
-  if (typeof window !== "undefined") {
-    const rawUser = localStorage.getItem("user");
-
-    if (rawUser) {
-      try {
-        const user = JSON.parse(rawUser);
-
-        if (!user?.api_enabled) {
-          window.location.href = "/pricing";
-          return null;
-        }
-      } catch (e) {
-        window.location.href = "/pricing";
-        return null;
-      }
-    }
-  }
 
   const totalRequests = usage.length;
   const creditsUsed = usage.reduce((sum, row) => sum + row.credits_used, 0);

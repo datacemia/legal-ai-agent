@@ -18,6 +18,31 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://runexa.ai/blog",
   },
+  openGraph: {
+    title:
+      "Runexa AI Blog | Legal AI, Finance AI, Business Intelligence & Study AI",
+    description:
+      "Insights about AI contract analysis, finance AI, business intelligence, AI workflows, and enterprise AI systems.",
+    url: "https://runexa.ai/blog",
+    siteName: "Runexa",
+    type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Runexa AI Blog",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "Runexa AI Blog | Legal AI, Finance AI, Business Intelligence & Study AI",
+    description:
+      "Insights about AI contract analysis, finance AI, business intelligence, AI workflows, and enterprise AI systems.",
+    images: ["/og-image.png"],
+  },
 };
 
 const articles = [
@@ -128,6 +153,24 @@ export default function BlogPage() {
           </div>
         </section>
       </section>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            name: "Runexa AI Blog",
+            description:
+              "Insights about legal AI, finance AI, enterprise AI workflows, business intelligence, and AI-powered operational systems.",
+            url: "https://runexa.ai/blog",
+            publisher: {
+              "@type": "Organization",
+              name: "Runexa Systems LLC",
+            },
+          }),
+        }}
+      />
     </main>
   );
 }

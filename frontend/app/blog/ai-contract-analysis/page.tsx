@@ -16,6 +16,32 @@ export const metadata: Metadata = {
     canonical:
       "https://runexa.ai/blog/ai-contract-analysis",
   },
+  openGraph: {
+    title:
+      "AI Contract Analysis: How AI Helps Review Legal Documents",
+    description:
+      "Learn how AI contract analysis helps identify risky clauses, summarize obligations, and support legal document review workflows.",
+    url:
+      "https://runexa.ai/blog/ai-contract-analysis",
+    siteName: "Runexa",
+    type: "article",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Runexa Legal AI",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "AI Contract Analysis: How AI Helps Review Legal Documents",
+    description:
+      "Learn how AI contract analysis helps identify risky clauses, summarize obligations, and support legal document review workflows.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function AIContractAnalysisArticle() {
@@ -184,10 +210,17 @@ export default function AIContractAnalysisArticle() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Article",
+              mainEntityOfPage: {
+                "@type": "WebPage",
+                "@id":
+                  "https://runexa.ai/blog/ai-contract-analysis",
+              },
               headline:
                 "AI Contract Analysis: How AI Helps Review Legal Documents",
               description:
                 "Learn how AI contract analysis helps identify risky clauses, summarize obligations, and support legal document review workflows.",
+              datePublished: "2026-05-24",
+              dateModified: "2026-05-24",
               author: {
                 "@type": "Person",
                 name: "Dr. Rachid Ejjami",

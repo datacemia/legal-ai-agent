@@ -17,6 +17,42 @@ export const metadata: Metadata = {
     canonical:
       "https://runexa.ai/blog/enterprise-ai-workflows",
   },
+
+  openGraph: {
+    title:
+      "Enterprise AI Workflows: How Organizations Use AI Systems",
+
+    description:
+      "Learn how enterprise AI workflows help organizations automate analysis, improve decision-making, and scale operational intelligence.",
+
+    url:
+      "https://runexa.ai/blog/enterprise-ai-workflows",
+
+    siteName: "Runexa",
+
+    type: "article",
+
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Runexa Enterprise AI",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+
+    title:
+      "Enterprise AI Workflows: How Organizations Use AI Systems",
+
+    description:
+      "Learn how enterprise AI workflows help organizations automate analysis, improve decision-making, and scale operational intelligence.",
+
+    images: ["/og-image.png"],
+  },
 };
 
 export default function EnterpriseAIWorkflowsArticle() {
@@ -197,10 +233,23 @@ export default function EnterpriseAIWorkflowsArticle() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Article",
+
+              mainEntityOfPage: {
+                "@type": "WebPage",
+                "@id":
+                  "https://runexa.ai/blog/enterprise-ai-workflows",
+              },
+
               headline:
                 "Enterprise AI Workflows: How Organizations Use AI Systems",
+
               description:
                 "Learn how enterprise AI workflows help organizations automate analysis, improve decision-making, and scale operational intelligence.",
+
+              datePublished: "2026-05-24",
+
+              dateModified: "2026-05-24",
+
               author: {
                 "@type": "Person",
                 name: "Dr. Rachid Ejjami",

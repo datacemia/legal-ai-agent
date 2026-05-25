@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || "https://api.runexa.ai";
 
 const AVAILABLE_AGENTS = [
   {
@@ -23,11 +25,56 @@ const AVAILABLE_AGENTS = [
   },
 ];
 
+type Enterprise = {
+  id: number;
+  name: string;
+  slug: string;
+  owner_email: string | null;
+  credits_balance: number;
+  total_requests: number;
+  total_credits_used: number;
+  members_count: number;
+  active_members_count: number;
+  enabled_agents: string[];
+  status: string;
+  plan_name: string;
+};
+
+type EnterpriseMember = {
+  id: number;
+  email: string;
+  role: string;
+  status: string;
+};
+
+type EnterpriseUsageAgent = {
+  agent_slug: string;
+  requests: number;
+  credits_used: number;
+};
+
+type EnterpriseUsage = {
+  total_requests: number;
+  total_credits_used: number;
+  usage_by_agent: EnterpriseUsageAgent[];
+};
+
+function getErrorMessage(error: unknown, fallback: string) {
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  return fallback;
+}
+
 export default function AdminEnterprisesPage() {
-  const [enterprises, setEnterprises] = useState<any[]>([]);
-  const [selectedEnterprise, setSelectedEnterprise] = useState<any>(null);
-  const [selectedUsage, setSelectedUsage] = useState<any>(null);
-  const [selectedMembers, setSelectedMembers] = useState<any[]>([]);
+  const [enterprises, setEnterprises] = useState<Enterprise[]>([]);
+  const [selectedEnterprise, setSelectedEnterprise] =
+    useState<Enterprise | null>(null);
+  const [selectedUsage, setSelectedUsage] =
+    useState<EnterpriseUsage | null>(null);
+  const [selectedMembers, setSelectedMembers] =
+    useState<EnterpriseMember[]>([]);
 
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(false);
@@ -87,14 +134,14 @@ export default function AdminEnterprisesPage() {
       const data = await fetchJson(`${API_URL}/admin/enterprises`);
 
       setEnterprises(Array.isArray(data) ? data : []);
-    } catch (error: any) {
-      setMessage(error.message || "Unable to load enterprises");
+    } catch (error: unknown) {
+      setMessage(getErrorMessage(error, "Unable to load enterprises"));
     } finally {
       setLoading(false);
     }
   }
 
-  async function loadEnterpriseDetails(enterprise: any) {
+  async function loadEnterpriseDetails(enterprise: Enterprise) {
     try {
       setSelectedEnterprise(enterprise);
       setSelectedUsage(null);
@@ -107,14 +154,21 @@ export default function AdminEnterprisesPage() {
 
       setSelectedUsage(usage);
       setSelectedMembers(Array.isArray(members) ? members : []);
-    } catch (error: any) {
-      setMessage(error.message || "Unable to load enterprise details");
+    } catch (error: unknown) {
+      setMessage(getErrorMessage(error, "Unable to load enterprise details"));
     }
   }
 
   useEffect(() => {
     if (!token) {
       window.location.href = "/login";
+      return;
+    }
+
+    const role = localStorage.getItem("role");
+
+    if (role !== "admin") {
+      window.location.href = "/dashboard";
       return;
     }
 
@@ -160,14 +214,14 @@ export default function AdminEnterprisesPage() {
 
       setMessage("Enterprise created successfully.");
       await loadEnterprises();
-    } catch (error: any) {
-      setMessage(error.message || "Unable to create enterprise");
+    } catch (error: unknown) {
+      setMessage(getErrorMessage(error, "Unable to create enterprise"));
     } finally {
       setActionLoading(false);
     }
   }
 
-  async function handleUpdateCredits(enterprise: any, credits: number) {
+  async function handleUpdateCredits(enterprise: Enterprise, credits: number) {
     try {
       setActionLoading(true);
       setMessage("");
@@ -181,14 +235,14 @@ export default function AdminEnterprisesPage() {
 
       setMessage("Credits updated.");
       await loadEnterprises();
-    } catch (error: any) {
-      setMessage(error.message || "Unable to update credits");
+    } catch (error: unknown) {
+      setMessage(getErrorMessage(error, "Unable to update credits"));
     } finally {
       setActionLoading(false);
     }
   }
 
-  async function handleToggleStatus(enterprise: any) {
+  async function handleToggleStatus(enterprise: Enterprise) {
     try {
       setActionLoading(true);
       setMessage("");
@@ -205,15 +259,15 @@ export default function AdminEnterprisesPage() {
 
       setMessage(`Enterprise ${nextStatus}.`);
       await loadEnterprises();
-    } catch (error: any) {
-      setMessage(error.message || "Unable to update status");
+    } catch (error: unknown) {
+      setMessage(getErrorMessage(error, "Unable to update status"));
     } finally {
       setActionLoading(false);
     }
   }
 
   async function handleToggleEnterpriseAgent(
-    enterprise: any,
+    enterprise: Enterprise,
     agentSlug: string
   ) {
     try {
@@ -237,8 +291,8 @@ export default function AdminEnterprisesPage() {
 
       setMessage("Enterprise agents updated.");
       await loadEnterprises();
-    } catch (error: any) {
-      setMessage(error.message || "Unable to update agents");
+    } catch (error: unknown) {
+      setMessage(getErrorMessage(error, "Unable to update agents"));
     } finally {
       setActionLoading(false);
     }
@@ -259,12 +313,12 @@ export default function AdminEnterprisesPage() {
       <div className="mx-auto max-w-7xl space-y-8">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <a
+            <Link
               href="/admin"
               className="text-sm font-medium text-blue-700 hover:underline"
             >
               ← Back to Admin
-            </a>
+            </Link>
 
             <h1 className="mt-3 text-3xl font-bold text-gray-900">
               Enterprise Accounts
@@ -604,7 +658,7 @@ export default function AdminEnterprisesPage() {
                 </div>
 
                 <div className="mt-3 space-y-2">
-                  {selectedUsage?.usage_by_agent?.map((item: any) => (
+                  {selectedUsage?.usage_by_agent?.map((item: EnterpriseUsageAgent) => (
                     <div
                       key={item.agent_slug}
                       className="flex justify-between rounded-xl border p-3 text-sm"

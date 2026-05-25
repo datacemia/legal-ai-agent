@@ -2,10 +2,21 @@
 
 import { useEffect, useState } from "react";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || "https://api.runexa.ai";
+
+type ContactRequest = {
+  id: number;
+  full_name: string;
+  email: string;
+  company_name: string | null;
+  company_size: string | null;
+  use_case: string;
+  created_at: string | null;
+};
 
 export default function ContactRequestsPage() {
-  const [requests, setRequests] = useState<any[]>([]);
+  const [requests, setRequests] = useState<ContactRequest[]>([]);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -25,7 +36,7 @@ export default function ContactRequestsPage() {
         if (!res.ok) throw new Error("Not allowed");
         return res.json();
       })
-      .then(setRequests)
+      .then((data: ContactRequest[]) => setRequests(data))
       .catch(() => setMessage("Not allowed or unable to load requests."));
   }, []);
 
