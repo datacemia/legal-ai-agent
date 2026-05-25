@@ -135,7 +135,7 @@ oauth.register(
 async def google_login(request: Request):
     redirect_uri = os.getenv(
         "GOOGLE_REDIRECT_URI",
-        "https://legal-ai-agent-production-fa17.up.railway.app/auth/google/callback"
+        "https://api.runexa.ai/auth/google/callback"
     )
     return await oauth.google.authorize_redirect(request, redirect_uri)
 
@@ -145,7 +145,10 @@ async def google_callback(request: Request, db: Session = Depends(get_db)):
     token = await oauth.google.authorize_access_token(request)
     user_info = token.get("userinfo")
 
-    email = user_info["email"]
+    if not user_info or not user_info.get("email"):
+        raise HTTPException(status_code=400, detail="Google email not found")
+
+    email = user_info["email"].strip().lower()
 
     user = db.query(User).filter(User.email == email).first()
 
@@ -179,7 +182,7 @@ async def google_callback(request: Request, db: Session = Depends(get_db)):
 async def microsoft_login(request: Request):
     redirect_uri = os.getenv(
         "MICROSOFT_REDIRECT_URI",
-        "https://legal-ai-agent-production-fa17.up.railway.app/auth/microsoft/callback"
+        "https://api.runexa.ai/auth/microsoft/callback"
     )
     return await oauth.microsoft.authorize_redirect(request, redirect_uri)
 
@@ -192,6 +195,9 @@ async def microsoft_callback(request: Request, db: Session = Depends(get_db)):
     user_info = resp.json()
 
     email = user_info.get("mail") or user_info.get("userPrincipalName")
+
+    if email:
+        email = email.strip().lower()
 
     if not email:
         raise HTTPException(status_code=400, detail="Microsoft email not found")
