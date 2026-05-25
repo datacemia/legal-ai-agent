@@ -24,27 +24,13 @@ const securityHeaders = [
 ];
 
 const nextConfig = {
+  reactStrictMode: true,
+
   async headers() {
     return [
       {
         source: "/(.*)",
         headers: securityHeaders,
-      },
-    ];
-  },
-
-  async redirects() {
-    return [
-      {
-        source: "/:path*",
-        has: [
-          {
-            type: "host",
-            value: "www.runexa.ai",
-          },
-        ],
-        destination: "https://runexa.ai/:path*",
-        permanent: true,
       },
     ];
   },
