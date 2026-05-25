@@ -1,6 +1,7 @@
 import "./globals.css";
 import AppShell from "../components/AppShell";
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://runexa.ai"),
@@ -90,6 +91,7 @@ export default function RootLayout({
         />
 
         <AppShell>{children}</AppShell>
+        <Analytics />
       </body>
     </html>
   );

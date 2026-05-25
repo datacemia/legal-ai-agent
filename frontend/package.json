@@ -10,6 +10,7 @@
   "dependencies": {
     "@next/third-parties": "^16.2.4",
     "@panzoom/panzoom": "^4.6.2",
+    "@vercel/analytics": "^2.0.1",
     "jspdf": "^4.2.1",
     "lucide-react": "^1.14.0",
     "mermaid": "^11.14.0",
