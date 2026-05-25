@@ -180,7 +180,7 @@ export default function Navbar() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
 
         {/* LOGO */}
-        <Link href="/" className="flex shrink-0 items-center gap-3">
+        <Link href="/" className="flex shrink-0 items-center gap-1.5">
           <Image
             src="/runexa.svg"
             alt="Runexa AI Workspace"
@@ -190,7 +190,7 @@ export default function Navbar() {
             className="h-12 w-auto object-contain"
           />
 
-          <span className="hidden lg:block text-xs font-medium text-slate-500">
+          <span className="hidden lg:block pr-6 text-xs font-medium text-slate-500">
             {navbarSlogan}
           </span>
         </Link>

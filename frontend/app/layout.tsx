@@ -57,24 +57,21 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "Runexa Systems",
-  applicationCategory: "BusinessApplication",
-  operatingSystem: "Web",
+  "@type": "Organization",
+  name: "Runexa Systems LLC",
   url: "https://runexa.ai",
+  logo: "https://runexa.ai/logo.png",
   description:
     "Runexa Systems is an enterprise AI workspace with specialized AI agents for legal analysis, finance, study workflows, AI document analysis, and business intelligence.",
-  publisher: {
-    "@type": "Organization",
-    name: "Runexa Systems LLC",
-    url: "https://runexa.ai",
-  },
-  offers: {
-    "@type": "Offer",
-    price: "1",
-    priceCurrency: "USD",
-    description: "$1 trial per AI agent with global credits and Pro plans.",
-  },
+  knowsAbout: [
+    "Artificial Intelligence",
+    "Enterprise AI",
+    "Legal AI",
+    "Finance AI",
+    "Study AI",
+    "Business Intelligence",
+    "AI Workflow Automation",
+  ],
 };
 
 export default function RootLayout({
@@ -91,6 +88,7 @@ export default function RootLayout({
             __html: JSON.stringify(jsonLd),
           }}
         />
+
         <AppShell>{children}</AppShell>
       </body>
     </html>

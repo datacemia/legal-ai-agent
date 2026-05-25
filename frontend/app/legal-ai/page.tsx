@@ -5,6 +5,17 @@ export const metadata: Metadata = {
   title: "AI Contract Review & Legal Document Analysis | Runexa",
   description:
     "Analyze contracts, detect risky clauses, understand obligations, and get practical recommendations with Runexa Legal Agent.",
+  keywords: [
+    "AI contract review",
+    "AI legal document analysis",
+    "AI contract analyzer",
+    "legal AI software",
+    "contract risk analysis",
+    "AI legal review",
+  ],
+  alternates: {
+    canonical: "https://runexa.ai/legal-ai",
+  },
 };
 
 export default function LegalAIPage() {
@@ -42,14 +53,31 @@ export default function LegalAIPage() {
 
       <section className="mx-auto mt-16 grid max-w-6xl gap-6 md:grid-cols-4">
         {[
-          ["Risky clause detection", "Identify clauses that may create legal, financial, or operational risk."],
-          ["Obligation extraction", "Understand payment terms, deadlines, duties, renewals, and termination rules."],
-          ["Executive summaries", "Get plain-language summaries of complex contracts and agreements."],
-          ["Practical recommendations", "Receive suggested next steps and negotiation points before signing."],
+          [
+            "Risky clause detection",
+            "Identify clauses that may create legal, financial, or operational risk.",
+          ],
+          [
+            "Obligation extraction",
+            "Understand payment terms, deadlines, duties, renewals, and termination rules.",
+          ],
+          [
+            "Executive summaries",
+            "Get plain-language summaries of complex contracts and agreements.",
+          ],
+          [
+            "Practical recommendations",
+            "Receive suggested next steps and negotiation points before signing.",
+          ],
         ].map(([title, desc]) => (
-          <div key={title} className="rounded-2xl border bg-white p-6 shadow-sm">
+          <div
+            key={title}
+            className="rounded-2xl border bg-white p-6 shadow-sm"
+          >
             <h2 className="font-bold">{title}</h2>
-            <p className="mt-3 text-sm leading-6 text-slate-600">{desc}</p>
+            <p className="mt-3 text-sm leading-6 text-slate-600">
+              {desc}
+            </p>
           </div>
         ))}
       </section>
@@ -97,11 +125,33 @@ export default function LegalAIPage() {
           ].map(([q, a]) => (
             <div key={q} className="rounded-2xl bg-slate-50 p-6">
               <h3 className="font-bold">{q}</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">{a}</p>
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                {a}
+              </p>
             </div>
           ))}
         </div>
       </section>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "Runexa Legal Agent",
+            applicationCategory: "BusinessApplication",
+            operatingSystem: "Web",
+            description:
+              "AI contract review and legal document analysis software for risky clause detection, obligation extraction, summaries, and recommendations.",
+            url: "https://runexa.ai/legal-ai",
+            publisher: {
+              "@type": "Organization",
+              name: "Runexa Systems",
+            },
+          }),
+        }}
+      />
     </main>
   );
 }

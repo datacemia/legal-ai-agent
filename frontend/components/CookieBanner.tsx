@@ -3,27 +3,47 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
+type CookiePreferences = {
+  essential: boolean;
+  analytics: boolean;
+  marketing: boolean;
+};
+
 export default function CookieBanner() {
+  const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
 
-  const [preferences, setPreferences] = useState({
+  const [preferences, setPreferences] = useState<
+    Omit<CookiePreferences, "essential">
+  >({
     analytics: false,
     marketing: false,
   });
 
   useEffect(() => {
+    setMounted(true);
+
     const consent = localStorage.getItem("cookie-consent");
+
     if (!consent) {
+      setVisible(true);
+      return;
+    }
+
+    try {
+      const parsed = JSON.parse(consent) as Partial<CookiePreferences>;
+
+      setPreferences({
+        analytics: Boolean(parsed.analytics),
+        marketing: Boolean(parsed.marketing),
+      });
+    } catch {
       setVisible(true);
     }
   }, []);
 
-  const savePreferences = (value: {
-    essential: boolean;
-    analytics: boolean;
-    marketing: boolean;
-  }) => {
+  const savePreferences = (value: CookiePreferences) => {
     localStorage.setItem("cookie-consent", JSON.stringify(value));
 
     window.dispatchEvent(new Event("cookie-consent-change"));
@@ -55,7 +75,7 @@ export default function CookieBanner() {
     });
   };
 
-  if (!visible) return null;
+  if (!mounted || !visible) return null;
 
   return (
     <div className="fixed bottom-4 left-1/2 z-50 w-full max-w-2xl -translate-x-1/2 px-4">
@@ -70,6 +90,13 @@ export default function CookieBanner() {
                 className="font-medium text-slate-900 underline hover:text-black"
               >
                 Privacy Policy
+              </Link>
+              ,{" "}
+              <Link
+                href="/cookie-policy"
+                className="font-medium text-slate-900 underline hover:text-black"
+              >
+                Cookie Policy
               </Link>{" "}
               and{" "}
               <Link
@@ -143,10 +170,10 @@ export default function CookieBanner() {
                   type="checkbox"
                   checked={preferences.analytics}
                   onChange={() =>
-                    setPreferences({
-                      ...preferences,
-                      analytics: !preferences.analytics,
-                    })
+                    setPreferences((current) => ({
+                      ...current,
+                      analytics: !current.analytics,
+                    }))
                   }
                   className="h-4 w-4 shrink-0"
                 />
@@ -165,10 +192,10 @@ export default function CookieBanner() {
                   type="checkbox"
                   checked={preferences.marketing}
                   onChange={() =>
-                    setPreferences({
-                      ...preferences,
-                      marketing: !preferences.marketing,
-                    })
+                    setPreferences((current) => ({
+                      ...current,
+                      marketing: !current.marketing,
+                    }))
                   }
                   className="h-4 w-4 shrink-0"
                 />

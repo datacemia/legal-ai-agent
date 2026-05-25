@@ -30,7 +30,19 @@ export default function Footer() {
 
   const t = translations[locale] || translations.en;
 
-  const legalLabels: any = {
+type LegalLabels = {
+  terms: string;
+  privacy: string;
+  productTerms: string;
+  acceptableUse: string;
+  aiDisclaimer: string;
+  cookies: string;
+  refunds: string;
+  security: string;
+  company: string;
+};
+
+  const legalLabels: Record<string, LegalLabels> = {
     en: {
       terms: "Terms",
       privacy: "Privacy Policy",
@@ -229,7 +241,7 @@ export default function Footer() {
             </p>
 
             <p className="mt-4 text-sm font-medium text-blue-400">
-              {t.developedBy}
+              Built by Dr. Rachid Ejjami
             </p>
           </div>
         </div>
