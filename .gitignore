@@ -105,3 +105,5 @@ backend/quality_audit_report.json
 backend/contract.docx
 backend/statement.pdf
 backend/storage/
+backend/*.xlsx
+backend/*.pdf
