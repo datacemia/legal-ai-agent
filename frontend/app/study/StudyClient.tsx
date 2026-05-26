@@ -161,7 +161,6 @@ const labels: any = {
       savingResult: "Saving study result...",
       savingHistory: "Saving study history...",
     },
-    remaining: "remaining",
     elapsed: "Elapsed",
     studyWorkflow: "Upload → AI study analysis → Personalized revision",
     generateStudyWorkspace:
@@ -252,7 +251,6 @@ const labels: any = {
       savingResult: "Sauvegarde du résultat...",
       savingHistory: "Sauvegarde de l’historique...",
     },
-    remaining: "restantes",
     elapsed: "Temps écoulé",
     studyWorkflow: "Téléversement → Analyse IA → Révision personnalisée",
     generateStudyWorkspace:
@@ -342,7 +340,6 @@ const labels: any = {
       savingResult: "جارٍ حفظ النتيجة...",
       savingHistory: "جارٍ حفظ سجل الدراسة...",
     },
-    remaining: "متبقية",
     elapsed: "الوقت المنقضي",
     studyWorkflow: "رفع الملف → تحليل دراسي بالذكاء الاصطناعي → مراجعة مخصصة",
     generateStudyWorkspace:
@@ -1273,7 +1270,6 @@ export default function StudyClient() {
   const [loading, setLoading] = useState(false);
   const [startTime, setStartTime] = useState<number | null>(null);
   const [elapsed, setElapsed] = useState(0);
-  const [remaining, setRemaining] = useState<number | null>(null);
   const [loadingStep, setLoadingStep] = useState("");
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [paymentMessage, setPaymentMessage] = useState("");
@@ -1315,25 +1311,6 @@ export default function StudyClient() {
     const remainingSeconds = safeSeconds % 60;
 
     return `${minutes}:${String(remainingSeconds).padStart(2, "0")}`;
-  };
-
-  const getEstimatedRemaining = (
-    elapsedSeconds: number,
-    progress: number
-  ) => {
-    if (
-      progress <= 5 ||
-      progress >= 100 ||
-      elapsedSeconds < 8
-    ) {
-      return null;
-    }
-
-    const estimatedTotal = Math.floor(
-      elapsedSeconds / (progress / 100)
-    );
-
-    return Math.max(estimatedTotal - elapsedSeconds, 0);
   };
 
   const featureStyles = [
@@ -1451,13 +1428,10 @@ export default function StudyClient() {
       );
 
       setElapsed(elapsedSec);
-      setRemaining(
-        getEstimatedRemaining(elapsedSec, loadingProgress)
-      );
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [loading, startTime, loadingProgress]);
+  }, [loading, startTime]);
 
   useEffect(() => {
     if (!loading) return;
@@ -1553,7 +1527,6 @@ export default function StudyClient() {
     setLoading(true);
     setStartTime(Date.now());
     setElapsed(0);
-    setRemaining(null);
     setLoadingStep(t.loadingSteps.extracting);
     setLoadingProgress(15);
     setShowLevelModal(false);
@@ -2302,12 +2275,6 @@ export default function StudyClient() {
                 <span>
                   {t.elapsed}: {formatDuration(elapsed)}
                 </span>
-
-                {remaining !== null && (
-                  <span>
-                    ⏳ {t.remaining}: {formatDuration(remaining)}
-                  </span>
-                )}
               </div>
             </div>
           )}
