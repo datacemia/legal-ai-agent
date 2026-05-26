@@ -107,3 +107,7 @@ backend/statement.pdf
 backend/storage/
 backend/*.xlsx
 backend/*.pdf
+.env.production
+.env.development
+.env.test
+*.env
