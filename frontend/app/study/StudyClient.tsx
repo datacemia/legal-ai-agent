@@ -1277,7 +1277,7 @@ export default function StudyClient() {
   const [loading, setLoading] = useState(false);
   const [startTime, setStartTime] = useState<number | null>(null);
   const [elapsed, setElapsed] = useState(0);
-  const [remaining, setRemaining] = useState(360);
+  const [remaining, setRemaining] = useState<number | null>(null);
   const [loadingStep, setLoadingStep] = useState("");
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [paymentMessage, setPaymentMessage] = useState("");
@@ -1312,6 +1312,33 @@ export default function StudyClient() {
   const primaryCtaLabel = hasActiveAccess
     ? t.analyze
     : t.startTrial;
+
+  const formatDuration = (seconds: number) => {
+    const safeSeconds = Math.max(0, Math.floor(seconds));
+    const minutes = Math.floor(safeSeconds / 60);
+    const remainingSeconds = safeSeconds % 60;
+
+    return `${minutes}:${String(remainingSeconds).padStart(2, "0")}`;
+  };
+
+  const getEstimatedRemaining = (
+    elapsedSeconds: number,
+    progress: number
+  ) => {
+    if (
+      progress <= 5 ||
+      progress >= 100 ||
+      elapsedSeconds < 8
+    ) {
+      return null;
+    }
+
+    const estimatedTotal = Math.floor(
+      elapsedSeconds / (progress / 100)
+    );
+
+    return Math.max(estimatedTotal - elapsedSeconds, 0);
+  };
 
   const featureStyles = [
     {
@@ -1423,13 +1450,18 @@ export default function StudyClient() {
     if (!loading || !startTime) return;
 
     const interval = setInterval(() => {
-      const elapsedSec = Math.floor((Date.now() - startTime) / 1000);
+      const elapsedSec = Math.floor(
+        (Date.now() - startTime) / 1000
+      );
+
       setElapsed(elapsedSec);
-      setRemaining(Math.max(360 - elapsedSec, 0));
+      setRemaining(
+        getEstimatedRemaining(elapsedSec, loadingProgress)
+      );
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [loading, startTime]);
+  }, [loading, startTime, loadingProgress]);
 
   useEffect(() => {
     if (!loading) return;
@@ -1525,7 +1557,7 @@ export default function StudyClient() {
     setLoading(true);
     setStartTime(Date.now());
     setElapsed(0);
-    setRemaining(360);
+    setRemaining(null);
     setLoadingStep(t.loadingSteps.extracting);
     setLoadingProgress(15);
     setShowLevelModal(false);
@@ -2265,19 +2297,21 @@ export default function StudyClient() {
                 <div
                   className="h-full bg-blue-600 transition-all duration-700"
                   style={{
-                    width: `${Math.max(
-                      loadingProgress,
-                      Math.min((elapsed / 90) * 100, 95)
-                    )}%`,
+                    width: `${loadingProgress}%`,
                   }}
                 />
               </div>
 
-              <div className="mt-2 flex justify-between text-xs text-slate-500">
+              <div className="mt-2 flex flex-wrap justify-between gap-3 text-xs text-slate-500">
                 <span>
-                  ⏳ {remaining > 0 ? `${remaining}s ${t.remaining}` : t.loadingSteps.finalizing}
+                  {t.elapsed}: {formatDuration(elapsed)}
                 </span>
-                <span>{t.elapsed}: {elapsed}s</span>
+
+                {remaining !== null && (
+                  <span>
+                    ⏳ {t.remaining}: {formatDuration(remaining)}
+                  </span>
+                )}
               </div>
             </div>
           )}
