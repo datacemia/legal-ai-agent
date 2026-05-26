@@ -3,6 +3,11 @@ import os
 from dotenv import load_dotenv
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from slowapi import Limiter
+from slowapi.errors import RateLimitExceeded
+from slowapi.middleware import SlowAPIMiddleware
+from slowapi.util import get_remote_address
+from slowapi import _rate_limit_exceeded_handler
 from starlette.middleware.sessions import SessionMiddleware
 
 load_dotenv()
@@ -57,6 +62,17 @@ app = FastAPI(
     title="Legal AI Agent API",
     version="1.0.0",
 )
+
+limiter = Limiter(key_func=get_remote_address)
+
+app.state.limiter = limiter
+
+app.add_exception_handler(
+    RateLimitExceeded,
+    _rate_limit_exceeded_handler,
+)
+
+app.add_middleware(SlowAPIMiddleware)
 
 
 @app.middleware("http")
@@ -145,14 +161,16 @@ app.include_router(enterprise_agent_access_router)
 
 
 @app.get("/")
-def root():
+@limiter.limit("60/minute")
+def root(request: Request):
     return {
         "message": "Legal AI Agent API is running",
     }
 
 
 @app.get("/health")
-def health_check():
+@limiter.limit("60/minute")
+def health_check(request: Request):
     return {
         "status": "ok",
     }
