@@ -25,33 +25,112 @@ router = APIRouter(prefix="/auth", tags=["Auth"])
 
 RATE_LIMIT_SECONDS = 60
 
-# ================= AJOUT =================
-LOGIN_ATTEMPTS = {}
-MAX_LOGIN_ATTEMPTS = 5
-LOGIN_WINDOW_SECONDS = 60
+# ================= RATE LIMITING =================
+
+RATE_LIMIT_BUCKETS: dict[str, list[datetime]] = {}
+
+RATE_LIMITS = {
+    "login": {
+        "max_attempts": 5,
+        "window_seconds": 60,
+    },
+    "token": {
+        "max_attempts": 5,
+        "window_seconds": 60,
+    },
+    "register": {
+        "max_attempts": 3,
+        "window_seconds": 60,
+    },
+    "resend_verification": {
+        "max_attempts": 3,
+        "window_seconds": 60,
+    },
+    "forgot_password": {
+        "max_attempts": 3,
+        "window_seconds": 60,
+    },
+    "reset_password": {
+        "max_attempts": 5,
+        "window_seconds": 60,
+    },
+    "oauth_login": {
+        "max_attempts": 20,
+        "window_seconds": 60,
+    },
+}
 
 
-def check_login_rate_limit(email: str):
+def get_client_ip(request: Request) -> str:
+    forwarded_for = request.headers.get("x-forwarded-for")
+
+    if forwarded_for:
+        return forwarded_for.split(",")[0].strip()
+
+    if request.client and request.client.host:
+        return request.client.host
+
+    return "unknown"
+
+
+def check_rate_limit(
+    action: str,
+    identifier: str,
+    max_attempts: int,
+    window_seconds: int,
+):
     now = datetime.utcnow()
-    email = email.strip().lower()
+    safe_identifier = str(identifier or "anonymous").strip().lower()
+    bucket_key = f"{action}:{safe_identifier}"
 
-    attempts = LOGIN_ATTEMPTS.get(email, [])
+    attempts = RATE_LIMIT_BUCKETS.get(bucket_key, [])
     attempts = [
-        attempt for attempt in attempts
-        if (now - attempt).total_seconds() < LOGIN_WINDOW_SECONDS
+        attempt
+        for attempt in attempts
+        if (now - attempt).total_seconds() < window_seconds
     ]
 
-    if len(attempts) >= MAX_LOGIN_ATTEMPTS:
+    if len(attempts) >= max_attempts:
         raise HTTPException(
             status_code=429,
-            detail="Too many login attempts. Please try again later.",
+            detail="Too many requests. Please try again later.",
         )
 
     attempts.append(now)
-    LOGIN_ATTEMPTS[email] = attempts
-# ================= FIN AJOUT =================
+    RATE_LIMIT_BUCKETS[bucket_key] = attempts
 
 
+def check_login_rate_limit(email: str):
+    limits = RATE_LIMITS["login"]
+
+    check_rate_limit(
+        action="login",
+        identifier=email,
+        max_attempts=limits["max_attempts"],
+        window_seconds=limits["window_seconds"],
+    )
+
+
+def check_ip_rate_limit(action: str, request: Request):
+    limits = RATE_LIMITS[action]
+
+    check_rate_limit(
+        action=action,
+        identifier=get_client_ip(request),
+        max_attempts=limits["max_attempts"],
+        window_seconds=limits["window_seconds"],
+    )
+
+
+def check_email_rate_limit(action: str, email: str):
+    limits = RATE_LIMITS[action]
+
+    check_rate_limit(
+        action=action,
+        identifier=email,
+        max_attempts=limits["max_attempts"],
+        window_seconds=limits["window_seconds"],
+    )
 
 
 def auto_accept_enterprise_invites_for_user(db: Session, user: User):
@@ -133,10 +212,13 @@ oauth.register(
 
 @router.get("/google/login")
 async def google_login(request: Request):
+    check_ip_rate_limit("oauth_login", request)
+
     redirect_uri = os.getenv(
         "GOOGLE_REDIRECT_URI",
-        "https://api.runexa.ai/auth/google/callback"
+        "https://api.runexa.ai/auth/google/callback",
     )
+
     return await oauth.google.authorize_redirect(request, redirect_uri)
 
 
@@ -180,10 +262,13 @@ async def google_callback(request: Request, db: Session = Depends(get_db)):
 
 @router.get("/microsoft/login")
 async def microsoft_login(request: Request):
+    check_ip_rate_limit("oauth_login", request)
+
     redirect_uri = os.getenv(
         "MICROSOFT_REDIRECT_URI",
-        "https://api.runexa.ai/auth/microsoft/callback"
+        "https://api.runexa.ai/auth/microsoft/callback",
     )
+
     return await oauth.microsoft.authorize_redirect(request, redirect_uri)
 
 
@@ -312,13 +397,15 @@ def send_reset_email(to_email: str, token: str):
     msg["From"] = f"{from_name} <{from_email}>"
     msg["To"] = to_email
 
-    msg.set_content(f"""
+    msg.set_content(
+        f"""
 Reset your password:
 
 {reset_url}
 
 If you did not request this, ignore this email.
-""")
+"""
+    )
 
     context = ssl.create_default_context()
 
@@ -336,7 +423,14 @@ If you did not request this, ignore this email.
 # ================= REGISTER =================
 
 @router.post("/register", response_model=UserResponse)
-def register(user: UserCreate, db: Session = Depends(get_db)):
+def register(
+    request: Request,
+    user: UserCreate,
+    db: Session = Depends(get_db),
+):
+    check_ip_rate_limit("register", request)
+    check_email_rate_limit("register", user.email)
+
     existing_user = db.query(User).filter(User.email == user.email).first()
 
     if existing_user:
@@ -386,7 +480,12 @@ def verify_email(token: str, db: Session = Depends(get_db)):
 # ================= LOGIN =================
 
 @router.post("/login", response_model=TokenResponse)
-def login(user: UserLogin, db: Session = Depends(get_db)):
+def login(
+    request: Request,
+    user: UserLogin,
+    db: Session = Depends(get_db),
+):
+    check_ip_rate_limit("login", request)
     check_login_rate_limit(user.email)
 
     existing_user = db.query(User).filter(User.email == user.email).first()
@@ -414,10 +513,12 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
 
 @router.post("/token")
 def token_login(
+    request: Request,
     form_data: OAuth2PasswordRequestForm = Depends(),
     db: Session = Depends(get_db),
 ):
-    check_login_rate_limit(form_data.username)
+    check_ip_rate_limit("token", request)
+    check_email_rate_limit("token", form_data.username)
 
     existing_user = db.query(User).filter(User.email == form_data.username).first()
 
@@ -444,8 +545,17 @@ def token_login(
 # ================= RESEND VERIFICATION =================
 
 @router.post("/resend-verification")
-def resend_verification(payload: dict, db: Session = Depends(get_db)):
-    email = payload.get("email", "").strip()
+def resend_verification(
+    request: Request,
+    payload: dict,
+    db: Session = Depends(get_db),
+):
+    email = payload.get("email", "").strip().lower()
+
+    check_ip_rate_limit("resend_verification", request)
+
+    if email:
+        check_email_rate_limit("resend_verification", email)
 
     user = db.query(User).filter(User.email == email).first()
 
@@ -476,8 +586,17 @@ def resend_verification(payload: dict, db: Session = Depends(get_db)):
 # ================= FORGOT PASSWORD =================
 
 @router.post("/forgot-password")
-def forgot_password(payload: dict, db: Session = Depends(get_db)):
+def forgot_password(
+    request: Request,
+    payload: dict,
+    db: Session = Depends(get_db),
+):
     email = payload.get("email", "").strip().lower()
+
+    check_ip_rate_limit("forgot_password", request)
+
+    if email:
+        check_email_rate_limit("forgot_password", email)
 
     user = db.query(User).filter(User.email == email).first()
 
@@ -504,7 +623,13 @@ def forgot_password(payload: dict, db: Session = Depends(get_db)):
 
 
 @router.post("/reset-password")
-def reset_password(payload: dict, db: Session = Depends(get_db)):
+def reset_password(
+    request: Request,
+    payload: dict,
+    db: Session = Depends(get_db),
+):
+    check_ip_rate_limit("reset_password", request)
+
     token = payload.get("token")
     new_password = payload.get("password")
 
