@@ -1,7 +1,7 @@
 import json
 from datetime import datetime
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 
 from app.database import get_db
@@ -30,43 +30,113 @@ LEGAL_AGENT_CREDITS = 8
 # =========================
 # RATE LIMIT
 # =========================
+
 ANALYSIS_ATTEMPTS = {}
-MAX_ANALYSIS_ATTEMPTS = 20
+
+MAX_ANALYSIS_ATTEMPTS = 10
 ANALYSIS_WINDOW_SECONDS = 60
 
+MAX_HISTORY_REQUESTS = 30
+HISTORY_WINDOW_SECONDS = 60
 
-def check_analysis_rate_limit(user_id: int):
+MAX_FETCH_REQUESTS = 60
+FETCH_WINDOW_SECONDS = 60
+
+
+def get_client_identifier(request: Request, user_id: int):
+    forwarded_for = request.headers.get("x-forwarded-for")
+
+    if forwarded_for:
+        ip = forwarded_for.split(",")[0].strip()
+    elif request.client and request.client.host:
+        ip = request.client.host
+    else:
+        ip = "unknown"
+
+    return f"{user_id}:{ip}"
+
+
+def cleanup_attempts(attempts, window_seconds):
     now = datetime.utcnow()
 
-    attempts = ANALYSIS_ATTEMPTS.get(user_id, [])
-
-    attempts = [
+    return [
         attempt
         for attempt in attempts
-        if (now - attempt).total_seconds() < ANALYSIS_WINDOW_SECONDS
+        if (now - attempt).total_seconds() < window_seconds
     ]
 
-    if len(attempts) >= MAX_ANALYSIS_ATTEMPTS:
+
+def check_rate_limit(
+    bucket_name: str,
+    identifier: str,
+    max_attempts: int,
+    window_seconds: int,
+):
+    now = datetime.utcnow()
+
+    bucket_key = f"{bucket_name}:{identifier}"
+
+    attempts = ANALYSIS_ATTEMPTS.get(bucket_key, [])
+
+    attempts = cleanup_attempts(attempts, window_seconds)
+
+    if len(attempts) >= max_attempts:
         raise HTTPException(
             status_code=429,
-            detail="Too many analyses. Please try again later.",
+            detail="Too many requests. Please try again later.",
         )
 
     attempts.append(now)
-    ANALYSIS_ATTEMPTS[user_id] = attempts
+
+    ANALYSIS_ATTEMPTS[bucket_key] = attempts
+
+
+def check_analysis_rate_limit(request: Request, user_id: int):
+    identifier = get_client_identifier(request, user_id)
+
+    check_rate_limit(
+        bucket_name="analysis",
+        identifier=identifier,
+        max_attempts=MAX_ANALYSIS_ATTEMPTS,
+        window_seconds=ANALYSIS_WINDOW_SECONDS,
+    )
+
+
+def check_history_rate_limit(request: Request, user_id: int):
+    identifier = get_client_identifier(request, user_id)
+
+    check_rate_limit(
+        bucket_name="history",
+        identifier=identifier,
+        max_attempts=MAX_HISTORY_REQUESTS,
+        window_seconds=HISTORY_WINDOW_SECONDS,
+    )
+
+
+def check_fetch_rate_limit(request: Request, user_id: int):
+    identifier = get_client_identifier(request, user_id)
+
+    check_rate_limit(
+        bucket_name="fetch",
+        identifier=identifier,
+        max_attempts=MAX_FETCH_REQUESTS,
+        window_seconds=FETCH_WINDOW_SECONDS,
+    )
 
 
 # =========================
 # RUN ANALYSIS ASYNC JOB
 # =========================
+
 @router.post("/{document_id}/run")
 def run_analysis(
+    request: Request,
     document_id: int,
     output_language: str = "en",
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    check_analysis_rate_limit(current_user.id)
+    check_analysis_rate_limit(request, current_user.id)
 
     document = db.query(Document).filter(Document.id == document_id).first()
 
@@ -116,16 +186,21 @@ def run_analysis(
             document.file_path,
             document.file_type,
         )
+
         document_text = clean_text(raw_text)
+
     except Exception as e:
         document.status = "failed"
+
         db.commit()
+
         raise HTTPException(
             status_code=400,
             detail=f"Could not read uploaded file: {str(e)}",
         )
 
     document.status = "processing"
+
     db.commit()
     db.refresh(document)
 
@@ -145,6 +220,7 @@ def run_analysis(
     )
 
     db.add(job)
+
     db.commit()
     db.refresh(job)
 
@@ -160,11 +236,15 @@ def run_analysis(
 # This route must stay BEFORE '/{document_id}'.
 # Otherwise FastAPI may interpret 'history' as document_id.
 # =========================
+
 @router.get("/history")
 def get_analysis_history(
+    request: Request,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
+    check_history_rate_limit(request, current_user.id)
+
     analyses = (
         db.query(AnalysisResult)
         .join(Document, Document.id == AnalysisResult.document_id)
@@ -181,6 +261,7 @@ def get_analysis_history(
         if isinstance(clauses, str):
             try:
                 clauses = json.loads(clauses)
+
             except Exception:
                 clauses = []
 
@@ -207,12 +288,16 @@ def get_analysis_history(
 # =========================
 # GET ANALYSIS
 # =========================
+
 @router.get("/{document_id}", response_model=AnalysisResponse)
 def get_analysis(
+    request: Request,
     document_id: int,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
+    check_fetch_rate_limit(request, current_user.id)
+
     document = db.query(Document).filter(Document.id == document_id).first()
 
     if not document:
