@@ -1,21 +1,23 @@
 import type { Metadata } from "next";
 import AIDisclaimerClient from "./AIDisclaimerClient";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "AI Disclaimer & Transparency | Runexa",
 
   description:
-    "Transparency and AI limitation disclosures for Runexa AI systems, APIs, workflows, and intelligent agents.",
+    "Review Runexa Systems AI disclaimer and transparency information regarding AI-generated outputs, limitations, human review requirements, and enterprise AI usage.",
 
   keywords: [
     "AI disclaimer",
     "AI transparency",
     "AI limitations",
-    "AI policy",
     "AI compliance",
     "enterprise AI disclaimer",
     "AI governance",
-    "Runexa AI",
+    "AI risk disclosure",
+    "Runexa AI policy",
   ],
 
   alternates: {
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
     title: "AI Disclaimer & Transparency | Runexa",
 
     description:
-      "Review AI transparency notices, limitations, and enterprise AI governance information for Runexa AI systems.",
+      "Review AI transparency, limitations, and human review requirements for Runexa Systems AI services and enterprise platforms.",
 
     url: "https://runexa.ai/legal/ai-disclaimer",
 
@@ -52,7 +54,7 @@ export const metadata: Metadata = {
     title: "AI Disclaimer & Transparency | Runexa",
 
     description:
-      "Review AI transparency, limitations, and governance information for Runexa AI systems and enterprise workflows.",
+      "Review AI limitations, transparency notices, and human review requirements for Runexa AI systems.",
 
     images: ["/og-image.png"],
   },
@@ -79,7 +81,7 @@ export default function AIDisclaimerPage() {
             name: "Runexa AI Disclaimer & Transparency",
 
             description:
-              "AI transparency and limitation disclosures for Runexa AI systems, APIs, enterprise workflows, and intelligent services.",
+              "AI disclaimer and transparency information governing the use of Runexa AI systems, enterprise platforms, APIs, and intelligent services.",
 
             url: "https://runexa.ai/legal/ai-disclaimer",
 
