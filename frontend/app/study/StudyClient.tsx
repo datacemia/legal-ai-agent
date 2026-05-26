@@ -20,7 +20,6 @@ const safeSetLocalStorage = (key: string, value: string) => {
   localStorage.setItem(key, value);
 };
 
-
 const LEVEL_LABELS: any = {
   en: {
     primary_school: "Primary school",
@@ -398,7 +397,6 @@ function findDiagramExplanation(
   return matchedEntry ? String(matchedEntry[1]) : null;
 }
 
-
 function sanitizeDiagramTitle(value: string, language: string) {
   const fallback =
     language === "ar"
@@ -538,7 +536,6 @@ function buildDiagramExplanationsForFixedRoot(
     [title]: genericExplanation,
   };
 }
-
 
 type VisualSummaryBlock = {
   title: string;
@@ -1269,7 +1266,6 @@ function resolveAudioUrl(payload: any): string {
 
   return "";
 }
-
 
 export default function StudyClient() {
   const [file, setFile] = useState<File | null>(null);
