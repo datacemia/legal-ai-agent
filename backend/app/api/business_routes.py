@@ -1,6 +1,7 @@
 import json
+from datetime import datetime
 
-from fastapi import APIRouter, UploadFile, File, Form, HTTPException, Depends
+from fastapi import APIRouter, UploadFile, File, Form, HTTPException, Depends, Request
 from sqlalchemy.orm import Session
 
 from app.database import get_db
@@ -29,6 +30,51 @@ router = APIRouter(
 
 BUSINESS_AGENT_CREDITS = 30
 
+MAX_BUSINESS_UPLOAD_BYTES = 10 * 1024 * 1024
+
+RATE_LIMIT_BUCKETS: dict[str, list[datetime]] = {}
+
+RATE_LIMITS = {
+    "business_analyze": {"max_attempts": 5, "window_seconds": 60},
+    "business_history": {"max_attempts": 40, "window_seconds": 60},
+}
+
+
+def get_client_identifier(request: Request, user_id: int):
+    forwarded_for = request.headers.get("x-forwarded-for")
+
+    if forwarded_for:
+        ip = forwarded_for.split(",")[0].strip()
+    elif request.client and request.client.host:
+        ip = request.client.host
+    else:
+        ip = "unknown"
+
+    return f"{user_id}:{ip}"
+
+
+def check_rate_limit(action: str, request: Request, user_id: int):
+    now = datetime.utcnow()
+    config = RATE_LIMITS[action]
+    identifier = get_client_identifier(request, user_id)
+    bucket_key = f"{action}:{identifier}"
+
+    attempts = RATE_LIMIT_BUCKETS.get(bucket_key, [])
+    attempts = [
+        attempt
+        for attempt in attempts
+        if (now - attempt).total_seconds() < config["window_seconds"]
+    ]
+
+    if len(attempts) >= config["max_attempts"]:
+        raise HTTPException(
+            status_code=429,
+            detail="Too many requests. Please try again later.",
+        )
+
+    attempts.append(now)
+    RATE_LIMIT_BUCKETS[bucket_key] = attempts
+
 
 def _make_json_safe(value):
     return json.loads(
@@ -42,11 +88,14 @@ def _make_json_safe(value):
 
 @router.post("/analyze")
 async def analyze_business(
+    request: Request,
     file: UploadFile = File(...),
     output_language: str = Form("en"),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
+    check_rate_limit("business_analyze", request, current_user.id)
+
     if output_language not in ["en", "fr", "ar"]:
         output_language = "en"
 
@@ -60,6 +109,16 @@ async def analyze_business(
             status_code=400,
             detail="Only CSV or Excel (.xlsx) files are supported.",
         )
+
+    content = await file.read()
+
+    if len(content) > MAX_BUSINESS_UPLOAD_BYTES:
+        raise HTTPException(
+            status_code=413,
+            detail="File is too large. Maximum allowed size is 10 MB.",
+        )
+
+    await file.seek(0)
 
     enterprise_context = check_enterprise_agent_access(
         db=db,
@@ -143,9 +202,12 @@ async def analyze_business(
 
 @router.get("/history", response_model=list[BusinessHistoryItem])
 def get_business_history(
+    request: Request,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
+    check_rate_limit("business_history", request, current_user.id)
+
     analyses = (
         db.query(BusinessAnalysis)
         .filter(BusinessAnalysis.user_id == current_user.id)

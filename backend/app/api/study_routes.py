@@ -1,10 +1,11 @@
 import hashlib
 import json
 import time
+from datetime import datetime
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 
-from fastapi import APIRouter, UploadFile, File, Form, HTTPException, Depends
+from fastapi import APIRouter, UploadFile, File, Form, HTTPException, Depends, Request
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
@@ -27,6 +28,19 @@ from app.services.enterprise_service import (
 router = APIRouter(prefix="/study", tags=["Study"])
 
 STUDY_AGENT_CREDITS = 3
+
+MAX_STUDY_UPLOAD_BYTES = 15 * 1024 * 1024
+MAX_STUDY_AUDIO_TEXT_CHARS = 12000
+
+RATE_LIMIT_BUCKETS: dict[str, list[datetime]] = {}
+
+RATE_LIMITS = {
+    "study_analyze": {"max_attempts": 8, "window_seconds": 60},
+    "study_audio": {"max_attempts": 10, "window_seconds": 60},
+    "study_attempt": {"max_attempts": 30, "window_seconds": 60},
+    "study_history": {"max_attempts": 40, "window_seconds": 60},
+    "study_weak_points": {"max_attempts": 40, "window_seconds": 60},
+}
 
 
 # =========================
@@ -52,6 +66,42 @@ class StudyAudioPayload(BaseModel):
     text: str
     language: str = "en"
     voice: Optional[str] = None
+
+
+def get_client_identifier(request: Request, user_id: int):
+    forwarded_for = request.headers.get("x-forwarded-for")
+
+    if forwarded_for:
+        ip = forwarded_for.split(",")[0].strip()
+    elif request.client and request.client.host:
+        ip = request.client.host
+    else:
+        ip = "unknown"
+
+    return f"{user_id}:{ip}"
+
+
+def check_rate_limit(action: str, request: Request, user_id: int):
+    now = datetime.utcnow()
+    config = RATE_LIMITS[action]
+    identifier = get_client_identifier(request, user_id)
+    bucket_key = f"{action}:{identifier}"
+
+    attempts = RATE_LIMIT_BUCKETS.get(bucket_key, [])
+    attempts = [
+        attempt
+        for attempt in attempts
+        if (now - attempt).total_seconds() < config["window_seconds"]
+    ]
+
+    if len(attempts) >= config["max_attempts"]:
+        raise HTTPException(
+            status_code=429,
+            detail="Too many requests. Please try again later.",
+        )
+
+    attempts.append(now)
+    RATE_LIMIT_BUCKETS[bucket_key] = attempts
 
 
 def make_study_cache_key(
@@ -151,16 +201,30 @@ def save_study_result_cache(cache_key: str, result: dict):
 # =========================
 @router.post("/analyze")
 async def analyze_study(
+    request: Request,
     file: UploadFile = File(...),
     education_level: str = Form(...),
     output_language: str = Form("en"),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
+    check_rate_limit("study_analyze", request, current_user.id)
+
+    if output_language not in ["en", "fr", "ar"]:
+        output_language = "en"
+
     if not file.filename or not file.filename.lower().endswith((".pdf", ".docx")):
         raise HTTPException(
             status_code=400,
             detail="Only PDF and DOCX files are allowed.",
+        )
+
+    file_bytes = await file.read()
+
+    if len(file_bytes) > MAX_STUDY_UPLOAD_BYTES:
+        raise HTTPException(
+            status_code=413,
+            detail="File is too large. Maximum allowed size is 15 MB.",
         )
 
     enterprise_context = check_enterprise_agent_access(
@@ -188,8 +252,6 @@ async def analyze_study(
             user=current_user,
             agent_slug="study",
         )
-
-    file_bytes = await file.read()
 
     user_weak_points = get_user_weak_points(db, current_user.id)
 
@@ -249,10 +311,13 @@ async def analyze_study(
 # =========================
 @router.post("/attempt")
 def save_study_attempt(
+    request: Request,
     payload: StudyAttemptPayload,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
+    check_rate_limit("study_attempt", request, current_user.id)
+
     weak_points = []
 
     for answer in payload.answers:
@@ -290,9 +355,12 @@ def save_study_attempt(
 # =========================
 @router.get("/weak-points")
 def get_study_weak_points(
+    request: Request,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
+    check_rate_limit("study_weak_points", request, current_user.id)
+
     attempts = (
         db.query(StudyAttempt)
         .filter(StudyAttempt.user_id == current_user.id)
@@ -337,10 +405,22 @@ def get_study_weak_points(
 # =========================
 @router.post("/audio")
 def generate_audio(
+    request: Request,
     payload: StudyAudioPayload,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
+    check_rate_limit("study_audio", request, current_user.id)
+
+    if not payload.text.strip():
+        raise HTTPException(status_code=400, detail="Text is required.")
+
+    if len(payload.text) > MAX_STUDY_AUDIO_TEXT_CHARS:
+        raise HTTPException(
+            status_code=413,
+            detail="Audio text is too long. Please shorten the content.",
+        )
+
     try:
         job = create_job(
             db=db,
@@ -372,9 +452,12 @@ def generate_audio(
 # =========================
 @router.get("/history", response_model=list[StudyHistoryItem])
 def get_study_history(
+    request: Request,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
+    check_rate_limit("study_history", request, current_user.id)
+
     analyses = (
         db.query(StudyAnalysis)
         .filter(StudyAnalysis.user_id == current_user.id)
