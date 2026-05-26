@@ -96,7 +96,7 @@ export default function DashboardPage() {
         const token = getToken();
 
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000"}/users/me`,
+          `${process.env.NEXT_PUBLIC_API_URL || "https://api.runexa.ai"}/users/me`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

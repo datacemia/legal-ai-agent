@@ -1,11 +1,92 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { Metadata } from "next";
 import {
   defaultLocale,
   getSavedLocale,
   getTranslations,
 } from "../../../lib/i18n";
+
+export const metadata: Metadata = {
+  title: "Cookie Policy | Runexa Systems",
+
+  description:
+    "Review the Cookie Policy for Runexa Systems LLC, including how cookies, analytics, security technologies, and related services are used across our AI platforms and enterprise infrastructure.",
+
+  keywords: [
+    "cookie policy",
+    "Runexa cookies",
+    "AI platform cookies",
+    "analytics cookies",
+    "security cookies",
+    "enterprise AI compliance",
+    "Runexa privacy",
+  ],
+
+  alternates: {
+    canonical: "https://runexa.ai/legal/cookies",
+  },
+
+  openGraph: {
+    title: "Cookie Policy | Runexa Systems",
+
+    description:
+      "Review the Cookie Policy governing cookies, analytics, and security technologies used by Runexa Systems LLC.",
+
+    url: "https://runexa.ai/legal/cookies",
+
+    siteName: "Runexa Systems",
+
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Runexa Cookie Policy",
+      },
+    ],
+
+    locale: "en_US",
+
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+
+    title: "Cookie Policy | Runexa Systems",
+
+    description:
+      "Review how cookies, analytics, and security technologies are used across Runexa AI services and platforms.",
+
+    images: ["/og-image.png"],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+
+  "@type": "WebPage",
+
+  name: "Runexa Cookie Policy",
+
+  description:
+    "Cookie Policy governing cookies, analytics technologies, and security-related technologies used by Runexa Systems LLC.",
+
+  url: "https://runexa.ai/legal/cookies",
+
+  publisher: {
+    "@type": "Organization",
+    name: "Runexa Systems LLC",
+    url: "https://runexa.ai",
+  },
+};
 
 export default function CookiePolicyClient() {
   const [locale, setLocale] = useState(defaultLocale);
@@ -21,13 +102,20 @@ export default function CookiePolicyClient() {
       dir={locale === "ar" ? "rtl" : "ltr"}
       className="min-h-screen bg-slate-50 px-4 py-12"
     >
-      <div className="max-w-3xl mx-auto bg-white p-8 rounded-3xl border shadow-sm space-y-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd),
+        }}
+      />
+
+      <div className="mx-auto max-w-3xl space-y-8 rounded-3xl border bg-white p-8 shadow-sm">
         <div>
           <h1 className="text-3xl font-bold text-slate-900">
             {t.cookiesTitle || "Cookie Policy"}
           </h1>
 
-          <p className="text-sm text-slate-500 mt-2">
+          <p className="mt-2 text-sm text-slate-500">
             {t.cookiesUpdated || "Last updated: May 2026"}
           </p>
         </div>
@@ -63,7 +151,7 @@ export default function CookiePolicyClient() {
             {t.cookiesEssentialTitle || "3.1 Essential Cookies"}
           </h3>
 
-          <p className="text-slate-600 mt-1">
+          <p className="mt-1 text-slate-600">
             {t.cookiesEssentialText ||
               "These cookies are necessary for the operation of the services, including authentication, account access, security, and session management."}
           </p>
@@ -73,7 +161,7 @@ export default function CookiePolicyClient() {
               "3.2 Performance and Analytics Cookies"}
           </h3>
 
-          <p className="text-slate-600 mt-1">
+          <p className="mt-1 text-slate-600">
             {t.cookiesAnalyticsText ||
               "These cookies help us understand how users interact with the platform, improve reliability, monitor performance, and detect technical issues."}
           </p>
@@ -82,7 +170,7 @@ export default function CookiePolicyClient() {
             {t.cookiesPreferenceTitle || "3.3 Preference Cookies"}
           </h3>
 
-          <p className="text-slate-600 mt-1">
+          <p className="mt-1 text-slate-600">
             {t.cookiesPreferenceText ||
               "These cookies may store user preferences such as language settings, interface preferences, or session-related choices."}
           </p>
@@ -91,9 +179,9 @@ export default function CookiePolicyClient() {
             {t.cookiesSecurityTitle || "3.4 Security Cookies"}
           </h3>
 
-          <p className="text-slate-600 mt-1">
+          <p className="mt-1 text-slate-600">
             {t.cookiesSecurityText ||
-              "Security-related cookies may be used to prevent fraud, abuse, unauthorized access, and suspicious activity."}
+              "Security-related cookies may be used to prevent fraud, abuse, unauthorized access, suspicious activity, rate limiting, and platform reliability."}
           </p>
         </section>
 
@@ -104,7 +192,7 @@ export default function CookiePolicyClient() {
 
           <p className="mt-2 text-slate-600">
             {t.cookiesThirdPartyText ||
-              "Some cookies may be placed by third-party providers that support infrastructure, analytics, authentication, hosting, AI processing, or payment services used by Runexa Systems LLC."}
+              "Some cookies may be placed by third-party providers that support infrastructure, analytics, authentication, hosting, AI processing, payment services, security, or operational reliability used by Runexa Systems LLC."}
           </p>
         </section>
 

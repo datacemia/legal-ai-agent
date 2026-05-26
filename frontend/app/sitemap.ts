@@ -31,7 +31,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
 
     {
+      url: "https://runexa.ai/finance",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+
+    {
       url: "https://runexa.ai/study-ai",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+
+    {
+      url: "https://runexa.ai/study",
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
@@ -45,10 +59,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
 
     {
+      url: "https://runexa.ai/business",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+
+    {
       url: "https://runexa.ai/enterprise-ai",
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.9,
+    },
+
+    {
+      url: "https://runexa.ai/enterprise",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+
+    {
+      url: "https://runexa.ai/labs/agent-0",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
     },
 
     {
@@ -122,10 +157,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
 
     {
-      url: "https://runexa.ai/enterprise",
+      url: "https://runexa.ai/contact-entreprise/contact",
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 0.8,
+      priority: 0.7,
     },
 
     {
@@ -150,35 +185,42 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
 
     {
-      url: "https://runexa.ai/ai-disclaimer",
+      url: "https://runexa.ai/products/ai-legal-agent/terms",
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.6,
     },
 
     {
-      url: "https://runexa.ai/product-terms",
+      url: "https://runexa.ai/legal/acceptable-use",
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.6,
     },
 
     {
-      url: "https://runexa.ai/cookie-policy",
+      url: "https://runexa.ai/legal/ai-disclaimer",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+
+    {
+      url: "https://runexa.ai/legal/cookies",
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.5,
     },
 
     {
-      url: "https://runexa.ai/refund-policy",
+      url: "https://runexa.ai/legal/refunds",
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.5,
     },
 
     {
-      url: "https://runexa.ai/company-information",
+      url: "https://runexa.ai/legal/company",
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.5,

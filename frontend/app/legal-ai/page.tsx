@@ -3,8 +3,10 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "AI Contract Review & Legal Document Analysis | Runexa",
+
   description:
     "Analyze contracts, detect risky clauses, understand obligations, and get practical recommendations with Runexa Legal Agent.",
+
   keywords: [
     "AI contract review",
     "AI legal document analysis",
@@ -12,9 +14,52 @@ export const metadata: Metadata = {
     "legal AI software",
     "contract risk analysis",
     "AI legal review",
+    "enterprise legal AI",
+    "AI clause detection",
   ],
+
   alternates: {
     canonical: "https://runexa.ai/legal-ai",
+  },
+
+  openGraph: {
+    title: "AI Contract Review & Legal Document Analysis | Runexa",
+
+    description:
+      "Analyze contracts, detect risky clauses, understand obligations, and receive practical recommendations with Runexa Legal Agent.",
+
+    url: "https://runexa.ai/legal-ai",
+
+    siteName: "Runexa Systems",
+
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Runexa Legal Agent",
+      },
+    ],
+
+    locale: "en_US",
+
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+
+    title: "AI Contract Review & Legal Document Analysis | Runexa",
+
+    description:
+      "AI-powered contract review, clause analysis, obligation extraction, and legal intelligence.",
+
+    images: ["/og-image.png"],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -22,16 +67,18 @@ export default function LegalAIPage() {
   return (
     <main className="min-h-screen bg-slate-50 px-6 py-20 text-slate-900">
       <section className="mx-auto max-w-6xl text-center">
-        <p className="font-semibold text-blue-600">Runexa Legal Agent</p>
+        <p className="font-semibold text-blue-600">
+          Runexa Legal Agent
+        </p>
 
         <h1 className="mt-4 text-5xl font-bold tracking-tight">
           AI Contract Review & Legal Document Analysis
         </h1>
 
         <p className="mx-auto mt-6 max-w-3xl text-lg text-slate-600">
-          Runexa helps individuals and professionals analyze contracts, detect
-          risky clauses, understand obligations, and receive practical legal
-          document insights before signing.
+          Runexa helps individuals and professionals analyze contracts,
+          detect risky clauses, understand obligations, and receive
+          practical legal document insights before signing.
         </p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -74,7 +121,10 @@ export default function LegalAIPage() {
             key={title}
             className="rounded-2xl border bg-white p-6 shadow-sm"
           >
-            <h2 className="font-bold">{title}</h2>
+            <h2 className="font-bold">
+              {title}
+            </h2>
+
             <p className="mt-3 text-sm leading-6 text-slate-600">
               {desc}
             </p>
@@ -83,7 +133,9 @@ export default function LegalAIPage() {
       </section>
 
       <section className="mx-auto mt-16 max-w-6xl rounded-3xl border bg-white p-8 shadow-sm md:p-12">
-        <h2 className="text-3xl font-bold">How Runexa legal AI works</h2>
+        <h2 className="text-3xl font-bold">
+          How Runexa legal AI works
+        </h2>
 
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {[
@@ -91,18 +143,26 @@ export default function LegalAIPage() {
             "Runexa AI analyzes clauses, obligations, and risk signals",
             "Receive a structured legal intelligence report",
           ].map((step, index) => (
-            <div key={step} className="rounded-2xl bg-slate-50 p-6">
+            <div
+              key={step}
+              className="rounded-2xl bg-slate-50 p-6"
+            >
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">
                 {index + 1}
               </div>
-              <p className="mt-4 font-semibold">{step}</p>
+
+              <p className="mt-4 font-semibold">
+                {step}
+              </p>
             </div>
           ))}
         </div>
       </section>
 
       <section className="mx-auto mt-16 max-w-6xl rounded-3xl border bg-white p-8 shadow-sm md:p-12">
-        <h2 className="text-3xl font-bold">Legal AI FAQ</h2>
+        <h2 className="text-3xl font-bold">
+          Legal AI FAQ
+        </h2>
 
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           {[
@@ -123,8 +183,14 @@ export default function LegalAIPage() {
               "Runexa is designed as a secure AI workspace for private document analysis and professional workflows.",
             ],
           ].map(([q, a]) => (
-            <div key={q} className="rounded-2xl bg-slate-50 p-6">
-              <h3 className="font-bold">{q}</h3>
+            <div
+              key={q}
+              className="rounded-2xl bg-slate-50 p-6"
+            >
+              <h3 className="font-bold">
+                {q}
+              </h3>
+
               <p className="mt-2 text-sm leading-6 text-slate-600">
                 {a}
               </p>
@@ -138,16 +204,24 @@ export default function LegalAIPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
+
             "@type": "SoftwareApplication",
+
             name: "Runexa Legal Agent",
+
             applicationCategory: "BusinessApplication",
+
             operatingSystem: "Web",
+
             description:
               "AI contract review and legal document analysis software for risky clause detection, obligation extraction, summaries, and recommendations.",
+
             url: "https://runexa.ai/legal-ai",
+
             publisher: {
               "@type": "Organization",
               name: "Runexa Systems",
+              url: "https://runexa.ai",
             },
           }),
         }}

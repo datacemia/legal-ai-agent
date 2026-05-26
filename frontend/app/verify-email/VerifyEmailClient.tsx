@@ -4,7 +4,9 @@ import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  "https://api.runexa.ai";
 
 type VerifyEmailLabels = {
   verifying: string;
@@ -14,8 +16,11 @@ type VerifyEmailLabels = {
   failed: string;
   serverError: string;
   title: string;
+  subtitle: string;
   goToLogin: string;
   loading: string;
+  statusSuccess: string;
+  statusError: string;
 };
 
 const labels: Record<string, VerifyEmailLabels> = {
@@ -27,32 +32,48 @@ const labels: Record<string, VerifyEmailLabels> = {
     failed: "Verification failed.",
     serverError: "Error connecting to server.",
     title: "Email Verification",
+    subtitle:
+      "We are verifying your Runexa account email address.",
     goToLogin: "Go to login",
     loading: "Loading...",
+    statusSuccess: "Verified",
+    statusError: "Action required",
   },
 
   fr: {
     verifying: "Vérification de votre e-mail...",
     invalidLink: "Lien de vérification invalide.",
-    success: "E-mail vérifié avec succès. Vous pouvez maintenant vous connecter.",
-    invalidOrUsed: "Ce lien de vérification est invalide ou a déjà été utilisé.",
+    success:
+      "E-mail vérifié avec succès. Vous pouvez maintenant vous connecter.",
+    invalidOrUsed:
+      "Ce lien de vérification est invalide ou a déjà été utilisé.",
     failed: "Échec de la vérification.",
     serverError: "Erreur de connexion au serveur.",
     title: "Vérification de l’e-mail",
+    subtitle:
+      "Nous vérifions l’adresse e-mail de votre compte Runexa.",
     goToLogin: "Aller à la connexion",
     loading: "Chargement...",
+    statusSuccess: "Vérifié",
+    statusError: "Action requise",
   },
 
   ar: {
     verifying: "جاري التحقق من بريدك الإلكتروني...",
     invalidLink: "رابط التحقق غير صالح.",
-    success: "تم التحقق من البريد الإلكتروني بنجاح. يمكنك الآن تسجيل الدخول.",
-    invalidOrUsed: "رابط التحقق هذا غير صالح أو تم استخدامه مسبقًا.",
+    success:
+      "تم التحقق من البريد الإلكتروني بنجاح. يمكنك الآن تسجيل الدخول.",
+    invalidOrUsed:
+      "رابط التحقق هذا غير صالح أو تم استخدامه مسبقًا.",
     failed: "فشل التحقق.",
     serverError: "خطأ في الاتصال بالخادم.",
     title: "التحقق من البريد الإلكتروني",
+    subtitle:
+      "نحن نتحقق من عنوان البريد الإلكتروني لحساب Runexa الخاص بك.",
     goToLogin: "الذهاب إلى تسجيل الدخول",
     loading: "جاري التحميل...",
+    statusSuccess: "تم التحقق",
+    statusError: "إجراء مطلوب",
   },
 };
 
@@ -64,6 +85,8 @@ function VerifyEmailContent() {
   const t = labels[language] || labels.en;
 
   const [message, setMessage] = useState(labels.en.verifying);
+  const [status, setStatus] =
+    useState<"loading" | "success" | "error">("loading");
 
   useEffect(() => {
     const saved = localStorage.getItem("locale");
@@ -92,27 +115,36 @@ function VerifyEmailContent() {
     const currentLabels = labels[language] || labels.en;
 
     if (!token) {
+      setStatus("error");
       setMessage(currentLabels.invalidLink);
       return;
     }
 
+    setStatus("loading");
     setMessage(currentLabels.verifying);
 
-    fetch(`${API_URL}/auth/verify-email?token=${token}`)
+    window.history.replaceState({}, "", "/verify-email");
+
+    fetch(`${API_URL}/auth/verify-email?token=${encodeURIComponent(token)}`)
       .then(async (res) => {
-        const data = await res.json();
+        const data = await res.json().catch(() => ({}));
 
         if (res.ok) {
+          setStatus("success");
           setMessage(currentLabels.success);
+          return;
+        }
+
+        setStatus("error");
+
+        if (data.detail?.includes("Invalid")) {
+          setMessage(currentLabels.invalidOrUsed);
         } else {
-          if (data.detail?.includes("Invalid")) {
-            setMessage(currentLabels.invalidOrUsed);
-          } else {
-            setMessage(data.detail || currentLabels.failed);
-          }
+          setMessage(data.detail || currentLabels.failed);
         }
       })
       .catch(() => {
+        setStatus("error");
         setMessage(currentLabels.serverError);
       });
   }, [token, language]);
@@ -120,14 +152,57 @@ function VerifyEmailContent() {
   return (
     <div
       dir={language === "ar" ? "rtl" : "ltr"}
-      className="bg-white p-8 rounded-xl shadow text-center space-y-4"
+      className="w-full max-w-md rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-xl shadow-slate-200/70"
     >
-      <h1 className="text-xl font-bold">{t.title}</h1>
-      <p>{message}</p>
+      <div
+        className={`mx-auto flex h-16 w-16 items-center justify-center rounded-full text-3xl ${
+          status === "success"
+            ? "bg-green-50 text-green-700"
+            : status === "error"
+            ? "bg-red-50 text-red-700"
+            : "bg-blue-50 text-blue-700"
+        }`}
+      >
+        {status === "success" ? "✓" : status === "error" ? "!" : "✉️"}
+      </div>
+
+      <h1 className="mt-6 text-3xl font-bold tracking-tight text-slate-950">
+        {t.title}
+      </h1>
+
+      <p className="mt-3 text-sm text-slate-500">
+        {t.subtitle}
+      </p>
+
+      {status === "loading" && (
+        <div className="mx-auto mt-6 h-10 w-10 animate-spin rounded-full border-4 border-slate-200 border-t-blue-600" />
+      )}
+
+      <div
+        className={`mt-6 rounded-2xl border p-4 text-sm ${
+          status === "success"
+            ? "border-green-200 bg-green-50 text-green-700"
+            : status === "error"
+            ? "border-red-200 bg-red-50 text-red-700"
+            : "border-blue-200 bg-blue-50 text-blue-700"
+        }`}
+      >
+        <p className="font-semibold">
+          {status === "success"
+            ? t.statusSuccess
+            : status === "error"
+            ? t.statusError
+            : t.verifying}
+        </p>
+
+        <p className="mt-1">
+          {message}
+        </p>
+      </div>
 
       <Link
         href="/login"
-        className="inline-block bg-black text-white px-4 py-2 rounded-lg"
+        className="mt-7 inline-flex w-full items-center justify-center rounded-xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-slate-800"
       >
         {t.goToLogin}
       </Link>
@@ -137,8 +212,17 @@ function VerifyEmailContent() {
 
 export default function VerifyEmailClient() {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gray-50">
-      <Suspense fallback={<p>{labels.en.loading}</p>}>
+    <main className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-10">
+      <Suspense
+        fallback={
+          <div className="rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-xl">
+            <div className="mx-auto h-10 w-10 animate-spin rounded-full border-4 border-slate-200 border-t-blue-600" />
+            <p className="mt-4 text-sm text-slate-600">
+              {labels.en.loading}
+            </p>
+          </div>
+        }
+      >
         <VerifyEmailContent />
       </Suspense>
     </main>

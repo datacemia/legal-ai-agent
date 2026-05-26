@@ -4,7 +4,9 @@ import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  "https://api.runexa.ai";
 
 type ResetLabels = {
   badge: string;
@@ -22,6 +24,7 @@ type ResetLabels = {
   passwordPlaceholder: string;
   passwordMustContain: string;
   resetPassword: string;
+  resetting: string;
   backToLogin: string;
   loading: string;
   invalidLink: string;
@@ -54,6 +57,7 @@ const labels: Record<string, ResetLabels> = {
     passwordPlaceholder: "Enter new password",
     passwordMustContain: "Password must contain:",
     resetPassword: "Reset password",
+    resetting: "Resetting password...",
     backToLogin: "← Back to login",
     loading: "Loading...",
 
@@ -93,6 +97,7 @@ const labels: Record<string, ResetLabels> = {
     passwordPlaceholder: "Entrez le nouveau mot de passe",
     passwordMustContain: "Le mot de passe doit contenir :",
     resetPassword: "Réinitialiser le mot de passe",
+    resetting: "Réinitialisation...",
     backToLogin: "← Retour à la connexion",
     loading: "Chargement...",
 
@@ -132,6 +137,7 @@ const labels: Record<string, ResetLabels> = {
     passwordPlaceholder: "أدخل كلمة المرور الجديدة",
     passwordMustContain: "يجب أن تحتوي كلمة المرور على:",
     resetPassword: "إعادة تعيين كلمة المرور",
+    resetting: "جارٍ إعادة التعيين...",
     backToLogin: "← الرجوع إلى تسجيل الدخول",
     loading: "جاري التحميل...",
 
@@ -154,13 +160,16 @@ const labels: Record<string, ResetLabels> = {
 function ResetPasswordContent() {
   const params = useSearchParams();
   const token = params.get("token");
+
   const [language, setLanguage] = useState("en");
   const t = labels[language] || labels.en;
 
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [message, setMessage] = useState("");
-  const [messageType, setMessageType] = useState<"success" | "error">("success");
+  const [messageType, setMessageType] =
+    useState<"success" | "error">("success");
 
   useEffect(() => {
     const saved = localStorage.getItem("locale");
@@ -192,10 +201,26 @@ function ResetPasswordContent() {
     /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
   const passwordRules = [
-    { icon: "12+", label: t.rules[0], valid: password.length >= 12 },
-    { icon: "Aa", label: t.rules[1], valid: /[A-Z]/.test(password) },
-    { icon: "aa", label: t.rules[2], valid: /[a-z]/.test(password) },
-    { icon: "1", label: t.rules[3], valid: /\d/.test(password) },
+    {
+      icon: "12+",
+      label: t.rules[0],
+      valid: password.length >= 12,
+    },
+    {
+      icon: "Aa",
+      label: t.rules[1],
+      valid: /[A-Z]/.test(password),
+    },
+    {
+      icon: "aa",
+      label: t.rules[2],
+      valid: /[a-z]/.test(password),
+    },
+    {
+      icon: "1",
+      label: t.rules[3],
+      valid: /\d/.test(password),
+    },
     {
       icon: "#",
       label: t.rules[4],
@@ -204,6 +229,8 @@ function ResetPasswordContent() {
   ];
 
   const handle = async () => {
+    if (loading) return;
+
     if (!token) {
       setMessageType("error");
       setMessage(t.invalidLink);
@@ -216,11 +243,18 @@ function ResetPasswordContent() {
       return;
     }
 
+    setLoading(true);
+
     try {
       const res = await fetch(`${API_URL}/auth/reset-password`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token, password }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token,
+          password,
+        }),
       });
 
       const data = await res.json();
@@ -242,6 +276,8 @@ function ResetPasswordContent() {
       console.error(error);
       setMessageType("error");
       setMessage(t.serverError);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -270,10 +306,12 @@ function ResetPasswordContent() {
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-100 text-xl text-blue-700">
                   🛡️
                 </div>
+
                 <div>
                   <h3 className="font-semibold text-slate-950">
                     {t.featureSecurityTitle}
                   </h3>
+
                   <p className="mt-1 text-slate-600">
                     {t.featureSecurityDesc}
                   </p>
@@ -284,10 +322,12 @@ function ResetPasswordContent() {
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-100 text-xl text-blue-700">
                   ⚡
                 </div>
+
                 <div>
                   <h3 className="font-semibold text-slate-950">
                     {t.featureExperienceTitle}
                   </h3>
+
                   <p className="mt-1 text-slate-600">
                     {t.featureExperienceDesc}
                   </p>
@@ -298,10 +338,12 @@ function ResetPasswordContent() {
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-100 text-xl text-blue-700">
                   ✅
                 </div>
+
                 <div>
                   <h3 className="font-semibold text-slate-950">
                     {t.featureControlTitle}
                   </h3>
+
                   <p className="mt-1 text-slate-600">
                     {t.featureControlDesc}
                   </p>
@@ -348,12 +390,18 @@ function ResetPasswordContent() {
                 <label className="mb-2 block text-sm font-medium text-slate-700">
                   {t.newPassword}
                 </label>
+
                 <input
                   type="password"
                   placeholder={t.passwordPlaceholder}
                   className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-950 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && isValid) {
+                      handle();
+                    }
+                  }}
                 />
               </div>
 
@@ -392,14 +440,14 @@ function ResetPasswordContent() {
 
               <button
                 onClick={handle}
-                disabled={!isValid}
+                disabled={!isValid || loading}
                 className={`w-full rounded-xl py-3 font-semibold text-white shadow-lg transition ${
-                  isValid
+                  isValid && !loading
                     ? "bg-slate-950 hover:bg-slate-800"
-                    : "bg-slate-400 cursor-not-allowed"
+                    : "cursor-not-allowed bg-slate-400"
                 }`}
               >
-                {t.resetPassword}
+                {loading ? t.resetting : t.resetPassword}
               </button>
             </div>
 
@@ -420,7 +468,15 @@ function ResetPasswordContent() {
 
 export default function ResetPasswordClient() {
   return (
-    <Suspense fallback={<p>{labels.en.loading}</p>}>
+    <Suspense
+      fallback={
+        <main className="flex min-h-screen items-center justify-center bg-white">
+          <p className="text-slate-600">
+            {labels.en.loading}
+          </p>
+        </main>
+      }
+    >
       <ResetPasswordContent />
     </Suspense>
   );

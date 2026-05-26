@@ -4,6 +4,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { getToken } from "../../lib/auth";
 import { getSavedLocale, setSavedLocale } from "../../lib/i18n";
 
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  "https://api.runexa.ai";
+
 const safeGetLocalStorage = (key: string, fallback = "") => {
   if (typeof window === "undefined") return fallback;
 
@@ -1478,7 +1482,7 @@ export default function StudyClient() {
     if (!token) return;
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/users/me`,
+      `${API_URL}/users/me`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -1548,7 +1552,7 @@ export default function StudyClient() {
       }
 
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/study/analyze`,
+        `${API_URL}/study/analyze`,
         {
           method: "POST",
           headers: token ? { Authorization: `Bearer ${token}` } : {},
@@ -1593,7 +1597,7 @@ export default function StudyClient() {
         await new Promise((resolve) => setTimeout(resolve, 2000));
 
         const statusRes = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/jobs/${jobId}`,
+          `${API_URL}/jobs/${jobId}`,
           {
             headers: token ? { Authorization: `Bearer ${token}` } : {},
           }
@@ -1806,7 +1810,7 @@ export default function StudyClient() {
 
       // 1. CREATE AUDIO JOB
       const createRes = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/study/audio`,
+        `${API_URL}/study/audio`,
         {
           method: "POST",
           headers: {
@@ -1840,7 +1844,7 @@ export default function StudyClient() {
         await new Promise((resolve) => setTimeout(resolve, 2000));
 
         const statusRes = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/jobs/${jobId}`,
+          `${API_URL}/jobs/${jobId}`,
           {
             headers: token
               ? { Authorization: `Bearer ${token}` }
@@ -1903,7 +1907,7 @@ export default function StudyClient() {
       type: q.type,
     }));
 
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/study/attempt`, {
+    fetch(`${API_URL}/study/attempt`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -15,10 +15,52 @@ export const metadata: Metadata = {
     "AI API pricing",
     "enterprise AI pricing",
     "Runexa pricing",
+    "AI credits",
+    "AI subscriptions",
   ],
 
   alternates: {
     canonical: "https://runexa.ai/pricing",
+  },
+
+  openGraph: {
+    title: "Runexa Pricing | AI Agents, Credits & API Plans",
+
+    description:
+      "Compare Runexa AI pricing plans including AI trials, global credits, Pro subscriptions, and enterprise API workflows.",
+
+    url: "https://runexa.ai/pricing",
+
+    siteName: "Runexa Systems",
+
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Runexa Pricing",
+      },
+    ],
+
+    locale: "en_US",
+
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+
+    title: "Runexa Pricing | AI Agents, Credits & API Plans",
+
+    description:
+      "Compare AI subscriptions, global credits, API workflows, and enterprise pricing plans from Runexa.",
+
+    images: ["/og-image.png"],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -32,17 +74,35 @@ export default function PricingPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
+
             "@type": "SoftwareApplication",
+
             name: "Runexa",
-            applicationCategory: "BusinessApplication",
+
+            applicationCategory:
+              "BusinessApplication",
+
             operatingSystem: "Web",
+
             description:
               "AI platform for legal analysis, finance intelligence, study workflows, and business decision support.",
+
+            url: "https://runexa.ai/pricing",
+
+            publisher: {
+              "@type": "Organization",
+              name: "Runexa Systems",
+              url: "https://runexa.ai",
+            },
+
             offers: [
               {
                 "@type": "Offer",
+
                 name: "Pro",
+
                 price: "49",
+
                 priceCurrency: "USD",
               },
             ],

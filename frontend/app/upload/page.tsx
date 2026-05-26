@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     "contract risk analysis",
     "enterprise legal AI",
     "Runexa legal agent",
+    "AI contract intelligence",
   ],
 
   alternates: {
@@ -24,18 +25,42 @@ export const metadata: Metadata = {
 
   openGraph: {
     title: "Runexa Legal AI",
+
     description:
       "AI-powered contract analysis, legal risk detection, obligation extraction, and structured legal intelligence.",
+
     url: "https://runexa.ai/upload",
-    siteName: "Runexa",
+
+    siteName: "Runexa Systems",
+
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Runexa Legal AI",
+      },
+    ],
+
+    locale: "en_US",
+
     type: "website",
   },
 
   twitter: {
     card: "summary_large_image",
+
     title: "Runexa Legal AI",
+
     description:
       "Analyze contracts and legal documents with AI-powered legal intelligence.",
+
+    images: ["/og-image.png"],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -49,6 +74,7 @@ export default function UploadPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
+
             "@type": "SoftwareApplication",
 
             name: "Runexa Legal AI",
@@ -63,6 +89,12 @@ export default function UploadPage() {
             url: "https://runexa.ai/upload",
 
             provider: {
+              "@type": "Organization",
+              name: "Runexa Systems LLC",
+              url: "https://runexa.ai",
+            },
+
+            publisher: {
               "@type": "Organization",
               name: "Runexa Systems LLC",
               url: "https://runexa.ai",
