@@ -1,4 +1,5 @@
 import json
+import os
 
 from app.models.job import Job
 from app.models.document import Document
@@ -24,6 +25,17 @@ from app.services.contract_agent.validator import (
 )
 
 from app.workers.progress import update_job_progress
+
+def delete_local_file_safely(file_path: str | None):
+    if not file_path:
+        return
+
+    try:
+        if os.path.exists(file_path):
+            os.remove(file_path)
+    except Exception:
+        pass
+
 
 
 def get_job_input(job: Job) -> dict:
@@ -245,6 +257,8 @@ def handle_contract_ai(job: Job, db):
     db.add(analysis)
     db.commit()
     db.refresh(analysis)
+
+    delete_local_file_safely(document.file_path)
 
     response = {
         "id": analysis.id,
