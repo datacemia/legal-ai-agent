@@ -543,7 +543,7 @@ export default function FinanceClient() {
 
       await refreshUserBilling();
     } catch (error) {
-      console.error("Finance analysis error:", error);
+      console.error("Finance analysis failed");
 
       const errorMessage =
         error instanceof Error ? error.message : t.apiError;
