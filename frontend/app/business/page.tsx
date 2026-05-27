@@ -1707,7 +1707,10 @@ export default function BusinessPage() {
       setResult(nextResult);
 
       saveLastBusinessAnalysis(
-        nextResult,
+        {
+          analysis_id: nextResult.analysis_id,
+          file_metadata: nextResult.file_metadata,
+        },
         file.name
       );
 

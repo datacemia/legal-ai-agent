@@ -86,7 +86,7 @@ def run_worker():
 
             except Exception as e:
                 job.status = "failed"
-                job.error = str(e)
+                job.error = "Business analysis failed."
                 job.status_message = "Failed"
                 job.completed_at = utc_now()
                 db.commit()
