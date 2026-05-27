@@ -146,6 +146,12 @@ def generate_study_audio(
 
     audio_url = upload_audio_to_supabase(local_path, storage_path)
 
+    try:
+        if local_path.exists():
+            local_path.unlink()
+    except Exception:
+        pass
+
     return {
         "audio_url": audio_url,
         "storage_path": storage_path,
