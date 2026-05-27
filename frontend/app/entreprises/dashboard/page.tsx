@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { getSavedLocale } from "../../../lib/i18n";
 import {
   Building2,
   Users,
@@ -49,6 +50,147 @@ const AGENT_CATALOG: Record<
 };
 
 
+const translations = {
+  en: {
+    workspace: "Enterprise workspace",
+    workspaceDesc:
+      "Centralized workspace for your organization, team access, credits, usage, and enterprise governance.",
+    refresh: "Refresh",
+    inviting: "Inviting...",
+    inviteMember: "Invite member",
+    plan: "Plan",
+    credits: "Credits",
+    sharedBalance: "Shared organization balance",
+    members: "Members",
+    activeTeam: "Active team access",
+    usage: "Usage",
+    creditsUsed: "credits used",
+    connectedAgents: "Connected AI Agents",
+    connectedAgentsDesc:
+      "Test all connected Runexa agents using shared enterprise organization credits.",
+    connected: "Connected",
+    openAgent: "Open agent",
+    noAgents:
+      "No agents are enabled for this enterprise workspace yet.",
+    teamMembers: "Team members",
+    manageAccess:
+      "Manage organization access and enterprise roles.",
+    membershipAccess:
+      "Your organization membership and workspace access.",
+    suspend: "Suspend",
+    activate: "Activate",
+    remove: "Remove",
+    enabled: "Enabled",
+    save: "Save",
+    currentUser: "Current user",
+    platformRole: "Platform role",
+    organizationRole: "Organization role",
+    fullListAdmins:
+      "Full member list is available to organization owners/admins.",
+    loadingWorkspace: "Loading enterprise workspace...",
+    accessUnavailable: "Enterprise access unavailable",
+    retry: "Retry",
+    member: "member",
+    admin: "admin",
+    used: "Used",
+    accessQuotas: "Agent access & quotas",
+    agentsConnected: "agents connected",
+  },
+
+  fr: {
+    workspace: "Espace entreprise",
+    workspaceDesc:
+      "Espace centralisé pour votre organisation, les accès équipe, les crédits, l’utilisation et la gouvernance entreprise.",
+    refresh: "Actualiser",
+    inviting: "Invitation...",
+    inviteMember: "Inviter un membre",
+    plan: "Plan",
+    credits: "Crédits",
+    sharedBalance: "Solde partagé de l’organisation",
+    members: "Membres",
+    activeTeam: "Accès équipe actif",
+    usage: "Utilisation",
+    creditsUsed: "crédits utilisés",
+    connectedAgents: "Agents IA connectés",
+    connectedAgentsDesc:
+      "Testez tous les agents Runexa connectés avec les crédits partagés de l’entreprise.",
+    connected: "Connecté",
+    openAgent: "Ouvrir l’agent",
+    noAgents:
+      "Aucun agent activé pour cet espace entreprise.",
+    teamMembers: "Membres de l’équipe",
+    manageAccess:
+      "Gérer les accès et rôles entreprise.",
+    membershipAccess:
+      "Votre accès et appartenance à l’organisation.",
+    suspend: "Suspendre",
+    activate: "Activer",
+    remove: "Supprimer",
+    enabled: "Activé",
+    save: "Enregistrer",
+    currentUser: "Utilisateur actuel",
+    platformRole: "Rôle plateforme",
+    organizationRole: "Rôle organisation",
+    fullListAdmins:
+      "La liste complète est réservée aux admins/propriétaires.",
+    loadingWorkspace: "Chargement de l’espace entreprise...",
+    accessUnavailable: "Accès entreprise indisponible",
+    retry: "Réessayer",
+    member: "membre",
+    admin: "admin",
+    used: "Utilisé",
+    accessQuotas: "Accès agents et quotas",
+    agentsConnected: "agents connectés",
+  },
+
+  ar: {
+    workspace: "مساحة المؤسسة",
+    workspaceDesc:
+      "مساحة مركزية للمؤسسة وإدارة الفريق والأرصدة والاستخدام والصلاحيات.",
+    refresh: "تحديث",
+    inviting: "جارٍ إرسال الدعوة...",
+    inviteMember: "دعوة عضو",
+    plan: "الخطة",
+    credits: "الرصيد",
+    sharedBalance: "الرصيد المشترك للمؤسسة",
+    members: "الأعضاء",
+    activeTeam: "وصول الفريق النشط",
+    usage: "الاستخدام",
+    creditsUsed: "رصيد مستخدم",
+    connectedAgents: "وكلاء الذكاء الاصطناعي المتصلون",
+    connectedAgentsDesc:
+      "اختبر جميع وكلاء Runexa باستخدام رصيد المؤسسة المشترك.",
+    connected: "متصل",
+    openAgent: "فتح الوكيل",
+    noAgents:
+      "لا توجد وكلاء مفعلة لهذه المؤسسة.",
+    teamMembers: "أعضاء الفريق",
+    manageAccess:
+      "إدارة الوصول والأدوار داخل المؤسسة.",
+    membershipAccess:
+      "وصولك وعضويتك داخل المؤسسة.",
+    suspend: "تعليق",
+    activate: "تفعيل",
+    remove: "إزالة",
+    enabled: "مفعل",
+    save: "حفظ",
+    currentUser: "المستخدم الحالي",
+    platformRole: "دور المنصة",
+    organizationRole: "دور المؤسسة",
+    fullListAdmins:
+      "القائمة الكاملة متاحة فقط للمسؤولين.",
+    loadingWorkspace: "جارٍ تحميل مساحة المؤسسة...",
+    accessUnavailable: "الوصول للمؤسسة غير متاح",
+    retry: "إعادة المحاولة",
+    member: "عضو",
+    admin: "مسؤول",
+    used: "المستخدم",
+    accessQuotas: "صلاحيات الوكلاء والحصص",
+    agentsConnected: "وكلاء متصلون",
+  },
+};
+
+
 export default function EntreprisesDashboardPage() {
   const [enterprise, setEnterprise] = useState<any>(null);
   const [members, setMembers] = useState<any[]>([]);
@@ -62,6 +204,12 @@ export default function EntreprisesDashboardPage() {
   const [memberActionLoading, setMemberActionLoading] = useState<number | null>(null);
   const [memberAgentAccess, setMemberAgentAccess] = useState<Record<number, any[]>>({});
   const [agentAccessLoading, setAgentAccessLoading] = useState<number | null>(null);
+
+  const locale = getSavedLocale();
+
+  const t =
+    translations[locale as keyof typeof translations] ||
+    translations.en;
 
   const fetchEnterpriseData = async () => {
     setLoading(true);
@@ -363,7 +511,7 @@ export default function EntreprisesDashboardPage() {
       <main className="min-h-screen bg-slate-950 p-8 text-white">
         <div className="mx-auto max-w-7xl">
           <div className="rounded-3xl border border-white/10 bg-white/5 p-10">
-            Loading enterprise workspace...
+            {t.loadingWorkspace}
           </div>
         </div>
       </main>
@@ -374,13 +522,13 @@ export default function EntreprisesDashboardPage() {
     return (
       <main className="min-h-screen bg-slate-950 p-8 text-white">
         <div className="mx-auto max-w-3xl rounded-3xl border border-red-500/20 bg-red-500/10 p-8">
-          <h1 className="text-2xl font-bold">Enterprise access unavailable</h1>
+          <h1 className="text-2xl font-bold">{t.accessUnavailable}</h1>
           <p className="mt-3 text-red-100">{error}</p>
           <button
             onClick={fetchEnterpriseData}
             className="mt-6 rounded-xl bg-white px-5 py-3 font-semibold text-slate-950"
           >
-            Retry
+            {t.retry}
           </button>
         </div>
       </main>
@@ -423,7 +571,7 @@ export default function EntreprisesDashboardPage() {
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/20 bg-blue-400/10 px-4 py-2 text-sm font-semibold text-blue-100">
                 <ShieldCheck className="h-4 w-4" />
-                Enterprise workspace
+                {t.workspace}
               </div>
 
               <h1 className="mt-5 text-4xl font-bold tracking-tight md:text-5xl">
@@ -431,8 +579,7 @@ export default function EntreprisesDashboardPage() {
               </h1>
 
               <p className="mt-3 max-w-2xl text-slate-300">
-                Centralized workspace for your organization, team access,
-                credits, usage, and enterprise governance.
+                {t.workspaceDesc}
               </p>
             </div>
 
@@ -442,7 +589,7 @@ export default function EntreprisesDashboardPage() {
                 className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
               >
                 <RefreshCw className="h-4 w-4" />
-                Refresh
+                {t.refresh}
               </button>
 
               {isOwnerOrAdmin && (
@@ -461,8 +608,8 @@ export default function EntreprisesDashboardPage() {
                       onChange={(e) => setInviteRole(e.target.value)}
                       className="rounded-xl border border-white/10 bg-slate-900 px-3 py-2 text-sm text-white"
                     >
-                      <option value="member">member</option>
-                      <option value="admin">admin</option>
+                      <option value="member">{t.member}</option>
+                      <option value="admin">{t.admin}</option>
                     </select>
 
                     <button
@@ -471,7 +618,7 @@ export default function EntreprisesDashboardPage() {
                       className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-slate-950 hover:bg-blue-50 disabled:cursor-not-allowed disabled:opacity-70"
                     >
                       <MailPlus className="h-4 w-4" />
-                      {inviteLoading ? "Inviting..." : "Invite member"}
+                      {inviteLoading ? t.inviting : t.inviteMember}
                     </button>
                   </div>
 
@@ -491,44 +638,44 @@ export default function EntreprisesDashboardPage() {
         <div className="grid gap-5 md:grid-cols-4">
           <MetricCard
             icon={<Building2 className="h-5 w-5" />}
-            label="Plan"
+            label={t.plan}
             value={org?.plan_name || "enterprise"}
             subtext={`Workspace slug: ${org?.slug}`}
           />
 
           <MetricCard
             icon={<CreditCard className="h-5 w-5" />}
-            label="Credits"
+            label={t.credits}
             value={org?.credits_balance ?? 0}
-            subtext="Shared organization balance"
+            subtext={t.sharedBalance}
           />
 
           <MetricCard
             icon={<Users className="h-5 w-5" />}
-            label="Members"
+            label={t.members}
             value={memberCount}
-            subtext="Active team access"
+            subtext={t.activeTeam}
           />
 
           <MetricCard
             icon={<Activity className="h-5 w-5" />}
-            label="Usage"
+            label={t.usage}
             value={usageSummary?.total_requests ?? 0}
-            subtext={`${usageSummary?.total_credits_used ?? 0} credits used`}
+            subtext={`${usageSummary?.total_credits_used ?? 0} ${t.creditsUsed}`}
           />
         </div>
 
         <div className="mt-8 rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-2xl">
           <div className="flex flex-col justify-between gap-4 border-b border-white/10 pb-5 md:flex-row md:items-center">
             <div>
-              <h2 className="text-2xl font-bold">Connected AI Agents</h2>
+              <h2 className="text-2xl font-bold">{t.connectedAgents}</h2>
               <p className="mt-1 text-sm text-slate-400">
-                Test all connected Runexa agents using shared enterprise organization credits.
+                {t.connectedAgentsDesc}
               </p>
             </div>
 
             <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-300">
-              {connectedAgents.length} agents connected
+              {connectedAgents.length} {t.agentsConnected}
             </span>
           </div>
 
@@ -546,7 +693,7 @@ export default function EntreprisesDashboardPage() {
                     </div>
 
                     <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-300">
-                      Connected
+                      {t.connected}
                     </span>
                   </div>
 
@@ -559,14 +706,14 @@ export default function EntreprisesDashboardPage() {
                   </p>
 
                   <div className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-blue-300 transition group-hover:text-blue-200">
-                    Open agent
+                    {t.openAgent}
                     <ArrowRight className="h-4 w-4" />
                   </div>
                 </Link>
               ))
             ) : (
               <div className="rounded-2xl border border-dashed border-white/10 p-6 text-sm text-slate-400 md:col-span-2 xl:col-span-3">
-                No agents are enabled for this enterprise workspace yet.
+                {t.noAgents}
               </div>
             )}
           </div>
@@ -576,11 +723,11 @@ export default function EntreprisesDashboardPage() {
           <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-2xl">
             <div className="flex items-center justify-between border-b border-white/10 pb-5">
               <div>
-                <h2 className="text-2xl font-bold">Team members</h2>
+                <h2 className="text-2xl font-bold">{t.teamMembers}</h2>
                 <p className="mt-1 text-sm text-slate-400">
                   {isOwnerOrAdmin
-                    ? "Manage organization access and enterprise roles."
-                    : "Your organization membership and workspace access."}
+                    ? t.manageAccess
+                    : t.membershipAccess}
                 </p>
               </div>
 
@@ -633,8 +780,8 @@ export default function EntreprisesDashboardPage() {
                             }
                             className="rounded-xl border border-white/10 bg-slate-900 px-3 py-2 text-xs text-white"
                           >
-                            <option value="member">member</option>
-                            <option value="admin">admin</option>
+                            <option value="member">{t.member}</option>
+                            <option value="admin">{t.admin}</option>
                           </select>
 
                           <button
@@ -648,8 +795,8 @@ export default function EntreprisesDashboardPage() {
                             className="rounded-xl border border-amber-500/20 bg-amber-500/10 px-3 py-2 text-xs font-semibold text-amber-200 hover:bg-amber-500/20"
                           >
                             {member.status === "active"
-                              ? "Suspend"
-                              : "Activate"}
+                              ? t.suspend
+                              : t.activate}
                           </button>
 
                           <button
@@ -659,7 +806,7 @@ export default function EntreprisesDashboardPage() {
                             disabled={memberActionLoading === member.id}
                             className="rounded-xl border border-red-500/20 bg-red-500/10 px-3 py-2 text-xs font-semibold text-red-200 hover:bg-red-500/20"
                           >
-                            Remove
+                            {t.remove}
                           </button>
                         </>
                       )}
@@ -668,7 +815,7 @@ export default function EntreprisesDashboardPage() {
                     {isOwnerOrAdmin && (
                       <div className="w-full rounded-2xl border border-white/10 bg-slate-950/40 p-4">
                         <p className="mb-3 text-sm font-bold text-slate-200">
-                          Agent access & quotas
+                          {t.accessQuotas}
                         </p>
 
                         <div className="grid gap-3 md:grid-cols-3">
@@ -682,7 +829,7 @@ export default function EntreprisesDashboardPage() {
                               </p>
 
                               <p className="mt-1 text-xs text-slate-400">
-                                Used: {agent.analyses_used} / {agent.analysis_quota}
+                                {t.used}: {agent.analyses_used} / {agent.analysis_quota}
                               </p>
 
                               <label className="mt-3 flex items-center gap-2 text-xs text-slate-300">
@@ -693,7 +840,7 @@ export default function EntreprisesDashboardPage() {
                                     agent.is_enabled = e.target.checked;
                                   }}
                                 />
-                                Enabled
+                                {t.enabled}
                               </label>
 
                               <input
@@ -718,7 +865,7 @@ export default function EntreprisesDashboardPage() {
                                 disabled={agentAccessLoading === member.id}
                                 className="mt-3 w-full rounded-lg bg-blue-600 px-3 py-2 text-xs font-bold text-white hover:bg-blue-500 disabled:opacity-60"
                               >
-                                Save
+                                {t.save}
                               </button>
                             </div>
                           ))}
@@ -731,14 +878,14 @@ export default function EntreprisesDashboardPage() {
                 <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
                   <p className="font-semibold">{user?.email}</p>
                   <p className="mt-1 text-sm text-slate-400">
-                    Platform role: {user?.role}
+                    {t.platformRole}: {user?.role}
                   </p>
                   <p className="mt-1 text-sm text-slate-400">
-                    Organization role: {membership?.role || "member"}
+                    {t.organizationRole}: {membership?.role || t.member}
                   </p>
                   {!isOwnerOrAdmin && (
                     <p className="mt-3 text-xs text-slate-500">
-                      Full member list is available to organization owners/admins.
+                      {t.fullListAdmins}
                     </p>
                   )}
                 </div>
@@ -748,14 +895,14 @@ export default function EntreprisesDashboardPage() {
 
           <aside className="space-y-6">
             <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-              <h2 className="text-xl font-bold">Current user</h2>
+              <h2 className="text-xl font-bold">{t.currentUser}</h2>
               <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
                 <p className="font-semibold">{user?.email}</p>
                 <p className="mt-1 text-sm text-slate-400">
-                  Platform role: {user?.role}
+                  {t.platformRole}: {user?.role}
                 </p>
                 <p className="mt-1 text-sm text-slate-400">
-                  Organization role: {membership?.role}
+                  {t.organizationRole}: {membership?.role}
                 </p>
               </div>
             </div>
@@ -801,7 +948,7 @@ export default function EntreprisesDashboardPage() {
                         </p>
 
                         <p className="text-sm text-slate-400">
-                          credits used
+                          {t.creditsUsed}
                         </p>
                       </div>
                     </div>
