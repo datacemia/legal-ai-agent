@@ -93,21 +93,21 @@ export default async function BlogPage() {
 
   const translations = {
     en: {
-      badge: "{t.badge}",
-      title: "{t.title}",
+      badge: "Runexa Blog",
+      title: "Enterprise AI Insights & Workflows",
       subtitle:
         "Insights about AI document analysis, finance AI, legal AI, business intelligence, enterprise AI systems, and intelligent workflows.",
 
-      readArticle: "{t.readArticle}",
+      readArticle: "Read article →",
 
       ctaTitle:
-        "{t.ctaTitle}",
+        "Explore enterprise AI workflows with Runexa",
 
       ctaDescription:
         "Analyze contracts, financial statements, business data, and study materials with specialized AI agents.",
 
-      pricing: "{t.pricing}",
-      developers: "{t.developers}",
+      pricing: "View Pricing",
+      developers: "Developers",
 
       legalAi: "Legal AI",
       financeAi: "Finance AI",
