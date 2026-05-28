@@ -6,15 +6,15 @@ import { getSavedLocale } from "../../../lib/i18n";
 
 const translations = {
   en: {
-    back: "{t.back}",
-    category: "{t.category}",
-    title: "{t.title}",
+    back: "← Back to Blog",
+    category: "Business AI",
+    title: "AI Business Intelligence: Turning Data Into Better Decisions",
     intro:
       "Business intelligence is no longer only about dashboards and static reports. Modern AI systems can help teams understand business data, detect risks, identify opportunities, and generate decision-ready insights faster.",
-    whatIs: "{t.whatIs}",
+    whatIs: "What is AI business intelligence?",
     whatIsText:
       "AI business intelligence combines structured business data with artificial intelligence to help organizations understand performance, risks, trends, and opportunities.",
-    why: "{t.why}",
+    why: "Why traditional dashboards are not enough",
     whyText:
       "Dashboards are useful, but they often require users to interpret the data themselves. AI adds an interpretation layer that turns raw metrics into practical business context.",
     riskDetection: "Risk detection",
@@ -29,19 +29,19 @@ const translations = {
     decisionSupport: "Decision support",
     decisionSupportText:
       "AI can suggest next actions based on business performance, risks, and strategic goals.",
-    useCases: "{t.useCases}",
+    useCases: "Common use cases for AI business intelligence",
     useCasesText:
       "AI business intelligence can support many workflows, from startup planning to enterprise reporting.",
-    runexa: "{t.runexa}",
+    runexa: "How Runexa Business Agent helps",
     runexaText:
       "Runexa Business Agent helps users upload structured business data, analyze performance, detect risks, identify opportunities, and generate AI-powered recommendations.",
-    support: "{t.support}",
+    support: "AI should support decisions, not automate judgment",
     supportText:
       "The strongest business AI systems help teams reason more clearly. AI-generated insights should be reviewed and validated with human expertise.",
-    ctaTitle: "{t.ctaTitle}",
+    ctaTitle: "Turn business data into actionable insight",
     ctaText:
       "Use Runexa Business Agent to analyze risks, opportunities, KPIs, and strategic decisions with AI.",
-    ctaButton: "{t.ctaButton}",
+    ctaButton: "Analyze Business Data",
     features: [
       "Business health analysis",
       "Risk and opportunity detection",
@@ -276,7 +276,7 @@ export default function AIBusinessIntelligenceArticle() {
               "@context": "https://schema.org",
               "@type": "Article",
               headline:
-                "{t.title}",
+                t.title,
               description:
                 "Learn how AI business intelligence helps teams analyze data, detect risks, identify opportunities, and improve strategic decision-making.",
               datePublished: "2026-05-24",
