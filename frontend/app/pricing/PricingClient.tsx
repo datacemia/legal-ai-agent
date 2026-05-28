@@ -1182,7 +1182,7 @@ export default function PricingClient() {
                     href="/contact"
                     className="mt-8 block w-full rounded-xl border border-slate-300 px-5 py-3 text-center text-sm font-bold text-slate-950 transition hover:bg-slate-50"
                   >
-                    Contact Sales
+                    {t.apiContactSales}
                   </a>
                 ) : (
                   <button
@@ -1193,7 +1193,7 @@ export default function PricingClient() {
                         : "bg-slate-950 text-white hover:bg-slate-800"
                     }`}
                   >
-                    Start API Plan
+                    {t.apiStartPlan}
                   </button>
                 )}
               </div>
