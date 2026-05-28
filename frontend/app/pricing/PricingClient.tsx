@@ -221,7 +221,7 @@ const labels: Record<Language, PricingLabels> = {
     plansTitle: "Pro / Premium Plans",
     plansDesc:
       "One global subscription covers all agents. No separate Pro plan per agent.",
-    globalPro: "Global Pro",
+    globalPro: "Pro العالمي",
     bestForProfessionals: "Best for professionals",
     proValueNote: "For regular users of multiple AI agents.",
     proDesc:
@@ -312,20 +312,20 @@ const labels: Record<Language, PricingLabels> = {
     ],
     creditPacks: [
       {
-        name: "Starter",
+        name: "المبتدئ",
         credits: 50,
         price: "$9",
         description: "Perfect for testing multiple Runexa agents.",
       },
       {
-        name: "Growth",
+        name: "النمو",
         credits: 150,
         price: "$24",
         description: "Best value for regular multi-agent usage.",
         highlighted: true,
       },
       {
-        name: "Scale",
+        name: "التوسّع",
         credits: 500,
         price: "$89",
         description: "Built for professionals and advanced workloads.",
@@ -446,7 +446,7 @@ const labels: Record<Language, PricingLabels> = {
     plansTitle: "Plans Pro / Premium",
     plansDesc:
       "Un seul abonnement global couvre tous les agents. Aucun plan Pro séparé par agent.",
-    globalPro: "Global Pro",
+    globalPro: "Pro العالمي",
     bestForProfessionals: "Idéal pour les professionnels",
     proValueNote: "Pour les utilisateurs réguliers de plusieurs agents IA.",
     proDesc:
@@ -540,13 +540,13 @@ const labels: Record<Language, PricingLabels> = {
     ],
     creditPacks: [
       {
-        name: "Starter",
+        name: "المبتدئ",
         credits: 50,
         price: "$9",
         description: "Parfait pour tester plusieurs agents Runexa.",
       },
       {
-        name: "Growth",
+        name: "النمو",
         credits: 150,
         price: "$24",
         description:
@@ -554,7 +554,7 @@ const labels: Record<Language, PricingLabels> = {
         highlighted: true,
       },
       {
-        name: "Scale",
+        name: "التوسّع",
         credits: 500,
         price: "$89",
         description: "Conçu pour les professionnels et les charges avancées.",
@@ -675,7 +675,7 @@ const labels: Record<Language, PricingLabels> = {
     plansTitle: "خطط Pro / Premium",
     plansDesc:
       "اشتراك عالمي واحد يغطي جميع الوكلاء. لا توجد خطة Pro منفصلة لكل وكيل.",
-    globalPro: "Global Pro",
+    globalPro: "Pro العالمي",
     bestForProfessionals: "الأفضل للمحترفين",
     proValueNote: "للمستخدمين المنتظمين لعدة وكلاء ذكاء اصطناعي.",
     proDesc: "للأفراد والمحترفين الذين يستخدمون عدة وكلاء بانتظام.",
@@ -763,20 +763,20 @@ const labels: Record<Language, PricingLabels> = {
     ],
     creditPacks: [
       {
-        name: "Starter",
+        name: "المبتدئ",
         credits: 50,
         price: "$9",
         description: "مثالي لاختبار عدة وكلاء من Runexa.",
       },
       {
-        name: "Growth",
+        name: "النمو",
         credits: 150,
         price: "$24",
         description: "أفضل قيمة للاستخدام المنتظم لعدة وكلاء.",
         highlighted: true,
       },
       {
-        name: "Scale",
+        name: "التوسّع",
         credits: 500,
         price: "$89",
         description: "مصمم للمحترفين والمهام المتقدمة.",
