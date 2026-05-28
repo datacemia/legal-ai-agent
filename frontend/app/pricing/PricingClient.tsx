@@ -33,6 +33,22 @@ type PricingMessages = {
 };
 
 type PricingLabels = {
+  apiSectionBadge: string;
+  apiSectionTitle: string;
+  apiSectionDesc: string;
+
+  apiPlans: {
+    name: string;
+    price: string;
+    credits: string;
+    rate: string;
+    desc: string;
+    highlighted?: boolean;
+    features: string[];
+  }[];
+
+  apiStartPlan: string;
+  apiContactSales: string;
   badge: string;
   title: string;
   desc: string;
@@ -93,6 +109,60 @@ type PricingLabels = {
 
 const labels: Record<Language, PricingLabels> = {
   en: {
+    apiSectionBadge: "Runexa API",
+    apiSectionTitle: "API Plans for Developers",
+    apiSectionDesc:
+      "Runexa API is a separate paid product for developers and companies who want to integrate AI agents into their own apps, dashboards, and workflows.",
+
+    apiStartPlan: "Start API Plan",
+    apiContactSales: "Contact Sales",
+
+    apiPlans: [
+      {
+        name: "API Starter",
+        price: "$29",
+        credits: "100 API credits",
+        rate: "10 requests/minute",
+        desc: "For developers testing Runexa API integrations.",
+        features: [
+          "Legal AI API",
+          "Finance AI API",
+          "Study AI API",
+          "Business AI API",
+          "Async job processing",
+        ],
+      },
+      {
+        name: "API Pro",
+        price: "$99",
+        credits: "500 API credits",
+        rate: "60 requests/minute",
+        desc: "For production workflows and regular API usage.",
+        highlighted: true,
+        features: [
+          "Everything in API Starter",
+          "Higher API limits",
+          "Production-ready workflows",
+          "Priority processing",
+          "Usage tracking",
+        ],
+      },
+      {
+        name: "Enterprise API",
+        price: "Custom",
+        credits: "Custom API credits",
+        rate: "Custom rate limits",
+        desc: "For organizations with private workflows and scale needs.",
+        features: [
+          "Custom AI workflows",
+          "Team API access",
+          "Private infrastructure options",
+          "Priority support",
+          "Enterprise onboarding",
+        ],
+      },
+    ],
+
     badge: "Global pricing for every Runexa AI agent",
     title: "One account. All agents. Simple global billing.",
     desc: "Access every Runexa AI agent with one account. Start with a $1 trial, global credits, or a Pro subscription.",
@@ -264,6 +334,60 @@ const labels: Record<Language, PricingLabels> = {
   },
 
   fr: {
+    apiSectionBadge: "API Runexa",
+    apiSectionTitle: "Plans API pour développeurs",
+    apiSectionDesc:
+      "L’API Runexa est un produit séparé destiné aux développeurs et entreprises qui souhaitent intégrer les agents IA dans leurs applications, dashboards et workflows.",
+
+    apiStartPlan: "Démarrer le plan API",
+    apiContactSales: "Contacter l’équipe commerciale",
+
+    apiPlans: [
+      {
+        name: "API Débutant",
+        price: "$29",
+        credits: "100 crédits API",
+        rate: "10 requêtes/minute",
+        desc: "Pour les développeurs qui testent les intégrations API Runexa.",
+        features: [
+          "API IA juridique",
+          "API IA finance",
+          "API IA étude",
+          "API IA business",
+          "Traitement asynchrone des jobs",
+        ],
+      },
+      {
+        name: "API Pro",
+        price: "$99",
+        credits: "500 crédits API",
+        rate: "60 requêtes/minute",
+        desc: "Pour les workflows de production et une utilisation régulière de l’API.",
+        highlighted: true,
+        features: [
+          "Tout inclus dans API Débutant",
+          "Limites API plus élevées",
+          "Workflows prêts pour la production",
+          "Traitement prioritaire",
+          "Suivi d’utilisation",
+        ],
+      },
+      {
+        name: "API Entreprise",
+        price: "Sur mesure",
+        credits: "Crédits API personnalisés",
+        rate: "Limites personnalisées",
+        desc: "Pour les organisations ayant des workflows privés et des besoins à grande échelle.",
+        features: [
+          "Workflows IA personnalisés",
+          "Accès API équipe",
+          "Infrastructure privée",
+          "Support prioritaire",
+          "Onboarding entreprise",
+        ],
+      },
+    ],
+
     badge: "Tarification globale pour tous les agents IA Runexa",
     title: "Un compte. Tous les agents. Une facturation simple et globale.",
     desc: "Accédez à tous les agents IA Runexa avec un seul compte. Commencez avec un essai à 1 $, des crédits globaux ou un abonnement Pro.",
@@ -439,6 +563,60 @@ const labels: Record<Language, PricingLabels> = {
   },
 
   ar: {
+    apiSectionBadge: "واجهة Runexa API",
+    apiSectionTitle: "خطط API للمطورين",
+    apiSectionDesc:
+      "واجهة Runexa API هي منتج منفصل للمطورين والشركات الذين يريدون دمج وكلاء الذكاء الاصطناعي داخل تطبيقاتهم ولوحات التحكم وسير العمل.",
+
+    apiStartPlan: "بدء خطة API",
+    apiContactSales: "التواصل مع المبيعات",
+
+    apiPlans: [
+      {
+        name: "API للمبتدئين",
+        price: "$29",
+        credits: "100 رصيد API",
+        rate: "10 طلبات/دقيقة",
+        desc: "للمطورين الذين يختبرون تكاملات Runexa API.",
+        features: [
+          "API الذكاء القانوني",
+          "API الذكاء المالي",
+          "API ذكاء الدراسة",
+          "API ذكاء الأعمال",
+          "معالجة مهام غير متزامنة",
+        ],
+      },
+      {
+        name: "API Pro",
+        price: "$99",
+        credits: "500 رصيد API",
+        rate: "60 طلب/دقيقة",
+        desc: "لسير العمل الإنتاجي والاستخدام المنتظم للـ API.",
+        highlighted: true,
+        features: [
+          "كل ما في API للمبتدئين",
+          "حدود API أعلى",
+          "سير عمل جاهز للإنتاج",
+          "معالجة ذات أولوية",
+          "تتبع الاستخدام",
+        ],
+      },
+      {
+        name: "Enterprise API",
+        price: "مخصص",
+        credits: "أرصدة API مخصصة",
+        rate: "حدود مخصصة",
+        desc: "للمؤسسات التي تحتاج إلى سير عمل خاص وتوسع كبير.",
+        features: [
+          "سير عمل ذكاء اصطناعي مخصص",
+          "وصول API للفريق",
+          "خيارات بنية تحتية خاصة",
+          "دعم ذو أولوية",
+          "تهيئة المؤسسات",
+        ],
+      },
+    ],
+
     badge: "منصة موحّدة لجميع وكلاء Runexa الذكية",
     title: "حساب واحد. جميع الوكلاء. تجربة موحّدة.",
     desc: "من حساب واحد، يمكنك الوصول إلى جميع وكلاء Runexa الذكية. ابدأ بتجربة 1 دولار أو استخدم الأرصدة الموحّدة أو خطة Pro.",
@@ -969,57 +1147,12 @@ export default function PricingClient() {
               API Plans for Developers
             </h2>
             <p className="mt-3 max-w-2xl text-slate-600">
-              Runexa API is a separate paid product for developers and companies who want
-              to integrate AI agents into their own apps, dashboards, and workflows.
+              {t.apiSectionDesc}
             </p>
           </div>
 
           <div className="mt-8 grid gap-6 lg:grid-cols-3">
-            {[
-              {
-                name: "API Starter",
-                price: "$29",
-                credits: "100 API credits",
-                rate: "10 requests/minute",
-                desc: "For developers testing Runexa API integrations.",
-                features: [
-                  "Legal AI API",
-                  "Finance AI API",
-                  "Study AI API",
-                  "Business AI API",
-                  "Async job processing",
-                ],
-              },
-              {
-                name: "API Pro",
-                price: "$99",
-                credits: "500 API credits",
-                rate: "60 requests/minute",
-                desc: "For production workflows and regular API usage.",
-                highlighted: true,
-                features: [
-                  "Everything in API Starter",
-                  "Higher API limits",
-                  "Production-ready workflows",
-                  "Priority processing",
-                  "Usage tracking",
-                ],
-              },
-              {
-                name: "Enterprise API",
-                price: "Custom",
-                credits: "Custom API credits",
-                rate: "Custom rate limits",
-                desc: "For organizations with private workflows and scale needs.",
-                features: [
-                  "Custom AI workflows",
-                  "Team API access",
-                  "Private infrastructure options",
-                  "Priority support",
-                  "Enterprise onboarding",
-                ],
-              },
-            ].map((plan) => (
+            {t.apiPlans.map((plan) => (
               <div
                 key={plan.name}
                 className={`rounded-3xl border p-8 shadow-sm transition-all duration-300 hover:shadow-xl ${
