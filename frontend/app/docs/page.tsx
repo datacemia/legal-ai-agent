@@ -62,6 +62,16 @@ const docsTranslations = {
     storeServerSide: "Store API keys server-side",
     rotateKeys: "Rotate compromised keys immediately",
     useHttps: "Use HTTPS only",
+    baseUrl: "Base URL",
+    production: "Production",
+    local: "Local",
+    jobsApiText: "{t.jobsApiText}",
+    errorResponses: "Error Responses",
+    plan: "Plan",
+    requests: "Requests",
+    securityEnterpriseSupport: "Security & Enterprise Support",
+    enterpriseSupport: "Enterprise Support",
+    exploreApiPlatform: "Explore API Platform",
   },
   fr: {
     badge: "Documentation Runexa",
@@ -119,6 +129,16 @@ const docsTranslations = {
     storeServerSide: "Stocker les clés API côté serveur",
     rotateKeys: "Remplacer immédiatement les clés compromises",
     useHttps: "Utiliser HTTPS uniquement",
+    baseUrl: "URL de base",
+    production: "Production",
+    local: "Local",
+    jobsApiText: "Récupérez les résultats des analyses IA asynchrones.",
+    errorResponses: "Réponses d’erreur",
+    plan: "Plan",
+    requests: "Requêtes",
+    securityEnterpriseSupport: "Sécurité et support entreprise",
+    enterpriseSupport: "Support entreprise",
+    exploreApiPlatform: "Explorer la plateforme API",
   },
   ar: {
     badge: "توثيق Runexa",
@@ -176,6 +196,16 @@ const docsTranslations = {
     storeServerSide: "خزّن مفاتيح API على الخادم",
     rotateKeys: "استبدل المفاتيح المخترقة فورًا",
     useHttps: "استخدم HTTPS فقط",
+    baseUrl: "رابط الأساس",
+    production: "الإنتاج",
+    local: "محلي",
+    jobsApiText: "استرجع نتائج تحليلات الذكاء الاصطناعي غير المتزامنة.",
+    errorResponses: "استجابات الأخطاء",
+    plan: "الخطة",
+    requests: "الطلبات",
+    securityEnterpriseSupport: "الأمان ودعم المؤسسات",
+    enterpriseSupport: "دعم المؤسسات",
+    exploreApiPlatform: "استكشاف منصة API",
   },
 };
 
@@ -279,13 +309,13 @@ export default function DocsPage() {
             </div>
 
             <div className="mt-8 rounded-2xl bg-slate-950 p-6 text-sm text-slate-100">
-              <p className="text-slate-400">Base URL</p>
+              <p className="text-slate-400">{t.baseUrl}</p>
 
               <pre className="mt-4 overflow-x-auto text-blue-300">
-{`Production:
+{`{t.production}:
 https://api.runexa.ai
 
-Local:
+{t.local}:
 http://127.0.0.1:8000`}
               </pre>
             </div>
@@ -402,7 +432,7 @@ http://127.0.0.1:8000`}
             className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm"
           >
             <div className="flex items-center justify-between">
-              <h2 className="text-3xl font-bold">Legal AI</h2>
+              <h2 className="text-3xl font-bold">{t.legalAi}</h2>
 
               <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-700">
                 POST /v1/legal/analyze
@@ -446,7 +476,7 @@ http://127.0.0.1:8000`}
             className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm"
           >
             <div className="flex items-center justify-between">
-              <h2 className="text-3xl font-bold">Business AI</h2>
+              <h2 className="text-3xl font-bold">{t.businessAi}</h2>
 
               <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-bold text-blue-700">
                 POST /v1/business/analyze
@@ -490,7 +520,7 @@ http://127.0.0.1:8000`}
             className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm"
           >
             <div className="flex items-center justify-between">
-              <h2 className="text-3xl font-bold">Study AI</h2>
+              <h2 className="text-3xl font-bold">{t.studyAi}</h2>
 
               <span className="rounded-full bg-violet-100 px-3 py-1 text-xs font-bold text-violet-700">
                 POST /v1/study/analyze
@@ -534,7 +564,7 @@ http://127.0.0.1:8000`}
             id="jobs-api"
             className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm"
           >
-            <h2 className="text-3xl font-bold">{t.jobsApi}</h2>
+            <h2 className="text-3xl font-bold">{t.exploreApiPlatform}</h2>
 
             <p className="mt-5 leading-8 text-slate-600">
               {t.asyncText}
