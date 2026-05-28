@@ -1,50 +1,216 @@
-import Link from "next/link";
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Runexa Docs | AI Agent API Documentation",
-  description:
-    "Developer documentation for Runexa AI agent APIs, async jobs, authentication, endpoints, and structured analysis responses.",
-  keywords: [
-    "Runexa API",
-    "AI API documentation",
-    "legal AI API",
-    "finance AI API",
-    "business AI API",
-    "study AI API",
-    "AI jobs API",
-    "enterprise AI API",
-  ],
-  alternates: {
-    canonical: "https://runexa.ai/docs",
+import Link from "next/link";
+import { getSavedLocale } from "../../lib/i18n";
+
+
+
+const docsTranslations = {
+  en: {
+    badge: "Runexa Docs",
+    title: "{t.title}",
+    subtitle:
+      "Build AI-powered workflows using Runexa asynchronous APIs for legal, finance, business intelligence, and study automation.",
+    developerPlatform: "{t.developerPlatform}",
+    developerSubtitle: "{t.developerSubtitle}",
+    contents: "Contents",
+    introduction: "Introduction",
+    authentication: "Authentication",
+    asyncJobs: "Async jobs",
+    financeAi: "Finance AI",
+    legalAi: "Legal AI",
+    businessAi: "Business AI",
+    studyAi: "Study AI",
+    jobsApi: "Jobs API",
+    errors: "Errors",
+    rateLimits: "Rate limits",
+    security: "Security",
+    infrastructure: "Runexa AI infrastructure",
+    introText:
+      "Runexa API allows developers and enterprises to integrate advanced AI analysis workflows directly into products, dashboards, internal tools, and enterprise systems.",
+    legalAnalysis: "Legal AI analysis",
+    financeAnalysis: "Finance AI analysis",
+    businessAnalysis: "Business AI analysis",
+    studyAnalysis: "Study AI analysis",
+    authText: "{t.authText}",
+    asyncArchitecture: "Async Architecture",
+    asyncText:
+      "Runexa APIs use asynchronous AI processing powered by queue-based workers.",
+    uploadFile: "Upload file",
+    createJob: "Create AI job",
+    workerProcessing: "Worker processing",
+    retrieveResults: "Retrieve results",
+    bankStatements: "Bank statements",
+    subscriptions: "Subscriptions",
+    savingsOpportunities: "Savings opportunities",
+    contractAnalysis: "Contract analysis",
+    riskDetection: "Risk detection",
+    clauseExtraction: "Clause extraction",
+    kpiDashboards: "KPI dashboards",
+    forecasting: "Forecasting",
+    executiveReporting: "Executive reporting",
+    studyDocuments: "Study documents",
+    summaries: "Summaries",
+    quizzesFlashcards: "Quizzes and flashcards",
+    missingApiKey: "Missing or invalid API key.",
+    insufficientCredits: "Insufficient credits or API access disabled.",
+    fileTooLarge: "Uploaded file exceeds allowed limits.",
+    rateLimitExceeded: "Rate limit exceeded.",
+    unexpectedError: "Unexpected AI processing error.",
+    custom: "Custom",
+    neverExpose: "Never expose API keys publicly",
+    storeServerSide: "Store API keys server-side",
+    rotateKeys: "Rotate compromised keys immediately",
+    useHttps: "Use HTTPS only",
+  },
+  fr: {
+    badge: "Documentation Runexa",
+    title: "Documentation API des agents IA",
+    subtitle:
+      "Construisez des workflows IA avec les API asynchrones Runexa pour le juridique, la finance, la business intelligence et l’apprentissage.",
+    developerPlatform: "Plateforme développeur",
+    developerSubtitle: "Infrastructure IA asynchrone pour workflows entreprise",
+    contents: "Sommaire",
+    introduction: "Introduction",
+    authentication: "Authentification",
+    asyncJobs: "Jobs asynchrones",
+    financeAi: "IA finance",
+    legalAi: "IA juridique",
+    businessAi: "IA business",
+    studyAi: "IA étude",
+    jobsApi: "API Jobs",
+    errors: "Erreurs",
+    rateLimits: "Limites de débit",
+    security: "Sécurité",
+    infrastructure: "Infrastructure IA Runexa",
+    introText:
+      "L’API Runexa permet aux développeurs et entreprises d’intégrer des workflows avancés d’analyse IA directement dans leurs produits, dashboards, outils internes et systèmes entreprise.",
+    legalAnalysis: "Analyse IA juridique",
+    financeAnalysis: "Analyse IA finance",
+    businessAnalysis: "Analyse IA business",
+    studyAnalysis: "Analyse IA étude",
+    authText: "Toutes les requêtes API nécessitent une clé API Bearer.",
+    asyncArchitecture: "Architecture asynchrone",
+    asyncText:
+      "Les API Runexa utilisent un traitement IA asynchrone alimenté par des workers et une file de jobs.",
+    uploadFile: "Téléverser le fichier",
+    createJob: "Créer le job IA",
+    workerProcessing: "Traitement par worker",
+    retrieveResults: "Récupérer les résultats",
+    bankStatements: "Relevés bancaires",
+    subscriptions: "Abonnements",
+    savingsOpportunities: "Opportunités d’économies",
+    contractAnalysis: "Analyse de contrat",
+    riskDetection: "Détection des risques",
+    clauseExtraction: "Extraction des clauses",
+    kpiDashboards: "Dashboards KPI",
+    forecasting: "Prévisions",
+    executiveReporting: "Reporting exécutif",
+    studyDocuments: "Documents d’étude",
+    summaries: "Résumés",
+    quizzesFlashcards: "Quiz et flashcards",
+    missingApiKey: "Clé API manquante ou invalide.",
+    insufficientCredits: "Crédits insuffisants ou accès API désactivé.",
+    fileTooLarge: "Le fichier dépasse les limites autorisées.",
+    rateLimitExceeded: "Limite de débit dépassée.",
+    unexpectedError: "Erreur inattendue du traitement IA.",
+    custom: "Personnalisé",
+    neverExpose: "Ne jamais exposer les clés API publiquement",
+    storeServerSide: "Stocker les clés API côté serveur",
+    rotateKeys: "Remplacer immédiatement les clés compromises",
+    useHttps: "Utiliser HTTPS uniquement",
+  },
+  ar: {
+    badge: "توثيق Runexa",
+    title: "توثيق API لوكلاء الذكاء الاصطناعي",
+    subtitle:
+      "أنشئ تدفقات عمل مدعومة بالذكاء الاصطناعي باستخدام واجهات Runexa غير المتزامنة للقانون والمالية وذكاء الأعمال والدراسة.",
+    developerPlatform: "منصة المطورين",
+    developerSubtitle: "بنية ذكاء اصطناعي غير متزامنة لسير عمل المؤسسات",
+    contents: "المحتويات",
+    introduction: "المقدمة",
+    authentication: "المصادقة",
+    asyncJobs: "المهام غير المتزامنة",
+    financeAi: "الذكاء المالي",
+    legalAi: "الذكاء القانوني",
+    businessAi: "ذكاء الأعمال",
+    studyAi: "ذكاء الدراسة",
+    jobsApi: "API المهام",
+    errors: "الأخطاء",
+    rateLimits: "حدود المعدل",
+    security: "الأمان",
+    infrastructure: "بنية Runexa للذكاء الاصطناعي",
+    introText:
+      "تتيح API Runexa للمطورين والمؤسسات دمج تدفقات تحليل ذكاء اصطناعي متقدمة مباشرة داخل المنتجات ولوحات التحكم والأدوات الداخلية وأنظمة المؤسسات.",
+    legalAnalysis: "تحليل قانوني بالذكاء الاصطناعي",
+    financeAnalysis: "تحليل مالي بالذكاء الاصطناعي",
+    businessAnalysis: "تحليل أعمال بالذكاء الاصطناعي",
+    studyAnalysis: "تحليل دراسي بالذكاء الاصطناعي",
+    authText: "تتطلب جميع طلبات API مفتاح Bearer.",
+    asyncArchitecture: "البنية غير المتزامنة",
+    asyncText:
+      "تستخدم واجهات Runexa معالجة ذكاء اصطناعي غير متزامنة تعتمد على قائمة مهام وعمّال معالجة.",
+    uploadFile: "رفع الملف",
+    createJob: "إنشاء مهمة الذكاء الاصطناعي",
+    workerProcessing: "المعالجة عبر العامل",
+    retrieveResults: "استرجاع النتائج",
+    bankStatements: "الكشوف البنكية",
+    subscriptions: "الاشتراكات",
+    savingsOpportunities: "فرص الادخار",
+    contractAnalysis: "تحليل العقود",
+    riskDetection: "كشف المخاطر",
+    clauseExtraction: "استخراج البنود",
+    kpiDashboards: "لوحات مؤشرات الأداء",
+    forecasting: "التوقعات",
+    executiveReporting: "تقارير تنفيذية",
+    studyDocuments: "مستندات الدراسة",
+    summaries: "الملخصات",
+    quizzesFlashcards: "اختبارات وبطاقات تعليمية",
+    missingApiKey: "مفتاح API مفقود أو غير صالح.",
+    insufficientCredits: "الرصيد غير كافٍ أو الوصول إلى API معطل.",
+    fileTooLarge: "الملف المرفوع يتجاوز الحدود المسموح بها.",
+    rateLimitExceeded: "تم تجاوز حد المعدل.",
+    unexpectedError: "خطأ غير متوقع أثناء معالجة الذكاء الاصطناعي.",
+    custom: "مخصص",
+    neverExpose: "لا تعرض مفاتيح API علنًا",
+    storeServerSide: "خزّن مفاتيح API على الخادم",
+    rotateKeys: "استبدل المفاتيح المخترقة فورًا",
+    useHttps: "استخدم HTTPS فقط",
   },
 };
 
 export default function DocsPage() {
+  const locale = getSavedLocale();
+  const t =
+    docsTranslations[locale as keyof typeof docsTranslations] ||
+    docsTranslations.en;
+
   return (
-    <main className="min-h-screen bg-slate-50 px-6 py-20 text-slate-900">
+    <main
+      dir={locale === "ar" ? "rtl" : "ltr"}
+      className="min-h-screen bg-slate-50 px-6 py-20 text-slate-900"
+    >
       <section className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="font-semibold text-blue-600">Runexa Docs</p>
+            <p className="font-semibold text-blue-600">{t.badge}</p>
 
             <h1 className="mt-4 text-5xl font-bold tracking-tight">
-              AI Agent API Documentation
+              {t.title}
             </h1>
 
             <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
-              Build AI-powered workflows using Runexa asynchronous APIs for
-              legal, finance, business intelligence, and study automation.
+              {t.subtitle}
             </p>
           </div>
 
           <div className="rounded-2xl border border-blue-200 bg-blue-50 px-5 py-4">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-blue-700">
-              Developer Platform
+              {t.developerPlatform}
             </p>
 
             <p className="mt-2 text-sm text-blue-900">
-              Async AI infrastructure for enterprise workflows
+              {t.developerSubtitle}
             </p>
           </div>
         </div>
@@ -52,21 +218,21 @@ export default function DocsPage() {
 
       <section className="mx-auto mt-12 grid max-w-7xl gap-6 lg:grid-cols-[280px_1fr]">
         <aside className="sticky top-10 h-fit rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-          <p className="text-sm font-bold text-slate-900">Contents</p>
+          <p className="text-sm font-bold text-slate-900">{t.contents}</p>
 
           <nav className="mt-5 space-y-3 text-sm text-slate-600">
             {[
-              ["Introduction", "#introduction"],
-              ["Authentication", "#authentication"],
-              ["Async jobs", "#jobs"],
-              ["Finance AI", "#finance"],
-              ["Legal AI", "#legal"],
-              ["Business AI", "#business"],
-              ["Study AI", "#study"],
-              ["Jobs API", "#jobs-api"],
-              ["Errors", "#errors"],
-              ["Rate limits", "#rate-limits"],
-              ["Security", "#security"],
+              [t.introduction, "#introduction"],
+              [t.authentication, "#authentication"],
+              [t.asyncJobs, "#jobs"],
+              [t.financeAi, "#finance"],
+              [t.legalAi, "#legal"],
+              [t.businessAi, "#business"],
+              [t.studyAi, "#study"],
+              [t.jobsApi, "#jobs-api"],
+              [t.errors, "#errors"],
+              [t.rateLimits, "#rate-limits"],
+              [t.security, "#security"],
             ].map(([label, href]) => (
               <a
                 key={href}
@@ -93,17 +259,15 @@ export default function DocsPage() {
             </h2>
 
             <p className="mt-5 leading-8 text-slate-600">
-              Runexa API allows developers and enterprises to integrate advanced
-              AI analysis workflows directly into products, dashboards, internal
-              tools, and enterprise systems.
+              {t.introText}
             </p>
 
             <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               {[
-                "Legal AI analysis",
-                "Finance AI analysis",
-                "Business AI analysis",
-                "Study AI analysis",
+                t.legalAnalysis,
+                t.financeAnalysis,
+                t.businessAnalysis,
+                t.studyAnalysis,
               ].map((item) => (
                 <div
                   key={item}
@@ -134,7 +298,7 @@ http://127.0.0.1:8000`}
             <h2 className="text-3xl font-bold">Authentication</h2>
 
             <p className="mt-5 leading-8 text-slate-600">
-              All API requests require a bearer API key.
+              {t.authText}
             </p>
 
             <pre className="mt-6 overflow-x-auto rounded-2xl bg-slate-950 p-5 text-sm text-slate-100">
@@ -151,19 +315,18 @@ http://127.0.0.1:8000`}
             id="jobs"
             className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm"
           >
-            <h2 className="text-3xl font-bold">Async Architecture</h2>
+            <h2 className="text-3xl font-bold">{t.asyncArchitecture}</h2>
 
             <p className="mt-5 leading-8 text-slate-600">
-              Runexa APIs use asynchronous AI processing powered by queue-based
-              workers.
+              {t.asyncText}
             </p>
 
             <div className="mt-8 grid gap-4 md:grid-cols-4">
               {[
-                "Upload file",
-                "Create AI job",
-                "Worker processing",
-                "Retrieve results",
+                t.uploadFile,
+                t.createJob,
+                t.workerProcessing,
+                t.retrieveResults,
               ].map((item, index) => (
                 <div
                   key={item}
@@ -202,9 +365,9 @@ http://127.0.0.1:8000`}
 
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               {[
-                "Bank statements",
-                "Subscriptions",
-                "Savings opportunities",
+                t.bankStatements,
+                t.subscriptions,
+                t.savingsOpportunities,
               ].map((item) => (
                 <div
                   key={item}
@@ -248,9 +411,9 @@ http://127.0.0.1:8000`}
 
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               {[
-                "Contract analysis",
-                "Risk detection",
-                "Clause extraction",
+                t.contractAnalysis,
+                t.riskDetection,
+                t.clauseExtraction,
               ].map((item) => (
                 <div
                   key={item}
@@ -292,9 +455,9 @@ http://127.0.0.1:8000`}
 
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               {[
-                "KPI dashboards",
-                "Forecasting",
-                "Executive reporting",
+                t.kpiDashboards,
+                t.forecasting,
+                t.executiveReporting,
               ].map((item) => (
                 <div
                   key={item}
@@ -336,9 +499,9 @@ http://127.0.0.1:8000`}
 
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               {[
-                "Study documents",
-                "Summaries",
-                "Quizzes and flashcards",
+                t.studyDocuments,
+                t.summaries,
+                t.quizzesFlashcards,
               ].map((item) => (
                 <div
                   key={item}
@@ -397,26 +560,11 @@ http://127.0.0.1:8000`}
 
             <div className="mt-8 space-y-4">
               {[
-                [
-                  "401 Unauthorized",
-                  "Missing or invalid API key.",
-                ],
-                [
-                  "402 Payment Required",
-                  "Insufficient credits or API access disabled.",
-                ],
-                [
-                  "413 Payload Too Large",
-                  "Uploaded file exceeds allowed limits.",
-                ],
-                [
-                  "429 Too Many Requests",
-                  "Rate limit exceeded.",
-                ],
-                [
-                  "500 Server Error",
-                  "Unexpected AI processing error.",
-                ],
+                ["401", t.missingApiKey],
+                ["402", t.insufficientCredits],
+                ["413", t.fileTooLarge],
+                ["429", t.rateLimitExceeded],
+                ["500", t.unexpectedError],
               ].map(([code, desc]) => (
                 <div
                   key={code}
@@ -453,7 +601,7 @@ http://127.0.0.1:8000`}
                   {[
                     ["API Starter", "10 requests/minute"],
                     ["API Pro", "60 requests/minute"],
-                    ["Enterprise API", "Custom"],
+                    ["Enterprise API", t.custom],
                   ].map(([plan, limit]) => (
                     <tr key={plan}>
                       <td className="px-5 py-4">{plan}</td>
@@ -475,10 +623,10 @@ http://127.0.0.1:8000`}
 
             <div className="mt-6 grid gap-4 md:grid-cols-2">
               {[
-                "Never expose API keys publicly",
-                "Store API keys server-side",
-                "Rotate compromised keys immediately",
-                "Use HTTPS only",
+                t.neverExpose,
+                t.storeServerSide,
+                t.rotateKeys,
+                t.useHttps,
               ].map((item) => (
                 <div
                   key={item}
@@ -514,7 +662,7 @@ http://127.0.0.1:8000`}
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "TechArticle",
-            headline: "Runexa AI Agent API Documentation",
+            headline: "Runexa {t.title}",
             description:
               "Developer documentation for Runexa AI APIs including legal AI, finance AI, business intelligence, and study automation.",
             author: {
