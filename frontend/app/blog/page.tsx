@@ -1,83 +1,39 @@
+"use client";
+
 import Link from "next/link";
-import type { Metadata } from "next";
-import { getLocale } from "../../lib/server-i18n";
+import { useEffect, useState } from "react";
+import { getSavedLocale } from "../../lib/i18n";
 
 
-export async function generateMetadata(): Promise<Metadata> {
-  const locale = await getLocale();
 
-  const metadataTranslations = {
-    en: {
-      title:
-        "Runexa AI Blog | Legal AI, Finance AI, Business Intelligence & Study AI",
-      description:
-        "Insights about AI contract analysis, finance AI, business intelligence, AI workflows, and enterprise AI systems.",
-    },
+export default function BlogPage() {
+  const [locale, setLocale] = useState<"en" | "fr" | "ar">("en");
 
-    fr: {
-      title:
-        "Blog Runexa AI | IA juridique, IA finance, IA business et IA étude",
-      description:
-        "Insights sur l’analyse juridique IA, la finance IA, l’intelligence business, les workflows IA et les systèmes IA entreprise.",
-    },
+  useEffect(() => {
+    const saved = getSavedLocale();
 
-    ar: {
-      title:
-        "مدونة Runexa AI | الذكاء القانوني والمالي وذكاء الأعمال وذكاء الدراسة",
-      description:
-        "مقالات ورؤى حول التحليل القانوني بالذكاء الاصطناعي والذكاء المالي وذكاء الأعمال وتدفقات العمل الذكية.",
-    },
-  };
+    if (saved === "fr" || saved === "ar") {
+      setLocale(saved);
+    } else {
+      setLocale("en");
+    }
 
-  const t =
-    metadataTranslations[
-      locale as keyof typeof metadataTranslations
-    ] || metadataTranslations.en;
+    const handleLocaleChange = () => {
+      const updated = getSavedLocale();
 
-  return {
-    title: t.title,
-    description: t.description,
-    keywords: [
-      "AI blog",
-      "legal AI",
-      "finance AI",
-      "business intelligence",
-      "study AI",
-      "enterprise AI",
-    ],
+      if (updated === "fr" || updated === "ar") {
+        setLocale(updated);
+      } else {
+        setLocale("en");
+      }
+    };
 
-    alternates: {
-      canonical: "https://runexa.ai/blog",
-    },
+    window.addEventListener("locale-change", handleLocaleChange);
 
-    openGraph: {
-      title: t.title,
-      description: t.description,
-      url: "https://runexa.ai/blog",
-      siteName: "Runexa",
-      type: "website",
-      images: [
-        {
-          url: "/og-image.png",
-          width: 1200,
-          height: 630,
-          alt: "Runexa AI Blog",
-        },
-      ],
-    },
-
-    twitter: {
-      card: "summary_large_image",
-      title: t.title,
-      description: t.description,
-      images: ["/og-image.png"],
-    },
-  };
-}
-
-
-export default async function BlogPage() {
-  const locale = await getLocale();
+    return () => {
+      window.removeEventListener("locale-change", handleLocaleChange);
+    };
+  }, []);
 
   const translations = {
     en: {
