@@ -100,14 +100,6 @@ export default function Navbar() {
       : "Enterprise";
 
 
-  const insightsLabel =
-    locale === "fr"
-      ? "Insights"
-      : locale === "ar"
-      ? "الرؤى"
-      : "Insights";
-
-
   const isAdmin = role === "admin";
   const isEnterpriseAdmin = role === "enterprise_admin";
   const canSeeEnterprise = isEnterpriseAdmin || isEnterpriseMember;
@@ -178,14 +170,6 @@ export default function Navbar() {
               {t.admin || "Admin"}
             </Link>
           )}
-
-          <Link
-            href="/blog"
-            className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
-          >
-            {insightsLabel}
-          </Link>
-
 
           <Link
             href="/developers"
@@ -319,14 +303,6 @@ export default function Navbar() {
                 {t.admin || "Admin"}
               </Link>
             )}
-
-            <Link
-              href="/blog"
-              onClick={closeMobileMenu}
-              className={mobileLinkClass}
-            >
-              {insightsLabel}
-            </Link>
 
             <Link
               href="/developers"
