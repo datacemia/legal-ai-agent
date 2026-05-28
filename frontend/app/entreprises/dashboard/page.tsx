@@ -14,6 +14,10 @@ import {
   RefreshCw,
   Bot,
   ArrowRight,
+  Scale,
+  GraduationCap,
+  Wallet,
+  Briefcase,
 } from "lucide-react";
 
 const API_URL =
@@ -22,30 +26,70 @@ const API_URL =
 const AGENT_CATALOG: Record<
   string,
   {
-    name: string;
     href: string;
-    description: string;
+    icon: typeof Scale;
+    name: Record<string, string>;
+    description: Record<string, string>;
   }
 > = {
   legal: {
-    name: "Legal Agent",
     href: "/upload",
-    description: "Analyze contracts, clauses, obligations, and legal risks.",
+    icon: Scale,
+    name: {
+      en: "Legal Agent",
+      fr: "Agent juridique",
+      ar: "الوكيل القانوني",
+    },
+    description: {
+      en: "Analyze contracts, clauses, obligations, and legal risks.",
+      fr: "Analyse les contrats, clauses, obligations et risques juridiques.",
+      ar: "تحليل العقود والبنود والالتزامات والمخاطر القانونية.",
+    },
   },
+
   study: {
-    name: "Study Agent",
     href: "/study",
-    description: "Summaries, quizzes, flashcards, and study plans.",
+    icon: GraduationCap,
+    name: {
+      en: "Study Agent",
+      fr: "Agent étude",
+      ar: "وكيل الدراسة",
+    },
+    description: {
+      en: "Summaries, quizzes, flashcards, and study plans.",
+      fr: "Résumés, quiz, flashcards et plans de révision.",
+      ar: "ملخصات واختبارات وبطاقات تعليمية وخطط دراسة.",
+    },
   },
+
   finance: {
-    name: "Finance Coach Agent",
     href: "/finance",
-    description: "Analyze spending, bank statements, waste, and savings.",
+    icon: Wallet,
+    name: {
+      en: "Finance Coach Agent",
+      fr: "Agent coach financier",
+      ar: "وكيل المدرب المالي",
+    },
+    description: {
+      en: "Analyze spending, bank statements, waste, and savings.",
+      fr: "Analyse les dépenses, relevés bancaires, gaspillage et économies.",
+      ar: "تحليل المصاريف والكشوف البنكية والهدر والادخار.",
+    },
   },
+
   business: {
-    name: "Business Decision Agent",
     href: "/business",
-    description: "Business risks, opportunities, decisions, and action plans.",
+    icon: Briefcase,
+    name: {
+      en: "Business Decision Agent",
+      fr: "Agent décision business",
+      ar: "وكيل قرارات الأعمال",
+    },
+    description: {
+      en: "Business risks, opportunities, decisions, and action plans.",
+      fr: "Risques, opportunités, décisions et plans d’action business.",
+      ar: "مخاطر وفرص الأعمال وخطط العمل واتخاذ القرار.",
+    },
   },
 };
 
@@ -95,6 +139,12 @@ const translations = {
     used: "Used",
     accessQuotas: "Agent access & quotas",
     agentsConnected: "agents connected",
+    enterpriseControls: "Enterprise controls",
+    usageAnalytics: "Usage analytics",
+    requests: "requests",
+    userId: "User ID",
+    memberId: "Member ID",
+    saveShort: "Save",
   },
 
   fr: {
@@ -141,6 +191,12 @@ const translations = {
     used: "Utilisé",
     accessQuotas: "Accès agents et quotas",
     agentsConnected: "agents connectés",
+    enterpriseControls: "Contrôles entreprise",
+    usageAnalytics: "Analyse d’utilisation",
+    requests: "requêtes",
+    userId: "ID utilisateur",
+    memberId: "ID membre",
+    saveShort: "Sauver",
   },
 
   ar: {
@@ -187,6 +243,12 @@ const translations = {
     used: "المستخدم",
     accessQuotas: "صلاحيات الوكلاء والحصص",
     agentsConnected: "وكلاء متصلون",
+    enterpriseControls: "إعدادات المؤسسة",
+    usageAnalytics: "تحليلات الاستخدام",
+    requests: "طلبات",
+    userId: "معرف المستخدم",
+    memberId: "معرف العضو",
+    saveShort: "حفظ",
   },
 };
 
@@ -549,9 +611,18 @@ export default function EntreprisesDashboardPage() {
     .map((slug: string) => ({
       slug,
       ...(AGENT_CATALOG[slug] || {
-        name: `${slug} Agent`,
         href: `/${slug}`,
-        description: `${slug} enterprise agent`,
+        icon: Bot,
+        name: {
+          en: `${slug} Agent`,
+          fr: `${slug} Agent`,
+          ar: `${slug} Agent`,
+        },
+        description: {
+          en: `${slug} enterprise agent`,
+          fr: `${slug} enterprise agent`,
+          ar: `${slug} enterprise agent`,
+        },
       }),
     }))
     .filter((agent: any) => Boolean(agent.slug));
@@ -681,7 +752,10 @@ export default function EntreprisesDashboardPage() {
 
           <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {connectedAgents.length > 0 ? (
-              connectedAgents.map((agent: any) => (
+              connectedAgents.map((agent: any) => {
+                const AgentIcon = agent.icon || Bot;
+
+                return (
                 <Link
                   key={agent.slug}
                   href={agent.href}
@@ -689,7 +763,7 @@ export default function EntreprisesDashboardPage() {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-200">
-                      <Bot className="h-5 w-5" />
+                      <AgentIcon className="h-5 w-5" />
                     </div>
 
                     <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-300">
@@ -698,11 +772,11 @@ export default function EntreprisesDashboardPage() {
                   </div>
 
                   <h3 className="mt-5 text-lg font-bold text-white">
-                    {agent.name}
+                    {agent.name[locale] || agent.name.en}
                   </h3>
 
                   <p className="mt-2 min-h-[72px] text-sm leading-6 text-slate-400">
-                    {agent.description}
+                    {agent.description[locale] || agent.description.en}
                   </p>
 
                   <div className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-blue-300 transition group-hover:text-blue-200">
@@ -710,7 +784,8 @@ export default function EntreprisesDashboardPage() {
                     <ArrowRight className="h-4 w-4" />
                   </div>
                 </Link>
-              ))
+                );
+              })
             ) : (
               <div className="rounded-2xl border border-dashed border-white/10 p-6 text-sm text-slate-400 md:col-span-2 xl:col-span-3">
                 {t.noAgents}
@@ -751,7 +826,7 @@ export default function EntreprisesDashboardPage() {
                         )}
                       </div>
                       <p className="mt-1 text-sm text-slate-400">
-                        User ID #{member.user_id} · Member ID #{member.id}
+                        {t.userId} #{member.user_id} · {t.memberId} #{member.id}
                       </p>
                     </div>
 
@@ -865,7 +940,7 @@ export default function EntreprisesDashboardPage() {
                                 disabled={agentAccessLoading === member.id}
                                 className="mt-3 w-full rounded-lg bg-blue-600 px-3 py-2 text-xs font-bold text-white hover:bg-blue-500 disabled:opacity-60"
                               >
-                                {t.save}
+                                {t.saveShort}
                               </button>
                             </div>
                           ))}
@@ -909,7 +984,7 @@ export default function EntreprisesDashboardPage() {
 
             <div className="rounded-3xl border border-blue-400/20 bg-blue-500/10 p-6">
               <h2 className="text-xl font-bold text-blue-50">
-                Enterprise controls
+                {t.enterpriseControls}
               </h2>
               <div className="mt-4 space-y-3 text-sm text-blue-100">
                 <p>✔ Organization-level credits</p>
@@ -922,7 +997,7 @@ export default function EntreprisesDashboardPage() {
           </aside>
 
           <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-            <h2 className="text-2xl font-bold">Usage analytics</h2>
+            <h2 className="text-2xl font-bold">{t.usageAnalytics}</h2>
 
             <div className="mt-6 space-y-4">
               {usageSummary?.usage_by_agent?.length ? (
@@ -938,7 +1013,7 @@ export default function EntreprisesDashboardPage() {
                         </p>
 
                         <p className="mt-1 text-sm text-slate-400">
-                          {agent.requests} requests
+                          {agent.requests} {t.requests}
                         </p>
                       </div>
 
