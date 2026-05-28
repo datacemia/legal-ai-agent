@@ -522,20 +522,25 @@ const labels: any = {
 };
 
 export default function EnterpriseClient() {
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] =
+    useState<"en" | "fr" | "ar">("en");
   const t = labels[language] || labels.en;
 
   useEffect(() => {
     const saved = localStorage.getItem("locale");
 
-    if (saved && labels[saved]) {
+    if (saved === "fr" || saved === "ar" || saved === "en") {
       setLanguage(saved);
     }
 
     const handleLocaleChange = () => {
       const nextLocale = localStorage.getItem("locale");
 
-      if (nextLocale && labels[nextLocale]) {
+      if (
+        nextLocale === "fr" ||
+        nextLocale === "ar" ||
+        nextLocale === "en"
+      ) {
         setLanguage(nextLocale);
       }
     };
