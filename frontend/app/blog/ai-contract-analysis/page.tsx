@@ -51,6 +51,18 @@ const translations = {
     riskDetection: "Risky clause detection",
     riskDetectionText:
       "AI can help flag clauses related to liability, termination, payment, and confidentiality.",
+    obligationSummaries: "Obligation summaries",
+    obligationSummariesText:
+      "AI can summarize deadlines, duties, renewal terms, payment obligations, and notice requirements in plain language.",
+
+    negotiationSupport: "Negotiation support",
+    negotiationSupportText:
+      "AI can suggest areas to review before signing, such as unclear obligations or one-sided termination rights.",
+
+    executiveSummaries: "Executive summaries",
+    executiveSummariesText:
+      "AI can turn long contracts into structured summaries for founders, teams, consultants, and professionals.",
+
   },
 
   fr: {
@@ -99,6 +111,18 @@ const translations = {
     riskDetection: "Détection des clauses à risque",
     riskDetectionText:
       "L’IA peut détecter les clauses liées à la responsabilité, résiliation, paiements et confidentialité.",
+    obligationSummaries: "Résumés des obligations",
+    obligationSummariesText:
+      "L’IA peut résumer les délais, obligations, renouvellements et conditions de paiement en langage clair.",
+
+    negotiationSupport: "Support de négociation",
+    negotiationSupportText:
+      "L’IA peut suggérer les éléments à examiner avant signature, comme les obligations ambiguës ou déséquilibrées.",
+
+    executiveSummaries: "Résumés exécutifs",
+    executiveSummariesText:
+      "L’IA peut transformer de longs contrats en résumés structurés pour équipes et dirigeants.",
+
   },
 
   ar: {
@@ -148,6 +172,18 @@ const translations = {
     riskDetection: "اكتشاف البنود الخطرة",
     riskDetectionText:
       "يمكن للذكاء الاصطناعي اكتشاف البنود المتعلقة بالمسؤولية والإنهاء والمدفوعات والسرية.",
+    obligationSummaries: "ملخص الالتزامات",
+    obligationSummariesText:
+      "يمكن للذكاء الاصطناعي تلخيص المواعيد والالتزامات وشروط الدفع والتجديد بلغة واضحة.",
+
+    negotiationSupport: "دعم التفاوض",
+    negotiationSupportText:
+      "يمكن للذكاء الاصطناعي اقتراح النقاط التي يجب مراجعتها قبل التوقيع.",
+
+    executiveSummaries: "الملخصات التنفيذية",
+    executiveSummariesText:
+      "يمكن للذكاء الاصطناعي تحويل العقود الطويلة إلى ملخصات منظمة للفرق والمديرين.",
+
   },
 };
 
@@ -237,16 +273,16 @@ export default function AIContractAnalysisArticle() {
                 t.riskDetectionText,
               ],
               [
-                "Obligation summaries",
-                "AI can summarize deadlines, duties, renewal terms, payment obligations, and notice requirements in plain language.",
+                t.obligationSummaries,
+                t.obligationSummariesText,
               ],
               [
-                "Negotiation support",
-                "AI can suggest areas to review before signing, such as unclear obligations or one-sided termination rights.",
+                t.negotiationSupport,
+                t.negotiationSupportText,
               ],
               [
-                "Executive summaries",
-                "AI can turn long contracts into structured summaries for founders, teams, consultants, and professionals.",
+                t.executiveSummaries,
+                t.executiveSummariesText,
               ],
             ].map(([title, text]) => (
               <div
