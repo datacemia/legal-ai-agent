@@ -1141,10 +1141,10 @@ export default function PricingClient() {
         <section className="mt-20">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.25em] text-blue-600">
-              Runexa API
+              {t.apiSectionBadge}
             </p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight">
-              API Plans for Developers
+              {t.apiSectionTitle}
             </h2>
             <p className="mt-3 max-w-2xl text-slate-600">
               {t.apiSectionDesc}
