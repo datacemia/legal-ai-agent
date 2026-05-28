@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 
     url: "https://runexa.ai/legal/ai-disclaimer",
 
-    siteName: "Runexa Systems",
+    siteName: "Runexa Systems LLC",
 
     images: [
       {

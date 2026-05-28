@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import CompanyClient from "./CompanyClient";
 
 export const metadata: Metadata = {
-  title: "Company Information | Runexa Systems LLC",
+  title: "Company Information | Runexa",
 
   description:
     "Official company information, registered address, contact details, services, and governing law for Runexa Systems LLC.",
@@ -22,14 +22,14 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Company Information | Runexa Systems LLC",
+    title: "Company Information | Runexa",
 
     description:
       "Official company information, registered address, contact details, services, and governing law for Runexa Systems LLC.",
 
     url: "https://runexa.ai/legal/company",
 
-    siteName: "Runexa Systems",
+    siteName: "Runexa Systems LLC",
 
     images: [
       {
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
 
-    title: "Company Information | Runexa Systems LLC",
+    title: "Company Information | Runexa",
 
     description:
       "Official company details, address, governing law, and contact information for Runexa Systems LLC.",

@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 
     url: "https://runexa.ai/privacy",
 
-    siteName: "Runexa Systems",
+    siteName: "Runexa Systems LLC",
 
     images: [
       {
@@ -85,7 +85,7 @@ export default function PrivacyPage() {
 
             publisher: {
               "@type": "Organization",
-              name: "Runexa Systems",
+              name: "Runexa Systems LLC",
               url: "https://runexa.ai",
             },
           }),

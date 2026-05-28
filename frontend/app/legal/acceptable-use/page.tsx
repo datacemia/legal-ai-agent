@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
     url: "https://runexa.ai/legal/acceptable-use",
 
-    siteName: "Runexa Systems",
+    siteName: "Runexa Systems LLC",
 
     images: [
       {

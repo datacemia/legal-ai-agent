@@ -23,14 +23,14 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Runexa Terms of Service",
+    title: "Terms of Service | Runexa",
 
     description:
       "Terms governing the use of Runexa AI systems, APIs, and enterprise AI workflows.",
 
     url: "https://runexa.ai/terms",
 
-    siteName: "Runexa Systems",
+    siteName: "Runexa Systems LLC",
 
     images: [
       {
