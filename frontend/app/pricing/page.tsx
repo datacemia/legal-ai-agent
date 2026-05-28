@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 
     url: "https://runexa.ai/pricing",
 
-    siteName: "Runexa Systems",
+    siteName: "Runexa Systems LLC",
 
     images: [
       {
@@ -77,7 +77,7 @@ export default function PricingPage() {
 
             "@type": "SoftwareApplication",
 
-            name: "Runexa",
+            name: "Runexa Pricing",
 
             applicationCategory:
               "BusinessApplication",
@@ -91,7 +91,7 @@ export default function PricingPage() {
 
             publisher: {
               "@type": "Organization",
-              name: "Runexa Systems",
+              name: "Runexa Systems LLC",
               url: "https://runexa.ai",
             },
 

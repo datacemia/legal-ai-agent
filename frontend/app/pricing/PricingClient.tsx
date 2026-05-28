@@ -221,7 +221,7 @@ const labels: Record<Language, PricingLabels> = {
     plansTitle: "Pro / Premium Plans",
     plansDesc:
       "One global subscription covers all agents. No separate Pro plan per agent.",
-    globalPro: "Pro العالمي",
+    globalPro: "Global Pro",
     bestForProfessionals: "Best for professionals",
     proValueNote: "For regular users of multiple AI agents.",
     proDesc:
@@ -312,20 +312,20 @@ const labels: Record<Language, PricingLabels> = {
     ],
     creditPacks: [
       {
-        name: "المبتدئ",
+        name: "Starter",
         credits: 50,
         price: "$9",
         description: "Perfect for testing multiple Runexa agents.",
       },
       {
-        name: "النمو",
+        name: "Growth",
         credits: 150,
         price: "$24",
         description: "Best value for regular multi-agent usage.",
         highlighted: true,
       },
       {
-        name: "التوسّع",
+        name: "Scale",
         credits: 500,
         price: "$89",
         description: "Built for professionals and advanced workloads.",
@@ -446,7 +446,7 @@ const labels: Record<Language, PricingLabels> = {
     plansTitle: "Plans Pro / Premium",
     plansDesc:
       "Un seul abonnement global couvre tous les agents. Aucun plan Pro séparé par agent.",
-    globalPro: "Pro العالمي",
+    globalPro: "Pro global",
     bestForProfessionals: "Idéal pour les professionnels",
     proValueNote: "Pour les utilisateurs réguliers de plusieurs agents IA.",
     proDesc:
@@ -540,13 +540,13 @@ const labels: Record<Language, PricingLabels> = {
     ],
     creditPacks: [
       {
-        name: "المبتدئ",
+        name: "Débutant",
         credits: 50,
         price: "$9",
         description: "Parfait pour tester plusieurs agents Runexa.",
       },
       {
-        name: "النمو",
+        name: "Croissance",
         credits: 150,
         price: "$24",
         description:
@@ -554,7 +554,7 @@ const labels: Record<Language, PricingLabels> = {
         highlighted: true,
       },
       {
-        name: "التوسّع",
+        name: "Échelle",
         credits: 500,
         price: "$89",
         description: "Conçu pour les professionnels et les charges avancées.",
