@@ -8,11 +8,11 @@ import { getSavedLocale } from "../../lib/i18n";
 const docsTranslations = {
   en: {
     badge: "Runexa Docs",
-    title: "{t.title}",
+    title: "AI Agent API Documentation",
     subtitle:
       "Build AI-powered workflows using Runexa asynchronous APIs for legal, finance, business intelligence, and study automation.",
-    developerPlatform: "{t.developerPlatform}",
-    developerSubtitle: "{t.developerSubtitle}",
+    developerPlatform: "Developer Platform",
+    developerSubtitle: "Async AI infrastructure for enterprise workflows",
     contents: "Contents",
     introduction: "Introduction",
     authentication: "Authentication",
@@ -32,7 +32,7 @@ const docsTranslations = {
     financeAnalysis: "Finance AI analysis",
     businessAnalysis: "Business AI analysis",
     studyAnalysis: "Study AI analysis",
-    authText: "{t.authText}",
+    authText: "All API requests require a bearer API key.",
     asyncArchitecture: "Async Architecture",
     asyncText:
       "Runexa APIs use asynchronous AI processing powered by queue-based workers.",
@@ -65,7 +65,7 @@ const docsTranslations = {
     baseUrl: "Base URL",
     production: "Production",
     local: "Local",
-    jobsApiText: "{t.jobsApiText}",
+    jobsApiText: "Retrieve asynchronous AI analysis results.",
     errorResponses: "Error Responses",
     plan: "Plan",
     requests: "Requests",
@@ -281,11 +281,11 @@ export default function DocsPage() {
             className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm"
           >
             <p className="text-sm font-semibold text-blue-600">
-              Introduction
+              {t.introduction}
             </p>
 
             <h2 className="mt-3 text-3xl font-bold">
-              Runexa AI infrastructure
+              {t.infrastructure}
             </h2>
 
             <p className="mt-5 leading-8 text-slate-600">
@@ -311,13 +311,13 @@ export default function DocsPage() {
             <div className="mt-8 rounded-2xl bg-slate-950 p-6 text-sm text-slate-100">
               <p className="text-slate-400">{t.baseUrl}</p>
 
-              <pre className="mt-4 overflow-x-auto text-blue-300">
-{`{t.production}:
-https://api.runexa.ai
-
-{t.local}:
-http://127.0.0.1:8000`}
-              </pre>
+              <div className="mt-4 overflow-x-auto text-blue-300">
+                <p>{t.production}:</p>
+                <p>https://api.runexa.ai</p>
+                <br />
+                <p>{t.local}:</p>
+                <p>http://127.0.0.1:8000</p>
+              </div>
             </div>
           </section>
 
@@ -564,10 +564,10 @@ http://127.0.0.1:8000`}
             id="jobs-api"
             className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm"
           >
-            <h2 className="text-3xl font-bold">{t.exploreApiPlatform}</h2>
+            <h2 className="text-3xl font-bold">{t.jobsApi}</h2>
 
             <p className="mt-5 leading-8 text-slate-600">
-              {t.asyncText}
+              {t.jobsApiText}
             </p>
 
             <pre className="mt-8 overflow-x-auto rounded-2xl bg-slate-950 p-5 text-sm text-slate-100">
@@ -619,10 +619,10 @@ http://127.0.0.1:8000`}
                 <thead className="bg-slate-100">
                   <tr>
                     <th className="px-5 py-4 text-left font-bold">
-                      Plan
+                      {t.plan}
                     </th>
                     <th className="px-5 py-4 text-left font-bold">
-                      Requests
+                      {t.requests}
                     </th>
                   </tr>
                 </thead>
@@ -648,7 +648,7 @@ http://127.0.0.1:8000`}
             className="rounded-3xl bg-slate-950 p-8 text-white"
           >
             <h2 className="text-3xl font-bold">
-              {t.security}
+              {t.securityEnterpriseSupport}
             </h2>
 
             <div className="mt-6 grid gap-4 md:grid-cols-2">
@@ -669,7 +669,7 @@ http://127.0.0.1:8000`}
 
             <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 p-6">
               <p className="text-sm uppercase tracking-[0.25em] text-blue-300">
-                {t.security}
+                {t.enterpriseSupport}
               </p>
 
               <p className="mt-3 text-lg font-semibold">
@@ -681,7 +681,7 @@ http://127.0.0.1:8000`}
               href="/api"
               className="mt-8 inline-flex items-center rounded-2xl bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:-translate-y-0.5"
             >
-              {t.jobsApi}
+              {t.exploreApiPlatform}
             </Link>
           </section>
         </div>
