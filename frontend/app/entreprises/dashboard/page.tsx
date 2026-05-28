@@ -145,6 +145,15 @@ const translations = {
     userId: "User ID",
     memberId: "Member ID",
     saveShort: "Save",
+    membersLabel: "members",
+    owner: "owner",
+    active: "active",
+    suspended: "suspended",
+    organizationCredits: "Organization-level credits",
+    teamAccess: "Team member access",
+    workspaceAccess: "Enterprise workspace access",
+    usageReady: "Ready for usage analytics",
+    inviteReady: "Ready for invite flow",
   },
 
   fr: {
@@ -197,6 +206,15 @@ const translations = {
     userId: "ID utilisateur",
     memberId: "ID membre",
     saveShort: "Sauver",
+    membersLabel: "membres",
+    owner: "propriétaire",
+    active: "actif",
+    suspended: "suspendu",
+    organizationCredits: "Crédits organisation",
+    teamAccess: "Accès équipe",
+    workspaceAccess: "Accès espace entreprise",
+    usageReady: "Prêt pour les analyses d’utilisation",
+    inviteReady: "Prêt pour les invitations",
   },
 
   ar: {
@@ -249,6 +267,15 @@ const translations = {
     userId: "معرف المستخدم",
     memberId: "معرف العضو",
     saveShort: "حفظ",
+    membersLabel: "أعضاء",
+    owner: "مالك",
+    active: "نشط",
+    suspended: "معلق",
+    organizationCredits: "رصيد المؤسسة",
+    teamAccess: "وصول أعضاء الفريق",
+    workspaceAccess: "الوصول إلى مساحة المؤسسة",
+    usageReady: "جاهز لتحليلات الاستخدام",
+    inviteReady: "جاهز لنظام الدعوات",
   },
 };
 
@@ -807,7 +834,7 @@ export default function EntreprisesDashboardPage() {
               </div>
 
               <span className="rounded-full bg-blue-500/10 px-3 py-1 text-xs font-semibold text-blue-200">
-                {memberCount} member{memberCount > 1 ? "s" : ""}
+                {memberCount} {t.membersLabel}
               </span>
             </div>
 
@@ -832,7 +859,11 @@ export default function EntreprisesDashboardPage() {
 
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-slate-200">
-                        {member.role}
+                        {member.role === "owner"
+                          ? t.owner
+                          : member.role === "admin"
+                            ? t.admin
+                            : t.member}
                       </span>
 
                       <span
@@ -842,7 +873,7 @@ export default function EntreprisesDashboardPage() {
                             : "bg-red-500/10 text-red-300"
                         }`}
                       >
-                        {member.status}
+                        {member.status === "active" ? t.active : t.suspended}
                       </span>
 
                       {isOwnerOrAdmin && member.role !== "owner" && (
@@ -987,11 +1018,11 @@ export default function EntreprisesDashboardPage() {
                 {t.enterpriseControls}
               </h2>
               <div className="mt-4 space-y-3 text-sm text-blue-100">
-                <p>✔ Organization-level credits</p>
-                <p>✔ Team member access</p>
-                <p>✔ Enterprise workspace access</p>
-                <p>✔ Ready for usage analytics</p>
-                {isOwnerOrAdmin && <p>✔ Ready for invite flow</p>}
+                <p>✔ {t.organizationCredits}</p>
+                <p>✔ {t.teamAccess}</p>
+                <p>✔ {t.workspaceAccess}</p>
+                <p>✔ {t.usageReady}</p>
+                {isOwnerOrAdmin && <p>✔ {t.inviteReady}</p>}
               </div>
             </div>
           </aside>
