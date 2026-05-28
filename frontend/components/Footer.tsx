@@ -141,7 +141,7 @@ type LegalLabels = {
           </div>
 
           <div>
-            <h4 className="font-semibold">Resources</h4>
+            <h4 className="font-semibold">{t.resources}</h4>
 
             <div className="mt-4 space-y-3 text-sm text-slate-400">
               <Link href="/legal-ai" className="block hover:text-white transition">
@@ -193,11 +193,7 @@ type LegalLabels = {
                   href="/api-dashboard"
                   className="block hover:text-white transition"
                 >
-                  {locale === "fr"
-                    ? "Dashboard API"
-                    : locale === "ar"
-                    ? "لوحة API"
-                    : "API Dashboard"}
+                  {t.apiDashboard}
                 </Link>
               )}
             </div>

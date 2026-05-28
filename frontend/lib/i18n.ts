@@ -464,6 +464,17 @@ export const translations: any = {
     companyLawText:
       "Services provided by Runexa Systems LLC are governed by the laws of the State of Wyoming, United States.",
 
+    resources: "Resources",
+    developers: "Developers",
+    docs: "Docs",
+    blog: "Blog",
+    legalAi: "Legal AI",
+    financeAi: "Finance AI",
+    studyAi: "Study AI",
+    businessAi: "Business AI",
+    builtBy: "Built by Dr. Rachid Ejjami",
+    apiDashboard: "API Dashboard",
+
 
   },
 
@@ -909,6 +920,17 @@ export const translations: any = {
     companyLawText:
       "Les services fournis par Runexa Systems LLC sont régis par les lois de l’État du Wyoming, États-Unis.",
 
+    resources: "Ressources",
+    developers: "Développeurs",
+    docs: "Documentation",
+    blog: "Blog",
+    legalAi: "IA juridique",
+    financeAi: "IA finance",
+    studyAi: "IA étude",
+    businessAi: "IA business",
+    builtBy: "Créé par Dr. Rachid Ejjami",
+    apiDashboard: "Dashboard API",
+
 
   },
 
@@ -1353,6 +1375,17 @@ export const translations: any = {
     companyLawTitle: "5. القانون الحاكم",
     companyLawText:
       "تخضع الخدمات المقدمة من Runexa Systems LLC لقوانين ولاية وايومنغ، الولايات المتحدة.",
+
+    resources: "الموارد",
+    developers: "المطورون",
+    docs: "التوثيق",
+    blog: "المدونة",
+    legalAi: "الذكاء القانوني",
+    financeAi: "الذكاء المالي",
+    studyAi: "ذكاء الدراسة",
+    businessAi: "ذكاء الأعمال",
+   builtBy: "تم التطوير بواسطة الدكتور رشيد الجامعي",
+    apiDashboard: "لوحة API",
 
 
   },
