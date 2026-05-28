@@ -145,33 +145,33 @@ type LegalLabels = {
 
             <div className="mt-4 space-y-3 text-sm text-slate-400">
               <Link href="/legal-ai" className="block hover:text-white transition">
-                Legal AI
+                {t.legalAi}
               </Link>
 
               <Link href="/finance-ai" className="block hover:text-white transition">
-                Finance AI
+                {t.financeAi}
               </Link>
 
               <Link href="/study-ai" className="block hover:text-white transition">
-                Study AI
+                {t.studyAi}
               </Link>
 
               <Link href="/business-ai" className="block hover:text-white transition">
-                Business AI
+                {t.businessAi}
               </Link>
 
               <Link
                 href="/blog"
                 className="block hover:text-white transition"
               >
-                Blog
+                {t.blog}
               </Link>
 
               <Link
                 href="/developers"
                 className="block hover:text-white transition"
               >
-                Developers
+                {t.developers}
               </Link>
 
               <Link
@@ -185,7 +185,7 @@ type LegalLabels = {
                 href="/docs"
                 className="block hover:text-white transition"
               >
-                Docs
+                {t.docs}
               </Link>
 
               {apiEnabled && (
@@ -237,7 +237,7 @@ type LegalLabels = {
             </p>
 
             <p className="mt-4 text-sm font-medium text-blue-400">
-              Built by Dr. Rachid Ejjami
+              {t.builtBy}
             </p>
           </div>
         </div>
