@@ -14,7 +14,6 @@ export default function Navbar() {
   const [apiEnabled, setApiEnabled] = useState(false);
   const [locale, setLocale] = useState("en");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMobileSolutionsOpen, setIsMobileSolutionsOpen] = useState(false);
 
   const checkAuth = () => {
     const token = localStorage.getItem("token");
@@ -63,7 +62,6 @@ export default function Navbar() {
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
-    setIsMobileSolutionsOpen(false);
   };
 
   const handleLogout = () => {
@@ -101,12 +99,6 @@ export default function Navbar() {
       ? "المؤسسات"
       : "Enterprise";
 
-  const solutionsLabel =
-    locale === "fr"
-      ? "Solutions"
-      : locale === "ar"
-      ? "الحلول"
-      : "Solutions";
 
   const insightsLabel =
     locale === "fr"
@@ -115,44 +107,6 @@ export default function Navbar() {
       ? "الرؤى"
       : "Insights";
 
-  const solutionLinks = [
-    {
-      label:
-        locale === "fr"
-          ? "IA juridique"
-          : locale === "ar"
-          ? "الذكاء القانوني"
-          : "Legal AI",
-      href: "/legal-ai",
-    },
-    {
-      label:
-        locale === "fr"
-          ? "IA finance"
-          : locale === "ar"
-          ? "الذكاء المالي"
-          : "Finance AI",
-      href: "/finance-ai",
-    },
-    {
-      label:
-        locale === "fr"
-          ? "IA étude"
-          : locale === "ar"
-          ? "ذكاء الدراسة"
-          : "Study AI",
-      href: "/study-ai",
-    },
-    {
-      label:
-        locale === "fr"
-          ? "IA business"
-          : locale === "ar"
-          ? "ذكاء الأعمال"
-          : "Business AI",
-      href: "/business-ai",
-    },
-  ];
 
   const isAdmin = role === "admin";
   const isEnterpriseAdmin = role === "enterprise_admin";
@@ -224,32 +178,6 @@ export default function Navbar() {
               {t.admin || "Admin"}
             </Link>
           )}
-
-          <div className="group relative">
-            <button
-              type="button"
-              className="inline-flex items-center gap-1 text-sm font-medium text-slate-600 transition hover:text-slate-900"
-            >
-              {solutionsLabel}
-              <span className="text-xs transition group-hover:rotate-180">▾</span>
-            </button>
-
-            <div
-              className={`invisible absolute top-full z-50 mt-3 w-56 rounded-2xl border border-slate-200 bg-white p-2 opacity-0 shadow-xl transition-all duration-200 group-hover:visible group-hover:opacity-100 ${
-                locale === "ar" ? "right-0" : "left-0"
-              }`}
-            >
-              {solutionLinks.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="block rounded-xl px-4 py-3 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-slate-900"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          </div>
 
           <Link
             href="/blog"
@@ -391,39 +319,6 @@ export default function Navbar() {
                 {t.admin || "Admin"}
               </Link>
             )}
-
-            <div>
-              <button
-                type="button"
-                onClick={() => setIsMobileSolutionsOpen((value) => !value)}
-                aria-expanded={isMobileSolutionsOpen}
-                className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50 hover:text-slate-950"
-              >
-                <span>{solutionsLabel}</span>
-                <span
-                  className={`text-xs transition ${
-                    isMobileSolutionsOpen ? "rotate-180" : ""
-                  }`}
-                >
-                  ▾
-                </span>
-              </button>
-
-              {isMobileSolutionsOpen && (
-                <div className="mt-1 rounded-2xl bg-slate-50 p-2">
-                  {solutionLinks.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={closeMobileMenu}
-                      className="block rounded-xl px-4 py-3 text-sm font-medium text-slate-600 transition hover:bg-white hover:text-slate-950"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
 
             <Link
               href="/blog"
