@@ -270,18 +270,16 @@ export default function Navbar() {
               : "Developer Platform"}
           </Link>
 
-          {apiEnabled && (
-            <Link
-              href="/api-dashboard"
-              className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
-            >
-              {locale === "fr"
-                ? "Dashboard API"
-                : locale === "ar"
-                ? "لوحة API"
-                : "API Dashboard"}
-            </Link>
-          )}
+          <Link
+            href="/api-dashboard"
+            className="hidden xl:flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:bg-slate-100"
+          >
+            {locale === "fr"
+              ? "Dashboard API"
+              : locale === "ar"
+              ? "لوحة API"
+              : "API Dashboard"}
+          </Link>
 
           <Link
             href="/labs/agent-0"
@@ -447,19 +445,17 @@ export default function Navbar() {
                 : "Developer Platform"}
             </Link>
 
-            {apiEnabled && (
-              <Link
-                href="/api-dashboard"
-                onClick={closeMobileMenu}
-                className={mobileLinkClass}
-              >
-                {locale === "fr"
-                  ? "Dashboard API"
-                  : locale === "ar"
-                  ? "لوحة API"
-                  : "API Dashboard"}
-              </Link>
-            )}
+            <Link
+              href="/api-dashboard"
+              onClick={closeMobileMenu}
+              className={mobileLinkClass}
+            >
+              {locale === "fr"
+                ? "Dashboard API"
+                : locale === "ar"
+                ? "لوحة API"
+                : "API Dashboard"}
+            </Link>
 
             <Link
               href="/labs/agent-0"
