@@ -1,98 +1,220 @@
-import Link from "next/link";
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "AI Contract Analysis: How AI Helps Review Legal Documents | Runexa",
-  description:
-    "Learn how AI contract analysis helps identify risky clauses, summarize obligations, and support legal document review workflows.",
-  keywords: [
-    "AI contract analysis",
-    "AI legal review",
-    "contract risk analysis",
-    "legal AI software",
-    "AI contract analyzer",
-  ],
-  alternates: {
-    canonical:
-      "https://runexa.ai/blog/ai-contract-analysis",
-  },
-  openGraph: {
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { getSavedLocale } from "../../../lib/i18n";
+
+
+const translations = {
+  en: {
+    back: "{t.back}",
+    category: "{t.category}",
     title:
-      "AI Contract Analysis: How AI Helps Review Legal Documents",
-    description:
-      "Learn how AI contract analysis helps identify risky clauses, summarize obligations, and support legal document review workflows.",
-    url:
-      "https://runexa.ai/blog/ai-contract-analysis",
-    siteName: "Runexa",
-    type: "article",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Runexa Legal AI",
-      },
-    ],
+      "{t.title}",
+    intro:
+      "Contract review is one of the most important workflows in legal, business, and professional decision-making. AI contract analysis can help users review legal documents faster, identify risky clauses, and understand obligations before signing.",
+
+    whatIs: "{t.whatIs}",
+    whatIsText:
+      "AI contract analysis uses artificial intelligence to read legal documents, extract key information, summarize obligations, highlight sensitive clauses, and generate practical recommendations. It is designed to support legal review workflows, not replace qualified legal professionals.",
+
+    why: "{t.why}",
+
+    whyText:
+      "Contracts often contain dense language, legal terminology, cross-references, deadlines, liability terms, termination clauses, confidentiality obligations, payment rules, and dispute resolution provisions. Missing a single clause can create legal, financial, or operational risk.",
+
+    common:
+      "{t.common}",
+
+    commonText:
+      "AI contract analysis can support many professional workflows, including service agreements, NDAs, vendor contracts, employment agreements, consulting agreements, partnership documents, lease terms, and procurement documents.",
+
+    runexa: "{t.runexa}",
+
+    runexaText:
+      "Runexa Legal Agent helps users upload legal documents, detect risky clauses, understand obligations, review recommendations, and generate structured legal intelligence reports. It is built for informational and decision-support use.",
+
+    support:
+      "{t.support}",
+
+    supportText:
+      "AI can make contract review faster and easier to understand, but important legal decisions should always be reviewed with qualified professionals. The best use of AI contract analysis is to improve preparation, clarity, and awareness before final decisions.",
+
+    ctaTitle:
+      "{t.ctaTitle}",
+
+    ctaText:
+      "Use Runexa Legal Agent to analyze risky clauses, obligations, and recommendations in legal documents.",
+
+    ctaButton: "{t.ctaButton}",
   },
-  twitter: {
-    card: "summary_large_image",
+
+  fr: {
+    back: "← Retour au blog",
+    category: "IA juridique",
     title:
-      "AI Contract Analysis: How AI Helps Review Legal Documents",
-    description:
-      "Learn how AI contract analysis helps identify risky clauses, summarize obligations, and support legal document review workflows.",
-    images: ["/og-image.png"],
+      "Analyse de contrats IA : comment l’IA aide à examiner les documents juridiques",
+    intro:
+      "La revue de contrats est l’un des workflows les plus importants dans le juridique et le business. L’analyse de contrats IA aide à examiner les documents plus rapidement, détecter les clauses à risque et comprendre les obligations avant signature.",
+
+    whatIs: "Qu’est-ce que l’analyse de contrats IA ?",
+    whatIsText:
+      "L’analyse de contrats IA utilise l’intelligence artificielle pour lire des documents juridiques, extraire les informations clés, résumer les obligations et mettre en évidence les clauses sensibles.",
+
+    why: "Pourquoi la revue de contrats est difficile",
+
+    whyText:
+      "Les contrats contiennent souvent un langage dense, des termes juridiques, des délais, clauses de responsabilité, confidentialité et règles de paiement.",
+
+    common:
+      "Types de contrats que l’IA peut aider à analyser",
+
+    commonText:
+      "L’IA peut aider à examiner les accords de services, NDA, contrats fournisseurs, contrats de travail et documents de partenariat.",
+
+    runexa:
+      "Comment Runexa Legal Agent aide",
+
+    runexaText:
+      "Runexa Legal Agent aide les utilisateurs à téléverser des documents juridiques, détecter les clauses à risque et générer des rapports structurés.",
+
+    support:
+      "L’IA doit assister les juristes, pas les remplacer",
+
+    supportText:
+      "L’IA améliore la rapidité et la compréhension, mais les décisions juridiques importantes doivent être validées par des professionnels qualifiés.",
+
+    ctaTitle:
+      "Analysez vos contrats avec l’IA avant signature",
+
+    ctaText:
+      "Utilisez Runexa Legal Agent pour analyser les clauses à risque et obligations des documents juridiques.",
+
+    ctaButton: "Téléverser un contrat",
+  },
+
+  ar: {
+    back: "← العودة إلى المدونة",
+    category: "الذكاء القانوني",
+    title:
+      "تحليل العقود بالذكاء الاصطناعي: كيف يساعد الذكاء الاصطناعي في مراجعة المستندات القانونية",
+    intro:
+      "تُعد مراجعة العقود من أهم تدفقات العمل القانونية والتجارية. يساعد الذكاء الاصطناعي في تحليل العقود بسرعة أكبر واكتشاف البنود الخطرة وفهم الالتزامات قبل التوقيع.",
+
+    whatIs: "ما هو تحليل العقود بالذكاء الاصطناعي؟",
+    whatIsText:
+      "يستخدم تحليل العقود بالذكاء الاصطناعي تقنيات الذكاء الاصطناعي لقراءة المستندات القانونية واستخراج المعلومات المهمة وتلخيص الالتزامات.",
+
+    why:
+      "لماذا تعتبر مراجعة العقود صعبة",
+
+    whyText:
+      "غالبًا ما تحتوي العقود على لغة قانونية معقدة وبنود مسؤولية وسرية ومدفوعات ومواعيد نهائية.",
+
+    common:
+      "أنواع العقود التي يمكن للذكاء الاصطناعي مراجعتها",
+
+    commonText:
+      "يمكن للذكاء الاصطناعي دعم مراجعة عقود الخدمات واتفاقيات السرية وعقود العمل والشراكات.",
+
+    runexa:
+      "كيف يساعد Runexa Legal Agent",
+
+    runexaText:
+      "يساعد Runexa Legal Agent المستخدمين على رفع المستندات القانونية واكتشاف البنود الخطرة وإنشاء تقارير قانونية منظمة.",
+
+    support:
+      "يجب أن يدعم الذكاء الاصطناعي المراجعة القانونية لا أن يستبدل المحامين",
+
+    supportText:
+      "يمكن للذكاء الاصطناعي تسريع مراجعة العقود، لكن القرارات القانونية المهمة يجب مراجعتها من قبل متخصصين مؤهلين.",
+
+    ctaTitle:
+      "راجع العقود بالذكاء الاصطناعي قبل التوقيع",
+
+    ctaText:
+      "استخدم Runexa Legal Agent لتحليل البنود الخطرة والالتزامات في المستندات القانونية.",
+
+    ctaButton: "رفع عقد",
   },
 };
 
+
 export default function AIContractAnalysisArticle() {
+  const [locale, setLocale] =
+    useState<"en" | "fr" | "ar">("en");
+
+  useEffect(() => {
+    const saved = getSavedLocale();
+
+    if (saved === "fr" || saved === "ar") {
+      setLocale(saved);
+    }
+
+    const handleLocaleChange = () => {
+      const updated = getSavedLocale();
+
+      if (updated === "fr" || updated === "ar") {
+        setLocale(updated);
+      } else {
+        setLocale("en");
+      }
+    };
+
+    window.addEventListener(
+      "locale-change",
+      handleLocaleChange
+    );
+
+    return () => {
+      window.removeEventListener(
+        "locale-change",
+        handleLocaleChange
+      );
+    };
+  }, []);
+
+  const t = translations[locale];
   return (
-    <main className="min-h-screen bg-slate-50 px-6 py-20 text-slate-900">
+    <main
+      dir={locale === "ar" ? "rtl" : "ltr"}
+      className="min-h-screen bg-slate-50 px-6 py-20 text-slate-900"
+    >
       <article className="mx-auto max-w-4xl">
         <Link href="/blog" className="text-sm font-semibold text-blue-600">
-          ← Back to Blog
+          {t.back}
         </Link>
 
         <p className="mt-8 text-sm font-semibold uppercase tracking-wide text-blue-600">
-          Legal AI
+          {t.category}
         </p>
 
         <h1 className="mt-4 text-5xl font-bold tracking-tight">
-          AI Contract Analysis: How AI Helps Review Legal Documents
+          {t.title}
         </h1>
 
         <p className="mt-6 text-lg leading-8 text-slate-600">
-          Contract review is one of the most important workflows in legal,
-          business, and professional decision-making. AI contract analysis can
-          help users review legal documents faster, identify risky clauses, and
-          understand obligations before signing.
+          {t.intro}
         </p>
 
         <div className="mt-10 rounded-3xl border bg-white p-8 shadow-sm">
           <h2 className="text-2xl font-bold">
-            What is AI contract analysis?
+            {t.whatIs}
           </h2>
 
           <p className="mt-4 leading-8 text-slate-600">
-            AI contract analysis uses artificial intelligence to read legal
-            documents, extract key information, summarize obligations, highlight
-            sensitive clauses, and generate practical recommendations. It is
-            designed to support legal review workflows, not replace qualified
-            legal professionals.
+            {t.whatIsText}
           </p>
         </div>
 
         <section className="mt-10 space-y-8">
           <div>
             <h2 className="text-3xl font-bold">
-              Why contract review is difficult
+              {t.why}
             </h2>
 
             <p className="mt-4 leading-8 text-slate-600">
-              Contracts often contain dense language, legal terminology,
-              cross-references, deadlines, liability terms, termination clauses,
-              confidentiality obligations, payment rules, and dispute resolution
-              provisions. Missing a single clause can create legal, financial,
-              or operational risk.
+              {t.whyText}
             </p>
           </div>
 
@@ -130,27 +252,21 @@ export default function AIContractAnalysisArticle() {
 
           <div>
             <h2 className="text-3xl font-bold">
-              Common contract types AI can help review
+              {t.common}
             </h2>
 
             <p className="mt-4 leading-8 text-slate-600">
-              AI contract analysis can support many professional workflows,
-              including service agreements, NDAs, vendor contracts, employment
-              agreements, consulting agreements, partnership documents, lease
-              terms, and procurement documents.
+              {t.commonText}
             </p>
           </div>
 
           <div className="rounded-3xl border bg-white p-8 shadow-sm">
             <h2 className="text-2xl font-bold">
-              How Runexa Legal Agent helps
+              {t.runexa}
             </h2>
 
             <p className="mt-4 leading-8 text-slate-600">
-              Runexa Legal Agent helps users upload legal documents, detect
-              risky clauses, understand obligations, review recommendations, and
-              generate structured legal intelligence reports. It is built for
-              informational and decision-support use.
+              {t.runexaText}
             </p>
 
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
@@ -174,33 +290,29 @@ export default function AIContractAnalysisArticle() {
 
           <div>
             <h2 className="text-3xl font-bold">
-              AI should support legal review, not replace lawyers
+              {t.support}
             </h2>
 
             <p className="mt-4 leading-8 text-slate-600">
-              AI can make contract review faster and easier to understand, but
-              important legal decisions should always be reviewed with qualified
-              professionals. The best use of AI contract analysis is to improve
-              preparation, clarity, and awareness before final decisions.
+              {t.supportText}
             </p>
           </div>
         </section>
 
         <section className="mt-12 rounded-3xl bg-blue-600 p-8 text-white">
           <h2 className="text-3xl font-bold">
-            Review contracts with AI before signing
+            {t.ctaTitle}
           </h2>
 
           <p className="mt-4 text-blue-100">
-            Use Runexa Legal Agent to analyze risky clauses, obligations, and
-            recommendations in legal documents.
+            {t.ctaText}
           </p>
 
           <Link
             href="/upload"
             className="mt-6 inline-block rounded-xl bg-white px-6 py-3 text-sm font-semibold text-blue-600"
           >
-            Upload Contract
+            {t.ctaButton}
           </Link>
         </section>
 
@@ -216,7 +328,7 @@ export default function AIContractAnalysisArticle() {
                   "https://runexa.ai/blog/ai-contract-analysis",
               },
               headline:
-                "AI Contract Analysis: How AI Helps Review Legal Documents",
+                "{t.title}",
               description:
                 "Learn how AI contract analysis helps identify risky clauses, summarize obligations, and support legal document review workflows.",
               datePublished: "2026-05-24",
