@@ -1,22 +1,10 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
+import { getLocale } from "@/lib/i18n";
 
-
-type Locale = "en" | "fr" | "ar";
-
-async function getPageLocale(): Promise<Locale> {
-  const cookieStore = await cookies();
-  const value =
-    cookieStore.get("locale")?.value ||
-    cookieStore.get("language")?.value ||
-    "en";
-
-  return value === "fr" || value === "ar" ? value : "en";
-}
 
 export async function generateMetadata(): Promise<Metadata> {
-  const locale = await getPageLocale();
+  const locale = await getLocale();
 
   const metadataTranslations = {
     en: {
@@ -89,7 +77,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 
 export default async function BlogPage() {
-  const locale = await getPageLocale();
+  const locale = await getLocale();
 
   const translations = {
     en: {
