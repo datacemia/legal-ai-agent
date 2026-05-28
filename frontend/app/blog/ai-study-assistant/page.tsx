@@ -8,20 +8,20 @@ import { getSavedLocale } from "../../../lib/i18n";
 
 const translations = {
   en: {
-    back: "{t.back}",
-    category: "{t.category}",
-    title: "{t.title}",
+    back: "← Back to Blog",
+    category: "Study AI",
+    title: "AI Study Assistant: Smarter Learning With AI Workflows",
 
     intro:
       "Learning large amounts of information can be difficult, repetitive, and time-consuming. AI study assistants help students and professionals organize knowledge, generate summaries, create quizzes, and build more efficient learning workflows.",
 
-    whatIs: "{t.whatIs}",
+    whatIs: "What is an AI study assistant?",
 
     whatIsText:
       "An AI study assistant uses artificial intelligence to analyze study materials and generate structured educational support such as summaries, flashcards, quizzes, explanations, revision plans, and learning recommendations.",
 
     why:
-      "{t.why}",
+      "Why traditional studying is inefficient",
 
     whyText:
       "Many learners spend hours manually summarizing documents, organizing notes, rewriting concepts, and preparing revision material. AI can automate repetitive study tasks and improve learning structure.",
@@ -47,30 +47,30 @@ const translations = {
       "AI can structure complex information into more understandable learning flows.",
 
     workflows:
-      "{t.workflows}",
+      "AI learning workflows for modern education",
 
     workflowsText:
       "AI-powered learning systems can support students, professionals, researchers, and organizations by simplifying content review, accelerating knowledge acquisition, and improving educational productivity.",
 
     runexa:
-      "{t.runexa}",
+      "How Runexa Study Agent helps",
 
     runexaText:
       "Runexa Study Agent helps users upload study materials and generate AI-powered summaries, quizzes, flashcards, study plans, and structured learning workflows designed to improve productivity and understanding.",
 
     support:
-      "{t.support}",
+      "AI should support learning, not replace thinking",
 
     supportText:
       "The best educational AI systems help learners understand concepts more efficiently while keeping human reasoning, critical thinking, and active learning at the center of the process.",
 
     ctaTitle:
-      "{t.ctaTitle}",
+      "Learn faster with AI study workflows",
 
     ctaText:
       "Use Runexa Study Agent to generate summaries, quizzes, flashcards, and structured learning workflows with AI.",
 
-    ctaButton: "{t.ctaButton}",
+    ctaButton: "Start Studying",
 
     features: [
       "AI study summaries",
@@ -290,10 +290,7 @@ export default function AIStudyAssistantArticle() {
         </h1>
 
         <p className="mt-6 text-lg leading-8 text-slate-600">
-          Learning large amounts of information can be difficult, repetitive,
-          and time-consuming. AI study assistants help students and
-          professionals organize knowledge, generate summaries, create quizzes,
-          and build more efficient learning workflows.
+          {t.intro}
         </p>
 
         <div className="mt-10 rounded-3xl border bg-white p-8 shadow-sm">
@@ -302,10 +299,7 @@ export default function AIStudyAssistantArticle() {
           </h2>
 
           <p className="mt-4 leading-8 text-slate-600">
-            An AI study assistant uses artificial intelligence to analyze study
-            materials and generate structured educational support such as
-            summaries, flashcards, quizzes, explanations, revision plans, and
-            learning recommendations.
+            {t.whatIsText}
           </p>
         </div>
 
@@ -316,11 +310,7 @@ export default function AIStudyAssistantArticle() {
             </h2>
 
             <p className="mt-4 leading-8 text-slate-600">
-              Many learners spend hours manually summarizing documents,
-              organizing notes, rewriting concepts, and preparing revision
-              material. This often creates cognitive overload and reduces
-              learning efficiency. AI can automate repetitive study tasks and
-              improve learning structure.
+              {t.whyText}
             </p>
           </div>
 
@@ -350,10 +340,7 @@ export default function AIStudyAssistantArticle() {
             </h2>
 
             <p className="mt-4 leading-8 text-slate-600">
-              AI-powered learning systems can support students, professionals,
-              researchers, and organizations by simplifying content review,
-              accelerating knowledge acquisition, and improving educational
-              productivity.
+              {t.workflowsText}
             </p>
           </div>
 
@@ -363,10 +350,7 @@ export default function AIStudyAssistantArticle() {
             </h2>
 
             <p className="mt-4 leading-8 text-slate-600">
-              Runexa Study Agent helps users upload study materials and generate
-              AI-powered summaries, quizzes, flashcards, study plans, and
-              structured learning workflows designed to improve productivity and
-              understanding.
+              {t.runexaText}
             </p>
 
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
@@ -387,9 +371,7 @@ export default function AIStudyAssistantArticle() {
             </h2>
 
             <p className="mt-4 leading-8 text-slate-600">
-              The best educational AI systems help learners understand concepts
-              more efficiently while keeping human reasoning, critical thinking,
-              and active learning at the center of the process.
+              {t.supportText}
             </p>
           </div>
         </section>
@@ -400,8 +382,7 @@ export default function AIStudyAssistantArticle() {
           </h2>
 
           <p className="mt-4 text-violet-100">
-            Use Runexa Study Agent to generate summaries, quizzes,
-            flashcards, and structured learning workflows with AI.
+            {t.ctaText}
           </p>
 
           <Link
@@ -426,7 +407,7 @@ export default function AIStudyAssistantArticle() {
               },
 
               headline:
-                "{t.title}",
+                t.title,
 
               description:
                 "Learn how AI study assistants help generate summaries, quizzes, flashcards, and structured learning workflows.",
