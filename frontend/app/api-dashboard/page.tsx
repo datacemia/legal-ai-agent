@@ -160,13 +160,6 @@ export default function ApiDashboardPage() {
       return;
     }
 
-    const apiEnabled =
-      localStorage.getItem("api_enabled") === "true";
-
-    if (!apiEnabled) {
-      window.location.href = "/pricing";
-      return;
-    }
 
     setLoading(true);
 
