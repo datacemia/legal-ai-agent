@@ -24,13 +24,12 @@ def generate_financial_alerts(
             ),
         })
 
-    if (
-        scores.get(
-            "overall_financial_habits_score",
-            0,
-        )
-        < 50
-    ):
+    overall_score = scores.get(
+        "overall_financial_habits_score",
+        0,
+    )
+
+    if overall_score < 50:
         alerts.append({
             "type": "risk",
             "severity": "high",
@@ -41,12 +40,13 @@ def generate_financial_alerts(
             ),
         })
 
+    cash_risk_days = forecast.get(
+        "days_until_cash_risk"
+    )
+
     if (
-        forecast.get(
-            "days_until_cash_risk",
-            999,
-        )
-        < 30
+        cash_risk_days is not None
+        and cash_risk_days < 30
     ):
         alerts.append({
             "type": "risk",
