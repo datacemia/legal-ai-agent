@@ -5,29 +5,22 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-
         allow: "/",
-
         disallow: [
-          "/admin",
-          "/api",
+          "/admin/",
           "/dashboard",
           "/entreprises/dashboard",
-
           "/login",
           "/register",
           "/reset-password",
           "/verify-email",
           "/oauth-success",
-
           "/settings",
           "/billing",
         ],
       },
     ],
-
     sitemap: "https://runexa.ai/sitemap.xml",
-
     host: "https://runexa.ai",
   };
 }
