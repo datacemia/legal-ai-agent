@@ -187,6 +187,8 @@ def handle_finance_ai(job: Job, db):
     )
 
     transactions = extract_transactions(text)
+    print("TRANSACTIONS FOUND:", len(transactions))
+    print(transactions[:20])
 
     update_job_progress(
         job,
