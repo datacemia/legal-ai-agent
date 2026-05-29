@@ -7,103 +7,221 @@ import { getSavedLocale } from "../../lib/i18n";
 const translations = {
   en: {
     badge: "Runexa Developers",
-    title: "Build AI workflows with specialized Runexa agents",
+
+    title:
+        "Build AI-powered workflows with Runexa",
+
     subtitle:
-      "Runexa is evolving into an AI workspace and API platform for legal analysis, finance intelligence, study automation, and business decision support.",
-    exploreApi: "Explore API",
-    viewDocs: "View Docs",
-    legalAi: "Legal AI",
+        "Integrate specialized AI capabilities for legal analysis, financial intelligence, learning automation, and business decision support into your applications and workflows.",
+
+    exploreApi:
+        "Explore API",
+
+    viewDocs:
+        "View Documentation",
+
+    legalAi:
+        "Legal Intelligence",
+
     legalDesc:
-      "Analyze contracts, risky clauses, obligations, and recommendations.",
-    financeAi: "Finance AI",
+        "Analyze contracts, obligations, risks, and legal documents through structured AI workflows.",
+
+    financeAi:
+        "Financial Intelligence",
+
     financeDesc:
-      "Analyze statements, subscriptions, spending, and savings opportunities.",
-    studyAi: "Study AI",
+        "Process financial statements, spending activity, subscriptions, and savings opportunities.",
+
+    studyAi:
+        "Learning Intelligence",
+
     studyDesc:
-      "Generate summaries, quizzes, flashcards, and study plans.",
-    businessAi: "Business AI",
+        "Generate summaries, quizzes, flashcards, and personalized learning workflows.",
+
+    businessAi:
+        "Business Intelligence",
+
     businessDesc:
-      "Analyze KPIs, risks, opportunities, and strategic decisions.",
-    workflow: "Developer workflow",
-    workflowTitle: "Async AI jobs designed for real workloads",
-    step1: "Send a file or structured data to a Runexa agent endpoint.",
-    step2: "Receive a job ID while Runexa processes the AI workflow.",
-    step3: "Poll the job status and retrieve structured analysis results.",
-    authentication: "Authentication",
+        "Analyze performance metrics, risks, opportunities, and strategic decisions.",
+
+    workflow:
+        "Developer Workflow",
+
+    workflowTitle:
+        "Asynchronous AI processing built for production",
+
+    step1:
+        "Send a document or structured data to a Runexa API endpoint.",
+
+    step2:
+        "Receive a job identifier while Runexa processes the workflow.",
+
+    step3:
+        "Retrieve structured results, insights, and recommendations when processing is complete.",
+
+    authentication:
+        "Authentication",
+
     authText:
-      "Runexa API requests use bearer token authentication. Include your API key in the Authorization header for every request.",
-    exampleFlow: "Example API flow",
-    ctaTitle: "Start with Runexa AI agents",
+        "Runexa APIs use bearer token authentication. Include your API key in the Authorization header for every request.",
+
+    exampleFlow:
+        "Example API Workflow",
+
+    ctaTitle:
+        "Start building with Runexa",
+
     ctaText:
-      "Explore Runexa APIs, review endpoint examples, and prepare AI workflows for legal, finance, study, and business use cases.",
-    readDocs: "Read Developer Docs",
-  },
+        "Explore APIs, review integration examples, and build AI-powered workflows for legal, finance, learning, and business use cases.",
+
+    readDocs:
+        "Read Documentation",
+    },
   fr: {
     badge: "Développeurs Runexa",
-    title: "Construisez des workflows IA avec les agents spécialisés Runexa",
+
+    title:
+        "Créez des workflows IA avec Runexa",
+
     subtitle:
-      "Runexa évolue vers un espace de travail IA et une plateforme API pour l’analyse juridique, l’intelligence financière, l’automatisation de l’apprentissage et l’aide à la décision business.",
-    exploreApi: "Explorer l’API",
-    viewDocs: "Voir la documentation",
-    legalAi: "IA juridique",
+        "Intégrez des capacités d’IA spécialisées pour l’analyse juridique, l’intelligence financière, l’automatisation de l’apprentissage et l’aide à la décision business dans vos applications et workflows.",
+
+    exploreApi:
+        "Explorer l’API",
+
+    viewDocs:
+        "Voir la documentation",
+
+    legalAi:
+        "Intelligence juridique",
+
     legalDesc:
-      "Analysez les contrats, clauses à risque, obligations et recommandations.",
-    financeAi: "IA finance",
+        "Analysez les contrats, obligations, risques et documents juridiques grâce à des workflows IA structurés.",
+
+    financeAi:
+        "Intelligence financière",
+
     financeDesc:
-      "Analysez les relevés, abonnements, dépenses et opportunités d’économies.",
-    studyAi: "IA étude",
+        "Traitez les relevés financiers, les dépenses, les abonnements et les opportunités d’optimisation.",
+
+    studyAi:
+        "Intelligence pédagogique",
+
     studyDesc:
-      "Générez des résumés, quiz, flashcards et plans de révision.",
-    businessAi: "IA business",
+        "Générez des résumés, quiz, flashcards et parcours d’apprentissage personnalisés.",
+
+    businessAi:
+        "Intelligence business",
+
     businessDesc:
-      "Analysez les KPI, risques, opportunités et décisions stratégiques.",
-    workflow: "Workflow développeur",
-    workflowTitle: "Jobs IA asynchrones conçus pour des usages réels",
-    step1: "Envoyez un fichier ou des données structurées vers un endpoint agent Runexa.",
-    step2: "Recevez un ID de job pendant que Runexa traite le workflow IA.",
-    step3: "Consultez le statut du job et récupérez des résultats structurés.",
-    authentication: "Authentification",
+        "Analysez les indicateurs de performance, les risques, les opportunités et les décisions stratégiques.",
+
+    workflow:
+        "Workflow développeur",
+
+    workflowTitle:
+        "Traitement IA asynchrone conçu pour la production",
+
+    step1:
+        "Envoyez un document ou des données structurées vers une API Runexa.",
+
+    step2:
+        "Recevez un identifiant de traitement pendant que Runexa exécute le workflow.",
+
+    step3:
+        "Récupérez des résultats structurés, des insights et des recommandations une fois le traitement terminé.",
+
+    authentication:
+        "Authentification",
+
     authText:
-      "Les requêtes API Runexa utilisent une authentification par token Bearer. Incluez votre clé API dans l’en-tête Authorization pour chaque requête.",
-    exampleFlow: "Exemple de flow API",
-    ctaTitle: "Commencez avec les agents IA Runexa",
+        "Les API Runexa utilisent une authentification par jeton Bearer. Incluez votre clé API dans l’en-tête Authorization pour chaque requête.",
+
+    exampleFlow:
+        "Exemple de workflow API",
+
+    ctaTitle:
+        "Commencez à développer avec Runexa",
+
     ctaText:
-      "Explorez les API Runexa, consultez les exemples d’endpoints et préparez des workflows IA pour les usages juridiques, finance, étude et business.",
-    readDocs: "Lire la documentation développeur",
-  },
+        "Explorez les API, consultez les exemples d’intégration et créez des workflows alimentés par l’IA pour les usages juridiques, financiers, pédagogiques et business.",
+
+    readDocs:
+        "Lire la documentation",
+    },
   ar: {
-    badge: "مطورو Runexa",
-    title: "أنشئ تدفقات عمل ذكاء اصطناعي باستخدام وكلاء Runexa المتخصصين",
+    badge:
+        "مطورو Runexa",
+
+    title:
+        "أنشئ تدفقات عمل مدعومة بالذكاء الاصطناعي مع Runexa",
+
     subtitle:
-      "تتطور Runexa إلى مساحة عمل ومنصة API للذكاء الاصطناعي للتحليل القانوني والذكاء المالي وأتمتة الدراسة ودعم قرارات الأعمال.",
-    exploreApi: "استكشاف API",
-    viewDocs: "عرض التوثيق",
-    legalAi: "الذكاء القانوني",
+        "دمج قدرات ذكاء اصطناعي متخصصة للتحليل القانوني والذكاء المالي وأتمتة التعلّم ودعم قرارات الأعمال داخل تطبيقاتك وتدفقات العمل الخاصة بك.",
+
+    exploreApi:
+        "استكشاف API",
+
+    viewDocs:
+        "عرض التوثيق",
+
+    legalAi:
+        "الذكاء القانوني",
+
     legalDesc:
-      "حلّل العقود والبنود الخطرة والالتزامات والتوصيات.",
-    financeAi: "الذكاء المالي",
+        "حلّل العقود والالتزامات والمخاطر والمستندات القانونية من خلال تدفقات عمل ذكاء اصطناعي منظمة.",
+
+    financeAi:
+        "الذكاء المالي",
+
     financeDesc:
-      "حلّل الكشوف والاشتراكات والمصاريف وفرص الادخار.",
-    studyAi: "ذكاء الدراسة",
+        "عالج الكشوف المالية والمصروفات والاشتراكات وفرص تحسين الإنفاق.",
+
+    studyAi:
+        "ذكاء التعلّم",
+
     studyDesc:
-      "أنشئ ملخصات واختبارات وبطاقات تعليمية وخطط دراسة.",
-    businessAi: "ذكاء الأعمال",
+        "أنشئ ملخصات واختبارات وبطاقات تعليمية ومسارات تعلّم مخصصة.",
+
+    businessAi:
+        "ذكاء الأعمال",
+
     businessDesc:
-      "حلّل مؤشرات الأداء والمخاطر والفرص والقرارات الاستراتيجية.",
-    workflow: "سير عمل المطور",
-    workflowTitle: "مهام ذكاء اصطناعي غير متزامنة مصممة للاستخدامات الواقعية",
-    step1: "أرسل ملفًا أو بيانات منظمة إلى endpoint خاص بوكيل Runexa.",
-    step2: "استلم معرف المهمة بينما تعالج Runexa سير عمل الذكاء الاصطناعي.",
-    step3: "تابع حالة المهمة واسترجع نتائج تحليل منظمة.",
-    authentication: "المصادقة",
+        "حلّل مؤشرات الأداء والمخاطر والفرص والقرارات الاستراتيجية.",
+
+    workflow:
+        "سير عمل المطور",
+
+    workflowTitle:
+        "معالجة غير متزامنة للذكاء الاصطناعي مصممة لبيئات الإنتاج",
+
+    step1:
+        "أرسل مستنداً أو بيانات منظمة إلى إحدى واجهات Runexa.",
+
+    step2:
+        "استلم معرف معالجة بينما يقوم Runexa بتنفيذ سير العمل.",
+
+    step3:
+        "استرجع النتائج المنظمة والرؤى والتوصيات بعد اكتمال المعالجة.",
+
+    authentication:
+        "المصادقة",
+
     authText:
-      "تستخدم طلبات API في Runexa مصادقة Bearer token. أضف مفتاح API داخل ترويسة Authorization في كل طلب.",
-    exampleFlow: "مثال على تدفق API",
-    ctaTitle: "ابدأ مع وكلاء Runexa للذكاء الاصطناعي",
+        "تستخدم واجهات Runexa مصادقة Bearer Token. أضف مفتاح API الخاص بك داخل ترويسة Authorization في كل طلب.",
+
+    exampleFlow:
+        "مثال على سير عمل API",
+
+    ctaTitle:
+        "ابدأ البناء مع Runexa",
+
     ctaText:
-      "استكشف واجهات Runexa، وراجع أمثلة الـ endpoints، وجهّز تدفقات عمل للمهام القانونية والمالية والدراسة والأعمال.",
-    readDocs: "قراءة توثيق المطورين",
-  },
+        "استكشف واجهات API، وراجع أمثلة التكامل، وأنشئ تدفقات عمل مدعومة بالذكاء الاصطناعي للاستخدامات القانونية والمالية والتعليمية والتجارية.",
+
+    readDocs:
+        "قراءة التوثيق",
+    },
 };
 
 export default function DevelopersClient() {

@@ -7,213 +7,272 @@ import { getSavedLocale } from "../../lib/i18n";
 const translations = {
   en: {
     badge: "Runexa Business Agent",
+
     title: "AI Business Intelligence & Decision Support",
+
     subtitle:
-      "Runexa Business Agent helps founders, professionals, and organizations analyze business data, identify risks, discover opportunities, and improve strategic decision-making with AI.",
+        "Transform business data into actionable insights, identify risks, uncover opportunities, and make better decisions with AI-powered business intelligence.",
+
     analyzeBusinessData: "Analyze Business Data",
     viewPricing: "View Pricing",
 
-    businessIntelligence: "Business intelligence",
+    businessIntelligence: "Business Intelligence",
     businessIntelligenceText:
-      "Transform business data into structured insights and recommendations.",
-    riskAnalysis: "Risk analysis",
-    riskAnalysisText:
-      "Identify operational, strategic, and financial risk signals.",
-    opportunityDetection: "Opportunity detection",
-    opportunityDetectionText:
-      "Discover growth opportunities and strategic improvements.",
-    aiDecisionSupport: "AI decision support",
-    aiDecisionSupportText:
-      "Receive practical AI-assisted business recommendations.",
+        "Turn business data into structured insights, forecasts, and strategic recommendations.",
 
-    howItWorks: "How Runexa business AI works",
+    riskAnalysis: "Risk Analysis",
+    riskAnalysisText:
+        "Identify financial, operational, and strategic risks before they become larger problems.",
+
+    opportunityDetection: "Opportunity Discovery",
+    opportunityDetectionText:
+        "Uncover growth opportunities, efficiency improvements, and untapped business potential.",
+
+    aiDecisionSupport: "AI Decision Support",
+    aiDecisionSupportText:
+        "Receive practical recommendations to support faster and more informed decisions.",
+
+    howItWorks: "How Runexa Business Agent Works",
+
     steps: [
-      "Upload business files or reports",
-      "Runexa analyzes risks, opportunities, and strategic signals",
-      "Receive structured business intelligence insights",
+        "Upload business files, reports, or structured data",
+        "Runexa analyzes performance, risks, opportunities, and key business signals",
+        "Receive structured insights, forecasts, and recommendations",
     ],
 
     modernTeamsTitle:
-      "AI business intelligence for modern teams",
+        "Business intelligence built for modern teams",
+
     modernTeamsText1:
-      "Runexa Business Agent is designed for business owners, founders, analysts, consultants, and teams that need faster insight from business data. Instead of manually reviewing spreadsheets, reports, KPIs, and operational signals, Runexa turns business information into structured analysis, risk detection, opportunities, forecasts, and decision recommendations.",
+        "Runexa Business Agent helps founders, operators, consultants, analysts, and leadership teams gain faster insights from business data. Instead of manually reviewing spreadsheets, reports, KPIs, and operational metrics, Runexa transforms information into structured analysis, risk assessments, growth opportunities, forecasts, and strategic recommendations.",
+
     modernTeamsText2:
-      "The platform helps users understand revenue performance, expense trends, profitability, business health, operational risks, customer signals, and strategic priorities. It is built for practical business decision support, not generic chatbot responses.",
+        "The platform helps organizations understand revenue performance, profitability, spending trends, business health, operational risks, customer behavior, and strategic priorities. It is designed for real-world decision support, not generic chatbot conversations.",
 
-    useCasesTitle: "Business AI use cases",
-    kpiAnalysis: "KPI analysis",
+    useCasesTitle: "Business AI Use Cases",
+
+    kpiAnalysis: "KPI Analysis",
     kpiAnalysisText:
-      "Analyze revenue, expenses, profit, growth, cashflow, and operational performance indicators.",
-    businessRiskDetection: "Business risk detection",
+        "Analyze revenue, expenses, profitability, growth, cashflow, and operational performance metrics.",
+
+    businessRiskDetection: "Business Risk Detection",
     businessRiskDetectionText:
-      "Identify weak margins, poor data quality, cashflow issues, declining performance, or operational warning signs.",
-    aiBusinessReports: "AI business reports",
+        "Identify weak margins, declining performance, cashflow concerns, data quality issues, and operational warning signals.",
+
+    aiBusinessReports: "Executive AI Reports",
     aiBusinessReportsText:
-      "Generate executive-style business summaries that explain what is happening and what actions matter most.",
-    decisionSupport: "Decision support",
+        "Generate executive-ready business summaries that explain performance, risks, opportunities, and recommended actions.",
+
+    decisionSupport: "Strategic Decision Support",
     decisionSupportText:
-      "Turn business data into practical recommendations for pricing, cost control, growth, and strategy.",
+        "Convert business data into actionable recommendations for growth, pricing, profitability, efficiency, and strategy.",
 
-    faqTitle: "Frequently asked questions",
+    faqTitle: "Frequently Asked Questions",
+
     faq: [
-      [
+        [
         "What is AI business intelligence?",
-        "AI business intelligence uses artificial intelligence to analyze business data, detect patterns, identify risks, and generate decision-ready insights.",
-      ],
-      [
+        "AI business intelligence uses artificial intelligence to analyze business data, detect patterns, identify risks, uncover opportunities, and generate decision-ready insights.",
+        ],
+        [
         "Can Runexa analyze spreadsheets?",
-        "Yes. Runexa Business Agent can analyze business files and transform them into structured KPI analysis, risks, opportunities, and recommendations.",
-      ],
-      [
+        "Yes. Runexa Business Agent can analyze spreadsheets, reports, and structured business files to generate KPI analysis, risk assessments, opportunity discovery, and recommendations.",
+        ],
+        [
         "Who should use Runexa Business Agent?",
-        "It is useful for founders, business owners, consultants, finance teams, analysts, and organizations that need faster business decision support.",
-      ],
-      [
-        "Does Runexa replace business consultants?",
-        "No. Runexa provides decision support and analysis. Important business, legal, financial, or strategic decisions should still be reviewed by qualified professionals.",
-      ],
+        "Runexa is designed for founders, executives, business owners, consultants, analysts, finance teams, and organizations that need faster business insights and decision support.",
+        ],
+        [
+        "Does Runexa replace consultants or advisors?",
+        "No. Runexa provides analysis and decision support. Important business, financial, legal, or strategic decisions should always be reviewed by qualified professionals.",
+        ],
     ],
-  },
+    },
 
-  fr: {
+ fr: {
     badge: "Runexa Business Agent",
+
     title: "Business Intelligence IA et aide à la décision",
+
     subtitle:
-      "Runexa Business Agent aide les fondateurs, professionnels et organisations à analyser les données business, identifier les risques, découvrir les opportunités et améliorer la prise de décision stratégique avec l’IA.",
-    analyzeBusinessData: "Analyser des données business",
+        "Transformez vos données d’entreprise en insights exploitables, identifiez les risques, détectez les opportunités et prenez de meilleures décisions grâce à l’intelligence artificielle.",
+
+    analyzeBusinessData: "Analyser des données d’entreprise",
     viewPricing: "Voir les tarifs",
 
-    businessIntelligence: "Business intelligence",
-    businessIntelligenceText:
-      "Transformez les données business en insights structurés et recommandations.",
-    riskAnalysis: "Analyse des risques",
-    riskAnalysisText:
-      "Identifiez les signaux de risque opérationnels, stratégiques et financiers.",
-    opportunityDetection: "Détection d’opportunités",
-    opportunityDetectionText:
-      "Découvrez des opportunités de croissance et des améliorations stratégiques.",
-    aiDecisionSupport: "Aide à la décision IA",
-    aiDecisionSupportText:
-      "Recevez des recommandations business pratiques assistées par l’IA.",
+    businessIntelligence: "Business Intelligence",
 
-    howItWorks: "Comment fonctionne l’IA business Runexa",
+    businessIntelligenceText:
+        "Transformez vos données en analyses structurées, prévisions et recommandations stratégiques.",
+
+    riskAnalysis: "Analyse des risques",
+
+    riskAnalysisText:
+        "Identifiez les risques financiers, opérationnels et stratégiques avant qu’ils ne deviennent des problèmes majeurs.",
+
+    opportunityDetection: "Détection d’opportunités",
+
+    opportunityDetectionText:
+        "Repérez les leviers de croissance, les gains d’efficacité et les opportunités inexploitées.",
+
+    aiDecisionSupport: "Aide à la décision IA",
+
+    aiDecisionSupportText:
+        "Recevez des recommandations concrètes pour prendre des décisions plus rapides et mieux informées.",
+
+    howItWorks: "Comment fonctionne Runexa Business Agent",
+
     steps: [
-      "Téléversez des fichiers ou rapports business",
-      "Runexa analyse les risques, opportunités et signaux stratégiques",
-      "Recevez des insights de business intelligence structurés",
+        "Téléversez vos fichiers, rapports ou données d’entreprise",
+        "Runexa analyse les performances, risques, opportunités et signaux clés",
+        "Recevez des analyses structurées, prévisions et recommandations",
     ],
 
     modernTeamsTitle:
-      "Business intelligence IA pour les équipes modernes",
-    modernTeamsText1:
-      "Runexa Business Agent est conçu pour les propriétaires d’entreprise, fondateurs, analystes, consultants et équipes qui ont besoin d’insights plus rapides à partir de leurs données business. Au lieu de revoir manuellement feuilles de calcul, rapports, KPI et signaux opérationnels, Runexa transforme l’information business en analyse structurée, détection des risques, opportunités, prévisions et recommandations de décision.",
-    modernTeamsText2:
-      "La plateforme aide les utilisateurs à comprendre la performance du chiffre d’affaires, les tendances de dépenses, la rentabilité, la santé business, les risques opérationnels, les signaux clients et les priorités stratégiques. Elle est conçue pour une aide à la décision business pratique, pas pour des réponses génériques de chatbot.",
+        "La Business Intelligence conçue pour les équipes modernes",
 
-    useCasesTitle: "Cas d’usage de l’IA business",
+    modernTeamsText1:
+        "Runexa Business Agent aide les dirigeants, fondateurs, consultants, analystes et équipes opérationnelles à obtenir plus rapidement des insights à partir de leurs données. Au lieu d’analyser manuellement des feuilles de calcul, rapports, KPI et indicateurs d’activité, Runexa transforme les données en analyses structurées, évaluations des risques, opportunités de croissance, prévisions et recommandations stratégiques.",
+
+    modernTeamsText2:
+        "La plateforme permet de mieux comprendre les revenus, la rentabilité, les dépenses, la santé de l’entreprise, les risques opérationnels, le comportement des clients et les priorités stratégiques. Elle est conçue pour l’aide à la décision en conditions réelles, et non pour fournir de simples réponses de chatbot.",
+
+    useCasesTitle: "Cas d’usage de l’IA pour les entreprises",
+
     kpiAnalysis: "Analyse des KPI",
+
     kpiAnalysisText:
-      "Analysez revenus, dépenses, profit, croissance, cashflow et indicateurs de performance opérationnelle.",
-    businessRiskDetection: "Détection des risques business",
+        "Analysez le chiffre d’affaires, les dépenses, la rentabilité, la croissance, le cash-flow et les indicateurs de performance opérationnelle.",
+
+    businessRiskDetection: "Détection des risques",
+
     businessRiskDetectionText:
-      "Identifiez marges faibles, mauvaise qualité des données, problèmes de cashflow, baisse de performance ou signaux d’alerte opérationnels.",
-    aiBusinessReports: "Rapports business IA",
+        "Identifiez les marges insuffisantes, les problèmes de qualité des données, les risques de trésorerie, les baisses de performance et les signaux d’alerte opérationnels.",
+
+    aiBusinessReports: "Rapports exécutifs IA",
+
     aiBusinessReportsText:
-      "Générez des résumés business de type exécutif qui expliquent ce qui se passe et quelles actions comptent le plus.",
-    decisionSupport: "Aide à la décision",
+        "Générez des synthèses exécutives expliquant les performances, les risques, les opportunités et les actions recommandées.",
+
+    decisionSupport: "Aide à la décision stratégique",
+
     decisionSupportText:
-      "Transformez les données business en recommandations pratiques pour les prix, le contrôle des coûts, la croissance et la stratégie.",
+        "Transformez vos données en recommandations concrètes pour la croissance, la rentabilité, la maîtrise des coûts et la stratégie.",
 
     faqTitle: "Questions fréquentes",
+
     faq: [
-      [
-        "Qu’est-ce que la business intelligence IA ?",
-        "La business intelligence IA utilise l’intelligence artificielle pour analyser les données business, détecter les tendances, identifier les risques et générer des insights prêts pour la décision.",
-      ],
-      [
+        [
+        "Qu’est-ce que la Business Intelligence IA ?",
+        "La Business Intelligence IA utilise l’intelligence artificielle pour analyser les données d’entreprise, détecter des tendances, identifier des risques, révéler des opportunités et produire des analyses directement exploitables."
+        ],
+        [
         "Runexa peut-il analyser des feuilles de calcul ?",
-        "Oui. Runexa Business Agent peut analyser des fichiers business et les transformer en analyse KPI structurée, risques, opportunités et recommandations.",
-      ],
-      [
-        "Qui devrait utiliser Runexa Business Agent ?",
-        "Il est utile pour les fondateurs, propriétaires d’entreprise, consultants, équipes finance, analystes et organisations qui ont besoin d’une aide à la décision business plus rapide.",
-      ],
-      [
-        "Runexa remplace-t-il les consultants business ?",
-        "Non. Runexa fournit une aide à la décision et une analyse. Les décisions business, juridiques, financières ou stratégiques importantes doivent toujours être revues par des professionnels qualifiés.",
-      ],
-    ],
-  },
+        "Oui. Runexa Business Agent peut analyser des feuilles de calcul, rapports et fichiers structurés afin de générer des analyses KPI, des évaluations des risques, des opportunités de croissance et des recommandations."
+        ],
+        [
+        "À qui s’adresse Runexa Business Agent ?",
+        "Runexa est conçu pour les dirigeants, fondateurs, propriétaires d’entreprise, consultants, analystes, équipes financières et organisations qui ont besoin d’analyses rapides pour soutenir leurs décisions."
+        ],
+        [
+        "Runexa remplace-t-il les consultants ou les conseillers ?",
+        "Non. Runexa fournit des analyses et une aide à la décision. Les décisions stratégiques, financières, juridiques ou opérationnelles importantes doivent toujours être validées par des professionnels qualifiés."
+        ]
+    ]
+    },
 
   ar: {
     badge: "وكيل Runexa للأعمال",
-    title: "ذكاء الأعمال بالذكاء الاصطناعي ودعم القرار",
+
+    title: "ذكاء الأعمال المدعوم بالذكاء الاصطناعي ودعم اتخاذ القرار",
+
     subtitle:
-      "يساعد Runexa Business Agent المؤسسين والمهنيين والمؤسسات على تحليل بيانات الأعمال وتحديد المخاطر واكتشاف الفرص وتحسين اتخاذ القرار الاستراتيجي باستخدام الذكاء الاصطناعي.",
+        "حوّل بيانات الأعمال إلى رؤى قابلة للتنفيذ، وحدد المخاطر، واكتشف فرص النمو، واتخذ قرارات أكثر فاعلية بمساعدة الذكاء الاصطناعي.",
+
     analyzeBusinessData: "تحليل بيانات الأعمال",
     viewPricing: "عرض الأسعار",
 
     businessIntelligence: "ذكاء الأعمال",
-    businessIntelligenceText:
-      "حوّل بيانات الأعمال إلى رؤى منظمة وتوصيات عملية.",
-    riskAnalysis: "تحليل المخاطر",
-    riskAnalysisText:
-      "حدد إشارات المخاطر التشغيلية والاستراتيجية والمالية.",
-    opportunityDetection: "اكتشاف الفرص",
-    opportunityDetectionText:
-      "اكتشف فرص النمو والتحسينات الاستراتيجية.",
-    aiDecisionSupport: "دعم القرار بالذكاء الاصطناعي",
-    aiDecisionSupportText:
-      "احصل على توصيات أعمال عملية مدعومة بالذكاء الاصطناعي.",
 
-    howItWorks: "كيف يعمل الذكاء الاصطناعي للأعمال في Runexa",
+    businessIntelligenceText:
+        "حوّل بياناتك إلى تحليلات منظمة وتوقعات وتوصيات استراتيجية.",
+
+    riskAnalysis: "تحليل المخاطر",
+
+    riskAnalysisText:
+        "اكتشف المخاطر المالية والتشغيلية والاستراتيجية قبل أن تتحول إلى تحديات أكبر.",
+
+    opportunityDetection: "اكتشاف الفرص",
+
+    opportunityDetectionText:
+        "حدّد فرص النمو ومجالات تحسين الكفاءة والإمكانات غير المستغلة.",
+
+    aiDecisionSupport: "دعم اتخاذ القرار بالذكاء الاصطناعي",
+
+    aiDecisionSupportText:
+        "احصل على توصيات عملية تساعدك على اتخاذ قرارات أسرع وأكثر دقة.",
+
+    howItWorks: "كيف يعمل Runexa Business Agent",
+
     steps: [
-      "ارفع ملفات أو تقارير الأعمال",
-      "يحلل Runexa المخاطر والفرص والإشارات الاستراتيجية",
-      "احصل على رؤى منظمة لذكاء الأعمال",
+        "ارفع ملفات الأعمال أو التقارير أو البيانات المنظمة",
+        "يقوم Runexa بتحليل الأداء والمخاطر والفرص والمؤشرات الرئيسية",
+        "احصل على تحليلات منظمة وتوقعات وتوصيات قابلة للتنفيذ",
     ],
 
     modernTeamsTitle:
-      "ذكاء الأعمال بالذكاء الاصطناعي للفرق الحديثة",
+        "ذكاء أعمال مصمم للفرق الحديثة",
+
     modernTeamsText1:
-      "تم تصميم Runexa Business Agent لأصحاب الأعمال والمؤسسين والمحللين والاستشاريين والفرق التي تحتاج إلى رؤى أسرع من بيانات الأعمال. بدلًا من مراجعة الجداول والتقارير ومؤشرات الأداء والإشارات التشغيلية يدويًا، يحول Runexa معلومات الأعمال إلى تحليل منظم واكتشاف للمخاطر والفرص والتوقعات وتوصيات القرار.",
+        "يساعد Runexa Business Agent المديرين والمؤسسين والاستشاريين والمحللين والفرق التشغيلية على الحصول على رؤى أسرع من بيانات الأعمال. وبدلاً من مراجعة الجداول والتقارير ومؤشرات الأداء يدويًا، يحول Runexa البيانات إلى تحليلات منظمة وتقييمات للمخاطر وفرص للنمو وتوقعات وتوصيات استراتيجية.",
+
     modernTeamsText2:
-      "تساعد المنصة المستخدمين على فهم أداء الإيرادات واتجاهات المصاريف والربحية وصحة الأعمال والمخاطر التشغيلية وإشارات العملاء والأولويات الاستراتيجية. تم بناؤها لدعم قرارات الأعمال بشكل عملي، وليس لإجابات عامة مثل روبوتات المحادثة.",
+        "تمكّن المنصة المؤسسات من فهم الإيرادات والربحية واتجاهات الإنفاق وصحة الأعمال والمخاطر التشغيلية وسلوك العملاء والأولويات الاستراتيجية. وقد صُممت لدعم اتخاذ القرار في بيئات العمل الحقيقية، وليس لتقديم إجابات عامة شبيهة بروبوتات المحادثة.",
 
-    useCasesTitle: "حالات استخدام ذكاء الأعمال",
-    kpiAnalysis: "تحليل مؤشرات الأداء",
+    useCasesTitle:
+        "حالات استخدام الذكاء الاصطناعي في الأعمال",
+
+    kpiAnalysis: "تحليل مؤشرات الأداء الرئيسية",
+
     kpiAnalysisText:
-      "حلل الإيرادات والمصاريف والربح والنمو والتدفق النقدي ومؤشرات الأداء التشغيلية.",
-    businessRiskDetection: "اكتشاف مخاطر الأعمال",
-    businessRiskDetectionText:
-      "حدد الهوامش الضعيفة أو جودة البيانات المنخفضة أو مشاكل التدفق النقدي أو انخفاض الأداء أو إشارات التحذير التشغيلية.",
-    aiBusinessReports: "تقارير أعمال بالذكاء الاصطناعي",
-    aiBusinessReportsText:
-      "أنشئ ملخصات أعمال تنفيذية تشرح ما يحدث وما الإجراءات الأكثر أهمية.",
-    decisionSupport: "دعم القرار",
-    decisionSupportText:
-      "حوّل بيانات الأعمال إلى توصيات عملية للتسعير والتحكم في التكاليف والنمو والاستراتيجية.",
+        "حلّل الإيرادات والمصروفات والربحية والنمو والتدفق النقدي ومؤشرات الأداء التشغيلية.",
 
-    faqTitle: "أسئلة شائعة",
+    businessRiskDetection: "اكتشاف مخاطر الأعمال",
+
+    businessRiskDetectionText:
+        "حدّد الهوامش الضعيفة ومشكلات جودة البيانات ومخاطر التدفق النقدي وتراجع الأداء والإشارات التشغيلية التحذيرية.",
+
+    aiBusinessReports: "تقارير تنفيذية بالذكاء الاصطناعي",
+
+    aiBusinessReportsText:
+        "أنشئ ملخصات تنفيذية تشرح الأداء والمخاطر والفرص والإجراءات الموصى بها.",
+
+    decisionSupport: "دعم القرار الاستراتيجي",
+
+    decisionSupportText:
+        "حوّل بيانات الأعمال إلى توصيات عملية للنمو وتحسين الربحية وضبط التكاليف وتطوير الاستراتيجية.",
+
+    faqTitle: "الأسئلة الشائعة",
+
     faq: [
-      [
-        "ما هو ذكاء الأعمال بالذكاء الاصطناعي؟",
-        "يستخدم ذكاء الأعمال بالذكاء الاصطناعي تقنيات الذكاء الاصطناعي لتحليل بيانات الأعمال واكتشاف الأنماط وتحديد المخاطر وإنشاء رؤى جاهزة لاتخاذ القرار.",
-      ],
-      [
-        "هل يمكن لـ Runexa تحليل الجداول؟",
-        "نعم. يمكن لـ Runexa Business Agent تحليل ملفات الأعمال وتحويلها إلى تحليل KPI منظم ومخاطر وفرص وتوصيات.",
-      ],
-      [
-        "من يجب أن يستخدم Runexa Business Agent؟",
-        "هو مفيد للمؤسسين وأصحاب الأعمال والاستشاريين وفرق المالية والمحللين والمؤسسات التي تحتاج إلى دعم أسرع لقرارات الأعمال.",
-      ],
-      [
-        "هل يستبدل Runexa مستشاري الأعمال؟",
-        "لا. يوفر Runexa دعمًا للقرار وتحليلًا. يجب دائمًا مراجعة القرارات التجارية أو القانونية أو المالية أو الاستراتيجية المهمة من قبل مختصين مؤهلين.",
-      ],
-    ],
-  },
+        [
+        "ما هو ذكاء الأعمال المدعوم بالذكاء الاصطناعي؟",
+        "يعتمد ذكاء الأعمال المدعوم بالذكاء الاصطناعي على تحليل بيانات الأعمال لاكتشاف الأنماط وتحديد المخاطر والفرص وإنشاء رؤى تدعم اتخاذ القرار."
+        ],
+        [
+        "هل يمكن لـ Runexa تحليل الجداول والملفات؟",
+        "نعم. يستطيع Runexa Business Agent تحليل الجداول والتقارير وملفات الأعمال المنظمة لإنتاج تحليلات لمؤشرات الأداء وتقييمات للمخاطر وفرص للنمو وتوصيات عملية."
+        ],
+        [
+        "لمن صُمم Runexa Business Agent؟",
+        "صُمم Runexa للمديرين التنفيذيين والمؤسسين وأصحاب الأعمال والاستشاريين والمحللين والفرق المالية والمؤسسات التي تحتاج إلى رؤى أسرع لدعم قراراتها."
+        ],
+        [
+        "هل يستبدل Runexa المستشارين أو الخبراء؟",
+        "لا. يوفر Runexa التحليل ودعم اتخاذ القرار، لكن القرارات الاستراتيجية أو المالية أو القانونية أو التشغيلية المهمة يجب أن تُراجع دائمًا من قبل مختصين مؤهلين."
+        ]
+    ]
+    },
 };
 
 export default function BusinessAIClient() {

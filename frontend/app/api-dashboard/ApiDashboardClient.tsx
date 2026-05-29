@@ -30,116 +30,277 @@ const API_URL =
 const translations = {
   en: {
     dashboard: "Runexa API Dashboard",
-    manageAccess: "Manage your API access",
+
+    manageAccess:
+        "Manage API access and credentials",
+
     monitorUsage:
-      "Monitor API keys, usage, and Runexa AI agent activity.",
-    docs: "Docs",
-    upgradeApi: "Upgrade API",
-    copyKeyNow: "Copy your API key now",
-    activeKeys: "Active Keys",
-    totalRequests: "Total Requests",
-    creditsUsed: "Credits Used",
-    successRate: "Success Rate",
-    apiKeys: "API Keys",
-    apiKeyName: "API key name",
-    createKey: "Create key",
-    name: "Name",
-    prefix: "Prefix",
-    status: "Status",
-    action: "Action",
-    active: "Active",
-    revoked: "Revoked",
-    revoke: "Revoke",
-    quickstart: "Quickstart",
-    recentUsage: "Recent usage",
-    endpoint: "Endpoint",
-    agent: "Agent",
-    couldNotLoad: "Could not load API dashboard data.",
-    couldNotConnect: "Could not connect to the API server.",
-    couldNotCreate: "Could not create API key.",
+        "Monitor API keys, usage, requests, and platform activity.",
+
+    docs:
+        "Documentation",
+
+    upgradeApi:
+        "Upgrade API Access",
+
+    copyKeyNow:
+        "Copy your API key now",
+
+    activeKeys:
+        "Active Keys",
+
+    totalRequests:
+        "Total Requests",
+
+    creditsUsed:
+        "Credits Used",
+
+    successRate:
+        "Success Rate",
+
+    apiKeys:
+        "API Keys",
+
+    apiKeyName:
+        "API Key Name",
+
+    createKey:
+        "Create API Key",
+
+    name:
+        "Name",
+
+    prefix:
+        "Prefix",
+
+    status:
+        "Status",
+
+    action:
+        "Action",
+
+    active:
+        "Active",
+
+    revoked:
+        "Revoked",
+
+    revoke:
+        "Revoke",
+
+    quickstart:
+        "Quickstart",
+
+    recentUsage:
+        "Recent Activity",
+
+    endpoint:
+        "Endpoint",
+
+    agent:
+        "Service",
+
+    couldNotLoad:
+        "Unable to load API dashboard data.",
+
+    couldNotConnect:
+        "Unable to connect to the API server.",
+
+    couldNotCreate:
+        "Unable to create API key.",
+
     keyCreated:
-      "API key created. Copy it now. It will only be shown once.",
-    couldNotRevoke: "Could not revoke API key.",
-    keyRevoked: "API key revoked.",
-  },
+        "API key created successfully. Copy it now. It will only be displayed once.",
+
+    couldNotRevoke:
+        "Unable to revoke API key.",
+
+    keyRevoked:
+        "API key revoked successfully.",
+    },
 
   fr: {
-    dashboard: "Tableau de bord API Runexa",
-    manageAccess: "Gérez votre accès API",
-    monitorUsage:
-      "Surveillez les clés API, l’utilisation et l’activité des agents IA Runexa.",
-    docs: "Documentation",
-    upgradeApi: "Mettre à niveau l’API",
-    copyKeyNow: "Copiez votre clé API maintenant",
-    activeKeys: "Clés actives",
-    totalRequests: "Requêtes totales",
-    creditsUsed: "Crédits utilisés",
-    successRate: "Taux de succès",
-    apiKeys: "Clés API",
-    apiKeyName: "Nom de la clé API",
-    createKey: "Créer une clé",
-    name: "Nom",
-    prefix: "Préfixe",
-    status: "Statut",
-    action: "Action",
-    active: "Active",
-    revoked: "Révoquée",
-    revoke: "Révoquer",
-    quickstart: "Démarrage rapide",
-    recentUsage: "Utilisation récente",
-    endpoint: "Endpoint",
-    agent: "Agent",
-    couldNotLoad:
-      "Impossible de charger le tableau de bord API.",
-    couldNotConnect:
-      "Impossible de se connecter au serveur API.",
-    couldNotCreate:
-      "Impossible de créer la clé API.",
-    keyCreated:
-      "Clé API créée. Copiez-la maintenant. Elle ne sera affichée qu’une seule fois.",
-    couldNotRevoke:
-      "Impossible de révoquer la clé API.",
-    keyRevoked: "Clé API révoquée.",
-  },
+    dashboard:
+        "Tableau de bord API Runexa",
 
-  ar: {
-    dashboard: "لوحة تحكم واجهة Runexa API",
-    manageAccess: "إدارة الوصول إلى الـ API",
+    manageAccess:
+        "Gérez les accès et les identifiants API",
+
     monitorUsage:
-      "راقب مفاتيح API والاستخدام ونشاط وكلاء Runexa.",
-    docs: "التوثيق",
-    upgradeApi: "ترقية API",
-    copyKeyNow: "انسخ مفتاح API الآن",
-    activeKeys: "المفاتيح النشطة",
-    totalRequests: "إجمالي الطلبات",
-    creditsUsed: "الرصيد المستخدم",
-    successRate: "معدل النجاح",
-    apiKeys: "مفاتيح API",
-    apiKeyName: "اسم مفتاح API",
-    createKey: "إنشاء مفتاح",
-    name: "الاسم",
-    prefix: "البادئة",
-    status: "الحالة",
-    action: "الإجراء",
-    active: "نشط",
-    revoked: "ملغى",
-    revoke: "إلغاء",
-    quickstart: "البدء السريع",
-    recentUsage: "الاستخدام الأخير",
-    endpoint: "المسار",
-    agent: "الوكيل",
+        "Surveillez les clés API, l’utilisation, les requêtes et l’activité de la plateforme.",
+
+    docs:
+        "Documentation",
+
+    upgradeApi:
+        "Mettre à niveau l’accès API",
+
+    copyKeyNow:
+        "Copiez votre clé API maintenant",
+
+    activeKeys:
+        "Clés actives",
+
+    totalRequests:
+        "Requêtes totales",
+
+    creditsUsed:
+        "Crédits utilisés",
+
+    successRate:
+        "Taux de réussite",
+
+    apiKeys:
+        "Clés API",
+
+    apiKeyName:
+        "Nom de la clé API",
+
+    createKey:
+        "Créer une clé API",
+
+    name:
+        "Nom",
+
+    prefix:
+        "Préfixe",
+
+    status:
+        "Statut",
+
+    action:
+        "Action",
+
+    active:
+        "Active",
+
+    revoked:
+        "Révoquée",
+
+    revoke:
+        "Révoquer",
+
+    quickstart:
+        "Démarrage rapide",
+
+    recentUsage:
+        "Activité récente",
+
+    endpoint:
+        "Endpoint",
+
+    agent:
+        "Service",
+
     couldNotLoad:
-      "تعذر تحميل لوحة تحكم API.",
+        "Impossible de charger les données du tableau de bord API.",
+
     couldNotConnect:
-      "تعذر الاتصال بخادم API.",
+        "Impossible de se connecter au serveur API.",
+
     couldNotCreate:
-      "تعذر إنشاء مفتاح API.",
+        "Impossible de créer la clé API.",
+
     keyCreated:
-      "تم إنشاء مفتاح API. انسخه الآن لأنه سيظهر مرة واحدة فقط.",
+        "Clé API créée avec succès. Copiez-la maintenant. Elle ne sera affichée qu’une seule fois.",
+
     couldNotRevoke:
-      "تعذر إلغاء مفتاح API.",
-    keyRevoked: "تم إلغاء مفتاح API.",
-  },
+        "Impossible de révoquer la clé API.",
+
+    keyRevoked:
+        "Clé API révoquée avec succès.",
+    },
+  ar: {
+    dashboard:
+        "لوحة تحكم Runexa API",
+
+    manageAccess:
+        "إدارة الوصول وبيانات اعتماد API",
+
+    monitorUsage:
+        "راقب مفاتيح API والاستخدام والطلبات ونشاط المنصة.",
+
+    docs:
+        "التوثيق",
+
+    upgradeApi:
+        "ترقية الوصول إلى API",
+
+    copyKeyNow:
+        "انسخ مفتاح API الآن",
+
+    activeKeys:
+        "المفاتيح النشطة",
+
+    totalRequests:
+        "إجمالي الطلبات",
+
+    creditsUsed:
+        "الأرصدة المستخدمة",
+
+    successRate:
+        "معدل النجاح",
+
+    apiKeys:
+        "مفاتيح API",
+
+    apiKeyName:
+        "اسم مفتاح API",
+
+    createKey:
+        "إنشاء مفتاح API",
+
+    name:
+        "الاسم",
+
+    prefix:
+        "البادئة",
+
+    status:
+        "الحالة",
+
+    action:
+        "الإجراء",
+
+    active:
+        "نشط",
+
+    revoked:
+        "ملغى",
+
+    revoke:
+        "إلغاء",
+
+    quickstart:
+        "البدء السريع",
+
+    recentUsage:
+        "النشاط الأخير",
+
+    endpoint:
+        "نقطة النهاية",
+
+    agent:
+        "الخدمة",
+
+    couldNotLoad:
+        "تعذر تحميل بيانات لوحة تحكم API.",
+
+    couldNotConnect:
+        "تعذر الاتصال بخادم API.",
+
+    couldNotCreate:
+        "تعذر إنشاء مفتاح API.",
+
+    keyCreated:
+        "تم إنشاء مفتاح API بنجاح. انسخه الآن، إذ لن يتم عرضه مرة أخرى.",
+
+    couldNotRevoke:
+        "تعذر إلغاء مفتاح API.",
+
+    keyRevoked:
+        "تم إلغاء مفتاح API بنجاح.",
+    },
 };
 
 export default function ApiDashboardClient() {

@@ -8,42 +8,79 @@ import { getSavedLocale } from "../../../lib/i18n";
 
 const translations = {
   en: {
-    back: "{t.back}",
-    category: "{t.category}",
-    title: "{t.title}",
+    back: "← Back to Blog",
+
+    category: "Financial Intelligence",
+
+    title:
+      "AI Finance Analysis: Understanding Spending, Subscriptions, and Savings",
+
     intro:
-      "Managing personal finances is often difficult because financial data is fragmented, repetitive, and time-consuming to analyze. AI finance analysis can help users better understand spending patterns, subscriptions, savings opportunities, and overall financial habits.",
-    whatIs: "{t.whatIs}",
+      "Managing personal finances can be difficult when financial data is fragmented across statements, transactions, subscriptions, and recurring expenses. AI finance analysis helps users understand spending patterns, identify subscriptions, detect waste, and improve financial visibility.",
+
+    whatIs:
+      "What is AI finance analysis?",
+
     whatIsText:
-      "AI finance analysis uses artificial intelligence to analyze bank statements and financial activity in order to generate insights, detect recurring expenses, identify waste, summarize spending behavior, and improve financial visibility.",
-    why: "{t.why}",
+      "AI finance analysis uses artificial intelligence to review bank statements and financial activity, generate insights, detect recurring expenses, identify waste, summarize spending behavior, and improve visibility into personal finances.",
+
+    why:
+      "Why financial visibility matters",
+
     whyText:
-      "Many people underestimate how much small recurring expenses, subscription charges, impulse purchases, or inconsistent spending habits affect long-term financial stability. Understanding where money goes is often the first step toward improving financial health.",
-    subscriptionDetection: "Subscription detection",
+      "Small recurring expenses, subscription charges, impulse purchases, and inconsistent spending habits can have a significant impact over time. Understanding where money goes is often the first step toward improving financial health.",
+
+    subscriptionDetection:
+      "Subscription detection",
+
     subscriptionDetectionText:
-      "AI can identify recurring payments such as streaming services, software tools, hosting platforms, and online subscriptions.",
-    spendingAnalysis: "Spending analysis",
+      "AI can identify recurring payments such as streaming services, software tools, hosting platforms, memberships, and online subscriptions.",
+
+    spendingAnalysis:
+      "Spending analysis",
+
     spendingAnalysisText:
-      "AI can categorize transactions and reveal where most monthly spending occurs.",
-    savingsOpportunities: "Savings opportunities",
+      "AI can categorize transactions and show where most monthly spending occurs.",
+
+    savingsOpportunities:
+      "Savings opportunities",
+
     savingsOpportunitiesText:
-      "AI can highlight areas where spending may be reduced or optimized.",
-    cashflowVisibility: "Cashflow visibility",
+      "AI can highlight areas where spending may be reduced, optimized, or reviewed more carefully.",
+
+    cashflowVisibility:
+      "Cashflow visibility",
+
     cashflowVisibilityText:
-      "AI can help users understand inflows, outflows, and financial balance trends.",
-    useCases: "{t.useCases}",
+      "AI can help users understand inflows, outflows, recurring expenses, and financial balance trends.",
+
+    useCases:
+      "Common use cases for AI finance analysis",
+
     useCasesText:
       "AI finance analysis can support budgeting, subscription tracking, monthly expense reviews, spending optimization, financial habit awareness, and personal cashflow monitoring.",
-    runexa: "{t.runexa}",
+
+    runexa:
+      "How Runexa Finance Coach helps",
+
     runexaText:
-      "Runexa Finance Coach helps users upload PDF bank statements, analyze transactions, identify subscriptions, detect waste, discover savings opportunities, and ask follow-up questions through a conversational AI assistant.",
-    support: "{t.support}",
+      "Runexa Finance Coach helps users upload bank statements, analyze transactions, identify subscriptions, detect waste, discover savings opportunities, and ask follow-up questions through a conversational AI assistant.",
+
+    support:
+      "AI should support financial awareness, not replace financial judgment",
+
     supportText:
-      "AI finance tools are most useful when they improve visibility and understanding. Financial decisions should still be evaluated with personal context, professional advice when necessary, and long-term goals in mind.",
-    ctaTitle: "{t.ctaTitle}",
+      "AI finance tools are most useful when they improve visibility and understanding. Financial decisions should still be evaluated with personal context, qualified advice when needed, and long-term goals in mind.",
+
+    ctaTitle:
+      "Understand your finances with AI",
+
     ctaText:
       "Use Runexa Finance Coach to analyze bank statements, subscriptions, spending habits, and savings opportunities.",
-    ctaButton: "{t.ctaButton}",
+
+    ctaButton:
+      "Analyze Financial Data",
+
     features: [
       "Subscription tracking",
       "Savings recommendations",
@@ -56,94 +93,167 @@ const translations = {
 
   fr: {
     back: "← Retour au blog",
-    category: "IA finance",
-    title: "Analyse financière IA : comprendre dépenses, économies et cashflow",
+
+    category: "Intelligence financière",
+
+    title:
+      "Analyse financière par IA : comprendre les dépenses, les abonnements et les opportunités d’économies",
+
     intro:
-      "Gérer ses finances personnelles est souvent difficile, car les données financières sont fragmentées, répétitives et longues à analyser. L’analyse financière IA aide à mieux comprendre les dépenses, abonnements, opportunités d’économies et habitudes financières.",
-    whatIs: "Qu’est-ce que l’analyse financière IA ?",
+      "Gérer ses finances personnelles peut être complexe lorsque les données financières sont dispersées entre relevés bancaires, transactions, abonnements et dépenses récurrentes. L’analyse financière par IA aide à mieux comprendre les habitudes de dépenses, identifier les abonnements, détecter les gaspillages et améliorer la visibilité financière.",
+
+    whatIs:
+      "Qu’est-ce que l’analyse financière par IA ?",
+
     whatIsText:
-      "L’analyse financière IA utilise l’intelligence artificielle pour analyser les relevés bancaires et l’activité financière afin de générer des insights, détecter les dépenses récurrentes, identifier le gaspillage et améliorer la visibilité financière.",
-    why: "Pourquoi l’analyse financière est importante",
+      "L’analyse financière par IA utilise l’intelligence artificielle pour examiner les relevés bancaires et l’activité financière, générer des insights, détecter les dépenses récurrentes, identifier les sources de gaspillage, résumer les comportements de dépenses et améliorer la visibilité sur les finances personnelles.",
+
+    why:
+      "Pourquoi la visibilité financière est importante",
+
     whyText:
-      "Beaucoup de personnes sous-estiment l’impact des petites dépenses récurrentes, abonnements, achats impulsifs et habitudes irrégulières sur la stabilité financière.",
-    subscriptionDetection: "Détection des abonnements",
+      "Les petites dépenses récurrentes, les abonnements, les achats impulsifs et les habitudes de consommation irrégulières peuvent avoir un impact significatif à long terme. Comprendre où va son argent constitue souvent la première étape vers une meilleure santé financière.",
+
+    subscriptionDetection:
+      "Détection des abonnements",
+
     subscriptionDetectionText:
-      "L’IA peut identifier les paiements récurrents comme les services de streaming, outils logiciels, plateformes d’hébergement et abonnements en ligne.",
-    spendingAnalysis: "Analyse des dépenses",
+      "L’IA peut identifier les paiements récurrents tels que les services de streaming, les logiciels, les plateformes d’hébergement, les adhésions et les abonnements en ligne.",
+
+    spendingAnalysis:
+      "Analyse des dépenses",
+
     spendingAnalysisText:
-      "L’IA peut catégoriser les transactions et montrer où se concentrent les dépenses mensuelles.",
-    savingsOpportunities: "Opportunités d’économies",
+      "L’IA peut catégoriser les transactions et mettre en évidence les principaux postes de dépenses mensuelles.",
+
+    savingsOpportunities:
+      "Opportunités d’économies",
+
     savingsOpportunitiesText:
-      "L’IA peut mettre en évidence les zones où les dépenses peuvent être réduites ou optimisées.",
-    cashflowVisibility: "Visibilité du cashflow",
+      "L’IA peut identifier les domaines où les dépenses peuvent être réduites, optimisées ou examinées plus attentivement.",
+
+    cashflowVisibility:
+      "Visibilité des flux financiers",
+
     cashflowVisibilityText:
-      "L’IA peut aider à comprendre les entrées, sorties et tendances générales du solde financier.",
-    useCases: "Cas d’usage courants de l’IA finance",
+      "L’IA peut aider à comprendre les entrées, les sorties, les dépenses récurrentes et les tendances générales de l’équilibre financier.",
+
+    useCases:
+      "Cas d’usage courants de l’analyse financière par IA",
+
     useCasesText:
-      "L’analyse financière IA peut aider au budget, suivi des abonnements, revue mensuelle des dépenses, optimisation financière et suivi du cashflow personnel.",
-    runexa: "Comment Runexa Finance Coach aide",
+      "L’analyse financière par IA peut accompagner la gestion du budget, le suivi des abonnements, la revue des dépenses mensuelles, l’optimisation des dépenses, la compréhension des habitudes financières et le suivi des flux financiers personnels.",
+
+    runexa:
+      "Comment Runexa Finance Coach aide",
+
     runexaText:
-      "Runexa Finance Coach aide les utilisateurs à téléverser des relevés bancaires PDF, analyser les transactions, détecter les abonnements, identifier le gaspillage et découvrir des opportunités d’économies.",
-    support: "L’IA doit améliorer la visibilité, pas remplacer le jugement",
+      "Runexa Finance Coach permet aux utilisateurs de téléverser des relevés bancaires, d’analyser les transactions, d’identifier les abonnements, de détecter les gaspillages, de découvrir des opportunités d’économies et de poser des questions complémentaires via un assistant conversationnel alimenté par l’IA.",
+
+    support:
+      "L’IA doit améliorer la compréhension financière, pas remplacer le jugement financier",
+
     supportText:
-      "Les outils IA finance sont utiles lorsqu’ils améliorent la compréhension. Les décisions financières doivent toujours tenir compte du contexte personnel, des objectifs long terme et, si nécessaire, d’un avis professionnel.",
-    ctaTitle: "Comprenez vos finances avec l’IA",
+      "Les outils d’analyse financière par IA sont particulièrement utiles lorsqu’ils améliorent la visibilité et la compréhension. Les décisions financières doivent toujours être prises en tenant compte du contexte personnel, d’un avis professionnel lorsque nécessaire et des objectifs à long terme.",
+
+    ctaTitle:
+      "Comprenez mieux vos finances grâce à l’IA",
+
     ctaText:
-      "Utilisez Runexa Finance Coach pour analyser relevés bancaires, abonnements, habitudes de dépenses et opportunités d’économies.",
-    ctaButton: "Téléverser un relevé bancaire",
+      "Utilisez Runexa Finance Coach pour analyser vos relevés bancaires, abonnements, habitudes de dépenses et opportunités d’économies.",
+
+    ctaButton:
+      "Analyser un relevé bancaire",
+
     features: [
       "Suivi des abonnements",
       "Recommandations d’économies",
-      "Résumés du cashflow",
+      "Synthèses des flux financiers",
       "Analyse des habitudes financières",
-      "Coaching financier IA",
+      "Coaching financier par IA",
       "Questions-réponses financières interactives",
     ],
   },
-
   ar: {
     back: "← العودة إلى المدونة",
+
     category: "الذكاء المالي",
-    title: "التحليل المالي بالذكاء الاصطناعي: فهم المصاريف والادخار والتدفق النقدي",
+
+    title:
+      "التحليل المالي بالذكاء الاصطناعي: فهم الإنفاق والاشتراكات وفرص الادخار",
+
     intro:
-      "إدارة المالية الشخصية قد تكون صعبة لأن البيانات المالية متفرقة ومتكررة وتحتاج وقتًا للتحليل. يساعد التحليل المالي بالذكاء الاصطناعي على فهم المصاريف والاشتراكات وفرص الادخار والعادات المالية.",
-    whatIs: "ما هو التحليل المالي بالذكاء الاصطناعي؟",
+      "قد تكون إدارة الشؤون المالية الشخصية معقدة عندما تكون البيانات موزعة بين الكشوف البنكية والمعاملات والاشتراكات والمصروفات المتكررة. يساعد التحليل المالي بالذكاء الاصطناعي المستخدمين على فهم أنماط الإنفاق وتحديد الاشتراكات واكتشاف الهدر وتحسين الرؤية المالية.",
+
+    whatIs:
+      "ما هو التحليل المالي بالذكاء الاصطناعي؟",
+
     whatIsText:
-      "يستخدم التحليل المالي بالذكاء الاصطناعي تقنيات الذكاء الاصطناعي لتحليل الكشوف البنكية والنشاط المالي، واكتشاف المصاريف المتكررة وتلخيص السلوك المالي وتحسين الرؤية المالية.",
-    why: "لماذا التحليل المالي مهم",
+      "يستخدم التحليل المالي بالذكاء الاصطناعي تقنيات الذكاء الاصطناعي لمراجعة الكشوف البنكية والنشاط المالي، وإنشاء رؤى تحليلية، واكتشاف المصروفات المتكررة، وتحديد مصادر الهدر، وتلخيص أنماط الإنفاق، وتحسين فهم الوضع المالي الشخصي.",
+
+    why:
+      "لماذا تعد الرؤية المالية مهمة؟",
+
     whyText:
-      "يقلل كثير من الناس من تأثير المصاريف الصغيرة المتكررة والاشتراكات والمشتريات العفوية على الاستقرار المالي طويل المدى.",
-    subscriptionDetection: "اكتشاف الاشتراكات",
+      "قد يكون للمصروفات الصغيرة المتكررة والاشتراكات والمشتريات الاندفاعية والعادات المالية غير المنتظمة تأثير كبير على المدى الطويل. وغالباً ما يكون فهم كيفية إنفاق الأموال هو الخطوة الأولى نحو تحسين الصحة المالية.",
+
+    subscriptionDetection:
+      "اكتشاف الاشتراكات",
+
     subscriptionDetectionText:
-      "يمكن للذكاء الاصطناعي تحديد المدفوعات المتكررة مثل خدمات البث والأدوات البرمجية ومنصات الاستضافة والاشتراكات عبر الإنترنت.",
-    spendingAnalysis: "تحليل المصاريف",
+      "يمكن للذكاء الاصطناعي تحديد المدفوعات المتكررة مثل خدمات البث الرقمي والأدوات البرمجية ومنصات الاستضافة والعضويات والاشتراكات عبر الإنترنت.",
+
+    spendingAnalysis:
+      "تحليل الإنفاق",
+
     spendingAnalysisText:
-      "يمكن للذكاء الاصطناعي تصنيف المعاملات وإظهار أين تتركز أغلب المصاريف الشهرية.",
-    savingsOpportunities: "فرص الادخار",
+      "يمكن للذكاء الاصطناعي تصنيف المعاملات وإبراز الفئات التي تستحوذ على الجزء الأكبر من الإنفاق الشهري.",
+
+    savingsOpportunities:
+      "فرص الادخار",
+
     savingsOpportunitiesText:
-      "يمكن للذكاء الاصطناعي إبراز المجالات التي يمكن فيها تقليل المصاريف أو تحسينها.",
-    cashflowVisibility: "رؤية التدفق النقدي",
+      "يمكن للذكاء الاصطناعي تحديد المجالات التي يمكن فيها تقليل الإنفاق أو تحسينه أو مراجعته بشكل أكثر فعالية.",
+
+    cashflowVisibility:
+      "وضوح التدفقات النقدية",
+
     cashflowVisibilityText:
-      "يمكن للذكاء الاصطناعي مساعدة المستخدمين على فهم المداخيل والمصاريف واتجاهات الرصيد المالي.",
-    useCases: "حالات استخدام شائعة للذكاء المالي",
+      "يمكن للذكاء الاصطناعي مساعدة المستخدمين على فهم التدفقات الداخلة والخارجة والمصروفات المتكررة والاتجاهات العامة للتوازن المالي.",
+
+    useCases:
+      "حالات الاستخدام الشائعة للتحليل المالي بالذكاء الاصطناعي",
+
     useCasesText:
-      "يمكن للتحليل المالي بالذكاء الاصطناعي دعم إعداد الميزانية وتتبع الاشتراكات ومراجعة المصاريف الشهرية وتحسين العادات المالية.",
-    runexa: "كيف يساعد Runexa Finance Coach",
+      "يمكن للتحليل المالي بالذكاء الاصطناعي دعم إعداد الميزانيات وتتبع الاشتراكات ومراجعة المصروفات الشهرية وتحسين الإنفاق وفهم العادات المالية ومراقبة التدفقات النقدية الشخصية.",
+
+    runexa:
+      "كيف يساعد Runexa Finance Coach",
+
     runexaText:
-      "يساعد Runexa Finance Coach المستخدمين على رفع كشوف بنكية PDF وتحليل المعاملات واكتشاف الاشتراكات والهدر وفرص الادخار.",
-    support: "يجب أن يحسن الذكاء الاصطناعي الوعي لا أن يستبدل الحكم الشخصي",
+      "يُمكّن Runexa Finance Coach المستخدمين من رفع الكشوف البنكية وتحليل المعاملات وتحديد الاشتراكات واكتشاف الهدر والعثور على فرص الادخار وطرح أسئلة متابعة عبر مساعد محادثة مدعوم بالذكاء الاصطناعي.",
+
+    support:
+      "يجب أن يعزز الذكاء الاصطناعي الوعي المالي لا أن يحل محل الحكم المالي",
+
     supportText:
-      "تكون أدوات الذكاء المالي مفيدة عندما تحسن الرؤية والفهم. يجب تقييم القرارات المالية حسب السياق الشخصي والأهداف طويلة المدى، ومع استشارة مختص عند الحاجة.",
-    ctaTitle: "افهم أموالك باستخدام الذكاء الاصطناعي",
+      "تكون أدوات التحليل المالي بالذكاء الاصطناعي أكثر فائدة عندما تساعد على تحسين الرؤية والفهم. ويجب دائماً اتخاذ القرارات المالية مع مراعاة الظروف الشخصية والأهداف طويلة المدى والاستعانة بمشورة متخصصة عند الحاجة.",
+
+    ctaTitle:
+      "افهم أموالك بشكل أفضل باستخدام الذكاء الاصطناعي",
+
     ctaText:
       "استخدم Runexa Finance Coach لتحليل الكشوف البنكية والاشتراكات وعادات الإنفاق وفرص الادخار.",
-    ctaButton: "رفع كشف بنكي",
+
+    ctaButton:
+      "تحليل كشف بنكي",
+
     features: [
       "تتبع الاشتراكات",
-      "توصيات الادخار",
-      "ملخصات التدفق النقدي",
+      "توصيات للادخار",
+      "ملخصات التدفقات النقدية",
       "تحليل العادات المالية",
-      "تدريب مالي بالذكاء الاصطناعي",
+      "إرشاد مالي بالذكاء الاصطناعي",
       "أسئلة وأجوبة مالية تفاعلية",
     ],
   },

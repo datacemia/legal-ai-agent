@@ -196,8 +196,8 @@ const normalizeBackendText = (
   const dictionaries: Record<Locale, Record<string, string>> = {
     en: {},
     fr: {
-      "up": "hausse",
-      "down": "baisse",
+      "up": "en hausse",
+      "down": "en baisse",
       "stable": "stable",
       "low": "faible",
       "medium": "moyen",
@@ -209,76 +209,92 @@ const normalizeBackendText = (
       "normal": "normal",
       "general": "général",
       "saas": "SaaS / abonnement",
+
       "Healthy profit margin.": "Marge bénéficiaire saine.",
       "Healthy growth.": "Croissance saine.",
-      "Positive cashflow.": "Cashflow positif.",
+      "Positive cashflow.": "Flux de trésorerie positif.",
       "Healthy ROAS.": "ROAS sain.",
       "Healthy CAC efficiency.": "Efficacité CAC saine.",
-      "Critical churn level.": "Niveau de churn critique.",
+      "Critical churn level.": "Taux de churn critique.",
+
       "Payroll": "Masse salariale",
       "Marketing": "Marketing",
       "Software": "Logiciels",
       "Customers": "Clients",
       "New customers": "Nouveaux clients",
       "Churned customers": "Clients perdus",
-      "Revenue/customer": "Revenu/client",
+      "Revenue/customer": "Revenu par client",
       "Orders": "Commandes",
       "Ad spend": "Dépenses publicitaires",
+
       "Profit Margin": "Marge bénéficiaire",
       "Growth": "Croissance",
-      "Cashflow": "Cashflow",
+      "Cashflow": "Flux de trésorerie",
       "Churn": "Churn",
       "Roas": "ROAS",
       "Cac Efficiency": "Efficacité CAC",
       "Data Quality": "Qualité des données",
-      "Revenue": "Revenus",
+      "Revenue": "Chiffre d’affaires",
       "Expenses": "Dépenses",
-      "Profit": "Profit",
-      "Profit Margin Percent": "Marge bénéficiaire",
+      "Profit": "Bénéfice",
+      "Profit Margin Percent": "Taux de marge bénéficiaire",
       "Growth Rate Percent": "Taux de croissance"
     },
     ar: {
-      "up": "صاعد",
-      "down": "هابط",
-      "stable": "مستقر",
-      "low": "منخفض",
-      "medium": "متوسط",
-      "high": "مرتفع",
-      "critical": "حرج",
-      "healthy": "صحي",
-      "positive": "إيجابي",
-      "negative": "سلبي",
-      "normal": "طبيعي",
-      "general": "عام",
-      "saas": "SaaS / اشتراك",
-      "Healthy profit margin.": "هامش ربح صحي.",
-      "Healthy growth.": "نمو صحي.",
-      "Positive cashflow.": "تدفق نقدي إيجابي.",
-      "Healthy ROAS.": "عائد إنفاق إعلاني صحي.",
-      "Healthy CAC efficiency.": "كفاءة صحية لتكلفة اكتساب العميل.",
-      "Critical churn level.": "مستوى فقدان العملاء حرج.",
-      "Payroll": "الرواتب",
-      "Marketing": "التسويق",
-      "Software": "البرمجيات",
-      "Customers": "العملاء",
-      "New customers": "العملاء الجدد",
-      "Churned customers": "العملاء المفقودون",
-      "Revenue/customer": "الإيراد لكل عميل",
-      "Orders": "الطلبات",
-      "Ad spend": "الإنفاق الإعلاني",
-      "Profit Margin": "هامش الربح",
-      "Growth": "النمو",
-      "Cashflow": "التدفق النقدي",
-      "Churn": "فقدان العملاء",
-      "Roas": "عائد الإنفاق الإعلاني",
-      "Cac Efficiency": "كفاءة تكلفة الاكتساب",
-      "Data Quality": "جودة البيانات",
-      "Revenue": "الإيرادات",
-      "Expenses": "المصاريف",
-      "Profit": "الأرباح",
-      "Profit Margin Percent": "هامش الربح",
-      "Growth Rate Percent": "معدل النمو"
-    },
+    "up": "في ارتفاع",
+    "down": "في انخفاض",
+    "stable": "مستقر",
+
+    "low": "منخفض",
+    "medium": "متوسط",
+    "high": "مرتفع",
+    "critical": "حرج",
+
+    "healthy": "سليم",
+    "positive": "إيجابي",
+    "negative": "سلبي",
+    "normal": "طبيعي",
+
+    "general": "عام",
+    "saas": "البرمجيات كخدمة (SaaS)",
+
+    "Healthy profit margin.": "هامش الربح في مستوى صحي.",
+    "Healthy growth.": "النمو في مستوى صحي.",
+    "Positive cashflow.": "التدفق النقدي إيجابي.",
+    "Healthy ROAS.": "عائد الإنفاق الإعلاني في مستوى صحي.",
+    "Healthy CAC efficiency.": "كفاءة تكلفة اكتساب العملاء في مستوى صحي.",
+    "Critical churn level.": "معدل فقدان العملاء في مستوى حرج.",
+
+    "Payroll": "الرواتب",
+    "Marketing": "التسويق",
+    "Software": "البرمجيات",
+
+    "Customers": "العملاء",
+    "New customers": "العملاء الجدد",
+    "Churned customers": "العملاء المفقودون",
+
+    "Revenue/customer": "الإيراد لكل عميل",
+
+    "Orders": "الطلبات",
+    "Ad spend": "الإنفاق الإعلاني",
+
+    "Profit Margin": "هامش الربح",
+    "Growth": "النمو",
+    "Cashflow": "التدفق النقدي",
+    "Churn": "معدل فقدان العملاء",
+
+    "Roas": "عائد الإنفاق الإعلاني",
+    "Cac Efficiency": "كفاءة تكلفة اكتساب العملاء",
+
+    "Data Quality": "جودة البيانات",
+
+    "Revenue": "الإيرادات",
+    "Expenses": "المصروفات",
+    "Profit": "صافي الربح",
+
+    "Profit Margin Percent": "نسبة هامش الربح",
+    "Growth Rate Percent": "معدل النمو"
+  },
   };
 
   const dictionary = dictionaries[language] || {};
@@ -357,152 +373,266 @@ const toneFromValue = (value: any): "slate" | "green" | "red" | "amber" | "blue"
 const labels: Record<Locale, Record<string, string>> = {
   en: {
     title: "Executive Business Dashboard",
-    subtitle: "A data-verified overview of your latest business analysis, risks, opportunities, and strategic decisions.",
-    latestFile: "Latest file",
-    healthScore: "Health Score",
+
+    subtitle:
+      "A data-verified overview of your latest business performance, risks, opportunities, and strategic priorities.",
+
+    latestFile: "Latest Analysis",
+
+    healthScore: "Business Health Score",
+
     currency: "Currency",
+
     exportPdf: "Export PDF",
     exportPptx: "Export PowerPoint",
+
     exportingPdf: "Generating PDF...",
     exportingPptx: "Generating PowerPoint...",
+
     exportSuccess: "Report exported successfully.",
     exportError: "Failed to export report.",
+
     multiCurrencyWarning: "Multiple currencies detected",
+
     businessModel: "Business Model",
+
     revenue: "Revenue",
     expenses: "Expenses",
-    profit: "Profit",
-    margin: "Margin",
+    profit: "Net Profit",
+
+    margin: "Profit Margin",
     growth: "Growth",
     cashflow: "Cashflow",
+
     forecast: "Forecast",
-    nextMonth: "Next Month Revenue",
-    nextQuarter: "Next Quarter Revenue",
+
+    nextMonth: "Projected Revenue (Next Month)",
+    nextQuarter: "Projected Revenue (Next Quarter)",
+
     trend: "Trend",
+
     cashflowRisk: "Cashflow Risk",
+
     volatility: "Volatility",
+
     memory: "Business Memory",
+
     decision: "Priority Decision",
+
     risks: "Risks",
     opportunities: "Opportunities",
     recommendations: "Recommendations",
+
     advancedKpis: "Advanced KPIs",
+
     anomalies: "Anomaly Detection",
-    healthDetails: "Health Score Details",
+
+    healthDetails: "Business Health Details",
+
     dataQuality: "Data Quality",
-    noData: "No business analysis found yet.",
-    analyzeFirst: "Analyze a business file first",
+
+    noData: "No business analysis available yet.",
+
+    analyzeFirst: "Analyze a business file to get started",
+
     verified: "Data-verified analysis",
+
     overview: "Overview",
+
     charts: "Visual Intelligence",
+
     strengths: "Strengths",
-    warnings: "Warnings",
-    noAnomalies: "No major anomalies detected.",
-    noLimitations: "No major data limitations detected.",
-    noMemory: "No previous business memory available yet.",
-    generatedAt: "Generated at",
-    publicEnterpriseReady: "Public & enterprise-ready",
+
+    warnings: "Areas of Attention",
+
+    noAnomalies: "No significant anomalies detected.",
+
+    noLimitations: "No significant data limitations detected.",
+
+    noMemory: "No historical business memory available yet.",
+
+    generatedAt: "Generated on",
+
+    publicEnterpriseReady: "Enterprise-ready",
+
     priority: "Priority",
+
     action: "Action",
   },
   fr: {
-    title: "Dashboard exécutif business",
-    subtitle: "Vue d’ensemble vérifiée par les données de votre dernière analyse business, risques, opportunités et décisions stratégiques.",
-    latestFile: "Dernier fichier",
-    healthScore: "Score de santé",
+    title: "Tableau de bord exécutif",
+
+    subtitle:
+      "Vue d’ensemble vérifiée par les données de votre performance business, des risques, des opportunités et des priorités stratégiques.",
+
+    latestFile: "Dernière analyse",
+
+    healthScore: "Score de santé business",
+
     currency: "Devise",
-    exportPdf: "Exporter PDF",
-    exportPptx: "Exporter PowerPoint",
+
+    exportPdf: "Exporter en PDF",
+    exportPptx: "Exporter en PowerPoint",
+
     exportingPdf: "Génération du PDF...",
     exportingPptx: "Génération du PowerPoint...",
+
     exportSuccess: "Rapport exporté avec succès.",
     exportError: "Échec de l’export du rapport.",
+
     multiCurrencyWarning: "Plusieurs devises détectées",
-    businessModel: "Modèle business",
-    revenue: "Revenus",
+
+    businessModel: "Modèle économique",
+
+    revenue: "Chiffre d’affaires",
     expenses: "Dépenses",
-    profit: "Profit",
-    margin: "Marge",
+    profit: "Bénéfice net",
+
+    margin: "Marge bénéficiaire",
     growth: "Croissance",
-    cashflow: "Cashflow",
+    cashflow: "Flux de trésorerie",
+
     forecast: "Prévisions",
-    nextMonth: "Revenus mois prochain",
-    nextQuarter: "Revenus prochain trimestre",
+
+    nextMonth: "Chiffre d’affaires prévisionnel (mois prochain)",
+    nextQuarter: "Chiffre d’affaires prévisionnel (prochain trimestre)",
+
     trend: "Tendance",
-    cashflowRisk: "Risque cashflow",
+
+    cashflowRisk: "Risque de trésorerie",
+
     volatility: "Volatilité",
+
     memory: "Mémoire business",
+
     decision: "Décision prioritaire",
+
     risks: "Risques",
     opportunities: "Opportunités",
     recommendations: "Recommandations",
-    advancedKpis: "KPIs avancés",
+
+    advancedKpis: "Indicateurs avancés",
+
     anomalies: "Détection d’anomalies",
-    healthDetails: "Détails du score de santé",
+
+    healthDetails: "Détails du score de santé business",
+
     dataQuality: "Qualité des données",
-    noData: "Aucune analyse business trouvée.",
-    analyzeFirst: "Analyser d’abord un fichier business",
+
+    noData: "Aucune analyse business disponible pour le moment.",
+
+    analyzeFirst: "Analysez un fichier business pour commencer",
+
     verified: "Analyse vérifiée par les données",
+
     overview: "Vue d’ensemble",
+
     charts: "Intelligence visuelle",
-    strengths: "Forces",
-    warnings: "Alertes",
-    noAnomalies: "Aucune anomalie majeure détectée.",
-    noLimitations: "Aucune limitation de données majeure détectée.",
-    noMemory: "Aucune mémoire business précédente disponible.",
+
+    strengths: "Points forts",
+
+    warnings: "Points de vigilance",
+
+    noAnomalies: "Aucune anomalie significative détectée.",
+
+    noLimitations: "Aucune limitation significative des données détectée.",
+
+    noMemory: "Aucune donnée historique disponible pour le moment.",
+
     generatedAt: "Généré le",
-    publicEnterpriseReady: "Prêt public & entreprise",
+
+    publicEnterpriseReady: "Prêt pour les usages entreprise",
+
     priority: "Priorité",
+
     action: "Action",
   },
   ar: {
-    title: "لوحة تنفيذية للأعمال",
-    subtitle: "نظرة عامة موثوقة بالبيانات على آخر تحليل أعمال والمخاطر والفرص والقرارات الاستراتيجية.",
-    latestFile: "آخر ملف",
-    healthScore: "مستوى الصحة",
+    title: "لوحة المعلومات التنفيذية",
+
+    subtitle:
+      "نظرة شاملة موثقة بالبيانات لأداء الأعمال والمخاطر والفرص والأولويات الاستراتيجية.",
+
+    latestFile: "آخر تحليل",
+
+    healthScore: "مؤشر صحة الأعمال",
+
     currency: "العملة",
+
     exportPdf: "تصدير PDF",
     exportPptx: "تصدير PowerPoint",
-    exportingPdf: "جاري إنشاء PDF...",
-    exportingPptx: "جاري إنشاء PowerPoint...",
+
+    exportingPdf: "جارٍ إنشاء ملف PDF...",
+    exportingPptx: "جارٍ إنشاء ملف PowerPoint...",
+
     exportSuccess: "تم تصدير التقرير بنجاح.",
-    exportError: "فشل تصدير التقرير.",
+    exportError: "تعذر تصدير التقرير.",
+
     multiCurrencyWarning: "تم اكتشاف عدة عملات",
-    businessModel: "نوع النشاط",
+
+    businessModel: "نموذج الأعمال",
+
     revenue: "الإيرادات",
-    expenses: "المصاريف",
-    profit: "الأرباح",
-    margin: "الهامش",
+    expenses: "المصروفات",
+    profit: "صافي الربح",
+
+    margin: "هامش الربح",
     growth: "النمو",
     cashflow: "التدفق النقدي",
+
     forecast: "التوقعات",
-    nextMonth: "إيرادات الشهر القادم",
-    nextQuarter: "إيرادات الربع القادم",
+
+    nextMonth: "الإيرادات المتوقعة للشهر القادم",
+    nextQuarter: "الإيرادات المتوقعة للربع القادم",
+
     trend: "الاتجاه",
+
     cashflowRisk: "مخاطر التدفق النقدي",
+
     volatility: "التقلب",
+
     memory: "ذاكرة الأعمال",
-    decision: "القرار الأولوي",
+
+    decision: "القرار ذو الأولوية",
+
     risks: "المخاطر",
     opportunities: "الفرص",
     recommendations: "التوصيات",
-    advancedKpis: "مؤشرات متقدمة",
-    anomalies: "كشف الشذوذ",
-    healthDetails: "تفاصيل مستوى الصحة",
+
+    advancedKpis: "مؤشرات الأداء المتقدمة",
+
+    anomalies: "اكتشاف الشذوذ",
+
+    healthDetails: "تفاصيل مؤشر صحة الأعمال",
+
     dataQuality: "جودة البيانات",
-    noData: "لا توجد تحليلات أعمال حتى الآن.",
-    analyzeFirst: "قم بتحليل ملف أعمال أولاً",
-    verified: "تحليل موثوق بالبيانات",
+
+    noData: "لا توجد تحليلات أعمال متاحة حتى الآن.",
+
+    analyzeFirst: "قم بتحليل ملف أعمال للبدء",
+
+    verified: "تحليل موثق بالبيانات",
+
     overview: "نظرة عامة",
+
     charts: "الذكاء البصري",
+
     strengths: "نقاط القوة",
-    warnings: "التحذيرات",
-    noAnomalies: "لم يتم اكتشاف شذوذ كبير.",
-    noLimitations: "لم يتم اكتشاف قيود بيانات كبيرة.",
-    noMemory: "لا توجد ذاكرة أعمال سابقة بعد.",
+
+    warnings: "نقاط تستدعي الانتباه",
+
+    noAnomalies: "لم يتم اكتشاف أي شذوذات مهمة.",
+
+    noLimitations: "لم يتم اكتشاف أي قيود مهمة في البيانات.",
+
+    noMemory: "لا تتوفر بيانات تاريخية للأعمال حتى الآن.",
+
     generatedAt: "تم الإنشاء في",
-    publicEnterpriseReady: "جاهز للاستخدام العام والمؤسسات",
+
+    publicEnterpriseReady: "جاهز للاستخدام المؤسسي",
+
     priority: "الأولوية",
+
     action: "الإجراء",
   },
 };

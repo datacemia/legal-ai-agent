@@ -6,80 +6,124 @@ import { getSavedLocale } from "../../../lib/i18n";
 
 const translations = {
   en: {
-    back: "← Back to Business page",
-    title: "Contact Runexa for Business",
-    subtitle:
-      "Tell us about your needs. We will build custom AI agents tailored to your workflows.",
-    fullName: "Full name",
-    workEmail: "Work email",
-    companyName: "Company name",
-    companySize: "Company size",
-    selectSize: "Select size",
-    size1: "1-10 employees",
-    size2: "10-50 employees",
-    size3: "50-200 employees",
-    size4: "200+ employees",
-    useCase: "Which custom AI agents do you need?",
-    useCasePlaceholder:
-      "Example: contract review, financial reporting, CV screening, document processing, business dashboards...",
-    success:
-      "Your request has been sent. Our team will contact you.",
-    businessEmailError: "Please use a company email address.",
-    submitError: "Failed to send request. Please try again.",
-    submit: "Contact sales",
-  },
+    back: "← Back to Business",
 
-  fr: {
-    back: "← Retour à la page Business",
-    title: "Contacter Runexa pour votre entreprise",
+    title: "Contact Runexa Sales",
+
     subtitle:
-      "Décrivez vos besoins. Nous construirons des agents IA personnalisés adaptés à vos workflows.",
-    fullName: "Nom complet",
-    workEmail: "Email professionnel",
-    companyName: "Nom de l’entreprise",
-    companySize: "Taille de l’entreprise",
-    selectSize: "Sélectionner la taille",
-    size1: "1-10 employés",
-    size2: "10-50 employés",
-    size3: "50-200 employés",
-    size4: "200+ employés",
-    useCase: "Quels agents IA personnalisés vous faut-il ?",
+        "Tell us about your business needs. Our team can help design custom AI agents and workflows tailored to your organization.",
+
+    fullName: "Full Name",
+
+    workEmail: "Work Email",
+
+    companyName: "Company Name",
+
+    companySize: "Company Size",
+
+    selectSize: "Select Company Size",
+
+    size1: "1–10 employees",
+    size2: "11–50 employees",
+    size3: "51–200 employees",
+    size4: "200+ employees",
+
+    useCase: "What would you like to build with Runexa?",
+
     useCasePlaceholder:
-      "Exemple : revue de contrats, reporting financier, tri de CV, traitement documentaire, dashboards business...",
+        "Examples: contract review, financial reporting, document processing, CV screening, business intelligence dashboards, compliance workflows...",
+
     success:
-      "Votre demande a été envoyée. Notre équipe vous contactera.",
+        "Your request has been submitted successfully. A member of our team will contact you shortly.",
+
     businessEmailError:
-      "Veuillez utiliser une adresse email professionnelle.",
+        "Please use a business email address.",
+
     submitError:
-      "Échec de l’envoi de la demande. Veuillez réessayer.",
+        "Unable to submit your request. Please try again.",
+
+    submit: "Contact Sales",
+    },
+
+fr: {
+    back: "← Retour à Business",
+
+    title: "Contacter l’équipe commerciale Runexa",
+
+    subtitle:
+        "Parlez-nous de vos besoins. Notre équipe peut concevoir des agents IA et des workflows adaptés à votre organisation.",
+
+    fullName: "Nom complet",
+
+    workEmail: "Adresse e-mail professionnelle",
+
+    companyName: "Nom de l’entreprise",
+
+    companySize: "Taille de l’entreprise",
+
+    selectSize: "Sélectionner la taille de l’entreprise",
+
+    size1: "1–10 employés",
+    size2: "11–50 employés",
+    size3: "51–200 employés",
+    size4: "200+ employés",
+
+    useCase: "Que souhaitez-vous construire avec Runexa ?",
+
+    useCasePlaceholder:
+        "Exemples : revue de contrats, reporting financier, traitement documentaire, tri de CV, tableaux de bord de business intelligence, workflows de conformité...",
+
+    success:
+        "Votre demande a été envoyée avec succès. Un membre de notre équipe vous contactera prochainement.",
+
+    businessEmailError:
+        "Veuillez utiliser une adresse e-mail professionnelle.",
+
+    submitError:
+        "Impossible d’envoyer votre demande. Veuillez réessayer.",
+
     submit: "Contacter l’équipe commerciale",
-  },
+    },
 
   ar: {
-    back: "← العودة إلى صفحة الأعمال",
-    title: "التواصل مع Runexa للأعمال",
+    back: "← العودة إلى الأعمال",
+
+    title: "التواصل مع فريق مبيعات Runexa",
+
     subtitle:
-      "أخبرنا باحتياجاتك. سنبني وكلاء ذكاء اصطناعي مخصصين حسب سير عملك.",
+        "أخبرنا باحتياجات مؤسستك. يمكن لفريقنا تصميم وكلاء ذكاء اصطناعي وتدفقات عمل مخصصة تناسب أعمالك.",
+
     fullName: "الاسم الكامل",
+
     workEmail: "البريد الإلكتروني المهني",
+
     companyName: "اسم الشركة",
+
     companySize: "حجم الشركة",
-    selectSize: "اختر الحجم",
-    size1: "1-10 موظفين",
-    size2: "10-50 موظفًا",
-    size3: "50-200 موظف",
+
+    selectSize: "اختر حجم الشركة",
+
+    size1: "1–10 موظفين",
+    size2: "11–50 موظفًا",
+    size3: "51–200 موظف",
     size4: "أكثر من 200 موظف",
-    useCase: "ما وكلاء الذكاء الاصطناعي المخصصون الذين تحتاجهم؟",
+
+    useCase: "ما الذي ترغب في بنائه باستخدام Runexa؟",
+
     useCasePlaceholder:
-      "مثال: مراجعة العقود، التقارير المالية، فرز السير الذاتية، معالجة المستندات، لوحات تحكم الأعمال...",
+        "أمثلة: مراجعة العقود، التقارير المالية، معالجة المستندات، فرز السير الذاتية، لوحات ذكاء الأعمال، سير عمل الامتثال...",
+
     success:
-      "تم إرسال طلبك. سيتواصل معك فريقنا.",
+        "تم إرسال طلبك بنجاح. سيتواصل معك أحد أعضاء فريقنا قريبًا.",
+
     businessEmailError:
-      "يرجى استخدام بريد إلكتروني خاص بالشركة.",
+        "يرجى استخدام بريد إلكتروني مهني تابع للشركة.",
+
     submitError:
-      "فشل إرسال الطلب. يرجى المحاولة مرة أخرى.",
-    submit: "التواصل مع المبيعات",
-  },
+        "تعذر إرسال الطلب. يرجى المحاولة مرة أخرى.",
+
+    submit: "التواصل مع فريق المبيعات",
+    },
 };
 
 export default function EnterpriseContactClient() {

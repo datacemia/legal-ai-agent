@@ -9,42 +9,50 @@ import { getSavedLocale } from "../../../lib/i18n";
 const translations = {
   en: {
     back: "← Back to Blog",
-    category: "Study AI",
-    title: "AI Study Assistant: Smarter Learning With AI Workflows",
+
+    category: "Learning Intelligence",
+
+    title:
+      "AI Study Assistant: Building Smarter Learning Workflows",
 
     intro:
-      "Learning large amounts of information can be difficult, repetitive, and time-consuming. AI study assistants help students and professionals organize knowledge, generate summaries, create quizzes, and build more efficient learning workflows.",
+      "Learning large amounts of information can be difficult, repetitive, and time-consuming. AI study assistants help students and professionals organize knowledge, generate summaries, create quizzes, and build more effective learning workflows.",
 
-    whatIs: "What is an AI study assistant?",
+    whatIs:
+      "What is an AI study assistant?",
 
     whatIsText:
-      "An AI study assistant uses artificial intelligence to analyze study materials and generate structured educational support such as summaries, flashcards, quizzes, explanations, revision plans, and learning recommendations.",
+      "An AI study assistant uses artificial intelligence to analyze learning materials and generate structured educational support such as summaries, flashcards, quizzes, explanations, revision plans, and personalized learning recommendations.",
 
     why:
-      "Why traditional studying is inefficient",
+      "Why traditional studying can be inefficient",
 
     whyText:
-      "Many learners spend hours manually summarizing documents, organizing notes, rewriting concepts, and preparing revision material. AI can automate repetitive study tasks and improve learning structure.",
+      "Many learners spend hours manually summarizing documents, organizing notes, rewriting concepts, and preparing revision material. AI can reduce repetitive study tasks and help create clearer learning structures.",
 
-    aiSummaries: "AI summaries",
+    aiSummaries:
+      "AI summaries",
 
     aiSummariesText:
-      "AI can transform long study documents into concise and structured summaries.",
+      "AI can transform long study documents into concise, structured, and easier-to-review summaries.",
 
-    flashcards: "Flashcards & quizzes",
+    flashcards:
+      "Flashcards & quizzes",
 
     flashcardsText:
-      "AI can generate learning exercises automatically for revision and memory reinforcement.",
+      "AI can generate revision exercises automatically to support memory, recall, and concept reinforcement.",
 
-    studyPlanning: "Study planning",
+    studyPlanning:
+      "Study planning",
 
     studyPlanningText:
-      "AI can help organize learning sessions, revision schedules, and educational priorities.",
+      "AI can help organize learning sessions, revision schedules, priorities, and progress tracking.",
 
-    knowledgeOrganization: "Knowledge organization",
+    knowledgeOrganization:
+      "Knowledge organization",
 
     knowledgeOrganizationText:
-      "AI can structure complex information into more understandable learning flows.",
+      "AI can structure complex information into clearer learning paths and more understandable study flows.",
 
     workflows:
       "AI learning workflows for modern education",
@@ -56,21 +64,22 @@ const translations = {
       "How Runexa Study Agent helps",
 
     runexaText:
-      "Runexa Study Agent helps users upload study materials and generate AI-powered summaries, quizzes, flashcards, study plans, and structured learning workflows designed to improve productivity and understanding.",
+      "Runexa Study Agent helps users upload learning materials and generate AI-powered summaries, quizzes, flashcards, study plans, and structured learning workflows designed to improve productivity and understanding.",
 
     support:
       "AI should support learning, not replace thinking",
 
     supportText:
-      "The best educational AI systems help learners understand concepts more efficiently while keeping human reasoning, critical thinking, and active learning at the center of the process.",
+      "The most effective educational AI systems help learners understand concepts more efficiently while keeping human reasoning, critical thinking, and active learning at the center of the process.",
 
     ctaTitle:
-      "Learn faster with AI study workflows",
+      "Learn more effectively with AI study workflows",
 
     ctaText:
-      "Use Runexa Study Agent to generate summaries, quizzes, flashcards, and structured learning workflows with AI.",
+      "Use Runexa Study Agent to generate summaries, quizzes, flashcards, study plans, and structured learning workflows with AI.",
 
-    ctaButton: "Start Studying",
+    ctaButton:
+      "Start Studying",
 
     features: [
       "AI study summaries",
@@ -84,74 +93,80 @@ const translations = {
 
   fr: {
     back: "← Retour au blog",
-    category: "IA étude",
+
+    category: "Intelligence pédagogique",
+
     title:
-      "Assistant d’étude IA : apprendre plus intelligemment avec des workflows IA",
+      "Assistant d’étude par IA : construire des workflows d’apprentissage plus efficaces",
 
     intro:
-      "Apprendre de grandes quantités d’informations peut être difficile et répétitif. Les assistants d’étude IA aident étudiants et professionnels à organiser les connaissances, générer des résumés, créer des quiz et améliorer les workflows d’apprentissage.",
+      "Assimiler de grandes quantités d’informations peut être complexe, répétitif et chronophage. Les assistants d’étude basés sur l’IA aident les étudiants, professionnels et apprenants à organiser les connaissances, générer des résumés, créer des exercices et structurer des méthodes d’apprentissage plus efficaces.",
 
     whatIs:
-      "Qu’est-ce qu’un assistant d’étude IA ?",
+      "Qu’est-ce qu’un assistant d’étude par IA ?",
 
     whatIsText:
-      "Un assistant d’étude IA utilise l’intelligence artificielle pour analyser des supports pédagogiques et générer des résumés, flashcards, quiz, explications et recommandations d’apprentissage.",
+      "Un assistant d’étude par IA utilise l’intelligence artificielle pour analyser des supports pédagogiques et générer un accompagnement structuré sous forme de résumés, flashcards, quiz, explications, plans de révision et recommandations d’apprentissage personnalisées.",
 
     why:
-      "Pourquoi les méthodes d’étude traditionnelles sont inefficaces",
+      "Pourquoi les méthodes d’étude traditionnelles peuvent être inefficaces",
 
     whyText:
-      "Beaucoup d’apprenants passent des heures à résumer des documents, organiser des notes et préparer du matériel de révision. L’IA peut automatiser ces tâches répétitives.",
+      "De nombreux apprenants passent des heures à résumer des documents, organiser leurs notes, reformuler des concepts et préparer leurs révisions. L’IA peut réduire ces tâches répétitives et contribuer à créer une structure d’apprentissage plus claire et plus efficace.",
 
-    aiSummaries: "Résumés IA",
+    aiSummaries:
+      "Résumés générés par IA",
 
     aiSummariesText:
-      "L’IA peut transformer de longs documents d’étude en résumés structurés et concis.",
+      "L’IA peut transformer de longs documents pédagogiques en résumés concis, structurés et faciles à réviser.",
 
-    flashcards: "Flashcards et quiz",
+    flashcards:
+      "Flashcards et quiz",
 
     flashcardsText:
-      "L’IA peut générer automatiquement des exercices de révision et de mémorisation.",
+      "L’IA peut générer automatiquement des exercices de révision pour renforcer la mémorisation, le rappel des connaissances et la compréhension des concepts.",
 
-    studyPlanning: "Planification des études",
+    studyPlanning:
+      "Planification des études",
 
     studyPlanningText:
-      "L’IA peut aider à organiser les sessions d’apprentissage et les priorités éducatives.",
+      "L’IA peut aider à organiser les sessions d’apprentissage, les calendriers de révision, les priorités et le suivi de la progression.",
 
     knowledgeOrganization:
       "Organisation des connaissances",
 
     knowledgeOrganizationText:
-      "L’IA peut structurer des informations complexes en workflows d’apprentissage plus compréhensibles.",
+      "L’IA peut structurer des informations complexes en parcours d’apprentissage plus clairs et en workflows pédagogiques plus faciles à suivre.",
 
     workflows:
-      "Workflows IA pour l’éducation moderne",
+      "Workflows d’apprentissage IA pour l’éducation moderne",
 
     workflowsText:
-      "Les systèmes d’apprentissage IA peuvent aider étudiants, chercheurs et organisations à améliorer la productivité éducative.",
+      "Les systèmes d’apprentissage alimentés par l’IA peuvent accompagner les étudiants, professionnels, chercheurs et organisations en simplifiant la révision des contenus, en accélérant l’acquisition des connaissances et en améliorant la productivité éducative.",
 
     runexa:
       "Comment Runexa Study Agent aide",
 
     runexaText:
-      "Runexa Study Agent aide les utilisateurs à téléverser des supports pédagogiques et générer résumés, quiz, flashcards et workflows d’apprentissage structurés.",
+      "Runexa Study Agent permet aux utilisateurs de téléverser des supports pédagogiques et de générer des résumés, quiz, flashcards, plans d’étude et workflows d’apprentissage structurés conçus pour améliorer la compréhension et la productivité.",
 
     support:
       "L’IA doit soutenir l’apprentissage, pas remplacer la réflexion",
 
     supportText:
-      "Les meilleurs systèmes IA éducatifs améliorent la compréhension tout en gardant la réflexion critique et l’apprentissage actif au centre du processus.",
+      "Les systèmes éducatifs les plus efficaces utilisent l’IA pour aider les apprenants à comprendre les concepts plus rapidement tout en conservant le raisonnement humain, l’esprit critique et l’apprentissage actif au cœur du processus.",
 
     ctaTitle:
-      "Apprenez plus vite avec les workflows IA",
+      "Apprenez plus efficacement grâce aux workflows IA",
 
     ctaText:
-      "Utilisez Runexa Study Agent pour générer résumés, quiz, flashcards et workflows d’apprentissage structurés.",
+      "Utilisez Runexa Study Agent pour générer des résumés, quiz, flashcards, plans d’étude et workflows d’apprentissage structurés avec l’IA.",
 
-    ctaButton: "Commencer à étudier",
+    ctaButton:
+      "Commencer à étudier",
 
     features: [
-      "Résumés d’étude IA",
+      "Résumés pédagogiques par IA",
       "Génération de flashcards",
       "Génération de quiz",
       "Planification des études",
@@ -162,78 +177,84 @@ const translations = {
 
   ar: {
     back: "← العودة إلى المدونة",
-    category: "ذكاء الدراسة",
+
+    category: "الذكاء التعليمي",
+
     title:
-      "مساعد الدراسة بالذكاء الاصطناعي: تعلم أكثر ذكاءً باستخدام تدفقات العمل الذكية",
+      "مساعد الدراسة بالذكاء الاصطناعي: بناء مسارات تعلم أكثر فاعلية",
 
     intro:
-      "قد يكون تعلم كميات كبيرة من المعلومات صعبًا ومتكررًا ويستغرق وقتًا طويلًا. تساعد أدوات الدراسة بالذكاء الاصطناعي الطلاب والمهنيين على تنظيم المعرفة وإنشاء ملخصات واختبارات وتحسين تدفقات التعلم.",
+      "قد يكون استيعاب كميات كبيرة من المعلومات أمراً معقداً ومتكرراً ويستغرق وقتاً طويلاً. تساعد أدوات الدراسة المدعومة بالذكاء الاصطناعي الطلاب والمهنيين والمتعلمين على تنظيم المعرفة وإنشاء الملخصات وإعداد التمارين وبناء أساليب تعلم أكثر كفاءة.",
 
     whatIs:
       "ما هو مساعد الدراسة بالذكاء الاصطناعي؟",
 
     whatIsText:
-      "يستخدم مساعد الدراسة بالذكاء الاصطناعي تقنيات الذكاء الاصطناعي لتحليل المواد الدراسية وإنشاء ملخصات وبطاقات تعليمية واختبارات وخطط مراجعة.",
+      "يستخدم مساعد الدراسة بالذكاء الاصطناعي تقنيات الذكاء الاصطناعي لتحليل المواد التعليمية وتقديم دعم تعليمي منظم يشمل الملخصات والبطاقات التعليمية والاختبارات والشروحات وخطط المراجعة والتوصيات التعليمية المخصصة.",
 
     why:
-      "لماذا الدراسة التقليدية غير فعالة",
+      "لماذا قد تكون أساليب الدراسة التقليدية غير فعالة؟",
 
     whyText:
-      "يقضي العديد من المتعلمين ساعات طويلة في تلخيص المستندات وتنظيم الملاحظات وإعادة كتابة المفاهيم. يمكن للذكاء الاصطناعي أتمتة هذه المهام وتحسين بنية التعلم.",
+      "يقضي العديد من المتعلمين ساعات طويلة في تلخيص المستندات وتنظيم الملاحظات وإعادة صياغة المفاهيم وإعداد مواد المراجعة. ويمكن للذكاء الاصطناعي تقليل هذه المهام المتكررة والمساعدة في بناء هيكل تعلم أكثر وضوحاً وفعالية.",
 
-    aiSummaries: "ملخصات الذكاء الاصطناعي",
+    aiSummaries:
+      "الملخصات المدعومة بالذكاء الاصطناعي",
 
     aiSummariesText:
-      "يمكن للذكاء الاصطناعي تحويل المستندات الدراسية الطويلة إلى ملخصات منظمة ومختصرة.",
+      "يمكن للذكاء الاصطناعي تحويل المواد التعليمية الطويلة إلى ملخصات موجزة ومنظمة وأسهل للمراجعة.",
 
-    flashcards: "بطاقات تعليمية واختبارات",
+    flashcards:
+      "البطاقات التعليمية والاختبارات",
 
     flashcardsText:
-      "يمكن للذكاء الاصطناعي إنشاء تمارين تعليمية للمراجعة وتعزيز الذاكرة.",
+      "يمكن للذكاء الاصطناعي إنشاء تمارين مراجعة تلقائياً لدعم التذكر واسترجاع المعلومات وتعزيز فهم المفاهيم.",
 
-    studyPlanning: "تخطيط الدراسة",
+    studyPlanning:
+      "تخطيط الدراسة",
 
     studyPlanningText:
-      "يمكن للذكاء الاصطناعي المساعدة في تنظيم جلسات التعلم والجداول التعليمية.",
+      "يمكن للذكاء الاصطناعي المساعدة في تنظيم جلسات التعلم وجداول المراجعة والأولويات التعليمية ومتابعة التقدم.",
 
     knowledgeOrganization:
       "تنظيم المعرفة",
 
     knowledgeOrganizationText:
-      "يمكن للذكاء الاصطناعي تنظيم المعلومات المعقدة في تدفقات تعلم أكثر وضوحًا.",
+      "يمكن للذكاء الاصطناعي تنظيم المعلومات المعقدة ضمن مسارات تعلم أوضح وتجارب تعليمية أكثر سهولة في المتابعة.",
 
     workflows:
-      "تدفقات التعلم بالذكاء الاصطناعي للتعليم الحديث",
+      "مسارات التعلم بالذكاء الاصطناعي للتعليم الحديث",
 
     workflowsText:
-      "يمكن لأنظمة التعلم بالذكاء الاصطناعي دعم الطلاب والباحثين والمؤسسات وتحسين الإنتاجية التعليمية.",
+      "يمكن لأنظمة التعلم المدعومة بالذكاء الاصطناعي مساعدة الطلاب والمهنيين والباحثين والمؤسسات من خلال تبسيط مراجعة المحتوى وتسريع اكتساب المعرفة وتحسين الإنتاجية التعليمية.",
 
     runexa:
       "كيف يساعد Runexa Study Agent",
 
     runexaText:
-      "يساعد Runexa Study Agent المستخدمين على رفع المواد الدراسية وإنشاء ملخصات واختبارات وبطاقات تعليمية وخطط تعلم منظمة.",
+      "يُمكّن Runexa Study Agent المستخدمين من رفع المواد التعليمية وإنشاء ملخصات واختبارات وبطاقات تعليمية وخطط دراسة ومسارات تعلم منظمة مصممة لتحسين الفهم والإنتاجية.",
 
     support:
-      "يجب أن يدعم الذكاء الاصطناعي التعلم لا أن يستبدل التفكير",
+      "يجب أن يدعم الذكاء الاصطناعي التعلم لا أن يحل محل التفكير",
 
     supportText:
-      "تساعد أفضل أنظمة الذكاء الاصطناعي التعليمية المتعلمين على الفهم بشكل أفضل مع الحفاظ على التفكير النقدي والتعلم النشط.",
+      "تساعد أفضل الأنظمة التعليمية المدعومة بالذكاء الاصطناعي المتعلمين على فهم المفاهيم بشكل أكثر كفاءة مع الحفاظ على التفكير النقدي والاستدلال البشري والتعلم النشط في صميم العملية التعليمية.",
 
     ctaTitle:
-      "تعلم بشكل أسرع باستخدام تدفقات الدراسة الذكية",
+      "تعلّم بفاعلية أكبر مع مسارات التعلم الذكية",
 
     ctaText:
-      "استخدم Runexa Study Agent لإنشاء ملخصات واختبارات وبطاقات تعليمية وتدفقات تعلم منظمة.",
+      "استخدم Runexa Study Agent لإنشاء الملخصات والاختبارات والبطاقات التعليمية وخطط الدراسة ومسارات التعلم المنظمة بالذكاء الاصطناعي.",
 
-    ctaButton: "ابدأ الدراسة",
+    ctaButton:
+      "ابدأ الدراسة",
 
     features: [
-      "ملخصات دراسية بالذكاء الاصطناعي",
+      "ملخصات تعليمية بالذكاء الاصطناعي",
       "إنشاء البطاقات التعليمية",
       "إنشاء الاختبارات",
       "تخطيط الدراسة",
-      "تدفقات التعلم",
+      "مسارات التعلم",
       "أدوات الإنتاجية التعليمية",
     ],
   },

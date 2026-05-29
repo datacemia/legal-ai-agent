@@ -8,206 +8,565 @@ import { getSavedLocale } from "../../lib/i18n";
 
 const docsTranslations = {
   en: {
-    badge: "Runexa Docs",
-    title: "AI Agent API Documentation",
+    badge: "Runexa Documentation",
+
+    title:
+        "Runexa API Documentation",
+
     subtitle:
-      "Build AI-powered workflows using Runexa asynchronous APIs for legal, finance, business intelligence, and study automation.",
-    developerPlatform: "Developer Platform",
-    developerSubtitle: "Async AI infrastructure for enterprise workflows",
-    contents: "Contents",
-    introduction: "Introduction",
-    authentication: "Authentication",
-    asyncJobs: "Async jobs",
-    financeAi: "Finance AI",
-    legalAi: "Legal AI",
-    businessAi: "Business AI",
-    studyAi: "Study AI",
-    jobsApi: "Jobs API",
-    errors: "Errors",
-    rateLimits: "Rate limits",
-    security: "Security",
-    infrastructure: "Runexa AI infrastructure",
+        "Build AI-powered applications and workflows using Runexa APIs for legal intelligence, financial analysis, learning automation, and business decision support.",
+
+    developerPlatform:
+        "Developer Platform",
+
+    developerSubtitle:
+        "Asynchronous AI infrastructure built for production",
+
+    contents:
+        "Contents",
+
+    introduction:
+        "Introduction",
+
+    authentication:
+        "Authentication",
+
+    asyncJobs:
+        "Asynchronous Processing",
+
+    financeAi:
+        "Financial Intelligence",
+
+    legalAi:
+        "Legal Intelligence",
+
+    businessAi:
+        "Business Intelligence",
+
+    studyAi:
+        "Learning Intelligence",
+
+    jobsApi:
+        "Jobs API",
+
+    errors:
+        "Errors",
+
+    rateLimits:
+        "Rate Limits",
+
+    security:
+        "Security",
+
+    infrastructure:
+        "Runexa AI Infrastructure",
+
     introText:
-      "Runexa API allows developers and enterprises to integrate advanced AI analysis workflows directly into products, dashboards, internal tools, and enterprise systems.",
-    legalAnalysis: "Legal AI analysis",
-    financeAnalysis: "Finance AI analysis",
-    businessAnalysis: "Business AI analysis",
-    studyAnalysis: "Study AI analysis",
-    authText: "All API requests require a bearer API key.",
-    asyncArchitecture: "Async Architecture",
+        "Runexa APIs enable developers and organizations to integrate advanced AI analysis workflows into applications, dashboards, internal tools, and enterprise systems.",
+
+    legalAnalysis:
+        "Legal Document Analysis",
+
+    financeAnalysis:
+        "Financial Analysis",
+
+    businessAnalysis:
+        "Business Intelligence",
+
+    studyAnalysis:
+        "Learning Analysis",
+
+    authText:
+        "All API requests require a valid bearer API key.",
+
+    asyncArchitecture:
+        "Asynchronous Architecture",
+
     asyncText:
-      "Runexa APIs use asynchronous AI processing powered by queue-based workers.",
-    uploadFile: "Upload file",
-    createJob: "Create AI job",
-    workerProcessing: "Worker processing",
-    retrieveResults: "Retrieve results",
-    bankStatements: "Bank statements",
-    subscriptions: "Subscriptions",
-    savingsOpportunities: "Savings opportunities",
-    contractAnalysis: "Contract analysis",
-    riskDetection: "Risk detection",
-    clauseExtraction: "Clause extraction",
-    kpiDashboards: "KPI dashboards",
-    forecasting: "Forecasting",
-    executiveReporting: "Executive reporting",
-    studyDocuments: "Study documents",
-    summaries: "Summaries",
-    quizzesFlashcards: "Quizzes and flashcards",
-    missingApiKey: "Missing or invalid API key.",
-    insufficientCredits: "Insufficient credits or API access disabled.",
-    fileTooLarge: "Uploaded file exceeds allowed limits.",
-    rateLimitExceeded: "Rate limit exceeded.",
-    unexpectedError: "Unexpected AI processing error.",
-    custom: "Custom",
-    neverExpose: "Never expose API keys publicly",
-    storeServerSide: "Store API keys server-side",
-    rotateKeys: "Rotate compromised keys immediately",
-    useHttps: "Use HTTPS only",
-    baseUrl: "Base URL",
-    production: "Production",
-    local: "Local",
-    jobsApiText: "Retrieve asynchronous AI analysis results.",
-    errorResponses: "Error Responses",
-    plan: "Plan",
-    requests: "Requests",
-    securityEnterpriseSupport: "Security & Enterprise Support",
-    enterpriseSupport: "Enterprise Support",
-    exploreApiPlatform: "Explore API Platform",
-  },
+        "Runexa APIs use asynchronous processing powered by distributed workers and job queues.",
+
+    uploadFile:
+        "Upload Document",
+
+    createJob:
+        "Create Job",
+
+    workerProcessing:
+        "Processing",
+
+    retrieveResults:
+        "Retrieve Results",
+
+    bankStatements:
+        "Bank Statements",
+
+    subscriptions:
+        "Subscriptions",
+
+    savingsOpportunities:
+        "Savings Opportunities",
+
+    contractAnalysis:
+        "Contract Analysis",
+
+    riskDetection:
+        "Risk Detection",
+
+    clauseExtraction:
+        "Clause Extraction",
+
+    kpiDashboards:
+        "Performance Metrics",
+
+    forecasting:
+        "Forecasting",
+
+    executiveReporting:
+        "Executive Reporting",
+
+    studyDocuments:
+        "Learning Materials",
+
+    summaries:
+        "Summaries",
+
+    quizzesFlashcards:
+        "Quizzes & Flashcards",
+
+    missingApiKey:
+        "Missing or invalid API key.",
+
+    insufficientCredits:
+        "Insufficient credits or API access unavailable.",
+
+    fileTooLarge:
+        "Uploaded file exceeds allowed limits.",
+
+    rateLimitExceeded:
+        "Rate limit exceeded.",
+
+    unexpectedError:
+        "Unexpected processing error.",
+
+    custom:
+        "Custom",
+
+    neverExpose:
+        "Never expose API keys in client-side applications",
+
+    storeServerSide:
+        "Store API keys securely on the server",
+
+    rotateKeys:
+        "Rotate compromised keys immediately",
+
+    useHttps:
+        "Use HTTPS for all API requests",
+
+    baseUrl:
+        "Base URL",
+
+    production:
+        "Production",
+
+    local:
+        "Local",
+
+    jobsApiText:
+        "Retrieve the status and results of asynchronous AI jobs.",
+
+    errorResponses:
+        "Error Responses",
+
+    plan:
+        "Plan",
+
+    requests:
+        "Requests",
+
+    securityEnterpriseSupport:
+        "Security & Enterprise Support",
+
+    enterpriseSupport:
+        "Enterprise Support",
+
+    exploreApiPlatform:
+        "Explore the API Platform",
+    },
   fr: {
-    badge: "Documentation Runexa",
-    title: "Documentation API des agents IA",
+    badge:
+        "Documentation Runexa",
+
+    title:
+        "Documentation de l’API Runexa",
+
     subtitle:
-      "Construisez des workflows IA avec les API asynchrones Runexa pour le juridique, la finance, la business intelligence et l’apprentissage.",
-    developerPlatform: "Plateforme développeur",
-    developerSubtitle: "Infrastructure IA asynchrone pour workflows entreprise",
-    contents: "Sommaire",
-    introduction: "Introduction",
-    authentication: "Authentification",
-    asyncJobs: "Jobs asynchrones",
-    financeAi: "IA finance",
-    legalAi: "IA juridique",
-    businessAi: "IA business",
-    studyAi: "IA étude",
-    jobsApi: "API Jobs",
-    errors: "Erreurs",
-    rateLimits: "Limites de débit",
-    security: "Sécurité",
-    infrastructure: "Infrastructure IA Runexa",
+        "Créez des applications et des workflows alimentés par l’IA grâce aux API Runexa pour l’intelligence juridique, l’analyse financière, l’automatisation de l’apprentissage et l’aide à la décision business.",
+
+    developerPlatform:
+        "Plateforme développeur",
+
+    developerSubtitle:
+        "Infrastructure IA asynchrone conçue pour la production",
+
+    contents:
+        "Sommaire",
+
+    introduction:
+        "Introduction",
+
+    authentication:
+        "Authentification",
+
+    asyncJobs:
+        "Traitement asynchrone",
+
+    financeAi:
+        "Intelligence financière",
+
+    legalAi:
+        "Intelligence juridique",
+
+    businessAi:
+        "Intelligence business",
+
+    studyAi:
+        "Intelligence pédagogique",
+
+    jobsApi:
+        "API Jobs",
+
+    errors:
+        "Erreurs",
+
+    rateLimits:
+        "Limites de débit",
+
+    security:
+        "Sécurité",
+
+    infrastructure:
+        "Infrastructure IA Runexa",
+
     introText:
-      "L’API Runexa permet aux développeurs et entreprises d’intégrer des workflows avancés d’analyse IA directement dans leurs produits, dashboards, outils internes et systèmes entreprise.",
-    legalAnalysis: "Analyse IA juridique",
-    financeAnalysis: "Analyse IA finance",
-    businessAnalysis: "Analyse IA business",
-    studyAnalysis: "Analyse IA étude",
-    authText: "Toutes les requêtes API nécessitent une clé API Bearer.",
-    asyncArchitecture: "Architecture asynchrone",
+        "Les API Runexa permettent aux développeurs et aux organisations d’intégrer des workflows avancés d’analyse IA dans leurs applications, tableaux de bord, outils internes et systèmes d’entreprise.",
+
+    legalAnalysis:
+        "Analyse de documents juridiques",
+
+    financeAnalysis:
+        "Analyse financière",
+
+    businessAnalysis:
+        "Intelligence business",
+
+    studyAnalysis:
+        "Analyse pédagogique",
+
+    authText:
+        "Toutes les requêtes API nécessitent une clé API Bearer valide.",
+
+    asyncArchitecture:
+        "Architecture asynchrone",
+
     asyncText:
-      "Les API Runexa utilisent un traitement IA asynchrone alimenté par des workers et une file de jobs.",
-    uploadFile: "Téléverser le fichier",
-    createJob: "Créer le job IA",
-    workerProcessing: "Traitement par worker",
-    retrieveResults: "Récupérer les résultats",
-    bankStatements: "Relevés bancaires",
-    subscriptions: "Abonnements",
-    savingsOpportunities: "Opportunités d’économies",
-    contractAnalysis: "Analyse de contrat",
-    riskDetection: "Détection des risques",
-    clauseExtraction: "Extraction des clauses",
-    kpiDashboards: "Dashboards KPI",
-    forecasting: "Prévisions",
-    executiveReporting: "Reporting exécutif",
-    studyDocuments: "Documents d’étude",
-    summaries: "Résumés",
-    quizzesFlashcards: "Quiz et flashcards",
-    missingApiKey: "Clé API manquante ou invalide.",
-    insufficientCredits: "Crédits insuffisants ou accès API désactivé.",
-    fileTooLarge: "Le fichier dépasse les limites autorisées.",
-    rateLimitExceeded: "Limite de débit dépassée.",
-    unexpectedError: "Erreur inattendue du traitement IA.",
-    custom: "Personnalisé",
-    neverExpose: "Ne jamais exposer les clés API publiquement",
-    storeServerSide: "Stocker les clés API côté serveur",
-    rotateKeys: "Remplacer immédiatement les clés compromises",
-    useHttps: "Utiliser HTTPS uniquement",
-    baseUrl: "URL de base",
-    production: "Production",
-    local: "Local",
-    jobsApiText: "Récupérez les résultats des analyses IA asynchrones.",
-    errorResponses: "Réponses d’erreur",
-    plan: "Plan",
-    requests: "Requêtes",
-    securityEnterpriseSupport: "Sécurité et support entreprise",
-    enterpriseSupport: "Support entreprise",
-    exploreApiPlatform: "Explorer la plateforme API",
-  },
+        "Les API Runexa utilisent un traitement asynchrone alimenté par des workers distribués et des files de traitement.",
+
+    uploadFile:
+        "Téléverser un document",
+
+    createJob:
+        "Créer un traitement",
+
+    workerProcessing:
+        "Traitement",
+
+    retrieveResults:
+        "Récupérer les résultats",
+
+    bankStatements:
+        "Relevés bancaires",
+
+    subscriptions:
+        "Abonnements",
+
+    savingsOpportunities:
+        "Opportunités d’économies",
+
+    contractAnalysis:
+        "Analyse de contrats",
+
+    riskDetection:
+        "Détection des risques",
+
+    clauseExtraction:
+        "Extraction de clauses",
+
+    kpiDashboards:
+        "Indicateurs de performance",
+
+    forecasting:
+        "Prévisions",
+
+    executiveReporting:
+        "Reporting exécutif",
+
+    studyDocuments:
+        "Supports d’apprentissage",
+
+    summaries:
+        "Résumés",
+
+    quizzesFlashcards:
+        "Quiz et flashcards",
+
+    missingApiKey:
+        "Clé API manquante ou invalide.",
+
+    insufficientCredits:
+        "Crédits insuffisants ou accès API indisponible.",
+
+    fileTooLarge:
+        "Le fichier dépasse les limites autorisées.",
+
+    rateLimitExceeded:
+        "Limite de débit dépassée.",
+
+    unexpectedError:
+        "Erreur inattendue lors du traitement.",
+
+    custom:
+        "Personnalisé",
+
+    neverExpose:
+        "Ne jamais exposer les clés API dans des applications côté client",
+
+    storeServerSide:
+        "Stocker les clés API de manière sécurisée côté serveur",
+
+    rotateKeys:
+        "Remplacer immédiatement les clés compromises",
+
+    useHttps:
+        "Utiliser HTTPS pour toutes les requêtes API",
+
+    baseUrl:
+        "URL de base",
+
+    production:
+        "Production",
+
+    local:
+        "Local",
+
+    jobsApiText:
+        "Récupérez l’état et les résultats des traitements IA asynchrones.",
+
+    errorResponses:
+        "Réponses d’erreur",
+
+    plan:
+        "Plan",
+
+    requests:
+        "Requêtes",
+
+    securityEnterpriseSupport:
+        "Sécurité et support entreprise",
+
+    enterpriseSupport:
+        "Support entreprise",
+
+    exploreApiPlatform:
+        "Explorer la plateforme API",
+    },
   ar: {
-    badge: "توثيق Runexa",
-    title: "توثيق API لوكلاء الذكاء الاصطناعي",
+    badge:
+        "توثيق Runexa",
+
+    title:
+        "توثيق واجهات Runexa API",
+
     subtitle:
-      "أنشئ تدفقات عمل مدعومة بالذكاء الاصطناعي باستخدام واجهات Runexa غير المتزامنة للقانون والمالية وذكاء الأعمال والدراسة.",
-    developerPlatform: "منصة المطورين",
-    developerSubtitle: "بنية ذكاء اصطناعي غير متزامنة لسير عمل المؤسسات",
-    contents: "المحتويات",
-    introduction: "المقدمة",
-    authentication: "المصادقة",
-    asyncJobs: "المهام غير المتزامنة",
-    financeAi: "الذكاء المالي",
-    legalAi: "الذكاء القانوني",
-    businessAi: "ذكاء الأعمال",
-    studyAi: "ذكاء الدراسة",
-    jobsApi: "API المهام",
-    errors: "الأخطاء",
-    rateLimits: "حدود المعدل",
-    security: "الأمان",
-    infrastructure: "بنية Runexa للذكاء الاصطناعي",
+        "أنشئ تطبيقات وتدفقات عمل مدعومة بالذكاء الاصطناعي باستخدام واجهات Runexa للتحليل القانوني والذكاء المالي وأتمتة التعلّم ودعم قرارات الأعمال.",
+
+    developerPlatform:
+        "منصة المطورين",
+
+    developerSubtitle:
+        "بنية تحتية غير متزامنة للذكاء الاصطناعي مصممة لبيئات الإنتاج",
+
+    contents:
+        "المحتويات",
+
+    introduction:
+        "المقدمة",
+
+    authentication:
+        "المصادقة",
+
+    asyncJobs:
+        "المعالجة غير المتزامنة",
+
+    financeAi:
+        "الذكاء المالي",
+
+    legalAi:
+        "الذكاء القانوني",
+
+    businessAi:
+        "ذكاء الأعمال",
+
+    studyAi:
+        "ذكاء التعلّم",
+
+    jobsApi:
+        "واجهة Jobs API",
+
+    errors:
+        "الأخطاء",
+
+    rateLimits:
+        "حدود المعدل",
+
+    security:
+        "الأمان",
+
+    infrastructure:
+        "بنية Runexa للذكاء الاصطناعي",
+
     introText:
-      "تتيح API Runexa للمطورين والمؤسسات دمج تدفقات تحليل ذكاء اصطناعي متقدمة مباشرة داخل المنتجات ولوحات التحكم والأدوات الداخلية وأنظمة المؤسسات.",
-    legalAnalysis: "تحليل قانوني بالذكاء الاصطناعي",
-    financeAnalysis: "تحليل مالي بالذكاء الاصطناعي",
-    businessAnalysis: "تحليل أعمال بالذكاء الاصطناعي",
-    studyAnalysis: "تحليل دراسي بالذكاء الاصطناعي",
-    authText: "تتطلب جميع طلبات API مفتاح Bearer.",
-    asyncArchitecture: "البنية غير المتزامنة",
+        "تمكّن واجهات Runexa المطورين والمؤسسات من دمج تدفقات متقدمة لتحليل الذكاء الاصطناعي داخل التطبيقات ولوحات التحكم والأدوات الداخلية وأنظمة المؤسسات.",
+
+    legalAnalysis:
+        "تحليل المستندات القانونية",
+
+    financeAnalysis:
+        "التحليل المالي",
+
+    businessAnalysis:
+        "ذكاء الأعمال",
+
+    studyAnalysis:
+        "تحليل التعلّم",
+
+    authText:
+        "تتطلب جميع طلبات API مفتاح Bearer صالحاً.",
+
+    asyncArchitecture:
+        "البنية غير المتزامنة",
+
     asyncText:
-      "تستخدم واجهات Runexa معالجة ذكاء اصطناعي غير متزامنة تعتمد على قائمة مهام وعمّال معالجة.",
-    uploadFile: "رفع الملف",
-    createJob: "إنشاء مهمة الذكاء الاصطناعي",
-    workerProcessing: "المعالجة عبر العامل",
-    retrieveResults: "استرجاع النتائج",
-    bankStatements: "الكشوف البنكية",
-    subscriptions: "الاشتراكات",
-    savingsOpportunities: "فرص الادخار",
-    contractAnalysis: "تحليل العقود",
-    riskDetection: "كشف المخاطر",
-    clauseExtraction: "استخراج البنود",
-    kpiDashboards: "لوحات مؤشرات الأداء",
-    forecasting: "التوقعات",
-    executiveReporting: "تقارير تنفيذية",
-    studyDocuments: "مستندات الدراسة",
-    summaries: "الملخصات",
-    quizzesFlashcards: "اختبارات وبطاقات تعليمية",
-    missingApiKey: "مفتاح API مفقود أو غير صالح.",
-    insufficientCredits: "الرصيد غير كافٍ أو الوصول إلى API معطل.",
-    fileTooLarge: "الملف المرفوع يتجاوز الحدود المسموح بها.",
-    rateLimitExceeded: "تم تجاوز حد المعدل.",
-    unexpectedError: "خطأ غير متوقع أثناء معالجة الذكاء الاصطناعي.",
-    custom: "مخصص",
-    neverExpose: "لا تعرض مفاتيح API علنًا",
-    storeServerSide: "خزّن مفاتيح API على الخادم",
-    rotateKeys: "استبدل المفاتيح المخترقة فورًا",
-    useHttps: "استخدم HTTPS فقط",
-    baseUrl: "رابط الأساس",
-    production: "الإنتاج",
-    local: "محلي",
-    jobsApiText: "استرجع نتائج تحليلات الذكاء الاصطناعي غير المتزامنة.",
-    errorResponses: "استجابات الأخطاء",
-    plan: "الخطة",
-    requests: "الطلبات",
-    securityEnterpriseSupport: "الأمان ودعم المؤسسات",
-    enterpriseSupport: "دعم المؤسسات",
-    exploreApiPlatform: "استكشاف منصة API",
-  },
+        "تستخدم واجهات Runexa معالجة غير متزامنة تعتمد على عمّال معالجة موزعين وقوائم انتظار للمهام.",
+
+    uploadFile:
+        "رفع مستند",
+
+    createJob:
+        "إنشاء مهمة",
+
+    workerProcessing:
+        "المعالجة",
+
+    retrieveResults:
+        "استرجاع النتائج",
+
+    bankStatements:
+        "الكشوف البنكية",
+
+    subscriptions:
+        "الاشتراكات",
+
+    savingsOpportunities:
+        "فرص الادخار",
+
+    contractAnalysis:
+        "تحليل العقود",
+
+    riskDetection:
+        "كشف المخاطر",
+
+    clauseExtraction:
+        "استخراج البنود",
+
+    kpiDashboards:
+        "مؤشرات الأداء",
+
+    forecasting:
+        "التوقعات",
+
+    executiveReporting:
+        "التقارير التنفيذية",
+
+    studyDocuments:
+        "مواد التعلّم",
+
+    summaries:
+        "الملخصات",
+
+    quizzesFlashcards:
+        "الاختبارات والبطاقات التعليمية",
+
+    missingApiKey:
+        "مفتاح API مفقود أو غير صالح.",
+
+    insufficientCredits:
+        "الرصيد غير كافٍ أو الوصول إلى API غير متاح.",
+
+    fileTooLarge:
+        "الملف المرفوع يتجاوز الحدود المسموح بها.",
+
+    rateLimitExceeded:
+        "تم تجاوز حد المعدل.",
+
+    unexpectedError:
+        "حدث خطأ غير متوقع أثناء المعالجة.",
+
+    custom:
+        "مخصص",
+
+    neverExpose:
+        "لا تعرض مفاتيح API داخل تطبيقات العميل",
+
+    storeServerSide:
+        "خزّن مفاتيح API بشكل آمن على الخادم",
+
+    rotateKeys:
+        "استبدل المفاتيح المخترقة فوراً",
+
+    useHttps:
+        "استخدم HTTPS لجميع طلبات API",
+
+    baseUrl:
+        "الرابط الأساسي",
+
+    production:
+        "الإنتاج",
+
+    local:
+        "محلي",
+
+    jobsApiText:
+        "استرجع حالة ونتائج مهام الذكاء الاصطناعي غير المتزامنة.",
+
+    errorResponses:
+        "استجابات الأخطاء",
+
+    plan:
+        "الخطة",
+
+    requests:
+        "الطلبات",
+
+    securityEnterpriseSupport:
+        "الأمان ودعم المؤسسات",
+
+    enterpriseSupport:
+        "دعم المؤسسات",
+
+    exploreApiPlatform:
+        "استكشاف منصة API",
+    },
 };
 
 export default function DocsClient() {

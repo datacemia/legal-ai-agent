@@ -223,88 +223,114 @@ const normalizeBackendText = (
   const dictionaries: Record<Locale, Record<string, string>> = {
     en: {},
     fr: {
-      "up": "hausse",
-      "down": "baisse",
-      "stable": "stable",
-      "low": "faible",
-      "medium": "moyen",
-      "high": "élevé",
-      "critical": "critique",
-      "healthy": "sain",
-      "positive": "positif",
-      "negative": "négatif",
-      "normal": "normal",
-      "general": "général",
-      "saas": "SaaS / abonnement",
-      "Healthy profit margin.": "Marge bénéficiaire saine.",
-      "Healthy growth.": "Croissance saine.",
-      "Positive cashflow.": "Cashflow positif.",
-      "Healthy ROAS.": "ROAS sain.",
-      "Healthy CAC efficiency.": "Efficacité CAC saine.",
-      "Critical churn level.": "Niveau de churn critique.",
-      "Payroll": "Masse salariale",
-      "Marketing": "Marketing",
-      "Software": "Logiciels",
-      "Customers": "Clients",
-      "New customers": "Nouveaux clients",
-      "Churned customers": "Clients perdus",
-      "Revenue/customer": "Revenu/client",
-      "Orders": "Commandes",
-      "Ad spend": "Dépenses publicitaires",
-      "Profit Margin": "Marge bénéficiaire",
-      "Growth": "Croissance",
-      "Cashflow": "Cashflow",
-      "Churn": "Churn",
-      "Roas": "ROAS",
-      "Cac Efficiency": "Efficacité CAC",
-      "Data Quality": "Qualité des données",
-      "Revenue": "Revenus",
-      "Expenses": "Dépenses",
-      "Profit": "Profit",
-      "Profit Margin Percent": "Marge bénéficiaire",
-      "Growth Rate Percent": "Taux de croissance"
+    "up": "en hausse",
+    "down": "en baisse",
+    "stable": "stable",
+
+    "low": "faible",
+    "medium": "moyen",
+    "high": "élevé",
+    "critical": "critique",
+
+    "healthy": "sain",
+    "positive": "positif",
+    "negative": "négatif",
+    "normal": "normal",
+
+    "general": "général",
+    "saas": "SaaS / abonnement",
+
+    "Healthy profit margin.": "Marge bénéficiaire saine.",
+    "Healthy growth.": "Croissance saine.",
+    "Positive cashflow.": "Flux de trésorerie positif.",
+    "Healthy ROAS.": "ROAS sain.",
+    "Healthy CAC efficiency.": "Efficacité CAC saine.",
+    "Critical churn level.": "Taux de churn critique.",
+
+    "Payroll": "Masse salariale",
+    "Marketing": "Marketing",
+    "Software": "Logiciels",
+
+    "Customers": "Clients",
+    "New customers": "Nouveaux clients",
+    "Churned customers": "Clients perdus",
+
+    "Revenue/customer": "Revenu par client",
+
+    "Orders": "Commandes",
+    "Ad spend": "Dépenses publicitaires",
+
+    "Profit Margin": "Marge bénéficiaire",
+    "Growth": "Croissance",
+    "Cashflow": "Flux de trésorerie",
+    "Churn": "Churn",
+
+    "Roas": "ROAS",
+    "Cac Efficiency": "Efficacité CAC",
+
+    "Data Quality": "Qualité des données",
+
+    "Revenue": "Chiffre d’affaires",
+    "Expenses": "Dépenses",
+    "Profit": "Bénéfice net",
+
+    "Profit Margin Percent": "Taux de marge bénéficiaire",
+    "Growth Rate Percent": "Taux de croissance"
     },
-    ar: {
-      "up": "صاعد",
-      "down": "هابط",
-      "stable": "مستقر",
-      "low": "منخفض",
-      "medium": "متوسط",
-      "high": "مرتفع",
-      "critical": "حرج",
-      "healthy": "صحي",
-      "positive": "إيجابي",
-      "negative": "سلبي",
-      "normal": "طبيعي",
-      "general": "عام",
-      "saas": "SaaS / اشتراك",
-      "Healthy profit margin.": "هامش ربح صحي.",
-      "Healthy growth.": "نمو صحي.",
-      "Positive cashflow.": "تدفق نقدي إيجابي.",
-      "Healthy ROAS.": "عائد إنفاق إعلاني صحي.",
-      "Healthy CAC efficiency.": "كفاءة صحية لتكلفة اكتساب العميل.",
-      "Critical churn level.": "مستوى فقدان العملاء حرج.",
-      "Payroll": "الرواتب",
-      "Marketing": "التسويق",
-      "Software": "البرمجيات",
-      "Customers": "العملاء",
-      "New customers": "العملاء الجدد",
-      "Churned customers": "العملاء المفقودون",
-      "Revenue/customer": "الإيراد لكل عميل",
-      "Orders": "الطلبات",
-      "Ad spend": "الإنفاق الإعلاني",
-      "Profit Margin": "هامش الربح",
-      "Growth": "النمو",
-      "Cashflow": "التدفق النقدي",
-      "Churn": "فقدان العملاء",
-      "Roas": "عائد الإنفاق الإعلاني",
-      "Cac Efficiency": "كفاءة تكلفة الاكتساب",
-      "Data Quality": "جودة البيانات",
-      "Revenue": "الإيرادات",
-      "Expenses": "المصاريف",
-      "Profit": "الأرباح",
-      "Profit Margin Percent": "هامش الربح",
-      "Growth Rate Percent": "معدل النمو"
+   ar: {
+    "up": "في ارتفاع",
+    "down": "في انخفاض",
+    "stable": "مستقر",
+
+    "low": "منخفض",
+    "medium": "متوسط",
+    "high": "مرتفع",
+    "critical": "حرج",
+
+    "healthy": "سليم",
+    "positive": "إيجابي",
+    "negative": "سلبي",
+    "normal": "طبيعي",
+
+    "general": "عام",
+    "saas": "البرمجيات كخدمة (SaaS)",
+
+    "Healthy profit margin.": "هامش الربح في مستوى صحي.",
+    "Healthy growth.": "النمو في مستوى صحي.",
+    "Positive cashflow.": "التدفق النقدي إيجابي.",
+    "Healthy ROAS.": "عائد الإنفاق الإعلاني في مستوى صحي.",
+    "Healthy CAC efficiency.": "كفاءة تكلفة اكتساب العملاء في مستوى صحي.",
+    "Critical churn level.": "معدل فقدان العملاء في مستوى حرج.",
+
+    "Payroll": "الرواتب",
+    "Marketing": "التسويق",
+    "Software": "البرمجيات",
+
+    "Customers": "العملاء",
+    "New customers": "العملاء الجدد",
+    "Churned customers": "العملاء المفقودون",
+
+    "Revenue/customer": "الإيراد لكل عميل",
+
+    "Orders": "الطلبات",
+    "Ad spend": "الإنفاق الإعلاني",
+
+    "Profit Margin": "هامش الربح",
+    "Growth": "النمو",
+    "Cashflow": "التدفق النقدي",
+    "Churn": "معدل فقدان العملاء",
+
+    "Roas": "عائد الإنفاق الإعلاني",
+    "Cac Efficiency": "كفاءة تكلفة اكتساب العملاء",
+
+    "Data Quality": "جودة البيانات",
+
+    "Revenue": "الإيرادات",
+    "Expenses": "المصروفات",
+    "Profit": "صافي الربح",
+
+    "Profit Margin Percent": "نسبة هامش الربح",
+    "Growth Rate Percent": "معدل النمو"
     },
   };
 
@@ -537,52 +563,94 @@ const badgeClass = (value: string) => {
 
 const chartLabels: Record<Locale, Record<string, string>> = {
   en: {
-    visualIntelligence: "Visual intelligence",
-    businessCharts: "Business Charts",
+    visualIntelligence: "Visual Intelligence",
+
+    businessCharts: "Business Analytics",
+
     chartsSubtitle:
-      "Backend-calculated trends for revenue, expenses, profit, cashflow, and categories.",
+      "Visual trends and insights across revenue, expenses, net profit, cashflow, and spending categories.",
+
     chartsCount: "charts",
-    latest: "Latest",
-    businessTrend: "Business trend",
-    categoryDistribution: "Category distribution",
+
+    latest: "Latest Period",
+
+    businessTrend: "Business Performance Trend",
+
+    categoryDistribution: "Category Distribution",
+
     noChartData: "No chart data available.",
+
     revenueTrend: "Revenue Trend",
+
     expenseTrend: "Expense Trend",
-    profitEvolution: "Profit Evolution",
+
+    profitEvolution: "Net Profit Trend",
+
     cashflowTrend: "Cashflow Trend",
+
     expensesByCategory: "Expenses by Category",
   },
+
   fr: {
     visualIntelligence: "Intelligence visuelle",
-    businessCharts: "Graphiques business",
+
+    businessCharts: "Visualisations business",
+
     chartsSubtitle:
-      "Tendances calculées par le backend pour les revenus, dépenses, profit, cashflow et catégories.",
+      "Tendances et analyses visuelles du chiffre d’affaires, des dépenses, du bénéfice net, des flux de trésorerie et des catégories de dépenses.",
+
     chartsCount: "graphiques",
-    latest: "Dernier",
-    businessTrend: "Tendance business",
+
+    latest: "Dernière période",
+
+    businessTrend: "Évolution de l’activité",
+
     categoryDistribution: "Répartition par catégorie",
-    noChartData: "Aucune donnée graphique disponible.",
-    revenueTrend: "Évolution des revenus",
+
+    noChartData:
+      "Aucune donnée disponible pour l’affichage des graphiques.",
+
+    revenueTrend: "Évolution du chiffre d’affaires",
+
     expenseTrend: "Évolution des dépenses",
-    profitEvolution: "Évolution du profit",
-    cashflowTrend: "Évolution du cashflow",
-    expensesByCategory: "Dépenses par catégorie",
+
+    profitEvolution: "Évolution du bénéfice net",
+
+    cashflowTrend: "Évolution du flux de trésorerie",
+
+    expensesByCategory:
+      "Répartition des dépenses par catégorie",
   },
+
   ar: {
     visualIntelligence: "الذكاء البصري",
-    businessCharts: "مخططات الأعمال",
+
+    businessCharts: "الرسوم البيانية للأعمال",
+
     chartsSubtitle:
-      "اتجاهات محسوبة من النظام الخلفي للإيرادات والمصاريف والربح والتدفق النقدي والفئات.",
-    chartsCount: "مخططات",
-    latest: "الأحدث",
-    businessTrend: "اتجاه النشاط",
+      "اتجاهات وتحليلات مرئية للإيرادات والمصروفات وصافي الربح والتدفق النقدي وفئات الإنفاق.",
+
+    chartsCount: "رسوم بيانية",
+
+    latest: "أحدث فترة",
+
+    businessTrend: "اتجاه أداء الأعمال",
+
     categoryDistribution: "توزيع الفئات",
-    noChartData: "لا توجد بيانات رسومية متاحة.",
-    revenueTrend: "تطور الإيرادات",
-    expenseTrend: "تطور المصاريف",
-    profitEvolution: "تطور الأرباح",
-    cashflowTrend: "تطور التدفق النقدي",
-    expensesByCategory: "المصاريف حسب الفئة",
+
+    noChartData:
+      "لا توجد بيانات متاحة لعرض الرسوم البيانية.",
+
+    revenueTrend: "اتجاه الإيرادات",
+
+    expenseTrend: "اتجاه المصروفات",
+
+    profitEvolution: "تطور صافي الربح",
+
+    cashflowTrend: "اتجاه التدفق النقدي",
+
+    expensesByCategory:
+      "توزيع المصروفات حسب الفئة",
   },
 };
 

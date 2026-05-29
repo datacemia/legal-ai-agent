@@ -7,43 +7,80 @@ import { getSavedLocale } from "../../../lib/i18n";
 const translations = {
   en: {
     back: "← Back to Blog",
-    category: "Business AI",
-    title: "AI Business Intelligence: Turning Data Into Better Decisions",
+
+    category: "Business Intelligence",
+
+    title:
+      "AI Business Intelligence: Turning Data into Better Decisions",
+
     intro:
-      "Business intelligence is no longer only about dashboards and static reports. Modern AI systems can help teams understand business data, detect risks, identify opportunities, and generate decision-ready insights faster.",
-    whatIs: "What is AI business intelligence?",
+      "Business intelligence is no longer limited to dashboards and static reports. Modern AI systems can help organizations understand performance, identify risks, uncover opportunities, and generate actionable insights faster.",
+
+    whatIs:
+      "What is AI business intelligence?",
+
     whatIsText:
-      "AI business intelligence combines structured business data with artificial intelligence to help organizations understand performance, risks, trends, and opportunities.",
-    why: "Why traditional dashboards are not enough",
+      "AI business intelligence combines structured business data with artificial intelligence to help organizations understand performance, trends, risks, and growth opportunities.",
+
+    why:
+      "Why dashboards alone are not enough",
+
     whyText:
-      "Dashboards are useful, but they often require users to interpret the data themselves. AI adds an interpretation layer that turns raw metrics into practical business context.",
-    riskDetection: "Risk detection",
+      "Dashboards provide visibility, but they often require users to interpret the data themselves. AI adds context and reasoning that transform metrics into actionable business insights.",
+
+    riskDetection:
+      "Risk detection",
+
     riskDetectionText:
-      "AI can highlight weak signals such as declining revenue, rising costs, customer concentration, or operational bottlenecks.",
-    opportunityDiscovery: "Opportunity discovery",
+      "AI can identify early warning signals such as declining revenue, increasing costs, customer concentration, operational bottlenecks, and performance anomalies.",
+
+    opportunityDiscovery:
+      "Opportunity discovery",
+
     opportunityDiscoveryText:
-      "AI can identify growth signals, high-performing segments, underused channels, or areas where resources could be reallocated.",
-    executiveSummaries: "Executive summaries",
+      "AI can uncover growth opportunities, high-performing segments, underutilized channels, and areas where resources can be allocated more effectively.",
+
+    executiveSummaries:
+      "Executive summaries",
+
     executiveSummariesText:
-      "AI can translate complex data into concise summaries for founders, managers, and teams.",
-    decisionSupport: "Decision support",
+      "AI can convert complex business data into concise summaries for executives, managers, and decision-makers.",
+
+    decisionSupport:
+      "Decision support",
+
     decisionSupportText:
-      "AI can suggest next actions based on business performance, risks, and strategic goals.",
-    useCases: "Common use cases for AI business intelligence",
+      "AI can recommend next steps based on performance metrics, operational risks, and strategic objectives.",
+
+    useCases:
+      "Common use cases for AI business intelligence",
+
     useCasesText:
-      "AI business intelligence can support many workflows, from startup planning to enterprise reporting.",
-    runexa: "How Runexa Business Agent helps",
+      "AI business intelligence supports a wide range of workflows, from startup planning and financial forecasting to operational reporting and executive decision-making.",
+
+    runexa:
+      "How Runexa Business Agent helps",
+
     runexaText:
-      "Runexa Business Agent helps users upload structured business data, analyze performance, detect risks, identify opportunities, and generate AI-powered recommendations.",
-    support: "AI should support decisions, not automate judgment",
+      "Runexa Business Agent enables organizations to upload structured business data, analyze performance, identify risks, uncover opportunities, and generate AI-powered recommendations.",
+
+    support:
+      "AI should support decisions, not replace judgment",
+
     supportText:
-      "The strongest business AI systems help teams reason more clearly. AI-generated insights should be reviewed and validated with human expertise.",
-    ctaTitle: "Turn business data into actionable insight",
+      "The most effective business AI systems help teams make better decisions through clearer reasoning and faster analysis. AI-generated insights should always be reviewed alongside human expertise.",
+
+    ctaTitle:
+      "Turn business data into actionable insights",
+
     ctaText:
-      "Use Runexa Business Agent to analyze risks, opportunities, KPIs, and strategic decisions with AI.",
-    ctaButton: "Analyze Business Data",
+      "Use Runexa Business Agent to analyze performance, risks, opportunities, KPIs, and strategic decisions with AI.",
+
+    ctaButton:
+      "Analyze Business Data",
+
     features: [
-      "Business health analysis",
+      "Business performance analysis",
       "Risk and opportunity detection",
       "KPI interpretation",
       "Executive AI summaries",
@@ -54,32 +91,80 @@ const translations = {
 
   fr: {
     back: "← Retour au blog",
-    category: "IA business",
-    title: "Business Intelligence IA : transformer les données en meilleures décisions",
-    intro: "La business intelligence ne se limite plus aux dashboards et rapports statiques. Les systèmes IA modernes aident les équipes à comprendre les données business, détecter les risques, identifier les opportunités et générer des insights actionnables plus rapidement.",
-    whatIs: "Qu’est-ce que la business intelligence IA ?",
-    whatIsText: "La business intelligence IA combine les données business structurées avec l’intelligence artificielle pour aider les organisations à comprendre performance, risques, tendances et opportunités.",
-    why: "Pourquoi les dashboards traditionnels ne suffisent pas",
-    whyText: "Les dashboards sont utiles, mais ils exigent souvent que les utilisateurs interprètent eux-mêmes les données. L’IA ajoute une couche d’interprétation qui transforme les métriques en contexte business pratique.",
-    riskDetection: "Détection des risques",
-    riskDetectionText: "L’IA peut détecter les signaux faibles comme la baisse du chiffre d’affaires, la hausse des coûts ou les blocages opérationnels.",
-    opportunityDiscovery: "Découverte d’opportunités",
-    opportunityDiscoveryText: "L’IA peut identifier les signaux de croissance, segments performants et canaux sous-utilisés.",
-    executiveSummaries: "Résumés exécutifs",
-    executiveSummariesText: "L’IA peut transformer des données complexes en résumés clairs pour fondateurs, managers et équipes.",
-    decisionSupport: "Aide à la décision",
-    decisionSupportText: "L’IA peut suggérer des prochaines actions selon la performance, les risques et les objectifs stratégiques.",
-    useCases: "Cas d’usage courants de l’IA business intelligence",
-    useCasesText: "L’IA business intelligence peut aider à l’analyse commerciale, segmentation client, reporting financier, analyse opérationnelle et planification stratégique.",
-    runexa: "Comment Runexa Business Agent aide",
-    runexaText: "Runexa Business Agent aide les utilisateurs à téléverser des données business structurées, analyser la performance, détecter les risques et générer des recommandations IA.",
-    support: "L’IA doit soutenir les décisions, pas automatiser le jugement",
-    supportText: "Les meilleurs systèmes IA business aident les équipes à raisonner plus clairement. Les insights IA doivent être validés avec l’expertise humaine et des données fiables.",
-    ctaTitle: "Transformez vos données business en insights actionnables",
-    ctaText: "Utilisez Runexa Business Agent pour analyser risques, opportunités, KPI et décisions stratégiques avec l’IA.",
-    ctaButton: "Analyser des données business",
+
+    category: "Business Intelligence",
+
+    title:
+      "Business Intelligence IA : transformer les données en meilleures décisions",
+
+    intro:
+      "La business intelligence ne se limite plus aux tableaux de bord et aux rapports statiques. Les systèmes d’IA modernes aident les organisations à comprendre leur performance, identifier les risques, détecter les opportunités et générer des insights actionnables plus rapidement.",
+
+    whatIs:
+      "Qu’est-ce que la business intelligence IA ?",
+
+    whatIsText:
+      "La business intelligence IA combine des données business structurées avec l’intelligence artificielle afin d’aider les organisations à comprendre leurs performances, leurs tendances, leurs risques et leurs opportunités de croissance.",
+
+    why:
+      "Pourquoi les tableaux de bord seuls ne suffisent pas",
+
+    whyText:
+      "Les tableaux de bord offrent de la visibilité, mais ils nécessitent souvent une interprétation humaine. L’IA ajoute une couche de contexte et de raisonnement qui transforme les métriques en insights business exploitables.",
+
+    riskDetection:
+      "Détection des risques",
+
+    riskDetectionText:
+      "L’IA peut identifier des signaux d’alerte précoces tels qu’une baisse du chiffre d’affaires, une hausse des coûts, une concentration excessive des clients, des goulets d’étranglement opérationnels ou des anomalies de performance.",
+
+    opportunityDiscovery:
+      "Découverte d’opportunités",
+
+    opportunityDiscoveryText:
+      "L’IA peut révéler des opportunités de croissance, des segments performants, des canaux sous-exploités et des domaines où les ressources peuvent être allouées plus efficacement.",
+
+    executiveSummaries:
+      "Résumés exécutifs",
+
+    executiveSummariesText:
+      "L’IA peut transformer des données complexes en synthèses claires destinées aux dirigeants, managers et décideurs.",
+
+    decisionSupport:
+      "Aide à la décision",
+
+    decisionSupportText:
+      "L’IA peut recommander des actions à entreprendre en fonction des performances, des risques opérationnels et des objectifs stratégiques.",
+
+    useCases:
+      "Cas d’usage courants de la business intelligence IA",
+
+    useCasesText:
+      "La business intelligence IA prend en charge de nombreux workflows, de la planification de startups et des prévisions financières jusqu’au reporting opérationnel et à la prise de décision stratégique.",
+
+    runexa:
+      "Comment Runexa Business Agent aide",
+
+    runexaText:
+      "Runexa Business Agent permet aux organisations de téléverser des données business structurées, d’analyser les performances, d’identifier les risques, de détecter les opportunités et de générer des recommandations alimentées par l’IA.",
+
+    support:
+      "L’IA doit soutenir les décisions, pas remplacer le jugement",
+
+    supportText:
+      "Les systèmes d’IA les plus performants aident les équipes à prendre de meilleures décisions grâce à une analyse plus rapide et un raisonnement plus clair. Les insights générés par l’IA doivent toujours être examinés avec l’expertise humaine.",
+
+    ctaTitle:
+      "Transformez vos données business en insights actionnables",
+
+    ctaText:
+      "Utilisez Runexa Business Agent pour analyser les performances, les risques, les opportunités, les KPI et les décisions stratégiques grâce à l’IA.",
+
+    ctaButton:
+      "Analyser des données business",
+
     features: [
-      "Analyse de santé business",
+      "Analyse des performances business",
       "Détection des risques et opportunités",
       "Interprétation des KPI",
       "Résumés exécutifs IA",
@@ -90,32 +175,80 @@ const translations = {
 
   ar: {
     back: "← العودة إلى المدونة",
+
     category: "ذكاء الأعمال",
-    title: "ذكاء الأعمال بالذكاء الاصطناعي: تحويل البيانات إلى قرارات أفضل",
-    intro: "لم تعد ذكاء الأعمال تقتصر على لوحات التحكم والتقارير الثابتة. تساعد أنظمة الذكاء الاصطناعي الحديثة الفرق على فهم بيانات الأعمال واكتشاف المخاطر وتحديد الفرص بشكل أسرع.",
-    whatIs: "ما هو ذكاء الأعمال بالذكاء الاصطناعي؟",
-    whatIsText: "يجمع ذكاء الأعمال بالذكاء الاصطناعي بين البيانات المنظمة وتقنيات الذكاء الاصطناعي لمساعدة المؤسسات على فهم الأداء والمخاطر والاتجاهات والفرص.",
-    why: "لماذا لا تكفي لوحات التحكم التقليدية",
-    whyText: "لوحات التحكم مفيدة، لكنها غالبًا تتطلب من المستخدم تفسير البيانات بنفسه. يضيف الذكاء الاصطناعي طبقة تفسير تحول الأرقام إلى سياق عملي.",
-    riskDetection: "اكتشاف المخاطر",
-    riskDetectionText: "يمكن للذكاء الاصطناعي اكتشاف إشارات ضعيفة مثل انخفاض الإيرادات أو ارتفاع التكاليف أو الاختناقات التشغيلية.",
-    opportunityDiscovery: "اكتشاف الفرص",
-    opportunityDiscoveryText: "يمكن للذكاء الاصطناعي تحديد إشارات النمو والشرائح عالية الأداء والقنوات غير المستغلة.",
-    executiveSummaries: "ملخصات تنفيذية",
-    executiveSummariesText: "يمكن للذكاء الاصطناعي تحويل البيانات المعقدة إلى ملخصات واضحة للمديرين والفرق.",
-    decisionSupport: "دعم القرار",
-    decisionSupportText: "يمكن للذكاء الاصطناعي اقتراح خطوات تالية بناءً على الأداء والمخاطر والأهداف الاستراتيجية.",
-    useCases: "حالات استخدام شائعة لذكاء الأعمال",
-    useCasesText: "يمكن لذكاء الأعمال بالذكاء الاصطناعي دعم تحليل المبيعات وتقسيم العملاء والتقارير المالية والتحليل التشغيلي والتخطيط الاستراتيجي.",
-    runexa: "كيف يساعد Runexa Business Agent",
-    runexaText: "يساعد Runexa Business Agent المستخدمين على رفع بيانات أعمال منظمة وتحليل الأداء واكتشاف المخاطر والفرص وإنشاء توصيات مدعومة بالذكاء الاصطناعي.",
-    support: "يجب أن يدعم الذكاء الاصطناعي القرارات لا أن يستبدل الحكم البشري",
-    supportText: "أفضل أنظمة ذكاء الأعمال تساعد الفرق على التفكير بوضوح أكبر. يجب مراجعة الرؤى الناتجة عن الذكاء الاصطناعي مع الخبرة البشرية والبيانات الموثوقة.",
-    ctaTitle: "حوّل بيانات الأعمال إلى رؤى قابلة للتنفيذ",
-    ctaText: "استخدم Runexa Business Agent لتحليل المخاطر والفرص ومؤشرات الأداء والقرارات الاستراتيجية بالذكاء الاصطناعي.",
-    ctaButton: "تحليل بيانات الأعمال",
+
+    title:
+      "ذكاء الأعمال المدعوم بالذكاء الاصطناعي: تحويل البيانات إلى قرارات أفضل",
+
+    intro:
+      "لم يعد ذكاء الأعمال يقتصر على لوحات المعلومات والتقارير الثابتة. تساعد أنظمة الذكاء الاصطناعي الحديثة المؤسسات على فهم الأداء وتحديد المخاطر واكتشاف الفرص وتوليد رؤى قابلة للتنفيذ بسرعة أكبر.",
+
+    whatIs:
+      "ما هو ذكاء الأعمال المدعوم بالذكاء الاصطناعي؟",
+
+    whatIsText:
+      "يجمع ذكاء الأعمال المدعوم بالذكاء الاصطناعي بين البيانات المنظمة وتقنيات الذكاء الاصطناعي لمساعدة المؤسسات على فهم الأداء والاتجاهات والمخاطر وفرص النمو.",
+
+    why:
+      "لماذا لا تكفي لوحات المعلومات وحدها",
+
+    whyText:
+      "توفر لوحات المعلومات رؤية واضحة للبيانات، لكنها غالباً ما تتطلب تفسيراً بشرياً. يضيف الذكاء الاصطناعي طبقة من السياق والاستدلال تحول المقاييس إلى رؤى أعمال قابلة للتنفيذ.",
+
+    riskDetection:
+      "اكتشاف المخاطر",
+
+    riskDetectionText:
+      "يمكن للذكاء الاصطناعي تحديد إشارات إنذار مبكرة مثل انخفاض الإيرادات وارتفاع التكاليف والتركيز المفرط للعملاء والاختناقات التشغيلية والانحرافات في الأداء.",
+
+    opportunityDiscovery:
+      "اكتشاف الفرص",
+
+    opportunityDiscoveryText:
+      "يمكن للذكاء الاصطناعي الكشف عن فرص النمو والقطاعات عالية الأداء والقنوات غير المستغلة والمجالات التي يمكن فيها تخصيص الموارد بشكل أكثر كفاءة.",
+
+    executiveSummaries:
+      "الملخصات التنفيذية",
+
+    executiveSummariesText:
+      "يمكن للذكاء الاصطناعي تحويل البيانات المعقدة إلى ملخصات واضحة وموجزة للمديرين التنفيذيين وصناع القرار.",
+
+    decisionSupport:
+      "دعم اتخاذ القرار",
+
+    decisionSupportText:
+      "يمكن للذكاء الاصطناعي اقتراح الخطوات التالية استناداً إلى مؤشرات الأداء والمخاطر التشغيلية والأهداف الاستراتيجية.",
+
+    useCases:
+      "حالات الاستخدام الشائعة لذكاء الأعمال",
+
+    useCasesText:
+      "يدعم ذكاء الأعمال المدعوم بالذكاء الاصطناعي مجموعة واسعة من الاستخدامات، من تخطيط الشركات الناشئة والتوقعات المالية إلى التقارير التشغيلية واتخاذ القرارات الاستراتيجية.",
+
+    runexa:
+      "كيف يساعد Runexa Business Agent",
+
+    runexaText:
+      "يمكّن Runexa Business Agent المؤسسات من رفع بيانات أعمال منظمة وتحليل الأداء وتحديد المخاطر واكتشاف الفرص وإنشاء توصيات مدعومة بالذكاء الاصطناعي.",
+
+    support:
+      "يجب أن يدعم الذكاء الاصطناعي القرارات لا أن يحل محل الحكم البشري",
+
+    supportText:
+      "تساعد أفضل أنظمة الذكاء الاصطناعي الفرق على اتخاذ قرارات أفضل من خلال تحليل أسرع واستدلال أوضح. ويجب دائماً مراجعة الرؤى الناتجة عن الذكاء الاصطناعي إلى جانب الخبرة البشرية.",
+
+    ctaTitle:
+      "حوّل بيانات الأعمال إلى رؤى قابلة للتنفيذ",
+
+    ctaText:
+      "استخدم Runexa Business Agent لتحليل الأداء والمخاطر والفرص ومؤشرات الأداء والقرارات الاستراتيجية باستخدام الذكاء الاصطناعي.",
+
+    ctaButton:
+      "تحليل بيانات الأعمال",
+
     features: [
-      "تحليل صحة الأعمال",
+      "تحليل أداء الأعمال",
       "اكتشاف المخاطر والفرص",
       "تفسير مؤشرات الأداء",
       "ملخصات تنفيذية بالذكاء الاصطناعي",

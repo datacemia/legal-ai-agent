@@ -7,51 +7,85 @@ const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "https://api.runexa.ai";
 
 const translations = {
-  en: {
+ en: {
     title: "Contact Sales",
-    subtitle: "Get a tailored solution for your business",
-    fullName: "Full name",
-    workEmail: "Work email",
-    companyName: "Company name",
-    companySize: "Company size",
-    useCase: "How will you use Runexa?",
-    contactSales: "Contact sales",
-    businessEmailError: "Please use a company email address.",
-    submitError: "Failed to send request. Please try again.",
-    submitted: "Submitted",
-  },
+
+    subtitle:
+        "Tell us about your needs and discover how Runexa can support your organization.",
+
+    fullName: "Full Name",
+
+    workEmail: "Work Email",
+
+    companyName: "Company Name",
+
+    companySize: "Company Size",
+
+    useCase: "How do you plan to use Runexa?",
+
+    contactSales: "Contact Sales",
+
+    businessEmailError:
+        "Please use a business email address.",
+
+    submitError:
+        "Unable to submit your request. Please try again.",
+
+    submitted: "Request Submitted",
+    },
 
   fr: {
-    title: "Contacter l’équipe commerciale",
-    subtitle: "Obtenez une solution adaptée à votre entreprise",
-    fullName: "Nom complet",
-    workEmail: "Email professionnel",
-    companyName: "Nom de l’entreprise",
-    companySize: "Taille de l’entreprise",
-    useCase: "Comment allez-vous utiliser Runexa ?",
-    contactSales: "Contacter l’équipe commerciale",
-    businessEmailError:
-      "Veuillez utiliser une adresse email professionnelle.",
-    submitError:
-      "Échec de l’envoi de la demande. Veuillez réessayer.",
-    submitted: "Demande envoyée",
-  },
+    title: "Contacter notre équipe commerciale",
 
+    subtitle:
+        "Parlons de vos besoins et découvrez comment Runexa peut accompagner votre organisation.",
+
+    fullName: "Nom complet",
+
+    workEmail: "Adresse e-mail professionnelle",
+
+    companyName: "Nom de l’entreprise",
+
+    companySize: "Taille de l’entreprise",
+
+    useCase: "Comment souhaitez-vous utiliser Runexa ?",
+
+    contactSales: "Contacter l’équipe commerciale",
+
+    businessEmailError:
+        "Veuillez utiliser une adresse e-mail professionnelle.",
+
+    submitError:
+        "Impossible d’envoyer votre demande. Veuillez réessayer.",
+
+    submitted: "Demande envoyée",
+    },
   ar: {
     title: "التواصل مع فريق المبيعات",
-    subtitle: "احصل على حل مخصص لعملك",
+
+    subtitle:
+        "تحدث معنا حول احتياجاتك واكتشف كيف يمكن لـ Runexa دعم مؤسستك.",
+
     fullName: "الاسم الكامل",
+
     workEmail: "البريد الإلكتروني المهني",
+
     companyName: "اسم الشركة",
+
     companySize: "حجم الشركة",
-    useCase: "كيف ستستخدم Runexa؟",
-    contactSales: "التواصل مع المبيعات",
+
+    useCase: "كيف تخطط لاستخدام Runexa؟",
+
+    contactSales: "التواصل مع فريق المبيعات",
+
     businessEmailError:
-      "يرجى استخدام بريد إلكتروني خاص بالشركة.",
+        "يرجى استخدام بريد إلكتروني مهني تابع للشركة.",
+
     submitError:
-      "فشل إرسال الطلب. يرجى المحاولة مرة أخرى.",
-    submitted: "تم الإرسال",
-  },
+        "تعذر إرسال الطلب. يرجى المحاولة مرة أخرى.",
+
+    submitted: "تم إرسال الطلب",
+    },
 };
 
 export default function ContactClient() {

@@ -8,182 +8,226 @@ import { getSavedLocale } from "../../../lib/i18n";
 const translations = {
   en: {
     back: "← Back to Blog",
-    category: "Legal AI",
+
+    category: "Legal Intelligence",
+
     title:
       "AI Contract Analysis: How AI Helps Review Legal Documents",
+
     intro:
-      "Contract review is one of the most important workflows in legal, business, and professional decision-making. AI contract analysis can help users review legal documents faster, identify risky clauses, and understand obligations before signing.",
+      "Contract review is a critical part of legal, commercial, and professional decision-making. AI-powered contract analysis helps organizations review documents faster, identify potential risks, understand obligations, and improve decision-making before signing.",
 
-    whatIs: "What is AI contract analysis?",
+    whatIs:
+      "What is AI contract analysis?",
+
     whatIsText:
-      "AI contract analysis uses artificial intelligence to read legal documents, extract key information, summarize obligations, highlight sensitive clauses, and generate practical recommendations. It is designed to support legal review workflows, not replace qualified legal professionals.",
+      "AI contract analysis uses artificial intelligence to review legal documents, extract key information, summarize obligations, identify sensitive clauses, and generate structured insights. It is designed to support legal workflows, not replace qualified legal professionals.",
 
-    why: "Why contract review is difficult",
+    why:
+      "Why contract review is challenging",
 
     whyText:
-      "Contracts often contain dense language, legal terminology, cross-references, deadlines, liability terms, termination clauses, confidentiality obligations, payment rules, and dispute resolution provisions. Missing a single clause can create legal, financial, or operational risk.",
+      "Contracts often contain complex legal language, cross-references, deadlines, liability provisions, termination rights, confidentiality obligations, payment terms, and dispute resolution clauses. Overlooking a single provision can create legal, financial, or operational risk.",
 
     common:
-      "Common contract types AI can help review",
+      "Common contract types AI can review",
 
     commonText:
-      "AI contract analysis can support many professional workflows, including service agreements, NDAs, vendor contracts, employment agreements, consulting agreements, partnership documents, lease terms, and procurement documents.",
+      "AI contract analysis can support a wide range of legal workflows, including service agreements, NDAs, vendor contracts, employment agreements, consulting agreements, partnership agreements, lease agreements, and procurement contracts.",
 
-    runexa: "How Runexa Legal Agent helps",
+    runexa:
+      "How Runexa Legal Agent helps",
 
     runexaText:
-      "Runexa Legal Agent helps users upload legal documents, detect risky clauses, understand obligations, review recommendations, and generate structured legal intelligence reports. It is built for informational and decision-support use.",
+      "Runexa Legal Agent enables users to upload legal documents, identify potential risks, understand obligations, review recommendations, and generate structured legal intelligence reports for decision support.",
 
     support:
-      "AI should support legal review, not replace lawyers",
+      "AI should support legal review, not replace legal judgment",
 
     supportText:
-      "AI can make contract review faster and easier to understand, but important legal decisions should always be reviewed with qualified professionals. The best use of AI contract analysis is to improve preparation, clarity, and awareness before final decisions.",
+      "AI can make contract review faster and easier to understand, but important legal decisions should always be reviewed by qualified legal professionals. The strongest use of AI is to improve preparation, visibility, and awareness before final decisions are made.",
 
     ctaTitle:
       "Review contracts with AI before signing",
 
     ctaText:
-      "Use Runexa Legal Agent to analyze risky clauses, obligations, and recommendations in legal documents.",
+      "Use Runexa Legal Agent to analyze risks, obligations, key clauses, and recommendations across legal documents.",
 
-    ctaButton: "Upload Contract",
+    ctaButton:
+      "Upload Contract",
 
-    riskDetection: "Risky clause detection",
+    riskDetection:
+      "Risk detection",
+
     riskDetectionText:
-      "AI can help flag clauses related to liability, termination, payment, and confidentiality.",
-    obligationSummaries: "Obligation summaries",
+      "AI can identify clauses related to liability, termination rights, payment obligations, indemnification, and confidentiality requirements.",
+
+    obligationSummaries:
+      "Obligation summaries",
+
     obligationSummariesText:
-      "AI can summarize deadlines, duties, renewal terms, payment obligations, and notice requirements in plain language.",
+      "AI can summarize deadlines, responsibilities, renewal provisions, payment commitments, and notice requirements in clear language.",
 
-    negotiationSupport: "Negotiation support",
+    negotiationSupport:
+      "Negotiation support",
+
     negotiationSupportText:
-      "AI can suggest areas to review before signing, such as unclear obligations or one-sided termination rights.",
+      "AI can highlight areas that may require further review, including unclear obligations, unusual provisions, or one-sided contractual terms.",
 
-    executiveSummaries: "Executive summaries",
+    executiveSummaries:
+      "Executive summaries",
+
     executiveSummariesText:
-      "AI can turn long contracts into structured summaries for founders, teams, consultants, and professionals.",
-
+      "AI can transform lengthy contracts into structured summaries for executives, founders, legal teams, consultants, and decision-makers.",
   },
-
   fr: {
     back: "← Retour au blog",
-    category: "IA juridique",
+
+    category: "Intelligence juridique",
+
     title:
-      "Analyse de contrats IA : comment l’IA aide à examiner les documents juridiques",
+      "Analyse de contrats par IA : comment l’IA aide à examiner les documents juridiques",
+
     intro:
-      "La revue de contrats est l’un des workflows les plus importants dans le juridique et le business. L’analyse de contrats IA aide à examiner les documents plus rapidement, détecter les clauses à risque et comprendre les obligations avant signature.",
+      "L’examen des contrats est une étape essentielle de la prise de décision juridique, commerciale et professionnelle. L’analyse de contrats par IA aide les organisations à examiner les documents plus rapidement, à identifier les risques potentiels, à comprendre les obligations et à prendre des décisions plus éclairées avant la signature.",
 
-    whatIs: "Qu’est-ce que l’analyse de contrats IA ?",
+    whatIs:
+      "Qu’est-ce que l’analyse de contrats par IA ?",
+
     whatIsText:
-      "L’analyse de contrats IA utilise l’intelligence artificielle pour lire des documents juridiques, extraire les informations clés, résumer les obligations et mettre en évidence les clauses sensibles.",
+      "L’analyse de contrats par IA utilise l’intelligence artificielle pour examiner les documents juridiques, extraire les informations clés, résumer les obligations, identifier les clauses sensibles et générer des insights structurés. Elle est conçue pour assister les workflows juridiques, et non pour remplacer les professionnels du droit.",
 
-    why: "Pourquoi la revue de contrats est difficile",
+    why:
+      "Pourquoi l’examen des contrats est complexe",
 
     whyText:
-      "Les contrats contiennent souvent un langage dense, des termes juridiques, des délais, clauses de responsabilité, confidentialité et règles de paiement.",
+      "Les contrats contiennent souvent un langage juridique complexe, des renvois internes, des échéances, des clauses de responsabilité, des droits de résiliation, des obligations de confidentialité, des conditions de paiement et des mécanismes de résolution des litiges. Négliger une seule disposition peut entraîner des risques juridiques, financiers ou opérationnels.",
 
     common:
-      "Types de contrats que l’IA peut aider à analyser",
+      "Types de contrats que l’IA peut analyser",
 
     commonText:
-      "L’IA peut aider à examiner les accords de services, NDA, contrats fournisseurs, contrats de travail et documents de partenariat.",
+      "L’analyse de contrats par IA peut prendre en charge de nombreux workflows juridiques, notamment les contrats de services, accords de confidentialité (NDA), contrats fournisseurs, contrats de travail, contrats de conseil, accords de partenariat, baux et contrats d’approvisionnement.",
 
     runexa:
       "Comment Runexa Legal Agent aide",
 
     runexaText:
-      "Runexa Legal Agent aide les utilisateurs à téléverser des documents juridiques, détecter les clauses à risque et générer des rapports structurés.",
+      "Runexa Legal Agent permet aux utilisateurs de téléverser des documents juridiques, d’identifier les risques potentiels, de comprendre leurs obligations, d’examiner des recommandations et de générer des rapports d’intelligence juridique structurés destinés à l’aide à la décision.",
 
     support:
-      "L’IA doit assister les juristes, pas les remplacer",
+      "L’IA doit soutenir l’analyse juridique, pas remplacer le jugement juridique",
 
     supportText:
-      "L’IA améliore la rapidité et la compréhension, mais les décisions juridiques importantes doivent être validées par des professionnels qualifiés.",
+      "L’IA peut rendre l’examen des contrats plus rapide et plus accessible, mais les décisions juridiques importantes doivent toujours être examinées par des professionnels qualifiés. Son utilisation la plus efficace consiste à améliorer la préparation, la visibilité et la compréhension avant toute décision finale.",
 
     ctaTitle:
-      "Analysez vos contrats avec l’IA avant signature",
+      "Analysez vos contrats avec l’IA avant de signer",
 
     ctaText:
-      "Utilisez Runexa Legal Agent pour analyser les clauses à risque et obligations des documents juridiques.",
+      "Utilisez Runexa Legal Agent pour analyser les risques, les obligations, les clauses clés et les recommandations dans vos documents juridiques.",
 
-    ctaButton: "Téléverser un contrat",
+    ctaButton:
+      "Téléverser un contrat",
 
-    riskDetection: "Détection des clauses à risque",
+    riskDetection:
+      "Détection des risques",
+
     riskDetectionText:
-      "L’IA peut détecter les clauses liées à la responsabilité, résiliation, paiements et confidentialité.",
-    obligationSummaries: "Résumés des obligations",
+      "L’IA peut identifier les clauses liées à la responsabilité, aux droits de résiliation, aux obligations de paiement, aux indemnisations et aux exigences de confidentialité.",
+
+    obligationSummaries:
+      "Synthèse des obligations",
+
     obligationSummariesText:
-      "L’IA peut résumer les délais, obligations, renouvellements et conditions de paiement en langage clair.",
+      "L’IA peut résumer les échéances, responsabilités, conditions de renouvellement, engagements financiers et obligations de notification dans un langage clair.",
 
-    negotiationSupport: "Support de négociation",
+    negotiationSupport:
+      "Aide à la négociation",
+
     negotiationSupportText:
-      "L’IA peut suggérer les éléments à examiner avant signature, comme les obligations ambiguës ou déséquilibrées.",
+      "L’IA peut mettre en évidence les points nécessitant une attention particulière, notamment les obligations ambiguës, les clauses inhabituelles ou les dispositions contractuelles déséquilibrées.",
 
-    executiveSummaries: "Résumés exécutifs",
+    executiveSummaries:
+      "Résumés exécutifs",
+
     executiveSummariesText:
-      "L’IA peut transformer de longs contrats en résumés structurés pour équipes et dirigeants.",
-
+      "L’IA peut transformer des contrats volumineux en synthèses structurées destinées aux dirigeants, équipes juridiques, consultants et décideurs.",
   },
 
   ar: {
     back: "← العودة إلى المدونة",
+
     category: "الذكاء القانوني",
+
     title:
       "تحليل العقود بالذكاء الاصطناعي: كيف يساعد الذكاء الاصطناعي في مراجعة المستندات القانونية",
-    intro:
-      "تُعد مراجعة العقود من أهم تدفقات العمل القانونية والتجارية. يساعد الذكاء الاصطناعي في تحليل العقود بسرعة أكبر واكتشاف البنود الخطرة وفهم الالتزامات قبل التوقيع.",
 
-    whatIs: "ما هو تحليل العقود بالذكاء الاصطناعي؟",
+    intro:
+      "تُعد مراجعة العقود جزءاً أساسياً من اتخاذ القرارات القانونية والتجارية والمهنية. يساعد تحليل العقود المدعوم بالذكاء الاصطناعي المؤسسات على مراجعة المستندات بسرعة أكبر، وتحديد المخاطر المحتملة، وفهم الالتزامات، واتخاذ قرارات أكثر وعياً قبل التوقيع.",
+
+    whatIs:
+      "ما هو تحليل العقود بالذكاء الاصطناعي؟",
+
     whatIsText:
-      "يستخدم تحليل العقود بالذكاء الاصطناعي تقنيات الذكاء الاصطناعي لقراءة المستندات القانونية واستخراج المعلومات المهمة وتلخيص الالتزامات.",
+      "يستخدم تحليل العقود بالذكاء الاصطناعي تقنيات الذكاء الاصطناعي لمراجعة المستندات القانونية واستخراج المعلومات الأساسية وتلخيص الالتزامات وتحديد البنود الحساسة وإنشاء رؤى قانونية منظمة. وقد صُمم لدعم سير العمل القانوني وليس لاستبدال المتخصصين القانونيين المؤهلين.",
 
     why:
-      "لماذا تعتبر مراجعة العقود صعبة",
+      "لماذا تُعد مراجعة العقود معقدة؟",
 
     whyText:
-      "غالبًا ما تحتوي العقود على لغة قانونية معقدة وبنود مسؤولية وسرية ومدفوعات ومواعيد نهائية.",
+      "غالباً ما تحتوي العقود على لغة قانونية معقدة وإحالات داخلية ومواعيد نهائية وبنود مسؤولية وحقوق إنهاء والتزامات سرية وشروط دفع وآليات لتسوية النزاعات. وقد يؤدي تجاهل بند واحد فقط إلى مخاطر قانونية أو مالية أو تشغيلية.",
 
     common:
-      "أنواع العقود التي يمكن للذكاء الاصطناعي مراجعتها",
+      "أنواع العقود التي يمكن للذكاء الاصطناعي تحليلها",
 
     commonText:
-      "يمكن للذكاء الاصطناعي دعم مراجعة عقود الخدمات واتفاقيات السرية وعقود العمل والشراكات.",
+      "يمكن لتحليل العقود بالذكاء الاصطناعي دعم مجموعة واسعة من سير العمل القانوني، بما في ذلك عقود الخدمات، واتفاقيات عدم الإفصاح (NDA)، وعقود الموردين، وعقود العمل، وعقود الاستشارات، واتفاقيات الشراكة، وعقود الإيجار، وعقود المشتريات.",
 
     runexa:
       "كيف يساعد Runexa Legal Agent",
 
     runexaText:
-      "يساعد Runexa Legal Agent المستخدمين على رفع المستندات القانونية واكتشاف البنود الخطرة وإنشاء تقارير قانونية منظمة.",
+      "يُمكّن Runexa Legal Agent المستخدمين من رفع المستندات القانونية وتحديد المخاطر المحتملة وفهم الالتزامات ومراجعة التوصيات وإنشاء تقارير ذكاء قانوني منظمة لدعم اتخاذ القرار.",
 
     support:
-      "يجب أن يدعم الذكاء الاصطناعي المراجعة القانونية لا أن يستبدل المحامين",
+      "يجب أن يدعم الذكاء الاصطناعي المراجعة القانونية لا أن يحل محل الحكم القانوني",
 
     supportText:
-      "يمكن للذكاء الاصطناعي تسريع مراجعة العقود، لكن القرارات القانونية المهمة يجب مراجعتها من قبل متخصصين مؤهلين.",
+      "يمكن للذكاء الاصطناعي أن يجعل مراجعة العقود أسرع وأسهل فهماً، لكن القرارات القانونية المهمة يجب دائماً أن تُراجع من قبل متخصصين قانونيين مؤهلين. وتتمثل أفضل استخداماته في تحسين الاستعداد والوضوح والوعي قبل اتخاذ القرارات النهائية.",
 
     ctaTitle:
       "راجع العقود بالذكاء الاصطناعي قبل التوقيع",
 
     ctaText:
-      "استخدم Runexa Legal Agent لتحليل البنود الخطرة والالتزامات في المستندات القانونية.",
+      "استخدم Runexa Legal Agent لتحليل المخاطر والالتزامات والبنود الرئيسية والتوصيات في المستندات القانونية.",
 
-    ctaButton: "رفع عقد",
+    ctaButton:
+      "رفع عقد",
 
-    riskDetection: "اكتشاف البنود الخطرة",
+    riskDetection:
+      "اكتشاف المخاطر",
+
     riskDetectionText:
-      "يمكن للذكاء الاصطناعي اكتشاف البنود المتعلقة بالمسؤولية والإنهاء والمدفوعات والسرية.",
-    obligationSummaries: "ملخص الالتزامات",
+      "يمكن للذكاء الاصطناعي تحديد البنود المتعلقة بالمسؤولية وحقوق الإنهاء والتزامات الدفع والتعويضات ومتطلبات السرية.",
+
+    obligationSummaries:
+      "ملخص الالتزامات",
+
     obligationSummariesText:
-      "يمكن للذكاء الاصطناعي تلخيص المواعيد والالتزامات وشروط الدفع والتجديد بلغة واضحة.",
+      "يمكن للذكاء الاصطناعي تلخيص المواعيد النهائية والمسؤوليات وشروط التجديد والالتزامات المالية ومتطلبات الإشعار بلغة واضحة.",
 
-    negotiationSupport: "دعم التفاوض",
+    negotiationSupport:
+      "دعم التفاوض",
+
     negotiationSupportText:
-      "يمكن للذكاء الاصطناعي اقتراح النقاط التي يجب مراجعتها قبل التوقيع.",
+      "يمكن للذكاء الاصطناعي إبراز النقاط التي قد تتطلب مراجعة إضافية، بما في ذلك الالتزامات غير الواضحة أو البنود غير المعتادة أو الشروط التعاقدية غير المتوازنة.",
 
-    executiveSummaries: "الملخصات التنفيذية",
+    executiveSummaries:
+      "الملخصات التنفيذية",
+
     executiveSummariesText:
-      "يمكن للذكاء الاصطناعي تحويل العقود الطويلة إلى ملخصات منظمة للفرق والمديرين.",
-
+      "يمكن للذكاء الاصطناعي تحويل العقود الطويلة إلى ملخصات منظمة موجهة للمديرين التنفيذيين والفرق القانونية والاستشاريين وصناع القرار.",
   },
 };
 

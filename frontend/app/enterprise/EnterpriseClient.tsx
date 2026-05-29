@@ -4,111 +4,136 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const labels: any = {
-  en: {
-    heroTitle: "Runexa for Business",
-    heroSubtitle: "Custom AI agents built for your company.",
-    heroDesc:
-      "We design AI agents tailored to your workflows, data, and business needs — helping your teams analyze faster, reduce risks, and make better decisions.",
-    requestDemo: "Request a demo",
-    contactSales: "Contact sales",
-    customAgent: "Custom agent",
+ en: {
+    badge: "Runexa for Business",
+
+    title: "Custom AI Solutions for Modern Organizations",
+
+    subtitle:
+      "Runexa helps organizations build custom AI agents, intelligent workflows, and decision-support systems tailored to their operations, teams, and business objectives.",
+
+    requestDemo: "Request a Demo",
+
+    contactSales: "Contact Sales",
+
+    customAgent: "Custom AI Solution",
 
     benefits: [
-      "Reduce manual work",
-      "Improve decision quality",
-      "Scale operations with AI",
-      "Centralize analysis across teams",
+      "Reduce repetitive manual work",
+      "Improve operational efficiency",
+      "Accelerate business decision-making",
+      "Scale organizational knowledge and workflows",
     ],
 
-    buildTitle: "What we build for your business",
+    buildTitle: "AI solutions designed around your business",
+
     buildDesc:
-      "Runexa Systems builds custom AI agents for legal, finance, HR, business, document processing, sales, and marketing workflows.",
+      "Every organization has unique processes, data structures, compliance requirements, and operational challenges. Runexa works with companies to design and deploy custom AI agents and intelligent workflow systems that integrate directly into existing business operations.",
 
-    customTitle: "We build AI agents tailored to your business",
+    customTitle: "Built specifically for your workflows",
+
     customDesc:
-      "Each company is different. That’s why we create custom AI agents adapted to your data, workflows, and internal processes.",
+      "Instead of forcing teams to adapt to generic software, Runexa develops AI systems tailored to your documents, internal processes, decision workflows, reporting requirements, and operational objectives.",
 
-    howTitle: "How it works",
+    howTitle: "How Runexa works with your organization",
+
     howSteps: [
-      "Understand your needs",
-      "Build your agents",
-      "Deploy & integrate",
-      "Scale with AI",
+      "Assess your requirements and workflows",
+      "Design custom AI agents and automation systems",
+      "Deploy and integrate into your existing environment",
+      "Monitor, optimize, and scale across teams",
     ],
 
-    featuresTitle: "Enterprise features",
+    featuresTitle: "Enterprise Capabilities",
+
     features: [
-      "Multi-user access",
-      "Team management",
-      "Secure data processing",
+      "Custom AI agents",
+      "Multi-user workspaces",
+      "Role-based permissions",
+      "Secure document processing",
+      "API integrations",
+      "Private deployments",
       "Custom dashboards",
-      "API access",
-      "Priority support",
+      "Workflow automation",
+      "Knowledge management",
+      "Priority enterprise support",
     ],
 
-    ctaTitle: "Ready to bring AI into your business?",
-    ctaDesc: "Let’s build your custom AI agents.",
-    ctaButton: "Get started",
+    ctaTitle:
+      "Ready to deploy AI across your organization?",
+
+    ctaDesc:
+      "Work with Runexa to build custom AI systems that improve productivity, automate workflows, and support better business decisions.",
+
+    ctaButton: "Get Started",
 
     categories: [
       {
-        title: "Legal AI Agents",
+        title: "Legal AI Solutions",
+
         description:
-          "Support legal, compliance, and risk teams with AI-powered document analysis.",
+          "Support legal, compliance, contract, and risk-management teams with AI-powered document intelligence and workflow automation.",
+
         agents: [
           {
             name: "Legal AI Agent",
-            desc: "Analyze internal contracts, detect risks, and ensure compliance.",
+            desc: "Analyze legal documents, identify risks, summarize obligations, and support legal review workflows.",
           },
           {
             name: "Contract Review Agent",
-            desc: "Review agreements, highlight key clauses, and identify negotiation points.",
+            desc: "Review contracts, identify key clauses, highlight negotiation points, and generate structured legal summaries.",
           },
           {
             name: "Compliance Agent",
-            desc: "Check documents and processes against internal rules and compliance requirements.",
+            desc: "Evaluate documents, policies, and procedures against compliance requirements and internal standards.",
           },
           {
             name: "Risk Detection Agent",
-            desc: "Detect operational, legal, and contractual risks before they become costly.",
+            desc: "Identify legal, operational, and contractual risks before they impact the organization.",
           },
         ],
       },
+
       {
-        title: "Finance AI Agents",
+        title: "Finance AI Solutions",
+
         description:
-          "Automate financial reporting, expense analysis, and decision support.",
+          "Automate financial analysis, reporting, forecasting, cashflow visibility, and executive decision support.",
+
         agents: [
           {
             name: "Finance AI Agent",
-            desc: "Automate financial analysis and generate internal reports.",
+            desc: "Analyze financial documents and generate structured business insights and recommendations.",
           },
           {
             name: "Expense Optimization Agent",
-            desc: "Detect unnecessary spending and suggest cost-saving opportunities.",
+            desc: "Identify unnecessary spending, recurring costs, and cost-reduction opportunities.",
           },
           {
             name: "Cashflow Forecast Agent",
-            desc: "Forecast cashflow trends and identify future liquidity risks.",
+            desc: "Forecast future cashflow scenarios and identify liquidity risks.",
           },
           {
             name: "Financial Reporting Agent",
-            desc: "Generate summaries, dashboards, and financial insights from business data.",
+            desc: "Generate executive financial reports, KPI dashboards, and performance summaries.",
           },
         ],
       },
+
       {
-        title: "HR AI Agents",
+        title: "HR & Talent AI Solutions",
+
         description:
-          "Improve hiring, screening, and employee management workflows.",
+          "Improve recruitment, candidate screening, talent evaluation, and workforce management workflows.",
+
         agents: [
           {
             name: "HR AI Agent",
-            desc: "Screen CVs and streamline recruitment.",
+            desc: "Support recruitment, onboarding, employee management, and HR operations.",
           },
           {
             name: "CV Screening Agent",
-            desc: "Rank candidates based on role requirements, skills, and experience.",
+            desc: "Analyze resumes and rank candidates against role requirements.",
           },
           {
             name: "Interview Assistant Agent",
@@ -116,117 +141,145 @@ const labels: any = {
           },
           {
             name: "Employee Performance Agent",
-            desc: "Analyze employee feedback, performance notes, and development plans.",
+            desc: "Support performance reviews, development planning, and workforce insights.",
           },
         ],
       },
+
       {
-        title: "Business AI Agents",
+        title: "Business Intelligence Solutions",
+
         description:
-          "Help leadership teams analyze data, monitor KPIs, and make better decisions.",
+          "Transform business data into operational insights, KPI monitoring, risk detection, and strategic recommendations.",
+
         agents: [
           {
             name: "Business Decision Agent",
-            desc: "Analyze business data and support strategic decisions.",
+            desc: "Analyze business performance and support strategic planning and decision-making.",
           },
           {
             name: "Market Analysis Agent",
-            desc: "Analyze market signals, competitors, and opportunities.",
+            desc: "Analyze competitive environments, market trends, and growth opportunities.",
           },
           {
             name: "KPI Monitoring Agent",
-            desc: "Track business KPIs and highlight performance changes.",
+            desc: "Track performance metrics and identify meaningful business changes.",
           },
           {
             name: "Strategy Recommendation Agent",
-            desc: "Generate strategic recommendations based on business data and goals.",
+            desc: "Generate actionable recommendations aligned with business objectives.",
           },
         ],
       },
+
       {
-        title: "Document AI Agents",
+        title: "Document Intelligence Solutions",
+
         description:
-          "Process documents, invoices, reports, and operational files faster.",
+          "Automate document analysis, extraction, classification, and information processing workflows.",
+
         agents: [
           {
             name: "Document Analysis Agent",
-            desc: "Extract key information from documents and summarize important points.",
+            desc: "Extract structured information from contracts, reports, policies, and operational documents.",
           },
           {
             name: "Invoice Processing Agent",
-            desc: "Read invoices, extract totals, detect anomalies, and support accounting workflows.",
+            desc: "Process invoices, extract financial information, detect anomalies, and support accounting operations.",
           },
         ],
       },
+
       {
-        title: "Sales & Marketing AI Agents",
+        title: "Sales & Marketing Intelligence",
+
         description:
-          "Support growth teams with customer, sales, and campaign intelligence.",
+          "Help commercial teams understand customers, improve campaigns, and identify growth opportunities.",
+
         agents: [
           {
             name: "Sales Insights Agent",
-            desc: "Analyze sales data, detect opportunities, and support pipeline decisions.",
+            desc: "Analyze sales pipelines, opportunities, conversion trends, and revenue performance.",
           },
           {
             name: "Customer Behavior Agent",
-            desc: "Understand customer patterns and identify growth opportunities.",
+            desc: "Understand customer behavior, engagement patterns, and retention opportunities.",
           },
         ],
       },
     ],
   },
-
   fr: {
-    heroTitle: "Runexa for Business",
-    heroSubtitle: "Des agents IA personnalisés conçus pour votre entreprise.",
+    heroTitle: "Runexa pour les entreprises",
+
+    heroSubtitle:
+      "Des solutions d’intelligence artificielle sur mesure conçues pour votre organisation.",
+
     heroDesc:
-      "Nous concevons des agents IA adaptés à vos flux de travail, vos données et vos besoins métiers — pour aider vos équipes à analyser plus vite, réduire les risques et prendre de meilleures décisions.",
-    requestDemo: "Demander une démo",
+      "Nous concevons des agents IA personnalisés, des workflows intelligents et des systèmes d’aide à la décision adaptés à vos processus métier, vos données et vos objectifs opérationnels — afin d’aider vos équipes à travailler plus efficacement, réduire les risques et prendre de meilleures décisions.",
+
+    requestDemo: "Demander une démonstration",
+
     contactSales: "Contacter l’équipe commerciale",
-    customAgent: "Agent personnalisé",
+
+    customAgent: "Solution IA sur mesure",
 
     benefits: [
-      "Réduire le travail manuel",
+      "Réduire les tâches manuelles répétitives",
       "Améliorer la qualité des décisions",
-      "Déployer l’IA à grande échelle",
-      "Centraliser l’analyse entre les équipes",
+      "Accélérer l’efficacité opérationnelle",
+      "Centraliser la connaissance et l’analyse entre les équipes",
     ],
 
-    buildTitle: "Ce que nous construisons pour votre entreprise",
+    buildTitle: "Ce que nous construisons pour les organisations",
+
     buildDesc:
-      "Runexa Systems conçoit des agents IA personnalisés pour les workflows juridiques, financiers, RH, business, documentaires, commerciaux et marketing.",
+      "Runexa Systems conçoit des agents IA personnalisés, des workflows intelligents et des systèmes d’automatisation pour les équipes juridiques, financières, RH, business, documentaires, commerciales et marketing.",
 
-    customTitle: "Nous créons des agents IA adaptés à votre entreprise",
+    customTitle:
+      "Des systèmes IA conçus autour de votre activité",
+
     customDesc:
-      "Chaque entreprise est différente. C’est pourquoi nous créons des agents IA personnalisés, adaptés à vos données, vos flux de travail et vos processus internes.",
+      "Chaque organisation possède ses propres processus, données, contraintes réglementaires et objectifs métier. C’est pourquoi nous développons des solutions IA adaptées à vos documents, workflows internes, exigences opérationnelles et priorités stratégiques.",
 
-    howTitle: "Comment ça fonctionne",
+    howTitle: "Comment nous accompagnons votre organisation",
+
     howSteps: [
-      "Comprendre vos besoins",
-      "Construire vos agents",
-      "Déployer et intégrer",
-      "Passer à l’échelle avec l’IA",
+      "Analyser vos besoins et vos workflows",
+      "Concevoir votre solution IA",
+      "Déployer et intégrer dans votre environnement",
+      "Développer l’IA à l’échelle de l’organisation",
     ],
 
-    featuresTitle: "Fonctionnalités Enterprise",
+    featuresTitle: "Capacités Enterprise",
+
     features: [
       "Accès multi-utilisateurs",
       "Gestion des équipes",
+      "Gestion des rôles et permissions",
       "Traitement sécurisé des données",
       "Tableaux de bord personnalisés",
       "Accès API",
+      "Automatisation des workflows",
+      "Déploiements privés",
       "Support prioritaire",
     ],
 
-    ctaTitle: "Prêt à intégrer l’IA dans votre entreprise ?",
-    ctaDesc: "Construisons vos agents IA personnalisés.",
+    ctaTitle:
+      "Prêt à déployer l’IA dans votre organisation ?",
+
+    ctaDesc:
+      "Construisons ensemble une solution adaptée à vos opérations, vos équipes et vos objectifs.",
+
     ctaButton: "Commencer",
 
     categories: [
       {
-        title: "Legal AI Agents",
+        title: "Solutions IA juridiques",
+
         description:
-          "Accompagnez vos équipes juridiques, conformité et risque avec l’analyse documentaire assistée par IA.",
+          "Accompagnez vos équipes juridiques, conformité et gestion des risques grâce à l’intelligence documentaire alimentée par l’IA.",
+
         agents: [
           {
             name: "Legal AI Agent",
@@ -246,10 +299,13 @@ const labels: any = {
           },
         ],
       },
+
       {
-        title: "Finance AI Agents",
+        title: "Solutions IA financières",
+
         description:
-          "Automatisez le reporting financier, l’analyse des dépenses et l’aide à la décision.",
+          "Automatisez le reporting financier, l’analyse des dépenses, les prévisions et l’aide à la décision.",
+
         agents: [
           {
             name: "Finance AI Agent",
@@ -261,7 +317,7 @@ const labels: any = {
           },
           {
             name: "Cashflow Forecast Agent",
-            desc: "Prévoit les tendances de cashflow et identifie les futurs risques de liquidité.",
+            desc: "Prévoit les tendances de trésorerie et identifie les futurs risques de liquidité.",
           },
           {
             name: "Financial Reporting Agent",
@@ -269,10 +325,13 @@ const labels: any = {
           },
         ],
       },
+
       {
-        title: "HR AI Agents",
+        title: "Solutions IA RH et Talents",
+
         description:
-          "Améliorez vos processus de recrutement, de présélection et de gestion des collaborateurs.",
+          "Améliorez vos processus de recrutement, de présélection, d’évaluation et de gestion des collaborateurs.",
+
         agents: [
           {
             name: "HR AI Agent",
@@ -292,10 +351,13 @@ const labels: any = {
           },
         ],
       },
+
       {
-        title: "Business AI Agents",
+        title: "Solutions Business Intelligence",
+
         description:
-          "Aidez les équipes dirigeantes à analyser les données, suivre les KPIs et prendre de meilleures décisions.",
+          "Aidez les équipes dirigeantes à analyser les données, suivre les KPI et prendre de meilleures décisions stratégiques.",
+
         agents: [
           {
             name: "Business Decision Agent",
@@ -307,7 +369,7 @@ const labels: any = {
           },
           {
             name: "KPI Monitoring Agent",
-            desc: "Suit les KPIs business et met en évidence les changements de performance.",
+            desc: "Suit les KPI business et met en évidence les changements de performance.",
           },
           {
             name: "Strategy Recommendation Agent",
@@ -315,10 +377,13 @@ const labels: any = {
           },
         ],
       },
+
       {
-        title: "Document AI Agents",
+        title: "Solutions d’intelligence documentaire",
+
         description:
           "Traitez plus rapidement les documents, factures, rapports et fichiers opérationnels.",
+
         agents: [
           {
             name: "Document Analysis Agent",
@@ -330,10 +395,13 @@ const labels: any = {
           },
         ],
       },
+
       {
-        title: "Sales & Marketing AI Agents",
+        title: "Solutions IA commerciales et marketing",
+
         description:
-          "Aidez les équipes de croissance avec l’intelligence client, commerciale et campagne.",
+          "Aidez les équipes de croissance grâce à l’intelligence client, commerciale et marketing.",
+
         agents: [
           {
             name: "Sales Insights Agent",
@@ -347,173 +415,198 @@ const labels: any = {
       },
     ],
   },
-
   ar: {
-    heroTitle: "Runexa for Business",
-    heroSubtitle: "وكلاء ذكاء اصطناعي مخصصون مصممون لشركتك.",
+   heroTitle: "Runexa للشركات",
+
+    heroSubtitle:
+      "حلول ذكاء اصطناعي مخصصة مصممة لمؤسستك.",
+
     heroDesc:
-      "نصمم وكلاء ذكاء اصطناعي مخصصين حسب سير العمل والبيانات واحتياجات شركتك — لمساعدة فرقك على التحليل بسرعة أكبر، تقليل المخاطر، واتخاذ قرارات أفضل.",
+      "نصمم وكلاء ذكاء اصطناعي مخصصين، وسير عمل ذكي، وأنظمة دعم لاتخاذ القرار تتكيف مع عملياتك وبياناتك وأهدافك التشغيلية — لمساعدة فرقك على العمل بكفاءة أعلى، وتقليل المخاطر، واتخاذ قرارات أفضل.",
+
     requestDemo: "طلب عرض توضيحي",
+
     contactSales: "التواصل مع فريق المبيعات",
-    customAgent: "وكيل مخصص",
+
+    customAgent: "حل ذكاء اصطناعي مخصص",
 
     benefits: [
-      "تقليل العمل اليدوي",
+      "تقليل المهام اليدوية المتكررة",
       "تحسين جودة القرارات",
-      "توسيع العمليات باستخدام الذكاء الاصطناعي",
-      "توحيد التحليل بين الفرق",
+      "تعزيز الكفاءة التشغيلية",
+      "توحيد المعرفة والتحليل بين الفرق",
     ],
 
-    buildTitle: "ما الذي نبنيه لشركتك",
+    buildTitle: "ما الذي نقدمه للمؤسسات",
+
     buildDesc:
-      "تبني Runexa Systems وكلاء ذكاء اصطناعي مخصصين لسير العمل القانوني، المالي، الموارد البشرية، الأعمال، معالجة المستندات، المبيعات والتسويق.",
+      "تطوّر Runexa Systems حلول ذكاء اصطناعي مؤسسية مخصصة، وسير عمل ذكي، وأنظمة أتمتة تدعم العمليات الحيوية عبر مختلف الإدارات والفرق داخل المؤسسة.",
 
-    customTitle: "نصمم وكلاء ذكاء اصطناعي حسب احتياجات شركتك",
+    customTitle: "حلول ذكاء اصطناعي مصممة وفق احتياجات مؤسستك",
     customDesc:
-      "كل شركة مختلفة. لذلك ننشئ وكلاء ذكاء اصطناعي مخصصين ومتكيفين مع بياناتك وسير العمل والعمليات الداخلية.",
+      "تختلف كل مؤسسة في عملياتها وبياناتها ومتطلباتها التنظيمية وأهدافها الاستراتيجية. لذلك نطوّر حلول ذكاء اصطناعي مخصصة تتوافق مع بيئتك التشغيلية وتتكامل مع أنظمتك الحالية لدعم النمو وتحسين الأداء.",
 
-    howTitle: "كيف يعمل",
+    howTitle: "منهجية العمل",
+
     howSteps: [
-      "فهم احتياجاتك",
-      "بناء الوكلاء",
-      "النشر والتكامل",
-      "التوسع باستخدام الذكاء الاصطناعي",
+      "تحليل الاحتياجات والعمليات",
+      "تصميم الحل وتخصيصه",
+      "التنفيذ والتكامل",
+      "التوسع والتحسين المستمر",
     ],
 
-    featuresTitle: "ميزات Enterprise",
     features: [
       "وصول متعدد المستخدمين",
       "إدارة الفرق",
+      "إدارة الأدوار والصلاحيات",
       "معالجة آمنة للبيانات",
       "لوحات تحكم مخصصة",
-      "وصول API",
+      "تكامل عبر واجهات API",
+      "إدارة سير العمل بذكاء",
+      "بيئات نشر خاصة",
       "دعم ذو أولوية",
     ],
 
-    ctaTitle: "هل أنت مستعد لإدخال الذكاء الاصطناعي إلى شركتك؟",
-    ctaDesc: "لنقم ببناء وكلاء الذكاء الاصطناعي المخصصين لشركتك.",
-    ctaButton: "ابدأ الآن",
+    ctaTitle:
+      "هل أنتم مستعدون للارتقاء بعمليات مؤسستكم باستخدام الذكاء الاصطناعي؟",
+
+    ctaDesc:
+      "دعونا نصمم معًا حلاً مخصصًا يتوافق مع احتياجاتكم التشغيلية وأهدافكم الاستراتيجية.",
+
+    ctaButton: "ابدأوا اليوم",
 
     categories: [
       {
-        title: "Legal AI Agents",
+        title: "حلول الذكاء الاصطناعي القانونية",
+
         description:
-          "دعم فرق القانون والامتثال والمخاطر من خلال تحليل المستندات بالذكاء الاصطناعي.",
+          "تمكين الفرق القانونية وفرق الامتثال وإدارة المخاطر من الاستفادة من تحليل الوثائق المدعوم بالذكاء الاصطناعي.",
+
         agents: [
           {
-            name: "Legal AI Agent",
-            desc: "يحلل العقود الداخلية، يكشف المخاطر، ويساعد على ضمان الامتثال.",
+            name: "المستشار القانوني الذكي",
+            desc: "يحلل العقود الداخلية، ويكشف المخاطر المحتملة، ويساعد على تعزيز الامتثال.",
           },
           {
-            name: "Contract Review Agent",
-            desc: "يراجع الاتفاقيات، يبرز البنود الرئيسية، ويحدد نقاط التفاوض.",
+            name: "مراجع العقود الذكي",
+            desc: "يراجع الاتفاقيات، ويبرز البنود الرئيسية، ويحدد نقاط التفاوض المهمة.",
           },
           {
-            name: "Compliance Agent",
-            desc: "يفحص المستندات والعمليات وفق القواعد الداخلية ومتطلبات الامتثال.",
+            name: "مساعد الامتثال",
+            desc: "يفحص الوثائق والعمليات وفق السياسات الداخلية والمتطلبات التنظيمية.",
           },
           {
-            name: "Risk Detection Agent",
-            desc: "يكشف المخاطر التشغيلية والقانونية والتعاقدية قبل أن تصبح مكلفة.",
+            name: "مكتشف المخاطر",
+            desc: "يرصد المخاطر التشغيلية والقانونية والتعاقدية قبل أن تتحول إلى تحديات مكلفة.",
           },
         ],
       },
       {
-        title: "Finance AI Agents",
+        title: "حلول الذكاء الاصطناعي المالية",
+
         description:
-          "أتمتة التقارير المالية، تحليل المصاريف، ودعم اتخاذ القرار.",
+          "تعزيز الأداء المالي من خلال التحليل الذكي للبيانات المالية، وتحسين إدارة المصروفات، ودعم اتخاذ القرار.",
+
         agents: [
           {
-            name: "Finance AI Agent",
-            desc: "يؤتمت التحليل المالي وينشئ تقارير داخلية.",
+            name: "المحلل المالي الذكي",
+            desc: "يحلل البيانات المالية ويُنشئ تقارير ورؤى تدعم اتخاذ القرار.",
           },
           {
-            name: "Expense Optimization Agent",
-            desc: "يكشف المصاريف غير الضرورية ويقترح فرص خفض التكاليف.",
+            name: "مُحسِّن المصروفات",
+            desc: "يرصد فرص خفض التكاليف ويكشف أوجه الإنفاق غير الضرورية.",
           },
           {
-            name: "Cashflow Forecast Agent",
-            desc: "يتوقع اتجاهات التدفق النقدي ويحدد مخاطر السيولة المستقبلية.",
+            name: "مساعد التنبؤ بالتدفقات النقدية",
+            desc: "يتوقع اتجاهات التدفقات النقدية ويساعد على استباق مخاطر السيولة.",
           },
           {
-            name: "Financial Reporting Agent",
-            desc: "ينشئ ملخصات ولوحات تحكم ورؤى مالية من بيانات الأعمال.",
+            name: "مساعد التقارير المالية",
+            desc: "يُعد ملخصات ولوحات معلومات ورؤى مالية انطلاقًا من بيانات المؤسسة.",
           },
         ],
       },
       {
-        title: "HR AI Agents",
+        title: "حلول الذكاء الاصطناعي للموارد البشرية والمواهب",
+
         description:
-          "تحسين سير عمل التوظيف والفرز وإدارة الموظفين.",
+          "تعزيز كفاءة التوظيف وإدارة المواهب وتطوير الموظفين من خلال حلول ذكاء اصطناعي مصممة للموارد البشرية.",
+
         agents: [
           {
-            name: "HR AI Agent",
-            desc: "يفرز السير الذاتية ويسهل عملية التوظيف.",
+            name: "مساعد الموارد البشرية الذكي",
+            desc: "يدعم فرق الموارد البشرية في إدارة عمليات التوظيف وتقييم المرشحين.",
           },
           {
-            name: "CV Screening Agent",
-            desc: "يرتب المرشحين حسب متطلبات الدور والمهارات والخبرة.",
+            name: "مساعد فرز السير الذاتية",
+            desc: "يقيّم المرشحين وفق متطلبات الوظيفة والمهارات والخبرات المطلوبة.",
           },
           {
-            name: "Interview Assistant Agent",
-            desc: "ينشئ أسئلة مقابلات ويلخص تقييمات المرشحين.",
+            name: "مساعد المقابلات",
+            desc: "يقترح أسئلة المقابلات ويلخص نتائج تقييم المرشحين.",
           },
           {
-            name: "Employee Performance Agent",
-            desc: "يحلل ملاحظات الموظفين وبيانات الأداء وخطط التطوير.",
+            name: "مساعد أداء الموظفين",
+            desc: "يحلل مؤشرات الأداء وملاحظات الموظفين ويدعم خطط التطوير المهني.",
           },
         ],
       },
       {
-        title: "Business AI Agents",
+        title: "حلول ذكاء الأعمال ودعم القرار",
+
         description:
-          "مساعدة فرق القيادة على تحليل البيانات، مراقبة مؤشرات الأداء، واتخاذ قرارات أفضل.",
+          "تمكين فرق القيادة من الاستفادة من البيانات ومؤشرات الأداء لاتخاذ قرارات أكثر دقة وفعالية.",
+
         agents: [
           {
-            name: "Business Decision Agent",
-            desc: "يحلل بيانات الأعمال ويدعم القرارات الاستراتيجية.",
+            name: "مساعد اتخاذ القرار",
+            desc: "يحلل بيانات المؤسسة ويوفر رؤى تدعم القرارات الاستراتيجية.",
           },
           {
-            name: "Market Analysis Agent",
-            desc: "يحلل إشارات السوق والمنافسين والفرص.",
+            name: "مساعد تحليل السوق",
+            desc: "يراقب اتجاهات السوق والمنافسين ويساعد على اكتشاف الفرص الجديدة.",
           },
           {
-            name: "KPI Monitoring Agent",
-            desc: "يتابع مؤشرات الأداء ويبرز تغيرات الأداء.",
+            name: "مساعد مؤشرات الأداء",
+            desc: "يتابع مؤشرات الأداء الرئيسية ويبرز التغيرات والاتجاهات المهمة.",
           },
           {
-            name: "Strategy Recommendation Agent",
-            desc: "ينشئ توصيات استراتيجية بناءً على بيانات وأهداف الأعمال.",
+            name: "مساعد التوصيات الاستراتيجية",
+            desc: "يقدم توصيات مبنية على البيانات لدعم التخطيط وتحقيق الأهداف المؤسسية.",
           },
         ],
       },
       {
-        title: "Document AI Agents",
+        title: "حلول الذكاء الوثائقي",
+
         description:
-          "معالجة المستندات والفواتير والتقارير والملفات التشغيلية بسرعة أكبر.",
+          "تسريع معالجة الوثائق والفواتير والتقارير والملفات التشغيلية واستخراج المعلومات المهمة منها بكفاءة أعلى.",
+
         agents: [
           {
-            name: "Document Analysis Agent",
-            desc: "يستخرج المعلومات الرئيسية من المستندات ويلخص النقاط المهمة.",
+            name: "مساعد تحليل الوثائق",
+            desc: "يستخرج المعلومات الرئيسية من الوثائق ويقدم ملخصات دقيقة للنقاط المهمة.",
           },
           {
-            name: "Invoice Processing Agent",
-            desc: "يقرأ الفواتير، يستخرج المبالغ، يكشف الشذوذ، ويدعم سير عمل المحاسبة.",
+            name: "مساعد معالجة الفواتير",
+            desc: "يعالج الفواتير تلقائيًا، ويستخرج البيانات الأساسية، ويدعم العمليات المالية والمحاسبية.",
           },
         ],
       },
       {
-        title: "Sales & Marketing AI Agents",
+        title: "حلول الذكاء الاصطناعي للمبيعات والتسويق",
+
         description:
-          "دعم فرق النمو برؤى العملاء والمبيعات والحملات.",
+          "تمكين فرق المبيعات والتسويق من الاستفادة من البيانات ورؤى العملاء لتعزيز النمو وتحسين الأداء التجاري.",
+
         agents: [
           {
-            name: "Sales Insights Agent",
-            desc: "يحلل بيانات المبيعات، يكشف الفرص، ويدعم قرارات خط المبيعات.",
+            name: "مساعد رؤى المبيعات",
+            desc: "يحلل بيانات المبيعات ويكشف الفرص التجارية ويدعم إدارة مسار المبيعات.",
           },
           {
-            name: "Customer Behavior Agent",
-            desc: "يفهم أنماط العملاء ويحدد فرص النمو.",
+            name: "مساعد تحليل سلوك العملاء",
+            desc: "يحلل تفضيلات العملاء وسلوكهم ويساعد على اكتشاف فرص النمو وتعزيز التفاعل.",
           },
         ],
       },

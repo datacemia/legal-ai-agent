@@ -7,103 +7,222 @@ import { getSavedLocale } from "../../lib/i18n";
 const translations = {
   en: {
     badge: "Runexa API",
-    title: "AI agent APIs for real-world workflows",
+
+    title:
+        "AI APIs for production workflows",
+
     subtitle:
-      "Connect applications, dashboards, and internal tools to Runexa AI agents for contract analysis, finance intelligence, learning automation, and business decision support.",
-    viewDocs: "View API Docs",
-    developers: "Developers",
-    legalApi: "Legal Analysis API",
+        "Integrate legal intelligence, financial analysis, learning automation, and business decision support into your applications, dashboards, and internal tools.",
+
+    viewDocs:
+        "View Documentation",
+
+    developers:
+        "Developers",
+
+    legalApi:
+        "Legal Intelligence API",
+
     legalDesc:
-      "Submit legal documents and receive risk scores, clause analysis, obligations, and recommendations.",
-    financeApi: "Finance Analysis API",
+        "Submit legal documents and receive structured risk analysis, clause extraction, obligations, and recommendations.",
+
+    financeApi:
+        "Financial Analysis API",
+
     financeDesc:
-      "Submit bank statements and receive spending insights, subscriptions, savings opportunities, and financial scores.",
-    studyApi: "Study Agent API",
+        "Process financial statements and receive spending insights, subscriptions, savings opportunities, and financial health indicators.",
+
+    studyApi:
+        "Learning Intelligence API",
+
     studyDesc:
-      "Submit learning material and generate summaries, quizzes, flashcards, and study plans.",
-    businessApi: "Business Intelligence API",
+        "Generate summaries, quizzes, flashcards, and personalized learning workflows from educational content.",
+
+    businessApi:
+        "Business Intelligence API",
+
     businessDesc:
-      "Submit business files and receive KPIs, risks, opportunities, charts, and executive recommendations.",
-    architecture: "API architecture",
-    asyncTitle: "Built around asynchronous AI jobs",
+        "Analyze business data and receive performance metrics, risk assessments, opportunities, and executive recommendations.",
+
+    architecture:
+        "API Architecture",
+
+    asyncTitle:
+        "Built for asynchronous processing",
+
     asyncDesc:
-      "AI analysis can take time depending on file size and workflow complexity. Runexa API is designed around job-based processing: submit a request, receive a job ID, poll for progress, and retrieve structured results when complete.",
-    uploadFile: "Upload file",
-    createJob: "Create AI job",
-    pollStatus: "Poll job status",
-    receiveJson: "Receive JSON result",
-    exampleResponse: "Example response",
-    ctaTitle: "Build with Runexa AI infrastructure",
+        "Analysis workloads may require additional processing time depending on document size and workflow complexity. Runexa APIs use a job-based architecture: submit a request, receive a job identifier, track progress, and retrieve structured results when processing is complete.",
+
+    uploadFile:
+        "Upload Document",
+
+    createJob:
+        "Create Job",
+
+    pollStatus:
+        "Check Status",
+
+    receiveJson:
+        "Retrieve Results",
+
+    exampleResponse:
+        "Example Response",
+
+    ctaTitle:
+        "Build with Runexa",
+
     ctaDesc:
-      "Use Runexa APIs to power document intelligence, finance analysis, learning automation, and business decision support inside your own products.",
-    readDocs: "Read API Docs",
-  },
+        "Use Runexa APIs to power document intelligence, financial analysis, learning automation, and business decision support within your products and workflows.",
+
+    readDocs:
+        "Read Documentation",
+    },
   fr: {
-    badge: "API Runexa",
-    title: "API d’agents IA pour workflows réels",
+    badge:
+        "API Runexa",
+
+    title:
+        "API d’IA pour les workflows en production",
+
     subtitle:
-      "Connectez vos applications, dashboards et outils internes aux agents IA Runexa pour l’analyse de contrats, l’intelligence financière, l’automatisation de l’apprentissage et l’aide à la décision business.",
-    viewDocs: "Voir la documentation API",
-    developers: "Développeurs",
-    legalApi: "API d’analyse juridique",
+        "Intégrez l’intelligence juridique, l’analyse financière, l’automatisation de l’apprentissage et l’aide à la décision business dans vos applications, tableaux de bord et outils internes.",
+
+    viewDocs:
+        "Voir la documentation",
+
+    developers:
+        "Développeurs",
+
+    legalApi:
+        "API d’intelligence juridique",
+
     legalDesc:
-      "Envoyez des documents juridiques et recevez des scores de risque, analyses de clauses, obligations et recommandations.",
-    financeApi: "API d’analyse finance",
+        "Envoyez des documents juridiques et recevez des analyses de risques structurées, l’extraction de clauses, les obligations et des recommandations.",
+
+    financeApi:
+        "API d’analyse financière",
+
     financeDesc:
-      "Envoyez des relevés bancaires et recevez des insights de dépenses, abonnements, opportunités d’économies et scores financiers.",
-    studyApi: "API agent étude",
+        "Traitez des relevés financiers et obtenez des insights sur les dépenses, les abonnements, les opportunités d’économies et les indicateurs de santé financière.",
+
+    studyApi:
+        "API d’intelligence pédagogique",
+
     studyDesc:
-      "Envoyez du contenu pédagogique et générez des résumés, quiz, flashcards et plans de révision.",
-    businessApi: "API business intelligence",
+        "Générez des résumés, quiz, flashcards et parcours d’apprentissage personnalisés à partir de contenus éducatifs.",
+
+    businessApi:
+        "API d’intelligence business",
+
     businessDesc:
-      "Envoyez des fichiers business et recevez des KPI, risques, opportunités, graphiques et recommandations exécutives.",
-    architecture: "Architecture API",
-    asyncTitle: "Conçue autour de jobs IA asynchrones",
+        "Analysez des données business et obtenez des indicateurs de performance, des évaluations de risques, des opportunités et des recommandations stratégiques.",
+
+    architecture:
+        "Architecture API",
+
+    asyncTitle:
+        "Conçue pour le traitement asynchrone",
+
     asyncDesc:
-      "L’analyse IA peut prendre du temps selon la taille du fichier et la complexité du workflow. L’API Runexa repose sur un traitement par jobs : envoyez une requête, recevez un ID de job, suivez la progression et récupérez les résultats structurés une fois terminés.",
-    uploadFile: "Téléverser le fichier",
-    createJob: "Créer le job IA",
-    pollStatus: "Suivre le statut du job",
-    receiveJson: "Recevoir le résultat JSON",
-    exampleResponse: "Exemple de réponse",
-    ctaTitle: "Construisez avec l’infrastructure IA Runexa",
+        "Les analyses peuvent nécessiter un temps de traitement supplémentaire selon la taille des documents et la complexité des workflows. Les API Runexa utilisent une architecture basée sur des traitements : envoyez une requête, recevez un identifiant, suivez la progression et récupérez les résultats structurés une fois le traitement terminé.",
+
+    uploadFile:
+        "Téléverser un document",
+
+    createJob:
+        "Créer un traitement",
+
+    pollStatus:
+        "Vérifier l’état",
+
+    receiveJson:
+        "Récupérer les résultats",
+
+    exampleResponse:
+        "Exemple de réponse",
+
+    ctaTitle:
+        "Développez avec Runexa",
+
     ctaDesc:
-      "Utilisez les API Runexa pour alimenter l’intelligence documentaire, l’analyse financière, l’automatisation de l’apprentissage et l’aide à la décision business dans vos propres produits.",
-    readDocs: "Lire la documentation API",
-  },
+        "Utilisez les API Runexa pour alimenter l’intelligence documentaire, l’analyse financière, l’automatisation de l’apprentissage et l’aide à la décision business au sein de vos produits et workflows.",
+
+    readDocs:
+        "Lire la documentation",
+    },
   ar: {
-    badge: "واجهة Runexa API",
-    title: "واجهات API لوكلاء ذكاء اصطناعي مخصصة لتدفقات العمل الواقعية",
+    badge:
+        "واجهة Runexa API",
+
+    title:
+        "واجهات ذكاء اصطناعي لتدفقات العمل في بيئات الإنتاج",
+
     subtitle:
-      "اربط التطبيقات ولوحات التحكم والأدوات الداخلية بوكلاء Runexa للتحليل القانوني والذكاء المالي وأتمتة التعلم ودعم قرارات الأعمال.",
-    viewDocs: "عرض توثيق API",
-    developers: "المطورون",
-    legalApi: "API التحليل القانوني",
+        "دمج الذكاء القانوني والتحليل المالي وأتمتة التعلّم ودعم قرارات الأعمال داخل تطبيقاتك ولوحات التحكم والأدوات الداخلية.",
+
+    viewDocs:
+        "عرض التوثيق",
+
+    developers:
+        "المطورون",
+
+    legalApi:
+        "واجهة الذكاء القانوني",
+
     legalDesc:
-      "أرسل مستندات قانونية واحصل على درجات المخاطر وتحليل البنود والالتزامات والتوصيات.",
-    financeApi: "API التحليل المالي",
+        "أرسل المستندات القانونية واحصل على تحليلات مخاطر منظمة واستخراج البنود والالتزامات والتوصيات.",
+
+    financeApi:
+        "واجهة التحليل المالي",
+
     financeDesc:
-      "أرسل كشوفًا بنكية واحصل على رؤى للمصاريف والاشتراكات وفرص الادخار والدرجات المالية.",
-    studyApi: "API وكيل الدراسة",
+        "عالج البيانات المالية واحصل على رؤى حول الإنفاق والاشتراكات وفرص الادخار ومؤشرات الصحة المالية.",
+
+    studyApi:
+        "واجهة ذكاء التعلّم",
+
     studyDesc:
-      "أرسل مواد تعليمية وأنشئ ملخصات واختبارات وبطاقات تعليمية وخطط دراسة.",
-    businessApi: "API ذكاء الأعمال",
+        "أنشئ ملخصات واختبارات وبطاقات تعليمية ومسارات تعلّم مخصصة من المحتوى التعليمي.",
+
+    businessApi:
+        "واجهة ذكاء الأعمال",
+
     businessDesc:
-      "أرسل ملفات الأعمال واحصل على مؤشرات أداء ومخاطر وفرص ورسوم بيانية وتوصيات تنفيذية.",
-    architecture: "بنية API",
-    asyncTitle: "مصممة حول مهام ذكاء اصطناعي غير متزامنة",
+        "حلّل بيانات الأعمال واحصل على مؤشرات الأداء وتقييمات المخاطر والفرص والتوصيات التنفيذية.",
+
+    architecture:
+        "بنية API",
+
+    asyncTitle:
+        "مصممة للمعالجة غير المتزامنة",
+
     asyncDesc:
-      "قد يستغرق تحليل الذكاء الاصطناعي وقتًا حسب حجم الملف وتعقيد سير العمل. تعتمد Runexa API على معالجة مبنية على المهام: أرسل طلبًا، واحصل على معرف مهمة، وتابع التقدم، ثم استرجع النتائج المنظمة عند الاكتمال.",
-    uploadFile: "رفع الملف",
-    createJob: "إنشاء مهمة الذكاء الاصطناعي",
-    pollStatus: "متابعة حالة المهمة",
-    receiveJson: "استلام نتيجة JSON",
-    exampleResponse: "مثال على الاستجابة",
-    ctaTitle: "ابنِ باستخدام بنية Runexa للذكاء الاصطناعي",
+        "قد تتطلب عمليات التحليل وقتاً إضافياً حسب حجم المستندات وتعقيد سير العمل. تعتمد واجهات Runexa على بنية قائمة على المهام: أرسل طلباً، واحصل على معرف معالجة، وتابع التقدم، ثم استرجع النتائج المنظمة عند اكتمال المعالجة.",
+
+    uploadFile:
+        "رفع مستند",
+
+    createJob:
+        "إنشاء مهمة",
+
+    pollStatus:
+        "التحقق من الحالة",
+
+    receiveJson:
+        "استرجاع النتائج",
+
+    exampleResponse:
+        "مثال على الاستجابة",
+
+    ctaTitle:
+        "ابدأ البناء مع Runexa",
+
     ctaDesc:
-      "استخدم واجهات Runexa لتشغيل ذكاء المستندات والتحليل المالي وأتمتة التعلم ودعم قرارات الأعمال داخل منتجاتك.",
-    readDocs: "قراءة توثيق API",
-  },
+        "استخدم واجهات Runexa لتشغيل ذكاء المستندات والتحليل المالي وأتمتة التعلّم ودعم قرارات الأعمال داخل منتجاتك وتدفقات العمل الخاصة بك.",
+
+    readDocs:
+        "قراءة التوثيق",
+    },
 };
 
 export default function ApiClient() {
