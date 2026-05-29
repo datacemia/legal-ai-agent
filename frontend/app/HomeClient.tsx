@@ -17,369 +17,400 @@ import {
 
 const labels: any = {
   en: {
-    platform: "Runexa AI Workspace",
-    title: "Specialized AI agents for legal, finance, study, and business work.",
-    desc: "Runexa helps individuals and professionals analyze documents, understand financial data, learn faster, and make smarter business decisions.",
+    platform: "Runexa AI Platform",
+    title:
+      "Specialized AI agents for legal, finance, learning, and business decision-making.",
+    desc:
+      "Runexa helps individuals and professionals analyze documents, understand financial data, learn more effectively, and make better decisions.",
     explore: "Explore AI Agents",
-    pricing: "View Pricing",
+    pricing: "Plans & Pricing",
     blog: "Insights",
-    trustLine: "$1 trial per agent · Global credits · Secure AI workspace",
-    tryLegal: "Runexa Legal Agent",
-    tryFinance: "Runexa Finance Coach",
-    tryStudy: "Runexa Study Agent",
-    tryBusiness: "Runexa Business Decision Agent",
-    choose: "Choose your AI agent",
+    trustLine:
+      "$1 trial per agent · Unified credits · Secure AI platform",
+    choose: "Choose Your AI Agent",
     chooseDesc:
-      "One Runexa account for specialized AI agents. Analyze legal documents, improve your finances, learn faster, and make smarter business decisions.",
+      "One Runexa account gives you access to specialized AI agents. Analyze legal documents, optimize your finances, learn more effectively, and make smarter business decisions.",
     available: "Available",
-    open: "Open agent",
-    howTitle: "How Runexa works",
+    open: "Open Agent",
+    howTitle: "How Runexa Works",
     howSteps: [
       "Upload your documents or data",
-      "Runexa AI analyzes the content",
-      "Receive actionable insights and recommendations",
+      "Runexa AI automatically analyzes the content",
+      "Receive actionable insights, recommendations, and reports",
     ],
     trustCards: [
-      ["Secure & private", "Your data is protected"],
-      ["Global credits", "Works across all agents"],
-      ["Instant access", "Start using agents quickly"],
-      ["Built for real work", "Individuals and professionals"],
-    ],
-    enterpriseBadge: "Custom AI Systems",
-    enterpriseTitle: "Runexa for Organizations",
-    enterpriseSubtitle: "Custom AI systems for teams and companies.",
+    ["Secure & Reliable", "Your data stays protected"],
+    ["Unified Credits", "Use them across all agents"],
+    ["Instant Access", "Get started in minutes"],
+    ["Built for Real Work", "For individuals and professionals"],
+  ],
+    enterpriseBadge: "Custom AI Solutions",
+    enterpriseTitle: "Runexa for Enterprises",
+    enterpriseSubtitle:
+      "Custom AI systems for teams, companies, and organizations.",
     enterpriseDesc:
-      "Runexa helps organizations automate document analysis, financial reporting, learning workflows, and strategic decision-making.",
-    enterprisePrimary: "Request a demo",
-    enterpriseSecondary: "Explore business solutions",
+      "Runexa helps organizations automate document analysis, unlock insights from financial data, optimize learning workflows, and support strategic decision-making.",
+    enterprisePrimary: "Request a Demo",
+    enterpriseSecondary: "Explore Enterprise Solutions",
     enterpriseCards: [
-      "Team workspace",
-      "Organization dashboard",
-      "Multi-user access",
-      "Custom credits",
-      "Priority support",
+      "Team Workspaces",
+      "Enterprise Dashboard",
+      "Multi-User Access",
+      "Custom Credits & Plans",
+      "Priority Support",
     ],
-    enterpriseSystem: "Custom AI system",
-    enterpriseWorkflow: "AI workflow",
-    enterpriseFooter: "Connected workflows → unified insights → faster decisions",
-    enterpriseTag: "Enterprise",
+    enterpriseSystem: "Custom AI Solutions",
+    enterpriseWorkflow: "Intelligent Workflows",
+    enterpriseFooter:
+      "Connected processes • Unified insights • Faster decisions",
+    enterpriseTag: "Enterprise Solutions",
     enterpriseHeader: "Runexa Business AI",
-    ctaTitle: "One platform. Multiple AI agents. Real-world results.",
+    ctaTitle:
+      "One Platform. Multiple AI Agents. Real Results.",
     ctaDesc:
-      "Runexa Systems is an AI workspace platform for legal, finance, study, and business productivity.",
-    ctaButton: "Create your account",
-    disclaimer: "AI-powered insights. Always verify before you act.",
-    seoTitle: "Enterprise AI Workspace",
+      "Runexa is a unified AI platform for document analysis, financial intelligence, learning, and business decision support.",
+    ctaButton:
+      "Create Account",
+    disclaimer:
+      "AI-generated insights may contain errors. Always verify information before making important decisions.",
+    seoTitle:
+      "AI Platform for Individuals and Enterprises",
     seoHeading:
-      "AI agents for document analysis, finance, study, and business intelligence",
+      "Specialized AI Agents for Document Analysis, Finance, Learning, and Business Intelligence",
     seoDesc:
-      "Runexa Systems provides specialized AI agents for AI document analysis, AI contract review, financial analysis, study assistance, business intelligence, and enterprise AI workflow automation.",
+      "Runexa provides specialized AI agents for document analysis, contract review, financial analysis, learning assistance, business intelligence, and enterprise workflow optimization.",
     seoItems: [
-      "AI document analysis",
-      "AI contract review",
-      "AI financial analysis",
-      "AI study assistant",
-      "AI business intelligence",
-      "Enterprise AI workflows",
+      "AI Document Analysis",
+      "Contract Review & Risk Detection",
+      "Financial Analysis & Insights",
+      "AI Learning Assistant",
+      "Business Intelligence & Decision Support",
+      "Enterprise Workflow Optimization",
     ],
     faqTitle: "FAQ",
-    faqHeading: "Frequently asked questions",
+    faqHeading: "Frequently Asked Questions",
     faqItems: [
       [
         "What is an AI agent?",
-        "An AI agent is a specialized AI system designed to complete a specific workflow, such as contract review, financial analysis, study planning, or business intelligence.",
+        "An AI agent is a specialized AI system designed to help you complete specific tasks, such as contract review, financial analysis, learning support, or business decision-making.",
       ],
       [
         "How does Runexa work?",
-        "Upload a document or business file, choose the AI agent, and receive structured insights, summaries, risks, recommendations, and reports.",
+        "Upload a document or dataset, choose the AI agent that matches your needs, and receive structured analyses, summaries, insights, recommendations, and reports.",
       ],
       [
         "Is Runexa secure?",
-        "Runexa is designed as a secure AI workspace for private document analysis and professional workflows.",
+        "Yes. Runexa is designed as a secure AI platform for document analysis, data processing, and professional workflows, with a strong focus on privacy and security.",
       ],
       [
         "Can businesses use Runexa?",
-        "Yes. Runexa supports enterprise AI workflows, team workspaces, organization dashboards, custom credits, and business intelligence use cases.",
+        "Yes. Runexa supports enterprises with team workspaces, enterprise dashboards, multi-user access, custom plans, and business intelligence solutions.",
       ],
       [
         "What can Runexa analyze?",
-        "Runexa can analyze legal documents, bank statements, study materials, and structured business data depending on the selected AI agent.",
+        "Runexa can analyze legal documents, bank statements, learning materials, and business data, depending on the AI agent you choose.",
       ],
       [
         "Does Runexa replace professionals?",
-        "No. Runexa provides informational and decision-support output. Important decisions should be verified with qualified professionals.",
+        "No. Runexa provides insights and decision-support tools, but important decisions should always be reviewed and validated by qualified professionals.",
       ],
     ],
     agents: [
-      [
-        "Runexa Legal Agent",
-        "Detect risky clauses before signing contracts.",
-        "/legal-ai",
-        "legal",
-      ],
-      [
-        "Runexa Finance Coach",
-        "Understand where your money goes and improve your financial habits.",
-        "/finance-ai",
-        "finance",
-      ],
-      [
-        "Runexa Study Agent",
-        "Learn faster with AI-generated summaries and revision plans.",
-        "/study-ai",
-        "study",
-      ],
-      [
-        "Runexa Business Decision Agent",
-        "Get AI support for smarter strategic decisions.",
-        "/business-ai",
-        "business",
-      ],
+    [
+      "Runexa Legal Agent",
+      "Identify risky clauses and understand legal risks before signing contracts.",
+      "/legal-ai",
+      "legal",
     ],
+    [
+      "Runexa Finance Coach",
+      "Analyze spending, uncover savings opportunities, and improve financial decisions.",
+      "/finance-ai",
+      "finance",
+    ],
+    [
+      "Runexa Study Agent",
+      "Learn more effectively with AI-generated summaries, quizzes, and study plans.",
+      "/study-ai",
+      "study",
+    ],
+    [
+      "Runexa Business Decision Agent",
+      "Gain actionable insights to make faster and better-informed business decisions.",
+      "/business-ai",
+      "business",
+    ],
+  ],
   },
 
   fr: {
-    platform: "Espace IA Runexa",
-    title: "Des agents IA spécialisés pour le juridique, la finance, les études et le business.",
-    desc: "Runexa aide les particuliers et les professionnels à analyser des documents, comprendre leurs finances, apprendre plus vite et prendre de meilleures décisions business.",
-    explore: "Explorer les agents IA",
-    pricing: "Voir les tarifs",
-    blog: "Insights",
-    trustLine: "Essai à 1 $ par agent · Crédits globaux · Espace IA sécurisé",
+    platform: "Plateforme IA Runexa",
+    title:
+      "Des agents IA spécialisés pour le juridique, la finance, l’apprentissage et les décisions business.",
+    desc:
+      "Runexa aide les particuliers et les professionnels à analyser des documents, comprendre leurs données financières, apprendre plus efficacement et prendre de meilleures décisions.",
+    explore: "Découvrir les agents IA",
+    pricing: "Plans et tarifs",
+    blog: "Ressources & Insights",
+    trustLine:
+      "Essai à 1 $ par agent · Crédits unifiés · Plateforme IA sécurisée",
     tryLegal: "Runexa Legal Agent",
     tryFinance: "Runexa Finance Coach",
     tryStudy: "Runexa Study Agent",
     tryBusiness: "Runexa Business Decision Agent",
     choose: "Choisissez votre agent IA",
     chooseDesc:
-      "Un seul compte Runexa pour des agents IA spécialisés. Analysez vos documents juridiques, améliorez vos finances, apprenez plus vite et prenez de meilleures décisions business.",
+      "Un seul compte Runexa pour accéder à des agents IA spécialisés. Analysez vos documents juridiques, optimisez vos finances, apprenez plus efficacement et prenez de meilleures décisions.",
     available: "Disponible",
     open: "Ouvrir l’agent",
     howTitle: "Comment fonctionne Runexa",
     howSteps: [
-      "Téléchargez vos documents ou données",
-      "L’IA Runexa analyse le contenu",
-      "Recevez des recommandations exploitables",
+      "Importez vos documents ou vos données",
+      "L’IA Runexa analyse automatiquement le contenu",
+      "Recevez des recommandations et des insights exploitables",
     ],
     trustCards: [
-      ["Sécurisé et confidentiel", "Vos données sont protégées"],
-      ["Crédits globaux", "Utilisables sur tous les agents"],
-      ["Accès instantané", "Commencez rapidement"],
-      ["Conçu pour le travail réel", "Particuliers et professionnels"],
+      ["Sécurisé et fiable", "Vos données sont protégées"],
+      ["Crédits unifiés", "Valables sur tous les agents"],
+      ["Accès immédiat", "Commencez instantanément"],
+      ["Conçu pour un usage réel", "Particuliers et professionnels"],
     ],
-    enterpriseBadge: "Systèmes IA personnalisés",
-    enterpriseTitle: "Runexa pour les organisations",
-    enterpriseSubtitle: "Des systèmes IA personnalisés pour les équipes et les entreprises.",
+    enterpriseBadge: "Solutions IA personnalisées",
+    enterpriseTitle: "Runexa pour les entreprises",
+    enterpriseSubtitle:
+      "Des systèmes d’IA personnalisés pour les équipes, les entreprises et les organisations.",
     enterpriseDesc:
-      "Runexa aide les organisations à automatiser l’analyse documentaire, le reporting financier, les workflows d’apprentissage et la prise de décision stratégique.",
-    enterprisePrimary: "Contacter l’équipe commerciale",
-    enterpriseSecondary: "Découvrir Runexa pour les entreprises",
+      "Runexa aide les organisations à automatiser l’analyse documentaire, exploiter les données financières, optimiser les workflows d’apprentissage et soutenir la prise de décision stratégique.",
+    enterprisePrimary: "Demander une démonstration",
+    enterpriseSecondary: "Découvrir les solutions entreprises",
     enterpriseCards: [
-      "Espace équipe",
-      "Tableau de bord organisation",
+      "Espaces de travail collaboratifs",
+      "Tableau de bord entreprise",
       "Accès multi-utilisateurs",
-      "Crédits personnalisés",
+      "Crédits et plans personnalisés",
       "Support prioritaire",
     ],
-    enterpriseSystem: "Système IA personnalisé",
-    enterpriseWorkflow: "Workflow IA",
-    enterpriseFooter: "Workflows connectés → vision unifiée → décisions plus rapides",
-    enterpriseTag: "Entreprise",
-    enterpriseHeader: "IA Business Runexa",
-    ctaTitle: "Une plateforme. Plusieurs agents IA. Des résultats concrets.",
+    enterpriseSystem: "Solutions IA personnalisées",
+    enterpriseWorkflow: "Workflows intelligents",
+    enterpriseFooter:
+      "Processus connectés • Vision unifiée • Décisions plus rapides",
+    enterpriseTag: "Solutions entreprises",
+    enterpriseHeader: "Runexa Business AI",
+    ctaTitle:
+      "Une plateforme. Plusieurs agents IA. Des résultats concrets.",
     ctaDesc:
-      "Runexa Systems est un espace IA pour le juridique, la finance, les études et la productivité business.",
-    ctaButton: "Créer votre compte",
-    disclaimer: "Analyses générées par IA. Vérifiez toujours avant d’agir.",
-    seoTitle: "Espace IA entreprise",
+      "Runexa est une plateforme IA unifiée pour l’analyse documentaire, la finance, l’apprentissage et les décisions business.",
+    ctaButton:
+      "Créer un compte",
+    disclaimer:
+      "Les analyses générées par l’IA peuvent contenir des erreurs. Vérifiez toujours les informations avant de prendre une décision.",
+    seoTitle:
+      "Plateforme IA pour les particuliers et les entreprises",
     seoHeading:
-      "Agents IA pour l’analyse documentaire, la finance, les études et la business intelligence",
+      "Agents IA spécialisés pour l’analyse documentaire, la finance, l’apprentissage et la business intelligence",
     seoDesc:
-      "Runexa Systems propose des agents IA spécialisés pour l’analyse de documents, l’analyse de contrats, l’analyse financière, l’assistance aux études, la business intelligence et l’automatisation des workflows IA en entreprise.",
+      "Runexa propose des agents IA spécialisés pour l’analyse documentaire, la revue de contrats, l’analyse financière, l’assistance à l’apprentissage, la business intelligence et l’optimisation des workflows en entreprise.",
     seoItems: [
-      "Analyse documentaire IA",
-      "Analyse de contrats IA",
-      "Analyse financière IA",
-      "Assistant d’étude IA",
-      "Business intelligence IA",
-      "Workflows IA entreprise",
+      "Analyse documentaire par IA",
+      "Revue de contrats et détection des risques",
+      "Analyse financière et insights",
+      "Assistant intelligent pour l’apprentissage",
+      "Business intelligence et aide à la décision",
+      "Optimisation des workflows en entreprise",
     ],
     faqTitle: "FAQ",
-    faqHeading: "Questions fréquentes",
+    faqHeading: "Questions fréquentes sur Runexa",
     faqItems: [
       [
         "Qu’est-ce qu’un agent IA ?",
-        "Un agent IA est un système spécialisé conçu pour réaliser un workflow précis, comme l’analyse de contrats, l’analyse financière, la planification d’étude ou la business intelligence.",
+        "Un agent IA est un système spécialisé conçu pour vous aider à accomplir des tâches précises, comme la revue de contrats, l’analyse financière, l’apprentissage ou l’aide à la décision.",
       ],
       [
         "Comment fonctionne Runexa ?",
-        "Importez un document ou un fichier business, choisissez l’agent IA, puis recevez des insights structurés, résumés, risques, recommandations et rapports.",
+        "Importez un document ou un jeu de données, choisissez l’agent adapté à votre besoin, puis recevez des analyses structurées, des résumés, des insights, des recommandations et des rapports.",
       ],
       [
         "Runexa est-il sécurisé ?",
-        "Runexa est conçu comme un espace IA sécurisé pour l’analyse privée de documents et les workflows professionnels.",
+        "Oui. Runexa est conçu comme une plateforme IA sécurisée pour l’analyse de documents, de données et de workflows professionnels, avec un fort accent sur la confidentialité.",
       ],
       [
         "Les entreprises peuvent-elles utiliser Runexa ?",
-        "Oui. Runexa prend en charge les workflows IA entreprise, les espaces équipe, les dashboards organisation, les crédits personnalisés et la business intelligence.",
+        "Oui. Runexa propose des espaces de travail collaboratifs, des tableaux de bord entreprise, un accès multi-utilisateurs, des crédits personnalisés et des solutions de business intelligence.",
       ],
       [
         "Que peut analyser Runexa ?",
-        "Runexa peut analyser des documents juridiques, des relevés bancaires, des supports d’étude et des données business structurées selon l’agent choisi.",
+        "Runexa peut analyser des documents juridiques, des relevés bancaires, des supports d’apprentissage et des données métier, selon l’agent IA sélectionné.",
       ],
       [
         "Runexa remplace-t-il les professionnels ?",
-        "Non. Runexa fournit une aide informative et décisionnelle. Les décisions importantes doivent être vérifiées avec des professionnels qualifiés.",
+        "Non. Runexa fournit des analyses et des informations destinées à faciliter la prise de décision. Les décisions importantes doivent toujours être validées par des professionnels qualifiés.",
       ],
     ],
     agents: [
-      [
-        "Runexa Legal Agent",
-        "Détectez les clauses à risque avant de signer vos contrats.",
-        "/legal-ai",
-        "legal",
-      ],
-      [
-        "Runexa Finance Coach",
-        "Comprenez où va votre argent et améliorez vos habitudes financières.",
-        "/finance-ai",
-        "finance",
-      ],
-      [
-        "Runexa Study Agent",
-        "Apprenez plus vite grâce aux résumés IA et aux plans de révision intelligents.",
-        "/study-ai",
-        "study",
-      ],
-      [
-        "Runexa Business Decision Agent",
-        "Obtenez une assistance IA pour prendre de meilleures décisions stratégiques.",
-        "/business-ai",
-        "business",
-      ],
+    [
+      "Runexa Legal Agent",
+      "Identifiez les clauses à risque et comprenez les implications juridiques avant de signer un contrat.",
+      "/legal-ai",
+      "legal",
     ],
+    [
+      "Runexa Finance Coach",
+      "Analysez vos dépenses, repérez les opportunités d’économies et améliorez vos décisions financières.",
+      "/finance-ai",
+      "finance",
+    ],
+    [
+      "Runexa Study Agent",
+      "Apprenez plus efficacement grâce aux résumés, quiz et plans d’étude générés par l’IA.",
+      "/study-ai",
+      "study",
+    ],
+    [
+      "Runexa Business Decision Agent",
+      "Obtenez des analyses et des insights pour prendre des décisions plus rapides et mieux informées.",
+      "/business-ai",
+      "business",
+    ],
+  ],
   },
 
   ar: {
     platform: "مساحة Runexa للذكاء الاصطناعي",
-    title: "وكلاء ذكاء اصطناعي متخصصون في القانون والمالية والدراسة والأعمال.",
-    desc: "تساعد Runexa الأفراد والمحترفين على تحليل المستندات وفهم البيانات المالية والتعلم بشكل أسرع واتخاذ قرارات أعمال أكثر ذكاءً.",
-    explore: "استكشاف وكلاء الذكاء الاصطناعي",
-    pricing: "عرض الأسعار",
-    blog: "الرؤى",
-    trustLine: "تجربة مقابل 1 دولار لكل وكيل · أرصدة موحدة · مساحة ذكاء اصطناعي آمنة",
+    title: "وكلاء ذكاء اصطناعي متخصصون للأعمال القانونية والمالية والتعليمية والتجارية.",
+    desc: "تساعد Runexa الأفراد والمحترفين على تحليل المستندات واستخلاص الرؤى من البيانات المالية وتسريع التعلّم واتخاذ قرارات أكثر ذكاءً وفعالية.",
+    explore: "استكشف حلول الذكاء الاصطناعي",
+    pricing: "الخطط والأسعار",
+    blog: "المدونة",
+    trustLine: "تجربة مقابل دولار واحد لكل وكيل · أرصدة موحدة · منصة ذكاء اصطناعي آمنة",
     tryLegal: "Runexa Legal Agent",
     tryFinance: "Runexa Finance Coach",
     tryStudy: "Runexa Study Agent",
     tryBusiness: "Runexa Business Decision Agent",
     choose: "اختر وكيلك الذكي",
     chooseDesc:
-      "حساب Runexa واحد لوكلاء ذكاء اصطناعي متخصصين. حلل المستندات القانونية، افهم أموالك، تعلّم أسرع، واتخذ قرارات أعمال أفضل.",
+       "حساب Runexa واحد للوصول إلى وكلاء ذكاء اصطناعي متخصصين. حلّل المستندات القانونية، وافهم بياناتك المالية، وسرّع تعلّمك، واتخذ قرارات أعمال أكثر ذكاءً.",
     available: "متاح",
     open: "فتح الوكيل",
     howTitle: "كيف تعمل Runexa",
     howSteps: [
-      "قم برفع مستنداتك أو بياناتك",
-      "يقوم ذكاء Runexa بتحليل المحتوى",
-      "احصل على توصيات ورؤى قابلة للتنفيذ",
+      "ارفع مستنداتك أو بياناتك",
+      "يقوم ذكاء Runexa بتحليل المحتوى تلقائيًا",
+      "احصل على رؤى وتوصيات قابلة للتنفيذ",
     ],
     trustCards: [
-      ["آمن وخاص", "بياناتك محمية"],
-      ["أرصدة موحدة", "صالحة لكل الوكلاء"],
-      ["وصول فوري", "ابدأ بسرعة"],
-      ["مصمم للعمل الواقعي", "للأفراد والمحترفين"],
+      ["آمن وموثوق", "بياناتك محمية"],
+      ["أرصدة موحدة", "لجميع الوكلاء"],
+      ["وصول فوري", "ابدأ فورًا"],
+      ["مصمم للعمل الحقيقي", "للأفراد والمحترفين"],
     ],
-    enterpriseBadge: "أنظمة ذكاء اصطناعي مخصصة",
+    enterpriseBadge: "حلول ذكاء اصطناعي للمؤسسات",
+
     enterpriseTitle: "Runexa للمؤسسات",
-    enterpriseSubtitle: "أنظمة ذكاء اصطناعي مخصصة للفرق والشركات.",
+
+    enterpriseSubtitle:
+      "أنظمة ذكاء اصطناعي مخصصة للفرق والشركات والمؤسسات.",
     enterpriseDesc:
-      "تساعد Runexa المؤسسات على أتمتة تحليل المستندات والتقارير المالية وعمليات التعلم واتخاذ القرارات الاستراتيجية.",
-    enterprisePrimary: "طلب عرض",
-    enterpriseSecondary: "استكشاف حلول الأعمال",
+      "تساعد Runexa المؤسسات على أتمتة تحليل المستندات واستخلاص الرؤى من البيانات المالية وتحسين عمليات التعلّم ودعم اتخاذ القرارات الاستراتيجية.",
+
+    enterprisePrimary: "طلب عرض توضيحي",
+
+    enterpriseSecondary: "استكشف حلول المؤسسات",
+
     enterpriseCards: [
-      "مساحة عمل الفريق",
-      "لوحة تحكم المؤسسة",
+      "مساحات عمل للفرق",
+      "لوحة تحكم للمؤسسات",
       "وصول متعدد المستخدمين",
-      "أرصدة مخصصة",
-      "دعم ذو أولوية",
+      "أرصدة وخطط مخصصة",
+      "دعم أولوية",
     ],
-    enterpriseSystem: "نظام ذكاء اصطناعي مخصص",
-    enterpriseWorkflow: "سير عمل ذكي",
-    enterpriseFooter: "ربط العمليات → رؤية موحدة → قرارات أسرع",
-    enterpriseTag: "المؤسسات",
-    enterpriseHeader: "Runexa Business AI",
-    ctaTitle: "منصة واحدة. عدة وكلاء ذكاء اصطناعي. نتائج واقعية.",
+    enterpriseSystem: "حلول ذكاء اصطناعي مخصصة",
+    enterpriseWorkflow: "تدفقات عمل ذكية",
+    enterpriseFooter:
+      "عمليات مترابطة • رؤية موحدة • قرارات أسرع",
+    enterpriseTag: "حلول المؤسسات",
+    ctaTitle:
+      "منصة واحدة. وكلاء ذكاء اصطناعي متخصصة. نتائج ملموسة.",
     ctaDesc:
-      "Runexa Systems هي مساحة ذكاء اصطناعي للقانون والمالية والدراسة وإنتاجية الأعمال.",
-    ctaButton: "إنشاء حساب",
-    disclaimer: "تحليلات مدعومة بالذكاء الاصطناعي. تحقق دائماً قبل اتخاذ أي قرار.",
-    seoTitle: "مساحة ذكاء اصطناعي للمؤسسات",
+      "Runexa هي منصة ذكاء اصطناعي موحدة لتحليل المستندات وفهم البيانات المالية وتسريع التعلّم ودعم قرارات الأعمال.",
+
+    ctaButton: "إنشاء حساب مجاني",
+
+    disclaimer:
+      "التحليلات مدعومة بالذكاء الاصطناعي وقد تحتوي على أخطاء. يُرجى التحقق من النتائج قبل اتخاذ أي قرار.",
+
+    seoTitle:
+      "منصة ذكاء اصطناعي موحدة للأفراد والمؤسسات",
+
     seoHeading:
-      "وكلاء ذكاء اصطناعي لتحليل المستندات والمالية والدراسة وذكاء الأعمال",
+      "وكلاء ذكاء اصطناعي متخصصة لتحليل المستندات والبيانات المالية والتعلّم وذكاء الأعمال",
     seoDesc:
-      "تقدم Runexa Systems وكلاء ذكاء اصطناعي متخصصين لتحليل المستندات، مراجعة العقود، التحليل المالي، المساعدة في الدراسة، ذكاء الأعمال، وأتمتة سير العمل بالذكاء الاصطناعي داخل المؤسسات.",
+      "توفّر Runexa منصة موحدة تضم وكلاء ذكاء اصطناعي متخصصين لتحليل المستندات ومراجعة العقود والتحليل المالي ودعم التعلّم وذكاء الأعمال وتحسين سير العمل للمؤسسات والفرق المهنية.",
+
     seoItems: [
-      "تحليل المستندات بالذكاء الاصطناعي",
-      "مراجعة العقود بالذكاء الاصطناعي",
-      "التحليل المالي بالذكاء الاصطناعي",
-      "مساعد دراسة ذكي",
-      "ذكاء الأعمال بالذكاء الاصطناعي",
-      "سير عمل ذكي للمؤسسات",
+      "تحليل المستندات واستخراج المعلومات",
+      "مراجعة العقود واكتشاف المخاطر",
+      "التحليل المالي واستخلاص الرؤى",
+      "مساعد ذكي للتعلّم والدراسة",
+      "ذكاء الأعمال ودعم اتخاذ القرار",
+      "تحسين سير العمل والإنتاجية",
     ],
     faqTitle: "الأسئلة الشائعة",
-    faqHeading: "أسئلة متكررة",
+    faqHeading: "إجابات عن أكثر الأسئلة شيوعًا حول Runexa",
     faqItems: [
       [
         "ما هو وكيل الذكاء الاصطناعي؟",
-        "وكيل الذكاء الاصطناعي هو نظام متخصص مصمم لتنفيذ مهمة محددة مثل مراجعة العقود، التحليل المالي، تخطيط الدراسة أو ذكاء الأعمال.",
+        "وكيل الذكاء الاصطناعي هو نظام متخصص مصمم لمساعدتك في تنفيذ مهام محددة، مثل مراجعة العقود وتحليل البيانات المالية وتنظيم الدراسة ودعم قرارات الأعمال.",
       ],
       [
         "كيف تعمل Runexa؟",
-        "ارفع مستنداً أو ملف بيانات، اختر الوكيل الذكي، ثم احصل على رؤى منظمة وملخصات ومخاطر وتوصيات وتقارير.",
+        "ارفع مستندًا أو ملف بيانات، واختر الوكيل المناسب، ثم احصل على تحليلات منظمة وملخصات ورؤى وتوصيات وتقارير قابلة للتنفيذ.",
       ],
       [
         "هل Runexa آمنة؟",
-        "تم تصميم Runexa كمساحة ذكاء اصطناعي آمنة لتحليل المستندات الخاصة وسير العمل المهني.",
+        "نعم. تم تصميم Runexa كمنصة ذكاء اصطناعي آمنة تساعد على تحليل المستندات والبيانات وسير العمل المهني مع التركيز على الخصوصية والأمان.",
       ],
       [
         "هل يمكن للشركات استخدام Runexa؟",
-        "نعم. تدعم Runexa سير العمل الذكي للمؤسسات، مساحات الفرق، لوحات تحكم المؤسسات، الأرصدة المخصصة وذكاء الأعمال.",
+        "نعم. تدعم Runexa المؤسسات من خلال مساحات عمل للفرق ولوحات تحكم إدارية ووصول متعدد المستخدمين وأرصدة مخصصة وحلول لذكاء الأعمال.",
       ],
       [
         "ما الذي يمكن لـ Runexa تحليله؟",
-        "يمكن لـ Runexa تحليل المستندات القانونية، كشوفات الحساب البنكية، مواد الدراسة والبيانات business المنظمة حسب الوكيل المختار.",
+        "يمكن لـ Runexa تحليل المستندات القانونية وكشوفات الحساب البنكية والمواد التعليمية وبيانات الأعمال، وفقًا للوكيل الذكي الذي تختاره.",
       ],
       [
-        "هل تعوض Runexa الخبراء؟",
-        "لا. تقدم Runexa مخرجات معلوماتية وداعمة للقرار. يجب التحقق من القرارات المهمة مع مختصين مؤهلين.",
+        "هل تحل Runexa محل الخبراء؟",
+        "لا. توفّر Runexa تحليلات ومعلومات تساعد على اتخاذ القرار، لكنها لا تُغني عن استشارة المختصين المؤهلين عند اتخاذ القرارات المهمة.",
       ],
     ],
     agents: [
-      [
-        "Runexa Legal Agent",
-        "اكتشف البنود الخطرة قبل توقيع العقود.",
-        "/legal-ai",
-        "legal",
+        [
+          "Runexa Legal Agent",
+          "اكتشف البنود الخطرة وافهم المخاطر القانونية قبل توقيع العقود.",
+          "/legal-ai",
+          "legal",
+        ],
+
+        [
+          "Runexa Finance Coach",
+          "افهم نفقاتك وحدد فرص التوفير وحسّن قراراتك المالية.",
+          "/finance-ai",
+          "finance",
+        ],
+
+        [
+          "Runexa Study Agent",
+          "تعلّم بفعالية أكبر من خلال الملخصات والاختبارات وخطط الدراسة المدعومة بالذكاء الاصطناعي.",
+          "/study-ai",
+          "study",
+        ],
+
+        [
+          "Runexa Business Decision Agent",
+          "احصل على رؤى ذكية وتحليلات تدعم اتخاذ قرارات أعمال أكثر ثقة وفعالية.",
+          "/business-ai",
+          "business",
+        ],
       ],
-      [
-        "Runexa Finance Coach",
-        "افهم أين تذهب أموالك وحسّن عاداتك المالية.",
-        "/finance-ai",
-        "finance",
-      ],
-      [
-        "Runexa Study Agent",
-        "تعلّم بشكل أسرع باستخدام الملخصات وخطط المراجعة المدعومة بالذكاء الاصطناعي.",
-        "/study-ai",
-        "study",
-      ],
-      [
-        "Runexa Business Decision Agent",
-        "احصل على دعم بالذكاء الاصطناعي لاتخاذ قرارات استراتيجية أكثر ذكاءً.",
-        "/business-ai",
-        "business",
-      ],
-    ],
   },
 };
 
@@ -495,10 +526,10 @@ export default function HomeClient() {
                   <span><Users className="h-4 w-4" /></span>
                   <span>
                     {language === "fr"
-                      ? "Pour particuliers & professionnels"
+                      ? "Pour les particuliers, les professionnels et les entreprises"
                       : language === "ar"
-                      ? "للأفراد والمحترفين"
-                      : "For individuals & professionals"}
+                      ? "للأفراد والمهنيين والمؤسسات"
+                      : "For Individuals, Professionals, and Enterprises"}
                   </span>
                 </div>
               </div>
@@ -521,10 +552,10 @@ export default function HomeClient() {
 
                         <p className="mt-1 text-sm text-blue-100">
                           {language === "fr"
-                            ? "Agents spécialisés"
+                            ? "Agents IA spécialisés"
                             : language === "ar"
-                            ? "وكلاء متخصصون"
-                            : "Specialized agents"}
+                            ? "وكلاء ذكاء اصطناعي متخصصون"
+                            : "Specialized AI Agents"}
                         </p>
                       </div>
                     </div>
@@ -536,10 +567,10 @@ export default function HomeClient() {
 
                   <div className="mt-5 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-blue-100">
                     {language === "fr"
-                      ? "Espace IA"
+                      ? "Plateforme IA"
                       : language === "ar"
-                      ? "مساحة ذكاء اصطناعي"
-                      : "AI workspace"}
+                      ? "منصة ذكاء اصطناعي"
+                      : "AI Platform"}
                   </div>
                 </a>
 
@@ -634,26 +665,26 @@ export default function HomeClient() {
                 <div>
                   <p className="text-sm font-semibold text-blue-600">
                     {language === "fr"
-                      ? "Aperçu de l’espace IA"
+                      ? "Aperçu de la plateforme IA"
                       : language === "ar"
-                      ? "معاينة مساحة الذكاء الاصطناعي"
-                      : "AI Workspace Preview"}
+                      ? "معاينة منصة الذكاء الاصطناعي"
+                      : "AI Platform Preview"}
                   </p>
 
-                  <h2 className="mt-3 text-3xl font-bold text-slate-900">
+                 <h2 className="mt-3 text-3xl font-bold text-slate-900">
                     {language === "fr"
-                      ? "Analyse intelligente pour le juridique, la finance et le business"
+                      ? "Des analyses intelligentes pour les documents, la finance, l’apprentissage et les décisions business"
                       : language === "ar"
-                      ? "تحليل ذكي للقانون والمالية والأعمال"
-                      : "Intelligent analysis for legal, finance, and business"}
+                      ? "تحليلات ذكية للمستندات والمالية والتعلّم وقرارات الأعمال"
+                      : "Intelligent insights for documents, finance, learning, and business decisions"}
                   </h2>
 
                   <p className="mt-4 text-slate-600 leading-7">
                     {language === "fr"
-                      ? "Runexa combine plusieurs agents IA spécialisés dans un espace de travail unifié."
+                      ? "Runexa réunit des agents IA spécialisés dans une plateforme unique conçue pour l’analyse, l’apprentissage et la prise de décision."
                       : language === "ar"
-                      ? "تجمع Runexa عدة وكلاء ذكاء اصطناعي متخصصين داخل مساحة عمل موحدة."
-                      : "Runexa combines multiple specialized AI agents inside a unified workspace."}
+                      ? "تجمع Runexa وكلاء ذكاء اصطناعي متخصصين ضمن منصة واحدة مصممة للتحليل والتعلّم ودعم اتخاذ القرار."
+                      : "Runexa brings together specialized AI agents in a single platform built for analysis, learning, and decision-making."}
                   </p>
                 </div>
 
@@ -661,18 +692,21 @@ export default function HomeClient() {
                   <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
                     <p className="text-sm text-slate-500">
                       {language === "fr"
-                        ? "Score de risque"
+                        ? "Niveau de risque"
                         : language === "ar"
                         ? "مستوى المخاطر"
-                        : "Risk score"}
+                        : "Risk Level"}
                     </p>
-
                     <p className="mt-2 text-3xl font-bold text-blue-600">
                       82/100
                     </p>
 
                     <p className="mt-2 text-sm text-slate-500">
-                      Legal AI
+                      {language === "fr"
+                        ? "Agent Juridique IA"
+                        : language === "ar"
+                        ? "وكيل قانوني بالذكاء الاصطناعي"
+                        : "Legal AI Agent"}
                     </p>
                   </div>
 
@@ -682,7 +716,7 @@ export default function HomeClient() {
                         ? "Santé financière"
                         : language === "ar"
                         ? "الصحة المالية"
-                        : "Financial health"}
+                        : "Financial Health"}
                     </p>
 
                     <p className="mt-2 text-3xl font-bold text-emerald-600">
@@ -690,17 +724,21 @@ export default function HomeClient() {
                     </p>
 
                     <p className="mt-2 text-sm text-slate-500">
-                      Finance AI
+                      {language === "fr"
+                        ? "Agent Finance IA"
+                        : language === "ar"
+                        ? "وكيل التمويل بالذكاء الاصطناعي"
+                        : "Finance AI Agent"}
                     </p>
                   </div>
 
                   <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
                     <p className="text-sm text-slate-500">
                       {language === "fr"
-                        ? "Progression étude"
+                        ? "Progression d’apprentissage"
                         : language === "ar"
-                        ? "تقدم الدراسة"
-                        : "Study progress"}
+                        ? "تقدّم التعلّم"
+                        : "Learning Progress"}
                     </p>
 
                     <p className="mt-2 text-3xl font-bold text-violet-600">
@@ -708,17 +746,17 @@ export default function HomeClient() {
                     </p>
 
                     <p className="mt-2 text-sm text-slate-500">
-                      Study AI
+                      Runexa Study Agent
                     </p>
                   </div>
 
                   <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
                     <p className="text-sm text-slate-500">
                       {language === "fr"
-                        ? "Business insights"
+                        ? "Insights business"
                         : language === "ar"
                         ? "رؤى الأعمال"
-                        : "Business insights"}
+                        : "Business Insights"}
                     </p>
 
                     <p className="mt-2 text-3xl font-bold text-orange-600">
@@ -726,7 +764,7 @@ export default function HomeClient() {
                     </p>
 
                     <p className="mt-2 text-sm text-slate-500">
-                      Business AI
+                      Runexa Business Decision Agent
                     </p>
                   </div>
                 </div>
@@ -752,28 +790,28 @@ export default function HomeClient() {
                 <div className="mt-6 space-y-4">
                   {[
                     language === "fr"
-                      ? "Vérifier la clause de responsabilité du contrat fournisseur"
+                      ? "Examiner les clauses à risque du contrat fournisseur"
                       : language === "ar"
-                      ? "مراجعة بند المسؤولية في عقد المورد"
-                      : "Review liability clause in vendor contract",
+                      ? "مراجعة البنود عالية المخاطر في عقد المورد"
+                      : "Review high-risk clauses in vendor contract",
 
                     language === "fr"
-                      ? "Réduire les dépenses d’abonnements récurrents"
+                      ? "Identifier des opportunités de réduction des dépenses récurrentes"
                       : language === "ar"
-                      ? "تقليل نفقات الاشتراكات المتكررة"
-                      : "Reduce recurring subscription expenses",
+                      ? "تحديد فرص خفض النفقات المتكررة"
+                      : "Identify opportunities to reduce recurring expenses",
 
                     language === "fr"
-                      ? "Améliorer la régularité des études cette semaine"
+                      ? "Améliorer la progression d’apprentissage cette semaine"
                       : language === "ar"
-                      ? "تحسين انتظام الدراسة هذا الأسبوع"
-                      : "Improve study consistency this week",
+                      ? "تحسين التقدم في التعلّم هذا الأسبوع"
+                      : "Improve learning progress this week",
 
                     language === "fr"
-                      ? "Surveiller les risques opérationnels business"
+                      ? "Surveiller les risques opérationnels et les indicateurs clés"
                       : language === "ar"
-                      ? "مراقبة المخاطر التشغيلية للأعمال"
-                      : "Monitor operational business risks",
+                      ? "مراقبة المخاطر التشغيلية والمؤشرات الرئيسية"
+                      : "Monitor operational risks and key business metrics",
                   ].map((item) => (
                     <div
                       key={item}
@@ -789,7 +827,11 @@ export default function HomeClient() {
                 </div>
 
                 <div className="mt-6 rounded-2xl border border-blue-400/20 bg-blue-500/10 p-4 text-sm text-blue-100">
-                  {language === "fr" ? "Workflows IA unifiés → analyses plus rapides → décisions plus intelligentes" : language === "ar" ? "سير عمل موحد بالذكاء الاصطناعي → تحليل أسرع → قرارات أذكى" : "Unified AI workflows → faster analysis → smarter decisions"}
+                  {language === "fr"
+                    ? "Données connectées → insights unifiés → décisions plus rapides"
+                    : language === "ar"
+                    ? "بيانات مترابطة → رؤى موحدة → قرارات أسرع"
+                    : "Connected data → unified insights → faster decisions"}
                 </div>
               </div>
             </div>
