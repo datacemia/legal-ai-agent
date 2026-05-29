@@ -57,30 +57,32 @@ type LoginLabels = {
 
 const labels: Record<string, LoginLabels> = {
   en: {
-    badge: "AI agents that get things done",
+    badge: "AI agents built for real work",
+
     welcomeBack: "Welcome back",
+
     leftDescription:
-      "Log in to your account and continue using AI agents to get work done faster.",
+      "Sign in to your Runexa account and continue working with specialized AI agents for legal, finance, learning, and business decisions.",
 
     featureAgentsTitle: "Specialized AI Agents",
 
     featureAgentsDesc:
-      "Access powerful agents built for your business needs.",
+      "Access AI agents designed for document analysis, financial insights, learning support, and business workflows.",
 
     featureSecurityTitle: "Secure & Private",
 
     featureSecurityDesc:
-      "Your data is protected with enterprise-grade security.",
+      "Your data is protected with security-first infrastructure and privacy-focused workflows.",
 
-    featureProductivityTitle: "Save Time, Get More Done",
+    featureProductivityTitle: "Work Faster with AI",
 
     featureProductivityDesc:
-      "Automate complex tasks and focus on what matters most.",
+      "Analyze documents, generate insights, and complete complex tasks faster with Runexa.",
 
-    loginTitle: "Login",
+    loginTitle: "Sign In",
 
     loginSubtitle:
-      "Welcome back! Please login to your account.",
+      "Welcome back. Sign in to continue to your Runexa workspace.",
 
     google: "Continue with Google",
 
@@ -88,7 +90,7 @@ const labels: Record<string, LoginLabels> = {
 
     separator: "or continue with email",
 
-    emailLabel: "Email address",
+    emailLabel: "Email Address",
 
     emailPlaceholder: "you@example.com",
 
@@ -100,9 +102,9 @@ const labels: Record<string, LoginLabels> = {
 
     forgot: "Forgot password?",
 
-    loginButton: "Login",
+    loginButton: "Sign In",
 
-    loggingIn: "Logging in...",
+    loggingIn: "Signing in...",
 
     noAccount: "Don’t have an account?",
 
@@ -113,52 +115,51 @@ const labels: Record<string, LoginLabels> = {
     invalidCredentials: "Incorrect email or password",
 
     verifyEmail:
-      "Please verify your email before login",
+      "Please verify your email before signing in.",
 
-    loginFailed: "Login failed",
+    loginFailed: "Sign-in failed",
 
-    serverError: "Error connecting to server",
+    serverError: "Unable to connect to the server",
 
     enterEmailFirst: "Enter your email first",
 
     verificationSent:
-      "Verification email request sent.",
+      "Verification email sent.",
   },
 
   fr: {
-    badge: "Des agents IA pour avancer plus vite",
+    badge: "Des agents IA conçus pour le travail réel",
 
     welcomeBack: "Bon retour",
 
     leftDescription:
-      "Connectez-vous à votre compte et continuez à utiliser vos agents IA pour travailler plus vite.",
+      "Connectez-vous à votre compte Runexa et continuez à travailler avec des agents IA spécialisés pour le juridique, la finance, l’apprentissage et les décisions business.",
 
     featureAgentsTitle: "Agents IA spécialisés",
 
     featureAgentsDesc:
-      "Accédez à des agents puissants conçus pour vos besoins métier.",
+      "Accédez à des agents IA conçus pour l’analyse documentaire, les insights financiers, l’apprentissage et les workflows métier.",
 
     featureSecurityTitle: "Sécurisé et confidentiel",
 
     featureSecurityDesc:
-      "Vos données sont protégées avec une sécurité de niveau entreprise.",
+      "Vos données sont protégées grâce à une infrastructure sécurisée et des workflows respectueux de la confidentialité.",
 
-    featureProductivityTitle:
-      "Gagnez du temps, avancez plus vite",
+    featureProductivityTitle: "Travaillez plus efficacement avec l’IA",
 
     featureProductivityDesc:
-      "Automatisez les tâches complexes et concentrez-vous sur l’essentiel.",
+      "Analysez des documents, obtenez des insights et accomplissez des tâches complexes plus rapidement avec Runexa.",
 
     loginTitle: "Connexion",
 
     loginSubtitle:
-      "Bon retour ! Connectez-vous à votre compte.",
+      "Connectez-vous pour accéder à votre espace de travail Runexa.",
 
     google: "Continuer avec Google",
 
     microsoft: "Continuer avec Microsoft",
 
-    separator: "ou continuer avec l’e-mail",
+    separator: "ou continuer avec votre adresse e-mail",
 
     emailLabel: "Adresse e-mail",
 
@@ -166,8 +167,7 @@ const labels: Record<string, LoginLabels> = {
 
     passwordLabel: "Mot de passe",
 
-    passwordPlaceholder:
-      "Entrez votre mot de passe",
+    passwordPlaceholder: "Saisissez votre mot de passe",
 
     remember: "Se souvenir de moi",
 
@@ -175,7 +175,7 @@ const labels: Record<string, LoginLabels> = {
 
     loginButton: "Se connecter",
 
-    loggingIn: "Connexion...",
+    loggingIn: "Connexion en cours...",
 
     noAccount: "Vous n’avez pas de compte ?",
 
@@ -185,103 +185,60 @@ const labels: Record<string, LoginLabels> = {
       "Renvoyer l’e-mail de vérification",
 
     invalidCredentials:
-      "E-mail ou mot de passe incorrect",
+      "Adresse e-mail ou mot de passe incorrect",
 
     verifyEmail:
-      "Veuillez vérifier votre e-mail avant de vous connecter",
+      "Veuillez vérifier votre adresse e-mail avant de vous connecter.",
 
-    loginFailed: "Échec de la connexion",
+    loginFailed: "Connexion impossible",
 
     serverError:
-      "Erreur de connexion au serveur",
+      "Impossible de se connecter au serveur",
 
     enterEmailFirst:
-      "Entrez d’abord votre e-mail",
+      "Veuillez d’abord saisir votre adresse e-mail",
 
     verificationSent:
-      "Demande d’e-mail de vérification envoyée.",
+      "E-mail de vérification envoyé.",
   },
 
   ar: {
-    badge:
-      "وكلاء ذكاء اصطناعي يساعدونك على الإنجاز",
-
+    badge: "وكلاء ذكاء اصطناعي مصممون للعمل الحقيقي",
     welcomeBack: "مرحباً بعودتك",
-
     leftDescription:
-      "سجّل الدخول إلى حسابك وواصل استخدام وكلاء الذكاء الاصطناعي لإنجاز العمل بسرعة أكبر.",
-
-    featureAgentsTitle:
-      "وكلاء ذكاء اصطناعي متخصصون",
-
+      "سجّل الدخول إلى حساب Runexa الخاص بك وواصل العمل باستخدام وكلاء ذكاء اصطناعي متخصصين في القانون والمالية والتعلّم وقرارات الأعمال.",
+    featureAgentsTitle: "وكلاء ذكاء اصطناعي متخصصون",
     featureAgentsDesc:
-      "استخدم وكلاء أقوياء مصممين لاحتياجات عملك.",
-
+      "استفد من وكلاء ذكاء اصطناعي مصممين لتحليل المستندات والرؤى المالية ودعم التعلّم وسير العمل المهني.",
     featureSecurityTitle: "آمن وخاص",
-
     featureSecurityDesc:
-      "بياناتك محمية بأمان من مستوى المؤسسات.",
-
-    featureProductivityTitle:
-      "وفّر الوقت وأنجز أكثر",
-
+      "بياناتك محمية من خلال بنية تحتية آمنة وسير عمل يركز على الخصوصية.",
+    featureProductivityTitle: "اعمل بكفاءة أكبر مع الذكاء الاصطناعي",
     featureProductivityDesc:
-      "أتمت المهام المعقدة وركّز على ما يهم.",
-
+      "حلّل المستندات واحصل على رؤى عملية وأنجز المهام المعقدة بسرعة أكبر مع Runexa.",
     loginTitle: "تسجيل الدخول",
-
     loginSubtitle:
-      "مرحباً بعودتك! يرجى تسجيل الدخول إلى حسابك.",
-
-    google:
-      "المتابعة باستخدام Google",
-
-    microsoft:
-      "المتابعة باستخدام Microsoft",
-
-    separator:
-      "أو المتابعة باستخدام البريد الإلكتروني",
-
+      "سجّل الدخول للوصول إلى مساحة عمل Runexa الخاصة بك.",
+    google: "المتابعة باستخدام Google",
+    microsoft: "المتابعة باستخدام Microsoft",
+    separator: "أو المتابعة باستخدام البريد الإلكتروني",
     emailLabel: "البريد الإلكتروني",
-
     emailPlaceholder: "you@example.com",
-
     passwordLabel: "كلمة المرور",
-
-    passwordPlaceholder:
-      "أدخل كلمة المرور",
-
+    passwordPlaceholder: "أدخل كلمة المرور",
     remember: "تذكرني",
-
     forgot: "هل نسيت كلمة المرور؟",
-
     loginButton: "تسجيل الدخول",
-
     loggingIn: "جارٍ تسجيل الدخول...",
-
     noAccount: "ليس لديك حساب؟",
-
     createAccount: "إنشاء حساب",
-
-    resendVerification:
-      "إعادة إرسال بريد التحقق",
-
-    invalidCredentials:
-      "البريد الإلكتروني أو كلمة المرور غير صحيحة",
-
-    verifyEmail:
-      "يرجى التحقق من بريدك الإلكتروني قبل تسجيل الدخول",
-
-    loginFailed: "فشل تسجيل الدخول",
-
-    serverError:
-      "خطأ في الاتصال بالخادم",
-
-    enterEmailFirst:
-      "أدخل بريدك الإلكتروني أولاً",
-
-    verificationSent:
-      "تم إرسال طلب بريد التحقق.",
+    resendVerification: "إعادة إرسال رسالة التحقق",
+    invalidCredentials: "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+    verifyEmail: "يرجى التحقق من بريدك الإلكتروني قبل تسجيل الدخول.",
+    loginFailed: "تعذر تسجيل الدخول",
+    serverError: "تعذر الاتصال بالخادم",
+    enterEmailFirst: "يرجى إدخال بريدك الإلكتروني أولاً",
+    verificationSent: "تم إرسال رسالة التحقق.",
   },
 };
 
