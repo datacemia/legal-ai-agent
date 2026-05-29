@@ -36,37 +36,36 @@ type ResetLabels = {
 };
 
 const labels: Record<string, ResetLabels> = {
-  en: {
-    badge: "AI agents that get things done",
-    heroTitle: "Secure your account with a new password",
+ en: {
+    badge: "Secure access to your Runexa account",
+    heroTitle: "Create a new password",
     heroDescription:
-      "Choose a strong password to protect your account and keep your data safe.",
+      "Choose a strong password to keep your Runexa account secure and protect access to your AI workspace.",
     featureSecurityTitle: "Stronger Security",
     featureSecurityDesc:
-      "A strong password keeps your account and data protected.",
-    featureExperienceTitle: "Better Experience",
+      "A strong password helps protect your account, data, and AI workflows.",
+    featureExperienceTitle: "Seamless Access",
     featureExperienceDesc:
-      "Secure access means uninterrupted productivity with your AI agents.",
-    featureControlTitle: "You’re in Control",
+      "Keep your account secure and continue working with your AI agents without interruption.",
+    featureControlTitle: "Account Control",
     featureControlDesc:
-      "Update your password anytime to stay in control.",
-
-    title: "Reset password",
-    subtitle: "Enter your new password below.",
+      "Update your password whenever needed to stay in control of your account.",
+    title: "Reset your password",
+    subtitle: "Enter a new password for your Runexa account.",
     newPassword: "New password",
-    passwordPlaceholder: "Enter new password",
-    passwordMustContain: "Password must contain:",
+    passwordPlaceholder: "Enter your new password",
+    passwordMustContain: "Your password must include:",
     resetPassword: "Reset password",
     resetting: "Resetting password...",
-    backToLogin: "← Back to login",
+    backToLogin: "← Back to sign in",
     loading: "Loading...",
-
-    invalidLink: "Invalid reset link.",
-    passwordRequirements: "Password does not meet the requirements.",
-    success: "Password updated successfully. Redirecting...",
+    invalidLink: "This reset link is invalid or has expired.",
+    passwordRequirements:
+      "Your password does not meet the requirements.",
+    success:
+      "Password updated successfully. Redirecting...",
     requestFailed: "Request failed",
-    serverError: "Error connecting to server",
-
+    serverError: "Unable to connect to the server",
     rules: [
       "At least 12 characters",
       "One uppercase letter",
@@ -77,35 +76,74 @@ const labels: Record<string, ResetLabels> = {
   },
 
   fr: {
-    badge: "Des agents IA pour avancer plus vite",
-    heroTitle: "Sécurisez votre compte avec un nouveau mot de passe",
+    badge:
+      "Accès sécurisé à votre compte Runexa",
+
+    heroTitle:
+      "Créer un nouveau mot de passe",
+
     heroDescription:
-      "Choisissez un mot de passe fort pour protéger votre compte et garder vos données en sécurité.",
-    featureSecurityTitle: "Sécurité renforcée",
+      "Choisissez un mot de passe sécurisé pour protéger votre compte Runexa et votre espace de travail IA.",
+
+    featureSecurityTitle:
+      "Sécurité renforcée",
+
     featureSecurityDesc:
-      "Un mot de passe fort protège votre compte et vos données.",
-    featureExperienceTitle: "Meilleure expérience",
+      "Un mot de passe robuste contribue à protéger votre compte, vos données et vos workflows IA.",
+
+    featureExperienceTitle:
+      "Accès sans interruption",
+
     featureExperienceDesc:
-      "Un accès sécurisé vous permet de continuer à travailler sans interruption avec vos agents IA.",
-    featureControlTitle: "Vous gardez le contrôle",
+      "Conservez un accès sécurisé à votre compte et poursuivez votre travail avec vos agents IA.",
+
+    featureControlTitle:
+      "Contrôle du compte",
+
     featureControlDesc:
-      "Vous pouvez mettre à jour votre mot de passe à tout moment.",
+      "Mettez à jour votre mot de passe à tout moment pour garder le contrôle de votre compte.",
 
-    title: "Réinitialiser le mot de passe",
-    subtitle: "Entrez votre nouveau mot de passe ci-dessous.",
-    newPassword: "Nouveau mot de passe",
-    passwordPlaceholder: "Entrez le nouveau mot de passe",
-    passwordMustContain: "Le mot de passe doit contenir :",
-    resetPassword: "Réinitialiser le mot de passe",
-    resetting: "Réinitialisation...",
-    backToLogin: "← Retour à la connexion",
-    loading: "Chargement...",
+    title:
+      "Réinitialiser votre mot de passe",
 
-    invalidLink: "Lien de réinitialisation invalide.",
-    passwordRequirements: "Le mot de passe ne respecte pas les exigences.",
-    success: "Mot de passe mis à jour avec succès. Redirection...",
-    requestFailed: "La requête a échoué",
-    serverError: "Erreur de connexion au serveur",
+    subtitle:
+      "Saisissez un nouveau mot de passe pour votre compte Runexa.",
+
+    newPassword:
+      "Nouveau mot de passe",
+
+    passwordPlaceholder:
+      "Saisissez votre nouveau mot de passe",
+
+    passwordMustContain:
+      "Votre mot de passe doit contenir :",
+
+    resetPassword:
+      "Réinitialiser le mot de passe",
+
+    resetting:
+      "Réinitialisation en cours...",
+
+    backToLogin:
+      "← Retour à la connexion",
+
+    loading:
+      "Chargement...",
+
+    invalidLink:
+      "Ce lien de réinitialisation est invalide ou a expiré.",
+
+    passwordRequirements:
+      "Votre mot de passe ne respecte pas les exigences de sécurité.",
+
+    success:
+      "Mot de passe mis à jour avec succès. Redirection...",
+
+    requestFailed:
+      "La requête a échoué",
+
+    serverError:
+      "Impossible de se connecter au serveur",
 
     rules: [
       "Au moins 12 caractères",
@@ -117,38 +155,77 @@ const labels: Record<string, ResetLabels> = {
   },
 
   ar: {
-    badge: "وكلاء ذكاء اصطناعي يساعدونك على الإنجاز",
-    heroTitle: "أمّن حسابك بكلمة مرور جديدة",
+    badge:
+      "وصول آمن إلى حساب Runexa",
+
+    heroTitle:
+      "إنشاء كلمة مرور جديدة",
+
     heroDescription:
-      "اختر كلمة مرور قوية لحماية حسابك والحفاظ على أمان بياناتك.",
-    featureSecurityTitle: "أمان أقوى",
+      "اختر كلمة مرور قوية لحماية حساب Runexa الخاص بك وتأمين الوصول إلى مساحة العمل المدعومة بالذكاء الاصطناعي.",
+
+    featureSecurityTitle:
+      "أمان أقوى",
+
     featureSecurityDesc:
-      "كلمة المرور القوية تساعد على حماية حسابك وبياناتك.",
-    featureExperienceTitle: "تجربة أفضل",
+      "تساعد كلمة المرور القوية على حماية حسابك وبياناتك وسير العمل المدعوم بالذكاء الاصطناعي.",
+
+    featureExperienceTitle:
+      "وصول دون انقطاع",
+
     featureExperienceDesc:
-      "الوصول الآمن يعني إنتاجية مستمرة مع وكلاء الذكاء الاصطناعي.",
-    featureControlTitle: "أنت تتحكم في حسابك",
+      "حافظ على أمان حسابك وواصل العمل مع وكلاء الذكاء الاصطناعي دون انقطاع.",
+
+    featureControlTitle:
+      "التحكم في الحساب",
+
     featureControlDesc:
-      "يمكنك تحديث كلمة المرور في أي وقت للحفاظ على التحكم بحسابك.",
+      "يمكنك تحديث كلمة المرور في أي وقت للحفاظ على التحكم الكامل في حسابك.",
 
-    title: "إعادة تعيين كلمة المرور",
-    subtitle: "أدخل كلمة المرور الجديدة أدناه.",
-    newPassword: "كلمة المرور الجديدة",
-    passwordPlaceholder: "أدخل كلمة المرور الجديدة",
-    passwordMustContain: "يجب أن تحتوي كلمة المرور على:",
-    resetPassword: "إعادة تعيين كلمة المرور",
-    resetting: "جارٍ إعادة التعيين...",
-    backToLogin: "← الرجوع إلى تسجيل الدخول",
-    loading: "جاري التحميل...",
+    title:
+      "إعادة تعيين كلمة المرور",
 
-    invalidLink: "رابط إعادة التعيين غير صالح.",
-    passwordRequirements: "كلمة المرور لا تستوفي المتطلبات.",
-    success: "تم تحديث كلمة المرور بنجاح. جارٍ إعادة التوجيه...",
-    requestFailed: "فشل الطلب",
-    serverError: "خطأ في الاتصال بالخادم",
+    subtitle:
+      "أدخل كلمة مرور جديدة لحساب Runexa الخاص بك.",
+
+    newPassword:
+      "كلمة المرور الجديدة",
+
+    passwordPlaceholder:
+      "أدخل كلمة المرور الجديدة",
+
+    passwordMustContain:
+      "يجب أن تتضمن كلمة المرور:",
+
+    resetPassword:
+      "إعادة تعيين كلمة المرور",
+
+    resetting:
+      "جارٍ إعادة تعيين كلمة المرور...",
+
+    backToLogin:
+      "← العودة إلى تسجيل الدخول",
+
+    loading:
+      "جارٍ التحميل...",
+
+    invalidLink:
+      "رابط إعادة تعيين كلمة المرور غير صالح أو منتهي الصلاحية.",
+
+    passwordRequirements:
+      "كلمة المرور لا تستوفي متطلبات الأمان.",
+
+    success:
+      "تم تحديث كلمة المرور بنجاح. جارٍ إعادة التوجيه...",
+
+    requestFailed:
+      "فشل الطلب",
+
+    serverError:
+      "تعذر الاتصال بالخادم",
 
     rules: [
-      "12 حرفًا على الأقل",
+      "12 حرفاً على الأقل",
       "حرف كبير واحد",
       "حرف صغير واحد",
       "رقم واحد",
