@@ -179,6 +179,13 @@ def handle_finance_ai(job: Job, db):
     if not text or not text.strip():
         raise ValueError("Could not extract text from PDF.")
 
+    print("=" * 80)
+    print("TEXT LENGTH:", len(text))
+    print("=" * 80)
+    print("TEXT PREVIEW:")
+    print(text[:3000])
+    print("=" * 80)
+
     update_job_progress(
         job,
         db,
