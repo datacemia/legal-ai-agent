@@ -32,34 +32,51 @@ type RegisterLabels = {
 
 const labels: Record<string, RegisterLabels> = {
   en: {
-    badge: "AI agents that get things done",
-    leftTitle: "Create one Runexa account for all AI agents",
+    badge: "AI agents built for real work",
+
+    leftTitle: "Create one Runexa account for every AI agent",
+
     leftDescription:
-      "Create one Runexa account for all AI agents. Start with a $1 trial per agent, then continue with global credits or a plan. Runexa supports legal, study, finance, business, and future security agents.",
+      "Create one Runexa account to access specialized AI agents for legal, finance, learning, and business decisions. Start with a $1 trial, use unified credits, or upgrade to a plan.",
+
     featureAgentsTitle: "Specialized AI Agents",
+
     featureAgentsDesc:
-      "Access powerful agents built for your business needs.",
+      "Access AI agents designed for document analysis, financial insights, learning support, and business workflows.",
+
     featureSecurityTitle: "Secure & Private",
+
     featureSecurityDesc:
-      "Your data is protected with enterprise-grade security.",
-    featureProductivityTitle: "Save Time, Get More Done",
+      "Your data is protected with security-first infrastructure and privacy-focused workflows.",
+
+    featureProductivityTitle: "Work Faster with AI",
+
     featureProductivityDesc:
-      "Automate complex tasks and focus on what matters most.",
+      "Analyze documents, generate insights, and complete complex tasks faster with Runexa.",
 
     title: "Create your account",
-    subtitle:
-      "Start with a $1 trial per agent, then continue with global credits or a plan.",
-    emailPlaceholder: "you@example.com",
-    passwordPlaceholder: "Create a strong password",
-    createAccount: "Create account",
-    alreadyHaveAccount: "Already have an account?",
-    login: "Log in",
 
-    enterEmailPassword: "Please enter email and password",
+    subtitle:
+      "Start with a $1 trial, use unified credits, or upgrade to a Runexa plan.",
+
+    emailPlaceholder: "you@example.com",
+
+    passwordPlaceholder: "Create a strong password",
+
+    createAccount: "Create account",
+
+    alreadyHaveAccount: "Already have an account?",
+
+    login: "Sign in",
+
+    enterEmailPassword: "Please enter your email and password",
+
     accountCreated:
       "Account created. Please check your email to verify your account.",
+
     registrationFailed: "Registration failed",
-    serverError: "Error connecting to server",
+
+    serverError: "Unable to connect to the server",
 
     passwordRules: [
       "At least 12 characters",
@@ -69,36 +86,64 @@ const labels: Record<string, RegisterLabels> = {
       "One special character",
     ],
   },
-
   fr: {
-    badge: "Des agents IA pour avancer plus vite",
-    leftTitle: "Un seul compte Runexa pour tous vos agents IA",
+    badge: "Des agents IA conçus pour le travail réel",
+
+    leftTitle:
+      "Un seul compte Runexa pour tous vos agents IA",
+
     leftDescription:
-      "Créez un seul compte Runexa pour accéder à tous les agents IA. Commencez avec un essai à 1 $ par agent, puis continuez avec des crédits globaux ou un abonnement. Runexa prend en charge les agents juridique, étude, finance, business et les futurs agents sécurité.",
-    featureAgentsTitle: "Agents IA spécialisés",
+      "Créez un compte Runexa et accédez à des agents IA spécialisés pour le juridique, la finance, l’apprentissage et les décisions business. Commencez avec un essai à 1 $, utilisez des crédits unifiés ou passez à une offre Runexa.",
+
+    featureAgentsTitle:
+      "Agents IA spécialisés",
+
     featureAgentsDesc:
-      "Accédez à des agents puissants conçus pour vos besoins métier.",
-    featureSecurityTitle: "Sécurisé et confidentiel",
+      "Accédez à des agents IA conçus pour l’analyse documentaire, les insights financiers, l’apprentissage et les workflows métier.",
+
+    featureSecurityTitle:
+      "Sécurisé et confidentiel",
+
     featureSecurityDesc:
-      "Vos données sont protégées avec une sécurité de niveau entreprise.",
-    featureProductivityTitle: "Gagnez du temps, avancez plus vite",
+      "Vos données sont protégées grâce à une infrastructure sécurisée et des workflows respectueux de la confidentialité.",
+
+    featureProductivityTitle:
+      "Travaillez plus efficacement avec l’IA",
+
     featureProductivityDesc:
-      "Automatisez les tâches complexes et concentrez-vous sur l’essentiel.",
+      "Analysez des documents, obtenez des insights et accomplissez des tâches complexes plus rapidement avec Runexa.",
 
     title: "Créer votre compte",
-    subtitle:
-      "Commencez avec un essai à 1 $ par agent, puis continuez avec des crédits globaux ou un abonnement.",
-    emailPlaceholder: "vous@exemple.com",
-    passwordPlaceholder: "Créez un mot de passe sécurisé",
-    createAccount: "Créer un compte",
-    alreadyHaveAccount: "Vous avez déjà un compte ?",
-    login: "Se connecter",
 
-    enterEmailPassword: "Veuillez entrer votre e-mail et votre mot de passe",
+    subtitle:
+      "Commencez avec un essai à 1 $, utilisez des crédits unifiés ou passez à une offre Runexa.",
+
+    emailPlaceholder:
+      "vous@exemple.com",
+
+    passwordPlaceholder:
+      "Créez un mot de passe sécurisé",
+
+    createAccount:
+      "Créer un compte",
+
+    alreadyHaveAccount:
+      "Vous avez déjà un compte ?",
+
+    login:
+      "Se connecter",
+
+    enterEmailPassword:
+      "Veuillez saisir votre adresse e-mail et votre mot de passe",
+
     accountCreated:
-      "Compte créé. Veuillez vérifier votre e-mail pour activer votre compte.",
-    registrationFailed: "Échec de l’inscription",
-    serverError: "Erreur de connexion au serveur",
+      "Compte créé. Vérifiez votre adresse e-mail pour activer votre compte.",
+
+    registrationFailed:
+      "Inscription impossible",
+
+    serverError:
+      "Impossible de se connecter au serveur",
 
     passwordRules: [
       "Au moins 12 caractères",
@@ -110,37 +155,68 @@ const labels: Record<string, RegisterLabels> = {
   },
 
   ar: {
-    badge: "وكلاء ذكاء اصطناعي يساعدونك على الإنجاز",
-    leftTitle: "حساب Runexa واحد لجميع وكلاء الذكاء الاصطناعي",
+    badge:
+      "وكلاء ذكاء اصطناعي مصممون للعمل الحقيقي",
+
+    leftTitle:
+      "حساب Runexa واحد لجميع وكلاء الذكاء الاصطناعي",
+
     leftDescription:
-      "أنشئ حساب Runexa واحدًا للوصول إلى جميع وكلاء الذكاء الاصطناعي. ابدأ بتجربة بقيمة 1 دولار لكل وكيل، ثم تابع باستخدام الأرصدة العامة أو الاشتراك. يدعم Runexa الوكلاء القانونيين، الدراسة، المالية، الأعمال، ووكلاء الأمان المستقبليين.",
-    featureAgentsTitle: "وكلاء ذكاء اصطناعي متخصصون",
+      "أنشئ حساب Runexa للوصول إلى وكلاء ذكاء اصطناعي متخصصين في القانون والمالية والتعلّم وقرارات الأعمال. ابدأ بتجربة مقابل 1 دولار، أو استخدم الأرصدة الموحّدة، أو قم بالترقية إلى إحدى خطط Runexa.",
+
+    featureAgentsTitle:
+      "وكلاء ذكاء اصطناعي متخصصون",
+
     featureAgentsDesc:
-      "استخدم وكلاء أقوياء مصممين لاحتياجات عملك.",
-    featureSecurityTitle: "آمن وخاص",
+      "استفد من وكلاء ذكاء اصطناعي مصممين لتحليل المستندات والرؤى المالية ودعم التعلّم وسير العمل المهني.",
+
+    featureSecurityTitle:
+      "آمن وخاص",
+
     featureSecurityDesc:
-      "بياناتك محمية بأمان من مستوى المؤسسات.",
-    featureProductivityTitle: "وفّر الوقت وأنجز أكثر",
+      "بياناتك محمية من خلال بنية تحتية آمنة وسير عمل يركز على الخصوصية.",
+
+    featureProductivityTitle:
+      "اعمل بكفاءة أكبر مع الذكاء الاصطناعي",
+
     featureProductivityDesc:
-      "أتمت المهام المعقدة وركّز على ما يهم.",
+      "حلّل المستندات واحصل على رؤى عملية وأنجز المهام المعقدة بسرعة أكبر مع Runexa.",
 
-    title: "إنشاء حسابك",
+    title:
+      "إنشاء حساب",
+
     subtitle:
-      "ابدأ بتجربة بقيمة 1 دولار لكل وكيل، ثم تابع باستخدام الأرصدة العامة أو الاشتراك.",
-    emailPlaceholder: "you@example.com",
-    passwordPlaceholder: "أنشئ كلمة مرور قوية",
-    createAccount: "إنشاء حساب",
-    alreadyHaveAccount: "لديك حساب بالفعل؟",
-    login: "تسجيل الدخول",
+      "ابدأ بتجربة مقابل 1 دولار، أو استخدم الأرصدة الموحّدة، أو قم بالترقية إلى إحدى خطط Runexa.",
 
-    enterEmailPassword: "يرجى إدخال البريد الإلكتروني وكلمة المرور",
+    emailPlaceholder:
+      "you@example.com",
+
+    passwordPlaceholder:
+      "أنشئ كلمة مرور قوية",
+
+    createAccount:
+      "إنشاء حساب",
+
+    alreadyHaveAccount:
+      "لديك حساب بالفعل؟",
+
+    login:
+      "تسجيل الدخول",
+
+    enterEmailPassword:
+      "يرجى إدخال البريد الإلكتروني وكلمة المرور",
+
     accountCreated:
       "تم إنشاء الحساب. يرجى التحقق من بريدك الإلكتروني لتفعيل الحساب.",
-    registrationFailed: "فشل إنشاء الحساب",
-    serverError: "خطأ في الاتصال بالخادم",
+
+    registrationFailed:
+      "تعذر إنشاء الحساب",
+
+    serverError:
+      "تعذر الاتصال بالخادم",
 
     passwordRules: [
-      "12 حرفًا على الأقل",
+      "12 حرفاً على الأقل",
       "حرف كبير واحد",
       "حرف صغير واحد",
       "رقم واحد",
