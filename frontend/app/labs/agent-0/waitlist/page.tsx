@@ -7,104 +7,148 @@ const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "https://api.runexa.ai";
 
 const labels: any = {
-  en: {
-    back: "← Back to Agent 0 concept",
-    badge: "Runexa Labs · Agent 0 Waitlist",
-    title: "Join the Runexa Agent 0 waitlist",
+ en: {
+    back: "← Back to Agent 0",
+
+    badge: "Runexa Labs · Agent 0 Early Access",
+
+    title: "Join the Agent 0 waitlist",
+
     subtitle:
       "Get early updates on Runexa’s future AI safety system for homes, cameras, sensors, GPS, and autonomous monitoring.",
-    success:
-      "Thank you. Your interest has been recorded. Runexa will contact selected early-access users when Agent 0 moves forward.",
-    submitError: "Failed to submit waitlist form.",
 
-    fullName: "Full name",
+    success:
+      "Thank you. Your request has been recorded. Runexa will contact selected early-access users as Agent 0 moves forward.",
+
+    submitError:
+      "Unable to submit the waitlist form. Please try again.",
+
+    fullName: "Full Name",
+
     fullNamePlaceholder: "Your name",
-    email: "Email address",
+
+    email: "Email Address",
+
     emailPlaceholder: "you@example.com",
+
     country: "Country",
+
     countryPlaceholder: "United States, Morocco, France...",
+
     profile: "Profile",
-    interestLevel: "Interest level",
+
+    interestLevel: "Interest Level",
+
     protectTarget: "What would you like Agent 0 to protect?",
-    message: "Message / use case",
+
+    message: "Message / Use Case",
+
     messagePlaceholder:
-      "Tell us what kind of safety or monitoring problem you would like Agent 0 to solve.",
+      "Tell us what safety or monitoring challenge you would like Agent 0 to help solve.",
+
     consent:
       "I agree to be contacted by Runexa Systems about Agent 0 updates, early access, and related product information.",
-    submit: "Request early access",
+
+    submit:
+      "Request Early Access",
+
     disclaimer:
       "Agent 0 is a concept and research initiative. It is not publicly available yet.",
 
     profiles: [
       "Homeowner",
       "Parent / Family",
-      "Property manager",
-      "Smart home enthusiast",
-      "Security company",
+      "Property Manager",
+      "Smart Home Enthusiast",
+      "Security Company",
       "Investor / Partner",
       "Other",
     ],
+
     interestLevels: [
-      "Early access",
-      "Beta tester",
+      "Early Access",
+      "Beta Testing",
       "Partnership",
-      "Investment / Business inquiry",
-      "Just following updates",
+      "Investment / Business Inquiry",
+      "Following Updates",
     ],
+
     protectTargets: [
       "Home",
       "Apartment",
       "Office",
       "Warehouse",
-      "Vacation property",
-      "Multiple properties",
+      "Vacation Property",
+      "Multiple Properties",
     ],
   },
-
   fr: {
-    back: "← Retour au concept Agent 0",
-    badge: "Runexa Labs · Liste d’attente Agent 0",
-    title: "Rejoignez la liste d’attente Runexa Agent 0",
+    back: "← Retour à Agent 0",
+
+    badge: "Runexa Labs · Accès anticipé Agent 0",
+
+    title: "Rejoindre la liste d’attente Agent 0",
+
     subtitle:
-      "Recevez les premières mises à jour sur le futur système d’IA sécurité de Runexa pour maisons, caméras, capteurs, GPS et surveillance autonome.",
+      "Recevez les premières informations sur Agent 0, le futur système de sécurité autonome de Runexa pour les habitations, les capteurs, les caméras et la surveillance intelligente.",
+
     success:
-      "Merci. Votre intérêt a bien été enregistré. Runexa contactera certains utilisateurs en accès anticipé lorsque Agent 0 avancera.",
-    submitError: "Échec de l’envoi du formulaire de liste d’attente.",
+      "Merci. Votre demande a été enregistrée. Runexa contactera les participants sélectionnés lors des prochaines phases d’accès anticipé.",
+
+    submitError:
+      "Impossible d’envoyer votre demande. Veuillez réessayer.",
 
     fullName: "Nom complet",
+
     fullNamePlaceholder: "Votre nom",
+
     email: "Adresse e-mail",
+
     emailPlaceholder: "vous@exemple.com",
+
     country: "Pays",
-    countryPlaceholder: "États-Unis, Maroc, France...",
+
+    countryPlaceholder: "France, Maroc, Canada...",
+
     profile: "Profil",
-    interestLevel: "Niveau d’intérêt",
-    protectTarget: "Que souhaitez-vous protéger avec Agent 0 ?",
-    message: "Message / cas d’usage",
+
+    interestLevel: "Type d’intérêt",
+
+    protectTarget:
+      "Que souhaitez-vous protéger avec Agent 0 ?",
+
+    message: "Message / Cas d’usage",
+
     messagePlaceholder:
-      "Expliquez le problème de sécurité ou de surveillance que vous aimeriez qu’Agent 0 résolve.",
+      "Décrivez le problème de sécurité, de surveillance ou d’automatisation que vous souhaiteriez résoudre avec Agent 0.",
+
     consent:
-      "J’accepte d’être contacté par Runexa Systems au sujet des mises à jour d’Agent 0, de l’accès anticipé et des informations produit associées.",
-    submit: "Demander un accès anticipé",
+      "J’accepte d’être contacté par Runexa Systems concernant Agent 0, les accès anticipés et les futures communications produit.",
+
+    submit:
+      "Demander un accès anticipé",
+
     disclaimer:
-      "Agent 0 est une initiative conceptuelle et de recherche. Il n’est pas encore disponible publiquement.",
+      "Agent 0 est actuellement un projet de recherche et développement. Il n’est pas encore disponible au public.",
 
     profiles: [
       "Propriétaire",
       "Parent / Famille",
       "Gestionnaire immobilier",
-      "Passionné de Smart Home",
+      "Passionné de maison connectée",
       "Entreprise de sécurité",
       "Investisseur / Partenaire",
       "Autre",
     ],
+
     interestLevels: [
       "Accès anticipé",
-      "Bêta-testeur",
+      "Programme bêta",
       "Partenariat",
-      "Investissement / demande business",
-      "Suivre les mises à jour",
+      "Investissement / Opportunité commerciale",
+      "Suivre les actualités",
     ],
+
     protectTargets: [
       "Maison",
       "Appartement",
@@ -115,56 +159,91 @@ const labels: any = {
     ],
   },
 
-  ar: {
-    back: "← الرجوع إلى مفهوم Agent 0",
-    badge: "Runexa Labs · قائمة انتظار Agent 0",
-    title: "انضم إلى قائمة انتظار Runexa Agent 0",
-    subtitle:
-      "احصل على تحديثات مبكرة حول نظام الأمان المستقبلي من Runexa بالذكاء الاصطناعي للمنازل والكاميرات والحساسات وGPS والمراقبة الذاتية.",
-    success:
-      "شكراً لك. تم تسجيل اهتمامك. ستتواصل Runexa مع بعض مستخدمي الوصول المبكر عندما يتقدم Agent 0.",
-    submitError: "فشل إرسال نموذج قائمة الانتظار.",
+ ar: {
+    back:
+      "← العودة إلى Agent 0",
 
-    fullName: "الاسم الكامل",
-    fullNamePlaceholder: "اسمك",
-    email: "البريد الإلكتروني",
-    emailPlaceholder: "you@example.com",
-    country: "البلد",
-    countryPlaceholder: "الولايات المتحدة، المغرب، فرنسا...",
-    profile: "الملف الشخصي",
-    interestLevel: "مستوى الاهتمام",
-    protectTarget: "ماذا تريد أن يحمي Agent 0؟",
-    message: "رسالة / حالة استخدام",
+    badge:
+      "Runexa Labs · الوصول المبكر إلى Agent 0",
+
+    title:
+      "الانضمام إلى قائمة انتظار Agent 0",
+
+    subtitle:
+      "احصل على أحدث المعلومات حول Agent 0، نظام الأمان الذاتي المستقبلي من Runexa للمنازل وأجهزة الاستشعار والكاميرات والمراقبة الذكية.",
+
+    success:
+      "شكراً لك. تم تسجيل طلبك. ستتواصل Runexa مع المشاركين الذين يتم اختيارهم خلال المراحل القادمة من الوصول المبكر.",
+
+    submitError:
+      "تعذر إرسال الطلب. يرجى المحاولة مرة أخرى.",
+
+    fullName:
+      "الاسم الكامل",
+
+    fullNamePlaceholder:
+      "اسمك",
+
+    email:
+      "البريد الإلكتروني",
+
+    emailPlaceholder:
+      "you@example.com",
+
+    country:
+      "الدولة",
+
+    countryPlaceholder:
+      "المغرب، فرنسا، الولايات المتحدة...",
+
+    profile:
+      "الملف الشخصي",
+
+    interestLevel:
+      "نوع الاهتمام",
+
+    protectTarget:
+      "ما الذي ترغب في أن يحميه Agent 0؟",
+
+    message:
+      "رسالة / حالة استخدام",
+
     messagePlaceholder:
-      "أخبرنا بنوع مشكلة الأمان أو المراقبة التي تريد من Agent 0 حلها.",
+      "صف التحدي الأمني أو مشكلة المراقبة أو الأتمتة التي ترغب في أن يساعد Agent 0 في حلها.",
+
     consent:
-      "أوافق على أن تتواصل معي Runexa Systems بخصوص تحديثات Agent 0، والوصول المبكر، والمعلومات المتعلقة بالمنتج.",
-    submit: "طلب الوصول المبكر",
+      "أوافق على أن تتواصل معي Runexa Systems بشأن Agent 0 وبرامج الوصول المبكر والتحديثات المستقبلية المتعلقة بالمنتج.",
+
+    submit:
+      "طلب الوصول المبكر",
+
     disclaimer:
-      "Agent 0 هو مبادرة مفهومية وبحثية. وهو غير متاح للعامة بعد.",
+      "Agent 0 مشروع بحث وتطوير قيد الدراسة حالياً، وهو غير متاح للعامة في الوقت الحالي.",
 
     profiles: [
       "مالك منزل",
       "والد / عائلة",
-      "مدير عقار",
-      "مهتم بـ Smart Home",
+      "مدير عقارات",
+      "مهتم بالمنازل الذكية",
       "شركة أمنية",
       "مستثمر / شريك",
-      "آخر",
+      "أخرى",
     ],
+
     interestLevels: [
       "وصول مبكر",
-      "مختبر تجريبي",
+      "برنامج تجريبي",
       "شراكة",
-      "استثمار / استفسار تجاري",
-      "متابعة التحديثات فقط",
+      "استثمار / فرصة تجارية",
+      "متابعة التحديثات",
     ],
+
     protectTargets: [
       "منزل",
       "شقة",
       "مكتب",
       "مستودع",
-      "منزل عطلات",
+      "منزل للعطلات",
       "عدة عقارات",
     ],
   },

@@ -63,172 +63,250 @@ export const metadata: Metadata = {
 
 const labels: any = {
   en: {
-    badge: "Concept Preview · Coming Soon",
+    badge: "Research Preview · Runexa Labs",
+
     title: "Runexa Agent 0",
+
     subtitle:
-      "The future AI safety infrastructure for homes, sensors, cameras, GPS, and intelligent home monitoring.",
+      "Exploring the future of AI-powered safety, monitoring, and intelligent home awareness.",
+
     joinWaitlist: "Join Waitlist",
-    viewConcept: "View Security Concept",
 
-    commandEyebrow: "Intelligent Safety Command Center",
+    viewConcept: "Explore the Concept",
+
+    commandEyebrow:
+      "Intelligent Safety Platform",
+
     commandTitle:
-      "One AI layer for cameras, sensors, GPS, alerts, and future smart home systems.",
+      "A unified intelligence layer for cameras, sensors, GPS, and connected environments.",
 
-    thinkingTitle: "How Agent 0 thinks",
+    thinkingTitle:
+      "How Agent 0 works",
+
     thinkingDesc:
-      "Agent 0 combines camera understanding, environmental sensors, GPS presence detection, and AI reasoning into a unified safety intelligence layer designed for future autonomous homes.",
+      "Agent 0 explores how visual understanding, environmental sensing, location awareness, and AI reasoning can work together to support future safety and monitoring systems.",
+
     thinkingSteps: [
-      "Cameras detect visual activity.",
-      "Sensors confirm physical events.",
-      "GPS understands trusted presence.",
-      "AI reasoning turns events into risk levels and actions.",
+      "Visual systems detect activity and changes.",
+      "Sensors provide environmental context.",
+      "Location awareness helps identify trusted presence.",
+      "AI reasoning transforms signals into actionable insights.",
     ],
 
-    visionEyebrow: "System Vision",
-    visionTitle: "Camera + Sensors + GPS + AI Reasoning",
+    visionEyebrow:
+      "Product Vision",
+
+    visionTitle:
+      "Connected Awareness Through AI",
+
     visionDesc:
-      "A future command center that can help understand unusual movement, open doors, unknown visitors, sensor alerts, family presence, and security events in real time.",
+      "A future platform designed to help understand unusual activity, access events, environmental changes, trusted presence, and safety-related situations in real time.",
+
     labsNotice:
-      "Agent 0 is currently a research and concept initiative from Runexa Labs. Features shown on this page are experimental and not publicly available yet.",
+      "Agent 0 is an active research and development initiative from Runexa Labs. Concepts presented on this page are experimental and not currently available as a public product.",
 
     features: [
       {
-        title: "AI Camera Reasoning",
-        desc: "Understand movement, visitors, unusual activity, and visual events from connected cameras.",
+        title: "Visual Intelligence",
+        desc:
+          "Analyze movement, activity, visitors, and events through connected camera systems.",
       },
+
       {
-        title: "Sensor Fusion Intelligence",
-        desc: "Combine door sensors, motion sensors, vibration, sound, temperature, and environmental signals.",
+        title: "Sensor Intelligence",
+        desc:
+          "Combine signals from environmental, motion, access, and safety sensors into a unified view.",
       },
+
       {
-        title: "GPS Geofencing",
-        desc: "Detect trusted presence, family arrival, unknown movement zones, and location-based safety rules.",
+        title: "Location Awareness",
+        desc:
+          "Support trusted presence detection, geofencing, and context-aware safety rules.",
       },
+
       {
-        title: "Real-time Smart Alerts",
-        desc: "Transform raw events into clear risk levels, explanations, and recommended actions.",
+        title: "Real-Time Insights",
+        desc:
+          "Transform raw signals into understandable events, explanations, and recommendations.",
       },
+
       {
-        title: "Smart Home Automation Ready",
-        desc: "Future-ready architecture for smart home automation, intelligent monitoring, and connected safety systems.",
+        title: "Automation-Ready Architecture",
+        desc:
+          "Designed to support future intelligent environments and connected automation systems.",
       },
+
       {
-        title: "Privacy-first Architecture",
-        desc: "Designed with local processing, permission control, and user-owned security data in mind.",
+        title: "Privacy-First Design",
+        desc:
+          "Built with transparency, user control, and privacy-conscious system design.",
       },
     ],
   },
-
   fr: {
-    badge: "Aperçu concept · Bientôt disponible",
+    badge: "Aperçu recherche · Runexa Labs",
+
     title: "Runexa Agent 0",
+
     subtitle:
-      "La future infrastructure IA de sécurité pour maisons, capteurs, caméras, GPS et surveillance intelligente du domicile.",
+      "Explorer l’avenir de la sécurité, de la surveillance et de l’intelligence environnementale assistées par l’IA.",
+
     joinWaitlist: "Rejoindre la liste d’attente",
-    viewConcept: "Voir le concept sécurité",
 
-    commandEyebrow: "Centre de commande sécurité intelligent",
+    viewConcept: "Explorer le concept",
+
+    commandEyebrow:
+      "Plateforme de sécurité intelligente",
+
     commandTitle:
-      "Une couche IA unique pour caméras, capteurs, GPS, alertes et futurs systèmes Smart Home.",
+      "Une couche d’intelligence unifiée pour les caméras, les capteurs, le GPS et les environnements connectés.",
 
-    thinkingTitle: "Comment Agent 0 raisonne",
+    thinkingTitle:
+      "Comment fonctionne Agent 0",
+
     thinkingDesc:
-      "Agent 0 combine la compréhension caméra, les capteurs environnementaux, la détection de présence GPS et le raisonnement IA dans une couche d’intelligence sécurité unifiée, pensée pour les maisons autonomes du futur.",
+      "Agent 0 explore comment la compréhension visuelle, les capteurs environnementaux, la localisation et le raisonnement IA peuvent fonctionner ensemble pour soutenir les futurs systèmes de sécurité et de surveillance.",
+
     thinkingSteps: [
-      "Les caméras détectent l’activité visuelle.",
-      "Les capteurs confirment les événements physiques.",
-      "Le GPS comprend les présences de confiance.",
-      "Le raisonnement IA transforme les événements en niveaux de risque et actions.",
+      "Les systèmes visuels détectent les activités et les changements.",
+      "Les capteurs apportent un contexte environnemental.",
+      "La localisation aide à identifier les présences de confiance.",
+      "Le raisonnement IA transforme les signaux en informations exploitables.",
     ],
 
-    visionEyebrow: "Vision système",
-    visionTitle: "Camera + Sensors + GPS + AI Reasoning",
+    visionEyebrow:
+      "Vision produit",
+
+    visionTitle:
+      "Une intelligence connectée grâce à l’IA",
+
     visionDesc:
-      "Un futur centre de commande capable d’aider à comprendre les mouvements inhabituels, portes ouvertes, visiteurs inconnus, alertes capteurs, présence familiale et événements de sécurité en temps réel.",
+      "Une future plateforme conçue pour aider à comprendre les activités inhabituelles, les événements d’accès, les changements environnementaux, les présences de confiance et les situations liées à la sécurité en temps réel.",
+
     labsNotice:
-      "Agent 0 est actuellement une initiative de recherche et de concept de Runexa Labs. Les fonctionnalités présentées sur cette page sont expérimentales et ne sont pas encore disponibles publiquement.",
+      "Agent 0 est une initiative active de recherche et développement menée par Runexa Labs. Les concepts présentés sur cette page sont expérimentaux et ne sont actuellement pas disponibles en tant que produit public.",
 
     features: [
       {
-        title: "AI Camera Reasoning",
-        desc: "Comprendre les mouvements, visiteurs, activités inhabituelles et événements visuels provenant de caméras connectées.",
+        title: "Intelligence visuelle",
+        desc:
+          "Analyser les mouvements, les activités, les visiteurs et les événements grâce à des systèmes de caméras connectés.",
       },
+
       {
-        title: "Sensor Fusion Intelligence",
-        desc: "Combiner capteurs de porte, capteurs de mouvement, vibrations, sons, température et signaux environnementaux.",
+        title: "Intelligence des capteurs",
+        desc:
+          "Combiner les signaux issus des capteurs environnementaux, de mouvement, d’accès et de sécurité dans une vue unifiée.",
       },
+
       {
-        title: "GPS Geofencing",
-        desc: "Détecter les présences de confiance, l’arrivée de la famille, les zones de mouvement inconnues et les règles de sécurité basées sur la localisation.",
+        title: "Conscience de la localisation",
+        desc:
+          "Prendre en charge la détection de présence de confiance, le géorepérage et les règles de sécurité contextuelles.",
       },
+
       {
-        title: "Real-time Smart Alerts",
-        desc: "Transformer les événements bruts en niveaux de risque clairs, explications et actions recommandées.",
+        title: "Informations en temps réel",
+        desc:
+          "Transformer les signaux bruts en événements compréhensibles, explications et recommandations.",
       },
+
       {
-        title: "Smart Home Automation Ready",
-        desc: "Architecture prête pour l’automatisation Smart Home, la surveillance intelligente et les systèmes de sécurité connectés.",
+        title: "Architecture prête pour l’automatisation",
+        desc:
+          "Conçue pour prendre en charge les futurs environnements intelligents et systèmes d’automatisation connectés.",
       },
+
       {
-        title: "Privacy-first Architecture",
-        desc: "Conçu avec le traitement local, le contrôle des permissions et la propriété utilisateur des données de sécurité.",
+        title: "Conception axée sur la confidentialité",
+        desc:
+          "Développée autour de la transparence, du contrôle utilisateur et du respect de la vie privée.",
       },
     ],
   },
 
-  ar: {
-    badge: "معاينة مفهومية · قريباً",
-    title: "Runexa Agent 0",
+ ar: {
+    badge:
+      "معاينة بحثية · Runexa Labs",
+
+    title:
+      "Runexa Agent 0",
+
     subtitle:
-      "البنية المستقبلية للأمان بالذكاء الاصطناعي للمنازل والحساسات والكاميرات وGPS والمراقبة المنزلية الذكية.",
-    joinWaitlist: "الانضمام إلى قائمة الانتظار",
-    viewConcept: "عرض مفهوم الأمان",
+      "استكشاف مستقبل الأمان والمراقبة والوعي البيئي المدعوم بالذكاء الاصطناعي.",
 
-    commandEyebrow: "مركز قيادة أمان ذكي",
+    joinWaitlist:
+      "الانضمام إلى قائمة الانتظار",
+
+    viewConcept:
+      "استكشاف المفهوم",
+
+    commandEyebrow:
+      "منصة أمان ذكية",
+
     commandTitle:
-      "طبقة ذكاء اصطناعي واحدة للكاميرات والحساسات وGPS والتنبيهات وأنظمة Smart Home المستقبلية.",
+      "طبقة ذكاء موحدة للكاميرات وأجهزة الاستشعار والموقع والبيئات المتصلة.",
 
-    thinkingTitle: "كيف يفكر Agent 0",
+    thinkingTitle:
+      "كيف يعمل Agent 0",
+
     thinkingDesc:
-      "يجمع Agent 0 بين فهم الكاميرا، الحساسات البيئية، اكتشاف الحضور عبر GPS، والاستدلال بالذكاء الاصطناعي داخل طبقة موحدة لذكاء الأمان مصممة للمنازل الذاتية المستقبلية.",
+      "يستكشف Agent 0 كيفية دمج الفهم البصري والاستشعار البيئي والوعي بالموقع والاستدلال بالذكاء الاصطناعي لدعم أنظمة الأمان والمراقبة المستقبلية.",
+
     thinkingSteps: [
-      "الكاميرات تكتشف النشاط البصري.",
-      "الحساسات تؤكد الأحداث الفعلية.",
-      "GPS يفهم الحضور الموثوق.",
-      "الاستدلال بالذكاء الاصطناعي يحول الأحداث إلى مستويات خطر وإجراءات.",
+      "تكتشف الأنظمة البصرية الأنشطة والتغيرات.",
+      "توفر أجهزة الاستشعار سياقاً بيئياً إضافياً.",
+      "يساعد الوعي بالموقع على تحديد الحضور الموثوق.",
+      "يحوّل الاستدلال بالذكاء الاصطناعي الإشارات إلى رؤى قابلة للتنفيذ.",
     ],
 
-    visionEyebrow: "رؤية النظام",
-    visionTitle: "Camera + Sensors + GPS + AI Reasoning",
+    visionEyebrow:
+      "رؤية المنتج",
+
+    visionTitle:
+      "وعي متصل مدعوم بالذكاء الاصطناعي",
+
     visionDesc:
-      "مركز قيادة مستقبلي يساعد على فهم الحركة غير المعتادة، الأبواب المفتوحة، الزوار غير المعروفين، تنبيهات الحساسات، حضور العائلة، وأحداث الأمان في الوقت الحقيقي.",
+      "منصة مستقبلية مصممة للمساعدة في فهم الأنشطة غير المعتادة وأحداث الوصول والتغيرات البيئية والحضور الموثوق والحالات المرتبطة بالأمان في الوقت الفعلي.",
+
     labsNotice:
-      "Agent 0 هو حالياً مبادرة بحثية ومفهومية من Runexa Labs. الميزات المعروضة في هذه الصفحة تجريبية وليست متاحة للعامة بعد.",
+      "Agent 0 هو مبادرة بحث وتطوير نشطة من Runexa Labs. المفاهيم المعروضة في هذه الصفحة تجريبية وليست متاحة حالياً كمنتج عام.",
 
     features: [
       {
-        title: "AI Camera Reasoning",
-        desc: "فهم الحركة والزوار والنشاط غير المعتاد والأحداث البصرية من الكاميرات المتصلة.",
+        title: "الذكاء البصري",
+        desc:
+          "تحليل الحركة والأنشطة والزوار والأحداث من خلال أنظمة الكاميرات المتصلة.",
       },
+
       {
-        title: "Sensor Fusion Intelligence",
-        desc: "دمج حساسات الأبواب والحركة والاهتزاز والصوت والحرارة والإشارات البيئية.",
+        title: "ذكاء أجهزة الاستشعار",
+        desc:
+          "دمج الإشارات القادمة من أجهزة الاستشعار البيئية والحركية وأنظمة الوصول والأمان ضمن رؤية موحدة.",
       },
+
       {
-        title: "GPS Geofencing",
-        desc: "اكتشاف الحضور الموثوق، وصول أفراد العائلة، مناطق الحركة غير المعروفة، وقواعد الأمان المعتمدة على الموقع.",
+        title: "الوعي بالموقع",
+        desc:
+          "دعم اكتشاف الحضور الموثوق والتسييج الجغرافي وقواعد الأمان المعتمدة على السياق.",
       },
+
       {
-        title: "Real-time Smart Alerts",
-        desc: "تحويل الأحداث الخام إلى مستويات خطر واضحة، تفسيرات، وإجراءات موصى بها.",
+        title: "رؤى فورية",
+        desc:
+          "تحويل الإشارات الخام إلى أحداث مفهومة وتفسيرات وتوصيات عملية.",
       },
+
       {
-        title: "Smart Home Automation Ready",
-        desc: "بنية جاهزة لمستقبل أتمتة Smart Home والمراقبة الذكية وأنظمة الأمان المتصلة.",
+        title: "بنية جاهزة للأتمتة",
+        desc:
+          "مصممة لدعم البيئات الذكية المستقبلية وأنظمة الأتمتة المتصلة.",
       },
+
       {
-        title: "Privacy-first Architecture",
-        desc: "مصممة مع مراعاة المعالجة المحلية، التحكم في الصلاحيات، وملكية المستخدم لبيانات الأمان.",
+        title: "تصميم يركز على الخصوصية",
+        desc:
+          "مبنية على الشفافية وتحكم المستخدم واحترام خصوصية البيانات.",
       },
     ],
   },
