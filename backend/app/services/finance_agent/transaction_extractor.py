@@ -179,6 +179,13 @@ def extract_transactions(text: str) -> list[dict]:
         date = extract_date(clean_line)
         description = clean_line
 
+        print(
+            "ADDING:",
+            date,
+            amount,
+            transaction_type,
+        )
+
         transactions.append(
             {
                 "date": date,
@@ -187,5 +194,9 @@ def extract_transactions(text: str) -> list[dict]:
                 "type": transaction_type,
             }
         )
+
+        if len(transactions) <= 5:
+            print("TRANSACTIONS_COUNT:", len(transactions))
+            print("LAST_TRANSACTION:", transactions[-1])
 
     return transactions
