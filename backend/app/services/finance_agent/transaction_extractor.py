@@ -133,6 +133,21 @@ def extract_transactions(text: str) -> list[dict]:
         if not clean_line:
             continue
 
+        if len(transactions) < 5:
+            print(
+                "CHECK:",
+                clean_line,
+                "DATE=",
+                extract_date(clean_line),
+                "AMOUNT_MATCH=",
+                bool(
+                    re.search(
+                        r"-?\d+(?:[.,]\d{2})",
+                        clean_line,
+                    )
+                ),
+            )
+
         if not has_transaction_signal(clean_line):
             continue
 
@@ -141,10 +156,18 @@ def extract_transactions(text: str) -> list[dict]:
             clean_line,
         )
 
+        if len(transactions) < 5:
+            print("LINE:", clean_line)
+            print("AMOUNTS:", amounts)
+
         if not amounts:
             continue
 
         amount = parse_amount(amounts[-1])
+
+        if len(transactions) < 5:
+            print("SELECTED:", amount)
+
         transaction_type = detect_type(clean_line, amount)
 
         if transaction_type == "expense" and amount > 0:
