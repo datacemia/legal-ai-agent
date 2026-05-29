@@ -112,676 +112,873 @@ const labels: Record<Language, PricingLabels> = {
     apiSectionBadge: "Runexa API",
     apiSectionTitle: "API Plans for Developers",
     apiSectionDesc:
-      "Runexa API is a separate paid product for developers and companies who want to integrate AI agents into their own apps, dashboards, and workflows.",
-
+      "Runexa API is a dedicated paid product for teams that want to embed AI agents into applications, dashboards, internal tools, and enterprise workflows.",
     apiStartPlan: "Start API Plan",
     apiContactSales: "Contact Sales",
-
     apiPlans: [
-      {
-        name: "API Starter",
-        price: "$29",
-        credits: "100 API credits",
-        rate: "10 requests/minute",
-        desc: "For developers testing Runexa API integrations.",
-        features: [
-          "Legal AI API",
-          "Finance AI API",
-          "Study AI API",
-          "Business AI API",
-          "Async job processing",
-        ],
-      },
+        {
+    name: "API Starter",
+    price: "$29",
+    credits: "100 API Credits",
+    rate: "10 Requests / Minute",
+
+    desc:
+      "Designed for developers exploring Runexa AI APIs and building early-stage integrations.",
+
+    features: [
+      "Legal AI API",
+      "Finance AI API",
+      "Study AI API",
+      "Business AI API",
+      "Asynchronous Processing",
+      "API Key Management",
+      "Usage Analytics Dashboard",
+      "Developer Documentation",
+    ],
+  },
       {
         name: "API Pro",
         price: "$99",
-        credits: "500 API credits",
-        rate: "60 requests/minute",
-        desc: "For production workflows and regular API usage.",
+        credits: "500 API Credits",
+        rate: "Higher API Limits",
+        desc:
+          "Built for production applications, growing teams, and higher API usage.",
         highlighted: true,
         features: [
           "Everything in API Starter",
-          "Higher API limits",
-          "Production-ready workflows",
-          "Priority processing",
-          "Usage tracking",
+          "Higher API Limits",
+          "Priority Processing",
+          "Usage Analytics Dashboard",
+          "Credits & Usage Tracking",
+          "Production-Ready Integrations",
         ],
       },
       {
         name: "Enterprise API",
+
         price: "Custom",
-        credits: "Custom API credits",
-        rate: "Custom rate limits",
-        desc: "For organizations with private workflows and scale needs.",
+
+        credits: "Custom API Credits",
+
+        rate: "Custom Limits",
+
+        desc:
+          "Built for enterprises requiring custom AI solutions, advanced integrations, and dedicated support.",
+
         features: [
-          "Custom AI workflows",
-          "Team API access",
-          "Private infrastructure options",
-          "Priority support",
-          "Enterprise onboarding",
+          "Everything in API Pro",
+          "Custom AI Workflows",
+          "Team API Access",
+          "Private Infrastructure Options",
+          "Dedicated Support",
+          "Enterprise Onboarding",
         ],
       },
     ],
 
-    badge: "Global pricing for every Runexa AI agent",
-    title: "One account. All agents. Simple global billing.",
-    desc: "Access every Runexa AI agent with one account. Start with a $1 trial, global credits, or a Pro subscription.",
-    socialProof: "Used for legal analysis, personal finance, learning, and business decisions.",
-    workflowLine: "Built for real-world AI workflows.",
-    powerUserBadge: "Recommended for power users",
-    activateTrialCta: "Activate any agent with a one-time $1 trial",
-    viewPlans: "View Pro & Premium",
-    audience: "For individuals, professionals, and organizations",
-    trustedWorkflow: "Upload → AI analysis → actionable insights",
-    whyTitle: "Why people use Runexa",
+    badge: "Unified Access to Every Runexa AI Agent",
+    title: "One Account. Every AI Agent. Simple Pricing.",
+    desc:
+      "Access every Runexa AI agent with a single account. Start with a $1 trial, use unified credits, or upgrade to Pro for unlimited access.",
+    socialProof:
+      "Trusted for legal analysis, financial insights, learning support, and business decision-making.",
+    workflowLine:
+      "Built for real-world analysis, learning, and decision workflows.",
+    powerUserBadge:
+      "Most Popular for Professionals",
+    activateTrialCta:
+      "Start Any AI Agent for $1",
+    viewPlans:
+      "Compare Plans",
+    audience:
+      "For Individuals, Professionals, and Enterprises",
+    trustedWorkflow:
+      "Upload → Analyze → Act",
+    whyTitle:
+      "Why People Choose Runexa",
     whyCards: [
-      {
-        title: "Detect risky contract clauses",
-        desc: "Review contracts and obligations before signing.",
-      },
-      {
-        title: "Understand spending habits",
-        desc: "Find waste, subscriptions, and financial patterns.",
-      },
-      {
-        title: "Learn faster",
-        desc: "Turn study material into summaries and revision systems.",
-      },
-      {
-        title: "Make smarter business decisions",
-        desc: "Analyze opportunities, risks, and strategic choices.",
-      },
-    ],
-    mostPopular: "Most popular",
+    {
+      title: "Identify Contract Risks",
+      desc: "Review contracts, obligations, and potential risks before signing.",
+    },
+
+    {
+      title: "Improve Financial Decisions",
+      desc: "Discover spending patterns, subscriptions, and opportunities to save.",
+    },
+
+    {
+      title: "Learn More Effectively",
+      desc: "Transform study materials into summaries, quizzes, and study plans.",
+    },
+
+    {
+      title: "Make Better Business Decisions",
+      desc: "Analyze opportunities, risks, and strategic options with AI-powered insights.",
+    },
+  ],
+    mostPopular: "Most Popular",
+
     microTrust: [
-      "🔒 Secure AI workspace",
-      "🌍 Global access",
-      "⚡ Fast AI analysis",
+      "🔒 Secure AI Platform",
+      "🌍 Global Access",
+      "⚡ Fast AI Insights",
     ],
-    section1: "Start with a $1 AI trial",
-    section2: "Global AI credits",
-    section3: "Professional plans",
-    section4: "Credit usage by AI agent",
-    trialsTitle: "$1 Trials by Agent",
+
+    section1: "Start with a $1 Trial",
+
+    section2: "Unified Credits",
+
+    section3: "Pro & Enterprise Plans",
+
+    section4: "Credit Usage by Agent",
+
+    trialsTitle: "$1 Trials",
+
     trialsDesc:
-      "Each agent has its own one-time $1 activation. Try exactly the agent you need before using global credits or a plan.",
-    trialsBadge: "Choose the agent you need",
-    oneTimeTrial: "one-time trial",
-    trialAnalysis: "One focused AI analysis",
-    trialReassurance: "Instant activation when payments are available.",
-    startTrial: "Start trial",
-    creditsTitle: "Global Credits",
-    mostFlexible: "Most flexible",
+      "Activate any Runexa AI agent with a one-time $1 trial. Explore the agent you need before using credits or upgrading to a plan.",
+
+    trialsBadge: "Choose Your AI Agent",
+
+    oneTimeTrial: "One-Time Trial",
+
+    trialAnalysis: "One AI-Powered Analysis",
+
+    trialReassurance:
+      "Instant access after activation.",
+
+    startTrial: "Start Trial",
+
+    creditsTitle: "Unified Credits",
+
+    mostFlexible: "Most Flexible",
+
     creditsDesc:
-      "Buy credits once and use them on all Runexa agents. Credits are the flexible option for users who do not need a monthly plan.",
-    bestValue: "Best value",
-    oneTime: "one-time",
-    globalCredits: "global credits",
-    buyCredits: "Buy credits",
-    plansTitle: "Pro / Premium Plans",
+      "Purchase credits once and use them across every Runexa AI agent. Ideal for occasional users who do not need a subscription.",
+
+    bestValue: "Best Value",
+
+    oneTime: "One-Time Purchase",
+
+    globalCredits: "Credits",
+
+    buyCredits: "Buy Credits",
+
+    plansTitle: "Pro & Enterprise Plans",
+
     plansDesc:
-      "One global subscription covers all agents. No separate Pro plan per agent.",
-    globalPro: "Global Pro",
-    bestForProfessionals: "Best for professionals",
-    proValueNote: "For regular users of multiple AI agents.",
+      "One subscription gives you access to all Runexa AI agents. No separate subscriptions required.",
+
+    globalPro: "Runexa Pro",
+
+    bestForProfessionals: "Best for Professionals",
+
+    proValueNote:
+      "Designed for regular users who rely on multiple AI agents.",
+
     proDesc:
-      "For individuals and professionals who use multiple agents regularly.",
+      "For individuals and professionals who need ongoing access across multiple AI agents.",
+
     month: "/month",
+
     proFeatures: [
-      "200 credits/month",
-      "Usable on all agents",
-      "Priority processing",
-      "Access to Legal, Study, Finance, and Business agents",
-      "Future agents included when available",
+      "200 Credits per Month",
+      "Usable Across All Agents",
+      "Priority Processing",
+      "Access to Legal, Finance, Study, and Business AI",
+      "Future AI Agents Included",
     ],
+
     upgradePro: "Upgrade to Pro",
+
     enterprise: "Enterprise",
-    premiumDesc: "For teams, companies, schools, and multi-user organizations.",
+
+    premiumDesc:
+      "For teams, organizations, educational institutions, and businesses.",
+
     custom: "Custom",
-    tailoredPricing: "tailored pricing",
+
+    tailoredPricing: "Custom Pricing",
+
     premiumFeatures: [
-      "Secure workspaces",
-      "Team collaboration",
-      "Private AI workflows",
-      "Organization management",
-      "Priority support",
+      "Secure Workspaces",
+      "Team Collaboration",
+      "Private AI Workflows",
+      "Organization Management",
+      "Priority Support",
     ],
-    contactSales: "Contact sales",
-    creditCostsTitle: "Agent credit costs",
+    contactSales: "Contact Sales",
+
+    creditCostsTitle: "Credit Usage by Agent",
+
     creditCostsDesc:
-      "Credits are global. The same balance works across every agent.",
-    creditComplexityNote: "The cost depends on the complexity of the AI analysis.",
-    creditsPerAnalysis: "credits / analysis",
+      "A single credit balance works across all Runexa AI agents.",
+
+    creditComplexityNote:
+      "Credit consumption depends on the complexity of the analysis.",
+
+    creditsPerAnalysis: "Credits per Analysis",
     infoCards: [
-      {
-        title: "Trials are optional",
-        desc: "You can activate a $1 trial for one agent or skip directly to credits or Pro.",
-      },
-      {
-        title: "Credits are global",
-        desc: "Buy once and use the same balance for Legal, Study, Finance, or Business.",
-      },
-      {
-        title: "Pro is global",
-        desc: "One monthly Pro plan includes credits usable across all agents.",
-      },
-    ],
+    {
+      title: "Start Your Way",
+      desc: "Try any AI agent for $1 or go directly to credits or a subscription plan.",
+    },
+
+    {
+      title: "One Credit Balance",
+      desc: "Use the same credits across Legal, Finance, Study, and Business AI agents.",
+    },
+
+    {
+      title: "One Plan for All Agents",
+      desc: "A single Pro subscription gives you access across the entire Runexa platform.",
+    },
+  ],
     disclaimer:
-      "⚠️ Runexa AI agents provide informational and decision-support output. Always verify important legal, financial, academic, or business decisions with qualified professionals or official sources.",
+      "⚠️ Runexa AI agents provide informational and decision-support insights. Always verify important legal, financial, academic, and business decisions with qualified professionals or official sources.",
+
     messages: {
       trial: (agentName: string) =>
-        `$1 trial payment for ${agentName} is not configured yet. Payments are temporarily unavailable during platform rollout.`,
+        `Continue to checkout to activate ${agentName}.`,
+
       credits:
-        "Payments are temporarily unavailable during platform rollout. Global credits will be available soon.",
-      pro: "Pro subscription is not configured yet. Payments are temporarily unavailable during platform rollout.",
+        "Continue to checkout to purchase credits.",
+
+      pro:
+        "Continue to checkout to activate your subscription.",
     },
     agents: [
-      {
-        slug: "legal",
-        name: "Runexa Legal Agent",
-        description:
-          "Detect risky clauses before signing contracts.",
-        trialOutcome: "Analyze one contract",
-        credits: 12,
-        gradient: "from-slate-950 to-blue-700",
-      },
-      {
-        slug: "finance",
-        name: "Runexa Finance Coach",
-        description: "Understand spending, reduce waste, and improve financial habits.",
-        trialOutcome: "Analyze one bank statement",
-        credits: 7,
-        gradient: "from-emerald-700 to-teal-500",
-      },
-      {
-        slug: "study",
-        name: "Runexa Study Agent",
-        description: "Learn faster with AI summaries and revision systems.",
-        trialOutcome: "Generate one AI study session",
-        credits: 5,
-        gradient: "from-indigo-700 to-violet-500",
-      },
-      {
-        slug: "business",
-        name: "Runexa Business Decision Agent",
-        description: "Analyze opportunities, risks, and strategic decisions.",
-        trialOutcome: "Run one business analysis",
-        credits: 30,
-        gradient: "from-amber-700 to-orange-500",
-      },
-    ],
+    {
+      slug: "legal",
+      name: "Runexa Legal Agent",
+      description:
+        "Identify contract risks, obligations, and critical clauses before signing.",
+      trialOutcome: "One AI-powered contract analysis",
+      credits: 12,
+      gradient: "from-slate-950 to-blue-700",
+    },
+
+    {
+      slug: "finance",
+      name: "Runexa Finance Coach",
+      description:
+        "Understand spending patterns, reduce waste, and improve financial decisions.",
+      trialOutcome: "One AI-powered financial analysis",
+      credits: 7,
+      gradient: "from-emerald-700 to-teal-500",
+    },
+
+    {
+      slug: "study",
+      name: "Runexa Study Agent",
+      description:
+        "Transform study materials into summaries, quizzes, and learning plans.",
+      trialOutcome: "One AI-powered learning session",
+      credits: 5,
+      gradient: "from-indigo-700 to-violet-500",
+    },
+
+    {
+      slug: "business",
+      name: "Runexa Business Decision Agent",
+      description:
+        "Evaluate opportunities, risks, and strategic business decisions.",
+      trialOutcome: "One AI-powered business analysis",
+      credits: 30,
+      gradient: "from-amber-700 to-orange-500",
+    },
+  ],
     creditPacks: [
-      {
-        name: "Starter",
-        credits: 50,
-        price: "$9",
-        description: "Perfect for testing multiple Runexa agents.",
-      },
-      {
-        name: "Growth",
-        credits: 150,
-        price: "$24",
-        description: "Best value for regular multi-agent usage.",
-        highlighted: true,
-      },
-      {
-        name: "Scale",
-        credits: 500,
-        price: "$89",
-        description: "Built for professionals and advanced workloads.",
-      },
-    ],
+    {
+      name: "Starter",
+      credits: 50,
+      price: "$9",
+      description:
+        "Ideal for exploring multiple Runexa AI agents and occasional use.",
+    },
+
+    {
+      name: "Growth",
+      credits: 150,
+      price: "$24",
+      description:
+        "Best value for regular users working across multiple AI agents.",
+      highlighted: true,
+    },
+
+    {
+      name: "Scale",
+      credits: 500,
+      price: "$89",
+      description:
+        "Designed for professionals, teams, and higher-volume AI workloads.",
+    },
+  ],
   },
 
   fr: {
     apiSectionBadge: "API Runexa",
-    apiSectionTitle: "Plans API pour développeurs",
-    apiSectionDesc:
-      "L’API Runexa est un produit séparé destiné aux développeurs et entreprises qui souhaitent intégrer les agents IA dans leurs applications, dashboards et workflows.",
 
-    apiStartPlan: "Démarrer le plan API",
+    apiSectionTitle: "Offres API pour les développeurs",
+
+    apiSectionDesc:
+      "L’API Runexa est un produit dédié aux développeurs et aux entreprises qui souhaitent intégrer des agents IA dans leurs applications, tableaux de bord, outils internes et workflows métier.",
+
+    apiStartPlan: "Commencer avec l’API",
+
     apiContactSales: "Contacter l’équipe commerciale",
 
     apiPlans: [
       {
-        name: "API Débutant",
+        name: "API Starter",
+
         price: "$29",
+
         credits: "100 crédits API",
-        rate: "10 requêtes/minute",
-        desc: "Pour les développeurs qui testent les intégrations API Runexa.",
+
+        rate: "10 requêtes / minute",
+
+        desc:
+          "Conçu pour les développeurs qui découvrent les API IA Runexa et créent leurs premières intégrations.",
+
         features: [
           "API IA juridique",
           "API IA finance",
           "API IA étude",
           "API IA business",
-          "Traitement asynchrone des jobs",
+          "Traitement asynchrone",
+          "Gestion des clés API",
+          "Tableau de bord d’utilisation",
+          "Documentation développeur",
         ],
       },
+
       {
         name: "API Pro",
+
         price: "$99",
+
         credits: "500 crédits API",
-        rate: "60 requêtes/minute",
-        desc: "Pour les workflows de production et une utilisation régulière de l’API.",
+
+        rate: "Limites API étendues",
+
+        desc:
+          "Conçu pour les applications en production, les équipes en croissance et une utilisation avancée de l’API.",
+
         highlighted: true,
+
         features: [
-          "Tout inclus dans API Débutant",
-          "Limites API plus élevées",
-          "Workflows prêts pour la production",
+          "Tout ce qui est inclus dans API Starter",
+          "Limites API étendues",
           "Traitement prioritaire",
-          "Suivi d’utilisation",
+          "Tableau de bord d’utilisation",
+          "Suivi des crédits et de l’utilisation",
+          "Intégrations prêtes pour la production",
         ],
       },
       {
         name: "API Entreprise",
+
         price: "Sur mesure",
+
         credits: "Crédits API personnalisés",
+
         rate: "Limites personnalisées",
-        desc: "Pour les organisations ayant des workflows privés et des besoins à grande échelle.",
+
+        desc:
+          "Conçu pour les entreprises ayant besoin de solutions IA personnalisées, d’intégrations avancées et d’un accompagnement dédié.",
+
         features: [
+          "Tout ce qui est inclus dans API Pro",
           "Workflows IA personnalisés",
-          "Accès API équipe",
-          "Infrastructure privée",
-          "Support prioritaire",
+          "Accès API pour les équipes",
+          "Options d’infrastructure privée",
+          "Support dédié",
           "Onboarding entreprise",
         ],
       },
     ],
 
-    badge: "Tarification globale pour tous les agents IA Runexa",
-    title: "Un compte. Tous les agents. Une facturation simple et globale.",
-    desc: "Accédez à tous les agents IA Runexa avec un seul compte. Commencez avec un essai à 1 $, des crédits globaux ou un abonnement Pro.",
-    socialProof: "Utilisé pour l’analyse juridique, la finance personnelle, l’apprentissage et les décisions business.",
-    workflowLine: "Conçu pour les workflows IA du monde réel.",
-    powerUserBadge: "Recommandé pour les utilisateurs avancés",
-    activateTrialCta: "Activer un agent avec un essai unique à 1 $",
-    viewPlans: "Voir Pro & Premium",
-    audience: "Pour les particuliers, les professionnels et les organisations",
-    trustedWorkflow: "Téléversement → Analyse IA → Insights actionnables",
-    whyTitle: "Pourquoi utiliser Runexa",
+    badge: "Accès unifié à tous les agents IA Runexa",
+    title: "Un compte. Tous les agents IA. Une tarification simple.",
+    desc:
+      "Accédez à tous les agents IA Runexa avec un seul compte. Commencez avec un essai à 1 $, utilisez des crédits unifiés ou passez à Runexa Pro.",
+    socialProof:
+      "Utilisé pour l’analyse juridique, les finances personnelles, l’apprentissage et la prise de décision business.",
+    workflowLine:
+      "Conçu pour l’analyse, l’apprentissage et la prise de décision dans le monde réel.",
+    powerUserBadge:
+      "Le choix privilégié des professionnels",
+    activateTrialCta:
+      "Tester n’importe quel agent IA pour 1 $",
+    viewPlans:
+      "Comparer les offres",
+    audience:
+      "Pour les particuliers, les professionnels et les entreprises",
+    trustedWorkflow:
+      "Importer → Analyser → Agir",
+    whyTitle:
+      "Pourquoi choisir Runexa",
     whyCards: [
-      {
-        title: "Détecter les clauses risquées",
-        desc: "Analysez les contrats et obligations avant signature.",
-      },
-      {
-        title: "Comprendre les dépenses",
-        desc: "Identifiez le gaspillage, les abonnements et les habitudes financières.",
-      },
-      {
-        title: "Apprendre plus vite",
-        desc: "Transformez vos contenus en résumés et systèmes de révision.",
-      },
-      {
-        title: "Décider plus intelligemment",
-        desc: "Analysez les opportunités, les risques et les choix stratégiques.",
-      },
-    ],
+    {
+      title: "Identifier les risques contractuels",
+      desc:
+        "Analysez les contrats, obligations et risques potentiels avant de signer.",
+    },
+
+    {
+      title: "Améliorer vos décisions financières",
+      desc:
+        "Identifiez les habitudes de dépenses, les abonnements et les opportunités d’économies.",
+    },
+
+    {
+      title: "Apprendre plus efficacement",
+      desc:
+        "Transformez vos supports d’étude en résumés, quiz et plans d’apprentissage.",
+    },
+
+    {
+      title: "Prendre de meilleures décisions business",
+      desc:
+        "Analysez les opportunités, les risques et les options stratégiques grâce à des insights alimentés par l’IA.",
+    },
+  ],
     mostPopular: "Le plus populaire",
     microTrust: [
-      "🔒 Espace IA sécurisé",
-      "🌍 Accès global",
-      "⚡ Analyse IA rapide",
+      "🔒 Plateforme IA sécurisée",
+      "🌍 Accès mondial",
+      "⚡ Insights IA rapides",
     ],
-    section1: "Commencez avec un essai IA à 1 $",
-    section2: "Crédits IA globaux",
-    section3: "Plans professionnels",
-    section4: "Utilisation des crédits par agent IA",
-    trialsTitle: "Essais à 1 $ par agent",
+    section1: "Commencer avec un essai à 1 $",
+    section2: "Crédits unifiés",
+    section3: "Offres Pro & Entreprise",
+    section4: "Utilisation des crédits par agent",
+    trialsTitle: "Essais à 1 $",
     trialsDesc:
-      "Chaque agent dispose de sa propre activation unique à 1 $. Essayez exactement l’agent dont vous avez besoin avant d’utiliser des crédits globaux ou un abonnement.",
-    trialsBadge: "Choisissez l’agent dont vous avez besoin",
-    oneTimeTrial: "essai unique",
-    trialAnalysis: "Une analyse IA ciblée",
-    trialReassurance: "Activation instantanée dès disponibilité des paiements.",
-    startTrial: "Démarrer l’essai",
-    creditsTitle: "Crédits globaux",
+      "Activez n’importe quel agent IA Runexa avec un essai unique à 1 $. Découvrez l’agent dont vous avez besoin avant d’utiliser des crédits ou de passer à une offre.",
+    trialsBadge: "Choisissez votre agent IA",
+    oneTimeTrial: "Essai unique",
+    trialAnalysis: "Une analyse alimentée par l’IA",
+    trialReassurance:
+      "Accès instantané après activation.",
+    startTrial: "Commencer l’essai",
+    creditsTitle: "Crédits unifiés",
     mostFlexible: "Le plus flexible",
     creditsDesc:
-      "Achetez des crédits une seule fois et utilisez-les sur tous les agents Runexa. Les crédits sont l’option flexible pour les utilisateurs qui n’ont pas besoin d’un abonnement mensuel.",
-    bestValue: "Meilleur choix",
-    oneTime: "paiement unique",
-    globalCredits: "crédits globaux",
+      "Achetez des crédits une seule fois et utilisez-les sur tous les agents IA Runexa. Idéal pour les utilisateurs occasionnels qui n’ont pas besoin d’un abonnement.",
+    bestValue: "Meilleur rapport qualité-prix",
+    oneTime: "Paiement unique",
+    globalCredits: "Crédits",
     buyCredits: "Acheter des crédits",
-    plansTitle: "Plans Pro / Premium",
+    plansTitle: "Offres Pro & Entreprise",
     plansDesc:
-      "Un seul abonnement global couvre tous les agents. Aucun plan Pro séparé par agent.",
-    globalPro: "Pro global",
+      "Un seul abonnement vous donne accès à tous les agents IA Runexa. Aucun abonnement séparé n’est nécessaire.",
+    globalPro: "Runexa Pro",
     bestForProfessionals: "Idéal pour les professionnels",
-    proValueNote: "Pour les utilisateurs réguliers de plusieurs agents IA.",
+    proValueNote:
+      "Conçu pour les utilisateurs réguliers qui s’appuient sur plusieurs agents IA.",
     proDesc:
-      "Pour les particuliers et professionnels qui utilisent régulièrement plusieurs agents.",
+      "Pour les particuliers et les professionnels qui ont besoin d’un accès continu à plusieurs agents IA.",
     month: "/mois",
     proFeatures: [
-      "200 crédits/mois",
+      "200 crédits par mois",
       "Utilisables sur tous les agents",
       "Traitement prioritaire",
-      "Accès aux agents Legal, Study, Finance et Business",
-      "Futurs agents inclus dès leur disponibilité",
+      "Accès aux agents IA Juridique, Finance, Étude et Business",
+      "Nouveaux agents IA inclus",
     ],
-    upgradePro: "Passer à Pro",
+    upgradePro: "Passer à Runexa Pro",
     enterprise: "Entreprise",
     premiumDesc:
-      "Pour les équipes, entreprises, écoles et organisations multi-utilisateurs.",
+      "Pour les équipes, les organisations, les établissements d’enseignement et les entreprises.",
     custom: "Sur mesure",
-    tailoredPricing: "tarification personnalisée",
+    tailoredPricing: "Tarification personnalisée",
     premiumFeatures: [
-      "Workspaces sécurisés",
-      "Collaboration équipe",
+      "Espaces de travail sécurisés",
+      "Collaboration d’équipe",
       "Workflows IA privés",
-      "Gestion organisationnelle",
+      "Gestion de l’organisation",
       "Support prioritaire",
     ],
     contactSales: "Contacter l’équipe commerciale",
-    creditCostsTitle: "Coût en crédits par agent",
+    creditCostsTitle: "Utilisation des crédits par agent",
     creditCostsDesc:
-      "Les crédits sont globaux. Le même solde fonctionne sur chaque agent.",
-    creditComplexityNote: "Le coût dépend de la complexité de l’analyse IA.",
-    creditsPerAnalysis: "crédits / analyse",
+      "Un seul solde de crédits fonctionne sur tous les agents IA Runexa.",
+    creditComplexityNote:
+      "La consommation de crédits dépend de la complexité de l’analyse.",
+    creditsPerAnalysis: "Crédits par analyse",
     infoCards: [
       {
-        title: "Les essais sont optionnels",
-        desc: "Vous pouvez activer un essai à 1 $ pour un agent ou passer directement aux crédits ou au plan Pro.",
+        title: "Accès flexible",
+        desc:
+          "Commencez avec un essai à 1 $, achetez des crédits ou choisissez une offre par abonnement.",
       },
       {
-        title: "Les crédits sont globaux",
-        desc: "Achetez une fois et utilisez le même solde pour Legal, Study, Finance ou Business.",
+        title: "Un solde de crédits unique",
+        desc:
+          "Le même solde de crédits fonctionne sur tous les agents IA Runexa.",
       },
       {
-        title: "Pro est global",
-        desc: "Un seul plan Pro mensuel inclut des crédits utilisables sur tous les agents.",
+        title: "Une seule offre pour tous les agents",
+        desc:
+          "Un abonnement Runexa Pro vous donne accès à l’ensemble de la plateforme Runexa.",
       },
     ],
     disclaimer:
-      "⚠️ Les agents IA Runexa fournissent des analyses informatives et d’aide à la décision. Vérifiez toujours les décisions juridiques, financières, académiques ou commerciales importantes auprès de professionnels qualifiés ou de sources officielles.",
+      "⚠️ Les agents IA Runexa fournissent des analyses informatives et des insights d’aide à la décision. Vérifiez toujours les décisions juridiques, financières, académiques ou commerciales importantes auprès de professionnels qualifiés ou de sources officielles.",
+
     messages: {
       trial: (agentName: string) =>
-        `Le paiement d’essai à 1 $ pour ${agentName} n’est pas encore configuré. Les paiements sont temporairement indisponibles pendant le déploiement de la plateforme.`,
+        `Poursuivez vers le paiement pour activer ${agentName}.`,
+
       credits:
-        "Les paiements sont temporairement indisponibles pendant le déploiement de la plateforme. Les crédits globaux seront bientôt disponibles.",
-      pro: "L’abonnement Pro n’est pas encore configuré. Les paiements sont temporairement indisponibles pendant le déploiement de la plateforme.",
+        "Poursuivez vers le paiement pour acheter des crédits.",
+
+      pro:
+        "Poursuivez vers le paiement pour activer votre abonnement.",
     },
     agents: [
-      {
-        slug: "legal",
-        name: "Runexa Legal Agent",
-        description:
-          "Détectez les clauses risquées avant de signer des contrats.",
-        trialOutcome: "Analyser un contrat",
-        credits: 12,
-        gradient: "from-slate-950 to-blue-700",
-      },
-      {
-        slug: "finance",
-        name: "Runexa Finance Coach",
-        description:
-          "Comprenez vos dépenses, réduisez le gaspillage et améliorez vos habitudes financières.",
-        trialOutcome: "Analyser un relevé bancaire",
-        credits: 7,
-        gradient: "from-emerald-700 to-teal-500",
-      },
-      {
-        slug: "study",
-        name: "Runexa Study Agent",
-        description: "Apprenez plus vite avec des résumés IA et des systèmes de révision.",
-        trialOutcome: "Générer une session d’étude IA",
-        credits: 5,
-        gradient: "from-indigo-700 to-violet-500",
-      },
-      {
-        slug: "business",
-        name: "Runexa Business Decision Agent",
-        description:
-          "Analysez les opportunités, les risques et les décisions stratégiques.",
-        trialOutcome: "Lancer une analyse business",
-        credits: 30,
-        gradient: "from-amber-700 to-orange-500",
-      },
-    ],
+    {
+      slug: "legal",
+      name: "Runexa Legal Agent",
+      description:
+        "Identifiez les risques contractuels, les obligations et les clauses critiques avant de signer.",
+      trialOutcome: "Une analyse de contrat alimentée par l’IA",
+      credits: 12,
+      gradient: "from-slate-950 to-blue-700",
+    },
+
+    {
+      slug: "finance",
+      name: "Runexa Finance Coach",
+      description:
+        "Comprenez vos habitudes de dépenses, réduisez le gaspillage et améliorez vos décisions financières.",
+      trialOutcome: "Une analyse financière alimentée par l’IA",
+      credits: 7,
+      gradient: "from-emerald-700 to-teal-500",
+    },
+
+    {
+      slug: "study",
+      name: "Runexa Study Agent",
+      description:
+        "Transformez vos supports d’étude en résumés, quiz et plans d’apprentissage.",
+      trialOutcome: "Une session d’apprentissage alimentée par l’IA",
+      credits: 5,
+      gradient: "from-indigo-700 to-violet-500",
+    },
+
+    {
+      slug: "business",
+      name: "Runexa Business Decision Agent",
+      description:
+        "Évaluez les opportunités, les risques et les décisions stratégiques.",
+      trialOutcome: "Une analyse business alimentée par l’IA",
+      credits: 30,
+      gradient: "from-amber-700 to-orange-500",
+    },
+  ],
     creditPacks: [
-      {
-        name: "Débutant",
-        credits: 50,
-        price: "$9",
-        description: "Parfait pour tester plusieurs agents Runexa.",
-      },
-      {
-        name: "Croissance",
-        credits: 150,
-        price: "$24",
-        description:
-          "Le meilleur choix pour une utilisation régulière multi-agents.",
-        highlighted: true,
-      },
-      {
-        name: "Échelle",
-        credits: 500,
-        price: "$89",
-        description: "Conçu pour les professionnels et les charges avancées.",
-      },
-    ],
+    {
+      name: "Starter",
+      credits: 50,
+      price: "$9",
+      description:
+        "Idéal pour découvrir plusieurs agents IA Runexa et pour une utilisation occasionnelle.",
+    },
+    {
+      name: "Growth",
+      credits: 150,
+      price: "$24",
+      description:
+        "Le meilleur rapport qualité-prix pour les utilisateurs réguliers qui utilisent plusieurs agents IA.",
+      highlighted: true,
+    },
+    {
+      name: "Scale",
+      credits: 500,
+      price: "$89",
+      description:
+        "Conçu pour les professionnels, les équipes et les volumes d’utilisation plus importants.",
+    },
+  ],
   },
 
   ar: {
     apiSectionBadge: "واجهة Runexa API",
     apiSectionTitle: "خطط API للمطورين",
     apiSectionDesc:
-      "واجهة Runexa API هي منتج منفصل للمطورين والشركات الذين يريدون دمج وكلاء الذكاء الاصطناعي داخل تطبيقاتهم ولوحات التحكم وسير العمل.",
-
-    apiStartPlan: "بدء خطة API",
-    apiContactSales: "التواصل مع المبيعات",
-
+      "واجهة Runexa API هي منتج مخصص للمطورين والشركات الذين يرغبون في دمج وكلاء الذكاء الاصطناعي داخل تطبيقاتهم ولوحات التحكم والأدوات الداخلية وسير العمل المؤسسي.",
+    apiStartPlan: "ابدأ مع API",
+    apiContactSales: "تواصل مع فريق المبيعات",
     apiPlans: [
       {
-        name: "API للمبتدئين",
+        name: "API Starter",
         price: "$29",
         credits: "100 رصيد API",
-        rate: "10 طلبات/دقيقة",
-        desc: "للمطورين الذين يختبرون تكاملات Runexa API.",
+        rate: "10 طلبات / دقيقة",
+        desc:
+          "مصممة للمطورين الذين يستكشفون واجهات Runexa AI API ويبنون تكاملاتهم الأولى.",
         features: [
           "API الذكاء القانوني",
           "API الذكاء المالي",
-          "API ذكاء الدراسة",
+          "API الدراسة الذكية",
           "API ذكاء الأعمال",
-          "معالجة مهام غير متزامنة",
+          "المعالجة غير المتزامنة",
+          "إدارة مفاتيح API",
+          "لوحة تحليلات الاستخدام",
+          "توثيق المطورين",
         ],
       },
+
       {
-        name: "API Pro",
-        price: "$99",
-        credits: "500 رصيد API",
-        rate: "60 طلب/دقيقة",
-        desc: "لسير العمل الإنتاجي والاستخدام المنتظم للـ API.",
-        highlighted: true,
-        features: [
-          "كل ما في API للمبتدئين",
-          "حدود API أعلى",
-          "سير عمل جاهز للإنتاج",
-          "معالجة ذات أولوية",
-          "تتبع الاستخدام",
-        ],
-      },
-      {
-        name: "Enterprise API",
-        price: "مخصص",
-        credits: "أرصدة API مخصصة",
-        rate: "حدود مخصصة",
-        desc: "للمؤسسات التي تحتاج إلى سير عمل خاص وتوسع كبير.",
-        features: [
-          "سير عمل ذكاء اصطناعي مخصص",
-          "وصول API للفريق",
-          "خيارات بنية تحتية خاصة",
-          "دعم ذو أولوية",
-          "تهيئة المؤسسات",
-        ],
-      },
+  name: "API Pro",
+
+  price: "$99",
+
+  credits: "500 رصيد API",
+
+  rate: "حدود API أعلى",
+
+  desc:
+    "مصممة للتطبيقات العاملة في بيئات الإنتاج، والفرق المتنامية، والاستخدام المتقدم لواجهة API.",
+
+  highlighted: true,
+
+  features: [
+    "كل ما يتضمنه API Starter",
+    "حدود API أعلى",
+    "معالجة ذات أولوية",
+    "لوحة تحليلات الاستخدام",
+    "تتبع الأرصدة والاستخدام",
+    "تكاملات جاهزة للإنتاج",
+  ],
+},
+
+{
+  name: "API Enterprise",
+
+  price: "مخصص",
+
+  credits: "أرصدة API مخصصة",
+
+  rate: "حدود مخصصة",
+
+  desc:
+    "مصممة للمؤسسات التي تحتاج إلى حلول ذكاء اصطناعي مخصصة، وتكاملات متقدمة، ودعم مخصص.",
+
+  features: [
+        "كل ما يتضمنه API Pro",
+        "سير عمل ذكاء اصطناعي مخصص",
+        "وصول API للفرق",
+        "خيارات بنية تحتية خاصة",
+        "دعم مخصص",
+        "تهيئة المؤسسات",
+      ],
+    },
     ],
 
-    badge: "منصة موحّدة لجميع وكلاء Runexa الذكية",
-    title: "حساب واحد. جميع الوكلاء. تجربة موحّدة.",
-    desc: "من حساب واحد، يمكنك الوصول إلى جميع وكلاء Runexa الذكية. ابدأ بتجربة 1 دولار أو استخدم الأرصدة الموحّدة أو خطة Pro.",
-    socialProof: "يُستخدم للتحليل القانوني، والمالية الشخصية، والتعلّم، وقرارات الأعمال.",
-    workflowLine: "مصمم لسير العمل الحقيقي بالذكاء الاصطناعي.",
-    powerUserBadge: "موصى به للمستخدمين المتقدمين",
-    activateTrialCta: "تفعيل أي وكيل بتجربة واحدة بقيمة 1 دولار",
-    viewPlans: "عرض Pro وPremium",
-    audience: "للأفراد والمحترفين والمؤسسات",
-    trustedWorkflow: "رفع الملفات → تحليل بالذكاء الاصطناعي → رؤى قابلة للتنفيذ",
-    whyTitle: "لماذا يختار المستخدمون Runexa",
+    badge: "وصول موحّد إلى جميع وكلاء Runexa الذكية",
+    title: "حساب واحد. جميع الوكلاء الذكيين. تسعير بسيط.",
+    desc:
+      "استفد من جميع وكلاء Runexa الذكية من خلال حساب واحد. ابدأ بتجربة مقابل 1 دولار، أو استخدم الأرصدة الموحّدة، أو قم بالترقية إلى Runexa Pro.",
+    socialProof:
+      "يُستخدم للتحليل القانوني، والرؤى المالية، ودعم التعلّم، واتخاذ قرارات الأعمال.",
+    workflowLine:
+      "مصمم للتحليل والتعلّم واتخاذ القرارات في بيئات العمل الواقعية.",
+    powerUserBadge:
+      "الخيار المفضل للمحترفين",
+    activateTrialCta:
+      "جرّب أي وكيل ذكي مقابل 1 دولار",
+    viewPlans:
+      "مقارنة الخطط",
+    audience:
+      "للأفراد والمحترفين والمؤسسات",
+    trustedWorkflow:
+      "رفع → تحليل → تنفيذ",
+    whyTitle:
+      "لماذا يختار المستخدمون Runexa",
     whyCards: [
-      {
-        title: "اكتشاف البنود الخطرة",
-        desc: "راجع العقود والالتزامات قبل التوقيع.",
-      },
-      {
-        title: "فهم عادات الإنفاق",
-        desc: "اكتشف الهدر والاشتراكات والأنماط المالية.",
-      },
-      {
-        title: "التعلّم بشكل أسرع",
-        desc: "حوّل المحتوى الدراسي إلى ملخصات وأنظمة مراجعة.",
-      },
-      {
-        title: "قرارات أعمال أذكى",
-        desc: "حلّل الفرص والمخاطر والخيارات الاستراتيجية.",
-      },
-    ],
-    mostPopular: "الأكثر شعبية",
+    {
+      title: "تحديد المخاطر التعاقدية",
+      desc:
+        "راجع العقود والالتزامات والمخاطر المحتملة قبل التوقيع.",
+    },
+    {
+      title: "تحسين قراراتك المالية",
+      desc:
+        "اكتشف أنماط الإنفاق والاشتراكات وفرص التوفير.",
+    },
+    {
+      title: "التعلّم بفعالية أكبر",
+      desc:
+        "حوّل موادك الدراسية إلى ملخصات واختبارات وخطط تعلّم.",
+    },
+    {
+      title: "اتخاذ قرارات أعمال أفضل",
+      desc:
+        "حلّل الفرص والمخاطر والخيارات الاستراتيجية باستخدام رؤى مدعومة بالذكاء الاصطناعي.",
+    },
+  ],
+    mostPopular: "الأكثر شيوعاً",
     microTrust: [
-      "🔒 مساحة ذكاء اصطناعي آمنة",
+      "🔒 منصة ذكاء اصطناعي آمنة",
       "🌍 وصول عالمي",
-      "⚡ تحليل سريع بالذكاء الاصطناعي",
+      "⚡ رؤى سريعة بالذكاء الاصطناعي",
     ],
-    section1: "ابدأ بتجربة ذكاء اصطناعي مقابل 1 دولار",
-    section2: "أرصدة ذكاء اصطناعي موحّدة",
-    section3: "خطط احترافية",
-    section4: "استخدام الأرصدة حسب وكيل الذكاء الاصطناعي",
-    trialsTitle: "تجارب بقيمة 1 دولار حسب الوكيل",
+    section1: "ابدأ بتجربة مقابل 1 دولار",
+    section2: "الأرصدة الموحّدة",
+    section3: "خطط Pro والمؤسسات",
+    section4: "استخدام الأرصدة حسب الوكيل",
+    trialsTitle: "تجارب بقيمة 1 دولار",
     trialsDesc:
-      "لكل وكيل تفعيل تجريبي خاص بقيمة 1 دولار لمرة واحدة. جرّب الوكيل الذي تحتاجه قبل استخدام الأرصدة الموحّدة أو الاشتراك.",
-    trialsBadge: "اختر الوكيل الذي تحتاجه",
+      "فعّل أي وكيل ذكاء اصطناعي من Runexa مقابل 1 دولار لمرة واحدة. استكشف الوكيل الذي تحتاجه قبل استخدام الأرصدة أو الترقية إلى إحدى الخطط.",
+    trialsBadge: "اختر وكيل الذكاء الاصطناعي",
     oneTimeTrial: "تجربة لمرة واحدة",
-    trialAnalysis: "تحليل ذكاء اصطناعي مركّز",
-    trialReassurance: "تفعيل فوري عند توفر المدفوعات.",
-    startTrial: "بدء التجربة",
+    trialAnalysis: "تحليل مدعوم بالذكاء الاصطناعي",
+    trialReassurance:
+      "وصول فوري بعد التفعيل.",
+    startTrial: "ابدأ التجربة",
     creditsTitle: "الأرصدة الموحّدة",
     mostFlexible: "الأكثر مرونة",
     creditsDesc:
-      "اشترِ الأرصدة مرة واحدة واستخدمها على جميع وكلاء Runexa. الأرصدة هي الخيار المرن للمستخدمين الذين لا يحتاجون إلى اشتراك شهري.",
+      "اشترِ الأرصدة مرة واحدة واستخدمها عبر جميع وكلاء Runexa الذكية. مثالية للمستخدمين الذين لا يحتاجون إلى اشتراك شهري.",
     bestValue: "أفضل قيمة",
     oneTime: "دفعة واحدة",
-    globalCredits: "أرصدة موحّدة",
+    globalCredits: "الأرصدة",
     buyCredits: "شراء الأرصدة",
-    plansTitle: "خطط Pro / Premium",
+    plansTitle: "خطط Pro والمؤسسات",
     plansDesc:
-      "اشتراك عالمي واحد يغطي جميع الوكلاء. لا توجد خطة Pro منفصلة لكل وكيل.",
-    globalPro: "Pro العالمي",
+      "اشتراك واحد يمنحك الوصول إلى جميع وكلاء Runexa الذكية. لا حاجة لاشتراكات منفصلة.",
+    globalPro: "Runexa Pro",
     bestForProfessionals: "الأفضل للمحترفين",
-    proValueNote: "للمستخدمين المنتظمين لعدة وكلاء ذكاء اصطناعي.",
-    proDesc: "للأفراد والمحترفين الذين يستخدمون عدة وكلاء بانتظام.",
+    proValueNote:
+      "مصممة للمستخدمين المنتظمين الذين يعتمدون على عدة وكلاء ذكاء اصطناعي.",
+    proDesc:
+      "للأفراد والمحترفين الذين يحتاجون إلى وصول مستمر إلى عدة وكلاء ذكاء اصطناعي.",
     month: "/شهر",
     proFeatures: [
-      "200 رصيد/شهر",
+      "200 رصيد شهرياً",
       "صالحة للاستخدام على جميع الوكلاء",
       "معالجة ذات أولوية",
-      "الوصول إلى وكلاء Legal وStudy وFinance وBusiness",
-      "تشمل الوكلاء المستقبليين عند توفرهم",
+      "الوصول إلى وكلاء القانون والمالية والدراسة والأعمال",
+      "الوكلاء الجدد مشمولون",
     ],
-    upgradePro: "الترقية إلى Pro",
+    upgradePro: "الترقية إلى Runexa Pro",
     enterprise: "المؤسسات",
-    premiumDesc: "للفرق والشركات والمدارس والمؤسسات متعددة المستخدمين.",
+    premiumDesc:
+      "للفرق والمؤسسات التعليمية والشركات والمنظمات.",
     custom: "مخصص",
     tailoredPricing: "تسعير مخصص",
     premiumFeatures: [
       "مساحات عمل آمنة",
       "تعاون الفرق",
-      "سير عمل ذكاء اصطناعي خاص",
+      "سير عمل ذكاء اصطناعي خاصة",
       "إدارة المؤسسات",
       "دعم ذو أولوية",
     ],
-    contactSales: "التواصل مع فريق المبيعات",
-    creditCostsTitle: "تكلفة الأرصدة حسب الوكيل",
-    creditCostsDesc: "الأرصدة موحّدة. نفس الرصيد يعمل على كل وكيل.",
-    creditComplexityNote: "تعتمد التكلفة على تعقيد تحليل الذكاء الاصطناعي.",
-    creditsPerAnalysis: "رصيد / تحليل",
+    contactSales: "تواصل مع فريق المبيعات",
+    creditCostsTitle: "استخدام الأرصدة حسب الوكيل",
+    creditCostsDesc:
+      "رصيد واحد يعمل عبر جميع وكلاء Runexa الذكية.",
+    creditComplexityNote:
+      "يعتمد استهلاك الأرصدة على تعقيد التحليل.",
+    creditsPerAnalysis: "أرصدة لكل تحليل",
     infoCards: [
-      {
-        title: "التجارب اختيارية",
-        desc: "يمكنك تفعيل تجربة بقيمة 1 دولار لوكيل واحد أو الانتقال مباشرة إلى الأرصدة أو خطة Pro.",
-      },
-      {
-        title: "الأرصدة موحّدة",
-        desc: "اشترِ مرة واحدة واستخدم نفس الرصيد مع Legal أو Study أو Finance أو Business.",
-      },
-      {
-        title: "خطة Pro موحّدة",
-        desc: "خطة Pro شهرية واحدة تتضمن أرصدة قابلة للاستخدام على جميع الوكلاء.",
-      },
-    ],
+    {
+      title: "وصول مرن",
+      desc:
+        "ابدأ بتجربة مقابل 1 دولار، أو اشترِ أرصدة، أو اختر إحدى الخطط المناسبة لك.",
+    },
+
+    {
+      title: "رصيد موحّد",
+      desc:
+        "يعمل نفس الرصيد عبر جميع وكلاء Runexa الذكية.",
+    },
+
+    {
+      title: "خطة واحدة لجميع الوكلاء",
+      desc:
+        "يمنحك اشتراك Runexa Pro الوصول إلى كامل منصة Runexa ووكلائها الذكية.",
+    },
+  ],
     disclaimer:
-      "⚠️ يقدم وكلاء Runexa للذكاء الاصطناعي مخرجات معلوماتية وداعمة لاتخاذ القرار. تحقق دائماً من القرارات القانونية أو المالية أو الأكاديمية أو التجارية المهمة مع مختصين مؤهلين أو مصادر رسمية.",
+      "⚠️ يقدم وكلاء Runexa للذكاء الاصطناعي تحليلات ورؤى داعمة لاتخاذ القرار. يجب دائماً التحقق من القرارات القانونية أو المالية أو الأكاديمية أو التجارية المهمة بالاستعانة بمختصين مؤهلين أو مصادر رسمية.",
+
     messages: {
       trial: (agentName: string) =>
-        `دفع تجربة 1 دولار لـ ${agentName} غير مفعّل بعد. المدفوعات غير متاحة مؤقتاً أثناء إطلاق المنصة.`,
-      credits: "المدفوعات غير متاحة مؤقتاً أثناء إطلاق المنصة. ستصبح الأرصدة الموحّدة متاحة قريباً.",
-      pro: "اشتراك Pro غير مفعّل بعد. المدفوعات غير متاحة مؤقتاً أثناء إطلاق المنصة.",
+        `تابع إلى صفحة الدفع لتفعيل ${agentName}.`,
+
+      credits:
+        "تابع إلى صفحة الدفع لشراء الأرصدة.",
+
+      pro:
+        "تابع إلى صفحة الدفع لتفعيل اشتراكك.",
     },
-    agents: [
-      {
-        slug: "legal",
-        name: "Runexa Legal Agent",
-        description: "اكتشف البنود الخطرة قبل توقيع العقود.",
-        trialOutcome: "تحليل عقد واحد",
-        credits: 12,
-        gradient: "from-slate-950 to-blue-700",
-      },
-      {
-        slug: "finance",
-        name: "Runexa Finance Coach",
-        description:
-          "افهم الإنفاق، قلّل الهدر، وحسّن العادات المالية.",
-        trialOutcome: "تحليل كشف بنكي واحد",
-        credits: 7,
-        gradient: "from-emerald-700 to-teal-500",
-      },
-      {
-        slug: "study",
-        name: "Runexa Study Agent",
-        description: "تعلّم أسرع مع ملخصات الذكاء الاصطناعي وأنظمة المراجعة.",
-        trialOutcome: "إنشاء جلسة دراسة ذكية",
-        credits: 5,
-        gradient: "from-indigo-700 to-violet-500",
-      },
-      {
-        slug: "business",
-        name: "Runexa Business Decision Agent",
-        description: "حلّل الفرص والمخاطر والقرارات الاستراتيجية.",
-        trialOutcome: "إجراء تحليل أعمال واحد",
-        credits: 30,
-        gradient: "from-amber-700 to-orange-500",
-      },
-    ],
-    creditPacks: [
-      {
-        name: "المبتدئ",
-        credits: 50,
-        price: "$9",
-        description: "مثالي لاختبار عدة وكلاء من Runexa.",
-      },
-      {
-        name: "النمو",
-        credits: 150,
-        price: "$24",
-        description: "أفضل قيمة للاستخدام المنتظم لعدة وكلاء.",
-        highlighted: true,
-      },
-      {
-        name: "التوسّع",
-        credits: 500,
-        price: "$89",
-        description: "مصمم للمحترفين والمهام المتقدمة.",
-      },
-    ],
+   agents: [
+    {
+      slug: "legal",
+      name: "Runexa Legal Agent",
+      description:
+        "حدد المخاطر التعاقدية والالتزامات والبنود المهمة قبل التوقيع.",
+      trialOutcome: "تحليل عقد مدعوم بالذكاء الاصطناعي",
+      credits: 12,
+      gradient: "from-slate-950 to-blue-700",
+    },
+    {
+      slug: "finance",
+      name: "Runexa Finance Coach",
+      description:
+        "افهم أنماط الإنفاق، وقلّل الهدر، وحسّن قراراتك المالية.",
+      trialOutcome: "تحليل مالي مدعوم بالذكاء الاصطناعي",
+      credits: 7,
+      gradient: "from-emerald-700 to-teal-500",
+    },
+    {
+      slug: "study",
+      name: "Runexa Study Agent",
+      description:
+        "حوّل موادك الدراسية إلى ملخصات واختبارات وخطط تعلّم.",
+      trialOutcome: "جلسة تعلّم مدعومة بالذكاء الاصطناعي",
+      credits: 5,
+      gradient: "from-indigo-700 to-violet-500",
+    },
+    {
+      slug: "business",
+      name: "Runexa Business Decision Agent",
+      description:
+        "قيّم الفرص والمخاطر والقرارات الاستراتيجية للأعمال.",
+      trialOutcome: "تحليل أعمال مدعوم بالذكاء الاصطناعي",
+      credits: 30,
+      gradient: "from-amber-700 to-orange-500",
+    },
+  ],
+  creditPacks: [
+    {
+      name: "Starter",
+      credits: 50,
+      price: "$9",
+      description:
+        "مثالي لاستكشاف عدة وكلاء ذكاء اصطناعي من Runexa والاستخدام العرضي.",
+    },
+    {
+      name: "Growth",
+      credits: 150,
+      price: "$24",
+      description:
+        "أفضل قيمة للمستخدمين المنتظمين الذين يستخدمون عدة وكلاء ذكاء اصطناعي.",
+      highlighted: true,
+    },
+    {
+      name: "Scale",
+      credits: 500,
+      price: "$89",
+      description:
+        "مصمم للمحترفين والفرق وأحجام الاستخدام الأكبر.",
+    },
+  ],
   },
 };
 
