@@ -1384,7 +1384,7 @@ export const translations: any = {
     financeAi: "الذكاء المالي",
     studyAi: "ذكاء الدراسة",
     businessAi: "ذكاء الأعمال",
-    builtBy: "تم الإنشاء بواسطة الدكتور رشيد الجامي",
+    builtBy: "تم الإنشاء بواسطة الدكتور رشيد الجامعي",
     apiDashboard: "لوحة API",
 
 
