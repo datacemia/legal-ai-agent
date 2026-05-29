@@ -774,16 +774,28 @@ export default function HomeClient() {
                 <div className="flex items-center justify-between border-b border-white/10 pb-4">
                   <div>
                     <p className="text-sm text-slate-400">
-                      Runexa AI Workspace
+                      {language === "fr"
+                        ? "Plateforme IA Runexa"
+                        : language === "ar"
+                        ? "منصة Runexa للذكاء الاصطناعي"
+                        : "Runexa AI Platform"}
                     </p>
 
                     <p className="text-lg font-semibold">
-                      {language === "fr" ? "Recommandations IA" : language === "ar" ? "توصيات الذكاء الاصطناعي" : "AI Recommendations"}
+                      {language === "fr"
+                        ? "Recommandations IA"
+                        : language === "ar"
+                        ? "توصيات الذكاء الاصطناعي"
+                        : "AI Recommendations"}
                     </p>
                   </div>
 
                   <span className="rounded-full bg-green-500/10 px-3 py-1 text-xs font-medium text-green-300">
-                    Live
+                    {language === "fr"
+                      ? "Temps réel"
+                      : language === "ar"
+                      ? "لحظي"
+                      : "Real-Time"}
                   </span>
                 </div>
 
