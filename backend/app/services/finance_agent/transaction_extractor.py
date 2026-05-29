@@ -15,6 +15,19 @@ EXPENSE_KEYWORDS = [
     "frais",
     "commission",
     "achat",
+    "payment",
+    "withdrawal",
+    "bill",
+    "rent",
+    "shopping",
+    "restaurant",
+    "market",
+    "supermarket",
+    "fuel",
+    "pharmacy",
+    "subscription",
+    "membership",
+    "transfer sent",
 ]
 
 INCOME_KEYWORDS = [
@@ -28,19 +41,10 @@ INCOME_KEYWORDS = [
     "remboursement",
     "deposit",
     "dépôt",
-]
-
-TRANSACTION_KEYWORDS = EXPENSE_KEYWORDS + INCOME_KEYWORDS + [
-    "transfer",
-    "withdrawal",
-    "payment",
-    "card",
-    "refund",
+    "transfer received",
 ]
 
 BALANCE_KEYWORDS = [
-    "solde",
-    "balance",
     "opening balance",
     "closing balance",
     "ancien solde",
@@ -101,7 +105,7 @@ def has_transaction_signal(line: str) -> bool:
 
     amount_found = bool(
         re.search(
-            r"-?\d+(?:[.,]\d{2})",
+            r"[+-]?\d+(?:[.,]\d{2})",
             line,
         )
     )
@@ -112,16 +116,48 @@ def has_transaction_signal(line: str) -> bool:
 def detect_type(line: str, amount: float) -> str:
     lower = line.lower()
 
-    if any(keyword in lower for keyword in EXPENSE_KEYWORDS):
-        return "expense"
-
     if any(keyword in lower for keyword in INCOME_KEYWORDS):
         return "income"
+
+    if any(keyword in lower for keyword in EXPENSE_KEYWORDS):
+        return "expense"
 
     if amount < 0:
         return "expense"
 
     return "income"
+
+
+def extract_transaction_amount(line: str) -> float | None:
+    money_matches = re.findall(
+        r"[+-]?\d+(?:[.,]\d{2})\s*(?:MAD|USD|EUR|GBP|CAD|DH|DHS|€|\$|£)?",
+        line,
+        flags=re.IGNORECASE,
+    )
+
+    if not money_matches:
+        return None
+
+    for value in money_matches:
+        cleaned = value.strip()
+
+        if cleaned.lower().startswith("balance"):
+            continue
+
+        if cleaned.startswith("+") or cleaned.startswith("-"):
+            numeric = re.search(r"[+-]?\d+(?:[.,]\d{2})", cleaned)
+            if numeric:
+                return parse_amount(numeric.group(0))
+
+    numeric = re.search(
+        r"[+-]?\d+(?:[.,]\d{2})",
+        money_matches[0],
+    )
+
+    if not numeric:
+        return None
+
+    return parse_amount(numeric.group(0))
 
 
 def extract_transactions(text: str) -> list[dict]:
@@ -133,40 +169,13 @@ def extract_transactions(text: str) -> list[dict]:
         if not clean_line:
             continue
 
-        if len(transactions) < 5:
-            print(
-                "CHECK:",
-                clean_line,
-                "DATE=",
-                extract_date(clean_line),
-                "AMOUNT_MATCH=",
-                bool(
-                    re.search(
-                        r"-?\d+(?:[.,]\d{2})",
-                        clean_line,
-                    )
-                ),
-            )
-
         if not has_transaction_signal(clean_line):
             continue
 
-        amounts = re.findall(
-            r"-?\d{1,3}(?:[,\s]\d{3})*(?:\.\d{2})|-?\d+(?:[.,]\d{2})",
-            clean_line,
-        )
+        amount = extract_transaction_amount(clean_line)
 
-        if len(transactions) < 5:
-            print("LINE:", clean_line)
-            print("AMOUNTS:", amounts)
-
-        if not amounts:
+        if amount is None:
             continue
-
-        amount = parse_amount(amounts[-1])
-
-        if len(transactions) < 5:
-            print("SELECTED:", amount)
 
         transaction_type = detect_type(clean_line, amount)
 
@@ -177,26 +186,14 @@ def extract_transactions(text: str) -> list[dict]:
             amount = abs(amount)
 
         date = extract_date(clean_line)
-        description = clean_line
-
-        print(
-            "ADDING:",
-            date,
-            amount,
-            transaction_type,
-        )
 
         transactions.append(
             {
                 "date": date,
-                "description": description,
+                "description": clean_line,
                 "amount": amount,
                 "type": transaction_type,
             }
         )
-
-        if len(transactions) <= 5:
-            print("TRANSACTIONS_COUNT:", len(transactions))
-            print("LAST_TRANSACTION:", transactions[-1])
 
     return transactions
