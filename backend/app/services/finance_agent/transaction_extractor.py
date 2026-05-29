@@ -97,7 +97,16 @@ def has_transaction_signal(line: str) -> bool:
     if any(keyword in lower for keyword in BALANCE_KEYWORDS):
         return False
 
-    return any(keyword in lower for keyword in TRANSACTION_KEYWORDS)
+    date_found = extract_date(line) is not None
+
+    amount_found = bool(
+        re.search(
+            r"-?\d+(?:[.,]\d{2})",
+            line,
+        )
+    )
+
+    return date_found and amount_found
 
 
 def detect_type(line: str, amount: float) -> str:
