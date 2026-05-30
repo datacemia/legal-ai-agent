@@ -106,6 +106,22 @@ MONTH_ALIASES = {
 }
 
 
+
+def normalize_ocr_numeric_text(value: str) -> str:
+    return re.sub(
+        r"(?<=\d|[+\-.,])([OoIlLS])(?=\d|[+\-.,])",
+        lambda m: {
+            "O": "0",
+            "o": "0",
+            "I": "1",
+            "l": "1",
+            "L": "1",
+            "S": "5",
+        }.get(m.group(1), m.group(1)),
+        value,
+    )
+
+
 def parse_amount(value: str) -> float:
     value = value.replace(" ", "")
 
@@ -416,6 +432,8 @@ def extract_tabular_bank_amount(
 
 
 def extract_transactions(text: str) -> list[dict]:
+    text = normalize_ocr_numeric_text(text)
+
     transactions = []
     default_year = detect_document_year(text)
 
