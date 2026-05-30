@@ -353,6 +353,7 @@ def handle_finance_ai(job: Job, db):
         forecast=forecast,
         opportunities=savings_opportunities,
         currency=currency,
+        output_language=output_language,
     )
 
     update_job_progress(

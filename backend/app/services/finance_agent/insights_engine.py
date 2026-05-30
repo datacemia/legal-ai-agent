@@ -5,6 +5,7 @@ def generate_financial_insights(
     forecast: dict,
     opportunities: list[dict],
     currency: str = "MAD",
+    output_language: str = "en",
 ) -> list[dict]:
     insights = []
 
@@ -51,8 +52,13 @@ def generate_financial_insights(
             {
                 "type": "warning",
                 "title": "Negative cashflow risk",
-                "message": (
-                    "Your current expenses exceed your income."
+                "message": {
+                    "en": "Your current expenses exceed your income.",
+                    "fr": "Vos dépenses actuelles dépassent vos revenus.",
+                    "ar": "مصاريفك الحالية تتجاوز دخلك.",
+                }.get(
+                    output_language,
+                    "Your current expenses exceed your income.",
                 ),
             }
         )
