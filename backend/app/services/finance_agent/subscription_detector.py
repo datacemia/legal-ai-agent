@@ -156,16 +156,58 @@ def detect_recurring_subscriptions(
         if not merchant:
             continue
 
-        grouped[merchant].append(amount)
+        grouped[merchant].append(
+            {
+                "amount": amount,
+                "date": tx.get("date"),
+            }
+        )
 
     subscriptions = []
 
-    for merchant, amounts in grouped.items():
-        total_observed = round(sum(amounts), 2)
+    for merchant, entries in grouped.items():
+        amounts = [
+            item["amount"]
+            for item in entries
+        ]
+
+        dates = [
+            item["date"]
+            for item in entries
+            if item.get("date")
+        ]
+
+        total_observed = round(
+            sum(amounts),
+            2,
+        )
+
         transactions_count = len(amounts)
 
+        if dates:
+            first_date = min(dates)
+            last_date = max(dates)
+
+            months_observed = max(
+                1,
+                (
+                    (
+                        int(last_date[:4]) * 12
+                        + int(last_date[5:7])
+                    )
+                    -
+                    (
+                        int(first_date[:4]) * 12
+                        + int(first_date[5:7])
+                    )
+                )
+                + 1,
+            )
+        else:
+            months_observed = 1
+
         estimated_monthly_cost = round(
-            total_observed / transactions_count,
+            total_observed / months_observed,
             2,
         )
 
