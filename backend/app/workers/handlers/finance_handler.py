@@ -341,6 +341,20 @@ def handle_finance_ai(job: Job, db):
         transactions=transactions,
         fallback_income=fallback_income,
     )
+    print(
+        "OBSERVED INCOME =",
+        forecast.get("observed_income"),
+    )
+
+    print(
+        "OBSERVED EXPENSES =",
+        forecast.get("observed_expenses"),
+    )
+
+    print(
+        "NET CASHFLOW =",
+        forecast.get("observed_net_cashflow"),
+    )
 
     observed_income = forecast.get(
         "observed_income",
