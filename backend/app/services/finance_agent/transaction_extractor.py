@@ -355,9 +355,24 @@ def extract_transactions(text: str) -> list[dict]:
             and len(current.split()) == 1
         )
 
-        if current_is_date_only and i + 1 < len(raw_lines):
-            lines.append(current + " " + raw_lines[i + 1])
-            i += 2
+        if current_is_date_only:
+            combined = current
+
+            j = i + 1
+
+            while j < len(raw_lines) and j <= i + 3:
+                combined += " " + raw_lines[j]
+
+                if re.search(
+                    r"\b\d+(?:[.,]\d{2})\b",
+                    raw_lines[j],
+                ):
+                    break
+
+                j += 1
+
+            lines.append(combined)
+            i = j + 1
             continue
 
         lines.append(current)
