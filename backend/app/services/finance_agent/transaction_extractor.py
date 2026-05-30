@@ -283,14 +283,29 @@ def extract_tabular_bank_amount(
 ) -> tuple[float | None, str | None]:
     normalized = line.lower()
 
+    NON_TRANSACTION_KEYWORDS = [
+        "account number",
+        "account holder",
+        "account name",
+        "customer name",
+        "client name",
+        "statement date",
+        "bank statement",
+        "example bank",
+        "iban",
+        "swift",
+        "sort code",
+    ]
+
+    if any(keyword in normalized for keyword in NON_TRANSACTION_KEYWORDS):
+        return None, None
+
     if any(
         keyword in normalized
         for keyword in [
             "balance carried forward",
             "closing balance",
             "opening balance",
-            "account number",
-            "example bank",
         ]
     ):
         return None, None
