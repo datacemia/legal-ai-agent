@@ -78,6 +78,9 @@ IMPORTANT LANGUAGE RULES:
 
 SUMMARY RULES:
 - The summary must contain 1 to 3 complete sentences.
+- Prefer observed totals when available.
+- If observed income or observed expenses are available, use them instead of AI estimates.
+- Do not present estimated values as facts when observed values exist.
 - The summary must reference observed income, observed expenses, and net cashflow when those values can be inferred.
 - The summary must describe the overall financial situation, not individual categories.
 - Avoid generic summaries such as:
