@@ -401,6 +401,25 @@ def extract_transactions(text: str) -> list[dict]:
         i += 1
 
     for clean_line in lines:
+        normalized_line = clean_line.lower()
+
+        if any(
+            keyword in normalized_line
+            for keyword in [
+                "account number",
+                "account holder",
+                "account name",
+                "customer name",
+                "client name",
+                "statement date",
+                "bank statement",
+                "iban",
+                "swift",
+                "sort code",
+            ]
+        ):
+            continue
+
         if not has_transaction_signal(
             clean_line,
             default_year=default_year,
