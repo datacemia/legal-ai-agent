@@ -164,6 +164,21 @@ const labels: any = {
     couldNotCheckFinanceStatus: "Could not check finance analysis status.",
     financeAnalysisFailed: "Finance analysis failed.",
     financeAnalysisLongerThanExpected: "Finance analysis is taking longer than expected. Please retry in a moment.",
+    aiNarrativeSummary: "AI Narrative Summary",
+    aiGeneratedScore: "AI-generated overall finance score.",
+    deterministicScore: "Deterministic score based on observed transactions.",
+    savingBehavior: "Saving behavior",
+    subscriptionControl: "Subscription control",
+    transactions: "transactions",
+    averageCharge: "Average charge",
+    totalObserved: "Total observed",
+    estimatedSavingsOpportunity: "{t.estimatedSavingsOpportunity}",
+    noMajorSavingsOpportunities: "No major savings opportunities detected.",
+    negativeCashflowRisk: "Negative cashflow risk",
+    financialHabitsNeedImprovement: "Financial habits need improvement",
+    spendingPatternsNeedMonitoring: "Your spending patterns may require closer monitoring.",
+    askFinanceAssistant: "Ask your finance assistant",
+    notFinancialAdvice: "This is not financial advice.",
     mainCategories: "Main categories",
     wasteDetected: "Waste detected",
     savingStrategies: "Saving strategies",
@@ -300,6 +315,21 @@ const labels: any = {
     couldNotCheckFinanceStatus: "Impossible de vérifier le statut de l’analyse financière.",
     financeAnalysisFailed: "L’analyse financière a échoué.",
     financeAnalysisLongerThanExpected: "L’analyse financière prend plus de temps que prévu. Veuillez réessayer dans un moment.",
+    aiNarrativeSummary: "Résumé narratif IA",
+    aiGeneratedScore: "Score financier global généré par l’IA.",
+    deterministicScore: "Score déterministe basé sur les transactions observées.",
+    savingBehavior: "Comportement d’épargne",
+    subscriptionControl: "Contrôle des abonnements",
+    transactions: "transactions",
+    averageCharge: "Frais moyens",
+    totalObserved: "Total observé",
+    estimatedSavingsOpportunity: "Opportunité d’épargne estimée",
+    noMajorSavingsOpportunities: "Aucune opportunité d’épargne majeure détectée.",
+    negativeCashflowRisk: "Risque de trésorerie négative",
+    financialHabitsNeedImprovement: "Les habitudes financières doivent être améliorées",
+    spendingPatternsNeedMonitoring: "Vos habitudes de dépense peuvent nécessiter un suivi plus attentif.",
+    askFinanceAssistant: "Posez une question à votre assistant financier",
+    notFinancialAdvice: "Ceci n’est pas un conseil financier.",
     mainCategories: "Catégories principales",
     wasteDetected: "Dépenses évitables détectées",
     savingStrategies: "Stratégies d’épargne",
@@ -436,6 +466,21 @@ const labels: any = {
     couldNotCheckFinanceStatus: "تعذر التحقق من حالة التحليل المالي.",
     financeAnalysisFailed: "فشل التحليل المالي.",
     financeAnalysisLongerThanExpected: "يستغرق التحليل المالي وقتاً أطول من المتوقع. يرجى المحاولة بعد قليل.",
+    aiNarrativeSummary: "ملخص سردي بالذكاء الاصطناعي",
+    aiGeneratedScore: "نتيجة مالية عامة تم إنشاؤها بالذكاء الاصطناعي.",
+    deterministicScore: "نتيجة حتمية مبنية على المعاملات المرصودة.",
+    savingBehavior: "سلوك الادخار",
+    subscriptionControl: "التحكم في الاشتراكات",
+    transactions: "معاملات",
+    averageCharge: "متوسط التكلفة",
+    totalObserved: "الإجمالي المرصود",
+    estimatedSavingsOpportunity: "فرصة الادخار المقدرة",
+    noMajorSavingsOpportunities: "لم يتم اكتشاف فرص ادخار كبيرة.",
+    negativeCashflowRisk: "خطر تدفق نقدي سلبي",
+    financialHabitsNeedImprovement: "العادات المالية تحتاج إلى تحسين",
+    spendingPatternsNeedMonitoring: "قد تتطلب أنماط إنفاقك مراقبة أكثر دقة.",
+    askFinanceAssistant: "اسأل مساعدك المالي",
+    notFinancialAdvice: "هذه ليست نصيحة مالية.",
     mainCategories: "الفئات الرئيسية",
     wasteDetected: "الهدر المكتشف",
     savingStrategies: "استراتيجيات الادخار",
@@ -500,6 +545,21 @@ export default function FinanceClient() {
   }, [loading, startedAt]);
 
   const t = labels[language] || labels.en;
+
+
+  const translateInsightText = (value: any) => {
+    if (typeof value !== "string") return value;
+
+    const insightTranslations: Record<string, string> = {
+      "Negative cashflow risk": t.negativeCashflowRisk,
+      "Financial habits need improvement": t.financialHabitsNeedImprovement,
+      "Your spending patterns may require closer monitoring.": t.spendingPatternsNeedMonitoring,
+      "This is not financial advice.": t.notFinancialAdvice,
+      "This is not financial advice...": t.notFinancialAdvice,
+    };
+
+    return insightTranslations[value] || value;
+  };
 
   const hasActiveAccess =
     role === "admin" ||
@@ -852,20 +912,20 @@ export default function FinanceClient() {
     addLine(7);
     doc.text(`${t.expenses}: ${formatMoney(result.cashflow_forecast?.observed_expenses)}`, 14, y);
     addLine(7);
-    doc.text(`Observed Net Cashflow: ${formatMoney(result.cashflow_forecast?.observed_net_cashflow)}`, 14, y);
+    doc.text(`${t.observedNetCashflow}: ${formatMoney(result.cashflow_forecast?.observed_net_cashflow)}`, 14, y);
     addLine(7);
     doc.text(`${t.financialHabitsScore}: ${result.financial_habit_scores?.overall_financial_habits_score ?? "-"}/100`, 14, y);
 
     addLine(12);
     doc.setFontSize(13);
-    doc.text("AI Savings Opportunities", 14, y);
+    doc.text(t.aiSavingsOpportunities, 14, y);
 
     addLine(8);
     doc.setFontSize(10);
 
     (result.savings_opportunities || []).forEach((item: any) => {
       doc.text(
-        `${item.issue}: Estimated savings opportunity ${formatMoney(item.estimated_savings_opportunity)}`,
+        `${item.issue}: ${t.estimatedSavingsOpportunity} ${formatMoney(item.estimated_savings_opportunity)}`,
         14,
         y
       );
@@ -890,7 +950,7 @@ export default function FinanceClient() {
 
     (result.subscriptions_detected || []).forEach((sub: any) => {
       doc.text(
-        `${sub.name}: Average charge ${formatMoney(sub.monthly_cost)} | Total observed ${formatMoney(sub.total_observed_cost)} | Transactions: ${sub.transactions_count}`,
+        `${sub.name}: ${t.averageCharge} ${formatMoney(sub.monthly_cost)} | ${t.totalObserved} ${formatMoney(sub.total_observed_cost)} | ${t.transactions}: ${sub.transactions_count}`,
         14,
         y
       );
@@ -1231,7 +1291,7 @@ export default function FinanceClient() {
               <>
                 <div className="rounded-2xl border bg-blue-50 p-5">
                   <p className="text-sm text-blue-700">
-                    AI Narrative Summary
+                    {t.aiNarrativeSummary}
                   </p>
                   <p className="mt-2 text-sm leading-7 text-slate-700">
                     {result.summary}
@@ -1251,7 +1311,7 @@ export default function FinanceClient() {
                     </p>
 
                     <p className="text-xs text-slate-500 mt-1">
-                      AI-generated overall finance score.
+                      {t.aiGeneratedScore}
                     </p>
 
                     <div className="mt-4">
@@ -1332,7 +1392,7 @@ export default function FinanceClient() {
                   </p>
 
                   <p className="text-xs text-slate-500 mt-1">
-                    Deterministic score based on observed transactions.
+                    {t.deterministicScore}
                   </p>
 
                   <div className="mt-2 flex items-end gap-2">
@@ -1343,12 +1403,12 @@ export default function FinanceClient() {
                   </div>
 
                   <p className="text-sm text-slate-500 mt-2">
-                    Saving behavior:{" "}
+                    {t.savingBehavior}:{" "}
                     {result.financial_habit_scores?.saving_behavior ?? 0}/100
                   </p>
 
                   <p className="text-sm text-slate-500">
-                    Subscription control:{" "}
+                    {t.subscriptionControl}:{" "}
                     {result.financial_habit_scores?.subscription_control ?? 0}/100
                   </p>
                 </div>
@@ -1385,7 +1445,7 @@ export default function FinanceClient() {
                   </div>
 
                   <p className="text-sm text-slate-600 mt-4">
-                    {result.cashflow_forecast?.message}
+                    {translateInsightText(result.cashflow_forecast?.message)}
                   </p>
                 </div>
 
@@ -1465,7 +1525,7 @@ export default function FinanceClient() {
                   </div>
 
                   <p className="text-sm text-slate-600 mt-4">
-                    {result.recommended_budget?.message}
+                    {translateInsightText(result.recommended_budget?.message)}
                   </p>
                 </div>
 
@@ -1508,21 +1568,21 @@ export default function FinanceClient() {
                               </p>
 
                               <p className="text-xs text-slate-500">
-                                {sub.transactions_count} transactions
+                                {sub.transactions_count} {t.transactions}
                               </p>
                             </div>
 
                             <div className="space-y-1 text-right">
                               <div className="font-semibold">
-                                Average charge: {formatMoney(sub.monthly_cost)}
+                                {t.averageCharge}: {formatMoney(sub.monthly_cost)}
                               </div>
 
                               <div className="text-sm text-slate-500">
-                                Total observed: {formatMoney(sub.total_observed_cost)}
+                                {t.totalObserved}: {formatMoney(sub.total_observed_cost)}
                               </div>
 
                               <div className="text-sm text-slate-500">
-                                {sub.transactions_count} transactions
+                                {sub.transactions_count} {t.transactions}
                               </div>
                             </div>
                           </div>
@@ -1556,7 +1616,7 @@ export default function FinanceClient() {
                       </h3>
 
                       <p className="text-xs text-slate-500 mt-1">
-                        Estimated savings opportunity
+                        {t.estimatedSavingsOpportunity}
                       </p>
                     </div>
 
@@ -1612,7 +1672,7 @@ export default function FinanceClient() {
                     </div>
                   ) : (
                     <p className="text-sm text-slate-500">
-                      No major savings opportunities detected.
+                      {t.noMajorSavingsOpportunities}
                     </p>
                   )}
                 </div>
@@ -1653,11 +1713,11 @@ export default function FinanceClient() {
 
                               <div>
                                 <p className="font-semibold text-slate-800">
-                                  {insight.title}
+                                  {translateInsightText(insight.title)}
                                 </p>
 
                                 <p className="text-sm text-slate-600 mt-1">
-                                  {insight.message}
+                                  {translateInsightText(insight.message)}
                                 </p>
                               </div>
                             </div>
@@ -1964,7 +2024,7 @@ export default function FinanceClient() {
                       </p>
 
                       <h3 className="text-2xl font-bold text-slate-800">
-                        Ask your finance assistant
+                        {t.askFinanceAssistant}
                       </h3>
 
                       <p className="mt-2 text-sm text-slate-500">
@@ -2075,7 +2135,7 @@ export default function FinanceClient() {
 
                 {result.disclaimer && (
                   <p className="text-xs text-slate-500 border-t pt-4">
-                    {result.disclaimer}
+                    {translateInsightText(result.disclaimer)}
                   </p>
                 )}
               </>
