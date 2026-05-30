@@ -251,6 +251,51 @@ def handle_finance_ai(job: Job, db):
         fallback_income=fallback_income,
     )
 
+    observed_income = forecast.get(
+        "observed_income",
+        0,
+    )
+
+    observed_expenses = forecast.get(
+        "observed_expenses",
+        0,
+    )
+
+    if (
+        result_ai.get(
+            "total_spending_estimate",
+            0,
+        ) == 0
+        and observed_expenses > 0
+    ):
+        result_ai["total_spending_estimate"] = round(
+            observed_expenses,
+            2,
+        )
+
+    if (
+        result_ai.get(
+            "total_income_estimate",
+            0,
+        ) == 0
+        and observed_income > 0
+    ):
+        result_ai["total_income_estimate"] = round(
+            observed_income,
+            2,
+        )
+
+    if (
+        result_ai.get(
+            "financial_score",
+            0,
+        ) == 0
+    ):
+        result_ai["financial_score"] = scores.get(
+            "overall_financial_habits_score",
+            0,
+        )
+
     alerts = generate_financial_alerts(
         transactions=transactions,
         subscriptions=subscriptions,

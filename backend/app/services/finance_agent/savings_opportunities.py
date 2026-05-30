@@ -60,7 +60,7 @@ def detect_savings_opportunities(
     if total_expenses >= 5000:
         opportunities.append(
             {
-                "issue": "High monthly spending detected",
+                "issue": "High spending detected",
                 "severity": "high",
                 "estimated_savings_opportunity": round(
                     total_expenses * 0.10,
