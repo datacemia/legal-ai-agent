@@ -1283,7 +1283,7 @@ export default function FinanceClient() {
 
                     <div className="text-right">
                       <p className="text-sm text-slate-500">
-                        Observed Subscription Spending
+                        Estimated Recurring Charge
                       </p>
 
                       <p className="text-xl font-semibold text-red-600">
