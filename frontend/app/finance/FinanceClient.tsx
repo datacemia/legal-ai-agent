@@ -99,7 +99,7 @@ const labels: any = {
     currency: "Currency",
     unknown: "unknown",
     financialScore: "Financial score",
-    totalSpending: "Total spending estimate",
+    totalSpending: "AI spending estimate",
     mainCategories: "Main categories",
     wasteDetected: "Waste detected",
     savingStrategies: "Saving strategies",
@@ -171,7 +171,7 @@ const labels: any = {
     currency: "Devise",
     unknown: "inconnue",
     financialScore: "Score financier",
-    totalSpending: "Estimation des dépenses totales",
+    totalSpending: "Estimation IA des dépenses",
     mainCategories: "Catégories principales",
     wasteDetected: "Dépenses évitables détectées",
     savingStrategies: "Stratégies d’épargne",
@@ -243,7 +243,7 @@ const labels: any = {
     currency: "العملة",
     unknown: "غير معروفة",
     financialScore: "النتيجة المالية",
-    totalSpending: "تقدير إجمالي المصاريف",
+    totalSpending: "تقدير الذكاء الاصطناعي للمصاريف",
     mainCategories: "الفئات الرئيسية",
     wasteDetected: "الهدر المكتشف",
     savingStrategies: "استراتيجيات الادخار",
@@ -1058,6 +1058,10 @@ export default function FinanceClient() {
                       {result.financial_score ?? "N/A"}/100
                     </p>
 
+                    <p className="text-xs text-slate-500 mt-1">
+                      AI-generated overall finance score.
+                    </p>
+
                     <div className="mt-4">
                       <div className="h-3 bg-slate-200 rounded-full">
                         <div
@@ -1133,6 +1137,10 @@ export default function FinanceClient() {
                 <div className="rounded-2xl border bg-slate-50 p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                   <p className="text-sm text-slate-500">
                     Financial Habits Score
+                  </p>
+
+                  <p className="text-xs text-slate-500 mt-1">
+                    Deterministic score based on observed transactions.
                   </p>
 
                   <div className="mt-2 flex items-end gap-2">
