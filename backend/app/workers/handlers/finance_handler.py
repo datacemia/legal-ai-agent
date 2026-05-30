@@ -188,10 +188,6 @@ def handle_finance_ai(job: Job, db):
 
     transactions = extract_transactions(text)
 
-    print("TOTAL TRANSACTIONS:", len(transactions))
-    print("INCOME COUNT:", len([t for t in transactions if t["type"] == "income"]))
-    print("EXPENSE COUNT:", len([t for t in transactions if t["type"] == "expense"]))
-    print(transactions[:20])
 
     update_job_progress(
         job,
@@ -200,9 +196,7 @@ def handle_finance_ai(job: Job, db):
         finance_progress_message("spending", output_language),
     )
 
-    print("START AI ANALYSIS")
     result_ai = analyze_bank_statement(text, output_language)
-    print("END AI ANALYSIS")
     fallback_income = result_ai.get("total_income_estimate")
     currency = result_ai.get(
         "currency_detected",
