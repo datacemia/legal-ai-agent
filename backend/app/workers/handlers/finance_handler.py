@@ -50,71 +50,6 @@ def get_job_input(job: Job) -> dict:
 
 
 
-
-
-def build_observed_finance_summary(
-    forecast: dict,
-    currency: str,
-    output_language: str = "en",
-) -> str:
-    income = round(
-        forecast.get("observed_income", 0) or 0,
-        2,
-    )
-    expenses = round(
-        forecast.get("observed_expenses", 0) or 0,
-        2,
-    )
-    net = round(
-        forecast.get("observed_net_cashflow", 0) or 0,
-        2,
-    )
-
-    if output_language == "fr":
-        if net < 0:
-            return (
-                f"Les revenus observés s’élèvent à {income} {currency}, "
-                f"tandis que les dépenses observées atteignent {expenses} {currency}. "
-                f"La trésorerie nette observée est négative de {abs(net)} {currency}, "
-                "ce qui indique que les dépenses dépassent les revenus."
-            )
-
-        return (
-            f"Les revenus observés s’élèvent à {income} {currency}, "
-            f"tandis que les dépenses observées atteignent {expenses} {currency}. "
-            f"La trésorerie nette observée est positive de {net} {currency}."
-        )
-
-    if output_language == "ar":
-        if net < 0:
-            return (
-                f"بلغ الدخل المرصود {income} {currency}، "
-                f"بينما بلغت المصاريف المرصودة {expenses} {currency}. "
-                f"صافي التدفق النقدي المرصود سلبي بقيمة {abs(net)} {currency}، "
-                "مما يشير إلى أن المصاريف تتجاوز الدخل."
-            )
-
-        return (
-            f"بلغ الدخل المرصود {income} {currency}، "
-            f"بينما بلغت المصاريف المرصودة {expenses} {currency}. "
-            f"صافي التدفق النقدي المرصود إيجابي بقيمة {net} {currency}."
-        )
-
-    if net < 0:
-        return (
-            f"Observed income is {income} {currency}, "
-            f"while observed expenses are {expenses} {currency}. "
-            f"Observed net cashflow is negative by {abs(net)} {currency}, "
-            "which indicates that expenses exceed income."
-        )
-
-    return (
-        f"Observed income is {income} {currency}, "
-        f"while observed expenses are {expenses} {currency}. "
-        f"Observed net cashflow is positive by {net} {currency}."
-    )
-
-
 def deduplicate_transactions(
     transactions: list[dict],
 ) -> list[dict]:
@@ -429,12 +364,6 @@ def handle_finance_ai(job: Job, db):
     )
 
     charts = build_financial_charts(transactions)
-
-    result_ai["summary"] = build_observed_finance_summary(
-        forecast=forecast,
-        currency=currency,
-        output_language=output_language,
-    )
 
     result = {
         **result_ai,
