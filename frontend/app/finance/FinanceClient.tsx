@@ -34,6 +34,62 @@ const safeSetLocalStorage = (key: string, value: string) => {
   localStorage.setItem(key, value);
 };
 
+
+const trendLabels: any = {
+  en: {
+    negative: "Negative",
+    risky: "Risky",
+    stable: "Stable",
+    improving: "Improving",
+  },
+  fr: {
+    negative: "Négatif",
+    risky: "À risque",
+    stable: "Stable",
+    improving: "En amélioration",
+  },
+  ar: {
+    negative: "سلبي",
+    risky: "معرّض للخطر",
+    stable: "مستقر",
+    improving: "في تحسن",
+  },
+};
+
+const budgetLabels: any = {
+  en: {
+    over_budget: "Over budget",
+    healthy: "Healthy",
+    balanced: "Balanced",
+    under_budget: "Under budget",
+  },
+  fr: {
+    over_budget: "Dépassement du budget",
+    healthy: "Sain",
+    balanced: "Équilibré",
+    under_budget: "Sous le budget",
+  },
+  ar: {
+    over_budget: "تجاوز الميزانية",
+    healthy: "صحي",
+    balanced: "متوازن",
+    under_budget: "أقل من الميزانية",
+  },
+};
+
+
+const categoryLabels: any = {
+  en: {
+    other: "Other",
+  },
+  fr: {
+    other: "Autre",
+  },
+  ar: {
+    other: "أخرى",
+  },
+};
+
 const labels: any = {
   en: {
     title: "Personal Finance Coach",
@@ -138,6 +194,7 @@ const labels: any = {
     executiveSummary: "Executive Summary",
     disclaimerPdf: "Disclaimer: This report is informational only and does not replace professional financial advice.",
     previewTitle: "AI Financial Intelligence Preview",
+    previewBadge: "AI preview",
     previewFinancialScore: "Financial score",
     previewSpendingBreakdown: "Spending breakdown",
     previewNeeds: "Needs",
@@ -172,13 +229,13 @@ const labels: any = {
     transactions: "transactions",
     averageCharge: "Average charge",
     totalObserved: "Total observed",
-    estimatedSavingsOpportunity: "{t.estimatedSavingsOpportunity}",
+    estimatedSavingsOpportunity: "Estimated savings opportunity",
     noMajorSavingsOpportunities: "No major savings opportunities detected.",
     negativeCashflowRisk: "Negative cashflow risk",
     financialHabitsNeedImprovement: "Financial habits need improvement",
     spendingPatternsNeedMonitoring: "Your spending patterns may require closer monitoring.",
     askFinanceAssistant: "Ask your finance assistant",
-    notFinancialAdvice: "This is not financial advice.",
+    notFinancialAdvice: "This is not financial advice. It is for informational purposes only.",
     mainCategories: "Main categories",
     wasteDetected: "Waste detected",
     savingStrategies: "Saving strategies",
@@ -289,6 +346,7 @@ const labels: any = {
     executiveSummary: "Résumé exécutif",
     disclaimerPdf: "Avertissement : ce rapport est fourni à titre informatif uniquement et ne remplace pas un conseil financier professionnel.",
     previewTitle: "Aperçu de l’intelligence financière IA",
+    previewBadge: "Aperçu IA",
     previewFinancialScore: "Score financier",
     previewSpendingBreakdown: "Répartition des dépenses",
     previewNeeds: "Besoins",
@@ -329,7 +387,7 @@ const labels: any = {
     financialHabitsNeedImprovement: "Les habitudes financières doivent être améliorées",
     spendingPatternsNeedMonitoring: "Vos habitudes de dépense peuvent nécessiter un suivi plus attentif.",
     askFinanceAssistant: "Posez une question à votre assistant financier",
-    notFinancialAdvice: "Ceci n’est pas un conseil financier.",
+    notFinancialAdvice: "Ceci n’est pas un conseil financier. Ces informations sont fournies à titre informatif uniquement.",
     mainCategories: "Catégories principales",
     wasteDetected: "Dépenses évitables détectées",
     savingStrategies: "Stratégies d’épargne",
@@ -440,6 +498,7 @@ const labels: any = {
     executiveSummary: "الملخص التنفيذي",
     disclaimerPdf: "تنبيه: هذا التقرير معلوماتي فقط ولا يُعد بديلاً عن الاستشارة المالية المهنية.",
     previewTitle: "معاينة الذكاء المالي بالذكاء الاصطناعي",
+    previewBadge: "معاينة بالذكاء الاصطناعي",
     previewFinancialScore: "النتيجة المالية",
     previewSpendingBreakdown: "تفصيل المصاريف",
     previewNeeds: "الاحتياجات",
@@ -480,7 +539,7 @@ const labels: any = {
     financialHabitsNeedImprovement: "العادات المالية تحتاج إلى تحسين",
     spendingPatternsNeedMonitoring: "قد تتطلب أنماط إنفاقك مراقبة أكثر دقة.",
     askFinanceAssistant: "اسأل مساعدك المالي",
-    notFinancialAdvice: "هذه ليست نصيحة مالية.",
+    notFinancialAdvice: "هذه ليست نصيحة مالية. المعلومات لأغراض إعلامية فقط.",
     mainCategories: "الفئات الرئيسية",
     wasteDetected: "الهدر المكتشف",
     savingStrategies: "استراتيجيات الادخار",
@@ -556,9 +615,41 @@ export default function FinanceClient() {
       "Your spending patterns may require closer monitoring.": t.spendingPatternsNeedMonitoring,
       "This is not financial advice.": t.notFinancialAdvice,
       "This is not financial advice...": t.notFinancialAdvice,
+      "This is not financial advice. It is for informational purposes only.": t.notFinancialAdvice,
     };
 
     return insightTranslations[value] || value;
+  };
+
+
+  const translateBackendMessage = (value: any) => {
+    if (typeof value !== "string") return value;
+
+    const backendMessageLabels: any = {
+      en: {
+        "Your expenses exceed your income.": "Your expenses exceed your income.",
+        "Your current spending is higher than your estimated income.": "Your current spending is higher than your estimated income.",
+        "This is not financial advice. It is for informational purposes only.": t.notFinancialAdvice,
+      },
+      fr: {
+        "Your expenses exceed your income.": "Vos dépenses dépassent vos revenus.",
+        "Your current spending is higher than your estimated income.": "Vos dépenses actuelles sont supérieures à vos revenus estimés.",
+        "This is not financial advice. It is for informational purposes only.": t.notFinancialAdvice,
+      },
+      ar: {
+        "Your expenses exceed your income.": "مصاريفك تتجاوز دخلك.",
+        "Your current spending is higher than your estimated income.": "إنفاقك الحالي أعلى من دخلك المقدر.",
+        "This is not financial advice. It is for informational purposes only.": t.notFinancialAdvice,
+      },
+    };
+
+    return backendMessageLabels[language]?.[value] || translateInsightText(value);
+  };
+
+  const translateCategory = (value: any) => {
+    if (typeof value !== "string") return value;
+
+    return categoryLabels[language]?.[value.toLowerCase()] || value;
   };
 
   const hasActiveAccess =
@@ -603,9 +694,20 @@ export default function FinanceClient() {
 
   const chartData =
     result?.charts?.category_breakdown?.map((item: any) => ({
-      name: item.category,
+      name: translateCategory(item.category),
       value: Number(item.amount),
     })) || [];
+
+
+  const translatedCashflowTrend =
+    trendLabels[language]?.[result?.cashflow_forecast?.trend] ??
+    result?.cashflow_forecast?.trend ??
+    "unknown";
+
+  const translatedBudgetStatus =
+    budgetLabels[language]?.[result?.recommended_budget?.status] ??
+    result?.recommended_budget?.status ??
+    "unknown";
 
   const quickQuestions = [
     result?.subscriptions_detected?.length > 0
@@ -976,7 +1078,7 @@ export default function FinanceClient() {
     doc.text(`${t.emergencyFund}: ${formatMoney(result.recommended_budget?.emergency_fund_target)}`, 14, y);
 
     addLine(7);
-    doc.text(`Status: ${result.recommended_budget?.status || "-"}`, 14, y);
+    doc.text(`Status: ${translatedBudgetStatus || "-"}`, 14, y);
 
     addLine(12);
     doc.setFontSize(9);
@@ -1027,7 +1129,7 @@ export default function FinanceClient() {
               </p>
             </div>
             <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700">
-              AI preview
+              {t.previewBadge}
             </span>
           </div>
 
@@ -1429,7 +1531,7 @@ export default function FinanceClient() {
                             : "text-green-600"
                         }`}
                       >
-                        {result.cashflow_forecast?.trend ?? "unknown"}
+                        {translatedCashflowTrend}
                       </h3>
                     </div>
 
@@ -1445,7 +1547,7 @@ export default function FinanceClient() {
                   </div>
 
                   <p className="text-sm text-slate-600 mt-4">
-                    {translateInsightText(result.cashflow_forecast?.message)}
+                    {translateBackendMessage(result.cashflow_forecast?.message)}
                   </p>
                 </div>
 
@@ -1457,7 +1559,7 @@ export default function FinanceClient() {
                       </p>
 
                       <h3 className="text-2xl font-bold text-slate-800 mt-1">
-                        {result.recommended_budget?.status ?? "unknown"}
+                        {translatedBudgetStatus}
                       </h3>
                     </div>
 
@@ -1525,7 +1627,7 @@ export default function FinanceClient() {
                   </div>
 
                   <p className="text-sm text-slate-600 mt-4">
-                    {translateInsightText(result.recommended_budget?.message)}
+                    {translateBackendMessage(result.recommended_budget?.message)}
                   </p>
                 </div>
 
@@ -1954,7 +2056,7 @@ export default function FinanceClient() {
                           <tbody>
                             {chartData.map((item, index) => (
                               <tr
-                                key={item.name}
+                                key={translateCategory(item.name)}
                                 className="border-b last:border-b-0"
                               >
                                 <td className="px-3 py-2">
@@ -1967,7 +2069,7 @@ export default function FinanceClient() {
                                       }}
                                     />
                                     <span className="capitalize">
-                                      {item.name}
+                                      {translateCategory(item.name)}
                                     </span>
                                   </div>
                                 </td>
@@ -2135,7 +2237,7 @@ export default function FinanceClient() {
 
                 {result.disclaimer && (
                   <p className="text-xs text-slate-500 border-t pt-4">
-                    {translateInsightText(result.disclaimer)}
+                    {translateBackendMessage(result.disclaimer)}
                   </p>
                 )}
               </>
