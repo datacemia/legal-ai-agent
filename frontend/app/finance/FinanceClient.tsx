@@ -1390,7 +1390,7 @@ export default function FinanceClient() {
                                 </p>
 
                                 <p className="text-xs text-slate-500">
-                                  / month
+                                  Savings opportunity
                                 </p>
                               </div>
                             </div>
