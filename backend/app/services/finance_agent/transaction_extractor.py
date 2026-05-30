@@ -108,19 +108,23 @@ MONTH_ALIASES = {
 
 
 def normalize_ocr_numeric_text(value: str) -> str:
+    translation = str.maketrans({
+        "O": "0",
+        "o": "0",
+        "I": "1",
+        "l": "1",
+        "L": "1",
+        "S": "5",
+    })
+
+    def fix_token(match):
+        return match.group(0).translate(translation)
+
     return re.sub(
-        r"(?<=\d|[+\-.,])([OoIlLS])(?=\d|[+\-.,])",
-        lambda m: {
-            "O": "0",
-            "o": "0",
-            "I": "1",
-            "l": "1",
-            "L": "1",
-            "S": "5",
-        }.get(m.group(1), m.group(1)),
+        r"(?=.*\d)[A-Za-z0-9+\-.,/]+",
+        fix_token,
         value,
     )
-
 
 def parse_amount(value: str) -> float:
     value = value.replace(" ", "")
