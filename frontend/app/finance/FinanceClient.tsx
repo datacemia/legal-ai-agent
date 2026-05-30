@@ -1584,28 +1584,32 @@ export default function FinanceClient() {
                     </h3>
                   </div>
 
-                  <div className="h-80">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <BarChart
-                        data={result.charts?.subscription_growth || []}
-                      >
-                        <CartesianGrid
-                          strokeDasharray="3 3"
-                          vertical={false}
-                        />
+                  {result.charts?.subscription_growth?.length > 0 ? (
+                    <div className="h-80">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <BarChart data={result.charts.subscription_growth}>
+                          <CartesianGrid
+                            strokeDasharray="3 3"
+                            vertical={false}
+                          />
 
-                        <XAxis dataKey="date" />
-                        <YAxis />
-                        <Tooltip />
+                          <XAxis dataKey="date" />
+                          <YAxis />
+                          <Tooltip />
 
-                        <Bar
-                          dataKey="amount"
-                          fill="#f97316"
-                          radius={[8, 8, 0, 0]}
-                        />
-                      </BarChart>
-                    </ResponsiveContainer>
-                  </div>
+                          <Bar
+                            dataKey="amount"
+                            fill="#f97316"
+                            radius={[8, 8, 0, 0]}
+                          />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
+                  ) : (
+                    <div className="flex h-80 items-center justify-center rounded-xl bg-slate-50 px-6 text-center text-sm text-slate-500">
+                      No recurring subscription spending detected for this statement.
+                    </div>
+                  )}
 
                   <p className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-600">
                     {t.chartInsightSubscriptions}
