@@ -84,6 +84,10 @@ STRICT RULES:
 - Do not guess January, February, March, etc.
 - Do not infer a statement period from a small sample of transactions.
 - The summary must not invent dates, months, or statement periods.
+- Never infer specific spending categories if transaction descriptions do not provide category information.
+- If categories cannot be determined, use generic wording such as:
+  "High overall spending observed."
+- Do not claim entertainment, shopping, restaurants, subscriptions, or discretionary spending unless explicitly supported by transaction descriptions.
 - Deposits, credits, salary, refunds = income.
 - Debits, payments, checks, withdrawals, card payments = expenses.
 - Outgoing transfers = expenses unless clearly internal.
