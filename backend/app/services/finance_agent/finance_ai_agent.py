@@ -74,6 +74,18 @@ IMPORTANT LANGUAGE RULES:
 - Do not translate JSON keys.
 - Do not write anything outside JSON.
 
+
+
+SUMMARY RULES:
+- The summary must contain 1 to 3 complete sentences.
+- The summary must reference observed income, observed expenses, and net cashflow when those values can be inferred.
+- The summary must describe the overall financial situation, not individual categories.
+- Avoid generic summaries such as:
+  "High spending observed."
+  "Expenses detected."
+  "Transactions found."
+- Summaries should explain whether spending exceeds income, income exceeds spending, or cashflow is approximately balanced.
+
 STRICT RULES:
 - NEVER invent the statement period.
 - Use only dates explicitly present in the statement.
