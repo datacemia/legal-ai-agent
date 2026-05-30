@@ -292,7 +292,7 @@ def has_transaction_signal(
 
     amount_found = bool(
         re.search(
-            r"[+-]?\d+(?:[.,]\d{2})",
+            r"[+-]?\d+(?:[.,]\d{1,2})",
             line,
         )
     )
@@ -324,7 +324,7 @@ def extract_transaction_amount(line: str) -> float | None:
     )[0]
 
     money_matches = re.findall(
-        r"[+-]?\d+(?:[.,]\d{2})\s*(?:MAD|USD|EUR|GBP|CAD|DH|DHS|€|\$|£)?",
+        r"[+-]?\d+(?:[.,]\d{1,2})\s*(?:[A-Z]{3}|DH|DHS|€|\$|£)?",
         transaction_part,
         flags=re.IGNORECASE,
     )
@@ -340,14 +340,14 @@ def extract_transaction_amount(line: str) -> float | None:
 
         if cleaned.startswith("+") or cleaned.startswith("-"):
             numeric = re.search(
-                r"[+-]?\d+(?:[.,]\d{2})",
+                r"[+-]?\d+(?:[.,]\d{1,2})",
                 cleaned,
             )
             if numeric:
                 return parse_amount(numeric.group(0))
 
     numeric = re.search(
-        r"[+-]?\d+(?:[.,]\d{2})",
+        r"[+-]?\d+(?:[.,]\d{1,2})",
         money_matches[0],
     )
 
@@ -397,7 +397,7 @@ def extract_tabular_bank_amount(
     )
 
     numbers = re.findall(
-        r"\b\d+(?:[.,]\d{2})\b",
+        r"\b\d+(?:[.,]\d{1,2})\b",
         without_date,
     )
 
@@ -467,7 +467,7 @@ def extract_transactions(text: str) -> list[dict]:
                 combined += " " + raw_lines[j]
 
                 if re.search(
-                    r"\b\d+(?:[.,]\d{2})\b",
+                    r"\b\d+(?:[.,]\d{1,2})\b",
                     raw_lines[j],
                 ):
                     break
