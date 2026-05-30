@@ -100,6 +100,10 @@ const labels: any = {
     unknown: "unknown",
     financialScore: "Financial score",
     totalSpending: "AI spending estimate",
+    observedIncome: "Observed Income",
+    financialHabitsScore: "Financial Habits Score",
+    cashflowForecast: "Cashflow Forecast",
+    detectedSubscriptions: "Detected Subscriptions",
     mainCategories: "Main categories",
     wasteDetected: "Waste detected",
     savingStrategies: "Saving strategies",
@@ -172,6 +176,10 @@ const labels: any = {
     unknown: "inconnue",
     financialScore: "Score financier",
     totalSpending: "Estimation IA des dépenses",
+    observedIncome: "Revenus observés",
+    financialHabitsScore: "Score des habitudes financières",
+    cashflowForecast: "Prévision de trésorerie",
+    detectedSubscriptions: "Abonnements détectés",
     mainCategories: "Catégories principales",
     wasteDetected: "Dépenses évitables détectées",
     savingStrategies: "Stratégies d’épargne",
@@ -244,6 +252,10 @@ const labels: any = {
     unknown: "غير معروفة",
     financialScore: "النتيجة المالية",
     totalSpending: "تقدير الذكاء الاصطناعي للمصاريف",
+    observedIncome: "الدخل الفعلي المرصود",
+    financialHabitsScore: "درجة العادات المالية",
+    cashflowForecast: "توقع التدفق النقدي",
+    detectedSubscriptions: "الاشتراكات المكتشفة",
     mainCategories: "الفئات الرئيسية",
     wasteDetected: "الهدر المكتشف",
     savingStrategies: "استراتيجيات الادخار",
@@ -662,7 +674,7 @@ export default function FinanceClient() {
     addLine(7);
     doc.text(`Observed Net Cashflow: ${formatMoney(result.cashflow_forecast?.observed_net_cashflow)}`, 14, y);
     addLine(7);
-    doc.text(`Financial Habits Score: ${result.financial_habit_scores?.overall_financial_habits_score ?? "-"}/100`, 14, y);
+    doc.text(`${t.financialHabitsScore}: ${result.financial_habit_scores?.overall_financial_habits_score ?? "-"}/100`, 14, y);
 
     addLine(12);
     doc.setFontSize(13);
@@ -691,7 +703,7 @@ export default function FinanceClient() {
 
     addLine(4);
     doc.setFontSize(13);
-    doc.text("Detected Subscriptions", 14, y);
+    doc.text(t.detectedSubscriptions, 14, y);
 
     addLine(8);
     doc.setFontSize(10);
@@ -1093,7 +1105,7 @@ export default function FinanceClient() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
                   <div className="rounded-2xl border bg-slate-50 p-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                     <p className="text-sm text-slate-500">
-                      Observed Income
+                      {t.observedIncome}
                     </p>
 
                     <h3 className="text-2xl font-bold text-green-600 mt-1">
@@ -1136,7 +1148,7 @@ export default function FinanceClient() {
 
                 <div className="rounded-2xl border bg-slate-50 p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                   <p className="text-sm text-slate-500">
-                    Financial Habits Score
+                    {t.financialHabitsScore}
                   </p>
 
                   <p className="text-xs text-slate-500 mt-1">
@@ -1165,7 +1177,7 @@ export default function FinanceClient() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-slate-500">
-                        Cashflow Forecast
+                        {t.cashflowForecast}
                       </p>
 
                       <h3
@@ -1281,7 +1293,7 @@ export default function FinanceClient() {
                   <div className="flex items-center justify-between mb-4">
                     <div>
                       <p className="text-sm text-slate-500">
-                        Detected Subscriptions
+                        {t.detectedSubscriptions}
                       </p>
 
                       <h3 className="text-2xl font-bold text-slate-800 mt-1">
