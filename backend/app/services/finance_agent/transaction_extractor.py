@@ -530,6 +530,20 @@ def extract_transactions(text: str) -> list[dict]:
             default_year=default_year,
         )
 
+        if amount > 0:
+            print(
+                "OCR INCOME:",
+                clean_line,
+                amount,
+            )
+
+        if amount < 0:
+            print(
+                "OCR EXPENSE:",
+                clean_line,
+                amount,
+            )
+
         transactions.append(
             {
                 "date": date,
