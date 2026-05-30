@@ -129,9 +129,16 @@ def detect_type(line: str, amount: float) -> str:
 
 
 def extract_transaction_amount(line: str) -> float | None:
+    transaction_part = re.split(
+        r"\bbalance\b|\bsolde\b",
+        line,
+        maxsplit=1,
+        flags=re.IGNORECASE,
+    )[0]
+
     money_matches = re.findall(
         r"[+-]?\d+(?:[.,]\d{2})\s*(?:MAD|USD|EUR|GBP|CAD|DH|DHS|€|\$|£)?",
-        line,
+        transaction_part,
         flags=re.IGNORECASE,
     )
 
