@@ -102,7 +102,7 @@ def generate_financial_insights(
     if opportunities:
         estimated = sum(
             o.get(
-                "estimated_monthly_savings",
+                "estimated_savings_opportunity",
                 0,
             )
             for o in opportunities
@@ -113,8 +113,8 @@ def generate_financial_insights(
                 "type": "tip",
                 "title": "Savings opportunities detected",
                 "message": (
-                    f"You could potentially save "
-                    f"{round(estimated, 2)} {currency} monthly."
+                    f"Potential savings opportunities identified: "
+                    f"{round(estimated, 2)} {currency}."
                 ),
             }
         )
@@ -126,7 +126,7 @@ def generate_financial_insights(
                 "type": "warning",
                 "title": "High spending intensity",
                 "message": (
-                    "Your monthly expenses are relatively high."
+                    "Your observed expenses are relatively high."
                 ),
             }
         )
