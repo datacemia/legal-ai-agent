@@ -673,7 +673,7 @@ export default function FinanceClient() {
 
     (result.savings_opportunities || []).forEach((item: any) => {
       doc.text(
-        `${item.issue}: ${formatMoney(item.estimated_monthly_savings)} / month`,
+        `${item.issue}: Estimated savings opportunity ${formatMoney(item.estimated_savings_opportunity)}`,
         14,
         y
       );
@@ -1348,7 +1348,7 @@ export default function FinanceClient() {
                           Number(
                             (result.savings_opportunities || []).reduce(
                               (sum: number, item: any) =>
-                                sum + Number(item.estimated_monthly_savings || 0),
+                                sum + Number(item.estimated_savings_opportunity || 0),
                               0
                             ).toFixed(2)
                           )
@@ -1356,7 +1356,7 @@ export default function FinanceClient() {
                       </h3>
 
                       <p className="text-xs text-slate-500 mt-1">
-                        Estimated monthly savings
+                        Estimated savings opportunity
                       </p>
                     </div>
 
@@ -1386,7 +1386,7 @@ export default function FinanceClient() {
 
                               <div className="text-right shrink-0">
                                 <p className="font-semibold text-green-600">
-                                  {formatMoney(item.estimated_monthly_savings)}
+                                  {formatMoney(item.estimated_savings_opportunity)}
                                 </p>
 
                                 <p className="text-xs text-slate-500">

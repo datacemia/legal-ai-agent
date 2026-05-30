@@ -1,3 +1,7 @@
+import re
+from collections import defaultdict
+
+
 def detect_savings_opportunities(
     transactions: list[dict],
     subscriptions: list[dict],
@@ -26,7 +30,7 @@ def detect_savings_opportunities(
             {
                 "issue": "High subscription spending",
                 "severity": "medium",
-                "estimated_monthly_savings": round(
+                "estimated_savings_opportunity": round(
                     subscription_total * 0.35,
                     2,
                 ),
@@ -42,7 +46,7 @@ def detect_savings_opportunities(
             {
                 "issue": "Too many recurring subscriptions",
                 "severity": "high",
-                "estimated_monthly_savings": round(
+                "estimated_savings_opportunity": round(
                     subscription_total * 0.20,
                     2,
                 ),
@@ -58,7 +62,7 @@ def detect_savings_opportunities(
             {
                 "issue": "High monthly spending detected",
                 "severity": "high",
-                "estimated_monthly_savings": round(
+                "estimated_savings_opportunity": round(
                     total_expenses * 0.10,
                     2,
                 ),
@@ -93,7 +97,7 @@ def detect_savings_opportunities(
                     {
                         "issue": f"Multiple charges detected for {merchant}",
                         "severity": "medium",
-                        "estimated_monthly_savings": round(
+                        "estimated_savings_opportunity": round(
                             matching_sub["monthly_cost"] * 0.50,
                             2,
                         ),
@@ -105,7 +109,7 @@ def detect_savings_opportunities(
 
     opportunities.sort(
         key=lambda item: item[
-            "estimated_monthly_savings"
+            "estimated_savings_opportunity"
         ],
         reverse=True,
     )
