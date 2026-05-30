@@ -660,7 +660,7 @@ export default function FinanceClient() {
     addLine(7);
     doc.text(`Expenses: ${formatMoney(result.cashflow_forecast?.monthly_expenses)}`, 14, y);
     addLine(7);
-    doc.text(`Net Cashflow: ${formatMoney(result.cashflow_forecast?.net_cashflow)}`, 14, y);
+    doc.text(`Observed Net Cashflow: ${formatMoney(result.cashflow_forecast?.net_cashflow)}`, 14, y);
     addLine(7);
     doc.text(`Financial Habits Score: ${result.financial_habit_scores?.overall_financial_habits_score ?? "-"}/100`, 14, y);
 
@@ -1089,7 +1089,7 @@ export default function FinanceClient() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
                   <div className="rounded-2xl border bg-slate-50 p-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                     <p className="text-sm text-slate-500">
-                      Monthly Income
+                      Observed Income
                     </p>
 
                     <h3 className="text-2xl font-bold text-green-600 mt-1">
@@ -1101,7 +1101,7 @@ export default function FinanceClient() {
 
                   <div className="rounded-2xl border bg-slate-50 p-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                     <p className="text-sm text-slate-500">
-                      Monthly Expenses
+                      Observed Expenses
                     </p>
 
                     <h3 className="text-2xl font-bold text-red-600 mt-1">
@@ -1113,7 +1113,7 @@ export default function FinanceClient() {
 
                   <div className="rounded-2xl border bg-slate-50 p-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                     <p className="text-sm text-slate-500">
-                      Net Cashflow
+                      Observed Net Cashflow
                     </p>
 
                     <h3
@@ -1539,7 +1539,7 @@ export default function FinanceClient() {
                 <div className="rounded-2xl border bg-white p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                   <div className="mb-4">
                     <p className="text-sm text-slate-500">
-                      Net Cashflow Over Time
+                      Observed Net Cashflow Over Time
                     </p>
 
                     <h3 className="text-xl font-bold mt-1">
