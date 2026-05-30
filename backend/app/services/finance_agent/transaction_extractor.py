@@ -385,12 +385,12 @@ def extract_transactions(text: str) -> list[dict]:
         ):
             continue
 
-        amount = extract_transaction_amount(clean_line)
+        tabular_amount, tabular_type = extract_tabular_bank_amount(clean_line)
 
-        tabular_type = None
-
-        if amount is None:
-            amount, tabular_type = extract_tabular_bank_amount(clean_line)
+        if tabular_amount is not None:
+            amount = tabular_amount
+        else:
+            amount = extract_transaction_amount(clean_line)
 
         if amount is None:
             continue
