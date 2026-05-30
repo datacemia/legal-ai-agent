@@ -66,7 +66,24 @@ def parse_amount(value: str) -> float:
 
 
 def extract_date(line: str):
-    match = re.search(r"(\d{2}[/-]\d{2}(?:[/-]\d{2,4})?)", line)
+    iso_match = re.search(
+        r"(\d{4}-\d{2}-\d{2})",
+        line,
+    )
+
+    if iso_match:
+        try:
+            return datetime.strptime(
+                iso_match.group(1),
+                "%Y-%m-%d",
+            ).date().isoformat()
+        except ValueError:
+            pass
+
+    match = re.search(
+        r"(\d{2}[/-]\d{2}(?:[/-]\d{2,4})?)",
+        line,
+    )
 
     if not match:
         return None
