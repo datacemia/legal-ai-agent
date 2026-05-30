@@ -161,17 +161,24 @@ def detect_recurring_subscriptions(
     subscriptions = []
 
     for merchant, amounts in grouped.items():
-        monthly_cost = round(sum(amounts), 2)
+        total_observed = round(sum(amounts), 2)
+        transactions_count = len(amounts)
+
+        estimated_monthly_cost = round(
+            total_observed / transactions_count,
+            2,
+        )
 
         subscriptions.append(
             {
                 "name": merchant,
-                "monthly_cost": monthly_cost,
+                "monthly_cost": estimated_monthly_cost,
+                "total_observed_cost": total_observed,
                 "yearly_cost_estimate": round(
-                    monthly_cost * 12,
+                    estimated_monthly_cost * 12,
                     2,
                 ),
-                "transactions_count": len(amounts),
+                "transactions_count": transactions_count,
             }
         )
 
