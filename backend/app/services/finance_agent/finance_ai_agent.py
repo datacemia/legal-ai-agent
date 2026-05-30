@@ -88,6 +88,10 @@ STRICT RULES:
 - If categories cannot be determined, use generic wording such as:
   "High overall spending observed."
 - Do not claim entertainment, shopping, restaurants, subscriptions, or discretionary spending unless explicitly supported by transaction descriptions.
+- The summary must contain 1–3 complete sentences.
+- The summary should reference observed income, spending, and cashflow when available.
+- Avoid vague summaries such as "High spending observed."
+- Use only facts supported by the statement and computed totals.
 - Deposits, credits, salary, refunds = income.
 - Debits, payments, checks, withdrawals, card payments = expenses.
 - Outgoing transfers = expenses unless clearly internal.
