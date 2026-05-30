@@ -188,6 +188,11 @@ def handle_finance_ai(job: Job, db):
 
     transactions = extract_transactions(text)
 
+    print("TOTAL TRANSACTIONS:", len(transactions))
+    print("INCOME COUNT:", len([t for t in transactions if t["type"] == "income"]))
+    print("EXPENSE COUNT:", len([t for t in transactions if t["type"] == "expense"]))
+    print(transactions[:20])
+
     update_job_progress(
         job,
         db,
