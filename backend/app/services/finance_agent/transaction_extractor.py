@@ -1,4 +1,5 @@
 import re
+from collections import Counter
 from datetime import datetime
 
 
@@ -65,23 +66,60 @@ def parse_amount(value: str) -> float:
     return float(value)
 
 
-def extract_date(line: str):
+def is_reasonable_year(year: int) -> bool:
+    return 2000 <= year <= datetime.now().year + 1
+
+
+def detect_document_year(text: str) -> int:
+    years = []
+
+    for match in re.findall(r"\b(20\d{2})-\d{2}-\d{2}\b", text):
+        year = int(match)
+        if is_reasonable_year(year):
+            years.append(year)
+
+    for match in re.findall(r"\b\d{2}[/-]\d{2}[/-](20\d{2})\b", text):
+        year = int(match)
+        if is_reasonable_year(year):
+            years.append(year)
+
+    for match in re.findall(r"\b\d{2}[/-]\d{2}[/-](\d{2})\b", text):
+        year = 2000 + int(match)
+        if is_reasonable_year(year):
+            years.append(year)
+
+    if not years:
+        return datetime.now().year
+
+    return Counter(years).most_common(1)[0][0]
+
+
+def extract_date(
+    line: str,
+    default_year: int | None = None,
+):
     iso_match = re.search(
-        r"(\d{4}-\d{2}-\d{2})",
+        r"\b(\d{4}-\d{2}-\d{2})\b",
         line,
     )
 
     if iso_match:
         try:
-            return datetime.strptime(
+            parsed = datetime.strptime(
                 iso_match.group(1),
                 "%Y-%m-%d",
-            ).date().isoformat()
+            )
+
+            if not is_reasonable_year(parsed.year):
+                return None
+
+            return parsed.date().isoformat()
+
         except ValueError:
             pass
 
     match = re.search(
-        r"(\d{2}[/-]\d{2}(?:[/-]\d{2,4})?)",
+        r"\b(\d{2}[/-]\d{2}(?:[/-]\d{2,4})?)\b",
         line,
     )
 
@@ -90,21 +128,39 @@ def extract_date(line: str):
 
     raw = match.group(1)
 
-    for fmt in (
+    formats_with_year = (
         "%d/%m/%Y",
         "%d-%m-%Y",
         "%d/%m/%y",
         "%d-%m-%y",
-        "%d/%m",
-        "%d-%m",
-    ):
+    )
+
+    for fmt in formats_with_year:
         try:
             parsed = datetime.strptime(raw, fmt)
 
-            if parsed.year == 1900:
-                parsed = parsed.replace(year=datetime.now().year)
+            if not is_reasonable_year(parsed.year):
+                return None
 
-            if parsed.year < 2000 or parsed.year > datetime.now().year + 1:
+            return parsed.date().isoformat()
+
+        except ValueError:
+            continue
+
+    formats_without_year = (
+        "%d/%m",
+        "%d-%m",
+    )
+
+    for fmt in formats_without_year:
+        try:
+            parsed = datetime.strptime(raw, fmt)
+
+            year = default_year or datetime.now().year
+
+            parsed = parsed.replace(year=year)
+
+            if not is_reasonable_year(parsed.year):
                 return None
 
             return parsed.date().isoformat()
@@ -115,13 +171,19 @@ def extract_date(line: str):
     return None
 
 
-def has_transaction_signal(line: str) -> bool:
+def has_transaction_signal(
+    line: str,
+    default_year: int | None = None,
+) -> bool:
     lower = line.lower()
 
     if any(keyword in lower for keyword in BALANCE_KEYWORDS):
         return False
 
-    date_found = extract_date(line) is not None
+    date_found = extract_date(
+        line,
+        default_year=default_year,
+    ) is not None
 
     amount_found = bool(
         re.search(
@@ -172,7 +234,10 @@ def extract_transaction_amount(line: str) -> float | None:
             continue
 
         if cleaned.startswith("+") or cleaned.startswith("-"):
-            numeric = re.search(r"[+-]?\d+(?:[.,]\d{2})", cleaned)
+            numeric = re.search(
+                r"[+-]?\d+(?:[.,]\d{2})",
+                cleaned,
+            )
             if numeric:
                 return parse_amount(numeric.group(0))
 
@@ -189,6 +254,7 @@ def extract_transaction_amount(line: str) -> float | None:
 
 def extract_transactions(text: str) -> list[dict]:
     transactions = []
+    default_year = detect_document_year(text)
 
     for line in text.splitlines():
         clean_line = " ".join(line.split())
@@ -196,7 +262,10 @@ def extract_transactions(text: str) -> list[dict]:
         if not clean_line:
             continue
 
-        if not has_transaction_signal(clean_line):
+        if not has_transaction_signal(
+            clean_line,
+            default_year=default_year,
+        ):
             continue
 
         amount = extract_transaction_amount(clean_line)
@@ -212,7 +281,10 @@ def extract_transactions(text: str) -> list[dict]:
         if transaction_type == "income":
             amount = abs(amount)
 
-        date = extract_date(clean_line)
+        date = extract_date(
+            clean_line,
+            default_year=default_year,
+        )
 
         transactions.append(
             {
