@@ -75,6 +75,8 @@ BALANCE_KEYWORDS = [
     "nouveau solde",
     "total",
     "report",
+    "statement period",
+    "statement date",
 ]
 
 
@@ -331,6 +333,13 @@ def extract_transaction_amount(line: str) -> float | None:
         maxsplit=1,
         flags=re.IGNORECASE,
     )[0]
+
+    transaction_part = re.sub(
+        r"\b\d{2}[./-]\d{2}(?:[./-]\d{2,4})?\b",
+        "",
+        transaction_part,
+        count=1,
+    )
 
     money_matches = re.findall(
         rf"{AMOUNT_PATTERN}\s*(?:[A-Z]{{3}}|DH|DHS|€|\$|£)?",
