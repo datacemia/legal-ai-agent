@@ -36,11 +36,6 @@ SERVICE_HINTS = [
     "abonnement",
     "monthly",
     "recurring",
-    "paiement carte",
-    "card payment",
-    "3ds",
-    "usd",
-    "eur",
 ]
 
 
