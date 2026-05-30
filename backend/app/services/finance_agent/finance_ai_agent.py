@@ -68,6 +68,8 @@ Analyze the following bank statement text.
 IMPORTANT LANGUAGE RULES:
 - Return the ENTIRE JSON content in this language: {language_name}.
 - All user-facing values must be written in {language_name}.
+- This includes summary, period_detected, waste_detected, saving_strategies, risk_notes, and disclaimer.
+- Do not mix languages inside any JSON value.
 - Keep JSON keys exactly in English.
 - Do not translate JSON keys.
 - Do not write anything outside JSON.
@@ -125,7 +127,7 @@ Return EXACT JSON:
   "saving_strategies": ["item"],
   "risk_notes": ["item"],
   "financial_score": 0,
-  "disclaimer": "This is not financial advice. It is for informational purposes only."
+  "disclaimer": "localized disclaimer"
 }}
 
 Bank statement:
