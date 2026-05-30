@@ -78,12 +78,12 @@ def detect_document_year(text: str) -> int:
         if is_reasonable_year(year):
             years.append(year)
 
-    for match in re.findall(r"\b\d{2}[/-]\d{2}[/-](20\d{2})\b", text):
+    for match in re.findall(r"\b\d{2}[./-]\d{2}[./-](20\d{2})\b", text):
         year = int(match)
         if is_reasonable_year(year):
             years.append(year)
 
-    for match in re.findall(r"\b\d{2}[/-]\d{2}[/-](\d{2})\b", text):
+    for match in re.findall(r"\b\d{2}[./-]\d{2}[./-](\d{2})\b", text):
         year = 2000 + int(match)
         if is_reasonable_year(year):
             years.append(year)
@@ -119,7 +119,7 @@ def extract_date(
             pass
 
     match = re.search(
-        r"\b(\d{2}[/-]\d{2}(?:[/-]\d{2,4})?)\b",
+        r"\b(\d{2}[./-]\d{2}(?:[./-]\d{2,4})?)\b",
         line,
     )
 
@@ -131,8 +131,10 @@ def extract_date(
     formats_with_year = (
         "%d/%m/%Y",
         "%d-%m-%Y",
+        "%d.%m.%Y",
         "%d/%m/%y",
         "%d-%m-%y",
+        "%d.%m.%y",
     )
 
     for fmt in formats_with_year:
@@ -150,6 +152,7 @@ def extract_date(
     formats_without_year = (
         "%d/%m",
         "%d-%m",
+        "%d.%m",
     )
 
     for fmt in formats_without_year:
@@ -252,6 +255,62 @@ def extract_transaction_amount(line: str) -> float | None:
     return parse_amount(numeric.group(0))
 
 
+def extract_tabular_bank_amount(
+    line: str,
+) -> tuple[float | None, str | None]:
+    normalized = line.lower()
+
+    if any(
+        keyword in normalized
+        for keyword in [
+            "balance carried forward",
+            "closing balance",
+            "opening balance",
+            "account number",
+            "example bank",
+        ]
+    ):
+        return None, None
+
+    numbers = re.findall(
+        r"\b\d+(?:[.,]\d{2})\b",
+        line,
+    )
+
+    if not numbers:
+        return None, None
+
+    description = normalized
+
+    if any(
+        keyword in description
+        for keyword in [
+            "salary",
+            "transfer",
+            "credit",
+            "deposit",
+            "received",
+        ]
+    ):
+        return parse_amount(numbers[0]), "income"
+
+    if any(
+        keyword in description
+        for keyword in [
+            "atm",
+            "visa",
+            "card",
+            "debit",
+            "withdrawal",
+            "payment",
+            "fee",
+        ]
+    ):
+        return -abs(parse_amount(numbers[0])), "expense"
+
+    return None, None
+
+
 def extract_transactions(text: str) -> list[dict]:
     transactions = []
     default_year = detect_document_year(text)
@@ -270,10 +329,15 @@ def extract_transactions(text: str) -> list[dict]:
 
         amount = extract_transaction_amount(clean_line)
 
+        tabular_type = None
+
+        if amount is None:
+            amount, tabular_type = extract_tabular_bank_amount(clean_line)
+
         if amount is None:
             continue
 
-        transaction_type = detect_type(clean_line, amount)
+        transaction_type = tabular_type or detect_type(clean_line, amount)
 
         if transaction_type == "expense" and amount > 0:
             amount = -abs(amount)
