@@ -48,6 +48,33 @@ def get_job_input(job: Job) -> dict:
     return data if isinstance(data, dict) else {}
 
 
+
+
+def deduplicate_transactions(
+    transactions: list[dict],
+) -> list[dict]:
+    seen = set()
+    unique = []
+
+    for tx in transactions:
+        key = (
+            tx.get("date"),
+            tx.get("description"),
+            round(
+                float(tx.get("amount", 0)),
+                2,
+            ),
+        )
+
+        if key in seen:
+            continue
+
+        seen.add(key)
+        unique.append(tx)
+
+    return unique
+
+
 def finance_progress_message(key: str, language: str) -> str:
     messages = {
         "loading": {
@@ -188,6 +215,19 @@ def handle_finance_ai(job: Job, db):
 
     transactions = extract_transactions(text)
 
+    print(
+        "BEFORE DEDUP:",
+        len(transactions),
+    )
+
+    transactions = deduplicate_transactions(
+        transactions
+    )
+
+    print(
+        "AFTER DEDUP:",
+        len(transactions),
+    )
 
     update_job_progress(
         job,
