@@ -197,6 +197,10 @@ def handle_finance_ai(job: Job, db):
 
     result_ai = analyze_bank_statement(text, output_language)
     fallback_income = result_ai.get("total_income_estimate")
+    currency = result_ai.get(
+        "currency_detected",
+        "MAD",
+    )
 
     update_job_progress(
         job,
@@ -262,6 +266,7 @@ def handle_finance_ai(job: Job, db):
         scores=scores,
         forecast=forecast,
         opportunities=savings_opportunities,
+        currency=currency,
     )
 
     update_job_progress(

@@ -4,6 +4,7 @@ def generate_financial_insights(
     scores: dict,
     forecast: dict,
     opportunities: list[dict],
+    currency: str = "MAD",
 ) -> list[dict]:
     insights = []
 
@@ -40,7 +41,7 @@ def generate_financial_insights(
                 "title": "Positive cashflow detected",
                 "message": (
                     f"You currently retain approximately "
-                    f"{round(net, 2)} MAD after expenses."
+                    f"{round(net, 2)} {currency} after expenses."
                 ),
             }
         )
@@ -113,7 +114,7 @@ def generate_financial_insights(
                 "title": "Savings opportunities detected",
                 "message": (
                     f"You could potentially save "
-                    f"{round(estimated, 2)} MAD monthly."
+                    f"{round(estimated, 2)} {currency} monthly."
                 ),
             }
         )
