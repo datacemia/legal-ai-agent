@@ -133,6 +133,37 @@ const labels: any = {
     financialOverview: "Financial Overview",
     income: "Income",
     expenses: "Expenses",
+    pdfTitle: "Runexa Personal Finance AI Report",
+    generated: "Generated",
+    executiveSummary: "Executive Summary",
+    disclaimerPdf: "Disclaimer: This report is informational only and does not replace professional financial advice.",
+    previewTitle: "AI Financial Intelligence Preview",
+    previewFinancialScore: "Financial score",
+    previewSpendingBreakdown: "Spending breakdown",
+    previewNeeds: "Needs",
+    previewBills: "Bills",
+    previewSubscriptions: "Subscriptions",
+    previewOther: "Other",
+    previewSubscriptionsDetected: "Subscriptions detected",
+    previewSavingsOpportunities: "Savings opportunities",
+    previewCancelUnusedSubscriptions: "Cancel unused subscriptions",
+    previewReduceDiscretionarySpending: "Reduce discretionary spending",
+    previewSetMonthlySavingsTarget: "Set monthly savings target",
+    chatCancelSubscriptions: "What subscriptions should I cancel first?",
+    chatSaveMoreMoney: "How can I save more money?",
+    chatAvoidCashflowRisk: "How can I avoid cashflow risk?",
+    chatBiggestExpenses: "What are my biggest expenses?",
+    chatWhyScoreLow: "Why is my financial score low?",
+    chatFinanciallyHealthy: "Am I financially healthy?",
+    chatExplainFinancialScore: "Explain my financial score",
+    chatCreateSavingsPlan: "Create a 30-day savings plan",
+    chatPlaceholder: "Ask about your finances...",
+    send: "Send",
+    you: "You",
+    suggestedFollowUpQuestions: "Suggested follow-up questions",
+    couldNotCheckFinanceStatus: "Could not check finance analysis status.",
+    financeAnalysisFailed: "Finance analysis failed.",
+    financeAnalysisLongerThanExpected: "Finance analysis is taking longer than expected. Please retry in a moment.",
     mainCategories: "Main categories",
     wasteDetected: "Waste detected",
     savingStrategies: "Saving strategies",
@@ -238,6 +269,37 @@ const labels: any = {
     financialOverview: "Vue d’ensemble financière",
     income: "Revenus",
     expenses: "Dépenses",
+    pdfTitle: "Rapport financier personnel IA Runexa",
+    generated: "Généré le",
+    executiveSummary: "Résumé exécutif",
+    disclaimerPdf: "Avertissement : ce rapport est fourni à titre informatif uniquement et ne remplace pas un conseil financier professionnel.",
+    previewTitle: "Aperçu de l’intelligence financière IA",
+    previewFinancialScore: "Score financier",
+    previewSpendingBreakdown: "Répartition des dépenses",
+    previewNeeds: "Besoins",
+    previewBills: "Factures",
+    previewSubscriptions: "Abonnements",
+    previewOther: "Autre",
+    previewSubscriptionsDetected: "Abonnements détectés",
+    previewSavingsOpportunities: "Opportunités d’épargne",
+    previewCancelUnusedSubscriptions: "Annuler les abonnements inutilisés",
+    previewReduceDiscretionarySpending: "Réduire les dépenses discrétionnaires",
+    previewSetMonthlySavingsTarget: "Définir un objectif d’épargne mensuel",
+    chatCancelSubscriptions: "Quels abonnements dois-je annuler en premier ?",
+    chatSaveMoreMoney: "Comment puis-je économiser plus d’argent ?",
+    chatAvoidCashflowRisk: "Comment éviter un risque de trésorerie ?",
+    chatBiggestExpenses: "Quelles sont mes plus grosses dépenses ?",
+    chatWhyScoreLow: "Pourquoi mon score financier est-il bas ?",
+    chatFinanciallyHealthy: "Ma situation financière est-elle saine ?",
+    chatExplainFinancialScore: "Explique mon score financier",
+    chatCreateSavingsPlan: "Crée un plan d’épargne sur 30 jours",
+    chatPlaceholder: "Posez une question sur vos finances...",
+    send: "Envoyer",
+    you: "Vous",
+    suggestedFollowUpQuestions: "Questions de suivi suggérées",
+    couldNotCheckFinanceStatus: "Impossible de vérifier le statut de l’analyse financière.",
+    financeAnalysisFailed: "L’analyse financière a échoué.",
+    financeAnalysisLongerThanExpected: "L’analyse financière prend plus de temps que prévu. Veuillez réessayer dans un moment.",
     mainCategories: "Catégories principales",
     wasteDetected: "Dépenses évitables détectées",
     savingStrategies: "Stratégies d’épargne",
@@ -343,6 +405,37 @@ const labels: any = {
     financialOverview: "نظرة عامة مالية",
     income: "الدخل",
     expenses: "المصاريف",
+    pdfTitle: "تقرير Runexa المالي الشخصي بالذكاء الاصطناعي",
+    generated: "تم الإنشاء",
+    executiveSummary: "الملخص التنفيذي",
+    disclaimerPdf: "تنبيه: هذا التقرير معلوماتي فقط ولا يُعد بديلاً عن الاستشارة المالية المهنية.",
+    previewTitle: "معاينة الذكاء المالي بالذكاء الاصطناعي",
+    previewFinancialScore: "النتيجة المالية",
+    previewSpendingBreakdown: "تفصيل المصاريف",
+    previewNeeds: "الاحتياجات",
+    previewBills: "الفواتير",
+    previewSubscriptions: "الاشتراكات",
+    previewOther: "أخرى",
+    previewSubscriptionsDetected: "الاشتراكات المكتشفة",
+    previewSavingsOpportunities: "فرص الادخار",
+    previewCancelUnusedSubscriptions: "إلغاء الاشتراكات غير المستخدمة",
+    previewReduceDiscretionarySpending: "تقليل الإنفاق الاختياري",
+    previewSetMonthlySavingsTarget: "تحديد هدف ادخار شهري",
+    chatCancelSubscriptions: "ما الاشتراكات التي يجب أن ألغيها أولاً؟",
+    chatSaveMoreMoney: "كيف يمكنني ادخار المزيد من المال؟",
+    chatAvoidCashflowRisk: "كيف أتجنب خطر التدفق النقدي؟",
+    chatBiggestExpenses: "ما أكبر مصاريفي؟",
+    chatWhyScoreLow: "لماذا نتيجتي المالية منخفضة؟",
+    chatFinanciallyHealthy: "هل وضعي المالي صحي؟",
+    chatExplainFinancialScore: "اشرح نتيجتي المالية",
+    chatCreateSavingsPlan: "أنشئ خطة ادخار لمدة 30 يوماً",
+    chatPlaceholder: "اسأل عن أمورك المالية...",
+    send: "إرسال",
+    you: "أنت",
+    suggestedFollowUpQuestions: "أسئلة متابعة مقترحة",
+    couldNotCheckFinanceStatus: "تعذر التحقق من حالة التحليل المالي.",
+    financeAnalysisFailed: "فشل التحليل المالي.",
+    financeAnalysisLongerThanExpected: "يستغرق التحليل المالي وقتاً أطول من المتوقع. يرجى المحاولة بعد قليل.",
     mainCategories: "الفئات الرئيسية",
     wasteDetected: "الهدر المكتشف",
     savingStrategies: "استراتيجيات الادخار",
@@ -456,17 +549,17 @@ export default function FinanceClient() {
 
   const quickQuestions = [
     result?.subscriptions_detected?.length > 0
-      ? "What subscriptions should I cancel first?"
-      : "How can I save more money?",
+      ? t.chatCancelSubscriptions
+      : t.chatSaveMoreMoney,
     result?.cashflow_forecast?.trend === "negative" ||
     result?.cashflow_forecast?.trend === "risky"
-      ? "How can I avoid cashflow risk?"
-      : "What are my biggest expenses?",
+      ? t.chatAvoidCashflowRisk
+      : t.chatBiggestExpenses,
     (result?.financial_habit_scores?.overall_financial_habits_score || 100) < 60
-      ? "Why is my financial score low?"
-      : "Am I financially healthy?",
-    "Explain my financial score",
-    "Create a 30-day savings plan",
+      ? t.chatWhyScoreLow
+      : t.chatFinanciallyHealthy,
+    t.chatExplainFinancialScore,
+    t.chatCreateSavingsPlan,
   ];
 
   const refreshUserBilling = async () => {
@@ -595,7 +688,7 @@ export default function FinanceClient() {
           );
 
           if (!statusResponse.ok) {
-            throw new Error("Could not check finance analysis status.");
+            throw new Error(t.couldNotCheckFinanceStatus);
           }
 
           const statusData = await statusResponse.json();
@@ -619,7 +712,7 @@ export default function FinanceClient() {
 
           if (statusData.status === "failed") {
             throw new Error(
-              statusData.error || "Finance analysis failed."
+              statusData.error || t.financeAnalysisFailed
             );
           }
 
@@ -628,7 +721,7 @@ export default function FinanceClient() {
 
         if (!completed) {
           throw new Error(
-            "Finance analysis is taking longer than expected. Please retry in a moment."
+            t.financeAnalysisLongerThanExpected
           );
         }
       }
@@ -690,7 +783,7 @@ export default function FinanceClient() {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.detail || "Finance chat failed");
+        throw new Error(data.detail || t.financeAnalysisFailed);
       }
 
       setChatMessages((prev) => [
@@ -735,15 +828,15 @@ export default function FinanceClient() {
     };
 
     doc.setFontSize(20);
-    doc.text("Runexa Personal Finance AI Report", 14, y);
+    doc.text(t.pdfTitle, 14, y);
 
     addLine(8);
     doc.setFontSize(10);
-    doc.text(`Generated: ${new Date().toLocaleDateString()}`, 14, y);
+    doc.text(`${t.generated}: ${new Date().toLocaleDateString()}`, 14, y);
 
     addLine(12);
     doc.setFontSize(13);
-    doc.text("Executive Summary", 14, y);
+    doc.text(t.executiveSummary, 14, y);
 
     addLine(8);
     doc.setFontSize(10);
@@ -830,7 +923,7 @@ export default function FinanceClient() {
 
     doc.text(
       doc.splitTextToSize(
-        "Disclaimer: This report is informational only and does not replace professional financial advice.",
+        t.disclaimerPdf,
         180
       ),
       14,
@@ -867,7 +960,7 @@ export default function FinanceClient() {
                 {t.sampleOutputTitle}
               </p>
               <h2 className="mt-1 text-xl font-semibold text-slate-900">
-                AI Financial Intelligence Preview
+                {t.previewTitle}
               </h2>
               <p className="mt-2 text-sm leading-6 text-slate-500">
                 {t.sampleOutputSubtitle}
@@ -881,7 +974,7 @@ export default function FinanceClient() {
           <div className="mt-6 grid gap-4 lg:grid-cols-4">
             <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
               <p className="text-sm font-semibold text-emerald-900">
-                Financial score
+                {t.previewFinancialScore}
               </p>
 
               <div className="mt-3 flex items-end gap-2">
@@ -896,7 +989,7 @@ export default function FinanceClient() {
 
             <div className="rounded-2xl border border-slate-200 bg-white p-4">
               <p className="text-sm font-semibold text-slate-900">
-                Spending breakdown
+                {t.previewSpendingBreakdown}
               </p>
 
               <div className="mt-4 flex items-center justify-center">
@@ -904,16 +997,16 @@ export default function FinanceClient() {
               </div>
 
               <div className="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-600">
-                <span>● Needs</span>
-                <span>● Bills</span>
-                <span>● Subscriptions</span>
-                <span>● Other</span>
+                <span>● {t.previewNeeds}</span>
+                <span>● {t.previewBills}</span>
+                <span>● {t.previewSubscriptions}</span>
+                <span>● {t.previewOther}</span>
               </div>
             </div>
 
             <div className="rounded-2xl border border-red-200 bg-red-50 p-4">
               <p className="text-sm font-semibold text-red-900">
-                Subscriptions detected
+                {t.previewSubscriptionsDetected}
               </p>
 
               <div className="mt-4 space-y-3">
@@ -935,14 +1028,14 @@ export default function FinanceClient() {
 
             <div className="rounded-2xl border border-blue-200 bg-blue-50 p-4">
               <p className="text-sm font-semibold text-blue-900">
-                Savings opportunities
+                {t.previewSavingsOpportunities}
               </p>
 
               <div className="mt-4 space-y-3">
                 {[
-                  "Cancel unused subscriptions",
-                  "Reduce discretionary spending",
-                  "Set monthly savings target",
+                  t.previewCancelUnusedSubscriptions,
+                  t.previewReduceDiscretionarySpending,
+                  t.previewSetMonthlySavingsTarget,
                 ].map((item) => (
                   <div
                     key={item}
@@ -1936,7 +2029,7 @@ export default function FinanceClient() {
                   {suggestedQuestions.length > 0 && (
                     <div className="mb-5">
                       <p className="text-xs uppercase tracking-wide text-slate-500 mb-2">
-                        Suggested follow-up questions
+                        {t.suggestedFollowUpQuestions}
                       </p>
 
                       <div className="flex flex-wrap gap-2">
@@ -1964,7 +2057,7 @@ export default function FinanceClient() {
                           sendFinanceQuestion();
                         }
                       }}
-                      placeholder="Ask about your finances..."
+                      placeholder={t.chatPlaceholder}
                       className="flex-1 rounded-xl border px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
                     />
 
@@ -1975,7 +2068,7 @@ export default function FinanceClient() {
                       disabled={chatLoading}
                       className="rounded-xl bg-blue-600 px-5 py-3 text-white transition-all duration-300 hover:bg-blue-700 hover:shadow-md disabled:bg-blue-300 disabled:hover:shadow-none"
                     >
-                      Send
+                      {t.send}
                     </button>
                   </div>
                 </div>
