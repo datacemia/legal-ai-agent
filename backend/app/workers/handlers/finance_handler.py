@@ -188,45 +188,6 @@ def handle_finance_ai(job: Job, db):
 
     transactions = extract_transactions(text)
 
-    print("TOTAL TRANSACTIONS:", len(transactions))
-
-    income_transactions = [
-        t
-        for t in transactions
-        if t.get("type") == "income"
-    ]
-
-    expense_transactions = [
-        t
-        for t in transactions
-        if t.get("type") == "expense"
-    ]
-
-    print("INCOME COUNT:", len(income_transactions))
-    print("EXPENSE COUNT:", len(expense_transactions))
-
-    print(
-        "MAX INCOME:",
-        max(
-            (
-                t["amount"]
-                for t in income_transactions
-            ),
-            default=0,
-        ),
-    )
-
-    print(
-        "MAX EXPENSE:",
-        min(
-            (
-                t["amount"]
-                for t in expense_transactions
-            ),
-            default=0,
-        ),
-    )
-
     update_job_progress(
         job,
         db,
