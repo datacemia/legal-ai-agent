@@ -104,6 +104,35 @@ const labels: any = {
     financialHabitsScore: "Financial Habits Score",
     cashflowForecast: "Cashflow Forecast",
     detectedSubscriptions: "Detected Subscriptions",
+    observedExpenses: "Observed Expenses",
+    observedNetCashflow: "Observed Net Cashflow",
+    daysUntilRisk: "Days Until Risk",
+    recommendedBudget: "Recommended Budget",
+    savingsTarget: "Savings Target",
+    needs: "Needs",
+    wants: "Wants",
+    emergencyFund: "Emergency Fund",
+    safeSpending: "Safe Spending",
+    estimatedRecurringCharge: "Estimated Recurring Charge",
+    noRecurringSubscriptions: "No recurring subscriptions detected.",
+    aiSavingsOpportunities: "AI Savings Opportunities",
+    aiDetected: "AI detected",
+    savingsOpportunity: "Savings opportunity",
+    aiFinancialInsights: "AI Financial Insights",
+    smartMoneyCoach: "Smart Money Coach",
+    spendingOverTime: "Spending Over Time",
+    expenseEvolution: "Expense Evolution",
+    observedNetCashflowOverTime: "Observed Net Cashflow Over Time",
+    dailyCashflowTrend: "Daily Cashflow Trend",
+    subscriptionGrowth: "Subscription Growth",
+    recurringSpendingTrend: "Recurring Spending Trend",
+    noRecurringSubscriptionSpending: "No recurring subscription spending detected for this statement.",
+    savingsEvolution: "Savings Evolution",
+    runningNetBalance: "Running Net Balance",
+    aiFinancialCoach: "AI Financial Coach",
+    financialOverview: "Financial Overview",
+    income: "Income",
+    expenses: "Expenses",
     mainCategories: "Main categories",
     wasteDetected: "Waste detected",
     savingStrategies: "Saving strategies",
@@ -180,6 +209,35 @@ const labels: any = {
     financialHabitsScore: "Score des habitudes financières",
     cashflowForecast: "Prévision de trésorerie",
     detectedSubscriptions: "Abonnements détectés",
+    observedExpenses: "Dépenses observées",
+    observedNetCashflow: "Trésorerie nette observée",
+    daysUntilRisk: "Jours avant risque",
+    recommendedBudget: "Budget recommandé",
+    savingsTarget: "Objectif d’épargne",
+    needs: "Besoins",
+    wants: "Envies",
+    emergencyFund: "Fonds d’urgence",
+    safeSpending: "Dépenses sûres",
+    estimatedRecurringCharge: "Charge récurrente estimée",
+    noRecurringSubscriptions: "Aucun abonnement récurrent détecté.",
+    aiSavingsOpportunities: "Opportunités d’épargne IA",
+    aiDetected: "Détecté par IA",
+    savingsOpportunity: "Opportunité d’épargne",
+    aiFinancialInsights: "Insights financiers IA",
+    smartMoneyCoach: "Coach financier intelligent",
+    spendingOverTime: "Dépenses dans le temps",
+    expenseEvolution: "Évolution des dépenses",
+    observedNetCashflowOverTime: "Trésorerie nette observée dans le temps",
+    dailyCashflowTrend: "Tendance quotidienne de trésorerie",
+    subscriptionGrowth: "Évolution des abonnements",
+    recurringSpendingTrend: "Tendance des dépenses récurrentes",
+    noRecurringSubscriptionSpending: "Aucune dépense d’abonnement récurrente détectée pour ce relevé.",
+    savingsEvolution: "Évolution de l’épargne",
+    runningNetBalance: "Solde net courant",
+    aiFinancialCoach: "Coach financier IA",
+    financialOverview: "Vue d’ensemble financière",
+    income: "Revenus",
+    expenses: "Dépenses",
     mainCategories: "Catégories principales",
     wasteDetected: "Dépenses évitables détectées",
     savingStrategies: "Stratégies d’épargne",
@@ -256,6 +314,35 @@ const labels: any = {
     financialHabitsScore: "درجة العادات المالية",
     cashflowForecast: "توقع التدفق النقدي",
     detectedSubscriptions: "الاشتراكات المكتشفة",
+    observedExpenses: "المصاريف الفعلية المرصودة",
+    observedNetCashflow: "صافي التدفق النقدي المرصود",
+    daysUntilRisk: "الأيام قبل الخطر",
+    recommendedBudget: "الميزانية المقترحة",
+    savingsTarget: "هدف الادخار",
+    needs: "الاحتياجات",
+    wants: "الرغبات",
+    emergencyFund: "صندوق الطوارئ",
+    safeSpending: "الإنفاق الآمن",
+    estimatedRecurringCharge: "التكلفة المتكررة المقدرة",
+    noRecurringSubscriptions: "لم يتم اكتشاف اشتراكات متكررة.",
+    aiSavingsOpportunities: "فرص الادخار بالذكاء الاصطناعي",
+    aiDetected: "تم اكتشافه بالذكاء الاصطناعي",
+    savingsOpportunity: "فرصة ادخار",
+    aiFinancialInsights: "رؤى مالية بالذكاء الاصطناعي",
+    smartMoneyCoach: "مدرب مالي ذكي",
+    spendingOverTime: "الإنفاق عبر الوقت",
+    expenseEvolution: "تطور المصاريف",
+    observedNetCashflowOverTime: "صافي التدفق النقدي المرصود عبر الوقت",
+    dailyCashflowTrend: "اتجاه التدفق النقدي اليومي",
+    subscriptionGrowth: "نمو الاشتراكات",
+    recurringSpendingTrend: "اتجاه الإنفاق المتكرر",
+    noRecurringSubscriptionSpending: "لم يتم اكتشاف إنفاق اشتراكات متكرر لهذا الكشف.",
+    savingsEvolution: "تطور الادخار",
+    runningNetBalance: "الرصيد الصافي الجاري",
+    aiFinancialCoach: "المدرب المالي الذكي",
+    financialOverview: "نظرة عامة مالية",
+    income: "الدخل",
+    expenses: "المصاريف",
     mainCategories: "الفئات الرئيسية",
     wasteDetected: "الهدر المكتشف",
     savingStrategies: "استراتيجيات الادخار",
@@ -664,13 +751,13 @@ export default function FinanceClient() {
 
     addLine(22);
     doc.setFontSize(13);
-    doc.text("Financial Overview", 14, y);
+    doc.text(t.financialOverview, 14, y);
 
     addLine(8);
     doc.setFontSize(10);
-    doc.text(`Income: ${formatMoney(result.cashflow_forecast?.observed_income)}`, 14, y);
+    doc.text(`${t.income}: ${formatMoney(result.cashflow_forecast?.observed_income)}`, 14, y);
     addLine(7);
-    doc.text(`Expenses: ${formatMoney(result.cashflow_forecast?.observed_expenses)}`, 14, y);
+    doc.text(`${t.expenses}: ${formatMoney(result.cashflow_forecast?.observed_expenses)}`, 14, y);
     addLine(7);
     doc.text(`Observed Net Cashflow: ${formatMoney(result.cashflow_forecast?.observed_net_cashflow)}`, 14, y);
     addLine(7);
@@ -720,20 +807,20 @@ export default function FinanceClient() {
 
     addLine(6);
     doc.setFontSize(13);
-    doc.text("Recommended Budget", 14, y);
+    doc.text(t.recommendedBudget, 14, y);
 
     addLine(8);
     doc.setFontSize(10);
-    doc.text(`Needs: ${formatMoney(result.recommended_budget?.needs)}`, 14, y);
+    doc.text(`${t.needs}: ${formatMoney(result.recommended_budget?.needs)}`, 14, y);
 
     addLine(7);
-    doc.text(`Wants: ${formatMoney(result.recommended_budget?.wants)}`, 14, y);
+    doc.text(`${t.wants}: ${formatMoney(result.recommended_budget?.wants)}`, 14, y);
 
     addLine(7);
-    doc.text(`Savings Target: ${formatMoney(result.recommended_budget?.savings_target)}`, 14, y);
+    doc.text(`${t.savingsTarget}: ${formatMoney(result.recommended_budget?.savings_target)}`, 14, y);
 
     addLine(7);
-    doc.text(`Emergency Fund: ${formatMoney(result.recommended_budget?.emergency_fund_target)}`, 14, y);
+    doc.text(`${t.emergencyFund}: ${formatMoney(result.recommended_budget?.emergency_fund_target)}`, 14, y);
 
     addLine(7);
     doc.text(`Status: ${result.recommended_budget?.status || "-"}`, 14, y);
@@ -1117,7 +1204,7 @@ export default function FinanceClient() {
 
                   <div className="rounded-2xl border bg-slate-50 p-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                     <p className="text-sm text-slate-500">
-                      Observed Expenses
+                      {t.observedExpenses}
                     </p>
 
                     <h3 className="text-2xl font-bold text-red-600 mt-1">
@@ -1129,7 +1216,7 @@ export default function FinanceClient() {
 
                   <div className="rounded-2xl border bg-slate-50 p-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                     <p className="text-sm text-slate-500">
-                      Observed Net Cashflow
+                      {t.observedNetCashflow}
                     </p>
 
                     <h3
@@ -1195,7 +1282,7 @@ export default function FinanceClient() {
 
                     <div className="text-right">
                       <p className="text-sm text-slate-500">
-                        Days Until Risk
+                        {t.daysUntilRisk}
                       </p>
 
                       <p className="text-xl font-semibold">
@@ -1213,7 +1300,7 @@ export default function FinanceClient() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-slate-500">
-                        Recommended Budget
+                        {t.recommendedBudget}
                       </p>
 
                       <h3 className="text-2xl font-bold text-slate-800 mt-1">
@@ -1223,7 +1310,7 @@ export default function FinanceClient() {
 
                     <div className="text-right">
                       <p className="text-sm text-slate-500">
-                        Savings Target
+                        {t.savingsTarget}
                       </p>
 
                       <p className="text-xl font-semibold text-green-600">
@@ -1237,7 +1324,7 @@ export default function FinanceClient() {
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-5">
                     <div>
                       <p className="text-xs text-slate-500">
-                        Needs
+                        {t.needs}
                       </p>
 
                       <p className="font-semibold">
@@ -1249,7 +1336,7 @@ export default function FinanceClient() {
 
                     <div>
                       <p className="text-xs text-slate-500">
-                        Wants
+                        {t.wants}
                       </p>
 
                       <p className="font-semibold">
@@ -1261,7 +1348,7 @@ export default function FinanceClient() {
 
                     <div>
                       <p className="text-xs text-slate-500">
-                        Emergency Fund
+                        {t.emergencyFund}
                       </p>
 
                       <p className="font-semibold">
@@ -1273,7 +1360,7 @@ export default function FinanceClient() {
 
                     <div>
                       <p className="text-xs text-slate-500">
-                        Safe Spending
+                        {t.safeSpending}
                       </p>
 
                       <p className="font-semibold">
@@ -1303,7 +1390,7 @@ export default function FinanceClient() {
 
                     <div className="text-right">
                       <p className="text-sm text-slate-500">
-                        Estimated Recurring Charge
+                        {t.estimatedRecurringCharge}
                       </p>
 
                       <p className="text-xl font-semibold text-red-600">
@@ -1351,7 +1438,7 @@ export default function FinanceClient() {
                     </div>
                   ) : (
                     <p className="text-sm text-slate-500">
-                      No recurring subscriptions detected.
+                      {t.noRecurringSubscriptions}
                     </p>
                   )}
                 </div>
@@ -1360,7 +1447,7 @@ export default function FinanceClient() {
                   <div className="flex items-center justify-between mb-4">
                     <div>
                       <p className="text-sm text-slate-500">
-                        AI Savings Opportunities
+                        {t.aiSavingsOpportunities}
                       </p>
 
                       <h3 className="text-2xl font-bold text-green-600 mt-1">
@@ -1381,7 +1468,7 @@ export default function FinanceClient() {
                     </div>
 
                     <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700">
-                      AI detected
+                      {t.aiDetected}
                     </span>
                   </div>
 
@@ -1410,7 +1497,7 @@ export default function FinanceClient() {
                                 </p>
 
                                 <p className="text-xs text-slate-500">
-                                  Savings opportunity
+                                  {t.savingsOpportunity}
                                 </p>
                               </div>
                             </div>
@@ -1440,11 +1527,11 @@ export default function FinanceClient() {
                 <div className="rounded-2xl border bg-slate-50 p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                   <div className="mb-4">
                     <p className="text-sm text-slate-500">
-                      AI Financial Insights
+                      {t.aiFinancialInsights}
                     </p>
 
                     <h3 className="text-2xl font-bold text-slate-800 mt-1">
-                      Smart Money Coach
+                      {t.smartMoneyCoach}
                     </h3>
                   </div>
 
@@ -1495,11 +1582,11 @@ export default function FinanceClient() {
                 <div className="rounded-2xl border bg-white p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                   <div className="mb-4">
                     <p className="text-sm text-slate-500">
-                      Spending Over Time
+                      {t.spendingOverTime}
                     </p>
 
                     <h3 className="text-xl font-bold mt-1">
-                      Expense Evolution
+                      {t.expenseEvolution}
                     </h3>
                   </div>
 
@@ -1559,11 +1646,11 @@ export default function FinanceClient() {
                 <div className="rounded-2xl border bg-white p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                   <div className="mb-4">
                     <p className="text-sm text-slate-500">
-                      Observed Net Cashflow Over Time
+                      {t.observedNetCashflowOverTime}
                     </p>
 
                     <h3 className="text-xl font-bold mt-1">
-                      Daily Cashflow Trend
+                      {t.dailyCashflowTrend}
                     </h3>
                   </div>
 
@@ -1600,11 +1687,11 @@ export default function FinanceClient() {
                 <div className="rounded-2xl border bg-white p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                   <div className="mb-4">
                     <p className="text-sm text-slate-500">
-                      Subscription Growth
+                      {t.subscriptionGrowth}
                     </p>
 
                     <h3 className="text-xl font-bold mt-1">
-                      Recurring Spending Trend
+                      {t.recurringSpendingTrend}
                     </h3>
                   </div>
 
@@ -1631,7 +1718,7 @@ export default function FinanceClient() {
                     </div>
                   ) : (
                     <div className="flex h-80 items-center justify-center rounded-xl bg-slate-50 px-6 text-center text-sm text-slate-500">
-                      No recurring subscription spending detected for this statement.
+                      {t.noRecurringSubscriptionSpending}
                     </div>
                   )}
 
@@ -1643,11 +1730,11 @@ export default function FinanceClient() {
                 <div className="rounded-2xl border bg-white p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                   <div className="mb-4">
                     <p className="text-sm text-slate-500">
-                      Savings Evolution
+                      {t.savingsEvolution}
                     </p>
 
                     <h3 className="text-xl font-bold mt-1">
-                      Running Net Balance
+                      {t.runningNetBalance}
                     </h3>
                   </div>
 
@@ -1780,7 +1867,7 @@ export default function FinanceClient() {
                   <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                     <div>
                       <p className="text-sm text-slate-500">
-                        AI Financial Coach
+                        {t.aiFinancialCoach}
                       </p>
 
                       <h3 className="text-2xl font-bold text-slate-800">
