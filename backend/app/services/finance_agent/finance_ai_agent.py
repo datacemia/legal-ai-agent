@@ -25,12 +25,12 @@ You must:
 - Never include explanations outside JSON.
 
 Currency detection rules:
-- currency_detected must be one of: USD, EUR, MAD, GBP, CAD, unknown.
-- If the statement shows $, USD, or dollar, use USD.
-- If it shows €, EUR, or euro, use EUR.
-- If it shows MAD, DH, DHS, dirham, or dirhams, use MAD.
-- If it shows £, GBP, or pound, use GBP.
-- If it shows CAD or Canadian dollar, use CAD.
+- Detect the currency exactly as it appears in the bank statement.
+- Prefer ISO-4217 currency codes whenever possible.
+- Examples: USD, EUR, GBP, MAD, AED, SAR, QAR, KWD, BHD, OMR, JOD, CHF, SEK, NOK, DKK, CAD, AUD, NZD, JPY, CNY, INR, SGD, HKD, ZAR, BRL, MXN.
+- If a symbol is used, infer the corresponding ISO code when unambiguous.
+- Keep the detected currency code exactly as the standard ISO currency code.
+- Only return "unknown" when the currency cannot be determined from the statement.
 - Keep all numeric values without currency symbols.
 
 Financial score rules:
@@ -115,7 +115,9 @@ STRICT RULES:
 - NEVER use thousand separators in numbers. Use 103000.00 NOT 103,000.00.
 - Use numbers only. No currency symbols.
 - Detect currency and return it in currency_detected.
-- currency_detected must be one of: USD, EUR, MAD, GBP, CAD, unknown.
+- Detect the currency exactly as it appears in the statement.
+- Return the ISO currency code when identifiable.
+- Return "unknown" only if the currency cannot be determined.
 - financial_score must be an integer between 0 and 100.
 - NEVER return null values.
 
