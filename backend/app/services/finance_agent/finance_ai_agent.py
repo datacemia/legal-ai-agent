@@ -73,6 +73,15 @@ IMPORTANT LANGUAGE RULES:
 - Do not write anything outside JSON.
 
 STRICT RULES:
+- NEVER invent the statement period.
+- Use only dates explicitly present in the statement.
+- If both the earliest and latest transaction dates are visible, you may use them to describe the observed statement period.
+- If the exact statement period cannot be determined with certainty, set period_detected to "unknown".
+- The summary must never mention months or date ranges that are not explicitly proven by the statement.
+- If uncertain, refer to "the observed statement period".
+- Do not guess January, February, March, etc.
+- Do not infer a statement period from a small sample of transactions.
+- The summary must not invent dates, months, or statement periods.
 - Deposits, credits, salary, refunds = income.
 - Debits, payments, checks, withdrawals, card payments = expenses.
 - Outgoing transfers = expenses unless clearly internal.
@@ -92,7 +101,7 @@ STRICT RULES:
 Return EXACT JSON:
 {{
   "summary": "short summary",
-  "period_detected": "detected period or unknown",
+  "period_detected": "exact statement period if explicitly known, otherwise unknown",
   "currency_detected": "unknown",
   "total_income_estimate": 0,
   "total_spending_estimate": 0,
