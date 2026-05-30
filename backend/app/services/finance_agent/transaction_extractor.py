@@ -78,6 +78,34 @@ BALANCE_KEYWORDS = [
 ]
 
 
+MONTH_ALIASES = {
+    "jan": "01",
+    "january": "01",
+    "feb": "02",
+    "february": "02",
+    "mar": "03",
+    "march": "03",
+    "apr": "04",
+    "april": "04",
+    "may": "05",
+    "jun": "06",
+    "june": "06",
+    "jul": "07",
+    "july": "07",
+    "aug": "08",
+    "august": "08",
+    "sep": "09",
+    "sept": "09",
+    "september": "09",
+    "oct": "10",
+    "october": "10",
+    "nov": "11",
+    "november": "11",
+    "dec": "12",
+    "december": "12",
+}
+
+
 def parse_amount(value: str) -> float:
     value = value.replace(" ", "")
 
@@ -140,6 +168,37 @@ def extract_date(
 
         except ValueError:
             pass
+
+
+    text_month_match = re.search(
+        r"\b(\d{1,2})\s+"
+        r"(jan|january|feb|february|mar|march|apr|april|may|"
+        r"jun|june|jul|july|aug|august|sep|sept|september|"
+        r"oct|october|nov|november|dec|december)"
+        r"\s+(\d{2,4})\b",
+        line,
+        flags=re.IGNORECASE,
+    )
+
+    if text_month_match:
+        day = int(text_month_match.group(1))
+        month_key = text_month_match.group(2).lower()
+        year = int(text_month_match.group(3))
+
+        if year < 100:
+            year += 2000
+
+        month = int(MONTH_ALIASES[month_key])
+
+        try:
+            parsed = datetime(year, month, day)
+
+            if parsed.year < 2000 or parsed.year > datetime.now().year + 1:
+                return None
+
+            return parsed.date().isoformat()
+        except ValueError:
+            return None
 
     match = re.search(
         r"\b(\d{2}[./-]\d{2}(?:[./-]\d{2,4})?)\b",
