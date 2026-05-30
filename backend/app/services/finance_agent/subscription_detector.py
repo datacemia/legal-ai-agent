@@ -39,6 +39,15 @@ SERVICE_HINTS = [
 ]
 
 
+FEE_KEYWORDS = [
+    "bank fee",
+    "monthly fee",
+    "service fee",
+    "overdraft fee",
+    "maintenance fee",
+]
+
+
 EXCLUDED_SUBSCRIPTION_KEYWORDS = [
     "attorney",
     "lawyer",
@@ -94,8 +103,15 @@ def detect_recurring_subscriptions(
             continue
 
         description = tx.get("description", "")
+        normalized = normalize_text(description)
 
         if is_excluded_subscription(description):
+            continue
+
+        if any(
+            keyword in normalized
+            for keyword in FEE_KEYWORDS
+        ):
             continue
 
         amount = abs(float(tx.get("amount", 0) or 0))
@@ -106,7 +122,10 @@ def detect_recurring_subscriptions(
         merchant = extract_known_merchant(description)
 
         if not merchant and looks_like_digital_service(description):
-            words = re.findall(r"[A-Z][A-Z0-9]{2,}", description.upper())
+            words = re.findall(
+                r"[A-Z][A-Z0-9]{2,}",
+                description.upper(),
+            )
 
             ignored_words = {
                 "USD",
@@ -127,7 +146,8 @@ def detect_recurring_subscriptions(
             merchant_words = [
                 word
                 for word in words
-                if word not in ignored_words and not word.isdigit()
+                if word not in ignored_words
+                and not word.isdigit()
             ]
 
             if merchant_words:
@@ -147,7 +167,10 @@ def detect_recurring_subscriptions(
             {
                 "name": merchant,
                 "monthly_cost": monthly_cost,
-                "yearly_cost_estimate": round(monthly_cost * 12, 2),
+                "yearly_cost_estimate": round(
+                    monthly_cost * 12,
+                    2,
+                ),
                 "transactions_count": len(amounts),
             }
         )
