@@ -107,6 +107,10 @@ MONTH_ALIASES = {
 
 
 
+AMOUNT_PATTERN = r"[+-]?(?:\d{1,3}(?:,\d{3})+|\d+)(?:[.,]\d{1,2})?"
+UNSIGNED_AMOUNT_PATTERN = r"(?:\d{1,3}(?:,\d{3})+|\d+)(?:[.,]\d{1,2})?"
+
+
 def normalize_ocr_numeric_text(value: str) -> str:
     translation = str.maketrans({
         "O": "0",
@@ -127,12 +131,17 @@ def normalize_ocr_numeric_text(value: str) -> str:
     )
 
 def parse_amount(value: str) -> float:
-    value = value.replace(" ", "")
+    value = value.strip().replace(" ", "")
 
     if "," in value and "." in value:
         value = value.replace(",", "")
-    else:
-        value = value.replace(",", ".")
+    elif "," in value:
+        parts = value.split(",")
+
+        if len(parts) == 2 and len(parts[1]) == 3:
+            value = value.replace(",", "")
+        else:
+            value = value.replace(",", ".")
 
     return float(value)
 
@@ -292,7 +301,7 @@ def has_transaction_signal(
 
     amount_found = bool(
         re.search(
-            r"[+-]?\d+(?:[.,]\d{1,2})",
+            AMOUNT_PATTERN,
             line,
         )
     )
@@ -324,7 +333,7 @@ def extract_transaction_amount(line: str) -> float | None:
     )[0]
 
     money_matches = re.findall(
-        r"[+-]?\d+(?:[.,]\d{1,2})\s*(?:[A-Z]{3}|DH|DHS|€|\$|£)?",
+        rf"{AMOUNT_PATTERN}\s*(?:[A-Z]{{3}}|DH|DHS|€|\$|£)?",
         transaction_part,
         flags=re.IGNORECASE,
     )
@@ -340,14 +349,14 @@ def extract_transaction_amount(line: str) -> float | None:
 
         if cleaned.startswith("+") or cleaned.startswith("-"):
             numeric = re.search(
-                r"[+-]?\d+(?:[.,]\d{1,2})",
+                AMOUNT_PATTERN,
                 cleaned,
             )
             if numeric:
                 return parse_amount(numeric.group(0))
 
     numeric = re.search(
-        r"[+-]?\d+(?:[.,]\d{1,2})",
+        AMOUNT_PATTERN,
         money_matches[0],
     )
 
@@ -397,7 +406,7 @@ def extract_tabular_bank_amount(
     )
 
     numbers = re.findall(
-        r"\b\d+(?:[.,]\d{1,2})\b",
+        rf"\b{UNSIGNED_AMOUNT_PATTERN}\b",
         without_date,
     )
 
@@ -467,7 +476,7 @@ def extract_transactions(text: str) -> list[dict]:
                 combined += " " + raw_lines[j]
 
                 if re.search(
-                    r"\b\d+(?:[.,]\d{1,2})\b",
+                    rf"\b{UNSIGNED_AMOUNT_PATTERN}\b",
                     raw_lines[j],
                 ):
                     break
@@ -529,20 +538,6 @@ def extract_transactions(text: str) -> list[dict]:
             clean_line,
             default_year=default_year,
         )
-
-        print(
-            "TX:",
-            clean_line,
-        )
-        print(
-            "AMOUNT:",
-            amount,
-        )
-        print(
-            "TYPE:",
-            transaction_type,
-        )
-
         transactions.append(
             {
                 "date": date,
