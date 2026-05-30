@@ -698,7 +698,7 @@ export default function FinanceClient() {
 
     (result.subscriptions_detected || []).forEach((sub: any) => {
       doc.text(
-        `${sub.name}: ${formatMoney(sub.monthly_cost)} / month | Yearly: ${formatMoney(sub.yearly_cost_estimate)}`,
+        `${sub.name}: Average charge ${formatMoney(sub.monthly_cost)} | Total observed ${formatMoney(sub.total_observed_cost)} | Transactions: ${sub.transactions_count}`,
         14,
         y
       );
@@ -1283,7 +1283,7 @@ export default function FinanceClient() {
 
                     <div className="text-right">
                       <p className="text-sm text-slate-500">
-                        Monthly Total
+                        Observed Subscription Spending
                       </p>
 
                       <p className="text-xl font-semibold text-red-600">
@@ -1312,14 +1312,18 @@ export default function FinanceClient() {
                               </p>
                             </div>
 
-                            <div className="text-right">
-                              <p className="font-semibold text-red-600">
-                                {formatMoney(sub.monthly_cost)}
-                              </p>
+                            <div className="space-y-1 text-right">
+                              <div className="font-semibold">
+                                Average charge: {formatMoney(sub.monthly_cost)}
+                              </div>
 
-                              <p className="text-xs text-slate-500">
-                                / month
-                              </p>
+                              <div className="text-sm text-slate-500">
+                                Total observed: {formatMoney(sub.total_observed_cost)}
+                              </div>
+
+                              <div className="text-sm text-slate-500">
+                                {sub.transactions_count} transactions
+                              </div>
                             </div>
                           </div>
                         )
