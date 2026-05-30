@@ -295,9 +295,16 @@ def extract_tabular_bank_amount(
     ):
         return None, None
 
+    without_date = re.sub(
+        r"\b\d{2}[./-]\d{2}(?:[./-]\d{2,4})?\b",
+        "",
+        line,
+        count=1,
+    )
+
     numbers = re.findall(
         r"\b\d+(?:[.,]\d{2})\b",
-        line,
+        without_date,
     )
 
     if not numbers:
