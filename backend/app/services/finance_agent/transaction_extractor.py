@@ -87,7 +87,7 @@ def extract_date(line: str):
             if parsed.year == 1900:
                 parsed = parsed.replace(year=datetime.now().year)
 
-            if parsed.year < 2020 or parsed.year > datetime.now().year + 1:
+            if parsed.year < 2000 or parsed.year > datetime.now().year + 1:
                 return None
 
             return parsed.date().isoformat()
