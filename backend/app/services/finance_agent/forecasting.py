@@ -63,14 +63,19 @@ def predict_cashflow(
 
     return {
         "income_source": income_source,
-        "monthly_income": round(
-            income,
+
+        # legacy fields (keep for compatibility)
+        "monthly_income": round(income, 2),
+        "monthly_expenses": round(expenses, 2),
+
+        # new explicit fields
+        "observed_income": round(income, 2),
+        "observed_expenses": round(expenses, 2),
+        "observed_net_cashflow": round(
+            net_cashflow,
             2,
         ),
-        "monthly_expenses": round(
-            expenses,
-            2,
-        ),
+
         "net_cashflow": round(
             net_cashflow,
             2,

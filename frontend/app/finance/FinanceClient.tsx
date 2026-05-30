@@ -656,11 +656,11 @@ export default function FinanceClient() {
 
     addLine(8);
     doc.setFontSize(10);
-    doc.text(`Income: ${formatMoney(result.cashflow_forecast?.monthly_income)}`, 14, y);
+    doc.text(`Income: ${formatMoney(result.cashflow_forecast?.observed_income)}`, 14, y);
     addLine(7);
-    doc.text(`Expenses: ${formatMoney(result.cashflow_forecast?.monthly_expenses)}`, 14, y);
+    doc.text(`Expenses: ${formatMoney(result.cashflow_forecast?.observed_expenses)}`, 14, y);
     addLine(7);
-    doc.text(`Observed Net Cashflow: ${formatMoney(result.cashflow_forecast?.net_cashflow)}`, 14, y);
+    doc.text(`Observed Net Cashflow: ${formatMoney(result.cashflow_forecast?.observed_net_cashflow)}`, 14, y);
     addLine(7);
     doc.text(`Financial Habits Score: ${result.financial_habit_scores?.overall_financial_habits_score ?? "-"}/100`, 14, y);
 
@@ -1094,7 +1094,7 @@ export default function FinanceClient() {
 
                     <h3 className="text-2xl font-bold text-green-600 mt-1">
                       {formatMoney(
-                        result.cashflow_forecast?.monthly_income
+                        result.cashflow_forecast?.observed_income
                       )}
                     </h3>
                   </div>
@@ -1106,7 +1106,7 @@ export default function FinanceClient() {
 
                     <h3 className="text-2xl font-bold text-red-600 mt-1">
                       {formatMoney(
-                        result.cashflow_forecast?.monthly_expenses
+                        result.cashflow_forecast?.observed_expenses
                       )}
                     </h3>
                   </div>
@@ -1118,13 +1118,13 @@ export default function FinanceClient() {
 
                     <h3
                       className={`text-2xl font-bold mt-1 ${
-                        (result.cashflow_forecast?.net_cashflow || 0) >= 0
+                        (result.cashflow_forecast?.observed_net_cashflow || 0) >= 0
                           ? "text-green-600"
                           : "text-red-600"
                       }`}
                     >
                       {formatMoney(
-                        result.cashflow_forecast?.net_cashflow
+                        result.cashflow_forecast?.observed_net_cashflow
                       )}
                     </h3>
                   </div>
