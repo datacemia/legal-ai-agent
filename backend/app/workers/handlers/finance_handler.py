@@ -200,7 +200,9 @@ def handle_finance_ai(job: Job, db):
         finance_progress_message("spending", output_language),
     )
 
+    print("START AI ANALYSIS")
     result_ai = analyze_bank_statement(text, output_language)
+    print("END AI ANALYSIS")
     fallback_income = result_ai.get("total_income_estimate")
     currency = result_ai.get(
         "currency_detected",
