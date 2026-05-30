@@ -188,6 +188,30 @@ def handle_finance_ai(job: Job, db):
 
     transactions = extract_transactions(text)
 
+    dates = sorted(
+        set(
+            t.get("date")
+            for t in transactions
+            if t.get("date")
+        )
+    )
+
+    print(
+        "MIN DATE:",
+        dates[0] if dates else None,
+    )
+
+    print(
+        "MAX DATE:",
+        dates[-1] if dates else None,
+    )
+
+    print(
+        "SAMPLE DATES:",
+        dates[:10],
+        dates[-10:],
+    )
+
     update_job_progress(
         job,
         db,
