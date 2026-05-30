@@ -45,6 +45,29 @@ INCOME_KEYWORDS = [
     "transfer received",
 ]
 
+EXPENSE_KEYWORDS += [
+    "atm",
+    "visa",
+    "debit",
+    "debit card",
+    "purchase",
+    "withdrawal",
+    "مدين",
+    "خصم",
+    "سحب",
+    "شراء",
+]
+
+INCOME_KEYWORDS += [
+    "credit",
+    "credited",
+    "deposit",
+    "transfer in",
+    "دائن",
+    "إيداع",
+    "تحويل وارد",
+]
+
 BALANCE_KEYWORDS = [
     "opening balance",
     "closing balance",
@@ -315,12 +338,32 @@ def extract_transactions(text: str) -> list[dict]:
     transactions = []
     default_year = detect_document_year(text)
 
-    for line in text.splitlines():
-        clean_line = " ".join(line.split())
+    raw_lines = [
+        " ".join(line.split())
+        for line in text.splitlines()
+        if " ".join(line.split())
+    ]
 
-        if not clean_line:
+    lines = []
+    i = 0
+
+    while i < len(raw_lines):
+        current = raw_lines[i]
+
+        current_is_date_only = (
+            extract_date(current, default_year=default_year)
+            and len(current.split()) == 1
+        )
+
+        if current_is_date_only and i + 1 < len(raw_lines):
+            lines.append(current + " " + raw_lines[i + 1])
+            i += 2
             continue
 
+        lines.append(current)
+        i += 1
+
+    for clean_line in lines:
         if not has_transaction_signal(
             clean_line,
             default_year=default_year,
