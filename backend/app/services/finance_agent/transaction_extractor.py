@@ -408,6 +408,13 @@ def extract_transaction_amount(line: str) -> float | None:
     )[0]
 
     transaction_part = re.sub(
+        r"\b\d{4}-\d{2}-\d{2}\b",
+        "",
+        transaction_part,
+        count=1,
+    )
+
+    transaction_part = re.sub(
         r"\b\d{2}[./-]\d{2}(?:[./-]\d{2,4})?\b",
         "",
         transaction_part,
@@ -570,6 +577,7 @@ def extract_tabular_bank_amount(
             "withdrawal",
             "payment",
             "purchase",
+            "recurring",
             "fee",
             "restaurant",
             "supermarket",
