@@ -42,19 +42,14 @@ EXPENSE_KEYWORDS = [
 ]
 
 INCOME_KEYWORDS = [
-    "salaire",
     "salary",
-    "credit",
-    "crédit",
-    "versement",
-    "virement recu",
-    "virement reçu",
-    "remboursement",
-    "deposit",
-    "dépôt",
-    "transfer received",
     "payroll",
-    "wage",
+    "incoming",
+    "incoming transfer",
+    "credit",
+    "deposit",
+    "freelance",
+    "client",
 ]
 
 EXPENSE_KEYWORDS += [
@@ -68,6 +63,12 @@ EXPENSE_KEYWORDS += [
     "خصم",
     "سحب",
     "شراء",
+    "outgoing",
+    "outgoing transfer",
+    "fee",
+    "card payment",
+    "direct debit",
+    "sepa direct debit",
 ]
 
 INCOME_KEYWORDS += [
