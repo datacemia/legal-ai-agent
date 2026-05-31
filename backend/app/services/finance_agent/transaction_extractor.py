@@ -851,40 +851,45 @@ def normalize_arabic_digits(value: str) -> str:
 
 
 def find_arabic_ocr_dates(text: str):
-    """
-    Dates robustes pour OCR arabe RTL.
-    Support:
-    20260401
-    2 0 2 6 0 4 0 1
-    2026/04/01
-    2026-04-01
-    01/04/2026
-    chiffres arabes
-    """
-
     text = normalize_arabic_digits(text)
 
-    patterns = [
-        r"(?<!\d)(2\s*0\s*\d\s*\d\s*[01]\s*\d\s*[0-3]\s*\d)(?!\d)",
-        r"(?<!\d)(20\d{2}\s*[-/.]\s*\d{1,2}\s*[-/.]\s*\d{1,2})(?!\d)",
-        r"(?<!\d)([0-3]?\d\s*[-/.]\s*[01]?\d\s*[-/.]\s*20\d{2})(?!\d)",
-    ]
+    digits = []
+    for i, ch in enumerate(text):
+        if ch.isdigit():
+            digits.append((ch, i))
 
-    results = []
+    found = []
 
-    for pattern in patterns:
-        for m in re.finditer(pattern, text):
-            raw = m.group(1)
-            clean = re.sub(r"\s+", "", raw)
+    for i in range(0, len(digits) - 7):
+        raw = "".join(d[0] for d in digits[i:i+8])
 
-            results.append({
-                "raw": raw,
-                "clean": clean,
-                "start": m.start(),
-                "end": m.end(),
-            })
+        if not raw.startswith("20"):
+            continue
 
-    return results
+        try:
+            year = int(raw[:4])
+            month = int(raw[4:6])
+            day = int(raw[6:8])
+            parsed = datetime(year, month, day)
+        except Exception:
+            continue
+
+        if not is_reasonable_year(year):
+            continue
+
+        found.append({
+            "clean": raw,
+            "date": parsed.date().isoformat(),
+            "start": digits[i][1],
+            "end": digits[i+7][1] + 1,
+        })
+
+    # dédoublonnage
+    unique = {}
+    for d in found:
+        unique[(d["date"], d["start"])] = d
+
+    return list(unique.values())
 
 
 def extract_arabic_ocr_transactions(text: str) -> list[dict]:
@@ -898,10 +903,8 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
     print("=== AR DEBUG START ===")
     print("TEXT_LENGTH:", len(normalized))
-    print(
-        "DATES_FOUND:",
-        [d["clean"] for d in find_arabic_ocr_dates(normalized)]
-    )
+    dates = find_arabic_ocr_dates(normalized)
+    print("DATES_FOUND:", [d["clean"] for d in dates])
     print(
         "AMOUNTS_FOUND:",
         re.findall(
@@ -911,7 +914,6 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
     )
 
     amount_pattern = r"\d{1,3}(?:[ ,]\d{3})*(?:[.,]\d{2})"
-    dates = find_arabic_ocr_dates(normalized)
 
     rows = []
 
@@ -919,15 +921,15 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         print("---- DATE LOOP ----")
         print("DATE:", dm["clean"])
 
-        date_raw = re.sub(
-            r"\D",
-            "",
-            dm["clean"]
-        )
+        date_raw = dm["clean"]
 
-        start = max(0, dm["start"] - 90)
-        end = min(len(normalized), dm["end"] + 90)
-        window = normalized[start:end]
+        line_start = normalized.rfind("\n", 0, dm["start"]) + 1
+        line_end = normalized.find("\n", dm["end"])
+
+        if line_end == -1:
+            line_end = len(normalized)
+
+        window = normalized[line_start:line_end]
 
         print("WINDOW:")
         print(window)
@@ -945,7 +947,7 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
             except Exception:
                 continue
 
-            absolute_pos = start + am.start()
+            absolute_pos = line_start + am.start()
             distance = abs(absolute_pos - dm["start"])
 
             amounts.append((distance, value, raw))
@@ -968,7 +970,7 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         balance = clean[1]
 
         rows.append({
-            "date": f"{date_raw[:4]}-{date_raw[4:6]}-{date_raw[6:8]}",
+            "date": dm["date"],
             "amount": tx_amount,
             "balance": balance,
             "text": window,
