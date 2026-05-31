@@ -947,9 +947,11 @@ def find_arabic_ocr_dates(text: str):
                 "end": m.end(),
             })
 
-    # OCR arabe bruité: D.M.226 => D.M.2026
+    # OCR arabe bruité:
+    # 1.4.226 => 01.04.2026
+    # 12.04.026 => 12.04.2026
     for m in re.finditer(
-        r"(?<!\d)([0-3]?\d)[./-]([01]?\d)[./-](2\d{2})(?!\d)",
+        r"(?:^|\s)([0-3]?\d)[./-]([0-1]?\d)[./-](\d{3})(?=\s|$)",
         text,
     ):
         day, month, year = m.groups()
