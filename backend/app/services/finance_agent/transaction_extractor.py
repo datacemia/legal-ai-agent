@@ -53,6 +53,11 @@ INCOME_KEYWORDS = [
 ]
 
 EXPENSE_KEYWORDS += [
+    "ticket",
+    "e-ticket",
+    "sncf",
+    "train",
+    "transport",
     "atm",
     "visa",
     "debit",
