@@ -191,6 +191,50 @@ MONEY_NUMBER_PATTERN = (
 )
 
 
+
+def is_arabic_text(text: str) -> bool:
+    return bool(re.search(r"[\u0600-\u06FF]", text))
+
+
+def normalize_arabic_ocr_lines(text: str) -> str:
+    if not is_arabic_text(text):
+        return text
+
+    lines = [
+        " ".join(line.split())
+        for line in text.splitlines()
+        if " ".join(line.split())
+    ]
+
+    rebuilt = []
+
+    amount_line_re = re.compile(
+        r"^\s*(?:\d{1,3}(?:[ ,]\d{3})*|\d+)(?:[.,]\d{2})\s+"
+        r"(?:\d{1,3}(?:[ ,]\d{3})*|\d+)(?:[.,]\d{2})\s+"
+        r"(20\d{6})\s*$"
+    )
+
+    pending_amount = None
+
+    for line in lines:
+        m = amount_line_re.search(line)
+
+        if m:
+            pending_amount = line
+            continue
+
+        if pending_amount and re.search(r"[\u0600-\u06FFA-Za-z]", line):
+            rebuilt.append(line + " " + pending_amount)
+            pending_amount = None
+        else:
+            rebuilt.append(line)
+
+    if pending_amount:
+        rebuilt.append(pending_amount)
+
+    return "\n".join(rebuilt)
+
+
 def normalize_ocr_numeric_text(value: str) -> str:
     translation = str.maketrans({
         "O": "0",
@@ -772,6 +816,7 @@ def extract_transactions(text: str) -> list[dict]:
 
     print("RAW_AR_TEXT_SAMPLE:", text[:1000])
 
+    text = normalize_arabic_ocr_lines(text)
     text = normalize_ocr_numeric_text(text)
 
     transactions = []
