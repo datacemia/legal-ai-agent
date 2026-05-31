@@ -770,7 +770,7 @@ def extract_transactions(text: str) -> list[dict]:
             while j < len(raw_lines) and j <= i + 3:
                 combined += " " + raw_lines[j]
 
-                if re.search(MONEY_NUMBER_PATTERN, combined):
+                if re.search(MONEY_NUMBER_PATTERN, raw_lines[j]):
                     break
 
                 j += 1
@@ -789,7 +789,7 @@ def extract_transactions(text: str) -> list[dict]:
             while j < len(raw_lines) and j <= i + 3:
                 combined += " " + raw_lines[j]
 
-                if re.search(MONEY_NUMBER_PATTERN, combined):
+                if re.search(MONEY_NUMBER_PATTERN, raw_lines[j]):
                     break
 
                 j += 1
@@ -830,8 +830,6 @@ def extract_transactions(text: str) -> list[dict]:
             default_year=default_year,
         ):
             continue
-
-        print("FINAL_LINE_BEFORE_AMOUNT:", clean_line)
 
         tabular_amount, tabular_type = extract_tabular_bank_amount(clean_line)
 
