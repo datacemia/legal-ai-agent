@@ -1024,6 +1024,22 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
         window = normalized[line_start:line_end]
 
+        # ignore lignes header/période
+        if any(x in window for x in [
+            "الفترة",
+            "ةرتفلا",
+            "period",
+            "statement"
+        ]):
+            continue
+
+        # enlever la date de la ligne avant extraction montants
+        amount_window = (
+            window[:dm["start"] - line_start]
+            +
+            window[dm["end"] - line_start:]
+        )
+
         print("WINDOW:")
         print(window)
 
@@ -1031,9 +1047,9 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
         print(
             "WINDOW_AMOUNTS:",
-            re.findall(amount_pattern, window)
+            re.findall(amount_pattern, amount_window)
         )
-        for am in re.finditer(amount_pattern, window):
+        for am in re.finditer(amount_pattern, amount_window):
             raw = am.group(0)
             try:
                 value = parse_amount(raw)
