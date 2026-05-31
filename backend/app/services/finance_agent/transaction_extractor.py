@@ -3,6 +3,8 @@ from collections import Counter
 from datetime import datetime
 
 
+CURRENCY_CODES = ["USD", "EUR", "GBP", "AED", "MAD", "CAD", "JOD", "SAR", "QAR", "KWD", "BHD", "OMR"]
+
 EXPENSE_KEYWORDS = [
     "paiement",
     "carte",
@@ -237,7 +239,7 @@ def pick_bank_amount(
     text = line.upper()
 
     currency_amounts = re.findall(
-        r"\b(?:USD|EUR|GBP|AED|MAD|CAD)\s*([+-]?\d[\d,]*(?:[.,]\d{1,2})?)",
+        r"\b(?:USD|EUR|GBP|AED|MAD|CAD|JOD|SAR|QAR|KWD|BHD|OMR|دينار|دولار|درهم|ريال)\s*([+-]?\d[\d,]*(?:[.,]\d{1,2})?)",
         text,
         flags=re.IGNORECASE,
     )
@@ -908,3 +910,28 @@ def extract_transactions(text: str) -> list[dict]:
         )
 
     return transactions
+EXPENSE_KEYWORDS += [
+    "مدين",
+    "خصم",
+    "سحب",
+    "شراء",
+    "دفع",
+    "بطاقة",
+    "رسوم",
+    "عمولة",
+    "فاتورة",
+    "اشتراك",
+    "تحويل صادر",
+    "حوالة صادرة",
+]
+
+INCOME_KEYWORDS += [
+    "دائن",
+    "إيداع",
+    "ايداع",
+    "راتب",
+    "دخل",
+    "تحويل وارد",
+    "حوالة واردة",
+    "قبض",
+]
