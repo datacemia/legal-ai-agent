@@ -29,6 +29,9 @@ EXPENSE_KEYWORDS = [
     "subscription",
     "membership",
     "transfer sent",
+    "card",
+    "direct debit",
+    "standing order",
     "facture",
     "invoice",
     "abonnement",
@@ -47,6 +50,8 @@ INCOME_KEYWORDS = [
     "deposit",
     "dépôt",
     "transfer received",
+    "payroll",
+    "wage",
 ]
 
 EXPENSE_KEYWORDS += [
