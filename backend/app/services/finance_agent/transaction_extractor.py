@@ -90,6 +90,8 @@ BALANCE_KEYWORDS = [
     "solde",
     "total",
     "report",
+    "fx conversion",
+    "wallet credit",
 ]
 
 
@@ -518,6 +520,17 @@ def extract_tabular_bank_amount(
         return None, None
 
     description = normalized
+
+    if any(
+        keyword in description
+        for keyword in [
+            "fx conversion",
+            "currency exchange",
+            "wallet credit",
+            "internal transfer",
+        ]
+    ):
+        return None, None
 
     if any(
         keyword in description
