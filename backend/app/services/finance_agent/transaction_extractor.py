@@ -115,6 +115,10 @@ INTERNAL_TRANSFER_KEYWORDS = [
     "own account",
     "internal transfer",
     "balance transfer",
+    "virement interne",
+    "transfer interne",
+    "internal saving",
+    "livret",
 ]
 
 
@@ -246,6 +250,10 @@ def pick_bank_amount(
 
         if matches:
             return parse_amount(matches[-1])
+
+    text = re.sub(r"\b\d{2}[./-]\d{2}[./-]\d{4}\b", "", text)
+    text = re.sub(r"\b\d{2}[./-]\d{2}\b", "", text)
+    text = re.sub(r"\b\d{4}-\d{2}-\d{2}\b", "", text)
 
     money_numbers = re.findall(
         MONEY_NUMBER_PATTERN,
@@ -655,6 +663,19 @@ def extract_tabular_bank_amount(
         ]
     ):
         return None, None
+
+    if any(
+        keyword in description
+        for keyword in [
+            "retour carte",
+            "refund",
+            "reversal",
+            "remboursement",
+        ]
+    ):
+        amount = pick_bank_amount(numbers, line)
+
+        return amount, "income"
 
     if any(
         keyword in description
