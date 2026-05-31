@@ -1010,19 +1010,28 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
     rows = []
 
-    for dm in dates:
+    for i, dm in enumerate(dates):
         print("---- DATE LOOP ----")
         print("DATE:", dm["clean"])
 
         date_raw = dm["clean"]
 
-        line_start = normalized.rfind("\n", 0, dm["start"]) + 1
-        line_end = normalized.find("\n", dm["end"])
+        prev_date_end = dates[i - 1]["end"] if i > 0 else 0
+        next_date_start = dates[i + 1]["start"] if i + 1 < len(dates) else len(normalized)
 
-        if line_end == -1:
-            line_end = len(normalized)
+        # segment autour de cette date, même si OCR met plusieurs transactions sur une ligne
+        if dm["start"] < next_date_start:
+            window = normalized[dm["start"]:next_date_start]
+        else:
+            window = normalized[prev_date_end:dm["end"]]
 
-        window = normalized[line_start:line_end]
+        # fallback: ligne locale si segment vide
+        if not window.strip():
+            line_start = normalized.rfind("\n", 0, dm["start"]) + 1
+            line_end = normalized.find("\n", dm["end"])
+            if line_end == -1:
+                line_end = len(normalized)
+            window = normalized[line_start:line_end]
 
         # ignore lignes header/période
         if any(x in window for x in [
@@ -1034,11 +1043,11 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
             continue
 
         # enlever la date de la ligne avant extraction montants
-        amount_window = (
-            window[:dm["start"] - line_start]
-            +
-            window[dm["end"] - line_start:]
-        )
+        window_pos = normalized.find(window)
+        local_start = max(0, dm["start"] - window_pos)
+        local_end = max(local_start, dm["end"] - window_pos)
+
+        amount_window = window[:local_start] + window[local_end:]
 
         print("WINDOW:")
         print(window)
