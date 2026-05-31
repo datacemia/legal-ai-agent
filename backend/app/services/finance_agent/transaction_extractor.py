@@ -855,29 +855,30 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         return []
 
     normalized = normalize_arabic_digits(text)
-    normalized = (
-        normalized
-        .replace("\u00a0", " ")
-        .replace("\u202f", " ")
-        .replace("،", ",")
-    )
+    normalized = normalized.replace("\u00a0", " ").replace("\u202f", " ").replace("،", ",")
     normalized = " ".join(normalized.split())
 
-    amount_token = r"(?:\d{1,3}(?:\s\d{3})+|\d+)(?:[.,]\d{2})"
-
-    row_re = re.compile(
-        rf"({amount_token})\s+({amount_token})\s+(20\d{{6}})"
-    )
+    amount_re = re.compile(r"\d[\d\s]*[.,]\d{2}")
+    date_re = re.compile(r"20\d{6}")
 
     rows = []
 
-    for m in row_re.finditer(normalized):
-        raw_date = m.group(3)
+    for m in date_re.finditer(normalized):
+        raw_date = m.group(0)
+
+        window = normalized[max(0, m.start() - 80):m.start()]
+        amounts = amount_re.findall(window)
+
+        if len(amounts) < 2:
+            continue
+
+        amount = amounts[-2]
+        balance = amounts[-1]
 
         rows.append({
             "date": f"{raw_date[:4]}-{raw_date[4:6]}-{raw_date[6:8]}",
-            "amount": parse_amount(m.group(1)),
-            "balance": parse_amount(m.group(2)),
+            "amount": parse_amount(amount),
+            "balance": parse_amount(balance),
         })
 
     rows.sort(key=lambda x: x["date"])
@@ -906,7 +907,6 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         previous_balance = row["balance"]
 
     print("ARABIC_BYPASS_COUNT:", len(transactions))
-
     return transactions
 
 
