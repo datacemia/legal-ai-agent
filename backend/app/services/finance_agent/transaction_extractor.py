@@ -584,9 +584,16 @@ def extract_tabular_bank_amount(
 
 
 def extract_first_amount_after_date(line: str) -> float | None:
+    text = re.sub(
+        r"\b\d{4}-\d{2}-\d{2}\b",
+        "",
+        line,
+        count=1,
+    )
+
     numbers = re.findall(
         r"\d[\d,]*(?:[.,]\d{1,2})?",
-        line,
+        text,
     )
 
     if not numbers:
