@@ -214,23 +214,16 @@ def normalize_arabic_ocr_lines(text: str) -> str:
         r"(20\d{6})\s*$"
     )
 
-    pending_amount = None
-
     for line in lines:
         m = amount_line_re.search(line)
 
         if m:
-            pending_amount = line
+            amount = re.findall(MONEY_NUMBER_PATTERN, line)[0]
+            date = m.group(1)
+            rebuilt.append(f"{date} Arabic OCR transaction {amount}")
             continue
 
-        if pending_amount and re.search(r"[\u0600-\u06FFA-Za-z]", line):
-            rebuilt.append(line + " " + pending_amount)
-            pending_amount = None
-        else:
-            rebuilt.append(line)
-
-    if pending_amount:
-        rebuilt.append(pending_amount)
+        rebuilt.append(line)
 
     return "\n".join(rebuilt)
 
@@ -1021,4 +1014,8 @@ INCOME_KEYWORDS += [
     "تحويل وارد",
     "حوالة واردة",
     "قبض",
+]
+
+EXPENSE_KEYWORDS += [
+    "arabic ocr transaction",
 ]
