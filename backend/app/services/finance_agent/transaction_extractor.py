@@ -564,37 +564,15 @@ def extract_tabular_bank_amount(
 
 
 def extract_first_amount_after_date(line: str) -> float | None:
-    text = re.sub(
-        r"^\s*\d{1,2}\s+"
-        r"(january|jan|february|feb|march|mar|april|apr|may|"
-        r"june|jun|july|jul|august|aug|september|sept|sep|"
-        r"october|oct|november|nov|december|dec)"
-        r"\s+\d{4}\s+",
-        "",
-        line,
-        count=1,
-        flags=re.IGNORECASE,
-    )
-
-    text = re.sub(
-        r"\b\d{2}[./-]\d{2}(?:[./-]\d{2,4})?\b",
-        "",
-        text,
-        count=1,
-    )
-
     numbers = re.findall(
         r"\d[\d,]*(?:[.,]\d{1,2})?",
-        text,
+        line,
     )
-
-    print("FALLBACK TEXT:", repr(text))
-    print("FALLBACK NUMBERS:", numbers)
 
     if not numbers:
         return None
 
-    return parse_amount(numbers[-2] if len(numbers) >= 2 else numbers[-1])
+    return parse_amount(numbers[-1])
 
 
 def extract_transactions(text: str) -> list[dict]:
