@@ -300,6 +300,39 @@ def extract_date(
     return None
 
 
+def is_date_only_line(
+    line: str,
+    default_year: int | None = None,
+) -> bool:
+    if not extract_date(line, default_year=default_year):
+        return False
+
+    remaining = re.sub(
+        r"\b\d{1,2}\s+"
+        r"(jan|january|feb|february|mar|march|apr|april|may|"
+        r"jun|june|jul|july|aug|august|sep|sept|september|"
+        r"oct|october|nov|november|dec|december)"
+        r"\s+\d{2,4}\b",
+        "",
+        line,
+        flags=re.IGNORECASE,
+    )
+
+    remaining = re.sub(
+        r"\b\d{4}-\d{2}-\d{2}\b",
+        "",
+        remaining,
+    )
+
+    remaining = re.sub(
+        r"\b\d{2}[./-]\d{2}(?:[./-]\d{2,4})?\b",
+        "",
+        remaining,
+    )
+
+    return remaining.strip() == ""
+
+
 def has_transaction_signal(
     line: str,
     default_year: int | None = None,
@@ -530,9 +563,9 @@ def extract_transactions(text: str) -> list[dict]:
     while i < len(raw_lines):
         current = raw_lines[i]
 
-        current_is_date_only = (
-            extract_date(current, default_year=default_year)
-            and len(re.findall(AMOUNT_PATTERN, current)) <= 1
+        current_is_date_only = is_date_only_line(
+            current,
+            default_year=default_year,
         )
 
         if current_is_date_only:
