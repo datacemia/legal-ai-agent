@@ -37,6 +37,8 @@ EXPENSE_KEYWORDS = [
     "abonnement",
     "premium",
     "recurring",
+    "netflix",
+    "transport",
 ]
 
 INCOME_KEYWORDS = [
@@ -141,6 +143,7 @@ MONTH_ALIASES = {
 
 AMOUNT_PATTERN = r"[+-]?(?:\d{1,3}(?:,\d{3})+|\d+)(?:[.,]\d{1,2})?"
 UNSIGNED_AMOUNT_PATTERN = r"(?:\d{1,3}(?:,\d{3})+|\d+)(?:[.,]\d{1,2})?"
+MONEY_NUMBER_PATTERN = r"(?<![A-Za-z0-9])\d{1,3}(?:,\d{3})*(?:[.,]\d{2})(?![A-Za-z0-9])"
 
 
 def normalize_ocr_numeric_text(value: str) -> str:
@@ -564,7 +567,7 @@ def extract_tabular_bank_amount(
 
 
     numbers = re.findall(
-        r"\d[\d,]*(?:[.,]\d{1,2})?",
+        MONEY_NUMBER_PATTERN,
         without_date,
     )
 
@@ -640,7 +643,7 @@ def extract_first_amount_after_date(line: str) -> float | None:
 
 
     numbers = re.findall(
-        r"\d[\d,]*(?:[.,]\d{1,2})?",
+        MONEY_NUMBER_PATTERN,
         text,
     )
 
