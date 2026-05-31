@@ -139,7 +139,7 @@ def normalize_ocr_numeric_text(value: str) -> str:
     def fix_token(match):
         token = match.group(0)
 
-        if not re.search(r"\d|[+\-.,/]", token):
+        if not re.search(r"\d", token):
             return token
 
         return token.translate(translation)
