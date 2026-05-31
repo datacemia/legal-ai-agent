@@ -855,30 +855,43 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         return []
 
     normalized = normalize_arabic_digits(text)
-    normalized = normalized.replace("\u00a0", " ").replace("\u202f", " ").replace("،", ",")
-    normalized = " ".join(normalized.split())
+    normalized = normalized.replace("\u00a0", " ").replace("\u202f", " ")
+    normalized = normalized.replace("،", ",")
+    normalized = re.sub(r"[^\S\r\n]+", " ", normalized)
 
-    amount_re = re.compile(r"\d[\d\s]*[.,]\d{2}")
-    date_re = re.compile(r"20\d{6}")
+    date_pattern = r"(?:20\d{6}|20\d{2}[-/]\d{2}[-/]\d{2}|\d{2}[-/]\d{2}[-/](?:20)?\d{2})"
+    amount_pattern = r"\d{1,3}(?:[ ,]\d{3})*(?:[.,]\d{2})"
 
     rows = []
 
-    for m in date_re.finditer(normalized):
-        raw_date = m.group(0)
+    for raw_line in normalized.splitlines():
+        line = " ".join(raw_line.split())
+        if not line:
+            continue
 
-        window = normalized[max(0, m.start() - 80):m.start()]
-        amounts = amount_re.findall(window)
+        date_match = re.search(date_pattern, line)
+        if not date_match:
+            continue
 
+        amounts = re.findall(amount_pattern, line)
         if len(amounts) < 2:
             continue
 
-        amount = amounts[-2]
-        balance = amounts[-1]
+        raw_date = date_match.group(0)
+
+        date = extract_date(raw_date)
+        if not date:
+            continue
+
+        # Généralement dans les relevés : montant transaction + solde
+        tx_amount = parse_amount(amounts[-2])
+        balance = parse_amount(amounts[-1])
 
         rows.append({
-            "date": f"{raw_date[:4]}-{raw_date[4:6]}-{raw_date[6:8]}",
-            "amount": parse_amount(amount),
-            "balance": parse_amount(balance),
+            "date": date,
+            "amount": tx_amount,
+            "balance": balance,
+            "line": line,
         })
 
     rows.sort(key=lambda x: x["date"])
@@ -887,7 +900,7 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
     previous_balance = None
 
     for row in rows:
-        tx_type = "income" if previous_balance is None else "expense"
+        tx_type = "income"
 
         if previous_balance is not None:
             delta = round(row["balance"] - previous_balance, 2)
@@ -896,11 +909,20 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
                 tx_type = "income"
             elif abs(delta + row["amount"]) < 0.05:
                 tx_type = "expense"
+            else:
+                # fallback mots-clés arabes
+                lower = row["line"].lower()
+                if any(k in lower for k in EXPENSE_KEYWORDS):
+                    tx_type = "expense"
+                elif any(k in lower for k in INCOME_KEYWORDS):
+                    tx_type = "income"
+
+        signed_amount = row["amount"] if tx_type == "income" else -abs(row["amount"])
 
         transactions.append({
             "date": row["date"],
-            "description": "Arabic OCR bank transaction",
-            "amount": row["amount"] if tx_type == "income" else -row["amount"],
+            "description": row["line"],
+            "amount": signed_amount,
             "type": tx_type,
         })
 
