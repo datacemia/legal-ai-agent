@@ -845,72 +845,52 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
     if not is_arabic_text(text):
         return []
 
-    amount_token = r"(?:\d{1,3}(?:[ ,]\d{3})+|\d+)(?:[.,]\d{2})"
-    row_re = re.compile(
-        rf"({amount_token})\s+({amount_token})\s+(20\d{{6}})"
+    transactions = []
+
+    pattern = re.compile(
+        r"((?:\d+\s)*\d+[,.]\d{2})\s+"
+        r"((?:\d+\s)*\d+[,.]\d{2})\s+"
+        r"(20\d{6})"
     )
+
+    matches = pattern.findall(text)
+
+    print("AR_ROWS_FOUND:", matches)
+
+    previous_balance = None
 
     rows = []
 
-    for line in text.splitlines():
-        line = " ".join(line.split())
-        m = row_re.search(line)
-
-        if not m:
-            continue
-
-        amount = parse_amount(m.group(1))
-        balance = parse_amount(m.group(2))
-        raw_date = m.group(3)
-
-        date = f"{raw_date[:4]}-{raw_date[4:6]}-{raw_date[6:8]}"
-
-        rows.append(
-            {
-                "date": date,
-                "amount": amount,
-                "balance": balance,
-            }
-        )
+    for amount_raw, balance_raw, raw_date in matches:
+        rows.append({
+            "date": f"{raw_date[:4]}-{raw_date[4:6]}-{raw_date[6:8]}",
+            "amount": parse_amount(amount_raw),
+            "balance": parse_amount(balance_raw),
+        })
 
     rows.sort(key=lambda x: x["date"])
 
-    transactions = []
-    previous_balance = None
-
     for row in rows:
         amount = row["amount"]
-        balance = row["balance"]
 
-        transaction_type = "expense"
+        tx_type = "expense"
 
         if previous_balance is None:
-            if balance >= amount:
-                transaction_type = "income"
+            tx_type = "income"
         else:
-            delta = round(balance - previous_balance, 2)
+            diff = round(row["balance"] - previous_balance, 2)
 
-            if abs(delta - amount) < 0.02:
-                transaction_type = "income"
-            elif abs(delta + amount) < 0.02:
-                transaction_type = "expense"
+            if abs(diff - amount) < 0.05:
+                tx_type = "income"
 
-        signed_amount = (
-            abs(amount)
-            if transaction_type == "income"
-            else -abs(amount)
-        )
+        transactions.append({
+            "date": row["date"],
+            "description": "Arabic OCR transaction",
+            "amount": amount if tx_type == "income" else -amount,
+            "type": tx_type,
+        })
 
-        transactions.append(
-            {
-                "date": row["date"],
-                "description": "Arabic OCR bank transaction",
-                "amount": signed_amount,
-                "type": transaction_type,
-            }
-        )
-
-        previous_balance = balance
+        previous_balance = row["balance"]
 
     print("ARABIC_BYPASS_COUNT:", len(transactions))
 
