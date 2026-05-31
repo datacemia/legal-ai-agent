@@ -253,10 +253,7 @@ def pick_bank_amount(
     )
 
     if money_numbers:
-        if len(money_numbers) >= 2:
-            return parse_amount(money_numbers[-2])
-
-        return parse_amount(money_numbers[-1])
+        return parse_amount(money_numbers[0])
 
     if len(numbers) >= 2:
         return parse_amount(numbers[-2])
