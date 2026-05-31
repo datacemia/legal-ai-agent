@@ -36,6 +36,7 @@ EXPENSE_KEYWORDS = [
     "invoice",
     "abonnement",
     "premium",
+    "recurring",
 ]
 
 INCOME_KEYWORDS = [
@@ -532,6 +533,10 @@ def extract_tabular_bank_amount(
         without_date,
     )
 
+    is_multi_currency_line = bool(
+        re.search(r"\b(USD|EUR|GBP|AED|MAD|CAD)\b", line, re.IGNORECASE)
+    )
+
     if not numbers:
         return None, None
 
@@ -586,7 +591,13 @@ def extract_tabular_bank_amount(
         ]
     ):
         return (
-            -abs(parse_amount(numbers[-2] if len(numbers) >= 2 else numbers[-1])),
+            -abs(
+                parse_amount(
+                    numbers[-2]
+                    if len(numbers) >= 3
+                    else numbers[-1]
+                )
+            ),
             "expense",
         )
 
