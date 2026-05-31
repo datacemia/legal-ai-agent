@@ -552,6 +552,37 @@ def extract_tabular_bank_amount(
     return None, None
 
 
+def extract_first_amount_after_date(line: str) -> float | None:
+    text = re.sub(
+        r"\b\d{1,2}\s+"
+        r"(jan|january|feb|february|mar|march|apr|april|may|"
+        r"jun|june|jul|july|aug|august|sep|sept|september|"
+        r"oct|october|nov|november|dec|december)"
+        r"\s+\d{2,4}\b",
+        "",
+        line,
+        count=1,
+        flags=re.IGNORECASE,
+    )
+
+    text = re.sub(
+        r"\b\d{2}[./-]\d{2}(?:[./-]\d{2,4})?\b",
+        "",
+        text,
+        count=1,
+    )
+
+    numbers = re.findall(
+        rf"\b{UNSIGNED_AMOUNT_PATTERN}\b",
+        text,
+    )
+
+    if not numbers:
+        return None
+
+    return parse_amount(numbers[0])
+
+
 def extract_transactions(text: str) -> list[dict]:
     print("TRANSACTION_EXTRACTOR_VERSION=merchant-debug-v1")
 
@@ -643,7 +674,12 @@ def extract_transactions(text: str) -> list[dict]:
             amount = extract_transaction_amount(clean_line)
 
         if amount is None:
-            continue
+            fallback_amount = extract_first_amount_after_date(clean_line)
+
+            if fallback_amount is None:
+                continue
+
+            amount = fallback_amount
 
         transaction_type = tabular_type or detect_type(clean_line, amount)
 
