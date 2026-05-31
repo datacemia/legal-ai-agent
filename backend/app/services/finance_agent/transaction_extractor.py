@@ -859,6 +859,14 @@ def extract_transactions(text: str) -> list[dict]:
             default_year=default_year,
         )
 
+        print(
+            "TX_FINAL:",
+            clean_line,
+            "=>",
+            amount,
+            transaction_type,
+        )
+
         transactions.append(
             {
                 "date": date,
