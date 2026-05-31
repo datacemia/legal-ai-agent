@@ -374,6 +374,18 @@ def extract_transaction_amount(line: str) -> float | None:
         count=1,
     )
 
+    transaction_part = re.sub(
+        r"\b\d{1,2}\s+"
+        r"(jan|january|feb|february|mar|march|apr|april|may|"
+        r"jun|june|jul|july|aug|august|sep|sept|september|"
+        r"oct|october|nov|november|dec|december)"
+        r"\s+\d{2,4}\b",
+        "",
+        transaction_part,
+        count=1,
+        flags=re.IGNORECASE,
+    )
+
     money_matches = re.findall(
         rf"{AMOUNT_PATTERN}\s*(?:[A-Z]{{3}}|DH|DHS|€|\$|£)?",
         transaction_part,
@@ -506,7 +518,7 @@ def extract_transactions(text: str) -> list[dict]:
 
         current_is_date_only = (
             extract_date(current, default_year=default_year)
-            and not re.search(AMOUNT_PATTERN, current)
+            and len(re.findall(AMOUNT_PATTERN, current)) <= 1
         )
 
         if current_is_date_only:
