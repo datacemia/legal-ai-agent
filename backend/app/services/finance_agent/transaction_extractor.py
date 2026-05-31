@@ -897,41 +897,84 @@ def detect_currency(text: str) -> str:
 
     return "unknown"
 
+def iter_lines_with_offsets(text: str):
+    offset = 0
+    for line in text.splitlines(True):
+        yield offset, line
+        offset += len(line)
+
+
 def find_arabic_ocr_dates(text: str):
     text = normalize_arabic_digits(text)
 
-    digits = []
-    for i, ch in enumerate(text):
-        if ch.isdigit():
-            digits.append((ch, i))
-
     found = []
 
-    for i in range(0, len(digits) - 7):
-        raw = "".join(d[0] for d in digits[i:i+8])
-
-        if not raw.startswith("20"):
-            continue
-
+    # 1) DD.MM.YYYY / DD-MM-YYYY / DD/MM/YYYY
+    for m in re.finditer(
+        r"(?<!\d)([0-3]?\d)[./-]([01]?\d)[./-](20\d{2})(?!\d)",
+        text,
+    ):
+        day, month, year = m.groups()
         try:
-            year = int(raw[:4])
-            month = int(raw[4:6])
-            day = int(raw[6:8])
-            parsed = datetime(year, month, day)
+            parsed = datetime(int(year), int(month), int(day))
         except Exception:
             continue
 
-        if not is_reasonable_year(year):
+        if is_reasonable_year(parsed.year):
+            found.append({
+                "clean": f"{year}{int(month):02d}{int(day):02d}",
+                "date": parsed.date().isoformat(),
+                "start": m.start(),
+                "end": m.end(),
+            })
+
+    # 2) YYYY.MM.DD / YYYY-MM-DD / YYYY/MM/DD
+    for m in re.finditer(
+        r"(?<!\d)(20\d{2})[./-]([01]?\d)[./-]([0-3]?\d)(?!\d)",
+        text,
+    ):
+        year, month, day = m.groups()
+        try:
+            parsed = datetime(int(year), int(month), int(day))
+        except Exception:
             continue
 
-        found.append({
-            "clean": raw,
-            "date": parsed.date().isoformat(),
-            "start": digits[i][1],
-            "end": digits[i+7][1] + 1,
-        })
+        if is_reasonable_year(parsed.year):
+            found.append({
+                "clean": f"{year}{int(month):02d}{int(day):02d}",
+                "date": parsed.date().isoformat(),
+                "start": m.start(),
+                "end": m.end(),
+            })
 
-    # dédoublonnage
+    # 3) compact YYYYMMDD, mais seulement ligne par ligne
+    # pour éviter les fausses dates depuis numéros de compte / IBAN
+    for line_start, line in iter_lines_with_offsets(text):
+        if not re.search(r"\d{1,3}(?:[ ,]\d{3})*(?:[.,]\d{2})", line):
+            continue
+
+        for m in re.finditer(
+            r"(?<!\d)(20\d{2}[01]\d[0-3]\d)(?!\d)",
+            line,
+        ):
+            raw = m.group(1)
+            try:
+                parsed = datetime(
+                    int(raw[:4]),
+                    int(raw[4:6]),
+                    int(raw[6:8]),
+                )
+            except Exception:
+                continue
+
+            if is_reasonable_year(parsed.year):
+                found.append({
+                    "clean": raw,
+                    "date": parsed.date().isoformat(),
+                    "start": line_start + m.start(),
+                    "end": line_start + m.end(),
+                })
+
     unique = {}
     for d in found:
         unique[(d["date"], d["start"])] = d
