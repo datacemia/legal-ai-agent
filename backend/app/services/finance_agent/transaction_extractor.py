@@ -303,6 +303,7 @@ def pick_bank_amount(
     text = re.sub(r"\b\d{2}[./-]\d{2}[./-]\d{4}\b", "", text)
     text = re.sub(r"\b\d{2}[./-]\d{2}\b", "", text)
     text = re.sub(r"\b\d{4}-\d{2}-\d{2}\b", "", text)
+    text = re.sub(r"\b20\d{6}\b", "", text)
 
     money_numbers = re.findall(
         MONEY_NUMBER_PATTERN,
@@ -326,6 +327,11 @@ def detect_document_year(text: str) -> int:
     years = []
 
     for match in re.findall(r"\b(20\d{2})-\d{2}-\d{2}\b", text):
+        year = int(match)
+        if is_reasonable_year(year):
+            years.append(year)
+
+    for match in re.findall(r"\b(20\d{2})\d{4}\b", text):
         year = int(match)
         if is_reasonable_year(year):
             years.append(year)
@@ -369,6 +375,25 @@ def extract_date(
 
         except ValueError:
             pass
+
+
+    compact_match = re.search(r"\b(20\d{2})(\d{2})(\d{2})\b", line)
+
+    if compact_match:
+        try:
+            parsed = datetime(
+                int(compact_match.group(1)),
+                int(compact_match.group(2)),
+                int(compact_match.group(3)),
+            )
+
+            if not is_reasonable_year(parsed.year):
+                return None
+
+            return parsed.date().isoformat()
+
+        except ValueError:
+            return None
 
 
     text_month_match = re.search(
@@ -566,6 +591,13 @@ def extract_transaction_amount(line: str) -> float | None:
 
     transaction_part = re.sub(
         r"\b\d{4}-\d{2}-\d{2}\b",
+        "",
+        transaction_part,
+        count=1,
+    )
+
+    transaction_part = re.sub(
+        r"\b20\d{6}\b",
         "",
         transaction_part,
         count=1,
