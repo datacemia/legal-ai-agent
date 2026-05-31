@@ -862,49 +862,57 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
     amount_pattern = r"\d{1,3}(?:[ ,]\d{3})*(?:[.,]\d{2})"
     date_pattern = r"\b20\d{6}\b"
 
-    dates = list(re.finditer(date_pattern, normalized))
     rows = []
 
-    for i, dm in enumerate(dates):
+    for dm in re.finditer(date_pattern, normalized):
         date_raw = dm.group(0)
 
-        # ignore période/header like 20260401 20260430
-        around = normalized[max(0, dm.start() - 120): min(len(normalized), dm.end() + 120)]
-        low = around.lower()
-        if any(k in low for k in ["الحساب", "الفترة", "ةرتفلا", "account", "period"]):
-            continue
+        start = max(0, dm.start() - 90)
+        end = min(len(normalized), dm.end() + 90)
+        window = normalized[start:end]
 
-        prev_pos = dates[i - 1].end() if i > 0 else 0
-        next_pos = dates[i + 1].start() if i + 1 < len(dates) else len(normalized)
-
-        segment = normalized[max(prev_pos, dm.start() - 120): min(next_pos, dm.end() + 120)]
-
-        amounts_raw = re.findall(amount_pattern, segment)
         amounts = []
-
-        for a in amounts_raw:
+        for am in re.finditer(amount_pattern, window):
+            raw = am.group(0)
             try:
-                v = parse_amount(a)
+                value = parse_amount(raw)
             except Exception:
                 continue
 
-            if v not in amounts:
-                amounts.append(v)
+            absolute_pos = start + am.start()
+            distance = abs(absolute_pos - dm.start())
+
+            amounts.append((distance, value, raw))
 
         if len(amounts) < 2:
             continue
 
-        tx_amount = amounts[-2]
-        balance = amounts[-1]
+        amounts.sort(key=lambda x: x[0])
+        nearest_values = [x[1] for x in amounts[:4]]
+
+        clean = []
+        for v in nearest_values:
+            if not any(abs(v - old) < 0.01 for old in clean):
+                clean.append(v)
+
+        if len(clean) < 2:
+            continue
+
+        tx_amount = clean[0]
+        balance = clean[1]
 
         rows.append({
             "date": f"{date_raw[:4]}-{date_raw[4:6]}-{date_raw[6:8]}",
             "amount": tx_amount,
             "balance": balance,
-            "text": segment,
+            "text": window,
         })
 
-    rows.sort(key=lambda x: x["date"])
+    unique = {}
+    for r in rows:
+        unique[r["date"]] = r
+
+    rows = sorted(unique.values(), key=lambda x: x["date"])
 
     transactions = []
 
@@ -935,6 +943,7 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
     print("ARABIC_BYPASS_COUNT:", len(transactions))
     return transactions
+
 
 def extract_transactions(text: str) -> list[dict]:
     arabic_transactions = extract_arabic_ocr_transactions(text)
