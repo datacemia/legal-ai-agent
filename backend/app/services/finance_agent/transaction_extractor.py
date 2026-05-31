@@ -859,19 +859,41 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
     normalized = normalized.replace("،", ",")
     normalized = "\n".join(" ".join(l.split()) for l in normalized.splitlines())
 
+    print("=== AR DEBUG START ===")
+    print("TEXT_LENGTH:", len(normalized))
+    print("DATES_FOUND:", re.findall(r"\b20\d{6}\b", normalized))
+    print(
+        "AMOUNTS_FOUND:",
+        re.findall(
+            r"\d{1,3}(?:[ ,]\d{3})*(?:[.,]\d{2})",
+            normalized
+        )[:30]
+    )
+
     amount_pattern = r"\d{1,3}(?:[ ,]\d{3})*(?:[.,]\d{2})"
     date_pattern = r"\b20\d{6}\b"
 
     rows = []
 
     for dm in re.finditer(date_pattern, normalized):
+        print("---- DATE LOOP ----")
+        print("DATE:", dm.group(0))
+
         date_raw = dm.group(0)
 
         start = max(0, dm.start() - 90)
         end = min(len(normalized), dm.end() + 90)
         window = normalized[start:end]
 
+        print("WINDOW:")
+        print(window)
+
         amounts = []
+
+        print(
+            "WINDOW_AMOUNTS:",
+            re.findall(amount_pattern, window)
+        )
         for am in re.finditer(amount_pattern, window):
             raw = am.group(0)
             try:
@@ -940,6 +962,11 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
             "amount": row["amount"] if tx_type == "income" else -abs(row["amount"]),
             "type": tx_type,
         })
+
+    print("ROWS_BUILT:", rows)
+
+    for t in transactions:
+        print("AR_TX:", t)
 
     print("ARABIC_BYPASS_COUNT:", len(transactions))
     return transactions
