@@ -854,34 +854,30 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
     if not is_arabic_text(text):
         return []
 
+    normalized = normalize_arabic_digits(text)
+    normalized = (
+        normalized
+        .replace("\u00a0", " ")
+        .replace("\u202f", " ")
+        .replace("،", ",")
+    )
+    normalized = " ".join(normalized.split())
+
+    amount_token = r"(?:\d{1,3}(?:\s\d{3})+|\d+)(?:[.,]\d{2})"
+
+    row_re = re.compile(
+        rf"({amount_token})\s+({amount_token})\s+(20\d{{6}})"
+    )
+
     rows = []
-    amount_re = re.compile(r"\d+(?:[ \u00a0\u202f]\d{3})*(?:[.,،]\d{2})")
 
-    for raw_line in text.splitlines():
-        line = normalize_arabic_digits(raw_line)
-        line = (
-            line
-            .replace("\u00a0", " ")
-            .replace("\u202f", " ")
-            .replace("،", ",")
-        )
-        line = " ".join(line.split())
+    for m in row_re.finditer(normalized):
+        raw_date = m.group(3)
 
-        date_match = re.search(r"20\d{6}", line)
-        if not date_match:
-            continue
-
-        left = line[:date_match.start()]
-        amounts = amount_re.findall(left)
-
-        if len(amounts) < 2:
-            continue
-
-        raw_date = date_match.group(0)
         rows.append({
             "date": f"{raw_date[:4]}-{raw_date[4:6]}-{raw_date[6:8]}",
-            "amount": parse_amount(amounts[0]),
-            "balance": parse_amount(amounts[1]),
+            "amount": parse_amount(m.group(1)),
+            "balance": parse_amount(m.group(2)),
         })
 
     rows.sort(key=lambda x: x["date"])
@@ -894,8 +890,11 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
         if previous_balance is not None:
             delta = round(row["balance"] - previous_balance, 2)
+
             if abs(delta - row["amount"]) < 0.05:
                 tx_type = "income"
+            elif abs(delta + row["amount"]) < 0.05:
+                tx_type = "expense"
 
         transactions.append({
             "date": row["date"],
@@ -907,6 +906,7 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         previous_balance = row["balance"]
 
     print("ARABIC_BYPASS_COUNT:", len(transactions))
+
     return transactions
 
 
