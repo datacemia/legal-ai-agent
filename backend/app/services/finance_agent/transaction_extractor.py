@@ -531,7 +531,10 @@ def extract_tabular_bank_amount(
             "received",
         ]
     ):
-        return parse_amount(numbers[0]), "income"
+        return (
+            parse_amount(numbers[-2] if len(numbers) >= 2 else numbers[-1]),
+            "income",
+        )
 
     if any(
         keyword in description
@@ -552,7 +555,10 @@ def extract_tabular_bank_amount(
             "fuel",
         ]
     ):
-        return -abs(parse_amount(numbers[0])), "expense"
+        return (
+            -abs(parse_amount(numbers[-2] if len(numbers) >= 2 else numbers[-1])),
+            "expense",
+        )
 
     return None, None
 
