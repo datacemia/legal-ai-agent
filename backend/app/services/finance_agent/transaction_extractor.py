@@ -218,9 +218,15 @@ def normalize_arabic_ocr_lines(text: str) -> str:
         m = amount_line_re.search(line)
 
         if m:
-            amount = re.findall(MONEY_NUMBER_PATTERN, line)[0]
-            date = m.group(1)
-            rebuilt.append(f"{date} Arabic OCR transaction {amount}")
+            amounts = re.findall(MONEY_NUMBER_PATTERN, line)
+
+            if amounts:
+                amount = amounts[0]
+                date = m.group(1)
+                rebuilt.append(
+                    f"{date} arabic ocr transaction card payment {amount}"
+                )
+
             continue
 
         rebuilt.append(line)
@@ -785,6 +791,7 @@ def extract_tabular_bank_amount(
             "uber",
             "transport",
             "rent",
+            "arabic ocr transaction",
         ]
     ):
         amount = pick_bank_amount(numbers, line)
