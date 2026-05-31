@@ -118,6 +118,23 @@ INTERNAL_TRANSFER_KEYWORDS = [
 ]
 
 
+TRANSACTION_SIGNALS = [
+    "virement",
+    "virement recu",
+    "virement reçu",
+    "prelevement",
+    "prélèvement",
+    "paiement",
+    "paiement carte",
+    "carte",
+    "retrait",
+    "frais",
+    "commission",
+    "remboursement",
+    "retour carte",
+]
+
+
 MONTH_ALIASES = {
     "jan": "01",
     "january": "01",
@@ -447,7 +464,14 @@ def has_transaction_signal(
         )
     )
 
-    return date_found and amount_found
+    signal_found = any(
+        keyword in lower
+        for keyword in TRANSACTION_SIGNALS
+    )
+
+    return date_found and amount_found and (
+        signal_found or amount_found
+    )
 
 
 def detect_type(line: str, amount: float) -> str:
