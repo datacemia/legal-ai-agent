@@ -69,18 +69,18 @@ INCOME_KEYWORDS += [
 ]
 
 BALANCE_KEYWORDS = [
-    "opening balance",
-    "closing balance",
-    "ancien solde",
-    "nouveau solde",
-    "total",
-    "report",
-
-    # document metadata (not transactions)
     "statement period",
     "statement date",
-    "generated test data",
+    "account holder",
+    "account number",
     "currency",
+    "generated test data",
+    "opening balance",
+    "closing balance",
+    "balance",
+    "solde",
+    "total",
+    "report",
 ]
 
 
@@ -297,7 +297,14 @@ def has_transaction_signal(
 ) -> bool:
     lower = line.lower()
 
-    if any(keyword in lower for keyword in BALANCE_KEYWORDS):
+    metadata_check = (
+        lower
+        .replace("5", "s")
+        .replace("0", "o")
+        .replace("1", "l")
+    )
+
+    if any(keyword in metadata_check for keyword in BALANCE_KEYWORDS):
         return False
 
     date_found = extract_date(
