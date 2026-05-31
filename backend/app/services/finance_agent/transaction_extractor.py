@@ -868,6 +868,35 @@ def clean_db_text(value: str) -> str:
 
     return value.strip()
 
+
+def detect_currency(text: str) -> str:
+    normalized = normalize_arabic_digits(text).upper()
+
+    patterns = [
+        ("USD", [r"\bUSD\b", r"\$", "دولار"]),
+        ("EUR", [r"\bEUR\b", "€", "يورو"]),
+        ("MAD", [r"\bMAD\b", r"\bDH\b", r"\bDHS\b", "درهم", "درهم مغربي"]),
+        ("JOD", [r"\bJOD\b", "دينار أردني", "دينار"]),
+        ("AED", [r"\bAED\b", "درهم إماراتي"]),
+        ("SAR", [r"\bSAR\b", "ريال سعودي"]),
+        ("QAR", [r"\bQAR\b", "ريال قطري"]),
+        ("KWD", [r"\bKWD\b", "دينار كويتي"]),
+        ("BHD", [r"\bBHD\b", "دينار بحريني"]),
+        ("OMR", [r"\bOMR\b", "ريال عماني"]),
+    ]
+
+    scores = Counter()
+
+    for code, pats in patterns:
+        for pat in pats:
+            if re.search(pat, normalized, flags=re.IGNORECASE):
+                scores[code] += 1
+
+    if scores:
+        return scores.most_common(1)[0][0]
+
+    return "unknown"
+
 def find_arabic_ocr_dates(text: str):
     text = normalize_arabic_digits(text)
 
@@ -918,6 +947,9 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
     normalized = normalized.replace("\u00a0", " ").replace("\u202f", " ")
     normalized = normalized.replace("،", ",")
     normalized = "\n".join(" ".join(l.split()) for l in normalized.splitlines())
+
+    currency = detect_currency(text)
+    print("CURRENCY_DETECTED:", currency)
 
     print("=== AR DEBUG START ===")
     print("TEXT_LENGTH:", len(normalized))
@@ -1051,6 +1083,7 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
             "description": clean_db_text(row["text"][:300]),
             "amount": tx_amount if tx_type == "income" else -abs(tx_amount),
             "type": tx_type,
+            "currency": currency,
         })
 
     print("ROWS_BUILT:", rows)
