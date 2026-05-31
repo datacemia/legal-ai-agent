@@ -137,10 +137,15 @@ def normalize_ocr_numeric_text(value: str) -> str:
     })
 
     def fix_token(match):
-        return match.group(0).translate(translation)
+        token = match.group(0)
+
+        if not re.search(r"\d|[+\-.,/]", token):
+            return token
+
+        return token.translate(translation)
 
     return re.sub(
-        r"(?=.*\d)[A-Za-z0-9+\-.,/]+",
+        r"[A-Za-z0-9+\-.,/]+",
         fix_token,
         value,
     )
@@ -675,6 +680,9 @@ def extract_transactions(text: str) -> list[dict]:
 
         if amount is None:
             fallback_amount = extract_first_amount_after_date(clean_line)
+
+            print("AMOUNT NONE:", clean_line)
+            print("FALLBACK:", fallback_amount)
 
             if fallback_amount is None:
                 continue
