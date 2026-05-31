@@ -947,6 +947,33 @@ def find_arabic_ocr_dates(text: str):
                 "end": m.end(),
             })
 
+    # OCR arabe bruité: D.M.226 => D.M.2026
+    for m in re.finditer(
+        r"(?<!\d)([0-3]?\d)[./-]([01]?\d)[./-](2\d{2})(?!\d)",
+        text,
+    ):
+        day, month, year = m.groups()
+
+        # 226 => 2026
+        year = "20" + year[-2:]
+
+        try:
+            parsed = datetime(
+                int(year),
+                int(month),
+                int(day),
+            )
+        except Exception:
+            continue
+
+        if is_reasonable_year(parsed.year):
+            found.append({
+                "clean": f"{year}{int(month):02d}{int(day):02d}",
+                "date": parsed.date().isoformat(),
+                "start": m.start(),
+                "end": m.end(),
+            })
+
     # 3) compact YYYYMMDD ligne par ligne
     # garde ancien OCR arabe sans scanner IBAN
     for line_start, line in iter_lines_with_offsets(text):
