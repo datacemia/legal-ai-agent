@@ -572,6 +572,9 @@ def extract_first_amount_after_date(line: str) -> float | None:
     if not numbers:
         return None
 
+    if len(numbers) >= 3:
+        return parse_amount(numbers[-2])
+
     return parse_amount(numbers[-1])
 
 
