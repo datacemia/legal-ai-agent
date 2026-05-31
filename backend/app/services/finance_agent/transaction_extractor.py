@@ -518,6 +518,8 @@ def extract_tabular_bank_amount(
         flags=re.IGNORECASE,
     )
 
+    print("WITHOUT_DATE:", without_date)
+
     numbers = re.findall(
         r"\d[\d,]*(?:[.,]\d{1,2})?",
         without_date,
@@ -590,6 +592,8 @@ def extract_first_amount_after_date(line: str) -> float | None:
         line,
         count=1,
     )
+
+    print("FALLBACK_TEXT_AFTER_ISO:", text)
 
     numbers = re.findall(
         r"\d[\d,]*(?:[.,]\d{1,2})?",
