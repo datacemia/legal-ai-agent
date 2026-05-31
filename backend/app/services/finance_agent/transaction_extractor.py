@@ -503,6 +503,12 @@ def extract_transaction_amount(line: str) -> float | None:
         flags=re.IGNORECASE,
     )
 
+    money_matches = [
+        value
+        for value in money_matches
+        if re.search(r"[.,]\d{2}", value)
+    ]
+
     if not money_matches:
         return None
 
