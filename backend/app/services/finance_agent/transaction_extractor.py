@@ -75,8 +75,12 @@ BALANCE_KEYWORDS = [
     "nouveau solde",
     "total",
     "report",
+
+    # document metadata (not transactions)
     "statement period",
     "statement date",
+    "generated test data",
+    "currency",
 ]
 
 
@@ -314,11 +318,24 @@ def has_transaction_signal(
 def detect_type(line: str, amount: float) -> str:
     lower = line.lower()
 
-    if any(keyword in lower for keyword in INCOME_KEYWORDS):
-        return "income"
-
+    # outgoing payments have priority
     if any(keyword in lower for keyword in EXPENSE_KEYWORDS):
         return "expense"
+
+    # common outgoing transfers
+    if any(
+        keyword in lower
+        for keyword in [
+            "loyer",
+            "rent",
+            "mortgage",
+            "loan payment",
+        ]
+    ):
+        return "expense"
+
+    if any(keyword in lower for keyword in INCOME_KEYWORDS):
+        return "income"
 
     if amount < 0:
         return "expense"
