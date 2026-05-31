@@ -545,8 +545,11 @@ def extract_tabular_bank_amount(
         keyword in description
         for keyword in [
             "fx conversion",
+            "fx exchange",
             "currency exchange",
+            "currency conversion",
             "wallet credit",
+            "wallet",
             "internal transfer",
         ]
     ):
