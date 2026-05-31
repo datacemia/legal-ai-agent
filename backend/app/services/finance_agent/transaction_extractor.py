@@ -719,7 +719,7 @@ def extract_transactions(text: str) -> list[dict]:
                 combined += " " + raw_lines[j]
 
                 if re.search(
-                    rf"\b{UNSIGNED_AMOUNT_PATTERN}\b",
+                    MONEY_NUMBER_PATTERN,
                     raw_lines[j],
                 ):
                     break
@@ -740,7 +740,7 @@ def extract_transactions(text: str) -> list[dict]:
             while j < len(raw_lines) and j <= i + 3:
                 combined += " " + raw_lines[j]
 
-                if re.search(AMOUNT_PATTERN, raw_lines[j]):
+                if re.search(MONEY_NUMBER_PATTERN, raw_lines[j]):
                     break
 
                 j += 1
