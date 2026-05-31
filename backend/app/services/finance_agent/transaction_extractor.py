@@ -506,7 +506,7 @@ def extract_transactions(text: str) -> list[dict]:
 
         current_is_date_only = (
             extract_date(current, default_year=default_year)
-            and len(current.split()) == 1
+            and not re.search(AMOUNT_PATTERN, current)
         )
 
         if current_is_date_only:
