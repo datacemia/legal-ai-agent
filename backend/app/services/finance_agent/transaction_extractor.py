@@ -29,6 +29,10 @@ EXPENSE_KEYWORDS = [
     "subscription",
     "membership",
     "transfer sent",
+    "facture",
+    "invoice",
+    "abonnement",
+    "premium",
 ]
 
 INCOME_KEYWORDS = [
@@ -570,19 +574,6 @@ def extract_transactions(text: str) -> list[dict]:
         date = extract_date(
             clean_line,
             default_year=default_year,
-        )
-
-        print(
-            "TX:",
-            clean_line,
-        )
-        print(
-            "AMOUNT:",
-            amount,
-        )
-        print(
-            "TYPE:",
-            transaction_type,
         )
 
         transactions.append(
