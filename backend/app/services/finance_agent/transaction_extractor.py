@@ -576,7 +576,6 @@ def extract_first_amount_after_date(line: str) -> float | None:
 
 
 def extract_transactions(text: str) -> list[dict]:
-    print("TRANSACTION_EXTRACTOR_VERSION=merchant-debug-v1")
 
     text = normalize_ocr_numeric_text(text)
 
@@ -624,14 +623,6 @@ def extract_transactions(text: str) -> list[dict]:
         i += 1
 
     for clean_line in lines:
-        print("LINE:", clean_line)
-        print(
-            "HAS_SIGNAL:",
-            has_transaction_signal(
-                clean_line,
-                default_year=default_year,
-            ),
-        )
 
         normalized_line = clean_line.lower()
 
@@ -668,9 +659,6 @@ def extract_transactions(text: str) -> list[dict]:
         if amount is None:
             fallback_amount = extract_first_amount_after_date(clean_line)
 
-            print("AMOUNT NONE:", clean_line)
-            print("FALLBACK:", fallback_amount)
-
             if fallback_amount is None:
                 continue
 
@@ -688,10 +676,6 @@ def extract_transactions(text: str) -> list[dict]:
             clean_line,
             default_year=default_year,
         )
-
-        print("TX:", clean_line)
-        print("AMOUNT:", amount)
-        print("TYPE:", transaction_type)
 
         transactions.append(
             {
