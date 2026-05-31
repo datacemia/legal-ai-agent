@@ -768,8 +768,6 @@ def extract_first_amount_after_date(line: str) -> float | None:
 
 def extract_transactions(text: str) -> list[dict]:
 
-    print("TRANSACTION_EXTRACTOR_VERSION=bp-fr-merge-v2")
-
     text = normalize_ocr_numeric_text(text)
 
     transactions = []
