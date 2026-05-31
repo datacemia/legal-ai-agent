@@ -183,7 +183,22 @@ def parse_amount(value: str) -> float:
     return float(value)
 
 
-def pick_bank_amount(numbers: list[str]) -> float:
+def pick_bank_amount(
+    numbers: list[str],
+    line: str,
+    account_currency: str | None = None,
+) -> float:
+    text = line.upper()
+
+    if account_currency:
+        matches = re.findall(
+            rf"{account_currency}\s*([\d,]+(?:[.,]\d{{1,2}})?)",
+            text,
+        )
+
+        if matches:
+            return parse_amount(matches[-1])
+
     if len(numbers) >= 2:
         return parse_amount(numbers[-2])
 
@@ -584,7 +599,7 @@ def extract_tabular_bank_amount(
             "received",
         ]
     ):
-        amount = pick_bank_amount(numbers)
+        amount = pick_bank_amount(numbers, line)
 
         return amount, "income"
 
@@ -608,7 +623,7 @@ def extract_tabular_bank_amount(
             "fuel",
         ]
     ):
-        amount = pick_bank_amount(numbers)
+        amount = pick_bank_amount(numbers, line)
 
         return -abs(amount), "expense"
 
