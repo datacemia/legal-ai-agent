@@ -510,7 +510,7 @@ def extract_tabular_bank_amount(
     )
 
     numbers = re.findall(
-        rf"\b{UNSIGNED_AMOUNT_PATTERN}\b",
+        r"\d[\d,]*(?:[.,]\d{1,2})?",
         without_date,
     )
 
@@ -584,7 +584,7 @@ def extract_first_amount_after_date(line: str) -> float | None:
     )
 
     numbers = re.findall(
-        rf"\b{UNSIGNED_AMOUNT_PATTERN}\b",
+        r"\d[\d,]*(?:[.,]\d{1,2})?",
         text,
     )
 
