@@ -96,6 +96,17 @@ BALANCE_KEYWORDS = [
 ]
 
 
+INTERNAL_TRANSFER_KEYWORDS = [
+    "fx exchange",
+    "currency exchange",
+    "currency conversion",
+    "wallet credit",
+    "wallet transfer",
+    "internal transfer",
+    "own account transfer",
+]
+
+
 MONTH_ALIASES = {
     "jan": "01",
     "january": "01",
@@ -679,6 +690,9 @@ def extract_transactions(text: str) -> list[dict]:
     for clean_line in lines:
 
         normalized_line = clean_line.lower()
+
+        if any(k in normalized_line for k in INTERNAL_TRANSFER_KEYWORDS):
+            continue
 
         if any(
             keyword in normalized_line
