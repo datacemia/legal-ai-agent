@@ -763,9 +763,6 @@ def extract_transactions(text: str) -> list[dict]:
         lines.append(current)
         i += 1
 
-    for l in lines:
-        print("MERGED_LINE:", l)
-
     for clean_line in lines:
 
         normalized_line = clean_line.lower()
