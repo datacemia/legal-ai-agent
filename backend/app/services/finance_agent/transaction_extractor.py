@@ -855,124 +855,86 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         return []
 
     normalized = normalize_arabic_digits(text)
-    normalized = normalized.replace("\u00a0", " ")
-    normalized = normalized.replace("\u202f", " ")
+    normalized = normalized.replace("\u00a0", " ").replace("\u202f", " ")
     normalized = normalized.replace("،", ",")
+    normalized = "\n".join(" ".join(l.split()) for l in normalized.splitlines())
 
-    # garde les lignes mais nettoie
-    lines = [
-        " ".join(x.split())
-        for x in normalized.splitlines()
-        if " ".join(x.split())
-    ]
+    amount_pattern = r"\d{1,3}(?:[ ,]\d{3})*(?:[.,]\d{2})"
+    date_pattern = r"\b20\d{6}\b"
 
-    blocks = []
-    current = ""
-
-    # reconstruction OCR arabe:
-    # une transaction commence par une date
-    for line in lines:
-        if re.search(r"\b20\d{6}\b", line):
-            if current:
-                blocks.append(current)
-            current = line
-        else:
-            current += " " + line
-
-    if current:
-        blocks.append(current)
-
-
-    amount_pattern = (
-        r"\d{1,3}(?:[ ,]\d{3})*(?:[.,]\d{2})"
-    )
-
+    dates = list(re.finditer(date_pattern, normalized))
     rows = []
 
-    for block in blocks:
-        date_match = re.search(r"\b20\d{6}\b", block)
-        if not date_match:
+    for i, dm in enumerate(dates):
+        date_raw = dm.group(0)
+
+        # ignore période/header like 20260401 20260430
+        around = normalized[max(0, dm.start() - 120): min(len(normalized), dm.end() + 120)]
+        low = around.lower()
+        if any(k in low for k in ["الحساب", "الفترة", "ةرتفلا", "account", "period"]):
             continue
 
-        amounts = re.findall(amount_pattern, block)
+        prev_pos = dates[i - 1].end() if i > 0 else 0
+        next_pos = dates[i + 1].start() if i + 1 < len(dates) else len(normalized)
+
+        segment = normalized[max(prev_pos, dm.start() - 120): min(next_pos, dm.end() + 120)]
+
+        amounts_raw = re.findall(amount_pattern, segment)
+        amounts = []
+
+        for a in amounts_raw:
+            try:
+                v = parse_amount(a)
+            except Exception:
+                continue
+
+            if v not in amounts:
+                amounts.append(v)
 
         if len(amounts) < 2:
             continue
 
-        date_raw = date_match.group()
-
-        # éliminer les doublons OCR
-        clean_amounts = []
-        for a in amounts:
-            value = parse_amount(a)
-            if value not in clean_amounts:
-                clean_amounts.append(value)
-
-        if len(clean_amounts) < 2:
-            continue
-
-        tx_amount = clean_amounts[0]
-        balance = clean_amounts[-1]
+        tx_amount = amounts[-2]
+        balance = amounts[-1]
 
         rows.append({
             "date": f"{date_raw[:4]}-{date_raw[4:6]}-{date_raw[6:8]}",
             "amount": tx_amount,
             "balance": balance,
-            "text": block,
+            "text": segment,
         })
-
 
     rows.sort(key=lambda x: x["date"])
 
     transactions = []
 
     for i, row in enumerate(rows):
-
         tx_type = "income"
 
         if i > 0:
-            previous_balance = rows[i-1]["balance"]
-
-            diff = round(
-                row["balance"] - previous_balance,
-                2
-            )
+            previous_balance = rows[i - 1]["balance"]
+            diff = round(row["balance"] - previous_balance, 2)
 
             if abs(diff + row["amount"]) < 0.1:
                 tx_type = "expense"
-
             elif abs(diff - row["amount"]) < 0.1:
                 tx_type = "income"
-
             else:
                 lower = row["text"].lower()
-
                 if any(k in lower for k in EXPENSE_KEYWORDS):
                     tx_type = "expense"
-
                 elif any(k in lower for k in INCOME_KEYWORDS):
                     tx_type = "income"
 
-
-        amount = (
-            row["amount"]
-            if tx_type == "income"
-            else -abs(row["amount"])
-        )
-
-
         transactions.append({
             "date": row["date"],
-            "description": row["text"],
-            "amount": amount,
+            "description": row["text"][:300],
+            "amount": row["amount"] if tx_type == "income" else -abs(row["amount"]),
             "type": tx_type,
         })
 
-
     print("ARABIC_BYPASS_COUNT:", len(transactions))
-
     return transactions
-
 
 def extract_transactions(text: str) -> list[dict]:
     arabic_transactions = extract_arabic_ocr_transactions(text)
