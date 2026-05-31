@@ -841,37 +841,47 @@ def extract_first_amount_after_date(line: str) -> float | None:
     return parse_amount(numbers[-1])
 
 
+def normalize_arabic_digits(value: str) -> str:
+    return value.translate(
+        str.maketrans(
+            "٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹",
+            "01234567890123456789",
+        )
+    )
+
+
 def extract_arabic_ocr_transactions(text: str) -> list[dict]:
     if not is_arabic_text(text):
         return []
 
     rows = []
+    amount_re = re.compile(r"\d+(?:[ \u00a0\u202f]\d{3})*(?:[.,،]\d{2})")
 
     for raw_line in text.splitlines():
+        line = normalize_arabic_digits(raw_line)
         line = (
-            " ".join(raw_line.split())
+            line
             .replace("\u00a0", " ")
             .replace("\u202f", " ")
             .replace("،", ",")
         )
+        line = " ".join(line.split())
 
-        date_match = re.search(r"(20\d{6})", line)
+        date_match = re.search(r"20\d{6}", line)
         if not date_match:
             continue
 
-        amounts = re.findall(MONEY_NUMBER_PATTERN, line)
+        left = line[:date_match.start()]
+        amounts = amount_re.findall(left)
 
         if len(amounts) < 2:
             continue
 
-        amount = parse_amount(amounts[0])
-        balance = parse_amount(amounts[1])
-        raw_date = date_match.group(1)
-
+        raw_date = date_match.group(0)
         rows.append({
             "date": f"{raw_date[:4]}-{raw_date[4:6]}-{raw_date[6:8]}",
-            "amount": amount,
-            "balance": balance,
+            "amount": parse_amount(amounts[0]),
+            "balance": parse_amount(amounts[1]),
         })
 
     rows.sort(key=lambda x: x["date"])
@@ -880,17 +890,12 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
     previous_balance = None
 
     for row in rows:
-        tx_type = "expense"
+        tx_type = "income" if previous_balance is None else "expense"
 
-        if previous_balance is None:
-            tx_type = "income"
-        else:
+        if previous_balance is not None:
             delta = round(row["balance"] - previous_balance, 2)
-
             if abs(delta - row["amount"]) < 0.05:
                 tx_type = "income"
-            elif abs(delta + row["amount"]) < 0.05:
-                tx_type = "expense"
 
         transactions.append({
             "date": row["date"],
