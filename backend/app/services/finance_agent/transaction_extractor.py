@@ -718,10 +718,7 @@ def extract_transactions(text: str) -> list[dict]:
             while j < len(raw_lines) and j <= i + 3:
                 combined += " " + raw_lines[j]
 
-                if re.search(
-                    MONEY_NUMBER_PATTERN,
-                    raw_lines[j],
-                ):
+                if len(re.findall(MONEY_NUMBER_PATTERN, combined)) >= 2:
                     break
 
                 j += 1
@@ -740,7 +737,7 @@ def extract_transactions(text: str) -> list[dict]:
             while j < len(raw_lines) and j <= i + 3:
                 combined += " " + raw_lines[j]
 
-                if re.search(MONEY_NUMBER_PATTERN, raw_lines[j]):
+                if len(re.findall(MONEY_NUMBER_PATTERN, combined)) >= 2:
                     break
 
                 j += 1
