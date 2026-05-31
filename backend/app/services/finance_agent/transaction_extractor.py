@@ -526,7 +526,6 @@ def extract_tabular_bank_amount(
         flags=re.IGNORECASE,
     )
 
-    print("WITHOUT_DATE:", without_date)
 
     numbers = re.findall(
         r"\d[\d,]*(?:[.,]\d{1,2})?",
@@ -612,7 +611,6 @@ def extract_first_amount_after_date(line: str) -> float | None:
         count=1,
     )
 
-    print("FALLBACK_TEXT_AFTER_ISO:", text)
 
     numbers = re.findall(
         r"\d[\d,]*(?:[.,]\d{1,2})?",
@@ -704,8 +702,6 @@ def extract_transactions(text: str) -> list[dict]:
 
         tabular_amount, tabular_type = extract_tabular_bank_amount(clean_line)
 
-        print("TX:", clean_line)
-        print("TABULAR:", tabular_amount, tabular_type)
 
         if tabular_amount is not None:
             amount = tabular_amount
@@ -722,8 +718,6 @@ def extract_transactions(text: str) -> list[dict]:
 
         transaction_type = tabular_type or detect_type(clean_line, amount)
 
-        print("AMOUNT:", amount)
-        print("TYPE:", transaction_type)
 
         if transaction_type == "expense" and amount > 0:
             amount = -abs(amount)
