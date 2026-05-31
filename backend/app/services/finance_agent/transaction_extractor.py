@@ -459,6 +459,18 @@ def extract_tabular_bank_amount(
         count=1,
     )
 
+    without_date = re.sub(
+        r"\b\d{1,2}\s+"
+        r"(jan|january|feb|february|mar|march|apr|april|may|"
+        r"jun|june|jul|july|aug|august|sep|sept|september|"
+        r"oct|october|nov|november|dec|december)"
+        r"\s+\d{2,4}\b",
+        "",
+        without_date,
+        count=1,
+        flags=re.IGNORECASE,
+    )
+
     numbers = re.findall(
         rf"\b{UNSIGNED_AMOUNT_PATTERN}\b",
         without_date,
@@ -499,6 +511,8 @@ def extract_tabular_bank_amount(
 
 
 def extract_transactions(text: str) -> list[dict]:
+    print("TRANSACTION_EXTRACTOR_VERSION=merchant-debug-v1")
+
     text = normalize_ocr_numeric_text(text)
 
     transactions = []
