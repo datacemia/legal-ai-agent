@@ -624,22 +624,6 @@ def extract_tabular_bank_amount(
     if any(
         keyword in description
         for keyword in [
-            "salary",
-            "payroll",
-            "wage",
-            "transfer",
-            "credit",
-            "deposit",
-            "received",
-        ]
-    ):
-        amount = pick_bank_amount(numbers, line)
-
-        return amount, "income"
-
-    if any(
-        keyword in description
-        for keyword in [
             "atm",
             "visa",
             "card",
@@ -651,15 +635,44 @@ def extract_tabular_bank_amount(
             "purchase",
             "recurring",
             "fee",
+            "card payment",
+            "sepa direct debit",
+            "outgoing transfer",
+            "ticket",
+            "e-ticket",
             "restaurant",
             "supermarket",
             "pharmacy",
+            "pharmacie",
             "fuel",
+            "uber",
+            "transport",
+            "rent",
         ]
     ):
         amount = pick_bank_amount(numbers, line)
 
         return -abs(amount), "expense"
+
+    if any(
+        keyword in description
+        for keyword in [
+            "incoming transfer",
+            "transfer received",
+            "virement reçu",
+            "virement recu",
+            "salary",
+            "payroll",
+            "wage",
+            "deposit",
+            "received",
+            "freelance",
+            "client",
+        ]
+    ):
+        amount = pick_bank_amount(numbers, line)
+
+        return amount, "income"
 
     return None, None
 
