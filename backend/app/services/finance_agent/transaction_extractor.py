@@ -518,6 +518,8 @@ def extract_tabular_bank_amount(
         keyword in description
         for keyword in [
             "salary",
+            "payroll",
+            "wage",
             "transfer",
             "credit",
             "deposit",
@@ -533,9 +535,16 @@ def extract_tabular_bank_amount(
             "visa",
             "card",
             "debit",
+            "direct debit",
+            "standing order",
             "withdrawal",
             "payment",
+            "purchase",
             "fee",
+            "restaurant",
+            "supermarket",
+            "pharmacy",
+            "fuel",
         ]
     ):
         return -abs(parse_amount(numbers[0])), "expense"
