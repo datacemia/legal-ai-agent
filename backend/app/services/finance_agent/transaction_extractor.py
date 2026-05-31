@@ -97,13 +97,16 @@ BALANCE_KEYWORDS = [
 
 
 INTERNAL_TRANSFER_KEYWORDS = [
-    "fx exchange",
+    "fx",
+    "exchange",
     "currency exchange",
     "currency conversion",
-    "wallet credit",
-    "wallet transfer",
+    "conversion",
+    "wallet",
+    "between accounts",
+    "own account",
     "internal transfer",
-    "own account transfer",
+    "balance transfer",
 ]
 
 
