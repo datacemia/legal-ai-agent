@@ -565,11 +565,11 @@ def extract_tabular_bank_amount(
 
 def extract_first_amount_after_date(line: str) -> float | None:
     text = re.sub(
-        r"\b\d{1,2}\s+"
+        r"^\s*\d{1,2}\s+"
         r"(jan|january|feb|february|mar|march|apr|april|may|"
         r"jun|june|jul|july|aug|august|sep|sept|september|"
         r"oct|october|nov|november|dec|december)"
-        r"\s+\d{2,4}\b",
+        r"\s+\d{4}\s+",
         "",
         line,
         count=1,
