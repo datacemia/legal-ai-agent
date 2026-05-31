@@ -730,6 +730,25 @@ def extract_transactions(text: str) -> list[dict]:
             i = j + 1
             continue
 
+        if (
+            extract_date(current, default_year=default_year)
+            and not re.search(AMOUNT_PATTERN, current)
+        ):
+            combined = current
+            j = i + 1
+
+            while j < len(raw_lines) and j <= i + 3:
+                combined += " " + raw_lines[j]
+
+                if re.search(AMOUNT_PATTERN, raw_lines[j]):
+                    break
+
+                j += 1
+
+            lines.append(combined)
+            i = j + 1
+            continue
+
         lines.append(current)
         i += 1
 
