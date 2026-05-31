@@ -770,6 +770,8 @@ def extract_first_amount_after_date(line: str) -> float | None:
 
 def extract_transactions(text: str) -> list[dict]:
 
+    print("RAW_AR_TEXT_SAMPLE:", text[:1000])
+
     text = normalize_ocr_numeric_text(text)
 
     transactions = []
@@ -898,6 +900,14 @@ def extract_transactions(text: str) -> list[dict]:
         date = extract_date(
             clean_line,
             default_year=default_year,
+        )
+
+        print(
+            "AR_TX_FINAL:",
+            clean_line,
+            "=>",
+            amount,
+            transaction_type,
         )
 
         transactions.append(
