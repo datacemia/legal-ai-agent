@@ -591,7 +591,7 @@ def extract_first_amount_after_date(line: str) -> float | None:
     if not numbers:
         return None
 
-    return parse_amount(numbers[-2] if len(numbers) >= 2 else numbers[-1])
+    return parse_amount(numbers[-1])
 
 
 def extract_transactions(text: str) -> list[dict]:
