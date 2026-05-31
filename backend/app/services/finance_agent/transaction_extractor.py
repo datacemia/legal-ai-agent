@@ -761,14 +761,10 @@ def extract_transactions(text: str) -> list[dict]:
 
         if current_is_date_only:
             combined = current
-
             j = i + 1
 
-            while j < len(raw_lines) and j <= i + 3:
+            while j < len(raw_lines) and j <= i + 4:
                 combined += " " + raw_lines[j]
-
-                print("MERGE_TEST:", current, " + ", raw_lines[j])
-                print("HAS_MONEY_NEXT:", re.findall(MONEY_NUMBER_PATTERN, raw_lines[j]))
 
                 if re.search(MONEY_NUMBER_PATTERN, raw_lines[j]):
                     break
