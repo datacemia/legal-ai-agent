@@ -500,6 +500,13 @@ def extract_tabular_bank_amount(
     )
 
     without_date = re.sub(
+        r"\b\d{4}-\d{2}-\d{2}\b",
+        "",
+        without_date,
+        count=1,
+    )
+
+    without_date = re.sub(
         r"\b\d{1,2}\s+"
         r"(january|jan|february|feb|march|mar|april|apr|may|"
         r"june|jun|july|jul|august|aug|september|sept|sep|"
