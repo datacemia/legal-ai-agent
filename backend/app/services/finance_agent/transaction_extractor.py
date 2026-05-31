@@ -947,17 +947,27 @@ def find_arabic_ocr_dates(text: str):
                 "end": m.end(),
             })
 
-    # 3) compact YYYYMMDD, mais seulement ligne par ligne
-    # pour éviter les fausses dates depuis numéros de compte / IBAN
+    # 3) compact YYYYMMDD ligne par ligne
+    # garde ancien OCR arabe sans scanner IBAN
     for line_start, line in iter_lines_with_offsets(text):
-        if not re.search(r"\d{1,3}(?:[ ,]\d{3})*(?:[.,]\d{2})", line):
-            continue
 
         for m in re.finditer(
             r"(?<!\d)(20\d{2}[01]\d[0-3]\d)(?!\d)",
             line,
         ):
             raw = m.group(1)
+
+            # ignorer lignes metadata
+            if any(x in line for x in [
+                "الحساب",
+                "باسحلا",
+                "account",
+                "iban",
+                "الفترة",
+                "ةرتفلا",
+            ]):
+                continue
+
             try:
                 parsed = datetime(
                     int(raw[:4]),
