@@ -855,80 +855,122 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         return []
 
     normalized = normalize_arabic_digits(text)
-    normalized = normalized.replace("\u00a0", " ").replace("\u202f", " ")
+    normalized = normalized.replace("\u00a0", " ")
+    normalized = normalized.replace("\u202f", " ")
     normalized = normalized.replace("،", ",")
-    normalized = re.sub(r"[^\S\r\n]+", " ", normalized)
 
-    date_pattern = r"(?:20\d{6}|20\d{2}[-/]\d{2}[-/]\d{2}|\d{2}[-/]\d{2}[-/](?:20)?\d{2})"
-    amount_pattern = r"\d{1,3}(?:[ ,]\d{3})*(?:[.,]\d{2})"
+    # garde les lignes mais nettoie
+    lines = [
+        " ".join(x.split())
+        for x in normalized.splitlines()
+        if " ".join(x.split())
+    ]
+
+    blocks = []
+    current = ""
+
+    # reconstruction OCR arabe:
+    # une transaction commence par une date
+    for line in lines:
+        if re.search(r"\b20\d{6}\b", line):
+            if current:
+                blocks.append(current)
+            current = line
+        else:
+            current += " " + line
+
+    if current:
+        blocks.append(current)
+
+
+    amount_pattern = (
+        r"\d{1,3}(?:[ ,]\d{3})*(?:[.,]\d{2})"
+    )
 
     rows = []
 
-    for raw_line in normalized.splitlines():
-        line = " ".join(raw_line.split())
-        if not line:
-            continue
-
-        date_match = re.search(date_pattern, line)
+    for block in blocks:
+        date_match = re.search(r"\b20\d{6}\b", block)
         if not date_match:
             continue
 
-        amounts = re.findall(amount_pattern, line)
+        amounts = re.findall(amount_pattern, block)
+
         if len(amounts) < 2:
             continue
 
-        raw_date = date_match.group(0)
+        date_raw = date_match.group()
 
-        date = extract_date(raw_date)
-        if not date:
+        # éliminer les doublons OCR
+        clean_amounts = []
+        for a in amounts:
+            value = parse_amount(a)
+            if value not in clean_amounts:
+                clean_amounts.append(value)
+
+        if len(clean_amounts) < 2:
             continue
 
-        # Généralement dans les relevés : montant transaction + solde
-        tx_amount = parse_amount(amounts[-2])
-        balance = parse_amount(amounts[-1])
+        tx_amount = clean_amounts[0]
+        balance = clean_amounts[-1]
 
         rows.append({
-            "date": date,
+            "date": f"{date_raw[:4]}-{date_raw[4:6]}-{date_raw[6:8]}",
             "amount": tx_amount,
             "balance": balance,
-            "line": line,
+            "text": block,
         })
+
 
     rows.sort(key=lambda x: x["date"])
 
     transactions = []
-    previous_balance = None
 
-    for row in rows:
+    for i, row in enumerate(rows):
+
         tx_type = "income"
 
-        if previous_balance is not None:
-            delta = round(row["balance"] - previous_balance, 2)
+        if i > 0:
+            previous_balance = rows[i-1]["balance"]
 
-            if abs(delta - row["amount"]) < 0.05:
-                tx_type = "income"
-            elif abs(delta + row["amount"]) < 0.05:
+            diff = round(
+                row["balance"] - previous_balance,
+                2
+            )
+
+            if abs(diff + row["amount"]) < 0.1:
                 tx_type = "expense"
+
+            elif abs(diff - row["amount"]) < 0.1:
+                tx_type = "income"
+
             else:
-                # fallback mots-clés arabes
-                lower = row["line"].lower()
+                lower = row["text"].lower()
+
                 if any(k in lower for k in EXPENSE_KEYWORDS):
                     tx_type = "expense"
+
                 elif any(k in lower for k in INCOME_KEYWORDS):
                     tx_type = "income"
 
-        signed_amount = row["amount"] if tx_type == "income" else -abs(row["amount"])
+
+        amount = (
+            row["amount"]
+            if tx_type == "income"
+            else -abs(row["amount"])
+        )
+
 
         transactions.append({
             "date": row["date"],
-            "description": row["line"],
-            "amount": signed_amount,
+            "description": row["text"],
+            "amount": amount,
             "type": tx_type,
         })
 
-        previous_balance = row["balance"]
 
     print("ARABIC_BYPASS_COUNT:", len(transactions))
+
     return transactions
 
 
