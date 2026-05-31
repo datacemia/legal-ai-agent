@@ -592,6 +592,15 @@ def extract_transactions(text: str) -> list[dict]:
         i += 1
 
     for clean_line in lines:
+        print("LINE:", clean_line)
+        print(
+            "HAS_SIGNAL:",
+            has_transaction_signal(
+                clean_line,
+                default_year=default_year,
+            ),
+        )
+
         normalized_line = clean_line.lower()
 
         if any(
