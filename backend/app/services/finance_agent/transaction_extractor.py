@@ -858,6 +858,12 @@ def extract_transactions(text: str) -> list[dict]:
         ):
             continue
 
+        if re.fullmatch(
+            r"\d{2}[./-]\d{2}[./-]\d{4}\s*[-–]\s*\d{2}[./-]\d{2}[./-]\d{4}",
+            clean_line,
+        ):
+            continue
+
         if not has_transaction_signal(
             clean_line,
             default_year=default_year,
@@ -892,14 +898,6 @@ def extract_transactions(text: str) -> list[dict]:
         date = extract_date(
             clean_line,
             default_year=default_year,
-        )
-
-        print(
-            "TX_FINAL:",
-            clean_line,
-            "=>",
-            amount,
-            transaction_type,
         )
 
         transactions.append(
