@@ -781,7 +781,7 @@ def extract_transactions(text: str) -> list[dict]:
 
         if (
             extract_date(current, default_year=default_year)
-            and not re.search(AMOUNT_PATTERN, current)
+            and not re.search(MONEY_NUMBER_PATTERN, current)
         ):
             combined = current
             j = i + 1
