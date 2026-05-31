@@ -197,6 +197,15 @@ def pick_bank_amount(
 ) -> float:
     text = line.upper()
 
+    currency_amounts = re.findall(
+        r"\b(?:USD|EUR|GBP|AED|MAD|CAD)\s*([+-]?\d[\d,]*(?:[.,]\d{1,2})?)",
+        text,
+        flags=re.IGNORECASE,
+    )
+
+    if currency_amounts:
+        return parse_amount(currency_amounts[-1])
+
     if account_currency:
         matches = re.findall(
             rf"{account_currency}\s*([\d,]+(?:[.,]\d{{1,2}})?)",
@@ -205,6 +214,17 @@ def pick_bank_amount(
 
         if matches:
             return parse_amount(matches[-1])
+
+    money_numbers = re.findall(
+        MONEY_NUMBER_PATTERN,
+        text,
+    )
+
+    if money_numbers:
+        if len(money_numbers) >= 2:
+            return parse_amount(money_numbers[-2])
+
+        return parse_amount(money_numbers[-1])
 
     if len(numbers) >= 2:
         return parse_amount(numbers[-2])
