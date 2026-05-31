@@ -537,7 +537,7 @@ def has_transaction_signal(
 
     amount_found = bool(
         re.search(
-            AMOUNT_PATTERN,
+            MONEY_NUMBER_PATTERN,
             line,
         )
     )
