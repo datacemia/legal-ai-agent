@@ -955,7 +955,7 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         if len(amounts) < 2:
             continue
 
-        amounts.sort(key=lambda x: x[0])
+        # garder l'ordre OCR réel de la ligne
         nearest_values = [x[1] for x in amounts[:4]]
 
         clean = []
@@ -966,13 +966,9 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         if len(clean) < 2:
             continue
 
-        tx_amount = clean[0]
-        balance = clean[1]
-
         rows.append({
             "date": dm["date"],
-            "amount": tx_amount,
-            "balance": balance,
+            "numbers": clean,
             "text": window,
         })
 
@@ -985,27 +981,57 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
     transactions = []
 
     for i, row in enumerate(rows):
-        tx_type = "income"
+        numbers = row.get("numbers", [])
+
+        if len(numbers) < 2:
+            continue
+
+        best = None
 
         if i > 0:
-            previous_balance = rows[i - 1]["balance"]
-            diff = round(row["balance"] - previous_balance, 2)
+            prev_balance = rows[i - 1].get("resolved_balance")
 
-            if abs(diff + row["amount"]) < 0.1:
+            if prev_balance is not None:
+                for tx in numbers:
+                    for bal in numbers:
+                        if tx == bal:
+                            continue
+
+                        diff = round(bal - prev_balance, 2)
+
+                        if abs(diff - tx) < 0.1:
+                            best = (tx, bal, "income")
+                        elif abs(diff + tx) < 0.1:
+                            best = (tx, bal, "expense")
+
+                        if best:
+                            break
+                    if best:
+                        break
+
+        if not best:
+            # fallback général: plus grand nombre = solde probable, autre = transaction
+            ordered = sorted(numbers)
+            tx = ordered[0]
+            bal = ordered[-1]
+
+            lower = row["text"].lower()
+            tx_type = "income"
+
+            if any(k in lower for k in EXPENSE_KEYWORDS):
                 tx_type = "expense"
-            elif abs(diff - row["amount"]) < 0.1:
+            elif any(k in lower for k in INCOME_KEYWORDS):
                 tx_type = "income"
-            else:
-                lower = row["text"].lower()
-                if any(k in lower for k in EXPENSE_KEYWORDS):
-                    tx_type = "expense"
-                elif any(k in lower for k in INCOME_KEYWORDS):
-                    tx_type = "income"
+
+            best = (tx, bal, tx_type)
+
+        tx_amount, balance, tx_type = best
+        row["resolved_balance"] = balance
 
         transactions.append({
             "date": row["date"],
             "description": row["text"][:300],
-            "amount": row["amount"] if tx_type == "income" else -abs(row["amount"]),
+            "amount": tx_amount if tx_type == "income" else -abs(tx_amount),
             "type": tx_type,
         })
 
