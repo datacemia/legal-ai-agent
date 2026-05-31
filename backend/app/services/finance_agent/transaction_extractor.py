@@ -1010,28 +1010,32 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
     rows = []
 
-    for i, dm in enumerate(dates):
+    for dm in dates:
         print("---- DATE LOOP ----")
         print("DATE:", dm["clean"])
 
         date_raw = dm["clean"]
 
-        prev_date_end = dates[i - 1]["end"] if i > 0 else 0
-        next_date_start = dates[i + 1]["start"] if i + 1 < len(dates) else len(normalized)
+        line_start = normalized.rfind("\n", 0, dm["start"]) + 1
+        line_end = normalized.find("\n", dm["end"])
 
-        # segment autour de cette date, même si OCR met plusieurs transactions sur une ligne
-        if dm["start"] < next_date_start:
-            window = normalized[dm["start"]:next_date_start]
-        else:
-            window = normalized[prev_date_end:dm["end"]]
+        if line_end == -1:
+            line_end = len(normalized)
 
-        # fallback: ligne locale si segment vide
-        if not window.strip():
-            line_start = normalized.rfind("\n", 0, dm["start"]) + 1
-            line_end = normalized.find("\n", dm["end"])
-            if line_end == -1:
-                line_end = len(normalized)
-            window = normalized[line_start:line_end]
+        window = normalized[line_start:line_end]
+
+        # fallback OCR: si la ligne date seule ou sans montants,
+        # fusionner avec la ligne suivante seulement
+        if len(re.findall(amount_pattern, window)) < 2:
+            next_line_end = normalized.find("\n", line_end + 1)
+
+            if next_line_end == -1:
+                next_line_end = len(normalized)
+
+            merged_window = normalized[line_start:next_line_end]
+
+            if len(re.findall(amount_pattern, merged_window)) >= 2:
+                window = merged_window
 
         # ignore lignes header/période
         if any(x in window for x in [
@@ -1043,11 +1047,11 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
             continue
 
         # enlever la date de la ligne avant extraction montants
-        window_pos = normalized.find(window)
-        local_start = max(0, dm["start"] - window_pos)
-        local_end = max(local_start, dm["end"] - window_pos)
-
-        amount_window = window[:local_start] + window[local_end:]
+        amount_window = (
+            window[:dm["start"] - line_start]
+            +
+            window[dm["end"] - line_start:]
+        )
 
         print("WINDOW:")
         print(window)
