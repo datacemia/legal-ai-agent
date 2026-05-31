@@ -221,9 +221,9 @@ def extract_date(
 
     text_month_match = re.search(
         r"\b(\d{1,2})\s+"
-        r"(jan|january|feb|february|mar|march|apr|april|may|"
-        r"jun|june|jul|july|aug|august|sep|sept|september|"
-        r"oct|october|nov|november|dec|december)"
+        r"(january|jan|february|feb|march|mar|april|apr|may|"
+        r"june|jun|july|jul|august|aug|september|sept|sep|"
+        r"october|oct|november|nov|december|dec)"
         r"\s+(\d{2,4})\b",
         line,
         flags=re.IGNORECASE,
@@ -314,9 +314,9 @@ def is_date_only_line(
 
     remaining = re.sub(
         r"\b\d{1,2}\s+"
-        r"(jan|january|feb|february|mar|march|apr|april|may|"
-        r"jun|june|jul|july|aug|august|sep|sept|september|"
-        r"oct|october|nov|november|dec|december)"
+        r"(january|jan|february|feb|march|mar|april|apr|may|"
+        r"june|jun|july|jul|august|aug|september|sept|sep|"
+        r"october|oct|november|nov|december|dec)"
         r"\s+\d{2,4}\b",
         "",
         line,
@@ -414,9 +414,9 @@ def extract_transaction_amount(line: str) -> float | None:
 
     transaction_part = re.sub(
         r"\b\d{1,2}\s+"
-        r"(jan|january|feb|february|mar|march|apr|april|may|"
-        r"jun|june|jul|july|aug|august|sep|sept|september|"
-        r"oct|october|nov|november|dec|december)"
+        r"(january|jan|february|feb|march|mar|april|apr|may|"
+        r"june|jun|july|jul|august|aug|september|sept|sep|"
+        r"october|oct|november|nov|december|dec)"
         r"\s+\d{2,4}\b",
         "",
         transaction_part,
@@ -499,9 +499,9 @@ def extract_tabular_bank_amount(
 
     without_date = re.sub(
         r"\b\d{1,2}\s+"
-        r"(jan|january|feb|february|mar|march|apr|april|may|"
-        r"jun|june|jul|july|aug|august|sep|sept|september|"
-        r"oct|october|nov|november|dec|december)"
+        r"(january|jan|february|feb|march|mar|april|apr|may|"
+        r"june|jun|july|jul|august|aug|september|sept|sep|"
+        r"october|oct|november|nov|december|dec)"
         r"\s+\d{2,4}\b",
         "",
         without_date,
@@ -566,9 +566,9 @@ def extract_tabular_bank_amount(
 def extract_first_amount_after_date(line: str) -> float | None:
     text = re.sub(
         r"^\s*\d{1,2}\s+"
-        r"(jan|january|feb|february|mar|march|apr|april|may|"
-        r"jun|june|jul|july|aug|august|sep|sept|september|"
-        r"oct|october|nov|november|dec|december)"
+        r"(january|jan|february|feb|march|mar|april|apr|may|"
+        r"june|jun|july|jul|august|aug|september|sept|sep|"
+        r"october|oct|november|nov|december|dec)"
         r"\s+\d{4}\s+",
         "",
         line,
