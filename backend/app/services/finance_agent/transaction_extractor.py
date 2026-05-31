@@ -767,6 +767,9 @@ def extract_transactions(text: str) -> list[dict]:
             while j < len(raw_lines) and j <= i + 3:
                 combined += " " + raw_lines[j]
 
+                print("MERGE_TEST:", current, " + ", raw_lines[j])
+                print("HAS_MONEY_NEXT:", re.findall(MONEY_NUMBER_PATTERN, raw_lines[j]))
+
                 if re.search(MONEY_NUMBER_PATTERN, raw_lines[j]):
                     break
 
@@ -785,6 +788,9 @@ def extract_transactions(text: str) -> list[dict]:
 
             while j < len(raw_lines) and j <= i + 3:
                 combined += " " + raw_lines[j]
+
+                print("MERGE_TEST:", current, " + ", raw_lines[j])
+                print("HAS_MONEY_NEXT:", re.findall(MONEY_NUMBER_PATTERN, raw_lines[j]))
 
                 if re.search(MONEY_NUMBER_PATTERN, raw_lines[j]):
                     break
