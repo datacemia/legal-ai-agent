@@ -101,6 +101,8 @@ BALANCE_KEYWORDS = [
     "report",
     "fx conversion",
     "wallet credit",
+    "periode",
+    "période",
 ]
 
 
