@@ -912,17 +912,17 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
         previous_balance = balance
 
+    print("ARABIC_BYPASS_COUNT:", len(transactions))
+
     return transactions
 
 
 def extract_transactions(text: str) -> list[dict]:
-
-    print("RAW_AR_TEXT_SAMPLE:", text[:1000])
-
     arabic_transactions = extract_arabic_ocr_transactions(text)
-
     if arabic_transactions:
         return arabic_transactions
+
+    print("RAW_AR_TEXT_SAMPLE:", text[:1000])
 
     text = normalize_arabic_ocr_lines(text)
     text = normalize_ocr_numeric_text(text)
