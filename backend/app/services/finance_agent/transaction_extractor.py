@@ -667,6 +667,9 @@ def extract_transactions(text: str) -> list[dict]:
 
         tabular_amount, tabular_type = extract_tabular_bank_amount(clean_line)
 
+        print("TX:", clean_line)
+        print("TABULAR:", tabular_amount, tabular_type)
+
         if tabular_amount is not None:
             amount = tabular_amount
         else:
@@ -681,6 +684,9 @@ def extract_transactions(text: str) -> list[dict]:
             amount = fallback_amount
 
         transaction_type = tabular_type or detect_type(clean_line, amount)
+
+        print("AMOUNT:", amount)
+        print("TYPE:", transaction_type)
 
         if transaction_type == "expense" and amount > 0:
             amount = -abs(amount)
