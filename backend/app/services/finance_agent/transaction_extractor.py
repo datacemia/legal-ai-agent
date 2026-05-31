@@ -180,6 +180,13 @@ def parse_amount(value: str) -> float:
     return float(value)
 
 
+def pick_bank_amount(numbers: list[str]) -> float:
+    if len(numbers) >= 2:
+        return parse_amount(numbers[-2])
+
+    return parse_amount(numbers[-1])
+
+
 def is_reasonable_year(year: int) -> bool:
     return 2000 <= year <= datetime.now().year + 1
 
@@ -543,10 +550,6 @@ def extract_tabular_bank_amount(
         without_date,
     )
 
-    is_multi_currency_line = bool(
-        re.search(r"\b(USD|EUR|GBP|AED|MAD|CAD)\b", line, re.IGNORECASE)
-    )
-
     if not numbers:
         return None, None
 
@@ -578,10 +581,9 @@ def extract_tabular_bank_amount(
             "received",
         ]
     ):
-        return (
-            parse_amount(numbers[-2] if len(numbers) >= 2 else numbers[-1]),
-            "income",
-        )
+        amount = pick_bank_amount(numbers)
+
+        return amount, "income"
 
     if any(
         keyword in description
@@ -603,16 +605,9 @@ def extract_tabular_bank_amount(
             "fuel",
         ]
     ):
-        return (
-            -abs(
-                parse_amount(
-                    numbers[-2]
-                    if len(numbers) >= 3
-                    else numbers[-1]
-                )
-            ),
-            "expense",
-        )
+        amount = pick_bank_amount(numbers)
+
+        return -abs(amount), "expense"
 
     return None, None
 
