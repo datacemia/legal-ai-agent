@@ -831,6 +831,8 @@ def extract_transactions(text: str) -> list[dict]:
         ):
             continue
 
+        print("FINAL_LINE_BEFORE_AMOUNT:", clean_line)
+
         tabular_amount, tabular_type = extract_tabular_bank_amount(clean_line)
 
 
