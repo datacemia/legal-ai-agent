@@ -850,6 +850,24 @@ def normalize_arabic_digits(value: str) -> str:
     )
 
 
+
+
+def clean_db_text(value: str) -> str:
+    if not isinstance(value, str):
+        return value
+
+    # caractères interdits PostgreSQL JSON/TEXT
+    value = value.replace("\x00", "")
+
+    # autres caractères contrôle OCR
+    value = re.sub(
+        r"[\x01-\x08\x0b\x0c\x0e-\x1f]",
+        "",
+        value,
+    )
+
+    return value.strip()
+
 def find_arabic_ocr_dates(text: str):
     text = normalize_arabic_digits(text)
 
@@ -1030,7 +1048,7 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
         transactions.append({
             "date": row["date"],
-            "description": row["text"][:300],
+            "description": clean_db_text(row["text"][:300]),
             "amount": tx_amount if tx_type == "income" else -abs(tx_amount),
             "type": tx_type,
         })
@@ -1193,7 +1211,7 @@ def extract_transactions(text: str) -> list[dict]:
         transactions.append(
             {
                 "date": date,
-                "description": clean_line,
+                "description": clean_db_text(clean_line),
                 "amount": amount,
                 "type": transaction_type,
             }
