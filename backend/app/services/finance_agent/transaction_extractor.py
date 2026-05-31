@@ -493,14 +493,14 @@ def extract_tabular_bank_amount(
         return None, None
 
     without_date = re.sub(
-        r"\b\d{2}[./-]\d{2}(?:[./-]\d{2,4})?\b",
+        r"\b\d{4}-\d{2}-\d{2}\b",
         "",
         line,
         count=1,
     )
 
     without_date = re.sub(
-        r"\b\d{4}-\d{2}-\d{2}\b",
+        r"\b\d{2}[./-]\d{2}(?:[./-]\d{2,4})?\b",
         "",
         without_date,
         count=1,
