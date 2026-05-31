@@ -208,23 +208,25 @@ def normalize_arabic_ocr_lines(text: str) -> str:
 
     rebuilt = []
 
-    amount_line_re = re.compile(
-        r".*?"
-        r"((?:\d{1,3}(?:[ ,]\d{3})*|\d+)(?:[.,]\d{2}))\s+"
-        r"((?:\d{1,3}(?:[ ,]\d{3})*|\d+)(?:[.,]\d{2}))\s+"
-        r"(20\d{6})"
+    amount_token = r"(?:\d{1,3}(?:[ ,]\d{3})+|\d+)(?:[.,]\d{2})"
+
+    amount_balance_date_re = re.compile(
+        rf"({amount_token})\s+({amount_token})\s+(20\d{{6}})"
     )
 
     for line in lines:
-        m = amount_line_re.search(line)
+        match = amount_balance_date_re.search(line)
 
-        if m:
-            amount = m.group(1)
-            date = m.group(3)
-            rebuilt.append(f"{date} arabic ocr transaction card payment {amount}")
+        if not match:
+            rebuilt.append(line)
             continue
 
-        rebuilt.append(line)
+        amount = match.group(1)
+        date = match.group(3)
+
+        rebuilt.append(
+            f"{date} arabic ocr transaction card payment {amount}"
+        )
 
     return "\n".join(rebuilt)
 
