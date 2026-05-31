@@ -841,9 +841,88 @@ def extract_first_amount_after_date(line: str) -> float | None:
     return parse_amount(numbers[-1])
 
 
+def extract_arabic_ocr_transactions(text: str) -> list[dict]:
+    if not is_arabic_text(text):
+        return []
+
+    amount_token = r"(?:\d{1,3}(?:[ ,]\d{3})+|\d+)(?:[.,]\d{2})"
+    row_re = re.compile(
+        rf"({amount_token})\s+({amount_token})\s+(20\d{{6}})"
+    )
+
+    rows = []
+
+    for line in text.splitlines():
+        line = " ".join(line.split())
+        m = row_re.search(line)
+
+        if not m:
+            continue
+
+        amount = parse_amount(m.group(1))
+        balance = parse_amount(m.group(2))
+        raw_date = m.group(3)
+
+        date = f"{raw_date[:4]}-{raw_date[4:6]}-{raw_date[6:8]}"
+
+        rows.append(
+            {
+                "date": date,
+                "amount": amount,
+                "balance": balance,
+            }
+        )
+
+    rows.sort(key=lambda x: x["date"])
+
+    transactions = []
+    previous_balance = None
+
+    for row in rows:
+        amount = row["amount"]
+        balance = row["balance"]
+
+        transaction_type = "expense"
+
+        if previous_balance is None:
+            if balance >= amount:
+                transaction_type = "income"
+        else:
+            delta = round(balance - previous_balance, 2)
+
+            if abs(delta - amount) < 0.02:
+                transaction_type = "income"
+            elif abs(delta + amount) < 0.02:
+                transaction_type = "expense"
+
+        signed_amount = (
+            abs(amount)
+            if transaction_type == "income"
+            else -abs(amount)
+        )
+
+        transactions.append(
+            {
+                "date": row["date"],
+                "description": "Arabic OCR bank transaction",
+                "amount": signed_amount,
+                "type": transaction_type,
+            }
+        )
+
+        previous_balance = balance
+
+    return transactions
+
+
 def extract_transactions(text: str) -> list[dict]:
 
     print("RAW_AR_TEXT_SAMPLE:", text[:1000])
+
+    arabic_transactions = extract_arabic_ocr_transactions(text)
+
+    if arabic_transactions:
+        return arabic_transactions
 
     text = normalize_arabic_ocr_lines(text)
     text = normalize_ocr_numeric_text(text)
