@@ -1066,6 +1066,16 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
             merged_window = normalized[line_start:next_line_end]
 
+            # si la ligne date seule fusionne avec une vraie transaction datée,
+            # ne pas créer une transaction doublon pour la date seule
+            other_dates = [
+                d for d in dates
+                if d["start"] > dm["end"] and d["start"] < line_start + len(merged_window)
+            ]
+
+            if other_dates:
+                continue
+
             if len(re.findall(amount_pattern, merged_window)) >= 2:
                 window = merged_window
 
