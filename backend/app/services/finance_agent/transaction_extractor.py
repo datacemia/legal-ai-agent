@@ -1306,6 +1306,7 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         print("AR_TX:", t)
 
     print("ARABIC_BYPASS_COUNT:", len(transactions))
+    print("FINAL_TXS", transactions)
     return transactions
 
 
@@ -1464,6 +1465,7 @@ def extract_transactions(text: str) -> list[dict]:
             }
         )
 
+    print("FINAL_TXS", transactions)
     return transactions
 EXPENSE_KEYWORDS += [
     "مدين",
