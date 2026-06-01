@@ -997,10 +997,10 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
     print("=== AR DEBUG START ===")
     print("TEXT_LENGTH:", len(normalized))
-    print("NOISY_DATE_TEST:", re.findall(
-        r"(?<!\d)([0-3]?\d)\s*[./-]\s*([0-1]?\d)\s*[./-]\s*(\d{3})(?!\d)",
+    print("DATE_CANDIDATES:", re.findall(
+        r"([0-3]?\d)[^\d]{1,6}([01]?\d)[^\d]{1,6}(\d{2,4})",
         normalized
-    ))
+    )[:20])
     dates = find_arabic_ocr_dates(normalized)
     print("DATES_FOUND:", [d["clean"] for d in dates])
     print(
