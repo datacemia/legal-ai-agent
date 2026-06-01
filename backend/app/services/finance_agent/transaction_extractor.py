@@ -1057,9 +1057,11 @@ def find_arabic_ocr_dates(text: str):
                 if not (1 <= int(day) <= 31):
                     continue
 
+                month = statement_month or 1
+
                 add_date(
                     int(year),
-                    1,  # mois absent dans OCR/PDF
+                    month,
                     int(day),
                     line_start + m.start(),
                     line_start + m.end(),
@@ -1205,6 +1207,14 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
             except Exception:
                 continue
 
+            # OCR pollution: ex "1182 388.45" lu comme "182 388.45"
+            if value > 100000:
+                alt = re.search(r"(\d{1,3}[.,]\d{2})$", raw)
+                if alt:
+                    value = parse_amount(alt.group(1))
+                else:
+                    continue
+
             absolute_pos = line_start + am.start()
             distance = abs(absolute_pos - dm["start"])
 
@@ -1228,6 +1238,8 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
             "date": dm["date"],
             "numbers": clean,
             "text": window,
+            "probable_balance": clean[-1],
+            "probable_tx": clean[0],
         })
 
     unique = {}
@@ -1240,6 +1252,8 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
     for i, row in enumerate(rows):
         numbers = row.get("numbers", [])
+        probable_balance = row.get("probable_balance")
+        probable_tx = row.get("probable_tx")
 
         if len(numbers) < 2:
             continue
@@ -1275,9 +1289,8 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
         if not best:
             # fallback général: plus grand nombre = solde probable, autre = transaction
-            ordered = sorted(numbers)
-            tx = ordered[0]
-            bal = ordered[-1]
+            tx = probable_tx or numbers[0]
+            bal = probable_balance or numbers[-1]
 
             lower = row["text"].lower()
             tx_type = "income"
