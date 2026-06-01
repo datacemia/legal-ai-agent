@@ -2747,6 +2747,27 @@ def extract_transactions(text: str) -> list[dict]:
                     amount_balance_tx_amount = None
                     amount_balance_value = None
 
+        numbers = re.findall(MONEY_NUMBER_PATTERN, clean_line)
+
+        if (
+            len(numbers) == 2
+            and not is_arabic_text(clean_line)
+        ):
+            locked_tx_amount = parse_amount(numbers[0])
+            locked_balance = parse_amount(numbers[1])
+
+            if tabular_amount is not None:
+                tabular_amount = abs(locked_tx_amount)
+
+                if tabular_type == "expense":
+                    tabular_amount = -abs(locked_tx_amount)
+                elif tabular_type == "income":
+                    tabular_amount = abs(locked_tx_amount)
+
+            amount_balance_tx_amount = locked_tx_amount
+            amount_balance_value = locked_balance
+            balance = locked_balance
+
         debug_log("TX_DEBUG: tabular", tabular_amount, tabular_type)
 
 
