@@ -906,8 +906,6 @@ def iter_lines_with_offsets(text: str):
 
 def find_arabic_ocr_dates(text: str):
     text = normalize_arabic_digits(text)
-
-    # normalisation séparateurs OCR Arabic/Unicode vers "."
     text = (
         text.replace("٫", ".")
             .replace("٬", ".")
@@ -936,39 +934,45 @@ def find_arabic_ocr_dates(text: str):
             "end": end,
         })
 
-    # DD.MM.YYYY / D.M.YYY / D.M.YY
-    for m in re.finditer(
-        r"(?<!\d)([0-3]?\d)\s*[./-]\s*([01]?\d)\s*[./-]\s*(\d{2,4})(?!\d)",
-        text,
-    ):
-        day, month, year = m.groups()
+    date_re = re.compile(
+        r"(?<!\d)([0-3]?\d)\s*[./-]\s*([01]?\d)\s*[./-]\s*(\d{2,4})(?!\d)"
+    )
 
-        if len(year) == 4 and year.startswith("20"):
-            y = year
-        elif len(year) in (2, 3):
-            y = "20" + year[-2:]
-        else:
-            continue
-
-        add_date(y, month, day, m.start(), m.end())
-
-    # YYYY.MM.DD
-    for m in re.finditer(
-        r"(?<!\d)(20\d{2})\s*[./-]\s*([01]?\d)\s*[./-]\s*([0-3]?\d)(?!\d)",
-        text,
-    ):
-        year, month, day = m.groups()
-        add_date(year, month, day, m.start(), m.end())
-
-    # compact YYYYMMDD, ligne par ligne, hors metadata
     for line_start, line in iter_lines_with_offsets(text):
-        if any(x in line for x in [
-            "الحساب", "باسحلا", "account", "iban", "الفترة", "ةرتفلا"
-        ]):
+        if any(x in line for x in ["الحساب", "باسحلا", "account", "iban"]):
             continue
+
+        for m in date_re.finditer(line):
+            day, month, year = m.groups()
+
+            if len(year) == 4 and year.startswith("20"):
+                y = year
+            elif len(year) in (2, 3):
+                y = "20" + year[-2:]
+            else:
+                continue
+
+            # date bancaire fiable: début ou fin de ligne
+            before = line[:m.start()].strip()
+            after = line[m.end():].strip()
+
+            if before and after:
+                continue
+
+            add_date(
+                y,
+                month,
+                day,
+                line_start + m.start(),
+                line_start + m.end(),
+            )
 
         for m in re.finditer(r"(?<!\d)(20\d{2}[01]\d[0-3]\d)(?!\d)", line):
             raw = m.group(1)
+
+            if any(x in line for x in ["الفترة", "ةرتفلا"]):
+                continue
+
             add_date(
                 raw[:4],
                 raw[4:6],
