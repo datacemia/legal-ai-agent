@@ -2416,14 +2416,13 @@ def resolve_arabic_row_amount(row: dict, prev_balance: float | None) -> tuple[fl
     # No reliable previous balance: use OCR-order fallback and text hints.
     tx_type = classify_by_keywords(row.get("text", ""))
 
-    # First Arabic OCR row has no previous balance, so balance delta cannot
-    # decide the sign. For neutral amount+balance rows, never default to
-    # expense. If the balance is at least the movement amount, classifying the
-    # first movement as income preserves a non-negative implied opening balance
-    # and fixes mixed Arabic/English layouts where descriptions are unreadable.
-    if prev_balance is None and tx_type is None and len(numbers) >= 2:
-        if probable_tx > 0 and probable_balance > 0 and probable_balance >= probable_tx:
-            return abs(probable_tx), probable_balance, "income"
+    # General safety rule:
+    # The first Arabic/OCR row cannot be safely classified as income/expense
+    # unless a previous running balance exists to validate the balance delta,
+    # or the text contains an explicit income/expense signal.
+    if prev_balance is None and len(numbers) >= 2:
+        if tx_type not in ("income", "expense"):
+            return 0.0, probable_balance, "opening_balance"
 
     return abs(probable_tx), probable_balance, tx_type
 
@@ -2584,6 +2583,11 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
             row,
             previous_balance,
         )
+
+        if tx_type == "opening_balance":
+            row["resolved_balance"] = balance
+            previous_balance = balance
+            continue
 
         row["resolved_balance"] = balance
         previous_balance = balance
