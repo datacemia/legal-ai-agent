@@ -443,32 +443,49 @@ def handle_finance_ai(job: Job, db):
         0,
     )
 
-    observed_net_cashflow = float(
-        forecast.get("observed_net_cashflow", 0) or 0
-    )
-
-    if observed_net_cashflow < 0:
-        result_ai["risk_notes"] = {
-            "en": [
-                "Negative cashflow detected.",
-                "Expenses exceed observed income.",
-            ],
-            "fr": [
-                "Trésorerie négative détectée.",
-                "Les dépenses dépassent les revenus observés.",
-            ],
-            "ar": [
-                "تم اكتشاف تدفق نقدي سلبي.",
-                "المصاريف تتجاوز الدخل المرصود.",
-            ],
-        }.get(output_language, ["Negative cashflow detected."])
-
     alerts = generate_financial_alerts(
         transactions=transactions,
         subscriptions=subscriptions,
         forecast=forecast,
         scores=scores,
     )
+
+    def localized_alert_message(alert: dict, language: str) -> str:
+        title = str(alert.get("title", ""))
+        message = str(alert.get("message", ""))
+
+        translations = {
+            "Cashflow risk detected": {
+                "en": "Cashflow risk detected.",
+                "fr": "Risque de trésorerie détecté.",
+                "ar": "تم اكتشاف خطر على التدفق النقدي.",
+            },
+            "Low financial habits score": {
+                "en": "Financial habits need improvement.",
+                "fr": "Les habitudes financières doivent être améliorées.",
+                "ar": "العادات المالية تحتاج إلى تحسين.",
+            },
+            "High monthly expenses": {
+                "en": "Monthly expenses are relatively high.",
+                "fr": "Les dépenses mensuelles sont relativement élevées.",
+                "ar": "المصاريف الشهرية مرتفعة نسبياً.",
+            },
+            "Too many subscriptions": {
+                "en": "Multiple recurring subscriptions detected.",
+                "fr": "Plusieurs abonnements récurrents détectés.",
+                "ar": "تم اكتشاف عدة اشتراكات متكررة.",
+            },
+        }
+
+        return translations.get(title, {}).get(language, message)
+
+    risk_notes = [
+        localized_alert_message(alert, output_language)
+        for alert in alerts
+        if alert.get("type") in ("risk", "warning")
+    ]
+
+    result_ai["risk_notes"] = risk_notes
 
     update_job_progress(
         job,
