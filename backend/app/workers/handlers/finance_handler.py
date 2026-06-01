@@ -447,12 +447,21 @@ def handle_finance_ai(job: Job, db):
         forecast.get("observed_net_cashflow", 0) or 0
     )
 
-    if observed_net_cashflow > 0:
+    if observed_net_cashflow < 0:
         result_ai["risk_notes"] = {
-            "en": ["No major cashflow risk detected."],
-            "fr": ["Aucun risque majeur de trésorerie détecté."],
-            "ar": ["لم يتم اكتشاف مخاطر كبيرة على التدفق النقدي."],
-        }.get(output_language, ["No major cashflow risk detected."])
+            "en": [
+                "Negative cashflow detected.",
+                "Expenses exceed observed income.",
+            ],
+            "fr": [
+                "Trésorerie négative détectée.",
+                "Les dépenses dépassent les revenus observés.",
+            ],
+            "ar": [
+                "تم اكتشاف تدفق نقدي سلبي.",
+                "المصاريف تتجاوز الدخل المرصود.",
+            ],
+        }.get(output_language, ["Negative cashflow detected."])
 
     alerts = generate_financial_alerts(
         transactions=transactions,
