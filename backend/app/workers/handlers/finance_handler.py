@@ -426,25 +426,13 @@ def handle_finance_ai(job: Job, db):
         0,
     )
 
-    if (
-        result_ai.get(
-            "total_spending_estimate",
-            0,
-        ) == 0
-        and observed_expenses > 0
-    ):
+    if observed_expenses > 0:
         result_ai["total_spending_estimate"] = round(
             observed_expenses,
             2,
         )
 
-    if (
-        result_ai.get(
-            "total_income_estimate",
-            0,
-        ) == 0
-        and observed_income > 0
-    ):
+    if observed_income > 0:
         result_ai["total_income_estimate"] = round(
             observed_income,
             2,
