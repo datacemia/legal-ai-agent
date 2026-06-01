@@ -14,6 +14,21 @@ def debug_log(*args):
 
 CURRENCY_CODES = ["USD", "EUR", "GBP", "AED", "MAD", "CAD", "JOD", "SAR", "QAR", "KWD", "BHD", "OMR"]
 
+CANADA_BANKS = [
+    "BANK OF MONTREAL",
+    "BMO",
+    "TD CANADA TRUST",
+    "TD BANK",
+    "RBC",
+    "ROYAL BANK OF CANADA",
+    "SCOTIABANK",
+    "CIBC",
+]
+
+COUNTRY_TO_CURRENCY = {
+    "CANADA": "CAD",
+}
+
 EXPENSE_KEYWORDS = [
     "paiement",
     "carte",
@@ -1159,7 +1174,7 @@ def detect_currency(text: str) -> str:
         "UNITED_KINGDOM": ["UNITED KINGDOM", "UK", "GREAT BRITAIN", "BRITAIN", "ENGLAND", "ROYAUME-UNI", "ANGLETERRE", "المملكة المتحدة", "بريطانيا", "إنجلترا"],
         "FRANCE": ["FRANCE", "فرنسا"],
         "EUROZONE": ["GERMANY", "DEUTSCHLAND", "SPAIN", "ESPAGNE", "ESPAÑA", "ITALY", "ITALIA", "NETHERLANDS", "BELGIUM", "BELGIQUE", "EUROZONE", "EUROPEAN UNION", "UNION EUROPEENNE", "UNION EUROPÉENNE", "ألمانيا", "إسبانيا", "إيطاليا"],
-        "CANADA": ["CANADA", "CANADIEN", "كندا"],
+        "CANADA": ["CANADA", "CANADIEN", "كندا"] + CANADA_BANKS,
         "AUSTRALIA": ["AUSTRALIA", "AUSTRALIE", "أستراليا"],
         "SWITZERLAND": ["SWITZERLAND", "SUISSE", "سويسرا"],
     }
@@ -1208,6 +1223,7 @@ def detect_currency(text: str) -> str:
         "SYRIA": ["COMMERCIAL BANK OF SYRIA", "BANK OF SYRIA AND OVERSEAS", "BBSF"],
 
         # Non-Arab bank hints preserved
+        "CANADA": CANADA_BANKS,
         "UNITED_STATES": ["ALLY BANK", "ALLY", "ALLY FINANCIAL", "CHASE", "JPMORGAN", "JPMORGAN CHASE", "BANK OF AMERICA", "WELLS FARGO", "CITI", "CITIBANK", "CAPITAL ONE", "USAA", "PNC BANK", "TD BANK USA", "DISCOVER BANK", "SOFI BANK","BREX","BREX ACCOUNT", "AMERICAN EXPRESS NATIONAL BANK","MERCURY",
     "MERCURY BANKING"],
         "UNITED_KINGDOM": ["BARCLAYS", "LLOYDS", "NATWEST", "HSBC UK", "MONZO", "STARLING", "SANTANDER UK", "TSB BANK"],
@@ -1824,7 +1840,7 @@ def extract_transactions(text: str) -> list[dict]:
     debug_log("TEXT_SAMPLE:", clean_db_text(str(text))[:500])
 
     detected_currency = detect_currency(text)
-    prefer_us_date = detected_currency == "USD"
+    prefer_us_date = detected_currency in {"USD", "CAD"}
     debug_log("TX_DEBUG: detected_currency", detected_currency)
     debug_log("TX_DEBUG: prefer_us_date", prefer_us_date)
 
