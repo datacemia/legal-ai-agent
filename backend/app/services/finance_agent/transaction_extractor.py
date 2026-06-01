@@ -879,7 +879,12 @@ def detect_currency(text: str) -> str:
         ("JOD", [r"\bJOD\b", "دينار أردني", "دينار"]),
         ("AED", [r"\bAED\b", "درهم إماراتي"]),
         ("SAR", [r"\bSAR\b", "ريال سعودي"]),
-        ("QAR", [r"\bQAR\b", "ريال قطري"]),
+        ("QAR", [
+            r"\bQAR\b",
+            "ريال قطري",
+            "يرطق لاير",
+            "QATARI RIYAL",
+        ]),
         ("KWD", [r"\bKWD\b", "دينار كويتي"]),
         ("BHD", [r"\bBHD\b", "دينار بحريني"]),
         ("OMR", [r"\bOMR\b", "ريال عماني"]),
@@ -894,6 +899,9 @@ def detect_currency(text: str) -> str:
 
     if scores:
         return scores.most_common(1)[0][0]
+
+    if "QNB" in normalized or "قطر" in normalized:
+        return "QAR"
 
     return "unknown"
 
@@ -1318,11 +1326,21 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
             "probable_tx": clean[0],
         })
 
-    unique = {}
-    for r in rows:
-        unique[r["date"]] = r
+    seen = set()
+    filtered = []
 
-    rows = sorted(unique.values(), key=lambda x: x["date"])
+    for row in rows:
+        key = (
+            row["date"],
+            row["probable_tx"],
+            row["probable_balance"],
+        )
+
+        if key not in seen:
+            seen.add(key)
+            filtered.append(row)
+
+    rows = filtered
 
     transactions = []
 
