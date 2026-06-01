@@ -12,7 +12,7 @@ def debug_log(*args):
         print(*args)
 
 
-CURRENCY_CODES = ["USD", "EUR", "GBP", "AED", "MAD", "CAD", "JOD", "SAR", "QAR", "KWD", "BHD", "OMR"]
+CURRENCY_CODES = ["USD", "EUR", "GBP", "AED", "MAD", "CAD", "AUD", "JOD", "SAR", "QAR", "KWD", "BHD", "OMR", "DZD", "TND", "EGP", "CHF", "JPY", "CNY", "INR", "TRY", "NGN", "ZAR"]
 
 CANADA_BANKS = [
     # Big Six / grandes banques canadiennes
@@ -177,6 +177,71 @@ CANADA_BANKS = [
     "BANQUE DE MONTRÉAL",
     "BANQUE NATIONALE",
     "BANQUE DESJARDINS",
+]
+
+
+AUSTRALIA_BANKS = [
+    # Major Australian banks / Big Four
+    "COMMONWEALTH BANK",
+    "COMMONWEALTH BANK OF AUSTRALIA",
+    "COMMBANK",
+    "CBA",
+    "WESTPAC",
+    "WESTPAC BANKING CORPORATION",
+    "NAB",
+    "NATIONAL AUSTRALIA BANK",
+    "ANZ",
+    "ANZ BANK",
+    "AUSTRALIA AND NEW ZEALAND BANKING",
+    "AUSTRALIA AND NEW ZEALAND BANKING GROUP",
+
+    # Australian regional / digital / specialist banks
+    "MACQUARIE BANK",
+    "MACQUARIE",
+    "BENDIGO BANK",
+    "BENDIGO AND ADELAIDE BANK",
+    "ADELAIDE BANK",
+    "ING AUSTRALIA",
+    "ING BANK AUSTRALIA",
+    "ING DIRECT AUSTRALIA",
+    "AMP BANK",
+    "AMP",
+    "SUNCORP BANK",
+    "SUNCORP",
+    "BANKWEST",
+    "BANK OF WESTERN AUSTRALIA",
+    "BOQ",
+    "BANK OF QUEENSLAND",
+    "ME BANK",
+    "ME BANKING",
+    "UBANK",
+    "U BANK",
+    "RABOBANK AUSTRALIA",
+    "RABOBANK",
+    "JUDO BANK",
+    "VOLT BANK",
+    "86400",
+    "UP BANK",
+    "UP MONEY",
+    "BANK AUSTRALIA",
+    "AUSWIDE BANK",
+    "HERITAGE BANK",
+    "PEOPLE'S CHOICE",
+    "PEOPLES CHOICE",
+    "GREAT SOUTHERN BANK",
+    "DEFENCE BANK",
+    "TEACHERS MUTUAL BANK",
+    "POLICE BANK",
+    "IMB BANK",
+    "NEWCASTLE PERMANENT",
+    "P&N BANK",
+    "BEYOND BANK",
+    "MYSTATE BANK",
+    "REGIONAL AUSTRALIA BANK",
+    "BANK OF SYDNEY",
+    "HSBC AUSTRALIA",
+    "HSBC BANK AUSTRALIA",
+    "CITIBANK AUSTRALIA",
 ]
 
 COUNTRY_TO_CURRENCY = {
@@ -1411,6 +1476,26 @@ def clean_db_text(value: str) -> str:
     return value.strip()
 
 
+
+def log_currency_detection_result(
+    currency: str,
+    source: str,
+    confidence: int,
+    evidence: str | None = None,
+):
+    """Emit a stable currency confidence debug line without changing return type."""
+    payload = {
+        "currency": currency,
+        "source": source,
+        "confidence": confidence,
+    }
+
+    if evidence:
+        payload["evidence"] = evidence
+
+    debug_log("CURRENCY_DEBUG: result", payload)
+
+
 def detect_currency(text: str) -> str:
     """Detect currency safely and generally.
 
@@ -1490,12 +1575,24 @@ def detect_currency(text: str) -> str:
     if scores:
         detected = scores.most_common(1)[0][0]
         debug_log("CURRENCY_DEBUG: explicit", detected, dict(scores))
+        log_currency_detection_result(
+            detected,
+            "explicit_currency",
+            100,
+            str(dict(scores)),
+        )
         return detected
 
     # If there is no explicit currency and the document says multi-currency,
     # do not infer a single currency from a bank brand.
     if is_mixed_currency_document:
         debug_log("CURRENCY_DEBUG: mixed_currency_document -> unknown")
+        log_currency_detection_result(
+            "unknown",
+            "mixed_currency_document",
+            0,
+            "multi_currency_marker",
+        )
         return "unknown"
 
     COUNTRY_CURRENCY = {
@@ -1557,7 +1654,7 @@ def detect_currency(text: str) -> str:
         "FRANCE": ["FRANCE", "فرنسا"],
         "EUROZONE": ["GERMANY", "DEUTSCHLAND", "SPAIN", "ESPAGNE", "ESPAÑA", "ITALY", "ITALIA", "NETHERLANDS", "BELGIUM", "BELGIQUE", "EUROZONE", "EUROPEAN UNION", "UNION EUROPEENNE", "UNION EUROPÉENNE", "ألمانيا", "إسبانيا", "إيطاليا"],
         "CANADA": ["CANADA", "CANADIEN", "كندا"] + CANADA_BANKS,
-        "AUSTRALIA": ["AUSTRALIA", "AUSTRALIE", "أستراليا"],
+        "AUSTRALIA": ["AUSTRALIA", "AUSTRALIE", "أستراليا"] + AUSTRALIA_BANKS,
         "SWITZERLAND": ["SWITZERLAND", "SUISSE", "سويسرا"],
     }
 
@@ -1606,6 +1703,7 @@ def detect_currency(text: str) -> str:
 
         # Non-Arab bank hints preserved
         "CANADA": CANADA_BANKS,
+        "AUSTRALIA": AUSTRALIA_BANKS,
         "UNITED_STATES": ["ALLY BANK", "ALLY", "ALLY FINANCIAL", "CHASE", "JPMORGAN", "JPMORGAN CHASE", "BANK OF AMERICA", "WELLS FARGO", "CITI", "CITIBANK", "CAPITAL ONE", "USAA", "PNC BANK", "TD BANK USA", "DISCOVER BANK", "SOFI BANK","BREX","BREX ACCOUNT", "AMERICAN EXPRESS NATIONAL BANK","MERCURY",
     "MERCURY BANKING"],
         "UNITED_KINGDOM": ["BARCLAYS", "LLOYDS", "NATWEST", "HSBC UK", "MONZO", "STARLING", "SANTANDER UK", "TSB BANK"],
@@ -1630,6 +1728,12 @@ def detect_currency(text: str) -> str:
         if has_hint(hints):
             detected = COUNTRY_CURRENCY[country]
             debug_log("CURRENCY_DEBUG: country_hint", country, "->", detected)
+            log_currency_detection_result(
+                detected,
+                "country_hint",
+                90,
+                country,
+            )
             return detected
 
     # 4) Bank -> country -> currency fallback.
@@ -1637,9 +1741,20 @@ def detect_currency(text: str) -> str:
         if has_hint(hints):
             detected = COUNTRY_CURRENCY[country]
             debug_log("CURRENCY_DEBUG: bank_country_hint", country, "->", detected)
+            log_currency_detection_result(
+                detected,
+                "bank_country_hint",
+                85,
+                country,
+            )
             return detected
 
     debug_log("CURRENCY_DEBUG: no_match -> unknown")
+    log_currency_detection_result(
+        "unknown",
+        "no_match",
+        0,
+    )
     return "unknown"
 
 def detect_statement_month_year(text: str):
