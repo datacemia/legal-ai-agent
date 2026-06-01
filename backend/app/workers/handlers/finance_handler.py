@@ -1,5 +1,6 @@
 import json
 import fitz
+from collections import Counter
 
 from app.models.job import Job
 from app.models.finance_analysis import FinanceAnalysis
@@ -138,6 +139,35 @@ def deduplicate_transactions(
         unique.append(tx)
 
     return unique
+
+
+def resolve_finance_currency(
+    result_ai: dict,
+    transactions: list[dict],
+) -> str:
+    """Resolve currency without hardcoding a country-specific fallback.
+
+    Priority:
+    1) AI-detected currency if explicit and not unknown.
+    2) Most common non-unknown currency from extracted transactions.
+    3) unknown.
+    """
+    currency = result_ai.get("currency_detected")
+
+    if currency not in [None, "", "unknown"]:
+        return str(currency).upper()
+
+    detected = [
+        str(tx.get("currency")).upper()
+        for tx in transactions
+        if tx.get("currency")
+        and str(tx.get("currency")).lower() != "unknown"
+    ]
+
+    if detected:
+        return Counter(detected).most_common(1)[0][0]
+
+    return "unknown"
 
 
 def finance_progress_message(key: str, language: str) -> str:
@@ -293,10 +323,14 @@ def handle_finance_ai(job: Job, db):
 
     result_ai = analyze_bank_statement(text, output_language)
     fallback_income = result_ai.get("total_income_estimate")
-    currency = result_ai.get(
-        "currency_detected",
-        "MAD",
+
+    currency = resolve_finance_currency(
+        result_ai=result_ai,
+        transactions=transactions,
     )
+
+    # Keep downstream UI/report fields consistent with the resolved value.
+    result_ai["currency_detected"] = currency
 
     update_job_progress(
         job,
