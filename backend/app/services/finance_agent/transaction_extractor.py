@@ -870,21 +870,21 @@ def clean_db_text(value: str) -> str:
 
 
 def detect_currency(text: str) -> str:
-    normalized = normalize_arabic_digits(text).upper()
+    """Detect explicit currency first, then use conservative country/bank hints.
+
+    This keeps FR/EN behavior stable and only applies hints when the document
+    itself clearly identifies a country/bank but no explicit currency string was OCRed.
+    """
+    normalized = normalize_arabic_digits(clean_db_text(text)).upper()
 
     patterns = [
         ("USD", [r"\bUSD\b", r"\$", "دولار"]),
         ("EUR", [r"\bEUR\b", "€", "يورو"]),
-        ("MAD", [r"\bMAD\b", r"\bDH\b", r"\bDHS\b", "درهم", "درهم مغربي"]),
-        ("JOD", [r"\bJOD\b", "دينار أردني", "دينار"]),
+        ("MAD", [r"\bMAD\b", r"\bDH\b", r"\bDHS\b", "درهم مغربي"]),
+        ("JOD", [r"\bJOD\b", "دينار أردني"]),
         ("AED", [r"\bAED\b", "درهم إماراتي"]),
         ("SAR", [r"\bSAR\b", "ريال سعودي"]),
-        ("QAR", [
-            r"\bQAR\b",
-            "ريال قطري",
-            "يرطق لاير",
-            "QATARI RIYAL",
-        ]),
+        ("QAR", [r"\bQAR\b", "ريال قطري", "يرطق لاير", "QATARI RIYAL"]),
         ("KWD", [r"\bKWD\b", "دينار كويتي"]),
         ("BHD", [r"\bBHD\b", "دينار بحريني"]),
         ("OMR", [r"\bOMR\b", "ريال عماني"]),
@@ -900,8 +900,22 @@ def detect_currency(text: str) -> str:
     if scores:
         return scores.most_common(1)[0][0]
 
-    if "QNB" in normalized or "قطر" in normalized:
-        return "QAR"
+    # Conservative fallback: only when the document clearly identifies a bank/country.
+    # Includes common Arabic OCR reversed words seen in RTL extraction.
+    country_bank_hints = [
+        ("QAR", ["QNB", "QATAR", "قطر", "رطق", "QATAR NATIONAL BANK"]),
+        ("MAD", ["MOROCCO", "MAROC", "المغرب", "برغملا", "CIH", "ATTIJARI", "WAFA", "BMCE", "CHAABI"]),
+        ("AED", ["EMIRATES NBD", "ADCB", "FAB", "DUBAI", "UAE", "الإمارات", "تارامإ"]),
+        ("SAR", ["SAUDI", "KSA", "AL RAJHI", "SNB", "السعودية", "ةيدوعسلا"]),
+        ("JOD", ["JORDAN", "الأردن", "ندرأ"]),
+        ("KWD", ["KUWAIT", "الكويت", "تيوك"]),
+        ("BHD", ["BAHRAIN", "البحرين", "نيرحب"]),
+        ("OMR", ["OMAN", "عمان", "نامع"]),
+    ]
+
+    for code, hints in country_bank_hints:
+        if any(hint.upper() in normalized for hint in hints):
+            return code
 
     return "unknown"
 
@@ -1185,6 +1199,72 @@ def extract_money_values_from_window(amount_window: str) -> list[float]:
     return values
 
 
+
+def classify_by_keywords(text: str) -> str:
+    lower = text.lower()
+
+    if any(k in lower for k in EXPENSE_KEYWORDS):
+        return "expense"
+
+    if any(k in lower for k in INCOME_KEYWORDS):
+        return "income"
+
+    return "income"
+
+
+def resolve_arabic_row_amount(row: dict, prev_balance: float | None) -> tuple[float, float, str]:
+    """Resolve transaction amount, balance and type for one OCR row.
+
+    General strategy:
+    1) If a previous balance exists, test all possible (transaction, balance)
+       pairs and choose the one where balance delta matches the transaction.
+    2) If no balance relation can be proven, use the OCR-order fallback:
+       first money value = movement, last money value = probable balance.
+    3) For banks without a reliable balance column, fall back to keywords/sign.
+    """
+    numbers = [float(n) for n in row.get("numbers", []) if n is not None]
+    probable_tx = float(row.get("probable_tx") or numbers[0])
+    probable_balance = float(row.get("probable_balance") or numbers[-1])
+
+    if prev_balance is not None and len(numbers) >= 2:
+        candidates = []
+
+        for bal in numbers:
+            if bal <= 0:
+                continue
+
+            delta = round(bal - prev_balance, 2)
+
+            if abs(delta) < 0.01 or abs(delta) > 100000:
+                continue
+
+            for tx in numbers:
+                if abs(tx - bal) < 0.01:
+                    continue
+
+                # Dynamic tolerance: strict for normal rows, slightly wider for OCR cents.
+                tolerance = max(0.15, abs(tx) * 0.002)
+                score = abs(abs(delta) - abs(tx))
+
+                if score <= tolerance:
+                    # Prefer the known OCR balance position when scores tie.
+                    position_penalty = 0 if abs(bal - probable_balance) < 0.01 else 0.05
+                    candidates.append((score + position_penalty, tx, bal, delta))
+
+        if candidates:
+            _, tx, bal, delta = min(candidates, key=lambda x: x[0])
+            return abs(tx), bal, "income" if delta > 0 else "expense"
+
+        # If the balance column is clear but OCR transaction is polluted/missing,
+        # trust the balance delta, but only within a safe range.
+        delta = round(probable_balance - prev_balance, 2)
+        if abs(delta) > 0.01 and abs(delta) < 100000:
+            return abs(delta), probable_balance, "income" if delta > 0 else "expense"
+
+    # No reliable previous balance: use OCR-order fallback and text hints.
+    tx_type = classify_by_keywords(row.get("text", ""))
+    return abs(probable_tx), probable_balance, tx_type
+
 def extract_arabic_ocr_transactions(text: str) -> list[dict]:
     if not is_arabic_text(text):
         return []
@@ -1343,58 +1423,21 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
     rows = filtered
 
     transactions = []
+    previous_balance = None
 
-    for i, row in enumerate(rows):
+    for row in rows:
         numbers = row.get("numbers", [])
-        probable_balance = row.get("probable_balance")
-        probable_tx = row.get("probable_tx")
 
         if len(numbers) < 2:
             continue
 
-        best = None
+        tx_amount, balance, tx_type = resolve_arabic_row_amount(
+            row,
+            previous_balance,
+        )
 
-        # Source de vérité générale:
-        # - le dernier montant fiable de la ligne est le solde probable
-        # - le premier montant fiable est le mouvement probable
-        # - si un solde précédent existe, le signe vient de la variation du solde
-        tx = probable_tx or numbers[0]
-        bal = probable_balance or numbers[-1]
-
-        if i > 0:
-            prev_balance = rows[i - 1].get("resolved_balance")
-
-            if prev_balance is not None:
-                delta = round(bal - prev_balance, 2)
-
-                # Le montant OCR correspond à la variation du solde.
-                if abs(abs(delta) - abs(tx)) < 0.15:
-                    if delta > 0:
-                        best = (abs(tx), bal, "income")
-                    else:
-                        best = (abs(tx), bal, "expense")
-
-                # Si le delta est fiable mais le montant OCR est pollué,
-                # utiliser le delta comme mouvement.
-                elif abs(delta) > 0.01 and abs(delta) < 100000:
-                    if delta > 0:
-                        best = (abs(delta), bal, "income")
-                    else:
-                        best = (abs(delta), bal, "expense")
-
-        if not best:
-            lower = row["text"].lower()
-            tx_type = "income"
-
-            if any(k in lower for k in EXPENSE_KEYWORDS):
-                tx_type = "expense"
-            elif any(k in lower for k in INCOME_KEYWORDS):
-                tx_type = "income"
-
-            best = (tx, bal, tx_type)
-
-        tx_amount, balance, tx_type = best
         row["resolved_balance"] = balance
+        previous_balance = balance
 
         transactions.append({
             "date": row["date"],
