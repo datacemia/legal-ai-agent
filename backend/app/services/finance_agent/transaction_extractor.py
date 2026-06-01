@@ -1074,6 +1074,109 @@ def find_arabic_ocr_dates(text: str):
 
     return sorted(unique.values(), key=lambda x: x["start"])
 
+
+
+def clean_ocr_amount_raw(raw: str) -> str:
+    """Normalize common Arabic/OCR duplicated amount fragments without changing valid formats."""
+    raw = raw.strip()
+
+    # OCR duplicates: 149,149,00 -> 149,00 ; 399,399,00 -> 399,00
+    raw = re.sub(r"^(\d{1,3}),\1,", r"\1,", raw)
+
+    # OCR prefix before amount: 5,500,00 -> 500,00
+    raw = re.sub(r"^(\d),(\d{3},\d{2})$", r"\2", raw)
+
+    return raw
+
+
+def extract_money_values_from_window(amount_window: str) -> list[float]:
+    """
+    General Arabic bank OCR amount extraction.
+
+    Strategy:
+    - Work line by line.
+    - Prefer the last physical OCR line containing at least 2 money values.
+      This avoids polluted lines such as:
+          1182 388.45
+          388,45 23 221,77
+      where the second line is the reliable transaction/balance pair.
+    - Keep OCR order: first value = probable transaction, last value = probable balance.
+    """
+    money_re = re.compile(
+        r"(?<![\d,\.])"
+        r"(?:\d{1,3}(?:[ ,]\d{3})+|\d+)"
+        r"(?:[.,]\d{2})"
+        r"(?!\d)"
+    )
+
+    candidates: list[list[float]] = []
+
+    for line in amount_window.splitlines():
+        line_values = []
+
+        for m in money_re.finditer(line):
+            raw = clean_ocr_amount_raw(m.group(0))
+
+            try:
+                value = parse_amount(raw)
+            except Exception:
+                continue
+
+            # OCR pollution: ex "182 388.45" should become "388.45" when possible.
+            if value > 100000:
+                alt = re.search(r"(\d{1,3}[.,]\d{2})$", raw)
+                if alt:
+                    try:
+                        value = parse_amount(alt.group(1))
+                    except Exception:
+                        continue
+                else:
+                    continue
+
+            # Defensive guard: avoid impossible synthetic artifacts.
+            if value <= 0 or value > 1000000:
+                continue
+
+            if not any(abs(value - old) < 0.01 for old in line_values):
+                line_values.append(value)
+
+        if len(line_values) >= 2:
+            candidates.append(line_values)
+
+    if candidates:
+        # Use the last reliable line. In Arabic OCR, duplicated English/localized
+        # amount lines often appear before the final amount+balance line.
+        return candidates[-1]
+
+    # Fallback: no line has two values, use all unique values in OCR order.
+    values = []
+    for m in money_re.finditer(amount_window):
+        raw = clean_ocr_amount_raw(m.group(0))
+
+        try:
+            value = parse_amount(raw)
+        except Exception:
+            continue
+
+        if value > 100000:
+            alt = re.search(r"(\d{1,3}[.,]\d{2})$", raw)
+            if alt:
+                try:
+                    value = parse_amount(alt.group(1))
+                except Exception:
+                    continue
+            else:
+                continue
+
+        if value <= 0 or value > 1000000:
+            continue
+
+        if not any(abs(value - old) < 0.01 for old in values):
+            values.append(value)
+
+    return values
+
+
 def extract_arabic_ocr_transactions(text: str) -> list[dict]:
     if not is_arabic_text(text):
         return []
@@ -1115,6 +1218,7 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         if line_end == -1:
             line_end = len(normalized)
 
+        window_start_abs = line_start
         window = normalized[line_start:line_end]
 
         # QNB / OCR partiel: date "02 2026" peut être à la fin de la ligne précédente.
@@ -1128,8 +1232,10 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
                     break
 
             if next_date_start:
+                window_start_abs = dm["start"]
                 window = normalized[dm["start"]:next_date_start]
             else:
+                window_start_abs = dm["start"]
                 window = normalized[dm["start"]:]
 
         # fallback OCR: si la ligne date seule ou sans montants,
@@ -1151,6 +1257,7 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
                 merged_window = normalized[line_start:next_line_end]
 
             if len(re.findall(amount_pattern, merged_window)) >= 2:
+                window_start_abs = line_start
                 window = merged_window
 
         # ignore lignes header/période
@@ -1164,9 +1271,9 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
         # enlever la date de la ligne avant extraction montants
         amount_window = (
-            window[:dm["start"] - line_start]
+            window[:dm["start"] - window_start_abs]
             +
-            window[dm["end"] - line_start:]
+            window[dm["end"] - window_start_abs:]
         )
 
         # retirer toutes les dates OCR restantes du segment avant montants
@@ -1192,47 +1299,16 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         print("WINDOW:")
         print(window)
 
-        amounts = []
+        values = extract_money_values_from_window(amount_window)
 
-        print(
-            "WINDOW_AMOUNTS:",
-            re.findall(amount_pattern, amount_window)
-        )
-        for am in re.finditer(amount_pattern, amount_window):
-            raw = am.group(0)
-            raw = re.sub(r"^(\d{1,3}),\1,", r"\1,", raw)
-            raw = re.sub(r"^(\d),(\d{3},\d{2})$", r"\2", raw)
-            try:
-                value = parse_amount(raw)
-            except Exception:
-                continue
+        print("WINDOW_AMOUNTS:", values)
 
-            # OCR pollution: ex "1182 388.45" lu comme "182 388.45"
-            if value > 100000:
-                alt = re.search(r"(\d{1,3}[.,]\d{2})$", raw)
-                if alt:
-                    value = parse_amount(alt.group(1))
-                else:
-                    continue
-
-            absolute_pos = line_start + am.start()
-            distance = abs(absolute_pos - dm["start"])
-
-            amounts.append((distance, value, raw))
-
-        if len(amounts) < 2:
+        if len(values) < 2:
             continue
 
-        # garder l'ordre OCR réel de la ligne
-        nearest_values = [x[1] for x in amounts[:4]]
-
-        clean = []
-        for v in nearest_values:
-            if not any(abs(v - old) < 0.01 for old in clean):
-                clean.append(v)
-
-        if len(clean) < 2:
-            continue
+        # garder l'ordre OCR réel de la ligne:
+        # premier montant = transaction probable, dernier montant = solde probable
+        clean = values[:4]
 
         rows.append({
             "date": dm["date"],
@@ -1260,38 +1336,35 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
         best = None
 
+        # Source de vérité générale:
+        # - le dernier montant fiable de la ligne est le solde probable
+        # - le premier montant fiable est le mouvement probable
+        # - si un solde précédent existe, le signe vient de la variation du solde
+        tx = probable_tx or numbers[0]
+        bal = probable_balance or numbers[-1]
+
         if i > 0:
             prev_balance = rows[i - 1].get("resolved_balance")
 
             if prev_balance is not None:
-                candidates = []
+                delta = round(bal - prev_balance, 2)
 
-                for bal in numbers:
-                    delta = round(bal - prev_balance, 2)
-
-                    for tx in numbers:
-                        if abs(tx - bal) < 0.01:
-                            continue
-
-                        if abs(abs(delta) - abs(tx)) < 0.1:
-                            candidates.append((tx, bal, delta))
-
-                if candidates:
-                    tx, bal, delta = min(
-                        candidates,
-                        key=lambda x: abs(abs(x[2]) - abs(x[0]))
-                    )
-
+                # Le montant OCR correspond à la variation du solde.
+                if abs(abs(delta) - abs(tx)) < 0.15:
                     if delta > 0:
                         best = (abs(tx), bal, "income")
                     else:
                         best = (abs(tx), bal, "expense")
 
-        if not best:
-            # fallback général: plus grand nombre = solde probable, autre = transaction
-            tx = probable_tx or numbers[0]
-            bal = probable_balance or numbers[-1]
+                # Si le delta est fiable mais le montant OCR est pollué,
+                # utiliser le delta comme mouvement.
+                elif abs(delta) > 0.01 and abs(delta) < 100000:
+                    if delta > 0:
+                        best = (abs(delta), bal, "income")
+                    else:
+                        best = (abs(delta), bal, "expense")
 
+        if not best:
             lower = row["text"].lower()
             tx_type = "income"
 
