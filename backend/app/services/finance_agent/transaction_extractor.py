@@ -897,6 +897,22 @@ def detect_currency(text: str) -> str:
 
     return "unknown"
 
+def detect_statement_month_year(text: str):
+    text = clean_db_text(normalize_arabic_digits(text))
+
+    # exemples: 20260401 20260430
+    m = re.search(r"(20\d{2})([01]\d)[0-3]\d\s+(20\d{2})([01]\d)[0-3]\d", text)
+    if m and m.group(1) == m.group(3) and m.group(2) == m.group(4):
+        return int(m.group(1)), int(m.group(2))
+
+    # exemples: 01.04.2026 30.04.2026
+    m = re.search(r"[0-3]?\d[./-]([01]?\d)[./-](20\d{2}).{0,20}[0-3]?\d[./-]\1[./-]\2", text)
+    if m:
+        return int(m.group(2)), int(m.group(1))
+
+    return None, None
+
+
 def iter_lines_with_offsets(text: str):
     offset = 0
     for line in text.splitlines(True):
@@ -918,6 +934,7 @@ def find_arabic_ocr_dates(text: str):
     )
 
     found = []
+    statement_year, statement_month = detect_statement_month_year(text)
 
     def add_date(year, month, day, start, end):
         try:
@@ -991,6 +1008,21 @@ def find_arabic_ocr_dates(text: str):
                 line_start + m.start(),
                 line_start + m.end(),
             )
+
+        # dates partielles OCR: "01 2026", "02 2026"
+        # utilise le mois de la période si disponible
+        if statement_year and statement_month:
+            m = re.search(r"^\s*([0-3]?\d)\s+(20\d{2})\b", line)
+            if m:
+                day, year = m.groups()
+                if int(year) == statement_year:
+                    add_date(
+                        statement_year,
+                        statement_month,
+                        int(day),
+                        line_start + m.start(1),
+                        line_start + m.end(2),
+                    )
 
         # compact YYYYMMDD
         for m in re.finditer(
@@ -1107,6 +1139,13 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
             " ",
             amount_window,
         )
+
+        if dates:
+            amount_window = re.sub(
+                r"^\s*([0-3]?\d)\s+(20\d{2})\b",
+                " ",
+                amount_window,
+            )
 
         print("WINDOW:")
         print(window)
