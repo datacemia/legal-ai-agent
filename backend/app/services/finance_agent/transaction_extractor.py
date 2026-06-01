@@ -12,7 +12,7 @@ def debug_log(*args):
         print(*args)
 
 
-CURRENCY_CODES = ["USD", "EUR", "GBP", "AED", "MAD", "CAD", "AUD", "JOD", "SAR", "QAR", "KWD", "BHD", "OMR", "DZD", "TND", "EGP", "CHF", "JPY", "CNY", "INR", "TRY", "NGN", "ZAR"]
+CURRENCY_CODES = ["USD", "EUR", "GBP", "AED", "MAD", "CAD", "AUD", "JOD", "SAR", "QAR", "KWD", "BHD", "OMR", "DZD", "TND", "EGP", "CHF", "JPY", "CNY", "INR", "TRY", "NGN", "ZAR", "MULTI"]
 
 CANADA_BANKS = [
     # Big Six / grandes banques canadiennes
@@ -1828,6 +1828,18 @@ def detect_currency(text: str) -> str:
                 scores[code] += 1
 
     if scores:
+        explicit_codes = [code for code, count in scores.items() if count > 0]
+
+        if is_mixed_currency_document and len(explicit_codes) > 1:
+            debug_log("CURRENCY_DEBUG: explicit_multi", dict(scores))
+            log_currency_detection_result(
+                "MULTI",
+                "explicit_multi_currency",
+                100,
+                str(dict(scores)),
+            )
+            return "MULTI"
+
         detected = scores.most_common(1)[0][0]
         debug_log("CURRENCY_DEBUG: explicit", detected, dict(scores))
         log_currency_detection_result(
@@ -1839,16 +1851,17 @@ def detect_currency(text: str) -> str:
         return detected
 
     # If there is no explicit currency and the document says multi-currency,
-    # do not infer a single currency from a bank brand.
+    # keep the result explicit as MULTI instead of unknown. Downstream code can
+    # then avoid pretending there is one reliable statement currency.
     if is_mixed_currency_document:
-        debug_log("CURRENCY_DEBUG: mixed_currency_document -> unknown")
+        debug_log("CURRENCY_DEBUG: mixed_currency_document -> MULTI")
         log_currency_detection_result(
-            "unknown",
+            "MULTI",
             "mixed_currency_document",
-            0,
+            80,
             "multi_currency_marker",
         )
-        return "unknown"
+        return "MULTI"
 
     COUNTRY_CURRENCY = {
         # Maghreb
@@ -2350,7 +2363,7 @@ def resolve_arabic_row_amount(row: dict, prev_balance: float | None) -> tuple[fl
     numbers = [float(n) for n in row.get("numbers", []) if n is not None]
 
     if not numbers:
-        return 0.0, 0.0, "income"
+        return 0.0, 0.0, None
 
     probable_tx = float(row.get("probable_tx") or numbers[0])
     probable_balance = float(row.get("probable_balance") or numbers[-1])
@@ -2402,6 +2415,16 @@ def resolve_arabic_row_amount(row: dict, prev_balance: float | None) -> tuple[fl
 
     # No reliable previous balance: use OCR-order fallback and text hints.
     tx_type = classify_by_keywords(row.get("text", ""))
+
+    # First Arabic OCR row has no previous balance, so balance delta cannot
+    # decide the sign. For neutral amount+balance rows, never default to
+    # expense. If the balance is at least the movement amount, classifying the
+    # first movement as income preserves a non-negative implied opening balance
+    # and fixes mixed Arabic/English layouts where descriptions are unreadable.
+    if prev_balance is None and tx_type is None and len(numbers) >= 2:
+        if probable_tx > 0 and probable_balance > 0 and probable_balance >= probable_tx:
+            return abs(probable_tx), probable_balance, "income"
+
     return abs(probable_tx), probable_balance, tx_type
 
 def extract_arabic_ocr_transactions(text: str) -> list[dict]:
@@ -2574,10 +2597,18 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         if is_internal_transfer:
             continue
 
+        if tx_type == "income":
+            signed_amount = abs(tx_amount)
+        elif tx_type == "expense":
+            signed_amount = -abs(tx_amount)
+        else:
+            signed_amount = abs(tx_amount)
+            tx_type = "unknown"
+
         transactions.append({
             "date": row["date"],
             "description": clean_db_text(row["text"][:300]),
-            "amount": tx_amount if tx_type == "income" else -abs(tx_amount),
+            "amount": signed_amount,
             "type": tx_type,
             "currency": currency,
         })
