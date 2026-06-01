@@ -1039,6 +1039,29 @@ def find_arabic_ocr_dates(text: str):
                 line_start + m.end(),
             )
 
+    # fallback général OCR: lignes "01 2026", "02 2026"
+    # seulement si aucune date complète n'a été trouvée
+    if not found:
+        for line_start, line in iter_lines_with_offsets(text):
+            if any(x in line for x in ["الحساب", "باسحلا", "account", "iban", "الفترة", "ةرتفلا"]):
+                continue
+
+            m = re.search(r"^\s*([0-3]?\d)\s+(20\d{2})\b", line)
+            if not m:
+                continue
+
+            day, year = m.groups()
+
+            # mois absent dans le PDF: placeholder stable = janvier
+            # objectif: extraire transactions sans inventer une devise/mois
+            add_date(
+                int(year),
+                1,
+                int(day),
+                line_start + m.start(1),
+                line_start + m.end(2),
+            )
+
     unique = {}
     for d in found:
         unique[(d["date"], d["start"])] = d
