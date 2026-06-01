@@ -1985,9 +1985,12 @@ def detect_currency(text: str) -> str:
     def has_hint(hints: list[str]) -> bool:
         for hint in hints:
             h = hint.upper()
-            # Avoid false positives for very short Latin acronyms such as BNA, CPA, CIB, NBE.
-            if re.fullmatch(r"[A-Z0-9]{2,4}", h):
-                if re.search(rf"(?<![A-Z0-9]){re.escape(h)}(?![A-Z0-9])", normalized):
+
+            if re.fullmatch(r"[A-Z0-9]{2,4}", h) or re.fullmatch(r"[\u0600-\u06FF]{2,4}", h):
+                if re.search(
+                    rf"(?<![A-Z0-9\u0600-\u06FF]){re.escape(h)}(?![A-Z0-9\u0600-\u06FF])",
+                    normalized,
+                ):
                     return True
             elif h in normalized:
                 return True
@@ -2334,18 +2337,31 @@ def extract_money_values_from_window(amount_window: str) -> list[float]:
 
 
 
+def arabic_text_variants(text: str) -> list[str]:
+    variants = [text.lower()]
+
+    if is_arabic_text(text):
+        reversed_words = " ".join(
+            word[::-1] if re.search(r"[\u0600-\u06FF]", word) else word
+            for word in text.split()
+        )
+        variants.append(reversed_words.lower())
+
+    return variants
+
+
 def classify_by_keywords(text: str) -> str | None:
-    lower = text.lower()
+    variants = arabic_text_variants(text)
 
     # General income-priority rule: inbound phrases must win over broad
     # expense words such as "payment".
-    if is_income_priority_description(lower):
+    if any(is_income_priority_description(v) for v in variants):
         return "income"
 
-    if any(k in lower for k in EXPENSE_KEYWORDS):
+    if any(any(k in v for k in EXPENSE_KEYWORDS) for v in variants):
         return "expense"
 
-    if any(k in lower for k in INCOME_KEYWORDS):
+    if any(any(k in v for k in INCOME_KEYWORDS) for v in variants):
         return "income"
 
     # Neutral descriptions should remain unknown.
