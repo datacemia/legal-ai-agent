@@ -961,6 +961,14 @@ def find_arabic_ocr_dates(text: str):
             near_start = len(before) <= 12
             near_end = len(after) <= 12
 
+            print("DATE_EDGE_CHECK:", {
+                "raw": m.group(0),
+                "before_len": len(before),
+                "after_len": len(after),
+                "before": before[-30:],
+                "after": after[:30],
+            })
+
             if not (near_start or near_end):
                 continue
 
