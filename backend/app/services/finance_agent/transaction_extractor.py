@@ -1047,6 +1047,9 @@ def find_arabic_ocr_dates(text: str):
                 continue
 
             m = re.search(r"^\s*([0-3]?\d)\s+(20\d{2})\b", line)
+            if m:
+                print("PARTIAL_DATE_MATCH:", line)
+
             if not m:
                 continue
 
