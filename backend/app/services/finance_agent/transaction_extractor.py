@@ -23,6 +23,7 @@ CANADA_BANKS = [
     "ROYAL BANK OF CANADA",
     "SCOTIABANK",
     "CIBC",
+    "DESJARDINS",
 ]
 
 COUNTRY_TO_CURRENCY = {
@@ -1909,12 +1910,103 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
     return transactions
 
 
+
+def infer_month_first_date_order(
+    text: str,
+    detected_currency: str,
+) -> bool:
+    """Infer whether numeric dates should be parsed as MM/DD/YYYY.
+
+    Conservative rules:
+    - USD is month-first by default.
+    - CAD is mixed in the real world: many English Canadian statements use
+      MM/DD/YYYY, while French/Quebec statements such as Desjardins can use
+      DD/MM/YYYY.
+    - Non-ambiguous dates inside the document are the strongest signal.
+    - French/Quebec markers force day-first.
+    - English Canadian bank markers fall back to month-first.
+    - Everything else remains day-first to avoid breaking France/UK/EU/Arabic.
+    """
+    normalized = normalize_arabic_digits(clean_db_text(text)).upper()
+
+    if detected_currency == "USD":
+        debug_log("TX_DEBUG: date_order", "USD -> month_first")
+        return True
+
+    if detected_currency != "CAD":
+        debug_log("TX_DEBUG: date_order", detected_currency, "-> day_first")
+        return False
+
+    french_canada_markers = [
+        "DESJARDINS",
+        "CAISSE DESJARDINS",
+        "CAISSE POPULAIRE",
+        "QUEBEC",
+        "QUÉBEC",
+        "MONTRÉAL",
+        "MONTREAL",
+        "RELEVÉ",
+        "SOLDE",
+        "OPÉRATION",
+        "OPERATION",
+        "PAIEMENT",
+        "VIREMENT",
+    ]
+
+    if any(marker in normalized for marker in french_canada_markers):
+        debug_log("TX_DEBUG: date_order", "CAD french_marker -> day_first")
+        return False
+
+    # Look for numeric dates and use any non-ambiguous example as proof.
+    # MM/DD proof: first <= 12 and second > 12, e.g. 01/18/2026.
+    # DD/MM proof: first > 12 and second <= 12, e.g. 15/01/2026.
+    for match in re.finditer(
+        r"\b(\d{1,2})[./-](\d{1,2})(?:[./-]\d{2,4})?\b",
+        normalized,
+    ):
+        first = int(match.group(1))
+        second = int(match.group(2))
+
+        if first <= 12 and second > 12:
+            debug_log(
+                "TX_DEBUG: date_order",
+                "CAD non_ambiguous -> month_first",
+                match.group(0),
+            )
+            return True
+
+        if first > 12 and second <= 12:
+            debug_log(
+                "TX_DEBUG: date_order",
+                "CAD non_ambiguous -> day_first",
+                match.group(0),
+            )
+            return False
+
+    english_canada_bank_markers = [
+        "BANK OF MONTREAL",
+        "BMO",
+        "TD CANADA TRUST",
+        "TD BANK",
+        "RBC",
+        "ROYAL BANK OF CANADA",
+        "SCOTIABANK",
+        "CIBC",
+    ]
+
+    if any(marker in normalized for marker in english_canada_bank_markers):
+        debug_log("TX_DEBUG: date_order", "CAD english_bank -> month_first")
+        return True
+
+    debug_log("TX_DEBUG: date_order", "CAD ambiguous -> day_first")
+    return False
+
 def extract_transactions(text: str) -> list[dict]:
     debug_log("=== TX_EXTRACT_DEBUG START ===")
     debug_log("TEXT_SAMPLE:", clean_db_text(str(text))[:500])
 
     detected_currency = detect_currency(text)
-    prefer_us_date = detected_currency in {"USD", "CAD"}
+    prefer_us_date = infer_month_first_date_order(text, detected_currency)
     debug_log("TX_DEBUG: detected_currency", detected_currency)
     debug_log("TX_DEBUG: prefer_us_date", prefer_us_date)
 
