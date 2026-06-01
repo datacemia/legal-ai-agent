@@ -940,6 +940,72 @@ def detect_currency(text: str) -> str:
     if scores:
         return scores.most_common(1)[0][0]
 
+    COUNTRY_CURRENCY = {
+        "MOROCCO": "MAD",
+        "ALGERIA": "DZD",
+        "TUNISIA": "TND",
+        "EGYPT": "EGP",
+        "SAUDI_ARABIA": "SAR",
+        "QATAR": "QAR",
+        "UAE": "AED",
+        "KUWAIT": "KWD",
+        "BAHRAIN": "BHD",
+        "OMAN": "OMR",
+        "JORDAN": "JOD",
+        "IRAQ": "IQD",
+        "LEBANON": "LBP",
+        "PALESTINE": "ILS",
+        "YEMEN": "YER",
+        "LIBYA": "LYD",
+        "SUDAN": "SDG",
+        "SYRIA": "SYP",
+    }
+
+    COUNTRY_HINTS = {
+        "MOROCCO": ["MOROCCO", "MAROC", "المغرب", "برغملا"],
+        "ALGERIA": ["ALGERIA", "ALGÉRIE", "ALGERIE", "الجزائر"],
+        "TUNISIA": ["TUNISIA", "TUNISIE", "تونس"],
+        "EGYPT": ["EGYPT", "ÉGYPTE", "EGYPTE", "مصر"],
+        "SAUDI_ARABIA": ["SAUDI", "KSA", "SAUDI ARABIA", "السعودية", "ةيدوعسلا"],
+        "QATAR": ["QATAR", "قطر", "رطق"],
+        "UAE": ["UAE", "UNITED ARAB EMIRATES", "EMIRATES", "DUBAI", "الإمارات", "دبي"],
+        "KUWAIT": ["KUWAIT", "الكويت"],
+        "BAHRAIN": ["BAHRAIN", "البحرين"],
+        "OMAN": ["OMAN", "عمان"],
+        "JORDAN": ["JORDAN", "الأردن"],
+        "IRAQ": ["IRAQ", "العراق"],
+        "LEBANON": ["LEBANON", "LIBAN", "لبنان"],
+        "PALESTINE": ["PALESTINE", "فلسطين"],
+        "YEMEN": ["YEMEN", "اليمن"],
+        "LIBYA": ["LIBYA", "LIBYE", "ليبيا"],
+        "SUDAN": ["SUDAN", "SOUDAN", "السودان"],
+        "SYRIA": ["SYRIA", "SYRIE", "سوريا"],
+    }
+
+    BANK_COUNTRY_HINTS = {
+        "MOROCCO": ["CIH", "ATTIJARI", "ATTIJARIWAFA", "BMCE", "BANK OF AFRICA", "CHAABI"],
+        "ALGERIA": ["BNA", "CPA", "BADR", "BEA", "CNEP"],
+        "TUNISIA": ["BIAT", "AMEN BANK", "BANQUE DE TUNISIE", "ATTIJARI BANK TUNISIE"],
+        "EGYPT": ["BANQUE MISR", "NATIONAL BANK OF EGYPT", "CIB", "QNB ALAHLI"],
+        "SAUDI_ARABIA": ["AL RAJHI", "مصرف الراجحي", "يحجارلا فرصم", "SNB", "RIYAD BANK"],
+        "QATAR": ["QNB", "QATAR NATIONAL BANK"],
+        "UAE": ["EMIRATES NBD", "ADCB", "FAB", "MASHREQ", "DUBAI ISLAMIC BANK"],
+        "KUWAIT": ["KUWAIT FINANCE HOUSE", "KFH", "NATIONAL BANK OF KUWAIT", "NBK"],
+        "BAHRAIN": ["NATIONAL BANK OF BAHRAIN", "NBB", "BANK OF BAHRAIN"],
+        "OMAN": ["BANK MUSCAT", "NATIONAL BANK OF OMAN", "NBO"],
+        "JORDAN": ["ARAB BANK JORDAN", "BANK OF JORDAN", "البنك العربي الأردني", "يبرعلا يندرألا كنبلا"],
+    }
+
+    # Arabic-country fallback: country first, then bank as country hint.
+    for country, hints in COUNTRY_HINTS.items():
+        if any(hint.upper() in normalized for hint in hints):
+            return COUNTRY_CURRENCY[country]
+
+    if not is_mixed_currency_document:
+        for country, hints in BANK_COUNTRY_HINTS.items():
+            if any(hint.upper() in normalized for hint in hints):
+                return COUNTRY_CURRENCY[country]
+
     # Country/jurisdiction fallback. Safer than bank fallback because it uses
     # explicit country context from the statement.
     country_currency_hints = [
