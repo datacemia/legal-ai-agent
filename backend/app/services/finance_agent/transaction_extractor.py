@@ -864,6 +864,116 @@ def is_date_only_line(
     return remaining.strip() == ""
 
 
+
+def split_compact_multi_transaction_lines(
+    lines: list[str],
+    default_year: int | None = None,
+    prefer_us_date: bool = False,
+) -> list[str]:
+    """Split compact OCR lines that contain multiple dated transactions.
+
+    Some PDFs/OCR outputs compress several rows into one physical line, e.g.:
+        01/03/2026 Salary +3200,00 02/03/2026 Carrefour -84,56
+
+    This structural normalization is intentionally language-neutral and does
+    not change French, English, or Arabic classification rules. It only turns
+    compact non-Arab rows into normal one-transaction-per-line candidates so
+    the existing parser can process them safely.
+    """
+    date_token_re = re.compile(
+        r"(?<!\d)(?:"
+        r"\d{4}-\d{2}-\d{2}"
+        r"|\d{1,2}[./-]\d{1,2}[./-]\d{2,4}"
+        r"|\d{1,2}\s+(?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s+\d{2,4}"
+        r"|(?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s+\d{1,2}\s+\d{2,4}"
+        r")(?!\d)",
+        flags=re.IGNORECASE,
+    )
+
+    rebuilt: list[str] = []
+
+    for line in lines:
+        if is_arabic_text(line):
+            rebuilt.append(line)
+            continue
+
+        matches = list(date_token_re.finditer(line))
+
+        if len(matches) <= 1:
+            rebuilt.append(line)
+            continue
+
+        prefix = line[:matches[0].start()].strip()
+
+        if prefix:
+            previous_needs_prefix = (
+                rebuilt
+                and extract_date(
+                    rebuilt[-1],
+                    default_year=default_year,
+                    prefer_us_date=prefer_us_date,
+                ) is not None
+                and not re.search(MONEY_NUMBER_PATTERN, rebuilt[-1])
+            )
+
+            if previous_needs_prefix:
+                rebuilt[-1] = f"{rebuilt[-1]} {prefix}".strip()
+                debug_log(
+                    "TX_DEBUG: compact_prefix_attached",
+                    {"prefix": prefix, "combined": rebuilt[-1]},
+                )
+
+                for idx, match in enumerate(matches):
+                    start = match.start()
+                    end = matches[idx + 1].start() if idx + 1 < len(matches) else len(line)
+                    segment = line[start:end].strip()
+
+                    if segment:
+                        rebuilt.append(segment)
+                        debug_log(
+                            "TX_DEBUG: compact_multi_tx_split",
+                            {"segment": segment},
+                        )
+
+                continue
+            else:
+                first_segment = line[matches[0].start():matches[1].start()].strip()
+                rebuilt.append(f"{prefix} {first_segment}".strip())
+                debug_log(
+                    "TX_DEBUG: compact_multi_tx_split",
+                    {"segment": rebuilt[-1]},
+                )
+
+                start_index = 1
+                for idx in range(start_index, len(matches)):
+                    start = matches[idx].start()
+                    end = matches[idx + 1].start() if idx + 1 < len(matches) else len(line)
+                    segment = line[start:end].strip()
+
+                    if segment:
+                        rebuilt.append(segment)
+                        debug_log(
+                            "TX_DEBUG: compact_multi_tx_split",
+                            {"segment": segment},
+                        )
+
+                continue
+
+        for idx, match in enumerate(matches):
+            start = match.start()
+            end = matches[idx + 1].start() if idx + 1 < len(matches) else len(line)
+            segment = line[start:end].strip()
+
+            if segment:
+                rebuilt.append(segment)
+                debug_log(
+                    "TX_DEBUG: compact_multi_tx_split",
+                    {"segment": segment},
+                )
+
+    return rebuilt
+
+
 def has_transaction_signal(
     line: str,
     default_year: int | None = None,
@@ -2602,6 +2712,13 @@ def extract_transactions(text: str) -> list[dict]:
         for line in text.splitlines()
         if " ".join(line.split())
     ]
+
+    if not is_arabic_text(text):
+        raw_lines = split_compact_multi_transaction_lines(
+            raw_lines,
+            default_year=default_year,
+            prefer_us_date=prefer_us_date,
+        )
 
     debug_log("TX_DEBUG: raw_lines_count", len(raw_lines))
     for idx, raw_line in enumerate(raw_lines[:30]):
