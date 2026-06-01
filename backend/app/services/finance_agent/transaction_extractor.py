@@ -641,6 +641,28 @@ def extract_date(
             return None
 
 
+    # Compact DMY format used by AU/UK/EU OCR statements: DDMMYYYY
+    # Example: 01022026 -> 2026-02-01. This must be checked before
+    # generic numeric date formats because degraded OCR often removes separators.
+    compact_dmy_match = re.search(r"\b([0-3]\d)([0-1]\d)(20\d{2})\b", line)
+
+    if compact_dmy_match:
+        try:
+            parsed = datetime(
+                int(compact_dmy_match.group(3)),
+                int(compact_dmy_match.group(2)),
+                int(compact_dmy_match.group(1)),
+            )
+
+            if not is_reasonable_year(parsed.year):
+                return None
+
+            return parsed.date().isoformat()
+
+        except ValueError:
+            return None
+
+
     text_month_us_match = re.search(
         r"\b("
         r"jan|january|feb|february|mar|march|apr|april|may|"
@@ -800,6 +822,12 @@ def is_date_only_line(
     )
 
     remaining = re.sub(
+        r"\b(?:[0-3]\d[0-1]\d20\d{2}|20\d{2}[0-1]\d[0-3]\d)\b",
+        "",
+        remaining,
+    )
+
+    remaining = re.sub(
         r"\b\d{2}[./-]\d{2}(?:[./-]\d{2,4})?\b",
         "",
         remaining,
@@ -913,6 +941,13 @@ def extract_transaction_amount(line: str) -> float | None:
 
     transaction_part = re.sub(
         r"\b20\d{6}\b",
+        "",
+        transaction_part,
+        count=1,
+    )
+
+    transaction_part = re.sub(
+        r"\b[0-3]\d[0-1]\d20\d{2}\b",
         "",
         transaction_part,
         count=1,
@@ -1044,6 +1079,13 @@ def extract_tabular_bank_amount(
         r"\b\d{4}-\d{2}-\d{2}\b",
         "",
         line,
+        count=1,
+    )
+
+    without_date = re.sub(
+        r"\b(?:[0-3]\d[0-1]\d20\d{2}|20\d{2}[0-1]\d[0-3]\d)\b",
+        "",
+        without_date,
         count=1,
     )
 
@@ -1430,6 +1472,13 @@ def extract_first_amount_after_date(line: str) -> float | None:
         r"\b\d{4}-\d{2}-\d{2}\b",
         "",
         line,
+        count=1,
+    )
+
+    text = re.sub(
+        r"\b(?:[0-3]\d[0-1]\d20\d{2}|20\d{2}[0-1]\d[0-3]\d)\b",
+        "",
+        text,
         count=1,
     )
 
@@ -2461,6 +2510,33 @@ def extract_transactions(text: str) -> list[dict]:
 
     while i < len(raw_lines):
         current = raw_lines[i]
+        current_lower = current.lower()
+        current_is_metadata_or_header = any(
+            keyword in current_lower
+            for keyword in [
+                "account number",
+                "account holder",
+                "account name",
+                "customer name",
+                "client name",
+                "statement date",
+                "statement period",
+                "date range",
+                "periode",
+                "période",
+                "bank statement",
+                "iban",
+                "swift",
+                "sort code",
+                "date description",
+                "debit credit",
+            ]
+        )
+
+        if current_is_metadata_or_header:
+            lines.append(current)
+            i += 1
+            continue
 
         current_is_date_only = is_date_only_line(
             current,
@@ -2669,6 +2745,16 @@ EXPENSE_KEYWORDS += [
     "openai api",
     "netflix",
     "slack",
+    # Common AU/degraded-OCR merchant and bill-payment tokens
+    "woolworths",
+    "coles",
+    "aldi",
+    "bpay",
+    "telstra",
+    "optus",
+    "utilities",
+    "grocery",
+    "groceries",
 ]
 
 INCOME_KEYWORDS += [
