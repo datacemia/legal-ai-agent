@@ -8,9 +8,9 @@ def calculate_financial_scores(
     fallback_income: float | None = None,
 ) -> dict:
     income = sum(
-        t["amount"]
+        float(t.get("amount", 0) or 0)
         for t in transactions
-        if t.get("type") == "income" and t.get("amount", 0) > 0
+        if t.get("type") == "income" and float(t.get("amount", 0) or 0) > 0
     )
 
     income_source = "transactions"
@@ -19,11 +19,32 @@ def calculate_financial_scores(
         income = float(fallback_income)
         income_source = "ai_fallback"
 
+    # Primary rule: trust the transaction type.
+    # This handles parsers that may return expenses as either:
+    #   {"type": "expense", "amount": -143.85}
+    # or:
+    #   {"type": "expense", "amount": 143.85}
     expenses = sum(
-        abs(t["amount"])
+        abs(float(t.get("amount", 0) or 0))
         for t in transactions
-        if t.get("type") == "expense" and t.get("amount", 0) < 0
+        if t.get("type") == "expense"
     )
+
+    # Safety fallback: if expense type labels failed but negative amounts exist,
+    # still recover observed expenses from signed transaction amounts.
+    if expenses <= 0 and transactions:
+        expenses = sum(
+            abs(float(t.get("amount", 0) or 0))
+            for t in transactions
+            if float(t.get("amount", 0) or 0) < 0
+        )
+
+    if not transactions:
+        extraction_quality = "failed"
+    elif expenses <= 0:
+        extraction_quality = "partial"
+    else:
+        extraction_quality = "success"
 
     subscription_total = sum(
         float(s.get("monthly_cost", 0) or 0)
@@ -85,6 +106,7 @@ def calculate_financial_scores(
         "impulse_spending": impulse_spending,
         "income_stability": income_stability,
         "overall_financial_habits_score": overall_score,
+        "extraction_quality": extraction_quality,
         "metrics": {
             "income_detected": round(income, 2),
             "income_source": income_source,
@@ -94,5 +116,6 @@ def calculate_financial_scores(
             "savings_rate_percent": round(savings_rate, 2),
             "expense_ratio_percent": round(expense_ratio, 2),
             "subscription_ratio_percent": round(subscription_ratio, 2),
+            "extraction_quality": extraction_quality,
         },
     }
