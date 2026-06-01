@@ -395,6 +395,7 @@ def handle_finance_ai(job: Job, db):
     budget = build_recommended_budget(
         transactions=transactions,
         fallback_income=effective_fallback_income,
+        output_language=output_language,
     )
 
     scores = calculate_financial_scores(
@@ -413,6 +414,7 @@ def handle_finance_ai(job: Job, db):
     forecast = predict_cashflow(
         transactions=transactions,
         fallback_income=effective_fallback_income,
+        output_language=output_language,
     )
     
 

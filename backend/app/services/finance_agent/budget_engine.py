@@ -1,6 +1,7 @@
 def build_recommended_budget(
     transactions: list[dict],
     fallback_income: float | None = None,
+    output_language: str = "en",
 ) -> dict:
     income = sum(
         t["amount"]
@@ -41,13 +42,48 @@ def build_recommended_budget(
 
     if expenses > estimated_income:
         status = "over_budget"
-        message = "Your current spending is higher than your estimated income."
+
+        message = {
+            "en": (
+                "Your current spending is higher than your estimated income."
+            ),
+            "fr": (
+                "Vos dépenses actuelles sont supérieures à votre revenu estimé."
+            ),
+            "ar": (
+                "مصاريفك الحالية أعلى من دخلك التقديري."
+            ),
+        }.get(output_language)
+
     elif expenses > max_safe_spending:
         status = "needs_attention"
-        message = "Your spending is within income but above the recommended safe level."
+
+        message = {
+            "en": (
+                "Your spending is within income but above the recommended safe level."
+            ),
+            "fr": (
+                "Vos dépenses restent inférieures à vos revenus mais dépassent le niveau recommandé."
+            ),
+            "ar": (
+                "مصاريفك أقل من دخلك ولكنها تتجاوز المستوى الآمن الموصى به."
+            ),
+        }.get(output_language)
+
     else:
         status = "healthy"
-        message = "Your spending is within the recommended safe level."
+
+        message = {
+            "en": (
+                "Your spending is within the recommended safe level."
+            ),
+            "fr": (
+                "Vos dépenses restent dans le niveau recommandé."
+            ),
+            "ar": (
+                "مصاريفك ضمن المستوى الآمن الموصى به."
+            ),
+        }.get(output_language)
 
     return {
         "income_source": income_source,

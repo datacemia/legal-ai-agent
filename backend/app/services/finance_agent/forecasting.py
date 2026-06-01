@@ -1,6 +1,7 @@
 def predict_cashflow(
     transactions: list[dict],
     fallback_income: float | None = None,
+    output_language: str = "en",
 ) -> dict:
     detected_income = sum(
         t["amount"]
@@ -47,19 +48,35 @@ def predict_cashflow(
 
     if net_cashflow < 0:
         trend = "negative"
-        message = "Your expenses exceed your income."
+        message = {
+            "en": "Your expenses exceed your income.",
+            "fr": "Vos dépenses dépassent vos revenus.",
+            "ar": "مصاريفك تتجاوز دخلك.",
+        }.get(output_language, "Your expenses exceed your income.")
 
     elif income > 0 and net_cashflow > income * 0.2:
         trend = "improving"
-        message = "Your balance trend is improving."
+        message = {
+            "en": "Your balance trend is improving.",
+            "fr": "La tendance de votre solde s’améliore.",
+            "ar": "اتجاه رصيدك يتحسن.",
+        }.get(output_language, "Your balance trend is improving.")
 
     elif income == 0 and expenses > 0:
         trend = "risky"
-        message = "No income was detected while expenses exist."
+        message = {
+            "en": "No income was detected while expenses exist.",
+            "fr": "Aucun revenu n’a été détecté alors que des dépenses existent.",
+            "ar": "لم يتم اكتشاف دخل بينما توجد مصاريف.",
+        }.get(output_language, "No income was detected while expenses exist.")
 
     else:
         trend = "stable"
-        message = "Your cashflow is relatively stable."
+        message = {
+            "en": "Your cashflow is relatively stable.",
+            "fr": "Votre trésorerie est relativement stable.",
+            "ar": "تدفقك النقدي مستقر نسبياً.",
+        }.get(output_language, "Your cashflow is relatively stable.")
 
     return {
         "income_source": income_source,
