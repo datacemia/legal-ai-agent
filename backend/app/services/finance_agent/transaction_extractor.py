@@ -1215,51 +1215,58 @@ def classify_by_keywords(text: str) -> str:
 def resolve_arabic_row_amount(row: dict, prev_balance: float | None) -> tuple[float, float, str]:
     """Resolve transaction amount, balance and type for one OCR row.
 
-    General strategy:
-    1) If a previous balance exists, test all possible (transaction, balance)
-       pairs and choose the one where balance delta matches the transaction.
-    2) If no balance relation can be proven, use the OCR-order fallback:
-       first money value = movement, last money value = probable balance.
-    3) For banks without a reliable balance column, fall back to keywords/sign.
+    General, conservative strategy:
+    1) Keep OCR order: first reliable value = movement candidate, last reliable value = balance candidate.
+    2) If a previous balance exists, the balance delta is the source of truth for the sign.
+    3) If the detected movement matches the delta, keep the movement value.
+    4) If the movement is missing/polluted but the balance delta is plausible, use the delta.
+    5) If no balance relation can be proven, fall back to keywords/sign without breaking FR/EN.
     """
     numbers = [float(n) for n in row.get("numbers", []) if n is not None]
+
+    if not numbers:
+        return 0.0, 0.0, "income"
+
     probable_tx = float(row.get("probable_tx") or numbers[0])
     probable_balance = float(row.get("probable_balance") or numbers[-1])
 
     if prev_balance is not None and len(numbers) >= 2:
-        candidates = []
+        # First trust the detected balance column when it is plausible.
+        delta = round(probable_balance - prev_balance, 2)
 
+        if abs(delta) > 0.01 and abs(delta) < 100000:
+            tolerance = max(0.15, abs(probable_tx) * 0.002)
+
+            if abs(abs(delta) - abs(probable_tx)) <= tolerance:
+                return abs(probable_tx), probable_balance, "income" if delta > 0 else "expense"
+
+            # General fallback for rows with fees/taxes/merged OCR: net cash movement equals balance delta.
+            return abs(delta), probable_balance, "income" if delta > 0 else "expense"
+
+        # If the probable balance is not usable, try every possible balance candidate.
+        candidates = []
         for bal in numbers:
             if bal <= 0:
                 continue
 
-            delta = round(bal - prev_balance, 2)
-
-            if abs(delta) < 0.01 or abs(delta) > 100000:
+            candidate_delta = round(bal - prev_balance, 2)
+            if abs(candidate_delta) < 0.01 or abs(candidate_delta) > 100000:
                 continue
 
             for tx in numbers:
                 if abs(tx - bal) < 0.01:
                     continue
 
-                # Dynamic tolerance: strict for normal rows, slightly wider for OCR cents.
                 tolerance = max(0.15, abs(tx) * 0.002)
-                score = abs(abs(delta) - abs(tx))
+                score = abs(abs(candidate_delta) - abs(tx))
 
                 if score <= tolerance:
-                    # Prefer the known OCR balance position when scores tie.
                     position_penalty = 0 if abs(bal - probable_balance) < 0.01 else 0.05
-                    candidates.append((score + position_penalty, tx, bal, delta))
+                    candidates.append((score + position_penalty, tx, bal, candidate_delta))
 
         if candidates:
-            _, tx, bal, delta = min(candidates, key=lambda x: x[0])
-            return abs(tx), bal, "income" if delta > 0 else "expense"
-
-        # If the balance column is clear but OCR transaction is polluted/missing,
-        # trust the balance delta, but only within a safe range.
-        delta = round(probable_balance - prev_balance, 2)
-        if abs(delta) > 0.01 and abs(delta) < 100000:
-            return abs(delta), probable_balance, "income" if delta > 0 else "expense"
+            _, tx, bal, candidate_delta = min(candidates, key=lambda x: x[0])
+            return abs(tx), bal, "income" if candidate_delta > 0 else "expense"
 
     # No reliable previous balance: use OCR-order fallback and text hints.
     tx_type = classify_by_keywords(row.get("text", ""))
