@@ -17,6 +17,7 @@ def generate_financial_alerts(
         alerts.append({
             "type": "warning",
             "severity": "medium",
+            "code": "HIGH_EXPENSES",
             "title": "High monthly expenses",
             "message": (
                 "Your monthly expenses are relatively high. "
@@ -33,6 +34,7 @@ def generate_financial_alerts(
         alerts.append({
             "type": "risk",
             "severity": "high",
+            "code": "LOW_FINANCIAL_SCORE",
             "title": "Low financial habits score",
             "message": (
                 "Your financial behavior may expose "
@@ -61,6 +63,7 @@ def generate_financial_alerts(
         alerts.append({
             "type": "risk",
             "severity": "high",
+            "code": "NEGATIVE_CASHFLOW",
             "title": "Cashflow risk detected",
             "message": (
                 "Your current spending trend could "
@@ -72,6 +75,7 @@ def generate_financial_alerts(
         alerts.append({
             "type": "warning",
             "severity": "medium",
+            "code": "TOO_MANY_SUBSCRIPTIONS",
             "title": "Too many subscriptions",
             "message": (
                 "You have multiple recurring services. "

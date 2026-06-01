@@ -450,40 +450,42 @@ def handle_finance_ai(job: Job, db):
         scores=scores,
     )
 
-    def localized_alert_message(alert: dict, language: str) -> str:
-        title = str(alert.get("title", ""))
-        message = str(alert.get("message", ""))
+    RISK_TRANSLATIONS = {
+        "NEGATIVE_CASHFLOW": {
+            "en": "Negative cashflow detected.",
+            "fr": "Trésorerie négative détectée.",
+            "ar": "تم اكتشاف خطر على التدفق النقدي.",
+        },
+        "LOW_FINANCIAL_SCORE": {
+            "en": "Financial habits need improvement.",
+            "fr": "Les habitudes financières doivent être améliorées.",
+            "ar": "العادات المالية تحتاج إلى تحسين.",
+        },
+        "HIGH_EXPENSES": {
+            "en": "Monthly expenses are relatively high.",
+            "fr": "Les dépenses mensuelles sont relativement élevées.",
+            "ar": "المصاريف الشهرية مرتفعة نسبياً.",
+        },
+        "TOO_MANY_SUBSCRIPTIONS": {
+            "en": "Multiple recurring subscriptions detected.",
+            "fr": "Plusieurs abonnements récurrents détectés.",
+            "ar": "تم اكتشاف عدة اشتراكات متكررة.",
+        },
+    }
 
-        translations = {
-            "Cashflow risk detected": {
-                "en": "Cashflow risk detected.",
-                "fr": "Risque de trésorerie détecté.",
-                "ar": "تم اكتشاف خطر على التدفق النقدي.",
-            },
-            "Low financial habits score": {
-                "en": "Financial habits need improvement.",
-                "fr": "Les habitudes financières doivent être améliorées.",
-                "ar": "العادات المالية تحتاج إلى تحسين.",
-            },
-            "High monthly expenses": {
-                "en": "Monthly expenses are relatively high.",
-                "fr": "Les dépenses mensuelles sont relativement élevées.",
-                "ar": "المصاريف الشهرية مرتفعة نسبياً.",
-            },
-            "Too many subscriptions": {
-                "en": "Multiple recurring subscriptions detected.",
-                "fr": "Plusieurs abonnements récurrents détectés.",
-                "ar": "تم اكتشاف عدة اشتراكات متكررة.",
-            },
-        }
+    risk_notes = []
 
-        return translations.get(title, {}).get(language, message)
+    for alert in alerts:
+        code = alert.get("code")
 
-    risk_notes = [
-        localized_alert_message(alert, output_language)
-        for alert in alerts
-        if alert.get("type") in ("risk", "warning")
-    ]
+        text = (
+            RISK_TRANSLATIONS
+            .get(code, {})
+            .get(output_language)
+        )
+
+        if text:
+            risk_notes.append(text)
 
     result_ai["risk_notes"] = risk_notes
 
