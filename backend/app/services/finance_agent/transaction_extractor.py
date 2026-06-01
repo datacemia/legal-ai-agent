@@ -956,7 +956,12 @@ def find_arabic_ocr_dates(text: str):
             before = line[:m.start()].strip()
             after = line[m.end():].strip()
 
-            if before and after:
+            # OCR arabe: la date peut être légèrement décalée,
+            # mais elle doit rester proche d'un bord de ligne
+            near_start = len(before) <= 12
+            near_end = len(after) <= 12
+
+            if not (near_start or near_end):
                 continue
 
             add_date(
