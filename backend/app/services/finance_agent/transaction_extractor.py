@@ -1250,22 +1250,28 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
             prev_balance = rows[i - 1].get("resolved_balance")
 
             if prev_balance is not None:
-                for tx in numbers:
-                    for bal in numbers:
-                        if tx == bal:
+                candidates = []
+
+                for bal in numbers:
+                    delta = round(bal - prev_balance, 2)
+
+                    for tx in numbers:
+                        if abs(tx - bal) < 0.01:
                             continue
 
-                        diff = round(bal - prev_balance, 2)
+                        if abs(abs(delta) - abs(tx)) < 0.1:
+                            candidates.append((tx, bal, delta))
 
-                        if abs(diff - tx) < 0.1:
-                            best = (tx, bal, "income")
-                        elif abs(diff + tx) < 0.1:
-                            best = (tx, bal, "expense")
+                if candidates:
+                    tx, bal, delta = min(
+                        candidates,
+                        key=lambda x: abs(abs(x[2]) - abs(x[0]))
+                    )
 
-                        if best:
-                            break
-                    if best:
-                        break
+                    if delta > 0:
+                        best = (abs(tx), bal, "income")
+                    else:
+                        best = (abs(tx), bal, "expense")
 
         if not best:
             # fallback général: plus grand nombre = solde probable, autre = transaction
