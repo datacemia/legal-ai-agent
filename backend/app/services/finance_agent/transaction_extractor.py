@@ -284,6 +284,25 @@ def parse_amount(value: str) -> float:
     return float(value)
 
 
+
+def extract_us_debit_credit_balance(line: str):
+    numbers = re.findall(MONEY_NUMBER_PATTERN, line)
+
+    if len(numbers) < 3:
+        return None, None
+
+    debit = parse_amount(numbers[-3])
+    credit = parse_amount(numbers[-2])
+    balance = parse_amount(numbers[-1])
+
+    if credit > 0 and debit == 0:
+        return credit, "income"
+
+    if debit > 0 and credit == 0:
+        return -debit, "expense"
+
+    return None, None
+
 def pick_bank_amount(
     numbers: list[str],
     line: str,
@@ -770,6 +789,12 @@ def extract_tabular_bank_amount(
         return None, None
 
     description = normalized
+
+
+    tabular_us_amount, tabular_us_type = extract_us_debit_credit_balance(line)
+
+    if tabular_us_amount is not None:
+        return tabular_us_amount, tabular_us_type
 
     if any(
         keyword in description
