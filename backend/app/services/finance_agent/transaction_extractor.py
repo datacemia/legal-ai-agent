@@ -890,20 +890,61 @@ def has_transaction_signal(
     )
 
 
+
+def is_income_priority_description(text: str) -> bool:
+    """Return True for income phrases that must override broad expense words.
+
+    This is intentionally general, not bank-specific. Many banks describe
+    inbound cashflow with words that also appear in expense rows, for example
+    "Salary Payment" or "Payment In". These income phrases must be
+    evaluated before generic expense terms such as "payment" or "transfer".
+    """
+    lower = text.lower()
+
+    priority_phrases = [
+        "salary payment",
+        "salary deposit",
+        "salary credit",
+        "payroll",
+        "salary",
+        "wage",
+        "wages",
+        "pay credit",
+        "payment in",
+        "payment received",
+        "osko payment in",
+        "incoming transfer",
+        "transfer received",
+        "transfer in",
+        "deposit",
+        "received",
+        "freelance",
+        "client",
+        "virement reçu",
+        "virement recu",
+        "دائن",
+        "إيداع",
+        "ايداع",
+        "راتب",
+        "دخل",
+        "تحويل وارد",
+        "حوالة واردة",
+    ]
+
+    return any(phrase in lower for phrase in priority_phrases)
+
 def detect_type(line: str, amount: float) -> str:
     lower = line.lower()
 
+    # Explicit signs are the strongest signal when present.
     if amount > 0 and "+" in line:
         return "income"
 
     if amount < 0 or "-" in line:
         return "expense"
 
-    # outgoing payments have priority
-    if any(keyword in lower for keyword in EXPENSE_KEYWORDS):
-        return "expense"
-
-    # common outgoing transfers
+    # Strong outgoing obligations should stay expenses even if they contain
+    # broad words that can appear in other contexts.
     if any(
         keyword in lower
         for keyword in [
@@ -911,8 +952,19 @@ def detect_type(line: str, amount: float) -> str:
             "rent",
             "mortgage",
             "loan payment",
+            "transfer to loan",
+            "outgoing transfer",
+            "transfer sent",
         ]
     ):
+        return "expense"
+
+    # General income-priority rule: inbound phrases must be checked before
+    # generic expense words such as "payment".
+    if is_income_priority_description(lower):
+        return "income"
+
+    if any(keyword in lower for keyword in EXPENSE_KEYWORDS):
         return "expense"
 
     if any(keyword in lower for keyword in INCOME_KEYWORDS):
@@ -922,7 +974,6 @@ def detect_type(line: str, amount: float) -> str:
         return "expense"
 
     return "income"
-
 
 def extract_transaction_amount(line: str) -> float | None:
     transaction_part = re.split(
@@ -1177,30 +1228,8 @@ def extract_tabular_bank_amount(
         return amount, "income"
 
     # Income keywords must be evaluated before generic outgoing words such as
-    # "payment". Some banks describe salary credits as "Salary Payment" and
-    # inbound transfers as "Payment In". Without this priority, those rows can
-    # be incorrectly classified as expenses.
-    if any(
-        keyword in description
-        for keyword in [
-            "salary payment",
-            "salary deposit",
-            "salary",
-            "payroll",
-            "wage",
-            "pay credit",
-            "payment in",
-            "osko payment in",
-            "incoming transfer",
-            "transfer received",
-            "virement reçu",
-            "virement recu",
-            "deposit",
-            "received",
-            "freelance",
-            "client",
-        ]
-    ):
+    # "payment". This is a general rule, not a bank-specific exception.
+    if is_income_priority_description(description):
         amount = pick_bank_amount(numbers, line)
 
         return abs(amount), "income"
@@ -1278,11 +1307,14 @@ def extract_amount_balance_line(line: str):
 
     text = line.lower()
 
-    if any(k in text for k in INCOME_KEYWORDS):
+    if is_income_priority_description(text):
         return abs(tx_amount), "income"
 
     if any(k in text for k in EXPENSE_KEYWORDS):
         return -abs(tx_amount), "expense"
+
+    if any(k in text for k in INCOME_KEYWORDS):
+        return abs(tx_amount), "income"
 
     # General safety rule for rows shaped like:
     #     date description transaction_amount running_balance
@@ -2145,27 +2177,9 @@ def extract_money_values_from_window(amount_window: str) -> list[float]:
 def classify_by_keywords(text: str) -> str:
     lower = text.lower()
 
-    # Income-specific phrases must win over broad expense words such as
-    # "payment". Example: "Salary Payment" is an income transaction.
-    if any(
-        k in lower
-        for k in [
-            "salary payment",
-            "salary deposit",
-            "payroll",
-            "salary",
-            "wage",
-            "pay credit",
-            "payment in",
-            "osko payment in",
-            "incoming transfer",
-            "transfer received",
-            "deposit",
-            "received",
-            "freelance",
-            "client",
-        ]
-    ):
+    # General income-priority rule: inbound phrases must win over broad
+    # expense words such as "payment".
+    if is_income_priority_description(lower):
         return "income"
 
     if any(k in lower for k in EXPENSE_KEYWORDS):
@@ -2175,7 +2189,6 @@ def classify_by_keywords(text: str) -> str:
         return "income"
 
     return "income"
-
 
 def resolve_arabic_row_amount(row: dict, prev_balance: float | None) -> tuple[float, float, str]:
     """Resolve transaction amount, balance and type for one OCR row.
