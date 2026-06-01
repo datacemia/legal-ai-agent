@@ -1148,7 +1148,13 @@ def extract_amount_balance_line(line: str):
     if any(k in text for k in EXPENSE_KEYWORDS):
         return -abs(tx_amount), "expense"
 
-    return None, None
+    # General safety rule for rows shaped like:
+    #     date description transaction_amount running_balance
+    # The transaction amount is the penultimate money value and the balance is
+    # the last money value. Never return the balance as the row amount.
+    # Type can remain unknown here; infer_balance_delta_rows() can later use
+    # the running balance delta to set income/expense safely.
+    return abs(tx_amount), None
 
 
 def extract_line_balance(line: str) -> float | None:
@@ -2442,8 +2448,20 @@ def extract_transactions(text: str) -> list[dict]:
         debug_log("TX_ACCEPT_SIGNAL:", clean_line)
         tabular_amount, tabular_type = extract_tabular_bank_amount(clean_line)
 
+        amount_balance_tx_amount = None
+        amount_balance_value = None
+
         if tabular_amount is None:
             tabular_amount, tabular_type = extract_amount_balance_line(clean_line)
+
+            amount_balance_numbers = re.findall(MONEY_NUMBER_PATTERN, clean_line)
+            if len(amount_balance_numbers) >= 2:
+                try:
+                    amount_balance_tx_amount = parse_amount(amount_balance_numbers[-2])
+                    amount_balance_value = parse_amount(amount_balance_numbers[-1])
+                except Exception:
+                    amount_balance_tx_amount = None
+                    amount_balance_value = None
 
         debug_log("TX_DEBUG: tabular", tabular_amount, tabular_type)
 
@@ -2471,6 +2489,16 @@ def extract_transactions(text: str) -> list[dict]:
 
         if transaction_type == "income":
             amount = abs(amount)
+
+        if amount_balance_tx_amount is not None and amount_balance_value is not None:
+            print(
+                "TX_DEBUG: amount_balance_parse",
+                {
+                    "amount": amount_balance_tx_amount,
+                    "balance": amount_balance_value,
+                    "chosen_amount": amount,
+                }
+            )
 
         date = extract_date(
             clean_line,
