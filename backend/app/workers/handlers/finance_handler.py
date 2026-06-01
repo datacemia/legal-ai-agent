@@ -450,16 +450,10 @@ def handle_finance_ai(job: Job, db):
             2,
         )
 
-    if (
-        result_ai.get(
-            "financial_score",
-            0,
-        ) == 0
-    ):
-        result_ai["financial_score"] = scores.get(
-            "overall_financial_habits_score",
-            0,
-        )
+    result_ai["financial_score"] = scores.get(
+        "overall_financial_habits_score",
+        0,
+    )
 
     alerts = generate_financial_alerts(
         transactions=transactions,
