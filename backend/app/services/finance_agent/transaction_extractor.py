@@ -1236,12 +1236,19 @@ def resolve_arabic_row_amount(row: dict, prev_balance: float | None) -> tuple[fl
 
         if abs(delta) > 0.01 and abs(delta) < 100000:
             tolerance = max(0.15, abs(probable_tx) * 0.002)
+            delta_type = "income" if delta > 0 else "expense"
 
             if abs(abs(delta) - abs(probable_tx)) <= tolerance:
-                return abs(probable_tx), probable_balance, "income" if delta > 0 else "expense"
+                return abs(probable_tx), probable_balance, delta_type
 
             # General fallback for rows with fees/taxes/merged OCR: net cash movement equals balance delta.
-            return abs(delta), probable_balance, "income" if delta > 0 else "expense"
+            # If explicit row keywords exist, they can override the sign for rare statements where
+            # the displayed balance delta and transaction columns disagree due to OCR/table noise.
+            keyword_type = classify_by_keywords(row.get("text", ""))
+            if keyword_type in ("expense", "income"):
+                return abs(delta), probable_balance, keyword_type
+
+            return abs(delta), probable_balance, delta_type
 
         # If the probable balance is not usable, try every possible balance candidate.
         candidates = []
