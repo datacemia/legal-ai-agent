@@ -827,6 +827,31 @@ def extract_tabular_bank_amount(
     if not numbers:
         return None, None
 
+    # General rule: when the statement shows an explicit + / - sign,
+    # the sign is more reliable than generic words such as "payment".
+    # Example: "Client Payment +7200.00" must be income, not expense.
+    signed_match = re.search(
+        r"([+-])\s*("
+        r"(?:\d{1,3}(?:[ ,]\d{3})+|\d+)"
+        r"(?:[.,]\d{2})"
+        r")",
+        line,
+    )
+
+    if signed_match:
+        sign = signed_match.group(1)
+        signed_amount = parse_amount(signed_match.group(2))
+
+        debug_log(
+            "TX_DEBUG: signed_amount_priority",
+            {"sign": sign, "amount": signed_amount},
+        )
+
+        if sign == "+":
+            return abs(signed_amount), "income"
+
+        return -abs(signed_amount), "expense"
+
     tabular_us_amount, tabular_us_type = extract_us_debit_credit_balance(line)
 
     if tabular_us_amount is not None:
