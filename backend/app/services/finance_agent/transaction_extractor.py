@@ -906,6 +906,7 @@ def iter_lines_with_offsets(text: str):
 
 def find_arabic_ocr_dates(text: str):
     text = normalize_arabic_digits(text)
+
     text = (
         text.replace("٫", ".")
             .replace("٬", ".")
@@ -934,58 +935,73 @@ def find_arabic_ocr_dates(text: str):
             "end": end,
         })
 
-    date_re = re.compile(
-        r"(?<!\d)([0-3]?\d)\s*[./-]\s*([01]?\d)\s*[./-]\s*(\d{2,4})(?!\d)"
-    )
+    def normalize_year(y: str) -> str | None:
+        if len(y) == 4 and y.startswith("20"):
+            return y
+        if len(y) in (2, 3):
+            return "20" + y[-2:]
+        return None
+
+    def has_real_date_separator(chunk: str) -> bool:
+        # accepte . / - et variantes OCR, refuse espaces/virgules de montants
+        separators = set("./-")
+        for ch in chunk:
+            if ch in separators:
+                return True
+            if not ch.isdigit() and not ch.isspace() and ch not in [",", "،"]:
+                return True
+        return False
+
+    def try_triplet(tokens, line_start, line):
+        if len(tokens) != 3:
+            return
+
+        a, b, c = [t.group() for t in tokens]
+        start = tokens[0].start()
+        end = tokens[2].end()
+        chunk = line[start:end]
+
+        if not has_real_date_separator(chunk):
+            return
+
+        # DD MM YY/YYYY
+        y = normalize_year(c)
+        if y:
+            try:
+                day = int(a)
+                month = int(b)
+            except Exception:
+                return
+
+            if 1 <= day <= 31 and 1 <= month <= 12:
+                add_date(y, month, day, line_start + start, line_start + end)
+
+        # YYYY MM DD
+        if len(a) == 4 and a.startswith("20"):
+            try:
+                month = int(b)
+                day = int(c)
+            except Exception:
+                return
+
+            if 1 <= day <= 31 and 1 <= month <= 12:
+                add_date(a, month, day, line_start + start, line_start + end)
 
     for line_start, line in iter_lines_with_offsets(text):
-        if any(x in line for x in ["الحساب", "باسحلا", "account", "iban"]):
+        if any(x in line for x in [
+            "الحساب", "باسحلا", "account", "iban", "الفترة", "ةرتفلا"
+        ]):
             continue
 
-        for m in date_re.finditer(line):
-            day, month, year = m.groups()
+        tokens = list(re.finditer(r"\d+", line))
 
-            if len(year) == 4 and year.startswith("20"):
-                y = year
-            elif len(year) in (2, 3):
-                y = "20" + year[-2:]
-            else:
-                continue
+        if len(tokens) >= 3:
+            try_triplet(tokens[:3], line_start, line)
+            try_triplet(tokens[-3:], line_start, line)
 
-            # date bancaire fiable: début ou fin de ligne
-            before = line[:m.start()].strip()
-            after = line[m.end():].strip()
-
-            # OCR arabe: la date peut être légèrement décalée,
-            # mais elle doit rester proche d'un bord de ligne
-            near_start = len(before) <= 12
-            near_end = len(after) <= 12
-
-            print("DATE_EDGE_CHECK:", {
-                "raw": m.group(0),
-                "before_len": len(before),
-                "after_len": len(after),
-                "before": before[-30:],
-                "after": after[:30],
-            })
-
-            if not (near_start or near_end):
-                continue
-
-            add_date(
-                y,
-                month,
-                day,
-                line_start + m.start(),
-                line_start + m.end(),
-            )
-
+        # compact YYYYMMDD
         for m in re.finditer(r"(?<!\d)(20\d{2}[01]\d[0-3]\d)(?!\d)", line):
             raw = m.group(1)
-
-            if any(x in line for x in ["الفترة", "ةرتفلا"]):
-                continue
-
             add_date(
                 raw[:4],
                 raw[4:6],
