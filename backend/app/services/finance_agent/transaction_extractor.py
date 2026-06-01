@@ -457,6 +457,30 @@ def extract_date(
         except ValueError:
             continue
 
+    # US statements commonly use MM/DD/YYYY. Keep this after DMY parsing so
+    # already-validated FR/UK/EU formats remain unchanged. It only matters when
+    # DMY is impossible, e.g. 01/20/2026.
+    us_formats_with_year = (
+        "%m/%d/%Y",
+        "%m-%d-%Y",
+        "%m.%d.%Y",
+        "%m/%d/%y",
+        "%m-%d-%y",
+        "%m.%d.%y",
+    )
+
+    for fmt in us_formats_with_year:
+        try:
+            parsed = datetime.strptime(raw, fmt)
+
+            if not is_reasonable_year(parsed.year):
+                return None
+
+            return parsed.date().isoformat()
+
+        except ValueError:
+            continue
+
     formats_without_year = (
         "%d/%m",
         "%d-%m",
@@ -1064,7 +1088,7 @@ def detect_currency(text: str) -> str:
         "SYRIA": ["COMMERCIAL BANK OF SYRIA", "BANK OF SYRIA AND OVERSEAS", "BBSF"],
 
         # Non-Arab bank hints preserved
-        "UNITED_STATES": ["CHASE", "JPMORGAN", "JPMORGAN CHASE", "BANK OF AMERICA", "WELLS FARGO", "CITI", "CITIBANK", "CAPITAL ONE", "USAA", "PNC BANK", "TD BANK USA"],
+        "UNITED_STATES": ["ALLY BANK", "ALLY FINANCIAL", "CHASE", "JPMORGAN", "JPMORGAN CHASE", "BANK OF AMERICA", "WELLS FARGO", "CITI", "CITIBANK", "CAPITAL ONE", "USAA", "PNC BANK", "TD BANK USA", "DISCOVER BANK", "SOFI BANK", "AMERICAN EXPRESS NATIONAL BANK"],
         "UNITED_KINGDOM": ["BARCLAYS", "LLOYDS", "NATWEST", "HSBC UK", "MONZO", "STARLING", "SANTANDER UK", "TSB BANK"],
         "FRANCE": ["BNP", "BNP PARIBAS", "SOCIETE GENERALE", "SOCIÉTÉ GÉNÉRALE", "CREDIT AGRICOLE", "CRÉDIT AGRICOLE", "LA BANQUE POSTALE", "LCL", "CAISSE D'EPARGNE", "CAISSE D’ÉPARGNE", "BOURSORAMA"],
         "EUROZONE": ["REVOLUT BANK UAB", "N26"],
