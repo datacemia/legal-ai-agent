@@ -936,7 +936,7 @@ def find_arabic_ocr_dates(text: str):
     found = []
     statement_year, statement_month = detect_statement_month_year(text)
 
-    def add_date(year, month, day, start, end):
+    def add_date(year, month, day, start, end, partial=False):
         try:
             parsed = datetime(int(year), int(month), int(day))
         except Exception:
@@ -950,6 +950,7 @@ def find_arabic_ocr_dates(text: str):
             "date": parsed.date().isoformat(),
             "start": start,
             "end": end,
+            "partial": partial,
         })
 
     def normalize_year(year: str):
@@ -1039,31 +1040,31 @@ def find_arabic_ocr_dates(text: str):
                 line_start + m.end(),
             )
 
-    # fallback général OCR: lignes "01 2026", "02 2026"
-    # seulement si aucune date complète n'a été trouvée
+    # fallback général OCR: "01 2026", "02 2026", etc.
+    # seulement si aucune vraie date complète n'a été trouvée
     if not found:
+        partial_re = re.compile(r"(?<![\d,])([0-3]?\d)\s+(20\d{2})(?!\d)")
+
         for line_start, line in iter_lines_with_offsets(text):
-            if any(x in line for x in ["الحساب", "باسحلا", "account", "iban", "الفترة", "ةرتفلا"]):
+            if any(x in line for x in [
+                "الحساب", "باسحلا", "account", "iban", "الفترة", "ةرتفلا"
+            ]):
                 continue
 
-            m = re.search(r"^\s*([0-3]?\d)\s+(20\d{2})\b", line)
-            if m:
-                print("PARTIAL_DATE_MATCH:", line)
+            for m in partial_re.finditer(line):
+                day, year = m.groups()
 
-            if not m:
-                continue
+                if not (1 <= int(day) <= 31):
+                    continue
 
-            day, year = m.groups()
-
-            # mois absent dans le PDF: placeholder stable = janvier
-            # objectif: extraire transactions sans inventer une devise/mois
-            add_date(
-                int(year),
-                1,
-                int(day),
-                line_start + m.start(1),
-                line_start + m.end(2),
-            )
+                add_date(
+                    int(year),
+                    1,  # mois absent dans OCR/PDF
+                    int(day),
+                    line_start + m.start(),
+                    line_start + m.end(),
+                    partial=True,
+                )
 
     unique = {}
     for d in found:
@@ -1113,6 +1114,21 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
             line_end = len(normalized)
 
         window = normalized[line_start:line_end]
+
+        # QNB / OCR partiel: date "02 2026" peut être à la fin de la ligne précédente.
+        # Dans ce cas, les montants utiles sont après cette date jusqu'à la prochaine date.
+        if dm.get("partial"):
+            next_date_start = None
+
+            for d in dates:
+                if d["start"] > dm["end"]:
+                    next_date_start = d["start"]
+                    break
+
+            if next_date_start:
+                window = normalized[dm["start"]:next_date_start]
+            else:
+                window = normalized[dm["start"]:]
 
         # fallback OCR: si la ligne date seule ou sans montants,
         # fusionner jusqu'à la prochaine date détectée si possible
