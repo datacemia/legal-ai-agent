@@ -1163,6 +1163,117 @@ def extract_line_balance(line: str) -> float | None:
         return None
 
 
+def is_balance_only_line(
+    line: str,
+    default_year: int | None = None,
+    prefer_us_date: bool = False,
+) -> bool:
+    """Return True for OCR lines that look like a standalone running balance.
+
+    This supports vertical bank tables where OCR splits:
+        date
+        description
+        transaction amount
+        running balance
+
+    into separate physical lines. We only treat a line as balance-only when:
+    - it has no date;
+    - it contains exactly one money value;
+    - after removing that money value, no meaningful letters remain.
+
+    This avoids merging normal transaction rows or metadata into the previous row.
+    """
+    if extract_date(
+        line,
+        default_year=default_year,
+        prefer_us_date=prefer_us_date,
+    ):
+        return False
+
+    amounts = re.findall(MONEY_NUMBER_PATTERN, line)
+
+    if len(amounts) != 1:
+        return False
+
+    remainder = re.sub(
+        MONEY_NUMBER_PATTERN,
+        "",
+        line,
+    )
+
+    remainder = re.sub(
+        r"[\s|:;,\-–—_/()]+",
+        "",
+        remainder,
+    )
+
+    return remainder == ""
+
+
+def attach_following_balance_lines(
+    lines: list[str],
+    default_year: int | None = None,
+    prefer_us_date: bool = False,
+) -> list[str]:
+    """Attach OCR standalone balance lines to the previous transaction line.
+
+    General case:
+        2026-02-05 Interest Credit 9.85
+        12,828.45
+
+    becomes:
+        2026-02-05 Interest Credit 9.85 12,828.45
+
+    Then infer_balance_delta_rows() can use the balance delta as the authority.
+    """
+    rebuilt = []
+    i = 0
+
+    while i < len(lines):
+        current = lines[i]
+
+        current_has_date = extract_date(
+            current,
+            default_year=default_year,
+            prefer_us_date=prefer_us_date,
+        ) is not None
+
+        current_amounts = re.findall(
+            MONEY_NUMBER_PATTERN,
+            current,
+        )
+
+        if (
+            current_has_date
+            and current_amounts
+            and i + 1 < len(lines)
+            and is_balance_only_line(
+                lines[i + 1],
+                default_year=default_year,
+                prefer_us_date=prefer_us_date,
+            )
+        ):
+            combined = f"{current} {lines[i + 1]}"
+
+            debug_log(
+                "TX_DEBUG: vertical_balance_attached",
+                {
+                    "transaction_line": current,
+                    "balance_line": lines[i + 1],
+                    "combined": combined,
+                },
+            )
+
+            rebuilt.append(combined)
+            i += 2
+            continue
+
+        rebuilt.append(current)
+        i += 1
+
+    return rebuilt
+
+
 def infer_balance_delta_rows(rows: list[dict]) -> list[dict]:
     """Infer income/expense from running balance deltas.
 
@@ -2273,6 +2384,12 @@ def extract_transactions(text: str) -> list[dict]:
 
         lines.append(current)
         i += 1
+
+    lines = attach_following_balance_lines(
+        lines,
+        default_year=default_year,
+        prefer_us_date=prefer_us_date,
+    )
 
     debug_log("TX_DEBUG: candidate_lines_count", len(lines))
     for idx, candidate_line in enumerate(lines[:50]):
