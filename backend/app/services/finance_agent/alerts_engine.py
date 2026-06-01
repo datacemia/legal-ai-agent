@@ -50,13 +50,8 @@ def generate_financial_alerts(
         forecast.get("observed_net_cashflow", 0) or 0
     )
 
-    forecast_direction = str(
-        forecast.get("forecast_direction", "")
-    ).lower()
-
     if (
         observed_net_cashflow < 0
-        and forecast_direction not in ["improving", "positive"]
         and cash_risk_days is not None
         and cash_risk_days < 30
     ):
