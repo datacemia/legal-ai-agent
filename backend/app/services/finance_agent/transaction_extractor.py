@@ -935,73 +935,70 @@ def find_arabic_ocr_dates(text: str):
             "end": end,
         })
 
-    def normalize_year(y: str) -> str | None:
-        if len(y) == 4 and y.startswith("20"):
-            return y
-        if len(y) in (2, 3):
-            return "20" + y[-2:]
+    def normalize_year(year: str):
+        if len(year) == 4 and year.startswith("20"):
+            return year
+
+        if len(year) in (2, 3):
+            return "20" + year[-2:]
+
         return None
 
-    def has_real_date_separator(chunk: str) -> bool:
-        # accepte . / - et variantes OCR, refuse espaces/virgules de montants
-        separators = set("./-")
-        for ch in chunk:
-            if ch in separators:
-                return True
-            if not ch.isdigit() and not ch.isspace() and ch not in [",", "،"]:
-                return True
-        return False
+    # DD.MM.YYYY / D.M.YY / D.M.YYY
+    # strict: refuse de commencer juste après chiffre ou virgule
+    date_pattern = re.compile(
+        r"(?<![\d,])([0-3]?\d)\s*[./-]\s*([01]?\d)\s*[./-]\s*(\d{2,4})(?!\d)"
+    )
 
-    def try_triplet(tokens, line_start, line):
-        if len(tokens) != 3:
-            return
-
-        a, b, c = [t.group() for t in tokens]
-        start = tokens[0].start()
-        end = tokens[2].end()
-        chunk = line[start:end]
-
-        if not has_real_date_separator(chunk):
-            return
-
-        # DD MM YY/YYYY
-        y = normalize_year(c)
-        if y:
-            try:
-                day = int(a)
-                month = int(b)
-            except Exception:
-                return
-
-            if 1 <= day <= 31 and 1 <= month <= 12:
-                add_date(y, month, day, line_start + start, line_start + end)
-
-        # YYYY MM DD
-        if len(a) == 4 and a.startswith("20"):
-            try:
-                month = int(b)
-                day = int(c)
-            except Exception:
-                return
-
-            if 1 <= day <= 31 and 1 <= month <= 12:
-                add_date(a, month, day, line_start + start, line_start + end)
+    # YYYY.MM.DD
+    ymd_pattern = re.compile(
+        r"(?<![\d,])(20\d{2})\s*[./-]\s*([01]?\d)\s*[./-]\s*([0-3]?\d)(?!\d)"
+    )
 
     for line_start, line in iter_lines_with_offsets(text):
         if any(x in line for x in [
-            "الحساب", "باسحلا", "account", "iban", "الفترة", "ةرتفلا"
+            "الحساب",
+            "باسحلا",
+            "account",
+            "iban",
+            "الفترة",
+            "ةرتفلا",
         ]):
             continue
 
-        tokens = list(re.finditer(r"\d+", line))
+        for m in date_pattern.finditer(line):
+            day, month, year = m.groups()
+            y = normalize_year(year)
 
-        if len(tokens) >= 3:
-            try_triplet(tokens[:3], line_start, line)
-            try_triplet(tokens[-3:], line_start, line)
+            if not y:
+                continue
+
+            add_date(
+                y,
+                month,
+                day,
+                line_start + m.start(),
+                line_start + m.end(),
+            )
+
+        for m in ymd_pattern.finditer(line):
+            year, month, day = m.groups()
+
+            add_date(
+                year,
+                month,
+                day,
+                line_start + m.start(),
+                line_start + m.end(),
+            )
 
         # compact YYYYMMDD
-        for m in re.finditer(r"(?<!\d)(20\d{2}[01]\d[0-3]\d)(?!\d)", line):
+        for m in re.finditer(
+            r"(?<!\d)(20\d{2}[01]\d[0-3]\d)(?!\d)",
+            line,
+        ):
             raw = m.group(1)
+
             add_date(
                 raw[:4],
                 raw[4:6],
@@ -1030,10 +1027,6 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
     print("=== AR DEBUG START ===")
     print("TEXT_LENGTH:", len(normalized))
-    print("DATE_CANDIDATES:", re.findall(
-        r"([0-3]?\d)[^\d]{1,6}([01]?\d)[^\d]{1,6}(\d{2,4})",
-        normalized
-    )[:20])
     dates = find_arabic_ocr_dates(normalized)
     print("DATES_FOUND:", [d["clean"] for d in dates])
     print(
