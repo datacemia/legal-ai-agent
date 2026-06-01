@@ -617,6 +617,12 @@ def has_transaction_signal(
 def detect_type(line: str, amount: float) -> str:
     lower = line.lower()
 
+    if amount > 0 and "+" in line:
+        return "income"
+
+    if amount < 0 or "-" in line:
+        return "expense"
+
     # outgoing payments have priority
     if any(keyword in lower for keyword in EXPENSE_KEYWORDS):
         return "expense"
@@ -1124,7 +1130,7 @@ def detect_currency(text: str) -> str:
         "BAHRAIN": ["BAHRAIN", "البحرين", "نيرحبلا"],
         "OMAN": ["OMAN", "عمان", "نامع"],
         "YEMEN": ["YEMEN", "اليمن", "نميلا"],
-        "UNITED_STATES": ["UNITED STATES", "USA", "U.S.A", "AMERICA", "ETATS-UNIS", "ÉTATS-UNIS", "الولايات المتحدة", "أمريكا"],
+        "UNITED_STATES": ["UNITED STATES","RAMP","RAMP BUSINESS ACCOUNT", "USA", "U.S.A", "AMERICA", "ETATS-UNIS", "ÉTATS-UNIS", "الولايات المتحدة", "أمريكا"],
         "UNITED_KINGDOM": ["UNITED KINGDOM", "UK", "GREAT BRITAIN", "BRITAIN", "ENGLAND", "ROYAUME-UNI", "ANGLETERRE", "المملكة المتحدة", "بريطانيا", "إنجلترا"],
         "FRANCE": ["FRANCE", "فرنسا"],
         "EUROZONE": ["GERMANY", "DEUTSCHLAND", "SPAIN", "ESPAGNE", "ESPAÑA", "ITALY", "ITALIA", "NETHERLANDS", "BELGIUM", "BELGIQUE", "EUROZONE", "EUROPEAN UNION", "UNION EUROPEENNE", "UNION EUROPÉENNE", "ألمانيا", "إسبانيا", "إيطاليا"],
