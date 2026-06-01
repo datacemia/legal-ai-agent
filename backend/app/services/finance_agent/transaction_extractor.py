@@ -97,6 +97,25 @@ INCOME_KEYWORDS += [
     "تحويل وارد",
 ]
 
+
+EXPENSE_KEYWORDS += [
+    "amazon",
+    "starbucks",
+    "target",
+    "uber",
+    "aws billing",
+    "openai api",
+    "netflix",
+    "slack",
+]
+
+INCOME_KEYWORDS += [
+    "payroll",
+    "salary",
+    "ach credit",
+    "deposit",
+]
+
 BALANCE_KEYWORDS = [
     "statement period",
     "statement date",
@@ -640,6 +659,27 @@ def detect_type(line: str, amount: float) -> str:
         return "expense"
 
     return "income"
+
+
+
+def extract_amount_balance_line(line: str):
+    numbers = re.findall(MONEY_NUMBER_PATTERN, line)
+
+    if len(numbers) < 2:
+        return None, None
+
+    tx_amount = parse_amount(numbers[-2])
+    balance = parse_amount(numbers[-1])
+
+    text = line.lower()
+
+    if any(k in text for k in INCOME_KEYWORDS):
+        return abs(tx_amount), "income"
+
+    if any(k in text for k in EXPENSE_KEYWORDS):
+        return -abs(tx_amount), "expense"
+
+    return None, None
 
 
 def extract_transaction_amount(line: str) -> float | None:
@@ -1901,6 +1941,10 @@ def extract_transactions(text: str) -> list[dict]:
 
         debug_log("TX_ACCEPT_SIGNAL:", clean_line)
         tabular_amount, tabular_type = extract_tabular_bank_amount(clean_line)
+
+        if tabular_amount is None:
+            tabular_amount, tabular_type = extract_amount_balance_line(clean_line)
+
         debug_log("TX_DEBUG: tabular", tabular_amount, tabular_type)
 
 
