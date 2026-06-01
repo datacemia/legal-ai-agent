@@ -2477,17 +2477,13 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         if next_date_start is not None:
             window = normalized[dm["start"]:next_date_start]
         else:
-            line_end = normalized.find("\n", dm["end"])
-
-            if line_end == -1:
-                line_end = len(normalized)
-
-            next_line_end = normalized.find("\n", line_end + 1)
-
-            if next_line_end == -1:
-                next_line_end = len(normalized)
-
-            window = normalized[dm["start"]:next_line_end]
+            remaining = normalized[dm["start"]:]
+            stop = re.search(
+                r"(?:\n\s*[:：]|Document|Generated|Test|بيانات|رابتخا)",
+                remaining,
+                flags=re.IGNORECASE,
+            )
+            window = remaining[:stop.start()] if stop else remaining
 
         # ignore lignes header/période
         if any(x in window for x in [
