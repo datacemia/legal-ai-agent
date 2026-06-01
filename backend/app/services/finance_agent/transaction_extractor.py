@@ -870,24 +870,60 @@ def clean_db_text(value: str) -> str:
 
 
 def detect_currency(text: str) -> str:
-    """Detect explicit currency first, then use conservative country/bank hints.
+    """Detect currency safely from explicit text, country hints, then bank hints.
 
-    This keeps FR/EN behavior stable and only applies hints when the document
-    itself clearly identifies a country/bank but no explicit currency string was OCRed.
+    Order is intentionally conservative:
+    1) explicit ISO/symbol/currency-name detection wins;
+    2) country or jurisdiction hints are used only when no explicit currency exists;
+    3) bank hints are last-resort and avoid ambiguous mixed-currency documents;
+    4) otherwise return "unknown" instead of inventing a currency.
     """
     normalized = normalize_arabic_digits(clean_db_text(text)).upper()
 
+    # Documents that explicitly say they are multi-currency should not be forced
+    # to a single bank-default currency unless a currency is explicitly present.
+    mixed_currency_markers = [
+        "MULTI CURRENCY",
+        "MULTICURRENCY",
+        "MIXED CURRENCY",
+        "MIXED CURRENCIES",
+        "COMPTE MULTIDEVISE",
+        "MULTI-DEVISE",
+        "MULTIDEVISE",
+        "عملات مختلطة",
+        "مختلط عملات",
+        "تالمع طلتخم",
+    ]
+    is_mixed_currency_document = any(
+        marker.upper() in normalized
+        for marker in mixed_currency_markers
+    )
+
+    # Explicit currency detection: ISO codes, symbols and common names in EN/FR/AR.
     patterns = [
-        ("USD", [r"\bUSD\b", r"\$", "دولار"]),
-        ("EUR", [r"\bEUR\b", "€", "يورو"]),
-        ("MAD", [r"\bMAD\b", r"\bDH\b", r"\bDHS\b", "درهم مغربي"]),
-        ("JOD", [r"\bJOD\b", "دينار أردني"]),
-        ("AED", [r"\bAED\b", "درهم إماراتي"]),
-        ("SAR", [r"\bSAR\b", "ريال سعودي"]),
-        ("QAR", [r"\bQAR\b", "ريال قطري", "يرطق لاير", "QATARI RIYAL"]),
-        ("KWD", [r"\bKWD\b", "دينار كويتي"]),
-        ("BHD", [r"\bBHD\b", "دينار بحريني"]),
-        ("OMR", [r"\bOMR\b", "ريال عماني"]),
+        ("USD", [r"\bUSD\b", r"\bUS\$\b", r"\$", "US DOLLAR", "DOLLAR US", "DOLLAR AMÉRICAIN", "DOLLAR AMERICAIN", "دولار أمريكي", "دولار"]),
+        ("EUR", [r"\bEUR\b", "€", "EURO", "يورو"]),
+        ("GBP", [r"\bGBP\b", "£", "POUND STERLING", "STERLING", "LIVRE STERLING", "جنيه إسترليني", "جنيه استرليني"]),
+        ("MAD", [r"\bMAD\b", r"\bDH\b", r"\bDHS\b", "DIRHAM MAROCAIN", "MOROCCAN DIRHAM", "درهم مغربي"]),
+        ("AED", [r"\bAED\b", "UAE DIRHAM", "EMIRATI DIRHAM", "DIRHAM ÉMIRATI", "DIRHAM EMIRATI", "درهم إماراتي"]),
+        ("JOD", [r"\bJOD\b", "JORDANIAN DINAR", "DINAR JORDANIEN", "دينار أردني"]),
+        ("SAR", [r"\bSAR\b", "SAUDI RIYAL", "RIYAL SAOUDIEN", "ريال سعودي"]),
+        ("QAR", [r"\bQAR\b", "QATARI RIYAL", "RIYAL QATARI", "ريال قطري", "يرطق لاير"]),
+        ("KWD", [r"\bKWD\b", "KUWAITI DINAR", "DINAR KOWEÏTIEN", "DINAR KOWEITIEN", "دينار كويتي"]),
+        ("BHD", [r"\bBHD\b", "BAHRAINI DINAR", "DINAR BAHREÏNI", "DINAR BAHREINI", "دينار بحريني"]),
+        ("OMR", [r"\bOMR\b", "OMANI RIAL", "RIAL OMANI", "ريال عماني"]),
+        ("CAD", [r"\bCAD\b", "CANADIAN DOLLAR", "DOLLAR CANADIEN", "دولار كندي"]),
+        ("AUD", [r"\bAUD\b", "AUSTRALIAN DOLLAR", "DOLLAR AUSTRALIEN", "دولار أسترالي"]),
+        ("CHF", [r"\bCHF\b", "SWISS FRANC", "FRANC SUISSE", "فرنك سويسري"]),
+        ("JPY", [r"\bJPY\b", "JAPANESE YEN", "YEN JAPONAIS", "ين ياباني"]),
+        ("CNY", [r"\bCNY\b", "CHINESE YUAN", "YUAN CHINOIS", "يوان صيني"]),
+        ("INR", [r"\bINR\b", "INDIAN RUPEE", "ROUPEE INDIENNE", "روبية هندية"]),
+        ("TRY", [r"\bTRY\b", "TURKISH LIRA", "LIVRE TURQUE", "ليرة تركية"]),
+        ("EGP", [r"\bEGP\b", "EGYPTIAN POUND", "LIVRE ÉGYPTIENNE", "LIVRE EGYPTIENNE", "جنيه مصري"]),
+        ("TND", [r"\bTND\b", "TUNISIAN DINAR", "DINAR TUNISIEN", "دينار تونسي"]),
+        ("DZD", [r"\bDZD\b", "ALGERIAN DINAR", "DINAR ALGÉRIEN", "DINAR ALGERIEN", "دينار جزائري"]),
+        ("NGN", [r"\bNGN\b", "NAIRA", "نيرة"]),
+        ("ZAR", [r"\bZAR\b", "RAND", "راند"]),
     ]
 
     scores = Counter()
@@ -900,20 +936,74 @@ def detect_currency(text: str) -> str:
     if scores:
         return scores.most_common(1)[0][0]
 
-    # Conservative fallback: only when the document clearly identifies a bank/country.
-    # Includes common Arabic OCR reversed words seen in RTL extraction.
-    country_bank_hints = [
-        ("QAR", ["QNB", "QATAR", "قطر", "رطق", "QATAR NATIONAL BANK"]),
-        ("MAD", ["MOROCCO", "MAROC", "المغرب", "برغملا", "CIH", "ATTIJARI", "WAFA", "BMCE", "CHAABI"]),
-        ("AED", ["EMIRATES NBD", "ADCB", "FAB", "DUBAI", "UAE", "الإمارات", "تارامإ"]),
-        ("SAR", ["SAUDI", "KSA", "AL RAJHI", "SNB", "السعودية", "ةيدوعسلا"]),
+    # Country/jurisdiction fallback. Safer than bank fallback because it uses
+    # explicit country context from the statement.
+    country_currency_hints = [
+        ("USD", ["UNITED STATES", "USA", "U.S.A", "US BANK", "AMERICA", "ÉTATS-UNIS", "ETATS-UNIS", "الولايات المتحدة", "أمريكا"]),
+        ("GBP", ["UNITED KINGDOM", "UK", "GREAT BRITAIN", "BRITAIN", "ENGLAND", "ROYAUME-UNI", "ANGLETERRE", "المملكة المتحدة", "بريطانيا", "إنجلترا"]),
+        ("EUR", ["FRANCE", "GERMANY", "DEUTSCHLAND", "SPAIN", "ESPAÑA", "ESPAGNE", "ITALY", "ITALIA", "NETHERLANDS", "BELGIUM", "BELGIQUE", "EUROZONE", "EUROPEAN UNION", "UNION EUROPÉENNE", "UNION EUROPEENNE", "فرنسا", "ألمانيا", "إسبانيا", "إيطاليا"]),
+        ("MAD", ["MOROCCO", "MAROC", "المغرب", "برغملا"]),
+        ("QAR", ["QATAR", "قطر", "رطق"]),
         ("JOD", ["JORDAN", "الأردن", "ندرأ"]),
+        ("AED", ["UNITED ARAB EMIRATES", "UAE", "DUBAI", "ABU DHABI", "EMIRATES", "ÉMIRATS", "EMIRATS", "الإمارات", "تارامإ", "دبي", "أبوظبي"]),
+        ("SAR", ["SAUDI ARABIA", "KSA", "SAUDI", "السعودية", "ةيدوعسلا"]),
         ("KWD", ["KUWAIT", "الكويت", "تيوك"]),
         ("BHD", ["BAHRAIN", "البحرين", "نيرحب"]),
         ("OMR", ["OMAN", "عمان", "نامع"]),
+        ("CAD", ["CANADA", "CANADIEN", "كندا"]),
+        ("AUD", ["AUSTRALIA", "AUSTRALIE", "أستراليا"]),
+        ("CHF", ["SWITZERLAND", "SUISSE", "سويسرا"]),
+        ("JPY", ["JAPAN", "JAPON", "اليابان"]),
+        ("CNY", ["CHINA", "CHINE", "الصين"]),
+        ("INR", ["INDIA", "INDE", "الهند"]),
+        ("TRY", ["TURKEY", "TURQUIE", "تركيا"]),
+        ("EGP", ["EGYPT", "ÉGYPTE", "EGYPTE", "مصر"]),
+        ("TND", ["TUNISIA", "TUNISIE", "تونس"]),
+        ("DZD", ["ALGERIA", "ALGÉRIE", "ALGERIE", "الجزائر"]),
+        ("ZAR", ["SOUTH AFRICA", "AFRIQUE DU SUD", "جنوب أفريقيا"]),
     ]
 
-    for code, hints in country_bank_hints:
+    for code, hints in country_currency_hints:
+        if any(hint.upper() in normalized for hint in hints):
+            return code
+
+    # Bank fallback is last-resort. It is skipped for explicit mixed-currency
+    # statements because a bank can issue accounts in several currencies.
+    if is_mixed_currency_document:
+        return "unknown"
+
+    bank_currency_hints = [
+        # Qatar
+        ("QAR", ["QNB", "QATAR NATIONAL BANK", "ينطولا رطق كنب", "كنب رطق ينطولا"]),
+
+        # Morocco
+        ("MAD", ["CIH", "ATTIJARI", "ATTIJARIWAFA", "WAFA", "BMCE", "BANK OF AFRICA", "CHAABI", "BANQUE POPULAIRE", "CREDIT DU MAROC", "CRÉDIT DU MAROC", "CFG BANK", "AL BARID BANK"]),
+
+        # UAE
+        ("AED", ["EMIRATES NBD", "ADCB", "FAB", "FIRST ABU DHABI BANK", "MASHREQ", "DUBAI ISLAMIC BANK", "ADIB"]),
+
+        # Saudi Arabia
+        ("SAR", ["AL RAJHI", "SNB", "SAUDI NATIONAL BANK", "RIYAD BANK", "ALINMA", "BANQUE SAUDI FRANSI"]),
+
+        # Kuwait / Bahrain / Oman
+        ("KWD", ["KUWAIT FINANCE HOUSE", "KFH", "NATIONAL BANK OF KUWAIT", "NBK"]),
+        ("BHD", ["NATIONAL BANK OF BAHRAIN", "NBB", "BANK OF BAHRAIN"]),
+        ("OMR", ["BANK MUSCAT", "NATIONAL BANK OF OMAN", "NBO"]),
+
+        # UK
+        ("GBP", ["BARCLAYS", "LLOYDS", "NATWEST", "HSBC UK", "MONZO", "STARLING", "SANTANDER UK", "TSB BANK"]),
+
+        # US
+        ("USD", ["CHASE", "JPMORGAN", "JPMORGAN CHASE", "BANK OF AMERICA", "WELLS FARGO", "CITI", "CITIBANK", "CAPITAL ONE", "USAA", "PNC BANK", "TD BANK USA"]),
+
+        # France / Eurozone banks
+        ("EUR", ["BNP", "BNP PARIBAS", "SOCIETE GENERALE", "SOCIÉTÉ GÉNÉRALE", "CREDIT AGRICOLE", "CRÉDIT AGRICOLE", "LA BANQUE POSTALE", "LCL", "CAISSE D'EPARGNE", "CAISSE D’ÉPARGNE", "BANQUE POPULAIRE FRANCE", "BOURSORAMA", "REVOLUT BANK UAB", "N26"]),
+
+        # Jordan / Arab Bank. Kept last because Arab Bank can be multi-country/multi-currency.
+        ("JOD", ["ARAB BANK JORDAN", "BANK OF JORDAN", "البنك العربي الأردني", "يبرعلا يندرألا كنبلا"]),
+    ]
+
+    for code, hints in bank_currency_hints:
         if any(hint.upper() in normalized for hint in hints):
             return code
 
