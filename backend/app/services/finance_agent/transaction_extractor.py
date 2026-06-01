@@ -1176,6 +1176,35 @@ def extract_tabular_bank_amount(
 
         return amount, "income"
 
+    # Income keywords must be evaluated before generic outgoing words such as
+    # "payment". Some banks describe salary credits as "Salary Payment" and
+    # inbound transfers as "Payment In". Without this priority, those rows can
+    # be incorrectly classified as expenses.
+    if any(
+        keyword in description
+        for keyword in [
+            "salary payment",
+            "salary deposit",
+            "salary",
+            "payroll",
+            "wage",
+            "pay credit",
+            "payment in",
+            "osko payment in",
+            "incoming transfer",
+            "transfer received",
+            "virement reçu",
+            "virement recu",
+            "deposit",
+            "received",
+            "freelance",
+            "client",
+        ]
+    ):
+        amount = pick_bank_amount(numbers, line)
+
+        return abs(amount), "income"
+
     if any(
         keyword in description
         for keyword in [
@@ -2115,6 +2144,29 @@ def extract_money_values_from_window(amount_window: str) -> list[float]:
 
 def classify_by_keywords(text: str) -> str:
     lower = text.lower()
+
+    # Income-specific phrases must win over broad expense words such as
+    # "payment". Example: "Salary Payment" is an income transaction.
+    if any(
+        k in lower
+        for k in [
+            "salary payment",
+            "salary deposit",
+            "payroll",
+            "salary",
+            "wage",
+            "pay credit",
+            "payment in",
+            "osko payment in",
+            "incoming transfer",
+            "transfer received",
+            "deposit",
+            "received",
+            "freelance",
+            "client",
+        ]
+    ):
+        return "income"
 
     if any(k in lower for k in EXPENSE_KEYWORDS):
         return "expense"
