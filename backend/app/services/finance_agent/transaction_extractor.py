@@ -967,6 +967,11 @@ def extract_amount_balance_line(line: str):
     tx_amount = parse_amount(numbers[-2])
     balance = parse_amount(numbers[-1])
 
+    debug_log(
+        "TX_DEBUG: amount_balance_line",
+        {"tx_amount": tx_amount, "balance": balance},
+    )
+
     text = line.lower()
 
     if any(k in text for k in INCOME_KEYWORDS):
@@ -976,6 +981,75 @@ def extract_amount_balance_line(line: str):
         return -abs(tx_amount), "expense"
 
     return None, None
+
+
+def extract_line_balance(line: str) -> float | None:
+    numbers = re.findall(MONEY_NUMBER_PATTERN, line)
+
+    if len(numbers) < 2:
+        return None
+
+    try:
+        return parse_amount(numbers[-1])
+    except Exception:
+        return None
+
+
+def infer_balance_delta_rows(rows: list[dict]) -> list[dict]:
+    """Infer income/expense from running balance deltas.
+
+    General rule for OCR/table rows shaped like:
+        date description transaction_amount running_balance
+
+    When current_balance - previous_balance matches the transaction amount,
+    the balance delta is stronger than merchant keywords.
+    """
+    previous_balance = None
+    fixed = []
+
+    for row in rows:
+        amount = float(row.get("amount", 0) or 0)
+        balance = row.get("_balance")
+
+        if balance is not None and previous_balance is not None:
+            delta = round(float(balance) - float(previous_balance), 2)
+            tolerance = max(0.02, abs(amount) * 0.002)
+
+            debug_log(
+                "TX_DEBUG: balance_delta_check",
+                {
+                    "date": row.get("date"),
+                    "amount": amount,
+                    "previous_balance": previous_balance,
+                    "balance": balance,
+                    "delta": delta,
+                    "tolerance": tolerance,
+                },
+            )
+
+            if abs(abs(delta) - abs(amount)) <= tolerance:
+                if delta > 0:
+                    row["type"] = "income"
+                    row["amount"] = abs(amount)
+                else:
+                    row["type"] = "expense"
+                    row["amount"] = -abs(amount)
+
+                debug_log(
+                    "TX_DEBUG: balance_delta_applied",
+                    {
+                        "date": row.get("date"),
+                        "amount": row.get("amount"),
+                        "type": row.get("type"),
+                    },
+                )
+
+        if balance is not None:
+            previous_balance = balance
+
+        fixed.append(row)
+
+    return fixed
 
 
 def extract_first_amount_after_date(line: str) -> float | None:
@@ -2013,7 +2087,18 @@ def extract_transactions(text: str) -> list[dict]:
             transaction_type,
         )
 
-        debug_log("TX_FINAL_ROW:", {"date": date, "amount": amount, "type": transaction_type, "currency": detected_currency})
+        line_balance = extract_line_balance(clean_line)
+
+        debug_log(
+            "TX_FINAL_ROW:",
+            {
+                "date": date,
+                "amount": amount,
+                "type": transaction_type,
+                "currency": detected_currency,
+                "balance": line_balance,
+            },
+        )
 
         transactions.append(
             {
@@ -2022,8 +2107,14 @@ def extract_transactions(text: str) -> list[dict]:
                 "amount": amount,
                 "type": transaction_type,
                 "currency": detected_currency,
+                "_balance": line_balance,
             }
         )
+
+    transactions = infer_balance_delta_rows(transactions)
+
+    for tx in transactions:
+        tx.pop("_balance", None)
 
     print("FINAL_TXS", transactions)
     return transactions
