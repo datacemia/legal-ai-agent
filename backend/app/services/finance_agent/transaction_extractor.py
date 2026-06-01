@@ -961,14 +961,19 @@ def is_income_priority_description(text: str) -> bool:
 
     return any(phrase in lower for phrase in priority_phrases)
 
-def detect_type(line: str, amount: float) -> str:
+def detect_type(line: str, amount: float) -> str | None:
     lower = line.lower()
 
-    # Explicit signs are the strongest signal when present.
-    if amount > 0 and "+" in line:
+    # Explicit transaction signs are the strongest signal when present.
+    # Use signed-number detection instead of raw "+" / "-" so ISO dates
+    # such as 2026-02-02 do not make neutral rows look like expenses.
+    signed_positive_amount = bool(re.search(r"(?<!\d)\+\s*\d", line))
+    signed_negative_amount = bool(re.search(r"(?<!\d)-\s*\d", line))
+
+    if amount > 0 and signed_positive_amount:
         return "income"
 
-    if amount < 0 or "-" in line:
+    if amount < 0 or signed_negative_amount:
         return "expense"
 
     # Strong outgoing obligations should stay expenses even if they contain
@@ -1001,7 +1006,9 @@ def detect_type(line: str, amount: float) -> str:
     if amount < 0:
         return "expense"
 
-    return "income"
+    # Neutral descriptions should not default to income.
+    # Leave the type unknown so running-balance authority can decide the sign.
+    return None
 
 def extract_transaction_amount(line: str) -> float | None:
     transaction_part = re.split(
@@ -2202,7 +2209,7 @@ def extract_money_values_from_window(amount_window: str) -> list[float]:
 
 
 
-def classify_by_keywords(text: str) -> str:
+def classify_by_keywords(text: str) -> str | None:
     lower = text.lower()
 
     # General income-priority rule: inbound phrases must win over broad
@@ -2216,7 +2223,9 @@ def classify_by_keywords(text: str) -> str:
     if any(k in lower for k in INCOME_KEYWORDS):
         return "income"
 
-    return "income"
+    # Neutral descriptions should remain unknown.
+    # Balance delta logic can then decide income/expense safely.
+    return None
 
 def resolve_arabic_row_amount(row: dict, prev_balance: float | None) -> tuple[float, float, str]:
     """Resolve transaction amount, balance and type for one OCR row.
