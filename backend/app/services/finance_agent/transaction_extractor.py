@@ -1,6 +1,15 @@
+import os
 import re
 from collections import Counter
 from datetime import datetime
+
+
+DEBUG_FINANCE_EXTRACTOR = os.getenv("FINANCE_EXTRACTOR_DEBUG", "1") != "0"
+
+
+def debug_log(*args):
+    if DEBUG_FINANCE_EXTRACTOR:
+        print(*args)
 
 
 CURRENCY_CODES = ["USD", "EUR", "GBP", "AED", "MAD", "CAD", "JOD", "SAR", "QAR", "KWD", "BHD", "OMR"]
@@ -974,11 +983,14 @@ def detect_currency(text: str) -> str:
                 scores[code] += 1
 
     if scores:
-        return scores.most_common(1)[0][0]
+        detected = scores.most_common(1)[0][0]
+        debug_log("CURRENCY_DEBUG: explicit", detected, dict(scores))
+        return detected
 
     # If there is no explicit currency and the document says multi-currency,
     # do not infer a single currency from a bank brand.
     if is_mixed_currency_document:
+        debug_log("CURRENCY_DEBUG: mixed_currency_document -> unknown")
         return "unknown"
 
     COUNTRY_CURRENCY = {
@@ -1088,7 +1100,7 @@ def detect_currency(text: str) -> str:
         "SYRIA": ["COMMERCIAL BANK OF SYRIA", "BANK OF SYRIA AND OVERSEAS", "BBSF"],
 
         # Non-Arab bank hints preserved
-        "UNITED_STATES": ["ALLY BANK", "ALLY FINANCIAL", "CHASE", "JPMORGAN", "JPMORGAN CHASE", "BANK OF AMERICA", "WELLS FARGO", "CITI", "CITIBANK", "CAPITAL ONE", "USAA", "PNC BANK", "TD BANK USA", "DISCOVER BANK", "SOFI BANK", "AMERICAN EXPRESS NATIONAL BANK"],
+        "UNITED_STATES": ["ALLY BANK", "ALLY", "ALLY FINANCIAL", "CHASE", "JPMORGAN", "JPMORGAN CHASE", "BANK OF AMERICA", "WELLS FARGO", "CITI", "CITIBANK", "CAPITAL ONE", "USAA", "PNC BANK", "TD BANK USA", "DISCOVER BANK", "SOFI BANK", "AMERICAN EXPRESS NATIONAL BANK"],
         "UNITED_KINGDOM": ["BARCLAYS", "LLOYDS", "NATWEST", "HSBC UK", "MONZO", "STARLING", "SANTANDER UK", "TSB BANK"],
         "FRANCE": ["BNP", "BNP PARIBAS", "SOCIETE GENERALE", "SOCIÉTÉ GÉNÉRALE", "CREDIT AGRICOLE", "CRÉDIT AGRICOLE", "LA BANQUE POSTALE", "LCL", "CAISSE D'EPARGNE", "CAISSE D’ÉPARGNE", "BOURSORAMA"],
         "EUROZONE": ["REVOLUT BANK UAB", "N26"],
@@ -1109,13 +1121,18 @@ def detect_currency(text: str) -> str:
     # 3) Country/jurisdiction fallback.
     for country, hints in COUNTRY_HINTS.items():
         if has_hint(hints):
-            return COUNTRY_CURRENCY[country]
+            detected = COUNTRY_CURRENCY[country]
+            debug_log("CURRENCY_DEBUG: country_hint", country, "->", detected)
+            return detected
 
     # 4) Bank -> country -> currency fallback.
     for country, hints in BANK_COUNTRY_HINTS.items():
         if has_hint(hints):
-            return COUNTRY_CURRENCY[country]
+            detected = COUNTRY_CURRENCY[country]
+            debug_log("CURRENCY_DEBUG: bank_country_hint", country, "->", detected)
+            return detected
 
+    debug_log("CURRENCY_DEBUG: no_match -> unknown")
     return "unknown"
 
 def detect_statement_month_year(text: str):
@@ -1688,28 +1705,41 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         print("AR_TX:", t)
 
     print("ARABIC_BYPASS_COUNT:", len(transactions))
-    print("FINAL_TXS", transactions)
+    debug_log("FINAL_TXS", transactions)
+    debug_log("=== TX_EXTRACT_DEBUG END ===")
     return transactions
 
 
 def extract_transactions(text: str) -> list[dict]:
+    debug_log("=== TX_EXTRACT_DEBUG START ===")
+    debug_log("TEXT_SAMPLE:", clean_db_text(str(text))[:500])
+
+    detected_currency = detect_currency(text)
+    debug_log("TX_DEBUG: detected_currency", detected_currency)
+
     arabic_transactions = extract_arabic_ocr_transactions(text)
     if arabic_transactions:
+        debug_log("TX_DEBUG: arabic_path_used", len(arabic_transactions))
         return arabic_transactions
 
-    print("RAW_AR_TEXT_SAMPLE:", text[:1000])
+    debug_log("TX_DEBUG: non_arabic_path_used")
 
     text = normalize_arabic_ocr_lines(text)
     text = normalize_ocr_numeric_text(text)
 
     transactions = []
     default_year = detect_document_year(text)
+    debug_log("TX_DEBUG: default_year", default_year)
 
     raw_lines = [
         " ".join(line.split())
         for line in text.splitlines()
         if " ".join(line.split())
     ]
+
+    debug_log("TX_DEBUG: raw_lines_count", len(raw_lines))
+    for idx, raw_line in enumerate(raw_lines[:30]):
+        debug_log(f"TX_DEBUG: raw_line[{idx}]", raw_line)
 
     lines = []
     i = 0
@@ -1760,11 +1790,16 @@ def extract_transactions(text: str) -> list[dict]:
         lines.append(current)
         i += 1
 
+    debug_log("TX_DEBUG: candidate_lines_count", len(lines))
+    for idx, candidate_line in enumerate(lines[:50]):
+        debug_log(f"TX_DEBUG: candidate_line[{idx}]", candidate_line, "date=", extract_date(candidate_line, default_year=default_year), "money=", re.findall(MONEY_NUMBER_PATTERN, candidate_line))
+
     for clean_line in lines:
 
         normalized_line = clean_line.lower()
 
         if any(k in normalized_line for k in INTERNAL_TRANSFER_KEYWORDS):
+            debug_log("TX_SKIP: internal_transfer", clean_line)
             continue
 
         if any(
@@ -1786,6 +1821,7 @@ def extract_transactions(text: str) -> list[dict]:
                 "sort code",
             ]
         ):
+            debug_log("TX_SKIP: metadata", clean_line)
             continue
 
         if re.fullmatch(
@@ -1798,9 +1834,12 @@ def extract_transactions(text: str) -> list[dict]:
             clean_line,
             default_year=default_year,
         ):
+            debug_log("TX_SKIP: no_signal", clean_line, "date=", extract_date(clean_line, default_year=default_year), "money=", re.findall(MONEY_NUMBER_PATTERN, clean_line))
             continue
 
+        debug_log("TX_ACCEPT_SIGNAL:", clean_line)
         tabular_amount, tabular_type = extract_tabular_bank_amount(clean_line)
+        debug_log("TX_DEBUG: tabular", tabular_amount, tabular_type)
 
 
         if tabular_amount is not None:
@@ -1810,8 +1849,10 @@ def extract_transactions(text: str) -> list[dict]:
 
         if amount is None:
             fallback_amount = extract_first_amount_after_date(clean_line)
+            debug_log("TX_DEBUG: fallback_amount", fallback_amount)
 
             if fallback_amount is None:
+                debug_log("TX_SKIP: no_amount", clean_line)
                 continue
 
             amount = fallback_amount
@@ -1838,12 +1879,15 @@ def extract_transactions(text: str) -> list[dict]:
             transaction_type,
         )
 
+        debug_log("TX_FINAL_ROW:", {"date": date, "amount": amount, "type": transaction_type, "currency": detected_currency})
+
         transactions.append(
             {
                 "date": date,
                 "description": clean_db_text(clean_line),
                 "amount": amount,
                 "type": transaction_type,
+                "currency": detected_currency,
             }
         )
 
