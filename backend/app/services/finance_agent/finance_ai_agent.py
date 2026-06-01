@@ -45,6 +45,14 @@ The financial_score must be based on:
 - Amount of discretionary spending such as shopping, entertainment, subscriptions
 - Financial risks such as fees, debt, overdraft patterns
 
+Risk assessment rules:
+- Never claim negative cashflow unless expenses exceed income.
+- Never claim debt risk unless debt, loan payments, unpaid balances, collections, or debt-related transactions are explicitly visible.
+- Never claim overdraft risk unless the statement explicitly shows overdraft usage, negative balances, overdraft fees, NSF fees, unpaid fees, or similar indicators.
+- Do not infer financial distress from isolated expenses.
+- If observed income exceeds observed expenses, do not describe the financial situation as deteriorating, risky, or negative unless explicit risk indicators are present.
+- Positive net cashflow should be treated as a positive financial signal.
+
 Never return null for financial_score. Always compute a score.
 """
 
@@ -119,6 +127,9 @@ STRICT RULES:
 - Return the ISO currency code when identifiable.
 - Return "unknown" only if the currency cannot be determined.
 - financial_score must be an integer between 0 and 100.
+- Never claim negative cashflow, debt risk, or overdraft risk unless expenses exceed income or the statement explicitly shows debt, overdraft, unpaid balances, collections, or related fees.
+- Positive observed net cashflow should not be described as a financial risk.
+- Do not generate risk_notes that contradict observed income, observed expenses, or observed net cashflow.
 - NEVER return null values.
 
 Return EXACT JSON:
