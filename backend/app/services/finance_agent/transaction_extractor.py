@@ -407,6 +407,38 @@ def extract_date(
             return None
 
 
+    text_month_us_match = re.search(
+        r"\b("
+        r"jan|january|feb|february|mar|march|apr|april|may|"
+        r"jun|june|jul|july|aug|august|sep|sept|september|"
+        r"oct|october|nov|november|dec|december"
+        r")\s+(\d{1,2})\s+(\d{2,4})\b",
+        line,
+        flags=re.IGNORECASE,
+    )
+
+    if text_month_us_match:
+        month_key = text_month_us_match.group(1).lower()
+        day = int(text_month_us_match.group(2))
+        year = int(text_month_us_match.group(3))
+
+        if year < 100:
+            year += 2000
+
+        month = int(MONTH_ALIASES[month_key])
+
+        try:
+            parsed = datetime(year, month, day)
+
+            if not is_reasonable_year(parsed.year):
+                return None
+
+            return parsed.date().isoformat()
+
+        except ValueError:
+            return None
+
+
     text_month_match = re.search(
         r"\b(\d{1,2})\s+"
         r"(january|jan|february|feb|march|mar|april|apr|may|"
@@ -1125,7 +1157,8 @@ def detect_currency(text: str) -> str:
         "SYRIA": ["COMMERCIAL BANK OF SYRIA", "BANK OF SYRIA AND OVERSEAS", "BBSF"],
 
         # Non-Arab bank hints preserved
-        "UNITED_STATES": ["ALLY BANK", "ALLY", "ALLY FINANCIAL", "CHASE", "JPMORGAN", "JPMORGAN CHASE", "BANK OF AMERICA", "WELLS FARGO", "CITI", "CITIBANK", "CAPITAL ONE", "USAA", "PNC BANK", "TD BANK USA", "DISCOVER BANK", "SOFI BANK","BREX","BREX ACCOUNT", "AMERICAN EXPRESS NATIONAL BANK"],
+        "UNITED_STATES": ["ALLY BANK", "ALLY", "ALLY FINANCIAL", "CHASE", "JPMORGAN", "JPMORGAN CHASE", "BANK OF AMERICA", "WELLS FARGO", "CITI", "CITIBANK", "CAPITAL ONE", "USAA", "PNC BANK", "TD BANK USA", "DISCOVER BANK", "SOFI BANK","BREX","BREX ACCOUNT", "AMERICAN EXPRESS NATIONAL BANK","MERCURY",
+    "MERCURY BANKING"],
         "UNITED_KINGDOM": ["BARCLAYS", "LLOYDS", "NATWEST", "HSBC UK", "MONZO", "STARLING", "SANTANDER UK", "TSB BANK"],
         "FRANCE": ["BNP", "BNP PARIBAS", "SOCIETE GENERALE", "SOCIÉTÉ GÉNÉRALE", "CREDIT AGRICOLE", "CRÉDIT AGRICOLE", "LA BANQUE POSTALE", "LCL", "CAISSE D'EPARGNE", "CAISSE D’ÉPARGNE", "BOURSORAMA"],
         "EUROZONE": ["REVOLUT BANK UAB", "N26"],
