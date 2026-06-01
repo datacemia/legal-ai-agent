@@ -2774,6 +2774,41 @@ def extract_transactions(text: str) -> list[dict]:
         if transaction_type == "income":
             amount = abs(amount)
 
+        # General non-Arabic safety lock for rows shaped like:
+        #     date description transaction_amount running_balance
+        # When two money values are present, the first value is the movement
+        # and the last value is the running balance. This prevents later
+        # fallback logic from accidentally using the balance as the transaction
+        # amount. Arabic OCR keeps its separate extraction path unchanged.
+        if (
+            amount_balance_tx_amount is not None
+            and amount_balance_value is not None
+            and not is_arabic_text(clean_line)
+        ):
+            original_amount_for_lock = amount
+            amount_abs = abs(float(amount or 0))
+            tx_abs = abs(float(amount_balance_tx_amount or 0))
+            balance_abs = abs(float(amount_balance_value or 0))
+
+            likely_used_balance = abs(amount_abs - balance_abs) <= max(0.02, balance_abs * 0.0001)
+            far_from_tx_amount = abs(amount_abs - tx_abs) > max(0.02, tx_abs * 0.01)
+
+            if likely_used_balance or far_from_tx_amount:
+                if transaction_type == "expense":
+                    amount = -abs(amount_balance_tx_amount)
+                else:
+                    amount = abs(amount_balance_tx_amount)
+
+                debug_log(
+                    "TX_DEBUG: amount_balance_lock",
+                    {
+                        "original_amount": original_amount_for_lock,
+                        "locked_amount": amount,
+                        "balance": amount_balance_value,
+                        "type": transaction_type,
+                    },
+                )
+
         if amount_balance_tx_amount is not None and amount_balance_value is not None:
             print(
                 "TX_DEBUG: amount_balance_parse",
