@@ -563,6 +563,34 @@ def pick_bank_amount(
     return parse_amount(numbers[-1])
 
 
+
+
+def pick_transaction_amount_from_tabular_numbers(
+    numbers: list[str],
+    line: str,
+    account_currency: str | None = None,
+) -> float:
+    """Pick the movement amount from a normal bank row without using the balance.
+
+    General non-bank-specific rule for rows shaped like:
+        date description transaction_amount running_balance
+
+    In that common format, the first money value is the transaction amount and
+    the last money value is the running balance. This avoids misreading values
+    such as 7,433.70 as the OSKO amount when the real movement is 75.00.
+
+    Arabic OCR has its own extraction path and remains unchanged.
+    """
+    if numbers and len(numbers) >= 2 and not is_arabic_text(line):
+        return parse_amount(numbers[0])
+
+    return pick_bank_amount(
+        numbers,
+        line,
+        account_currency=account_currency,
+    )
+
+
 def is_reasonable_year(year: int) -> bool:
     return 2000 <= year <= datetime.now().year + 1
 
@@ -1223,14 +1251,14 @@ def extract_tabular_bank_amount(
             "remboursement",
         ]
     ):
-        amount = pick_bank_amount(numbers, line)
+        amount = pick_transaction_amount_from_tabular_numbers(numbers, line)
 
         return amount, "income"
 
     # Income keywords must be evaluated before generic outgoing words such as
     # "payment". This is a general rule, not a bank-specific exception.
     if is_income_priority_description(description):
-        amount = pick_bank_amount(numbers, line)
+        amount = pick_transaction_amount_from_tabular_numbers(numbers, line)
 
         return abs(amount), "income"
 
@@ -1264,7 +1292,7 @@ def extract_tabular_bank_amount(
             "arabic ocr transaction",
         ]
     ):
-        amount = pick_bank_amount(numbers, line)
+        amount = pick_transaction_amount_from_tabular_numbers(numbers, line)
 
         return -abs(amount), "expense"
 
@@ -1284,7 +1312,7 @@ def extract_tabular_bank_amount(
             "client",
         ]
     ):
-        amount = pick_bank_amount(numbers, line)
+        amount = pick_transaction_amount_from_tabular_numbers(numbers, line)
 
         return amount, "income"
 
