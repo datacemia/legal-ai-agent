@@ -757,8 +757,10 @@ def has_transaction_signal(
         .replace("1", "l")
     )
 
-    if any(keyword in metadata_check for keyword in BALANCE_KEYWORDS):
-        return False
+    metadata_balance_only = any(
+        keyword in metadata_check
+        for keyword in BALANCE_KEYWORDS
+    )
 
     date_found = extract_date(
         line,
@@ -766,12 +768,24 @@ def has_transaction_signal(
         prefer_us_date=prefer_us_date,
     ) is not None
 
-    amount_found = bool(
+    amounts = re.findall(
+        MONEY_NUMBER_PATTERN,
+        line,
+    )
+
+    signed_amount_found = bool(
         re.search(
-            MONEY_NUMBER_PATTERN,
+            r"[+-]\s*\d",
             line,
         )
     )
+
+    if metadata_balance_only and not (
+        date_found and (signed_amount_found or len(amounts) >= 2)
+    ):
+        return False
+
+    amount_found = bool(amounts)
 
     signal_found = any(
         keyword in lower
