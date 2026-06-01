@@ -124,6 +124,10 @@ INTERNAL_TRANSFER_KEYWORDS = [
     "transfer interne",
     "internal saving",
     "livret",
+    "تحويل داخلي",
+    "يلخاد ليوحت",
+    "حوالة داخلية",
+    "ةيلخاد ةلاوح",
 ]
 
 
@@ -983,7 +987,7 @@ def detect_currency(text: str) -> str:
         ("AED", ["EMIRATES NBD", "ADCB", "FAB", "FIRST ABU DHABI BANK", "MASHREQ", "DUBAI ISLAMIC BANK", "ADIB"]),
 
         # Saudi Arabia
-        ("SAR", ["AL RAJHI", "SNB", "SAUDI NATIONAL BANK", "RIYAD BANK", "ALINMA", "BANQUE SAUDI FRANSI"]),
+        ("SAR", ["AL RAJHI", "ALRAJHI", "AL RAJHI BANK", "ALRAJHI BANK", "مصرف الراجحي", "يحجارلا فرصم", "SNB", "SAUDI NATIONAL BANK", "RIYAD BANK", "ALINMA", "BANQUE SAUDI FRANSI"]),
 
         # Kuwait / Bahrain / Oman
         ("KWD", ["KUWAIT FINANCE HOUSE", "KFH", "NATIONAL BANK OF KUWAIT", "NBK"]),
@@ -1138,10 +1142,14 @@ def find_arabic_ocr_dates(text: str):
                     )
 
         # format DDMMYYYY (ex: 01042026)
-        for day, month, year in re.findall(
-            r"\b([0-3]\d)([0-1]\d)(20\d{2})\b",
+        # Important: keep the exact match offsets, not the whole line.
+        # Otherwise amount extraction can merge two different transactions.
+        for m in re.finditer(
+            r"(?<!\d)([0-3]\d)([0-1]\d)(20\d{2})(?!\d)",
             line,
         ):
+            day, month, year = m.groups()
+
             try:
                 date_obj = datetime(
                     int(year),
@@ -1155,8 +1163,8 @@ def find_arabic_ocr_dates(text: str):
                 date_obj.year,
                 date_obj.month,
                 date_obj.day,
-                line_start,
-                line_start + len(line),
+                line_start + m.start(),
+                line_start + m.end(),
             )
 
         # compact YYYYMMDD
@@ -1426,53 +1434,32 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
         date_raw = dm["clean"]
 
-        line_start = normalized.rfind("\n", 0, dm["start"]) + 1
-        line_end = normalized.find("\n", dm["end"])
+        # Build one transaction segment from this date to the next detected date.
+        # This is safer than using physical OCR lines because RTL extraction can place
+        # amount/balance pairs before the next date on the same line.
+        next_date_start = None
 
-        if line_end == -1:
-            line_end = len(normalized)
+        for d in dates:
+            if d["start"] > dm["start"]:
+                next_date_start = d["start"]
+                break
 
-        window_start_abs = line_start
-        window = normalized[line_start:line_end]
+        window_start_abs = dm["start"]
 
-        # QNB / OCR partiel: date "02 2026" peut être à la fin de la ligne précédente.
-        # Dans ce cas, les montants utiles sont après cette date jusqu'à la prochaine date.
-        if dm.get("partial"):
-            next_date_start = None
+        if next_date_start is not None:
+            window = normalized[dm["start"]:next_date_start]
+        else:
+            line_end = normalized.find("\n", dm["end"])
 
-            for d in dates:
-                if d["start"] > dm["end"]:
-                    next_date_start = d["start"]
-                    break
+            if line_end == -1:
+                line_end = len(normalized)
 
-            if next_date_start:
-                window_start_abs = dm["start"]
-                window = normalized[dm["start"]:next_date_start]
-            else:
-                window_start_abs = dm["start"]
-                window = normalized[dm["start"]:]
+            next_line_end = normalized.find("\n", line_end + 1)
 
-        # fallback OCR: si la ligne date seule ou sans montants,
-        # fusionner jusqu'à la prochaine date détectée si possible
-        if len(re.findall(amount_pattern, window)) < 2:
-            next_date_start = None
+            if next_line_end == -1:
+                next_line_end = len(normalized)
 
-            for d in dates:
-                if d["start"] > dm["end"]:
-                    next_date_start = d["start"]
-                    break
-
-            if next_date_start:
-                merged_window = normalized[line_start:next_date_start]
-            else:
-                next_line_end = normalized.find("\n", line_end + 1)
-                if next_line_end == -1:
-                    next_line_end = len(normalized)
-                merged_window = normalized[line_start:next_line_end]
-
-            if len(re.findall(amount_pattern, merged_window)) >= 2:
-                window_start_abs = line_start
-                window = merged_window
+            window = normalized[dm["start"]:next_line_end]
 
         # ignore lignes header/période
         if any(x in window for x in [
@@ -1499,6 +1486,12 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
         amount_window = re.sub(
             r"(?<!\d)(20\d{2}[01]\d[0-3]\d)(?!\d)",
+            " ",
+            amount_window,
+        )
+
+        amount_window = re.sub(
+            r"(?<!\d)([0-3]\d[0-1]\d20\d{2})(?!\d)",
             " ",
             amount_window,
         )
@@ -1557,6 +1550,12 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         if len(numbers) < 2:
             continue
 
+        row_text_lower = str(row.get("text", "")).lower()
+        is_internal_transfer = any(
+            keyword.lower() in row_text_lower
+            for keyword in INTERNAL_TRANSFER_KEYWORDS
+        )
+
         tx_amount, balance, tx_type = resolve_arabic_row_amount(
             row,
             previous_balance,
@@ -1564,6 +1563,11 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
         row["resolved_balance"] = balance
         previous_balance = balance
+
+        # Internal transfers still update the running balance chain, but are not
+        # counted as income/expense because they are movements between own accounts.
+        if is_internal_transfer:
+            continue
 
         transactions.append({
             "date": row["date"],
