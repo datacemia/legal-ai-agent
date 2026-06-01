@@ -141,6 +141,30 @@ def deduplicate_transactions(
     return unique
 
 
+
+def observed_income_from_transactions(
+    transactions: list[dict],
+) -> float:
+    """Return positive income already visible in extracted transactions.
+
+    This prevents downstream forecast/budget engines from adding an AI income
+    fallback on top of real extracted income. The fallback remains available
+    for statements where no income transaction was extracted.
+    """
+    total = 0.0
+
+    for tx in transactions:
+        try:
+            amount = float(tx.get("amount") or 0)
+        except Exception:
+            continue
+
+        if amount > 0:
+            total += amount
+
+    return round(total, 2)
+
+
 def resolve_finance_currency(
     result_ai: dict,
     transactions: list[dict],
@@ -324,6 +348,21 @@ def handle_finance_ai(job: Job, db):
     result_ai = analyze_bank_statement(text, output_language)
     fallback_income = result_ai.get("total_income_estimate")
 
+    observed_transaction_income = observed_income_from_transactions(
+        transactions
+    )
+
+    # General protection:
+    # If income is already visible in extracted transactions, do not pass the
+    # AI estimate as fallback income to forecast/budget/scoring engines.
+    # Otherwise some statements can double-count income:
+    # extracted income + AI estimated income.
+    effective_fallback_income = (
+        None
+        if observed_transaction_income > 0
+        else fallback_income
+    )
+
     currency = resolve_finance_currency(
         result_ai=result_ai,
         transactions=transactions,
@@ -355,13 +394,13 @@ def handle_finance_ai(job: Job, db):
 
     budget = build_recommended_budget(
         transactions=transactions,
-        fallback_income=fallback_income,
+        fallback_income=effective_fallback_income,
     )
 
     scores = calculate_financial_scores(
         transactions=transactions,
         subscriptions=subscriptions,
-        fallback_income=fallback_income,
+        fallback_income=effective_fallback_income,
     )
 
     update_job_progress(
@@ -373,7 +412,7 @@ def handle_finance_ai(job: Job, db):
 
     forecast = predict_cashflow(
         transactions=transactions,
-        fallback_income=fallback_income,
+        fallback_income=effective_fallback_income,
     )
     
 
