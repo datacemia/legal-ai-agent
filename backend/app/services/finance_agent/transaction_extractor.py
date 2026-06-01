@@ -1177,11 +1177,23 @@ def infer_balance_delta_rows(rows: list[dict]) -> list[dict]:
 
     for row in rows:
         amount = float(row.get("amount", 0) or 0)
+        tx_type = row.get("type")
         balance = row.get("_balance")
 
         if balance is not None and previous_balance is not None:
             delta = round(float(balance) - float(previous_balance), 2)
             tolerance = max(0.02, abs(amount) * 0.002)
+
+            print(
+                "TX_DEBUG: balance_authority",
+                {
+                    "previous": previous_balance,
+                    "current": balance,
+                    "delta": delta,
+                    "original_amount": amount,
+                    "original_type": tx_type,
+                }
+            )
 
             debug_log(
                 "TX_DEBUG: balance_delta_check",
@@ -1202,6 +1214,17 @@ def infer_balance_delta_rows(rows: list[dict]) -> list[dict]:
                 else:
                     row["type"] = "expense"
                     row["amount"] = -abs(amount)
+
+                amount = row["amount"]
+                tx_type = row["type"]
+
+                print(
+                    "TX_DEBUG: balance_override",
+                    {
+                        "new_amount": amount,
+                        "new_type": tx_type,
+                    }
+                )
 
                 debug_log(
                     "TX_DEBUG: balance_delta_applied",
