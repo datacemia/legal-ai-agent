@@ -1119,6 +1119,7 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         )
         for am in re.finditer(amount_pattern, amount_window):
             raw = am.group(0)
+            raw = re.sub(r"^(\d{1,3}),\1,", r"\1,", raw)
             try:
                 value = parse_amount(raw)
             except Exception:
