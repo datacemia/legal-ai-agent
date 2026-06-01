@@ -907,6 +907,17 @@ def iter_lines_with_offsets(text: str):
 def find_arabic_ocr_dates(text: str):
     text = normalize_arabic_digits(text)
 
+    # normalisation séparateurs OCR Arabic/Unicode vers "."
+    text = (
+        text.replace("٫", ".")
+            .replace("٬", ".")
+            .replace("·", ".")
+            .replace("•", ".")
+            .replace("․", ".")
+            .replace("﹒", ".")
+            .replace("．", ".")
+    )
+
     found = []
 
     def add_date(year, month, day, start, end):
@@ -925,65 +936,31 @@ def find_arabic_ocr_dates(text: str):
             "end": end,
         })
 
-    # 1) formats séparés, même OCR bruité:
-    # 01.04.2026, 1.4.226, 1٫4٫226, 1 4 226
-    for line_start, line in iter_lines_with_offsets(text):
-        if any(x in line for x in [
-            "الحساب", "باسحلا", "account", "iban"
-        ]):
+    # DD.MM.YYYY / D.M.YYY / D.M.YY
+    for m in re.finditer(
+        r"(?<!\d)([0-3]?\d)\s*[./-]\s*([01]?\d)\s*[./-]\s*(\d{2,4})(?!\d)",
+        text,
+    ):
+        day, month, year = m.groups()
+
+        if len(year) == 4 and year.startswith("20"):
+            y = year
+        elif len(year) in (2, 3):
+            y = "20" + year[-2:]
+        else:
             continue
 
-        tokens = list(re.finditer(r"\d+", line))
+        add_date(y, month, day, m.start(), m.end())
 
-        for i in range(len(tokens) - 2):
-            a = tokens[i].group()
-            b = tokens[i + 1].group()
-            c = tokens[i + 2].group()
+    # YYYY.MM.DD
+    for m in re.finditer(
+        r"(?<!\d)(20\d{2})\s*[./-]\s*([01]?\d)\s*[./-]\s*([0-3]?\d)(?!\d)",
+        text,
+    ):
+        year, month, day = m.groups()
+        add_date(year, month, day, m.start(), m.end())
 
-            gap1 = line[tokens[i].end():tokens[i + 1].start()]
-            gap2 = line[tokens[i + 1].end():tokens[i + 2].start()]
-
-            # évite les nombres collés sans séparateur
-            if len(gap1) > 5 or len(gap2) > 5:
-                continue
-
-            # DD MM YYYY / DD MM YY / DD MM YYY noisy
-            if len(a) <= 2 and len(b) <= 2 and len(c) in [2, 3, 4]:
-                day = int(a)
-                month = int(b)
-
-                if len(c) == 4 and c.startswith("20"):
-                    year = c
-                elif len(c) in [2, 3]:
-                    year = "20" + c[-2:]
-                else:
-                    continue
-
-                if 1 <= day <= 31 and 1 <= month <= 12:
-                    add_date(
-                        year,
-                        month,
-                        day,
-                        line_start + tokens[i].start(),
-                        line_start + tokens[i + 2].end(),
-                    )
-
-            # YYYY MM DD
-            if len(a) == 4 and a.startswith("20") and len(b) <= 2 and len(c) <= 2:
-                year = a
-                month = int(b)
-                day = int(c)
-
-                if 1 <= day <= 31 and 1 <= month <= 12:
-                    add_date(
-                        year,
-                        month,
-                        day,
-                        line_start + tokens[i].start(),
-                        line_start + tokens[i + 2].end(),
-                    )
-
-    # 2) compact YYYYMMDD ligne par ligne
+    # compact YYYYMMDD, ligne par ligne, hors metadata
     for line_start, line in iter_lines_with_offsets(text):
         if any(x in line for x in [
             "الحساب", "باسحلا", "account", "iban", "الفترة", "ةرتفلا"
@@ -1005,7 +982,6 @@ def find_arabic_ocr_dates(text: str):
         unique[(d["date"], d["start"])] = d
 
     return sorted(unique.values(), key=lambda x: x["start"])
-
 
 def extract_arabic_ocr_transactions(text: str) -> list[dict]:
     if not is_arabic_text(text):
