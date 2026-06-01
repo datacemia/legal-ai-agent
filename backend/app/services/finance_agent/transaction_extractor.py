@@ -1930,6 +1930,9 @@ def detect_currency(text: str) -> str:
         "MOROCCO": [
             "CIH", "CREDIT IMMOBILIER ET HOTELIER", "CRÉDIT IMMOBILIER ET HÔTELIER",
             "القرض العقاري والسياحي", "يحايسلاو يراقعلا ضرقلا",
+            "كنب",
+            "يمقر باسح فشك",
+            "فشك باسح",
             "ATTIJARI", "ATTIJARIWAFA", "ATTIJARI WAFA", "WAFA", "التجاري وفا بنك", "كنب افو يراجتلا",
             "BMCE", "BANK OF AFRICA", "BANQUE POPULAIRE", "CHAABI", "CREDIT DU MAROC", "CRÉDIT DU MAROC", "CFG BANK", "AL BARID BANK",
         ],
@@ -2231,13 +2234,12 @@ def find_arabic_ocr_dates(text: str):
 
 
 def clean_ocr_amount_raw(raw: str) -> str:
-    """Normalize common Arabic/OCR duplicated amount fragments without changing valid formats."""
     raw = raw.strip()
 
-    # OCR duplicates: 149,149,00 -> 149,00 ; 399,399,00 -> 399,00
     raw = re.sub(r"^(\d{1,3}),\1,", r"\1,", raw)
 
-    # OCR prefix before amount: 5,500,00 -> 500,00
+    # 5,500,00 -> 500,00 only when it is clearly a duplicated OCR prefix,
+    # but keep 3 500,00 / 9 800,00 valid thousands.
     raw = re.sub(r"^(\d),(\d{3},\d{2})$", r"\2", raw)
 
     return raw
