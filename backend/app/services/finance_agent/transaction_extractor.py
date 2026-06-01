@@ -1137,6 +1137,28 @@ def find_arabic_ocr_dates(text: str):
                         line_start + m.end(2),
                     )
 
+        # format DDMMYYYY (ex: 01042026)
+        for day, month, year in re.findall(
+            r"\b([0-3]\d)([0-1]\d)(20\d{2})\b",
+            line,
+        ):
+            try:
+                date_obj = datetime(
+                    int(year),
+                    int(month),
+                    int(day),
+                )
+            except Exception:
+                continue
+
+            add_date(
+                date_obj.year,
+                date_obj.month,
+                date_obj.day,
+                line_start,
+                line_start + len(line),
+            )
+
         # compact YYYYMMDD
         for m in re.finditer(
             r"(?<!\d)(20\d{2}[01]\d[0-3]\d)(?!\d)",
