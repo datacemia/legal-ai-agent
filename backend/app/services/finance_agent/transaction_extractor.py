@@ -909,116 +909,102 @@ def find_arabic_ocr_dates(text: str):
 
     found = []
 
-    # 1) DD.MM.YYYY / DD-MM-YYYY / DD/MM/YYYY
-    for m in re.finditer(
-        r"(?<!\d)([0-3]?\d)[./-]([01]?\d)[./-](20\d{2})(?!\d)",
-        text,
-    ):
-        day, month, year = m.groups()
+    def add_date(year, month, day, start, end):
         try:
             parsed = datetime(int(year), int(month), int(day))
         except Exception:
-            continue
+            return
 
-        if is_reasonable_year(parsed.year):
-            found.append({
-                "clean": f"{year}{int(month):02d}{int(day):02d}",
-                "date": parsed.date().isoformat(),
-                "start": m.start(),
-                "end": m.end(),
-            })
+        if not is_reasonable_year(parsed.year):
+            return
 
-    # 2) YYYY.MM.DD / YYYY-MM-DD / YYYY/MM/DD
-    for m in re.finditer(
-        r"(?<!\d)(20\d{2})[./-]([01]?\d)[./-]([0-3]?\d)(?!\d)",
-        text,
-    ):
-        year, month, day = m.groups()
-        try:
-            parsed = datetime(int(year), int(month), int(day))
-        except Exception:
-            continue
+        found.append({
+            "clean": f"{parsed.year}{parsed.month:02d}{parsed.day:02d}",
+            "date": parsed.date().isoformat(),
+            "start": start,
+            "end": end,
+        })
 
-        if is_reasonable_year(parsed.year):
-            found.append({
-                "clean": f"{year}{int(month):02d}{int(day):02d}",
-                "date": parsed.date().isoformat(),
-                "start": m.start(),
-                "end": m.end(),
-            })
-
-    # OCR arabe bruité:
-    # 1.4.226 => 01.04.2026
-    # 12.04.026 => 12.04.2026
-    for m in re.finditer(
-        r"(?:^|\s)([0-3]?\d)[./-]([0-1]?\d)[./-](\d{3})(?=\s|$)",
-        text,
-    ):
-        day, month, year = m.groups()
-
-        # 226 => 2026
-        year = "20" + year[-2:]
-
-        try:
-            parsed = datetime(
-                int(year),
-                int(month),
-                int(day),
-            )
-        except Exception:
-            continue
-
-        if is_reasonable_year(parsed.year):
-            found.append({
-                "clean": f"{year}{int(month):02d}{int(day):02d}",
-                "date": parsed.date().isoformat(),
-                "start": m.start(),
-                "end": m.end(),
-            })
-
-    # 3) compact YYYYMMDD ligne par ligne
-    # garde ancien OCR arabe sans scanner IBAN
+    # 1) formats séparés, même OCR bruité:
+    # 01.04.2026, 1.4.226, 1٫4٫226, 1 4 226
     for line_start, line in iter_lines_with_offsets(text):
+        if any(x in line for x in [
+            "الحساب", "باسحلا", "account", "iban"
+        ]):
+            continue
 
-        for m in re.finditer(
-            r"(?<!\d)(20\d{2}[01]\d[0-3]\d)(?!\d)",
-            line,
-        ):
+        tokens = list(re.finditer(r"\d+", line))
+
+        for i in range(len(tokens) - 2):
+            a = tokens[i].group()
+            b = tokens[i + 1].group()
+            c = tokens[i + 2].group()
+
+            gap1 = line[tokens[i].end():tokens[i + 1].start()]
+            gap2 = line[tokens[i + 1].end():tokens[i + 2].start()]
+
+            # évite les nombres collés sans séparateur
+            if len(gap1) > 5 or len(gap2) > 5:
+                continue
+
+            # DD MM YYYY / DD MM YY / DD MM YYY noisy
+            if len(a) <= 2 and len(b) <= 2 and len(c) in [2, 3, 4]:
+                day = int(a)
+                month = int(b)
+
+                if len(c) == 4 and c.startswith("20"):
+                    year = c
+                elif len(c) in [2, 3]:
+                    year = "20" + c[-2:]
+                else:
+                    continue
+
+                if 1 <= day <= 31 and 1 <= month <= 12:
+                    add_date(
+                        year,
+                        month,
+                        day,
+                        line_start + tokens[i].start(),
+                        line_start + tokens[i + 2].end(),
+                    )
+
+            # YYYY MM DD
+            if len(a) == 4 and a.startswith("20") and len(b) <= 2 and len(c) <= 2:
+                year = a
+                month = int(b)
+                day = int(c)
+
+                if 1 <= day <= 31 and 1 <= month <= 12:
+                    add_date(
+                        year,
+                        month,
+                        day,
+                        line_start + tokens[i].start(),
+                        line_start + tokens[i + 2].end(),
+                    )
+
+    # 2) compact YYYYMMDD ligne par ligne
+    for line_start, line in iter_lines_with_offsets(text):
+        if any(x in line for x in [
+            "الحساب", "باسحلا", "account", "iban", "الفترة", "ةرتفلا"
+        ]):
+            continue
+
+        for m in re.finditer(r"(?<!\d)(20\d{2}[01]\d[0-3]\d)(?!\d)", line):
             raw = m.group(1)
-
-            # ignorer lignes metadata
-            if any(x in line for x in [
-                "الحساب",
-                "باسحلا",
-                "account",
-                "iban",
-                "الفترة",
-                "ةرتفلا",
-            ]):
-                continue
-
-            try:
-                parsed = datetime(
-                    int(raw[:4]),
-                    int(raw[4:6]),
-                    int(raw[6:8]),
-                )
-            except Exception:
-                continue
-
-            if is_reasonable_year(parsed.year):
-                found.append({
-                    "clean": raw,
-                    "date": parsed.date().isoformat(),
-                    "start": line_start + m.start(),
-                    "end": line_start + m.end(),
-                })
+            add_date(
+                raw[:4],
+                raw[4:6],
+                raw[6:8],
+                line_start + m.start(),
+                line_start + m.end(),
+            )
 
     unique = {}
     for d in found:
         unique[(d["date"], d["start"])] = d
 
-    return list(unique.values())
+    return sorted(unique.values(), key=lambda x: x["start"])
 
 
 def extract_arabic_ocr_transactions(text: str) -> list[dict]:
