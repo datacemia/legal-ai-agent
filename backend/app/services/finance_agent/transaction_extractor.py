@@ -905,7 +905,7 @@ def iter_lines_with_offsets(text: str):
 
 
 def find_arabic_ocr_dates(text: str):
-    text = normalize_arabic_digits(text)
+    text = clean_db_text(normalize_arabic_digits(text))
 
     text = (
         text.replace("٫", ".")
@@ -1018,6 +1018,7 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         return []
 
     normalized = normalize_arabic_digits(text)
+    normalized = clean_db_text(normalized)
     normalized = normalized.replace("\u00a0", " ").replace("\u202f", " ")
     normalized = normalized.replace("،", ",")
     normalized = "\n".join(" ".join(l.split()) for l in normalized.splitlines())
