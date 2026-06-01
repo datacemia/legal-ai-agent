@@ -199,7 +199,8 @@ UNSIGNED_AMOUNT_PATTERN = (
 
 MONEY_NUMBER_PATTERN = (
     r"(?<![A-Za-z0-9])"
-    r"\d{1,3}(?:[ ,]\d{3})*(?:[.,]\d{2})"
+    r"(?:\d{1,3}(?:[ ,]\d{3})+|\d+)"
+    r"(?:[.,]\d{2})"
     r"(?![A-Za-z0-9])"
 )
 
@@ -364,6 +365,7 @@ def detect_document_year(text: str) -> int:
 def extract_date(
     line: str,
     default_year: int | None = None,
+    prefer_us_date: bool = False,
 ):
     iso_match = re.search(
         r"\b(\d{4}-\d{2}-\d{2})\b",
@@ -445,7 +447,7 @@ def extract_date(
 
     raw = match.group(1)
 
-    formats_with_year = (
+    dmy_formats_with_year = (
         "%d/%m/%Y",
         "%d-%m-%Y",
         "%d.%m.%Y",
@@ -454,21 +456,6 @@ def extract_date(
         "%d.%m.%y",
     )
 
-    for fmt in formats_with_year:
-        try:
-            parsed = datetime.strptime(raw, fmt)
-
-            if not is_reasonable_year(parsed.year):
-                return None
-
-            return parsed.date().isoformat()
-
-        except ValueError:
-            continue
-
-    # US statements commonly use MM/DD/YYYY. Keep this after DMY parsing so
-    # already-validated FR/UK/EU formats remain unchanged. It only matters when
-    # DMY is impossible, e.g. 01/20/2026.
     us_formats_with_year = (
         "%m/%d/%Y",
         "%m-%d-%Y",
@@ -478,7 +465,13 @@ def extract_date(
         "%m.%d.%y",
     )
 
-    for fmt in us_formats_with_year:
+    formats_with_year = (
+        us_formats_with_year + dmy_formats_with_year
+        if prefer_us_date
+        else dmy_formats_with_year + us_formats_with_year
+    )
+
+    for fmt in formats_with_year:
         try:
             parsed = datetime.strptime(raw, fmt)
 
@@ -518,8 +511,9 @@ def extract_date(
 def is_date_only_line(
     line: str,
     default_year: int | None = None,
+    prefer_us_date: bool = False,
 ) -> bool:
-    if not extract_date(line, default_year=default_year):
+    if not extract_date(line, default_year=default_year, prefer_us_date=prefer_us_date):
         return False
 
     remaining = re.sub(
@@ -551,6 +545,7 @@ def is_date_only_line(
 def has_transaction_signal(
     line: str,
     default_year: int | None = None,
+    prefer_us_date: bool = False,
 ) -> bool:
     lower = line.lower()
 
@@ -567,6 +562,7 @@ def has_transaction_signal(
     date_found = extract_date(
         line,
         default_year=default_year,
+        prefer_us_date=prefer_us_date,
     ) is not None
 
     amount_found = bool(
@@ -704,6 +700,11 @@ def extract_us_debit_credit_balance(line: str):
     debit = parse_amount(numbers[-3])
     credit = parse_amount(numbers[-2])
     balance = parse_amount(numbers[-1])
+
+    debug_log(
+        "TX_DEBUG: us_debit_credit_balance",
+        {"debit": debit, "credit": credit, "balance": balance},
+    )
 
     if credit > 0 and debit == 0:
         return credit, "income"
@@ -1739,7 +1740,9 @@ def extract_transactions(text: str) -> list[dict]:
     debug_log("TEXT_SAMPLE:", clean_db_text(str(text))[:500])
 
     detected_currency = detect_currency(text)
+    prefer_us_date = detected_currency == "USD"
     debug_log("TX_DEBUG: detected_currency", detected_currency)
+    debug_log("TX_DEBUG: prefer_us_date", prefer_us_date)
 
     arabic_transactions = extract_arabic_ocr_transactions(text)
     if arabic_transactions:
@@ -1774,6 +1777,7 @@ def extract_transactions(text: str) -> list[dict]:
         current_is_date_only = is_date_only_line(
             current,
             default_year=default_year,
+            prefer_us_date=prefer_us_date,
         )
 
         if current_is_date_only:
@@ -1793,7 +1797,7 @@ def extract_transactions(text: str) -> list[dict]:
             continue
 
         if (
-            extract_date(current, default_year=default_year)
+            extract_date(current, default_year=default_year, prefer_us_date=prefer_us_date)
             and not re.search(MONEY_NUMBER_PATTERN, current)
         ):
             combined = current
@@ -1816,7 +1820,7 @@ def extract_transactions(text: str) -> list[dict]:
 
     debug_log("TX_DEBUG: candidate_lines_count", len(lines))
     for idx, candidate_line in enumerate(lines[:50]):
-        debug_log(f"TX_DEBUG: candidate_line[{idx}]", candidate_line, "date=", extract_date(candidate_line, default_year=default_year), "money=", re.findall(MONEY_NUMBER_PATTERN, candidate_line))
+        debug_log(f"TX_DEBUG: candidate_line[{idx}]", candidate_line, "date=", extract_date(candidate_line, default_year=default_year, prefer_us_date=prefer_us_date), "money=", re.findall(MONEY_NUMBER_PATTERN, candidate_line))
 
     for clean_line in lines:
 
@@ -1857,8 +1861,9 @@ def extract_transactions(text: str) -> list[dict]:
         if not has_transaction_signal(
             clean_line,
             default_year=default_year,
+            prefer_us_date=prefer_us_date,
         ):
-            debug_log("TX_SKIP: no_signal", clean_line, "date=", extract_date(clean_line, default_year=default_year), "money=", re.findall(MONEY_NUMBER_PATTERN, clean_line))
+            debug_log("TX_SKIP: no_signal", clean_line, "date=", extract_date(clean_line, default_year=default_year, prefer_us_date=prefer_us_date), "money=", re.findall(MONEY_NUMBER_PATTERN, clean_line))
             continue
 
         debug_log("TX_ACCEPT_SIGNAL:", clean_line)
@@ -1893,6 +1898,7 @@ def extract_transactions(text: str) -> list[dict]:
         date = extract_date(
             clean_line,
             default_year=default_year,
+            prefer_us_date=prefer_us_date,
         )
 
         print(
