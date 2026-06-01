@@ -1085,6 +1085,19 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
             window[dm["end"] - line_start:]
         )
 
+        # retirer toutes les dates OCR restantes du segment avant montants
+        amount_window = re.sub(
+            r"(?<![\d,])([0-3]?\d)\s*[./-]\s*([01]?\d)\s*[./-]\s*(\d{2,4})(?!\d)",
+            " ",
+            amount_window,
+        )
+
+        amount_window = re.sub(
+            r"(?<!\d)(20\d{2}[01]\d[0-3]\d)(?!\d)",
+            " ",
+            amount_window,
+        )
+
         print("WINDOW:")
         print(window)
 
