@@ -1115,24 +1115,22 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         window = normalized[line_start:line_end]
 
         # fallback OCR: si la ligne date seule ou sans montants,
-        # fusionner avec la ligne suivante seulement
+        # fusionner jusqu'à la prochaine date détectée si possible
         if len(re.findall(amount_pattern, window)) < 2:
-            next_line_end = normalized.find("\n", line_end + 1)
+            next_date_start = None
 
-            if next_line_end == -1:
-                next_line_end = len(normalized)
+            for d in dates:
+                if d["start"] > dm["end"]:
+                    next_date_start = d["start"]
+                    break
 
-            merged_window = normalized[line_start:next_line_end]
-
-            # si la ligne date seule fusionne avec une vraie transaction datée,
-            # ne pas créer une transaction doublon pour la date seule
-            other_dates = [
-                d for d in dates
-                if d["start"] > dm["end"] and d["start"] < line_start + len(merged_window)
-            ]
-
-            if other_dates:
-                continue
+            if next_date_start:
+                merged_window = normalized[line_start:next_date_start]
+            else:
+                next_line_end = normalized.find("\n", line_end + 1)
+                if next_line_end == -1:
+                    next_line_end = len(normalized)
+                merged_window = normalized[line_start:next_line_end]
 
             if len(re.findall(amount_pattern, merged_window)) >= 2:
                 window = merged_window
