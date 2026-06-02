@@ -2139,38 +2139,44 @@ export default function FinanceClient() {
                   )}
                 </div>
 
-                <div>
-                  <strong>{t.wasteDetected}:</strong>
-                  <ul className="list-disc ml-6 text-red-600">
-                    {(result.waste_detected || []).map(
-                      (item: string, i: number) => (
-                        <li key={i}>{item}</li>
-                      )
-                    )}
-                  </ul>
-                </div>
+                {result.waste_detected?.length > 0 && (
+                  <div>
+                    <strong>{t.wasteDetected}:</strong>
+                    <ul className="list-disc ml-6 text-red-600">
+                      {result.waste_detected.map(
+                        (item: string, i: number) => (
+                          <li key={i}>{item}</li>
+                        )
+                      )}
+                    </ul>
+                  </div>
+                )}
 
-                <div>
-                  <strong>{t.savingStrategies}:</strong>
-                  <ul className="list-disc ml-6 text-green-600">
-                    {(result.saving_strategies || []).map(
-                      (item: string, i: number) => (
-                        <li key={i}>{item}</li>
-                      )
-                    )}
-                  </ul>
-                </div>
+                {result.saving_strategies?.length > 0 && (
+                  <div>
+                    <strong>{t.savingStrategies}:</strong>
+                    <ul className="list-disc ml-6 text-green-600">
+                      {result.saving_strategies.map(
+                        (item: string, i: number) => (
+                          <li key={i}>{item}</li>
+                        )
+                      )}
+                    </ul>
+                  </div>
+                )}
 
-                <div>
-                  <strong>{t.riskNotes}:</strong>
-                  <ul className="list-disc ml-6 text-amber-600">
-                    {(result.risk_notes || []).map(
-                      (item: string, i: number) => (
-                        <li key={i}>{item}</li>
-                      )
-                    )}
-                  </ul>
-                </div>
+                {result.risk_notes?.length > 0 && (
+                  <div>
+                    <strong>{t.riskNotes}:</strong>
+                    <ul className="list-disc ml-6 text-amber-600">
+                      {result.risk_notes.map(
+                        (item: string, i: number) => (
+                          <li key={i}>{item}</li>
+                        )
+                      )}
+                    </ul>
+                  </div>
+                )}
 
                 <div className="rounded-2xl border bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                   <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
