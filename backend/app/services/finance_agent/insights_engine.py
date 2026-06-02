@@ -348,17 +348,22 @@ def generate_financial_insights(
             opportunity.get("recommendation") or ""
         ).lower()
 
+        action = str(
+            opportunity.get("action") or ""
+        ).lower()
+
         issue = str(
             opportunity.get("issue") or ""
         ).lower()
 
-        text = f"{issue} {recommendation}"
+        text = f"{issue} {recommendation} {action}"
 
         if subscription_count == 0 and "subscription" in text:
             continue
 
         if savings_rate >= 0.15 and (
             "increase savings" in text
+            or "savings contribution" in text
             or "savings contributions" in text
             or "increase savings contributions" in text
         ):

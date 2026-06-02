@@ -132,6 +132,12 @@ STRICT RULES:
 - Do not generate risk_notes that contradict observed income, observed expenses, or observed net cashflow.
 - NEVER return null values.
 
+SAVING STRATEGY RULES:
+- Do not recommend increasing savings contributions when observed savings rate is 15% or higher.
+- Do not recommend reducing spending when observed expense ratio is below 60%.
+- Saving strategies must be consistent with observed income, expenses, and net cashflow.
+- Never generate generic saving strategies that contradict the observed financial metrics.
+
 Return EXACT JSON:
 {{
   "summary": "short summary",
