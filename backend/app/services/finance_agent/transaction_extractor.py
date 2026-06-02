@@ -378,12 +378,27 @@ TRANSACTION_SIGNALS = [
     "virement",
     "virement recu",
     "virement reçu",
+    "vir recu",
+    "vir reçu",
+    "vir inst recu",
+    "vir inst reçu",
+    "vir.web recu",
+    "vir.web reçu",
+    "vir web recu",
+    "vir web reçu",
+    "vir emis",
+    "vir émis",
+    "vir.emis",
+    "vir emis web",
+    "virement emis",
+    "virement émis",
     "prelevement",
     "prélèvement",
     "paiement",
     "paiement carte",
     "carte",
     "retrait",
+    "gab",
     "frais",
     "commission",
     "remboursement",
@@ -519,12 +534,66 @@ def parse_amount(value: str) -> float:
     return float(value)
 
 
+def normalize_line_for_amount_detection(line: str) -> str:
+    """Remove date-like tokens before money detection.
+
+    This prevents OCR/table rows such as:
+        20 04 2026 300,00
+    from being misread as:
+        6 300,00 -> 6300.00
+
+    The rule is structural and bank-neutral: dates are not transaction
+    amounts, so they should not participate in money token matching.
+    """
+    text = str(line or "")
+
+    date_patterns = [
+        r"\b\d{4}-\d{2}-\d{2}\b",
+        r"\b20\d{6}\b",
+        r"\b[0-3]\d[0-1]\d20\d{2}\b",
+        r"\b\d{2}[./-]\d{2}[./-]\d{2,4}\b",
+        r"\b\d{1,2}[./-]\d{1,2}\b",
+        r"\b[0-3]?\d\s+[01]?\d\s+20\d{2}\b",
+        r"\b20\d{2}\s+[01]?\d\s+[0-3]?\d\b",
+        r"\b\d{1,2}\s+"
+        r"(?:january|jan|february|feb|march|mar|april|apr|may|"
+        r"june|jun|july|jul|august|aug|september|sept|sep|"
+        r"october|oct|november|nov|december|dec)"
+        r"\s+\d{2,4}\b",
+    ]
+
+    for pattern in date_patterns:
+        text = re.sub(
+            pattern,
+            " ",
+            text,
+            flags=re.IGNORECASE,
+        )
+
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def extract_money_numbers_safely(line: str) -> list[str]:
+    """Return decimal money values after removing date noise.
+
+    This is used by the generic bank parser to avoid combining the last digit
+    of a date with a transaction amount, for example:
+        2026 100,00 -> 6100,00
+    """
+    cleaned = normalize_line_for_amount_detection(line)
+
+    return re.findall(
+        MONEY_NUMBER_PATTERN,
+        cleaned,
+    )
+
+
 def pick_bank_amount(
     numbers: list[str],
     line: str,
     account_currency: str | None = None,
 ) -> float:
-    text = line.upper()
+    text = normalize_line_for_amount_detection(line.upper())
 
     currency_amounts = re.findall(
         r"\b(?:USD|EUR|GBP|AED|MAD|CAD|JOD|SAR|QAR|KWD|BHD|OMR|دينار|دولار|درهم|ريال)\s*([+-]?\d[\d,]*(?:[.,]\d{1,2})?)",
@@ -544,15 +613,7 @@ def pick_bank_amount(
         if matches:
             return parse_amount(matches[-1])
 
-    text = re.sub(r"\b\d{2}[./-]\d{2}[./-]\d{4}\b", "", text)
-    text = re.sub(r"\b\d{2}[./-]\d{2}\b", "", text)
-    text = re.sub(r"\b\d{4}-\d{2}-\d{2}\b", "", text)
-    text = re.sub(r"\b20\d{6}\b", "", text)
-
-    money_numbers = re.findall(
-        MONEY_NUMBER_PATTERN,
-        text,
-    )
+    money_numbers = extract_money_numbers_safely(line)
 
     if money_numbers:
         return parse_amount(money_numbers[0])
@@ -570,25 +631,27 @@ def pick_transaction_amount_from_tabular_numbers(
     line: str,
     account_currency: str | None = None,
 ) -> float:
-    """Pick the movement amount from a normal bank row without using the balance.
+    """Pick the movement amount without using dates or running balances.
 
-    General non-bank-specific rule for rows shaped like:
-        date description transaction_amount running_balance
-
-    In that common format, the first money value is the transaction amount and
-    the last money value is the running balance. This avoids misreading values
-    such as 7,433.70 as the OSKO amount when the real movement is 75.00.
-
-    Arabic OCR has its own extraction path and remains unchanged.
+    General rule:
+    - remove date-like tokens before detecting money;
+    - if the row has transaction amount + running balance, use the movement;
+    - never allow a date fragment to merge with a money value.
     """
-    if numbers and len(numbers) >= 2 and not is_arabic_text(line):
-        return parse_amount(numbers[0])
+    safe_numbers = extract_money_numbers_safely(line)
+
+    if safe_numbers and len(safe_numbers) >= 2 and not is_arabic_text(line):
+        return parse_amount(safe_numbers[0])
+
+    if safe_numbers and not is_arabic_text(line):
+        return parse_amount(safe_numbers[0])
 
     return pick_bank_amount(
         numbers,
         line,
         account_currency=account_currency,
     )
+
 
 
 def is_reasonable_year(year: int) -> bool:
@@ -999,10 +1062,7 @@ def has_transaction_signal(
         prefer_us_date=prefer_us_date,
     ) is not None
 
-    amounts = re.findall(
-        MONEY_NUMBER_PATTERN,
-        line,
-    )
+    amounts = extract_money_numbers_safely(line)
 
     signed_amount_found = bool(
         re.search(
@@ -1060,6 +1120,16 @@ def is_income_priority_description(text: str) -> bool:
         "client",
         "virement reçu",
         "virement recu",
+        "vir recu",
+        "vir reçu",
+        "vir inst recu",
+        "vir inst reçu",
+        "vir.web recu",
+        "vir.web reçu",
+        "vir web recu",
+        "vir web reçu",
+        "recu de",
+        "reçu de",
         "دائن",
         "إيداع",
         "ايداع",
@@ -1098,6 +1168,12 @@ def detect_type(line: str, amount: float) -> str | None:
             "transfer to loan",
             "outgoing transfer",
             "transfer sent",
+            "vir emis",
+            "vir émis",
+            "vir.emis",
+            "vir emis web",
+            "virement emis",
+            "virement émis",
         ]
     ):
         return "expense"
@@ -1305,10 +1381,7 @@ def extract_tabular_bank_amount(
     )
 
 
-    numbers = re.findall(
-        MONEY_NUMBER_PATTERN,
-        without_date,
-    )
+    numbers = extract_money_numbers_safely(without_date)
 
     if not numbers:
         return None, None
@@ -1396,6 +1469,12 @@ def extract_tabular_bank_amount(
             "card payment",
             "sepa direct debit",
             "outgoing transfer",
+            "vir emis",
+            "vir émis",
+            "vir.emis",
+            "vir emis web",
+            "virement emis",
+            "virement émis",
             "ticket",
             "e-ticket",
             "restaurant",
@@ -1420,6 +1499,16 @@ def extract_tabular_bank_amount(
             "transfer received",
             "virement reçu",
             "virement recu",
+            "vir recu",
+            "vir reçu",
+            "vir inst recu",
+            "vir inst reçu",
+            "vir.web recu",
+            "vir.web reçu",
+            "vir web recu",
+            "vir web reçu",
+            "recu de",
+            "reçu de",
             "salary",
             "payroll",
             "wage",
@@ -1437,7 +1526,7 @@ def extract_tabular_bank_amount(
 
 
 def extract_amount_balance_line(line: str):
-    numbers = re.findall(MONEY_NUMBER_PATTERN, line)
+    numbers = extract_money_numbers_safely(line)
 
     if len(numbers) < 2:
         return None, None
@@ -1471,7 +1560,7 @@ def extract_amount_balance_line(line: str):
 
 
 def extract_line_balance(line: str) -> float | None:
-    numbers = re.findall(MONEY_NUMBER_PATTERN, line)
+    numbers = extract_money_numbers_safely(line)
 
     if len(numbers) < 2:
         return None
@@ -1689,10 +1778,7 @@ def extract_first_amount_after_date(line: str) -> float | None:
     )
 
 
-    numbers = re.findall(
-        MONEY_NUMBER_PATTERN,
-        text,
-    )
+    numbers = extract_money_numbers_safely(text)
 
     if not numbers:
         return None
