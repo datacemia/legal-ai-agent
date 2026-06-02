@@ -416,6 +416,21 @@ def handle_finance_ai(job: Job, db):
         fallback_income=effective_fallback_income,
         output_language=output_language,
     )
+
+    savings_rate = (
+        forecast.get("observed_net_cashflow", 0)
+        / forecast.get("observed_income", 1)
+        if forecast.get("observed_income", 0) > 0
+        else 0
+    )
+
+    if savings_rate >= 0.15:
+        result_ai["saving_strategies"] = [
+            s
+            for s in result_ai.get("saving_strategies", [])
+            if "increase savings" not in str(s).lower()
+            and "savings contribution" not in str(s).lower()
+        ]
     
 
     observed_income = forecast.get(
