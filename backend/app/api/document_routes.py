@@ -1,15 +1,18 @@
 from datetime import datetime
+import os
 
 from fastapi import APIRouter, UploadFile, File, HTTPException, Depends, Request
 from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.models.document import Document
+from app.models.uploaded_file import UploadedFile
 from app.models.user import User
 from app.schemas.document_schema import DocumentResponse
 from app.utils.file_validator import validate_file
 from app.utils.security import get_current_user
 from app.services.storage_service import save_upload_file
+from app.services.supabase_storage_service import upload_file_to_supabase_storage
 
 router = APIRouter(prefix="/documents", tags=["Documents"])
 
@@ -99,6 +102,15 @@ def upload_document(
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
+    stored_file_name = os.path.basename(file_path)
+    supabase_storage_path = f"legal/{stored_file_name}"
+
+    storage_result = upload_file_to_supabase_storage(
+        local_file_path=file_path,
+        storage_path=supabase_storage_path,
+        content_type=file.content_type,
+    )
+
     document = Document(
         user_id=current_user.id,
         file_name=file.filename,
@@ -111,6 +123,25 @@ def upload_document(
     db.add(document)
     db.commit()
     db.refresh(document)
+
+    uploaded_file = UploadedFile(
+        user_id=current_user.id,
+        agent_type="legal",
+        original_file_name=file.filename,
+        stored_file_name=stored_file_name,
+        file_path=storage_result["storage_path"],
+        public_url=storage_result["public_url"],
+        mime_type=file.content_type,
+        file_extension=extension,
+        file_size_bytes=file_size,
+        storage_backend="supabase",
+        status="uploaded",
+        consent_for_training=False,
+    )
+
+    db.add(uploaded_file)
+    db.commit()
+    db.refresh(uploaded_file)
 
     return document
 
