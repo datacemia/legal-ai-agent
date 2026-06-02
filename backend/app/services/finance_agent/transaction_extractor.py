@@ -3262,7 +3262,7 @@ def extract_transactions(text: str) -> list[dict]:
         if tabular_amount is None:
             tabular_amount, tabular_type = extract_amount_balance_line(clean_line)
 
-            amount_balance_numbers = re.findall(MONEY_NUMBER_PATTERN, clean_line)
+            amount_balance_numbers = extract_money_numbers_safely(clean_line)
             if len(amount_balance_numbers) >= 2:
                 try:
                     amount_balance_tx_amount = parse_amount(amount_balance_numbers[-2])
@@ -3271,7 +3271,7 @@ def extract_transactions(text: str) -> list[dict]:
                     amount_balance_tx_amount = None
                     amount_balance_value = None
 
-        numbers = re.findall(MONEY_NUMBER_PATTERN, clean_line)
+        numbers = extract_money_numbers_safely(clean_line)
 
         if (
             len(numbers) == 2
