@@ -37,6 +37,8 @@ def generate_financial_insights(
         for s in subscriptions
     )
 
+    subscription_count = len(subscriptions)
+
     savings_rate = (
         net / income
         if income > 0
@@ -67,43 +69,28 @@ def generate_financial_insights(
                 float(t.get("amount", 0) or 0)
             )
 
-    # 🔥 Cashflow
-    if net > 0:
-        insights.append(
-            {
-                "type": "positive",
-                "title": {
-                    "en": "Positive cashflow detected",
-                    "fr": "Trésorerie positive détectée",
-                    "ar": "تم اكتشاف تدفق نقدي إيجابي",
-                }.get(
-                    output_language,
-                    "Positive cashflow detected",
-                ),
-                "message": {
-                    "en": (
-                        f"You currently retain approximately "
-                        f"{round(net, 2)} {currency} after expenses."
-                    ),
-                    "fr": (
-                        f"Vous conservez actuellement environ "
-                        f"{round(net, 2)} {currency} après vos dépenses."
-                    ),
-                    "ar": (
-                        f"تحتفظ حاليًا بحوالي "
-                        f"{round(net, 2)} {currency} بعد المصاريف."
-                    ),
-                }.get(
-                    output_language,
-                    (
-                        f"You currently retain approximately "
-                        f"{round(net, 2)} {currency} after expenses."
-                    ),
-                ),
-            }
+    category_totals.pop(
+        "other",
+        None,
+    )
+
+    dominant_category = None
+    dominant_category_amount = 0
+
+    if category_totals:
+        dominant_category, dominant_category_amount = max(
+            category_totals.items(),
+            key=lambda item: item[1],
         )
 
-    else:
+    dominant_ratio = (
+        dominant_category_amount / expenses
+        if expenses > 0
+        else 0
+    )
+
+    # 🔥 Cashflow risk
+    if net < 0:
         insights.append(
             {
                 "type": "warning",
@@ -126,94 +113,99 @@ def generate_financial_insights(
             }
         )
 
-    # 🔥 Universal financial position insight
-    if savings_rate >= 0.30 and expense_ratio <= 0.70:
-        financial_position_type = "positive"
-        financial_position_title = {
-            "en": "Strong financial position",
-            "fr": "Situation financière solide",
-            "ar": "وضع مالي قوي",
-        }.get(
-            output_language,
-            "Strong financial position",
+    # 🔥 Savings capacity levels
+    if savings_rate >= 0.30:
+        insights.append(
+            {
+                "type": "positive",
+                "title": {
+                    "en": "Excellent savings capacity",
+                    "fr": "Excellente capacité d’épargne",
+                    "ar": "قدرة ممتازة على الادخار",
+                }.get(
+                    output_language,
+                    "Excellent savings capacity",
+                ),
+                "message": {
+                    "en": (
+                        f"You retain approximately "
+                        f"{round(savings_rate * 100, 1)}% of your income after expenses."
+                    ),
+                    "fr": (
+                        f"Vous conservez environ "
+                        f"{round(savings_rate * 100, 1)}% de vos revenus après dépenses."
+                    ),
+                    "ar": (
+                        f"تحتفظ بحوالي "
+                        f"{round(savings_rate * 100, 1)}% من دخلك بعد المصاريف."
+                    ),
+                }.get(
+                    output_language,
+                    (
+                        f"You retain approximately "
+                        f"{round(savings_rate * 100, 1)}% of your income after expenses."
+                    ),
+                ),
+            }
         )
 
-        financial_position_message = {
-            "en": "Your savings rate is strong and your expenses remain controlled compared with income.",
-            "fr": "Votre taux d’épargne est élevé et vos dépenses restent maîtrisées par rapport à vos revenus.",
-            "ar": "معدل ادخارك قوي ومصاريفك ما زالت تحت السيطرة مقارنة بدخلك.",
-        }.get(
-            output_language,
-            "Your savings rate is strong and your expenses remain controlled compared with income.",
-        )
-
-    elif savings_rate >= 0.15 and expense_ratio <= 0.85:
-        financial_position_type = "positive"
-        financial_position_title = {
-            "en": "Healthy financial position",
-            "fr": "Situation financière saine",
-            "ar": "وضع مالي صحي",
-        }.get(
-            output_language,
-            "Healthy financial position",
-        )
-
-        financial_position_message = {
-            "en": "Your financial position appears healthy, with a reasonable balance between income, expenses, and savings.",
-            "fr": "Votre situation financière semble saine, avec un bon équilibre entre revenus, dépenses et épargne.",
-            "ar": "يبدو وضعك المالي صحيًا، مع توازن مقبول بين الدخل والمصاريف والادخار.",
-        }.get(
-            output_language,
-            "Your financial position appears healthy, with a reasonable balance between income, expenses, and savings.",
-        )
-
-    elif savings_rate >= 0.05:
-        financial_position_type = "tip"
-        financial_position_title = {
-            "en": "Moderate financial position",
-            "fr": "Situation financière modérée",
-            "ar": "وضع مالي متوسط",
-        }.get(
-            output_language,
-            "Moderate financial position",
-        )
-
-        financial_position_message = {
-            "en": "You are saving some income, but your financial margin could be improved.",
-            "fr": "Vous épargnez une partie de vos revenus, mais votre marge financière pourrait être améliorée.",
-            "ar": "أنت تدخر جزءًا من دخلك، لكن يمكن تحسين هامشك المالي.",
-        }.get(
-            output_language,
-            "You are saving some income, but your financial margin could be improved.",
+    elif savings_rate >= 0.15:
+        insights.append(
+            {
+                "type": "positive",
+                "title": {
+                    "en": "Healthy savings capacity",
+                    "fr": "Capacité d’épargne saine",
+                    "ar": "قدرة صحية على الادخار",
+                }.get(
+                    output_language,
+                    "Healthy savings capacity",
+                ),
+                "message": {
+                    "en": (
+                        f"You retain approximately "
+                        f"{round(savings_rate * 100, 1)}% of your income after expenses."
+                    ),
+                    "fr": (
+                        f"Vous conservez environ "
+                        f"{round(savings_rate * 100, 1)}% de vos revenus après dépenses."
+                    ),
+                    "ar": (
+                        f"تحتفظ بحوالي "
+                        f"{round(savings_rate * 100, 1)}% من دخلك بعد المصاريف."
+                    ),
+                }.get(
+                    output_language,
+                    (
+                        f"You retain approximately "
+                        f"{round(savings_rate * 100, 1)}% of your income after expenses."
+                    ),
+                ),
+            }
         )
 
     else:
-        financial_position_type = "warning"
-        financial_position_title = {
-            "en": "Financial pressure detected",
-            "fr": "Pression financière détectée",
-            "ar": "تم اكتشاف ضغط مالي",
-        }.get(
-            output_language,
-            "Financial pressure detected",
+        insights.append(
+            {
+                "type": "warning",
+                "title": {
+                    "en": "Limited savings capacity",
+                    "fr": "Capacité d’épargne limitée",
+                    "ar": "قدرة محدودة على الادخار",
+                }.get(
+                    output_language,
+                    "Limited savings capacity",
+                ),
+                "message": {
+                    "en": "Your current income and expenses leave limited room for savings.",
+                    "fr": "Vos revenus et dépenses actuels laissent une marge limitée pour l’épargne.",
+                    "ar": "دخلك ومصاريفك الحالية تترك مجالًا محدودًا للادخار.",
+                }.get(
+                    output_language,
+                    "Your current income and expenses leave limited room for savings.",
+                ),
+            }
         )
-
-        financial_position_message = {
-            "en": "Your current income, expenses, and savings suggest financial pressure.",
-            "fr": "Vos revenus, dépenses et économies actuels indiquent une pression financière.",
-            "ar": "يشير دخلك ومصاريفك وادخارك الحالي إلى وجود ضغط مالي.",
-        }.get(
-            output_language,
-            "Your current income, expenses, and savings suggest financial pressure.",
-        )
-
-    insights.append(
-        {
-            "type": financial_position_type,
-            "title": financial_position_title,
-            "message": financial_position_message,
-        }
-    )
 
     # 🔥 General spending level insight
     if expense_ratio > 0.90:
@@ -285,64 +277,32 @@ def generate_financial_insights(
             }
         )
 
-    category_totals.pop("other", None)
-
-    # 🔥 Category ratio insights
-    for category, amount in category_totals.items():
-        ratio = (
-            amount / expenses
-            if expenses > 0
-            else 0
+    # 🔥 Dominant category insight
+    if dominant_category and dominant_ratio > 0.40:
+        insights.append(
+            {
+                "type": "warning",
+                "title": {
+                    "en": "Primary expense category",
+                    "fr": "Catégorie principale de dépenses",
+                    "ar": "فئة المصاريف الرئيسية",
+                }.get(
+                    output_language,
+                    "Primary expense category",
+                ),
+                "message": {
+                    "en": f"{dominant_category} is the primary expense category.",
+                    "fr": f"{dominant_category} est la principale catégorie de dépenses.",
+                    "ar": f"{dominant_category} هي فئة المصاريف الرئيسية.",
+                }.get(
+                    output_language,
+                    f"{dominant_category} is the primary expense category.",
+                ),
+            }
         )
 
-        if ratio >= 0.40:
-            insights.append(
-                {
-                    "type": "warning",
-                    "title": {
-                        "en": "Dominant spending category",
-                        "fr": "Catégorie de dépenses dominante",
-                        "ar": "فئة إنفاق مهيمنة",
-                    }.get(
-                        output_language,
-                        "Dominant spending category",
-                    ),
-                    "message": {
-                        "en": f"{category} is your dominant spending category.",
-                        "fr": f"{category} représente votre catégorie de dépenses dominante.",
-                        "ar": f"{category} هي فئة الإنفاق المهيمنة لديك.",
-                    }.get(
-                        output_language,
-                        f"{category} is your dominant spending category.",
-                    ),
-                }
-            )
-
-        elif ratio >= 0.20:
-            insights.append(
-                {
-                    "type": "tip",
-                    "title": {
-                        "en": "Significant spending category",
-                        "fr": "Catégorie de dépenses significative",
-                        "ar": "فئة إنفاق مهمة",
-                    }.get(
-                        output_language,
-                        "Significant spending category",
-                    ),
-                    "message": {
-                        "en": f"{category} represents a significant share of expenses.",
-                        "fr": f"{category} représente une part importante des dépenses.",
-                        "ar": f"{category} تمثل جزءًا مهمًا من المصاريف.",
-                    }.get(
-                        output_language,
-                        f"{category} represents a significant share of expenses.",
-                    ),
-                }
-            )
-
     # 🔥 Subscription pressure
-    if income > 0:
+    if subscription_count > 0 and income > 0:
         ratio = subscription_ratio * 100
 
         if ratio >= 10:
@@ -381,13 +341,46 @@ def generate_financial_insights(
             )
 
     # 🔥 Opportunities
-    if opportunities:
+    filtered_opportunities = []
+
+    for opportunity in opportunities:
+        recommendation = str(
+            opportunity.get("recommendation") or ""
+        ).lower()
+
+        issue = str(
+            opportunity.get("issue") or ""
+        ).lower()
+
+        text = f"{issue} {recommendation}"
+
+        if subscription_count == 0 and "subscription" in text:
+            continue
+
+        if savings_rate >= 0.15 and (
+            "increase savings" in text
+            or "savings contributions" in text
+            or "increase savings contributions" in text
+        ):
+            continue
+
+        if expense_ratio < 0.60 and (
+            "reduce spending" in text
+            or "reduce discretionary spending" in text
+            or "spending reduction" in text
+            or "reduce expenses" in text
+        ):
+            continue
+
+        filtered_opportunities.append(opportunity)
+
+    if filtered_opportunities:
         estimated = sum(
             o.get(
                 "estimated_savings_opportunity",
                 0,
             )
-            for o in opportunities
+            for o in filtered_opportunities
         )
 
         insights.append(
