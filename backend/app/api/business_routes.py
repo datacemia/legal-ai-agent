@@ -1,5 +1,8 @@
 import json
+import os
+import uuid
 from datetime import datetime
+from pathlib import Path
 
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException, Depends, Request
 from sqlalchemy.orm import Session
@@ -11,10 +14,12 @@ from app.utils.billing import check_and_consume_agent_access
 from app.models.user import User
 from app.models.job import Job
 from app.models.business_analysis import BusinessAnalysis
+from app.models.uploaded_file import UploadedFile
 
 from app.schemas.business_schema import BusinessHistoryItem
 
 from app.services.business_agent.business_parser import extract_business_data
+from app.services.supabase_storage_service import upload_file_to_supabase_storage
 
 from app.services.enterprise_service import (
     check_enterprise_agent_access,
@@ -117,6 +122,45 @@ async def analyze_business(
             status_code=413,
             detail="File is too large. Maximum allowed size is 10 MB.",
         )
+
+    original_file_name = file.filename
+    file_extension = original_file_name.rsplit(".", 1)[-1].lower()
+    stored_file_name = f"{uuid.uuid4()}.{file_extension}"
+
+    upload_dir = Path("storage/business")
+    upload_dir.mkdir(parents=True, exist_ok=True)
+
+    local_file_path = upload_dir / stored_file_name
+
+    with open(local_file_path, "wb") as buffer:
+        buffer.write(content)
+
+    supabase_storage_path = f"business/{stored_file_name}"
+
+    storage_result = upload_file_to_supabase_storage(
+        local_file_path=str(local_file_path),
+        storage_path=supabase_storage_path,
+        content_type=file.content_type,
+    )
+
+    uploaded_file = UploadedFile(
+        user_id=current_user.id,
+        agent_type="business",
+        original_file_name=original_file_name,
+        stored_file_name=stored_file_name,
+        file_path=storage_result["storage_path"],
+        public_url=storage_result["public_url"],
+        mime_type=file.content_type,
+        file_extension=file_extension,
+        file_size_bytes=len(content),
+        storage_backend="supabase",
+        status="uploaded",
+        consent_for_training=False,
+    )
+
+    db.add(uploaded_file)
+    db.commit()
+    db.refresh(uploaded_file)
 
     await file.seek(0)
 
