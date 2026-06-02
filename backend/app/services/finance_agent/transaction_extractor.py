@@ -2727,19 +2727,11 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
             "probable_tx": clean[0],
         })
 
-    seen = set()
     filtered = []
 
-    for row in rows:
-        key = (
-            row["date"],
-            row["probable_tx"],
-            row["probable_balance"],
-        )
-
-        if key not in seen:
-            seen.add(key)
-            filtered.append(row)
+    for index, row in enumerate(rows):
+        row["_source_index"] = index
+        filtered.append(row)
 
     rows = filtered
 
