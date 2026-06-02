@@ -4,10 +4,10 @@ from sqlalchemy import (
     Column,
     DateTime,
     Integer,
+    JSON,
     String,
     Text,
 )
-from sqlalchemy.dialects.postgresql import JSONB
 
 from app.database import Base
 
@@ -32,7 +32,7 @@ class UploadedFile(Base):
     storage_backend = Column(String(50))
 
     extracted_text = Column(Text)
-    extracted_json = Column(JSONB)
+    extracted_json = Column(JSON)
 
     status = Column(String(50))
 
