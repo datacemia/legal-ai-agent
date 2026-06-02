@@ -1,3 +1,6 @@
+from collections import defaultdict
+
+
 def generate_financial_insights(
     transactions: list[dict],
     subscriptions: list[dict],
@@ -33,6 +36,36 @@ def generate_financial_insights(
         s.get("monthly_cost", 0)
         for s in subscriptions
     )
+
+    savings_rate = (
+        net / income
+        if income > 0
+        else 0
+    )
+
+    expense_ratio = (
+        expenses / income
+        if income > 0
+        else 1
+    )
+
+    subscription_ratio = (
+        subscription_total / income
+        if income > 0
+        else 0
+    )
+
+    category_totals = defaultdict(float)
+
+    for t in transactions:
+        if t.get("type") == "expense":
+            category = str(
+                t.get("category") or "other"
+            ).lower()
+
+            category_totals[category] += abs(
+                float(t.get("amount", 0) or 0)
+            )
 
     # 🔥 Cashflow
     if net > 0:
@@ -93,58 +126,222 @@ def generate_financial_insights(
             }
         )
 
-    # 🔥 Score insight
-    if score >= 80:
-        insights.append(
-            {
-                "type": "positive",
-                "title": {
-                    "en": "Excellent financial habits",
-                    "fr": "Excellentes habitudes financières",
-                    "ar": "عادات مالية ممتازة",
-                }.get(
-                    output_language,
-                    "Excellent financial habits",
-                ),
-                "message": {
-                    "en": "Your financial behavior appears healthy and stable.",
-                    "fr": "Votre comportement financier semble sain et stable.",
-                    "ar": "يبدو أن سلوكك المالي صحي ومستقر.",
-                }.get(
-                    output_language,
-                    "Your financial behavior appears healthy and stable.",
-                ),
-            }
+    # 🔥 Universal financial position insight
+    if savings_rate >= 0.30 and expense_ratio <= 0.70:
+        financial_position_type = "positive"
+        financial_position_title = {
+            "en": "Strong financial position",
+            "fr": "Situation financière solide",
+            "ar": "وضع مالي قوي",
+        }.get(
+            output_language,
+            "Strong financial position",
         )
 
-    elif score < 50:
+        financial_position_message = {
+            "en": "Your savings rate is strong and your expenses remain controlled compared with income.",
+            "fr": "Votre taux d’épargne est élevé et vos dépenses restent maîtrisées par rapport à vos revenus.",
+            "ar": "معدل ادخارك قوي ومصاريفك ما زالت تحت السيطرة مقارنة بدخلك.",
+        }.get(
+            output_language,
+            "Your savings rate is strong and your expenses remain controlled compared with income.",
+        )
+
+    elif savings_rate >= 0.15 and expense_ratio <= 0.85:
+        financial_position_type = "positive"
+        financial_position_title = {
+            "en": "Healthy financial position",
+            "fr": "Situation financière saine",
+            "ar": "وضع مالي صحي",
+        }.get(
+            output_language,
+            "Healthy financial position",
+        )
+
+        financial_position_message = {
+            "en": "Your financial position appears healthy, with a reasonable balance between income, expenses, and savings.",
+            "fr": "Votre situation financière semble saine, avec un bon équilibre entre revenus, dépenses et épargne.",
+            "ar": "يبدو وضعك المالي صحيًا، مع توازن مقبول بين الدخل والمصاريف والادخار.",
+        }.get(
+            output_language,
+            "Your financial position appears healthy, with a reasonable balance between income, expenses, and savings.",
+        )
+
+    elif savings_rate >= 0.05:
+        financial_position_type = "tip"
+        financial_position_title = {
+            "en": "Moderate financial position",
+            "fr": "Situation financière modérée",
+            "ar": "وضع مالي متوسط",
+        }.get(
+            output_language,
+            "Moderate financial position",
+        )
+
+        financial_position_message = {
+            "en": "You are saving some income, but your financial margin could be improved.",
+            "fr": "Vous épargnez une partie de vos revenus, mais votre marge financière pourrait être améliorée.",
+            "ar": "أنت تدخر جزءًا من دخلك، لكن يمكن تحسين هامشك المالي.",
+        }.get(
+            output_language,
+            "You are saving some income, but your financial margin could be improved.",
+        )
+
+    else:
+        financial_position_type = "warning"
+        financial_position_title = {
+            "en": "Financial pressure detected",
+            "fr": "Pression financière détectée",
+            "ar": "تم اكتشاف ضغط مالي",
+        }.get(
+            output_language,
+            "Financial pressure detected",
+        )
+
+        financial_position_message = {
+            "en": "Your current income, expenses, and savings suggest financial pressure.",
+            "fr": "Vos revenus, dépenses et économies actuels indiquent une pression financière.",
+            "ar": "يشير دخلك ومصاريفك وادخارك الحالي إلى وجود ضغط مالي.",
+        }.get(
+            output_language,
+            "Your current income, expenses, and savings suggest financial pressure.",
+        )
+
+    insights.append(
+        {
+            "type": financial_position_type,
+            "title": financial_position_title,
+            "message": financial_position_message,
+        }
+    )
+
+    # 🔥 General spending level insight
+    if expense_ratio > 0.90:
         insights.append(
             {
                 "type": "warning",
                 "title": {
-                    "en": "Financial habits need improvement",
-                    "fr": "Les habitudes financières doivent être améliorées",
-                    "ar": "العادات المالية تحتاج إلى تحسين",
+                    "en": "Very high expense ratio",
+                    "fr": "Ratio de dépenses très élevé",
+                    "ar": "نسبة مصاريف مرتفعة جدًا",
                 }.get(
                     output_language,
-                    "Financial habits need improvement",
+                    "Very high expense ratio",
                 ),
                 "message": {
-                    "en": "Your spending patterns may require closer monitoring.",
-                    "fr": "Vos habitudes de dépense peuvent nécessiter un suivi plus attentif.",
-                    "ar": "قد تتطلب أنماط إنفاقك مراقبة أدق.",
+                    "en": "Your expenses consume most of your income.",
+                    "fr": "Vos dépenses consomment la majeure partie de vos revenus.",
+                    "ar": "مصاريفك تستهلك معظم دخلك.",
                 }.get(
                     output_language,
-                    "Your spending patterns may require closer monitoring.",
+                    "Your expenses consume most of your income.",
                 ),
             }
         )
 
+    elif expense_ratio > 0.75:
+        insights.append(
+            {
+                "type": "warning",
+                "title": {
+                    "en": "Elevated spending level",
+                    "fr": "Niveau de dépenses élevé",
+                    "ar": "مستوى إنفاق مرتفع",
+                }.get(
+                    output_language,
+                    "Elevated spending level",
+                ),
+                "message": {
+                    "en": "Your spending level is elevated compared with income.",
+                    "fr": "Votre niveau de dépenses est élevé par rapport à vos revenus.",
+                    "ar": "مستوى إنفاقك مرتفع مقارنة بدخلك.",
+                }.get(
+                    output_language,
+                    "Your spending level is elevated compared with income.",
+                ),
+            }
+        )
+
+    elif expense_ratio > 0.60:
+        insights.append(
+            {
+                "type": "tip",
+                "title": {
+                    "en": "Moderate spending level",
+                    "fr": "Niveau de dépenses modéré",
+                    "ar": "مستوى إنفاق متوسط",
+                }.get(
+                    output_language,
+                    "Moderate spending level",
+                ),
+                "message": {
+                    "en": "Your spending is moderate but should be monitored.",
+                    "fr": "Vos dépenses sont modérées mais doivent être surveillées.",
+                    "ar": "إنفاقك متوسط لكنه يحتاج إلى متابعة.",
+                }.get(
+                    output_language,
+                    "Your spending is moderate but should be monitored.",
+                ),
+            }
+        )
+
+    # 🔥 Category ratio insights
+    for category, amount in category_totals.items():
+        ratio = (
+            amount / expenses
+            if expenses > 0
+            else 0
+        )
+
+        if ratio >= 0.40:
+            insights.append(
+                {
+                    "type": "warning",
+                    "title": {
+                        "en": "Dominant spending category",
+                        "fr": "Catégorie de dépenses dominante",
+                        "ar": "فئة إنفاق مهيمنة",
+                    }.get(
+                        output_language,
+                        "Dominant spending category",
+                    ),
+                    "message": {
+                        "en": f"{category} is your dominant spending category.",
+                        "fr": f"{category} représente votre catégorie de dépenses dominante.",
+                        "ar": f"{category} هي فئة الإنفاق المهيمنة لديك.",
+                    }.get(
+                        output_language,
+                        f"{category} is your dominant spending category.",
+                    ),
+                }
+            )
+
+        elif ratio >= 0.20:
+            insights.append(
+                {
+                    "type": "tip",
+                    "title": {
+                        "en": "Significant spending category",
+                        "fr": "Catégorie de dépenses significative",
+                        "ar": "فئة إنفاق مهمة",
+                    }.get(
+                        output_language,
+                        "Significant spending category",
+                    ),
+                    "message": {
+                        "en": f"{category} represents a significant share of expenses.",
+                        "fr": f"{category} représente une part importante des dépenses.",
+                        "ar": f"{category} تمثل جزءًا مهمًا من المصاريف.",
+                    }.get(
+                        output_language,
+                        f"{category} represents a significant share of expenses.",
+                    ),
+                }
+            )
+
     # 🔥 Subscription pressure
     if income > 0:
-        ratio = (
-            subscription_total / income
-        ) * 100
+        ratio = subscription_ratio * 100
 
         if ratio >= 10:
             insights.append(
@@ -221,30 +418,6 @@ def generate_financial_insights(
                         f"Potential savings opportunities identified: "
                         f"{round(estimated, 2)} {currency}."
                     ),
-                ),
-            }
-        )
-
-    # 🔥 Expense intensity
-    if expenses >= 5000:
-        insights.append(
-            {
-                "type": "warning",
-                "title": {
-                    "en": "High spending intensity",
-                    "fr": "Intensité de dépenses élevée",
-                    "ar": "مستوى إنفاق مرتفع",
-                }.get(
-                    output_language,
-                    "High spending intensity",
-                ),
-                "message": {
-                    "en": "Your observed expenses are relatively high.",
-                    "fr": "Vos dépenses observées sont relativement élevées.",
-                    "ar": "مصاريفك المسجلة مرتفعة نسبيًا.",
-                }.get(
-                    output_language,
-                    "Your observed expenses are relatively high.",
                 ),
             }
         )
