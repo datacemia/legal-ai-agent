@@ -2457,8 +2457,7 @@ def extract_money_values_from_window(amount_window: str) -> list[float]:
             if value <= 0 or value > 1000000:
                 continue
 
-            if not any(abs(value - old) < 0.01 for old in line_values):
-                line_values.append(value)
+            line_values.append(value)
 
         if len(line_values) >= 2:
             candidates.append(line_values)
@@ -2491,8 +2490,7 @@ def extract_money_values_from_window(amount_window: str) -> list[float]:
         if value <= 0 or value > 1000000:
             continue
 
-        if not any(abs(value - old) < 0.01 for old in values):
-            values.append(value)
+        values.append(value)
 
     return values
 
