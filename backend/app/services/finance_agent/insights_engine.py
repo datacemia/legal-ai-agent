@@ -344,34 +344,21 @@ def generate_financial_insights(
     filtered_opportunities = []
 
     for opportunity in opportunities:
-        text_parts = []
+        recommendation = str(
+            opportunity.get("recommendation") or ""
+        ).lower()
 
-        for field in (
-            "issue",
-            "title",
-            "message",
-            "recommendation",
-            "action",
-        ):
-            value = opportunity.get(field)
+        issue = str(
+            opportunity.get("issue") or ""
+        ).lower()
 
-            if isinstance(value, str):
-                text_parts.append(value)
-
-            elif isinstance(value, list):
-                text_parts.extend(
-                    str(item)
-                    for item in value
-                )
-
-        text = " ".join(text_parts).lower()
+        text = f"{issue} {recommendation}"
 
         if subscription_count == 0 and "subscription" in text:
             continue
 
         if savings_rate >= 0.15 and (
             "increase savings" in text
-            or "savings contribution" in text
             or "savings contributions" in text
             or "increase savings contributions" in text
         ):

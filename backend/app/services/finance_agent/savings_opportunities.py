@@ -75,6 +75,26 @@ def detect_savings_opportunities(
         for t in expenses
     )
 
+    income = sum(
+        float(t.get("amount", 0) or 0)
+        for t in transactions
+        if t.get("type") == "income"
+    )
+
+    net_cashflow = income - total_expenses
+
+    expense_ratio = (
+        total_expenses / income
+        if income > 0
+        else 1
+    )
+
+    savings_rate = (
+        net_cashflow / income
+        if income > 0
+        else 0
+    )
+
     subscription_total = sum(
         s.get("monthly_cost", 0)
         for s in subscriptions
@@ -109,7 +129,7 @@ def detect_savings_opportunities(
         )
 
     # 🔥 Overspending
-    if total_expenses >= 5000:
+    if expense_ratio > 0.75:
         opportunities.append(
             {
                 "issue": t("HIGH_SPENDING_ISSUE", output_language),
