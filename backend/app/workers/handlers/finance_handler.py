@@ -538,6 +538,17 @@ def handle_finance_ai(job: Job, db):
         output_language=output_language,
     )
 
+    for field in [
+        "saving_strategies",
+        "waste_detected",
+        "risk_notes",
+    ]:
+        result_ai[field] = [
+            item
+            for item in result_ai.get(field, [])
+            if str(item).strip()
+        ]
+
     result = {
         **result_ai,
         "transactions": transactions,

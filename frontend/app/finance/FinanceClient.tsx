@@ -1834,6 +1834,60 @@ export default function FinanceClient() {
                   )}
                 </div>
 
+                {result.waste_detected?.length > 0 && (
+                  <section className="rounded-2xl border bg-slate-50 p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
+                    <h3 className="text-xl font-semibold mb-3">
+                      {t.wasteDetected}
+                    </h3>
+
+                    <div className="space-y-2">
+                      {result.waste_detected.map(
+                        (item: string, i: number) => (
+                          <p key={i} className="text-sm text-slate-700">
+                            {translateBackendMessage(item)}
+                          </p>
+                        )
+                      )}
+                    </div>
+                  </section>
+                )}
+
+                {result.saving_strategies?.length > 0 && (
+                  <section className="rounded-2xl border bg-slate-50 p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
+                    <h3 className="text-xl font-semibold mb-3">
+                      {t.savingStrategies}
+                    </h3>
+
+                    <div className="space-y-2">
+                      {result.saving_strategies.map(
+                        (item: string, i: number) => (
+                          <p key={i} className="text-sm text-slate-700">
+                            {translateBackendMessage(item)}
+                          </p>
+                        )
+                      )}
+                    </div>
+                  </section>
+                )}
+
+                {result.risk_notes?.length > 0 && (
+                  <section className="rounded-2xl border bg-slate-50 p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
+                    <h3 className="text-xl font-semibold mb-3">
+                      {t.riskNotes}
+                    </h3>
+
+                    <div className="space-y-2">
+                      {result.risk_notes.map(
+                        (item: string, i: number) => (
+                          <p key={i} className="text-sm text-slate-700">
+                            {translateBackendMessage(item)}
+                          </p>
+                        )
+                      )}
+                    </div>
+                  </section>
+                )}
+
                 <div className="rounded-2xl border bg-white p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
                   <div className="mb-4">
                     <p className="text-sm text-slate-500">
