@@ -443,9 +443,10 @@ def handle_finance_ai(job: Job, db):
 
     transactions = extract_transactions(text)
 
-    transactions = deduplicate_transactions(
-        transactions
-    )
+    # Do not deduplicate bank transactions by content.
+    # Two real bank operations can have the same date, description and amount.
+    # Example: two ATM withdrawals of 2 000 MAD on the same day.
+    transactions = list(transactions)
 
     update_job_progress(
         job,
