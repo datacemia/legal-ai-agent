@@ -704,6 +704,24 @@ def handle_finance_ai(job: Job, db):
         finance_progress_message("saving", output_language),
     )
 
+    print(
+        "DEBUG_EXPENSES",
+        sum(
+            abs(float(t.get("amount", 0)))
+            for t in transactions
+            if t.get("type") == "expense"
+        )
+    )
+
+    print(
+        "DEBUG_INCOME",
+        sum(
+            float(t.get("amount", 0))
+            for t in transactions
+            if t.get("type") == "income"
+        )
+    )
+
     analysis = FinanceAnalysis(
         user_id=user_id,
         file_name=file_name,
