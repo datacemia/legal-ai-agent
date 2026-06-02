@@ -194,6 +194,25 @@ def resolve_finance_currency(
     return "unknown"
 
 
+def get_finance_disclaimer(output_language: str = "en") -> str:
+    disclaimers = {
+        "en": (
+            "This analysis is for informational purposes only "
+            "and should not be considered financial advice."
+        ),
+        "fr": (
+            "Cette analyse est fournie à titre informatif uniquement "
+            "et ne constitue pas un conseil financier."
+        ),
+        "ar": (
+            "هذا التحليل لأغراض معلوماتية فقط "
+            "ولا يُعتبر نصيحة مالية."
+        ),
+    }
+
+    return disclaimers.get(output_language, disclaimers["en"])
+
+
 def finance_progress_message(key: str, language: str) -> str:
     messages = {
         "loading": {
@@ -548,6 +567,10 @@ def handle_finance_ai(job: Job, db):
             for item in result_ai.get(field, [])
             if str(item).strip()
         ]
+
+    result_ai["disclaimer"] = get_finance_disclaimer(
+        output_language
+    )
 
     result = {
         **result_ai,

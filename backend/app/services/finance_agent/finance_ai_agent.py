@@ -67,6 +67,25 @@ def get_language_name(output_language: str) -> str:
     return languages.get(output_language, "English")
 
 
+def get_finance_disclaimer(output_language: str = "en") -> str:
+    disclaimers = {
+        "en": (
+            "This analysis is for informational purposes only "
+            "and should not be considered financial advice."
+        ),
+        "fr": (
+            "Cette analyse est fournie à titre informatif uniquement "
+            "et ne constitue pas un conseil financier."
+        ),
+        "ar": (
+            "هذا التحليل لأغراض معلوماتية فقط "
+            "ولا يُعتبر نصيحة مالية."
+        ),
+    }
+
+    return disclaimers.get(output_language, disclaimers["en"])
+
+
 def build_user_prompt(statement_text: str, output_language: str = "en") -> str:
     language_name = get_language_name(output_language)
 
@@ -148,6 +167,12 @@ WASTE DETECTION RULES:
 - Merchant names alone are not sufficient evidence of financial waste.
 - If the financial impact is small relative to income and expenses, leave waste_detected empty.
 
+DISCLAIMER RULES:
+- disclaimer must be returned in the requested language.
+- disclaimer must be a complete sentence.
+- disclaimer must explain that the analysis is informational only and is not financial advice.
+- Never return the literal text "localized disclaimer".
+
 Return EXACT JSON:
 {{
   "summary": "short summary",
@@ -175,7 +200,7 @@ Return EXACT JSON:
   "saving_strategies": ["item"],
   "risk_notes": ["item"],
   "financial_score": 0,
-  "disclaimer": "localized disclaimer"
+  "disclaimer": ""
 }}
 
 Bank statement:
@@ -203,10 +228,21 @@ def analyze_bank_statement(
     content = response.choices[0].message.content
 
     try:
-        return json.loads(content)
+        result = json.loads(content)
+
+        if not isinstance(result, dict):
+            result = {
+                "error": "Invalid JSON returned",
+                "raw": content,
+            }
+
+        result["disclaimer"] = get_finance_disclaimer(output_language)
+
+        return result
+
     except Exception:
         return {
             "error": "Invalid JSON returned",
             "raw": content,
-            "disclaimer": "This is not financial advice. It is for informational purposes only.",
+            "disclaimer": get_finance_disclaimer(output_language),
         }
