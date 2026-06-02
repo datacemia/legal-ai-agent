@@ -2650,9 +2650,21 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         next_date_start = None
 
         for d in dates:
-            if d["start"] > dm["start"]:
-                next_date_start = d["start"]
-                break
+            if d["start"] <= dm["start"]:
+                continue
+
+            if d.get("partial"):
+                continue
+
+            # Do not split the same transaction on value dates like 08/04
+            # or duplicated posting dates like 09 04 2026 inside the same OCR row.
+            between = normalized[dm["end"]:d["start"]]
+
+            if "\n" not in between and len(between) < 80:
+                continue
+
+            next_date_start = d["start"]
+            break
 
         window_start_abs = dm["start"]
 
