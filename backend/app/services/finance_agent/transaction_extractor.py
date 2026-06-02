@@ -2738,14 +2738,19 @@ def extract_signed_amount_fallback_transactions(
     text: str,
     detected_currency: str,
 ) -> list[dict]:
-    """Fallback for compact statements without transaction dates.
+    """Fallback for compact statements without normal transaction rows.
 
-    Some statements list several transactions as:
-        Merchant A -10.00 Merchant B +20.00
+    This is only used when the normal extractor returns no transactions.
 
-    This fallback is intentionally only used when the normal extractor returns
-    no transactions. It is language-neutral: it relies on explicit signed
-    amounts, not bank names or country-specific layouts.
+    General rule:
+        Description A -10.00 Description B +20.00
+    becomes:
+        Description A / -10.00
+        Description B / +20.00
+
+    It uses signed amounts and text positions, not bank names. This prevents
+    the previous fallback bug where "+89.90 Aramco Fuel -210.35" became one
+    bad description for the -210.35 transaction.
     """
     transactions: list[dict] = []
 
@@ -2756,9 +2761,10 @@ def extract_signed_amount_fallback_transactions(
     )
 
     signed_amount_re = re.compile(
-        r"(.+?)\s*([+-]\s*"
+        r"(?<![\d.,])([+-])\s*("
         r"(?:\d{1,3}(?:[ ,]\d{3})+|\d+)"
-        r"(?:[.,]\d{2}))"
+        r"(?:[.,]\d{2})"
+        r")(?![\d.,])"
     )
 
     metadata_keywords = [
@@ -2778,6 +2784,22 @@ def extract_signed_amount_fallback_transactions(
         "solde",
     ]
 
+    fallback_transfer_exclusions = [
+        "to savings",
+        "transfer to savings",
+        "savings transfer",
+        "own account",
+        "between accounts",
+        "internal transfer",
+        "transfer between accounts",
+        "virement interne",
+        "compte épargne",
+        "compte epargne",
+        "livret",
+        "تحويل داخلي",
+        "حوالة داخلية",
+    ]
+
     sequence = 0
 
     for raw_line in normalized_text.splitlines():
@@ -2791,16 +2813,68 @@ def extract_signed_amount_fallback_transactions(
         if any(keyword in lower for keyword in metadata_keywords):
             continue
 
-        for match in signed_amount_re.finditer(line):
-            description = clean_db_text(match.group(1))
+        matches = list(signed_amount_re.finditer(line))
+
+        if not matches:
+            continue
+
+        for index, match in enumerate(matches):
+            previous_end = (
+                matches[index - 1].end()
+                if index > 0
+                else 0
+            )
+
+            description_segment = line[
+                previous_end:match.start()
+            ].strip(" -–—:;,.|")
+
+            if not description_segment:
+                continue
+
+            date = extract_date(description_segment)
+
+            description = re.sub(
+                r"\b\d{4}-\d{2}-\d{2}\b",
+                "",
+                description_segment,
+                count=1,
+            )
+
+            description = re.sub(
+                r"\b\d{2}[./-]\d{2}(?:[./-]\d{2,4})?\b",
+                "",
+                description,
+                count=1,
+            )
+
+            description = clean_db_text(
+                description.strip(" -–—:;,.|")
+            )
 
             if not description:
                 continue
 
-            amount_token = match.group(2).replace(" ", "")
-            amount = parse_amount(amount_token)
+            description_lower = description.lower()
 
-            if amount_token.startswith("-"):
+            if any(keyword in description_lower for keyword in INTERNAL_TRANSFER_KEYWORDS):
+                debug_log(
+                    "TX_FALLBACK_SKIP: internal_transfer",
+                    description,
+                )
+                continue
+
+            if any(keyword in description_lower for keyword in fallback_transfer_exclusions):
+                debug_log(
+                    "TX_FALLBACK_SKIP: transfer_exclusion",
+                    description,
+                )
+                continue
+
+            sign = match.group(1)
+            amount = parse_amount(match.group(2))
+
+            if sign == "-":
                 amount = -abs(amount)
                 transaction_type = "expense"
             else:
@@ -2817,20 +2891,10 @@ def extract_signed_amount_fallback_transactions(
                 else:
                     amount = abs(amount)
 
-            # Preserve the existing general internal-transfer protection.
-            # This avoids suddenly counting account-to-account movements as
-            # spending only in fallback mode.
-            if any(keyword in description.lower() for keyword in INTERNAL_TRANSFER_KEYWORDS):
-                debug_log(
-                    "TX_FALLBACK_SKIP: internal_transfer",
-                    description,
-                )
-                continue
-
             sequence += 1
 
             row = {
-                "date": "unknown",
+                "date": date or "unknown",
                 "description": description,
                 "amount": amount,
                 "type": transaction_type,
