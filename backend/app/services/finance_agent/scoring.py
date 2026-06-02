@@ -212,6 +212,9 @@ def calculate_financial_scores(
         overall_score - penalty
     )
 
+    if extraction_quality == "success" and transactions:
+        overall_score = max(10, overall_score)
+
     return {
         "saving_behavior": saving_behavior,
         "subscription_control": subscription_control,
