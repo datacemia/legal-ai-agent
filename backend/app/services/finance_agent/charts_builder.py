@@ -221,30 +221,33 @@ CATEGORY_KEYWORDS = {
 }
 
 
-def keyword_matches(text: str, keyword: str) -> bool:
-    keyword = keyword.lower().strip()
-
-    if not keyword:
-        return False
-
-    if re.search(r"[\u0600-\u06FF]", keyword):
-        return keyword in text
-
-    if len(keyword) <= 3:
-        return re.search(
-            rf"(?<![a-z0-9]){re.escape(keyword)}(?![a-z0-9])",
-            text,
-        ) is not None
-
-    return keyword in text
+def normalize_tokens(text: str) -> set[str]:
+    return {
+        token
+        for token in re.split(r"[^\w\u0600-\u06FF]+", text.lower())
+        if token
+    }
 
 
 def detect_category(description: str) -> str:
     normalized = description.lower()
+    tokens = normalize_tokens(normalized)
 
     for category, keywords in CATEGORY_KEYWORDS.items():
-        if any(keyword_matches(normalized, keyword) for keyword in keywords):
-            return category
+        for keyword in keywords:
+            keyword = keyword.lower().strip()
+
+            if not keyword:
+                continue
+
+            # Multi-word phrase
+            if " " in keyword:
+                if keyword in normalized:
+                    return category
+
+            # Single word/token
+            elif keyword in tokens:
+                return category
 
     return "other"
 
