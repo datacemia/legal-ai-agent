@@ -448,6 +448,10 @@ def handle_finance_ai(job: Job, db):
     # Example: two ATM withdrawals of 2 000 MAD on the same day.
     transactions = list(transactions)
 
+    for tx in transactions:
+        if tx.get("date") == "2026-09-01":
+            print("BAD_DATE_TX:", tx)
+
     update_job_progress(
         job,
         db,
