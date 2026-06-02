@@ -1,8 +1,5 @@
 from __future__ import annotations
 
-from collections import defaultdict
-import re
-
 
 TEXT = {
     "HIGH_SUBSCRIPTION_SPENDING_ISSUE": {
@@ -15,16 +12,6 @@ TEXT = {
         "fr": "Passez en revue les abonnements inutilisés et annulez les services non nécessaires.",
         "ar": "راجع الاشتراكات غير المستخدمة وألغِ الخدمات غير الضرورية.",
     },
-    "TOO_MANY_SUBSCRIPTIONS_ISSUE": {
-        "en": "Too many recurring subscriptions",
-        "fr": "Trop d'abonnements récurrents",
-        "ar": "عدد كبير من الاشتراكات المتكررة",
-    },
-    "TOO_MANY_SUBSCRIPTIONS_ACTION": {
-        "en": "Reduce the number of active subscriptions.",
-        "fr": "Réduisez le nombre d'abonnements actifs.",
-        "ar": "قلّل عدد الاشتراكات النشطة.",
-    },
     "HIGH_SPENDING_ISSUE": {
         "en": "High spending detected",
         "fr": "Dépenses élevées détectées",
@@ -36,9 +23,9 @@ TEXT = {
         "ar": "قلّل الإنفاق غير الضروري وراقب مدفوعات البطاقة.",
     },
     "MULTIPLE_CHARGES_ISSUE": {
-        "en": "Multiple charges detected for {merchant}",
-        "fr": "Plusieurs prélèvements détectés pour {merchant}",
-        "ar": "تم اكتشاف عدة عمليات خصم لـ {merchant}",
+        "en": "Multiple meaningful charges detected for {merchant}",
+        "fr": "Plusieurs prélèvements significatifs détectés pour {merchant}",
+        "ar": "تم اكتشاف عدة عمليات خصم مهمة لـ {merchant}",
     },
     "MULTIPLE_CHARGES_ACTION": {
         "en": "Check whether all {merchant} charges are necessary.",
@@ -57,6 +44,13 @@ def t(key: str, output_language: str = "en", **kwargs) -> str:
     return template.format(**kwargs) if kwargs else template
 
 
+def safe_float(value: object) -> float:
+    try:
+        return float(value or 0)
+    except (TypeError, ValueError):
+        return 0.0
+
+
 def detect_savings_opportunities(
     transactions: list[dict],
     subscriptions: list[dict],
@@ -65,20 +59,21 @@ def detect_savings_opportunities(
     opportunities = []
 
     expenses = [
-        t
-        for t in transactions
-        if t.get("type") == "expense"
+        tx
+        for tx in transactions
+        if tx.get("type") == "expense"
     ]
 
     total_expenses = sum(
-        abs(t.get("amount", 0))
-        for t in expenses
+        abs(safe_float(tx.get("amount", 0)))
+        for tx in expenses
     )
 
     income = sum(
-        float(t.get("amount", 0) or 0)
-        for t in transactions
-        if t.get("type") == "income"
+        safe_float(tx.get("amount", 0))
+        for tx in transactions
+        if tx.get("type") == "income"
+        and safe_float(tx.get("amount", 0)) > 0
     )
 
     net_cashflow = income - total_expenses
@@ -96,92 +91,108 @@ def detect_savings_opportunities(
     )
 
     subscription_total = sum(
-        s.get("monthly_cost", 0)
-        for s in subscriptions
+        safe_float(subscription.get("monthly_cost", 0))
+        for subscription in subscriptions
     )
 
-    # 🔥 High subscription spending
-    if subscription_total >= 300:
+    subscription_ratio = (
+        subscription_total / income
+        if income > 0
+        else 0
+    )
+
+    # 🔥 Subscription waste
+    # General rule:
+    # only flag subscription waste when subscriptions consume more than 5%
+    # of observed income. Do not use fixed currency thresholds or counts.
+    if subscription_ratio > 0.05:
         opportunities.append(
             {
-                "issue": t("HIGH_SUBSCRIPTION_SPENDING_ISSUE", output_language),
+                "issue": t(
+                    "HIGH_SUBSCRIPTION_SPENDING_ISSUE",
+                    output_language,
+                ),
                 "severity": "medium",
                 "estimated_savings_opportunity": round(
                     subscription_total * 0.35,
                     2,
                 ),
-                "action": t("HIGH_SUBSCRIPTION_SPENDING_ACTION", output_language),
-            }
-        )
-
-    # 🔥 Too many subscriptions
-    if len(subscriptions) >= 5:
-        opportunities.append(
-            {
-                "issue": t("TOO_MANY_SUBSCRIPTIONS_ISSUE", output_language),
-                "severity": "high",
-                "estimated_savings_opportunity": round(
-                    subscription_total * 0.20,
-                    2,
+                "action": t(
+                    "HIGH_SUBSCRIPTION_SPENDING_ACTION",
+                    output_language,
                 ),
-                "action": t("TOO_MANY_SUBSCRIPTIONS_ACTION", output_language),
             }
         )
 
     # 🔥 Overspending
-    if expense_ratio > 0.75:
+    # General rule:
+    # only recommend spending reduction when expenses consume more than 75%
+    # of income or when the observed savings rate is below 15%.
+    if expense_ratio > 0.75 or savings_rate < 0.15:
         opportunities.append(
             {
-                "issue": t("HIGH_SPENDING_ISSUE", output_language),
+                "issue": t(
+                    "HIGH_SPENDING_ISSUE",
+                    output_language,
+                ),
                 "severity": "high",
                 "estimated_savings_opportunity": round(
                     total_expenses * 0.10,
                     2,
                 ),
-                "action": t("HIGH_SPENDING_ACTION", output_language),
+                "action": t(
+                    "HIGH_SPENDING_ACTION",
+                    output_language,
+                ),
             }
         )
 
     # 🔥 Duplicate subscription detection
-    merchant_counts = {}
-
-    for sub in subscriptions:
-        merchant_counts[sub["name"]] = sub.get(
-            "transactions_count",
-            0,
-        )
-
-    for merchant, count in merchant_counts.items():
-        if count >= 3:
-            matching_sub = next(
-                (
-                    s
-                    for s in subscriptions
-                    if s["name"] == merchant
-                ),
-                None,
+    # General rule:
+    # multiple charges are only meaningful if subscriptions are already
+    # financially significant relative to income.
+    if subscription_ratio > 0.05:
+        for subscription in subscriptions:
+            merchant = subscription.get("name")
+            transactions_count = int(
+                subscription.get("transactions_count", 0) or 0
+            )
+            monthly_cost = safe_float(
+                subscription.get("monthly_cost", 0)
             )
 
-            if matching_sub:
-                opportunities.append(
-                    {
-                        "issue": t(
-                            "MULTIPLE_CHARGES_ISSUE",
-                            output_language,
-                            merchant=merchant,
-                        ),
-                        "severity": "medium",
-                        "estimated_savings_opportunity": round(
-                            matching_sub["monthly_cost"] * 0.50,
-                            2,
-                        ),
-                        "action": t(
-                            "MULTIPLE_CHARGES_ACTION",
-                            output_language,
-                            merchant=merchant,
-                        ),
-                    }
-                )
+            merchant_ratio = (
+                monthly_cost / income
+                if income > 0
+                else 0
+            )
+
+            if (
+                not merchant
+                or transactions_count < 3
+                or merchant_ratio <= 0.02
+            ):
+                continue
+
+            opportunities.append(
+                {
+                    "issue": t(
+                        "MULTIPLE_CHARGES_ISSUE",
+                        output_language,
+                        merchant=merchant,
+                    ),
+                    "severity": "medium",
+                    "estimated_savings_opportunity": round(
+                        monthly_cost * 0.50,
+                        2,
+                    ),
+                    "action": t(
+                        "MULTIPLE_CHARGES_ACTION",
+                        output_language,
+                        merchant=merchant,
+                    ),
+                }
+            )
 
     opportunities.sort(
         key=lambda item: item[
