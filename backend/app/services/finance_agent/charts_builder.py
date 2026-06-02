@@ -1,3 +1,4 @@
+import re
 from collections import defaultdict
 
 
@@ -220,11 +221,29 @@ CATEGORY_KEYWORDS = {
 }
 
 
+def keyword_matches(text: str, keyword: str) -> bool:
+    keyword = keyword.lower().strip()
+
+    if not keyword:
+        return False
+
+    if re.search(r"[\u0600-\u06FF]", keyword):
+        return keyword in text
+
+    if len(keyword) <= 3:
+        return re.search(
+            rf"(?<![a-z0-9]){re.escape(keyword)}(?![a-z0-9])",
+            text,
+        ) is not None
+
+    return keyword in text
+
+
 def detect_category(description: str) -> str:
     normalized = description.lower()
 
     for category, keywords in CATEGORY_KEYWORDS.items():
-        if any(keyword in normalized for keyword in keywords):
+        if any(keyword_matches(normalized, keyword) for keyword in keywords):
             return category
 
     return "other"
@@ -268,9 +287,6 @@ def build_financial_charts(
             category = detect_category(description)
 
             spending_over_time[date] += expense_amount
-
-            if category == "pets":
-                print("PETS_MATCH:", description)
 
             category_breakdown[category] += expense_amount
 
