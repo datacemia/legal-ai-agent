@@ -26,6 +26,7 @@ CATEGORY_KEYWORDS = {
 
         # Arabic subscription wording
         "اشتراك", "اشتراكات", "شهري", "سنوي", "تجديد",
+        "كارتشا", "مايكروسوفت 365", "365 تفوسوركيام",
     ],
     "housing": [
         "rent", "rental", "landlord", "mortgage", "flat",
@@ -33,6 +34,7 @@ CATEGORY_KEYWORDS = {
         "crédit logement", "loyer appartement", "bail",
         "hypothèque", "pret immobilier", "prêt immobilier",
         "إيجار", "كراء", "سكن", "رهن",
+        "راجيإ", "مكتب", "بتكم", "المكتب", "بتكملا",
     ],
     "utilities": [
         "water", "electricity", "internet", "telecom", "orange",
@@ -43,17 +45,22 @@ CATEGORY_KEYWORDS = {
         "electricite", "gaz", "wifi", "mobile", "phone",
         "téléphone", "telephone", "فواتير", "كهرباء", "ماء",
         "غاز", "إنترنت", "هاتف",
+        "ءابرهكلا", "فاتورة", "ةروتاف", "stc", "اتصالات",
     ],
     "government": [
         "council tax", "tax", "hmrc", "municipal", "government",
         "impot", "impôt", "taxe", "taxes", "trésor public",
         "tresor public", "dgfip", "urssaf", "amende",
         "administration", "ضرائب", "ضريبة", "حكومة",
+        "زكاة", "ةاكز", "جمارك", "كرامج", "ضريبة القيمة المضافة",
+        "ةفاضملا ةميقلا ةبيرض", "القيمة المضافة", "أبشر", "رشبأ", "مقيم",
+        "ميقم", "منصة", "ةصنم",
     ],
     "insurance": [
         "insurance", "assurance", "assurance maladie",
         "mutuelle", "axa", "allianz", "maif", "macif",
         "aviva", "policy", "premium insurance", "تأمين",
+        "نيمأت", "تأمين طبي", "يط نيمأت", "طبي", "يبط",
     ],
     "healthcare": [
         "nhs", "prescription", "pharmacy", "pharmacie",
@@ -80,6 +87,7 @@ CATEGORY_KEYWORDS = {
         "bistrot", "café", "cafe terrasse", "bakery",
         "takeaway", "meal", "snack", "مطعم", "قهوة",
         "مقهى", "طعام", "وجبة",
+        "ضيافة", "ةفايض", "اجتماعات", "تاعامتجا",
     ],
     "transport": [
         "uber trip", "taxi", "careem", "fuel", "train",
@@ -89,6 +97,7 @@ CATEGORY_KEYWORDS = {
         "tram", "parking", "essence", "diesel", "carburant",
         "shell", "bp", "totalenergies", "نقل", "وقود",
         "قطار", "تاكسي",
+        "دوقو", "أسطول", "لوطسأ", "شحن", "نحش",
     ],
     "travel": [
         "air france", "ryanair", "easyjet", "british airways",
@@ -105,6 +114,7 @@ CATEGORY_KEYWORDS = {
         "darty", "ikea", "apple store", "google store",
         "achat", "achats", "boutique", "magasin", "تسوق",
         "متجر", "شراء",
+        "ءارش", "أجهزة", "ةزهجأ", "حاسب", "بساح", "noon", "noon marketplace",
     ],
     "education": [
         "school", "university", "college", "tuition", "course",
@@ -144,11 +154,17 @@ CATEGORY_KEYWORDS = {
         "wyoming", "attorney", "llc", "legal", "company",
         "formation", "accountant", "notary", "notaire",
         "business", "professional services", "محامي", "شركة",
+        "خدمات", "تامدخ", "استشاري", "يراشتسا", "مشروع", "عورشم", "مورد",
+        "دروم", "سداد مورد", "دروم دادس", "بوابة الدفع", "عفدلا ةباوب",
+        "رسوم الدفع", "عفدلا موسر", "cloud", "cloud services",
+        "aws cloud services", "خدمات سحابية", "ةيباحسلا تامدخ", "سحابية",
+        "ةيباحسلا",
     ],
     "fees": [
         "fee", "fees", "frais", "commission", "charge",
         "bank charge", "overdraft fee", "late fee",
         "رسوم", "عمولة",
+        "موسر", "ةلومع", "رسوم بنكية", "ةيكنب موسر",
     ],
     "cash": [
         "atm", "cash withdrawal", "withdrawal", "dab",
@@ -160,6 +176,7 @@ CATEGORY_KEYWORDS = {
         "debt", "collections", "prêt", "pret", "crédit",
         "credit", "remboursement prêt", "remboursement pret",
         "دين", "قرض",
+        "دادس", "سداد",
     ],
 }
 
