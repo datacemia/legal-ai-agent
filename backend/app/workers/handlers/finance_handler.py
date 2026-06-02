@@ -213,6 +213,96 @@ def get_finance_disclaimer(output_language: str = "en") -> str:
     return disclaimers.get(output_language, disclaimers["en"])
 
 
+def safe_float(value: object) -> float:
+    try:
+        return float(value or 0)
+    except (TypeError, ValueError):
+        return 0.0
+
+
+def contains_any_text(value: object, keywords: set[str]) -> bool:
+    normalized = str(value or "").lower()
+
+    return any(
+        keyword in normalized
+        for keyword in keywords
+    )
+
+
+def filter_metric_inconsistent_items(
+    items: list,
+    *,
+    subscription_ratio: float,
+    expense_ratio: float,
+    savings_rate: float,
+) -> list:
+    subscription_terms = {
+        "subscription",
+        "subscriptions",
+        "abonnement",
+        "abonnements",
+        "اشتراك",
+        "اشتراكات",
+    }
+
+    increase_savings_terms = {
+        "increase savings",
+        "savings contribution",
+        "savings contributions",
+        "augmenter l’épargne",
+        "augmenter l'epargne",
+        "augmenter les contributions d’épargne",
+        "augmenter les contributions d'epargne",
+        "زيادة الادخار",
+        "مساهمات الادخار",
+    }
+
+    reduce_spending_terms = {
+        "reduce spending",
+        "reduce discretionary spending",
+        "reduce expenses",
+        "réduire les dépenses",
+        "reduire les depenses",
+        "réduire les dépenses discrétionnaires",
+        "reduire les depenses discretionnaires",
+        "تقليل الإنفاق",
+        "خفض الإنفاق",
+        "تقليل المصاريف",
+        "خفض المصاريف",
+    }
+
+    filtered = []
+
+    for item in items or []:
+        text = str(item or "").strip()
+
+        if not text:
+            continue
+
+        if (
+            subscription_ratio <= 0.05
+            and contains_any_text(text, subscription_terms)
+        ):
+            continue
+
+        if (
+            savings_rate >= 0.15
+            and contains_any_text(text, increase_savings_terms)
+        ):
+            continue
+
+        if (
+            expense_ratio <= 0.75
+            and savings_rate >= 0.15
+            and contains_any_text(text, reduce_spending_terms)
+        ):
+            continue
+
+        filtered.append(item)
+
+    return filtered
+
+
 def finance_progress_message(key: str, language: str) -> str:
     messages = {
         "loading": {
@@ -443,15 +533,6 @@ def handle_finance_ai(job: Job, db):
         else 0
     )
 
-    if savings_rate >= 0.15:
-        result_ai["saving_strategies"] = [
-            s
-            for s in result_ai.get("saving_strategies", [])
-            if "increase savings" not in str(s).lower()
-            and "savings contribution" not in str(s).lower()
-        ]
-    
-
     observed_income = forecast.get(
         "observed_income",
         0,
@@ -460,6 +541,37 @@ def handle_finance_ai(job: Job, db):
     observed_expenses = forecast.get(
         "observed_expenses",
         0,
+    )
+
+    subscription_total = sum(
+        safe_float(subscription.get("monthly_cost", 0))
+        for subscription in subscriptions
+    )
+
+    subscription_ratio = (
+        subscription_total / observed_income
+        if observed_income > 0
+        else 0
+    )
+
+    expense_ratio = (
+        observed_expenses / observed_income
+        if observed_income > 0
+        else 1
+    )
+
+    result_ai["waste_detected"] = filter_metric_inconsistent_items(
+        result_ai.get("waste_detected", []),
+        subscription_ratio=subscription_ratio,
+        expense_ratio=expense_ratio,
+        savings_rate=savings_rate,
+    )
+
+    result_ai["saving_strategies"] = filter_metric_inconsistent_items(
+        result_ai.get("saving_strategies", []),
+        subscription_ratio=subscription_ratio,
+        expense_ratio=expense_ratio,
+        savings_rate=savings_rate,
     )
 
     if observed_expenses > 0:
