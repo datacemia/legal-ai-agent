@@ -74,7 +74,7 @@ CATEGORY_KEYWORDS = {
         "dentist", "optical", "optician", "médecin",
         "medecin", "hôpital", "hopital", "clinique",
         "santé", "sante", "دواء", "صيدلية", "طبيب",
-        "مستشفى", "صحة",
+        "مستشفى", "صحة", "صيدليات",
     ],
     "groceries": [
         # EN
@@ -85,7 +85,7 @@ CATEGORY_KEYWORDS = {
         "hypermarché", "hypermarche", "alimentaire",
 
         # AR
-        "بقالة", "تموينات", "سوبرماركت",
+        "بقالة", "تموينات", "سوبرماركت", "تموين",
     ],
     "food": [
         # EN
@@ -96,7 +96,7 @@ CATEGORY_KEYWORDS = {
         "boulangerie", "snack",
 
         # AR
-        "مطعم", "مقهى", "قهوة",
+        "مطعم", "مقهى", "قهوة", "مطاعم",
     ],
     "transport": [
         # EN
@@ -109,7 +109,7 @@ CATEGORY_KEYWORDS = {
 
         # AR
         "وقود", "بنزين", "محطة وقود",
-        "مواقف", "أجرة",
+        "مواقف", "أجرة", "سيارات",
     ],
     "travel": [
         "air france", "ryanair", "easyjet", "british airways",
@@ -247,8 +247,30 @@ def normalize_tokens(text: str) -> set[str]:
     }
 
 
+def normalize_text(text: str) -> str:
+    text = text.lower()
+
+    text = re.sub(
+        r"\b(?:apple pay|google pay|samsung pay|mada|visa|mastercard)\b",
+        " ",
+        text,
+        flags=re.IGNORECASE,
+    )
+
+    text = re.sub(
+        r"(?:شراء عبر نقاط بيع|نقاط بيع|pos purchase|card purchase|paiement carte|achat carte)",
+        " ",
+        text,
+        flags=re.IGNORECASE,
+    )
+
+    text = re.sub(r"\s+", " ", text)
+
+    return text.strip()
+
+
 def detect_category(description: str) -> str:
-    normalized = description.lower()
+    normalized = normalize_text(description)
     tokens = normalize_tokens(normalized)
 
     for category, keywords in CATEGORY_KEYWORDS.items():
