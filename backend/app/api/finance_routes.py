@@ -13,6 +13,7 @@ from app.models.user import User
 from app.models.finance_analysis import FinanceAnalysis
 from app.models.finance_chat_message import FinanceChatMessage
 from app.models.job import Job
+from app.models.uploaded_file import UploadedFile
 from app.schemas.finance_schema import FinanceHistoryItem
 
 from app.services.finance_agent.statement_parser import extract_statement_text
@@ -166,6 +167,24 @@ async def analyze_statement(
 
     with open(file_path, "wb") as buffer:
         buffer.write(content)
+
+    uploaded_file = UploadedFile(
+        user_id=current_user.id,
+        agent_type="finance",
+        original_file_name=file.filename,
+        stored_file_name=unique_name,
+        file_path=file_path,
+        mime_type=file.content_type,
+        file_extension="pdf",
+        file_size_bytes=len(content),
+        storage_backend="local",
+        status="uploaded",
+        consent_for_training=False,
+    )
+
+    db.add(uploaded_file)
+    db.commit()
+    db.refresh(uploaded_file)
 
     job = Job(
         user_id=current_user.id,
