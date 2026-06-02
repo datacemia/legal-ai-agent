@@ -285,6 +285,8 @@ def generate_financial_insights(
             }
         )
 
+    category_totals.pop("other", None)
+
     # 🔥 Category ratio insights
     for category, amount in category_totals.items():
         ratio = (
