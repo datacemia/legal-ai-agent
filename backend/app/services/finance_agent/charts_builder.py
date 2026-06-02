@@ -150,11 +150,11 @@ CATEGORY_KEYWORDS = {
         "remboursement ami", "transfer received",
         "payment from", "payment to", "حوالة", "تحويل",
     ],
-    "business_services": [
+    "business_operations": [
         "wyoming", "attorney", "llc", "legal", "company",
         "formation", "accountant", "notary", "notaire",
         "business", "professional services", "محامي", "شركة",
-        "خدمات", "تامدخ", "استشاري", "يراشتسا", "مشروع", "عورشم", "مورد",
+        "استشاري", "يراشتسا", "مورد",
         "دروم", "سداد مورد", "دروم دادس", "بوابة الدفع", "عفدلا ةباوب",
         "رسوم الدفع", "عفدلا موسر", "cloud", "cloud services",
         "aws cloud services", "خدمات سحابية", "ةيباحسلا تامدخ", "سحابية",
