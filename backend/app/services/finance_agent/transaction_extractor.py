@@ -4,7 +4,7 @@ from collections import Counter
 from datetime import datetime
 
 
-DEBUG_FINANCE_EXTRACTOR = os.getenv("FINANCE_EXTRACTOR_DEBUG", "1") != "0"
+DEBUG_FINANCE_EXTRACTOR = os.getenv("FINANCE_EXTRACTOR_DEBUG", "0") == "1"
 
 
 def debug_log(*args):
@@ -1765,7 +1765,7 @@ def infer_balance_delta_rows(rows: list[dict]) -> list[dict]:
             delta = round(float(balance) - float(previous_balance), 2)
             tolerance = max(0.02, abs(amount) * 0.002)
 
-            print(
+            debug_log(
                 "TX_DEBUG: balance_authority",
                 {
                     "previous": previous_balance,
@@ -1799,7 +1799,7 @@ def infer_balance_delta_rows(rows: list[dict]) -> list[dict]:
                 amount = row["amount"]
                 tx_type = row["type"]
 
-                print(
+                debug_log(
                     "TX_DEBUG: balance_override",
                     {
                         "new_amount": amount,
@@ -2620,13 +2620,13 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
     normalized = "\n".join(" ".join(l.split()) for l in normalized.splitlines())
 
     currency = detect_currency(text)
-    print("CURRENCY_DETECTED:", currency)
+    debug_log("CURRENCY_DETECTED:", currency)
 
-    print("=== AR DEBUG START ===")
-    print("TEXT_LENGTH:", len(normalized))
+    debug_log("=== AR DEBUG START ===")
+    debug_log("TEXT_LENGTH:", len(normalized))
     dates = find_arabic_ocr_dates(normalized)
-    print("DATES_FOUND:", [d["clean"] for d in dates])
-    print(
+    debug_log("DATES_FOUND:", [d["clean"] for d in dates])
+    debug_log(
         "AMOUNTS_FOUND:",
         re.findall(
             r"\d{1,3}(?:[ ,]\d{3})*(?:[.,]\d{2})",
@@ -2639,8 +2639,8 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
     rows = []
 
     for dm in dates:
-        print("---- DATE LOOP ----")
-        print("DATE:", dm["clean"])
+        debug_log("---- DATE LOOP ----")
+        debug_log("DATE:", dm["clean"])
 
         date_raw = dm["clean"]
 
@@ -2709,12 +2709,12 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
                 amount_window,
             )
 
-        print("WINDOW:")
-        print(window)
+        debug_log("WINDOW:")
+        debug_log(window)
 
         values = extract_money_values_from_window(amount_window)
 
-        print("WINDOW_AMOUNTS:", values)
+        debug_log("WINDOW_AMOUNTS:", values)
 
         if len(values) < 2:
             continue
@@ -2723,13 +2723,13 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         # premier montant = transaction probable, dernier montant = solde probable
         clean = values[:4]
 
-        print(
+        debug_log(
             "ROW_DATE_DEBUG",
             dm["date"],
             window[:250]
         )
 
-        print(
+        debug_log(
             "ROW_DATE_RAW",
             dm
         )
@@ -2799,12 +2799,12 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
             "currency": currency,
         })
 
-    print("ROWS_BUILT:", rows)
+    debug_log("ROWS_BUILT:", rows)
 
     for t in transactions:
-        print("AR_TX:", t)
+        debug_log("AR_TX:", t)
 
-    print("ARABIC_BYPASS_COUNT:", len(transactions))
+    debug_log("ARABIC_BYPASS_COUNT:", len(transactions))
     log_final_transactions(transactions)
     debug_log("FINAL_TXS", transactions)
     debug_log("=== TX_EXTRACT_DEBUG END ===")
@@ -3355,7 +3355,7 @@ def extract_transactions(text: str) -> list[dict]:
                 )
 
         if amount_balance_tx_amount is not None and amount_balance_value is not None:
-            print(
+            debug_log(
                 "TX_DEBUG: amount_balance_parse",
                 {
                     "amount": amount_balance_tx_amount,
@@ -3370,7 +3370,7 @@ def extract_transactions(text: str) -> list[dict]:
             prefer_us_date=prefer_us_date,
         )
 
-        print(
+        debug_log(
             "AR_TX_FINAL:",
             clean_line,
             "=>",
@@ -3417,7 +3417,7 @@ def extract_transactions(text: str) -> list[dict]:
         )
 
     log_final_transactions(transactions)
-    print("FINAL_TXS", transactions)
+    debug_log("FINAL_TXS", transactions)
     return transactions
 EXPENSE_KEYWORDS += [
     "amazon",
