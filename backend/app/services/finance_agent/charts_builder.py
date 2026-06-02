@@ -41,7 +41,8 @@ CATEGORY_KEYWORDS = {
     ],
     "shopping": [
         "amazon", "shein", "zara", "mall", "shop", "store",
-        "marketplace", "paypal payment",
+        "marketplace", "paypal payment", "card purchase",
+        "retail", "electronics",
     ],
     "healthcare": [
         "nhs", "prescription", "pharmacy", "pharmacie",
@@ -53,7 +54,9 @@ CATEGORY_KEYWORDS = {
     "transfers": [
         "to savings", "savings", "own account",
         "internal transfer", "transfer between accounts",
-        "virement interne", "livret",
+        "virement interne", "livret", "transfer",
+        "osko transfer", "bank transfer", "wise transfer",
+        "faster payment",
     ],
     "business_services": [
         "wyoming", "attorney", "llc", "legal", "company",
