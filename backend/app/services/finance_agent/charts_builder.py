@@ -3,12 +3,29 @@ from collections import defaultdict
 
 CATEGORY_KEYWORDS = {
     "subscriptions": [
+        # Specific recurring digital services
         "netflix", "spotify", "adobe", "openai", "chatgpt",
         "hostinger", "railway", "namesilo", "aws", "google",
-        "youtube", "canva", "apple.com bill", "subscription",
-        "premium", "recurring", "abonnement", "abonnements",
-        "canal+", "deezer", "icloud", "microsoft", "office 365",
-        "اشتراك", "اشتراكات",
+        "youtube", "canva", "apple.com bill", "canal+",
+        "deezer", "icloud", "microsoft", "office 365",
+
+        # General subscription wording
+        "subscription", "subscriptions", "premium", "recurring",
+        "membership", "monthly plan", "annual plan",
+        "monthly subscription", "annual subscription",
+        "renewal", "auto renewal", "auto-renewal",
+
+        # Streaming / media subscriptions
+        "streaming", "music", "video", "video streaming",
+        "music streaming", "streaming service",
+
+        # French subscription wording
+        "abonnement", "abonnements", "forfait", "forfaits",
+        "mensuel", "annuel", "renouvellement",
+        "prélèvement abonnement", "prelevement abonnement",
+
+        # Arabic subscription wording
+        "اشتراك", "اشتراكات", "شهري", "سنوي", "تجديد",
     ],
     "housing": [
         "rent", "rental", "landlord", "mortgage", "flat",
