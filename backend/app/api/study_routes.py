@@ -1,6 +1,8 @@
 import hashlib
 import json
+import os
 import time
+import uuid
 from datetime import datetime
 from pathlib import Path
 from typing import List, Dict, Any, Optional
@@ -14,11 +16,13 @@ from app.utils.security import get_current_user
 from app.utils.billing import check_and_consume_agent_access
 from app.models.user import User
 from app.models.study_analysis import StudyAnalysis, StudyAttempt
+from app.models.uploaded_file import UploadedFile
 from app.schemas.study_schema import StudyHistoryItem
 
 from app.services.study_agent.study_parser import extract_study_text
 from app.services.study_agent.study_ai_agent import analyze_study_content
 from app.services.job_service import create_job
+from app.services.supabase_storage_service import upload_file_to_supabase_storage
 from app.services.enterprise_service import (
     check_enterprise_agent_access,
     consume_enterprise_agent_quota,
@@ -226,6 +230,45 @@ async def analyze_study(
             status_code=413,
             detail="File is too large. Maximum allowed size is 15 MB.",
         )
+
+    original_file_name = file.filename
+    file_extension = original_file_name.rsplit(".", 1)[-1].lower()
+    stored_file_name = f"{uuid.uuid4()}.{file_extension}"
+
+    upload_dir = Path("storage/study")
+    upload_dir.mkdir(parents=True, exist_ok=True)
+
+    local_file_path = upload_dir / stored_file_name
+
+    with open(local_file_path, "wb") as buffer:
+        buffer.write(file_bytes)
+
+    supabase_storage_path = f"study/{stored_file_name}"
+
+    storage_result = upload_file_to_supabase_storage(
+        local_file_path=str(local_file_path),
+        storage_path=supabase_storage_path,
+        content_type=file.content_type,
+    )
+
+    uploaded_file = UploadedFile(
+        user_id=current_user.id,
+        agent_type="study",
+        original_file_name=original_file_name,
+        stored_file_name=stored_file_name,
+        file_path=storage_result["storage_path"],
+        public_url=storage_result["public_url"],
+        mime_type=file.content_type,
+        file_extension=file_extension,
+        file_size_bytes=len(file_bytes),
+        storage_backend="supabase",
+        status="uploaded",
+        consent_for_training=False,
+    )
+
+    db.add(uploaded_file)
+    db.commit()
+    db.refresh(uploaded_file)
 
     enterprise_context = check_enterprise_agent_access(
         db=db,
