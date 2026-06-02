@@ -24,6 +24,7 @@ class UploadedFile(Base):
     original_file_name = Column(Text)
     stored_file_name = Column(Text)
     file_path = Column(Text)
+    public_url = Column(Text)
 
     mime_type = Column(String(150))
     file_extension = Column(String(20))

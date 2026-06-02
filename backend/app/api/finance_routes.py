@@ -173,7 +173,7 @@ async def analyze_statement(
 
     supabase_storage_path = f"finance/{unique_name}"
 
-    upload_file_to_supabase_storage(
+    storage_result = upload_file_to_supabase_storage(
         local_file_path=file_path,
         storage_path=supabase_storage_path,
         content_type=file.content_type,
@@ -184,11 +184,12 @@ async def analyze_statement(
         agent_type="finance",
         original_file_name=file.filename,
         stored_file_name=unique_name,
-        file_path=supabase_storage_path,
+        file_path=storage_result["storage_path"],
         mime_type=file.content_type,
         file_extension="pdf",
         file_size_bytes=len(content),
         storage_backend="supabase",
+        public_url=storage_result["public_url"],
         status="uploaded",
         consent_for_training=False,
     )
