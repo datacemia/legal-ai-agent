@@ -713,12 +713,11 @@ def pick_bank_amount(
     money_numbers = extract_money_numbers_safely(line)
 
     if money_numbers:
-        return parse_amount(money_numbers[0])
+        return parse_amount(money_numbers[-1])
 
-    if len(numbers) >= 2:
-        return parse_amount(numbers[-2])
-
-    return parse_amount(numbers[-1])
+    raise ValueError(
+        "No reliable money amount found in transaction line."
+    )
 
 
 
@@ -728,20 +727,10 @@ def pick_transaction_amount_from_tabular_numbers(
     line: str,
     account_currency: str | None = None,
 ) -> float:
-    """Pick the movement amount without using dates or running balances.
-
-    General rule:
-    - remove date-like tokens before detecting money;
-    - if the row has transaction amount + running balance, use the movement;
-    - never allow a date fragment to merge with a money value.
-    """
     safe_numbers = extract_money_numbers_safely(line)
 
-    if safe_numbers and len(safe_numbers) >= 2 and not is_arabic_text(line):
-        return parse_amount(safe_numbers[0])
-
-    if safe_numbers and not is_arabic_text(line):
-        return parse_amount(safe_numbers[0])
+    if safe_numbers:
+        return parse_amount(safe_numbers[-1])
 
     return pick_bank_amount(
         numbers,
