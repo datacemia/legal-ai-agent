@@ -19,19 +19,12 @@ def calculate_financial_scores(
         income = float(fallback_income)
         income_source = "ai_fallback"
 
-    # Primary rule: trust the transaction type.
-    # This handles parsers that may return expenses as either:
-    #   {"type": "expense", "amount": -143.85}
-    # or:
-    #   {"type": "expense", "amount": 143.85}
     expenses = sum(
         abs(float(t.get("amount", 0) or 0))
         for t in transactions
         if t.get("type") == "expense"
     )
 
-    # Safety fallback: if expense type labels failed but negative amounts exist,
-    # still recover observed expenses from signed transaction amounts.
     if expenses <= 0 and transactions:
         expenses = sum(
             abs(float(t.get("amount", 0) or 0))
@@ -60,8 +53,10 @@ def calculate_financial_scores(
             continue
 
         category = str(t.get("category") or "Other").lower()
-        category_totals[category] = category_totals.get(category, 0) + abs(
-            float(t.get("amount", 0) or 0)
+
+        category_totals[category] = (
+            category_totals.get(category, 0)
+            + abs(float(t.get("amount", 0) or 0))
         )
 
     other_expenses = category_totals.get("other", 0)
@@ -82,12 +77,27 @@ def calculate_financial_scores(
     )
 
     if income > 0:
-        savings_rate = ((income - expenses) / income) * 100
-        expense_ratio = (expenses / income) * 100
-        subscription_ratio = (subscription_total / income) * 100
+        savings_rate = (
+            (income - expenses) / income
+        ) * 100
+
+        expense_ratio = (
+            expenses / income
+        ) * 100
+
+        subscription_ratio = (
+            subscription_total / income
+        ) * 100
+
     else:
         savings_rate = 0
-        expense_ratio = 100 if expenses > 0 else 0
+
+        expense_ratio = (
+            100
+            if expenses > 0
+            else 0
+        )
+
         subscription_ratio = (
             (subscription_total / expenses) * 100
             if expenses > 0
@@ -95,13 +105,19 @@ def calculate_financial_scores(
         )
 
     saving_behavior = clamp_score(
-        min(100, savings_rate * 2.2)
+        min(
+            100,
+            savings_rate * 2.0,
+        )
     )
 
     if expenses <= 0:
         subscription_control = 100
+
     else:
-        subscription_expense_ratio = (subscription_total / expenses) * 100
+        subscription_expense_ratio = (
+            subscription_total / expenses
+        ) * 100
 
         subscription_control = clamp_score(
             100
@@ -110,14 +126,24 @@ def calculate_financial_scores(
         )
 
     debt_risk = clamp_score(
-        100 - max(0, expense_ratio - 70)
+        100 - max(
+            0,
+            expense_ratio - 70,
+        )
     )
 
     impulse_spending = clamp_score(
-        100 - min(80, expense_ratio * 0.6)
+        100 - min(
+            80,
+            expense_ratio * 0.6,
+        )
     )
 
-    income_stability = 80 if income > 0 else 35
+    income_stability = (
+        80
+        if income > 0
+        else 35
+    )
 
     overall_score = clamp_score(
         (
@@ -132,13 +158,29 @@ def calculate_financial_scores(
     penalty = 0
 
     if income > 0:
-        raw_expense_ratio = expenses / income
-        raw_subscription_ratio = subscription_total / income
+        raw_expense_ratio = (
+            expenses / income
+        )
+
+        raw_subscription_ratio = (
+            subscription_total / income
+        )
+
     else:
-        raw_expense_ratio = 1 if expenses > 0 else 0
+        raw_expense_ratio = (
+            1
+            if expenses > 0
+            else 0
+        )
+
         raw_subscription_ratio = 0
 
-    raw_other_ratio = other_expenses / expenses if expenses > 0 else 0
+    raw_other_ratio = (
+        other_expenses / expenses
+        if expenses > 0
+        else 0
+    )
+
     raw_discretionary_ratio = (
         discretionary_expenses / expenses
         if expenses > 0
@@ -147,8 +189,10 @@ def calculate_financial_scores(
 
     if raw_expense_ratio > 0.90:
         penalty += 30
+
     elif raw_expense_ratio > 0.75:
         penalty += 20
+
     elif raw_expense_ratio > 0.60:
         penalty += 10
 
@@ -156,7 +200,7 @@ def calculate_financial_scores(
         penalty += 5
 
     if raw_discretionary_ratio > 0.30:
-        penalty += 8
+        penalty += 10
 
     if raw_subscription_ratio > 0.05:
         penalty += 6
@@ -164,7 +208,9 @@ def calculate_financial_scores(
     if income - expenses < 0:
         penalty += 25
 
-    overall_score = clamp_score(overall_score - penalty)
+    overall_score = clamp_score(
+        overall_score - penalty
+    )
 
     return {
         "saving_behavior": saving_behavior,
@@ -175,16 +221,40 @@ def calculate_financial_scores(
         "overall_financial_habits_score": overall_score,
         "extraction_quality": extraction_quality,
         "metrics": {
-            "income_detected": round(income, 2),
+            "income_detected": round(
+                income,
+                2,
+            ),
             "income_source": income_source,
-            "expenses_detected": round(expenses, 2),
-            "subscription_total": round(subscription_total, 2),
+            "expenses_detected": round(
+                expenses,
+                2,
+            ),
+            "subscription_total": round(
+                subscription_total,
+                2,
+            ),
             "subscription_count": subscription_count,
-            "savings_rate_percent": round(savings_rate, 2),
-            "expense_ratio_percent": round(expense_ratio, 2),
-            "subscription_ratio_percent": round(subscription_ratio, 2),
-            "other_ratio_percent": round(raw_other_ratio * 100, 2),
-            "discretionary_ratio_percent": round(raw_discretionary_ratio * 100, 2),
+            "savings_rate_percent": round(
+                savings_rate,
+                2,
+            ),
+            "expense_ratio_percent": round(
+                expense_ratio,
+                2,
+            ),
+            "subscription_ratio_percent": round(
+                subscription_ratio,
+                2,
+            ),
+            "other_ratio_percent": round(
+                raw_other_ratio * 100,
+                2,
+            ),
+            "discretionary_ratio_percent": round(
+                raw_discretionary_ratio * 100,
+                2,
+            ),
             "score_penalty": penalty,
             "extraction_quality": extraction_quality,
         },
