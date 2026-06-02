@@ -138,6 +138,16 @@ SAVING STRATEGY RULES:
 - Saving strategies must be consistent with observed income, expenses, and net cashflow.
 - Never generate generic saving strategies that contradict the observed financial metrics.
 
+WASTE DETECTION RULES:
+- Do not generate waste_detected items solely because a spending category appears.
+- Waste must represent a meaningful financial impact relative to observed income, observed expenses, or net cashflow.
+- Do not flag subscriptions unless subscription spending represents a significant share of observed income.
+- Do not flag food, restaurants, cafes, or delivery spending unless those expenses represent a significant share of observed income.
+- Do not generate waste_detected items that contradict observed savings rate, expense ratio, or positive net cashflow.
+- Small recurring purchases alone are not sufficient evidence of financial waste.
+- Merchant names alone are not sufficient evidence of financial waste.
+- If the financial impact is small relative to income and expenses, leave waste_detected empty.
+
 Return EXACT JSON:
 {{
   "summary": "short summary",
