@@ -2717,6 +2717,17 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         # premier montant = transaction probable, dernier montant = solde probable
         clean = values[:4]
 
+        print(
+            "ROW_DATE_DEBUG",
+            dm["date"],
+            window[:250]
+        )
+
+        print(
+            "ROW_DATE_RAW",
+            dm
+        )
+
         rows.append({
             "date": dm["date"],
             "numbers": clean,
