@@ -53,6 +53,34 @@ def calculate_financial_scores(
 
     subscription_count = len(subscriptions)
 
+    category_totals = {}
+
+    for t in transactions:
+        if t.get("type") != "expense":
+            continue
+
+        category = str(t.get("category") or "Other").lower()
+        category_totals[category] = category_totals.get(category, 0) + abs(
+            float(t.get("amount", 0) or 0)
+        )
+
+    other_expenses = category_totals.get("other", 0)
+
+    discretionary_keywords = {
+        "food",
+        "shopping",
+        "subscriptions",
+        "entertainment",
+        "transport",
+        "travel",
+    }
+
+    discretionary_expenses = sum(
+        amount
+        for category, amount in category_totals.items()
+        if category in discretionary_keywords
+    )
+
     if income > 0:
         savings_rate = ((income - expenses) / income) * 100
         expense_ratio = (expenses / income) * 100
@@ -66,7 +94,9 @@ def calculate_financial_scores(
             else 0
         )
 
-    saving_behavior = clamp_score(savings_rate * 3)
+    saving_behavior = clamp_score(
+        min(100, savings_rate * 2.2)
+    )
 
     if expenses <= 0:
         subscription_control = 100
@@ -99,6 +129,43 @@ def calculate_financial_scores(
         )
     )
 
+    penalty = 0
+
+    if income > 0:
+        raw_expense_ratio = expenses / income
+        raw_subscription_ratio = subscription_total / income
+    else:
+        raw_expense_ratio = 1 if expenses > 0 else 0
+        raw_subscription_ratio = 0
+
+    raw_other_ratio = other_expenses / expenses if expenses > 0 else 0
+    raw_discretionary_ratio = (
+        discretionary_expenses / expenses
+        if expenses > 0
+        else 0
+    )
+
+    if raw_expense_ratio > 0.90:
+        penalty += 30
+    elif raw_expense_ratio > 0.75:
+        penalty += 20
+    elif raw_expense_ratio > 0.60:
+        penalty += 10
+
+    if raw_other_ratio > 0.70:
+        penalty += 5
+
+    if raw_discretionary_ratio > 0.30:
+        penalty += 8
+
+    if raw_subscription_ratio > 0.05:
+        penalty += 6
+
+    if income - expenses < 0:
+        penalty += 25
+
+    overall_score = clamp_score(overall_score - penalty)
+
     return {
         "saving_behavior": saving_behavior,
         "subscription_control": subscription_control,
@@ -116,6 +183,9 @@ def calculate_financial_scores(
             "savings_rate_percent": round(savings_rate, 2),
             "expense_ratio_percent": round(expense_ratio, 2),
             "subscription_ratio_percent": round(subscription_ratio, 2),
+            "other_ratio_percent": round(raw_other_ratio * 100, 2),
+            "discretionary_ratio_percent": round(raw_discretionary_ratio * 100, 2),
+            "score_penalty": penalty,
             "extraction_quality": extraction_quality,
         },
     }
