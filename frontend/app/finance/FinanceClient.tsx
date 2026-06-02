@@ -80,12 +80,78 @@ const budgetLabels: any = {
 
 const categoryLabels: any = {
   en: {
+    income: "Income",
+    housing: "Housing",
+    utilities: "Utilities",
+    government: "Government",
+    insurance: "Insurance",
+    healthcare: "Healthcare",
+    groceries: "Groceries",
+    food: "Food & restaurants",
+    transport: "Transport",
+    travel: "Travel",
+    shopping: "Shopping",
+    subscriptions: "Subscriptions",
+    education: "Education",
+    childcare: "Childcare",
+    pets: "Pets",
+    charity: "Charity",
+    fees: "Fees",
+    debt: "Debt",
+    savings: "Savings",
+    transfers: "Transfers",
+    business_services: "Business services",
+    cash: "Cash withdrawals",
     other: "Other",
   },
   fr: {
+    income: "Revenus",
+    housing: "Logement",
+    utilities: "Services et factures",
+    government: "Impôts et administration",
+    insurance: "Assurance",
+    healthcare: "Santé",
+    groceries: "Courses",
+    food: "Restaurants et cafés",
+    transport: "Transport",
+    travel: "Voyage",
+    shopping: "Achats",
+    subscriptions: "Abonnements",
+    education: "Éducation",
+    childcare: "Garde d’enfants",
+    pets: "Animaux",
+    charity: "Dons",
+    fees: "Frais",
+    debt: "Dettes et crédits",
+    savings: "Épargne",
+    transfers: "Transferts",
+    business_services: "Services professionnels",
+    cash: "Retraits d’espèces",
     other: "Autre",
   },
   ar: {
+    income: "الدخل",
+    housing: "السكن",
+    utilities: "المرافق والفواتير",
+    government: "الضرائب والإدارة",
+    insurance: "التأمين",
+    healthcare: "الصحة",
+    groceries: "البقالة",
+    food: "المطاعم والمقاهي",
+    transport: "النقل",
+    travel: "السفر",
+    shopping: "التسوق",
+    subscriptions: "الاشتراكات",
+    education: "التعليم",
+    childcare: "رعاية الأطفال",
+    pets: "الحيوانات الأليفة",
+    charity: "التبرعات",
+    fees: "الرسوم",
+    debt: "الديون والقروض",
+    savings: "الادخار",
+    transfers: "التحويلات",
+    business_services: "الخدمات المهنية",
+    cash: "السحب النقدي",
     other: "أخرى",
   },
 };
@@ -649,7 +715,9 @@ export default function FinanceClient() {
   const translateCategory = (value: any) => {
     if (typeof value !== "string") return value;
 
-    return categoryLabels[language]?.[value.toLowerCase()] || value;
+    const normalized = value.toLowerCase().trim();
+
+    return categoryLabels[language]?.[normalized] || value;
   };
 
   const hasActiveAccess =
