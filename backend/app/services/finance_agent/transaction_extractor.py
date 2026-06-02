@@ -2733,6 +2733,122 @@ def infer_month_first_date_order(
     debug_log("TX_DEBUG: date_order", "CAD ambiguous -> day_first")
     return False
 
+
+def extract_signed_amount_fallback_transactions(
+    text: str,
+    detected_currency: str,
+) -> list[dict]:
+    """Fallback for compact statements without transaction dates.
+
+    Some statements list several transactions as:
+        Merchant A -10.00 Merchant B +20.00
+
+    This fallback is intentionally only used when the normal extractor returns
+    no transactions. It is language-neutral: it relies on explicit signed
+    amounts, not bank names or country-specific layouts.
+    """
+    transactions: list[dict] = []
+
+    normalized_text = normalize_ocr_numeric_text(
+        normalize_arabic_digits(
+            clean_db_text(str(text))
+        )
+    )
+
+    signed_amount_re = re.compile(
+        r"(.+?)\s*([+-]\s*"
+        r"(?:\d{1,3}(?:[ ,]\d{3})+|\d+)"
+        r"(?:[.,]\d{2}))"
+    )
+
+    metadata_keywords = [
+        "account number",
+        "account holder",
+        "account name",
+        "customer name",
+        "client name",
+        "statement date",
+        "statement period",
+        "date range",
+        "bank statement",
+        "iban",
+        "swift",
+        "sort code",
+        "balance",
+        "solde",
+    ]
+
+    sequence = 0
+
+    for raw_line in normalized_text.splitlines():
+        line = " ".join(raw_line.split())
+
+        if not line:
+            continue
+
+        lower = line.lower()
+
+        if any(keyword in lower for keyword in metadata_keywords):
+            continue
+
+        for match in signed_amount_re.finditer(line):
+            description = clean_db_text(match.group(1))
+
+            if not description:
+                continue
+
+            amount_token = match.group(2).replace(" ", "")
+            amount = parse_amount(amount_token)
+
+            if amount_token.startswith("-"):
+                amount = -abs(amount)
+                transaction_type = "expense"
+            else:
+                amount = abs(amount)
+                transaction_type = "income"
+
+            inferred_type = detect_type(description, amount)
+
+            if inferred_type in ["income", "expense"]:
+                transaction_type = inferred_type
+
+                if transaction_type == "expense":
+                    amount = -abs(amount)
+                else:
+                    amount = abs(amount)
+
+            # Preserve the existing general internal-transfer protection.
+            # This avoids suddenly counting account-to-account movements as
+            # spending only in fallback mode.
+            if any(keyword in description.lower() for keyword in INTERNAL_TRANSFER_KEYWORDS):
+                debug_log(
+                    "TX_FALLBACK_SKIP: internal_transfer",
+                    description,
+                )
+                continue
+
+            sequence += 1
+
+            row = {
+                "date": "unknown",
+                "description": description,
+                "amount": amount,
+                "type": transaction_type,
+                "currency": detected_currency,
+            }
+
+            debug_log(
+                "TX_FALLBACK_ROW:",
+                {
+                    "sequence": sequence,
+                    **row,
+                },
+            )
+
+            transactions.append(row)
+
+    return transactions
+
 def extract_transactions(text: str) -> list[dict]:
     debug_log("=== TX_EXTRACT_DEBUG START ===")
     debug_log("TEXT_SAMPLE:", clean_db_text(str(text))[:500])
@@ -3057,6 +3173,15 @@ def extract_transactions(text: str) -> list[dict]:
 
     for tx in transactions:
         tx.pop("_balance", None)
+
+    if not transactions:
+        debug_log(
+            "TX_DEBUG: normal_extraction_empty_using_signed_amount_fallback"
+        )
+        transactions = extract_signed_amount_fallback_transactions(
+            text,
+            detected_currency,
+        )
 
     print("FINAL_TXS", transactions)
     return transactions
