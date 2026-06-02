@@ -2583,14 +2583,16 @@ def resolve_arabic_row_amount(row: dict, prev_balance: float | None) -> tuple[fl
             if abs(abs(delta) - abs(probable_tx)) <= tolerance:
                 return abs(probable_tx), probable_balance, delta_type
 
-            # General fallback for rows with fees/taxes/merged OCR: net cash movement equals balance delta.
-            # If explicit row keywords exist, they can override the sign for rare statements where
-            # the displayed balance delta and transaction columns disagree due to OCR/table noise.
+            # Standard bank-statement rule:
+            # if an explicit transaction amount is present, keep it.
+            # The running balance delta may validate the sign, but must not replace
+            # the displayed transaction amount because OCR windows can merge rows.
             keyword_type = classify_by_keywords(row.get("text", ""))
-            if keyword_type in ("expense", "income"):
-                return abs(delta), probable_balance, keyword_type
 
-            return abs(delta), probable_balance, delta_type
+            if keyword_type in ("expense", "income"):
+                return abs(probable_tx), probable_balance, keyword_type
+
+            return abs(probable_tx), probable_balance, delta_type
 
         # If the probable balance is not usable, try every possible balance candidate.
         candidates = []
