@@ -491,18 +491,6 @@ def handle_finance_ai(job: Job, db):
 
     result_ai["risk_notes"] = risk_notes
 
-    result_ai["waste_detected"] = [
-        item.get("issue")
-        for item in savings_opportunities
-        if item.get("issue")
-    ]
-
-    result_ai["saving_strategies"] = [
-        item.get("action")
-        for item in savings_opportunities
-        if item.get("action")
-    ]
-
     update_job_progress(
         job,
         db,
