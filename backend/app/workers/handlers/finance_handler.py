@@ -662,6 +662,18 @@ def handle_finance_ai(job: Job, db):
         finance_progress_message("charts", output_language),
     )
 
+    for tx in transactions:
+        if (
+            tx.get("type") == "expense"
+            and abs(float(tx.get("amount", 0) or 0)) > 5000
+        ):
+            print(
+                "BIG_TX",
+                tx.get("date"),
+                tx.get("amount"),
+                tx.get("description"),
+            )
+
     charts = build_financial_charts(transactions)
 
     result_ai["summary"] = build_observed_finance_summary(
