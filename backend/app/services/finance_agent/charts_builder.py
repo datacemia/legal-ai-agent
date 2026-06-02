@@ -38,15 +38,20 @@ CATEGORY_KEYWORDS = {
         "راجيإ", "مكتب", "بتكم", "المكتب", "بتكملا",
     ],
     "utilities": [
-        "water", "electricity", "internet", "telecom", "orange",
-        "inwi", "maroc telecom", "gas", "british gas",
-        "thames water", "edf", "sfr", "fiber", "fibre",
-        "utility", "utilities", "free mobile", "engie",
-        "engie gaz", "bpay electricity", "eau", "électricité",
-        "electricite", "gaz", "wifi", "mobile", "phone",
-        "téléphone", "telephone", "فواتير", "كهرباء", "ماء",
-        "غاز", "إنترنت", "هاتف",
-        "ءابرهكلا", "فاتورة", "ةروتاف", "stc", "اتصالات",
+        # EN
+        "electricity", "water", "internet",
+        "telecom", "mobile",
+
+        # FR
+        "électricité", "electricite",
+        "eau", "internet",
+        "télécom", "telecom",
+        "facture",
+
+        # AR
+        "كهرباء", "مياه",
+        "اتصالات", "إنترنت",
+        "سداد",
     ],
     "government": [
         "council tax", "tax", "hmrc", "municipal", "government",
@@ -72,33 +77,39 @@ CATEGORY_KEYWORDS = {
         "مستشفى", "صحة",
     ],
     "groceries": [
-        "tesco", "sainsburys", "sainsbury", "carrefour",
-        "lidl", "aldi", "monoprix", "intermarche",
-        "intermarché", "supermarket", "grocery", "groceries",
-        "carrefour city", "marché local", "marche local",
+        # EN
+        "grocery", "groceries", "supermarket", "hypermarket", "market",
+
+        # FR
         "épicerie", "epicerie", "supermarché", "supermarche",
-        "asda", "morrisons", "waitrose", "auchan", "casino",
-        "bim", "marjane", "aswak", "بقالة", "سوبرماركت",
+        "hypermarché", "hypermarche", "alimentaire",
+
+        # AR
+        "بقالة", "تموينات", "سوبرماركت",
     ],
     "food": [
-        "restaurant", "cafe", "coffee", "glovo", "uber eats",
-        "deliveroo", "just eat", "pret", "pret a manger",
-        "costa", "mcdonald", "kfc", "burger", "pizza",
-        "pub", "bar", "food", "order", "boulangerie",
-        "bistrot", "café", "cafe terrasse", "bakery",
-        "takeaway", "meal", "snack", "مطعم", "قهوة",
-        "مقهى", "طعام", "وجبة",
-        "ضيافة", "ةفايض", "اجتماعات", "تاعامتجا",
+        # EN
+        "restaurant", "cafe", "coffee", "food", "meal",
+
+        # FR
+        "restaurant", "café", "cafe", "brasserie",
+        "boulangerie", "snack",
+
+        # AR
+        "مطعم", "مقهى", "قهوة",
     ],
     "transport": [
-        "uber trip", "taxi", "careem", "fuel", "train",
-        "rail", "national rail", "trainline", "tfl",
-        "contactless london", "transport", "sncf", "sncf connect",
-        "péage", "peage", "vinci", "bus", "metro", "métro",
-        "tram", "parking", "essence", "diesel", "carburant",
-        "shell", "bp", "totalenergies", "نقل", "وقود",
-        "قطار", "تاكسي",
-        "دوقو", "أسطول", "لوطسأ", "شحن", "نحش",
+        # EN
+        "fuel", "gas station", "petrol", "parking",
+        "taxi", "uber",
+
+        # FR
+        "carburant", "essence", "station service",
+        "parking", "péage", "peage", "taxi",
+
+        # AR
+        "وقود", "بنزين", "محطة وقود",
+        "مواقف", "أجرة",
     ],
     "travel": [
         "air france", "ryanair", "easyjet", "british airways",
@@ -108,14 +119,20 @@ CATEGORY_KEYWORDS = {
         "فندق", "طيران", "مطار",
     ],
     "shopping": [
-        "amazon", "shein", "zara", "mall", "shop", "store",
-        "marketplace", "paypal payment", "paypal", "card purchase",
-        "retail", "electronics", "jb hi-fi", "jbhifi",
-        "fnac", "décathlon", "decathlon", "boulanger",
-        "darty", "ikea", "apple store", "google store",
-        "achat", "achats", "boutique", "magasin", "تسوق",
-        "متجر", "شراء",
-        "ءارش", "أجهزة", "ةزهجأ", "حاسب", "بساح", "noon", "noon marketplace",
+        # EN
+        "pos purchase", "card purchase",
+        "retail", "store", "shopping",
+
+        # FR
+        "achat carte",
+        "paiement carte",
+        "magasin",
+        "commerce",
+
+        # AR
+        "شراء عبر نقاط بيع",
+        "نقاط بيع",
+        "متجر",
     ],
     "education": [
         "school", "university", "college", "tuition", "course",
@@ -143,13 +160,14 @@ CATEGORY_KEYWORDS = {
         "épargne", "epargne", "ادخار", "توفير",
     ],
     "transfers": [
-        "own account", "internal transfer",
-        "transfer between accounts", "virement interne",
-        "transfer", "osko transfer", "bank transfer",
-        "wise transfer", "faster payment", "virement",
-        "virement famille", "virement reçu", "virement recu",
-        "remboursement ami", "transfer received",
-        "payment from", "payment to", "حوالة", "تحويل",
+        # EN
+        "transfer", "bank transfer", "wire transfer",
+
+        # FR
+        "virement", "transfert",
+
+        # AR
+        "حوالة", "تحويل",
     ],
     "business_operations": [
         "wyoming", "attorney", "llc", "legal", "company",
