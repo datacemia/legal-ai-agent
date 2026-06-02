@@ -35,6 +35,9 @@ from app.services.finance_agent.insights_engine import (
 from app.services.finance_agent.alerts_engine import (
     generate_financial_alerts,
 )
+from app.services.supabase_storage_service import (
+    upload_file_to_supabase_storage,
+)
 
 
 router = APIRouter(prefix="/finance", tags=["Finance"])
@@ -168,16 +171,24 @@ async def analyze_statement(
     with open(file_path, "wb") as buffer:
         buffer.write(content)
 
+    supabase_storage_path = f"finance/{unique_name}"
+
+    upload_file_to_supabase_storage(
+        local_file_path=file_path,
+        storage_path=supabase_storage_path,
+        content_type=file.content_type,
+    )
+
     uploaded_file = UploadedFile(
         user_id=current_user.id,
         agent_type="finance",
         original_file_name=file.filename,
         stored_file_name=unique_name,
-        file_path=file_path,
+        file_path=supabase_storage_path,
         mime_type=file.content_type,
         file_extension="pdf",
         file_size_bytes=len(content),
-        storage_backend="local",
+        storage_backend="supabase",
         status="uploaded",
         consent_for_training=False,
     )
