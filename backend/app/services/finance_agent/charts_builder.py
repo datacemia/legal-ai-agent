@@ -167,9 +167,48 @@ CATEGORY_KEYWORDS = {
         "موسر", "ةلومع", "رسوم بنكية", "ةيكنب موسر",
     ],
     "cash": [
-        "atm", "cash withdrawal", "withdrawal", "dab",
-        "retrait", "retrait espèces", "retrait especes",
-        "guichet", "سحب", "نقد",
+        # English
+        "atm",
+        "cash withdrawal",
+        "withdrawal",
+        "cash",
+        "cash machine",
+        "cashpoint",
+        "cash dispenser",
+        "teller",
+        "counter withdrawal",
+        "branch withdrawal",
+
+        # French
+        "dab",
+        "gab",
+        "retrait",
+        "retrait espèces",
+        "retrait especes",
+        "retrait esp",
+        "retrait d'espèces",
+        "retrait d especes",
+        "guichet",
+        "distributeur",
+        "distributeur automatique",
+
+        # Moroccan / bank OCR common generic patterns
+        "awbgab",
+        "esp gab",
+        "retrait esp gab",
+        "gab confrere",
+        "gab confrère",
+
+        # Arabic
+        "سحب",
+        "سحب نقدي",
+        "سحب من الصراف",
+        "صراف",
+        "صراف آلي",
+        "الصراف الآلي",
+        "نقد",
+        "نقدي",
+        "شباك",
     ],
     "debt": [
         "loan", "credit card", "minimum payment", "repayment",
