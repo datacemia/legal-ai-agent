@@ -1,10 +1,66 @@
-import re
+from __future__ import annotations
+
 from collections import defaultdict
+import re
+
+
+TEXT = {
+    "HIGH_SUBSCRIPTION_SPENDING_ISSUE": {
+        "en": "High subscription spending",
+        "fr": "Dépenses d'abonnements élevées",
+        "ar": "إنفاق مرتفع على الاشتراكات",
+    },
+    "HIGH_SUBSCRIPTION_SPENDING_ACTION": {
+        "en": "Review unused subscriptions and cancel unnecessary services.",
+        "fr": "Passez en revue les abonnements inutilisés et annulez les services non nécessaires.",
+        "ar": "راجع الاشتراكات غير المستخدمة وألغِ الخدمات غير الضرورية.",
+    },
+    "TOO_MANY_SUBSCRIPTIONS_ISSUE": {
+        "en": "Too many recurring subscriptions",
+        "fr": "Trop d'abonnements récurrents",
+        "ar": "عدد كبير من الاشتراكات المتكررة",
+    },
+    "TOO_MANY_SUBSCRIPTIONS_ACTION": {
+        "en": "Reduce the number of active subscriptions.",
+        "fr": "Réduisez le nombre d'abonnements actifs.",
+        "ar": "قلّل عدد الاشتراكات النشطة.",
+    },
+    "HIGH_SPENDING_ISSUE": {
+        "en": "High spending detected",
+        "fr": "Dépenses élevées détectées",
+        "ar": "تم اكتشاف إنفاق مرتفع",
+    },
+    "HIGH_SPENDING_ACTION": {
+        "en": "Reduce discretionary spending and monitor card payments.",
+        "fr": "Réduire les dépenses discrétionnaires et surveiller les paiements par carte.",
+        "ar": "قلّل الإنفاق غير الضروري وراقب مدفوعات البطاقة.",
+    },
+    "MULTIPLE_CHARGES_ISSUE": {
+        "en": "Multiple charges detected for {merchant}",
+        "fr": "Plusieurs prélèvements détectés pour {merchant}",
+        "ar": "تم اكتشاف عدة عمليات خصم لـ {merchant}",
+    },
+    "MULTIPLE_CHARGES_ACTION": {
+        "en": "Check whether all {merchant} charges are necessary.",
+        "fr": "Vérifiez si tous les prélèvements {merchant} sont nécessaires.",
+        "ar": "تحقق مما إذا كانت جميع عمليات خصم {merchant} ضرورية.",
+    },
+}
+
+
+def t(key: str, output_language: str = "en", **kwargs) -> str:
+    """Return translated text for a key, falling back to English then the key itself."""
+    template = TEXT.get(key, {}).get(
+        output_language,
+        TEXT.get(key, {}).get("en", key),
+    )
+    return template.format(**kwargs) if kwargs else template
 
 
 def detect_savings_opportunities(
     transactions: list[dict],
     subscriptions: list[dict],
+    output_language: str = "en",
 ) -> list[dict]:
     opportunities = []
 
@@ -28,15 +84,13 @@ def detect_savings_opportunities(
     if subscription_total >= 300:
         opportunities.append(
             {
-                "issue": "High subscription spending",
+                "issue": t("HIGH_SUBSCRIPTION_SPENDING_ISSUE", output_language),
                 "severity": "medium",
                 "estimated_savings_opportunity": round(
                     subscription_total * 0.35,
                     2,
                 ),
-                "recommendation": (
-                    "Review unused subscriptions and cancel unnecessary services."
-                ),
+                "action": t("HIGH_SUBSCRIPTION_SPENDING_ACTION", output_language),
             }
         )
 
@@ -44,15 +98,13 @@ def detect_savings_opportunities(
     if len(subscriptions) >= 5:
         opportunities.append(
             {
-                "issue": "Too many recurring subscriptions",
+                "issue": t("TOO_MANY_SUBSCRIPTIONS_ISSUE", output_language),
                 "severity": "high",
                 "estimated_savings_opportunity": round(
                     subscription_total * 0.20,
                     2,
                 ),
-                "recommendation": (
-                    "Reduce the number of active subscriptions."
-                ),
+                "action": t("TOO_MANY_SUBSCRIPTIONS_ACTION", output_language),
             }
         )
 
@@ -60,15 +112,13 @@ def detect_savings_opportunities(
     if total_expenses >= 5000:
         opportunities.append(
             {
-                "issue": "High spending detected",
+                "issue": t("HIGH_SPENDING_ISSUE", output_language),
                 "severity": "high",
                 "estimated_savings_opportunity": round(
                     total_expenses * 0.10,
                     2,
                 ),
-                "recommendation": (
-                    "Reduce discretionary spending and monitor card payments."
-                ),
+                "action": t("HIGH_SPENDING_ACTION", output_language),
             }
         )
 
@@ -95,14 +145,20 @@ def detect_savings_opportunities(
             if matching_sub:
                 opportunities.append(
                     {
-                        "issue": f"Multiple charges detected for {merchant}",
+                        "issue": t(
+                            "MULTIPLE_CHARGES_ISSUE",
+                            output_language,
+                            merchant=merchant,
+                        ),
                         "severity": "medium",
                         "estimated_savings_opportunity": round(
                             matching_sub["monthly_cost"] * 0.50,
                             2,
                         ),
-                        "recommendation": (
-                            f"Check whether all {merchant} charges are necessary."
+                        "action": t(
+                            "MULTIPLE_CHARGES_ACTION",
+                            output_language,
+                            merchant=merchant,
                         ),
                     }
                 )

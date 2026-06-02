@@ -59,7 +59,7 @@ def predict_cashflow(
         message = {
             "en": "Your balance trend is improving.",
             "fr": "La tendance de votre solde s’améliore.",
-            "ar": "اتجاه رصيدك يتحسن.",
+            "ar": "اتجاه الرصيد في تحسن.",
         }.get(output_language, "Your balance trend is improving.")
 
     elif income == 0 and expenses > 0:

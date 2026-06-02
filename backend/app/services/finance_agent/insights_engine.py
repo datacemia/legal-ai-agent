@@ -39,10 +39,33 @@ def generate_financial_insights(
         insights.append(
             {
                 "type": "positive",
-                "title": "Positive cashflow detected",
-                "message": (
-                    f"You currently retain approximately "
-                    f"{round(net, 2)} {currency} after expenses."
+                "title": {
+                    "en": "Positive cashflow detected",
+                    "fr": "Trésorerie positive détectée",
+                    "ar": "تم اكتشاف تدفق نقدي إيجابي",
+                }.get(
+                    output_language,
+                    "Positive cashflow detected",
+                ),
+                "message": {
+                    "en": (
+                        f"You currently retain approximately "
+                        f"{round(net, 2)} {currency} after expenses."
+                    ),
+                    "fr": (
+                        f"Vous conservez actuellement environ "
+                        f"{round(net, 2)} {currency} après vos dépenses."
+                    ),
+                    "ar": (
+                        f"تحتفظ حاليًا بحوالي "
+                        f"{round(net, 2)} {currency} بعد المصاريف."
+                    ),
+                }.get(
+                    output_language,
+                    (
+                        f"You currently retain approximately "
+                        f"{round(net, 2)} {currency} after expenses."
+                    ),
                 ),
             }
         )
@@ -51,7 +74,14 @@ def generate_financial_insights(
         insights.append(
             {
                 "type": "warning",
-                "title": "Negative cashflow risk",
+                "title": {
+                    "en": "Negative cashflow risk",
+                    "fr": "Risque de trésorerie négative",
+                    "ar": "خطر تدفق نقدي سلبي",
+                }.get(
+                    output_language,
+                    "Negative cashflow risk",
+                ),
                 "message": {
                     "en": "Your current expenses exceed your income.",
                     "fr": "Vos dépenses actuelles dépassent vos revenus.",
@@ -68,9 +98,21 @@ def generate_financial_insights(
         insights.append(
             {
                 "type": "positive",
-                "title": "Excellent financial habits",
-                "message": (
-                    "Your financial behavior appears healthy and stable."
+                "title": {
+                    "en": "Excellent financial habits",
+                    "fr": "Excellentes habitudes financières",
+                    "ar": "عادات مالية ممتازة",
+                }.get(
+                    output_language,
+                    "Excellent financial habits",
+                ),
+                "message": {
+                    "en": "Your financial behavior appears healthy and stable.",
+                    "fr": "Votre comportement financier semble sain et stable.",
+                    "ar": "يبدو أن سلوكك المالي صحي ومستقر.",
+                }.get(
+                    output_language,
+                    "Your financial behavior appears healthy and stable.",
                 ),
             }
         )
@@ -79,9 +121,21 @@ def generate_financial_insights(
         insights.append(
             {
                 "type": "warning",
-                "title": "Financial habits need improvement",
-                "message": (
-                    "Your spending patterns may require closer monitoring."
+                "title": {
+                    "en": "Financial habits need improvement",
+                    "fr": "Les habitudes financières doivent être améliorées",
+                    "ar": "العادات المالية تحتاج إلى تحسين",
+                }.get(
+                    output_language,
+                    "Financial habits need improvement",
+                ),
+                "message": {
+                    "en": "Your spending patterns may require closer monitoring.",
+                    "fr": "Vos habitudes de dépense peuvent nécessiter un suivi plus attentif.",
+                    "ar": "قد تتطلب أنماط إنفاقك مراقبة أدق.",
+                }.get(
+                    output_language,
+                    "Your spending patterns may require closer monitoring.",
                 ),
             }
         )
@@ -96,10 +150,33 @@ def generate_financial_insights(
             insights.append(
                 {
                     "type": "warning",
-                    "title": "High subscription pressure",
-                    "message": (
-                        f"Subscriptions consume approximately "
-                        f"{round(ratio, 1)}% of your income."
+                    "title": {
+                        "en": "High subscription pressure",
+                        "fr": "Pression élevée des abonnements",
+                        "ar": "ضغط مرتفع من الاشتراكات",
+                    }.get(
+                        output_language,
+                        "High subscription pressure",
+                    ),
+                    "message": {
+                        "en": (
+                            f"Subscriptions consume approximately "
+                            f"{round(ratio, 1)}% of your income."
+                        ),
+                        "fr": (
+                            f"Les abonnements consomment environ "
+                            f"{round(ratio, 1)}% de vos revenus."
+                        ),
+                        "ar": (
+                            f"تستهلك الاشتراكات حوالي "
+                            f"{round(ratio, 1)}% من دخلك."
+                        ),
+                    }.get(
+                        output_language,
+                        (
+                            f"Subscriptions consume approximately "
+                            f"{round(ratio, 1)}% of your income."
+                        ),
                     ),
                 }
             )
@@ -117,10 +194,33 @@ def generate_financial_insights(
         insights.append(
             {
                 "type": "tip",
-                "title": "Savings opportunities detected",
-                "message": (
-                    f"Potential savings opportunities identified: "
-                    f"{round(estimated, 2)} {currency}."
+                "title": {
+                    "en": "Savings opportunities detected",
+                    "fr": "Opportunités d’économies détectées",
+                    "ar": "تم اكتشاف فرص للتوفير",
+                }.get(
+                    output_language,
+                    "Savings opportunities detected",
+                ),
+                "message": {
+                    "en": (
+                        f"Potential savings opportunities identified: "
+                        f"{round(estimated, 2)} {currency}."
+                    ),
+                    "fr": (
+                        f"Opportunités d’économies potentielles identifiées : "
+                        f"{round(estimated, 2)} {currency}."
+                    ),
+                    "ar": (
+                        f"تم تحديد فرص توفير محتملة: "
+                        f"{round(estimated, 2)} {currency}."
+                    ),
+                }.get(
+                    output_language,
+                    (
+                        f"Potential savings opportunities identified: "
+                        f"{round(estimated, 2)} {currency}."
+                    ),
                 ),
             }
         )
@@ -130,9 +230,21 @@ def generate_financial_insights(
         insights.append(
             {
                 "type": "warning",
-                "title": "High spending intensity",
-                "message": (
-                    "Your observed expenses are relatively high."
+                "title": {
+                    "en": "High spending intensity",
+                    "fr": "Intensité de dépenses élevée",
+                    "ar": "مستوى إنفاق مرتفع",
+                }.get(
+                    output_language,
+                    "High spending intensity",
+                ),
+                "message": {
+                    "en": "Your observed expenses are relatively high.",
+                    "fr": "Vos dépenses observées sont relativement élevées.",
+                    "ar": "مصاريفك المسجلة مرتفعة نسبيًا.",
+                }.get(
+                    output_language,
+                    "Your observed expenses are relatively high.",
                 ),
             }
         )
