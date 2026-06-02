@@ -291,6 +291,13 @@ def build_financial_charts(
 
             spending_over_time[date] += expense_amount
 
+            if category == "other":
+                print(
+                    "OTHER_TX",
+                    amount,
+                    description[:200],
+                )
+
             category_breakdown[category] += expense_amount
 
             if category == "subscriptions":
