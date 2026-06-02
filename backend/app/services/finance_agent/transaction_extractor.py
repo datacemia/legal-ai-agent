@@ -839,6 +839,27 @@ def extract_date(
         except ValueError:
             return None
 
+    spaced_dmy_match = re.search(
+        r"(?<!\d)([0-3]?\d)\s+([01]?\d)\s+(20\d{2})(?!\d)",
+        line,
+    )
+
+    if spaced_dmy_match:
+        day, month, year = spaced_dmy_match.groups()
+
+        try:
+            parsed = datetime(
+                int(year),
+                int(month),
+                int(day),
+            )
+
+            if is_reasonable_year(parsed.year):
+                return parsed.date().isoformat()
+
+        except ValueError:
+            return None
+
 
     text_month_us_match = re.search(
         r"\b("
