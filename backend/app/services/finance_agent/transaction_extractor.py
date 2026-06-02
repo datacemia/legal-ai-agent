@@ -11,7 +11,7 @@ def debug_log(*args):
     if DEBUG_FINANCE_EXTRACTOR:
         print(*args)
 
-
+debug_log("RUNEXA_FINANCE_EXTRACTOR_VERSION", "debit-credit-table-v3")
 CURRENCY_CODES = ["USD", "EUR", "GBP", "AED", "MAD", "CAD", "AUD", "JOD", "SAR", "QAR", "KWD", "BHD", "OMR", "DZD", "TND", "EGP", "CHF", "JPY", "CNY", "INR", "TRY", "NGN", "ZAR", "MULTI"]
 
 CANADA_BANKS = [
@@ -554,6 +554,7 @@ def normalize_line_for_amount_detection(line: str) -> str:
         r"\b\d{2}[./-]\d{2}[./-]\d{2,4}\b",
         r"\b\d{1,2}[./-]\d{1,2}\b",
         r"\b[0-3]?\d\s+[01]?\d\s+20\d{2}\b",
+        r"\b[0-3]?\d\s+[01]?\d\b",
         r"\b20\d{2}\s+[01]?\d\s+[0-3]?\d\b",
         r"\b\d{1,2}\s+"
         r"(?:january|jan|february|feb|march|mar|april|apr|may|"
@@ -586,6 +587,91 @@ def extract_money_numbers_safely(line: str) -> list[str]:
         MONEY_NUMBER_PATTERN,
         cleaned,
     )
+
+
+def looks_like_debit_description(line: str) -> bool:
+    lower = line.lower()
+
+    debit_markers = [
+        "paiement",
+        "operation au debit",
+        "opération au débit",
+        "debit",
+        "débit",
+        "retrait",
+        "gab",
+        "awb gab",
+        "awbgab",
+        "frais",
+        "commission",
+        "achat",
+        "card",
+        "payment",
+        "withdrawal",
+        "atm",
+        "purchase",
+        "vir emis",
+        "vir émis",
+        "vir.emis",
+        "virement emis",
+        "virement émis",
+        "vers ",
+    ]
+
+    return any(marker in lower for marker in debit_markers)
+
+
+def looks_like_credit_description(line: str) -> bool:
+    lower = line.lower()
+
+    credit_markers = [
+        "virement recu",
+        "virement reçu",
+        "vir recu",
+        "vir reçu",
+        "vir.web recu",
+        "vir.web reçu",
+        "vir web recu",
+        "vir web reçu",
+        "vir inst recu",
+        "vir inst reçu",
+        "recu de",
+        "reçu de",
+        "credit",
+        "crédit",
+        "deposit",
+        "incoming",
+        "received",
+        "salary",
+        "payroll",
+    ]
+
+    return any(marker in lower for marker in credit_markers)
+
+
+def extract_debit_credit_from_description(line: str) -> tuple[float | None, str | None]:
+    """Infer amount/type from debit-credit bank tables.
+
+    This is still general: many bank PDFs expose separate debit and credit
+    columns, but OCR often flattens the row into one line. When the
+    description clearly says incoming/received, the single visible amount is a
+    credit. When it clearly says card/ATM/debit/fee/outgoing, the single
+    visible amount is a debit.
+    """
+    numbers = extract_money_numbers_safely(line)
+
+    if not numbers:
+        return None, None
+
+    amount = parse_amount(numbers[0])
+
+    if looks_like_credit_description(line):
+        return abs(amount), "income"
+
+    if looks_like_debit_description(line):
+        return -abs(amount), "expense"
+
+    return None, None
 
 
 def pick_bank_amount(
@@ -815,6 +901,33 @@ def extract_date(
             return parsed.date().isoformat()
         except ValueError:
             return None
+
+    # Bank-table OCR format:
+    # code date description value-date amount
+    # Example:
+    # 0016BK 08 04 VIR.WEB RECU DE NAME 08 04 2026 500,00
+    # This is common in statements where dates are printed as separate columns.
+    bank_table_dates = re.findall(
+        r"(?<!\d)([0-3]?\d)\s+([01]?\d)(?!\d)",
+        line,
+    )
+
+    if bank_table_dates:
+        for day_text, month_text in reversed(bank_table_dates):
+            day = int(day_text)
+            month = int(month_text)
+
+            year_match = re.search(r"\b(20\d{2})\b", line)
+            year = int(year_match.group(1)) if year_match else (default_year or datetime.now().year)
+
+            try:
+                parsed = datetime(year, month, day)
+
+                if is_reasonable_year(parsed.year):
+                    return parsed.date().isoformat()
+
+            except ValueError:
+                continue
 
     match = re.search(
         r"\b(\d{2}[./-]\d{2}(?:[./-]\d{2,4})?)\b",
@@ -1197,95 +1310,32 @@ def detect_type(line: str, amount: float) -> str | None:
     return None
 
 def extract_transaction_amount(line: str) -> float | None:
-    transaction_part = re.split(
-        r"\bbalance\b|\bsolde\b",
-        line,
-        maxsplit=1,
-        flags=re.IGNORECASE,
-    )[0]
+    numbers = extract_money_numbers_safely(line)
 
-    transaction_part = re.sub(
-        r"\b\d{4}-\d{2}-\d{2}\b",
-        "",
-        transaction_part,
-        count=1,
-    )
-
-    transaction_part = re.sub(
-        r"\b20\d{6}\b",
-        "",
-        transaction_part,
-        count=1,
-    )
-
-    transaction_part = re.sub(
-        r"\b[0-3]\d[0-1]\d20\d{2}\b",
-        "",
-        transaction_part,
-        count=1,
-    )
-
-    transaction_part = re.sub(
-        r"\b\d{2}[./-]\d{2}(?:[./-]\d{2,4})?\b",
-        "",
-        transaction_part,
-        count=1,
-    )
-
-    transaction_part = re.sub(
-        r"\b\d{1,2}\s+"
-        r"(january|jan|february|feb|march|mar|april|apr|may|"
-        r"june|jun|july|jul|august|aug|september|sept|sep|"
-        r"october|oct|november|nov|december|dec)"
-        r"\s+\d{2,4}\b",
-        "",
-        transaction_part,
-        count=1,
-        flags=re.IGNORECASE,
-    )
-
-    money_matches = re.findall(
-        rf"{AMOUNT_PATTERN}\s*(?:[A-Z]{{3}}|DH|DHS|€|\$|£)?",
-        transaction_part,
-        flags=re.IGNORECASE,
-    )
-
-    money_matches = [
-        value
-        for value in money_matches
-        if re.search(r"[.,]\d{2}", value)
-    ]
-
-    if not money_matches:
+    if not numbers:
         return None
 
-    for value in money_matches:
-        cleaned = value.strip()
-
-        if cleaned.lower().startswith("balance"):
-            continue
-
-        if cleaned.startswith("+") or cleaned.startswith("-"):
-            numeric = re.search(
-                AMOUNT_PATTERN,
-                cleaned,
-            )
-            if numeric:
-                return parse_amount(numeric.group(0))
-
-    numeric = re.search(
-        AMOUNT_PATTERN,
-        money_matches[0],
+    signed_match = re.search(
+        r"([+-])\s*("
+        r"(?:\d{1,3}(?:[ ,]\d{3})+|\d+)"
+        r"(?:[.,]\d{2})"
+        r")",
+        normalize_line_for_amount_detection(line),
     )
 
-    if not numeric:
-        return None
+    if signed_match:
+        amount = parse_amount(signed_match.group(2))
+        return amount if signed_match.group(1) == "+" else -amount
 
-    return parse_amount(numeric.group(0))
+    if len(numbers) >= 2:
+        return parse_amount(numbers[0])
+
+    return parse_amount(numbers[0])
+
 
 
 def extract_us_debit_credit_balance(line: str):
-    numbers = re.findall(MONEY_NUMBER_PATTERN, line)
+    numbers = extract_money_numbers_safely(line)
 
     if len(numbers) < 3:
         return None, None
@@ -1385,6 +1435,15 @@ def extract_tabular_bank_amount(
 
     if not numbers:
         return None, None
+
+    dc_amount, dc_type = extract_debit_credit_from_description(line)
+
+    if dc_amount is not None:
+        debug_log(
+            "TX_DEBUG: debit_credit_description",
+            {"amount": dc_amount, "type": dc_type, "line": line},
+        )
+        return dc_amount, dc_type
 
     # General rule: when the statement shows an explicit + / - sign,
     # the sign is more reliable than generic words such as "payment".
@@ -1646,10 +1705,7 @@ def attach_following_balance_lines(
             prefer_us_date=prefer_us_date,
         ) is not None
 
-        current_amounts = re.findall(
-            MONEY_NUMBER_PATTERN,
-            current,
-        )
+        current_amounts = extract_money_numbers_safely(current)
 
         if (
             current_has_date
