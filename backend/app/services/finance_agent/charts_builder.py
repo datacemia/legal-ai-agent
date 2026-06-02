@@ -268,6 +268,10 @@ def build_financial_charts(
             category = detect_category(description)
 
             spending_over_time[date] += expense_amount
+
+            if category == "pets":
+                print("PETS_MATCH:", description)
+
             category_breakdown[category] += expense_amount
 
             if category == "subscriptions":
