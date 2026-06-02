@@ -1874,6 +1874,25 @@ def clean_db_text(value: str) -> str:
 
 
 
+def log_final_transactions(transactions: list[dict]) -> None:
+    """Log only the transactions that are finally retained.
+
+    Keep this payload intentionally small so debugging stays readable even on
+    large statements.
+    """
+    for tx in transactions:
+        debug_log(
+            "TX_FINAL",
+            {
+                "date": tx.get("date"),
+                "amount": tx.get("amount"),
+                "type": tx.get("type"),
+                "description": str(tx.get("description", ""))[:80],
+            },
+        )
+
+
+
 def log_currency_detection_result(
     currency: str,
     source: str,
@@ -2779,6 +2798,7 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         print("AR_TX:", t)
 
     print("ARABIC_BYPASS_COUNT:", len(transactions))
+    log_final_transactions(transactions)
     debug_log("FINAL_TXS", transactions)
     debug_log("=== TX_EXTRACT_DEBUG END ===")
     return transactions
@@ -3389,6 +3409,7 @@ def extract_transactions(text: str) -> list[dict]:
             detected_currency,
         )
 
+    log_final_transactions(transactions)
     print("FINAL_TXS", transactions)
     return transactions
 EXPENSE_KEYWORDS += [
