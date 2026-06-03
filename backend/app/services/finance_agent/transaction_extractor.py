@@ -1002,6 +1002,73 @@ def looks_like_credit_description(line: str) -> bool:
     return any(marker in lower for marker in credit_markers)
 
 
+def looks_like_neutral_inbound_transfer(line: str, amount: float | None = None) -> bool:
+    """Detect positive transfer rows that should be income when not outgoing.
+
+    Standard international FR / EN / AR rule, not bank-specific:
+    if a row describes a transfer/remittance and there is no explicit outgoing
+    marker, a positive amount extracted from a credit/debit table is treated
+    as income. This covers OCR rows such as:
+        VIREMENT MANN ... 118.00
+        VIREMENT ETRANGER ... 630.00
+    while preserving outgoing rows like virement emis / transfer sent / تحويل صادر.
+    """
+    if amount is not None and amount <= 0:
+        return False
+
+    lower = str(line or "").lower()
+
+    transfer_markers = [
+        # FR
+        "virement",
+        "vir ",
+        "vir.",
+        "virement etranger",
+        "virement étranger",
+
+        # EN / international
+        "transfer",
+        "wire transfer",
+        "bank transfer",
+        "remittance",
+
+        # AR
+        "تحويل",
+        "حوالة",
+    ]
+
+    outgoing_markers = [
+        # FR
+        "virement emis",
+        "virement émis",
+        "vir emis",
+        "vir émis",
+        "vir.emis",
+        "vers ",
+        "a destination de",
+        "à destination de",
+
+        # EN / international
+        "outgoing transfer",
+        "transfer sent",
+        "sent transfer",
+        "transfer to",
+        "payment to",
+        "debit transfer",
+
+        # AR
+        "تحويل صادر",
+        "حوالة صادرة",
+        "إلى",
+        "الى",
+    ]
+
+    has_transfer = any(marker in lower for marker in transfer_markers)
+    has_outgoing = any(marker in lower for marker in outgoing_markers)
+
+    return has_transfer and not has_outgoing
+
+
 def extract_debit_credit_from_description(line: str) -> tuple[float | None, str | None]:
     """Infer amount/type from debit-credit bank tables.
 
@@ -1832,6 +1899,11 @@ def detect_type(line: str, amount: float) -> str | None:
         return "income"
 
     # Standard international FR / EN / AR direction layer.
+    # Generic transfer rows with a positive amount and no outgoing marker are
+    # income. This is structural (credit/debit table semantics), not bank-specific.
+    if looks_like_neutral_inbound_transfer(line, amount):
+        return "income"
+
     # Keep this before broad legacy keyword lists so abbreviations such as
     # PRLV SEPA are classified consistently without bank-specific patches.
     if any(keyword in lower for keyword in UNIVERSAL_INCOME_MARKERS):
@@ -2155,6 +2227,16 @@ def extract_tabular_bank_amount(
         amount = pick_transaction_amount_from_tabular_numbers(numbers, line)
 
         return amount, "income"
+
+    # Standard international FR / EN / AR fallback for debit/credit tables:
+    # transfer/remittance with no outgoing marker and a positive extracted
+    # amount belongs to credit/income. This preserves already typed expenses
+    # because explicit outgoing/card/debit markers are handled above.
+    if looks_like_neutral_inbound_transfer(line):
+        amount = pick_transaction_amount_from_tabular_numbers(numbers, line)
+
+        if amount > 0:
+            return abs(amount), "income"
 
     return None, None
 
