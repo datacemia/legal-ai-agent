@@ -4262,6 +4262,19 @@ def extract_transactions(text: str) -> list[dict]:
             },
         )
 
+        if (
+            "LITTLE BIG CONNECTION" in clean_line.upper()
+            or "LBC-20250528585018P" in clean_line.upper()
+        ):
+            print(
+                "LBC_RAW_MATCH",
+                {
+                    "line": clean_line,
+                    "amount": amount,
+                    "type": transaction_type,
+                },
+            )
+
         transactions.append(
             {
                 "date": date,
@@ -4328,6 +4341,16 @@ def extract_transactions(text: str) -> list[dict]:
 
     log_final_transactions(transactions)
     debug_log("FINAL_TXS", transactions)
+
+    print(
+        "LBC_FINAL_TX",
+        [
+            tx
+            for tx in transactions
+            if "LITTLE" in str(tx.get("description", "")).upper()
+            or "CONNECTION" in str(tx.get("description", "")).upper()
+        ],
+    )
 
     return transactions
 EXPENSE_KEYWORDS += [
