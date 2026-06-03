@@ -3190,6 +3190,58 @@ def extract_signed_amount_fallback_transactions(
 
     return transactions
 
+def merge_multiline_debit_credit_rows(
+    lines: list[str],
+    default_year: int | None = None,
+    prefer_us_date: bool = False,
+) -> list[str]:
+    rebuilt = []
+    buffer = ""
+
+    amount_balance_re = re.compile(
+        rf"^\s*(?:"
+        rf"\d{{1,2}}[- ](?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[- ]\d{{2,4}}\s+"
+        rf")?({MONEY_NUMBER_PATTERN})\s+({MONEY_NUMBER_PATTERN})\s*$",
+        flags=re.IGNORECASE,
+    )
+
+    for line in lines:
+        clean = " ".join(str(line or "").split())
+
+        if not clean:
+            continue
+
+        has_date = extract_date(
+            clean,
+            default_year=default_year,
+            prefer_us_date=prefer_us_date,
+        ) is not None
+
+        is_amount_balance_line = bool(amount_balance_re.search(clean))
+
+        if buffer and is_amount_balance_line:
+            rebuilt.append(f"{buffer} {clean}".strip())
+            buffer = ""
+            continue
+
+        if has_date:
+            if buffer:
+                rebuilt.append(buffer)
+
+            buffer = clean
+            continue
+
+        if buffer:
+            buffer = f"{buffer} {clean}".strip()
+        else:
+            rebuilt.append(clean)
+
+    if buffer:
+        rebuilt.append(buffer)
+
+    return rebuilt
+
+
 def extract_transactions(text: str) -> list[dict]:
     debug_log("=== TX_EXTRACT_DEBUG START ===")
     debug_log("TEXT_SAMPLE:", clean_db_text(str(text))[:500])
@@ -3220,6 +3272,12 @@ def extract_transactions(text: str) -> list[dict]:
     ]
 
     if not is_arabic_text(text):
+        raw_lines = merge_multiline_debit_credit_rows(
+            raw_lines,
+            default_year=default_year,
+            prefer_us_date=prefer_us_date,
+        )
+
         raw_lines = split_compact_multi_transaction_lines(
             raw_lines,
             default_year=default_year,
