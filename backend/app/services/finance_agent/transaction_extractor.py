@@ -464,8 +464,19 @@ def is_arabic_text(text: str) -> bool:
     return bool(re.search(r"[\u0600-\u06FF]", text))
 
 
+def is_mostly_arabic_text(text: str) -> bool:
+    letters = re.findall(r"[A-Za-z\u0600-\u06FF]", str(text or ""))
+
+    if not letters:
+        return False
+
+    arabic_letters = re.findall(r"[\u0600-\u06FF]", str(text or ""))
+
+    return len(arabic_letters) / len(letters) >= 0.35
+
+
 def normalize_arabic_ocr_lines(text: str) -> str:
-    if not is_arabic_text(text):
+    if not is_mostly_arabic_text(text):
         return text
 
     lines = [
@@ -515,6 +526,13 @@ def normalize_ocr_numeric_text(value: str) -> str:
         if not re.search(r"\d", token):
             return token
 
+        if re.search(
+            r"(jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)",
+            token,
+            flags=re.IGNORECASE,
+        ):
+            return token
+
         return token.translate(translation)
 
     return re.sub(
@@ -557,9 +575,7 @@ def normalize_line_for_amount_detection(line: str) -> str:
         r"\b20\d{6}\b",
         r"\b[0-3]\d[0-1]\d20\d{2}\b",
         r"\b\d{2}[./-]\d{2}[./-]\d{2,4}\b",
-        r"\b\d{1,2}[./-]\d{1,2}\b",
         r"\b[0-3]?\d\s+[01]?\d\s+20\d{2}\b",
-        r"\b[0-3]?\d\s+[01]?\d\b",
         r"\b20\d{2}\s+[01]?\d\s+[0-3]?\d\b",
         r"\b\d{1,2}\s+"
         r"(?:january|jan|february|feb|march|mar|april|apr|may|"
