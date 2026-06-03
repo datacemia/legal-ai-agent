@@ -507,7 +507,7 @@ def normalize_arabic_ocr_lines(text: str) -> str:
 
     rebuilt = []
 
-    amount_token = r"(?:\d{1,3}(?:[ ,]\d{3})+|\d+)(?:[.,]\d{2})"
+    amount_token = r"(?:\d{1,3}(?:,\d{3})+|\d+)(?:[.,]\d{2,3})"
 
     amount_balance_date_re = re.compile(
         rf"({amount_token})\s+({amount_token})\s+(20\d{{6}})"
@@ -3257,7 +3257,7 @@ def merge_multiline_debit_credit_rows(
     rebuilt = []
     buffer = ""
 
-    amount_token = r"(?:\d{1,3}(?:,\d{3})+|\d+)(?:[.,]\d{2})"
+    amount_token = r"(?:\d{1,3}(?:,\d{3})+|\d+)(?:[.,]\d{2,3})"
 
     row_start_date_re = re.compile(
         r"^\s*(?:"
@@ -3323,6 +3323,40 @@ def merge_multiline_debit_credit_rows(
     return rebuilt
 
 
+
+def has_debit_credit_balance_table(text: str) -> bool:
+    """Detect bank statements with explicit debit/credit/balance columns.
+
+    Structural and language-neutral:
+    - EN: Debit / Credit / Balance
+    - FR: Débit / Crédit / Solde
+    - AR: مدين / دائن / الرصيد / رصيد
+
+    When this is true, the general table parser is safer than the legacy
+    Arabic OCR shortcut because transaction amount and running balance are
+    printed in separate columns.
+    """
+    normalized = normalize_arabic_digits(clean_db_text(text)).lower()
+
+    debit_markers = ["debit", "débit", "مدين", "سحوبات"]
+    credit_markers = ["credit", "crédit", "دائن", "إيداعات", "ايداعات"]
+    balance_markers = [
+        "balance", "solde", "الرصيد", "رصيد",
+        "closingbalance", "openingbalance",
+    ]
+    transaction_markers = [
+        "transactiondetail", "transaction detail",
+        "تفاصيل الحركة",
+        "details operation", "détail opération", "detail operation",
+    ]
+
+    has_debit = any(marker in normalized for marker in debit_markers)
+    has_credit = any(marker in normalized for marker in credit_markers)
+    has_balance = any(marker in normalized for marker in balance_markers)
+    has_transaction_detail = any(marker in normalized for marker in transaction_markers)
+
+    return has_balance and ((has_debit and has_credit) or has_transaction_detail)
+
 def extract_transactions(text: str) -> list[dict]:
     debug_log("=== TX_EXTRACT_DEBUG START ===")
     debug_log("TEXT_SAMPLE:", clean_db_text(str(text))[:500])
@@ -3332,12 +3366,17 @@ def extract_transactions(text: str) -> list[dict]:
     debug_log("TX_DEBUG: detected_currency", detected_currency)
     debug_log("TX_DEBUG: prefer_us_date", prefer_us_date)
 
-    arabic_transactions = extract_arabic_ocr_transactions(text)
-    if arabic_transactions:
-        debug_log("TX_DEBUG: arabic_path_used", len(arabic_transactions))
-        return arabic_transactions
+    table_statement_detected = has_debit_credit_balance_table(text)
 
-    debug_log("TX_DEBUG: non_arabic_path_used")
+    if not table_statement_detected:
+        arabic_transactions = extract_arabic_ocr_transactions(text)
+        if arabic_transactions:
+            debug_log("TX_DEBUG: arabic_path_used", len(arabic_transactions))
+            return arabic_transactions
+    else:
+        debug_log("TX_DEBUG: table_statement_detected_skip_arabic_shortcut")
+
+    debug_log("TX_DEBUG: general_table_path_used")
 
     text = normalize_arabic_ocr_lines(text)
     text = normalize_ocr_numeric_text(text)

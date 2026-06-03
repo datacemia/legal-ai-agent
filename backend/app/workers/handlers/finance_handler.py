@@ -309,66 +309,118 @@ def filter_metric_inconsistent_items(
 
 
 def assess_analysis_quality(transactions: list[dict]) -> dict:
-    VERIFIED_OTHER_THRESHOLD = 0.25
-    INSUFFICIENT_OTHER_THRESHOLD = 0.50
+    """Assess extraction quality from transaction structure, not category success.
+
+    International standard rule:
+    - Parsing quality is based on valid transaction structure: date, amount,
+      description and usable type.
+    - Categorization quality is reported separately as `other_ratio`.
+    - A bank statement must not be rejected only because many merchants or
+      transfers are classified as `other`.
+
+    This keeps Arabic / French / English statements valid even when merchant
+    names, bank references, SWIFT/IBAN references or OCR fragments are unknown.
+    """
     MIN_TRANSACTIONS = 5
+    PARTIAL_STRUCTURE_RATIO = 0.50
+    VERIFIED_STRUCTURE_RATIO = 0.75
+    PARTIAL_TYPED_RATIO = 0.45
+    VERIFIED_TYPED_RATIO = 0.65
 
-    expenses = [
-        tx for tx in transactions
-        if tx.get("type") == "expense"
-    ]
+    total_count = len(transactions or [])
 
-    total_expenses = sum(
-        abs(float(tx.get("amount", 0) or 0))
-        for tx in expenses
-    )
+    if total_count <= 0:
+        return {
+            "status": "insufficient_data",
+            "confidence": 25,
+            "other_ratio": 0,
+            "transaction_count": 0,
+            "valid_transaction_count": 0,
+            "structure_ratio": 0,
+            "typed_ratio": 0,
+            "income_count": 0,
+            "expense_count": 0,
+        }
 
-    other_expenses = 0
+    valid_count = 0
+    typed_count = 0
+    income_count = 0
+    expense_count = 0
+    total_expenses = 0.0
+    other_expenses = 0.0
 
-    for tx in expenses:
-        category = str(
-            tx.get("category")
-            or detect_category(tx.get("description", ""))
-        ).lower()
+    for tx in transactions:
+        try:
+            amount = float(tx.get("amount") or 0)
+        except Exception:
+            amount = 0.0
 
-        if category in ["other", "autres", "أخرى"]:
-            other_expenses += abs(float(tx.get("amount", 0) or 0))
+        description = str(tx.get("description") or "").strip()
+        date = str(tx.get("date") or "").strip()
+        tx_type = str(tx.get("type") or "").lower().strip()
 
-    other_ratio = (
-        other_expenses / total_expenses
-        if total_expenses > 0
-        else 0
-    )
+        has_valid_amount = amount != 0
+        has_description = bool(description)
+        has_date = bool(date)
 
-    if len(transactions) < MIN_TRANSACTIONS:
+        if has_date and has_valid_amount and has_description:
+            valid_count += 1
+
+        if tx_type in ["income", "expense"]:
+            typed_count += 1
+
+        if tx_type == "income" and amount > 0:
+            income_count += 1
+
+        if tx_type == "expense" and amount < 0:
+            expense_count += 1
+            abs_amount = abs(amount)
+            total_expenses += abs_amount
+
+            category = str(
+                tx.get("category")
+                or detect_category(description)
+            ).lower()
+
+            if category in ["other", "autres", "أخرى"]:
+                other_expenses += abs_amount
+
+    structure_ratio = valid_count / total_count if total_count else 0
+    typed_ratio = typed_count / total_count if total_count else 0
+    other_ratio = other_expenses / total_expenses if total_expenses > 0 else 0
+
+    if total_count < MIN_TRANSACTIONS or structure_ratio < PARTIAL_STRUCTURE_RATIO:
         status = "insufficient_data"
         confidence = 25
-    elif other_ratio > INSUFFICIENT_OTHER_THRESHOLD:
-        status = "insufficient_data"
-        confidence = 25
-    elif other_ratio > VERIFIED_OTHER_THRESHOLD:
+    elif structure_ratio < VERIFIED_STRUCTURE_RATIO or typed_ratio < PARTIAL_TYPED_RATIO:
         status = "partial"
         confidence = 65
+    elif typed_ratio < VERIFIED_TYPED_RATIO:
+        status = "partial"
+        confidence = 75
     else:
         status = "verified"
         confidence = 90
 
-    print("QUALITY_DEBUG_SAMPLE", [
-        {
-            "description": tx.get("description", "")[:120],
-            "type": tx.get("type"),
-            "amount": tx.get("amount"),
-            "category": tx.get("category") or detect_category(tx.get("description", "")),
-        }
-        for tx in expenses[:25]
-    ])
+    # Category coverage is useful, but should not downgrade a structurally valid
+    # statement to insufficient_data. Apply only a small confidence adjustment.
+    if status == "verified" and other_ratio > 0.70:
+        confidence = 80
+    elif status == "verified" and other_ratio > 0.50:
+        confidence = 85
 
     return {
         "status": status,
         "confidence": confidence,
         "other_ratio": round(other_ratio, 4),
-        "transaction_count": len(transactions),
+        "transaction_count": total_count,
+        "valid_transaction_count": valid_count,
+        "structure_ratio": round(structure_ratio, 4),
+        "typed_ratio": round(typed_ratio, 4),
+        "income_count": income_count,
+        "expense_count": expense_count,
     }
+
 
 def finance_progress_message(key: str, language: str) -> str:
     messages = {

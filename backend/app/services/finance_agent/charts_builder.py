@@ -370,6 +370,37 @@ def detect_category(description: str) -> str:
             if _keyword_matches(keyword, normalized, tokens):
                 return _canonical_category(category)
 
+    # Structural bank-transfer fallback.
+    # Standard EN/FR/AR rule: opaque reference + bank clearing/core-system
+    # metadata usually means a transfer, not an unknown merchant purchase.
+    transfer_reference_like = bool(
+        re.search(
+            r"\b(ref|reference|beneficiary|iban|swift|bic|value\s*dt|value\s*date|"
+            r"date[-\s]*time|core\s*system|via\s*core|system\s*core|"
+            r"instant\s*payment|bank\s*transfer|wire\s*transfer|"
+            r"virement|référence|reference|bénéficiaire|beneficiaire|"
+            r"تحويل|حوالة|مرجع|مستفيد|النظام|السريع)\b",
+            normalized,
+            flags=re.IGNORECASE,
+        )
+    )
+    has_bank_identifier = bool(
+        re.search(
+            r"\b[A-Z0-9]{8,}\b|\b[A-Z]{4,}SARI\b|\bSA\d{2}[A-Z0-9]{10,}\b",
+            original.upper(),
+        )
+    )
+    has_card_purchase_signal = bool(
+        re.search(
+            r"card no|pos#|mada|apple pay|google pay|purchase|"
+            r"بطاقة|مدى|نقاط بيع|شراء",
+            original.lower(),
+        )
+    )
+
+    if transfer_reference_like and (has_bank_identifier or "core" in normalized or "system" in normalized) and not has_card_purchase_signal:
+        return "transfers"
+
     lowered_original = original.lower()
     if re.search(
         r"pos purchase|card purchase|naps purchase|cbq purchase|electron auth|"
@@ -512,3 +543,71 @@ if __name__ == "__main__":
 
     for sample in samples:
         print(sample, "=>", detect_category_details(sample))
+
+
+
+def assess_analysis_quality_standard(transactions: list[dict]) -> dict[str, Any]:
+    """International structural quality gate for bank-statement parsing.
+
+    Validation should be based on whether transactions were extracted with a
+    date, an amount and a description. A statement must not be rejected only
+    because merchants are not recognized or many rows are transfers.
+    """
+    total = len(transactions or [])
+
+    if total == 0:
+        return {
+            "status": "insufficient_data",
+            "confidence": 0,
+            "transaction_count": 0,
+            "structure_ratio": 0,
+            "other_ratio": 1,
+            "category_confidence": 0,
+        }
+
+    structurally_valid = 0
+    categorized_count = 0
+    other_count = 0
+
+    for tx in transactions:
+        has_date = bool(tx.get("date"))
+        has_amount = tx.get("amount") is not None
+        has_description = bool(str(tx.get("description", "")).strip())
+
+        if has_date and has_amount and has_description:
+            structurally_valid += 1
+
+        category = _canonical_category(
+            tx.get("category") or detect_category(tx.get("description", ""))
+        )
+
+        if category != "other":
+            categorized_count += 1
+        else:
+            other_count += 1
+
+    structure_ratio = structurally_valid / total
+    other_ratio = other_count / total
+    category_confidence = categorized_count / total
+
+    if total < 5 or structure_ratio < 0.40:
+        status = "insufficient_data"
+        confidence = 25
+    elif total < 15 or structure_ratio < 0.70:
+        status = "partial"
+        confidence = 60
+    else:
+        status = "verified"
+        confidence = 90
+
+    if status == "verified" and category_confidence < 0.35:
+        confidence = 80
+
+    return {
+        "status": status,
+        "confidence": confidence,
+        "transaction_count": total,
+        "structure_ratio": round(structure_ratio, 4),
+        "other_ratio": round(other_ratio, 4),
+        "category_confidence": round(category_confidence, 4),
+    }
