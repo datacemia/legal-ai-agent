@@ -4249,6 +4249,30 @@ def extract_wallet_tabular_transactions(
             # Attach detail lines like "De :", "Référence :", "Frais:", "£150.00".
             # Stop when obvious footer/header metadata starts.
             low = line.lower()
+
+            footer_markers = [
+                "iban",
+                "bic",
+                "swift",
+                "bank identifier code",
+                "routing number",
+                "account number",
+                "customer support",
+                "contact us",
+                "terms and conditions",
+                "signaler une carte",
+                "obtenir de l'aide",
+            ]
+
+            if any(marker in low for marker in footer_markers):
+                rows.append(" ".join(current))
+                current = []
+                continue
+
+            if re.search(r"^\d{4,6}$|^\d+\s+\w+", low):
+                rows.append(" ".join(current))
+                current = []
+                continue
             if any(
                 marker in low
                 for marker in [
