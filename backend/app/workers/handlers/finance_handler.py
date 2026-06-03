@@ -306,9 +306,9 @@ def filter_metric_inconsistent_items(
 
 
 def assess_analysis_quality(transactions: list[dict]) -> dict:
-    OTHER_THRESHOLD = 0.35
+    VERIFIED_OTHER_THRESHOLD = 0.35
+    INSUFFICIENT_OTHER_THRESHOLD = 0.80
     MIN_TRANSACTIONS = 5
-    MAX_EXPENSE_INCOME_RATIO = 3
 
     expenses = [
         tx for tx in transactions
@@ -330,45 +330,31 @@ def assess_analysis_quality(transactions: list[dict]) -> dict:
         ]
     )
 
-    income = sum(
-        float(tx.get("amount", 0) or 0)
-        for tx in transactions
-        if tx.get("type") == "income"
-        and float(tx.get("amount", 0) or 0) > 0
-    )
-
     other_ratio = (
         other_expenses / total_expenses
         if total_expenses > 0
         else 0
     )
 
-    expense_income_ratio = (
-        total_expenses / income
-        if income > 0
-        else None
-    )
-
-    low_confidence = (
-        len(transactions) < MIN_TRANSACTIONS
-        or other_ratio > OTHER_THRESHOLD
-        or (
-            expense_income_ratio is not None
-            and expense_income_ratio > MAX_EXPENSE_INCOME_RATIO
-        )
-    )
+    if len(transactions) < MIN_TRANSACTIONS:
+        status = "insufficient_data"
+        confidence = 25
+    elif other_ratio > INSUFFICIENT_OTHER_THRESHOLD:
+        status = "insufficient_data"
+        confidence = 25
+    elif other_ratio > VERIFIED_OTHER_THRESHOLD:
+        status = "partial"
+        confidence = 65
+    else:
+        status = "verified"
+        confidence = 90
 
     return {
-        "low_confidence": low_confidence,
+        "status": status,
+        "confidence": confidence,
         "other_ratio": round(other_ratio, 4),
         "transaction_count": len(transactions),
-        "expense_income_ratio": (
-            round(expense_income_ratio, 4)
-            if expense_income_ratio is not None
-            else None
-        ),
     }
-
 
 def finance_progress_message(key: str, language: str) -> str:
     messages = {
@@ -530,16 +516,18 @@ def handle_finance_ai(job: Job, db):
 
     quality = assess_analysis_quality(transactions)
 
-    if quality["low_confidence"]:
+    if quality["status"] == "insufficient_data":
         result = {
-            "status": "low_confidence",
+            "status": "insufficient_data",
+            "analysis_status": "insufficient_data",
+            "confidence": quality["confidence"],
             "analysis_quality": quality,
             "financial_score": None,
             "transactions": transactions,
             "message": {
-                "en": "Statement could not be analyzed reliably.",
-                "fr": "Le relevé ne peut pas être analysé de manière fiable.",
-                "ar": "لا يمكن تحليل كشف الحساب بشكل موثوق.",
+                "en": "We detected this statement, but there is not enough reliable data to generate a full financial analysis. Please upload a clearer exported PDF or a higher-quality scan.",
+                "fr": "Nous avons détecté ce relevé, mais les données fiables sont insuffisantes pour générer une analyse financière complète. Veuillez importer un PDF exporté plus clair ou un scan de meilleure qualité.",
+                "ar": "تم اكتشاف كشف الحساب، لكن البيانات الموثوقة غير كافية لإنشاء تحليل مالي كامل. يرجى رفع ملف PDF أوضح أو نسخة ممسوحة بجودة أعلى.",
             }.get(output_language),
             "disclaimer": get_finance_disclaimer(output_language),
         }
@@ -795,6 +783,10 @@ def handle_finance_ai(job: Job, db):
     result_ai["disclaimer"] = get_finance_disclaimer(
         output_language
     )
+
+    result_ai["analysis_status"] = quality["status"]
+    result_ai["confidence"] = quality["confidence"]
+    result_ai["analysis_quality"] = quality
 
     result = {
         **result_ai,
