@@ -4243,18 +4243,12 @@ def extract_transactions(text: str) -> list[dict]:
         detected_currency,
     )
 
-    transactions = mark_internal_transfers(
-        transactions,
-        text,
-    )
+    transactions = mark_internal_transfers(transactions, text)
 
-    debug_log(
+    print(
         "INTERNAL_TRANSFER_STATS",
         {
-            "detected": sum(
-                1 for tx in transactions
-                if tx.get("is_internal_transfer")
-            ),
+            "detected": sum(1 for tx in transactions if tx.get("is_internal_transfer")),
             "total": len(transactions),
         },
     )
