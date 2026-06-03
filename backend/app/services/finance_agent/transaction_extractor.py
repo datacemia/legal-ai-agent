@@ -3462,6 +3462,29 @@ def extract_transactions(text: str) -> list[dict]:
         ):
             continue
 
+        BALANCE_ROWS = [
+            "brought forward",
+            "carried forward",
+            "opening balance",
+            "closing balance",
+            "balance forward",
+            "opening balance brought forward",
+            "solde initial",
+            "solde report",
+            "solde reporte",
+            "solde de clôture",
+            "solde de cloture",
+            "رصيد افتتاحي",
+            "رصيد مرحل",
+            "الرصيد الافتتاحي",
+        ]
+
+        if any(
+            keyword in clean_line.lower()
+            for keyword in BALANCE_ROWS
+        ):
+            continue
+
         normalized_line = clean_line.lower()
 
         if any(k in normalized_line for k in INTERNAL_TRANSFER_KEYWORDS):
