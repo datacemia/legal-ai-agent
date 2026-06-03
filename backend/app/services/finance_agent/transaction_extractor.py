@@ -566,6 +566,11 @@ def normalize_line_for_amount_detection(line: str) -> str:
         r"june|jun|july|jul|august|aug|september|sept|sep|"
         r"october|oct|november|nov|december|dec)"
         r"\s+\d{2,4}\b",
+        r"\b\d{1,2}[- ]"
+        r"(?:january|jan|february|feb|march|mar|april|apr|may|"
+        r"june|jun|july|jul|august|aug|september|sept|sep|"
+        r"october|oct|november|nov|december|dec)"
+        r"[- ]\d{2,4}\b",
     ]
 
     for pattern in date_patterns:
@@ -1149,8 +1154,8 @@ def split_compact_multi_transaction_lines(
         r"(?<!\d)(?:"
         r"\d{4}-\d{2}-\d{2}"
         r"|\d{1,2}[./-]\d{1,2}[./-]\d{2,4}"
-        r"|\d{1,2}\s+(?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s+\d{2,4}"
-        r"|(?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s+\d{1,2}\s+\d{2,4}"
+        r"|\d{1,2}[- ](?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)[- ]\d{2,4}"
+        r"|(?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)[- ]\d{1,2}[- ]\d{2,4}"
         r")(?!\d)",
         flags=re.IGNORECASE,
     )
