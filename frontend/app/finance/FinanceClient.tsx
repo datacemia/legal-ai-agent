@@ -168,6 +168,37 @@ const categoryLabels: any = {
   },
 };
 
+const savingsOpportunityLabels: any = {
+  "High spending detected": {
+    en: "High spending detected",
+    fr: "Dépenses élevées détectées",
+    ar: "تم اكتشاف إنفاق مرتفع",
+  },
+  "Consider reducing discretionary spending to align expenses with income.": {
+    en: "Consider reducing discretionary spending to align expenses with income.",
+    fr: "Réduisez les dépenses non essentielles pour aligner vos dépenses avec vos revenus.",
+    ar: "فكّر في تقليل المصاريف غير الأساسية لمواءمة الإنفاق مع الدخل.",
+  },
+};
+
+const severityLabels: any = {
+  high: {
+    en: "High",
+    fr: "Élevé",
+    ar: "مرتفع",
+  },
+  medium: {
+    en: "Medium",
+    fr: "Moyen",
+    ar: "متوسط",
+  },
+  low: {
+    en: "Low",
+    fr: "Faible",
+    ar: "منخفض",
+  },
+};
+
 const labels: any = {
   en: {
     title: "Personal Finance Coach",
@@ -736,6 +767,18 @@ export default function FinanceClient() {
     return categoryLabels[language]?.[normalized] || value;
   };
 
+  const translateSavingsText = (value: any) => {
+    if (typeof value !== "string") return value;
+
+    return savingsOpportunityLabels[value]?.[language] || value;
+  };
+
+  const translateSeverity = (value: any) => {
+    if (typeof value !== "string") return value;
+
+    return severityLabels[value]?.[language] || value;
+  };
+
   const hasActiveAccess =
     role === "admin" ||
     role === "enterprise_admin" ||
@@ -1111,7 +1154,7 @@ export default function FinanceClient() {
 
     (result.savings_opportunities || []).forEach((item: any) => {
       doc.text(
-        `${item.issue}: ${t.estimatedSavingsOpportunity} ${formatMoney(item.estimated_savings_opportunity)}`,
+        `${translateSavingsText(item.issue)}: ${t.estimatedSavingsOpportunity} ${formatMoney(item.estimated_savings_opportunity)}`,
         14,
         y
       );
@@ -1842,11 +1885,11 @@ export default function FinanceClient() {
                             <div className="flex items-start justify-between gap-4">
                               <div>
                                 <p className="font-medium text-slate-800">
-                                  {item.issue}
+                                  {translateSavingsText(item.issue)}
                                 </p>
 
                                 <p className="text-sm text-slate-500 mt-1">
-                                  {item.recommendation}
+                                  {translateSavingsText(item.recommendation)}
                                 </p>
                               </div>
 
@@ -1870,7 +1913,7 @@ export default function FinanceClient() {
                                   : "bg-slate-100 text-slate-700"
                               }`}
                             >
-                              {item.severity}
+                              {translateSeverity(item.severity)}
                             </span>
                           </div>
                         )
