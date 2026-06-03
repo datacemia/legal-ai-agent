@@ -11,7 +11,7 @@ def debug_log(*args):
     if DEBUG_FINANCE_EXTRACTOR:
         print(*args)
 
-debug_log("RUNEXA_FINANCE_EXTRACTOR_VERSION", "international-multipass-v7-kpi-neutral-internal-transfers")
+debug_log("RUNEXA_FINANCE_EXTRACTOR_VERSION", "international-multipass-v8-guarded-columnar-fallback")
 CURRENCY_CODES = ["USD", "EUR", "GBP", "AED", "MAD", "CAD", "AUD", "JOD", "SAR", "QAR", "KWD", "BHD", "OMR", "DZD", "TND", "EGP", "CHF", "JPY", "CNY", "INR", "TRY", "NGN", "ZAR", "MULTI"]
 
 CANADA_BANKS = [
@@ -2589,6 +2589,11 @@ DOCUMENT_METADATA_KEYWORDS = [
     "coordonnees bancaires",
     "relevé identité bancaire",
     "releve identite bancaire",
+    "situation de vos autres comptes",
+    "situationdevos autrescomptes",
+    "protection des comptes",
+    "garantie des dépôts",
+    "garantie des depots",
 
     # EN / international
     "registered office",
@@ -2683,6 +2688,11 @@ NON_TRANSACTION_PATTERNS = [
     "الرصيد",
     "إجمالي الحركات",
     "SOLDE AU",
+    "SITUATION DE VOS AUTRES COMPTES",
+    "SITUATIONDEVOS AUTRESCOMPTES",
+    "TOTAL DES MOUVEMENTS",
+    "TOTAL DES OPERATIONS",
+    "TOTAL DES OPÉRATIONS",
     "NOUVEAU SOLDE",
     "CLOTURE",
     "CLÔTURE",
@@ -5692,6 +5702,70 @@ def looks_like_balance_or_total_text(line: str) -> bool:
     return any(marker in lower for marker in markers)
 
 
+
+def trim_non_transaction_account_summary_blocks(text: str) -> str:
+    """Remove account-summary / other-account blocks before column fallback.
+
+    Standard international FR / EN / AR safety rule: balances and portfolio
+    summaries are not transaction rows. This prevents scattered column OCR from
+    pairing account balances with transaction descriptions.
+    """
+    value = str(text or "")
+    cut_markers = [
+        # FR
+        "situation de vos autres comptes",
+        "situationdevos autrescomptes",
+        "situation de vos comptes d'epargne",
+        "situation de vos comptes d’épargne",
+        "numéro opération solde",
+        "numero operation solde",
+        # EN
+        "other accounts",
+        "account summary",
+        "portfolio summary",
+        "savings accounts summary",
+        # AR
+        "ملخص الحسابات",
+        "حسابات أخرى",
+        "حسابات اخرى",
+    ]
+    lower = value.lower()
+    cut_positions = [lower.find(marker) for marker in cut_markers if lower.find(marker) >= 0]
+    if cut_positions:
+        return value[:min(cut_positions)]
+    return value
+
+
+def is_local_columnar_amount_for_operation(
+    raw_lines: list[str],
+    op_index: int,
+    default_year: int | None = None,
+) -> str | None:
+    """Find an amount physically adjacent to a dated operation line.
+
+    This deliberately avoids global amount-list pairing. Some PDFs output all
+    debit/credit amounts first, then descriptions. Pairing those globally can
+    attach balances or account-summary amounts to unrelated rows. We only use a
+    local amount when it is on the same line or on the next few continuation
+    lines before the next dated operation.
+    """
+    line = raw_lines[op_index]
+    inline_amounts = extract_transaction_money_numbers(line)
+    if inline_amounts:
+        return inline_amounts[-1]
+
+    for j in range(op_index + 1, min(len(raw_lines), op_index + 4)):
+        nxt = raw_lines[j]
+        if extract_date(nxt, default_year=default_year):
+            break
+        if looks_like_balance_or_total_text(nxt) or is_document_metadata_line(nxt):
+            break
+        if is_amount_only_money_line(nxt):
+            amounts = re.findall(MONEY_NUMBER_PATTERN, nxt)
+            if amounts:
+                return amounts[0]
+    return None
+
 def extract_scattered_columnar_transactions(
     text: str,
     detected_currency: str | None = None,
@@ -5711,9 +5785,11 @@ def extract_scattered_columnar_transactions(
     if not has_debit_credit_balance_table(text):
         return []
 
+    safe_text = trim_non_transaction_account_summary_blocks(text)
+
     raw_lines = [
         " ".join(str(line or "").split())
-        for line in str(text or "").splitlines()
+        for line in str(safe_text or "").splitlines()
         if " ".join(str(line or "").split())
     ]
 
@@ -5758,39 +5834,54 @@ def extract_scattered_columnar_transactions(
     if len(operation_lines) < 3:
         return []
 
-    # Money tokens from amount-only lines, excluding lines near obvious balance
-    # or total captions. This handles PDF text streams that emit the debit and
-    # credit columns separately from operation descriptions.
-    money_tokens: list[str] = []
-    for idx, line in enumerate(raw_lines):
-        if not is_amount_only_money_line(line):
-            continue
-        context = " ".join(raw_lines[max(0, idx - 3): min(len(raw_lines), idx + 4)])
-        if looks_like_balance_or_total_text(context):
-            continue
-        try:
-            amount = abs(parse_amount(re.findall(MONEY_NUMBER_PATTERN, line)[0]))
-        except Exception:
-            continue
-        if amount == 0:
-            continue
-        money_tokens.append(re.findall(MONEY_NUMBER_PATTERN, line)[0])
-
-    if not money_tokens:
-        return []
-
-    # Conservative alignment: use the tail if there are extra totals/balances;
-    # otherwise use the head. Existing table semantics determine income/expense.
-    if len(money_tokens) >= len(operation_lines):
-        selected_amounts = money_tokens[-len(operation_lines):]
-    else:
-        selected_amounts = money_tokens
-        operation_lines = operation_lines[:len(selected_amounts)]
-
+    # Guarded local alignment only: do NOT globally pair amount-only columns
+    # with operation rows. Global pairing caused false positives on column-
+    # scrambled PDFs by attaching balances and account-summary amounts to CB rows.
     rows: list[dict] = []
     default_year = detect_document_year(text)
 
-    for line, amount_token in zip(operation_lines, selected_amounts):
+    # Rebuild operation indexes so amount lookup can inspect physical neighbours.
+    operation_indexes: list[tuple[int, str]] = []
+    for idx, line in enumerate(raw_lines):
+        if is_document_metadata_line(line) or is_non_transaction_line(line):
+            continue
+        if looks_like_balance_or_total_text(line):
+            continue
+        date = extract_date(line, default_year=default_year)
+        if not date:
+            continue
+        lower = line.lower()
+        has_signal = any(marker in lower for marker in TRANSACTION_SIGNALS) or any(
+            marker in lower for marker in (UNIVERSAL_INCOME_MARKERS + UNIVERSAL_EXPENSE_MARKERS)
+        )
+        has_signal = has_signal or any(
+            marker in lower
+            for marker in [
+                "vir ", "vir.", "virement", "transfer", "salary", "payroll", "salaire", "paie", "راتب",
+                "prlv", "prelevement", "prélèvement", "paiement", "payment", "carte", "card", "cb ",
+            ]
+        )
+        if has_signal:
+            desc = line
+            j = idx + 1
+            while j < min(len(raw_lines), idx + 3):
+                nxt = raw_lines[j]
+                if extract_date(nxt, default_year=default_year):
+                    break
+                if is_amount_only_money_line(nxt) or is_document_metadata_line(nxt) or looks_like_balance_or_total_text(nxt):
+                    break
+                if len(nxt) <= 80:
+                    desc = f"{desc} {nxt}".strip()
+                j += 1
+            operation_indexes.append((idx, desc))
+
+    if len(operation_indexes) < 3:
+        return []
+
+    for idx, line in operation_indexes:
+        amount_token = is_local_columnar_amount_for_operation(raw_lines, idx, default_year=default_year)
+        if not amount_token:
+            continue
         if looks_like_balance_or_total_text(line):
             continue
         try:
@@ -5802,18 +5893,20 @@ def extract_scattered_columnar_transactions(
         if not date:
             continue
 
+        # Expenses must win for card/direct-debit/ATM rows. Positive default is
+        # allowed only for explicit income/salary/inbound-transfer wording.
         tx_type = detect_type(line, amount)
+        if looks_like_debit_description(line):
+            tx_type = "expense"
+        elif looks_like_credit_description(line) or is_income_priority_description(line):
+            tx_type = "income"
+
         if tx_type == "expense":
             signed_amount = -abs(amount)
         elif tx_type == "income":
             signed_amount = abs(amount)
         else:
-            tabular_amount, tabular_type = extract_tabular_bank_amount(f"{line} {amount_token}")
-            if tabular_amount is not None:
-                signed_amount = tabular_amount
-                tx_type = tabular_type
-            else:
-                signed_amount = amount
+            continue
 
         rows.append(
             {
@@ -5822,15 +5915,19 @@ def extract_scattered_columnar_transactions(
                 "amount": round(signed_amount, 2),
                 "type": tx_type,
                 "currency": detected_currency,
-                "source": "scattered_columnar_table",
+                "source": "scattered_columnar_table_guarded",
             }
         )
 
     debug_log(
-        "TX_DEBUG: scattered_columnar_rows",
-        {"operations": len(operation_lines), "amounts": len(money_tokens), "rows": len(rows)},
+        "TX_DEBUG: scattered_columnar_rows_guarded",
+        {"operations": len(operation_indexes), "rows": len(rows)},
     )
 
+    # A safe fallback should not replace the main extraction unless it has a
+    # meaningful locally aligned set. Returning [] avoids false verified KPIs.
+    if len(rows) < 3:
+        return []
     return rows
 
 def fallback_debit_credit_column_transactions_if_low_quality(
