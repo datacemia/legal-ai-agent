@@ -372,6 +372,8 @@ UNIVERSAL_EXPENSE_MARKERS = [
     "prélèvement sepa",
     "paiement",
     "paiement carte",
+    "cb",
+    "carte bancaire",
     "retrait",
     "achat",
     "carte",
@@ -941,6 +943,10 @@ def looks_like_debit_description(line: str) -> bool:
         "commission",
         "achat",
         "card",
+        "carte bancaire",
+        "cb ",
+        "cb.",
+        "cb-",
         "payment",
         "withdrawal",
         "atm",
@@ -953,7 +959,10 @@ def looks_like_debit_description(line: str) -> bool:
         "vers ",
     ]
 
-    return any(marker in lower for marker in debit_markers)
+    return (
+        any(marker in lower for marker in debit_markers)
+        or bool(re.search(r"\bcb\b|\bcb[a-z0-9]", lower))
+    )
 
 
 def looks_like_credit_description(line: str) -> bool:
@@ -1742,6 +1751,12 @@ def is_income_priority_description(text: str) -> bool:
         "dépôt",
         "depot",
         "received",
+        "refund",
+        "rebate",
+        "cashback",
+        "remise",
+        "remboursement",
+        "retour carte",
         "freelance",
         "client",
         "virement reçu",
@@ -2148,7 +2163,10 @@ def extract_amount_balance_line(line: str):
     if is_document_metadata_line(line):
         return None, None
 
-    numbers = extract_money_numbers_safely(line)
+    # Use transaction money values, not date/value-date tokens.
+    # This keeps already validated amount+balance rows working while preventing
+    # OCR table dates like 05.11 / 22.11 from becoming fake amounts.
+    numbers = extract_transaction_money_numbers(line)
 
     if len(numbers) < 2:
         return None, None
@@ -5747,7 +5765,7 @@ def extract_transactions(text: str) -> list[dict]:
         if tabular_amount is None:
             tabular_amount, tabular_type = extract_amount_balance_line(clean_line)
 
-            amount_balance_numbers = extract_money_numbers_safely(clean_line)
+            amount_balance_numbers = extract_transaction_money_numbers(clean_line)
             if len(amount_balance_numbers) >= 2:
                 try:
                     amount_balance_tx_amount = parse_amount(amount_balance_numbers[-2])
@@ -5756,7 +5774,7 @@ def extract_transactions(text: str) -> list[dict]:
                     amount_balance_tx_amount = None
                     amount_balance_value = None
 
-        numbers = extract_money_numbers_safely(clean_line)
+        numbers = extract_transaction_money_numbers(clean_line)
 
         if (
             len(numbers) == 2
