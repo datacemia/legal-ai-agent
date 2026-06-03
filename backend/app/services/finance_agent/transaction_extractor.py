@@ -856,6 +856,66 @@ def extract_money_numbers_safely(line: str) -> list[str]:
     )
 
 
+def remove_short_bank_date_noise(line: str) -> str:
+    """Remove short statement/value-date tokens before amount selection.
+
+    Standard international rule (FR / EN / AR safe):
+    transaction amounts must not be taken from date/value-date columns.
+    This targets OCR/table rows like:
+        22.11 VIREMENT ... 22.11. 21 120,00
+        05.11 CARD ... 05.11. 21 23,57
+    without changing real money values such as 23,57 or 120.00.
+    """
+    text = str(line or "")
+
+    # Leading statement date without year: DD.MM / DD/MM / DD-MM
+    text = re.sub(
+        r"^\s*[0-3]?\d[./-][01]?\d\.?(?=\s+)",
+        " ",
+        text,
+    )
+
+    # Full OCR value dates with compact noise, e.g. 02.'11/18
+    text = re.sub(
+        r"\b[0-3]?\d[./-]'?[01]?\d[./-]\d{2,4}\b",
+        " ",
+        text,
+    )
+
+    # Value-date column split by OCR: DD.MM. YY or DD/MM YY
+    text = re.sub(
+        r"\b[0-3]?\d[./-][01]?\d\.?\s+\d{2,4}\b",
+        " ",
+        text,
+    )
+
+    # Repeated short value date before a real amount:
+    # "05.11. 21 23,57" after OCR cleanup can leave "05.11 23,57".
+    text = re.sub(
+        r"\b[0-3]?\d[./-][01]?\d\.?(?=\s+\d+(?:[,.]\d{2,3})\b)",
+        " ",
+        text,
+    )
+
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def extract_transaction_money_numbers(line: str) -> list[str]:
+    """Return real transaction money values, excluding date/value-date tokens.
+
+    This is stricter than extract_money_numbers_safely() and should be used
+    only when choosing a transaction amount from a candidate row.
+    """
+    cleaned = normalize_line_for_amount_detection(line)
+    cleaned = remove_short_bank_date_noise(cleaned)
+
+    return re.findall(
+        MONEY_NUMBER_PATTERN,
+        cleaned,
+    )
+
+
+
 def looks_like_debit_description(line: str) -> bool:
     lower = line.lower()
 
@@ -941,13 +1001,16 @@ def extract_debit_credit_from_description(line: str) -> tuple[float | None, str 
     description clearly says incoming/received, the single visible amount is a
     credit. When it clearly says card/ATM/debit/fee/outgoing, the single
     visible amount is a debit.
+
+    Amount selection uses extract_transaction_money_numbers() so short
+    statement/value dates such as 22.11 or 05.11.21 are not mistaken for money.
     """
-    numbers = extract_money_numbers_safely(line)
+    numbers = extract_transaction_money_numbers(line)
 
     if not numbers:
         return None, None
 
-    amount = parse_amount(numbers[0])
+    amount = pick_transaction_amount_from_tabular_numbers(numbers, line)
 
     if looks_like_credit_description(line) or any(
         marker in line.lower() for marker in UNIVERSAL_INCOME_MARKERS
@@ -1004,7 +1067,7 @@ def pick_transaction_amount_from_tabular_numbers(
     line: str,
     account_currency: str | None = None,
 ) -> float:
-    safe_numbers = extract_money_numbers_safely(line)
+    safe_numbers = extract_transaction_money_numbers(line)
 
     if len(safe_numbers) >= 2:
         return parse_amount(safe_numbers[-2])
@@ -1776,7 +1839,7 @@ def detect_type(line: str, amount: float) -> str | None:
     return None
 
 def extract_transaction_amount(line: str) -> float | None:
-    numbers = extract_money_numbers_safely(line)
+    numbers = extract_transaction_money_numbers(line)
 
     if not numbers:
         return None
@@ -1786,7 +1849,7 @@ def extract_transaction_amount(line: str) -> float | None:
         r"(?:\d{1,3}(?:[ ,]\d{3})+|\d+)"
         r"(?:[.,]\d{2})"
         r")",
-        normalize_line_for_amount_detection(line),
+        remove_short_bank_date_noise(normalize_line_for_amount_detection(line)),
     )
 
     if signed_match:
@@ -2506,6 +2569,20 @@ NON_TRANSACTION_PATTERNS = [
     "FONDS DE GARANTIE",
     "GARANTIE DES DEPOTS",
     "GARANTIE DES DÉPÔTS",
+    "ANCIEN SOLDE",
+    "SOLDE EN EUROS",
+    "SOLDE PRECEDENT",
+    "SOLDE PRÉCÉDENT",
+    "TOTAUX",
+    "TOTALS",
+    "OPENING BALANCE",
+    "ENDING BALANCE",
+    "BALANCE FORWARD",
+    "BALANCE BROUGHT FORWARD",
+    "الرصيد السابق",
+    "الرصيد الختامي",
+    "إجمالي",
+    "اجمالي",
     "S.A. AU CAPITAL",
     "SA AU CAPITAL",
     "SOCIÉTÉ ANONYME",
