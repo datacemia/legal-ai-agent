@@ -741,6 +741,9 @@ def looks_like_credit_description(line: str) -> bool:
         "vir web reçu",
         "vir inst recu",
         "vir inst reçu",
+        "vir inst re",
+        "wero de:",
+        "wero de ",
         "recu de",
         "reçu de",
         "credit",
@@ -2298,6 +2301,87 @@ def is_internal_transfer(
 
     return False
 
+
+
+def normalize_untyped_incoming_credits(transactions: list[dict]) -> list[dict]:
+    """Classify untyped positive inbound transfers as income.
+
+    International rule:
+    - if a row has a positive amount and clear inbound transfer wording,
+      classify it as income;
+    - never override outgoing transfer/card/debit wording;
+    - keep internal-transfer detection separate, so own-account receipts can
+      still be neutralized later by mark_internal_transfers().
+
+    This covers common rails/wording:
+    - FR: VIR INST RE, VIR RECU, VIREMENT RECU, RECU DE
+    - EN: incoming transfer, transfer received, payment received
+    - Wallet/instant rails: WERO DE:
+    """
+    normalized: list[dict] = []
+
+    inbound_markers = [
+        "vir inst re",
+        "vir inst recu",
+        "vir inst reçu",
+        "vir recu",
+        "vir reçu",
+        "virement recu",
+        "virement reçu",
+        "recu de",
+        "reçu de",
+        "incoming transfer",
+        "transfer received",
+        "payment received",
+        "received from",
+        "wero de:",
+        "wero de ",
+    ]
+
+    outgoing_markers = [
+        "vir instantane emis",
+        "vir instantané émis",
+        "vir europeen emis",
+        "vir européen émis",
+        "virement emis",
+        "virement émis",
+        "vir emis",
+        "vir émis",
+        "pour:",
+        "card",
+        "carte",
+        "debit",
+        "débit",
+        "prelevement",
+        "prélèvement",
+        "withdrawal",
+        "retrait",
+        "payment to",
+        "transfer sent",
+        "outgoing transfer",
+    ]
+
+    for tx in transactions:
+        row = dict(tx)
+        description = str(
+            row.get("description")
+            or row.get("text")
+            or ""
+        ).lower()
+        amount = float(row.get("amount", 0) or 0)
+
+        if (
+            row.get("type") is None
+            and amount > 0
+            and any(marker in description for marker in inbound_markers)
+            and not any(marker in description for marker in outgoing_markers)
+        ):
+            row["type"] = "income"
+            row["category_hint"] = row.get("category_hint") or "incoming_transfer"
+
+        normalized.append(row)
+
+    return normalized
 
 def mark_internal_transfers(
     transactions: list[dict],
@@ -4342,6 +4426,8 @@ def extract_transactions(text: str) -> list[dict]:
         text,
         detected_currency,
     )
+
+    transactions = normalize_untyped_incoming_credits(transactions)
 
     transactions = mark_internal_transfers(
         transactions,
