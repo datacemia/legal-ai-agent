@@ -4841,6 +4841,258 @@ def fallback_vertical_transactions_if_empty(
 
     return transactions
 
+
+def extract_debit_credit_column_transactions(
+    text: str,
+    detected_currency: str | None = None,
+) -> list[dict]:
+    """Extract statements with explicit Debit/Credit columns.
+
+    Standard/international:
+    - FR: Débit / Crédit
+    - EN: Debit / Credit
+    - AR: مدين / دائن
+    - No bank-specific names.
+    - Continuation lines are attached to the current transaction.
+    - Debit column => expense, Credit column => income.
+    """
+    raw = clean_db_text(str(text or ""))
+    lower = raw.lower()
+    currency = detected_currency or detect_currency(raw) or "EUR"
+    default_year = detect_document_year(raw)
+
+    has_debit_credit_header = (
+        (
+            re.search(r"\bdate\b", lower)
+            and (
+                ("débit" in lower or "debit" in lower or "مدين" in raw)
+                and ("crédit" in lower or "credit" in lower or "دائن" in raw)
+            )
+        )
+        or (
+            "total des operations" in lower
+            or "total des opérations" in lower
+            or "total operations" in lower
+            or "إجمالي العمليات" in raw
+        )
+    )
+
+    if not has_debit_credit_header:
+        return []
+
+    lines = [
+        " ".join(line.replace("\xa0", " ").split())
+        for line in raw.splitlines()
+        if " ".join(line.replace("\xa0", " ").split())
+    ]
+
+    non_row_markers = [
+        "releve de compte",
+        "relevé de compte",
+        "statement",
+        "rib :",
+        "iban :",
+        "bic :",
+        "monnaie du compte",
+        "account currency",
+        "garantie des dépôts",
+        "garantie des depots",
+        "fonds de garantie",
+        "www.",
+        "tél.",
+        "tel.",
+        "service client",
+        "réclamations",
+        "reclamations",
+        "médiateur",
+        "mediateur",
+        "capital de",
+        "siège social",
+        "siege social",
+        "orias",
+        "p.",
+        "كشف حساب",
+        "رقم الحساب",
+    ]
+
+    stop_markers = [
+        "total des operations",
+        "total des opérations",
+        "solde crediteur au",
+        "solde créditeur au",
+        "solde debiteur au",
+        "solde débiteur au",
+        "closing balance",
+        "ending balance",
+        "إجمالي العمليات",
+        "الرصيد الختامي",
+    ]
+
+    row_start_re = re.compile(
+        r"^(?P<date>\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?)\s+(?P<body>.+)$"
+    )
+
+    value_date_amount_end_re = re.compile(
+        r"(?P<value_date>\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?)\s+"
+        r"(?P<amount>(?:\d{1,3}(?:[ .]\d{3})+|\d+)(?:[.,]\d{2}))\s*$"
+    )
+
+    transactions: list[dict] = []
+    current: dict | None = None
+
+    def flush_current():
+        nonlocal current
+
+        if not current:
+            return
+
+        description = clean_db_text(current.get("description", ""))
+
+        if not description:
+            current = None
+            return
+
+        amount = current.get("amount")
+        tx_type = current.get("type")
+
+        if amount is None or tx_type not in {"income", "expense"}:
+            current = None
+            return
+
+        signed_amount = abs(float(amount)) if tx_type == "income" else -abs(float(amount))
+
+        transactions.append(
+            {
+                "date": current.get("date"),
+                "description": description,
+                "amount": round(signed_amount, 2),
+                "type": tx_type,
+                "currency": currency,
+            }
+        )
+
+        current = None
+
+    for line in lines:
+        low = line.lower()
+
+        if any(marker in low for marker in stop_markers):
+            flush_current()
+            break
+
+        if any(marker in low for marker in non_row_markers):
+            continue
+
+        # Skip balances/opening rows before real operations.
+        if is_non_transaction_line(line) or is_balance_snapshot_line(line):
+            continue
+
+        row_match = row_start_re.match(line)
+
+        if row_match:
+            body = row_match.group("body").strip()
+            amount_match = value_date_amount_end_re.search(body)
+
+            if amount_match:
+                flush_current()
+
+                raw_date = row_match.group("date")
+                parsed_date = extract_date(
+                    raw_date,
+                    default_year=default_year,
+                    prefer_us_date=False,
+                )
+
+                if not parsed_date:
+                    parsed_date = extract_date(
+                        line,
+                        default_year=default_year,
+                        prefer_us_date=False,
+                    )
+
+                if not parsed_date:
+                    continue
+
+                amount = parse_amount(amount_match.group("amount"))
+                value_date_start = amount_match.start("value_date")
+                description = body[:value_date_start].strip()
+
+                # Column inference:
+                # In explicit Debit/Credit statements, rows with outgoing
+                # operation wording normally populate the debit column.
+                # If a credit-specific wording exists, classify as income.
+                desc_lower = description.lower()
+
+                if looks_like_credit_description(description):
+                    tx_type = "income"
+                else:
+                    tx_type = "expense"
+
+                current = {
+                    "date": parsed_date,
+                    "description": description,
+                    "amount": abs(amount),
+                    "type": tx_type,
+                }
+                continue
+
+        # Continuation/details lines belong to current operation.
+        if current:
+            # Avoid appending pure metadata/footer noise.
+            if not any(marker in low for marker in non_row_markers):
+                current["description"] = (
+                    str(current.get("description", "")).strip()
+                    + " "
+                    + line.strip()
+                ).strip()
+
+    flush_current()
+
+    print(
+        "DEBIT_CREDIT_COLUMN_EXTRACTED",
+        {
+            "transactions": len(transactions),
+            "income": sum(1 for tx in transactions if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in transactions if tx.get("type") == "expense"),
+            "income_total": round(sum(float(tx.get("amount") or 0) for tx in transactions if float(tx.get("amount") or 0) > 0), 2),
+            "expense_total": round(abs(sum(float(tx.get("amount") or 0) for tx in transactions if float(tx.get("amount") or 0) < 0)), 2),
+        },
+    )
+
+    return transactions
+
+
+def fallback_debit_credit_column_transactions_if_low_quality(
+    transactions: list[dict],
+    text: str,
+    detected_currency: str | None = None,
+) -> list[dict]:
+    """Use Debit/Credit column fallback when previous extraction is empty or untyped."""
+    valid_typed = [
+        tx for tx in transactions
+        if tx.get("type") in {"income", "expense"}
+        and float(tx.get("amount") or 0) != 0
+    ]
+
+    if len(valid_typed) >= max(3, int(len(transactions) * 0.7)):
+        return transactions
+
+    dc_transactions = extract_debit_credit_column_transactions(
+        text,
+        detected_currency,
+    )
+
+    if dc_transactions:
+        print(
+            "DEBIT_CREDIT_COLUMN_FALLBACK_USED",
+            {
+                "transactions": len(dc_transactions),
+            },
+        )
+        return dc_transactions
+
+    return transactions
+
 def extract_transactions(text: str) -> list[dict]:
     debug_log("=== TX_EXTRACT_DEBUG START ===")
     debug_log("TEXT_SAMPLE:", clean_db_text(str(text))[:500])
@@ -5273,6 +5525,12 @@ def extract_transactions(text: str) -> list[dict]:
     )
 
     transactions = fallback_vertical_transactions_if_empty(
+        transactions,
+        text,
+        detected_currency,
+    )
+
+    transactions = fallback_debit_credit_column_transactions_if_low_quality(
         transactions,
         text,
         detected_currency,
