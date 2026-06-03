@@ -7,6 +7,9 @@ from app.models.finance_analysis import FinanceAnalysis
 
 from app.services.finance_agent.statement_parser import extract_statement_text_from_path
 from app.services.cloud_storage_service import download_api_file_from_cloud
+from app.services.finance_agent.scan_agent import (
+    scan_agent_extract_text,
+)
 from app.services.finance_agent.finance_ai_agent import analyze_bank_statement
 from app.services.finance_agent.transaction_extractor import extract_transactions
 from app.services.finance_agent.subscription_detector import detect_recurring_subscriptions
@@ -431,8 +434,23 @@ def handle_finance_ai(job: Job, db):
 
         text = extract_statement_text_from_path(str(file_path))
 
-    if not text or not text.strip():
-        raise ValueError("Could not extract text from PDF.")
+    MIN_TEXT_LENGTH = 500
+
+    if not text or len(text.strip()) < MIN_TEXT_LENGTH:
+        try:
+            text = scan_agent_extract_text(
+                file_path=file_path,
+                content=content if file_bytes_hex else None,
+            )
+
+        except Exception:
+            pass
+
+    if not text or len(text.strip()) < 100:
+        raise ValueError(
+            "Could not extract text from PDF. "
+            "This PDF appears to be scanned and requires OCR."
+        )
 
     update_job_progress(
         job,
@@ -662,18 +680,6 @@ def handle_finance_ai(job: Job, db):
         finance_progress_message("charts", output_language),
     )
 
-    for tx in transactions:
-        if (
-            tx.get("type") == "expense"
-            and abs(float(tx.get("amount", 0) or 0)) > 5000
-        ):
-            print(
-                "BIG_TX",
-                tx.get("date"),
-                tx.get("amount"),
-                tx.get("description"),
-            )
-
     charts = build_financial_charts(transactions)
 
     result_ai["summary"] = build_observed_finance_summary(
@@ -715,24 +721,6 @@ def handle_finance_ai(job: Job, db):
         db,
         96,
         finance_progress_message("saving", output_language),
-    )
-
-    print(
-        "DEBUG_EXPENSES",
-        sum(
-            abs(float(t.get("amount", 0)))
-            for t in transactions
-            if t.get("type") == "expense"
-        )
-    )
-
-    print(
-        "DEBUG_INCOME",
-        sum(
-            float(t.get("amount", 0))
-            for t in transactions
-            if t.get("type") == "income"
-        )
     )
 
     analysis = FinanceAnalysis(
