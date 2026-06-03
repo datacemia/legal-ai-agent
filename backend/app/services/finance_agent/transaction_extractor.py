@@ -1596,6 +1596,9 @@ def has_transaction_signal(
     default_year: int | None = None,
     prefer_us_date: bool = False,
 ) -> bool:
+    if is_document_metadata_line(line):
+        return False
+
     lower = line.lower()
 
     metadata_check = (
@@ -1824,6 +1827,9 @@ def extract_us_debit_credit_balance(line: str):
 def extract_tabular_bank_amount(
     line: str,
 ) -> tuple[float | None, str | None]:
+    if is_document_metadata_line(line):
+        return None, None
+
     normalized = line.lower()
 
     NON_TRANSACTION_KEYWORDS = [
@@ -2076,6 +2082,9 @@ def extract_tabular_bank_amount(
 
 
 def extract_amount_balance_line(line: str):
+    if is_document_metadata_line(line):
+        return None, None
+
     numbers = extract_money_numbers_safely(line)
 
     if len(numbers) < 2:
@@ -2367,6 +2376,118 @@ def normalize_arabic_digits(value: str) -> str:
 
 
 
+# Universal document metadata / legal-contact noise markers.
+# Standard international FR / EN / AR layer: structural metadata filtering,
+# not bank-specific and not country-specific.
+DOCUMENT_METADATA_KEYWORDS = [
+    # FR
+    "s.a. au capital",
+    "sa au capital",
+    "société anonyme",
+    "societe anonyme",
+    "capital social",
+    "rcs",
+    "siège social",
+    "siege social",
+    "vos contacts",
+    "votre banque à distance",
+    "votre banque a distance",
+    "votre conseiller",
+    "service clientèle",
+    "service clientele",
+    "médiateur",
+    "mediateur",
+    "tarif au",
+    "ttc/min",
+    "france télécom",
+    "france telecom",
+    "internet mobile",
+    "téléphone",
+    "telephone",
+    "fax",
+    "code client",
+    "agence",
+    "coordonnées bancaires",
+    "coordonnees bancaires",
+    "relevé identité bancaire",
+    "releve identite bancaire",
+
+    # EN / international
+    "registered office",
+    "head office",
+    "corporate information",
+    "company registration",
+    "registration number",
+    "share capital",
+    "paid-up capital",
+    "customer service",
+    "client service",
+    "contact us",
+    "help desk",
+    "call center",
+    "terms and conditions",
+    "important information",
+    "legal notice",
+    "privacy notice",
+    "complaints procedure",
+    "ombudsman",
+    "swift code",
+    "sort code",
+
+    # AR
+    "المقر الاجتماعي",
+    "المقر الرئيسي",
+    "رأس المال",
+    "راس المال",
+    "السجل التجاري",
+    "معلومات الشركة",
+    "خدمة العملاء",
+    "مركز الاتصال",
+    "اتصل بنا",
+    "الشروط والأحكام",
+    "الشروط والاحكام",
+    "إشعار قانوني",
+    "اشعار قانوني",
+    "سياسة الخصوصية",
+    "الشكاوى",
+    "رقم الهاتف",
+    "الهاتف",
+]
+
+DOCUMENT_METADATA_REGEXES = [
+    # Corporate/legal numeric lines such as:
+    # "S.A. au capital de 933 027 038,75 Eur"
+    r"\b(?:s\.?a\.?|ltd|limited|inc\.?|llc|plc)\b.*\b(?:capital|share capital|paid-up capital)\b",
+    r"\b(?:rcs|registration number|company registration)\b",
+    # Contact/tariff lines with dates and tiny prices should not become income.
+    r"\b(?:tarif|rate|fee per minute|ttc/min)\b",
+    r"\b(?:t[ée]l[ée]phone|telephone|phone|fax|mobile)\b.*\b\d{2,}\b",
+]
+
+
+def is_document_metadata_line(line: str) -> bool:
+    """Detect non-transaction document metadata in FR / EN / AR.
+
+    This removes headers, footers, legal notices, contact blocks, corporate
+    registration/capital lines and service/tariff text without relying on any
+    specific bank name.
+    """
+    raw = clean_db_text(str(line or ""))
+    if not raw:
+        return False
+
+    lower = raw.lower()
+
+    if any(keyword in lower for keyword in DOCUMENT_METADATA_KEYWORDS):
+        return True
+
+    return any(
+        re.search(pattern, lower, flags=re.IGNORECASE)
+        for pattern in DOCUMENT_METADATA_REGEXES
+    )
+
+
+
 
 NON_TRANSACTION_PATTERNS = [
     "SOLDE AU",
@@ -2385,9 +2506,58 @@ NON_TRANSACTION_PATTERNS = [
     "FONDS DE GARANTIE",
     "GARANTIE DES DEPOTS",
     "GARANTIE DES DÉPÔTS",
+    "S.A. AU CAPITAL",
+    "SA AU CAPITAL",
+    "SOCIÉTÉ ANONYME",
+    "SOCIETE ANONYME",
+    "CAPITAL SOCIAL",
+    "RCS",
+    "SIÈGE SOCIAL",
+    "SIEGE SOCIAL",
+    "REGISTERED OFFICE",
+    "HEAD OFFICE",
+    "CORPORATE INFORMATION",
+    "COMPANY REGISTRATION",
+    "REGISTRATION NUMBER",
+    "SHARE CAPITAL",
+    "PAID-UP CAPITAL",
+    "VOS CONTACTS",
+    "VOTRE BANQUE À DISTANCE",
+    "VOTRE BANQUE A DISTANCE",
+    "VOTRE CONSEILLER",
+    "CUSTOMER SERVICE",
+    "CLIENT SERVICE",
+    "CONTACT US",
+    "SERVICE CLIENTÈLE",
+    "SERVICE CLIENTELE",
+    "TARIF AU",
+    "TTC/MIN",
+    "FRANCE TELECOM",
+    "FRANCE TÉLÉCOM",
+    "INTERNET MOBILE",
+    "TÉLÉPHONE",
+    "TELEPHONE",
+    "FAX",
+    "CODE CLIENT",
+    "COORDONNÉES BANCAIRES",
+    "COORDONNEES BANCAIRES",
+    "RELEVÉ IDENTITÉ BANCAIRE",
+    "RELEVE IDENTITE BANCAIRE",
+    "المقر الاجتماعي",
+    "المقر الرئيسي",
+    "رأس المال",
+    "راس المال",
+    "السجل التجاري",
+    "معلومات الشركة",
+    "خدمة العملاء",
+    "مركز الاتصال",
+    "اتصل بنا",
 ]
 
 def is_non_transaction_line(line: str) -> bool:
+    if is_document_metadata_line(line):
+        return True
+
     upper_line = str(line or "").upper()
     return any(pattern in upper_line for pattern in NON_TRANSACTION_PATTERNS)
 
