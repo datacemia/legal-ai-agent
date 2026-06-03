@@ -773,11 +773,79 @@ def detect_document_year(text: str) -> int:
     return Counter(years).most_common(1)[0][0]
 
 
+def try_parse_date(raw: str):
+    raw = raw.strip()
+
+    formats = [
+        "%Y-%m-%d",
+        "%Y/%m/%d",
+        "%Y.%m.%d",
+        "%d/%m/%Y",
+        "%d-%m-%Y",
+        "%d.%m.%Y",
+        "%d/%m/%y",
+        "%d-%m-%y",
+        "%d.%m.%y",
+        "%m/%d/%Y",
+        "%m-%d-%Y",
+        "%m.%d.%Y",
+        "%m/%d/%y",
+        "%m-%d-%y",
+        "%m.%d.%y",
+        "%d %b %Y",
+        "%d %B %Y",
+        "%d %b %y",
+        "%d %B %y",
+        "%d-%b-%Y",
+        "%d-%B-%Y",
+        "%d-%b-%y",
+        "%d-%B-%y",
+        "%b %d %Y",
+        "%B %d %Y",
+        "%b %d %y",
+        "%B %d %y",
+        "%b-%d-%Y",
+        "%B-%d-%Y",
+        "%b-%d-%y",
+        "%B-%d-%y",
+    ]
+
+    for fmt in formats:
+        try:
+            parsed = datetime.strptime(raw, fmt)
+
+            if is_reasonable_year(parsed.year):
+                return parsed.date().isoformat()
+        except ValueError:
+            continue
+
+    return None
+
+
 def extract_date(
     line: str,
     default_year: int | None = None,
     prefer_us_date: bool = False,
 ):
+    date_candidates = re.findall(
+        r"\b(?:"
+        r"\d{4}[-/.]\d{1,2}[-/.]\d{1,2}"
+        r"|"
+        r"\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}"
+        r"|"
+        r"\d{1,2}[- ](?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)[- ]\d{2,4}"
+        r"|"
+        r"(?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)[- ]\d{1,2}[- ]\d{2,4}"
+        r")\b",
+        line,
+        flags=re.IGNORECASE,
+    )
+
+    for raw_date in date_candidates:
+        parsed = try_parse_date(raw_date)
+        if parsed:
+            return parsed
+
     iso_match = re.search(
         r"\b(\d{4}-\d{2}-\d{2})\b",
         line,
