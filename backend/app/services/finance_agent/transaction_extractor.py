@@ -3680,6 +3680,12 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         },
     )
 
+    transactions = fallback_debit_credit_column_transactions_if_low_quality(
+        transactions,
+        text,
+        detected_currency,
+    )
+
     log_final_transactions(transactions)
 
     debug_log("FINAL_TXS", transactions)
@@ -4846,22 +4852,17 @@ def extract_debit_credit_column_transactions(
     text: str,
     detected_currency: str | None = None,
 ) -> list[dict]:
-    """Extract statements with explicit Debit/Credit columns.
+    """Extract explicit Debit/Credit column statements.
 
     Standard/international FR/EN/AR:
     - FR: Débit / Crédit
     - EN: Debit / Credit
     - AR: مدين / دائن
     - no bank-specific names;
-    - opening balance rows are skipped, not used as transactions;
+    - opening balance rows are skipped;
     - total/closing balance rows stop extraction;
-    - rows may be continued over multiple OCR lines;
-    - Debit column => expense, Credit column => income.
-
-    This fallback is intentionally tolerant because PDF OCR often flattens
-    bank tables into lines like:
-        10.09 OPERATION DETAILS 10.09 10,00
-        CONTINUATION LINE
+    - OCR continuation lines are attached to the current operation;
+    - debit side => expense, credit side => income.
     """
     raw = clean_db_text(str(text or ""))
     lower_raw = raw.lower()
@@ -4893,8 +4894,8 @@ def extract_debit_credit_column_transactions(
         "date nature des operations",
         "date description",
         "date transaction",
-        "debit credit",
         "débit crédit",
+        "debit credit",
         "مدين",
         "دائن",
     ]
@@ -4914,14 +4915,13 @@ def extract_debit_credit_column_transactions(
         "total des opérations",
         "closing balance",
         "ending balance",
-        "الرصيد الختامي",
         "إجمالي العمليات",
+        "الرصيد الختامي",
     ]
 
     metadata_markers = [
         "releve de compte",
         "relevé de compte",
-        "statement period",
         "rib :",
         "iban :",
         "bic :",
@@ -4948,12 +4948,10 @@ def extract_debit_credit_column_transactions(
         "رقم الحساب",
     ]
 
-    # Row begins with a short operation date like 10.09 or 10/09/2024.
     row_start_re = re.compile(
         r"^(?P<op_date>\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?)\s+(?P<body>.+)$"
     )
 
-    # Most debit/credit tables have a value date just before the amount.
     value_date_amount_re = re.compile(
         r"(?P<value_date>\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?)\s+"
         r"(?P<amount>(?:\d{1,3}(?:[ .]\d{3})+|\d+)(?:[.,]\d{2}))\s*$"
@@ -4968,28 +4966,11 @@ def extract_debit_credit_column_transactions(
     inside_operations = False
 
     def parse_operation_date(value: str, full_line: str) -> str | None:
-        parsed = extract_date(
-            value,
-            default_year=default_year,
-            prefer_us_date=False,
-        )
-
+        parsed = extract_date(value, default_year=default_year, prefer_us_date=False)
         if parsed:
             return parsed
 
-        return extract_date(
-            full_line,
-            default_year=default_year,
-            prefer_us_date=False,
-        )
-
-    def infer_debit_credit_type(description: str) -> str:
-        # In explicit debit/credit statements, a row with no positive credit
-        # signal is treated as debit when it is in the debit column / debit side.
-        if looks_like_credit_description(description):
-            return "income"
-
-        return "expense"
+        return extract_date(full_line, default_year=default_year, prefer_us_date=False)
 
     def flush_current():
         nonlocal current
@@ -4998,29 +4979,20 @@ def extract_debit_credit_column_transactions(
             return
 
         description = clean_db_text(str(current.get("description") or ""))
-
-        if not description:
-            current = None
-            return
-
         amount = current.get("amount")
         tx_type = current.get("type")
 
-        if amount is None or tx_type not in {"income", "expense"}:
-            current = None
-            return
-
-        signed_amount = abs(float(amount)) if tx_type == "income" else -abs(float(amount))
-
-        transactions.append(
-            {
-                "date": current.get("date"),
-                "description": description,
-                "amount": round(signed_amount, 2),
-                "type": tx_type,
-                "currency": currency,
-            }
-        )
+        if description and amount is not None and tx_type in {"income", "expense"}:
+            signed_amount = abs(float(amount)) if tx_type == "income" else -abs(float(amount))
+            transactions.append(
+                {
+                    "date": current.get("date"),
+                    "description": description,
+                    "amount": round(signed_amount, 2),
+                    "type": tx_type,
+                    "currency": currency,
+                }
+            )
 
         current = None
 
@@ -5052,38 +5024,31 @@ def extract_debit_credit_column_transactions(
 
         if row_match:
             body = row_match.group("body").strip()
-            amount_match = value_date_amount_re.search(body)
-
-            # Fallback: some OCR lines have only one trailing amount.
-            if not amount_match:
-                amount_match = trailing_amount_re.search(body)
+            amount_match = value_date_amount_re.search(body) or trailing_amount_re.search(body)
 
             if amount_match:
-                flush_current()
-
-                parsed_date = parse_operation_date(
-                    row_match.group("op_date"),
-                    line,
-                )
+                parsed_date = parse_operation_date(row_match.group("op_date"), line)
 
                 if not parsed_date:
                     continue
 
                 amount = parse_amount(amount_match.group("amount"))
-                description_end = amount_match.start()
-                description = body[:description_end].strip()
-
-                # Remove a value-date at the end of the description when present.
+                description = body[:amount_match.start()].strip()
                 description = re.sub(
                     r"\s+\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?\s*$",
                     "",
                     description,
                 ).strip()
 
+                if any(marker in description.lower() for marker in opening_balance_markers):
+                    continue
+
                 if not description:
                     continue
 
-                tx_type = infer_debit_credit_type(description)
+                flush_current()
+
+                tx_type = "income" if looks_like_credit_description(description) else "expense"
 
                 current = {
                     "date": parsed_date,
@@ -5093,7 +5058,6 @@ def extract_debit_credit_column_transactions(
                 }
                 continue
 
-        # Continuation lines complete the current row until next dated row.
         if current:
             if not any(marker in low for marker in metadata_markers):
                 current["description"] = (
@@ -5139,7 +5103,7 @@ def fallback_debit_credit_column_transactions_if_low_quality(
     text: str,
     detected_currency: str | None = None,
 ) -> list[dict]:
-    """Use Debit/Credit column fallback when previous extraction is empty or untyped."""
+    """Use Debit/Credit column fallback when previous extraction is empty or weak."""
     valid_typed = [
         tx for tx in transactions
         if tx.get("type") in {"income", "expense"}
@@ -5594,6 +5558,12 @@ def extract_transactions(text: str) -> list[dict]:
         {
             "remaining": len(transactions),
         },
+    )
+
+    transactions = fallback_debit_credit_column_transactions_if_low_quality(
+        transactions,
+        text,
+        detected_currency,
     )
 
     transactions = fallback_vertical_transactions_if_empty(
