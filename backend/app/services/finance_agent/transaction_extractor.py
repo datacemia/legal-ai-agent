@@ -4853,7 +4853,8 @@ def extract_debit_credit_column_transactions(
     - EN: Debit / Credit
     - AR: مدين / دائن
     - No bank-specific names.
-    - Continuation lines are attached to the current transaction.
+    - Opening balance rows are skipped.
+    - Total / closing balance rows stop extraction after real operations.
     - Debit column => expense, Credit column => income.
     """
     raw = clean_db_text(str(text or ""))
@@ -4915,13 +4916,19 @@ def extract_debit_credit_column_transactions(
         "رقم الحساب",
     ]
 
-    stop_markers = [
-        "total des operations",
-        "total des opérations",
+    opening_balance_markers = [
         "solde crediteur au",
         "solde créditeur au",
         "solde debiteur au",
         "solde débiteur au",
+        "opening balance",
+        "balance brought forward",
+        "الرصيد الافتتاحي",
+    ]
+
+    stop_markers = [
+        "total des operations",
+        "total des opérations",
         "closing balance",
         "ending balance",
         "إجمالي العمليات",
@@ -4959,7 +4966,11 @@ def extract_debit_credit_column_transactions(
             current = None
             return
 
-        signed_amount = abs(float(amount)) if tx_type == "income" else -abs(float(amount))
+        signed_amount = (
+            abs(float(amount))
+            if tx_type == "income"
+            else -abs(float(amount))
+        )
 
         transactions.append(
             {
@@ -4976,6 +4987,10 @@ def extract_debit_credit_column_transactions(
     for line in lines:
         low = line.lower()
 
+        if any(marker in low for marker in opening_balance_markers):
+            # Opening balance is not an operation. Do not stop extraction here.
+            continue
+
         if any(marker in low for marker in stop_markers):
             flush_current()
             break
@@ -4983,8 +4998,7 @@ def extract_debit_credit_column_transactions(
         if any(marker in low for marker in non_row_markers):
             continue
 
-        # Skip balances/opening rows before real operations.
-        if is_non_transaction_line(line) or is_balance_snapshot_line(line):
+        if is_balance_snapshot_line(line):
             continue
 
         row_match = row_start_re.match(line)
@@ -5017,12 +5031,6 @@ def extract_debit_credit_column_transactions(
                 value_date_start = amount_match.start("value_date")
                 description = body[:value_date_start].strip()
 
-                # Column inference:
-                # In explicit Debit/Credit statements, rows with outgoing
-                # operation wording normally populate the debit column.
-                # If a credit-specific wording exists, classify as income.
-                desc_lower = description.lower()
-
                 if looks_like_credit_description(description):
                     tx_type = "income"
                 else:
@@ -5036,9 +5044,7 @@ def extract_debit_credit_column_transactions(
                 }
                 continue
 
-        # Continuation/details lines belong to current operation.
         if current:
-            # Avoid appending pure metadata/footer noise.
             if not any(marker in low for marker in non_row_markers):
                 current["description"] = (
                     str(current.get("description", "")).strip()
@@ -5054,8 +5060,24 @@ def extract_debit_credit_column_transactions(
             "transactions": len(transactions),
             "income": sum(1 for tx in transactions if tx.get("type") == "income"),
             "expenses": sum(1 for tx in transactions if tx.get("type") == "expense"),
-            "income_total": round(sum(float(tx.get("amount") or 0) for tx in transactions if float(tx.get("amount") or 0) > 0), 2),
-            "expense_total": round(abs(sum(float(tx.get("amount") or 0) for tx in transactions if float(tx.get("amount") or 0) < 0)), 2),
+            "income_total": round(
+                sum(
+                    float(tx.get("amount") or 0)
+                    for tx in transactions
+                    if float(tx.get("amount") or 0) > 0
+                ),
+                2,
+            ),
+            "expense_total": round(
+                abs(
+                    sum(
+                        float(tx.get("amount") or 0)
+                        for tx in transactions
+                        if float(tx.get("amount") or 0) < 0
+                    )
+                ),
+                2,
+            ),
         },
     )
 
