@@ -671,6 +671,10 @@ export default function FinanceClient() {
 
   const t = labels[language] || labels.en;
 
+  const isInsufficientData =
+    result?.status === "insufficient_data" ||
+    result?.analysis_status === "insufficient_data";
+
 
   const translateInsightText = (value: any) => {
     if (typeof value !== "string") return value;
@@ -1459,7 +1463,27 @@ export default function FinanceClient() {
               <p className="text-red-600">{result.detail}</p>
             ) : (
               <>
-                <div className="rounded-2xl border bg-blue-50 p-5">
+                {isInsufficientData ? (
+                  <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
+                    <p className="text-sm font-semibold text-amber-900">
+                      {language === "fr"
+                        ? "Analyse terminée avec confiance limitée"
+                        : language === "ar"
+                        ? "تمت المعالجة بثقة محدودة"
+                        : "Analysis completed with limited confidence"}
+                    </p>
+
+                    <p className="mt-2 text-sm leading-7 text-amber-800">
+                      {result.message}
+                    </p>
+
+                    <p className="mt-3 text-xs text-amber-700">
+                      Confidence: {result.confidence ?? result.analysis_quality?.confidence ?? 25}%
+                    </p>
+                  </div>
+                ) : (
+                  <>
+                    <div className="rounded-2xl border bg-blue-50 p-5">
                   <p className="text-sm text-blue-700">
                     {t.aiNarrativeSummary}
                   </p>
@@ -2367,6 +2391,8 @@ export default function FinanceClient() {
                   <p className="text-xs text-slate-500 border-t pt-4">
                     {translateBackendMessage(result.disclaimer)}
                   </p>
+                )}
+                  </>
                 )}
               </>
             )}
