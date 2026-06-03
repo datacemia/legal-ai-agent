@@ -599,6 +599,21 @@ def handle_finance_ai(job: Job, db):
     # Example: two ATM withdrawals of 2 000 MAD on the same day.
     transactions = list(transactions)
 
+    print(
+        "INCOME_AUDIT",
+        [
+            {
+                "date": tx.get("date"),
+                "amount": tx.get("amount"),
+                "type": tx.get("type"),
+                "description": tx.get("description"),
+            }
+            for tx in transactions
+            if tx.get("amount", 0) > 0
+        ][:50]
+    )
+
+
     quality = assess_analysis_quality(transactions)
 
     # International KPI filter:
@@ -727,6 +742,18 @@ def handle_finance_ai(job: Job, db):
         fallback_income=effective_fallback_income,
         output_language=output_language,
     )
+
+    print(
+        "KPI_AUDIT",
+        {
+            "raw_transactions": len(transactions),
+            "kpi_transactions": len(kpi_transactions),
+            "income": forecast.get("observed_income"),
+            "expenses": forecast.get("observed_expenses"),
+            "net": forecast.get("observed_net_cashflow"),
+        },
+    )
+
 
     savings_rate = (
         forecast.get("observed_net_cashflow", 0)
