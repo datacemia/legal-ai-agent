@@ -4848,34 +4848,35 @@ def extract_debit_credit_column_transactions(
 ) -> list[dict]:
     """Extract statements with explicit Debit/Credit columns.
 
-    Standard/international:
+    Standard/international FR/EN/AR:
     - FR: Débit / Crédit
     - EN: Debit / Credit
     - AR: مدين / دائن
-    - No bank-specific names.
-    - Opening balance rows are skipped.
-    - Total / closing balance rows stop extraction after real operations.
+    - no bank-specific names;
+    - opening balance rows are skipped, not used as transactions;
+    - total/closing balance rows stop extraction;
+    - rows may be continued over multiple OCR lines;
     - Debit column => expense, Credit column => income.
+
+    This fallback is intentionally tolerant because PDF OCR often flattens
+    bank tables into lines like:
+        10.09 OPERATION DETAILS 10.09 10,00
+        CONTINUATION LINE
     """
     raw = clean_db_text(str(text or ""))
-    lower = raw.lower()
+    lower_raw = raw.lower()
     currency = detected_currency or detect_currency(raw) or "EUR"
     default_year = detect_document_year(raw)
 
     has_debit_credit_header = (
         (
-            re.search(r"\bdate\b", lower)
-            and (
-                ("débit" in lower or "debit" in lower or "مدين" in raw)
-                and ("crédit" in lower or "credit" in lower or "دائن" in raw)
-            )
+            ("débit" in lower_raw or "debit" in lower_raw or "مدين" in raw)
+            and ("crédit" in lower_raw or "credit" in lower_raw or "دائن" in raw)
         )
-        or (
-            "total des operations" in lower
-            or "total des opérations" in lower
-            or "total operations" in lower
-            or "إجمالي العمليات" in raw
-        )
+        or "total des operations" in lower_raw
+        or "total des opérations" in lower_raw
+        or "total operations" in lower_raw
+        or "إجمالي العمليات" in raw
     )
 
     if not has_debit_credit_header:
@@ -4887,10 +4888,40 @@ def extract_debit_credit_column_transactions(
         if " ".join(line.replace("\xa0", " ").split())
     ]
 
-    non_row_markers = [
+    operations_header_markers = [
+        "date nature des opérations",
+        "date nature des operations",
+        "date description",
+        "date transaction",
+        "debit credit",
+        "débit crédit",
+        "مدين",
+        "دائن",
+    ]
+
+    opening_balance_markers = [
+        "solde crediteur au",
+        "solde créditeur au",
+        "solde debiteur au",
+        "solde débiteur au",
+        "opening balance",
+        "balance brought forward",
+        "الرصيد الافتتاحي",
+    ]
+
+    stop_markers = [
+        "total des operations",
+        "total des opérations",
+        "closing balance",
+        "ending balance",
+        "الرصيد الختامي",
+        "إجمالي العمليات",
+    ]
+
+    metadata_markers = [
         "releve de compte",
         "relevé de compte",
-        "statement",
+        "statement period",
         "rib :",
         "iban :",
         "bic :",
@@ -4911,41 +4942,54 @@ def extract_debit_credit_column_transactions(
         "siège social",
         "siege social",
         "orias",
-        "p.",
+        "p. ",
+        "page ",
         "كشف حساب",
         "رقم الحساب",
     ]
 
-    opening_balance_markers = [
-        "solde crediteur au",
-        "solde créditeur au",
-        "solde debiteur au",
-        "solde débiteur au",
-        "opening balance",
-        "balance brought forward",
-        "الرصيد الافتتاحي",
-    ]
-
-    stop_markers = [
-        "total des operations",
-        "total des opérations",
-        "closing balance",
-        "ending balance",
-        "إجمالي العمليات",
-        "الرصيد الختامي",
-    ]
-
+    # Row begins with a short operation date like 10.09 or 10/09/2024.
     row_start_re = re.compile(
-        r"^(?P<date>\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?)\s+(?P<body>.+)$"
+        r"^(?P<op_date>\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?)\s+(?P<body>.+)$"
     )
 
-    value_date_amount_end_re = re.compile(
+    # Most debit/credit tables have a value date just before the amount.
+    value_date_amount_re = re.compile(
         r"(?P<value_date>\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?)\s+"
+        r"(?P<amount>(?:\d{1,3}(?:[ .]\d{3})+|\d+)(?:[.,]\d{2}))\s*$"
+    )
+
+    trailing_amount_re = re.compile(
         r"(?P<amount>(?:\d{1,3}(?:[ .]\d{3})+|\d+)(?:[.,]\d{2}))\s*$"
     )
 
     transactions: list[dict] = []
     current: dict | None = None
+    inside_operations = False
+
+    def parse_operation_date(value: str, full_line: str) -> str | None:
+        parsed = extract_date(
+            value,
+            default_year=default_year,
+            prefer_us_date=False,
+        )
+
+        if parsed:
+            return parsed
+
+        return extract_date(
+            full_line,
+            default_year=default_year,
+            prefer_us_date=False,
+        )
+
+    def infer_debit_credit_type(description: str) -> str:
+        # In explicit debit/credit statements, a row with no positive credit
+        # signal is treated as debit when it is in the debit column / debit side.
+        if looks_like_credit_description(description):
+            return "income"
+
+        return "expense"
 
     def flush_current():
         nonlocal current
@@ -4953,7 +4997,7 @@ def extract_debit_credit_column_transactions(
         if not current:
             return
 
-        description = clean_db_text(current.get("description", ""))
+        description = clean_db_text(str(current.get("description") or ""))
 
         if not description:
             current = None
@@ -4966,11 +5010,7 @@ def extract_debit_credit_column_transactions(
             current = None
             return
 
-        signed_amount = (
-            abs(float(amount))
-            if tx_type == "income"
-            else -abs(float(amount))
-        )
+        signed_amount = abs(float(amount)) if tx_type == "income" else -abs(float(amount))
 
         transactions.append(
             {
@@ -4987,15 +5027,22 @@ def extract_debit_credit_column_transactions(
     for line in lines:
         low = line.lower()
 
+        if any(marker in low for marker in operations_header_markers):
+            inside_operations = True
+            continue
+
         if any(marker in low for marker in opening_balance_markers):
-            # Opening balance is not an operation. Do not stop extraction here.
+            inside_operations = True
             continue
 
         if any(marker in low for marker in stop_markers):
             flush_current()
             break
 
-        if any(marker in low for marker in non_row_markers):
+        if not inside_operations:
+            continue
+
+        if any(marker in low for marker in metadata_markers):
             continue
 
         if is_balance_snapshot_line(line):
@@ -5005,36 +5052,38 @@ def extract_debit_credit_column_transactions(
 
         if row_match:
             body = row_match.group("body").strip()
-            amount_match = value_date_amount_end_re.search(body)
+            amount_match = value_date_amount_re.search(body)
+
+            # Fallback: some OCR lines have only one trailing amount.
+            if not amount_match:
+                amount_match = trailing_amount_re.search(body)
 
             if amount_match:
                 flush_current()
 
-                raw_date = row_match.group("date")
-                parsed_date = extract_date(
-                    raw_date,
-                    default_year=default_year,
-                    prefer_us_date=False,
+                parsed_date = parse_operation_date(
+                    row_match.group("op_date"),
+                    line,
                 )
-
-                if not parsed_date:
-                    parsed_date = extract_date(
-                        line,
-                        default_year=default_year,
-                        prefer_us_date=False,
-                    )
 
                 if not parsed_date:
                     continue
 
                 amount = parse_amount(amount_match.group("amount"))
-                value_date_start = amount_match.start("value_date")
-                description = body[:value_date_start].strip()
+                description_end = amount_match.start()
+                description = body[:description_end].strip()
 
-                if looks_like_credit_description(description):
-                    tx_type = "income"
-                else:
-                    tx_type = "expense"
+                # Remove a value-date at the end of the description when present.
+                description = re.sub(
+                    r"\s+\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?\s*$",
+                    "",
+                    description,
+                ).strip()
+
+                if not description:
+                    continue
+
+                tx_type = infer_debit_credit_type(description)
 
                 current = {
                     "date": parsed_date,
@@ -5044,10 +5093,11 @@ def extract_debit_credit_column_transactions(
                 }
                 continue
 
+        # Continuation lines complete the current row until next dated row.
         if current:
-            if not any(marker in low for marker in non_row_markers):
+            if not any(marker in low for marker in metadata_markers):
                 current["description"] = (
-                    str(current.get("description", "")).strip()
+                    str(current.get("description") or "").strip()
                     + " "
                     + line.strip()
                 ).strip()
