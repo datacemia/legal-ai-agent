@@ -8,7 +8,10 @@ from app.models.finance_analysis import FinanceAnalysis
 from app.services.finance_agent.statement_parser import extract_statement_text_from_path
 from app.services.cloud_storage_service import download_api_file_from_cloud
 from app.services.finance_agent.finance_ai_agent import analyze_bank_statement
-from app.services.finance_agent.transaction_extractor import extract_transactions
+from app.services.finance_agent.transaction_extractor import (
+    debug_log,
+    extract_transactions,
+)
 from app.services.finance_agent.subscription_detector import detect_recurring_subscriptions
 from app.services.finance_agent.budget_engine import build_recommended_budget
 from app.services.finance_agent.forecasting import predict_cashflow
@@ -408,6 +411,22 @@ def assess_analysis_quality(transactions: list[dict]) -> dict:
         confidence = 80
     elif status == "verified" and other_ratio > 0.50:
         confidence = 85
+
+    detected_count = sum(
+        1
+        for tx in transactions or []
+        if tx.get("type") == "transfer"
+        or tx.get("is_internal_transfer")
+        or tx.get("excluded_from_financial_kpis")
+    )
+
+    debug_log(
+        "INTERNAL_TRANSFER_STATS",
+        {
+            "detected": detected_count,
+            "total": len(transactions or []),
+        }
+    )
 
     return {
         "status": status,
