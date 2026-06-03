@@ -205,15 +205,24 @@ def calculate_financial_scores(
     if raw_subscription_ratio > 0.05:
         penalty += 6
 
-    if income - expenses < 0:
-        penalty += 25
+    if income > 0 and income - expenses < 0:
+        negative_gap_ratio = abs(income - expenses) / income
+
+        if negative_gap_ratio > 0.50:
+            penalty += 25
+        elif negative_gap_ratio > 0.25:
+            penalty += 18
+        elif negative_gap_ratio > 0.10:
+            penalty += 10
+        else:
+            penalty += 5
 
     overall_score = clamp_score(
         overall_score - penalty
     )
 
     if extraction_quality == "success" and transactions:
-        overall_score = max(10, overall_score)
+        overall_score = max(35, overall_score)
 
     return {
         "saving_behavior": saving_behavior,
