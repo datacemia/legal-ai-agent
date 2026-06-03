@@ -7,9 +7,6 @@ from app.models.finance_analysis import FinanceAnalysis
 
 from app.services.finance_agent.statement_parser import extract_statement_text_from_path
 from app.services.cloud_storage_service import download_api_file_from_cloud
-from app.services.finance_agent.scan_agent import (
-    scan_agent_extract_text,
-)
 from app.services.finance_agent.finance_ai_agent import analyze_bank_statement
 from app.services.finance_agent.transaction_extractor import extract_transactions
 from app.services.finance_agent.subscription_detector import detect_recurring_subscriptions
@@ -306,6 +303,69 @@ def filter_metric_inconsistent_items(
     return filtered
 
 
+
+
+def assess_analysis_quality(transactions: list[dict]) -> dict:
+    expenses = [
+        tx for tx in transactions
+        if tx.get("type") == "expense"
+    ]
+
+    total_expenses = sum(
+        abs(float(tx.get("amount", 0) or 0))
+        for tx in expenses
+    )
+
+    other_expenses = sum(
+        abs(float(tx.get("amount", 0) or 0))
+        for tx in expenses
+        if str(tx.get("category", "")).lower() in [
+            "other",
+            "autres",
+            "أخرى",
+        ]
+    )
+
+    income = sum(
+        float(tx.get("amount", 0) or 0)
+        for tx in transactions
+        if tx.get("type") == "income"
+        and float(tx.get("amount", 0) or 0) > 0
+    )
+
+    other_ratio = (
+        other_expenses / total_expenses
+        if total_expenses > 0
+        else 0
+    )
+
+    expense_income_ratio = (
+        total_expenses / income
+        if income > 0
+        else None
+    )
+
+    low_confidence = (
+        len(transactions) < 5
+        or other_ratio > 0.35
+        or (
+            expense_income_ratio is not None
+            and expense_income_ratio > 3
+        )
+    )
+
+    return {
+        "low_confidence": low_confidence,
+        "transaction_count": len(transactions),
+        "other_ratio": round(other_ratio, 4),
+        "expense_income_ratio": (
+            round(expense_income_ratio, 4)
+            if expense_income_ratio is not None
+            else None
+        ),
+    }
+
+
 def finance_progress_message(key: str, language: str) -> str:
     messages = {
         "loading": {
@@ -420,11 +480,21 @@ def handle_finance_ai(job: Job, db):
 
     if file_bytes_hex:
         content = bytes.fromhex(file_bytes_hex)
-        text = ""
 
-        with fitz.open(stream=content, filetype="pdf") as doc:
-            for page in doc:
-                text += page.get_text()
+        from app.services.finance_agent.statement_parser import (
+            extract_statement_text,
+        )
+
+        class BytesUpload:
+            async def read(self):
+                return content
+
+        import asyncio
+
+        text = asyncio.run(
+            extract_statement_text(BytesUpload())
+        )
+
     else:
         if storage_path:
             file_path = download_api_file_from_cloud(
@@ -433,18 +503,6 @@ def handle_finance_ai(job: Job, db):
             )
 
         text = extract_statement_text_from_path(str(file_path))
-
-    MIN_TEXT_LENGTH = 500
-
-    if not text or len(text.strip()) < MIN_TEXT_LENGTH:
-        try:
-            text = scan_agent_extract_text(
-                file_path=file_path,
-                content=content if file_bytes_hex else None,
-            )
-
-        except Exception:
-            pass
 
     if not text or len(text.strip()) < 100:
         raise ValueError(
@@ -465,6 +523,20 @@ def handle_finance_ai(job: Job, db):
     # Two real bank operations can have the same date, description and amount.
     # Example: two ATM withdrawals of 2 000 MAD on the same day.
     transactions = list(transactions)
+
+    quality = assess_analysis_quality(transactions)
+
+    if quality["low_confidence"]:
+        return {
+            "status": "low_confidence",
+            "analysis_quality": quality,
+            "message": {
+                "en": "This bank statement could not be analyzed reliably. Please upload a clearer exported PDF or a higher-quality scan.",
+                "fr": "Ce relevé bancaire n’a pas pu être analysé de manière fiable. Veuillez importer un PDF exporté plus clair ou un scan de meilleure qualité.",
+                "ar": "تعذر تحليل كشف الحساب البنكي بشكل موثوق. يرجى رفع ملف PDF أوضح أو نسخة ممسوحة بجودة أعلى.",
+            }.get(output_language),
+            "transactions": transactions,
+        }
 
     update_job_progress(
         job,
