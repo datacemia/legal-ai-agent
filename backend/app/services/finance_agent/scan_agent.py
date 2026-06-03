@@ -1,34 +1,44 @@
 import fitz
+import pytesseract
+from PIL import Image
+import io
 
 
 def scan_agent_extract_text(
     file_path: str | None = None,
     content: bytes | None = None,
 ) -> str:
-    """
-    Safe OCR placeholder for scanned PDFs.
-
-    For now, it does not perform real OCR.
-    It prevents import errors and keeps finance worker stable.
-    Later, plug real OCR here.
-    """
-    text = ""
+    text_parts = []
 
     try:
         if content:
-            with fitz.open(stream=content, filetype="pdf") as doc:
-                for page in doc:
-                    text += page.get_text() or ""
-                    text += "\n"
-
+            doc = fitz.open(stream=content, filetype="pdf")
         elif file_path:
-            with fitz.open(file_path) as doc:
-                for page in doc:
-                    text += page.get_text() or ""
-                    text += "\n"
+            doc = fitz.open(file_path)
+        else:
+            return ""
+
+        with doc:
+            for page in doc:
+                pix = page.get_pixmap(
+                    matrix=fitz.Matrix(2, 2),
+                    alpha=False,
+                )
+
+                image = Image.open(
+                    io.BytesIO(pix.tobytes("png"))
+                )
+
+                page_text = pytesseract.image_to_string(
+                    image,
+                    lang="eng+fra+ara",
+                )
+
+                if page_text:
+                    text_parts.append(page_text)
 
     except Exception as e:
         print("SCAN_AGENT_EXTRACT_FAILED", str(e))
         return ""
 
-    return text.strip()
+    return "\n".join(text_parts).strip()
