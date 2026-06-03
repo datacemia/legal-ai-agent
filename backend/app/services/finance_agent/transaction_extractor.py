@@ -2213,6 +2213,25 @@ def is_internal_transfer(
     tx = clean_db_text(str(transaction_text or ""))
     lower = tx.lower()
 
+    BUSINESS_ENTITY_MARKERS = [
+        " sas",
+        " sarl",
+        " eurl",
+        " ltd",
+        " limited",
+        " inc",
+        " llc",
+        " gmbh",
+        " prestation",
+        " facture",
+        " invoice",
+        " client",
+        " honoraires",
+    ]
+
+    if any(marker in lower for marker in BUSINESS_ENTITY_MARKERS):
+        return False
+
     # Exclude FX/wallet/own-account movements already covered by the legacy list.
     if any(keyword.lower() in lower for keyword in INTERNAL_TRANSFER_KEYWORDS):
         return True
