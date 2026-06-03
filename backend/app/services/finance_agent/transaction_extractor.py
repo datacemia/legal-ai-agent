@@ -11,7 +11,7 @@ def debug_log(*args):
     if DEBUG_FINANCE_EXTRACTOR:
         print(*args)
 
-debug_log("RUNEXA_FINANCE_EXTRACTOR_VERSION", "international-multipass-v5-debit-credit-reconcile")
+debug_log("RUNEXA_FINANCE_EXTRACTOR_VERSION", "international-multipass-v6-internal-transfer-kpi-exclusion")
 CURRENCY_CODES = ["USD", "EUR", "GBP", "AED", "MAD", "CAD", "AUD", "JOD", "SAR", "QAR", "KWD", "BHD", "OMR", "DZD", "TND", "EGP", "CHF", "JPY", "CNY", "INR", "TRY", "NGN", "ZAR", "MULTI"]
 
 CANADA_BANKS = [
@@ -2093,6 +2093,224 @@ def clean_db_text(value: str) -> str:
 
 
 
+def normalize_identity_text(value: str) -> str:
+    """Normalize names/identity fragments for safe matching.
+
+    Used only to detect likely own-account/internal transfers. It removes
+    titles, punctuation and excess spaces without changing transaction parsing.
+    """
+    text = clean_db_text(str(value or "")).lower()
+    text = normalize_arabic_digits(text)
+    text = re.sub(r"\b(?:mr|mrs|ms|mme|m\.|mlle|dr|docteur|monsieur|madame)\b", " ", text)
+    text = re.sub(r"[^a-z0-9àâäéèêëîïôöùûüçñ\u0600-\u06ff]+", " ", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def extract_account_holder_identity_tokens(text: str) -> set[str]:
+    """Extract likely account-holder identity tokens from the statement.
+
+    This is intentionally conservative and language-neutral. It only returns
+    names found near common statement owner labels or very common title/name
+    patterns printed in bank headers.
+    """
+    raw = clean_db_text(str(text or ""))
+    candidates: set[str] = set()
+
+    patterns = [
+        r"(?:account\s+holder|account\s+name|customer\s+name|client\s+name|titulaire|nom\s+du\s+client)\s*[:\-]?\s*([A-ZÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ][A-ZÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ'\- ]{3,80})",
+        r"\b(?:M\.|MR|MME|MRS|MS|DR)\s+([A-ZÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ][A-ZÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ'\- ]{3,80})",
+        r"\b(?:السيد|السيدة|العميل)\s+([\u0600-\u06ff ]{3,80})",
+    ]
+
+    stop_words = [
+        "RELEVE", "RELEVÉ", "COMPTE", "BANQUE", "BANK", "PAGE",
+        "DATE", "VALEUR", "DEBIT", "CREDIT", "SOLDE", "OPERATIONS",
+        "SOCIETE", "SOCIÉTÉ", "GENERALE", "GÉNÉRALE", "BRED",
+    ]
+
+    for pattern in patterns:
+        for match in re.finditer(pattern, raw, flags=re.IGNORECASE):
+            candidate = match.group(1)
+            candidate = re.split(
+                r"\n|\r|\b(?:RELEV[ÉE]|COMPTE|APPT|ETAGE|BOULEVARD|RUE|AVENUE|PAGE|DATE|SOLDE|VOS CONTACTS)\b",
+                candidate,
+                maxsplit=1,
+                flags=re.IGNORECASE,
+            )[0]
+            normalized = normalize_identity_text(candidate)
+
+            if not normalized:
+                continue
+
+            words = normalized.split()
+            if len(words) < 2 or len(words) > 6:
+                continue
+
+            if any(stop.lower() in normalized for stop in stop_words):
+                continue
+
+            candidates.add(normalized)
+
+    return candidates
+
+
+def extract_account_reference_tokens(text: str) -> set[str]:
+    """Extract own-account references that may appear again in transfer rows."""
+    raw = clean_db_text(str(text or "")).upper()
+    tokens: set[str] = set()
+
+    for iban in re.findall(r"\b[A-Z]{2}\d{2}[A-Z0-9 ]{10,34}\b", raw):
+        normalized = re.sub(r"\s+", "", iban)
+        if len(normalized) >= 12:
+            tokens.add(normalized)
+
+    # French/European account-number-like groups printed in headers.
+    for number in re.findall(r"\b\d{5}\s+\d{5}\s+\d{8,12}\s+\d{2}\b", raw):
+        tokens.add(re.sub(r"\s+", "", number))
+
+    return tokens
+
+
+def is_internal_transfer(
+    transaction_text: str,
+    document_text: str | None = None,
+) -> bool:
+    """Detect internal/own-account transfers without bank-specific patches.
+
+    Goal: keep parsing intact, but exclude own transfers from financial KPIs
+    (income, expenses, score, savings opportunities). The transaction remains
+    available as type="transfer" so charts/auditing can still see it.
+
+    Conservative signals:
+    - explicit internal-transfer wording in EN/FR/AR;
+    - transfer row where sender/recipient matches the account holder name;
+    - own IBAN/account reference appears in the row.
+    """
+    tx = clean_db_text(str(transaction_text or ""))
+    lower = tx.lower()
+
+    # Exclude FX/wallet/own-account movements already covered by the legacy list.
+    if any(keyword.lower() in lower for keyword in INTERNAL_TRANSFER_KEYWORDS):
+        return True
+
+    transfer_markers = [
+        "virement", "vir ", "vir.", "transfer", "standing order",
+        "paylib", "wero", "internal", "own account", "between accounts",
+        "تحويل", "حوالة",
+    ]
+
+    if not any(marker in lower for marker in transfer_markers):
+        return False
+
+    doc = clean_db_text(str(document_text or ""))
+
+    holder_tokens = extract_account_holder_identity_tokens(doc)
+    tx_identity = normalize_identity_text(tx)
+
+    for holder in holder_tokens:
+        if not holder:
+            continue
+
+        holder_words = holder.split()
+        enough_words = len(holder_words) >= 2
+        if enough_words and holder in tx_identity:
+            debug_log(
+                "TX_INTERNAL_TRANSFER: holder_match",
+                {"holder": holder, "transaction": tx[:180]},
+            )
+            return True
+
+    account_tokens = extract_account_reference_tokens(doc)
+    compact_tx = re.sub(r"\s+", "", tx.upper())
+
+    for token in account_tokens:
+        if token and token in compact_tx:
+            debug_log(
+                "TX_INTERNAL_TRANSFER: account_reference_match",
+                {"token": token[-8:], "transaction": tx[:180]},
+            )
+            return True
+
+    # Generic own-account phrases across EN/FR/AR.
+    own_account_phrases = [
+        "own account", "my account", "between my accounts",
+        "compte propre", "mes comptes", "entre comptes", "virement interne",
+        "transfer interne", "épargne", "epargne", "livret", "ldd", "livret a",
+        "حسابي", "حساب خاص", "بين حساباتي", "تحويل داخلي",
+    ]
+
+    if any(phrase in lower for phrase in own_account_phrases):
+        return True
+
+    return False
+
+
+def mark_internal_transfers(
+    transactions: list[dict],
+    text: str,
+) -> list[dict]:
+    """Mark own-account transfers as neutral movements.
+
+    Downstream finance code already sums only type == "income" and
+    type == "expense". Setting type="transfer" excludes these rows from:
+    - observed income
+    - observed expenses
+    - financial score inputs
+    - savings opportunities
+
+    The signed amount is preserved for audit/debug purposes.
+    """
+    marked: list[dict] = []
+
+    for tx in transactions:
+        row = dict(tx)
+        description = str(row.get("description", ""))
+
+        if is_internal_transfer(description, text):
+            original_type = row.get("type")
+            row["type"] = "transfer"
+            row["is_internal_transfer"] = True
+            row["excluded_from_financial_kpis"] = True
+            row["original_type"] = original_type
+            row["category_hint"] = row.get("category_hint") or "internal_transfer"
+            debug_log(
+                "TX_INTERNAL_TRANSFER_MARKED",
+                {
+                    "date": row.get("date"),
+                    "amount": row.get("amount"),
+                    "original_type": original_type,
+                    "description": description[:160],
+                },
+            )
+
+        marked.append(row)
+
+    return marked
+
+
+def movement_total_amount(transactions: list[dict], direction: str) -> float:
+    """Gross debit/credit total for reconciliation, including transfers.
+
+    Reconciliation must compare against official statement movement totals,
+    which include transfers. Financial KPIs later ignore type="transfer".
+    """
+    total = 0.0
+
+    for tx in transactions:
+        amount = float(tx.get("amount", 0) or 0)
+        tx_type = tx.get("type")
+
+        if direction == "debit":
+            if tx_type == "expense" or amount < 0:
+                total += abs(amount)
+        elif direction == "credit":
+            if tx_type == "income" or amount > 0:
+                total += abs(amount)
+
+    return round(total, 2)
+
+
+
 def log_final_transactions(transactions: list[dict]) -> None:
     """Log only the transactions that are finally retained.
 
@@ -2986,11 +3204,8 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         if len(numbers) < 2:
             continue
 
-        row_text_lower = str(row.get("text", "")).lower()
-        is_internal_transfer = any(
-            keyword.lower() in row_text_lower
-            for keyword in INTERNAL_TRANSFER_KEYWORDS
-        )
+        row_text = str(row.get("text", ""))
+        row_is_internal_transfer = is_internal_transfer(row_text, text)
 
         tx_amount, balance, tx_type = resolve_arabic_row_amount(
             row,
@@ -3007,7 +3222,7 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
         # Internal transfers still update the running balance chain, but are not
         # counted as income/expense because they are movements between own accounts.
-        if is_internal_transfer:
+        if row_is_internal_transfer:
             continue
 
         if tx_type == "income":
@@ -3560,14 +3775,8 @@ def reconcile_with_official_movement_totals(
     if not official:
         return transactions
 
-    extracted_debits = round(
-        sum(abs(float(t.get("amount", 0) or 0)) for t in transactions if t.get("type") == "expense"),
-        2,
-    )
-    extracted_credits = round(
-        sum(abs(float(t.get("amount", 0) or 0)) for t in transactions if t.get("type") == "income"),
-        2,
-    )
+    extracted_debits = movement_total_amount(transactions, "debit")
+    extracted_credits = movement_total_amount(transactions, "credit")
 
     official_debits = float(official["debit_total"])
     official_credits = float(official["credit_total"])
@@ -3807,16 +4016,9 @@ def extract_transactions(text: str) -> list[dict]:
 
         normalized_line = clean_line.lower()
 
-        internal_transfer_check_text = re.sub(
-            r"\bexchange\s+rate\b|\brate\s+exchange\b|\bexchangerate\b",
-            " ",
-            normalized_line,
-            flags=re.IGNORECASE,
-        )
-
-        if any(k in internal_transfer_check_text for k in INTERNAL_TRANSFER_KEYWORDS):
-            debug_log("TX_SKIP: internal_transfer", clean_line)
-            continue
+        # Do not skip internal transfers here. Keep the movement for gross
+        # statement reconciliation, then mark it as type="transfer" before
+        # returning so KPIs exclude it without breaking debit/credit totals.
 
         if any(
             keyword in normalized_line
@@ -4022,6 +4224,8 @@ def extract_transactions(text: str) -> list[dict]:
         text,
         detected_currency,
     )
+
+    transactions = mark_internal_transfers(transactions, text)
 
     log_final_transactions(transactions)
     debug_log("FINAL_TXS", transactions)
