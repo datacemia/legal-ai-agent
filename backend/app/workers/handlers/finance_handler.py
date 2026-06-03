@@ -718,6 +718,18 @@ def handle_finance_ai(job: Job, db):
         finance_progress_message("budget", output_language),
     )
 
+    print(
+        "KPI_SOURCE_AUDIT",
+        [
+            {
+                "date": tx.get("date"),
+                "amount": tx.get("amount"),
+                "type": tx.get("type"),
+            }
+            for tx in transactions[:20]
+        ],
+    )
+
     budget = build_recommended_budget(
         transactions=kpi_transactions,
         fallback_income=effective_fallback_income,
