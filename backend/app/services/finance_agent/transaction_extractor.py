@@ -2099,6 +2099,14 @@ def is_non_transaction_line(line: str) -> bool:
     upper_line = str(line or "").upper()
     return any(pattern in upper_line for pattern in NON_TRANSACTION_PATTERNS)
 
+
+def is_balance_snapshot_line(line: str) -> bool:
+    s = str(line or "").strip()
+    return bool(
+        re.search(r"^\d{2}/\d{2}/\d{4}\s+\+\s*\d", s)
+        and "***" in s
+    )
+
 def clean_db_text(value: str) -> str:
     if not isinstance(value, str):
         return value
@@ -3319,10 +3327,17 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
     transactions = [
         tx
         for tx in transactions
-        if not is_non_transaction_line(
-            tx.get("description")
-            or tx.get("text")
-            or ""
+        if not (
+            is_non_transaction_line(
+                tx.get("description")
+                or tx.get("text")
+                or ""
+            )
+            or is_balance_snapshot_line(
+                tx.get("description")
+                or tx.get("text")
+                or ""
+            )
         )
     ]
 
