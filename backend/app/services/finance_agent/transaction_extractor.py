@@ -317,6 +317,7 @@ EXPENSE_KEYWORDS += [
     "مدين",
     "خصم",
     "سحب",
+    "سحب نقدي",
     "شراء",
     "outgoing",
     "outgoing transfer",
@@ -375,6 +376,12 @@ UNIVERSAL_EXPENSE_MARKERS = [
     "cb",
     "carte bancaire",
     "retrait",
+    "ret dab",
+    "dab",
+    "distributeur automatique",
+    "retrait dab",
+    "cash withdrawal",
+    "atm withdrawal",
     "achat",
     "carte",
     "frais",
@@ -401,6 +408,7 @@ UNIVERSAL_EXPENSE_MARKERS = [
     "مدين",
     "خصم",
     "سحب",
+    "سحب نقدي",
     "شراء",
     "اقتطاع",
     "دفع",
@@ -936,6 +944,11 @@ def looks_like_debit_description(line: str) -> bool:
         "prelevement sepa",
         "prélèvement sepa",
         "retrait",
+        "ret dab",
+        "dab",
+        "retrait dab",
+        "cash withdrawal",
+        "atm withdrawal",
         "gab",
         "awb gab",
         "awbgab",
@@ -3113,13 +3126,15 @@ def mark_internal_transfers(
     """Mark own-account transfers as neutral KPI movements.
 
     Enterprise-grade rule:
-    - keep the transaction row for auditability;
-    - preserve the original signed movement in original_amount / gross_amount;
-    - set amount = 0.0 and type = "transfer" so every existing downstream
-      calculation that sums either by type OR by sign automatically excludes it.
+    - keep the transaction row for auditability and quality scoring;
+    - preserve the original signed movement in amount / original_amount / gross_amount;
+    - set type = "transfer" and explicit KPI-exclusion flags so income/expense
+      KPIs ignore it while quality checks still see a valid bank movement.
 
-    This prevents internal transfers from inflating income, expenses, scores,
-    budget recommendations, savings opportunities, and cashflow risk.
+    This avoids false insufficient_data on statements with many own-account
+    transfers, while preventing internal movements from inflating income,
+    expenses, scores, budget recommendations, savings opportunities, and
+    cashflow risk.
     """
     marked: list[dict] = []
 
@@ -3132,13 +3147,18 @@ def mark_internal_transfers(
             original_amount = float(row.get("amount", 0) or 0)
 
             row["type"] = "transfer"
-            row["amount"] = 0.0
+            # Keep the real signed movement for validity/quality scoring.
+            # KPI layers must use the exclusion flags below and/or type=transfer.
+            row["amount"] = round(original_amount, 2)
 
             # Audit fields: do not lose the bank movement.
             row["original_type"] = original_type
             row["original_amount"] = round(original_amount, 2)
             row["gross_amount"] = round(original_amount, 2)
             row["movement_amount"] = round(original_amount, 2)
+            row["quality_valid"] = True
+            row["quality_type"] = "transfer"
+            row["valid_for_quality"] = True
 
             # Explicit KPI exclusion flags for newer services.
             row["is_internal_transfer"] = True
@@ -4107,9 +4127,33 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         row["resolved_balance"] = balance
         previous_balance = balance
 
-        # Internal transfers still update the running balance chain, but are not
-        # counted as income/expense because they are movements between own accounts.
+        # Internal transfers still update the running balance chain and remain
+        # valid transaction rows for quality, but are neutral for KPIs.
         if row_is_internal_transfer:
+            signed_amount = tx_amount if tx_type == "income" else -abs(tx_amount)
+            transactions.append({
+                "date": row["date"],
+                "description": clean_db_text(row["text"][:300]),
+                "amount": round(signed_amount, 2),
+                "type": "transfer",
+                "currency": currency,
+                "original_type": tx_type,
+                "original_amount": round(signed_amount, 2),
+                "gross_amount": round(signed_amount, 2),
+                "movement_amount": round(signed_amount, 2),
+                "quality_valid": True,
+                "quality_type": "transfer",
+                "valid_for_quality": True,
+                "is_internal_transfer": True,
+                "excluded_from_financial_kpis": True,
+                "exclude_from_income": True,
+                "exclude_from_expense": True,
+                "exclude_from_score": True,
+                "exclude_from_savings": True,
+                "exclude_from_cashflow": True,
+                "category_hint": "internal_transfer",
+                "category": "transfers",
+            })
             continue
 
         if tx_type == "income":
@@ -6132,6 +6176,7 @@ EXPENSE_KEYWORDS += [
     "مدين",
     "خصم",
     "سحب",
+    "سحب نقدي",
     "شراء",
     "دفع",
     "بطاقة",
