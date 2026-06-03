@@ -626,13 +626,43 @@ def extract_money_numbers_safely(line: str) -> list[str]:
     This is used by the generic bank parser to avoid combining the last digit
     of a date with a transaction amount, for example:
         2026 100,00 -> 6100,00
+
+    It also filters structurally suspicious OCR numbers that are too long or
+    unrealistically large for normal bank statement transaction rows.
     """
     cleaned = normalize_line_for_amount_detection(line)
 
-    return re.findall(
-        MONEY_NUMBER_PATTERN,
-        cleaned,
-    )
+    safe_numbers = []
+
+    for raw_number in re.findall(MONEY_NUMBER_PATTERN, cleaned):
+        digits_only = (
+            raw_number.replace(",", "")
+            .replace(".", "")
+            .replace(" ", "")
+        )
+
+        if len(digits_only) > 10:
+            continue
+
+        try:
+            value = parse_amount(raw_number)
+        except Exception:
+            continue
+
+        if value > 100000:
+            print(
+                "SUSPICIOUS_AMOUNT",
+                value,
+                raw_number,
+                str(line or "")[:200],
+            )
+
+        if value > 1_000_000:
+            continue
+
+        safe_numbers.append(raw_number)
+
+    return safe_numbers
 
 
 def looks_like_debit_description(line: str) -> bool:
@@ -3583,6 +3613,13 @@ def extract_transactions(text: str) -> list[dict]:
                 continue
 
             amount = fallback_amount
+
+        if abs(amount) > 100000:
+            print(
+                "SUSPICIOUS_AMOUNT",
+                amount,
+                clean_line[:300],
+            )
 
         transaction_type = tabular_type or detect_type(clean_line, amount)
 
