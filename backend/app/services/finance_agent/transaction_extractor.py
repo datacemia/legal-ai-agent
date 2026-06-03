@@ -4293,18 +4293,42 @@ def extract_transactions(text: str) -> list[dict]:
         detected_currency,
     )
 
-    transactions = mark_internal_transfers(transactions, text)
+    transactions = mark_internal_transfers(
+        transactions,
+        text,
+    )
+
+    transactions = [
+        tx
+        for tx in transactions
+        if not is_non_transaction_line(
+            tx.get("description")
+            or tx.get("text")
+            or ""
+        )
+    ]
+
+    print(
+        "NON_TRANSACTION_FILTER_STATS",
+        {
+            "remaining": len(transactions),
+        },
+    )
 
     print(
         "INTERNAL_TRANSFER_STATS",
         {
-            "detected": sum(1 for tx in transactions if tx.get("is_internal_transfer")),
+            "detected": sum(
+                1 for tx in transactions
+                if tx.get("is_internal_transfer")
+            ),
             "total": len(transactions),
         },
     )
 
     log_final_transactions(transactions)
     debug_log("FINAL_TXS", transactions)
+
     return transactions
 EXPENSE_KEYWORDS += [
     "amazon",
