@@ -2594,6 +2594,10 @@ DOCUMENT_METADATA_KEYWORDS = [
     "protection des comptes",
     "garantie des dépôts",
     "garantie des depots",
+    "releve et informations bancaires",
+    "relevé et informations bancaires",
+    "information sur la protection des comptes",
+    "suite au verso",
 
     # EN / international
     "registered office",
@@ -2645,6 +2649,9 @@ DOCUMENT_METADATA_REGEXES = [
     # Contact/tariff lines with dates and tiny prices should not become income.
     r"\b(?:tarif|rate|fee per minute|ttc/min)\b",
     r"\b(?:t[ée]l[ée]phone|telephone|phone|fax|mobile)\b.*\b\d{2,}\b",
+    # Technical print/reference IDs in headers/footers; not bank transactions.
+    r"\b[a-z]{1,4}\.\d{8}\.\d{4,}(?:\.\d+){2,}\b",
+    r"\b(?:x\s+0\s+\d+|page\s+\d+)\b.*\b(?:relev[ée]|statement|bank)\b",
 ]
 
 
@@ -5496,6 +5503,10 @@ def extract_debit_credit_column_transactions(
         "account currency",
         "garantie des dépôts",
         "garantie des depots",
+    "releve et informations bancaires",
+    "relevé et informations bancaires",
+    "information sur la protection des comptes",
+    "suite au verso",
         "fonds de garantie",
         "www.",
         "tél.",
@@ -5693,13 +5704,19 @@ def looks_like_balance_or_total_text(line: str) -> bool:
         "solde crediteur", "solde créditeur", "solde debiteur", "solde débiteur",
         "solde au", "ancien solde", "nouveau solde", "total des mouvements",
         "total des opérations", "total des operations", "situation de vos autres comptes",
+        "soldecrediteur", "soldecréditeur", "soldedebiteur", "soldedébiteur",
+        "situationdevosautrescomptes", "totaldesmouvements",
         # EN
         "opening balance", "closing balance", "available balance", "current balance",
         "total movements", "total transactions", "other accounts",
         # AR
         "الرصيد", "إجمالي", "اجمالي", "رصيد",
     ]
-    return any(marker in lower for marker in markers)
+    collapsed = re.sub(r"[^a-z0-9àâäéèêëîïôöùûüçء-ي]+", "", lower)
+    return any(marker in lower for marker in markers) or any(
+        re.sub(r"[^a-z0-9àâäéèêëîïôöùûüçء-ي]+", "", marker) in collapsed
+        for marker in markers
+    )
 
 
 
