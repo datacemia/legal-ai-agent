@@ -4633,10 +4633,28 @@ def extract_vertical_statement_transactions(
 
         if date_header_re.match(line):
             parsed_date = extract_date(line, default_year=default_year)
+
+            if not parsed_date:
+                cleaned_date = re.sub(
+                    r"^(lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche|"
+                    r"monday|tuesday|wednesday|thursday|friday|saturday|sunday),?\s+",
+                    "",
+                    line,
+                    flags=re.IGNORECASE,
+                )
+                cleaned_date = cleaned_date.replace(".", "")
+                parts = cleaned_date.lower().split()
+
+                if len(parts) == 3 and parts[1] in MONTH_ALIASES:
+                    parsed_date = (
+                        f"{parts[2]}-{MONTH_ALIASES[parts[1]]}-{int(parts[0]):02d}"
+                    )
+
             if parsed_date:
                 current_date = parsed_date
                 buffer = []
                 skip_section = False
+
             continue
 
         if skip_section or not current_date:
