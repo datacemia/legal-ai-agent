@@ -438,6 +438,39 @@ TRANSACTION_SIGNALS = [
 
 
 MONTH_ALIASES = {
+    "يناير": "01",
+    "كانون الثاني": "01",
+    "فبراير": "02",
+    "شباط": "02",
+    "مارس": "03",
+    "آذار": "03",
+    "اذار": "03",
+    "أبريل": "04",
+    "ابريل": "04",
+    "نيسان": "04",
+    "مايو": "05",
+    "أيار": "05",
+    "ايار": "05",
+    "يونيو": "06",
+    "حزيران": "06",
+    "يوليو": "07",
+    "تموز": "07",
+    "أغسطس": "08",
+    "اغسطس": "08",
+    "آب": "08",
+    "اب": "08",
+    "سبتمبر": "09",
+    "أيلول": "09",
+    "ايلول": "09",
+    "أكتوبر": "10",
+    "اكتوبر": "10",
+    "تشرين الأول": "10",
+    "تشرين الاول": "10",
+    "نوفمبر": "11",
+    "تشرين الثاني": "11",
+    "ديسمبر": "12",
+    "كانون الأول": "12",
+    "كانون الاول": "12",
     "jan": "01",
     "janv": "01",
     "janvier": "01",
@@ -905,6 +938,78 @@ def detect_document_year(text: str) -> int:
         return datetime.now().year
 
     return Counter(years).most_common(1)[0][0]
+
+
+def remove_weekday_prefix(text: str) -> str:
+    value = str(text or "").strip()
+
+    weekday_aliases = [
+        "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche",
+        "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",
+        "الاثنين", "الإثنين", "الثلاثاء", "الأربعاء", "الاربعاء",
+        "الخميس", "الجمعة", "الجمعه", "السبت", "الأحد", "الاحد",
+    ]
+
+    aliases_pattern = "|".join(re.escape(alias) for alias in weekday_aliases)
+
+    return re.sub(
+        rf"^(?:{aliases_pattern}),?\s+",
+        "",
+        value,
+        flags=re.IGNORECASE,
+    ).strip()
+
+
+def extract_day(value: str) -> int | None:
+    match = re.search(r"\d{1,2}", normalize_arabic_digits(str(value or "")))
+
+    if not match:
+        return None
+
+    day = int(match.group(0))
+
+    if 1 <= day <= 31:
+        return day
+
+    return None
+
+
+def extract_year(value: str) -> int | None:
+    match = re.search(r"\d{2,4}", normalize_arabic_digits(str(value or "")))
+
+    if not match:
+        return None
+
+    year = int(match.group(0))
+
+    if year < 100:
+        year += 2000
+
+    if is_reasonable_year(year):
+        return year
+
+    return None
+
+
+def parse_localized_date(text: str) -> str | None:
+    normalized = normalize_arabic_digits(str(text or ""))
+    normalized = remove_weekday_prefix(normalized)
+    normalized = normalized.replace(".", " ")
+    normalized = re.sub(r"[,،]+", " ", normalized)
+    normalized = re.sub(r"\s+", " ", normalized).strip().lower()
+
+    tokens = normalized.split()
+
+    if len(tokens) >= 3:
+        day = extract_day(tokens[0])
+        month = MONTH_ALIASES.get(tokens[1])
+        year = extract_year(tokens[2])
+
+        if day and month and year:
+            return f"{year}-{month}-{day:02d}"
+
+    return None
+
 
 
 def try_parse_date(raw: str):
@@ -4635,20 +4740,7 @@ def extract_vertical_statement_transactions(
             parsed_date = extract_date(line, default_year=default_year)
 
             if not parsed_date:
-                cleaned_date = re.sub(
-                    r"^(lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche|"
-                    r"monday|tuesday|wednesday|thursday|friday|saturday|sunday),?\s+",
-                    "",
-                    line,
-                    flags=re.IGNORECASE,
-                )
-                cleaned_date = cleaned_date.replace(".", "")
-                parts = cleaned_date.lower().split()
-
-                if len(parts) == 3 and parts[1] in MONTH_ALIASES:
-                    parsed_date = (
-                        f"{parts[2]}-{MONTH_ALIASES[parts[1]]}-{int(parts[0]):02d}"
-                    )
+                parsed_date = parse_localized_date(line)
 
             if parsed_date:
                 current_date = parsed_date
