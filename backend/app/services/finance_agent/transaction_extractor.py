@@ -289,7 +289,6 @@ EXPENSE_KEYWORDS = [
 INCOME_KEYWORDS = [
     "salary",
     "payroll",
-    "wage",
     "incoming",
     "incoming transfer",
     "credit",
@@ -431,7 +430,6 @@ UNIVERSAL_INCOME_MARKERS = [
     "dépôt",
     "depot",
     "salaire",
-    "paie",
 
     # EN / international
     "incoming transfer",
@@ -2668,20 +2666,6 @@ def is_document_metadata_line(line: str) -> bool:
 
 
 NON_TRANSACTION_PATTERNS = [
-    "SOLDE CREDITEUR",
-    "SOLDE CRÉDITEUR",
-    "SOLDE DEBITEUR",
-    "SOLDE DÉBITEUR",
-    "SOLDE CREDITEURAU",
-    "SOLDE CRÉDITEURAU",
-    "TOTAL DES OPERATIONS",
-    "TOTAL DES OPÉRATIONS",
-    "TOTAL DES MOUVEMENTS",
-    "TOTAL MOVEMENTS",
-    "OPENING BALANCE",
-    "CLOSING BALANCE",
-    "الرصيد",
-    "إجمالي الحركات",
     "SOLDE AU",
     "NOUVEAU SOLDE",
     "CLOTURE",
@@ -5655,184 +5639,6 @@ def extract_debit_credit_column_transactions(
     return transactions
 
 
-
-
-def is_amount_only_money_line(line: str) -> bool:
-    """True when a line contains only one money token and separators.
-
-    International OCR/table helper used for columnar statements where the PDF
-    text stream emits debit/credit columns separately from date/description.
-    """
-    value = str(line or "").strip()
-    if not value:
-        return False
-
-    amounts = re.findall(MONEY_NUMBER_PATTERN, value)
-    if len(amounts) != 1:
-        return False
-
-    rest = re.sub(MONEY_NUMBER_PATTERN, " ", value)
-    rest = re.sub(r"[\s€$£¤+\-–—_/|:;,.()]+", "", rest)
-    return rest == ""
-
-
-def looks_like_balance_or_total_text(line: str) -> bool:
-    lower = str(line or "").lower()
-    markers = [
-        # FR
-        "solde crediteur", "solde créditeur", "solde debiteur", "solde débiteur",
-        "solde au", "ancien solde", "nouveau solde", "total des mouvements",
-        "total des opérations", "total des operations", "situation de vos autres comptes",
-        # EN
-        "opening balance", "closing balance", "available balance", "current balance",
-        "total movements", "total transactions", "other accounts",
-        # AR
-        "الرصيد", "إجمالي", "اجمالي", "رصيد",
-    ]
-    return any(marker in lower for marker in markers)
-
-
-def extract_scattered_columnar_transactions(
-    text: str,
-    detected_currency: str | None = None,
-) -> list[dict]:
-    """Recover transactions from column-scrambled debit/credit tables.
-
-    Some PDF engines output tables by columns instead of rows. A visual row:
-        Date | Value date | Description | Debit | Credit
-    can become separate text fragments:
-        many amount-only lines, then description/date lines.
-
-    This fallback is structural and international (FR / EN / AR): it only runs
-    when an explicit debit/credit table is present, extracts dated operation
-    fragments, pairs them with money tokens conservatively, ignores balances and
-    totals, and lets the existing direction rules classify the movement.
-    """
-    if not has_debit_credit_balance_table(text):
-        return []
-
-    raw_lines = [
-        " ".join(str(line or "").split())
-        for line in str(text or "").splitlines()
-        if " ".join(str(line or "").split())
-    ]
-
-    # Candidate operations: dated lines carrying transaction wording.
-    operation_lines: list[str] = []
-    for idx, line in enumerate(raw_lines):
-        if is_document_metadata_line(line) or is_non_transaction_line(line):
-            continue
-        if looks_like_balance_or_total_text(line):
-            continue
-        date = extract_date(line, default_year=detect_document_year(text))
-        if not date:
-            continue
-        lower = line.lower()
-        has_signal = any(marker in lower for marker in TRANSACTION_SIGNALS) or any(
-            marker in lower for marker in (UNIVERSAL_INCOME_MARKERS + UNIVERSAL_EXPENSE_MARKERS)
-        )
-        # Also accept salary/payroll rows and common transfer abbreviations.
-        has_signal = has_signal or any(
-            marker in lower
-            for marker in [
-                "vir ", "vir.", "virement", "transfer", "salary", "payroll", "salaire", "paie", "راتب",
-                "prlv", "prelevement", "prélèvement", "paiement", "payment", "carte", "card", "cb ",
-            ]
-        )
-        if has_signal:
-            # Append short continuation merchant/card label lines when they are
-            # immediately after the operation and before the next dated line.
-            desc = line
-            j = idx + 1
-            while j < min(len(raw_lines), idx + 3):
-                nxt = raw_lines[j]
-                if extract_date(nxt, default_year=detect_document_year(text)):
-                    break
-                if is_amount_only_money_line(nxt) or is_document_metadata_line(nxt) or looks_like_balance_or_total_text(nxt):
-                    break
-                if len(nxt) <= 80:
-                    desc = f"{desc} {nxt}".strip()
-                j += 1
-            operation_lines.append(desc)
-
-    if len(operation_lines) < 3:
-        return []
-
-    # Money tokens from amount-only lines, excluding lines near obvious balance
-    # or total captions. This handles PDF text streams that emit the debit and
-    # credit columns separately from operation descriptions.
-    money_tokens: list[str] = []
-    for idx, line in enumerate(raw_lines):
-        if not is_amount_only_money_line(line):
-            continue
-        context = " ".join(raw_lines[max(0, idx - 3): min(len(raw_lines), idx + 4)])
-        if looks_like_balance_or_total_text(context):
-            continue
-        try:
-            amount = abs(parse_amount(re.findall(MONEY_NUMBER_PATTERN, line)[0]))
-        except Exception:
-            continue
-        if amount == 0:
-            continue
-        money_tokens.append(re.findall(MONEY_NUMBER_PATTERN, line)[0])
-
-    if not money_tokens:
-        return []
-
-    # Conservative alignment: use the tail if there are extra totals/balances;
-    # otherwise use the head. Existing table semantics determine income/expense.
-    if len(money_tokens) >= len(operation_lines):
-        selected_amounts = money_tokens[-len(operation_lines):]
-    else:
-        selected_amounts = money_tokens
-        operation_lines = operation_lines[:len(selected_amounts)]
-
-    rows: list[dict] = []
-    default_year = detect_document_year(text)
-
-    for line, amount_token in zip(operation_lines, selected_amounts):
-        if looks_like_balance_or_total_text(line):
-            continue
-        try:
-            amount = abs(parse_amount(amount_token))
-        except Exception:
-            continue
-
-        date = extract_date(line, default_year=default_year)
-        if not date:
-            continue
-
-        tx_type = detect_type(line, amount)
-        if tx_type == "expense":
-            signed_amount = -abs(amount)
-        elif tx_type == "income":
-            signed_amount = abs(amount)
-        else:
-            tabular_amount, tabular_type = extract_tabular_bank_amount(f"{line} {amount_token}")
-            if tabular_amount is not None:
-                signed_amount = tabular_amount
-                tx_type = tabular_type
-            else:
-                signed_amount = amount
-
-        rows.append(
-            {
-                "date": date,
-                "description": clean_db_text(line),
-                "amount": round(signed_amount, 2),
-                "type": tx_type,
-                "currency": detected_currency,
-                "source": "scattered_columnar_table",
-            }
-        )
-
-    debug_log(
-        "TX_DEBUG: scattered_columnar_rows",
-        {"operations": len(operation_lines), "amounts": len(money_tokens), "rows": len(rows)},
-    )
-
-    return rows
-
 def fallback_debit_credit_column_transactions_if_low_quality(
     transactions: list[dict],
     text: str,
@@ -5861,20 +5667,6 @@ def fallback_debit_credit_column_transactions_if_low_quality(
             },
         )
         return dc_transactions
-
-    scattered_transactions = extract_scattered_columnar_transactions(
-        text,
-        detected_currency,
-    )
-
-    if scattered_transactions and len(scattered_transactions) > len(transactions):
-        print(
-            "SCATTERED_COLUMNAR_FALLBACK_USED",
-            {
-                "transactions": len(scattered_transactions),
-            },
-        )
-        return scattered_transactions
 
     return transactions
 
@@ -6032,14 +5824,6 @@ def extract_transactions(text: str) -> list[dict]:
             "closing balance",
             "balance forward",
             "opening balance brought forward",
-            "solde crediteur",
-            "solde créditeur",
-            "solde debiteur",
-            "solde débiteur",
-            "solde crediteur au",
-            "solde créditeur au",
-            "total des mouvements",
-            "total movements",
             "solde initial",
             "solde report",
             "solde reporte",
