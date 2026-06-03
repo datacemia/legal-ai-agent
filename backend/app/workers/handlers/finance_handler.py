@@ -13,7 +13,10 @@ from app.services.finance_agent.subscription_detector import detect_recurring_su
 from app.services.finance_agent.budget_engine import build_recommended_budget
 from app.services.finance_agent.forecasting import predict_cashflow
 from app.services.finance_agent.scoring import calculate_financial_scores
-from app.services.finance_agent.charts_builder import build_financial_charts
+from app.services.finance_agent.charts_builder import (
+    build_financial_charts,
+    detect_category,
+)
 from app.services.finance_agent.savings_opportunities import (
     detect_savings_opportunities,
 )
@@ -320,15 +323,16 @@ def assess_analysis_quality(transactions: list[dict]) -> dict:
         for tx in expenses
     )
 
-    other_expenses = sum(
-        abs(float(tx.get("amount", 0) or 0))
-        for tx in expenses
-        if str(tx.get("category", "")).lower() in [
-            "other",
-            "autres",
-            "أخرى",
-        ]
-    )
+    other_expenses = 0
+
+    for tx in expenses:
+        category = str(
+            tx.get("category")
+            or detect_category(tx.get("description", ""))
+        ).lower()
+
+        if category in ["other", "autres", "أخرى"]:
+            other_expenses += abs(float(tx.get("amount", 0) or 0))
 
     other_ratio = (
         other_expenses / total_expenses
