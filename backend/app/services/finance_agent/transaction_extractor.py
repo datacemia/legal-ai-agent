@@ -3352,13 +3352,13 @@ def extract_transactions(text: str) -> list[dict]:
         if " ".join(line.split())
     ]
 
-    if not is_mostly_arabic_text(text):
-        raw_lines = merge_multiline_debit_credit_rows(
-            raw_lines,
-            default_year=default_year,
-            prefer_us_date=prefer_us_date,
-        )
+    raw_lines = merge_multiline_debit_credit_rows(
+        raw_lines,
+        default_year=default_year,
+        prefer_us_date=prefer_us_date,
+    )
 
+    if not is_mostly_arabic_text(text):
         raw_lines = split_compact_multi_transaction_lines(
             raw_lines,
             default_year=default_year,
