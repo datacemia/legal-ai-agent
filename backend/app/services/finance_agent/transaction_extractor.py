@@ -3532,6 +3532,25 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         debug_log("AR_TX:", t)
 
     debug_log("ARABIC_BYPASS_COUNT:", len(transactions))
+    print(
+        "PRE_NON_TRANSACTION_FILTER_AUDIT",
+        [
+            {
+                "date": tx.get("date"),
+                "amount": tx.get("amount"),
+                "type": tx.get("type"),
+                "description": tx.get("description"),
+                "is_non_transaction": is_non_transaction_line(
+                    tx.get("description") or tx.get("text") or ""
+                ),
+                "is_balance_snapshot": is_balance_snapshot_line(
+                    tx.get("description") or tx.get("text") or ""
+                ),
+            }
+            for tx in transactions
+        ],
+    )
+
     transactions = [
         tx
         for tx in transactions
