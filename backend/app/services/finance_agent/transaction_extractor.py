@@ -407,6 +407,12 @@ TRANSACTION_SIGNALS = [
     "vir reçu",
     "vir inst recu",
     "vir inst reçu",
+    "wero",
+    "vir inst re",
+    "virement sepa recu",
+    "virement sepa reçu",
+    "virement instantane recu",
+    "virement instantané reçu",
     "vir.web recu",
     "vir.web reçu",
     "vir web recu",
@@ -1439,6 +1445,13 @@ def is_income_priority_description(text: str) -> bool:
         "vir reçu",
         "vir inst recu",
         "vir inst reçu",
+        "virement instantané reçu",
+        "virement instantane recu",
+        "virement sepa reçu",
+        "virement sepa recu",
+        "vir inst re",
+        "wero de:",
+        "wero de ",
         "vir.web recu",
         "vir.web reçu",
         "vir web recu",
@@ -2303,31 +2316,89 @@ def is_internal_transfer(
 
 
 
+
+def extract_amount_after_marker(
+    description: str,
+    markers: list[str],
+) -> float | None:
+    """Return the most reliable money amount after an incoming marker.
+
+    This is a structural banking rule, not a bank patch:
+    when a flattened OCR row contains dates, references, card rows, and one
+    incoming transfer segment, the amount belonging to the incoming transfer is
+    usually the last monetary token after the incoming marker.
+
+    It prevents date fragments such as 09.02 / 28.02 from being treated as
+    transaction amounts.
+    """
+    lower = str(description or "").lower()
+
+    marker_positions = [
+        lower.find(marker)
+        for marker in markers
+        if marker in lower
+    ]
+
+    if not marker_positions:
+        return None
+
+    start = min(pos for pos in marker_positions if pos >= 0)
+    tail = description[start:]
+
+    amounts = extract_money_numbers_safely(tail)
+
+    if not amounts:
+        return None
+
+    parsed_amounts: list[float] = []
+
+    for token in amounts:
+        try:
+            amount = abs(parse_amount(token))
+        except Exception:
+            continue
+
+        # Ignore tiny values that are most likely date fragments created by OCR
+        # unless the token itself has a real decimal comma/dot and appears after
+        # a strong payment rail marker. This still allows real WERO 6,00 / 8,05.
+        parsed_amounts.append(amount)
+
+    if not parsed_amounts:
+        return None
+
+    return parsed_amounts[-1]
+
+
 def normalize_untyped_incoming_credits(transactions: list[dict]) -> list[dict]:
-    """Classify untyped positive inbound transfers as income.
+    """Classify clear inbound transfer rails as income without corrupting amounts.
 
     International rule:
-    - if a row has a positive amount and clear inbound transfer wording,
-      classify it as income;
-    - never override outgoing transfer/card/debit wording;
-    - keep internal-transfer detection separate, so own-account receipts can
-      still be neutralized later by mark_internal_transfers().
+    - classify only untyped positive rows with explicit inbound wording;
+    - reject mixed rows containing clear outgoing/card/debit wording before the
+      inbound segment is isolated;
+    - if OCR gave a date-like amount (09.02, 28.02, etc.), replace it with the
+      reliable money token found after the inbound marker;
+    - keep internal-transfer detection separate and later in the pipeline.
 
-    This covers common rails/wording:
-    - FR: VIR INST RE, VIR RECU, VIREMENT RECU, RECU DE
+    Covered rails:
+    - FR/BPCE/BRED/SG: Virement reçu, Virement instantané reçu, VIR INST RE
     - EN: incoming transfer, transfer received, payment received
     - Wallet/instant rails: WERO DE:
     """
     normalized: list[dict] = []
 
     inbound_markers = [
+        "virement instantané reçu",
+        "virement instantane recu",
+        "virement sepa reçu",
+        "virement sepa recu",
+        "virement reçu",
+        "virement recu",
         "vir inst re",
         "vir inst recu",
         "vir inst reçu",
         "vir recu",
         "vir reçu",
-        "virement recu",
-        "virement reçu",
         "recu de",
         "reçu de",
         "incoming transfer",
@@ -2338,7 +2409,11 @@ def normalize_untyped_incoming_credits(transactions: list[dict]) -> list[dict]:
         "wero de ",
     ]
 
-    outgoing_markers = [
+    hard_outgoing_markers = [
+        "virement instantané émis",
+        "virement instantane emis",
+        "virement sepa émis",
+        "virement sepa emis",
         "vir instantane emis",
         "vir instantané émis",
         "vir europeen emis",
@@ -2347,37 +2422,62 @@ def normalize_untyped_incoming_credits(transactions: list[dict]) -> list[dict]:
         "virement émis",
         "vir emis",
         "vir émis",
-        "pour:",
-        "card",
-        "carte",
-        "debit",
-        "débit",
-        "prelevement",
-        "prélèvement",
-        "withdrawal",
-        "retrait",
-        "payment to",
         "transfer sent",
         "outgoing transfer",
+        "payment to",
+    ]
+
+    card_or_debit_markers = [
+        "carte",
+        "card",
+        "prelevement",
+        "prélèvement",
+        "direct debit",
+        "withdrawal",
+        "retrait",
+        "commission",
+        "frais",
     ]
 
     for tx in transactions:
         row = dict(tx)
-        description = str(
+        description_raw = str(
             row.get("description")
             or row.get("text")
             or ""
-        ).lower()
+        )
+        description = description_raw.lower()
         amount = float(row.get("amount", 0) or 0)
 
-        if (
-            row.get("type") is None
-            and amount > 0
-            and any(marker in description for marker in inbound_markers)
-            and not any(marker in description for marker in outgoing_markers)
-        ):
-            row["type"] = "income"
-            row["category_hint"] = row.get("category_hint") or "incoming_transfer"
+        has_inbound = any(marker in description for marker in inbound_markers)
+
+        if row.get("type") is None and amount > 0 and has_inbound:
+            first_inbound_pos = min(
+                description.find(marker)
+                for marker in inbound_markers
+                if marker in description
+            )
+
+            has_hard_outgoing = any(
+                marker in description
+                for marker in hard_outgoing_markers
+            )
+
+            # If a card/debit row appears before the inbound segment, it is OCR
+            # noise from another transaction. We still allow classification
+            # only after recalculating the amount from the inbound segment.
+            reliable_amount = extract_amount_after_marker(
+                description_raw,
+                inbound_markers,
+            )
+
+            if reliable_amount is not None and not has_hard_outgoing:
+                row["amount"] = round(abs(reliable_amount), 2)
+                row["type"] = "income"
+                row["category_hint"] = (
+                    row.get("category_hint")
+                    or "incoming_transfer"
+                )
 
         normalized.append(row)
 
