@@ -11,7 +11,7 @@ def debug_log(*args):
     if DEBUG_FINANCE_EXTRACTOR:
         print(*args)
 
-debug_log("RUNEXA_FINANCE_EXTRACTOR_VERSION", "debit-credit-table-v3")
+debug_log("RUNEXA_FINANCE_EXTRACTOR_VERSION", "international-multipass-v4")
 CURRENCY_CODES = ["USD", "EUR", "GBP", "AED", "MAD", "CAD", "AUD", "JOD", "SAR", "QAR", "KWD", "BHD", "OMR", "DZD", "TND", "EGP", "CHF", "JPY", "CNY", "INR", "TRY", "NGN", "ZAR", "MULTI"]
 
 CANADA_BANKS = [
@@ -3254,12 +3254,32 @@ def merge_multiline_debit_credit_rows(
     default_year: int | None = None,
     prefer_us_date: bool = False,
 ) -> list[str]:
-    rebuilt = []
-    buffer = ""
+    """Rebuild one logical transaction per row from noisy OCR/PDF text.
+
+    International multi-pass rule, not bank-specific:
+    - A new transaction can start with a Gregorian date at the beginning
+      of the line OR inside the line. This covers EN/FR rows and Arabic/RTL
+      rows where OCR outputs description before the Gregorian date.
+    - Continuation lines are appended until the next transaction start.
+    - A terminal amount+running-balance line closes the current row.
+    - Header/footer/verification lines are ignored unless they are already
+      inside a transaction buffer.
+
+    This protects previously validated formats while fixing vertical tables
+    such as:
+        FROM MADA / APPLE PAY ...
+        ...
+        5.500 588.33
+    """
+    cleaned_lines = [
+        " ".join(str(line or "").split())
+        for line in lines
+        if " ".join(str(line or "").split())
+    ]
 
     amount_token = r"(?:\d{1,3}(?:,\d{3})+|\d+)(?:[.,]\d{2,3})"
 
-    row_start_date_re = re.compile(
+    start_at_beginning_re = re.compile(
         r"^\s*(?:"
         r"\d{4}[-/.]\d{1,2}[-/.]\d{1,2}"
         r"|"
@@ -3270,10 +3290,12 @@ def merge_multiline_debit_credit_rows(
         flags=re.IGNORECASE,
     )
 
+    gregorian_anywhere_re = re.compile(
+        r"(?<!\d)20\d{2}[-/.]\d{1,2}[-/.]\d{1,2}(?!\d)"
+    )
+
     amount_balance_re = re.compile(
-        rf"^\s*(?:"
-        rf"\d{{1,2}}[- ](?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)[- ]\d{{2,4}}\s+"
-        rf")?({amount_token})\s+({amount_token})\s*$",
+        rf"^\s*({amount_token})\s+({amount_token})\s*$",
         flags=re.IGNORECASE,
     )
 
@@ -3286,43 +3308,95 @@ def merge_multiline_debit_credit_rows(
         flags=re.IGNORECASE,
     )
 
-    for line in lines:
-        clean = " ".join(str(line or "").split())
+    metadata_markers = [
+        "to verify", "please scan", "qr code", "seal", "reference number",
+        "account statement", "customer name", "accountnumber", "account number",
+        "iban number", "branch", "currency", "openingbalance", "closingbalance",
+        "withdrawals", "deposits", "transactiondetail", "transaction detail",
+        "hijri", "gregorian", "debit", "credit", "balance",
+        "للتحقق", "الختم", "الرقم المرجعي", "كشف حساب", "اسم العميل",
+        "رقم الحساب", "الايبان", "الفرع", "العملة", "الرصيد الافتتاحي",
+        "رصيد الإقفال", "تفاصيل الحركة", "مدين", "دائن", "الرصيد",
+    ]
 
+    def is_metadata_line(line: str) -> bool:
+        lower = line.lower()
+        if any(marker in lower for marker in metadata_markers):
+            # A real transaction row can still contain debit/credit words in the
+            # description. Only skip pure header/footer lines with no amount row.
+            if not gregorian_anywhere_re.search(line) and not amount_balance_re.match(line):
+                return True
+        return False
+
+    def is_logical_transaction_start(line: str) -> bool:
+        if is_metadata_line(line):
+            return False
+
+        if date_amounts_only_re.match(line):
+            return False
+
+        if gregorian_anywhere_re.search(line):
+            return True
+
+        # Keep legacy EN/FR rows that start with text dates or numeric dates.
+        if start_at_beginning_re.search(line):
+            parsed = extract_date(
+                line,
+                default_year=default_year,
+                prefer_us_date=prefer_us_date,
+            )
+            return parsed is not None
+
+        return False
+
+    rebuilt: list[str] = []
+    buffer = ""
+
+    def flush_buffer() -> None:
+        nonlocal buffer
+        if buffer:
+            rebuilt.append(buffer.strip())
+            buffer = ""
+
+    for clean in cleaned_lines:
         if not clean:
             continue
 
-        starts_transaction_row = bool(row_start_date_re.search(clean))
-        is_amount_balance_line = bool(amount_balance_re.search(clean))
-
+        is_amount_balance = bool(amount_balance_re.match(clean))
         is_date_amounts_only = bool(date_amounts_only_re.match(clean))
-        if buffer and is_date_amounts_only and not is_amount_balance_line:
-            rebuilt.append(f"{buffer} {clean}".strip())
-            buffer = ""
-            continue
+        starts_transaction = is_logical_transaction_start(clean)
 
-        if buffer and is_amount_balance_line:
-            rebuilt.append(f"{buffer} {clean}".strip())
-            buffer = ""
-            continue
-
-        if starts_transaction_row:
-            if buffer:
-                rebuilt.append(buffer)
+        if starts_transaction:
+            flush_buffer()
             buffer = clean
             continue
 
-        if buffer:
+        if buffer and (is_amount_balance or is_date_amounts_only):
             buffer = f"{buffer} {clean}".strip()
-        else:
-            rebuilt.append(clean)
+            flush_buffer()
+            continue
 
-    if buffer:
-        rebuilt.append(buffer)
+        if buffer:
+            # Continuation text belongs to the current transaction until the
+            # next logical transaction start or terminal amount/balance line.
+            buffer = f"{buffer} {clean}".strip()
+            continue
+
+        if is_metadata_line(clean):
+            continue
+
+        # Preserve unbuffered lines for legacy fallbacks; they will be filtered
+        # later if they do not contain a valid transaction signal.
+        rebuilt.append(clean)
+
+    flush_buffer()
+
+    debug_log(
+        "TX_DEBUG: reconstructed_rows",
+        {"input": len(cleaned_lines), "output": len(rebuilt)},
+    )
 
     return rebuilt
-
-
 
 def has_debit_credit_balance_table(text: str) -> bool:
     """Detect bank statements with explicit debit/credit/balance columns.
@@ -3529,7 +3603,14 @@ def extract_transactions(text: str) -> list[dict]:
 
         normalized_line = clean_line.lower()
 
-        if any(k in normalized_line for k in INTERNAL_TRANSFER_KEYWORDS):
+        internal_transfer_check_text = re.sub(
+            r"\bexchange\s+rate\b|\brate\s+exchange\b|\bexchangerate\b",
+            " ",
+            normalized_line,
+            flags=re.IGNORECASE,
+        )
+
+        if any(k in internal_transfer_check_text for k in INTERNAL_TRANSFER_KEYWORDS):
             debug_log("TX_SKIP: internal_transfer", clean_line)
             continue
 
