@@ -336,6 +336,26 @@ INCOME_KEYWORDS += [
     "تحويل وارد",
 ]
 
+
+EXPENSE_KEYWORDS += [
+    "naps purchase",
+    "naps atm",
+    "cbq purchase",
+    "electron auth",
+    "card bill payment",
+    "transfer charge",
+    "thirdparty transfer",
+    "loan repayment",
+    "loan repayment - princ",
+    "funds transfer",
+]
+
+INCOME_KEYWORDS += [
+    "transfer - credit",
+    "salary transfer",
+    "salary transfer cdd",
+]
+
 BALANCE_KEYWORDS = [
     "statement period",
     "statement date",
