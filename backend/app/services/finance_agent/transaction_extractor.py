@@ -11,7 +11,7 @@ def debug_log(*args):
     if DEBUG_FINANCE_EXTRACTOR:
         print(*args)
 
-debug_log("RUNEXA_FINANCE_EXTRACTOR_VERSION", "international-multipass-v6-internal-transfer-kpi-exclusion")
+debug_log("RUNEXA_FINANCE_EXTRACTOR_VERSION", "international-multipass-v7-kpi-neutral-internal-transfers")
 CURRENCY_CODES = ["USD", "EUR", "GBP", "AED", "MAD", "CAD", "AUD", "JOD", "SAR", "QAR", "KWD", "BHD", "OMR", "DZD", "TND", "EGP", "CHF", "JPY", "CNY", "INR", "TRY", "NGN", "ZAR", "MULTI"]
 
 CANADA_BANKS = [
@@ -2249,16 +2249,16 @@ def mark_internal_transfers(
     transactions: list[dict],
     text: str,
 ) -> list[dict]:
-    """Mark own-account transfers as neutral movements.
+    """Mark own-account transfers as neutral KPI movements.
 
-    Downstream finance code already sums only type == "income" and
-    type == "expense". Setting type="transfer" excludes these rows from:
-    - observed income
-    - observed expenses
-    - financial score inputs
-    - savings opportunities
+    Enterprise-grade rule:
+    - keep the transaction row for auditability;
+    - preserve the original signed movement in original_amount / gross_amount;
+    - set amount = 0.0 and type = "transfer" so every existing downstream
+      calculation that sums either by type OR by sign automatically excludes it.
 
-    The signed amount is preserved for audit/debug purposes.
+    This prevents internal transfers from inflating income, expenses, scores,
+    budget recommendations, savings opportunities, and cashflow risk.
     """
     marked: list[dict] = []
 
@@ -2268,16 +2268,34 @@ def mark_internal_transfers(
 
         if is_internal_transfer(description, text):
             original_type = row.get("type")
+            original_amount = float(row.get("amount", 0) or 0)
+
             row["type"] = "transfer"
+            row["amount"] = 0.0
+
+            # Audit fields: do not lose the bank movement.
+            row["original_type"] = original_type
+            row["original_amount"] = round(original_amount, 2)
+            row["gross_amount"] = round(original_amount, 2)
+            row["movement_amount"] = round(original_amount, 2)
+
+            # Explicit KPI exclusion flags for newer services.
             row["is_internal_transfer"] = True
             row["excluded_from_financial_kpis"] = True
-            row["original_type"] = original_type
+            row["exclude_from_income"] = True
+            row["exclude_from_expense"] = True
+            row["exclude_from_score"] = True
+            row["exclude_from_savings"] = True
+            row["exclude_from_cashflow"] = True
             row["category_hint"] = row.get("category_hint") or "internal_transfer"
+            row["category"] = row.get("category") or "transfers"
+
             debug_log(
                 "TX_INTERNAL_TRANSFER_MARKED",
                 {
                     "date": row.get("date"),
-                    "amount": row.get("amount"),
+                    "original_amount": original_amount,
+                    "kpi_amount": row.get("amount"),
                     "original_type": original_type,
                     "description": description[:160],
                 },
