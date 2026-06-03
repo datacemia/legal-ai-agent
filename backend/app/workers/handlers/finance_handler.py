@@ -601,6 +601,20 @@ def handle_finance_ai(job: Job, db):
 
     quality = assess_analysis_quality(transactions)
 
+    # International KPI filter:
+    # Internal transfers must never affect income, expenses,
+    # savings, scores, forecasts or charts.
+    kpi_transactions = [
+        tx
+        for tx in transactions
+        if not (
+            tx.get("type") == "transfer"
+            or tx.get("is_internal_transfer")
+            or tx.get("excluded_from_financial_kpis")
+        )
+    ]
+
+
     print("QUALITY_CHECK")
     print(quality)
 
@@ -678,7 +692,7 @@ def handle_finance_ai(job: Job, db):
     subscriptions = detect_recurring_subscriptions(transactions)
 
     savings_opportunities = detect_savings_opportunities(
-        transactions=transactions,
+        transactions=kpi_transactions,
         subscriptions=subscriptions,
     )
 
@@ -690,13 +704,13 @@ def handle_finance_ai(job: Job, db):
     )
 
     budget = build_recommended_budget(
-        transactions=transactions,
+        transactions=kpi_transactions,
         fallback_income=effective_fallback_income,
         output_language=output_language,
     )
 
     scores = calculate_financial_scores(
-        transactions=transactions,
+        transactions=kpi_transactions,
         subscriptions=subscriptions,
         fallback_income=effective_fallback_income,
     )
@@ -709,7 +723,7 @@ def handle_finance_ai(job: Job, db):
     )
 
     forecast = predict_cashflow(
-        transactions=transactions,
+        transactions=kpi_transactions,
         fallback_income=effective_fallback_income,
         output_language=output_language,
     )
@@ -780,7 +794,7 @@ def handle_finance_ai(job: Job, db):
     )
 
     alerts = generate_financial_alerts(
-        transactions=transactions,
+        transactions=kpi_transactions,
         subscriptions=subscriptions,
         forecast=forecast,
         scores=scores,
@@ -833,7 +847,7 @@ def handle_finance_ai(job: Job, db):
     )
 
     insights = generate_financial_insights(
-        transactions=transactions,
+        transactions=kpi_transactions,
         subscriptions=subscriptions,
         scores=scores,
         forecast=forecast,
@@ -849,7 +863,7 @@ def handle_finance_ai(job: Job, db):
         finance_progress_message("charts", output_language),
     )
 
-    charts = build_financial_charts(transactions)
+    charts = build_financial_charts(kpi_transactions)
 
     result_ai["summary"] = build_observed_finance_summary(
         forecast=forecast,
