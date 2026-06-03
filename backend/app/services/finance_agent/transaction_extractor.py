@@ -3560,6 +3560,16 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
     debug_log("FINAL_TXS", transactions)
     debug_log("=== TX_EXTRACT_DEBUG END ===")
+    print(
+        "WALLET_ROWS_DEBUG",
+        {
+            "table_lines": len(table_lines),
+            "rows": len(rows),
+            "transactions": len(transactions),
+            "sample_rows": rows[:5],
+        },
+    )
+
     return transactions
 
 
@@ -4187,6 +4197,16 @@ def extract_wallet_tabular_transactions(
     ]
 
     lowered = raw.lower()
+    print(
+        "WALLET_HEADER_CHECK",
+        {
+            "has_argent_sortant": "argent sortant" in lowered,
+            "has_argent_entrant": "argent entrant" in lowered,
+            "has_money_out": "money out" in lowered,
+            "has_money_in": "money in" in lowered,
+            "text_preview": raw[:500],
+        },
+    )
 
     if not (
         ("argent sortant" in lowered and "argent entrant" in lowered)
