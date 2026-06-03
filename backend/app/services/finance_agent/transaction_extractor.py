@@ -4565,7 +4565,13 @@ def extract_vertical_statement_transactions(
         optional category/detail line(s)
         signed amount line
 
-    Standard/international: no bank name, no person name, no merchant patch.
+    Standard/international:
+    - FR/EN/AR localized dates are supported through parse_localized_date().
+    - Section boundaries are structural, not bank-specific:
+      main account transactions are parsed; summaries, subaccount/space/pocket
+      statements, activity logs and legal notes are not mixed into KPI rows.
+    - signed amount is authoritative;
+    - internal own-account / pocket / space movements are KPI-neutral transfers.
     """
     raw = clean_db_text(str(text or ""))
     currency = detected_currency or detect_currency(raw) or "EUR"
@@ -4577,56 +4583,88 @@ def extract_vertical_statement_transactions(
         if " ".join(line.replace("\xa0", " ").split())
     ]
 
-    month_names = (
-        "janvier|janv|jan|january|"
-        "février|fevrier|févr|fevr|february|feb|"
-        "mars|march|mar|"
-        "avril|avr|april|apr|"
-        "mai|may|"
-        "juin|june|jun|"
-        "juillet|juil|july|jul|"
-        "août|aout|august|aug|"
-        "septembre|sept|september|sep|"
-        "octobre|october|oct|"
-        "novembre|november|nov|"
-        "décembre|decembre|déc|december|dec"
+    month_names = "|".join(
+        sorted(
+            (re.escape(key) for key in MONTH_ALIASES.keys()),
+            key=len,
+            reverse=True,
+        )
     )
 
     date_header_re = re.compile(
         rf"^(?:(?:lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche|"
-        rf"monday|tuesday|wednesday|thursday|friday|saturday|sunday),?\s+)?"
-        rf"\d{{1,2}}\.\s*(?:{month_names})\s+\d{{4}}$",
+        rf"monday|tuesday|wednesday|thursday|friday|saturday|sunday|"
+        rf"الاثنين|الإثنين|الثلاثاء|الأربعاء|الاربعاء|الخميس|الجمعة|الجمعه|السبت|الأحد|الاحد),?\s+)?"
+        rf"\d{{1,2}}\.?\s*(?:{month_names})\s+\d{{4}}$",
         flags=re.IGNORECASE,
     )
 
     activity_log_re = re.compile(
-        rf"^\d{{1,2}}\.\s*(?:{month_names})\s+\d{{4}}\s+\d{{1,2}}:\d{{2}}\b",
+        rf"^\d{{1,2}}\.?\s*(?:{month_names})\s+\d{{4}}\s+\d{{1,2}}:\d{{2}}\b",
         flags=re.IGNORECASE,
     )
 
     signed_amount_re = re.compile(
-        r"(?P<amount>[+-]\s*(?:\d{1,3}(?:[ .]\d{3})+|\d+)(?:[.,]\d{2})\s*(?:€|eur|usd|gbp|mad|cad|aud|chf)?)\s*$",
+        r"(?P<amount>[+-]\s*(?:\d{1,3}(?:[ .]\d{3})+|\d+)(?:[.,]\d{2})\s*(?:€|eur|usd|gbp|mad|cad|aud|chf|درهم|دولار|ريال)?)\s*$",
         flags=re.IGNORECASE,
     )
 
     inline_signed_amount_re = re.compile(
-        r"^(?P<description>.+?)\s+(?P<amount>[+-]\s*(?:\d{1,3}(?:[ .]\d{3})+|\d+)(?:[.,]\d{2})\s*(?:€|eur|usd|gbp|mad|cad|aud|chf)?)$",
+        r"^(?P<description>.+?)\s+(?P<amount>[+-]\s*(?:\d{1,3}(?:[ .]\d{3})+|\d+)(?:[.,]\d{2})\s*(?:€|eur|usd|gbp|mad|cad|aud|chf|درهم|دولار|ريال)?)$",
         flags=re.IGNORECASE,
     )
 
-    overview_markers = [
+    summary_section_markers = [
         "vue d’ensemble",
         "vue d'ensemble",
+        "synthèse",
+        "synthese",
+        "résumé",
+        "resume",
         "overview",
-        "activity log",
-        "remarque",
-        "conditions générales",
-        "conditions generales",
+        "summary",
         "ancien solde",
         "transactions sortantes",
         "transactions entrantes",
         "votre nouveau solde",
-        "date action initiator",
+        "ملخص",
+        "نظرة عامة",
+    ]
+
+    subaccount_section_markers = [
+        "relevé espace",
+        "releve espace",
+        "space:",
+        "spaces vue",
+        "pocket statement",
+        "vault statement",
+        "space statement",
+        "saving space",
+        "subaccount statement",
+        "كشف مساحة",
+        "كشف محفظة",
+        "حساب فرعي",
+    ]
+
+    activity_section_markers = [
+        "activity log",
+        "journal d'activité",
+        "journal d activite",
+        "سجل النشاط",
+    ]
+
+    legal_or_footer_markers = [
+        "remarque",
+        "conditions générales",
+        "conditions generales",
+        "terms and conditions",
+        "legal notice",
+        "guide du déposant",
+        "guide du deposant",
+        "l’équipe",
+        "l'equipe",
+        "ملاحظات",
+        "الشروط والأحكام",
     ]
 
     header_markers = [
@@ -4634,32 +4672,40 @@ def extract_vertical_statement_transactions(
         "emise le",
         "relevé de compte",
         "releve de compte",
-        "relevé espace",
-        "releve espace",
-        "space:",
+        "account statement",
+        "كشف حساب",
         "date d'ouverture",
         "date de clôture",
         "date de cloture",
         "iban:",
         "bic:",
         "solde",
+        "balance",
         "n°",
     ]
 
     internal_space_markers = [
         "compte en banque",
+        "bank account",
+        "own account",
+        "between accounts",
         "space",
         "pocket",
         "vault",
         "savings",
         "épargne",
         "epargne",
+        "حسابي",
+        "حساب بنكي",
+        "محفظة",
+        "جيب",
+        "ادخار",
     ]
 
     transactions: list[dict] = []
     current_date: str | None = None
     buffer: list[str] = []
-    skip_section = False
+    stop_financial_extraction = False
 
     def flush_buffer_with_amount(amount_text: str, description_lines: list[str]):
         if not current_date:
@@ -4674,6 +4720,7 @@ def extract_vertical_statement_transactions(
             return
 
         description = clean_db_text(" ".join(description_lines).strip())
+
         if not description:
             return
 
@@ -4685,13 +4732,19 @@ def extract_vertical_statement_transactions(
         is_transfer_like = (
             lower.startswith("vers ")
             or lower.startswith("de ")
+            or lower.startswith("to ")
+            or lower.startswith("from ")
+            or lower.startswith("الى ")
+            or lower.startswith("إلى ")
+            or lower.startswith("من ")
             or " transfer " in f" {lower} "
             or " virement " in f" {lower} "
+            or " تحويل " in f" {lower} "
         )
 
         is_internal_like = (
             any(marker in lower for marker in internal_space_markers)
-            or re.search(r"\b(vers|de)\s+[a-z0-9_+\-]{2,30}\b", lower) is not None
+            or re.search(r"\b(vers|de|to|from)\s+[a-z0-9_+\-]{2,30}\b", lower) is not None
         )
 
         if is_transfer_like and is_internal_like:
@@ -4726,14 +4779,19 @@ def extract_vertical_statement_transactions(
     for line in lines:
         low = line.lower()
 
-        if activity_log_re.match(line):
-            skip_section = True
+        if (
+            any(marker in low for marker in summary_section_markers)
+            or any(marker in low for marker in subaccount_section_markers)
+            or any(marker in low for marker in activity_section_markers)
+            or any(marker in low for marker in legal_or_footer_markers)
+            or activity_log_re.match(line)
+        ):
+            stop_financial_extraction = True
             buffer = []
+            current_date = None
             continue
 
-        if any(marker in low for marker in overview_markers):
-            skip_section = True
-            buffer = []
+        if stop_financial_extraction:
             continue
 
         if date_header_re.match(line):
@@ -4745,17 +4803,17 @@ def extract_vertical_statement_transactions(
             if parsed_date:
                 current_date = parsed_date
                 buffer = []
-                skip_section = False
 
             continue
 
-        if skip_section or not current_date:
+        if not current_date:
             continue
 
         if any(marker in low for marker in header_markers):
             continue
 
         inline = inline_signed_amount_re.match(line)
+
         if inline:
             flush_buffer_with_amount(
                 inline.group("amount").strip(),
@@ -4765,6 +4823,7 @@ def extract_vertical_statement_transactions(
             continue
 
         signed = signed_amount_re.match(line)
+
         if signed:
             flush_buffer_with_amount(signed.group("amount"), buffer)
             buffer = []
