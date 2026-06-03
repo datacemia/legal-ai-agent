@@ -306,6 +306,10 @@ def filter_metric_inconsistent_items(
 
 
 def assess_analysis_quality(transactions: list[dict]) -> dict:
+    OTHER_THRESHOLD = 0.35
+    MIN_TRANSACTIONS = 5
+    MAX_EXPENSE_INCOME_RATIO = 3
+
     expenses = [
         tx for tx in transactions
         if tx.get("type") == "expense"
@@ -346,23 +350,18 @@ def assess_analysis_quality(transactions: list[dict]) -> dict:
     )
 
     low_confidence = (
-        len(transactions) < 5
-        or other_ratio > 0.35
+        len(transactions) < MIN_TRANSACTIONS
+        or other_ratio > OTHER_THRESHOLD
         or (
             expense_income_ratio is not None
-            and expense_income_ratio > 3
+            and expense_income_ratio > MAX_EXPENSE_INCOME_RATIO
         )
     )
 
     return {
         "low_confidence": low_confidence,
-        "transaction_count": len(transactions),
         "other_ratio": round(other_ratio, 4),
-        "expense_income_ratio": (
-            round(expense_income_ratio, 4)
-            if expense_income_ratio is not None
-            else None
-        ),
+        "transaction_count": len(transactions),
     }
 
 
@@ -531,11 +530,10 @@ def handle_finance_ai(job: Job, db):
             "status": "low_confidence",
             "analysis_quality": quality,
             "message": {
-                "en": "This bank statement could not be analyzed reliably. Please upload a clearer exported PDF or a higher-quality scan.",
-                "fr": "Ce relevé bancaire n’a pas pu être analysé de manière fiable. Veuillez importer un PDF exporté plus clair ou un scan de meilleure qualité.",
-                "ar": "تعذر تحليل كشف الحساب البنكي بشكل موثوق. يرجى رفع ملف PDF أوضح أو نسخة ممسوحة بجودة أعلى.",
+                "en": "Statement could not be analyzed reliably.",
+                "fr": "Le relevé ne peut pas être analysé de manière fiable.",
+                "ar": "لا يمكن تحليل كشف الحساب بشكل موثوق.",
             }.get(output_language),
-            "transactions": transactions,
         }
 
     update_job_progress(
