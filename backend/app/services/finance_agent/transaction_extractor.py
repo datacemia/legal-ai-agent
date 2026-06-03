@@ -4447,6 +4447,260 @@ def extract_wallet_tabular_transactions(
 
     return transactions
 
+
+def extract_vertical_statement_transactions(
+    text: str,
+    detected_currency: str | None = None,
+) -> list[dict]:
+    """Extract vertical mobile-bank/neobank statement transactions.
+
+    Generic layout:
+        localized date line
+        description line(s)
+        optional category/detail line(s)
+        signed amount line
+
+    Standard/international: no bank name, no person name, no merchant patch.
+    """
+    raw = clean_db_text(str(text or ""))
+    currency = detected_currency or detect_currency(raw) or "EUR"
+    default_year = detect_document_year(raw)
+
+    lines = [
+        " ".join(line.replace("\xa0", " ").split())
+        for line in raw.splitlines()
+        if " ".join(line.replace("\xa0", " ").split())
+    ]
+
+    month_names = (
+        "janvier|janv|jan|january|"
+        "février|fevrier|févr|fevr|february|feb|"
+        "mars|march|mar|"
+        "avril|avr|april|apr|"
+        "mai|may|"
+        "juin|june|jun|"
+        "juillet|juil|july|jul|"
+        "août|aout|august|aug|"
+        "septembre|sept|september|sep|"
+        "octobre|october|oct|"
+        "novembre|november|nov|"
+        "décembre|decembre|déc|december|dec"
+    )
+
+    date_header_re = re.compile(
+        rf"^(?:(?:lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche|"
+        rf"monday|tuesday|wednesday|thursday|friday|saturday|sunday),?\s+)?"
+        rf"\d{{1,2}}\.\s*(?:{month_names})\s+\d{{4}}$",
+        flags=re.IGNORECASE,
+    )
+
+    activity_log_re = re.compile(
+        rf"^\d{{1,2}}\.\s*(?:{month_names})\s+\d{{4}}\s+\d{{1,2}}:\d{{2}}\b",
+        flags=re.IGNORECASE,
+    )
+
+    signed_amount_re = re.compile(
+        r"(?P<amount>[+-]\s*(?:\d{1,3}(?:[ .]\d{3})+|\d+)(?:[.,]\d{2})\s*(?:€|eur|usd|gbp|mad|cad|aud|chf)?)\s*$",
+        flags=re.IGNORECASE,
+    )
+
+    inline_signed_amount_re = re.compile(
+        r"^(?P<description>.+?)\s+(?P<amount>[+-]\s*(?:\d{1,3}(?:[ .]\d{3})+|\d+)(?:[.,]\d{2})\s*(?:€|eur|usd|gbp|mad|cad|aud|chf)?)$",
+        flags=re.IGNORECASE,
+    )
+
+    overview_markers = [
+        "vue d’ensemble",
+        "vue d'ensemble",
+        "overview",
+        "activity log",
+        "remarque",
+        "conditions générales",
+        "conditions generales",
+        "ancien solde",
+        "transactions sortantes",
+        "transactions entrantes",
+        "votre nouveau solde",
+        "date action initiator",
+    ]
+
+    header_markers = [
+        "émise le",
+        "emise le",
+        "relevé de compte",
+        "releve de compte",
+        "relevé espace",
+        "releve espace",
+        "space:",
+        "date d'ouverture",
+        "date de clôture",
+        "date de cloture",
+        "iban:",
+        "bic:",
+        "solde",
+        "n°",
+    ]
+
+    internal_space_markers = [
+        "compte en banque",
+        "space",
+        "pocket",
+        "vault",
+        "savings",
+        "épargne",
+        "epargne",
+    ]
+
+    transactions: list[dict] = []
+    current_date: str | None = None
+    buffer: list[str] = []
+    skip_section = False
+
+    def flush_buffer_with_amount(amount_text: str, description_lines: list[str]):
+        if not current_date:
+            return
+
+        try:
+            amount = parse_amount(amount_text)
+        except Exception:
+            return
+
+        if amount == 0:
+            return
+
+        description = clean_db_text(" ".join(description_lines).strip())
+        if not description:
+            return
+
+        lower = description.lower()
+
+        tx_type = "income" if amount > 0 else "expense"
+        signed_amount = round(amount, 2)
+
+        is_transfer_like = (
+            lower.startswith("vers ")
+            or lower.startswith("de ")
+            or " transfer " in f" {lower} "
+            or " virement " in f" {lower} "
+        )
+
+        is_internal_like = (
+            any(marker in lower for marker in internal_space_markers)
+            or re.search(r"\b(vers|de)\s+[a-z0-9_+\-]{2,30}\b", lower) is not None
+        )
+
+        if is_transfer_like and is_internal_like:
+            tx_type = "transfer"
+            signed_amount = 0.0
+
+        tx = {
+            "date": current_date,
+            "description": description,
+            "amount": signed_amount,
+            "type": tx_type,
+            "currency": currency,
+        }
+
+        if tx_type == "transfer":
+            original_amount = round(abs(amount), 2)
+            tx["original_amount"] = original_amount
+            tx["gross_amount"] = original_amount
+            tx["movement_amount"] = original_amount
+            tx["is_internal_transfer"] = True
+            tx["excluded_from_financial_kpis"] = True
+            tx["exclude_from_income"] = True
+            tx["exclude_from_expense"] = True
+            tx["exclude_from_score"] = True
+            tx["exclude_from_savings"] = True
+            tx["exclude_from_cashflow"] = True
+            tx["category_hint"] = "internal_transfer"
+            tx["category"] = "transfers"
+
+        transactions.append(tx)
+
+    for line in lines:
+        low = line.lower()
+
+        if activity_log_re.match(line):
+            skip_section = True
+            buffer = []
+            continue
+
+        if any(marker in low for marker in overview_markers):
+            skip_section = True
+            buffer = []
+            continue
+
+        if date_header_re.match(line):
+            parsed_date = extract_date(line, default_year=default_year)
+            if parsed_date:
+                current_date = parsed_date
+                buffer = []
+                skip_section = False
+            continue
+
+        if skip_section or not current_date:
+            continue
+
+        if any(marker in low for marker in header_markers):
+            continue
+
+        inline = inline_signed_amount_re.match(line)
+        if inline:
+            flush_buffer_with_amount(
+                inline.group("amount").strip(),
+                buffer + [inline.group("description").strip()],
+            )
+            buffer = []
+            continue
+
+        signed = signed_amount_re.match(line)
+        if signed:
+            flush_buffer_with_amount(signed.group("amount"), buffer)
+            buffer = []
+            continue
+
+        if not is_date_only_line(line, default_year=default_year):
+            buffer.append(line)
+
+    print(
+        "VERTICAL_STATEMENT_EXTRACTED",
+        {
+            "transactions": len(transactions),
+            "income": sum(1 for tx in transactions if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in transactions if tx.get("type") == "expense"),
+            "transfers": sum(1 for tx in transactions if tx.get("type") == "transfer"),
+        },
+    )
+
+    return transactions
+
+
+def fallback_vertical_transactions_if_empty(
+    transactions: list[dict],
+    text: str,
+    detected_currency: str | None = None,
+) -> list[dict]:
+    """Run vertical statement extraction only when previous parsers returned zero."""
+    if transactions:
+        return transactions
+
+    vertical_transactions = extract_vertical_statement_transactions(
+        text,
+        detected_currency,
+    )
+
+    if vertical_transactions:
+        print(
+            "VERTICAL_STATEMENT_FALLBACK_USED",
+            {
+                "transactions": len(vertical_transactions),
+            },
+        )
+        return vertical_transactions
+
+    return transactions
+
 def extract_transactions(text: str) -> list[dict]:
     debug_log("=== TX_EXTRACT_DEBUG START ===")
     debug_log("TEXT_SAMPLE:", clean_db_text(str(text))[:500])
@@ -4876,6 +5130,12 @@ def extract_transactions(text: str) -> list[dict]:
         {
             "remaining": len(transactions),
         },
+    )
+
+    transactions = fallback_vertical_transactions_if_empty(
+        transactions,
+        text,
+        detected_currency,
     )
 
     print(
