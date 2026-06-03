@@ -3297,7 +3297,25 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         debug_log("AR_TX:", t)
 
     debug_log("ARABIC_BYPASS_COUNT:", len(transactions))
+    transactions = [
+        tx
+        for tx in transactions
+        if not is_non_transaction_line(
+            tx.get("description")
+            or tx.get("text")
+            or ""
+        )
+    ]
+
+    debug_log(
+        "NON_TRANSACTION_FILTER_STATS",
+        {
+            "remaining": len(transactions),
+        },
+    )
+
     log_final_transactions(transactions)
+
     debug_log("FINAL_TXS", transactions)
     debug_log("=== TX_EXTRACT_DEBUG END ===")
     return transactions
