@@ -2722,7 +2722,7 @@ def resolve_arabic_row_amount(row: dict, prev_balance: float | None) -> tuple[fl
     return abs(probable_tx), probable_balance, tx_type
 
 def extract_arabic_ocr_transactions(text: str) -> list[dict]:
-    if not is_arabic_text(text):
+    if not is_mostly_arabic_text(text):
         return []
 
     normalized = normalize_arabic_digits(text)
@@ -3295,7 +3295,7 @@ def extract_transactions(text: str) -> list[dict]:
         if " ".join(line.split())
     ]
 
-    if not is_arabic_text(text):
+    if not is_mostly_arabic_text(text):
         raw_lines = merge_multiline_debit_credit_rows(
             raw_lines,
             default_year=default_year,
