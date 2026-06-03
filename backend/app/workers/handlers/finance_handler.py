@@ -353,6 +353,16 @@ def assess_analysis_quality(transactions: list[dict]) -> dict:
         status = "verified"
         confidence = 90
 
+    print("QUALITY_DEBUG_SAMPLE", [
+        {
+            "description": tx.get("description", "")[:120],
+            "type": tx.get("type"),
+            "amount": tx.get("amount"),
+            "category": tx.get("category") or detect_category(tx.get("description", "")),
+        }
+        for tx in expenses[:25]
+    ])
+
     return {
         "status": status,
         "confidence": confidence,
