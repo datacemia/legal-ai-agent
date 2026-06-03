@@ -3234,6 +3234,15 @@ def merge_multiline_debit_credit_rows(
         flags=re.IGNORECASE,
     )
 
+    date_amounts_only_re = re.compile(
+        rf"^\s*(?:"
+        rf"\d{{4}}[-/.]\d{{1,2}}[-/.]\d{{1,2}}"
+        rf"|\d{{1,2}}[- ](?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)[- ]\d{{2,4}}"
+        rf"|\d{{1,2}}[./-]\d{{1,2}}[./-]\d{{2,4}}"
+        rf")\s+(?:{amount_token}\s*){{1,3}}\s*$",
+        flags=re.IGNORECASE,
+    )
+
     for line in lines:
         clean = " ".join(str(line or "").split())
 
@@ -3243,6 +3252,12 @@ def merge_multiline_debit_credit_rows(
         starts_transaction_row = bool(row_start_date_re.search(clean))
         is_amount_balance_line = bool(amount_balance_re.search(clean))
 
+        is_date_amounts_only = bool(date_amounts_only_re.match(clean))
+        if buffer and is_date_amounts_only and not is_amount_balance_line:
+            rebuilt.append(f"{buffer} {clean}".strip())
+            buffer = ""
+            continue
+
         if buffer and is_amount_balance_line:
             rebuilt.append(f"{buffer} {clean}".strip())
             buffer = ""
@@ -3251,7 +3266,6 @@ def merge_multiline_debit_credit_rows(
         if starts_transaction_row:
             if buffer:
                 rebuilt.append(buffer)
-
             buffer = clean
             continue
 
