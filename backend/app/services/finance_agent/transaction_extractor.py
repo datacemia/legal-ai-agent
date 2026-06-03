@@ -2075,6 +2075,30 @@ def normalize_arabic_digits(value: str) -> str:
 
 
 
+
+NON_TRANSACTION_PATTERNS = [
+    "SOLDE AU",
+    "NOUVEAU SOLDE",
+    "CLOTURE",
+    "CLÔTURE",
+    "TOTAL DES MOUVEMENTS",
+    "TOTAUX DES MOUVEMENTS",
+    "OPENING BALANCE",
+    "CLOSING BALANCE",
+    "AVAILABLE BALANCE",
+    "AUTORISATION DE DECOUVERT",
+    "DÉCOUVERT",
+    "DECOUVERT",
+    "TAEG",
+    "FONDS DE GARANTIE",
+    "GARANTIE DES DEPOTS",
+    "GARANTIE DES DÉPÔTS",
+]
+
+def is_non_transaction_line(line: str) -> bool:
+    upper_line = str(line or "").upper()
+    return any(pattern in upper_line for pattern in NON_TRANSACTION_PATTERNS)
+
 def clean_db_text(value: str) -> str:
     if not isinstance(value, str):
         return value
@@ -3223,6 +3247,14 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
             continue
 
         row_text = str(row.get("text", ""))
+        if is_non_transaction_line(row_text):
+            debug_log(
+                "NON_TRANSACTION_SKIPPED",
+                {
+                    "text": row_text[:200],
+                },
+            )
+            continue
         row_is_internal_transfer = is_internal_transfer(row_text, text)
 
         tx_amount, balance, tx_type = resolve_arabic_row_amount(
