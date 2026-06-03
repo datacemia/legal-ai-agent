@@ -306,8 +306,8 @@ def filter_metric_inconsistent_items(
 
 
 def assess_analysis_quality(transactions: list[dict]) -> dict:
-    VERIFIED_OTHER_THRESHOLD = 0.35
-    INSUFFICIENT_OTHER_THRESHOLD = 0.80
+    VERIFIED_OTHER_THRESHOLD = 0.25
+    INSUFFICIENT_OTHER_THRESHOLD = 0.50
     MIN_TRANSACTIONS = 5
 
     expenses = [
@@ -515,6 +515,9 @@ def handle_finance_ai(job: Job, db):
     transactions = list(transactions)
 
     quality = assess_analysis_quality(transactions)
+
+    print("QUALITY_CHECK")
+    print(quality)
 
     if quality["status"] == "insufficient_data":
         result = {
