@@ -3,6 +3,11 @@ from collections import defaultdict
 
 
 CATEGORY_KEYWORDS = {
+    "income": [
+        "transfer - credit",
+        "salary transfer",
+        "salary transfer cdd",
+    ],
     "subscriptions": [
         # Specific recurring digital services
         "netflix", "spotify", "adobe", "openai", "chatgpt",
@@ -119,6 +124,9 @@ CATEGORY_KEYWORDS = {
         "فندق", "طيران", "مطار",
     ],
     "shopping": [
+        "naps purchase",
+        "cbq purchase",
+        "electron auth",
         # EN
         "pos purchase", "card purchase",
         "retail", "store", "shopping",
@@ -160,6 +168,8 @@ CATEGORY_KEYWORDS = {
         "épargne", "epargne", "ادخار", "توفير",
     ],
     "transfers": [
+        "thirdparty transfer",
+        "funds transfer",
         # EN
         "transfer", "bank transfer", "wire transfer",
 
@@ -180,12 +190,14 @@ CATEGORY_KEYWORDS = {
         "ةيباحسلا",
     ],
     "fees": [
+        "transfer charge",
         "fee", "fees", "frais", "commission", "charge",
         "bank charge", "overdraft fee", "late fee",
         "رسوم", "عمولة",
         "موسر", "ةلومع", "رسوم بنكية", "ةيكنب موسر",
     ],
     "cash": [
+        "naps atm",
         # English
         "atm",
         "cash withdrawal",
@@ -230,11 +242,17 @@ CATEGORY_KEYWORDS = {
         "شباك",
     ],
     "debt": [
+        "loan repayment - princ",
+        "card bill payment",
         "loan", "credit card", "minimum payment", "repayment",
         "debt", "collections", "prêt", "pret", "crédit",
         "credit", "remboursement prêt", "remboursement pret",
         "دين", "قرض",
         "دادس", "سداد",
+    ],
+    "debt_loans": [
+        "loan repayment - princ",
+        "card bill payment",
     ],
 }
 
