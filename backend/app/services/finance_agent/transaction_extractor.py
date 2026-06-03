@@ -3198,10 +3198,23 @@ def merge_multiline_debit_credit_rows(
     rebuilt = []
     buffer = ""
 
+    amount_token = r"(?:\d{1,3}(?:,\d{3})+|\d+)(?:[.,]\d{2})"
+
+    row_start_date_re = re.compile(
+        r"^\s*(?:"
+        r"\d{4}[-/.]\d{1,2}[-/.]\d{1,2}"
+        r"|"
+        r"\d{1,2}[- ](?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)[- ]\d{2,4}"
+        r"|"
+        r"\d{1,2}[./-]\d{1,2}[./-]\d{2,4}"
+        r")\b",
+        flags=re.IGNORECASE,
+    )
+
     amount_balance_re = re.compile(
         rf"^\s*(?:"
-        rf"\d{{1,2}}[- ](?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[- ]\d{{2,4}}\s+"
-        rf")?({MONEY_NUMBER_PATTERN})\s+({MONEY_NUMBER_PATTERN})\s*$",
+        rf"\d{{1,2}}[- ](?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)[- ]\d{{2,4}}\s+"
+        rf")?({amount_token})\s+({amount_token})\s*$",
         flags=re.IGNORECASE,
     )
 
@@ -3211,12 +3224,7 @@ def merge_multiline_debit_credit_rows(
         if not clean:
             continue
 
-        has_date = extract_date(
-            clean,
-            default_year=default_year,
-            prefer_us_date=prefer_us_date,
-        ) is not None
-
+        starts_transaction_row = bool(row_start_date_re.search(clean))
         is_amount_balance_line = bool(amount_balance_re.search(clean))
 
         if buffer and is_amount_balance_line:
@@ -3224,7 +3232,7 @@ def merge_multiline_debit_credit_rows(
             buffer = ""
             continue
 
-        if has_date:
+        if starts_transaction_row:
             if buffer:
                 rebuilt.append(buffer)
 
