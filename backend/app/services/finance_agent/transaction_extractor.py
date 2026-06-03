@@ -356,6 +356,101 @@ INCOME_KEYWORDS += [
     "salary transfer cdd",
 ]
 
+
+# Universal FR / EN / AR markers.
+# Standard international layer: language-neutral direction detection,
+# not bank-specific and not country-specific.
+UNIVERSAL_EXPENSE_MARKERS = [
+    # FR / EU OCR abbreviations
+    "prlv",
+    "prlv sepa",
+    "prel",
+    "prel sepa",
+    "prelevement",
+    "prélèvement",
+    "prelevement sepa",
+    "prélèvement sepa",
+    "paiement",
+    "paiement carte",
+    "retrait",
+    "achat",
+    "carte",
+    "frais",
+    "commission",
+    "virement emis",
+    "virement émis",
+    "vir emis",
+    "vir émis",
+
+    # EN / international
+    "direct debit",
+    "sepa direct debit",
+    "standing order",
+    "card payment",
+    "purchase",
+    "withdrawal",
+    "atm",
+    "fee",
+    "debit",
+    "outgoing transfer",
+    "transfer sent",
+
+    # AR
+    "مدين",
+    "خصم",
+    "سحب",
+    "شراء",
+    "اقتطاع",
+    "دفع",
+    "بطاقة",
+    "رسوم",
+    "عمولة",
+    "فاتورة",
+    "تحويل صادر",
+    "حوالة صادرة",
+]
+
+UNIVERSAL_INCOME_MARKERS = [
+    # FR
+    "virement reçu",
+    "virement recu",
+    "vir reçu",
+    "vir recu",
+    "versement",
+    "dépôt",
+    "depot",
+    "salaire",
+
+    # EN / international
+    "incoming transfer",
+    "transfer received",
+    "payment received",
+    "payment in",
+    "salary",
+    "payroll",
+    "deposit",
+    "credit",
+
+    # AR
+    "دائن",
+    "إيداع",
+    "ايداع",
+    "راتب",
+    "دخل",
+    "تحويل وارد",
+    "حوالة واردة",
+]
+
+EXPENSE_KEYWORDS += [
+    marker for marker in UNIVERSAL_EXPENSE_MARKERS
+    if marker not in EXPENSE_KEYWORDS
+]
+
+INCOME_KEYWORDS += [
+    marker for marker in UNIVERSAL_INCOME_MARKERS
+    if marker not in INCOME_KEYWORDS
+]
+
 BALANCE_KEYWORDS = [
     "statement period",
     "statement date",
@@ -425,6 +520,12 @@ TRANSACTION_SIGNALS = [
     "virement émis",
     "prelevement",
     "prélèvement",
+    "prelevement sepa",
+    "prélèvement sepa",
+    "prlv",
+    "prlv sepa",
+    "prel",
+    "prel sepa",
     "paiement",
     "paiement carte",
     "carte",
@@ -764,6 +865,14 @@ def looks_like_debit_description(line: str) -> bool:
         "opération au débit",
         "debit",
         "débit",
+        "prlv",
+        "prlv sepa",
+        "prel",
+        "prel sepa",
+        "prelevement",
+        "prélèvement",
+        "prelevement sepa",
+        "prélèvement sepa",
         "retrait",
         "gab",
         "awb gab",
@@ -840,10 +949,14 @@ def extract_debit_credit_from_description(line: str) -> tuple[float | None, str 
 
     amount = parse_amount(numbers[0])
 
-    if looks_like_credit_description(line):
+    if looks_like_credit_description(line) or any(
+        marker in line.lower() for marker in UNIVERSAL_INCOME_MARKERS
+    ):
         return abs(amount), "income"
 
-    if looks_like_debit_description(line):
+    if looks_like_debit_description(line) or any(
+        marker in line.lower() for marker in UNIVERSAL_EXPENSE_MARKERS
+    ):
         return -abs(amount), "expense"
 
     return None, None
@@ -1637,6 +1750,15 @@ def detect_type(line: str, amount: float) -> str | None:
     if is_income_priority_description(lower):
         return "income"
 
+    # Standard international FR / EN / AR direction layer.
+    # Keep this before broad legacy keyword lists so abbreviations such as
+    # PRLV SEPA are classified consistently without bank-specific patches.
+    if any(keyword in lower for keyword in UNIVERSAL_INCOME_MARKERS):
+        return "income"
+
+    if any(keyword in lower for keyword in UNIVERSAL_EXPENSE_MARKERS):
+        return "expense"
+
     if any(keyword in lower for keyword in EXPENSE_KEYWORDS):
         return "expense"
 
@@ -1737,6 +1859,18 @@ def extract_tabular_bank_amount(
         ]
     ):
         return None, None
+
+    # First-pass direction extraction on the original line.
+    # This avoids losing valid international decimal amounts such as 15.00
+    # when degraded OCR/date cleanup could confuse them with date-like tokens.
+    original_dc_amount, original_dc_type = extract_debit_credit_from_description(line)
+
+    if original_dc_amount is not None:
+        debug_log(
+            "TX_DEBUG: original_line_debit_credit_description",
+            {"amount": original_dc_amount, "type": original_dc_type, "line": line},
+        )
+        return original_dc_amount, original_dc_type
 
     without_date = re.sub(
         r"\b\d{4}-\d{2}-\d{2}\b",
@@ -1847,10 +1981,17 @@ def extract_tabular_bank_amount(
 
     # Income keywords must be evaluated before generic outgoing words such as
     # "payment". This is a general rule, not a bank-specific exception.
-    if is_income_priority_description(description):
+    if is_income_priority_description(description) or any(
+        keyword in description for keyword in UNIVERSAL_INCOME_MARKERS
+    ):
         amount = pick_transaction_amount_from_tabular_numbers(numbers, line)
 
         return abs(amount), "income"
+
+    if any(keyword in description for keyword in UNIVERSAL_EXPENSE_MARKERS):
+        amount = pick_transaction_amount_from_tabular_numbers(numbers, line)
+
+        return -abs(amount), "expense"
 
     if any(
         keyword in description
@@ -1860,6 +2001,15 @@ def extract_tabular_bank_amount(
             "card",
             "debit",
             "direct debit",
+            "sepa direct debit",
+            "prlv",
+            "prlv sepa",
+            "prel",
+            "prel sepa",
+            "prelevement",
+            "prélèvement",
+            "prelevement sepa",
+            "prélèvement sepa",
             "standing order",
             "withdrawal",
             "payment",
@@ -5660,3 +5810,18 @@ INCOME_KEYWORDS += [
 EXPENSE_KEYWORDS += [
     "arabic ocr transaction",
 ]
+
+
+# Final universal transaction markers safety net.
+# This keeps production behavior standard international FR / EN / AR.
+for _marker in UNIVERSAL_EXPENSE_MARKERS:
+    if _marker not in EXPENSE_KEYWORDS:
+        EXPENSE_KEYWORDS.append(_marker)
+    if _marker not in TRANSACTION_SIGNALS:
+        TRANSACTION_SIGNALS.append(_marker)
+
+for _marker in UNIVERSAL_INCOME_MARKERS:
+    if _marker not in INCOME_KEYWORDS:
+        INCOME_KEYWORDS.append(_marker)
+    if _marker not in TRANSACTION_SIGNALS:
+        TRANSACTION_SIGNALS.append(_marker)
