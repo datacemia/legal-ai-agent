@@ -1813,6 +1813,26 @@ def is_balance_only_line(
     return remainder == ""
 
 
+def is_amount_balance_only_row(
+    line: str,
+    default_year: int | None = None,
+    prefer_us_date: bool = False,
+) -> bool:
+    if not extract_date(line, default_year=default_year, prefer_us_date=prefer_us_date):
+        return False
+
+    amounts = extract_money_numbers_safely(line)
+
+    if len(amounts) != 2:
+        return False
+
+    cleaned = normalize_line_for_amount_detection(line)
+    cleaned = re.sub(MONEY_NUMBER_PATTERN, " ", cleaned)
+    cleaned = re.sub(r"[\s|:;,\-–—_/().]+", "", cleaned)
+
+    return cleaned == ""
+
+
 def attach_following_balance_lines(
     lines: list[str],
     default_year: int | None = None,
@@ -3434,6 +3454,13 @@ def extract_transactions(text: str) -> list[dict]:
         debug_log(f"TX_DEBUG: candidate_line[{idx}]", candidate_line, "date=", extract_date(candidate_line, default_year=default_year, prefer_us_date=prefer_us_date), "money=", re.findall(MONEY_NUMBER_PATTERN, candidate_line))
 
     for clean_line in lines:
+
+        if is_amount_balance_only_row(
+            clean_line,
+            default_year=default_year,
+            prefer_us_date=prefer_us_date,
+        ):
+            continue
 
         normalized_line = clean_line.lower()
 
