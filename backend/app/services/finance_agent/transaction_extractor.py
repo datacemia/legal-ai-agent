@@ -4411,7 +4411,7 @@ def extract_wallet_tabular_transactions(
         transactions.append(tx)
 
     if transactions:
-        debug_log(
+        print(
             "WALLET_TABULAR_EXTRACTED",
             {
                 "transactions": len(transactions),
@@ -4420,6 +4420,32 @@ def extract_wallet_tabular_transactions(
                 "transfers": sum(1 for tx in transactions if tx.get("type") == "transfer"),
             },
         )
+
+    return transactions
+
+
+def fallback_wallet_transactions_if_empty(
+    transactions: list[dict],
+    text: str,
+    detected_currency: str | None = None,
+) -> list[dict]:
+    """Run wallet/digital-bank extraction when the main parser produced zero rows."""
+    if transactions:
+        return transactions
+
+    wallet_transactions = extract_wallet_tabular_transactions(
+        text,
+        detected_currency,
+    )
+
+    if wallet_transactions:
+        print(
+            "WALLET_TABULAR_FALLBACK_USED",
+            {
+                "transactions": len(wallet_transactions),
+            },
+        )
+        return wallet_transactions
 
     return transactions
 
@@ -4852,6 +4878,12 @@ def extract_transactions(text: str) -> list[dict]:
         {
             "remaining": len(transactions),
         },
+    )
+
+    transactions = fallback_wallet_transactions_if_empty(
+        transactions,
+        text,
+        detected_currency,
     )
 
     print(
