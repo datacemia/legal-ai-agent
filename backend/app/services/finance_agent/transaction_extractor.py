@@ -3560,16 +3560,6 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
     debug_log("FINAL_TXS", transactions)
     debug_log("=== TX_EXTRACT_DEBUG END ===")
-    print(
-        "WALLET_ROWS_DEBUG",
-        {
-            "table_lines": len(table_lines),
-            "rows": len(rows),
-            "transactions": len(transactions),
-            "sample_rows": rows[:5],
-        },
-    )
-
     return transactions
 
 
@@ -4169,34 +4159,20 @@ def extract_wallet_tabular_transactions(
     text: str,
     detected_currency: str | None = None,
 ) -> list[dict]:
-    """Extract transactions from wallet/digital-bank tables.
+    """Extract digital-wallet / neobank tabular statements.
 
     Generic table shape:
         Date | Description | Money out | Money in | Balance
 
-    This covers Revolut/Wise/N26-style statements without bank-specific logic.
-    It is triggered only when the document exposes the table headers
-    "Argent sortant / Argent entrant" or "Money out / Money in".
-
-    KPI principle:
-    - external incoming rows => income;
-    - external outgoing rows => expense;
-    - pocket/vault/account movements remain available as transfer and are
-      excluded from financial KPIs;
-    - running balance is never used as the transaction amount.
+    This is intentionally not Revolut-specific. It supports French/English
+    wallet exports where rows are flattened like:
+        26 janv. 2025 Payment from Name €60.00 €60.00
+        26 janv. 2025 À EUR Mouh €60.00 €0.00
+        26 janv. 2025 To Vendor €1,000.00 €1,125.15
     """
     raw = clean_db_text(str(text or ""))
-
-    header_markers = [
-        "argent sortant",
-        "argent entrant",
-        "money out",
-        "money in",
-        "outgoing",
-        "incoming",
-    ]
-
     lowered = raw.lower()
+
     print(
         "WALLET_HEADER_CHECK",
         {
@@ -4216,10 +4192,8 @@ def extract_wallet_tabular_transactions(
 
     currency = detected_currency or detect_currency(raw) or "EUR"
 
-    # French and English textual month dates, e.g.:
-    # 26 janv. 2025 Payment from X €60.00 €60.00
-    date_re = re.compile(
-        r"(?P<date>\b\d{1,2}\s+"
+    date_start_re = re.compile(
+        r"^\s*(?P<date>\d{1,2}\s+"
         r"(?:janv\.?|janvier|jan\.?|january|"
         r"févr\.?|fevr\.?|février|fevrier|feb\.?|february|"
         r"mars|mar\.?|march|"
@@ -4232,60 +4206,44 @@ def extract_wallet_tabular_transactions(
         r"oct\.?|octobre|october|"
         r"nov\.?|novembre|november|"
         r"déc\.?|dec\.?|décembre|decembre|december)"
-        r"\s+\d{4}\b)",
+        r"\s+\d{4})\b",
         flags=re.IGNORECASE,
     )
 
     lines = [
-        " ".join(line.split())
+        " ".join(line.replace("\xa0", " ").split())
         for line in raw.splitlines()
-        if " ".join(line.split())
+        if " ".join(line.replace("\xa0", " ").split())
     ]
 
-    # Extract only table sections, avoiding legal/header text.
-    table_lines: list[str] = []
-    inside_table = False
-
-    for line in lines:
-        lower = line.lower()
-
-        if (
-            "transactions du compte" in lower
-            or "transactions sur des pockets" in lower
-            or "transactions on" in lower
-            or "transactions from" in lower
-            or "date description argent sortant argent entrant solde" in lower
-            or "date description money out money in balance" in lower
-        ):
-            inside_table = True
-            continue
-
-        if inside_table and any(
-            marker in lower
-            for marker in [
-                "iban",
-                "bic",
-                "signaler une carte",
-                "obtenir de l'aide",
-                "revolut bank uab",
-                "©",
-            ]
-        ):
-            continue
-
-        if inside_table:
-            table_lines.append(line)
-
-    # Rebuild physical rows: a transaction row starts with a textual date.
     rows: list[str] = []
     current: list[str] = []
 
-    for line in table_lines:
-        if date_re.search(line):
+    for line in lines:
+        if date_start_re.search(line):
             if current:
                 rows.append(" ".join(current))
             current = [line]
-        elif current:
+            continue
+
+        if current:
+            # Attach detail lines like "De :", "Référence :", "Frais:", "£150.00".
+            # Stop when obvious footer/header metadata starts.
+            low = line.lower()
+            if any(
+                marker in low
+                for marker in [
+                    "iban",
+                    "bic",
+                    "signaler une carte",
+                    "obtenir de l'aide",
+                    "revolut bank uab",
+                    "©",
+                    "résumé du solde",
+                    "solde figurant",
+                ]
+            ):
+                continue
             current.append(line)
 
     if current:
@@ -4294,11 +4252,12 @@ def extract_wallet_tabular_transactions(
     transactions: list[dict] = []
 
     money_re = re.compile(
-        r"€\s*[-+]?\d[\d,]*(?:\.\d{2})?"
-        r"|[-+]?\d[\d,]*(?:\.\d{2})?\s*€"
+        r"(?:€|eur)\s*[-+]?\d[\d,]*(?:\.\d{2})?"
+        r"|[-+]?\d[\d,]*(?:\.\d{2})?\s*(?:€|eur)",
+        flags=re.IGNORECASE,
     )
 
-    transfer_out_markers = [
+    internal_markers = [
         " à eur ",
         " a eur ",
         "to eur ",
@@ -4316,108 +4275,100 @@ def extract_wallet_tabular_transactions(
         "change ",
     ]
 
-    for row in rows:
-        date_match = date_re.search(row)
+    incoming_markers = [
+        "payment from",
+        "virement de",
+        "de :",
+        "from ",
+        "incoming",
+        "received",
+    ]
 
+    outgoing_markers = [
+        "to ",
+        "à :",
+        "a :",
+        "vers ",
+        "payment to",
+        "card payment",
+        "purchase",
+    ]
+
+    for row in rows:
+        date_match = date_start_re.search(row)
         if not date_match:
             continue
 
         parsed_date = extract_date(row)
+        if not parsed_date:
+            # Fallback parser for French textual month dates.
+            raw_date = date_match.group("date").lower().replace(".", "")
+            parts = raw_date.split()
+            if len(parts) == 3 and parts[1] in MONTH_ALIASES:
+                parsed_date = f"{parts[2]}-{MONTH_ALIASES[parts[1]]}-{int(parts[0]):02d}"
 
         if not parsed_date:
             continue
 
-        amounts = money_re.findall(row)
+        amount_tokens = money_re.findall(row)
+        parsed_amounts = []
 
-        if not amounts:
-            continue
-
-        cleaned_amounts = []
-        for amount_text in amounts:
+        for token in amount_tokens:
             cleaned = (
-                amount_text
+                token
                 .replace("€", "")
                 .replace("EUR", "")
+                .replace("eur", "")
                 .strip()
             )
             try:
-                cleaned_amounts.append(parse_amount(cleaned))
+                parsed_amounts.append(abs(parse_amount(cleaned)))
             except Exception:
                 continue
 
-        if not cleaned_amounts:
+        if not parsed_amounts:
             continue
 
+        # In wallet tables, first money token is the movement amount,
+        # last money token is usually running balance. Never use the balance.
+        amount = round(parsed_amounts[0], 2)
         description = row[date_match.end():].strip()
-        lower_description = f" {description.lower()} "
+        desc = f" {description.lower()} "
 
-        # For a date + description + transaction amount + running balance row:
-        # the transaction amount is the first amount after the description.
-        amount = abs(float(cleaned_amounts[0]))
-
-        if amount <= 0:
-            continue
-
-        is_incoming = any(
-            marker in lower_description
-            for marker in [
-                "payment from",
-                "virement de",
-                "de :",
-                "from ",
-                "incoming",
-                "received",
-            ]
-        )
-
-        is_internal = any(
-            marker in lower_description
-            for marker in transfer_out_markers
-        )
-
-        is_outgoing = any(
-            marker in lower_description
-            for marker in [
-                "to ",
-                "à :",
-                "a :",
-                "vers ",
-                "payment to",
-                "card payment",
-                "purchase",
-            ]
-        )
-
-        tx_type = None
-        signed_amount = amount
+        is_internal = any(marker in desc for marker in internal_markers)
+        is_income = any(marker in desc for marker in incoming_markers)
+        is_expense = any(marker in desc for marker in outgoing_markers)
 
         if is_internal:
-            tx_type = "transfer"
             signed_amount = 0.0
-        elif is_incoming:
-            tx_type = "income"
+            tx_type = "transfer"
+        elif is_income:
             signed_amount = amount
-        elif is_outgoing:
-            tx_type = "expense"
+            tx_type = "income"
+        elif is_expense:
             signed_amount = -amount
+            tx_type = "expense"
         else:
-            # In these tables, one amount plus a positive balance usually means
-            # a credit row. Keep conservative fallback unknown if no signal.
-            tx_type = detect_type(description, amount)
-            signed_amount = amount if tx_type == "income" else -amount if tx_type == "expense" else amount
+            inferred = detect_type(description, amount)
+            tx_type = inferred
+            signed_amount = (
+                amount if inferred == "income"
+                else -amount if inferred == "expense"
+                else amount
+            )
 
         tx = {
             "date": parsed_date,
             "description": clean_db_text(description),
-            "amount": round(signed_amount, 2),
+            "amount": signed_amount,
             "type": tx_type,
             "currency": currency,
         }
 
         if is_internal:
-            tx["original_amount"] = round(amount, 2)
-            tx["gross_amount"] = round(amount, 2)
-            tx["movement_amount"] = round(amount, 2)
+            tx["original_amount"] = amount
+            tx["gross_amount"] = amount
+            tx["movement_amount"] = amount
             tx["is_internal_transfer"] = True
             tx["excluded_from_financial_kpis"] = True
             tx["exclude_from_income"] = True
@@ -4430,6 +4381,16 @@ def extract_wallet_tabular_transactions(
 
         transactions.append(tx)
 
+    print(
+        "WALLET_ROWS_DEBUG",
+        {
+            "lines": len(lines),
+            "rows": len(rows),
+            "transactions": len(transactions),
+            "sample_rows": rows[:5],
+        },
+    )
+
     if transactions:
         print(
             "WALLET_TABULAR_EXTRACTED",
@@ -4440,32 +4401,6 @@ def extract_wallet_tabular_transactions(
                 "transfers": sum(1 for tx in transactions if tx.get("type") == "transfer"),
             },
         )
-
-    return transactions
-
-
-def fallback_wallet_transactions_if_empty(
-    transactions: list[dict],
-    text: str,
-    detected_currency: str | None = None,
-) -> list[dict]:
-    """Run wallet/digital-bank extraction when the main parser produced zero rows."""
-    if transactions:
-        return transactions
-
-    wallet_transactions = extract_wallet_tabular_transactions(
-        text,
-        detected_currency,
-    )
-
-    if wallet_transactions:
-        print(
-            "WALLET_TABULAR_FALLBACK_USED",
-            {
-                "transactions": len(wallet_transactions),
-            },
-        )
-        return wallet_transactions
 
     return transactions
 
@@ -4898,12 +4833,6 @@ def extract_transactions(text: str) -> list[dict]:
         {
             "remaining": len(transactions),
         },
-    )
-
-    transactions = fallback_wallet_transactions_if_empty(
-        transactions,
-        text,
-        detected_currency,
     )
 
     print(
