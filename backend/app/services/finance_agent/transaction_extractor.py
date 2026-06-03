@@ -11,7 +11,7 @@ def debug_log(*args):
     if DEBUG_FINANCE_EXTRACTOR:
         print(*args)
 
-debug_log("RUNEXA_FINANCE_EXTRACTOR_VERSION", "international-multipass-v4")
+debug_log("RUNEXA_FINANCE_EXTRACTOR_VERSION", "international-multipass-v5-debit-credit-reconcile")
 CURRENCY_CODES = ["USD", "EUR", "GBP", "AED", "MAD", "CAD", "AUD", "JOD", "SAR", "QAR", "KWD", "BHD", "OMR", "DZD", "TND", "EGP", "CHF", "JPY", "CNY", "INR", "TRY", "NGN", "ZAR", "MULTI"]
 
 CANADA_BANKS = [
@@ -473,7 +473,13 @@ UNSIGNED_AMOUNT_PATTERN = (
 
 MONEY_NUMBER_PATTERN = (
     r"(?<![A-Za-z0-9])"
-    r"(?:\d{1,3}(?:,\d{3})+|\d+)"
+    # International money tokens:
+    #   1,234.56  (US/UK/GCC)
+    #   1.234,56  (FR/EU)
+    #   1234.56 / 1234,56
+    # Spaces are intentionally NOT accepted here because OCR often merges
+    # amount + balance as: "500 588.33". Arabic OCR has its own path.
+    r"(?:\d{1,3}(?:[,.]\d{3})+|\d+)"
     r"(?:[.,]\d{2,3})"
     r"(?![A-Za-z0-9])"
 )
@@ -562,20 +568,74 @@ def normalize_ocr_numeric_text(value: str) -> str:
     )
 
 def parse_amount(value: str) -> float:
-    value = value.strip().replace(" ", "")
+    """Parse international bank amounts safely.
 
-    if "," in value and "." in value:
-        value = value.replace(",", "")
-    elif "," in value:
-        parts = value.split(",")
+    Supports both major formats without assuming one country:
+    - US/UK/GCC: 1,234.56
+    - FR/EU:     1.234,56
+    - Plain:     1234.56 / 1234,56
 
-        if len(parts) == 2 and len(parts[1]) == 3:
-            value = value.replace(",", "")
+    The decimal separator is the last separator when both comma and dot are
+    present. This fixes French statements where 9.450,00 must be 9450.00,
+    while keeping 9,450.00 as 9450.00.
+    """
+    raw = str(value or "").strip()
+    raw = normalize_arabic_digits(raw)
+    raw = raw.replace(" ", "").replace(" ", "").replace(" ", "")
+    raw = re.sub(r"[^0-9,\.\-+]", "", raw)
+
+    if not raw or raw in {"-", "+"}:
+        raise ValueError("Invalid amount")
+
+    sign = -1 if raw.startswith("-") else 1
+    raw = raw.lstrip("+-")
+
+    if "," in raw and "." in raw:
+        last_comma = raw.rfind(",")
+        last_dot = raw.rfind(".")
+
+        if last_comma > last_dot:
+            # European: 1.234,56
+            raw = raw.replace(".", "").replace(",", ".")
         else:
-            value = value.replace(",", ".")
+            # US/GCC: 1,234.56
+            raw = raw.replace(",", "")
 
-    return float(value)
+    elif "," in raw:
+        parts = raw.split(",")
 
+        if len(parts) > 2:
+            # 1,234,567 -> thousands only
+            raw = "".join(parts)
+        elif len(parts) == 2:
+            left, right = parts
+            if len(right) in (1, 2):
+                raw = left + "." + right
+            elif len(right) == 3 and len(left) <= 3:
+                # 1,234 -> thousands
+                raw = left + right
+            else:
+                raw = left + "." + right
+
+    elif "." in raw:
+        parts = raw.split(".")
+
+        if len(parts) > 2:
+            # European thousands with decimal may already have been handled
+            # above when comma exists. If only dots exist, treat last 1-2
+            # digits as decimal, otherwise all dots are thousands.
+            if len(parts[-1]) in (1, 2):
+                raw = "".join(parts[:-1]) + "." + parts[-1]
+            else:
+                raw = "".join(parts)
+        elif len(parts) == 2:
+            left, right = parts
+            if len(right) == 3 and len(left) <= 3:
+                raw = left + right
+            else:
+                raw = left + "." + right
+
+    return sign * float(raw)
 
 def normalize_line_for_amount_detection(line: str) -> str:
     """Remove date-like tokens before money detection.
@@ -3431,6 +3491,150 @@ def has_debit_credit_balance_table(text: str) -> bool:
 
     return has_balance and ((has_debit and has_credit) or has_transaction_detail)
 
+
+def extract_official_movement_totals(text: str) -> dict | None:
+    """Extract official debit/credit movement totals when printed by the bank.
+
+    This is a standard reconciliation control, not a bank-specific patch.
+    It supports common EN/FR labels:
+    - Total des mouvements 9.832,14 10.011,70
+    - Totaux des mouvements 15.267,53 20.615,05
+    - Total withdrawals / deposits
+    - Total debits / credits
+
+    Returns the first main-account total found. Annex/savings account totals
+    later in the document are intentionally ignored by taking the first match.
+    """
+    normalized = normalize_arabic_digits(clean_db_text(text))
+    normalized = normalized.replace("\u00a0", " ").replace("\u202f", " ")
+
+    amount = r"(?:\d{1,3}(?:[,.]\d{3})+|\d+)(?:[.,]\d{2})"
+
+    patterns = [
+        rf"(?:totaux?|total)\s+des\s+mouvements\s+({amount})\s+({amount})",
+        rf"(?:total)\s+(?:debit|débit|debits|débits)\s+({amount}).{{0,80}}?(?:credit|crédit|credits|crédits)\s+({amount})",
+        rf"(?:withdrawals?|debits?)\s+({amount}).{{0,80}}?(?:deposits?|credits?)\s+({amount})",
+    ]
+
+    for pattern in patterns:
+        match = re.search(
+            pattern,
+            normalized,
+            flags=re.IGNORECASE | re.DOTALL,
+        )
+
+        if not match:
+            continue
+
+        try:
+            debit_total = parse_amount(match.group(1))
+            credit_total = parse_amount(match.group(2))
+        except Exception:
+            continue
+
+        if debit_total > 0 or credit_total > 0:
+            return {
+                "debit_total": round(abs(debit_total), 2),
+                "credit_total": round(abs(credit_total), 2),
+                "source": "official_statement_totals",
+            }
+
+    return None
+
+
+def reconcile_with_official_movement_totals(
+    transactions: list[dict],
+    text: str,
+    detected_currency: str,
+) -> list[dict]:
+    """Reconcile extracted totals with official bank totals when available.
+
+    If a PDF contains official movement totals and the parser extracted only a
+    small part of the table, add explicit reconciliation rows instead of
+    presenting false tiny income/expense numbers. This protects international
+    debit/credit-column statements such as SG/BRED/BNP/Credit Agricole, while
+    leaving already-good parsers unchanged when totals are close.
+    """
+    official = extract_official_movement_totals(text)
+
+    if not official:
+        return transactions
+
+    extracted_debits = round(
+        sum(abs(float(t.get("amount", 0) or 0)) for t in transactions if t.get("type") == "expense"),
+        2,
+    )
+    extracted_credits = round(
+        sum(abs(float(t.get("amount", 0) or 0)) for t in transactions if t.get("type") == "income"),
+        2,
+    )
+
+    official_debits = float(official["debit_total"])
+    official_credits = float(official["credit_total"])
+
+    debit_gap = round(official_debits - extracted_debits, 2)
+    credit_gap = round(official_credits - extracted_credits, 2)
+
+    # Do not adjust for tiny rounding/FX/OCR differences.
+    debit_threshold = max(2.0, official_debits * 0.03)
+    credit_threshold = max(2.0, official_credits * 0.03)
+
+    if debit_gap <= debit_threshold and credit_gap <= credit_threshold:
+        debug_log(
+            "TX_RECONCILE: official_totals_close",
+            {
+                "official_debits": official_debits,
+                "extracted_debits": extracted_debits,
+                "official_credits": official_credits,
+                "extracted_credits": extracted_credits,
+            },
+        )
+        return transactions
+
+    date = None
+    for tx in reversed(transactions):
+        if tx.get("date") and tx.get("date") != "unknown":
+            date = tx.get("date")
+            break
+
+    date = date or f"{detect_document_year(text)}-01-01"
+
+    reconciled = list(transactions)
+
+    if debit_gap > debit_threshold:
+        reconciled.append({
+            "date": date,
+            "description": "Official statement debit total reconciliation",
+            "amount": -abs(debit_gap),
+            "type": "expense",
+            "currency": detected_currency,
+            "category_hint": "reconciliation",
+        })
+
+    if credit_gap > credit_threshold:
+        reconciled.append({
+            "date": date,
+            "description": "Official statement credit total reconciliation",
+            "amount": abs(credit_gap),
+            "type": "income",
+            "currency": detected_currency,
+            "category_hint": "reconciliation",
+        })
+
+    debug_log(
+        "TX_RECONCILE: official_totals_applied",
+        {
+            "official_debits": official_debits,
+            "extracted_debits": extracted_debits,
+            "debit_gap": debit_gap,
+            "official_credits": official_credits,
+            "extracted_credits": extracted_credits,
+            "credit_gap": credit_gap,
+        },
+    )
+
+    return reconciled
+
 def extract_transactions(text: str) -> list[dict]:
     debug_log("=== TX_EXTRACT_DEBUG START ===")
     debug_log("TEXT_SAMPLE:", clean_db_text(str(text))[:500])
@@ -3812,6 +4016,12 @@ def extract_transactions(text: str) -> list[dict]:
             text,
             detected_currency,
         )
+
+    transactions = reconcile_with_official_movement_totals(
+        transactions,
+        text,
+        detected_currency,
+    )
 
     log_final_transactions(transactions)
     debug_log("FINAL_TXS", transactions)
