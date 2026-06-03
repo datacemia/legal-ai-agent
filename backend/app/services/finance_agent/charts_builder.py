@@ -401,6 +401,14 @@ def detect_category(description: str) -> str:
     if transfer_reference_like and (has_bank_identifier or "core" in normalized or "system" in normalized) and not has_card_purchase_signal:
         return "transfers"
 
+    # Generic outgoing payment to an organization/service provider.
+    # Standard rule, not merchant-specific.
+    if re.search(
+        r"^(to|payment to|paid to|payee|beneficiary)\s+[a-z0-9]",
+        normalized,
+    ):
+        return "business_operations"
+
     lowered_original = original.lower()
     if re.search(
         r"pos purchase|card purchase|naps purchase|cbq purchase|electron auth|"
