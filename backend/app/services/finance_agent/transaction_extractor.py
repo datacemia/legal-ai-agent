@@ -6392,6 +6392,8 @@ def extract_debit_credit_column_transactions(
             continue
 
         if any(marker in low for marker in metadata_markers):
+            flush_current()
+            inside_operations = False
             continue
 
         if is_balance_snapshot_line(line):
@@ -6429,7 +6431,10 @@ def extract_debit_credit_column_transactions(
 
                 flush_current()
 
-                tx_type = "income" if looks_like_credit_description(description) else "expense"
+                if is_universal_fee_tax_or_charge(description):
+                    tx_type = "expense"
+                else:
+                    tx_type = "income" if looks_like_credit_description(description) else "expense"
 
                 current = {
                     "date": parsed_date,
@@ -6440,12 +6445,16 @@ def extract_debit_credit_column_transactions(
                 continue
 
         if current:
-            if not any(marker in low for marker in metadata_markers):
-                current["description"] = (
-                    str(current.get("description") or "").strip()
-                    + " "
-                    + line.strip()
-                ).strip()
+            if any(marker in low for marker in metadata_markers):
+                flush_current()
+                inside_operations = False
+                continue
+
+            current["description"] = (
+                str(current.get("description") or "").strip()
+                + " "
+                + line.strip()
+            ).strip()
 
     flush_current()
 
