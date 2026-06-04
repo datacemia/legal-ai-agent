@@ -3356,18 +3356,6 @@ def normalize_untyped_incoming_credits(transactions: list[dict]) -> list[dict]:
         "payment to",
     ]
 
-    card_or_debit_markers = [
-        "carte",
-        "card",
-        "prelevement",
-        "prélèvement",
-        "direct debit",
-        "withdrawal",
-        "retrait",
-        "commission",
-        "frais",
-    ]
-
     for tx in transactions:
         row = dict(tx)
         description_raw = str(
@@ -3390,12 +3378,6 @@ def normalize_untyped_incoming_credits(transactions: list[dict]) -> list[dict]:
         has_inbound = any(marker in description for marker in inbound_markers)
 
         if row.get("type") is None and amount > 0 and has_inbound:
-            first_inbound_pos = min(
-                description.find(marker)
-                for marker in inbound_markers
-                if marker in description
-            )
-
             has_hard_outgoing = any(
                 marker in description
                 for marker in hard_outgoing_markers
@@ -4251,7 +4233,7 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
     normalized = clean_db_text(normalized)
     normalized = normalized.replace("\u00a0", " ").replace("\u202f", " ")
     normalized = normalized.replace("،", ",")
-    normalized = "\n".join(" ".join(l.split()) for l in normalized.splitlines())
+    normalized = "\n".join(" ".join(line.split()) for line in normalized.splitlines())
 
     currency = detect_currency(text)
     debug_log("CURRENCY_DETECTED:", currency)
@@ -4268,15 +4250,11 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         )[:30]
     )
 
-    amount_pattern = r"\d{1,3}(?:[ ,]\d{3})*(?:[.,]\d{2})"
-
     rows = []
 
     for dm in dates:
         debug_log("---- DATE LOOP ----")
         debug_log("DATE:", dm["clean"])
-
-        date_raw = dm["clean"]
 
         # Build one transaction segment from this date to the next detected date.
         # This is safer than using physical OCR lines because RTL extraction can place
@@ -4526,7 +4504,7 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
     transactions = fallback_debit_credit_column_transactions_if_low_quality(
         transactions,
         text,
-        detected_currency,
+        currency,
     )
 
     log_final_transactions(transactions)
@@ -4969,8 +4947,6 @@ def extract_standard_amount_balance_ledger_transactions(
         description = re.sub(r"^\s*\d{1,2}[/-]\d{1,2}\b", "", combined).strip()
         description = money_re.sub("", description).strip()
         description = clean_db_text(description)
-
-        lower = description.lower()
 
         amount_abs = abs(float(tx_amount or 0))
         amount = amount_abs
@@ -5415,7 +5391,7 @@ def extract_wallet_tabular_transactions(
         " ".join(clean_db_text(
             line.replace("\xa0", " ").replace("\u202f", " ")
         ).split())
-        for line in raw_text.splitlines()
+        for line in raw.splitlines()
         if " ".join(line.replace("\xa0", " ").replace("\u202f", " ").split())
     ]
 
@@ -5967,7 +5943,7 @@ def extract_debit_credit_column_transactions(
         " ".join(clean_db_text(
             line.replace("\xa0", " ").replace("\u202f", " ")
         ).split())
-        for line in raw_text.splitlines()
+        for line in raw.splitlines()
         if " ".join(line.replace("\xa0", " ").replace("\u202f", " ").split())
     ]
 
@@ -7013,8 +6989,6 @@ def extract_transactions(text: str) -> list[dict]:
             tabular_amount, tabular_type = extract_amount_balance_line(clean_line)
 
             amount_balance_tx_amount, amount_balance_value = extract_terminal_amount_balance_pair(clean_line)
-
-        numbers = extract_transaction_money_numbers(clean_line)
 
         # Universal terminal pair authority, valid for FR / EN / AR:
         # if the logical row exposes movement + balance at the end, lock the
