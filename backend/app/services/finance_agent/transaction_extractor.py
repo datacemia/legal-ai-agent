@@ -6052,7 +6052,7 @@ def extract_vertical_statement_transactions(
             "income": sum(1 for tx in transactions if tx.get("type") == "income"),
             "expenses": sum(1 for tx in transactions if tx.get("type") == "expense"),
             "transfers": sum(1 for tx in transactions if tx.get("type") == "transfer"),
-            "income_total": round(sum(float(tx.get("amount") or 0) for tx in transactions if tx.get("amount", 0) > 0), 2),
+            "income_total": round(sum(float(tx.get("amount") or 0) for tx in transactions if tx.get("type") == "income"), 2),
             "expense_total": round(abs(sum(float(tx.get("amount") or 0) for tx in transactions if tx.get("amount", 0) < 0)), 2),
         },
     )
@@ -6326,7 +6326,7 @@ def extract_debit_credit_column_transactions(
                 sum(
                     float(tx.get("amount") or 0)
                     for tx in transactions
-                    if float(tx.get("amount") or 0) > 0
+                    if tx.get("type") == "income"
                 ),
                 2,
             ),
