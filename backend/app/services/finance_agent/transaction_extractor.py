@@ -4508,39 +4508,27 @@ def extract_signed_amount_fallback_transactions(
 
 
 def has_standard_amount_balance_ledger_header(text: str) -> bool:
-    lower = str(text or "").lower()
+    normalized = re.sub(r"\s+", " ", str(text or "").lower())
 
-    has_standard_columns = (
-        "date" in lower
-        and (
-            "description" in lower
-            or "libellé" in lower
-            or "libelle" in lower
-            or "details" in lower
-            or "détails" in lower
-        )
-        and (
-            "amount" in lower
-            or "montant" in lower
-            or "المبلغ" in lower
-        )
-        and (
-            "balance" in lower
-            or "solde" in lower
-            or "الرصيد" in lower
-        )
+    amount_balance_header = (
+        "date description amount balance" in normalized
+        or "date details amount balance" in normalized
+        or "date libellé montant solde" in normalized
+        or "date libelle montant solde" in normalized
+        or "date détails montant solde" in normalized
+        or "date details montant solde" in normalized
+        or "التاريخ" in normalized and "المبلغ" in normalized and "الرصيد" in normalized
     )
 
-    has_debit_credit_columns = (
-        "debit" in lower
-        or "débit" in lower
-        or "credit" in lower
-        or "crédit" in lower
-        or "مدين" in lower
-        or "دائن" in lower
+    debit_credit_header = (
+        "date description debit credit" in normalized
+        or "date description débit crédit" in normalized
+        or "date libellé débit crédit" in normalized
+        or "date libelle debit credit" in normalized
+        or "مدين" in normalized and "دائن" in normalized and "الرصيد" in normalized
     )
 
-    return has_standard_columns and not has_debit_credit_columns
+    return amount_balance_header and not debit_credit_header
 
 
 def detect_standard_statement_year(text: str) -> int:
@@ -6259,24 +6247,16 @@ def extract_transactions(text: str) -> list[dict]:
         )
 
     if not transactions:
-        debug_log(
-            "TX_DEBUG: normal_extraction_empty_using_signed_amount_fallback"
-        )
-        transactions = extract_signed_amount_fallback_transactions(
+        transactions = extract_standard_amount_balance_ledger_transactions(
             text,
             detected_currency,
         )
 
-    transactions = reconcile_with_official_movement_totals(
-        transactions,
-        text,
-        detected_currency,
-    )
-
-    transactions = normalize_untyped_incoming_credits(transactions)
-
     if not transactions:
-        transactions = extract_standard_amount_balance_ledger_transactions(
+        debug_log(
+            "TX_DEBUG: normal_extraction_empty_using_signed_amount_fallback"
+        )
+        transactions = extract_signed_amount_fallback_transactions(
             text,
             detected_currency,
         )
