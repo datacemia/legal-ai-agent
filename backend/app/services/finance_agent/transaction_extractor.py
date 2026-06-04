@@ -7034,7 +7034,7 @@ def extract_transactions(text: str) -> list[dict]:
         print("AMOUNT_BALANCE_DEBUG_LINE", clean_line)
         print("AMOUNT_BALANCE_DEBUG_NUMBERS", extract_transaction_money_numbers(clean_line))
         print("AMOUNT_BALANCE_DEBUG_PAIR", extract_terminal_amount_balance_pair(clean_line))
-
+        balance = None
         locked_tx_amount, locked_balance = extract_terminal_amount_balance_pair(clean_line)
 
         if locked_tx_amount is not None and locked_balance is not None:
