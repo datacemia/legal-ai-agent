@@ -2623,6 +2623,15 @@ def enforce_no_untyped_kpi_transactions(transactions: list[dict]) -> list[dict]:
 
     return fixed
 
+def canonicalize_transaction(tx):
+    if tx.get("locked_type"):
+        tx["type"] = tx["locked_type"]
+        tx["amount"] = tx["locked_amount"]
+        return tx
+
+    return tx
+
+
 def infer_balance_delta_rows(rows: list[dict]) -> list[dict]:
     """Infer and LOCK income/expense from running balance deltas.
 
@@ -7002,7 +7011,15 @@ def extract_transactions(text: str) -> list[dict]:
             "type": tx_type,
             "currency": detected_currency,
             "_locked_amount": final_amount,
+            "locked_amount": final_amount,
         }
+
+        if signed_amount > 0:
+            tx["locked_type"] = "income"
+        elif signed_amount < 0:
+            tx["locked_type"] = "expense"
+
+        tx = canonicalize_transaction(tx)
 
         if balance is not None:
             tx["_balance"] = balance
@@ -7230,6 +7247,22 @@ def extract_transactions(text: str) -> list[dict]:
                         tx["amount"] = original
 
     transactions = enforce_no_untyped_kpi_transactions(transactions)
+
+    for tx in transactions:
+        if tx.get("locked_type"):
+            tx["type"] = tx["locked_type"]
+            tx["amount"] = tx["locked_amount"]
+
+        elif tx.get("type") is None:
+            try:
+                amount = float(tx.get("amount") or 0)
+            except (TypeError, ValueError):
+                amount = 0.0
+
+            if amount > 0:
+                tx["type"] = "income"
+            elif amount < 0:
+                tx["type"] = "expense"
 
     print(
         "KPI_INPUT_DEBUG",
