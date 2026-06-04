@@ -4959,7 +4959,7 @@ def extract_standard_amount_balance_ledger_transactions(
             i = j
             continue
 
-        tx_amount = parse_amount(amounts[-2])
+        tx_amount = parse_terminal_amount(amounts[-2], combined)
         balance = parse_amount(amounts[-1])
 
         description = re.sub(r"^\s*\d{1,2}[/-]\d{1,2}\b", "", combined).strip()
