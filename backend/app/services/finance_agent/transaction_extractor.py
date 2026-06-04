@@ -6840,6 +6840,21 @@ def extract_transactions(text: str) -> list[dict]:
                 },
             )
 
+        tx_type = transaction_type
+        description = clean_db_text(clean_line)
+        signed_amount = amount
+
+        print(
+            "FINAL_TX_DEBUG",
+            {
+                "amount": amount,
+                "balance": balance,
+                "signed_amount": signed_amount,
+                "type": tx_type,
+                "description": description[:100],
+            }
+        )
+
         transactions.append(
             {
                 "date": date,
@@ -7023,6 +7038,17 @@ def extract_transactions(text: str) -> list[dict]:
             if "LITTLE" in str(tx.get("description", "")).upper()
             or "CONNECTION" in str(tx.get("description", "")).upper()
         ],
+    )
+
+    print(
+        "KPI_INPUT_DEBUG",
+        [
+            {
+                "amount": getattr(t, "amount", t.get("amount") if isinstance(t, dict) else None),
+                "type": getattr(t, "type", t.get("type") if isinstance(t, dict) else None),
+            }
+            for t in transactions[:20]
+        ]
     )
 
     debug_log(
