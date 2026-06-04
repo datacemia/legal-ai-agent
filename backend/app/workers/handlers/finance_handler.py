@@ -770,6 +770,30 @@ def handle_finance_ai(job: Job, db):
     )
 
     print(
+        "EXPENSE_TOTAL_RECALC",
+        round(
+            sum(
+                abs(float(tx.get("amount", 0)))
+                for tx in kpi_transactions
+                if tx.get("type") == "expense"
+            ),
+            2,
+        ),
+    )
+
+    print(
+        "INCOME_TOTAL_RECALC",
+        round(
+            sum(
+                float(tx.get("amount", 0))
+                for tx in kpi_transactions
+                if tx.get("type") == "income"
+            ),
+            2,
+        ),
+    )
+
+    print(
         "KPI_AUDIT",
         {
             "raw_transactions": len(transactions),
