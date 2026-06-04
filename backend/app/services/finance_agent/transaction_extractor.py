@@ -4920,10 +4920,20 @@ def extract_standard_amount_balance_ledger_transactions(
     previous_balance = None
     i = 0
 
+    standard_row_start_re = re.compile(
+        r"^\s*(?:"
+        r"\d{1,2}[/-]\d{1,2}[/-]\d{4}\s+\d{4}[/-]\d{1,2}[/-]\d{1,2}"
+        r"|"
+        r"\d{4}[/-]\d{1,2}[/-]\d{1,2}"
+        r"|"
+        r"\d{1,2}[/-]\d{1,2}\b"
+        r")"
+    )
+
     while i < len(raw_lines):
         line = raw_lines[i]
 
-        if not re.match(r"^\s*\d{1,2}[/-]\d{1,2}\b", line):
+        if not standard_row_start_re.match(line):
             i += 1
             continue
 
@@ -4959,7 +4969,7 @@ def extract_standard_amount_balance_ledger_transactions(
             i = j
             continue
 
-        tx_amount = parse_terminal_amount(amounts[-2], combined)
+        tx_amount = parse_amount(amounts[-2])
         balance = parse_amount(amounts[-1])
 
         description = re.sub(r"^\s*\d{1,2}[/-]\d{1,2}\b", "", combined).strip()
