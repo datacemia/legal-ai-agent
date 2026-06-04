@@ -10,6 +10,7 @@ DEBUG_FINANCE_EXTRACTOR = os.getenv("FINANCE_EXTRACTOR_DEBUG", "0") == "1"
 def debug_log(*args):
     if DEBUG_FINANCE_EXTRACTOR:
         print(*args)
+print("RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE", "v9-terminal-balance-authority")
 
 debug_log("RUNEXA_FINANCE_EXTRACTOR_VERSION", "international-multipass-v8-terminal-balance-authority-fr-en-ar")
 CURRENCY_CODES = ["USD", "EUR", "GBP", "AED", "MAD", "CAD", "AUD", "JOD", "SAR", "QAR", "KWD", "BHD", "OMR", "DZD", "TND", "EGP", "CHF", "JPY", "CNY", "INR", "TRY", "NGN", "ZAR", "MULTI"]
