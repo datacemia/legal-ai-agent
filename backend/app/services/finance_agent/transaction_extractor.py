@@ -6310,6 +6310,11 @@ def extract_debit_credit_column_transactions(
         "page ",
         "كشف حساب",
         "رقم الحساب",
+        "au releve d'identite bancaire",
+        "au relevé d'identité bancaire",
+        "numero de compte principal",
+        "numéro de compte principal",
+        "extrait de compte",
     ]
 
     row_start_re = re.compile(
