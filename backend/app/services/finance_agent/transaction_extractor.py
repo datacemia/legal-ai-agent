@@ -2489,85 +2489,196 @@ def attach_following_balance_lines(
     return rebuilt
 
 
+
+def lock_transaction_from_balance_delta(
+    tx: dict,
+    previous_balance: float | None,
+    current_balance: float | None,
+) -> dict:
+    """Lock transaction sign/type from running-balance authority.
+
+    Standard international FR / EN / AR rule:
+    when a statement row exposes amount + running balance, the balance delta is
+    stronger than keywords, language, OCR direction, or later classification.
+
+        delta = current_balance - previous_balance
+
+        delta ~= +amount_abs => income
+        delta ~= -amount_abs => expense
+
+    Once locked, later stages must not reclassify the transaction.
+    """
+    if previous_balance is None or current_balance is None:
+        return tx
+
+    try:
+        amount_abs = abs(float(tx.get("amount") or tx.get("locked_amount") or 0))
+        delta = round(float(current_balance) - float(previous_balance), 2)
+    except Exception:
+        return tx
+
+    if amount_abs == 0:
+        return tx
+
+    tolerance = max(0.02, amount_abs * 0.002)
+
+    signed_amount: float | None = None
+    locked_type: str | None = None
+
+    if abs(delta - amount_abs) <= tolerance:
+        signed_amount = amount_abs
+        locked_type = "income"
+    elif abs(delta + amount_abs) <= tolerance:
+        signed_amount = -amount_abs
+        locked_type = "expense"
+
+    if locked_type is None or signed_amount is None:
+        return tx
+
+    tx["amount"] = round(signed_amount, 2)
+    tx["type"] = locked_type
+    tx["signed_amount"] = round(signed_amount, 2)
+    tx["locked_amount"] = round(signed_amount, 2)
+    tx["locked_type"] = locked_type
+    tx["balance_delta"] = delta
+    tx["balance_authority"] = True
+    tx["_balance_locked"] = True
+
+    return tx
+
+
+def is_balance_locked_transaction(tx: dict) -> bool:
+    """Return True when transaction was signed by balance authority."""
+    return bool(
+        tx.get("_balance_locked")
+        or tx.get("balance_authority")
+        or tx.get("locked_type")
+    )
+
+
+def preserve_balance_locked_transaction(tx: dict) -> dict:
+    """Re-apply locked sign/type after any legacy stage mutates the row."""
+    if not is_balance_locked_transaction(tx):
+        return tx
+
+    locked_type = tx.get("locked_type")
+    locked_amount = tx.get("locked_amount")
+
+    if locked_type in {"income", "expense"} and locked_amount is not None:
+        try:
+            signed_amount = float(locked_amount)
+        except Exception:
+            return tx
+
+        if locked_type == "income":
+            signed_amount = abs(signed_amount)
+        else:
+            signed_amount = -abs(signed_amount)
+
+        tx["amount"] = round(signed_amount, 2)
+        tx["type"] = locked_type
+        tx["signed_amount"] = round(signed_amount, 2)
+        tx["locked_amount"] = round(signed_amount, 2)
+        tx["_balance_locked"] = True
+        tx["balance_authority"] = True
+
+    return tx
+
+
+def enforce_no_untyped_kpi_transactions(transactions: list[dict]) -> list[dict]:
+    """Prevent type=None rows from reaching KPI production.
+
+    Locked rows are preserved. Remaining untyped rows with a sign are assigned
+    by sign only; rows without a reliable sign stay excluded from KPIs instead
+    of being silently treated as income.
+    """
+    fixed: list[dict] = []
+
+    for tx in transactions:
+        tx = preserve_balance_locked_transaction(tx)
+
+        if tx.get("type") in {"income", "expense", "transfer"}:
+            fixed.append(tx)
+            continue
+
+        try:
+            amount = float(tx.get("amount") or 0)
+        except Exception:
+            amount = 0.0
+
+        if amount < 0:
+            tx["type"] = "expense"
+        elif amount > 0 and tx.get("signed_amount") is not None:
+            tx["type"] = "income"
+        else:
+            tx["excluded_from_financial_kpis"] = True
+            tx["exclude_from_income"] = True
+            tx["exclude_from_expense"] = True
+            tx["exclude_from_score"] = True
+            tx["exclude_from_savings"] = True
+            tx["exclude_from_cashflow"] = True
+            tx["category_hint"] = tx.get("category_hint") or "untyped_unreliable"
+
+        fixed.append(tx)
+
+    return fixed
+
 def infer_balance_delta_rows(rows: list[dict]) -> list[dict]:
-    """Infer income/expense from running balance deltas.
+    """Infer and LOCK income/expense from running balance deltas.
 
-    General rule for OCR/table rows shaped like:
-        date description transaction_amount running_balance
+    Standard international FR / EN / AR rule:
+        previous_balance + signed_amount == current_balance
 
-    When current_balance - previous_balance matches the transaction amount,
-    the balance delta is stronger than merchant keywords.
+    Balance authority is stronger than keywords and later classification.
+    Once a row is locked, downstream logic must preserve locked_type and
+    locked_amount.
     """
     previous_balance = None
     fixed = []
 
     for row in rows:
+        row = preserve_balance_locked_transaction(row)
+
         amount = float(row.get("amount", 0) or 0)
-        tx_type = row.get("type")
         balance = row.get("_balance")
 
         if balance is not None and previous_balance is not None:
-            delta = round(float(balance) - float(previous_balance), 2)
-            tolerance = 0.05
+            before = previous_balance
+            after = float(balance)
 
             debug_log(
                 "TX_DEBUG: balance_authority",
                 {
-                    "previous": previous_balance,
-                    "current": balance,
-                    "delta": delta,
+                    "previous": before,
+                    "current": after,
                     "original_amount": amount,
-                    "original_type": tx_type,
-                }
-            )
-
-            debug_log(
-                "TX_DEBUG: balance_delta_check",
-                {
-                    "date": row.get("date"),
-                    "amount": amount,
-                    "previous_balance": previous_balance,
-                    "balance": balance,
-                    "delta": delta,
-                    "tolerance": tolerance,
+                    "original_type": row.get("type"),
                 },
             )
 
-            if abs(abs(delta) - abs(amount)) <= tolerance:
-                if delta > 0:
-                    row["type"] = "income"
-                    row["amount"] = abs(amount)
-                else:
-                    row["type"] = "expense"
-                    row["amount"] = -abs(amount)
+            row = lock_transaction_from_balance_delta(
+                row,
+                before,
+                after,
+            )
 
-                amount = row["amount"]
-                tx_type = row["type"]
-
+            if row.get("_balance_locked"):
                 debug_log(
-                    "TX_DEBUG: balance_override",
-                    {
-                        "new_amount": amount,
-                        "new_type": tx_type,
-                    }
-                )
-
-                debug_log(
-                    "TX_DEBUG: balance_delta_applied",
+                    "TX_DEBUG: balance_delta_locked",
                     {
                         "date": row.get("date"),
                         "amount": row.get("amount"),
                         "type": row.get("type"),
+                        "delta": row.get("balance_delta"),
                     },
                 )
 
         if balance is not None:
-            previous_balance = balance
+            previous_balance = float(balance)
 
-        fixed.append(row)
+        fixed.append(preserve_balance_locked_transaction(row))
 
     return fixed
-
 
 def extract_first_amount_after_date(line: str) -> float | None:
     text = re.sub(
@@ -6911,6 +7022,7 @@ def extract_transactions(text: str) -> list[dict]:
         )
 
     transactions = infer_balance_delta_rows(transactions)
+    transactions = [preserve_balance_locked_transaction(tx) for tx in transactions]
 
     amount_balance_transactions = extract_standard_amount_balance_ledger_transactions(
         text,
@@ -7032,6 +7144,8 @@ def extract_transactions(text: str) -> list[dict]:
             detected_currency,
         )
 
+    transactions = [preserve_balance_locked_transaction(tx) for tx in transactions]
+
     transactions = mark_internal_transfers(
         transactions,
         text,
@@ -7114,6 +7228,8 @@ def extract_transactions(text: str) -> list[dict]:
 
                     if original is not None:
                         tx["amount"] = original
+
+    transactions = enforce_no_untyped_kpi_transactions(transactions)
 
     print(
         "KPI_INPUT_DEBUG",
