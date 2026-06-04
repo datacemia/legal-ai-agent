@@ -7467,6 +7467,18 @@ def extract_transactions(text: str) -> list[dict]:
     transactions = enforce_no_untyped_kpi_transactions(transactions)
 
     for tx in transactions:
+        if tx.get("_balance") is not None and not tx.get("_balance_locked"):
+            tx["type"] = None
+            tx.pop("signed_amount", None)
+            tx.pop("locked_amount", None)
+            tx.pop("_locked_amount", None)
+            tx.pop("locked_type", None)
+            tx = exclude_transaction_from_financial_kpis(
+                tx,
+                tx.get("category_hint") or "unlocked_amount_balance_row",
+            )
+            continue
+
         if tx.get("signed_amount") is not None:
             tx["locked_amount"] = tx["signed_amount"]
             tx["_locked_amount"] = tx["signed_amount"]
