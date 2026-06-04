@@ -6871,6 +6871,18 @@ def extract_transactions(text: str) -> list[dict]:
 
         transactions.append(tx)
 
+        print(
+            "FINAL_TX_DEBUG",
+            {
+                "date": tx.get("date"),
+                "amount": tx.get("amount"),
+                "signed_amount": tx.get("signed_amount"),
+                "locked": tx.get("_locked_amount"),
+                "balance": tx.get("_balance"),
+                "description": tx.get("description", "")[:80]
+            }
+        )
+
     transactions = infer_balance_delta_rows(transactions)
 
     amount_balance_transactions = extract_standard_amount_balance_ledger_transactions(
@@ -7075,6 +7087,19 @@ def extract_transactions(text: str) -> list[dict]:
             {
                 "amount": getattr(t, "amount", t.get("amount") if isinstance(t, dict) else None),
                 "type": getattr(t, "type", t.get("type") if isinstance(t, dict) else None),
+            }
+            for t in transactions[:20]
+        ]
+    )
+
+    print(
+        "KPI_INPUT_DEBUG",
+        [
+            {
+                "amount": t.get("amount"),
+                "signed": t.get("signed_amount"),
+                "locked": t.get("_locked_amount"),
+                "balance": t.get("_balance")
             }
             for t in transactions[:20]
         ]
