@@ -7185,9 +7185,28 @@ def extract_debit_credit_table_transactions(text: str) -> list[dict]:
     return extract_debit_credit_column_transactions(text)
 
 
+def extract_credit_card_statement_transactions(text: str) -> list[dict]:
+    return extract_debit_credit_column_transactions(text)
+
+
 def extract_transactions(text: str) -> list[dict]:
     statement_layout = detect_statement_layout(text)
     print("STATEMENT_LAYOUT_DETECTED", statement_layout)
+
+    if statement_layout == "credit_card_statement":
+        cc_transactions = extract_credit_card_statement_transactions(text)
+
+        print(
+            "CREDIT_CARD_LAYOUT_ROUTE",
+            {
+                "transactions": len(cc_transactions),
+                "income": sum(1 for tx in cc_transactions if tx.get("type") == "income"),
+                "expenses": sum(1 for tx in cc_transactions if tx.get("type") == "expense"),
+            },
+        )
+
+        if len(cc_transactions) >= 1:
+            return cc_transactions
 
     if statement_layout == "debit_credit_table":
         dc_transactions = extract_debit_credit_table_transactions(text)
