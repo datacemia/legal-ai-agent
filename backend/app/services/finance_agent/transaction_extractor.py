@@ -6274,11 +6274,17 @@ def extract_debit_credit_column_transactions(
         r"\d{4}[./-]\d{1,2}[./-]\d{1,2}"
         r"|"
         r"\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?"
+        r"|"
+        r"\d{1,2}\s+\d{1,2}\s+\d{4}"
         r")\s+(?P<body>.+)$"
     )
 
     value_date_amount_re = re.compile(
-        r"(?P<value_date>\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?)\s+"
+        r"(?P<value_date>"
+        r"\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?"
+        r"|"
+        r"\d{1,2}\s+\d{1,2}\s+\d{4}"
+        r")\s+"
         r"(?P<amount>(?:\d{1,3}(?:[ .]\d{3})+|\d+)(?:[.,]\d{2,3}))\s*$"
     )
 
@@ -6363,7 +6369,11 @@ def extract_debit_credit_column_transactions(
                 amount = parse_amount(amount_match.group("amount"))
                 description = body[:amount_match.start()].strip()
                 description = re.sub(
-                    r"\s+\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?\s*$",
+                    r"\s+(?:"
+                    r"\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?"
+                    r"|"
+                    r"\d{1,2}\s+\d{1,2}\s+\d{4}"
+                    r")\s*$",
                     "",
                     description,
                 ).strip()
