@@ -7198,6 +7198,13 @@ def extract_credit_card_statement_transactions(text: str) -> list[dict]:
 
     for raw_line in str(text or "").splitlines():
         line = " ".join(str(raw_line or "").split())
+        if (
+            "online payment" in line.lower()
+            or "snipes" in line.lower()
+            or "ebay" in line.lower()
+        ):
+            print("CC_DEBUG_LINE", repr(line))
+
         match = cc_row_re.match(line)
 
         if not match:
