@@ -7854,3 +7854,4 @@ for _marker in UNIVERSAL_INCOME_MARKERS:
         INCOME_KEYWORDS.append(_marker)
     if _marker not in TRANSACTION_SIGNALS:
         TRANSACTION_SIGNALS.append(_marker)
+
