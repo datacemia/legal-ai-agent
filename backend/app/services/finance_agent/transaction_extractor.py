@@ -2760,6 +2760,20 @@ def canonicalize_transaction(tx):
         "خصم ضريبه",
     ]
 
+    if any(
+        marker in description.lower()
+        for marker in [
+            "خصم ضريبة",
+            "خصم ضريبه",
+            "vat deduction",
+            "tax deduction",
+            "déduction tva",
+            "déduction taxe",
+        ]
+    ):
+        tx["amount"] = -abs(float(tx.get("amount") or 0))
+        tx["type"] = "expense"
+
     if any(marker in desc for marker in fee_tax_adjustment_markers):
         return exclude_transaction_from_financial_kpis(
             tx,
