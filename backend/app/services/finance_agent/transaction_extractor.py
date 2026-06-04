@@ -2627,7 +2627,13 @@ def canonicalize_transaction(tx):
     if tx.get("locked_type"):
         tx["type"] = tx["locked_type"]
         tx["amount"] = tx["locked_amount"]
+        tx["signed_amount"] = tx["locked_amount"]
+        tx["_locked_amount"] = tx["locked_amount"]
         return tx
+
+    if tx.get("signed_amount") is not None:
+        tx["locked_amount"] = tx["signed_amount"]
+        tx["_locked_amount"] = tx["signed_amount"]
 
     return tx
 
@@ -7010,8 +7016,8 @@ def extract_transactions(text: str) -> list[dict]:
             "amount": final_amount,
             "type": tx_type,
             "currency": detected_currency,
-            "_locked_amount": final_amount,
-            "locked_amount": final_amount,
+            "_locked_amount": signed_amount,
+            "locked_amount": signed_amount,
         }
 
         if signed_amount > 0:
@@ -7123,9 +7129,17 @@ def extract_transactions(text: str) -> list[dict]:
 
             if balance is not None and amount is not None:
                 if round(abs(float(amount)), 2) == round(abs(float(balance)), 2):
-                    original = tx.get("_locked_amount")
+                    original = tx.get("locked_amount") or tx.get("_locked_amount")
 
                     if original is not None:
+                        if tx.get("locked_type") == "expense":
+                            original = -abs(float(original))
+                        elif tx.get("locked_type") == "income":
+                            original = abs(float(original))
+
+                        tx["locked_amount"] = original
+                        tx["_locked_amount"] = original
+                        tx["signed_amount"] = original
                         tx["amount"] = original
 
     for tx in transactions:
@@ -7241,17 +7255,37 @@ def extract_transactions(text: str) -> list[dict]:
 
             if balance is not None and amount is not None:
                 if round(abs(float(amount)), 2) == round(abs(float(balance)), 2):
-                    original = tx.get("_locked_amount")
+                    original = tx.get("locked_amount") or tx.get("_locked_amount")
 
                     if original is not None:
+                        if tx.get("locked_type") == "expense":
+                            original = -abs(float(original))
+                        elif tx.get("locked_type") == "income":
+                            original = abs(float(original))
+
+                        tx["locked_amount"] = original
+                        tx["_locked_amount"] = original
+                        tx["signed_amount"] = original
                         tx["amount"] = original
 
     transactions = enforce_no_untyped_kpi_transactions(transactions)
 
     for tx in transactions:
+        if tx.get("signed_amount") is not None:
+            tx["locked_amount"] = tx["signed_amount"]
+            tx["_locked_amount"] = tx["signed_amount"]
+
         if tx.get("locked_type"):
+            if tx.get("locked_amount") is not None:
+                if tx.get("locked_type") == "expense":
+                    tx["locked_amount"] = -abs(float(tx["locked_amount"]))
+                elif tx.get("locked_type") == "income":
+                    tx["locked_amount"] = abs(float(tx["locked_amount"]))
+
             tx["type"] = tx["locked_type"]
             tx["amount"] = tx["locked_amount"]
+            tx["signed_amount"] = tx["locked_amount"]
+            tx["_locked_amount"] = tx["locked_amount"]
 
         elif tx.get("type") is None:
             try:
