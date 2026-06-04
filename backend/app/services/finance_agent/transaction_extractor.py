@@ -951,28 +951,10 @@ def parse_terminal_amount(value: str, line: str) -> float:
             or is_arabic_text(ctx)
         )
     ):
-        print(
-            "PARSE_TERMINAL_AMOUNT_GCC",
-            {
-                "raw": raw,
-                "result": float(raw),
-                "ctx_has_sar": "sar" in ctx,
-                "ctx_is_arabic": is_arabic_text(ctx),
-            },
-        )
         return float(raw)
 
-    parsed = parse_amount(raw)
-    print(
-        "PARSE_TERMINAL_AMOUNT_FALLBACK",
-        {
-            "raw": raw,
-            "result": parsed,
-            "ctx_has_sar": "sar" in ctx,
-            "ctx_is_arabic": is_arabic_text(ctx),
-        },
-    )
-    return parsed
+    return parse_amount(raw)
+
 
 def extract_terminal_amount_balance_pair(line: str) -> tuple[float | None, float | None]:
     """Extract the terminal transaction amount + running balance pair.
@@ -3301,7 +3283,7 @@ def extract_amount_after_marker(
 
     for token in amounts:
         try:
-            amount = abs(parse_terminal_amount(token, description))
+            amount = abs(parse_amount(token))
         except Exception:
             continue
 
@@ -3374,6 +3356,18 @@ def normalize_untyped_incoming_credits(transactions: list[dict]) -> list[dict]:
         "payment to",
     ]
 
+    card_or_debit_markers = [
+        "carte",
+        "card",
+        "prelevement",
+        "prélèvement",
+        "direct debit",
+        "withdrawal",
+        "retrait",
+        "commission",
+        "frais",
+    ]
+
     for tx in transactions:
         row = dict(tx)
         description_raw = str(
@@ -3396,6 +3390,12 @@ def normalize_untyped_incoming_credits(transactions: list[dict]) -> list[dict]:
         has_inbound = any(marker in description for marker in inbound_markers)
 
         if row.get("type") is None and amount > 0 and has_inbound:
+            first_inbound_pos = min(
+                description.find(marker)
+                for marker in inbound_markers
+                if marker in description
+            )
+
             has_hard_outgoing = any(
                 marker in description
                 for marker in hard_outgoing_markers
@@ -4251,7 +4251,7 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
     normalized = clean_db_text(normalized)
     normalized = normalized.replace("\u00a0", " ").replace("\u202f", " ")
     normalized = normalized.replace("،", ",")
-    normalized = "\n".join(" ".join(line.split()) for line in normalized.splitlines())
+    normalized = "\n".join(" ".join(l.split()) for l in normalized.splitlines())
 
     currency = detect_currency(text)
     debug_log("CURRENCY_DETECTED:", currency)
@@ -4268,11 +4268,15 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         )[:30]
     )
 
+    amount_pattern = r"\d{1,3}(?:[ ,]\d{3})*(?:[.,]\d{2})"
+
     rows = []
 
     for dm in dates:
         debug_log("---- DATE LOOP ----")
         debug_log("DATE:", dm["clean"])
+
+        date_raw = dm["clean"]
 
         # Build one transaction segment from this date to the next detected date.
         # This is safer than using physical OCR lines because RTL extraction can place
@@ -4522,7 +4526,7 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
     transactions = fallback_debit_credit_column_transactions_if_low_quality(
         transactions,
         text,
-        currency,
+        detected_currency,
     )
 
     log_final_transactions(transactions)
@@ -4920,20 +4924,10 @@ def extract_standard_amount_balance_ledger_transactions(
     previous_balance = None
     i = 0
 
-    standard_row_start_re = re.compile(
-        r"^\s*(?:"
-        r"\d{1,2}[/-]\d{1,2}[/-]\d{4}\s+\d{4}[/-]\d{1,2}[/-]\d{1,2}"
-        r"|"
-        r"\d{4}[/-]\d{1,2}[/-]\d{1,2}"
-        r"|"
-        r"\d{1,2}[/-]\d{1,2}\b"
-        r")"
-    )
-
     while i < len(raw_lines):
         line = raw_lines[i]
 
-        if not standard_row_start_re.match(line):
+        if not re.match(r"^\s*\d{1,2}[/-]\d{1,2}\b", line):
             i += 1
             continue
 
@@ -4975,6 +4969,8 @@ def extract_standard_amount_balance_ledger_transactions(
         description = re.sub(r"^\s*\d{1,2}[/-]\d{1,2}\b", "", combined).strip()
         description = money_re.sub("", description).strip()
         description = clean_db_text(description)
+
+        lower = description.lower()
 
         amount_abs = abs(float(tx_amount or 0))
         amount = amount_abs
@@ -5416,11 +5412,9 @@ def extract_wallet_tabular_transactions(
     )
 
     lines = [
-        " ".join(clean_db_text(
-            line.replace("\xa0", " ").replace("\u202f", " ")
-        ).split())
+        " ".join(line.replace("\xa0", " ").split())
         for line in raw.splitlines()
-        if " ".join(line.replace("\xa0", " ").replace("\u202f", " ").split())
+        if " ".join(line.replace("\xa0", " ").split())
     ]
 
     rows: list[str] = []
@@ -5947,8 +5941,7 @@ def extract_debit_credit_column_transactions(
     - OCR continuation lines are attached to the current operation;
     - debit side => expense, credit side => income.
     """
-    raw_text = str(text or "")
-    raw = clean_db_text(raw_text)
+    raw = clean_db_text(str(text or ""))
     lower_raw = raw.lower()
     currency = detected_currency or detect_currency(raw) or "EUR"
     default_year = detect_document_year(raw)
@@ -5968,11 +5961,9 @@ def extract_debit_credit_column_transactions(
         return []
 
     lines = [
-        " ".join(clean_db_text(
-            line.replace("\xa0", " ").replace("\u202f", " ")
-        ).split())
+        " ".join(line.replace("\xa0", " ").split())
         for line in raw.splitlines()
-        if " ".join(line.replace("\xa0", " ").replace("\u202f", " ").split())
+        if " ".join(line.replace("\xa0", " ").split())
     ]
 
     operations_header_markers = [
@@ -6035,11 +6026,7 @@ def extract_debit_credit_column_transactions(
     ]
 
     row_start_re = re.compile(
-        r"^(?P<op_date>"
-        r"\d{4}[./-]\d{1,2}[./-]\d{1,2}"
-        r"|"
-        r"\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?"
-        r")\s+(?P<body>.+)$"
+        r"^(?P<op_date>\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?)\s+(?P<body>.+)$"
     )
 
     value_date_amount_re = re.compile(
@@ -7018,6 +7005,8 @@ def extract_transactions(text: str) -> list[dict]:
 
             amount_balance_tx_amount, amount_balance_value = extract_terminal_amount_balance_pair(clean_line)
 
+        numbers = extract_transaction_money_numbers(clean_line)
+
         # Universal terminal pair authority, valid for FR / EN / AR:
         # if the logical row exposes movement + balance at the end, lock the
         # movement to the penultimate value and the balance to the final value.
@@ -7086,9 +7075,6 @@ def extract_transactions(text: str) -> list[dict]:
             amount_abs = abs(float(amount or 0))
             tx_abs = abs(float(amount_balance_tx_amount or 0))
             balance_abs = abs(float(amount_balance_value or 0))
-
-            if transaction_type is None and tabular_type is not None:
-                transaction_type = tabular_type
 
             likely_used_balance = abs(amount_abs - balance_abs) <= max(0.02, balance_abs * 0.0001)
             far_from_tx_amount = abs(amount_abs - tx_abs) > max(0.02, tx_abs * 0.01)
@@ -7218,24 +7204,12 @@ def extract_transactions(text: str) -> list[dict]:
                     tx["balance_authority"] = True
                     tx["_balance_locked"] = True
                 else:
-                    tx = exclude_transaction_from_financial_kpis(
-                        tx,
-                        "balance_delta_mismatch",
-                    )
+                    tx = exclude_transaction_from_financial_kpis(tx, "balance_delta_mismatch")
             else:
                 tx["type"] = None
                 tx = exclude_transaction_from_financial_kpis(tx, "missing_previous_balance")
 
-            if abs(float(balance or 0)) >= 1:
-                if not (
-                    re.search(
-                        r"\b(fee|fees|vat|commission|charge|tax|رسوم|عمولة|ضريبة)\b",
-                        description.lower(),
-                    )
-                    and abs(float(amount_abs or 0)) <= 5
-                    and abs(float(balance or 0)) <= 5
-                ):
-                    previous_amount_balance = float(balance)
+            previous_amount_balance = float(balance)
         else:
             tx["_locked_amount"] = signed_amount
             tx["locked_amount"] = signed_amount
