@@ -2553,9 +2553,12 @@ def lock_transaction_from_balance_delta(
     locked_type: str | None = None
 
     if abs(delta - amount_abs) <= tolerance:
+
+        print("BALANCE_LOCK_INCOME", delta, amount_abs)
         signed_amount = amount_abs
         locked_type = "income"
     elif abs(delta + amount_abs) <= tolerance:
+        print("BALANCE_LOCK_EXPENSE", delta, amount_abs)
         signed_amount = -amount_abs
         locked_type = "expense"
 
@@ -7207,6 +7210,25 @@ def extract_transactions(text: str) -> list[dict]:
             tx["type"] = None
             tx["_balance"] = balance
             tx["balance"] = balance
+
+            print(
+
+                "BALANCE_DELTA_DEBUG",
+
+                {
+
+                    "prev": previous_amount_balance,
+
+                    "current": balance,
+
+                    "amount": amount_abs,
+
+                    "desc": description[:80],
+
+                },
+
+            )
+
 
             if previous_amount_balance is not None:
                 delta = round(float(balance) - float(previous_amount_balance), 2)
