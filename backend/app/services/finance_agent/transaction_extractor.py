@@ -7780,6 +7780,23 @@ def extract_transactions(text: str) -> list[dict]:
         ]
     )
 
+
+    for tx in transactions:
+        desc = str(tx.get("description") or "").lower()
+
+        if any(k in desc for k in [
+            "fee", "fees", "charge", "commission", "tax", "vat",
+            "frais", "taxe", "tva", "commission",
+            "رسوم", "رسم", "ضريبة", "الضريبة", "القيمة المضافة", "عمولة",
+        ]):
+            amount = abs(float(tx.get("amount") or 0))
+            tx["amount"] = -amount
+            tx["type"] = "expense"
+            tx["signed_amount"] = -amount
+            tx["locked_amount"] = -amount
+            tx["_locked_amount"] = -amount
+            tx["locked_type"] = "expense"
+
     return transactions
 EXPENSE_KEYWORDS += [
     "amazon",
