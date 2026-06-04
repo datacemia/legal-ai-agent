@@ -6939,13 +6939,10 @@ def extract_transactions(text: str) -> list[dict]:
                     {"candidate_count": len(amount_balance_transactions)},
             )
 
-        sectioned_transactions = []
-
-        sectioned_transactions = extract_standard_sectioned_statement_transactions(
-            text,
-            detected_currency,
-        )
-    
+    sectioned_transactions = extract_standard_sectioned_statement_transactions(
+        text,
+        detected_currency,
+    )
 
     if should_use_standard_sectioned_statement(transactions, sectioned_transactions):
         existing_typed_ratio = (
