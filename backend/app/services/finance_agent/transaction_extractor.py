@@ -6332,6 +6332,15 @@ def extract_transactions(text: str) -> list[dict]:
         ],
     )
 
+    debug_log(
+        "ALL_INCOME_TRANSACTIONS",
+        [
+            tx
+            for tx in transactions
+            if tx.get("type") == "income"
+        ]
+    )
+
     return transactions
 EXPENSE_KEYWORDS += [
     "amazon",
