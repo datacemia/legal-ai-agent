@@ -599,6 +599,26 @@ def handle_finance_ai(job: Job, db):
     # Example: two ATM withdrawals of 2 000 MAD on the same day.
     transactions = list(transactions)
 
+    def audit_tx_stage(stage: str, txs: list[dict]):
+        print(
+            stage,
+            [
+                {
+                    "i": i,
+                    "date": tx.get("date"),
+                    "amount": tx.get("amount"),
+                    "locked": tx.get("_locked_amount"),
+                    "signed": tx.get("signed_amount"),
+                    "balance": tx.get("balance") or tx.get("_balance"),
+                    "type": tx.get("type"),
+                    "desc": str(tx.get("description") or "")[:80],
+                }
+                for i, tx in enumerate(txs[:50])
+            ],
+        )
+
+    audit_tx_stage("TX_STAGE_1_AFTER_EXTRACT", transactions)
+
     print(
         "INCOME_AUDIT",
         [
@@ -633,6 +653,8 @@ def handle_finance_ai(job: Job, db):
             elif amount < 0:
                 tx["type"] = "expense"
 
+    audit_tx_stage("TX_STAGE_2_AFTER_CANONICALIZE", transactions)
+
     quality = assess_analysis_quality(transactions)
 
     # International KPI filter:
@@ -648,6 +670,8 @@ def handle_finance_ai(job: Job, db):
         )
     ]
 
+
+    audit_tx_stage("TX_STAGE_3_KPI_TRANSACTIONS_CREATED", kpi_transactions)
 
     print("QUALITY_CHECK")
     print(quality)
@@ -737,6 +761,8 @@ def handle_finance_ai(job: Job, db):
         finance_progress_message("budget", output_language),
     )
 
+
+    audit_tx_stage("TX_STAGE_4_BEFORE_EXPENSE_FULL_AUDIT", kpi_transactions)
 
     print(
         "EXPENSE_FULL_AUDIT",
