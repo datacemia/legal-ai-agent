@@ -11,7 +11,7 @@ def debug_log(*args):
     if DEBUG_FINANCE_EXTRACTOR:
         print(*args)
 
-debug_log("RUNEXA_FINANCE_EXTRACTOR_VERSION", "international-multipass-v7-kpi-neutral-internal-transfers")
+debug_log("RUNEXA_FINANCE_EXTRACTOR_VERSION", "international-multipass-v8-terminal-balance-authority-fr-en-ar")
 CURRENCY_CODES = ["USD", "EUR", "GBP", "AED", "MAD", "CAD", "AUD", "JOD", "SAR", "QAR", "KWD", "BHD", "OMR", "DZD", "TND", "EGP", "CHF", "JPY", "CNY", "INR", "TRY", "NGN", "ZAR", "MULTI"]
 
 CANADA_BANKS = [
@@ -923,6 +923,40 @@ def extract_transaction_money_numbers(line: str) -> list[str]:
         MONEY_NUMBER_PATTERN,
         cleaned,
     )
+
+
+def extract_terminal_amount_balance_pair(line: str) -> tuple[float | None, float | None]:
+    """Extract the terminal transaction amount + running balance pair.
+
+    Standard international FR / EN / AR rule:
+    when a logical statement row ends with two money values, the penultimate
+    value is the transaction movement and the final value is the running
+    balance. This is independent of bank, country, language, and script.
+
+    Examples:
+        EN: 2024-08-12 FROM MADA ... 5.500 588.33
+        FR: 18/07/2025 VIR RECU ... 9.450,00 12.300,00
+        AR: 2024-08-12 بطاقة مدى ... 5.500 588.33
+
+    The function never returns the balance as the movement.
+    """
+    numbers = extract_transaction_money_numbers(line)
+
+    if len(numbers) < 2:
+        return None, None
+
+    try:
+        tx_amount = parse_amount(numbers[-2])
+        balance = parse_amount(numbers[-1])
+    except Exception:
+        return None, None
+
+    return tx_amount, balance
+
+
+def has_terminal_amount_balance_pair(line: str) -> bool:
+    tx_amount, balance = extract_terminal_amount_balance_pair(line)
+    return tx_amount is not None and balance is not None
 
 
 
@@ -2258,16 +2292,13 @@ def extract_amount_balance_line(line: str):
     if is_document_metadata_line(line):
         return None, None
 
-    # Use transaction money values, not date/value-date tokens.
-    # This keeps already validated amount+balance rows working while preventing
-    # OCR table dates like 05.11 / 22.11 from becoming fake amounts.
-    numbers = extract_transaction_money_numbers(line)
+    # Use the terminal movement/balance pair, never the running balance.
+    # This is the core international FR / EN / AR rule for table rows with
+    # Debit/Credit/Balance or Amount/Balance columns.
+    tx_amount, balance = extract_terminal_amount_balance_pair(line)
 
-    if len(numbers) < 2:
+    if tx_amount is None or balance is None:
         return None, None
-
-    tx_amount = parse_amount(numbers[-2])
-    balance = parse_amount(numbers[-1])
 
     debug_log(
         "TX_DEBUG: amount_balance_line",
@@ -2295,15 +2326,14 @@ def extract_amount_balance_line(line: str):
 
 
 def extract_line_balance(line: str) -> float | None:
-    numbers = extract_money_numbers_safely(line)
+    """Return running balance only when a terminal movement/balance pair exists.
 
-    if len(numbers) < 2:
-        return None
+    This avoids treating a single visible amount, duplicated card amount, fee,
+    VAT, or FX amount as a running balance.
+    """
+    _tx_amount, balance = extract_terminal_amount_balance_pair(line)
 
-    try:
-        return parse_amount(numbers[-1])
-    except Exception:
-        return None
+    return balance
 
 
 def is_balance_only_line(
@@ -4916,6 +4946,9 @@ def extract_official_movement_totals(text: str) -> dict | None:
         rf"(?:totaux?|total)\s+des\s+mouvements\s+({amount})\s+({amount})",
         rf"(?:total)\s+(?:debit|débit|debits|débits)\s+({amount}).{{0,80}}?(?:credit|crédit|credits|crédits)\s+({amount})",
         rf"(?:withdrawals?|debits?)\s+({amount}).{{0,80}}?(?:deposits?|credits?)\s+({amount})",
+        # Bilingual Arabic/English summary blocks, e.g. Riyad Bank:
+        # Withdrawals No Total Amount Deposits No Total Amount ... 230 125,624.39 18 176,610.45
+        rf"(?:withdrawals|سحوبات).{{0,160}}?(?:deposits|إيداعات|ايداعات).{{0,200}}?\b\d+\s+({amount})\s+\d+\s+({amount})",
     ]
 
     for pattern in patterns:
@@ -6649,13 +6682,14 @@ def extract_transactions(text: str) -> list[dict]:
 
         numbers = extract_transaction_money_numbers(clean_line)
 
-        if (
-            len(numbers) == 2
-            and not is_arabic_text(clean_line)
-        ):
-            locked_tx_amount = parse_amount(numbers[0])
-            locked_balance = parse_amount(numbers[1])
+        # Universal terminal pair authority, valid for FR / EN / AR:
+        # if the logical row exposes movement + balance at the end, lock the
+        # movement to the penultimate value and the balance to the final value.
+        # This fixes Arabic/RTL bilingual tables where the old path sometimes
+        # used the running balance as the transaction amount.
+        locked_tx_amount, locked_balance = extract_terminal_amount_balance_pair(clean_line)
 
+        if locked_tx_amount is not None and locked_balance is not None:
             if tabular_amount is not None:
                 tabular_amount = abs(locked_tx_amount)
 
@@ -6704,7 +6738,6 @@ def extract_transactions(text: str) -> list[dict]:
         if (
             amount_balance_tx_amount is not None
             and amount_balance_value is not None
-            and not is_arabic_text(clean_line)
         ):
             original_amount_for_lock = amount
             amount_abs = abs(float(amount or 0))
