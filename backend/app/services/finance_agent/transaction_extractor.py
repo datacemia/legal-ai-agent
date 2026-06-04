@@ -1963,14 +1963,17 @@ def is_universal_fee_tax_or_charge(description: str) -> bool:
             "tax", "vat", "gst", "hst", "duty", "withholding tax",
             "tax deduction", "vat deduction",
             "fee", "fees", "charge", "charges", "commission",
+            "stamp duty", "stamp tax", "fiscal stamp",
 
             # FR
             "taxe", "tva", "impôt", "impot", "retenue",
             "déduction taxe", "deduction taxe", "déduction tva", "deduction tva",
             "frais", "commission",
+            "droit de timbre", "timbre fiscal",
 
             # ES/PT/IT common
             "impuesto", "iva", "imposto", "imposta",
+            "impuesto de timbre", "imposto de selo", "imposta di bollo",
 
             # DE/NL
             "steuer", "mwst", "gebühr", "gebuhr",
@@ -1979,6 +1982,7 @@ def is_universal_fee_tax_or_charge(description: str) -> bool:
             "ضريبة", "ضريبه", "الضريبة", "القيمة المضافة", "القيمه المضافه",
             "خصم ضريبة", "خصم ضريبه",
             "رسوم", "رسم", "عمولة",
+            "رسم الطابع", "رسوم الطابع", "طابع مالي",
         ]
     )
 
@@ -5339,6 +5343,27 @@ def merge_multiline_debit_credit_rows(
         "للتحقق", "الختم", "الرقم المرجعي", "كشف حساب", "اسم العميل",
         "رقم الحساب", "الايبان", "الفرع", "العملة", "الرصيد الافتتاحي",
         "رصيد الإقفال", "تفاصيل الحركة", "مدين", "دائن", "الرصيد",
+        "releve d'identite bancaire",
+        "relevé d'identité bancaire",
+        "bank account details",
+        "bank identity statement",
+        "account identification",
+        "extrait de compte",
+        "statement of account",
+        "numero de compte",
+        "numéro de compte",
+        "code banque",
+        "bank code",
+        "branch code",
+        "sort code",
+        "swift",
+        "iban",
+        "agence",
+        "address",
+        "adresse",
+        "tel",
+        "tél",
+        "phone",
     ]
 
     def is_metadata_line(line: str) -> bool:
