@@ -6219,6 +6219,17 @@ def extract_debit_credit_column_transactions(
         "debit credit",
         "مدين",
         "دائن",
+        "date opération",
+        "date operation",
+        "date valeur",
+        "référence nature opération",
+        "reference nature operation",
+        "nature opération",
+        "nature operation",
+        "montant débit",
+        "montant debit",
+        "montant crédit",
+        "montant credit",
     ]
 
     opening_balance_markers = [
@@ -6229,6 +6240,11 @@ def extract_debit_credit_column_transactions(
         "opening balance",
         "balance brought forward",
         "الرصيد الافتتاحي",
+        "ancien solde",
+        "ancien solde au",
+        "solde report",
+        "solde a reporter",
+        "solde à reporter",
     ]
 
     stop_markers = [
@@ -6238,6 +6254,8 @@ def extract_debit_credit_column_transactions(
         "ending balance",
         "إجمالي العمليات",
         "الرصيد الختامي",
+        "nouveau solde",
+        "nouveau solde au",
     ]
 
     metadata_markers = [
