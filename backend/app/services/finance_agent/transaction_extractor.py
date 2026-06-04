@@ -2845,6 +2845,15 @@ def canonicalize_transaction(tx):
             },
         )
 
+    print(
+        "FINAL_CANONICALIZE",
+        {
+            "amount": tx.get("amount"),
+            "type": tx.get("type"),
+            "desc": tx.get("description", "")[:120],
+        }
+    )
+
     return tx
 
 
