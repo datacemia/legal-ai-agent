@@ -719,6 +719,20 @@ def handle_finance_ai(job: Job, db):
     )
 
     print(
+        "EXPENSE_FULL_AUDIT",
+        [
+            {
+                "date": tx.get("date"),
+                "amount": tx.get("amount"),
+                "type": tx.get("type"),
+                "description": tx.get("description"),
+            }
+            for tx in kpi_transactions
+            if tx.get("type") == "expense"
+        ],
+    )
+
+    print(
         "KPI_SOURCE_AUDIT",
         [
             {
