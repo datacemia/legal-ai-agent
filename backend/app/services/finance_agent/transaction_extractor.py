@@ -6914,7 +6914,24 @@ def extract_transactions(text: str) -> list[dict]:
                 "new_income": ledger_income,
                 "new_expense": ledger_expense,
             })
-            transactions = amount_balance_transactions
+            bad_balance_amounts = sum(
+                1
+                for tx in amount_balance_transactions
+                if tx.get("_balance") is not None
+                and round(abs(float(tx.get("amount", 0))), 2)
+                    == round(abs(float(tx.get("_balance", 0))), 2)
+            )
+
+            if bad_balance_amounts > 0:
+                debug_log(
+                    "SKIP_AMOUNT_BALANCE_LEDGER_REPLACEMENT_BAD_BALANCE_AMOUNTS",
+                    {
+                        "bad_balance_amounts": bad_balance_amounts,
+                        "candidate_count": len(amount_balance_transactions),
+                    },
+                )
+            else:
+                transactions = amount_balance_transactions
 
     sectioned_transactions = extract_standard_sectioned_statement_transactions(
         text,
