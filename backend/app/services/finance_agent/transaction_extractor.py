@@ -5412,9 +5412,11 @@ def extract_wallet_tabular_transactions(
     )
 
     lines = [
-        " ".join(line.replace("\xa0", " ").split())
-        for line in raw.splitlines()
-        if " ".join(line.replace("\xa0", " ").split())
+        " ".join(clean_db_text(
+            line.replace("\xa0", " ").replace("\u202f", " ")
+        ).split())
+        for line in raw_text.splitlines()
+        if " ".join(line.replace("\xa0", " ").replace("\u202f", " ").split())
     ]
 
     rows: list[str] = []
@@ -5941,7 +5943,8 @@ def extract_debit_credit_column_transactions(
     - OCR continuation lines are attached to the current operation;
     - debit side => expense, credit side => income.
     """
-    raw = clean_db_text(str(text or ""))
+    raw_text = str(text or "")
+    raw = clean_db_text(raw_text)
     lower_raw = raw.lower()
     currency = detected_currency or detect_currency(raw) or "EUR"
     default_year = detect_document_year(raw)
@@ -5961,9 +5964,11 @@ def extract_debit_credit_column_transactions(
         return []
 
     lines = [
-        " ".join(line.replace("\xa0", " ").split())
-        for line in raw.splitlines()
-        if " ".join(line.replace("\xa0", " ").split())
+        " ".join(clean_db_text(
+            line.replace("\xa0", " ").replace("\u202f", " ")
+        ).split())
+        for line in raw_text.splitlines()
+        if " ".join(line.replace("\xa0", " ").replace("\u202f", " ").split())
     ]
 
     operations_header_markers = [
