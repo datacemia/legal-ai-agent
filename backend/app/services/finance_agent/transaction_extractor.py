@@ -2615,6 +2615,25 @@ def enforce_no_untyped_kpi_transactions(transactions: list[dict]) -> list[dict]:
     for tx in transactions:
         tx = preserve_balance_locked_transaction(tx)
 
+        # Standard international FR / EN / AR rule:
+        # amount/balance ledger rows must never reach KPI totals unless
+        # they were explicitly locked by running-balance delta authority.
+        # This prevents any downstream or previous positive-amount fallback
+        # from converting an unlocked amount/balance row into income.
+        if tx.get("_balance") is not None and not tx.get("_balance_locked"):
+            tx["type"] = None
+            tx.pop("signed_amount", None)
+            tx.pop("locked_amount", None)
+            tx.pop("_locked_amount", None)
+            tx.pop("locked_type", None)
+            fixed.append(
+                exclude_transaction_from_financial_kpis(
+                    tx,
+                    tx.get("category_hint") or "unlocked_amount_balance_row",
+                )
+            )
+            continue
+
         if tx.get("type") in {"income", "expense", "transfer"}:
             fixed.append(tx)
             continue
@@ -2637,6 +2656,22 @@ def enforce_no_untyped_kpi_transactions(transactions: list[dict]) -> list[dict]:
 
 def canonicalize_transaction(tx):
     description = str(tx.get("description") or "")
+
+    # Standard international FR / EN / AR rule:
+    # amount/balance ledger rows must never become income only because
+    # their visible movement amount is positive. For rows carrying a running
+    # balance, only balance-delta authority may lock type/amount.
+    # If the row is not balance-delta locked, keep it out of financial KPIs.
+    if tx.get("_balance") is not None and not tx.get("_balance_locked"):
+        tx["type"] = None
+        tx.pop("signed_amount", None)
+        tx.pop("locked_amount", None)
+        tx.pop("_locked_amount", None)
+        tx.pop("locked_type", None)
+        return exclude_transaction_from_financial_kpis(
+            tx,
+            tx.get("category_hint") or "unlocked_amount_balance_row",
+        )
 
     if re.search(
         r"\b(fee|fees|vat|commission|charge|رسوم|عمولة|ضريبة)\b",
