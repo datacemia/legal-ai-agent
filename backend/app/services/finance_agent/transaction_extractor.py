@@ -2688,6 +2688,34 @@ def enforce_no_untyped_kpi_transactions(transactions: list[dict]) -> list[dict]:
 
 def canonicalize_transaction(tx):
     description = str(tx.get("description") or "")
+    desc = str(description or "").lower()
+
+    is_micro_fee_or_tax = (
+        abs(float(tx.get("amount") or 0)) <= 5
+        and any(
+            marker in desc
+            for marker in [
+                # EN
+                "fee", "fees", "charge", "commission", "tax", "vat",
+
+                # FR
+                "frais", "commission", "taxe", "tva", "impot", "impôt",
+
+                # AR
+                "رسوم", "رسم", "عمولة", "ضريبة", "الضريبة", "القيمة المضافة",
+            ]
+        )
+    )
+
+    if is_micro_fee_or_tax:
+        tx["amount"] = -abs(float(tx.get("amount") or 0))
+        tx["type"] = "expense"
+        tx["signed_amount"] = tx["amount"]
+        tx["locked_amount"] = tx["amount"]
+        tx["_locked_amount"] = tx["amount"]
+        tx["locked_type"] = "expense"
+        return tx
+
 
     desc = str(description or "").lower()
 
