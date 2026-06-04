@@ -616,6 +616,25 @@ def handle_finance_ai(job: Job, db):
 
     quality = assess_analysis_quality(transactions)
 
+    # Canonicalize transactions BEFORE any KPI/budget/forecast/chart usage.
+    # International FR / EN / AR rule:
+    # amount/signed_amount = real transaction movement
+    # balance/_balance = account balance only, never used as KPI amount.
+    for tx in transactions:
+        locked_amount = tx.get("_locked_amount")
+
+        if locked_amount is not None:
+            tx["amount"] = locked_amount
+            tx["signed_amount"] = locked_amount
+
+        if tx.get("type") is None:
+            amount = safe_float(tx.get("signed_amount", tx.get("amount")))
+
+            if amount > 0:
+                tx["type"] = "income"
+            elif amount < 0:
+                tx["type"] = "expense"
+
     # International KPI filter:
     # Internal transfers must never affect income, expenses,
     # savings, scores, forecasts or charts.
@@ -719,10 +738,6 @@ def handle_finance_ai(job: Job, db):
     )
 
 
-    for tx in transactions:
-        if tx.get("_locked_amount") is not None:
-            tx["amount"] = tx["_locked_amount"]
-
     print(
         "EXPENSE_FULL_AUDIT",
         [
@@ -737,10 +752,6 @@ def handle_finance_ai(job: Job, db):
         ],
     )
 
-
-    for tx in transactions:
-        if tx.get("_locked_amount") is not None:
-            tx["amount"] = tx["_locked_amount"]
 
     print(
         "KPI_SOURCE_AUDIT",
