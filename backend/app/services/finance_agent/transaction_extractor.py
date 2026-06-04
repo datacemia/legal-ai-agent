@@ -2739,6 +2739,24 @@ def infer_balance_delta_rows(rows: list[dict]) -> list[dict]:
                 after,
             )
 
+            debug_log(
+                "BALANCE_LOCK_RESULT",
+                {
+                    "date": row.get("date"),
+                    "before": before,
+                    "after": after,
+                    "delta": round(after - before, 2),
+                    "amount": row.get("amount"),
+                    "type": row.get("type"),
+                    "signed_amount": row.get("signed_amount"),
+                    "locked": row.get("_balance_locked"),
+                    "locked_type": row.get("locked_type"),
+                    "locked_amount": row.get("locked_amount"),
+                    "balance_delta": row.get("balance_delta"),
+                    "category_hint": row.get("category_hint"),
+                },
+            )
+
             if row.get("_balance_locked"):
                 debug_log(
                     "TX_DEBUG: balance_delta_locked",
