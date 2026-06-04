@@ -7210,7 +7210,10 @@ def extract_transactions(text: str) -> list[dict]:
             elif signed_amount < 0:
                 tx["locked_type"] = "expense"
 
-            tx = canonicalize_transaction(tx)
+            if is_amount_balance_row:
+                tx = preserve_balance_locked_transaction(tx)
+            else:
+                tx = canonicalize_transaction(tx)
 
             if balance is not None:
                 tx["_balance"] = balance
