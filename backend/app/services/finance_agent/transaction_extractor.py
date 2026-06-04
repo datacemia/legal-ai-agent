@@ -4699,6 +4699,16 @@ def extract_standard_amount_balance_ledger_transactions(
         "expenses": sum(1 for r in rows if r.get("type") == "expense"),
     })
 
+    debug_log(
+        "RAW_LEDGER_TX_COUNT",
+        len(rows),
+    )
+
+    debug_log(
+        "RAW_LEDGER_SAMPLE",
+        rows[55:75],
+    )
+
     return rows
 
 def merge_multiline_debit_credit_rows(
