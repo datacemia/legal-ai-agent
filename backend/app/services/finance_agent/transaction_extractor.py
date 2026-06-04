@@ -6428,6 +6428,33 @@ def should_use_standard_sectioned_statement(
     if not existing_transactions:
         return True
 
+    # International FR / EN / AR safety gate:
+    # when the primary extractor has already produced canonical
+    # amount/balance transactions, never let a secondary section parser
+    # replace them with rows that have lost _locked_amount/_balance.
+    # The section parser is useful for true debit/credit sections, but it
+    # must not override explicit movement + running balance authority.
+    existing_has_canonical_amount_balance = any(
+        tx.get("_locked_amount") is not None
+        and tx.get("_balance") is not None
+        for tx in existing_transactions
+    )
+    sectioned_has_canonical_amount_balance = any(
+        tx.get("_locked_amount") is not None
+        and tx.get("_balance") is not None
+        for tx in sectioned_transactions
+    )
+
+    if existing_has_canonical_amount_balance and not sectioned_has_canonical_amount_balance:
+        debug_log(
+            "SKIP_SECTIONED_REPLACEMENT_CANONICAL_AMOUNT_BALANCE_AUTHORITY",
+            {
+                "existing_transactions": len(existing_transactions),
+                "sectioned_transactions": len(sectioned_transactions),
+            },
+        )
+        return False
+
     existing_typed = sum(
         1 for tx in existing_transactions
         if tx.get("type") in {"income", "expense"}
@@ -6906,7 +6933,7 @@ def extract_transactions(text: str) -> list[dict]:
             or (ledger_is_balanced and existing_one_sided)
             or (ledger_is_balanced and ledger_count > existing_count * 1.20)
         ):
-            debug_log("STANDARD_AMOUNT_BALANCE_LEDGER_USED", {
+            debug_log("STANDARD_AMOUNT_BALANCE_LEDGER_CANDIDATE", {
                 "old_transactions": existing_count,
                 "new_transactions": ledger_count,
                 "old_income": existing_income,
@@ -6914,29 +6941,13 @@ def extract_transactions(text: str) -> list[dict]:
                 "new_income": ledger_income,
                 "new_expense": ledger_expense,
             })
-            bad_balance_amounts = sum(
-                1
-                for tx in amount_balance_transactions
-                if tx.get("_balance") is not None
-                and round(abs(float(tx.get("amount", 0))), 2)
-                    == round(abs(float(tx.get("_balance", 0))), 2)
-            )
 
-            if bad_balance_amounts > 0:
-                debug_log(
-                    "SKIP_AMOUNT_BALANCE_LEDGER_REPLACEMENT_BAD_BALANCE_AMOUNTS",
-                    {
-                        "bad_balance_amounts": bad_balance_amounts,
-                        "candidate_count": len(amount_balance_transactions),
-                    },
-                )
-            else:
-                # Disabled: this fallback can replace correct extracted movements
-                # with running balances on amount+balance OCR ledgers.
-                # Keep primary extractor output instead.
-                debug_log(
-                    "SKIP_AMOUNT_BALANCE_LEDGER_REPLACEMENT_DISABLED",
-                    {"candidate_count": len(amount_balance_transactions)},
+            # Disabled by design: this secondary fallback can replace correct
+            # extracted movements with running balances on amount+balance OCR
+            # ledgers. Keep primary canonical extractor output instead.
+            debug_log(
+                "SKIP_AMOUNT_BALANCE_LEDGER_REPLACEMENT_DISABLED",
+                {"candidate_count": len(amount_balance_transactions)},
             )
 
     sectioned_transactions = extract_standard_sectioned_statement_transactions(
