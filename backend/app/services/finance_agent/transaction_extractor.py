@@ -7028,7 +7028,50 @@ def should_use_standard_sectioned_statement(
         )
     )
 
+def detect_statement_layout(text: str) -> str:
+    lower = str(text or "").lower()
+
+    debit_credit_markers = [
+        # EN
+        "debit", "credit", "withdrawals", "deposits",
+
+        # FR
+        "montant débit", "montant debit",
+        "montant crédit", "montant credit",
+        "débit", "debit",
+        "crédit", "credit",
+
+        # AR
+        "مدين", "دائن", "سحوبات", "إيداعات", "ايداعات",
+
+        # ES / PT / IT
+        "débito", "debito",
+        "crédito", "credito",
+    ]
+
+    amount_balance_markers = [
+        "running balance",
+        "balance",
+        "solde courant",
+        "رصيد",
+    ]
+
+    dc_hits = sum(1 for marker in debit_credit_markers if marker in lower)
+    balance_hits = sum(1 for marker in amount_balance_markers if marker in lower)
+
+    if dc_hits >= 2:
+        return "debit_credit_table"
+
+    if balance_hits >= 1:
+        return "amount_balance_ledger"
+
+    return "generic"
+
+
 def extract_transactions(text: str) -> list[dict]:
+    statement_layout = detect_statement_layout(text)
+    print("STATEMENT_LAYOUT_DETECTED", statement_layout)
+
     debug_log("=== TX_EXTRACT_DEBUG START ===")
     debug_log("TEXT_SAMPLE:", clean_db_text(str(text))[:500])
 
