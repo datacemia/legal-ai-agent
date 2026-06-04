@@ -2689,6 +2689,41 @@ def enforce_no_untyped_kpi_transactions(transactions: list[dict]) -> list[dict]:
 def canonicalize_transaction(tx):
     description = str(tx.get("description") or "")
 
+    desc = str(description or "").lower()
+
+    fee_tax_adjustment_markers = [
+        # FR
+        "annulation de frais",
+        "contrepassation de frais",
+        "remboursement de frais",
+        "annulation taxe",
+        "remboursement taxe",
+        "annulation tva",
+
+        # EN
+        "fee reversal",
+        "charge reversal",
+        "fee refund",
+        "tax reversal",
+        "vat reversal",
+
+        # AR
+        "عكس رسوم",
+        "عكس رسوم تحويل",
+        "استرداد رسوم",
+        "عكس ضريبة",
+        "استرداد ضريبة",
+        "خصم ضريبة",
+        "خصم ضريبه",
+    ]
+
+    if any(marker in desc for marker in fee_tax_adjustment_markers):
+        return exclude_transaction_from_financial_kpis(
+            tx,
+            "fee_tax_adjustment",
+        )
+
+
     # Standard international FR / EN / AR rule:
     # amount/balance ledger rows must never become income only because
     # their visible movement amount is positive. For rows carrying a running
@@ -2742,50 +2777,6 @@ def canonicalize_transaction(tx):
             "القيمة المضافة",
         ]
     )
-
-    adjustment_text = description.lower()
-
-    is_fee_tax_adjustment = any(
-        marker in adjustment_text
-        for marker in [
-            # EN
-            "fee reversal",
-            "reverse fee",
-            "charge reversal",
-            "tax reversal",
-            "tax adjustment",
-            "vat reversal",
-            "vat adjustment",
-
-            # FR
-            "contrepassation de frais",
-            "annulation de frais",
-            "remboursement de frais",
-            "régularisation de frais",
-            "regularisation de frais",
-            "annulation taxe",
-            "remboursement taxe",
-            "régularisation taxe",
-            "regularisation taxe",
-            "annulation tva",
-            "remboursement tva",
-
-            # AR
-            "عكس رسوم",
-            "عكس ضريبة",
-            "خصم ضريبة",
-            "تسوية رسوم",
-            "تسوية ضريبة",
-            "استرداد رسوم",
-            "استرداد ضريبة",
-        ]
-    )
-
-    if is_fee_tax_adjustment:
-        return exclude_transaction_from_financial_kpis(
-            tx,
-            "fee_tax_adjustment",
-        )
 
     if is_fee_or_tax:
         amount = tx.get("locked_amount", tx.get("signed_amount", tx.get("amount", 0)))
