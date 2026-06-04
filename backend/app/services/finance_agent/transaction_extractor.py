@@ -7218,7 +7218,8 @@ def extract_transactions(text: str) -> list[dict]:
                 tx["type"] = None
                 tx = exclude_transaction_from_financial_kpis(tx, "missing_previous_balance")
 
-            previous_amount_balance = float(balance)
+            if abs(float(balance or 0)) >= 1:
+                previous_amount_balance = float(balance)
         else:
             tx["_locked_amount"] = signed_amount
             tx["locked_amount"] = signed_amount
