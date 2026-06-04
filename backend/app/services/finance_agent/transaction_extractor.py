@@ -3378,6 +3378,15 @@ def normalize_untyped_incoming_credits(transactions: list[dict]) -> list[dict]:
         description = description_raw.lower()
         amount = float(row.get("amount", 0) or 0)
 
+        if row.get("_balance") is not None and not row.get("_balance_locked"):
+            normalized.append(
+                exclude_transaction_from_financial_kpis(
+                    row,
+                    row.get("category_hint") or "unlocked_amount_balance_row",
+                )
+            )
+            continue
+
         has_inbound = any(marker in description for marker in inbound_markers)
 
         if row.get("type") is None and amount > 0 and has_inbound:
