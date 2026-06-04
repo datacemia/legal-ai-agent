@@ -7186,7 +7186,52 @@ def extract_debit_credit_table_transactions(text: str) -> list[dict]:
 
 
 def extract_credit_card_statement_transactions(text: str) -> list[dict]:
-    return extract_debit_credit_column_transactions(text)
+    cc_row_re = re.compile(
+        r"^(?P<tx_date>\d{1,2}/\d{1,2})\s+"
+        r"(?P<post_date>\d{1,2}/\d{1,2})\s+"
+        r"(?P<description>.+?)\s+"
+        r"(?P<amount>-?\$?(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d{2}))\s*$"
+    )
+
+    transactions = []
+    default_year = detect_document_year(text)
+
+    for raw_line in str(text or "").splitlines():
+        line = " ".join(str(raw_line or "").split())
+        match = cc_row_re.match(line)
+
+        if not match:
+            continue
+
+        raw_amount = parse_amount(match.group("amount").replace("$", ""))
+
+        if raw_amount < 0:
+            tx_type = "income"
+            amount = abs(raw_amount)
+        else:
+            tx_type = "expense"
+            amount = -abs(raw_amount)
+
+        date = extract_date(
+            match.group("tx_date"),
+            default_year=default_year,
+            prefer_us_date=True,
+        )
+
+        transactions.append(
+            {
+                "date": date,
+                "description": match.group("description").strip(),
+                "amount": amount,
+                "type": tx_type,
+                "signed_amount": amount,
+                "locked_amount": amount,
+                "_locked_amount": amount,
+                "locked_type": tx_type,
+            }
+        )
+
+    return transactions
 
 
 def extract_transactions(text: str) -> list[dict]:
