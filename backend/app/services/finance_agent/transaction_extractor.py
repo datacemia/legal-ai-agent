@@ -6031,11 +6031,11 @@ def extract_debit_credit_column_transactions(
 
     value_date_amount_re = re.compile(
         r"(?P<value_date>\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?)\s+"
-        r"(?P<amount>(?:\d{1,3}(?:[ .]\d{3})+|\d+)(?:[.,]\d{2}))\s*$"
+        r"(?P<amount>(?:\d{1,3}(?:[ .]\d{3})+|\d+)(?:[.,]\d{2,3}))\s*$"
     )
 
     trailing_amount_re = re.compile(
-        r"(?P<amount>(?:\d{1,3}(?:[ .]\d{3})+|\d+)(?:[.,]\d{2}))\s*$"
+        r"(?P<amount>(?:\d{1,3}(?:[ .]\d{3})+|\d+)(?:[.,]\d{2,3}))\s*$"
     )
 
     transactions: list[dict] = []
