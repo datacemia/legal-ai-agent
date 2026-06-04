@@ -6710,6 +6710,10 @@ def extract_transactions(text: str) -> list[dict]:
         # movement to the penultimate value and the balance to the final value.
         # This fixes Arabic/RTL bilingual tables where the old path sometimes
         # used the running balance as the transaction amount.
+        print("AMOUNT_BALANCE_DEBUG_LINE", clean_line)
+        print("AMOUNT_BALANCE_DEBUG_NUMBERS", extract_transaction_money_numbers(clean_line))
+        print("AMOUNT_BALANCE_DEBUG_PAIR", extract_terminal_amount_balance_pair(clean_line))
+
         locked_tx_amount, locked_balance = extract_terminal_amount_balance_pair(clean_line)
 
         if locked_tx_amount is not None and locked_balance is not None:
