@@ -2705,10 +2705,41 @@ def canonicalize_transaction(tx):
             tx.get("category_hint") or "unlocked_amount_balance_row",
         )
 
-    if re.search(
-        r"\b(fee|fees|vat|commission|charge|رسوم|عمولة|ضريبة)\b",
-        description.lower(),
-    ):
+    fee_tax_text = description.lower()
+
+    is_fee_or_tax = any(
+        marker in fee_tax_text
+        for marker in [
+            # EN
+            "fee",
+            "fees",
+            "commission",
+            "charge",
+            "charges",
+            "tax",
+            "vat",
+            "value added tax",
+
+            # FR
+            "frais",
+            "commission",
+            "commissions",
+            "taxe",
+            "tva",
+            "impôt",
+            "impot",
+
+            # AR
+            "رسوم",
+            "رسم",
+            "عمولة",
+            "ضريبة",
+            "الضريبة",
+            "القيمة المضافة",
+        ]
+    )
+
+    if is_fee_or_tax:
         amount = tx.get("locked_amount", tx.get("signed_amount", tx.get("amount", 0)))
         tx["amount"] = -abs(float(amount))
         tx["type"] = "expense"
