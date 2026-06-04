@@ -7250,8 +7250,7 @@ def extract_transactions(text: str) -> list[dict]:
             },
         )
 
-        if len(cc_transactions) >= 1:
-            return cc_transactions
+        return cc_transactions
 
     if statement_layout == "debit_credit_table":
         dc_transactions = extract_debit_credit_table_transactions(text)
