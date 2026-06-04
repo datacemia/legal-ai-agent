@@ -2743,6 +2743,50 @@ def canonicalize_transaction(tx):
         ]
     )
 
+    adjustment_text = description.lower()
+
+    is_fee_tax_adjustment = any(
+        marker in adjustment_text
+        for marker in [
+            # EN
+            "fee reversal",
+            "reverse fee",
+            "charge reversal",
+            "tax reversal",
+            "tax adjustment",
+            "vat reversal",
+            "vat adjustment",
+
+            # FR
+            "contrepassation de frais",
+            "annulation de frais",
+            "remboursement de frais",
+            "régularisation de frais",
+            "regularisation de frais",
+            "annulation taxe",
+            "remboursement taxe",
+            "régularisation taxe",
+            "regularisation taxe",
+            "annulation tva",
+            "remboursement tva",
+
+            # AR
+            "عكس رسوم",
+            "عكس ضريبة",
+            "خصم ضريبة",
+            "تسوية رسوم",
+            "تسوية ضريبة",
+            "استرداد رسوم",
+            "استرداد ضريبة",
+        ]
+    )
+
+    if is_fee_tax_adjustment:
+        return exclude_transaction_from_financial_kpis(
+            tx,
+            "fee_tax_adjustment",
+        )
+
     if is_fee_or_tax:
         amount = tx.get("locked_amount", tx.get("signed_amount", tx.get("amount", 0)))
         tx["amount"] = -abs(float(amount))
