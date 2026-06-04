@@ -6338,6 +6338,24 @@ def extract_transactions(text: str) -> list[dict]:
     )
 
     debug_log(
+        "EXPENSE_SUMMARY_AUDIT",
+        {
+            "expense_count": sum(
+                1 for tx in transactions
+                if tx.get("type") == "expense"
+            ),
+            "expense_total": round(
+                sum(
+                    abs(tx.get("amount", 0))
+                    for tx in transactions
+                    if tx.get("type") == "expense"
+                ),
+                2,
+            ),
+        },
+    )
+
+    debug_log(
         "ALL_INCOME_TRANSACTIONS",
         [
             tx
