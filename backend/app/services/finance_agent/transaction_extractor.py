@@ -2827,6 +2827,24 @@ def canonicalize_transaction(tx):
         tx["locked_amount"] = tx["signed_amount"]
         tx["_locked_amount"] = tx["signed_amount"]
 
+
+    if any(
+        k in description.lower()
+        for k in [
+            "fee", "fees", "charge", "commission", "tax", "vat",
+            "frais", "taxe", "tva",
+            "رسوم", "رسم", "عمولة", "ضريبة",
+        ]
+    ):
+        print(
+            "MICRO_FEE_CANONICALIZE",
+            {
+                "amount": tx.get("amount"),
+                "type": tx.get("type"),
+                "desc": description[:120],
+            },
+        )
+
     return tx
 
 
