@@ -6855,16 +6855,21 @@ def extract_transactions(text: str) -> list[dict]:
             }
         )
 
-        transactions.append(
-            {
-                "date": date,
-                "description": clean_db_text(clean_line),
-                "amount": amount,
-                "type": transaction_type,
-                "currency": detected_currency,
-                "_balance": line_balance,
-            }
-        )
+        final_amount = signed_amount
+
+        tx = {
+            "date": date,
+            "description": description,
+            "amount": final_amount,
+            "type": tx_type,
+            "currency": detected_currency,
+            "_locked_amount": final_amount,
+        }
+
+        if balance is not None:
+            tx["_balance"] = balance
+
+        transactions.append(tx)
 
     transactions = infer_balance_delta_rows(transactions)
 
@@ -6935,6 +6940,18 @@ def extract_transactions(text: str) -> list[dict]:
             if tx.get("type") == "expense"
         ]
     )
+
+    for tx in transactions:
+        if "_balance" in tx:
+            balance = tx.get("_balance")
+            amount = tx.get("amount")
+
+            if balance is not None and amount is not None:
+                if round(abs(float(amount)), 2) == round(abs(float(balance)), 2):
+                    original = tx.get("_locked_amount")
+
+                    if original is not None:
+                        tx["amount"] = original
 
     for tx in transactions:
         tx.pop("_balance", None)
@@ -7039,6 +7056,18 @@ def extract_transactions(text: str) -> list[dict]:
             or "CONNECTION" in str(tx.get("description", "")).upper()
         ],
     )
+
+    for tx in transactions:
+        if "_balance" in tx:
+            balance = tx.get("_balance")
+            amount = tx.get("amount")
+
+            if balance is not None and amount is not None:
+                if round(abs(float(amount)), 2) == round(abs(float(balance)), 2):
+                    original = tx.get("_locked_amount")
+
+                    if original is not None:
+                        tx["amount"] = original
 
     print(
         "KPI_INPUT_DEBUG",
