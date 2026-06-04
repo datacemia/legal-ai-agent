@@ -941,7 +941,7 @@ def parse_terminal_amount(value: str, line: str) -> float:
     ctx = str(line or "").lower()
 
     if (
-        re.fullmatch(r"[+-]?\d{1,6}\.\d{3}", raw)
+        re.fullmatch(r"[+-]?\d+\.\d{3}", raw)
         and (
             "sar" in ctx
             or "ريال" in ctx
@@ -2508,7 +2508,7 @@ def infer_balance_delta_rows(rows: list[dict]) -> list[dict]:
 
         if balance is not None and previous_balance is not None:
             delta = round(float(balance) - float(previous_balance), 2)
-            tolerance = max(0.02, abs(amount) * 0.002)
+            tolerance = 0.05
 
             debug_log(
                 "TX_DEBUG: balance_authority",
