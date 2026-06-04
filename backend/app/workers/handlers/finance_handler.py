@@ -645,6 +645,28 @@ def handle_finance_ai(job: Job, db):
             tx["amount"] = locked_amount
             tx["signed_amount"] = locked_amount
 
+        # Standard international FR / EN / AR rule:
+        # amount/balance ledger rows must never become income only because
+        # their visible movement amount is positive. Only balance-delta locked
+        # rows may participate in KPI totals.
+        if tx.get("_balance") is not None and not tx.get("_balance_locked"):
+            tx["type"] = None
+            tx.pop("signed_amount", None)
+            tx.pop("locked_amount", None)
+            tx.pop("_locked_amount", None)
+            tx.pop("locked_type", None)
+            tx["excluded_from_financial_kpis"] = True
+            tx["exclude_from_income"] = True
+            tx["exclude_from_expense"] = True
+            tx["exclude_from_score"] = True
+            tx["exclude_from_savings"] = True
+            tx["exclude_from_cashflow"] = True
+            tx["category_hint"] = (
+                tx.get("category_hint")
+                or "unlocked_amount_balance_row"
+            )
+            continue
+
         if tx.get("type") is None:
             amount = safe_float(tx.get("signed_amount", tx.get("amount")))
 
