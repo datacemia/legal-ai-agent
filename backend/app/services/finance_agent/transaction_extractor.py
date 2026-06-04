@@ -5876,6 +5876,547 @@ def fallback_debit_credit_column_transactions_if_low_quality(
 
     return transactions
 
+
+
+def extract_standard_sectioned_statement_transactions(
+    text: str,
+    detected_currency: str | None = None,
+) -> list[dict]:
+    """Extract section-based statement transactions using structure, not bank names.
+
+    Standard international FR / EN / AR layer.
+
+    Supported structural families:
+      - TRANSACTION DATE / POSTING DATE / DESCRIPTION / AMOUNT
+      - POSTING DATE / DESCRIPTION / AMOUNT
+      - DATE / SERIAL NO / AMOUNT
+      - Section-driven statements where direction is defined by headings:
+          income/credit sections: deposits, credits, payments received,
+          versements, dépôts, crédits, دائن, إيداعات
+          expense/debit sections: purchases, payments, withdrawals, checks,
+          achats, paiements, retraits, chèques, مدين, سحوبات
+
+    This is intentionally not bank-specific. It does not look for bank names;
+    it only uses statement structure, section titles, dates, and money tokens.
+    """
+    raw = str(text or "")
+    normalized = re.sub(r"\s+", " ", raw.lower())
+    currency = detected_currency or detect_currency(raw) or "unknown"
+
+    structure_markers = [
+        # EN
+        "transaction date", "posting date", "description", "reference number",
+        "payments and other credits", "purchases and adjustments",
+        "electronic payments", "electronic deposits", "checks paid",
+        "deposits", "withdrawals", "date serial no", "serial no. amount",
+        # FR
+        "date libellé montant", "date libelle montant", "date opération montant",
+        "date operation montant", "paiements", "achats", "débits", "debits",
+        "crédits", "credits", "dépôts", "depots", "versements", "chèques",
+        "cheques", "retraits",
+        # AR
+        "التاريخ", "الوصف", "المبلغ", "المدفوعات", "المشتريات", "الإيداعات",
+        "الايداعات", "الشيكات", "السحوبات", "مدين", "دائن",
+    ]
+
+    if not any(marker in normalized for marker in structure_markers):
+        return []
+
+    lines = [
+        " ".join(line.replace("\xa0", " ").replace("\u202f", " ").split())
+        for line in raw.splitlines()
+        if " ".join(line.replace("\xa0", " ").replace("\u202f", " ").split())
+    ]
+
+    money_re = re.compile(
+        r"(?<![A-Za-z0-9])"
+        r"[+-]?"
+        r"(?:\d{1,3}(?:[,.]\d{3})+|\d+)"
+        r"(?:[.,]\d{2})"
+        r"(?![A-Za-z0-9])"
+    )
+
+    short_date_re = re.compile(r"(?<!\d)(\d{1,2})[/-](\d{1,2})(?!\d)")
+
+    income_sections = [
+        # EN
+        "payments and other credits", "deposits", "electronic deposits",
+        "credits", "credit transfers", "payments received", "payment received",
+        "incoming payments", "incoming transfers",
+        # FR
+        "crédits", "credits", "dépôts", "depots", "versements",
+        "virements reçus", "virements recus", "encaissements",
+        # AR
+        "الإيداعات", "الايداعات", "دائن", "إيداع", "ايداع", "تحويل وارد",
+    ]
+
+    expense_sections = [
+        # EN
+        "purchases and adjustments", "electronic payments", "checks paid",
+        "other withdrawals", "withdrawals", "debits", "debit", "payments",
+        "purchases", "card purchases", "fees charged", "interest charged",
+        # FR
+        "débits", "debits", "paiements", "achats", "retraits", "chèques",
+        "cheques", "frais", "intérêts débités", "interets debites",
+        # AR
+        "المدفوعات", "المشتريات", "السحوبات", "الشيكات", "مدين", "خصم", "سحب",
+    ]
+
+    neutral_headers = [
+        "daily account activity", "transactions", "transaction detail",
+        "date description amount", "posting date description amount",
+        "transaction date posting date description", "reference number account number amount",
+        "date serial no", "date serial no. amount",
+        "mouvements", "opérations", "operations", "تفاصيل العمليات", "الحركات",
+    ]
+
+    stop_sections = [
+        "account summary", "payment information", "interest charge calculation",
+        "important information", "important messages", "daily balance summary",
+        "ending balance", "beginning balance", "total fees charged",
+        "total interest charged", "customer service", "how to balance your account",
+        "calculation of balances", "apr type definitions", "reward summary",
+        "for consumer accounts only", "in case of errors", "call 1-800",
+        "bank deposits fdic", "fdic insured", "equal housing lender",
+        "résumé", "resume", "solde initial", "solde final", "الرصيد الافتتاحي", "الرصيد النهائي",
+    ]
+
+    metadata_markers = [
+        "account number", "account #", "primary account", "cust ref", "customer service",
+        "statement period", "statement periods", "payment due date", "new balance total",
+        "total credit line", "credit available", "cash credit line", "previous balance",
+        "average collected balance", "days in period", "days in billing cycle",
+        "annual percentage", "interest paid year-to-date", "mail payment", "mail billing",
+        "p.o. box", "www.", "http", "page ", "enter payment amount",
+        "minimum payment warning", "late payment warning",
+        "numéro de compte", "numero de compte", "période", "periode", "service client",
+        "رقم الحساب", "فترة", "خدمة العملاء",
+    ]
+
+    def section_type(section: str | None) -> str | None:
+        low = str(section or "").lower()
+        if any(marker in low for marker in income_sections):
+            return "income"
+        if any(marker in low for marker in expense_sections):
+            return "expense"
+        return None
+
+    def detect_section(line: str) -> str | None:
+        low = line.lower()
+        for marker in income_sections:
+            if marker in low:
+                return marker
+        for marker in expense_sections:
+            if marker in low:
+                return marker
+        if any(marker in low for marker in neutral_headers):
+            return "__neutral__"
+        return None
+
+    def line_is_stop(line: str) -> bool:
+        low = line.lower()
+        return any(marker in low for marker in stop_sections)
+
+    def line_is_metadata(line: str) -> bool:
+        low = line.lower()
+        if any(marker in low for marker in metadata_markers):
+            return True
+        if is_document_metadata_line(line):
+            return True
+        return False
+
+    def detect_statement_periods(src_lines: list[str]) -> list[tuple[datetime, datetime]]:
+        joined = "\n".join(src_lines)
+        patterns = [
+            r"\b([A-Za-z]{3,9})\s+(\d{1,2})\s+(20\d{2})\s*[-–]\s*([A-Za-z]{3,9})\s+(\d{1,2})\s+(20\d{2})\b",
+            r"\b(\d{1,2})[/-](\d{1,2})[/-](20\d{2})\s*[-–]\s*(\d{1,2})[/-](\d{1,2})[/-](20\d{2})\b",
+        ]
+        periods: list[tuple[datetime, datetime]] = []
+
+        for match in re.finditer(patterns[0], joined, flags=re.IGNORECASE):
+            m1, d1, y1, m2, d2, y2 = match.groups()
+            if m1.lower() in MONTH_ALIASES and m2.lower() in MONTH_ALIASES:
+                try:
+                    start = datetime(int(y1), int(MONTH_ALIASES[m1.lower()]), int(d1))
+                    end = datetime(int(y2), int(MONTH_ALIASES[m2.lower()]), int(d2))
+                    if is_reasonable_year(start.year) and is_reasonable_year(end.year):
+                        periods.append((start, end))
+                except ValueError:
+                    pass
+
+        for match in re.finditer(patterns[1], joined):
+            a, b, y1, c, d, y2 = match.groups()
+            for month_first in (True, False):
+                try:
+                    if month_first:
+                        start = datetime(int(y1), int(a), int(b))
+                        end = datetime(int(y2), int(c), int(d))
+                    else:
+                        start = datetime(int(y1), int(b), int(a))
+                        end = datetime(int(y2), int(d), int(c))
+                    if is_reasonable_year(start.year) and is_reasonable_year(end.year):
+                        periods.append((start, end))
+                        break
+                except ValueError:
+                    continue
+
+        # Common card-statement form: "December 27 - January 26, 2024".
+        # The start year is inferred structurally from the end month/year.
+        for match in re.finditer(
+            r"\b([A-Za-z]{3,9})\s+(\d{1,2})\s*[-–]\s*([A-Za-z]{3,9})\s+(\d{1,2}),?\s+(20\d{2})\b",
+            joined,
+            flags=re.IGNORECASE,
+        ):
+            m1, d1, m2, d2, end_year_text = match.groups()
+            if m1.lower() in MONTH_ALIASES and m2.lower() in MONTH_ALIASES:
+                try:
+                    end_year = int(end_year_text)
+                    start_month = int(MONTH_ALIASES[m1.lower()])
+                    end_month = int(MONTH_ALIASES[m2.lower()])
+                    start_year = end_year - 1 if start_month > end_month else end_year
+                    start = datetime(start_year, start_month, int(d1))
+                    end = datetime(end_year, end_month, int(d2))
+                    if is_reasonable_year(start.year) and is_reasonable_year(end.year):
+                        periods.append((start, end))
+                except ValueError:
+                    pass
+
+        return periods
+
+    periods = detect_statement_periods(lines)
+    default_year = periods[-1][1].year if periods else detect_document_year(raw)
+    current_period: tuple[datetime, datetime] | None = periods[-1] if periods else None
+    current_year = default_year
+
+    def update_period_from_line(line: str) -> None:
+        nonlocal current_period, current_year
+        local_periods = detect_statement_periods([line])
+        if local_periods:
+            current_period = local_periods[-1]
+            current_year = current_period[1].year
+            return
+
+        years = [int(y) for y in re.findall(r"\b(20\d{2})\b", line) if is_reasonable_year(int(y))]
+        if years and re.search(r"statement period|period|période|periode|فترة", line, flags=re.I):
+            current_year = years[-1]
+
+    def prefer_month_day_for_context() -> bool:
+        context = normalized
+        # Structural EN labels use MM/DD in most international card/checking statements.
+        if re.search(
+            r"\b(posting date|transaction date|checks paid|electronic payments|purchases and adjustments|payments and other credits)\b",
+            context,
+            flags=re.IGNORECASE,
+        ):
+            return True
+        # FR/AR context remains day/month by default.
+        if re.search(r"\b(libell[eé]|op[ée]ration|débit|crédit|solde)\b", context, flags=re.I):
+            return False
+        if re.search(r"[\u0600-\u06FF]", context):
+            return False
+        return False
+
+    def parse_short_date_token(token: str) -> str | None:
+        match = re.match(r"^\s*(\d{1,2})[/-](\d{1,2})\b", token)
+        if not match:
+            return None
+        first = int(match.group(1))
+        second = int(match.group(2))
+        month_first = prefer_month_day_for_context()
+
+        possible: list[datetime] = []
+        candidate_years = []
+        if current_period:
+            candidate_years.extend([current_period[0].year, current_period[1].year])
+        candidate_years.extend([current_year, default_year])
+
+        unique_years = []
+        for year in candidate_years:
+            if year not in unique_years and is_reasonable_year(int(year)):
+                unique_years.append(int(year))
+
+        orders = [(first, second)] if month_first else [(second, first)]
+        # If non-ambiguous, allow the only valid alternative too.
+        if first > 12 and second <= 12:
+            orders = [(second, first)]
+        elif second > 12 and first <= 12:
+            orders = [(first, second)]
+
+        for year in unique_years:
+            for month, day in orders:
+                try:
+                    possible.append(datetime(year, month, day))
+                except ValueError:
+                    continue
+
+        if not possible:
+            return None
+
+        if current_period:
+            start, end = current_period
+            in_period = [dt for dt in possible if start <= dt <= end]
+            if in_period:
+                return in_period[0].date().isoformat()
+
+            # Statement OCR may split pages or include adjacent cycle rows. Pick nearest.
+            possible.sort(key=lambda dt: min(abs((dt - start).days), abs((dt - end).days)))
+            return possible[0].date().isoformat()
+
+        return possible[0].date().isoformat()
+
+    def clean_section_description(combined: str) -> str:
+        description = re.sub(r"^\s*\d{1,2}[/-]\d{1,2}\s+", "", combined)
+        # Credit-card style rows have transaction date + posting date.
+        description = re.sub(r"^\s*\d{1,2}[/-]\d{1,2}\s+", "", description)
+        description = money_re.sub(" ", description)
+        description = re.sub(r"\b\d{8,}\b", " ", description)
+        description = re.sub(r"\s+", " ", description).strip(" -–—:;,.|")
+        return clean_db_text(description)
+
+    def should_skip_candidate(combined: str) -> bool:
+        low = combined.lower()
+        if line_is_metadata(combined):
+            return True
+        if line_is_stop(combined):
+            return True
+        if any(marker in low for marker in ["subtotal", "total ", "total:", "new balance", "ending balance", "beginning balance"]):
+            return True
+        if re.search(r"cust ref|primary account|account number|account #|payment due date", low):
+            return True
+        return False
+
+    rows: list[dict] = []
+    current_section: str | None = None
+    buffer: list[str] = []
+
+    def add_row(date: str, description: str, amount: float, tx_type: str) -> None:
+        if not date or not description or amount <= 0:
+            return
+        rows.append({
+            "date": date,
+            "description": description,
+            "amount": amount if tx_type == "income" else -amount,
+            "type": tx_type,
+            "currency": currency,
+        })
+
+    def parse_check_serial_rows(line: str, tx_type: str) -> bool:
+        # Handles repeated structures such as:
+        #   10/02 1027 8,800.00 10/02 1002* 1,131.47
+        pattern = re.compile(
+            r"(?<!\d)(\d{1,2}[/-]\d{1,2})\s+([A-Za-z0-9*#-]{1,12})\s+([+-]?(?:\d{1,3}(?:[,.]\d{3})+|\d+)(?:[.,]\d{2}))(?![A-Za-z0-9])"
+        )
+        matches = list(pattern.finditer(line))
+        if not matches:
+            return False
+
+        used = False
+        for match in matches:
+            date = parse_short_date_token(match.group(1))
+            if not date:
+                continue
+            amount = abs(parse_amount(match.group(3)))
+            description = clean_db_text(f"check/serial {match.group(2)}")
+            add_row(date, description, amount, tx_type)
+            used = True
+        return used
+
+    def flush_buffer() -> None:
+        nonlocal buffer
+        if not buffer:
+            return
+
+        combined = " ".join(buffer)
+        buffer = []
+        tx_type = section_type(current_section)
+
+        if tx_type not in {"income", "expense"}:
+            return
+        if should_skip_candidate(combined):
+            return
+
+        date_match = short_date_re.search(combined)
+        if not date_match:
+            return
+
+        date = parse_short_date_token(date_match.group(0))
+        if not date:
+            return
+
+        # Check sections can contain two or more transactions on one physical line.
+        if current_section and any(marker in current_section for marker in ["checks paid", "chèques", "cheques", "الشيكات"]):
+            if parse_check_serial_rows(combined, tx_type):
+                return
+
+        amounts = money_re.findall(combined)
+        if not amounts:
+            return
+
+        # Section-based statements expose one transaction amount per logical row.
+        # Rows with multiple money values usually belong to amount+balance ledgers
+        # or summary blocks, which are handled by other structural parsers.
+        if len(amounts) != 1:
+            return
+
+        amount = abs(parse_amount(amounts[-1]))
+        description = clean_section_description(combined)
+        if not description:
+            return
+
+        add_row(date, description, amount, tx_type)
+
+    for line in lines:
+        update_period_from_line(line)
+        low = line.lower()
+
+        if line_is_stop(line):
+            flush_buffer()
+            current_section = None
+            continue
+
+        detected_section = detect_section(line)
+        if detected_section:
+            flush_buffer()
+            if detected_section == "__neutral__":
+                current_section = None
+            else:
+                current_section = detected_section
+            continue
+
+        # Skip pure table headers without closing the active section.
+        if re.search(
+            r"\b(transaction date|posting date|description|reference number|account number|amount|serial no)\b",
+            low,
+            flags=re.I,
+        ):
+            flush_buffer()
+            continue
+
+        if current_section is None or section_type(current_section) not in {"income", "expense"}:
+            continue
+
+        if should_skip_candidate(line):
+            flush_buffer()
+            continue
+
+        if short_date_re.match(line):
+            flush_buffer()
+            # For check/serial paired rows, parse immediately when possible.
+            if current_section and any(marker in current_section for marker in ["checks paid", "chèques", "cheques", "الشيكات"]):
+                if parse_check_serial_rows(line, section_type(current_section) or "expense"):
+                    continue
+            buffer = [line]
+            if money_re.search(line):
+                flush_buffer()
+            continue
+
+        if buffer:
+            buffer.append(line)
+            if money_re.search(line):
+                flush_buffer()
+
+    flush_buffer()
+
+    # Deduplicate rows emitted from repeated OCR/page artifacts.
+    deduped: list[dict] = []
+    seen = set()
+    for row in rows:
+        key = (
+            row.get("date"),
+            round(float(row.get("amount") or 0), 2),
+            re.sub(r"\s+", " ", str(row.get("description") or "").lower()).strip(),
+            row.get("type"),
+        )
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(row)
+
+    debug_log("STANDARD_SECTIONED_STATEMENT_EXTRACTED", {
+        "transactions": len(deduped),
+        "income": sum(1 for r in deduped if r.get("type") == "income"),
+        "expenses": sum(1 for r in deduped if r.get("type") == "expense"),
+        "income_total": round(sum(float(r.get("amount") or 0) for r in deduped if r.get("type") == "income"), 2),
+        "expense_total": round(abs(sum(float(r.get("amount") or 0) for r in deduped if r.get("type") == "expense")), 2),
+    })
+
+    return deduped
+
+
+def should_use_standard_sectioned_statement(
+    existing_transactions: list[dict],
+    sectioned_transactions: list[dict],
+) -> bool:
+    """Decide whether the section-based structural parse is better.
+
+    Standard quality gate. It never checks bank names.
+    """
+    if not sectioned_transactions:
+        return False
+
+    sectioned_has_unreasonable_amount = any(
+        abs(float(tx.get("amount") or 0)) > 1_000_000
+        for tx in sectioned_transactions
+    )
+
+    if sectioned_has_unreasonable_amount:
+        return False
+
+    if not existing_transactions:
+        return True
+
+    existing_typed = sum(
+        1 for tx in existing_transactions
+        if tx.get("type") in {"income", "expense"}
+    )
+    existing_typed_ratio = existing_typed / len(existing_transactions) if existing_transactions else 0
+
+    sectioned_typed = sum(
+        1 for tx in sectioned_transactions
+        if tx.get("type") in {"income", "expense"}
+    )
+    sectioned_typed_ratio = sectioned_typed / len(sectioned_transactions) if sectioned_transactions else 0
+
+    has_bad_reference_amount = any(
+        abs(float(tx.get("amount") or 0)) > 1_000_000
+        for tx in existing_transactions
+    )
+
+    has_bad_unknown_year = any(
+        str(tx.get("date") or "").startswith(str(datetime.now().year))
+        and tx.get("type") not in {"income", "expense"}
+        for tx in existing_transactions
+    )
+
+    metadata_contamination_markers = [
+        "payment due date", "account summary", "payment information",
+        "minimum payment", "credit line", "credit available",
+        "new balance total", "statement closing date", "previous balance",
+        "interest charged", "fees charged",
+    ]
+    metadata_contamination_ratio = (
+        sum(
+            1 for tx in existing_transactions
+            if any(
+                marker in str(tx.get("description") or "").lower()
+                for marker in metadata_contamination_markers
+            )
+        ) / len(existing_transactions)
+        if existing_transactions else 0
+    )
+
+    return (
+        has_bad_reference_amount
+        or has_bad_unknown_year
+        or metadata_contamination_ratio >= 0.20
+        or existing_typed_ratio < 0.50 <= sectioned_typed_ratio
+        or (
+            sectioned_typed_ratio >= 0.90
+            and len(sectioned_transactions) >= max(2, int(len(existing_transactions) * 0.75))
+            and sectioned_typed > existing_typed
+        )
+    )
+
 def extract_transactions(text: str) -> list[dict]:
     debug_log("=== TX_EXTRACT_DEBUG START ===")
     debug_log("TEXT_SAMPLE:", clean_db_text(str(text))[:500])
@@ -6252,6 +6793,59 @@ def extract_transactions(text: str) -> list[dict]:
 
     transactions = infer_balance_delta_rows(transactions)
 
+    amount_balance_transactions = extract_standard_amount_balance_ledger_transactions(
+        text,
+        detected_currency,
+    )
+
+    if amount_balance_transactions:
+        existing_income = sum(1 for tx in transactions if tx.get("type") == "income")
+        existing_expense = sum(1 for tx in transactions if tx.get("type") == "expense")
+        ledger_income = sum(1 for tx in amount_balance_transactions if tx.get("type") == "income")
+        ledger_expense = sum(1 for tx in amount_balance_transactions if tx.get("type") == "expense")
+        existing_count = len(transactions)
+        ledger_count = len(amount_balance_transactions)
+
+        existing_one_sided = existing_count >= 5 and (existing_income == 0 or existing_expense == 0)
+        ledger_is_balanced = ledger_income > 0 and ledger_expense > 0
+
+        if (
+            not transactions
+            or (ledger_is_balanced and existing_one_sided)
+            or (ledger_is_balanced and ledger_count > existing_count * 1.20)
+        ):
+            debug_log("STANDARD_AMOUNT_BALANCE_LEDGER_USED", {
+                "old_transactions": existing_count,
+                "new_transactions": ledger_count,
+                "old_income": existing_income,
+                "old_expense": existing_expense,
+                "new_income": ledger_income,
+                "new_expense": ledger_expense,
+            })
+            transactions = amount_balance_transactions
+
+    sectioned_transactions = extract_standard_sectioned_statement_transactions(
+        text,
+        detected_currency,
+    )
+
+    if should_use_standard_sectioned_statement(transactions, sectioned_transactions):
+        existing_typed_ratio = (
+            sum(
+                1 for tx in transactions
+                if tx.get("type") in {"income", "expense"}
+            ) / len(transactions)
+            if transactions else 0
+        )
+
+        debug_log("STANDARD_SECTIONED_STATEMENT_USED", {
+            "old_transactions": len(transactions),
+            "new_transactions": len(sectioned_transactions),
+            "old_typed_ratio": round(existing_typed_ratio, 4),
+        })
+
+        transactions = sectioned_transactions
+
     debug_log(
         "EXPENSE_FULL_AUDIT",
         [
@@ -6281,6 +6875,15 @@ def extract_transactions(text: str) -> list[dict]:
             text,
             detected_currency,
         )
+
+    if not transactions:
+        sectioned_transactions = extract_standard_sectioned_statement_transactions(
+            text,
+            detected_currency,
+        )
+
+        if should_use_standard_sectioned_statement([], sectioned_transactions):
+            transactions = sectioned_transactions
 
     if not transactions:
         debug_log(
