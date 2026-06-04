@@ -718,6 +718,11 @@ def handle_finance_ai(job: Job, db):
         finance_progress_message("budget", output_language),
     )
 
+
+    for tx in transactions:
+        if tx.get("_locked_amount") is not None:
+            tx["amount"] = tx["_locked_amount"]
+
     print(
         "EXPENSE_FULL_AUDIT",
         [
@@ -731,6 +736,11 @@ def handle_finance_ai(job: Job, db):
             if tx.get("type") == "expense"
         ],
     )
+
+
+    for tx in transactions:
+        if tx.get("_locked_amount") is not None:
+            tx["amount"] = tx["_locked_amount"]
 
     print(
         "KPI_SOURCE_AUDIT",
