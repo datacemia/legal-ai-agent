@@ -925,6 +925,33 @@ def extract_transaction_money_numbers(line: str) -> list[str]:
     )
 
 
+def parse_terminal_amount(value: str, line: str) -> float:
+    """Parse a transaction movement in a terminal amount/balance pair.
+
+    This is intentionally narrower than parse_amount(). It is used only for
+    logical bank rows that expose transaction movement + running balance.
+
+    Standard international FR / EN / AR rule:
+    - In GCC/Arabic statements, amounts can have three decimal places, e.g.
+      25.000 SAR means 25.000, not 25,000.
+    - For all other cases, keep the existing international parser unchanged.
+    """
+    raw = str(value or "").strip()
+    ctx = str(line or "").lower()
+
+    if (
+        re.fullmatch(r"[+-]?\d{1,6}\.\d{3}", raw)
+        and (
+            "sar" in ctx
+            or "ريال" in ctx
+            or is_arabic_text(ctx)
+        )
+    ):
+        return float(raw)
+
+    return parse_amount(raw)
+
+
 def extract_terminal_amount_balance_pair(line: str) -> tuple[float | None, float | None]:
     """Extract the terminal transaction amount + running balance pair.
 
@@ -932,11 +959,6 @@ def extract_terminal_amount_balance_pair(line: str) -> tuple[float | None, float
     when a logical statement row ends with two money values, the penultimate
     value is the transaction movement and the final value is the running
     balance. This is independent of bank, country, language, and script.
-
-    Examples:
-        EN: 2024-08-12 FROM MADA ... 5.500 588.33
-        FR: 18/07/2025 VIR RECU ... 9.450,00 12.300,00
-        AR: 2024-08-12 بطاقة مدى ... 5.500 588.33
 
     The function never returns the balance as the movement.
     """
@@ -946,7 +968,7 @@ def extract_terminal_amount_balance_pair(line: str) -> tuple[float | None, float
         return None, None
 
     try:
-        tx_amount = parse_amount(numbers[-2])
+        tx_amount = parse_terminal_amount(numbers[-2], line)
         balance = parse_amount(numbers[-1])
     except Exception:
         return None, None
@@ -1193,10 +1215,10 @@ def pick_transaction_amount_from_tabular_numbers(
     safe_numbers = extract_transaction_money_numbers(line)
 
     if len(safe_numbers) >= 2:
-        return parse_amount(safe_numbers[-2])
+        return parse_terminal_amount(safe_numbers[-2], line)
 
     if len(safe_numbers) == 1:
-        return parse_amount(safe_numbers[0])
+        return parse_terminal_amount(safe_numbers[0], line)
 
     return pick_bank_amount(
         numbers,
@@ -1981,19 +2003,21 @@ def extract_transaction_amount(line: str) -> float | None:
     signed_match = re.search(
         r"([+-])\s*("
         r"(?:\d{1,3}(?:[ ,]\d{3})+|\d+)"
-        r"(?:[.,]\d{2})"
+        r"(?:[.,]\d{2,3})"
         r")",
         remove_short_bank_date_noise(normalize_line_for_amount_detection(line)),
     )
 
     if signed_match:
-        amount = parse_amount(signed_match.group(2))
+        amount = parse_terminal_amount(signed_match.group(2), line)
         return amount if signed_match.group(1) == "+" else -amount
 
-    if len(numbers) >= 2:
-        return parse_amount(numbers[0])
+    tx_amount, _balance = extract_terminal_amount_balance_pair(line)
 
-    return parse_amount(numbers[0])
+    if tx_amount is not None:
+        return tx_amount
+
+    return parse_terminal_amount(numbers[0], line)
 
 
 
@@ -2560,15 +2584,20 @@ def extract_first_amount_after_date(line: str) -> float | None:
     )
 
 
+    tx_amount, _balance = extract_terminal_amount_balance_pair(line)
+
+    if tx_amount is not None:
+        return tx_amount
+
     numbers = extract_money_numbers_safely(text)
 
     if not numbers:
         return None
 
     if len(numbers) >= 3:
-        return parse_amount(numbers[-2])
+        return parse_terminal_amount(numbers[-2], line)
 
-    return parse_amount(numbers[-1])
+    return parse_terminal_amount(numbers[-1], line)
 
 
 def normalize_arabic_digits(value: str) -> str:
@@ -6671,14 +6700,7 @@ def extract_transactions(text: str) -> list[dict]:
         if tabular_amount is None:
             tabular_amount, tabular_type = extract_amount_balance_line(clean_line)
 
-            amount_balance_numbers = extract_transaction_money_numbers(clean_line)
-            if len(amount_balance_numbers) >= 2:
-                try:
-                    amount_balance_tx_amount = parse_amount(amount_balance_numbers[-2])
-                    amount_balance_value = parse_amount(amount_balance_numbers[-1])
-                except Exception:
-                    amount_balance_tx_amount = None
-                    amount_balance_value = None
+            amount_balance_tx_amount, amount_balance_value = extract_terminal_amount_balance_pair(clean_line)
 
         numbers = extract_transaction_money_numbers(clean_line)
 
