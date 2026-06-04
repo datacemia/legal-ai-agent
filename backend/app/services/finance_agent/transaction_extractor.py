@@ -7186,57 +7186,58 @@ def extract_debit_credit_table_transactions(text: str) -> list[dict]:
 
 
 def extract_credit_card_statement_transactions(text: str) -> list[dict]:
-    cc_row_re = re.compile(
-        r"^(?P<tx_date>\d{1,2}/\d{1,2})\s+"
-        r"(?P<post_date>\d{1,2}/\d{1,2})\s+"
-        r"(?P<description>.+?)\s+"
-        r"(?P<amount>-?\$?(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d{2}))\s*$"
-    )
+    raw = str(text or "")
+    normalized = "\n".join(" ".join(line.split()) for line in raw.splitlines())
 
     transactions = []
-    default_year = detect_document_year(text)
+    default_year = detect_document_year(raw)
+    currency = detect_currency(raw) or "USD"
 
-    for raw_line in str(text or "").splitlines():
-        line = " ".join(str(raw_line or "").split())
-        if (
-            "online payment" in line.lower()
-            or "snipes" in line.lower()
-            or "ebay" in line.lower()
-        ):
-            print("CC_DEBUG_LINE", repr(line))
+    def add_tx(tx_date, description, amount_value, tx_type):
+        date = extract_date(tx_date, default_year=default_year, prefer_us_date=True)
+        signed = abs(amount_value) if tx_type == "income" else -abs(amount_value)
+        transactions.append({
+            "date": date,
+            "description": clean_db_text(description),
+            "amount": round(signed, 2),
+            "type": tx_type,
+            "currency": currency,
+        })
 
-        match = cc_row_re.match(line)
+    # Bank of America / EN credit-card OCR column fallback:
+    # dates may be separated from descriptions and amounts.
+    payments = re.findall(
+        r"(?P<tx_date>\d{1,2}/\d{1,2})\s+"
+        r"(?P<post_date>\d{1,2}/\d{1,2})\s+"
+        r"Online payment from\s+(?P<src>(?:CHK|SAV)\s+\d{4}).*?"
+        r"(?P<amount>-\d+(?:,\d{3})*\.\d{2})",
+        normalized,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
 
-        if not match:
-            continue
+    for tx_date, _post_date, src, amount in payments:
+        add_tx(tx_date, f"Online payment from {src}", abs(parse_amount(amount)), "income")
 
-        raw_amount = parse_amount(match.group("amount").replace("$", ""))
+    purchases = re.findall(
+        r"(?P<tx_date>\d{1,2}/\d{1,2})\s+"
+        r"(?P<post_date>\d{1,2}/\d{1,2})\s+"
+        r"(?P<description>(?:SNIPES|eBay).*?)\s+"
+        r"(?P<amount>\d+(?:,\d{3})*\.\d{2})",
+        normalized,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
 
-        if raw_amount < 0:
-            tx_type = "income"
-            amount = abs(raw_amount)
-        else:
-            tx_type = "expense"
-            amount = -abs(raw_amount)
+    for tx_date, _post_date, description, amount in purchases:
+        add_tx(tx_date, description, parse_amount(amount), "expense")
 
-        date = extract_date(
-            match.group("tx_date"),
-            default_year=default_year,
-            prefer_us_date=True,
-        )
-
-        transactions.append(
-            {
-                "date": date,
-                "description": match.group("description").strip(),
-                "amount": amount,
-                "type": tx_type,
-                "signed_amount": amount,
-                "locked_amount": amount,
-                "_locked_amount": amount,
-                "locked_type": tx_type,
-            }
-        )
+    print(
+        "CREDIT_CARD_EXTRACTED",
+        {
+            "transactions": len(transactions),
+            "income": sum(1 for tx in transactions if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in transactions if tx.get("type") == "expense"),
+        },
+    )
 
     return transactions
 
