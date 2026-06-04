@@ -6026,7 +6026,11 @@ def extract_debit_credit_column_transactions(
     ]
 
     row_start_re = re.compile(
-        r"^(?P<op_date>\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?)\s+(?P<body>.+)$"
+        r"^(?P<op_date>"
+        r"\d{4}[./-]\d{1,2}[./-]\d{1,2}"
+        r"|"
+        r"\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?"
+        r")\s+(?P<body>.+)$"
     )
 
     value_date_amount_re = re.compile(
