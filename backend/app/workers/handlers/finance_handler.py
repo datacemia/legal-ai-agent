@@ -803,6 +803,16 @@ def handle_finance_ai(job: Job, db):
         ),
     )
 
+    for tx in kpi_transactions:
+        print(
+            "KPI_INPUT_DEBUG",
+            {
+                "amount": tx.get("amount"),
+                "balance": tx.get("balance"),
+                "type": tx.get("type")
+            }
+        )
+
     print(
         "KPI_AUDIT",
         {
