@@ -2638,7 +2638,11 @@ def enforce_no_untyped_kpi_transactions(transactions: list[dict]) -> list[dict]:
         # they were explicitly locked by running-balance delta authority.
         # This prevents any downstream or previous positive-amount fallback
         # from converting an unlocked amount/balance row into income.
-        if tx.get("_balance") is not None and not tx.get("_balance_locked"):
+        if (
+        tx.get("_balance") is not None
+        and not tx.get("_balance_locked")
+        and not tx.get("balance_delta_mismatch")
+    ):
             tx["type"] = None
             tx.pop("signed_amount", None)
             tx.pop("locked_amount", None)
@@ -2680,7 +2684,11 @@ def canonicalize_transaction(tx):
     # their visible movement amount is positive. For rows carrying a running
     # balance, only balance-delta authority may lock type/amount.
     # If the row is not balance-delta locked, keep it out of financial KPIs.
-    if tx.get("_balance") is not None and not tx.get("_balance_locked"):
+    if (
+        tx.get("_balance") is not None
+        and not tx.get("_balance_locked")
+        and not tx.get("balance_delta_mismatch")
+    ):
         tx["type"] = None
         tx.pop("signed_amount", None)
         tx.pop("locked_amount", None)
@@ -7218,10 +7226,10 @@ def extract_transactions(text: str) -> list[dict]:
                     tx["balance_authority"] = True
                     tx["_balance_locked"] = True
                 else:
-                    tx = exclude_transaction_from_financial_kpis(
-                        tx,
-                        "balance_delta_mismatch",
-                    )
+                    tx["balance_delta"] = delta
+                    tx["balance_authority"] = False
+                    tx["balance_delta_mismatch"] = True
+                    tx["type"] = None
             else:
                 tx["type"] = None
                 tx = exclude_transaction_from_financial_kpis(tx, "missing_previous_balance")
@@ -7502,7 +7510,11 @@ def extract_transactions(text: str) -> list[dict]:
     transactions = enforce_no_untyped_kpi_transactions(transactions)
 
     for tx in transactions:
-        if tx.get("_balance") is not None and not tx.get("_balance_locked"):
+        if (
+        tx.get("_balance") is not None
+        and not tx.get("_balance_locked")
+        and not tx.get("balance_delta_mismatch")
+    ):
             tx["type"] = None
             tx.pop("signed_amount", None)
             tx.pop("locked_amount", None)
