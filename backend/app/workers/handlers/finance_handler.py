@@ -614,9 +614,7 @@ def handle_finance_ai(job: Job, db):
     )
 
 
-    quality = assess_analysis_quality(transactions)
-
-    # Canonicalize transactions BEFORE any KPI/budget/forecast/chart usage.
+    # Canonicalize transactions BEFORE any quality/KPI/budget/forecast/chart usage.
     # International FR / EN / AR rule:
     # amount/signed_amount = real transaction movement
     # balance/_balance = account balance only, never used as KPI amount.
@@ -634,6 +632,8 @@ def handle_finance_ai(job: Job, db):
                 tx["type"] = "income"
             elif amount < 0:
                 tx["type"] = "expense"
+
+    quality = assess_analysis_quality(transactions)
 
     # International KPI filter:
     # Internal transfers must never affect income, expenses,
