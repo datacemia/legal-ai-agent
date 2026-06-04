@@ -7087,6 +7087,9 @@ def extract_transactions(text: str) -> list[dict]:
             tx_abs = abs(float(amount_balance_tx_amount or 0))
             balance_abs = abs(float(amount_balance_value or 0))
 
+            if transaction_type is None and tabular_type is not None:
+                transaction_type = tabular_type
+
             likely_used_balance = abs(amount_abs - balance_abs) <= max(0.02, balance_abs * 0.0001)
             far_from_tx_amount = abs(amount_abs - tx_abs) > max(0.02, tx_abs * 0.01)
 
@@ -7224,7 +7227,15 @@ def extract_transactions(text: str) -> list[dict]:
                 tx = exclude_transaction_from_financial_kpis(tx, "missing_previous_balance")
 
             if abs(float(balance or 0)) >= 1:
-                previous_amount_balance = float(balance)
+                if not (
+                    re.search(
+                        r"\b(fee|fees|vat|commission|charge|tax|رسوم|عمولة|ضريبة)\b",
+                        description.lower(),
+                    )
+                    and abs(float(amount_abs or 0)) <= 5
+                    and abs(float(balance or 0)) <= 5
+                ):
+                    previous_amount_balance = float(balance)
         else:
             tx["_locked_amount"] = signed_amount
             tx["locked_amount"] = signed_amount
