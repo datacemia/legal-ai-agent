@@ -1953,6 +1953,40 @@ def is_income_priority_description(text: str) -> bool:
 
     return any(phrase in lower for phrase in priority_phrases)
 
+def is_administrative_statement_line(text: str) -> bool:
+    lower = text.lower()
+
+    return any(
+        marker in lower
+        for marker in [
+            # FR
+            "relevé",
+            "releve",
+            "identité bancaire",
+            "identite bancaire",
+            "numéro de compte",
+            "numero de compte",
+            "rib",
+            "extrait de compte",
+
+            # EN
+            "bank statement",
+            "account number",
+            "account details",
+            "iban",
+            "swift",
+            "sort code",
+
+            # AR
+            "كشف حساب",
+            "رقم الحساب",
+            "رقم الحساب الرئيسي",
+            "بيان الحساب",
+            "رقم ريب",
+        ]
+    )
+
+
 def is_universal_fee_tax_or_charge(description: str) -> bool:
     text = str(description or "").lower()
 
@@ -6450,6 +6484,11 @@ def extract_debit_credit_column_transactions(
                 continue
 
         if current:
+            if is_administrative_statement_line(line):
+                flush_current()
+                inside_operations = False
+                continue
+
             if any(marker in low for marker in metadata_markers):
                 flush_current()
                 inside_operations = False
