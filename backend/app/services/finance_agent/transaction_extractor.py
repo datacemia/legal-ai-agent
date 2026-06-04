@@ -6242,6 +6242,21 @@ def extract_transactions(text: str) -> list[dict]:
 
     transactions = infer_balance_delta_rows(transactions)
 
+    debug_log(
+        "EXPENSE_FULL_AUDIT",
+        [
+            {
+                "date": tx.get("date"),
+                "amount": tx.get("amount"),
+                "type": tx.get("type"),
+                "description": tx.get("description"),
+                "balance": tx.get("_balance"),
+            }
+            for tx in transactions
+            if tx.get("type") == "expense"
+        ]
+    )
+
     for tx in transactions:
         tx.pop("_balance", None)
 
