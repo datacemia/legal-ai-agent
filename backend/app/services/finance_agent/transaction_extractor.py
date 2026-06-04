@@ -7194,7 +7194,15 @@ def extract_credit_card_statement_transactions(text: str) -> list[dict]:
     currency = detect_currency(raw) or "USD"
 
     def add_tx(tx_date, description, amount_value, tx_type):
-        date = extract_date(tx_date, default_year=default_year, prefer_us_date=True)
+        date_input = tx_date
+        if re.fullmatch(r"\d{1,2}/\d{1,2}", str(tx_date or "")):
+            date_input = f"{tx_date}/{default_year}"
+
+        date = extract_date(
+            date_input,
+            default_year=default_year,
+            prefer_us_date=True,
+        )
         signed = abs(amount_value) if tx_type == "income" else -abs(amount_value)
         transactions.append({
             "date": date,
