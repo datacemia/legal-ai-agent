@@ -4505,6 +4505,209 @@ def extract_signed_amount_fallback_transactions(
 
     return transactions
 
+
+
+def has_standard_amount_balance_ledger_header(text: str) -> bool:
+    lower = str(text or "").lower()
+
+    has_standard_columns = (
+        "date" in lower
+        and (
+            "description" in lower
+            or "libellé" in lower
+            or "libelle" in lower
+            or "details" in lower
+            or "détails" in lower
+        )
+        and (
+            "amount" in lower
+            or "montant" in lower
+            or "المبلغ" in lower
+        )
+        and (
+            "balance" in lower
+            or "solde" in lower
+            or "الرصيد" in lower
+        )
+    )
+
+    has_debit_credit_columns = (
+        "debit" in lower
+        or "débit" in lower
+        or "credit" in lower
+        or "crédit" in lower
+        or "مدين" in lower
+        or "دائن" in lower
+    )
+
+    return has_standard_columns and not has_debit_credit_columns
+
+
+def detect_standard_statement_year(text: str) -> int:
+    years = re.findall(r"\b(20\d{2})\b", str(text or ""))
+    valid_years = [int(y) for y in years if is_reasonable_year(int(y))]
+
+    if valid_years:
+        return Counter(valid_years).most_common(1)[0][0]
+
+    return detect_document_year(text)
+
+
+def prefer_month_day_short_dates(text: str) -> bool:
+    lower = str(text or "").lower()
+
+    english_months = [
+        "january", "february", "march", "april", "may", "june",
+        "july", "august", "september", "october", "november", "december",
+    ]
+
+    return any(month in lower for month in english_months)
+
+
+def extract_standard_short_date(
+    line: str,
+    default_year: int,
+    prefer_month_day: bool = False,
+) -> str | None:
+    match = re.search(r"^\s*(\d{1,2})[/-](\d{1,2})\b", str(line or ""))
+
+    if not match:
+        return None
+
+    first = int(match.group(1))
+    second = int(match.group(2))
+
+    if prefer_month_day:
+        month, day = first, second
+    else:
+        day, month = first, second
+
+    try:
+        parsed = datetime(default_year, month, day)
+        return parsed.date().isoformat()
+    except ValueError:
+        return None
+
+
+def extract_standard_amount_balance_ledger_transactions(
+    text: str,
+    detected_currency: str,
+) -> list[dict]:
+    """
+    Standard international fallback, FR / EN / AR.
+
+    Supports ledger rows shaped like:
+        DATE DESCRIPTION AMOUNT BALANCE
+
+    Examples:
+        1/23 Card Purchase ... -20.42 24,716.54
+        23/01 Paiement carte ... -20,42 24 716,54
+        23/01 شراء بطاقة ... -20.42 24,716.54
+
+    Strategy:
+        - Never runs before validated extractors.
+        - Never handles debit/credit tables.
+        - Uses the second-to-last money value as transaction amount.
+        - Uses the last money value as running balance.
+    """
+    if not has_standard_amount_balance_ledger_header(text):
+        return []
+
+    default_year = detect_standard_statement_year(text)
+    prefer_month_day = prefer_month_day_short_dates(text)
+
+    money_re = re.compile(
+        r"(?<!\d)"
+        r"[+-]?"
+        r"(?:\d{1,3}(?:[ ,]\d{3})+|\d+)"
+        r"(?:[.,]\d{2})"
+        r"(?!\d)"
+    )
+
+    raw_lines = [
+        " ".join(line.split())
+        for line in str(text or "").splitlines()
+        if " ".join(line.split())
+    ]
+
+    rows = []
+    i = 0
+
+    while i < len(raw_lines):
+        line = raw_lines[i]
+
+        if not re.match(r"^\s*\d{1,2}[/-]\d{1,2}\b", line):
+            i += 1
+            continue
+
+        combined = line
+        j = i + 1
+
+        while (
+            len(money_re.findall(combined)) < 2
+            and j < len(raw_lines)
+            and j <= i + 4
+        ):
+            combined += " " + raw_lines[j]
+            j += 1
+
+        amounts = money_re.findall(combined)
+
+        if len(amounts) < 2:
+            i = j
+            continue
+
+        date = extract_standard_short_date(
+            combined,
+            default_year=default_year,
+            prefer_month_day=prefer_month_day,
+        )
+
+        if not date:
+            i = j
+            continue
+
+        tx_amount = parse_amount(amounts[-2])
+        balance = parse_amount(amounts[-1])
+
+        description = re.sub(r"^\s*\d{1,2}[/-]\d{1,2}\b", "", combined).strip()
+        description = money_re.sub("", description).strip()
+        description = clean_db_text(description)
+
+        lower = description.lower()
+
+        if tx_amount < 0:
+            tx_type = "expense"
+            amount = -abs(tx_amount)
+        elif any(marker in lower for marker in INCOME_KEYWORDS):
+            tx_type = "income"
+            amount = abs(tx_amount)
+        elif any(marker in lower for marker in EXPENSE_KEYWORDS):
+            tx_type = "expense"
+            amount = -abs(tx_amount)
+        else:
+            tx_type = "income"
+            amount = abs(tx_amount)
+
+        rows.append({
+            "date": date,
+            "description": description,
+            "amount": amount,
+            "type": tx_type,
+            "currency": detected_currency,
+            "_balance": balance,
+        })
+
+        i = j
+
+    debug_log("STANDARD_AMOUNT_BALANCE_LEDGER_EXTRACTED", {
+        "transactions": len(rows),
+        "income": sum(1 for r in rows if r.get("type") == "income"),
+        "expenses": sum(1 for r in rows if r.get("type") == "expense"),
+    })
+
+    return rows
+
 def merge_multiline_debit_credit_rows(
     lines: list[str],
     default_year: int | None = None,
@@ -6071,6 +6274,12 @@ def extract_transactions(text: str) -> list[dict]:
     )
 
     transactions = normalize_untyped_incoming_credits(transactions)
+
+    if not transactions:
+        transactions = extract_standard_amount_balance_ledger_transactions(
+            text,
+            detected_currency,
+        )
 
     transactions = mark_internal_transfers(
         transactions,
