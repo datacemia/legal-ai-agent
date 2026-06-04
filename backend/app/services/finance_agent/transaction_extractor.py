@@ -3301,7 +3301,7 @@ def extract_amount_after_marker(
 
     for token in amounts:
         try:
-            amount = abs(parse_amount(token))
+            amount = abs(parse_terminal_amount(token, description))
         except Exception:
             continue
 
@@ -7215,31 +7215,10 @@ def extract_transactions(text: str) -> list[dict]:
                     tx["balance_authority"] = True
                     tx["_balance_locked"] = True
                 else:
-                    tx["balance_delta"] = delta
-                    tx["balance_authority"] = False
-                    tx["balance_delta_mismatch"] = True
-
-                    if looks_like_credit_description(description) or looks_like_neutral_inbound_transfer(description, amount_abs):
-                        tx["amount"] = amount_abs
-                        tx["type"] = "income"
-                        tx["signed_amount"] = amount_abs
-                        tx["locked_amount"] = amount_abs
-                        tx["_locked_amount"] = amount_abs
-                        tx["locked_type"] = "income"
-
-                    elif looks_like_debit_description(description):
-                        tx["amount"] = -amount_abs
-                        tx["type"] = "expense"
-                        tx["signed_amount"] = -amount_abs
-                        tx["locked_amount"] = -amount_abs
-                        tx["_locked_amount"] = -amount_abs
-                        tx["locked_type"] = "expense"
-
-                    else:
-                        tx = exclude_transaction_from_financial_kpis(
-                            tx,
-                            "balance_delta_mismatch_untyped",
-                        )
+                    tx = exclude_transaction_from_financial_kpis(
+                        tx,
+                        "balance_delta_mismatch",
+                    )
             else:
                 tx["type"] = None
                 tx = exclude_transaction_from_financial_kpis(tx, "missing_previous_balance")
