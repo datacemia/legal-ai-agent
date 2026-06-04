@@ -6931,17 +6931,11 @@ def extract_transactions(text: str) -> list[dict]:
                     },
                 )
             else:
-                # Disabled: this fallback can replace correct extracted movements
-                # with running balances on amount+balance OCR ledgers.
-                # Keep primary extractor output instead.
-                debug_log(
-                    "SKIP_AMOUNT_BALANCE_LEDGER_REPLACEMENT_DISABLED",
-                    {"candidate_count": len(amount_balance_transactions)},
-                )
+                transactions = amount_balance_transactions
 
-            sectioned_transactions = extract_standard_sectioned_statement_transactions(
-                text,
-                detected_currency,
+    sectioned_transactions = extract_standard_sectioned_statement_transactions(
+        text,
+        detected_currency,
     )
 
     if should_use_standard_sectioned_statement(transactions, sectioned_transactions):
