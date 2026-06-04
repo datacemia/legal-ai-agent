@@ -4343,7 +4343,12 @@ def resolve_arabic_row_amount(row: dict, prev_balance: float | None) -> tuple[fl
 
         if abs(delta) > 0.01 and abs(delta) < 100000:
             tolerance = max(0.15, abs(probable_tx) * 0.002)
+            keyword_type = classify_by_keywords(row.get("text", ""))
+
             delta_type = "income" if delta > 0 else "expense"
+
+            if keyword_type in ("expense", "income"):
+                delta_type = keyword_type
 
             if abs(abs(delta) - abs(probable_tx)) <= tolerance:
                 return abs(probable_tx), probable_balance, delta_type
@@ -4352,11 +4357,6 @@ def resolve_arabic_row_amount(row: dict, prev_balance: float | None) -> tuple[fl
             # if an explicit transaction amount is present, keep it.
             # The running balance delta may validate the sign, but must not replace
             # the displayed transaction amount because OCR windows can merge rows.
-            keyword_type = classify_by_keywords(row.get("text", ""))
-
-            if keyword_type in ("expense", "income"):
-                return abs(probable_tx), probable_balance, keyword_type
-
             return abs(probable_tx), probable_balance, delta_type
 
         # If the probable balance is not usable, try every possible balance candidate.
