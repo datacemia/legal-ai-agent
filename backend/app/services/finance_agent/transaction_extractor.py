@@ -921,7 +921,10 @@ def extract_transaction_money_numbers(line: str) -> list[str]:
     only when choosing a transaction amount from a candidate row.
     """
     cleaned = normalize_line_for_amount_detection(line)
-    cleaned = remove_short_bank_date_noise(cleaned)
+    cleaned_without_noise = remove_short_bank_date_noise(cleaned)
+
+    if len(re.findall(MONEY_NUMBER_PATTERN, cleaned_without_noise)) >= 2:
+        cleaned = cleaned_without_noise
 
     return re.findall(
         MONEY_NUMBER_PATTERN,
