@@ -2012,6 +2012,19 @@ def detect_type(line: str, amount: float) -> str | None:
     if any(keyword in lower for keyword in EXPENSE_KEYWORDS):
         return "expense"
 
+    if any(
+        keyword in lower
+        for keyword in [
+            "vat",
+            "tax",
+            "tva",
+            "taxe",
+            "ضريبة",
+            "القيمة المضافة",
+        ]
+    ):
+        return "expense"
+
     if any(keyword in lower for keyword in INCOME_KEYWORDS):
         return "income"
 
