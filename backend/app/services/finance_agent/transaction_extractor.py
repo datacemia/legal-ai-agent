@@ -692,6 +692,9 @@ def normalize_arabic_ocr_lines(text: str) -> str:
     )
 
     for line in lines:
+        if is_statement_footer_or_verification_block(line):
+            continue
+
         match = amount_balance_date_re.search(line)
 
         if not match:
@@ -1719,6 +1722,9 @@ def split_compact_multi_transaction_lines(
     rebuilt: list[str] = []
 
     for line in lines:
+        if is_statement_footer_or_verification_block(line):
+            continue
+
         if is_arabic_text(line):
             rebuilt.append(line)
             continue
@@ -2624,6 +2630,21 @@ def enforce_no_untyped_kpi_transactions(transactions: list[dict]) -> list[dict]:
     return fixed
 
 def canonicalize_transaction(tx):
+    description = str(tx.get("description") or "")
+
+    if re.search(
+        r"\b(fee|fees|vat|commission|charge|رسوم|عمولة|ضريبة)\b",
+        description.lower(),
+    ):
+        amount = tx.get("locked_amount", tx.get("signed_amount", tx.get("amount", 0)))
+        tx["amount"] = -abs(float(amount))
+        tx["type"] = "expense"
+        tx["signed_amount"] = tx["amount"]
+        tx["locked_amount"] = tx["amount"]
+        tx["_locked_amount"] = tx["amount"]
+        tx["locked_type"] = "expense"
+        return tx
+
     if tx.get("locked_type"):
         tx["type"] = tx["locked_type"]
         tx["amount"] = tx["locked_amount"]
@@ -2929,6 +2950,34 @@ NON_TRANSACTION_PATTERNS = [
     "مركز الاتصال",
     "اتصل بنا",
 ]
+
+def is_statement_footer_or_verification_block(line: str) -> bool:
+    low = clean_db_text(str(line or "")).lower()
+
+    markers = [
+        "to verify",
+        "please scan",
+        "qr code",
+        "seal reference",
+        "hijri",
+        "gregorian",
+        "transactiondetail",
+        "transaction detail",
+        "date-time",
+        "value dt",
+        "vat amount",
+        "vat%",
+        "ضريبة",
+        "الختم",
+        "للتحقق",
+        "رمز الاستجابة",
+        "الرقم المرجعي",
+        "هجري",
+        "ميلادي",
+    ]
+
+    return any(marker in low for marker in markers)
+
 
 def is_non_transaction_line(line: str) -> bool:
     if is_document_metadata_line(line):
@@ -5286,6 +5335,9 @@ def extract_wallet_tabular_transactions(
     current: list[str] = []
 
     for line in lines:
+        if is_statement_footer_or_verification_block(line):
+            continue
+
         if date_start_re.search(line):
             if current:
                 rows.append(" ".join(current))
@@ -5674,6 +5726,9 @@ def extract_vertical_statement_transactions(
         )
 
     for line in lines:
+        if is_statement_footer_or_verification_block(line):
+            continue
+
         low = line.lower()
 
         if (
@@ -5933,6 +5988,9 @@ def extract_debit_credit_column_transactions(
         current = None
 
     for line in lines:
+        if is_statement_footer_or_verification_block(line):
+            continue
+
         low = line.lower()
 
         if any(marker in low for marker in operations_header_markers):
@@ -6455,6 +6513,9 @@ def extract_standard_sectioned_statement_transactions(
         add_row(date, description, amount, tx_type)
 
     for line in lines:
+        if is_statement_footer_or_verification_block(line):
+            continue
+
         update_period_from_line(line)
         low = line.lower()
 
@@ -6885,6 +6946,9 @@ def extract_transactions(text: str) -> list[dict]:
         debug_log("TX_DEBUG: tabular", tabular_amount, tabular_type)
 
 
+        if is_statement_footer_or_verification_block(clean_line):
+            continue
+
         if tabular_amount is not None:
             amount = tabular_amount
         else:
@@ -7029,6 +7093,17 @@ def extract_transactions(text: str) -> list[dict]:
 
         if balance is not None:
             tx["_balance"] = balance
+
+        if re.search(
+            r"\b(fee|fees|vat|commission|charge|رسوم|عمولة|ضريبة)\b",
+            description.lower(),
+        ):
+            tx["amount"] = -abs(float(tx["amount"]))
+            tx["type"] = "expense"
+            tx["signed_amount"] = tx["amount"]
+            tx["locked_amount"] = tx["amount"]
+            tx["_locked_amount"] = tx["amount"]
+            tx["locked_type"] = "expense"
 
         transactions.append(tx)
 
