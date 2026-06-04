@@ -803,12 +803,45 @@ def handle_finance_ai(job: Job, db):
         ),
     )
 
+    income_total = round(
+        sum(
+            float(tx.get("amount", 0))
+            for tx in kpi_transactions
+            if tx.get("type") == "income"
+        ),
+        2,
+    )
+
+    expense_total = round(
+        sum(
+            abs(float(tx.get("amount", 0)))
+            for tx in kpi_transactions
+            if tx.get("type") == "expense"
+        ),
+        2,
+    )
+
+    uncategorized_count = sum(
+        1
+        for tx in kpi_transactions
+        if tx.get("type") not in ["income", "expense"]
+    )
+
+    print(
+        "KPI_TOTALS",
+        {
+            "income": income_total,
+            "expense": expense_total,
+            "uncategorized": uncategorized_count
+        }
+    )
+
     for tx in kpi_transactions:
         print(
-            "KPI_INPUT_DEBUG",
+            "KPI_INPUT",
             {
                 "amount": tx.get("amount"),
-                "balance": tx.get("balance"),
+                "signed_amount": tx.get("signed_amount"),
                 "type": tx.get("type")
             }
         )
