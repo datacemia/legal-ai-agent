@@ -7165,6 +7165,13 @@ def detect_statement_layout(text: str) -> str:
     dc_hits = sum(1 for marker in debit_credit_markers if marker in lower)
     balance_hits = sum(1 for marker in amount_balance_markers if marker in lower)
 
+    if (
+        "account summary/payment information" in lower
+        and "payments and other credits" in lower
+        and "purchases and adjustments" in lower
+    ):
+        return "credit_card_statement"
+
     if dc_hits >= 2:
         return "debit_credit_table"
 
