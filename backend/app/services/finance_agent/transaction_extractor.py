@@ -951,10 +951,28 @@ def parse_terminal_amount(value: str, line: str) -> float:
             or is_arabic_text(ctx)
         )
     ):
+        print(
+            "PARSE_TERMINAL_AMOUNT_GCC",
+            {
+                "raw": raw,
+                "result": float(raw),
+                "ctx_has_sar": "sar" in ctx,
+                "ctx_is_arabic": is_arabic_text(ctx),
+            },
+        )
         return float(raw)
 
-    return parse_amount(raw)
-
+    parsed = parse_amount(raw)
+    print(
+        "PARSE_TERMINAL_AMOUNT_FALLBACK",
+        {
+            "raw": raw,
+            "result": parsed,
+            "ctx_has_sar": "sar" in ctx,
+            "ctx_is_arabic": is_arabic_text(ctx),
+        },
+    )
+    return parsed
 
 def extract_terminal_amount_balance_pair(line: str) -> tuple[float | None, float | None]:
     """Extract the terminal transaction amount + running balance pair.
