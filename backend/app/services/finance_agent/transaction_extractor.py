@@ -2020,7 +2020,9 @@ def detect_type(line: str, amount: float) -> str | None:
             "tva",
             "taxe",
             "ضريبة",
+            "ضريبه",
             "القيمة المضافة",
+            "القيمه المضافه",
         ]
     ):
         return "expense"
