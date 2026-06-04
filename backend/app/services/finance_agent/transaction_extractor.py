@@ -1953,6 +1953,36 @@ def is_income_priority_description(text: str) -> bool:
 
     return any(phrase in lower for phrase in priority_phrases)
 
+def is_universal_fee_tax_or_charge(description: str) -> bool:
+    text = str(description or "").lower()
+
+    return any(
+        marker in text
+        for marker in [
+            # EN
+            "tax", "vat", "gst", "hst", "duty", "withholding tax",
+            "tax deduction", "vat deduction",
+            "fee", "fees", "charge", "charges", "commission",
+
+            # FR
+            "taxe", "tva", "impôt", "impot", "retenue",
+            "déduction taxe", "deduction taxe", "déduction tva", "deduction tva",
+            "frais", "commission",
+
+            # ES/PT/IT common
+            "impuesto", "iva", "imposto", "imposta",
+
+            # DE/NL
+            "steuer", "mwst", "gebühr", "gebuhr",
+
+            # AR
+            "ضريبة", "ضريبه", "الضريبة", "القيمة المضافة", "القيمه المضافه",
+            "خصم ضريبة", "خصم ضريبه",
+            "رسوم", "رسم", "عمولة",
+        ]
+    )
+
+
 def detect_type(line: str, amount: float) -> str | None:
     lower = line.lower()
 
@@ -2703,6 +2733,18 @@ def enforce_no_untyped_kpi_transactions(transactions: list[dict]) -> list[dict]:
 
 def canonicalize_transaction(tx):
     description = str(tx.get("description") or "")
+
+    if is_universal_fee_tax_or_charge(description):
+        amount = abs(float(tx.get("amount") or 0))
+        tx["amount"] = -amount
+        tx["type"] = "expense"
+        tx["signed_amount"] = -amount
+        tx["locked_amount"] = -amount
+        tx["_locked_amount"] = -amount
+        tx["locked_type"] = "expense"
+        return tx
+
+
     desc = str(description or "").lower()
 
     is_micro_fee_or_tax = (
@@ -4361,6 +4403,9 @@ def resolve_arabic_row_amount(row: dict, prev_balance: float | None) -> tuple[fl
 
             delta_type = "income" if delta > 0 else "expense"
 
+            if is_universal_fee_tax_or_charge(row.get("text", "") or row.get("description", "")):
+                delta_type = "expense"
+
             if keyword_type in ("expense", "income"):
                 delta_type = keyword_type
 
@@ -4396,6 +4441,12 @@ def resolve_arabic_row_amount(row: dict, prev_balance: float | None) -> tuple[fl
 
         if candidates:
             _, tx, bal, candidate_delta = min(candidates, key=lambda x: x[0])
+            if (
+                candidate_delta > 0
+                and is_universal_fee_tax_or_charge(row.get("text", "") or row.get("description", ""))
+            ):
+                return abs(tx), bal, "expense"
+
             return abs(tx), bal, "income" if candidate_delta > 0 else "expense"
 
     # No reliable previous balance: use OCR-order fallback and text hints.
