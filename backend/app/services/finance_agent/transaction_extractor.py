@@ -4634,12 +4634,17 @@ def extract_standard_amount_balance_ledger_transactions(
         while (
             len(money_re.findall(combined)) < 2
             and j < len(raw_lines)
-            and j <= i + 4
+            and j <= i + 6
         ):
             combined += " " + raw_lines[j]
             j += 1
 
         amounts = money_re.findall(combined)
+
+        debug_log("STANDARD_LEDGER_ROW_CANDIDATE", {
+            "line": combined,
+            "amounts": amounts,
+        })
 
         if len(amounts) < 2:
             i = j
