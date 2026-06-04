@@ -2591,6 +2591,18 @@ def preserve_balance_locked_transaction(tx: dict) -> dict:
     return tx
 
 
+def exclude_transaction_from_financial_kpis(tx: dict, reason: str = "untyped_unreliable") -> dict:
+    """Mark a transaction as excluded from financial KPIs without guessing income."""
+    tx["excluded_from_financial_kpis"] = True
+    tx["exclude_from_income"] = True
+    tx["exclude_from_expense"] = True
+    tx["exclude_from_score"] = True
+    tx["exclude_from_savings"] = True
+    tx["exclude_from_cashflow"] = True
+    tx["category_hint"] = tx.get("category_hint") or reason
+    return tx
+
+
 def enforce_no_untyped_kpi_transactions(transactions: list[dict]) -> list[dict]:
     """Prevent type=None rows from reaching KPI production.
 
@@ -2617,13 +2629,7 @@ def enforce_no_untyped_kpi_transactions(transactions: list[dict]) -> list[dict]:
         elif amount > 0 and tx.get("signed_amount") is not None:
             tx["type"] = "income"
         else:
-            tx["excluded_from_financial_kpis"] = True
-            tx["exclude_from_income"] = True
-            tx["exclude_from_expense"] = True
-            tx["exclude_from_score"] = True
-            tx["exclude_from_savings"] = True
-            tx["exclude_from_cashflow"] = True
-            tx["category_hint"] = tx.get("category_hint") or "untyped_unreliable"
+            tx = exclude_transaction_from_financial_kpis(tx, "untyped_unreliable")
 
         fixed.append(tx)
 
@@ -2955,6 +2961,10 @@ def is_statement_footer_or_verification_block(line: str) -> bool:
     low = clean_db_text(str(line or "")).lower()
 
     markers = [
+        # Verification / footer-only markers.
+        # Do not include transaction-table labels such as "value dt",
+        # "date-time", "vat amount", "vat%", or "ضريبة" here:
+        # they can appear on real Rajhi / GCC transaction rows.
         "to verify",
         "please scan",
         "qr code",
@@ -2963,11 +2973,6 @@ def is_statement_footer_or_verification_block(line: str) -> bool:
         "gregorian",
         "transactiondetail",
         "transaction detail",
-        "date-time",
-        "value dt",
-        "vat amount",
-        "vat%",
-        "ضريبة",
         "الختم",
         "للتحقق",
         "رمز الاستجابة",
@@ -4854,6 +4859,7 @@ def extract_standard_amount_balance_ledger_transactions(
     ]
 
     rows = []
+    previous_balance = None
     i = 0
 
     while i < len(raw_lines):
@@ -4904,27 +4910,45 @@ def extract_standard_amount_balance_ledger_transactions(
 
         lower = description.lower()
 
-        if tx_amount < 0:
-            tx_type = "expense"
-            amount = -abs(tx_amount)
-        elif any(marker in lower for marker in INCOME_KEYWORDS):
-            tx_type = "income"
-            amount = abs(tx_amount)
-        elif any(marker in lower for marker in EXPENSE_KEYWORDS):
-            tx_type = "expense"
-            amount = -abs(tx_amount)
-        else:
-            tx_type = "income"
-            amount = abs(tx_amount)
+        amount_abs = abs(float(tx_amount or 0))
+        amount = amount_abs
+        tx_type = None
+        delta = None
+        tolerance = max(0.02, amount_abs * 0.002)
 
-        rows.append({
+        if previous_balance is not None:
+            delta = round(float(balance) - float(previous_balance), 2)
+
+            if abs(delta - amount_abs) <= tolerance:
+                amount = amount_abs
+                tx_type = "income"
+            elif abs(delta + amount_abs) <= tolerance:
+                amount = -amount_abs
+                tx_type = "expense"
+
+        row = {
             "date": date,
             "description": description,
-            "amount": amount,
+            "amount": round(amount, 2),
             "type": tx_type,
             "currency": detected_currency,
             "_balance": balance,
-        })
+            "balance": balance,
+        }
+
+        if tx_type in {"income", "expense"}:
+            row["locked_type"] = tx_type
+            row["signed_amount"] = row["amount"]
+            row["locked_amount"] = row["amount"]
+            row["_locked_amount"] = row["amount"]
+            row["balance_delta"] = delta
+            row["balance_authority"] = True
+            row["_balance_locked"] = True
+        else:
+            row = exclude_transaction_from_financial_kpis(row, "missing_previous_balance")
+
+        rows.append(row)
+        previous_balance = float(balance)
 
         i = j
 
@@ -6832,6 +6856,8 @@ def extract_transactions(text: str) -> list[dict]:
     for idx, candidate_line in enumerate(lines[:50]):
         debug_log(f"TX_DEBUG: candidate_line[{idx}]", candidate_line, "date=", extract_date(candidate_line, default_year=default_year, prefer_us_date=prefer_us_date), "money=", re.findall(MONEY_NUMBER_PATTERN, candidate_line))
 
+    previous_amount_balance = None
+
     for clean_line in lines:
 
         if is_amount_balance_only_row(
@@ -7080,19 +7106,61 @@ def extract_transactions(text: str) -> list[dict]:
             "amount": final_amount,
             "type": tx_type,
             "currency": detected_currency,
-            "_locked_amount": signed_amount,
-            "locked_amount": signed_amount,
         }
 
-        if signed_amount > 0:
-            tx["locked_type"] = "income"
-        elif signed_amount < 0:
-            tx["locked_type"] = "expense"
+        is_amount_balance_row = (
+            amount_balance_tx_amount is not None
+            and amount_balance_value is not None
+        )
 
-        tx = canonicalize_transaction(tx)
-
-        if balance is not None:
+        if is_amount_balance_row:
+            balance = amount_balance_value
+            amount_abs = abs(float(amount_balance_tx_amount or 0))
+            tx["amount"] = amount_abs
+            tx["type"] = None
             tx["_balance"] = balance
+            tx["balance"] = balance
+
+            if previous_amount_balance is not None:
+                delta = round(float(balance) - float(previous_amount_balance), 2)
+                tolerance = max(0.02, amount_abs * 0.002)
+
+                if abs(delta - amount_abs) <= tolerance:
+                    tx["amount"] = amount_abs
+                    tx["type"] = "income"
+                    tx["locked_type"] = "income"
+                elif abs(delta + amount_abs) <= tolerance:
+                    tx["amount"] = -amount_abs
+                    tx["type"] = "expense"
+                    tx["locked_type"] = "expense"
+
+                if tx.get("locked_type"):
+                    tx["signed_amount"] = tx["amount"]
+                    tx["locked_amount"] = tx["amount"]
+                    tx["_locked_amount"] = tx["amount"]
+                    tx["balance_delta"] = delta
+                    tx["balance_authority"] = True
+                    tx["_balance_locked"] = True
+                else:
+                    tx = exclude_transaction_from_financial_kpis(tx, "balance_delta_mismatch")
+            else:
+                tx["type"] = None
+                tx = exclude_transaction_from_financial_kpis(tx, "missing_previous_balance")
+
+            previous_amount_balance = float(balance)
+        else:
+            tx["_locked_amount"] = signed_amount
+            tx["locked_amount"] = signed_amount
+
+            if signed_amount > 0:
+                tx["locked_type"] = "income"
+            elif signed_amount < 0:
+                tx["locked_type"] = "expense"
+
+            tx = canonicalize_transaction(tx)
+
+            if balance is not None:
+                tx["_balance"] = balance
 
         if re.search(
             r"\b(fee|fees|vat|commission|charge|رسوم|عمولة|ضريبة)\b",
@@ -7216,9 +7284,6 @@ def extract_transactions(text: str) -> list[dict]:
                         tx["_locked_amount"] = original
                         tx["signed_amount"] = original
                         tx["amount"] = original
-
-    for tx in transactions:
-        tx.pop("_balance", None)
 
     if not transactions:
         transactions = extract_wallet_tabular_transactions(
@@ -7363,15 +7428,7 @@ def extract_transactions(text: str) -> list[dict]:
             tx["_locked_amount"] = tx["locked_amount"]
 
         elif tx.get("type") is None:
-            try:
-                amount = float(tx.get("amount") or 0)
-            except (TypeError, ValueError):
-                amount = 0.0
-
-            if amount > 0:
-                tx["type"] = "income"
-            elif amount < 0:
-                tx["type"] = "expense"
+            tx = exclude_transaction_from_financial_kpis(tx, "untyped_unreliable")
 
     print(
         "KPI_INPUT_DEBUG",
