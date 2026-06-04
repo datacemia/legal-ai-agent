@@ -5025,7 +5025,23 @@ def extract_standard_amount_balance_ledger_transactions(
             row["balance_authority"] = True
             row["_balance_locked"] = True
         else:
-            row = exclude_transaction_from_financial_kpis(row, "missing_previous_balance")
+            if is_income_priority_description(description.lower()):
+                row["amount"] = amount_abs
+                row["type"] = "income"
+                row["signed_amount"] = amount_abs
+                row["locked_amount"] = amount_abs
+                row["_locked_amount"] = amount_abs
+                row["locked_type"] = "income"
+            else:
+                row["amount"] = -amount_abs
+                row["type"] = "expense"
+                row["signed_amount"] = -amount_abs
+                row["locked_amount"] = -amount_abs
+                row["_locked_amount"] = -amount_abs
+                row["locked_type"] = "expense"
+
+            row["balance_authority"] = False
+            row["balance_delta_mismatch"] = True
 
         rows.append(row)
         previous_balance = float(balance)
