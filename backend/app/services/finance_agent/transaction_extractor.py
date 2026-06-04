@@ -7254,7 +7254,25 @@ def extract_transactions(text: str) -> list[dict]:
                     tx["balance_delta"] = delta
                     tx["balance_authority"] = False
                     tx["balance_delta_mismatch"] = True
-                    tx["type"] = None
+
+                    # Standard international FR / EN / AR fallback:
+                    # if running-balance authority cannot match because OCR skipped/fused rows,
+                    # use the visible movement amount as an expense by default only when
+                    # the row is an amount+balance ledger row and not an income/credit marker.
+                    if is_income_priority_description(description.lower()):
+                        tx["amount"] = amount_abs
+                        tx["type"] = "income"
+                        tx["signed_amount"] = amount_abs
+                        tx["locked_amount"] = amount_abs
+                        tx["_locked_amount"] = amount_abs
+                        tx["locked_type"] = "income"
+                    else:
+                        tx["amount"] = -amount_abs
+                        tx["type"] = "expense"
+                        tx["signed_amount"] = -amount_abs
+                        tx["locked_amount"] = -amount_abs
+                        tx["_locked_amount"] = -amount_abs
+                        tx["locked_type"] = "expense"
             else:
                 tx["type"] = None
                 tx = exclude_transaction_from_financial_kpis(tx, "missing_previous_balance")
