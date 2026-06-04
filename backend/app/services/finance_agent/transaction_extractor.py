@@ -7219,22 +7219,22 @@ def extract_transactions(text: str) -> list[dict]:
                     tx["balance_authority"] = False
                     tx["balance_delta_mismatch"] = True
 
-                    inferred_type = detect_type(description, amount_abs)
-
-                    if inferred_type == "expense":
-                        tx["amount"] = -amount_abs
-                        tx["type"] = "expense"
-                        tx["signed_amount"] = tx["amount"]
-                        tx["locked_amount"] = tx["amount"]
-                        tx["_locked_amount"] = tx["amount"]
-                        tx["locked_type"] = "expense"
-                    elif inferred_type == "income":
+                    if looks_like_credit_description(description) or looks_like_neutral_inbound_transfer(description, amount_abs):
                         tx["amount"] = amount_abs
                         tx["type"] = "income"
-                        tx["signed_amount"] = tx["amount"]
-                        tx["locked_amount"] = tx["amount"]
-                        tx["_locked_amount"] = tx["amount"]
+                        tx["signed_amount"] = amount_abs
+                        tx["locked_amount"] = amount_abs
+                        tx["_locked_amount"] = amount_abs
                         tx["locked_type"] = "income"
+
+                    elif looks_like_debit_description(description):
+                        tx["amount"] = -amount_abs
+                        tx["type"] = "expense"
+                        tx["signed_amount"] = -amount_abs
+                        tx["locked_amount"] = -amount_abs
+                        tx["_locked_amount"] = -amount_abs
+                        tx["locked_type"] = "expense"
+
                     else:
                         tx = exclude_transaction_from_financial_kpis(
                             tx,
