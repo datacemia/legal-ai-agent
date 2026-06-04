@@ -7187,7 +7187,23 @@ def extract_transactions(text: str) -> list[dict]:
                     tx["balance_authority"] = True
                     tx["_balance_locked"] = True
                 else:
-                    tx = exclude_transaction_from_financial_kpis(tx, "balance_delta_mismatch")
+                    print(
+                        "BALANCE_DELTA_MISMATCH",
+                        {
+                            "date": date,
+                            "description": description[:120],
+                            "amount_abs": amount_abs,
+                            "balance": balance,
+                            "previous_balance": previous_amount_balance,
+                            "delta": delta,
+                            "tolerance": tolerance,
+                        },
+                    )
+
+                    tx = exclude_transaction_from_financial_kpis(
+                        tx,
+                        "balance_delta_mismatch"
+                    )
             else:
                 tx["type"] = None
                 tx = exclude_transaction_from_financial_kpis(tx, "missing_previous_balance")
