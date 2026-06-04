@@ -7215,23 +7215,31 @@ def extract_transactions(text: str) -> list[dict]:
                     tx["balance_authority"] = True
                     tx["_balance_locked"] = True
                 else:
-                    print(
-                        "BALANCE_DELTA_MISMATCH",
-                        {
-                            "date": date,
-                            "description": description[:120],
-                            "amount_abs": amount_abs,
-                            "balance": balance,
-                            "previous_balance": previous_amount_balance,
-                            "delta": delta,
-                            "tolerance": tolerance,
-                        },
-                    )
+                    tx["balance_delta"] = delta
+                    tx["balance_authority"] = False
+                    tx["balance_delta_mismatch"] = True
 
-                    tx = exclude_transaction_from_financial_kpis(
-                        tx,
-                        "balance_delta_mismatch"
-                    )
+                    inferred_type = detect_type(description, amount_abs)
+
+                    if inferred_type == "expense":
+                        tx["amount"] = -amount_abs
+                        tx["type"] = "expense"
+                        tx["signed_amount"] = tx["amount"]
+                        tx["locked_amount"] = tx["amount"]
+                        tx["_locked_amount"] = tx["amount"]
+                        tx["locked_type"] = "expense"
+                    elif inferred_type == "income":
+                        tx["amount"] = amount_abs
+                        tx["type"] = "income"
+                        tx["signed_amount"] = tx["amount"]
+                        tx["locked_amount"] = tx["amount"]
+                        tx["_locked_amount"] = tx["amount"]
+                        tx["locked_type"] = "income"
+                    else:
+                        tx = exclude_transaction_from_financial_kpis(
+                            tx,
+                            "balance_delta_mismatch_untyped",
+                        )
             else:
                 tx["type"] = None
                 tx = exclude_transaction_from_financial_kpis(tx, "missing_previous_balance")
