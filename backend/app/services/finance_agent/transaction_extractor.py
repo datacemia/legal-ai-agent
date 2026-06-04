@@ -2052,6 +2052,10 @@ def extract_transaction_amount(line: str) -> float | None:
 def extract_us_debit_credit_balance(line: str):
     numbers = extract_money_numbers_safely(line)
 
+    terminal_amount_balance = extract_terminal_amount_balance_pair(line)
+    if terminal_amount_balance[0] is not None and terminal_amount_balance[1] is not None:
+        return None, None
+
     if len(numbers) < 3:
         return None, None
 
