@@ -6730,12 +6730,18 @@ def extract_debit_credit_column_transactions(
                 # If OCR column position is unavailable, use strong credit/debit
                 # semantic markers as fallback. This is still parser-family logic,
                 # not bank-specific logic.
-                if current_section_side == "credit":
-                    tx_type = "income"
-                elif current_section_side == "debit":
+                # Generic FR / EN / AR transaction markers have priority over
+                # section fallback. This prevents a stale "credit" section from
+                # turning withdrawals, card payments, fees or outgoing transfers
+                # into income.
+                if looks_like_debit_description(description):
                     tx_type = "expense"
                 elif looks_like_credit_description(description):
                     tx_type = "income"
+                elif current_section_side == "credit":
+                    tx_type = "income"
+                elif current_section_side == "debit":
+                    tx_type = "expense"
                 elif is_universal_fee_tax_or_charge(description):
                     tx_type = "expense"
                 else:
