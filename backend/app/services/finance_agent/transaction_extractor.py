@@ -5672,7 +5672,11 @@ def extract_official_movement_totals(text: str) -> dict | None:
     normalized = normalize_arabic_digits(clean_db_text(text))
     normalized = normalized.replace("\u00a0", " ").replace("\u202f", " ")
 
-    amount = r"(?:\d{1,3}(?:[,.]\d{3})+|\d+)(?:[.,]\d{2})"
+    # Generic international amount pattern:
+    # FR: 1 907,72 / 1.907,72
+    # EN: 1,907.72 / 1907.72
+    # AR OCR-normalized digits with same separators.
+    amount = r"(?:\d{1,3}(?:[ ,.\u00a0\u202f]\d{3})+|\d+)(?:[.,]\d{2})"
 
     patterns = [
         # Generic FR table footer: TOTAUX <debit_total> <credit_total>
