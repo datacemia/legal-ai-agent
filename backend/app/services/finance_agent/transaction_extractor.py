@@ -7332,6 +7332,10 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
         if any(marker in low for marker in skip_markers):
             continue
 
+        if re.match(r"^\d{1,2}/\d{1,2}/\d{4}", line):
+            print("WDB_CANDIDATE_LINE", repr(line))
+            print("WDB_MATCH", bool(row_re.match(line)))
+
         match = row_re.match(line)
 
         if not match:
