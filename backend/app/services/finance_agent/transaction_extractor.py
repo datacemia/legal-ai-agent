@@ -7754,6 +7754,11 @@ def extract_date_description_debit_credit_balance_transactions(text: str) -> lis
 def extract_transactions(text: str) -> list[dict]:
     statement_layout = detect_statement_layout(text)
     print("STATEMENT_LAYOUT_DETECTED", statement_layout)
+    if "all transactions" in text.lower():
+       idx = text.lower().find("all transactions")
+       print("MERCURY_RAW_SECTION_START")
+       print(text[idx:idx + 3000])
+       print("MERCURY_RAW_SECTION_END")
 
     if statement_layout == "date_description_debit_credit_balance":
         ddcb_transactions = extract_date_description_debit_credit_balance_transactions(text)
