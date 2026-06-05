@@ -8802,7 +8802,38 @@ def extract_running_balance_column_statement_transactions(
 
 
 
+def strip_n26_spaces_sections(text: str) -> str:
+    """Keep only the main N26 account statement.
+
+    N26 PDFs may append Spaces statements after the main account.
+    Those sections duplicate internal transfers and must not be parsed as
+    main-account transactions.
+    """
+    markers = [
+        "Relevé Espace",
+        "Releve Espace",
+        "Spaces Vue d’ensemble",
+        "Spaces Vue d'ensemble",
+        "Activity Log",
+        "\nSpace:",
+    ]
+
+    cut_positions = [
+        pos for marker in markers
+        for pos in [str(text or "").find(marker)]
+        if pos >= 0
+    ]
+
+    if not cut_positions:
+        return text
+
+    cut_at = min(cut_positions)
+    print("N26_SPACES_STRIPPED", {"cut_at": cut_at})
+    return str(text or "")[:cut_at]
+
+
 def extract_transactions(text: str) -> list[dict]:
+    text = strip_n26_spaces_sections(text)
     statement_layout = detect_statement_layout(text)
     print("STATEMENT_LAYOUT_DETECTED", statement_layout)
 
