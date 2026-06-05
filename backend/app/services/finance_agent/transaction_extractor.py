@@ -5172,7 +5172,7 @@ def extract_standard_amount_balance_ledger_transactions(
 
     money_re = re.compile(
         r"(?<!\d)"
-        r"[+-]?"
+        r"[–\\-+]?\\$?"
         r"(?:\d{1,3}(?:[ ,]\d{3})+|\d+)"
         r"(?:[.,]\d{2})"
         r"(?!\d)"
@@ -5193,6 +5193,10 @@ def extract_standard_amount_balance_ledger_transactions(
         r"\d{1,2}[/-]\d{1,2}[/-]\d{4}\s+\d{4}[/-]\d{1,2}[/-]\d{1,2}"
         r"|"
         r"\d{4}[/-]\d{1,2}[/-]\d{1,2}"
+        r"|"
+        r"\d{1,2}[- ](?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\b"
+        r"|"
+        r"(?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s+\d{1,2}\b"
         r"|"
         r"\d{1,2}[/-]\d{1,2}\b"
         r")"
@@ -5234,11 +5238,18 @@ def extract_standard_amount_balance_ledger_transactions(
         )
 
         if not date:
+            date = extract_date(
+                combined,
+                default_year=default_year,
+                prefer_us_date=True,
+            )
+
+        if not date:
             i = j
             continue
 
-        tx_amount = parse_amount(amounts[-2])
-        balance = parse_amount(amounts[-1])
+        tx_amount = parse_amount(amounts[-2].replace("$", "").replace("–", "-"))
+        balance = parse_amount(amounts[-1].replace("$", "").replace("–", "-"))
 
         description = re.sub(r"^\s*\d{1,2}[/-]\d{1,2}\b", "", combined).strip()
         description = money_re.sub("", description).strip()
