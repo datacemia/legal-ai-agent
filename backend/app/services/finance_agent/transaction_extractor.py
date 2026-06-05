@@ -8198,6 +8198,180 @@ def extract_typed_amount_balance_table_transactions(
 
     return rows
 
+
+RUNNING_BALANCE_LAYOUT = "running_balance_column_statement"
+
+
+def detect_running_balance_column_layout(text: str) -> bool:
+    low = str(text or "").lower()
+    return all(marker in low for marker in [
+        "transaction history",
+        "deposits/additions",
+        "withdrawals/subtractions",
+        "ending daily",
+    ])
+
+
+def is_running_balance_guard_line(line: str) -> bool:
+    low = str(line or "").lower()
+    return any(marker in low for marker in [
+        "ending balance",
+        "totals",
+        "items returned unpaid",
+        "monthly service fee",
+        "fee period",
+        "standard monthly service fee",
+        "how to avoid the monthly service fee",
+        "summary of overdraft",
+        "sheet seq",
+    ])
+
+
+def extract_running_balance_column_statement_transactions(
+    text: str,
+    detected_currency: str | None = None,
+) -> list[dict]:
+    if not detect_running_balance_column_layout(text):
+        return []
+
+    default_year = detect_document_year(text)
+    currency = detected_currency or "USD"
+
+    lines = [
+        " ".join(line.split())
+        for line in str(text or "").splitlines()
+        if " ".join(line.split())
+    ]
+
+    transactions = []
+    in_table = False
+    current = None
+
+    date_re = re.compile(r"^(\d{1,2}/\d{1,2})\s+(.*)$")
+
+    def normalize_mmdd(raw: str) -> str:
+        month, day = [int(x) for x in raw.split("/")]
+        return f"{default_year:04d}-{month:02d}-{day:02d}"
+
+    def flush():
+        nonlocal current
+
+        if not current:
+            return
+
+        raw = current["raw"].strip()
+        low = raw.lower()
+
+        if is_running_balance_guard_line(raw):
+            current = None
+            return
+
+        numbers = re.findall(
+            r"(?<!\d)(\d{1,3}(?:,\d{3})*\.\d{2}|\d+\.\d{2})(?!\d)",
+            raw,
+        )
+
+        if not numbers:
+            current = None
+            return
+
+        balance = None
+        amount_token = numbers[-1]
+
+        if len(numbers) >= 2:
+            balance = parse_amount(numbers[-1])
+            amount_token = numbers[-2]
+
+        amount = abs(parse_amount(amount_token))
+
+        expense_markers = [
+            "purchase",
+            "withdrawal",
+            "payment",
+            "pymt",
+            "debit",
+            "transfer debit",
+            "prem coll",
+            "student ln",
+            "fee",
+            "ach",
+        ]
+
+        income_markers = [
+            "deposit",
+            "direct dep",
+            "credit",
+            "transfer credit",
+        ]
+
+        if any(m in low for m in expense_markers):
+            signed = -amount
+            tx_type = "expense"
+        elif any(m in low for m in income_markers):
+            signed = amount
+            tx_type = "income"
+        else:
+            signed = amount
+            tx_type = None
+
+        transactions.append({
+            "date": current["date"],
+            "description": raw,
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "type": tx_type,
+            "balance": balance,
+            "_balance": balance,
+            "currency": currency,
+            "parser_family": RUNNING_BALANCE_LAYOUT,
+        })
+
+        current = None
+
+    for line in lines:
+        low = line.lower()
+
+        if "transaction history" in low:
+            in_table = True
+            continue
+
+        if not in_table:
+            continue
+
+        if is_running_balance_guard_line(line):
+            flush()
+            in_table = False
+            continue
+
+        if any(h in low for h in [
+            "date",
+            "check",
+            "number",
+            "description",
+            "deposits/",
+            "withdrawals/",
+            "ending daily",
+        ]):
+            continue
+
+        match = date_re.match(line)
+
+        if match:
+            flush()
+            current = {
+                "date": normalize_mmdd(match.group(1)),
+                "raw": match.group(2),
+            }
+        elif current:
+            current["raw"] += " " + line
+
+    flush()
+
+    return transactions
+
+
+
 def extract_transactions(text: str) -> list[dict]:
     statement_layout = detect_statement_layout(text)
     print("STATEMENT_LAYOUT_DETECTED", statement_layout)
@@ -8333,6 +8507,19 @@ def extract_transactions(text: str) -> list[dict]:
     text = normalize_ocr_numeric_text(text)
 
     transactions = []
+
+    detected_currency = detect_currency(text)
+
+    # New-format branch: generic running-balance column layout.
+    # Architecture rule: parser family, not bank-specific.
+    running_balance_transactions = extract_running_balance_column_statement_transactions(
+        text,
+        detected_currency,
+    )
+
+    if running_balance_transactions:
+        return running_balance_transactions
+
     default_year = detect_document_year(text)
     debug_log("TX_DEBUG: default_year", default_year)
 
