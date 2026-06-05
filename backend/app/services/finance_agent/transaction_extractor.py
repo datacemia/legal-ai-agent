@@ -6334,6 +6334,7 @@ def extract_debit_credit_column_transactions(
     ]
 
     opening_balance_markers = [
+        "solde initial",
         "solde crediteur au",
         "solde créditeur au",
         "solde debiteur au",
