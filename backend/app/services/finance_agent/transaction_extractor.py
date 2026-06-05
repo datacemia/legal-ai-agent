@@ -5172,7 +5172,7 @@ def extract_standard_amount_balance_ledger_transactions(
 
     money_re = re.compile(
         r"(?<!\d)"
-        r"[–\\-+]?\\$?"
+        r"[–\-+]?\$?"
         r"(?:\d{1,3}(?:[ ,]\d{3})+|\d+)"
         r"(?:[.,]\d{2})"
         r"(?!\d)"
