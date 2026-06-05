@@ -8395,6 +8395,21 @@ def extract_transactions(text: str) -> list[dict]:
     statement_layout = detect_statement_layout(text)
     print("STATEMENT_LAYOUT_DETECTED", statement_layout)
 
+    if statement_layout == "running_balance_column_statement":
+        running_balance_transactions = extract_running_balance_column_statement_transactions(text)
+
+        print(
+            "RUNNING_BALANCE_COLUMN_ROUTE",
+            {
+                "transactions": len(running_balance_transactions),
+                "income": sum(1 for tx in running_balance_transactions if tx.get("type") == "income"),
+                "expenses": sum(1 for tx in running_balance_transactions if tx.get("type") == "expense"),
+            },
+        )
+
+        if running_balance_transactions:
+            return running_balance_transactions
+
     deposit_withdrawal_balance_transactions = extract_us_deposit_withdrawal_balance_transactions(text)
     if deposit_withdrawal_balance_transactions:
         print(
