@@ -5867,10 +5867,20 @@ def extract_wallet_tabular_transactions(
     incoming_markers = [
         "payment from",
         "virement de",
+        "virement reçu",
+        "virement recu",
+        "virement sepa reçu",
+        "virement sepa recu",
         "de :",
         "from ",
         "incoming",
         "received",
+        "salaire",
+        "salary",
+        "payroll",
+        "salary payment",
+        "salary deposit",
+        "salary credit",
     ]
 
     outgoing_markers = [
@@ -5927,6 +5937,23 @@ def extract_wallet_tabular_transactions(
         is_internal = any(marker in desc for marker in internal_markers)
         is_income = any(marker in desc for marker in incoming_markers)
         is_expense = any(marker in desc for marker in outgoing_markers)
+
+        # Standard FR / EN:
+        # Salary and incoming payroll transfers always dominate
+        # generic transfer heuristics.
+        if any(
+            marker in desc
+            for marker in (
+                "salaire",
+                "salary",
+                "payroll",
+                "salary payment",
+                "salary deposit",
+                "salary credit",
+            )
+        ):
+            is_income = True
+            is_expense = False
 
         if is_internal:
             signed_amount = 0.0
@@ -8989,7 +9016,7 @@ def extract_transactions(text: str) -> list[dict]:
             "amount": final_amount,
             "type": tx_type,
             "currency": detected_currency,
-            "parser_family": tx.get("parser_family"),
+            "parser_family": "generic_transaction_signal",
         }
 
         is_amount_balance_row = (
