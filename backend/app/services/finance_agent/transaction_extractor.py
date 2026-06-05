@@ -6538,12 +6538,17 @@ def extract_debit_credit_column_transactions(
 
         if row_match:
             body = row_match.group("body").strip()
-            amount_candidates = [
-                m for m in money_amount_re.finditer(body)
-                if not re.search(r"\d{1,2}[./]\d{1,2}[./]\d{2,4}", m.group(0))
-            ]
+            body_without_dates = re.sub(
+                r"\b\d{1,2}[./-]\d{1,2}[./-]\d{2,4}\b",
+                " ",
+                body,
+            )
+
+            amount_candidates = list(money_amount_re.finditer(body_without_dates))
+
             amount_match = amount_candidates[-1] if amount_candidates else (
-                value_date_amount_re.search(body) or trailing_amount_re.search(body)
+                value_date_amount_re.search(body_without_dates)
+                or trailing_amount_re.search(body_without_dates)
             )
 
             if amount_match:
