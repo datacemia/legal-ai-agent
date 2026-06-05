@@ -7222,9 +7222,13 @@ def detect_statement_layout(text: str) -> str:
         return "withdraw_deposit_balance"
 
     if (
-        ("withdraw" in lower or "withdrawal" in lower)
-        and "deposit" in lower
-        and "balance" in lower
+        "date" in lower
+        and (
+            "withdraw deposit balance" in lower
+            or "withdrawal deposit balance" in lower
+            or "withdraw deposits balance" in lower
+            or "withdrawal deposits balance" in lower
+        )
     ):
         return "withdraw_deposit_balance"
 
