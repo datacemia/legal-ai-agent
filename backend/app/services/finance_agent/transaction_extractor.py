@@ -7490,6 +7490,23 @@ def reconstruct_ocr_column_debit_credit_balance(
 ) -> list[dict]:
     text = str(raw or "")
 
+    # This OCR column reconstructor is EN/USD-oriented.
+    # Do not run it on Arabic debit/credit/balance statements:
+    # it can confuse running balances with transaction amounts.
+    if is_mostly_arabic_text(text) or any(
+        marker in text for marker in [
+            "الرصيد السابق",
+            "حساب جاري",
+            "ريال سعودي",
+            "مدين",
+            "دائن",
+            "حواله",
+            "ضريبه",
+            "شراء عبر نقاط بيع",
+        ]
+    ):
+        return []
+
     period_year_match = re.search(
         r"\b[A-Za-z]{3,9}\s+\d{1,2},\s*(20\d{2})\s*-\s*"
         r"[A-Za-z]{3,9}\s+\d{1,2},\s*(20\d{2})",
