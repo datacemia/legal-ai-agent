@@ -6515,6 +6515,13 @@ def extract_debit_credit_column_transactions(
         r")\s+(?P<body>.+)$"
     )
 
+    double_date_row_re = re.compile(
+        r"^(?P<op_date>\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?)"
+        r"\s*"
+        r"(?P<value_date>\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?)"
+        r"\s+(?P<body>.+)$"
+    )
+
     value_date_amount_re = re.compile(
         r"(?P<value_date>"
         r"\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?"
@@ -6659,7 +6666,7 @@ def extract_debit_credit_column_transactions(
         if is_balance_snapshot_line(line):
             continue
 
-        row_match = row_start_re.match(line)
+        row_match = double_date_row_re.match(line) or row_start_re.match(line)
 
         if row_match:
             body = row_match.group("body").strip()
