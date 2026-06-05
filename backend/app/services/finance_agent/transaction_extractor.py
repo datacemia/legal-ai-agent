@@ -8329,8 +8329,12 @@ def extract_running_balance_column_statement_transactions(
             signed = amount
             tx_type = "income"
         else:
-            signed = amount
-            tx_type = None
+            # Generic running-balance column rule:
+            # In this family, a single visible amount with no credit/deposit
+            # marker is a movement in the withdrawal/debit side.
+            # Do not let downstream canonicalization convert it to income.
+            signed = -amount
+            tx_type = "expense"
 
         transactions.append({
             "date": current["date"],
