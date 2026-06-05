@@ -9365,7 +9365,15 @@ def extract_transactions(text: str) -> list[dict]:
             },
         )
 
-        if income_priority_match and not looks_like_debit_description(description):
+        # Do not let broad income/refund markers override a transaction
+        # already classified as an expense by amount/balance or debit semantics.
+        # OCR-fused lines may contain both "Received From ..." and later
+        # "Card Payment ..." in the same text block.
+        if (
+            income_priority_match
+            and tx_type != "expense"
+            and not looks_like_debit_description(description)
+        ):
             tx_type = "income"
             if amount_balance_tx_amount is not None:
                 amount = abs(float(amount_balance_tx_amount or 0))
