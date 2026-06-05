@@ -725,6 +725,27 @@ def handle_finance_ai(job: Job, db):
     print("QUALITY_CHECK")
     print(quality)
 
+    reconciliation_income_total = round(
+        sum(float(tx.get("amount") or 0) for tx in kpi_transactions if tx.get("type") == "income"),
+        2,
+    )
+    reconciliation_expense_total = round(
+        sum(abs(float(tx.get("amount") or 0)) for tx in kpi_transactions if tx.get("type") == "expense"),
+        2,
+    )
+
+    print(
+        "RECONCILIATION_CHECK",
+        {
+            "transactions": len(kpi_transactions),
+            "income_count": sum(1 for tx in kpi_transactions if tx.get("type") == "income"),
+            "expense_count": sum(1 for tx in kpi_transactions if tx.get("type") == "expense"),
+            "income_total": reconciliation_income_total,
+            "expense_total": reconciliation_expense_total,
+            "warning": None,
+        },
+    )
+
     if quality["status"] == "insufficient_data":
         result = {
             "status": "insufficient_data",
