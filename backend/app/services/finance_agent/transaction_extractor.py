@@ -6919,11 +6919,27 @@ def extract_debit_credit_column_transactions(
         )
 
         if official_credit_total > 0 and extracted_income_total == 0:
+            official_debit_total = round(float(official_totals.get("debit_total") or 0), 2)
+            extracted_expense_total = round(
+                sum(
+                    abs(float(tx.get("amount") or 0))
+                    for tx in transactions
+                    if tx.get("type") == "expense"
+                ),
+                2,
+            )
+
+            # Generic table reconciliation:
+            # when all rows were classified as debits but the official debit total
+            # is smaller, the difference is the credit-column amount hidden by OCR.
+            # This is based only on official debit/credit totals, not payee names.
+            hidden_credit_amount = round(extracted_expense_total - official_debit_total, 2)
+
             matches = [
                 tx
                 for tx in transactions
                 if tx.get("type") == "expense"
-                and round(abs(float(tx.get("amount") or 0)), 2) == official_credit_total
+                and abs(round(abs(float(tx.get("amount") or 0)), 2) - hidden_credit_amount) <= 0.02
             ]
 
             if len(matches) == 1:
@@ -6931,9 +6947,11 @@ def extract_debit_credit_column_transactions(
                 tx["type"] = "income"
                 tx["amount"] = abs(float(tx.get("amount") or 0))
                 print(
-                    "OFFICIAL_CREDIT_TOTAL_RECLASSIFIED",
+                    "OFFICIAL_TOTALS_DIFF_RECLASSIFIED",
                     {
-                        "credit_total": official_credit_total,
+                        "official_debit_total": official_debit_total,
+                        "official_credit_total": official_credit_total,
+                        "hidden_credit_amount": hidden_credit_amount,
                         "description": str(tx.get("description") or "")[:180],
                     },
                 )
