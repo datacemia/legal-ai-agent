@@ -7320,18 +7320,20 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
         return value
 
     transactions: list[dict] = []
-    lines = raw.splitlines()
 
-    for i, raw_line in enumerate(lines):
-        line = " ".join(str(raw_line or "").split())
+    normalized = " ".join(str(raw or "").split())
 
-        if re.match(r"^\d{1,2}/\d{1,2}/\d{4}", line):
-            print("WDB_RAW_DATE_LINE", repr(line))
-            print("WDB_BLOCK")
-            print(repr(line))
+    date_row_re = re.compile(
+        r"(?=\b\d{1,2}/\d{1,2}/\d{4}\b)"
+    )
 
-            for j in range(i + 1, min(i + 6, len(lines))):
-                print("NEXT", repr(lines[j]))
+    candidate_rows = [
+        row.strip()
+        for row in date_row_re.split(normalized)
+        if row.strip()
+    ]
+
+    for line in candidate_rows:
 
         if not line:
             continue
