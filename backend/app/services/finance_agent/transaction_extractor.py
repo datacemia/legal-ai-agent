@@ -7870,6 +7870,19 @@ def extract_typed_amount_balance_table_transactions(
         if not description:
             continue
 
+        admin_desc = description.lower().strip()
+        if (
+            admin_desc.startswith("solde initial")
+            or admin_desc.startswith("solde au")
+            or admin_desc in {"total", "total:"}
+            or admin_desc.startswith("total ")
+            or admin_desc.startswith("opening balance")
+            or admin_desc.startswith("closing balance")
+            or admin_desc.startswith("balance brought forward")
+            or admin_desc.startswith("brought forward")
+        ):
+            continue
+
         parsed_date = extract_date(
             f"{current_date_text} {default_year}",
             default_year=default_year,
