@@ -8227,13 +8227,14 @@ def reconstruct_ocr_column_debit_credit_balance(
         desc = descriptions[i]
         tx_date = dates[i]
 
-        tx_type = "income" if is_income_priority_description(desc.lower()) else None
-
-        if tx_type is None and looks_like_credit_description(desc):
-            tx_type = "income"
-
-        if tx_type is None and looks_like_debit_description(desc):
+        if looks_like_debit_description(desc):
             tx_type = "expense"
+        elif is_income_priority_description(desc.lower()):
+            tx_type = "income"
+        elif looks_like_credit_description(desc):
+            tx_type = "income"
+        else:
+            tx_type = None
 
         if tx_type is None:
             continue
@@ -9333,7 +9334,7 @@ def extract_transactions(text: str) -> list[dict]:
             },
         )
 
-        if income_priority_match:
+        if income_priority_match and not looks_like_debit_description(description):
             tx_type = "income"
             if amount_balance_tx_amount is not None:
                 amount = abs(float(amount_balance_tx_amount or 0))
