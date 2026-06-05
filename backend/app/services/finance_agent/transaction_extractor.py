@@ -7424,6 +7424,10 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
 
 def extract_date_description_debit_credit_balance_transactions(text: str) -> list[dict]:
     raw = str(text or "")
+
+    print("DDCB_RAW_START")
+    print(raw[:5000])
+    print("DDCB_RAW_END")
     default_year = detect_document_year(raw)
     currency = detect_currency(raw)
 
