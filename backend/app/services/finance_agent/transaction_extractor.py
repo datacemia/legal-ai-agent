@@ -9066,6 +9066,10 @@ def extract_transactions(text: str) -> list[dict]:
 
             if is_amount_balance_row:
                 tx = preserve_balance_locked_transaction(tx)
+            elif tx.get("parser_family") == "running_balance_column_statement":
+                # Parser family is authoritative for signed amount/type.
+                # Do not let generic canonicalization erase column-derived types.
+                pass
             else:
                 tx = canonicalize_transaction(tx)
 
