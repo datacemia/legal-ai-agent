@@ -5164,7 +5164,10 @@ def extract_standard_amount_balance_ledger_transactions(
         - Uses the second-to-last money value as transaction amount.
         - Uses the last money value as running balance.
     """
-    if not has_standard_amount_balance_ledger_header(text):
+    header_ok = has_standard_amount_balance_ledger_header(text)
+    print("STANDARD_LEDGER_HEADER_OK", header_ok)
+
+    if not header_ok:
         return []
 
     default_year = detect_standard_statement_year(text)
@@ -5206,6 +5209,13 @@ def extract_standard_amount_balance_ledger_transactions(
         line = raw_lines[i]
 
         if not standard_row_start_re.match(line):
+            if (
+                "mar " in line.lower()
+                or "$" in line
+                or "transfer" in line.lower()
+                or "ipostal" in line.lower()
+            ):
+                print("STANDARD_LEDGER_SKIP_LINE", repr(line))
             i += 1
             continue
 
