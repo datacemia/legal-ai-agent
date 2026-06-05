@@ -7662,6 +7662,22 @@ def reconstruct_ocr_column_debit_credit_balance(
 
 def extract_date_description_debit_credit_balance_transactions(text: str) -> list[dict]:
     raw = str(text or "")
+
+    # This family parser is for left-to-right Date/Description/Debit/Credit/Balance
+    # layouts. Arabic/SNB statements need the Arabic/running-balance parsers;
+    # otherwise OCR order can make the balance look like the transaction amount.
+    if is_mostly_arabic_text(raw) or any(
+        marker in raw for marker in [
+            "الرصيد السابق",
+            "حساب جاري",
+            "ريال سعودي",
+            "شراء عبر نقاط بيع",
+            "حواله",
+            "ضريبه",
+        ]
+    ):
+        return []
+
     default_year = detect_document_year(raw)
     currency = detect_currency(raw)
 
