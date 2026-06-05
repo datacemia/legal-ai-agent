@@ -1066,6 +1066,10 @@ def looks_like_credit_description(line: str) -> bool:
     credit_markers = [
         "virement recu",
         "virement reçu",
+        "virement sepa reçu",
+        "virement instantané reçu",
+        "vir sepa reçu",
+        "reçu",
         "vir recu",
         "vir reçu",
         "vir.web recu",
@@ -6467,7 +6471,7 @@ def extract_debit_credit_column_transactions(
     )
 
     money_amount_re = re.compile(
-        r"(?<![./])(?P<amount>(?:\d{1,3}(?:[ .]\d{3})+|\d+)(?:[.,]\d{2}))(?![./]\d)"
+        r"(?<![\w./])(?P<amount>(?:\d{1,3}(?:[ .]\d{3})+|\d+)(?:[.,]\d{2}))(?![\w./]\d)"
     )
 
     transactions: list[dict] = []
