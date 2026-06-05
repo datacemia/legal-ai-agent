@@ -6532,10 +6532,16 @@ def extract_debit_credit_column_transactions(
 
                 flush_current()
 
-                if is_universal_fee_tax_or_charge(description):
+                # International debit/credit table rule:
+                # If OCR column position is unavailable, use strong credit/debit
+                # semantic markers as fallback. This is still parser-family logic,
+                # not bank-specific logic.
+                if looks_like_credit_description(description):
+                    tx_type = "income"
+                elif is_universal_fee_tax_or_charge(description):
                     tx_type = "expense"
                 else:
-                    tx_type = "income" if looks_like_credit_description(description) else "expense"
+                    tx_type = "expense"
 
                 current = {
                     "date": parsed_date,
