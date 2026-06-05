@@ -7196,6 +7196,216 @@ def should_use_standard_sectioned_statement(
         )
     )
 
+
+def is_us_deposit_withdrawal_balance_layout(text: str) -> bool:
+    """Detect generic US-style statements with deposit/withdrawal/balance columns.
+
+    Family format, not bank-specific:
+    - Date / Description
+    - Deposits or Additions
+    - Withdrawals or Subtractions
+    - Ending daily balance
+    """
+    lower = str(text or "").lower()
+
+    has_deposit_column = (
+        "deposits/additions" in lower
+        or "deposits additions" in lower
+        or "deposit additions" in lower
+        or "additions" in lower
+    )
+
+    has_withdrawal_column = (
+        "withdrawals/subtractions" in lower
+        or "withdrawals subtractions" in lower
+        or "withdrawal subtractions" in lower
+        or "subtractions" in lower
+    )
+
+    has_balance_column = (
+        "ending daily balance" in lower
+        or "daily balance" in lower
+        or "ending balance" in lower
+    )
+
+    has_transaction_history = (
+        "transaction history" in lower
+        or "date description" in lower
+    )
+
+    return (
+        has_transaction_history
+        and has_deposit_column
+        and has_withdrawal_column
+        and has_balance_column
+    )
+
+
+def extract_us_deposit_withdrawal_balance_transactions(
+    text: str,
+    detected_currency: str | None = None,
+) -> list[dict]:
+    """Extract generic US deposit/withdrawal/balance column statements.
+
+    This is a family parser, not a bank parser.
+    It targets statements where rows are shaped like:
+        Date Description [Deposit/Additions] [Withdrawal/Subtractions] [Balance]
+
+    Guardrails:
+    - skip summaries, fee explanations, totals, balances, headers and footers;
+    - skip returned/unpaid items sections;
+    - use semantic direction first when visible;
+    - use balance as validation only, not KPI amount;
+    - do not modify FR/AR/debit-credit/wallet parsers.
+    """
+    raw = str(text or "")
+    if not is_us_deposit_withdrawal_balance_layout(raw):
+        return []
+
+    currency = detected_currency or detect_currency(raw) or "USD"
+    default_year = detect_document_year(raw)
+
+    normalized = " ".join(raw.replace("\xa0", " ").replace("\u202f", " ").split())
+
+    money = r"(?:\d{1,3}(?:,\d{3})+|\d+)\.\d{2}"
+    row_re = re.compile(
+        r"(?P<date>\d{1,2}/\d{1,2})\s+"
+        r"(?P<body>.*?)(?=\s+\d{1,2}/\d{1,2}\s+|$)",
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    money_re = re.compile(money)
+
+    stop_sections = [
+        "items returned unpaid",
+        "summary of overdraft",
+        "monthly service fee summary",
+        "how to avoid the monthly service fee",
+        "interest summary",
+        "ending balance on",
+        "totals $",
+    ]
+
+    skip_markers = [
+        "beginning balance",
+        "ending balance",
+        "activity summary",
+        "account number",
+        "routing number",
+        "monthly service fee",
+        "standard monthly service fee",
+        "you paid $",
+        "minimum required",
+        "this fee period",
+        "total overdraft fees",
+        "total returned item fees",
+        "the ending daily balance",
+        "page ",
+        "sheet seq",
+    ]
+
+    income_markers = [
+        "direct dep",
+        "direct deposit",
+        "atm cash deposit",
+        "atm check deposit",
+        "deposit",
+        "credit from",
+        "transfer credit",
+        "interest paid",
+    ]
+
+    expense_markers = [
+        "purchase authorized",
+        "recurring payment",
+        "atm withdrawal",
+        "withdrawal",
+        "debit to",
+        "transfer debit",
+        "online pymt",
+        "payment",
+        "fee",
+        "service fee",
+    ]
+
+    transactions: list[dict] = []
+
+    for match in row_re.finditer(normalized):
+        date_text = match.group("date")
+        body = clean_db_text(match.group("body"))
+
+        low = body.lower()
+
+        if any(marker in low for marker in stop_sections):
+            break
+
+        if any(marker in low for marker in skip_markers):
+            continue
+
+        amounts = money_re.findall(body)
+        if not amounts:
+            continue
+
+        # Generic family rule:
+        # If a row has movement + ending balance, use the first amount as movement.
+        # If a row has one amount, use it as movement.
+        amount_raw = amounts[0]
+        amount_abs = abs(parse_amount(amount_raw))
+
+        description = money_re.sub("", body, count=1).strip()
+        description = clean_db_text(description)
+
+        if not description:
+            continue
+
+        desc_lower = description.lower()
+
+        if any(marker in desc_lower for marker in income_markers):
+            tx_type = "income"
+            signed = amount_abs
+        elif any(marker in desc_lower for marker in expense_markers):
+            tx_type = "expense"
+            signed = -amount_abs
+        else:
+            # Unknown direction in this family is safer to exclude than guess.
+            continue
+
+        parsed_date = extract_date(
+            f"{date_text}/{default_year}",
+            default_year=default_year,
+            prefer_us_date=True,
+        )
+
+        if not parsed_date:
+            continue
+
+        transactions.append(
+            {
+                "date": parsed_date,
+                "description": description,
+                "amount": round(signed, 2),
+                "type": tx_type,
+                "currency": currency,
+                "signed_amount": round(signed, 2),
+                "locked_amount": round(signed, 2),
+                "_locked_amount": round(signed, 2),
+                "locked_type": tx_type,
+                "category_hint": "us_deposit_withdrawal_balance_family",
+            }
+        )
+
+    print(
+        "US_DEPOSIT_WITHDRAWAL_BALANCE_EXTRACTED",
+        {
+            "transactions": len(transactions),
+            "income": sum(1 for tx in transactions if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in transactions if tx.get("type") == "expense"),
+        },
+    )
+
+    return transactions
+
+
+
 def detect_statement_layout(text: str) -> str:
     raw = str(text or "")
     lower = raw.lower()
@@ -7991,6 +8201,18 @@ def extract_typed_amount_balance_table_transactions(
 def extract_transactions(text: str) -> list[dict]:
     statement_layout = detect_statement_layout(text)
     print("STATEMENT_LAYOUT_DETECTED", statement_layout)
+
+    deposit_withdrawal_balance_transactions = extract_us_deposit_withdrawal_balance_transactions(text)
+    if deposit_withdrawal_balance_transactions:
+        print(
+            "DEPOSIT_WITHDRAWAL_BALANCE_ROUTE",
+            {
+                "transactions": len(deposit_withdrawal_balance_transactions),
+                "income": sum(1 for tx in deposit_withdrawal_balance_transactions if tx.get("type") == "income"),
+                "expenses": sum(1 for tx in deposit_withdrawal_balance_transactions if tx.get("type") == "expense"),
+            },
+        )
+        return deposit_withdrawal_balance_transactions
 
     if statement_layout == "date_description_debit_credit_balance":
         ddcb_transactions = extract_date_description_debit_credit_balance_transactions(text)
