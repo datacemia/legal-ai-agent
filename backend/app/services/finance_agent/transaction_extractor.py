@@ -5171,13 +5171,11 @@ def extract_standard_amount_balance_ledger_transactions(
     prefer_month_day = prefer_month_day_short_dates(text)
 
     money_re = re.compile(
-        r"(?<![A-Za-z0-9])"
-        r"[–\-+]?"
-        r"(?:[$€£]|USD|EUR|GBP|CAD|AUD)?\s*"
+        r"(?<!\d)"
+        r"[–\-+]?\$?"
         r"(?:\d{1,3}(?:[ ,]\d{3})+|\d+)"
         r"(?:[.,]\d{2})"
-        r"(?![A-Za-z0-9])",
-        flags=re.IGNORECASE,
+        r"(?!\d)"
     )
 
     raw_lines = [
