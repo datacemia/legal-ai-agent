@@ -7857,6 +7857,20 @@ def extract_typed_amount_balance_table_transactions(
 
         admin_desc = description.lower().strip()
         if (
+            "ending balance" in admin_desc
+            or "beginning balance" in admin_desc
+            or "annual percentage yield" in admin_desc
+            or "interest paid" in admin_desc
+            or "account summary" in admin_desc
+            or "total withdrawals" in admin_desc
+            or "total deposits" in admin_desc
+            or admin_desc.startswith("total ")
+            or admin_desc in {"total", "total:"}
+        ):
+            continue
+
+        admin_desc = description.lower().strip()
+        if (
             admin_desc.startswith("solde initial")
             or admin_desc.startswith("solde au")
             or admin_desc in {"total", "total:"}
