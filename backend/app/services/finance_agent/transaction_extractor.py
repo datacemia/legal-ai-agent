@@ -5073,6 +5073,17 @@ def has_standard_amount_balance_ledger_header(text: str) -> bool:
         or "date détails montant solde" in normalized
         or "date details montant solde" in normalized
         or "التاريخ" in normalized and "المبلغ" in normalized and "الرصيد" in normalized
+        or (
+            "date" in normalized
+            and "description" in normalized
+            and "type" in normalized
+            and "amount" in normalized
+            and (
+                "end of day balance" in normalized
+                or "running balance" in normalized
+                or "balance" in normalized
+            )
+        )
     )
 
     debit_credit_header = (
@@ -7183,7 +7194,16 @@ def detect_statement_layout(text: str) -> str:
     ):
         return "date_description_debit_credit_balance"
 
-    if dc_hits >= 2:
+    if (
+        "date" in lower
+        and (
+            ("debit" in lower and "credit" in lower)
+            or ("débit" in lower and "crédit" in lower)
+            or ("مدين" in lower and "دائن" in lower)
+            or ("debito" in lower and "credito" in lower)
+            or ("débito" in lower and "crédito" in lower)
+        )
+    ):
         return "debit_credit_table"
 
     withdraw_deposit_balance_markers = [
@@ -7262,7 +7282,27 @@ def extract_credit_card_statement_transactions(text: str) -> list[dict]:
     )
 
     for tx_date, _post_date, src, amount in payments:
-        add_tx(tx_date, f"Online payment from {src}", abs(parse_amount(amount)), "income")
+        payment_amount = abs(parse_amount(amount))
+        payment_year = (
+            default_year - 1
+            if int(str(tx_date).split("/")[0]) == 12 and "january" in raw.lower()
+            else default_year
+        )
+
+        transactions.append({
+            "date": extract_date(
+                f"{tx_date}/{payment_year}",
+                default_year=payment_year,
+                prefer_us_date=True,
+            ),
+            "description": clean_db_text(f"Online payment from {src}"),
+            "amount": round(payment_amount, 2),
+            "type": None,
+            "currency": currency,
+            "excluded_from_financial_kpis": True,
+            "excluded_reason": "credit_card_payment_repayment",
+            "category_hint": "credit_card_payment_repayment",
+        })
 
     purchases = re.findall(
         r"(?P<tx_date>\d{1,2}/\d{1,2})\s+"
