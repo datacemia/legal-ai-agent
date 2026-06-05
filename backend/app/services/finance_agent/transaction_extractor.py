@@ -4451,13 +4451,17 @@ def resolve_arabic_row_amount(row: dict, prev_balance: float | None) -> tuple[fl
             tolerance = max(0.15, abs(probable_tx) * 0.002)
             keyword_type = classify_by_keywords(row.get("text", ""))
 
+            row_text = row.get("text", "") or row.get("description", "")
             delta_type = "income" if delta > 0 else "expense"
 
-            if is_universal_fee_tax_or_charge(row.get("text", "") or row.get("description", "")):
-                delta_type = "expense"
-
+            # Standard international rule:
+            # refund/reversal/income markers must override broad fee/tax words.
+            # Examples: fee reversal, charge refund, remboursement frais,
+            # عكس رسوم, عكس تحويل رسوم, مبلغ اعادة.
             if keyword_type in ("expense", "income"):
                 delta_type = keyword_type
+            elif is_universal_fee_tax_or_charge(row_text) and not is_income_priority_description(row_text):
+                delta_type = "expense"
 
             if abs(abs(delta) - abs(probable_tx)) <= tolerance:
                 return abs(probable_tx), probable_balance, delta_type
