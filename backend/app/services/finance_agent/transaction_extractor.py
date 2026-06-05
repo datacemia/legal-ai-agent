@@ -8462,7 +8462,10 @@ def extract_transactions(text: str) -> list[dict]:
         # AR: مبلغ اعادة, عكس رسوم, عكس تحويل رسوم
         if is_income_priority_description(description):
             tx_type = "income"
-            amount = abs(float(amount or 0))
+            if amount_balance_tx_amount is not None:
+                amount = abs(float(amount_balance_tx_amount or 0))
+            else:
+                amount = abs(float(amount or 0))
 
         signed_amount = amount
 
