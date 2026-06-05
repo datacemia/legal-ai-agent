@@ -6748,7 +6748,20 @@ def extract_debit_credit_column_transactions(
                 # section fallback. This prevents a stale "credit" section from
                 # turning withdrawals, card payments, fees or outgoing transfers
                 # into income.
-                if looks_like_debit_description(description):
+                debit_match = looks_like_debit_description(description)
+
+                if "paiement" in description.lower():
+                    print(
+                        "PAYMENT_DEBUG",
+                        {
+                            "description": description[:220],
+                            "debit_match": debit_match,
+                            "credit_match": looks_like_credit_description(description),
+                            "section": current_section_side,
+                        },
+                    )
+
+                if debit_match:
                     tx_type = "expense"
                 elif looks_like_credit_description(description):
                     tx_type = "income"
