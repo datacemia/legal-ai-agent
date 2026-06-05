@@ -1063,6 +1063,41 @@ def looks_like_debit_description(line: str) -> bool:
 def looks_like_credit_description(line: str) -> bool:
     lower = line.lower()
 
+    # Generic FR / EN / AR hard expense markers.
+    # These must override broad credit markers like "reçu", "deposit", etc.
+    hard_expense_markers = [
+        # FR
+        "paiement cb",
+        "achat cb",
+        "carte ",
+        "prlv",
+        "prélèvement",
+        "prelevement",
+        "virement emis",
+        "virement émis",
+        "virement pour",
+        "vir emis",
+        "vir émis",
+
+        # EN
+        "card payment",
+        "purchase",
+        "direct debit",
+        "transfer sent",
+        "transfer to",
+        "outgoing transfer",
+
+        # AR
+        "دفع بطاقة",
+        "شراء",
+        "خصم مباشر",
+        "تحويل صادر",
+        "تحويل إلى",
+    ]
+
+    if any(marker in lower for marker in hard_expense_markers):
+        return False
+
     credit_markers = [
         "virement recu",
         "virement reçu",
