@@ -6535,6 +6535,7 @@ def extract_debit_credit_column_transactions(
     transactions: list[dict] = []
     current: dict | None = None
     inside_operations = False
+    current_section_side: str | None = None
 
     def parse_operation_date(value: str, full_line: str) -> str | None:
         parsed = extract_date(value, default_year=default_year, prefer_us_date=False)
@@ -6580,6 +6581,60 @@ def extract_debit_credit_column_transactions(
             continue
 
         low = line.lower()
+
+        # Generic FR / EN / AR section authority for grouped debit/credit statements.
+        if any(marker in low for marker in [
+            # FR
+            "virements recus",
+            "virements reçus",
+            "credits recus",
+            "crédits reçus",
+
+            # EN
+            "incoming transfers",
+            "credits received",
+            "received transfers",
+
+            # AR
+            "التحويلات الواردة",
+            "الحوالات الواردة",
+            "الائتمانات الواردة",
+        ]):
+            flush_current()
+            current_section_side = "credit"
+            inside_operations = True
+            continue
+
+        if any(marker in low for marker in [
+            # FR
+            "virements emis",
+            "virements émis",
+            "prelevements",
+            "prélèvements",
+            "paiements par carte",
+            "retraits",
+            "services et frais bancaires",
+
+            # EN
+            "outgoing transfers",
+            "sent transfers",
+            "direct debits",
+            "card payments",
+            "withdrawals",
+            "bank fees",
+
+            # AR
+            "التحويلات الصادرة",
+            "الحوالات الصادرة",
+            "الخصم المباشر",
+            "مدفوعات البطاقة",
+            "السحوبات",
+            "رسوم بنكية",
+        ]):
+            flush_current()
+            current_section_side = "debit"
+            inside_operations = True
+            continue
 
         if any(marker in low for marker in operations_header_markers):
             inside_operations = True
@@ -6668,7 +6723,11 @@ def extract_debit_credit_column_transactions(
                 # If OCR column position is unavailable, use strong credit/debit
                 # semantic markers as fallback. This is still parser-family logic,
                 # not bank-specific logic.
-                if looks_like_credit_description(description):
+                if current_section_side == "credit":
+                    tx_type = "income"
+                elif current_section_side == "debit":
+                    tx_type = "expense"
+                elif looks_like_credit_description(description):
                     tx_type = "income"
                 elif is_universal_fee_tax_or_charge(description):
                     tx_type = "expense"
