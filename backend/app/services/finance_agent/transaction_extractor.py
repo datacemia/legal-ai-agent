@@ -7782,6 +7782,136 @@ def extract_date_description_debit_credit_balance_transactions(text: str) -> lis
     return transactions
 
 
+
+def extract_typed_amount_balance_table_transactions(
+    text: str,
+    detected_currency: str | None,
+) -> list[dict]:
+    """Family parser for standard typed amount/balance tables.
+
+    Shape:
+        Date | Description | Type | Amount | optional Balance
+
+    Bank-neutral. Works on EN-style extracted PDF rows without touching
+    FR/AR/debit-credit/vertical/wallet parsers.
+    """
+    raw = str(text or "")
+    lower = raw.lower()
+
+    if not (
+        "date" in lower
+        and "description" in lower
+        and "type" in lower
+        and "amount" in lower
+        and ("balance" in lower or "end of day balance" in lower)
+    ):
+        return []
+
+    default_year = detect_standard_statement_year(raw)
+    currency = detected_currency or detect_currency(raw)
+
+    money_token = r"[–\-+]?(?:[$€£]|USD|EUR|GBP|CAD|AUD)?\s*(?:\d{1,3}(?:[ ,]\d{3})+|\d+)(?:[.,]\d{2})"
+    month_token = r"(?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)"
+
+    date_re = re.compile(
+        rf"^\s*(?P<date>(?:{month_token})\s+\d{{1,2}}|\d{{1,2}}\s+(?:{month_token})|\d{{4}}[-/.]\d{{1,2}}[-/.]\d{{1,2}}|\d{{1,2}}[/-]\d{{1,2}}(?:[/-]\d{{2,4}})?)\b",
+        flags=re.IGNORECASE,
+    )
+    money_re = re.compile(money_token, flags=re.IGNORECASE)
+
+    rows = []
+    current_date_text = None
+
+    for line in [" ".join(x.split()) for x in raw.splitlines() if " ".join(x.split())]:
+        low = line.lower()
+
+        if any(x in low for x in [
+            "beginning balance", "statement balance", "total withdrawals",
+            "total deposits", "account details", "account number",
+            "routing number", "banking services provided", "member fdic",
+            "all transactions", "date (utc)", "end of day balance",
+        ]):
+            continue
+
+        date_match = date_re.match(line)
+        if date_match:
+            current_date_text = date_match.group("date")
+            body = line[date_match.end():].strip()
+        else:
+            body = line.strip()
+
+        if not current_date_text:
+            continue
+
+        amounts = money_re.findall(body)
+        if not amounts:
+            continue
+
+        amount_raw = amounts[-2] if len(amounts) >= 2 else amounts[-1]
+        amount = parse_amount(
+            amount_raw
+            .replace("$", "")
+            .replace("€", "")
+            .replace("£", "")
+            .replace("USD", "")
+            .replace("EUR", "")
+            .replace("GBP", "")
+            .replace("CAD", "")
+            .replace("AUD", "")
+            .replace("–", "-")
+        )
+
+        description = money_re.sub("", body).strip()
+        description = clean_db_text(description)
+
+        if not description:
+            continue
+
+        parsed_date = extract_date(
+            f"{current_date_text} {default_year}",
+            default_year=default_year,
+            prefer_us_date=True,
+        )
+
+        if not parsed_date:
+            continue
+
+        desc_lower = description.lower()
+
+        if amount < 0 or "transfer out" in desc_lower or looks_like_debit_description(description):
+            tx_type = "expense"
+            signed = -abs(amount)
+        elif "transfer in" in desc_lower or looks_like_credit_description(description):
+            tx_type = "income"
+            signed = abs(amount)
+        else:
+            tx_type = detect_type(description, amount) or ("expense" if amount < 0 else "income")
+            signed = -abs(amount) if tx_type == "expense" else abs(amount)
+
+        rows.append({
+            "date": parsed_date,
+            "description": description,
+            "amount": round(signed, 2),
+            "type": tx_type,
+            "currency": currency,
+            "signed_amount": round(signed, 2),
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": tx_type,
+            "category_hint": "typed_amount_balance_table",
+        })
+
+    print(
+        "TYPED_AMOUNT_BALANCE_TABLE_EXTRACTED",
+        {
+            "transactions": len(rows),
+            "income": sum(1 for tx in rows if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in rows if tx.get("type") == "expense"),
+        },
+    )
+
+    return rows
+
 def extract_transactions(text: str) -> list[dict]:
     statement_layout = detect_statement_layout(text)
     print("STATEMENT_LAYOUT_DETECTED", statement_layout)
@@ -7846,6 +7976,24 @@ def extract_transactions(text: str) -> list[dict]:
 
         if amount_balance_transactions:
             return amount_balance_transactions
+
+    if statement_layout == "amount_balance_ledger":
+        typed_transactions = extract_typed_amount_balance_table_transactions(
+            text,
+            detect_currency(text),
+        )
+
+        print(
+            "TYPED_AMOUNT_BALANCE_TABLE_ROUTE",
+            {
+                "transactions": len(typed_transactions),
+                "income": sum(1 for tx in typed_transactions if tx.get("type") == "income"),
+                "expenses": sum(1 for tx in typed_transactions if tx.get("type") == "expense"),
+            },
+        )
+
+        if typed_transactions:
+            return typed_transactions
 
     if statement_layout == "debit_credit_table":
         dc_transactions = extract_debit_credit_table_transactions(text)
