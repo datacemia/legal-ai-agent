@@ -1,5 +1,6 @@
 import os
 import re
+import unicodedata
 from collections import Counter
 from datetime import datetime
 
@@ -1891,8 +1892,9 @@ def is_income_priority_description(text: str) -> bool:
     evaluated before generic expense terms such as "payment" or "transfer".
     """
     lower = text.lower()
-    arabic_normalized = normalize_arabic_ocr_lines(lower)
-    searchable = f"{lower} {arabic_normalized}"
+    unicode_normalized = unicodedata.normalize("NFKC", lower)
+    arabic_normalized = normalize_arabic_ocr_lines(unicode_normalized)
+    searchable = f"{lower} {unicode_normalized} {arabic_normalized}"
 
     priority_phrases = [
         "salary payment",
