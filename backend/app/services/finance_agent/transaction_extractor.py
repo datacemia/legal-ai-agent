@@ -8204,12 +8204,26 @@ RUNNING_BALANCE_LAYOUT = "running_balance_column_statement"
 
 def detect_running_balance_column_layout(text: str) -> bool:
     low = str(text or "").lower()
-    return all(marker in low for marker in [
-        "transaction history",
-        "deposits/additions",
-        "withdrawals/subtractions",
-        "ending daily",
-    ])
+
+    matched = (
+        "transaction history" in low
+        and "deposits/additions" in low
+        and "withdrawals/subtractions" in low
+        and "ending daily" in low
+    )
+
+    debug_log(
+        "RUNNING_BALANCE_LAYOUT_DETECT",
+        {
+            "matched": matched,
+            "has_transaction_history": "transaction history" in low,
+            "has_deposits": "deposits/additions" in low,
+            "has_withdrawals": "withdrawals/subtractions" in low,
+            "has_ending_daily": "ending daily" in low,
+        },
+    )
+
+    return matched
 
 
 def is_running_balance_guard_line(line: str) -> bool:
@@ -8333,6 +8347,7 @@ def extract_running_balance_column_statement_transactions(
         low = line.lower()
 
         if "transaction history" in low:
+            debug_log("RUNNING_BALANCE_TABLE_START")
             in_table = True
             continue
 
@@ -8518,6 +8533,13 @@ def extract_transactions(text: str) -> list[dict]:
     )
 
     if running_balance_transactions:
+        debug_log(
+            "RUNNING_BALANCE_LAYOUT_SELECTED",
+            {
+                "count": len(running_balance_transactions),
+                "family": "running_balance_column_statement",
+            },
+        )
         return running_balance_transactions
 
     default_year = detect_document_year(text)
