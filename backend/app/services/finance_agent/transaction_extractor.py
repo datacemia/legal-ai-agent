@@ -8460,12 +8460,34 @@ def extract_transactions(text: str) -> list[dict]:
         # EN: refund, reversal, charge reversal
         # FR: remboursement, retour carte, remise
         # AR: مبلغ اعادة, عكس رسوم, عكس تحويل رسوم
-        if is_income_priority_description(description):
+        income_priority_match = is_income_priority_description(description)
+
+        print(
+            "INCOME_PRIORITY_CHECK",
+            {
+                "match": income_priority_match,
+                "amount_before": amount,
+                "amount_balance_tx_amount": amount_balance_tx_amount,
+                "type_before": tx_type,
+                "description": description[:200],
+            },
+        )
+
+        if income_priority_match:
             tx_type = "income"
             if amount_balance_tx_amount is not None:
                 amount = abs(float(amount_balance_tx_amount or 0))
             else:
                 amount = abs(float(amount or 0))
+
+            print(
+                "INCOME_PRIORITY_APPLIED",
+                {
+                    "amount_after": amount,
+                    "type_after": tx_type,
+                    "description": description[:200],
+                },
+            )
 
         signed_amount = amount
 
