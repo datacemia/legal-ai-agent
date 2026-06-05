@@ -6696,6 +6696,42 @@ def extract_debit_credit_column_transactions(
                 continue
 
         if current:
+            # Generic FR / EN / AR statement-summary guards.
+            # Prevent totals/closing-balance blocks from being merged into last transaction.
+            if any(marker in low for marker in [
+                # FR
+                "total des mouvements",
+                "total des operations",
+                "total des opérations",
+                "total debit",
+                "total débit",
+                "total credit",
+                "total crédit",
+                "nouveau solde",
+                "solde crediteur",
+                "solde créditeur",
+                "solde debiteur",
+                "solde débiteur",
+
+                # EN
+                "total transactions",
+                "total debits",
+                "total credits",
+                "closing balance",
+                "new balance",
+                "ending balance",
+
+                # AR
+                "إجمالي الحركات",
+                "إجمالي المدين",
+                "إجمالي الدائن",
+                "الرصيد الختامي",
+                "الرصيد الجديد",
+            ]):
+                flush_current()
+                inside_operations = False
+                continue
+
             if is_administrative_statement_line(line):
                 flush_current()
                 inside_operations = False
