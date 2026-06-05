@@ -6632,6 +6632,18 @@ def extract_debit_credit_column_transactions(
                 else:
                     tx_type = "expense"
 
+                if "débit euros" in text.lower() and "crédit euros" in text.lower():
+                    print(
+                        "TX_TYPE_DECISION_DEBUG",
+                        {
+                            "description": description[:220],
+                            "amount": amount,
+                            "looks_like_credit": looks_like_credit_description(description),
+                            "is_fee_tax_charge": is_universal_fee_tax_or_charge(description),
+                            "chosen_type": tx_type,
+                        },
+                    )
+
                 current = {
                     "date": parsed_date,
                     "description": description,
