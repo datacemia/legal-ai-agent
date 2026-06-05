@@ -1095,6 +1095,10 @@ def looks_like_credit_description(line: str) -> bool:
         "virement pour",
         "vir emis",
         "vir émis",
+        "cotis",
+        "cotisation",
+        "frais",
+        "commission",
 
         # EN
         "card payment",
@@ -1103,6 +1107,11 @@ def looks_like_credit_description(line: str) -> bool:
         "transfer sent",
         "transfer to",
         "outgoing transfer",
+        "fee",
+        "fees",
+        "charge",
+        "charges",
+        "commission",
 
         # AR
         "دفع بطاقة",
@@ -1110,6 +1119,8 @@ def looks_like_credit_description(line: str) -> bool:
         "خصم مباشر",
         "تحويل صادر",
         "تحويل إلى",
+        "رسوم",
+        "عمولة",
     ]
 
     if any(marker in lower for marker in hard_expense_markers):
@@ -2012,7 +2023,6 @@ def is_income_priority_description(text: str) -> bool:
         "مرتجع",
         "مبلغ اعادة",
         "مبلغ إعادة",
-        "remise",
         "remboursement",
         "retour carte",
         "freelance",
