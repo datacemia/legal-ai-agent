@@ -7428,6 +7428,16 @@ def reconstruct_ocr_column_debit_credit_balance(
     currency: str | None,
 ) -> list[dict]:
     text = str(raw or "")
+
+    period_year_match = re.search(
+        r"\b[A-Za-z]{3,9}\s+\d{1,2},\s*(20\d{2})\s*-\s*"
+        r"[A-Za-z]{3,9}\s+\d{1,2},\s*(20\d{2})",
+        text,
+    )
+
+    if period_year_match:
+        default_year = int(period_year_match.group(2))
+
     lines = [" ".join(line.split()) for line in text.splitlines() if " ".join(line.split())]
 
     date_re = re.compile(
@@ -7468,6 +7478,16 @@ def reconstruct_ocr_column_debit_credit_balance(
 
     if count < 2 or len(amounts) < count:
         return []
+
+    print(
+        "DDCB_RECON_PROFILE",
+        {
+            "descriptions": len(descriptions),
+            "dates": len(dates),
+            "amounts": len(amounts),
+            "year": default_year,
+        },
+    )
 
     # Use semantic description direction first. Balances are validation-only.
     txs = []
