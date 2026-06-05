@@ -8579,9 +8579,12 @@ def extract_transactions(text: str) -> list[dict]:
             if balance is not None:
                 tx["_balance"] = balance
 
-        if re.search(
-            r"\b(fee|fees|vat|commission|charge|رسوم|عمولة|ضريبة)\b",
-            description.lower(),
+        if (
+            re.search(
+                r"\b(fee|fees|vat|commission|charge|رسوم|عمولة|ضريبة)\b",
+                description.lower(),
+            )
+            and not is_income_priority_description(description)
         ):
             tx["amount"] = -abs(float(tx["amount"]))
             tx["type"] = "expense"
@@ -8918,11 +8921,14 @@ def extract_transactions(text: str) -> list[dict]:
     for tx in transactions:
         desc = str(tx.get("description") or "").lower()
 
-        if any(k in desc for k in [
-            "fee", "fees", "charge", "commission", "tax", "vat",
-            "frais", "taxe", "tva", "commission",
-            "رسوم", "رسم", "ضريبة", "الضريبة", "القيمة المضافة", "عمولة",
-        ]):
+        if (
+            any(k in desc for k in [
+                "fee", "fees", "charge", "commission", "tax", "vat",
+                "frais", "taxe", "tva", "commission",
+                "رسوم", "رسم", "ضريبة", "الضريبة", "القيمة المضافة", "عمولة",
+            ])
+            and not is_income_priority_description(desc)
+        ):
             amount = abs(float(tx.get("amount") or 0))
             tx["amount"] = -amount
             tx["type"] = "expense"
