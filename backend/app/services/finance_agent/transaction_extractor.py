@@ -1418,9 +1418,9 @@ def extract_date(
         r"|"
         r"\d{1,2}[-/.]\d{1,2}[-/.]\d{2,4}"
         r"|"
-        r"\d{1,2}[- ](?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)[- ]\d{2,4}"
+        r"\d{1,2}[- ](?:january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec)[- ]\d{2,4}"
         r"|"
-        r"(?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)[- ]\d{1,2}[- ]\d{2,4}"
+        r"(?:january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec)[- ]\d{1,2}[- ]\d{2,4}"
         r")\b",
         line,
         flags=re.IGNORECASE,
@@ -1734,8 +1734,8 @@ def split_compact_multi_transaction_lines(
         r"(?<!\d)(?:"
         r"\d{4}-\d{2}-\d{2}"
         r"|\d{1,2}[./-]\d{1,2}[./-]\d{2,4}"
-        r"|\d{1,2}[- ](?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)[- ]\d{2,4}"
-        r"|(?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)[- ]\d{1,2}[- ]\d{2,4}"
+        r"|\d{1,2}[- ](?:january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec)[- ]\d{2,4}"
+        r"|(?:january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec)[- ]\d{1,2}[- ]\d{2,4}"
         r")(?!\d)",
         flags=re.IGNORECASE,
     )
@@ -5164,10 +5164,7 @@ def extract_standard_amount_balance_ledger_transactions(
         - Uses the second-to-last money value as transaction amount.
         - Uses the last money value as running balance.
     """
-    header_ok = has_standard_amount_balance_ledger_header(text)
-    print("STANDARD_LEDGER_HEADER_OK", header_ok)
-
-    if not header_ok:
+    if not has_standard_amount_balance_ledger_header(text):
         return []
 
     default_year = detect_standard_statement_year(text)
@@ -5197,9 +5194,9 @@ def extract_standard_amount_balance_ledger_transactions(
         r"|"
         r"\d{4}[/-]\d{1,2}[/-]\d{1,2}"
         r"|"
-        r"\d{1,2}[- ](?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\b"
+        r"\d{1,2}[- ](?:january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec)\b"
         r"|"
-        r"(?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s+\d{1,2}\b"
+        r"(?:january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec)\s+\d{1,2}\b"
         r"|"
         r"\d{1,2}[/-]\d{1,2}\b"
         r")"
@@ -5209,13 +5206,6 @@ def extract_standard_amount_balance_ledger_transactions(
         line = raw_lines[i]
 
         if not standard_row_start_re.match(line):
-            if (
-                "mar " in line.lower()
-                or "$" in line
-                or "transfer" in line.lower()
-                or "ipostal" in line.lower()
-            ):
-                print("STANDARD_LEDGER_SKIP_LINE", repr(line))
             i += 1
             continue
 
@@ -5385,7 +5375,7 @@ def merge_multiline_debit_credit_rows(
         r"^\s*(?:"
         r"\d{4}[-/.]\d{1,2}[-/.]\d{1,2}"
         r"|"
-        r"\d{1,2}[- ](?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)[- ]\d{2,4}"
+        r"\d{1,2}[- ](?:january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec)[- ]\d{2,4}"
         r"|"
         r"\d{1,2}[./-]\d{1,2}[./-]\d{2,4}"
         r")\b",
@@ -5404,7 +5394,7 @@ def merge_multiline_debit_credit_rows(
     date_amounts_only_re = re.compile(
         rf"^\s*(?:"
         rf"\d{{4}}[-/.]\d{{1,2}}[-/.]\d{{1,2}}"
-        rf"|\d{{1,2}}[- ](?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)[- ]\d{{2,4}}"
+        rf"|\d{{1,2}}[- ](?:january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec)[- ]\d{{2,4}}"
         rf"|\d{{1,2}}[./-]\d{{1,2}}[./-]\d{{2,4}}"
         rf")\s+(?:{amount_token}\s*){{1,3}}\s*$",
         flags=re.IGNORECASE,
