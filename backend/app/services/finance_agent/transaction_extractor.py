@@ -5675,6 +5675,8 @@ def extract_official_movement_totals(text: str) -> dict | None:
     amount = r"(?:\d{1,3}(?:[,.]\d{3})+|\d+)(?:[.,]\d{2})"
 
     patterns = [
+        # Generic FR table footer: TOTAUX <debit_total> <credit_total>
+        rf"(?:totaux?|totals?)\s+({amount})\s+({amount})",
         rf"(?:totaux?|total)\s+des\s+mouvements\s+({amount})\s+({amount})",
         rf"(?:total)\s+(?:debit|débit|debits|débits)\s+({amount}).{{0,80}}?(?:credit|crédit|credits|crédits)\s+({amount})",
         rf"(?:withdrawals?|debits?)\s+({amount}).{{0,80}}?(?:deposits?|credits?)\s+({amount})",
