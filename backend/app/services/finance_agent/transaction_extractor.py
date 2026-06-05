@@ -7988,7 +7988,8 @@ def extract_transactions(text: str) -> list[dict]:
             },
         )
 
-        return ddcb_transactions
+        if ddcb_transactions:
+            return ddcb_transactions
 
     if statement_layout == "withdraw_deposit_balance":
         wdb_transactions = extract_withdraw_deposit_balance_transactions(text)
