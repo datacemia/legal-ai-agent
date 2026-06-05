@@ -7440,6 +7440,27 @@ def reconstruct_ocr_column_debit_credit_balance(
 
     lines = [" ".join(line.split()) for line in text.splitlines() if " ".join(line.split())]
 
+    pdf_total_credits: float | None = None
+    pdf_total_debits: float | None = None
+
+    if "total credits" in text.lower() and "total debits" in text.lower():
+        total_credits_match = re.search(
+            r"total\s+credits?\D+\$?([0-9,]+(?:\.\d{2})?)",
+            text,
+            flags=re.IGNORECASE,
+        )
+        total_debits_match = re.search(
+            r"total\s+debits?\D+\$?([0-9,]+(?:\.\d{2})?)",
+            text,
+            flags=re.IGNORECASE,
+        )
+
+        if total_credits_match:
+            pdf_total_credits = abs(parse_amount(total_credits_match.group(1)))
+
+        if total_debits_match:
+            pdf_total_debits = abs(parse_amount(total_debits_match.group(1)))
+
     date_re = re.compile(
         r"\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)\s+\d{1,2}\b",
         re.IGNORECASE,
@@ -7531,6 +7552,32 @@ def reconstruct_ocr_column_debit_credit_balance(
                 "locked_type": tx_type,
             }
         )
+
+    if pdf_total_credits is not None and pdf_total_debits is not None:
+        extracted_credits = round(
+            sum(float(tx.get("amount") or 0) for tx in txs if float(tx.get("amount") or 0) > 0),
+            2,
+        )
+        extracted_debits = round(
+            abs(sum(float(tx.get("amount") or 0) for tx in txs if float(tx.get("amount") or 0) < 0)),
+            2,
+        )
+
+        if (
+            abs(extracted_credits - round(pdf_total_credits, 2)) > 0.02
+            or abs(extracted_debits - round(pdf_total_debits, 2)) > 0.02
+        ):
+            print(
+                "DDCB_RECON_TOTALS_MISMATCH",
+                {
+                    "pdf_credits": round(pdf_total_credits, 2),
+                    "pdf_debits": round(pdf_total_debits, 2),
+                    "extracted_credits": extracted_credits,
+                    "extracted_debits": extracted_debits,
+                },
+            )
+            return []
+
 
     return txs
 
