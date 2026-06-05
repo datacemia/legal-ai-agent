@@ -648,7 +648,11 @@ def handle_finance_ai(job: Job, db):
         # amount/balance ledger rows must never become income only because
         # their visible movement amount is positive. Only balance-delta locked
         # rows may participate in KPI totals.
-        if tx.get("_balance") is not None and not tx.get("_balance_locked"):
+        if (
+            tx.get("_balance") is not None
+            and not tx.get("_balance_locked")
+            and tx.get("parser_family") != "running_balance_column_statement"
+        ):
             tx["type"] = None
             tx.pop("signed_amount", None)
             tx.pop("locked_amount", None)
