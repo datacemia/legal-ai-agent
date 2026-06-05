@@ -5188,15 +5188,6 @@ def extract_standard_amount_balance_ledger_transactions(
     previous_balance = None
     i = 0
 
-    typed_amount_table = (
-        "type" in str(text or "").lower()
-        and "amount" in str(text or "").lower()
-        and (
-            "balance" in str(text or "").lower()
-            or "end of day balance" in str(text or "").lower()
-        )
-    )
-
     standard_row_start_re = re.compile(
         r"^\s*(?:"
         r"\d{1,2}[/-]\d{1,2}[/-]\d{4}\s+\d{4}[/-]\d{1,2}[/-]\d{1,2}"
@@ -5223,7 +5214,6 @@ def extract_standard_amount_balance_ledger_transactions(
 
         while (
             len(money_re.findall(combined)) < 2
-            and not (typed_amount_table and len(money_re.findall(combined)) == 1)
             and j < len(raw_lines)
             and j <= i + 6
         ):
@@ -5236,6 +5226,12 @@ def extract_standard_amount_balance_ledger_transactions(
             "line": combined,
             "amounts": amounts,
         })
+
+        typed_amount_table = (
+            "type" in normalized
+            and "amount" in normalized
+            and ("balance" in normalized or "end of day balance" in normalized)
+        )
 
         if len(amounts) < 2 and not (typed_amount_table and len(amounts) == 1):
             i = j
@@ -5265,12 +5261,7 @@ def extract_standard_amount_balance_ledger_transactions(
             tx_amount = parse_amount(amounts[-1].replace("$", "").replace("–", "-"))
             balance = previous_balance if previous_balance is not None else 0.0
 
-        description = re.sub(
-            r"^\s*(?:\d{1,2}[/-]\d{1,2}|(?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s+\d{1,2}|\d{1,2}\s+(?:jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december))\b",
-            "",
-            combined,
-            flags=re.IGNORECASE,
-        ).strip()
+        description = re.sub(r"^\s*\d{1,2}[/-]\d{1,2}\b", "", combined).strip()
         description = money_re.sub("", description).strip()
         description = clean_db_text(description)
 
