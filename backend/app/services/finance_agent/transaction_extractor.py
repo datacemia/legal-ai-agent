@@ -5227,7 +5227,13 @@ def extract_standard_amount_balance_ledger_transactions(
             "amounts": amounts,
         })
 
-        if len(amounts) < 2:
+        typed_amount_table = (
+            "type" in normalized
+            and "amount" in normalized
+            and ("balance" in normalized or "end of day balance" in normalized)
+        )
+
+        if len(amounts) < 2 and not (typed_amount_table and len(amounts) == 1):
             i = j
             continue
 
@@ -5248,8 +5254,12 @@ def extract_standard_amount_balance_ledger_transactions(
             i = j
             continue
 
-        tx_amount = parse_amount(amounts[-2].replace("$", "").replace("–", "-"))
-        balance = parse_amount(amounts[-1].replace("$", "").replace("–", "-"))
+        if len(amounts) >= 2:
+            tx_amount = parse_amount(amounts[-2].replace("$", "").replace("–", "-"))
+            balance = parse_amount(amounts[-1].replace("$", "").replace("–", "-"))
+        else:
+            tx_amount = parse_amount(amounts[-1].replace("$", "").replace("–", "-"))
+            balance = previous_balance if previous_balance is not None else 0.0
 
         description = re.sub(r"^\s*\d{1,2}[/-]\d{1,2}\b", "", combined).strip()
         description = money_re.sub("", description).strip()
@@ -7765,12 +7775,6 @@ def extract_date_description_debit_credit_balance_transactions(text: str) -> lis
 def extract_transactions(text: str) -> list[dict]:
     statement_layout = detect_statement_layout(text)
     print("STATEMENT_LAYOUT_DETECTED", statement_layout)
-
-    if "all transactions" in text.lower():
-        idx = text.lower().find("all transactions")
-        print("STANDARD_TABLE_RAW_SECTION_START")
-        print(text[idx:idx + 3000])
-        print("STANDARD_TABLE_RAW_SECTION_END")
 
     if statement_layout == "date_description_debit_credit_balance":
         ddcb_transactions = extract_date_description_debit_credit_balance_transactions(text)
