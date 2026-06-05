@@ -7284,7 +7284,7 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
 
     row_re = re.compile(
         r"^(?P<date>\d{1,2}[/-]\d{1,2}[/-]\d{2,4})\s+"
-        r"(?P<body>.+?)\s+"
+        r"(?P<description>.+?)\s+"
         r"(?P<withdraw>(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d{2}))\s+"
         r"(?P<deposit>(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d{2}))\s+"
         r"(?P<balance>(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d{2}))\s*$",
@@ -7293,9 +7293,9 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
 
     skip_markers = [
         "b/f",
-        "opening balance",
         "balance forward",
-        "balance brought forward",
+        "opening balance",
+        "closing balance",
         "الرصيد الافتتاحي",
     ]
 
@@ -7336,17 +7336,15 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
             prefer_us_date=False,
         )
 
-        description = clean_db_text(match.group("body"))
-
         transactions.append(
             {
                 "date": date,
-                "description": description,
+                "description": clean_db_text(match.group("description")),
                 "amount": round(amount, 2),
                 "type": tx_type,
                 "currency": currency,
-                "_balance": round(balance, 2),
                 "balance": round(balance, 2),
+                "_balance": round(balance, 2),
                 "signed_amount": round(amount, 2),
                 "locked_amount": round(amount, 2),
                 "_locked_amount": round(amount, 2),
