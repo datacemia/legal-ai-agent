@@ -6587,16 +6587,6 @@ def extract_standard_sectioned_statement_transactions(
     it only uses statement structure, section titles, dates, and money tokens.
     """
     raw = str(text or "")
-
-    print(
-        "DDCB_PROFILE",
-        {
-            "dates": len(re.findall(r"(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2}", raw, re.I)),
-            "amounts": len(re.findall(r"\$\d+(?:\.\d{2})?", raw)),
-            "deposits": raw.lower().count("ach deposit"),
-            "purchases": raw.lower().count("purchase"),
-        }
-    )
     normalized = re.sub(r"\s+", " ", raw.lower())
     currency = detected_currency or detect_currency(raw) or "unknown"
 
@@ -7432,12 +7422,101 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
     return transactions
 
 
+def reconstruct_ocr_column_debit_credit_balance(
+    raw: str,
+    default_year: int,
+    currency: str | None,
+) -> list[dict]:
+    text = str(raw or "")
+    lines = [" ".join(line.split()) for line in text.splitlines() if " ".join(line.split())]
+
+    date_re = re.compile(
+        r"\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)\s+\d{1,2}\b",
+        re.IGNORECASE,
+    )
+
+    money_re = re.compile(r"\$?\d+(?:,\d{3})*(?:\.\d{2})")
+
+    descriptions = []
+    for line in lines:
+        low = line.lower()
+        if (
+            any(k in low for k in ["deposit", "purchase", "interest", "payment", "transfer", "withdrawal", "fee"])
+            and not any(k in low for k in ["total", "balance:", "account summary", "statement"])
+            and not money_re.search(line)
+            and not date_re.search(line)
+        ):
+            descriptions.append(line)
+
+    dates = []
+    for line in lines:
+        for match in date_re.findall(line):
+            dates.append(match)
+
+    amounts = []
+    for line in lines:
+        if "$" in line:
+            for match in money_re.findall(line):
+                try:
+                    amounts.append(parse_amount(match))
+                except Exception:
+                    pass
+
+    # Generic OCR-column safety gate.
+    # We only reconstruct when the document clearly has enough parallel columns.
+    count = min(len(descriptions), len(dates))
+
+    if count < 2 or len(amounts) < count:
+        return []
+
+    # Use semantic description direction first. Balances are validation-only.
+    txs = []
+
+    for i in range(count):
+        desc = descriptions[i]
+        tx_date = dates[i]
+
+        tx_type = "income" if is_income_priority_description(desc.lower()) else None
+
+        if tx_type is None and looks_like_credit_description(desc):
+            tx_type = "income"
+
+        if tx_type is None and looks_like_debit_description(desc):
+            tx_type = "expense"
+
+        if tx_type is None:
+            continue
+
+        # Pick plausible amount from OCR amount stream by order.
+        amount_value = abs(float(amounts[min(i, len(amounts) - 1)]))
+
+        signed = amount_value if tx_type == "income" else -amount_value
+
+        date = extract_date(
+            f"{tx_date} {default_year}",
+            default_year=default_year,
+            prefer_us_date=True,
+        )
+
+        txs.append(
+            {
+                "date": date,
+                "description": clean_db_text(desc),
+                "amount": round(signed, 2),
+                "type": tx_type,
+                "currency": currency or "USD",
+                "signed_amount": round(signed, 2),
+                "locked_amount": round(signed, 2),
+                "_locked_amount": round(signed, 2),
+                "locked_type": tx_type,
+            }
+        )
+
+    return txs
+
+
 def extract_date_description_debit_credit_balance_transactions(text: str) -> list[dict]:
     raw = str(text or "")
-
-    print("DDCB_RAW_START")
-    print(raw[:5000])
-    print("DDCB_RAW_END")
     default_year = detect_document_year(raw)
     currency = detect_currency(raw)
 
@@ -7539,6 +7618,13 @@ def extract_date_description_debit_credit_balance_transactions(text: str) -> lis
                 "locked_type": tx_type,
                 "_balance_locked": True,
             }
+        )
+
+    if not transactions:
+        transactions = reconstruct_ocr_column_debit_credit_balance(
+            raw=raw,
+            default_year=default_year,
+            currency=currency,
         )
 
     print(
