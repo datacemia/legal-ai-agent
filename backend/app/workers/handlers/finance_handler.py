@@ -1,5 +1,4 @@
 import json
-import fitz
 from collections import Counter
 
 from app.models.job import Job
@@ -676,6 +675,30 @@ def handle_finance_ai(job: Job, db):
                 tx["type"] = "expense"
 
     audit_tx_stage("TX_STAGE_2_AFTER_CANONICALIZE", transactions)
+
+
+    print(
+        "TX_BEFORE_QUALITY_CHECK",
+        {
+            "count": len(transactions),
+            "income": sum(1 for tx in transactions if tx.get("type") == "income"),
+            "expense": sum(1 for tx in transactions if tx.get("type") == "expense"),
+        },
+    )
+
+    for tx in transactions:
+        desc = str(tx.get("description") or "")
+        if any(x in desc for x in ["اعاده", "اعادة", "ﺍﻋﺎﺩﻩ", "refund", "reversal"]):
+            print(
+                "REFUND_ROW_BEFORE_QUALITY_CHECK",
+                {
+                    "amount": tx.get("amount"),
+                    "type": tx.get("type"),
+                    "locked": tx.get("locked_type"),
+                    "signed": tx.get("signed_amount"),
+                    "desc": desc[:300],
+                },
+            )
 
     quality = assess_analysis_quality(transactions)
 
