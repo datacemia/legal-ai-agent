@@ -7836,6 +7836,14 @@ def extract_typed_amount_balance_table_transactions(
             continue
 
         amount_raw = amounts[-2] if len(amounts) >= 2 else amounts[-1]
+        amount_is_parenthesized = bool(
+            re.search(
+                r"\(\s*" + re.escape(amount_raw).replace(r"\ ", r"\s*") + r"\s*\)",
+                body,
+                flags=re.IGNORECASE,
+            )
+        )
+
         amount = parse_amount(
             amount_raw
             .replace("$", "")
@@ -7893,7 +7901,10 @@ def extract_typed_amount_balance_table_transactions(
 
         desc_lower = description.lower()
 
-        if amount < 0 or "transfer out" in desc_lower or looks_like_debit_description(description):
+        if amount_is_parenthesized:
+            tx_type = "expense"
+            signed = -abs(amount)
+        elif amount < 0 or "transfer out" in desc_lower or looks_like_debit_description(description):
             tx_type = "expense"
             signed = -abs(amount)
         elif "transfer in" in desc_lower or looks_like_credit_description(description):
