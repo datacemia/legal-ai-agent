@@ -7135,7 +7135,8 @@ def should_use_standard_sectioned_statement(
     )
 
 def detect_statement_layout(text: str) -> str:
-    lower = str(text or "").lower()
+    raw = str(text or "")
+    lower = raw.lower()
 
     debit_credit_markers = [
         # EN
@@ -7171,6 +7172,15 @@ def detect_statement_layout(text: str) -> str:
         and "purchases and adjustments" in lower
     ):
         return "credit_card_statement"
+
+    if (
+        "date" in lower
+        and "description" in lower
+        and ("debit" in lower or "débit" in lower or "مدين" in raw)
+        and ("credit" in lower or "crédit" in lower or "دائن" in raw)
+        and ("balance" in lower or "solde" in lower or "الرصيد" in raw)
+    ):
+        return "date_description_debit_credit_balance"
 
     if dc_hits >= 2:
         return "debit_credit_table"
@@ -7412,9 +7422,140 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
     return transactions
 
 
+def extract_date_description_debit_credit_balance_transactions(text: str) -> list[dict]:
+    raw = str(text or "")
+    default_year = detect_document_year(raw)
+    currency = detect_currency(raw)
+
+    money_re = r"(?:\d{1,3}(?:[,.]\d{3})+|\d+)(?:[,.]\d{2})|\d{1,3}[,.]\d{2}[,.]\d{2}"
+
+    row_re = re.compile(
+        r"^(?P<date>\d{1,2}[/-]\d{1,2}[/-]\d{2,4})\s+"
+        r"(?P<description>.+?)\s+"
+        r"(?P<debit>" + money_re + r")\s+"
+        r"(?P<credit>" + money_re + r")\s+"
+        r"(?P<balance>" + money_re + r")"
+        r"(?:\s+.*)?$",
+        flags=re.IGNORECASE,
+    )
+
+    skip_markers = [
+        "b/f",
+        "balance forward",
+        "opening balance",
+        "closing balance",
+        "solde initial",
+        "solde final",
+        "الرصيد الافتتاحي",
+    ]
+
+    def normalize_ddcb_money(value: str) -> str:
+        value = str(value or "").strip()
+
+        if re.fullmatch(r"\d{1,3},\d{2}\.\d{2}", value):
+            return value.replace(",", "", 1)
+
+        if re.fullmatch(r"\d{1,3}\.\d{3}\.\d{2}", value):
+            return value.replace(".", ",", 1)
+
+        if re.fullmatch(r"\d+,\d{2}", value):
+            return value.replace(",", ".")
+
+        return value
+
+    transactions: list[dict] = []
+
+    normalized = " ".join(str(raw or "").split())
+
+    date_row_re = re.compile(
+        r"(?=\b\d{1,2}/\d{1,2}/\d{4}\b)"
+    )
+
+    candidate_rows = [
+        row.strip()
+        for row in date_row_re.split(normalized)
+        if row.strip()
+    ]
+
+    for line in candidate_rows:
+        if not line:
+            continue
+
+        low = line.lower()
+
+        if any(marker in low for marker in skip_markers):
+            continue
+
+        match = row_re.match(line)
+
+        if not match:
+            continue
+
+        debit = parse_amount(normalize_ddcb_money(match.group("debit")))
+        credit = parse_amount(normalize_ddcb_money(match.group("credit")))
+        balance = parse_amount(normalize_ddcb_money(match.group("balance")))
+
+        if debit > 0:
+            amount = -abs(debit)
+            tx_type = "expense"
+        elif credit > 0:
+            amount = abs(credit)
+            tx_type = "income"
+        else:
+            continue
+
+        date = extract_date(
+            match.group("date"),
+            default_year=default_year,
+            prefer_us_date=False,
+        )
+
+        transactions.append(
+            {
+                "date": date,
+                "description": clean_db_text(match.group("description")),
+                "amount": round(amount, 2),
+                "type": tx_type,
+                "currency": currency,
+                "balance": round(balance, 2),
+                "_balance": round(balance, 2),
+                "signed_amount": round(amount, 2),
+                "locked_amount": round(amount, 2),
+                "_locked_amount": round(amount, 2),
+                "locked_type": tx_type,
+                "_balance_locked": True,
+            }
+        )
+
+    print(
+        "DATE_DESCRIPTION_DEBIT_CREDIT_BALANCE_EXTRACTED",
+        {
+            "transactions": len(transactions),
+            "income": sum(1 for tx in transactions if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in transactions if tx.get("type") == "expense"),
+        },
+    )
+
+    return transactions
+
+
 def extract_transactions(text: str) -> list[dict]:
     statement_layout = detect_statement_layout(text)
     print("STATEMENT_LAYOUT_DETECTED", statement_layout)
+
+    if statement_layout == "date_description_debit_credit_balance":
+        ddcb_transactions = extract_date_description_debit_credit_balance_transactions(text)
+
+        print(
+            "DATE_DESCRIPTION_DEBIT_CREDIT_BALANCE_ROUTE",
+            {
+                "transactions": len(ddcb_transactions),
+                "income": sum(1 for tx in ddcb_transactions if tx.get("type") == "income"),
+                "expenses": sum(1 for tx in ddcb_transactions if tx.get("type") == "expense"),
+            },
+        )
+
+        return ddcb_transactions
 
     if statement_layout == "withdraw_deposit_balance":
         wdb_transactions = extract_withdraw_deposit_balance_transactions(text)
