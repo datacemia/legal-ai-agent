@@ -6554,6 +6554,14 @@ def extract_debit_credit_column_transactions(
         tx_type = current.get("type")
 
         if description and amount is not None and tx_type in {"income", "expense"}:
+            # Re-evaluate after multiline OCR merge.
+            # Generic FR / EN / AR income concepts, not bank-specific:
+            # FR: salaire / paie
+            # EN: salary / payroll / wage
+            # AR: راتب / أجر
+            if looks_like_credit_description(description):
+                tx_type = "income"
+
             signed_amount = abs(float(amount)) if tx_type == "income" else -abs(float(amount))
             transactions.append(
                 {
