@@ -6902,6 +6902,7 @@ def extract_debit_credit_column_transactions(
     # while no income was detected, flip that row to income.
     # This is based on universal debit/credit totals, not bank/country/payee names.
     official_totals = extract_official_movement_totals(text)
+    print("OFFICIAL_TOTALS_DEBUG", official_totals)
     if official_totals:
         official_credit_total = round(float(official_totals.get("credit_total") or 0), 2)
         extracted_income_total = round(
