@@ -7174,11 +7174,12 @@ def detect_statement_layout(text: str) -> str:
         return "credit_card_statement"
 
     if (
-        "date" in lower
+        not is_arabic_text(raw)
+        and "date" in lower
         and "description" in lower
-        and ("debit" in lower or "débit" in lower or "مدين" in raw)
-        and ("credit" in lower or "crédit" in lower or "دائن" in raw)
-        and ("balance" in lower or "solde" in lower or "الرصيد" in raw)
+        and ("debit" in lower or "débit" in lower)
+        and ("credit" in lower or "crédit" in lower)
+        and ("balance" in lower or "solde" in lower)
     ):
         return "date_description_debit_credit_balance"
 
