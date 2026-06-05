@@ -8649,6 +8649,21 @@ def extract_transactions(text: str) -> list[dict]:
     transactions = infer_balance_delta_rows(transactions)
     transactions = [preserve_balance_locked_transaction(tx) for tx in transactions]
 
+    # Standard international correction:
+    # if a generic/OCR parser classified refund/reversal rows as expenses,
+    # fix them before quality/KPI stages.
+    for tx in transactions:
+        description = str(tx.get("description") or "")
+        if tx.get("type") == "expense" and is_income_priority_description(description):
+            amount = abs(float(tx.get("amount") or 0))
+            tx["amount"] = amount
+            tx["type"] = "income"
+            tx["signed_amount"] = amount
+            tx["locked_amount"] = amount
+            tx["_locked_amount"] = amount
+            tx["locked_type"] = "income"
+            tx["category_hint"] = tx.get("category_hint") or "income_priority_refund_reversal"
+
     amount_balance_transactions = extract_standard_amount_balance_ledger_transactions(
         text,
         detected_currency,
