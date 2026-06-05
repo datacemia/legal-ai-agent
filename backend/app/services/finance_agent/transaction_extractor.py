@@ -7184,24 +7184,6 @@ def detect_statement_layout(text: str) -> str:
     raw = str(text or "")
     lower = raw.lower()
 
-    debit_credit_markers = [
-        # EN
-        "debit", "credit", "withdrawals", "deposits",
-
-        # FR
-        "montant débit", "montant debit",
-        "montant crédit", "montant credit",
-        "débit", "debit",
-        "crédit", "credit",
-
-        # AR
-        "مدين", "دائن", "سحوبات", "إيداعات", "ايداعات",
-
-        # ES / PT / IT
-        "débito", "debito",
-        "crédito", "credito",
-    ]
-
     amount_balance_markers = [
         "running balance",
         "balance",
