@@ -6512,7 +6512,22 @@ def extract_debit_credit_column_transactions(
                 if not parsed_date:
                     continue
 
-                amount = parse_amount(amount_match.group("amount"))
+                amount_token = amount_match.group("amount")
+                amount_start = amount_match.start()
+                amount_end = amount_match.end()
+
+                debug_log(
+                    "DEBIT_CREDIT_AMOUNT_POSITION",
+                    {
+                        "line": line[:180],
+                        "body": body[:180],
+                        "amount": amount_token,
+                        "amount_start": amount_start,
+                        "amount_end": amount_end,
+                    },
+                )
+
+                amount = parse_amount(amount_token)
                 description = body[:amount_match.start()].strip()
                 description = re.sub(
                     r"\s+(?:"
