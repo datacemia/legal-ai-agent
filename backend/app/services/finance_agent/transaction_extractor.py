@@ -5238,9 +5238,12 @@ def extract_standard_amount_balance_ledger_transactions(
         })
 
         typed_amount_table = (
-            "type" in normalized
-            and "amount" in normalized
-            and ("balance" in normalized or "end of day balance" in normalized)
+            "type" in str(text or "").lower()
+            and "amount" in str(text or "").lower()
+            and (
+                "balance" in str(text or "").lower()
+                or "end of day balance" in str(text or "").lower()
+            )
         )
 
         if len(amounts) < 2 and not (typed_amount_table and len(amounts) == 1):
@@ -7206,7 +7209,6 @@ def detect_statement_layout(text: str) -> str:
         "رصيد",
     ]
 
-    dc_hits = sum(1 for marker in debit_credit_markers if marker in lower)
     balance_hits = sum(1 for marker in amount_balance_markers if marker in lower)
 
     if (
