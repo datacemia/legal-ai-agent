@@ -6567,6 +6567,15 @@ def extract_debit_credit_column_transactions(
                     },
                 )
 
+                print(
+                    "AMOUNT_CANDIDATES_DEBUG",
+                    {
+                        "body": body[:250],
+                        "selected_token": amount_token,
+                        "amount_match": amount_match.group(0) if amount_match else None,
+                    },
+                )
+
                 amount = parse_amount(amount_token)
                 description = body[:amount_match.start()].strip()
                 description = re.sub(
