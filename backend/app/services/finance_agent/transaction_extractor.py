@@ -6587,6 +6587,16 @@ def extract_standard_sectioned_statement_transactions(
     it only uses statement structure, section titles, dates, and money tokens.
     """
     raw = str(text or "")
+
+    print(
+        "DDCB_PROFILE",
+        {
+            "dates": len(re.findall(r"(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2}", raw, re.I)),
+            "amounts": len(re.findall(r"\$\d+(?:\.\d{2})?", raw)),
+            "deposits": raw.lower().count("ach deposit"),
+            "purchases": raw.lower().count("purchase"),
+        }
+    )
     normalized = re.sub(r"\s+", " ", raw.lower())
     currency = detected_currency or detect_currency(raw) or "unknown"
 
