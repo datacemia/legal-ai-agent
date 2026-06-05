@@ -1891,6 +1891,8 @@ def is_income_priority_description(text: str) -> bool:
     evaluated before generic expense terms such as "payment" or "transfer".
     """
     lower = text.lower()
+    arabic_normalized = normalize_arabic_ocr_lines(lower)
+    searchable = f"{lower} {arabic_normalized}"
 
     priority_phrases = [
         "salary payment",
@@ -1959,7 +1961,7 @@ def is_income_priority_description(text: str) -> bool:
         "حوالة واردة",
     ]
 
-    return any(phrase in lower for phrase in priority_phrases)
+    return any(phrase in searchable for phrase in priority_phrases)
 
 def is_administrative_statement_line(text: str) -> bool:
     lower = text.lower()
