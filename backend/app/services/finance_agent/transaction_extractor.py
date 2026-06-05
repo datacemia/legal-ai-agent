@@ -7179,6 +7179,8 @@ def detect_statement_layout(text: str) -> str:
         "withdraw deposit balance",
         "withdrawal deposit balance",
         "withdraw deposits balance",
+        "withdraw deposit",
+        "withdrawal deposit",
         "debit credit balance",
         "débit crédit solde",
         "debit credit solde",
@@ -7186,6 +7188,13 @@ def detect_statement_layout(text: str) -> str:
     ]
 
     if any(marker in lower for marker in withdraw_deposit_balance_markers):
+        return "withdraw_deposit_balance"
+
+    if (
+        ("withdraw" in lower or "withdrawal" in lower)
+        and "deposit" in lower
+        and "balance" in lower
+    ):
         return "withdraw_deposit_balance"
 
     if balance_hits >= 1:
@@ -7269,8 +7278,93 @@ def extract_credit_card_statement_transactions(text: str) -> list[dict]:
 
 
 def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
-    print("WITHDRAW_DEPOSIT_BALANCE_EXTRACTOR_CALLED")
-    return []
+    raw = str(text or "")
+    default_year = detect_document_year(raw)
+    currency = detect_currency(raw)
+
+    row_re = re.compile(
+        r"^(?P<date>\d{1,2}[/-]\d{1,2}[/-]\d{2,4})\s+"
+        r"(?P<body>.+?)\s+"
+        r"(?P<withdraw>(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d{2}))\s+"
+        r"(?P<deposit>(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d{2}))\s+"
+        r"(?P<balance>(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d{2}))\s*$",
+        flags=re.IGNORECASE,
+    )
+
+    skip_markers = [
+        "b/f",
+        "opening balance",
+        "balance forward",
+        "balance brought forward",
+        "الرصيد الافتتاحي",
+    ]
+
+    transactions: list[dict] = []
+
+    for raw_line in raw.splitlines():
+        line = " ".join(str(raw_line or "").split())
+
+        if not line:
+            continue
+
+        low = line.lower()
+
+        if any(marker in low for marker in skip_markers):
+            continue
+
+        match = row_re.match(line)
+
+        if not match:
+            continue
+
+        withdraw = parse_amount(match.group("withdraw"))
+        deposit = parse_amount(match.group("deposit"))
+        balance = parse_amount(match.group("balance"))
+
+        if withdraw > 0:
+            amount = -abs(withdraw)
+            tx_type = "expense"
+        elif deposit > 0:
+            amount = abs(deposit)
+            tx_type = "income"
+        else:
+            continue
+
+        date = extract_date(
+            match.group("date"),
+            default_year=default_year,
+            prefer_us_date=False,
+        )
+
+        description = clean_db_text(match.group("body"))
+
+        transactions.append(
+            {
+                "date": date,
+                "description": description,
+                "amount": round(amount, 2),
+                "type": tx_type,
+                "currency": currency,
+                "_balance": round(balance, 2),
+                "balance": round(balance, 2),
+                "signed_amount": round(amount, 2),
+                "locked_amount": round(amount, 2),
+                "_locked_amount": round(amount, 2),
+                "locked_type": tx_type,
+                "_balance_locked": True,
+            }
+        )
+
+    print(
+        "WITHDRAW_DEPOSIT_BALANCE_EXTRACTED",
+        {
+            "transactions": len(transactions),
+            "income": sum(1 for tx in transactions if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in transactions if tx.get("type") == "expense"),
+        },
+    )
+
+    return transactions
 
 
 def extract_transactions(text: str) -> list[dict]:
