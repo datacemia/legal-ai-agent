@@ -6726,20 +6726,22 @@ def extract_debit_credit_column_transactions(
                 amount = parse_amount(amount_token)
 
                 # Generic international OCR repair.
-                # Fixes value-date + amount fusion, independent of bank/country/language:
+                # Fixes OCR fusion where a value-date/year fragment is glued
+                # before the real amount:
+                #   "21 120.00" -> "120.00"
                 #   "21 118.00" -> "118.00"
                 #   "21 630.00" -> "630.00"
                 #   "22 1 907,72" -> "1 907,72"
                 if amount >= 10000:
-                    raw_amount_token = str(amount_token or "")
+                    raw_amount_token = str(amount_token or "").strip()
 
-                    money_matches = re.findall(
-                        r"(?<!\d)(\d{1,3}(?:[ .]\d{3})*(?:[.,]\d{2}))(?!\d)",
+                    m = re.match(
+                        r"^\d{2}\s+(?P<real_amount>\d{1,3}(?:[ .]\d{3})*(?:[.,]\d{2}))$",
                         raw_amount_token,
                     )
 
-                    if money_matches:
-                        repaired_amount_token = money_matches[-1]
+                    if m:
+                        repaired_amount_token = m.group("real_amount")
                         repaired_amount = parse_amount(repaired_amount_token)
 
                         if 0 < repaired_amount < amount:
