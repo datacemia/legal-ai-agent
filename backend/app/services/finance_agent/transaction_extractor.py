@@ -8454,6 +8454,16 @@ def extract_transactions(text: str) -> list[dict]:
 
         tx_type = transaction_type
         description = clean_db_text(clean_line)
+
+        # Standard international rule:
+        # refund/reversal/income markers override broad/default expense classification.
+        # EN: refund, reversal, charge reversal
+        # FR: remboursement, retour carte, remise
+        # AR: مبلغ اعادة, عكس رسوم, عكس تحويل رسوم
+        if is_income_priority_description(description):
+            tx_type = "income"
+            amount = abs(float(amount or 0))
+
         signed_amount = amount
 
         print(
