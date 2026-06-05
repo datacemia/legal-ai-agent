@@ -8714,12 +8714,14 @@ def extract_transactions(text: str) -> list[dict]:
             text,
             detected_currency,
         )
+        print("TX_SOURCE_SELECTED", "wallet_tabular", len(transactions))
 
     if not transactions:
         transactions = extract_standard_amount_balance_ledger_transactions(
             text,
             detected_currency,
         )
+        print("TX_SOURCE_SELECTED", "standard_amount_balance_ledger", len(transactions))
 
     if not transactions:
         sectioned_transactions = extract_standard_sectioned_statement_transactions(
@@ -8738,6 +8740,7 @@ def extract_transactions(text: str) -> list[dict]:
             text,
             detected_currency,
         )
+        print("TX_SOURCE_SELECTED", "signed_amount_fallback", len(transactions))
 
     transactions = [preserve_balance_locked_transaction(tx) for tx in transactions]
 
