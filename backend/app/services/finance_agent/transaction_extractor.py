@@ -8724,14 +8724,30 @@ def extract_transactions(text: str) -> list[dict]:
             text,
             detected_currency,
         )
-        print("TX_SOURCE_SELECTED", "wallet_tabular", len(transactions))
+        print(
+            "TX_SOURCE_SELECTED",
+            {
+                "source": "wallet_tabular",
+                "count": len(transactions),
+                "income": sum(1 for tx in transactions if tx.get("type") == "income"),
+                "expense": sum(1 for tx in transactions if tx.get("type") == "expense"),
+            },
+        )
 
     if not transactions:
         transactions = extract_standard_amount_balance_ledger_transactions(
             text,
             detected_currency,
         )
-        print("TX_SOURCE_SELECTED", "standard_amount_balance_ledger", len(transactions))
+        print(
+            "TX_SOURCE_SELECTED",
+            {
+                "source": "standard_amount_balance_ledger",
+                "count": len(transactions),
+                "income": sum(1 for tx in transactions if tx.get("type") == "income"),
+                "expense": sum(1 for tx in transactions if tx.get("type") == "expense"),
+            },
+        )
 
     if not transactions:
         sectioned_transactions = extract_standard_sectioned_statement_transactions(
@@ -8750,7 +8766,15 @@ def extract_transactions(text: str) -> list[dict]:
             text,
             detected_currency,
         )
-        print("TX_SOURCE_SELECTED", "signed_amount_fallback", len(transactions))
+        print(
+            "TX_SOURCE_SELECTED",
+            {
+                "source": "signed_amount_fallback",
+                "count": len(transactions),
+                "income": sum(1 for tx in transactions if tx.get("type") == "income"),
+                "expense": sum(1 for tx in transactions if tx.get("type") == "expense"),
+            },
+        )
 
     transactions = [preserve_balance_locked_transaction(tx) for tx in transactions]
 
