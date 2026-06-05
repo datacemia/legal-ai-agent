@@ -9489,7 +9489,11 @@ def extract_transactions(text: str) -> list[dict]:
                     # if running-balance authority cannot match because OCR skipped/fused rows,
                     # use the visible movement amount as an expense by default only when
                     # the row is an amount+balance ledger row and not an income/credit marker.
-                    if is_income_priority_description(description.lower()):
+                    if (
+                        is_income_priority_description(description.lower())
+                        and tx.get("type") != "expense"
+                        and not looks_like_debit_description(description)
+                    ):
                         tx["amount"] = amount_abs
                         tx["type"] = "income"
                         tx["signed_amount"] = amount_abs
