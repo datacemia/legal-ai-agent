@@ -7410,6 +7410,10 @@ def detect_statement_layout(text: str) -> str:
     raw = str(text or "")
     lower = raw.lower()
 
+    # Specific family layout first; keep existing router as fallback.
+    if detect_running_balance_column_layout(text):
+        return "running_balance_column_statement"
+
     amount_balance_markers = [
         "running balance",
         "balance",
