@@ -6587,6 +6587,20 @@ def extract_debit_credit_column_transactions(
                 amount_token = amount_match.group("amount")
                 amount_start = amount_match.start()
                 amount_end = amount_match.end()
+
+                if "débit euros" in text.lower() and "crédit euros" in text.lower():
+                    print(
+                        "CIC_COLUMN_DEBUG",
+                        {
+                            "line": line[:220],
+                            "body": body[:220],
+                            "amount_token": amount_token,
+                            "amount_start": amount_start,
+                            "amount_end": amount_end,
+                            "description_before_amount": body[:amount_start].strip()[:160],
+                        },
+                    )
+
                 amount = parse_amount(amount_token)
                 description = body[:amount_match.start()].strip()
                 description = re.sub(
