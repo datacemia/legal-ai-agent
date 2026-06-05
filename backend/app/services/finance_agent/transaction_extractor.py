@@ -5234,6 +5234,17 @@ def extract_standard_amount_balance_ledger_transactions(
 
         amounts = money_re.findall(combined)
 
+        if (
+            "mar " in combined.lower()
+            or "$" in combined
+            or "transfer" in combined.lower()
+            or "ipostal" in combined.lower()
+        ):
+            print("STANDARD_LEDGER_ROW_CANDIDATE", {
+                "line": combined,
+                "amounts": amounts,
+            })
+
         debug_log("STANDARD_LEDGER_ROW_CANDIDATE", {
             "line": combined,
             "amounts": amounts,
