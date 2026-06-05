@@ -13,7 +13,7 @@ def _extract_text_from_pdf_bytes(content: bytes) -> str:
 
     with fitz.open(stream=content, filetype="pdf") as doc:
         for page in doc:
-            text += page.get_text() or ""
+            text += page.get_text("text", sort=True) or ""
             text += "\n"
 
     return text.strip()
@@ -24,7 +24,7 @@ def _extract_text_from_pdf_path(file_path: str) -> str:
 
     with fitz.open(file_path) as doc:
         for page in doc:
-            text += page.get_text() or ""
+            text += page.get_text("text", sort=True) or ""
             text += "\n"
 
     return text.strip()
