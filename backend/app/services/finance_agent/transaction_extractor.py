@@ -7828,6 +7828,24 @@ def extract_transactions(text: str) -> list[dict]:
 
         return cc_transactions
 
+    if statement_layout == "amount_balance_ledger":
+        amount_balance_transactions = extract_standard_amount_balance_ledger_transactions(
+            text,
+            detect_currency(text),
+        )
+
+        print(
+            "AMOUNT_BALANCE_LEDGER_ROUTE",
+            {
+                "transactions": len(amount_balance_transactions),
+                "income": sum(1 for tx in amount_balance_transactions if tx.get("type") == "income"),
+                "expenses": sum(1 for tx in amount_balance_transactions if tx.get("type") == "expense"),
+            },
+        )
+
+        if amount_balance_transactions:
+            return amount_balance_transactions
+
     if statement_layout == "debit_credit_table":
         dc_transactions = extract_debit_credit_table_transactions(text)
 
