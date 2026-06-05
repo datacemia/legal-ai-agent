@@ -6486,6 +6486,16 @@ def extract_debit_credit_column_transactions(
         "الرصيد الختامي",
         "nouveau solde",
         "nouveau solde au",
+        "solde en euros",
+        "solde final",
+        "solde de cloture",
+        "solde de clôture",
+        "balance in",
+        "final balance",
+        "closing balance",
+        "ending balance",
+        "الرصيد النهائي",
+        "الرصيد الختامي",
     ]
 
     metadata_markers = [
