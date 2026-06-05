@@ -391,7 +391,17 @@ def assess_analysis_quality(transactions: list[dict]) -> dict:
     typed_ratio = typed_count / total_count if total_count else 0
     other_ratio = other_expenses / total_expenses if total_expenses > 0 else 0
 
-    if total_count < MIN_TRANSACTIONS or structure_ratio < PARTIAL_STRUCTURE_RATIO:
+    short_but_clean_statement = (
+        total_count >= 3
+        and structure_ratio >= 0.95
+        and typed_ratio >= 0.95
+        and (income_count + expense_count) == total_count
+    )
+
+    if (
+        (total_count < MIN_TRANSACTIONS and not short_but_clean_statement)
+        or structure_ratio < PARTIAL_STRUCTURE_RATIO
+    ):
         status = "insufficient_data"
         confidence = 25
     elif structure_ratio < VERIFIED_STRUCTURE_RATIO or typed_ratio < PARTIAL_TYPED_RATIO:
