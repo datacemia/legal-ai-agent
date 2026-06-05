@@ -1075,6 +1075,9 @@ def looks_like_debit_description(line: str) -> bool:
 
 
 def looks_like_credit_description(line: str) -> bool:
+    if looks_like_debit_description(line):
+        return False
+
     lower = line.lower()
 
     # Generic FR / EN / AR hard expense markers.
