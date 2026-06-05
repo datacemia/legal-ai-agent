@@ -7282,12 +7282,15 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
     default_year = detect_document_year(raw)
     currency = detect_currency(raw)
 
+    money_re = r"(?:\d{1,3}(?:[,.]\d{3})+|\d+)(?:[,.]\d{2})|\d{1,3}[,.]\d{2}[,.]\d{2}"
+
     row_re = re.compile(
         r"^(?P<date>\d{1,2}[/-]\d{1,2}[/-]\d{2,4})\s+"
         r"(?P<description>.+?)\s+"
-        r"(?P<withdraw>(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d{2}))\s+"
-        r"(?P<deposit>(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d{2}))\s+"
-        r"(?P<balance>(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d{2}))\s*$",
+        r"(?P<withdraw>" + money_re + r")\s+"
+        r"(?P<deposit>" + money_re + r")\s+"
+        r"(?P<balance>" + money_re + r")"
+        r"(?:\s+.*)?$",
         flags=re.IGNORECASE,
     )
 
@@ -7298,6 +7301,23 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
         "closing balance",
         "الرصيد الافتتاحي",
     ]
+
+    def normalize_wdb_money(value: str) -> str:
+        value = str(value or "").strip()
+
+        # OCR: 5,00.00 -> 5,000.00
+        if re.fullmatch(r"\d{1,3},\d{2}\.\d{2}", value):
+            return value.replace(",", "", 1)
+
+        # OCR/Asia: 60.389.78 -> 60,389.78
+        if re.fullmatch(r"\d{1,3}\.\d{3}\.\d{2}", value):
+            return value.replace(".", ",", 1)
+
+        # decimal comma zero: 0,00 -> 0.00
+        if re.fullmatch(r"\d+,\d{2}", value):
+            return value.replace(",", ".")
+
+        return value
 
     transactions: list[dict] = []
 
@@ -7317,9 +7337,9 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
         if not match:
             continue
 
-        withdraw = parse_amount(match.group("withdraw"))
-        deposit = parse_amount(match.group("deposit"))
-        balance = parse_amount(match.group("balance"))
+        withdraw = parse_amount(normalize_wdb_money(match.group("withdraw")))
+        deposit = parse_amount(normalize_wdb_money(match.group("deposit")))
+        balance = parse_amount(normalize_wdb_money(match.group("balance")))
 
         if withdraw > 0:
             amount = -abs(withdraw)
