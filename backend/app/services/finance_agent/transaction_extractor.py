@@ -7175,6 +7175,19 @@ def detect_statement_layout(text: str) -> str:
     if dc_hits >= 2:
         return "debit_credit_table"
 
+    withdraw_deposit_balance_markers = [
+        "withdraw deposit balance",
+        "withdrawal deposit balance",
+        "withdraw deposits balance",
+        "debit credit balance",
+        "débit crédit solde",
+        "debit credit solde",
+        "مدين دائن الرصيد",
+    ]
+
+    if any(marker in lower for marker in withdraw_deposit_balance_markers):
+        return "withdraw_deposit_balance"
+
     if balance_hits >= 1:
         return "amount_balance_ledger"
 
@@ -7255,9 +7268,29 @@ def extract_credit_card_statement_transactions(text: str) -> list[dict]:
     return transactions
 
 
+def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
+    print("WITHDRAW_DEPOSIT_BALANCE_EXTRACTOR_CALLED")
+    return []
+
+
 def extract_transactions(text: str) -> list[dict]:
     statement_layout = detect_statement_layout(text)
     print("STATEMENT_LAYOUT_DETECTED", statement_layout)
+
+    if statement_layout == "withdraw_deposit_balance":
+        wdb_transactions = extract_withdraw_deposit_balance_transactions(text)
+
+        print(
+            "WITHDRAW_DEPOSIT_BALANCE_ROUTE",
+            {
+                "transactions": len(wdb_transactions),
+                "income": sum(1 for tx in wdb_transactions if tx.get("type") == "income"),
+                "expenses": sum(1 for tx in wdb_transactions if tx.get("type") == "expense"),
+            },
+        )
+
+        if len(wdb_transactions) >= 2:
+            return wdb_transactions
 
     if statement_layout == "credit_card_statement":
         cc_transactions = extract_credit_card_statement_transactions(text)
