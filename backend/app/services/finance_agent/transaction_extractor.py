@@ -7843,6 +7843,9 @@ def extract_typed_amount_balance_table_transactions(
         if not current_date_text:
             continue
 
+        if body.strip().lower() in {"total", "total:"} or body.strip().lower().startswith("total "):
+            continue
+
         amounts = money_re.findall(body)
         if not amounts:
             continue
