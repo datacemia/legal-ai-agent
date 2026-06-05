@@ -8964,6 +8964,7 @@ def extract_transactions(text: str) -> list[dict]:
             "amount": final_amount,
             "type": tx_type,
             "currency": detected_currency,
+            "parser_family": tx.get("parser_family"),
         }
 
         is_amount_balance_row = (
@@ -8974,6 +8975,21 @@ def extract_transactions(text: str) -> list[dict]:
         if is_amount_balance_row:
             balance = amount_balance_value
             amount_abs = abs(float(amount_balance_tx_amount or 0))
+
+            if tx.get("parser_family") == "running_balance_column_statement":
+                # Parser family is authoritative for amount/type.
+                # Balance is informational only.
+                tx["_balance"] = balance
+                tx["balance"] = balance
+                tx["signed_amount"] = tx.get("amount")
+                tx["locked_amount"] = tx.get("amount")
+                tx["_locked_amount"] = tx.get("amount")
+                if tx.get("type") in {"income", "expense"}:
+                    tx["locked_type"] = tx.get("type")
+                transactions.append(tx)
+                previous_amount_balance = float(balance) if balance is not None else previous_amount_balance
+                continue
+
             tx["amount"] = amount_abs
             tx["type"] = None
             tx["_balance"] = balance
