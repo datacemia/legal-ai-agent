@@ -7320,6 +7320,7 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
         return value
 
     transactions: list[dict] = []
+    previous_balance: float | None = None
 
     normalized = " ".join(str(raw or "").split())
 
@@ -7363,7 +7364,16 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
             amount = abs(deposit)
             tx_type = "income"
         else:
+            previous_balance = balance
             continue
+
+        if previous_balance is not None:
+            delta = round(balance - previous_balance, 2)
+
+            if abs(delta + abs(amount)) > 0.02:
+                if withdraw > 0 and abs(delta) > abs(withdraw):
+                    amount = -abs(delta)
+                    withdraw = abs(delta)
 
         date = extract_date(
             match.group("date"),
@@ -7387,6 +7397,8 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
                 "_balance_locked": True,
             }
         )
+
+        previous_balance = balance
 
     print(
         "WITHDRAW_DEPOSIT_BALANCE_EXTRACTED",
