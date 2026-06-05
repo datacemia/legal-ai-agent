@@ -6463,7 +6463,11 @@ def extract_debit_credit_column_transactions(
     )
 
     trailing_amount_re = re.compile(
-        r"(?P<amount>(?:\d{1,3}(?:[ .]\d{3})+|\d+)(?:[.,]\d{2,3}))\s*$"
+        r"(?P<amount>(?:\d{1,3}(?:[ .]\d{3})+|\d+)(?:[.,]\d{2}))\s*$"
+    )
+
+    money_amount_re = re.compile(
+        r"(?<![./])(?P<amount>(?:\d{1,3}(?:[ .]\d{3})+|\d+)(?:[.,]\d{2}))(?![./]\d)"
     )
 
     transactions: list[dict] = []
@@ -6534,7 +6538,13 @@ def extract_debit_credit_column_transactions(
 
         if row_match:
             body = row_match.group("body").strip()
-            amount_match = value_date_amount_re.search(body) or trailing_amount_re.search(body)
+            amount_candidates = [
+                m for m in money_amount_re.finditer(body)
+                if not re.search(r"\d{1,2}[./]\d{1,2}[./]\d{2,4}", m.group(0))
+            ]
+            amount_match = amount_candidates[-1] if amount_candidates else (
+                value_date_amount_re.search(body) or trailing_amount_re.search(body)
+            )
 
             if amount_match:
                 parsed_date = parse_operation_date(row_match.group("op_date"), line)
