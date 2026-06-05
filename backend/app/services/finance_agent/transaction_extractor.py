@@ -6895,6 +6895,42 @@ def extract_debit_credit_column_transactions(
 
     flush_current()
 
+    # Generic official totals authority.
+    # If the statement official credit total exactly matches one extracted debit
+    # while no income was detected, flip that row to income.
+    # This is based on universal debit/credit totals, not bank/country/payee names.
+    official_totals = extract_official_movement_totals(text)
+    if official_totals:
+        official_credit_total = round(float(official_totals.get("credit_total") or 0), 2)
+        extracted_income_total = round(
+            sum(
+                float(tx.get("amount") or 0)
+                for tx in transactions
+                if tx.get("type") == "income"
+            ),
+            2,
+        )
+
+        if official_credit_total > 0 and extracted_income_total == 0:
+            matches = [
+                tx
+                for tx in transactions
+                if tx.get("type") == "expense"
+                and round(abs(float(tx.get("amount") or 0)), 2) == official_credit_total
+            ]
+
+            if len(matches) == 1:
+                tx = matches[0]
+                tx["type"] = "income"
+                tx["amount"] = abs(float(tx.get("amount") or 0))
+                print(
+                    "OFFICIAL_CREDIT_TOTAL_RECLASSIFIED",
+                    {
+                        "credit_total": official_credit_total,
+                        "description": str(tx.get("description") or "")[:180],
+                    },
+                )
+
     print(
         "DEBIT_CREDIT_COLUMN_EXTRACTED",
         {
