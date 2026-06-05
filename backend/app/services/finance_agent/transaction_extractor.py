@@ -7661,6 +7661,7 @@ def reconstruct_ocr_column_debit_credit_balance(
 
 
 def extract_date_description_debit_credit_balance_transactions(text: str) -> list[dict]:
+    print("DDCB_ARABIC_SKIP_PATCH_ACTIVE_54ec3ce")
     raw = str(text or "")
 
     # This family parser is for left-to-right Date/Description/Debit/Credit/Balance
