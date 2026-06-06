@@ -9792,11 +9792,28 @@ def parse_sectioned_balance_history_statement(text: str) -> list[dict]:
             if re.search(r"^\s*(DATE|AMOUNT|SERIAL|DESCRIPTION|PAID)\b", line, re.I):
                 continue
 
+            inline_tx = re.match(
+                r"^\s*(?P<date>\d{1,2}/\s*\d{1,2}|[A-Za-z]{3}-\d{1,2}|20/\d{1,2})\s+"
+                r"(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+(?:\.\d{2}))\b"
+                r"\s*(?P<desc>.*)$",
+                line,
+                re.I,
+            )
+            if inline_tx:
+                iso = iso_from_token(inline_tx.group("date").replace(" ", ""))
+                if iso:
+                    dates.append(iso)
+                    amounts.append(parse_money(inline_tx.group("amount")))
+                    desc = inline_tx.group("desc").strip()
+                    if desc:
+                        desc_lines.append(desc)
+                continue
+
             dm = date_re.match(line)
             am = amount_re.match(line)
 
             if dm:
-                iso = iso_from_token(dm.group("date"))
+                iso = iso_from_token(dm.group("date").replace(" ", ""))
                 if iso:
                     dates.append(iso)
                 continue
