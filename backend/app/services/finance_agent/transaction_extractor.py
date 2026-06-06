@@ -9652,8 +9652,28 @@ def extract_transactions(text: str) -> list[dict]:
                         tx["_locked_amount"] = -amount_abs
                         tx["locked_type"] = "expense"
             else:
-                tx["type"] = None
-                tx = exclude_transaction_from_financial_kpis(tx, "missing_previous_balance")
+                # International fallback:
+                # If previous balance is missing but the row has clear debit/credit semantics,
+                # do not exclude it from KPIs. Use description semantics.
+                if looks_like_debit_description(description):
+                    tx["amount"] = -abs(amount_abs)
+                    tx["type"] = "expense"
+                    tx["signed_amount"] = -abs(amount_abs)
+                    tx["locked_amount"] = -abs(amount_abs)
+                    tx["_locked_amount"] = -abs(amount_abs)
+                    tx["locked_type"] = "expense"
+                    tx["category_hint"] = tx.get("category_hint") or "debit_without_previous_balance"
+                elif is_income_priority_description(description.lower()) or looks_like_credit_description(description):
+                    tx["amount"] = abs(amount_abs)
+                    tx["type"] = "income"
+                    tx["signed_amount"] = abs(amount_abs)
+                    tx["locked_amount"] = abs(amount_abs)
+                    tx["_locked_amount"] = abs(amount_abs)
+                    tx["locked_type"] = "income"
+                    tx["category_hint"] = tx.get("category_hint") or "credit_without_previous_balance"
+                else:
+                    tx["type"] = None
+                    tx = exclude_transaction_from_financial_kpis(tx, "missing_previous_balance")
 
             if abs(float(balance or 0)) >= 1:
                 if not (
