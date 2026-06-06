@@ -1668,10 +1668,23 @@ def handle_finance_ai(job: Job, db):
             official_start = _money_to_float(m_start.group(1)) if m_start else None
             official_end = _money_to_float(m_end.group(1)) if m_end else None
 
-        # Credit-card/account-summary style EN
+        # Credit-card/account-summary/checking style EN
         if official_income is None or official_expense is None:
-            m_income = re.search(r"(?:payments\s+and\s+other\s+credits|deposits?/additions?|total\s+credits?)\s*-?[£$€]?\s*([\d,]+\.\d{2})", raw_text_for_summary, re.I)
-            m_expense = re.search(r"(?:purchases\s+and\s+adjustments|checks/withdrawals|withdrawals|total\s+debits?)\s*[£$€]?\s*([\d,]+\.\d{2})", raw_text_for_summary, re.I)
+            m_income = re.search(
+                r"(?:payments\s+and\s+other\s+credits|deposits?\s+and\s+additions|"
+                r"deposits?/additions?|deposits?|additions?|total\s+credits?)"
+                r"\s*-?[£$€]?\s*([\d,]+\.\d{2})",
+                raw_text_for_summary,
+                re.I,
+            )
+            m_expense = re.search(
+                r"(?:purchases\s+and\s+adjustments|atm\s*&\s*debit\s+card\s+withdrawals|"
+                r"atm\s+and\s+debit\s+card\s+withdrawals|checks/withdrawals|"
+                r"withdrawals|total\s+debits?)"
+                r"\s*-?[£$€]?\s*([\d,]+\.\d{2})",
+                raw_text_for_summary,
+                re.I,
+            )
             if m_income and m_expense:
                 official_income = _money_to_float(m_income.group(1))
                 official_expense = _money_to_float(m_expense.group(1))
@@ -1724,6 +1737,7 @@ def handle_finance_ai(job: Job, db):
                     accounting_ok
                     or ("money in" in low_summary and "money out" in low_summary)
                     or ("payments and other credits" in low_summary and "purchases and adjustments" in low_summary)
+                    or ("deposits and additions" in low_summary and "withdrawals" in low_summary)
                 )
                 and (
                     income_gap_ratio > 0.005
