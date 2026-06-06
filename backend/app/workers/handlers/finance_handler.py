@@ -1041,6 +1041,35 @@ def handle_finance_ai(job: Job, db):
         }
     )
 
+    suspicious_balance_like = []
+    for tx in kpi_transactions:
+        try:
+            amount_abs = abs(float(tx.get("amount") or 0))
+            balance_abs = abs(float(tx.get("balance") or tx.get("_balance") or 0))
+        except Exception:
+            continue
+
+        if balance_abs > 0 and amount_abs > 0:
+            ratio = amount_abs / balance_abs
+            if ratio > 0.80:
+                suspicious_balance_like.append({
+                    "date": tx.get("date"),
+                    "amount": tx.get("amount"),
+                    "balance": tx.get("balance") or tx.get("_balance"),
+                    "type": tx.get("type"),
+                    "desc": (tx.get("description") or tx.get("desc") or "")[:120],
+                    "ratio": round(ratio, 4),
+                })
+
+    if suspicious_balance_like:
+        print(
+            "BALANCE_LIKE_AMOUNT_WARNING",
+            {
+                "count": len(suspicious_balance_like),
+                "samples": suspicious_balance_like[:10],
+            },
+        )
+
     for idx, tx in enumerate(kpi_transactions):
         if idx < 50 or DEBUG_FINANCE_EXTRACTOR:
             print(
