@@ -9927,20 +9927,21 @@ def is_typed_transaction_table_statement(text: str) -> bool:
 def parse_typed_transaction_table_statement(text: str) -> list[dict]:
     """Parse DATE | DESCRIPTION | TYPE | AMOUNT | NET AMOUNT tables.
 
-    Used by fintech/card statements worldwide.
+    Global OCR-safe parser:
+    - Same-line rows
+    - Multi-line rows: date + description lines + type/amount/net line
     """
     import re
 
     raw = str(text or "")
     lines = [ln.strip() for ln in raw.splitlines() if ln.strip()]
 
-    tx_re = re.compile(
-        r"^(?P<date>\d{1,2}/\d{1,2}/\d{4})\s+"
-        r"(?P<desc>.*?)\s+"
+    date_re = re.compile(r"^(?P<date>\d{1,2}/\d{1,2}/\d{4})\b")
+    type_amount_re = re.compile(
         r"(?P<typ>Deposit|Purchase|ATM Withdrawal|Direct Debit|Transfer|Round Up Transfer|Fee|"
         r"Dépôt|Depot|Achat|Retrait|Frais|Virement|تحويل|إيداع|ايداع|شراء|سحب|رسوم)\s+"
         r"(?P<amount>-?\$?\s*\d+(?:,\d{3})*(?:\.\d{2}))\s+"
-        r"(?P<net>-?\$?\s*\d+(?:,\d{3})*(?:\.\d{2}))",
+        r"(?P<net>-?\$?\s*\d+(?:,\d{3})*(?:\.\d{2}))\s*$",
         re.I,
     )
 
@@ -9950,42 +9951,28 @@ def parse_typed_transaction_table_statement(text: str) -> list[dict]:
 
     def classify_type(label: str, amount: float) -> tuple[str, bool]:
         l = str(label or "").lower()
-
         if any(x in l for x in ["deposit", "dépôt", "depot", "إيداع", "ايداع"]):
             return "income", False
-
         if any(x in l for x in ["transfer", "virement", "تحويل"]):
             return "transfer", True
-
         if any(x in l for x in [
             "purchase", "atm withdrawal", "direct debit", "fee",
             "achat", "retrait", "frais", "شراء", "سحب", "رسوم"
         ]):
             return "expense", False
-
         return ("income" if amount > 0 else "expense"), False
 
-    transactions = []
+    def make_row(date_token: str, desc: str, label: str, net_amount: float) -> dict:
+        month, day, year = [int(x) for x in date_token.split("/")]
+        typ, is_internal_transfer = classify_type(label, net_amount)
 
-    for line in lines:
-        if not re.search(r"\d{1,2}/\d{1,2}/\d{4}", line):
-            continue
-
-        m = tx_re.match(line)
-        if not m:
-            continue
-
-        month, day, year = [int(x) for x in m.group("date").split("/")]
-        amount = parse_money(m.group("net"))
-        typ, is_internal_transfer = classify_type(m.group("typ"), amount)
-
-        signed = abs(amount) if typ == "income" else -abs(amount)
+        signed = abs(net_amount) if typ == "income" else -abs(net_amount)
         if typ == "transfer":
-            signed = amount
+            signed = net_amount
 
         row = {
             "date": f"{year:04d}-{month:02d}-{day:02d}",
-            "description": m.group("desc").strip(),
+            "description": desc.strip(),
             "amount": round(signed, 2),
             "signed_amount": round(signed, 2),
             "type": typ,
@@ -10008,7 +9995,58 @@ def parse_typed_transaction_table_statement(text: str) -> list[dict]:
             row["category_hint"] = "internal_transfer"
             row["category"] = "transfers"
 
-        transactions.append(row)
+        return row
+
+    transactions = []
+    i = 0
+
+    while i < len(lines):
+        line = lines[i]
+        dm = date_re.match(line)
+
+        if not dm:
+            i += 1
+            continue
+
+        date_token = dm.group("date")
+        rest = line[dm.end():].strip()
+        desc_parts = []
+        if rest:
+            desc_parts.append(rest)
+
+        i += 1
+
+        while i < len(lines):
+            current = lines[i]
+
+            # Next transaction starts.
+            if date_re.match(current):
+                break
+
+            tm = type_amount_re.search(current)
+            if tm:
+                label = tm.group("typ")
+                net = parse_money(tm.group("net"))
+
+                # Description before type on same line.
+                before_type = current[:tm.start()].strip()
+                if before_type:
+                    desc_parts.append(before_type)
+
+                transactions.append(make_row(
+                    date_token,
+                    " ".join(desc_parts),
+                    label,
+                    net,
+                ))
+                i += 1
+                break
+
+            # Skip headers/footers.
+            if not re.search(r"^(DATE|DESCRIPTION|TYPE|AMOUNT|NET AMOUNT|Page \d+|Member Services|support@)", current, re.I):
+                desc_parts.append(current)
+
+            i += 1
 
     print("TYPED_TRANSACTION_TABLE_EXTRACTED", {
         "transactions": len(transactions),
@@ -10020,6 +10058,7 @@ def parse_typed_transaction_table_statement(text: str) -> list[dict]:
     })
 
     return transactions
+
 
 def extract_transactions(text: str) -> list[dict]:
     if is_typed_transaction_table_statement(text):
