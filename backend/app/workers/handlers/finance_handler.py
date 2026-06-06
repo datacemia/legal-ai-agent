@@ -1044,6 +1044,18 @@ def handle_finance_ai(job: Job, db):
     )
 
     if excluded_transactions > max(3, int(len(transactions) * 0.10)):
+        excluded_samples = [
+            {
+                "date": tx.get("date"),
+                "amount": tx.get("amount"),
+                "signed_amount": tx.get("signed_amount"),
+                "type": tx.get("type"),
+                "desc": (tx.get("description") or tx.get("desc") or "")[:120],
+            }
+            for tx in transactions
+            if tx not in kpi_transactions
+        ][:10]
+
         print(
             "KPI_EXCLUSION_WARNING",
             {
@@ -1052,6 +1064,7 @@ def handle_finance_ai(job: Job, db):
                 "excluded_transactions": excluded_transactions,
                 "exclusion_ratio": round(exclusion_ratio, 4),
                 "warning": "TOO_MANY_EXCLUDED_TRANSACTIONS",
+                "samples": excluded_samples,
             },
         )
 
