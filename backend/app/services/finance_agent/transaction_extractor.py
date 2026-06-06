@@ -10826,11 +10826,11 @@ def parse_debit_credit_balance_ledger(text: str) -> list[dict]:
             continue
 
         money_only = re.fullmatch(
-            r"\$?\s*\d{1,3}(?:,\d{3})*(?:\.\d{2})|\$?\s*\d+\.\d{2}",
+            r"\$?\s*(\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+\.\d{2})",
             ln.strip(),
         )
         if money_only:
-            val = float(ln.replace("$", "").replace(",", "").strip())
+            val = float(money_only.group(1).replace(",", ""))
             amounts.append(val)
             continue
 
