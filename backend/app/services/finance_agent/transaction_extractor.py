@@ -9324,21 +9324,26 @@ def is_sectioned_deposit_withdrawal_statement(text: str) -> bool:
     """International EN/FR/AR simple sectioned statement detector."""
     t = str(text or "").lower()
 
+    balance_count = t.count("balance")
     has_balance_activity_history = (
         "balance activity" in t
         or "activity history" in t
         or "balance collected" in t
         or ("date balance" in t and "collected" in t)
-        or ("balance date balance collected" in t and "activity balance balance" in t)
-        or ("balance date balance" in t and "activity balance" in t and "history" in t)
+        or (
+            balance_count >= 5
+            and "collected" in t
+            and "activity" in t
+            and "history" in t
+        )
     )
 
     print("SECTIONED_DW_DETECTOR_BALANCE_HISTORY_CHECK", {
         "has_balance_activity_history": has_balance_activity_history,
-        "has_balance_activity": "balance activity" in t,
-        "has_activity_history": "activity history" in t,
-        "has_balance_collected": "balance collected" in t,
-        "has_date_balance_collected": ("date balance" in t and "collected" in t),
+        "balance_count": balance_count,
+        "has_collected": "collected" in t,
+        "has_activity": "activity" in t,
+        "has_history": "history" in t,
         "preview_has_balance": t.find("balance"),
     })
 
