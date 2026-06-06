@@ -819,6 +819,104 @@ def handle_finance_ai(job: Job, db):
 
     transactions = normalize_signed_amounts_before_kpi(transactions)
 
+
+    # Global international safety guard before KPI/canonical audit.
+    # FR/EN/AR: protect against references, cheque numbers, totals, balances,
+    # and OCR-fused identifiers becoming financial movements.
+    import re
+
+    def is_global_non_transaction_amount(tx):
+        desc = str(tx.get("description") or tx.get("desc") or "")
+        upper = desc.upper()
+        amount = abs(float(tx.get("amount") or 0))
+
+        # 1) Cheque/check/chq number fused with amount:
+        # CHEQUE 458 + 150,00 -> 458150.00
+        cheque_like = re.search(
+            r"\b(CH[EÈ]QUE|CHEQUE|CHECK|CHQ|CHK|شيك|صك)\b",
+            upper,
+            re.IGNORECASE,
+        )
+        desc_has_only_cheque_word = cheque_like and len(re.findall(r"[A-Za-zÀ-ÿ\u0600-\u06FF]+", desc)) <= 2
+
+        if cheque_like and amount >= 100000 and desc_has_only_cheque_word:
+            return "cheque_number_amount_fusion"
+
+        # 2) Totals / movement summaries are not transactions.
+        if re.search(
+            r"(TOTAUX?\s+DES\s+MOUVEMENTS|TOTAL\s+MOVEMENTS?|TOTAL\s+DEBITS?|TOTAL\s+CREDITS?|"
+            r"TOTAL\s+DES\s+OP[ÉE]RATIONS|مجموع|إجمالي|اجمالي)",
+            upper,
+            re.IGNORECASE,
+        ):
+            return "statement_total_or_summary_row"
+
+        # 3) Opening / brought-forward balances are not transactions.
+        if re.search(
+            r"(\bB/F\b|\bBF\b|BROUGHT\s+FORWARD|BALANCE\s+BROUGHT\s+FORWARD|"
+            r"OPENING\s+BALANCE|BEGINNING\s+BALANCE|SOLDE\s+INITIAL|SOLDE\s+D[ÉE]BUT|"
+            r"REPORT\s+[ÀA]\s+NOUVEAU|رصيد\s+افتتاحي|الرصيد\s+الافتتاحي|رصيد\s+سابق)",
+            upper,
+            re.IGNORECASE,
+        ):
+            return "opening_or_brought_forward_balance"
+
+        # 4) Value-date-only rows are metadata, not transactions.
+        if re.search(
+            r"(VALUE\s+DATE|DATE\s+VALEUR|تاريخ\s+القيمة)",
+            upper,
+            re.IGNORECASE,
+        ) and len(re.findall(r"[A-Za-zÀ-ÿ\u0600-\u06FF]+", desc)) <= 4:
+            return "value_date_metadata_row"
+
+        # 5) Generic absurd amount guard:
+        # huge amount + weak description = likely ID/reference/balance/OCR fusion.
+        strong_tx_words = re.search(
+            r"(CARTE|CARD|PAYMENT|PAIEMENT|VIREMENT|VIR\s+RECU|VIR\s+EMIS|TRANSFER|"
+            r"PRELEVEMENT|PR[ÉE]L[ÈE]VEMENT|ATM|RETRAIT|DAB|DEPOSIT|DEPOT|D[ÉE]P[ÔO]T|"
+            r"SALAIRE|SALARY|INVOICE|FACTURE|رسوم|تحويل|دفع|سحب|إيداع)",
+            upper,
+            re.IGNORECASE,
+        )
+        if amount >= 100000 and not strong_tx_words:
+            return "absurd_amount_weak_description"
+
+        return None
+
+    global_guard_excluded = []
+    kept_transactions = []
+
+    for tx in transactions:
+        reason = is_global_non_transaction_amount(tx)
+        if reason:
+            tx["excluded_from_financial_kpis"] = True
+            tx["excluded_reason"] = reason
+            tx["exclude_from_income"] = True
+            tx["exclude_from_expense"] = True
+            tx["exclude_from_score"] = True
+            tx["exclude_from_savings"] = True
+            tx["exclude_from_cashflow"] = True
+            global_guard_excluded.append({
+                "date": tx.get("date"),
+                "amount": tx.get("amount"),
+                "type": tx.get("type"),
+                "reason": reason,
+                "desc": (tx.get("description") or tx.get("desc") or "")[:160],
+            })
+            continue
+        kept_transactions.append(tx)
+
+    if global_guard_excluded:
+        print(
+            "GLOBAL_NON_TRANSACTION_AMOUNT_GUARD",
+            {
+                "count": len(global_guard_excluded),
+                "samples": global_guard_excluded[:20],
+            },
+        )
+
+    transactions = kept_transactions
+
     audit_tx_stage("TX_STAGE_2_AFTER_CANONICALIZE", transactions)
 
 
