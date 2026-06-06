@@ -10373,7 +10373,10 @@ def parse_date_amount_description_ledger(text: str) -> list[dict]:
     return transactions
 
 def extract_transactions(text: str) -> list[dict]:
-    if "date amount description" in str(text or "").lower():
+    if (
+        "date amount description" in str(text or "").lower()
+        or re.search(r"(?m)^\s*\d{4}\s+\d+\.\d{2}\s+\S+", str(text or ""))
+    ):
         print("STATEMENT_LAYOUT_DETECTED", "date_amount_description_ledger")
         txs = parse_date_amount_description_ledger(text)
         if txs:
