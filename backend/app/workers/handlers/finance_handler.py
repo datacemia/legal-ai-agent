@@ -1070,6 +1070,48 @@ def handle_finance_ai(job: Job, db):
             },
         )
 
+    # International banking audit:
+    # For chronological statement rows, current_balance should equal
+    # previous_balance + signed_amount within a small tolerance.
+    balance_chain_mismatches = []
+    tx_with_balance = [
+        tx for tx in kpi_transactions
+        if tx.get("balance") is not None or tx.get("_balance") is not None
+    ]
+
+    for prev_tx, curr_tx in zip(tx_with_balance, tx_with_balance[1:]):
+        try:
+            prev_balance = float(prev_tx.get("balance") or prev_tx.get("_balance"))
+            curr_balance = float(curr_tx.get("balance") or curr_tx.get("_balance"))
+            signed_amount = float(curr_tx.get("signed_amount") or curr_tx.get("amount") or 0)
+        except Exception:
+            continue
+
+        expected = round(prev_balance + signed_amount, 2)
+        delta = round(curr_balance - expected, 2)
+
+        if abs(delta) > 0.05:
+            balance_chain_mismatches.append({
+                "prev_date": prev_tx.get("date"),
+                "date": curr_tx.get("date"),
+                "prev_balance": prev_balance,
+                "signed_amount": signed_amount,
+                "expected_balance": expected,
+                "actual_balance": curr_balance,
+                "delta": delta,
+                "type": curr_tx.get("type"),
+                "desc": (curr_tx.get("description") or curr_tx.get("desc") or "")[:120],
+            })
+
+    if balance_chain_mismatches:
+        print(
+            "BALANCE_CHAIN_MISMATCH",
+            {
+                "count": len(balance_chain_mismatches),
+                "samples": balance_chain_mismatches[:10],
+            },
+        )
+
     for idx, tx in enumerate(kpi_transactions):
         if idx < 50 or DEBUG_FINANCE_EXTRACTOR:
             print(
