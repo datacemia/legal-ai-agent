@@ -1709,12 +1709,22 @@ def handle_finance_ai(job: Job, db):
             if official_start is not None and official_end is not None:
                 accounting_ok = abs((official_start + official_income - official_expense) - official_end) <= 2.00
 
-            should_apply_summary_reconciliation = (
-                accounting_ok
-                and len(kpi_transactions) > 0
+            has_strong_official_totals = (
+                official_income is not None
+                and official_expense is not None
                 and (official_income > 0 or official_expense > 0)
+            )
+
+            should_apply_summary_reconciliation = (
+                len(kpi_transactions) > 0
+                and has_strong_official_totals
                 and income_gap_ratio <= 0.25
                 and expense_gap_ratio <= 0.35
+                and (
+                    accounting_ok
+                    or ("money in" in low_summary and "money out" in low_summary)
+                    or ("payments and other credits" in low_summary and "purchases and adjustments" in low_summary)
+                )
                 and (
                     income_gap_ratio > 0.005
                     or expense_gap_ratio > 0.005
