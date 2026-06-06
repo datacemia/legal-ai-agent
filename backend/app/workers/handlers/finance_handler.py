@@ -1551,95 +1551,84 @@ def handle_finance_ai(job: Job, db):
         2,
     )
 
-    # Global EN/FR/AR official-summary fallback.
-    # Use only when OCR has partial detail rows but no reliable income detail.
+    # Global EN/FR/AR validated official-summary fallback.
+    # Uses 4-number accounting summary only:
+    # beginning_balance, withdrawals/debits, deposits/credits, ending_balance.
     summary_reconciliation_used = False
     try:
+        import re
+
         raw_text_for_summary = str(
             result_ai.get("raw_text")
             or result_ai.get("text")
             or result_ai.get("extracted_text")
+            or locals().get("text")
+            or locals().get("raw_text")
             or ""
         )
 
-        if not raw_text_for_summary:
-            raw_text_for_summary = str(locals().get("text") or locals().get("raw_text") or "")
+        money_re = r"\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+\.\d{2}"
 
-        import re
-
-        official_summary_match = re.search(
+        summary_block_match = re.search(
             r"(?:ACCOUNT SUMMARY|R[ÉE]SUM[ÉE] DU COMPTE|RESUME DU COMPTE|ملخص الحساب)"
-            r".{0,800}?"
-            r"(?:CHECKS/WITHDRAWALS|WITHDRAWALS|DEBITS|RETRAITS|D[ÉE]BITS|السحوبات|مدين)"
-            r".{0,120}?"
-            r"(?P<expense>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+\.\d{2})"
-            r".{0,120}?"
-            r"(?:DEPOSITS/ADDITIONS|DEPOSITS|ADDITIONS|CREDITS|D[ÉE]P[ÔO]TS|DEPOTS|CR[ÉE]DITS|VERSEMENTS|الإيداعات|دائن)"
-            r".{0,120}?"
-            r"(?P<income>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+\.\d{2})",
+            r".{0,600}?"
+            r"(?:BALANCE|SOLDE|الرصيد).{0,120}?"
+            r"(?:CHECKS/WITHDRAWALS|WITHDRAWALS|DEBITS|RETRAITS|D[ÉE]BITS|السحوبات|مدين).{0,120}?"
+            r"(?:DEPOSITS/ADDITIONS|DEPOSITS|ADDITIONS|CREDITS|D[ÉE]P[ÔO]TS|DEPOTS|CR[ÉE]DITS|VERSEMENTS|الإيداعات|دائن).{0,120}?"
+            r"(?:BALANCE|SOLDE|الرصيد)"
+            r"(?P<body>.{0,300})",
             raw_text_for_summary,
             re.I | re.S,
         )
 
-        if not official_summary_match:
-            official_summary_match = re.search(
-                r"(?:CHECKS/WITHDRAWALS|WITHDRAWALS|DEBITS|RETRAITS|D[ÉE]BITS|السحوبات|مدين)"
-                r"\s+"
-                r"(?:DEPOSITS/ADDITIONS|DEPOSITS|ADDITIONS|CREDITS|D[ÉE]P[ÔO]TS|DEPOTS|CR[ÉE]DITS|VERSEMENTS|الإيداعات|دائن)"
-                r".{0,200}?"
-                r"(?P<expense>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+\.\d{2})"
-                r"\s+"
-                r"(?P<income>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+\.\d{2})",
-                raw_text_for_summary,
-                re.I | re.S,
-            )
+        if summary_block_match:
+            nums = re.findall(money_re, summary_block_match.group("body"))
+            nums = [round(float(x.replace(",", "")), 2) for x in nums]
 
-        if official_summary_match:
-            official_expense = round(float(official_summary_match.group("expense").replace(",", "")), 2)
-            official_income = round(float(official_summary_match.group("income").replace(",", "")), 2)
+            if len(nums) >= 4:
+                beginning_balance, official_expense, official_income, ending_balance = nums[:4]
+                accounting_ok = abs((beginning_balance - official_expense + official_income) - ending_balance) <= 1.00
 
-            parsed_income = income_total
-            parsed_expense = expense_total
+                parsed_income = income_total
+                parsed_expense = expense_total
+                income_count = sum(1 for tx in kpi_transactions if tx.get("type") == "income")
+                expense_count = sum(1 for tx in kpi_transactions if tx.get("type") == "expense")
 
-            income_count = sum(1 for tx in kpi_transactions if tx.get("type") == "income")
-            expense_count = sum(1 for tx in kpi_transactions if tx.get("type") == "expense")
-
-            income_gap_ratio = (
-                abs(official_income - parsed_income) / official_income
-                if official_income > 0 else 0
-            )
-            expense_gap_ratio = (
-                abs(official_expense - parsed_expense) / official_expense
-                if official_expense > 0 else 0
-            )
-
-            should_use_summary_fallback = (
-                len(kpi_transactions) > 0
-                and expense_count > 0
-                and income_count == 0
-                and official_income > 0
-                and (
-                    parsed_income == 0
-                    or income_gap_ratio > 0.25
-                    or expense_gap_ratio > 0.25
+                should_use_summary_fallback = (
+                    accounting_ok
+                    and len(kpi_transactions) > 0
+                    and expense_count > 0
+                    and income_count == 0
+                    and official_income > 0
+                    and official_expense > 0
                 )
-            )
 
-            if should_use_summary_fallback:
-                print("SUMMARY_RECONCILIATION_FALLBACK_DISABLED_PENDING_VALIDATION", {
-                    "official_income": official_income,
+                print("SUMMARY_RECONCILIATION_4NUM_AUDIT", {
+                    "beginning_balance": beginning_balance,
                     "official_expense": official_expense,
+                    "official_income": official_income,
+                    "ending_balance": ending_balance,
                     "parsed_income": parsed_income,
                     "parsed_expense": parsed_expense,
-                    "income_gap": round(official_income - parsed_income, 2),
-                    "expense_gap": round(official_expense - parsed_expense, 2),
-                    "action": "aggregate_kpi_only_no_transaction_mutation",
+                    "accounting_ok": accounting_ok,
+                    "will_apply": should_use_summary_fallback,
                 })
 
-                # Disabled pending validated 4-number summary mapping.
-                # Do not mutate KPI totals here.
-                summary_reconciliation_used = False
-                result_ai["summary_reconciliation_used"] = False
+                if should_use_summary_fallback:
+                    income_total = official_income
+                    expense_total = official_expense
+                    summary_reconciliation_used = True
+                    result_ai["summary_reconciliation_used"] = True
+                    result_ai["analysis_confidence"] = "limited"
+                    print("SUMMARY_RECONCILIATION_FALLBACK", {
+                        "official_income": official_income,
+                        "official_expense": official_expense,
+                        "parsed_income": parsed_income,
+                        "parsed_expense": parsed_expense,
+                        "income_gap": round(official_income - parsed_income, 2),
+                        "expense_gap": round(official_expense - parsed_expense, 2),
+                        "action": "aggregate_kpi_only_no_transaction_mutation",
+                    })
 
     except Exception as e:
         print("SUMMARY_RECONCILIATION_FALLBACK_ERROR", str(e)[:200])
