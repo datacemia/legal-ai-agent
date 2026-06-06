@@ -1036,6 +1036,25 @@ def handle_finance_ai(job: Job, db):
     forecast["observed_expenses"] = expense_total
     forecast["observed_net_cashflow"] = round(income_total - expense_total, 2)
 
+    excluded_transactions = max(len(transactions) - len(kpi_transactions), 0)
+    exclusion_ratio = (
+        excluded_transactions / len(transactions)
+        if len(transactions) > 0
+        else 0
+    )
+
+    if excluded_transactions > max(3, int(len(transactions) * 0.10)):
+        print(
+            "KPI_EXCLUSION_WARNING",
+            {
+                "raw_transactions": len(transactions),
+                "kpi_transactions": len(kpi_transactions),
+                "excluded_transactions": excluded_transactions,
+                "exclusion_ratio": round(exclusion_ratio, 4),
+                "warning": "TOO_MANY_EXCLUDED_TRANSACTIONS",
+            },
+        )
+
     print(
         "KPI_AUDIT",
         {
@@ -1044,6 +1063,7 @@ def handle_finance_ai(job: Job, db):
             "income": income_total,
             "expenses": expense_total,
             "net": round(income_total - expense_total, 2),
+            "excluded_transactions": excluded_transactions,
         },
     )
 
