@@ -1192,13 +1192,28 @@ def handle_finance_ai(job: Job, db):
             })
 
     if balance_chain_mismatches:
-        print(
-            "BALANCE_CHAIN_MISMATCH",
-            {
-                "count": len(balance_chain_mismatches),
-                "samples": balance_chain_mismatches[:10],
-            },
+        mismatch_ratio = (
+            len(balance_chain_mismatches) / max(len(tx_with_balance) - 1, 1)
         )
+
+        if mismatch_ratio > 0.30:
+            print(
+                "BALANCE_CHAIN_UNRELIABLE",
+                {
+                    "count": len(balance_chain_mismatches),
+                    "checked_pairs": max(len(tx_with_balance) - 1, 1),
+                    "mismatch_ratio": round(mismatch_ratio, 4),
+                    "samples": balance_chain_mismatches[:5],
+                },
+            )
+        else:
+            print(
+                "BALANCE_CHAIN_MISMATCH",
+                {
+                    "count": len(balance_chain_mismatches),
+                    "samples": balance_chain_mismatches[:10],
+                },
+            )
 
     for idx, tx in enumerate(kpi_transactions):
         if idx < 50 or DEBUG_FINANCE_EXTRACTOR:
