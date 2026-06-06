@@ -9676,12 +9676,15 @@ def is_sectioned_balance_history_statement(text: str) -> bool:
 
 
 def parse_sectioned_balance_history_statement(text: str) -> list[dict]:
-    """Parse sectioned statements with balance history table.
+    """Parse sectioned statements with separate balance history.
 
-    Sections:
-      Deposits/Credits        -> income
-      Withdrawals/Debits Paid -> expense
-      Balance Activity History -> ignored
+    Global OCR-stack pattern:
+      section header
+      date-only lines
+      amount-only lines
+      description lines
+
+    Balance Activity History is ignored.
     """
     import re
 
@@ -9696,151 +9699,131 @@ def parse_sectioned_balance_history_statement(text: str) -> list[dict]:
         r"DEPOSITS?\s+AND\s+ADDITIONS?|D[ÉE]P[ÔO]TS?|CR[ÉE]DITS?|الإيداعات|ايداعات|إيداعات|دائن)",
         re.I,
     )
-
     withdrawal_header_re = re.compile(
         r"(WITHDRAWALS?\s*/\s*DEBITS?|WITHDRAWALS?\s+DEBITS?|DEBITS?\s+PAID|WITHDRAWALS?|DEBITS?|"
         r"RETRAITS?|D[ÉE]BITS?|PR[ÉE]L[ÈE]VEMENTS?|السحوبات|سحوبات|خصم|مدين)",
         re.I,
     )
-
     balance_history_re = re.compile(
-        r"(BALANCE\s+ACTIVITY|ACTIVITY\s+HISTORY|BALANCE\s+COLLECTED|"
-        r"DATE\s+BALANCE|الرصيد|رصيد)",
+        r"(BALANCE\s+ACTIVITY|ACTIVITY\s+HISTORY|BALANCE\s+COLLECTED|DATE\s+BALANCE|"
+        r"BALANCE\s+DATE\s+BALANCE|الرصيد|رصيد)",
         re.I,
     )
-
     total_re = re.compile(r"^(TOTAL|TOTAUX|مجموع|إجمالي|اجمالي)\b", re.I)
 
-    amount_only_re = re.compile(
-        r"^\$?\s*(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+(?:\.\d{2}))\s*$"
-    )
-
-    date_only_re = re.compile(
-        r"^(?P<date>\d{1,2}/\d{1,2}|[A-Za-z]{3}-\d{1,2})\s*$"
-    )
-
-    date_amount_re = re.compile(
-        r"^(?P<date>\d{1,2}/\d{1,2}|[A-Za-z]{3}-\d{1,2})\s+"
-        r"\$?\s*(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+(?:\.\d{2}))\s*$"
-    )
+    date_re = re.compile(r"^(?P<date>\d{1,2}/\d{1,2}|[A-Za-z]{3}-\d{1,2}|20/\d{1,2})\s*$")
+    amount_re = re.compile(r"^\$?\s*(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+(?:\.\d{2}))\s*$")
 
     month_name = {
         "jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
         "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12,
     }
 
-    def iso_from_token(token: str) -> str:
-        token = token.strip()
-        if "/" in token:
-            m, d = [int(x) for x in token.split("/")]
-            return f"{year}-{m:02d}-{d:02d}"
-        mon, d = token.split("-")
-        return f"{year}-{month_name[mon[:3].lower()]:02d}-{int(d):02d}"
+    def iso_from_token(token: str) -> str | None:
+        token = str(token or "").strip()
+        try:
+            if "/" in token:
+                m, d = [int(x) for x in token.split("/")]
+                if not (1 <= m <= 12 and 1 <= d <= 31):
+                    return None
+                return f"{year}-{m:02d}-{d:02d}"
+            mon, d = token.split("-")
+            return f"{year}-{month_name[mon[:3].lower()]:02d}-{int(d):02d}"
+        except Exception:
+            return None
 
     def parse_money(token: str) -> float:
         return float(str(token).replace(",", ""))
 
-    transactions = []
-    section = None
-    i = 0
+    # Split document into structural sections.
+    sections = []
+    current = None
 
-    while i < len(lines):
-        line = lines[i]
-
+    for line in lines:
         if balance_history_re.search(line):
-            section = "balance_history"
-            i += 1
+            current = "balance_history"
+            sections.append((current, []))
             continue
 
         if deposit_header_re.search(line) and "$" not in line:
-            section = "income"
-            i += 1
+            current = "income"
+            sections.append((current, []))
             continue
 
         if withdrawal_header_re.search(line) and "$" not in line:
-            section = "expense"
-            i += 1
+            current = "expense"
+            sections.append((current, []))
             continue
 
-        if section == "balance_history":
-            i += 1
-            continue
+        if current and sections:
+            sections[-1][1].append(line)
 
-        if section not in {"income", "expense"}:
-            i += 1
-            continue
+    transactions = []
 
-        if total_re.search(line) or re.search(r"^\s*(DATE|AMOUNT|SERIAL|DESCRIPTION)\b", line, re.I):
-            i += 1
-            continue
+    def parse_section(section_type: str, section_lines: list[str]) -> None:
+        if section_type not in {"income", "expense"}:
+            return
 
-        date_token = None
-        amount = None
-        desc_parts = []
+        dates = []
+        amounts = []
+        desc_lines = []
 
-        m_da = date_amount_re.match(line)
-        if m_da:
-            date_token = m_da.group("date")
-            amount = parse_money(m_da.group("amount"))
-            i += 1
-        else:
-            m_date = date_only_re.match(line)
-            if m_date and i + 1 < len(lines):
-                m_amount = amount_only_re.match(lines[i + 1])
-                if m_amount:
-                    date_token = m_date.group("date")
-                    amount = parse_money(m_amount.group("amount"))
-                    i += 2
-                else:
-                    i += 1
-                    continue
-            else:
-                # Same-line date amount description fallback.
-                m_inline = re.match(
-                    r"^(?P<date>\d{1,2}/\d{1,2}|[A-Za-z]{3}-\d{1,2})\s+"
-                    r"(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+(?:\.\d{2}))\s+"
-                    r"(?P<desc>.+)$",
-                    line,
-                )
-                if not m_inline:
-                    i += 1
-                    continue
-                date_token = m_inline.group("date")
-                amount = parse_money(m_inline.group("amount"))
-                desc_parts.append(m_inline.group("desc").strip())
-                i += 1
-
-        # Collect following description lines until next date/header/total.
-        while i < len(lines):
-            nxt = lines[i]
-            if (
-                date_only_re.match(nxt)
-                or date_amount_re.match(nxt)
-                or deposit_header_re.search(nxt)
-                or withdrawal_header_re.search(nxt)
-                or balance_history_re.search(nxt)
-                or total_re.search(nxt)
-            ):
+        for line in section_lines:
+            if total_re.search(line):
                 break
-            if not re.search(r"^\s*(DATE|AMOUNT|SERIAL|DESCRIPTION)\b", nxt, re.I):
-                desc_parts.append(nxt)
-            i += 1
+            if re.search(r"^\s*(DATE|AMOUNT|SERIAL|DESCRIPTION|PAID)\b", line, re.I):
+                continue
 
-        desc = " ".join(desc_parts).strip()
-        signed = amount if section == "income" else -amount
+            dm = date_re.match(line)
+            am = amount_re.match(line)
 
-        transactions.append({
-            "date": iso_from_token(date_token),
-            "description": desc,
-            "amount": round(signed, 2),
-            "signed_amount": round(signed, 2),
-            "type": section,
-            "currency": "USD",
-            "locked_amount": round(signed, 2),
-            "_locked_amount": round(signed, 2),
-            "locked_type": section,
-            "parser_family": "sectioned_balance_history_statement",
-        })
+            if dm:
+                iso = iso_from_token(dm.group("date"))
+                if iso:
+                    dates.append(iso)
+                continue
+
+            if am:
+                amounts.append(parse_money(am.group("amount")))
+                continue
+
+            # Keep real descriptive lines only.
+            if re.search(r"[A-Za-z\u0600-\u06FF]", line):
+                desc_lines.append(line)
+
+        n = min(len(dates), len(amounts))
+        if n == 0:
+            return
+
+        # Descriptions often appear as 2-line blocks per transaction.
+        # If exact grouping is hard, attach available text sequentially.
+        desc_chunks = []
+        if desc_lines:
+            per_tx = max(1, len(desc_lines) // n)
+            for idx in range(n):
+                chunk = " ".join(desc_lines[idx * per_tx:(idx + 1) * per_tx]).strip()
+                desc_chunks.append(chunk)
+        while len(desc_chunks) < n:
+            desc_chunks.append("")
+
+        for idx in range(n):
+            amount = round(amounts[idx], 2)
+            signed = amount if section_type == "income" else -amount
+            transactions.append({
+                "date": dates[idx],
+                "description": desc_chunks[idx],
+                "amount": round(signed, 2),
+                "signed_amount": round(signed, 2),
+                "type": section_type,
+                "currency": "USD",
+                "locked_amount": round(signed, 2),
+                "_locked_amount": round(signed, 2),
+                "locked_type": section_type,
+                "parser_family": "sectioned_balance_history_statement",
+            })
+
+    for section_type, section_lines in sections:
+        parse_section(section_type, section_lines)
 
     print("SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED", {
         "transactions": len(transactions),
@@ -9851,6 +9834,7 @@ def parse_sectioned_balance_history_statement(text: str) -> list[dict]:
     })
 
     return transactions
+
 
 def extract_transactions(text: str) -> list[dict]:
     if is_sectioned_balance_history_statement(text):
