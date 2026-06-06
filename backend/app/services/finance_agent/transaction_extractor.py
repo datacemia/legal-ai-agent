@@ -11174,7 +11174,29 @@ def parse_money_out_money_in_balance_ledger(text: str) -> list[dict]:
             return
 
         low_desc = desc.lower()
-        if any(x in low_desc for x in ["start balance", "end balance", "continued", "credit interest rates"]):
+        if any(x in low_desc for x in [
+            "start balance",
+            "end balance",
+            "continued",
+            "credit interest rates",
+            "money in £",
+            "money out £",
+            "money in $",
+            "money out $",
+            "money in €",
+            "money out €",
+            "non-sterling",
+            "bank charges explained",
+            "important information",
+            "how we pay interest",
+            "financial services compensation",
+        ]):
+            return
+
+        if re.fullmatch(
+            r".*(money in|money out|total credits|total debits).*\d{1,3}(?:,\d{3})*(?:\.\d{2}).*",
+            low_desc,
+        ):
             return
 
         nums = [float(x.replace(",", "")) for x in money_re.findall(desc)]
@@ -11190,8 +11212,11 @@ def parse_money_out_money_in_balance_ledger(text: str) -> list[dict]:
         if typ is None:
             return
 
-        amount = nums[0]
-        balance = nums[-1] if len(nums) >= 2 else None
+        # Barclays/Lloyds/NatWest-style OCR can include dates, references,
+        # transaction amount, and balance in the same text block.
+        # Use the largest monetary value as the transaction amount.
+        amount = max(nums)
+        balance = nums[-1] if len(nums) >= 2 and nums[-1] != amount else None
         signed = amount if typ == "income" else -amount
 
         txs.append({
