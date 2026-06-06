@@ -9346,12 +9346,15 @@ def parse_sectioned_deposit_withdrawal_statement(text: str) -> list[dict]:
 
         if ending_balance_re.search(line):
             section = "balance"
+            i += 1
             continue
         if deposit_header_re.search(line) and not total_re.search(line):
             section = "income"
+            i += 1
             continue
         if withdrawal_header_re.search(line) and not total_re.search(line):
             section = "expense"
+            i += 1
             continue
 
         if not section or total_re.search(line):
