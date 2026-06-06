@@ -7450,6 +7450,9 @@ def extract_standard_sectioned_statement_transactions(
     neutral_headers = [
         "daily account activity", "transactions", "transaction detail",
         "date description amount", "posting date description amount",
+        "date amount description", "posting date amount description",
+        "date montant libellé", "date montant libelle",
+        "تاريخ المبلغ الوصف", "تاريخ المبلغ البيان",
         "transaction date posting date description", "reference number account number amount",
         "date serial no", "date serial no. amount",
         "mouvements", "opérations", "operations", "تفاصيل العمليات", "الحركات",
