@@ -701,6 +701,45 @@ def handle_finance_ai(job: Job, db):
 
     transactions = filtered_transactions
 
+    # International FR/EN/AR rule:
+    # Opening / brought-forward balance rows are not transactions.
+    opening_balance_rows = []
+    filtered_transactions = []
+
+    import re
+    opening_balance_re = re.compile(
+        r"(\bB/F\b|\bBF\b|BROUGHT\s+FORWARD|BALANCE\s+BROUGHT\s+FORWARD|"
+        r"OPENING\s+BALANCE|BEGINNING\s+BALANCE|SOLDE\s+INITIAL|SOLDE\s+D[ÉE]BUT|"
+        r"REPORT\s+[ÀA]\s+NOUVEAU|رصيد\s+افتتاحي|الرصيد\s+الافتتاحي|رصيد\s+سابق)",
+        re.IGNORECASE,
+    )
+
+    for tx in transactions:
+        desc = str(tx.get("description") or tx.get("desc") or "")
+        if opening_balance_re.search(desc):
+            tx["excluded_from_financial_kpis"] = True
+            tx["excluded_reason"] = "opening_or_brought_forward_balance"
+            opening_balance_rows.append({
+                "date": tx.get("date"),
+                "amount": tx.get("amount"),
+                "balance": tx.get("balance") or tx.get("_balance"),
+                "desc": desc[:140],
+            })
+            continue
+
+        filtered_transactions.append(tx)
+
+    if opening_balance_rows:
+        print(
+            "OPENING_BALANCE_ROWS_EXCLUDED",
+            {
+                "count": len(opening_balance_rows),
+                "samples": opening_balance_rows[:10],
+            },
+        )
+
+    transactions = filtered_transactions
+
     # Do not deduplicate bank transactions by content.
     # Two real bank operations can have the same date, description and amount.
     # Example: two ATM withdrawals of 2 000 MAD on the same day.
