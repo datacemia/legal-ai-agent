@@ -956,6 +956,19 @@ def handle_finance_ai(job: Job, db):
 
     for tx in transactions:
         amount = abs(float(tx.get("amount") or 0))
+
+        # Typed table rows are already structurally validated by parser family:
+        # DATE + TYPE + AMOUNT + NET AMOUNT.
+        # Do not drop them only because OCR lost/shortened description text.
+        if (
+            tx.get("parser_family") == "typed_transaction_table_statement"
+            and tx.get("type") in {"income", "expense", "transfer"}
+            and tx.get("amount") is not None
+            and tx.get("locked_amount") is not None
+        ):
+            kept_transactions.append(tx)
+            continue
+
         if amount > 0 and not description_has_min_signal(tx):
             tx["excluded_from_financial_kpis"] = True
             tx["excluded_reason"] = "min_description_signal_guard"
