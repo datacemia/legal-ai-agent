@@ -1633,6 +1633,122 @@ def handle_finance_ai(job: Job, db):
     except Exception as e:
         print("SUMMARY_RECONCILIATION_FALLBACK_ERROR", str(e)[:200])
 
+    # Global EN/FR/AR official summary reconciliation.
+    # KPI override only: never mutates extracted transactions.
+    try:
+        import re
+
+        raw_text_for_summary = str(
+            result_ai.get("raw_text")
+            or result_ai.get("text")
+            or result_ai.get("extracted_text")
+            or locals().get("text")
+            or locals().get("raw_text")
+            or ""
+        )
+        low_summary = raw_text_for_summary.lower()
+
+        def _money_to_float(v):
+            return round(float(str(v).replace(",", "").replace("£", "").replace("$", "").replace("€", "").strip()), 2)
+
+        official_income = None
+        official_expense = None
+        official_start = None
+        official_end = None
+
+        # EN/UK/Commonwealth: Money in / Money out
+        m_in = re.search(r"(?:money\s+in|total\s+credits?|credits?)\s*[£$€]?\s*([\d,]+\.\d{2})", raw_text_for_summary, re.I)
+        m_out = re.search(r"(?:money\s+out|total\s+debits?|debits?)\s*[£$€]?\s*([\d,]+\.\d{2})", raw_text_for_summary, re.I)
+        m_start = re.search(r"(?:start|beginning)\s+balance\s*[£$€]?\s*([\d,]+\.\d{2})", raw_text_for_summary, re.I)
+        m_end = re.search(r"(?:end|ending)\s+balance\s*[£$€]?\s*([\d,]+\.\d{2})", raw_text_for_summary, re.I)
+
+        if m_in and m_out:
+            official_income = _money_to_float(m_in.group(1))
+            official_expense = _money_to_float(m_out.group(1))
+            official_start = _money_to_float(m_start.group(1)) if m_start else None
+            official_end = _money_to_float(m_end.group(1)) if m_end else None
+
+        # Credit-card/account-summary style EN
+        if official_income is None or official_expense is None:
+            m_income = re.search(r"(?:payments\s+and\s+other\s+credits|deposits?/additions?|total\s+credits?)\s*-?[£$€]?\s*([\d,]+\.\d{2})", raw_text_for_summary, re.I)
+            m_expense = re.search(r"(?:purchases\s+and\s+adjustments|checks/withdrawals|withdrawals|total\s+debits?)\s*[£$€]?\s*([\d,]+\.\d{2})", raw_text_for_summary, re.I)
+            if m_income and m_expense:
+                official_income = _money_to_float(m_income.group(1))
+                official_expense = _money_to_float(m_expense.group(1))
+
+        # FR
+        if official_income is None or official_expense is None:
+            m_income = re.search(r"(?:entr[ée]e|cr[ée]dits?|d[ée]p[ôo]ts?|versements?)\s*[£$€]?\s*([\d,]+\.\d{2})", raw_text_for_summary, re.I)
+            m_expense = re.search(r"(?:sortie|d[ée]bits?|retraits?|paiements?|frais)\s*[£$€]?\s*([\d,]+\.\d{2})", raw_text_for_summary, re.I)
+            if m_income and m_expense:
+                official_income = _money_to_float(m_income.group(1))
+                official_expense = _money_to_float(m_expense.group(1))
+
+        # AR
+        if official_income is None or official_expense is None:
+            m_income = re.search(r"(?:دائن|الإيداعات|الايداعات|إيداع|ايداع)\s*[£$€]?\s*([\d,]+\.\d{2})", raw_text_for_summary)
+            m_expense = re.search(r"(?:مدين|السحوبات|سحب|المدفوعات|رسوم)\s*[£$€]?\s*([\d,]+\.\d{2})", raw_text_for_summary)
+            if m_income and m_expense:
+                official_income = _money_to_float(m_income.group(1))
+                official_expense = _money_to_float(m_expense.group(1))
+
+        if official_income is not None and official_expense is not None:
+            parsed_income = income_total
+            parsed_expense = expense_total
+
+            income_gap_ratio = (
+                abs(parsed_income - official_income) / official_income
+                if official_income > 0 else 0
+            )
+            expense_gap_ratio = (
+                abs(parsed_expense - official_expense) / official_expense
+                if official_expense > 0 else 0
+            )
+
+            accounting_ok = True
+            if official_start is not None and official_end is not None:
+                accounting_ok = abs((official_start + official_income - official_expense) - official_end) <= 2.00
+
+            should_apply_summary_reconciliation = (
+                accounting_ok
+                and len(kpi_transactions) > 0
+                and (official_income > 0 or official_expense > 0)
+                and income_gap_ratio <= 0.25
+                and expense_gap_ratio <= 0.35
+                and (
+                    income_gap_ratio > 0.005
+                    or expense_gap_ratio > 0.005
+                )
+            )
+
+            print("SUMMARY_RECONCILIATION_AUDIT", {
+                "official_income": official_income,
+                "official_expense": official_expense,
+                "parsed_income": parsed_income,
+                "parsed_expense": parsed_expense,
+                "income_gap_ratio": round(income_gap_ratio, 4),
+                "expense_gap_ratio": round(expense_gap_ratio, 4),
+                "accounting_ok": accounting_ok,
+                "will_apply": should_apply_summary_reconciliation,
+            })
+
+            if should_apply_summary_reconciliation:
+                income_total = official_income
+                expense_total = official_expense
+                result_ai["summary_reconciliation_used"] = True
+                result_ai["summary_reconciliation_mode"] = "kpi_override_only_no_transaction_mutation"
+
+                print("SUMMARY_RECONCILIATION_APPLIED", {
+                    "official_income": official_income,
+                    "official_expense": official_expense,
+                    "parsed_income": parsed_income,
+                    "parsed_expense": parsed_expense,
+                    "action": "kpi_override_only_no_transaction_mutation",
+                })
+
+    except Exception as e:
+        print("SUMMARY_RECONCILIATION_ERROR", str(e)[:200])
+
     uncategorized_count = sum(
         1
         for tx in kpi_transactions
