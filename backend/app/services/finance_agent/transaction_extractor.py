@@ -816,6 +816,64 @@ def parse_amount(value: str) -> float:
 
 
 
+
+def strip_non_transaction_balance_sections(text: str) -> str:
+    """Remove balance-summary sections before transaction extraction.
+
+    International rule:
+    Daily balance summaries are not transactions. They are account balances.
+    EN: DAILY BALANCE SUMMARY, DATE BALANCE
+    FR: SOLDE JOURNALIER, RÉSUMÉ DES SOLDES
+    AR: الرصيد اليومي, ملخص الأرصدة
+    """
+    if not text:
+        return text
+
+    stop_markers = [
+        "DAILY BALANCE SUMMARY",
+        "DATE BALANCE",
+        "DATE BALA NCE",
+        "SOLDE JOURNALIER",
+        "RÉSUMÉ DES SOLDES",
+        "RESUME DES SOLDES",
+        "الرصيد اليومي",
+        "ملخص الأرصدة",
+    ]
+
+    resume_markers = [
+        "STATEMENT OF ACCOUNT",
+        "DAILY ACCOUNT ACTIVITY",
+        "POSTING DATE",
+        "DESCRIPTION AMOUNT",
+        "Electronic Payments",
+        "Deposits",
+        "Checks Paid",
+        "Call 1-800",
+        "Bank Deposits",
+    ]
+
+    lines = text.splitlines()
+    kept = []
+    in_balance_section = False
+
+    for line in lines:
+        upper = line.upper()
+
+        if any(marker in upper for marker in stop_markers):
+            in_balance_section = True
+            continue
+
+        if in_balance_section and any(marker.upper() in upper for marker in resume_markers):
+            in_balance_section = False
+
+        if in_balance_section:
+            continue
+
+        kept.append(line)
+
+    return "\\n".join(kept)
+
+
 def restore_semantically_valid_kpi_rows(transactions: list[dict]) -> list[dict]:
     """International FR/EN/AR safety rule.
 
@@ -9046,6 +9104,7 @@ def strip_n26_spaces_sections(text: str) -> str:
 
 
 def extract_transactions(text: str) -> list[dict]:
+    text = strip_non_transaction_balance_sections(text)
     text = strip_n26_spaces_sections(text)
     statement_layout = detect_statement_layout(text)
     print("STATEMENT_LAYOUT_DETECTED", statement_layout)
