@@ -9875,13 +9875,38 @@ def parse_sectioned_balance_history_statement(text: str) -> list[dict]:
     for section_type, section_lines in sections:
         parse_section(section_type, section_lines)
 
+    income_total = round(sum(tx["amount"] for tx in transactions if tx["type"] == "income"), 2)
+    expense_total = round(sum(abs(tx["amount"]) for tx in transactions if tx["type"] == "expense"), 2)
+
     print("SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED", {
         "transactions": len(transactions),
         "income": sum(1 for tx in transactions if tx["type"] == "income"),
         "expenses": sum(1 for tx in transactions if tx["type"] == "expense"),
-        "income_total": round(sum(tx["amount"] for tx in transactions if tx["type"] == "income"), 2),
-        "expense_total": round(sum(abs(tx["amount"]) for tx in transactions if tx["type"] == "expense"), 2),
+        "income_total": income_total,
+        "expense_total": expense_total,
     })
+
+    official_income = None
+    official_expense = None
+
+    mi = re.search(r"Deposits\s*/\s*Credits\s*\$?\s*([0-9,]+\.\d{2})", raw, re.I)
+    me = re.search(r"Withdrawals\s*/\s*Debits\s*\$?\s*([0-9,]+\.\d{2})", raw, re.I)
+
+    if mi:
+        official_income = round(float(mi.group(1).replace(",", "")), 2)
+    if me:
+        official_expense = round(float(me.group(1).replace(",", "")), 2)
+
+    if official_income is not None or official_expense is not None:
+        print("SECTIONED_BALANCE_HISTORY_OFFICIAL_RECONCILIATION", {
+            "official_income": official_income,
+            "extracted_income": income_total,
+            "income_delta": round((official_income or 0) - income_total, 2) if official_income is not None else None,
+            "official_expense": official_expense,
+            "extracted_expense": expense_total,
+            "expense_delta": round((official_expense or 0) - expense_total, 2) if official_expense is not None else None,
+            "action": "audit_only_no_transaction_mutation",
+        })
 
     return transactions
 
