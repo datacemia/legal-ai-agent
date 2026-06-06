@@ -1053,6 +1053,7 @@ def handle_finance_ai(job: Job, db):
                 "signed_amount": tx.get("signed_amount"),
                 "type": tx.get("type"),
                 "excluded_flag": tx.get("excluded_from_financial_kpis"),
+                "excluded_reason": tx.get("excluded_reason") or tx.get("category_hint"),
                 "is_internal_transfer": tx.get("is_internal_transfer"),
                 "desc": (tx.get("description") or tx.get("desc") or "")[:120],
             }

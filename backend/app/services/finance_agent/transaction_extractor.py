@@ -2959,6 +2959,7 @@ def exclude_transaction_from_financial_kpis(tx: dict, reason: str = "untyped_unr
     tx["exclude_from_savings"] = True
     tx["exclude_from_cashflow"] = True
     tx["category_hint"] = tx.get("category_hint") or reason
+    tx["excluded_reason"] = tx.get("excluded_reason") or reason
     return tx
 
 
