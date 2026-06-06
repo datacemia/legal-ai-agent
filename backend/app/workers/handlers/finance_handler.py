@@ -12,6 +12,7 @@ from app.services.finance_agent.transaction_extractor import (
     debug_log,
     extract_transactions,
     append_fx_fee_transactions,
+    restore_semantically_valid_kpi_rows,
 )
 from app.services.finance_agent.subscription_detector import detect_recurring_subscriptions
 from app.services.finance_agent.budget_engine import build_recommended_budget
@@ -654,6 +655,7 @@ def handle_finance_ai(job: Job, db):
 
     transactions = extract_transactions(text)
     transactions = append_fx_fee_transactions(transactions)
+    transactions = restore_semantically_valid_kpi_rows(transactions)
 
     # Do not deduplicate bank transactions by content.
     # Two real bank operations can have the same date, description and amount.

@@ -815,6 +815,56 @@ def parse_amount(value: str) -> float:
 
 
 
+
+def restore_semantically_valid_kpi_rows(transactions: list[dict]) -> list[dict]:
+    """International FR/EN/AR safety rule.
+
+    A row must not be excluded from financial KPIs if it already has:
+    - type income/expense
+    - signed_amount
+    - non-zero amount
+    and is not an internal transfer.
+
+    This prevents valid SAR/MAD/EUR/USD bank movements from being removed only
+    because a balance-lock heuristic was uncertain.
+    """
+    restored = []
+
+    for tx in transactions or []:
+        if not isinstance(tx, dict):
+            continue
+
+        tx_type = tx.get("type")
+        signed_amount = tx.get("signed_amount")
+        amount = tx.get("amount")
+
+        try:
+            amount_abs = abs(float(amount or 0))
+        except Exception:
+            amount_abs = 0
+
+        if (
+            tx.get("excluded_from_financial_kpis")
+            and tx.get("excluded_reason") == "unlocked_amount_balance_row"
+            and tx_type in {"income", "expense"}
+            and signed_amount is not None
+            and amount_abs > 0
+            and not tx.get("is_internal_transfer")
+        ):
+            tx["excluded_from_financial_kpis"] = False
+            tx["exclude_from_income"] = False if tx_type == "income" else True
+            tx["exclude_from_expense"] = False if tx_type == "expense" else True
+            tx["exclude_from_score"] = False
+            tx["exclude_from_savings"] = False
+            tx["exclude_from_cashflow"] = False
+            tx["category_hint"] = "restored_semantically_valid_amount_balance_row"
+            tx.pop("excluded_reason", None)
+
+        restored.append(tx)
+
+    return restored
+
+
 def append_fx_fee_transactions(transactions: list[dict]) -> list[dict]:
     """Extract FX/exchange fees from wallet rows excluded as internal transfers.
 
