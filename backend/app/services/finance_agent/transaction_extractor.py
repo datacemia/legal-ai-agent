@@ -9953,6 +9953,9 @@ def parse_typed_transaction_table_statement(text: str) -> list[dict]:
         l = str(label or "").lower()
         if any(x in l for x in ["deposit", "dépôt", "depot", "إيداع", "ايداع"]):
             return "income", False
+        if "round up transfer" in l:
+            return "expense", False
+
         if any(x in l for x in ["transfer", "virement", "تحويل"]):
             return "transfer", True
         if any(x in l for x in [
