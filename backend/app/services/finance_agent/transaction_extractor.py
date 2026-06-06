@@ -9339,26 +9339,28 @@ def parse_sectioned_deposit_withdrawal_statement(text: str) -> list[dict]:
     transactions = []
     excluded_balance_rows = []
 
-    i = 0
-    while i < len(lines):
-        line = lines[i]
+    skip_next = False
+
+    for i, line in enumerate(lines):
+        if skip_next:
+            skip_next = False
+            continue
+
         upper = line.upper()
 
         if ending_balance_re.search(line):
             section = "balance"
-            i += 1
             continue
+
         if deposit_header_re.search(line) and not total_re.search(line):
             section = "income"
-            i += 1
             continue
+
         if withdrawal_header_re.search(line) and not total_re.search(line):
             section = "expense"
-            i += 1
             continue
 
         if not section or total_re.search(line):
-            i += 1
             continue
 
         # OCR-safe fallback:
@@ -9374,11 +9376,10 @@ def parse_sectioned_deposit_withdrawal_statement(text: str) -> list[dict]:
             )
             if date_desc_only and amount_only:
                 line = f"{date_desc_only.group('date')} {date_desc_only.group('desc')} {amount_only.group(1)}"
-                i += 1
+                skip_next = True
 
         m = tx_re.match(line)
         if not m:
-            i += 1
             continue
 
         mmdd = m.group("date")
@@ -9409,8 +9410,6 @@ def parse_sectioned_deposit_withdrawal_statement(text: str) -> list[dict]:
             "locked_type": section,
             "parser_family": "sectioned_deposit_withdrawal_statement",
         })
-
-        i += 1
 
     income_total = round(sum(tx["amount"] for tx in transactions if tx["type"] == "income"), 2)
     expense_total = round(sum(abs(tx["amount"]) for tx in transactions if tx["type"] == "expense"), 2)
