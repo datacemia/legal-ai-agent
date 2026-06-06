@@ -1626,7 +1626,7 @@ def handle_finance_ai(job: Job, db):
             )
 
             if should_use_summary_fallback:
-                print("SUMMARY_RECONCILIATION_FALLBACK", {
+                print("SUMMARY_RECONCILIATION_FALLBACK_DISABLED_PENDING_VALIDATION", {
                     "official_income": official_income,
                     "official_expense": official_expense,
                     "parsed_income": parsed_income,
@@ -1636,12 +1636,10 @@ def handle_finance_ai(job: Job, db):
                     "action": "aggregate_kpi_only_no_transaction_mutation",
                 })
 
-                income_total = official_income
-                expense_total = official_expense
-                summary_reconciliation_used = True
-
-                result_ai["summary_reconciliation_used"] = True
-                result_ai["analysis_confidence"] = "limited"
+                # Disabled pending validated 4-number summary mapping.
+                # Do not mutate KPI totals here.
+                summary_reconciliation_used = False
+                result_ai["summary_reconciliation_used"] = False
 
     except Exception as e:
         print("SUMMARY_RECONCILIATION_FALLBACK_ERROR", str(e)[:200])
