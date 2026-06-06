@@ -9741,6 +9741,11 @@ def parse_sectioned_balance_history_statement(text: str) -> list[dict]:
     sections = []
     current = None
 
+    print("SECTIONED_BALANCE_HISTORY_LINES_DEBUG", {
+        "count": len(lines),
+        "sample": lines[:120],
+    })
+
     for line in lines:
         if balance_history_re.search(line):
             current = "balance_history"
@@ -9823,6 +9828,10 @@ def parse_sectioned_balance_history_statement(text: str) -> list[dict]:
                 "locked_type": section_type,
                 "parser_family": "sectioned_balance_history_statement",
             })
+
+    print("SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG", {
+        "sections": [(kind, len(items), items[:25]) for kind, items in sections],
+    })
 
     for section_type, section_lines in sections:
         parse_section(section_type, section_lines)
