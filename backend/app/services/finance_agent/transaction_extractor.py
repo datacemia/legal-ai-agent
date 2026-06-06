@@ -10813,6 +10813,64 @@ def parse_debit_credit_balance_ledger(text: str) -> list[dict]:
     money_re = re.compile(r"\$?\s*(\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+\.\d{2})")
 
     # Rebuild OCR columns when text extraction lists descriptions, dates, and amounts separately.
+    direct_txs = []
+    direct_line_re = re.compile(
+        r"^(?P<mon>[A-Za-zÀ-ÿ]{3,9})\s+(?P<day>\d{1,2})\s+"
+        r"(?P<desc>.+?)\s+"
+        r"(?P<a1>\$?\s*\d{1,3}(?:,\d{3})*(?:\.\d{2})|\$?\s*\d+\.\d{2})"
+        r"(?:\s+(?P<a2>\$?\s*\d{1,3}(?:,\d{3})*(?:\.\d{2})|\$?\s*\d+\.\d{2}))?\s*$",
+        re.I | re.UNICODE,
+    )
+
+    for ln in lines:
+        m = direct_line_re.match(ln)
+        if not m:
+            continue
+
+        mon = month_map.get(m.group("mon").lower())
+        if not mon:
+            continue
+
+        desc = re.sub(r"\s+", " ", m.group("desc")).strip()
+        low = desc.lower()
+
+        a1 = float(m.group("a1").replace("$", "").replace(",", "").replace(" ", ""))
+        a2 = m.group("a2")
+        balance = float(a2.replace("$", "").replace(",", "").replace(" ", "")) if a2 else None
+
+        typ = "income" if any(k in low for k in [
+            "deposit", "credit", "interest", "ach",
+            "crédit", "dépôt", "depot", "versement",
+            "دائن", "إيداع", "ايداع"
+        ]) else "expense"
+
+        signed = a1 if typ == "income" else -a1
+
+        direct_txs.append({
+            "date": f"{year:04d}-{mon:02d}-{int(m.group('day')):02d}",
+            "description": desc,
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": typ,
+            "balance": balance,
+            "currency": "USD" if "usd" in normalized else None,
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": typ,
+            "parser_family": "debit_credit_balance_ledger",
+        })
+
+    if direct_txs:
+        print("DEBIT_CREDIT_BALANCE_LEDGER_EXTRACTED", {
+            "transactions": len(direct_txs),
+            "income": sum(1 for tx in direct_txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in direct_txs if tx.get("type") == "expense"),
+            "income_total": round(sum(tx["amount"] for tx in direct_txs if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx["amount"]) for tx in direct_txs if tx.get("type") == "expense"), 2),
+        })
+        return direct_txs
+
+
     descriptions = []
     dates = []
     amounts = []
