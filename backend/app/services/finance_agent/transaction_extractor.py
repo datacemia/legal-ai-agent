@@ -994,9 +994,15 @@ def extract_terminal_amount_balance_pair(line: str) -> tuple[float | None, float
         return None, None
 
     try:
-        tx_amount = parse_terminal_amount(numbers[-2], line)
+        tx_token = select_transaction_money_token(numbers, line)
+        if tx_token is None or tx_token == numbers[-1]:
+            return None, None
+        tx_amount = parse_terminal_amount(tx_token, line)
         balance = parse_amount(numbers[-1])
     except Exception:
+        return None, None
+
+    if abs(tx_amount) == 0:
         return None, None
 
     return tx_amount, balance
@@ -1289,6 +1295,52 @@ def extract_debit_credit_from_description(line: str) -> tuple[float | None, str 
     return None, None
 
 
+
+
+def is_probable_running_balance_token(token: str, line: str) -> bool:
+    """Detect tokens likely to be balances, not transaction movements."""
+    try:
+        value = abs(parse_amount(token))
+    except Exception:
+        return False
+
+    lower = str(line or "").lower()
+    has_movement_marker = any(marker in lower for marker in [
+        "apple pay", "purchase", "achat", "شراء", "حواله", "حوالة",
+        "transfer", "virement", "paiement", "card", "carte", "gab", "atm",
+    ])
+
+    # Very large terminal values after a movement marker are commonly running balances.
+    return has_movement_marker and value >= 1000
+
+
+def select_transaction_money_token(numbers: list[str], line: str) -> str | None:
+    """Choose transaction amount, not balance, from OCR-flattened rows.
+
+    Standard bank rule: when amount and running balance are both present, the
+    running balance is usually the last monetary token. Prefer the penultimate
+    token, unless there is only one visible amount. For Arabic/GCC rows where
+    OCR exposes a clear purchase/transfer amount before a terminal balance,
+    avoid selecting the terminal balance.
+    """
+    if not numbers:
+        return None
+
+    if len(numbers) == 1:
+        return numbers[0]
+
+    # Prefer penultimate token in amount/balance rows.
+    candidate = numbers[-2]
+    terminal = numbers[-1]
+
+    if is_probable_running_balance_token(candidate, line) and len(numbers) >= 3:
+        return numbers[-3]
+
+    if is_probable_running_balance_token(terminal, line):
+        return candidate
+
+    return candidate
+
 def pick_bank_amount(
     numbers: list[str],
     line: str,
@@ -1333,11 +1385,10 @@ def pick_transaction_amount_from_tabular_numbers(
 ) -> float:
     safe_numbers = extract_transaction_money_numbers(line)
 
-    if len(safe_numbers) >= 2:
-        return parse_terminal_amount(safe_numbers[-2], line)
+    selected_token = select_transaction_money_token(safe_numbers, line)
 
-    if len(safe_numbers) == 1:
-        return parse_terminal_amount(safe_numbers[0], line)
+    if selected_token is not None:
+        return parse_terminal_amount(selected_token, line)
 
     return pick_bank_amount(
         numbers,
@@ -2231,6 +2282,10 @@ def extract_transaction_amount(line: str) -> float | None:
 
     if tx_amount is not None:
         return tx_amount
+
+    selected_token = select_transaction_money_token(numbers, line)
+    if selected_token is not None:
+        return parse_terminal_amount(selected_token, line)
 
     return parse_terminal_amount(numbers[0], line)
 

@@ -8,6 +8,7 @@ from app.services.finance_agent.statement_parser import extract_statement_text_f
 from app.services.cloud_storage_service import download_api_file_from_cloud
 from app.services.finance_agent.finance_ai_agent import analyze_bank_statement
 from app.services.finance_agent.transaction_extractor import (
+    DEBUG_FINANCE_EXTRACTOR,
     debug_log,
     extract_transactions,
 )
@@ -450,6 +451,35 @@ def assess_analysis_quality(transactions: list[dict]) -> dict:
     }
 
 
+
+
+def ensure_signed_amount(tx: dict) -> None:
+    """Canonical money invariant: signed_amount must mirror the KPI amount.
+
+    Balance is never a movement amount. Exclusion flags may remove a row from
+    KPI totals, but they must not destroy the original type/amount/signed value,
+    because audits, quality checks and debugging rely on those fields.
+    """
+    if tx.get("signed_amount") is not None:
+        return
+
+    amount = safe_float(tx.get("amount"))
+    if amount != 0:
+        tx["signed_amount"] = amount
+
+
+def exclude_from_financial_kpis(tx: dict, reason: str) -> dict:
+    """Mark a transaction as excluded without deleting financial evidence."""
+    tx["excluded_from_financial_kpis"] = True
+    tx["exclude_from_income"] = True
+    tx["exclude_from_expense"] = True
+    tx["exclude_from_score"] = True
+    tx["exclude_from_savings"] = True
+    tx["exclude_from_cashflow"] = True
+    tx["category_hint"] = tx.get("category_hint") or reason
+    tx["exclusion_reason"] = reason
+    return tx
+
 def finance_progress_message(key: str, language: str) -> str:
     messages = {
         "loading": {
@@ -663,22 +693,14 @@ def handle_finance_ai(job: Job, db):
             and not tx.get("_balance_locked")
             and tx.get("parser_family") != "running_balance_column_statement"
         ):
-            tx["type"] = None
-            tx.pop("signed_amount", None)
-            tx.pop("locked_amount", None)
-            tx.pop("_locked_amount", None)
-            tx.pop("locked_type", None)
-            tx["excluded_from_financial_kpis"] = True
-            tx["exclude_from_income"] = True
-            tx["exclude_from_expense"] = True
-            tx["exclude_from_score"] = True
-            tx["exclude_from_savings"] = True
-            tx["exclude_from_cashflow"] = True
-            tx["category_hint"] = (
-                tx.get("category_hint")
-                or "unlocked_amount_balance_row"
-            )
+            # Do not destroy amount/type/signed_amount. This row may be excluded
+            # from KPI totals, but audit must preserve the extracted evidence.
+            ensure_signed_amount(tx)
+            exclude_from_financial_kpis(tx, "unlocked_amount_balance_row")
+            tx["untrusted_balance_row"] = True
             continue
+
+        ensure_signed_amount(tx)
 
         if tx.get("type") is None:
             amount = safe_float(tx.get("signed_amount", tx.get("amount")))
@@ -744,6 +766,23 @@ def handle_finance_ai(job: Job, db):
         2,
     )
 
+    reconciliation_warnings = []
+
+    if transactions and not kpi_transactions:
+        reconciliation_warnings.append("NO_KPI_TRANSACTIONS_AFTER_FILTER")
+
+    if any(tx.get("signed_amount") is None for tx in kpi_transactions):
+        reconciliation_warnings.append("MISSING_SIGNED_AMOUNT")
+
+    if kpi_transactions and all(
+        tx.get("balance") is None and tx.get("_balance") is None
+        for tx in kpi_transactions
+    ):
+        reconciliation_warnings.append("NO_BALANCE_DATA")
+
+    if quality.get("status") == "insufficient_data":
+        reconciliation_warnings.append("INSUFFICIENT_DATA")
+
     print(
         "RECONCILIATION_CHECK",
         {
@@ -752,7 +791,8 @@ def handle_finance_ai(job: Job, db):
             "expense_count": sum(1 for tx in kpi_transactions if tx.get("type") == "expense"),
             "income_total": reconciliation_income_total,
             "expense_total": reconciliation_expense_total,
-            "warning": None,
+            "excluded_transactions": len(transactions) - len(kpi_transactions),
+            "warning": ";".join(reconciliation_warnings) if reconciliation_warnings else None,
         },
     )
 
@@ -953,15 +993,18 @@ def handle_finance_ai(job: Job, db):
         }
     )
 
-    for tx in kpi_transactions:
-        print(
-            "KPI_INPUT",
-            {
-                "amount": tx.get("amount"),
-                "signed_amount": tx.get("signed_amount"),
-                "type": tx.get("type")
-            }
-        )
+    for idx, tx in enumerate(kpi_transactions):
+        if idx < 50 or DEBUG_FINANCE_EXTRACTOR:
+            print(
+                "KPI_INPUT",
+                {
+                    "amount": tx.get("amount"),
+                    "signed_amount": tx.get("signed_amount"),
+                    "type": tx.get("type")
+                }
+            )
+    if len(kpi_transactions) > 50 and not DEBUG_FINANCE_EXTRACTOR:
+        print("KPI_INPUT_TRUNCATED", {"printed": 50, "total": len(kpi_transactions)})
 
     print(
         "KPI_AUDIT",
