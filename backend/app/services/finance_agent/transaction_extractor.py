@@ -9311,10 +9311,6 @@ def parse_sectioned_deposit_withdrawal_statement(text: str) -> list[dict]:
 
     raw = str(text or "")
     lines = [ln.strip() for ln in raw.splitlines() if ln.strip()]
-    print("SECTIONED_DW_LINES_DEBUG", {
-        "count": len(lines),
-        "lines": lines[:80],
-    })
 
     year_match = re.search(r"(20\d{2})", raw)
     year = int(year_match.group(1)) if year_match else 2024
