@@ -10411,11 +10411,34 @@ def parse_date_amount_description_ledger(text: str) -> list[dict]:
             "parser_family": "date_amount_description_ledger",
         })
 
+    # Global EN/FR/AR income section detector for DATE AMOUNT DESCRIPTION ledgers.
+    income_section_re = re.compile(
+        r"(deposits?/additions?|deposits?|additions?|credits?|payments received|"
+        r"d[ée]p[ôo]ts?|depots?|cr[ée]dits?|versements?|virements?\s+re[cç]us?|encaissements?|"
+        r"الإيداعات|الايداعات|إيداع|ايداع|دائن|تحويل\s+وارد)",
+        re.I | re.UNICODE,
+    )
+
+    expense_section_re = re.compile(
+        r"(withdrawals?|charges?|checks?/withdrawals?|debits?|payments?|"
+        r"retraits?|d[ée]bits?|paiements?|pr[ée]l[èe]vements?|frais|"
+        r"سحوبات|مدين|مدفوعات|خصومات|رسوم)",
+        re.I | re.UNICODE,
+    )
+
+    # Detect if this compact ledger mostly represents income or expense.
+    active_type = "expense"
+    for ln in lines:
+        if income_section_re.search(ln):
+            active_type = "income"
+        elif expense_section_re.search(ln):
+            active_type = "expense"
+
     # Extract embedded right-column transactions left inside descriptions/unmatched lines:
     embedded_tx_re = re.compile(
         r"(?P<date>\d{4}|\d{1,2}/\d{1,2})\s+"
         r"(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+\.\d{2})\s+"
-        r"(?P<desc>[A-Za-z][A-Za-z0-9 #'*./&-]{2,80})"
+        r"(?P<desc>[\wÀ-ÿ\u0600-\u06FF][\wÀ-ÿ\u0600-\u06FF #'*./&-]{2,80})"
     )
 
     existing_keys = {
