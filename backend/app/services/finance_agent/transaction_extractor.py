@@ -9478,7 +9478,6 @@ def extract_transactions(text: str) -> list[dict]:
 
         signed_amount = amount
 
-        tx = ensure_transaction_signed_amount(tx)
         print(
             "FINAL_TX_DEBUG",
             {
