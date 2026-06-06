@@ -955,10 +955,16 @@ def handle_finance_ai(job: Job, db):
         desc = str(tx.get("description") or tx.get("desc") or "").lower()
 
         patterns = [
+            "interest rate",
             "interest rates",
-            "credit interest rates",
-            "debit interest rates",
+            "credit interest",
+            "debit interest",
             "automatic limit",
+            "excess @",
+            "p.a.",
+            "p.a",
+            "tier 1",
+            "tier 2",
             "opening balance",
             "closing balance",
             "brought forward",
@@ -967,6 +973,9 @@ def handle_finance_ai(job: Job, db):
             "total credits",
             "statement number",
             "account number",
+            "page 1 of",
+            "page 2 of",
+            "page 3 of",
         ]
 
         return any(p in desc for p in patterns)
