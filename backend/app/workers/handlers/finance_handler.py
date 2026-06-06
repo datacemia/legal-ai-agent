@@ -764,6 +764,26 @@ def handle_finance_ai(job: Job, db):
 
     quality = assess_analysis_quality(transactions)
 
+    # Hotfix international FR/EN/AR:
+    # Restore valid income/expense rows wrongly excluded by balance heuristics
+    # immediately before KPI filtering.
+    for tx in transactions:
+        if (
+            tx.get("excluded_from_financial_kpis")
+            and tx.get("type") in {"income", "expense"}
+            and tx.get("signed_amount") is not None
+            and abs(float(tx.get("amount") or 0)) > 0
+            and not tx.get("is_internal_transfer")
+        ):
+            tx["excluded_from_financial_kpis"] = False
+            tx["exclude_from_income"] = False if tx.get("type") == "income" else True
+            tx["exclude_from_expense"] = False if tx.get("type") == "expense" else True
+            tx["exclude_from_score"] = False
+            tx["exclude_from_savings"] = False
+            tx["exclude_from_cashflow"] = False
+            tx.pop("excluded_reason", None)
+            tx["category_hint"] = "restored_valid_kpi_row_before_filter"
+
     # International KPI filter:
     # Internal transfers must never affect income, expenses,
     # savings, scores, forecasts or charts.
