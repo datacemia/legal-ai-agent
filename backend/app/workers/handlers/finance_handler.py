@@ -991,6 +991,29 @@ def handle_finance_ai(job: Job, db):
             "dated_transactions": len(parsed_dates),
         })
 
+        # Smart international date-order audit.
+        # FR/EN/AR: detect if ambiguous DD/MM vs MM/DD dates are likely mixed.
+        # Audit-only: does not mutate transactions yet.
+        ambiguous = []
+        for tx in transactions:
+            raw_date = str(tx.get("date") or "")
+            m = re.match(r"^2024-(\d{2})-(\d{2})$", raw_date)
+            if not m:
+                continue
+            mm = int(m.group(1))
+            dd = int(m.group(2))
+            if 1 <= mm <= 12 and 1 <= dd <= 12:
+                ambiguous.append(raw_date)
+
+        if ambiguous:
+            print("SMART_DATE_ORDER_SELECTION", {
+                "mode": "audit_only",
+                "ambiguous_dates": len(ambiguous),
+                "samples": ambiguous[:20],
+                "current_order": order,
+                "note": "candidate for DD/MM vs MM/DD normalization",
+            })
+
     cc_rows = []
     cc_seen = {}
 
