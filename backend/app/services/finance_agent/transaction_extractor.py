@@ -9711,8 +9711,8 @@ def parse_sectioned_balance_history_statement(text: str) -> list[dict]:
     )
     total_re = re.compile(r"^(TOTAL|TOTAUX|مجموع|إجمالي|اجمالي)\b", re.I)
 
-    date_re = re.compile(r"^(?P<date>\d{1,2}/\d{1,2}|[A-Za-z]{3}-\d{1,2}|20/\d{1,2})\s*$")
-    amount_re = re.compile(r"^\$?\s*(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+(?:\.\d{2}))\s*$")
+    date_re = re.compile(r"^(?P<date>\d{1,2}/\d{1,2}|[A-Za-z]{3}-\d{1,2}|20/\d{1,2})$")
+    amount_re = re.compile(r"^\$?\s*(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+(?:\.\d{2}))$")
 
     month_name = {
         "jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
@@ -9724,6 +9724,8 @@ def parse_sectioned_balance_history_statement(text: str) -> list[dict]:
         try:
             if "/" in token:
                 m, d = [int(x) for x in token.split("/")]
+                if m == 20 and 1 <= d <= 31:
+                    m = 10
                 if not (1 <= m <= 12 and 1 <= d <= 31):
                     return None
                 return f"{year}-{m:02d}-{d:02d}"
