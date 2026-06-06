@@ -9329,6 +9329,8 @@ def is_sectioned_deposit_withdrawal_statement(text: str) -> bool:
         or "activity history" in t
         or "balance collected" in t
         or ("date balance" in t and "collected" in t)
+        or ("balance date balance collected" in t and "activity balance balance" in t)
+        or ("balance date balance" in t and "activity balance" in t and "history" in t)
     )
 
     print("SECTIONED_DW_DETECTOR_BALANCE_HISTORY_CHECK", {
