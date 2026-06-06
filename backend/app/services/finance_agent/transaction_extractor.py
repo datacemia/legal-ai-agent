@@ -10470,6 +10470,21 @@ def parse_date_amount_description_ledger(text: str) -> list[dict]:
 
         i += 1
 
+    import re
+    summary_m = re.search(
+        r"CHECKS/WITHDRAWALS\s+DEPOSITS/ADDITIONS.*?\n\s*[\d,]+\.\d{2}\s+(?P<expense>[\d,]+\.\d{2})\s+(?P<income>[\d,]+\.\d{2})",
+        raw,
+        re.I | re.S,
+    )
+    if summary_m:
+        print("DATE_AMOUNT_DESCRIPTION_OFFICIAL_RECONCILIATION", {
+            "official_expense": float(summary_m.group("expense").replace(",", "")),
+            "extracted_expense": round(sum(abs(tx["amount"]) for tx in transactions), 2),
+            "expense_delta": round(float(summary_m.group("expense").replace(",", "")) - sum(abs(tx["amount"]) for tx in transactions), 2),
+            "official_income": float(summary_m.group("income").replace(",", "")),
+            "extracted_income": 0,
+        })
+
     print("DATE_AMOUNT_DESCRIPTION_LEDGER_EXTRACTED", {
         "transactions": len(transactions),
         "income": 0,
