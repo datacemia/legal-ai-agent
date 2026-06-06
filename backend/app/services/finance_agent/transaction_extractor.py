@@ -10317,7 +10317,74 @@ def has_composite_statement_periods(text: str) -> bool:
 
     return len(periods) > 1
 
+
+def parse_date_amount_description_ledger(text: str) -> list[dict]:
+    """Global ledger variant: DATE AMOUNT DESCRIPTION."""
+    import re
+
+    raw = str(text or "")
+    lines = [ln.strip() for ln in raw.splitlines() if ln.strip()]
+
+    y = re.search(r"(20\d{2}|\d{2})", raw)
+    year = 2000 + int(y.group(1)) if y and len(y.group(1)) == 2 else int(y.group(1)) if y else 2024
+
+    tx_re = re.compile(
+        r"^(?P<date>\d{4}|\d{1,2}/\d{1,2})\s+"
+        r"(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+\.\d{2})\s+"
+        r"(?P<desc>.+)$"
+    )
+
+    transactions = []
+
+    for line in lines:
+        m = tx_re.match(line)
+        if not m:
+            continue
+
+        d = m.group("date")
+        if "/" in d:
+            month, day = [int(x) for x in d.split("/")]
+        else:
+            month, day = int(d[:2]), int(d[2:])
+
+        amount = float(m.group("amount").replace(",", ""))
+        desc = m.group("desc").strip()
+
+        transactions.append({
+            "date": f"{year:04d}-{month:02d}-{day:02d}",
+            "description": desc,
+            "amount": -round(amount, 2),
+            "signed_amount": -round(amount, 2),
+            "type": "expense",
+            "currency": "USD",
+            "locked_amount": -round(amount, 2),
+            "_locked_amount": -round(amount, 2),
+            "locked_type": "expense",
+            "parser_family": "date_amount_description_ledger",
+        })
+
+    print("DATE_AMOUNT_DESCRIPTION_LEDGER_EXTRACTED", {
+        "transactions": len(transactions),
+        "income": 0,
+        "expenses": len(transactions),
+        "expense_total": round(sum(abs(tx["amount"]) for tx in transactions), 2),
+    })
+
+    return transactions
+
 def extract_transactions(text: str) -> list[dict]:
+    if "date amount description" in str(text or "").lower():
+        print("STATEMENT_LAYOUT_DETECTED", "date_amount_description_ledger")
+        txs = parse_date_amount_description_ledger(text)
+        if txs:
+            print("DATE_AMOUNT_DESCRIPTION_LEDGER_ROUTE", {
+                "transactions": len(txs),
+                "income": 0,
+                "expenses": len(txs),
+            })
+            return txs
+
+
     if is_sectioned_activity_statement(text):
         if has_composite_statement_periods(text):
             print("COMPOSITE_STATEMENT_PERIOD_GUARD", {
