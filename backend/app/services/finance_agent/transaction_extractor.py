@@ -1145,6 +1145,30 @@ def parse_terminal_amount(value: str, line: str) -> float:
     )
     return parsed
 
+def is_multidate_multiamount_non_ledger_row(line: str) -> bool:
+    """International FR/EN/AR structural guard.
+
+    A true amount/balance ledger row is usually:
+        date description movement balance
+
+    But OCR multi-column tables often become:
+        date ref amount date ref amount
+
+    That must not be parsed as movement+balance.
+    """
+    import re
+
+    text = str(line or "").strip()
+    money_tokens = re.findall(MONEY_NUMBER_PATTERN, text)
+
+    date_tokens = re.findall(
+        r"\b(?:\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?|\d{4}-\d{2}-\d{2})\b",
+        text,
+    )
+
+    return len(date_tokens) >= 2 and len(money_tokens) >= 2
+
+
 def extract_terminal_amount_balance_pair(line: str) -> tuple[float | None, float | None]:
     """Extract the terminal transaction amount + running balance pair.
 
@@ -1155,6 +1179,9 @@ def extract_terminal_amount_balance_pair(line: str) -> tuple[float | None, float
 
     The function never returns the balance as the movement.
     """
+    if is_multidate_multiamount_non_ledger_row(line):
+        return None, None
+
     numbers = extract_transaction_money_numbers(line)
 
     if len(numbers) < 2:
