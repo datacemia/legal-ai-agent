@@ -10363,6 +10363,65 @@ def parse_date_amount_description_ledger(text: str) -> list[dict]:
             "parser_family": "date_amount_description_ledger",
         })
 
+    # OCR/global vertical paired rows:
+    # date
+    # date
+    # amount
+    # amount
+    # description
+    # description
+    i = 0
+    while i < len(lines) - 5:
+        d1 = re.fullmatch(r"\d{4}|\d{1,2}/\d{1,2}", lines[i])
+        d2 = re.fullmatch(r"\d{4}|\d{1,2}/\d{1,2}", lines[i + 1])
+        a1 = re.fullmatch(r"\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+\.\d{2}", lines[i + 2])
+        a2 = re.fullmatch(r"\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+\.\d{2}", lines[i + 3])
+
+        if d1 and d2 and a1 and a2:
+            desc1 = lines[i + 4].strip()
+            desc2 = lines[i + 5].strip()
+
+            for d, a, desc in [
+                (lines[i], lines[i + 2], desc1),
+                (lines[i + 1], lines[i + 3], desc2),
+            ]:
+                if "/" in d:
+                    month, day = [int(x) for x in d.split("/")]
+                else:
+                    month, day = int(d[:2]), int(d[2:])
+
+                amount = float(a.replace(",", ""))
+                key = (year, month, day, round(amount, 2), desc[:80])
+                existing = {
+                    (
+                        int(tx["date"][:4]),
+                        int(tx["date"][5:7]),
+                        int(tx["date"][8:10]),
+                        round(abs(float(tx["amount"])), 2),
+                        (tx.get("description") or "")[:80],
+                    )
+                    for tx in transactions
+                }
+
+                if key not in existing:
+                    transactions.append({
+                        "date": f"{year:04d}-{month:02d}-{day:02d}",
+                        "description": desc,
+                        "amount": -round(amount, 2),
+                        "signed_amount": -round(amount, 2),
+                        "type": "expense",
+                        "currency": "USD",
+                        "locked_amount": -round(amount, 2),
+                        "_locked_amount": -round(amount, 2),
+                        "locked_type": "expense",
+                        "parser_family": "date_amount_description_ledger",
+                    })
+
+            i += 6
+            continue
+
+        i += 1
+
     print("DATE_AMOUNT_DESCRIPTION_LEDGER_EXTRACTED", {
         "transactions": len(transactions),
         "income": 0,
