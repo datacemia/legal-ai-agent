@@ -10785,6 +10785,14 @@ def parse_debit_credit_balance_ledger(text: str) -> list[dict]:
         or ("débit" in normalized and "crédit" in normalized and "solde" in normalized)
         or ("مدين" in normalized and "دائن" in normalized and "الرصيد" in normalized)
     )
+    print("DEBIT_CREDIT_BALANCE_HEADER_CHECK", {
+        "has_headers": has_headers,
+        "has_debit": ("debit" in normalized or "débit" in normalized or "مدين" in normalized),
+        "has_credit": ("credit" in normalized or "crédit" in normalized or "دائن" in normalized),
+        "has_balance": ("balance" in normalized or "solde" in normalized or "الرصيد" in normalized),
+        "preview": normalized[:300],
+    })
+
     if not has_headers:
         return []
 
