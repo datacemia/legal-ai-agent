@@ -10987,7 +10987,134 @@ def parse_debit_credit_balance_ledger(text: str) -> list[dict]:
     return txs
 
 
+
+def parse_date_posting_description_amount_statement(text: str) -> list[dict]:
+    """Global credit-card style parser:
+    Transaction Date | Posting Date | Description | Amount.
+    """
+    import re
+
+    raw = str(text or "")
+    low = raw.lower()
+
+    has_layout = (
+        "transaction" in low
+        and "posting" in low
+        and "description" in low
+        and "amount" in low
+    )
+    if not has_layout:
+        return []
+
+    year_m = re.search(r"(20\d{2})", raw)
+    year = int(year_m.group(1)) if year_m else 2024
+
+    tx_re = re.compile(
+        r"^(?P<tdate>\d{1,2}/\d{1,2})\s+"
+        r"(?P<pdate>\d{1,2}/\d{1,2})\s+"
+        r"(?P<desc>.+?)\s+"
+        r"(?P<amount>-?\$?\s*\d{1,3}(?:,\d{3})*(?:\.\d{2})|-?\$?\s*\d+\.\d{2})\s*$",
+        re.I | re.UNICODE,
+    )
+
+    section_type = None
+    txs = []
+
+    for ln in [x.strip() for x in raw.splitlines() if x.strip()]:
+        l = ln.lower()
+
+        if any(k in l for k in [
+            "payments and other credits",
+            "payments received",
+            "credits",
+            "crédits",
+            "paiements reçus",
+            "مدفوعات",
+            "دائن",
+        ]):
+            section_type = "income"
+            continue
+
+        if any(k in l for k in [
+            "purchases and adjustments",
+            "purchases",
+            "debits",
+            "charges",
+            "achats",
+            "débits",
+            "frais",
+            "مدين",
+            "مشتريات",
+        ]):
+            section_type = "expense"
+            continue
+
+        if l.startswith("total "):
+            section_type = None
+            continue
+
+        m = tx_re.match(ln)
+        if not m:
+            continue
+
+        desc = re.sub(r"\s+", " ", m.group("desc")).strip()
+        amt = float(
+            m.group("amount")
+            .replace("$", "")
+            .replace(",", "")
+            .replace(" ", "")
+        )
+
+        if abs(amt) == 0:
+            continue
+
+        typ = section_type
+        if typ is None:
+            typ = "income" if amt < 0 else "expense"
+
+        # Credit-card convention: negative payment/credit reduces balance.
+        signed = abs(amt) if typ == "income" else -abs(amt)
+
+        month, day = [int(x) for x in m.group("tdate").split("/")]
+        iso = f"{year:04d}-{month:02d}-{day:02d}"
+
+        txs.append({
+            "date": iso,
+            "posting_date": f"{year:04d}-{int(m.group('pdate').split('/')[0]):02d}-{int(m.group('pdate').split('/')[1]):02d}",
+            "description": desc,
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": typ,
+            "currency": "USD" if "$" in raw or "usd" in low else None,
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": typ,
+            "parser_family": "date_posting_description_amount_statement",
+        })
+
+    if txs:
+        print("DATE_POSTING_DESCRIPTION_AMOUNT_EXTRACTED", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+            "income_total": round(sum(tx["amount"] for tx in txs if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx["amount"]) for tx in txs if tx.get("type") == "expense"), 2),
+        })
+
+    return txs
+
+
 def extract_transactions(text: str) -> list[dict]:
+    txs = parse_date_posting_description_amount_statement(text)
+    if txs and len(txs) >= 2:
+        print("STATEMENT_LAYOUT_DETECTED", "date_posting_description_amount_statement")
+        print("DATE_POSTING_DESCRIPTION_AMOUNT_ROUTE", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+        })
+        return txs
+
     txs = parse_debit_credit_balance_ledger(text)
     if txs and len(txs) >= 3:
         print("STATEMENT_LAYOUT_DETECTED", "debit_credit_balance_ledger")
