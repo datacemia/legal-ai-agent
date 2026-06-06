@@ -10844,6 +10844,11 @@ def parse_debit_credit_balance_ledger(text: str) -> list[dict]:
         ]):
             descriptions.append(ln)
 
+    print("DEBIT_CREDIT_BALANCE_MONEYLIKE_LINES", [
+        repr(ln) for ln in lines
+        if "$" in ln or re.search(r"\\d+\\.\\d{2}", ln)
+    ][:60])
+
     print("DEBIT_CREDIT_BALANCE_COMPONENT_DEBUG", {
         "dates": len(dates),
         "descriptions": len(descriptions),
