@@ -9936,7 +9936,7 @@ def parse_typed_transaction_table_statement(text: str) -> list[dict]:
     raw = str(text or "")
     lines = [ln.strip() for ln in raw.splitlines() if ln.strip()]
 
-    date_re = re.compile(r"^(?P<date>\d{1,2}/\d{1,2}/\d{4})\b")
+    date_re = re.compile(r"^(?P<date>\d{1,2}/\d{1,2}/\d{4})(?:\d{1,2}/\d{1,2}/\d{4})?\b")
     type_amount_re = re.compile(
         r"(?P<typ>Deposit|Purchase|ATM Withdrawal|Direct Debit|Transfer|Round Up Transfer|Fee|"
         r"Dépôt|Depot|Achat|Retrait|Frais|Virement|تحويل|إيداع|ايداع|شراء|سحب|رسوم)\s+"
