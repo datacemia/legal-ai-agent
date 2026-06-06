@@ -9269,7 +9269,152 @@ def parse_visual_debit_credit_balance_table(text: str) -> list[dict]:
 
     return []
 
+
+def is_sectioned_deposit_withdrawal_statement(text: str) -> bool:
+    """International EN/FR/AR sectioned statement detector."""
+    t = str(text or "").lower()
+
+    has_deposit_section = any(x in t for x in [
+        "deposits and additions", "deposits", "additions",
+        "dépôts", "depots", "crédits", "credits",
+        "الإيداعات", "ايداعات", "إيداعات", "دائن"
+    ])
+
+    has_withdrawal_section = any(x in t for x in [
+        "electronic withdrawals", "withdrawals", "debits",
+        "retraits", "débits", "debits", "prélèvements", "prelevements",
+        "السحوبات", "سحوبات", "خصم", "مدين"
+    ])
+
+    has_balance_section = any(x in t for x in [
+        "ending balance", "balance ending", "solde final", "solde de clôture",
+        "الرصيد النهائي", "رصيد ختامي", "الرصيد الختامي"
+    ])
+
+    return has_deposit_section and has_withdrawal_section and has_balance_section
+
+
+def parse_sectioned_deposit_withdrawal_statement(text: str) -> list[dict]:
+    """Parse sectioned bank statements.
+
+    Pattern:
+      DEPOSITS AND ADDITIONS
+        DATE DESCRIPTION AMOUNT
+      ELECTRONIC WITHDRAWALS
+        DATE DESCRIPTION AMOUNT
+      ENDING BALANCE
+        DATE AMOUNT  <-- balance history, not transactions
+
+    International EN/FR/AR-safe: section semantics determine type.
+    """
+    import re
+
+    raw = str(text or "")
+    lines = [ln.strip() for ln in raw.splitlines() if ln.strip()]
+
+    year_match = re.search(r"(20\d{2})", raw)
+    year = int(year_match.group(1)) if year_match else 2024
+
+    deposit_header_re = re.compile(
+        r"(DEPOSITS?\s+AND\s+ADDITIONS?|DEPOSITS?|ADDITIONS?|D[ÉE]P[ÔO]TS?|CR[ÉE]DITS?|الإيداعات|ايداعات|إيداعات|دائن)",
+        re.I,
+    )
+    withdrawal_header_re = re.compile(
+        r"(ELECTRONIC\s+WITHDRAWALS?|WITHDRAWALS?|DEBITS?|RETRAITS?|D[ÉE]BITS?|PR[ÉE]L[ÈE]VEMENTS?|السحوبات|سحوبات|خصم|مدين)",
+        re.I,
+    )
+    ending_balance_re = re.compile(
+        r"(ENDING\s+BALANCE|BALANCE\s+ENDING|SOLDE\s+FINAL|SOLDE\s+DE\s+CL[ÔO]TURE|الرصيد\s+النهائي|رصيد\s+ختامي|الرصيد\s+الختامي)",
+        re.I,
+    )
+    total_re = re.compile(r"^(TOTAL|TOTAUX|مجموع|إجمالي|اجمالي)\b", re.I)
+
+    tx_re = re.compile(
+        r"^(?P<date>\d{1,2}/\d{1,2})\s+"
+        r"(?P<desc>.*?)\s+"
+        r"\$?\s*(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+(?:\.\d{2}))\s*$"
+    )
+
+    section = None
+    transactions = []
+    excluded_balance_rows = []
+
+    for line in lines:
+        upper = line.upper()
+
+        if ending_balance_re.search(line):
+            section = "balance"
+            continue
+        if deposit_header_re.search(line) and not total_re.search(line):
+            section = "income"
+            continue
+        if withdrawal_header_re.search(line) and not total_re.search(line):
+            section = "expense"
+            continue
+
+        if not section or total_re.search(line):
+            continue
+
+        m = tx_re.match(line)
+        if not m:
+            continue
+
+        mmdd = m.group("date")
+        month, day = [int(x) for x in mmdd.split("/")]
+        iso_date = f"{year}-{month:02d}-{day:02d}"
+        desc = m.group("desc").strip()
+        amount = float(m.group("amount").replace(",", ""))
+
+        if section == "balance":
+            excluded_balance_rows.append({
+                "date": iso_date,
+                "amount": amount,
+                "desc": line[:120],
+            })
+            continue
+
+        signed = amount if section == "income" else -amount
+
+        transactions.append({
+            "date": iso_date,
+            "description": desc,
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": section,
+            "currency": "USD",
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": section,
+            "parser_family": "sectioned_deposit_withdrawal_statement",
+        })
+
+    income_total = round(sum(tx["amount"] for tx in transactions if tx["type"] == "income"), 2)
+    expense_total = round(sum(abs(tx["amount"]) for tx in transactions if tx["type"] == "expense"), 2)
+
+    print("SECTIONED_DW_STATEMENT_EXTRACTED", {
+        "transactions": len(transactions),
+        "income": sum(1 for tx in transactions if tx["type"] == "income"),
+        "expenses": sum(1 for tx in transactions if tx["type"] == "expense"),
+        "income_total": income_total,
+        "expense_total": expense_total,
+        "balance_rows_excluded": len(excluded_balance_rows),
+        "balance_samples": excluded_balance_rows[:5],
+    })
+
+    return transactions
+
 def extract_transactions(text: str) -> list[dict]:
+    if is_sectioned_deposit_withdrawal_statement(text):
+        print("STATEMENT_LAYOUT_DETECTED", "sectioned_deposit_withdrawal_statement")
+        txs = parse_sectioned_deposit_withdrawal_statement(text)
+        if txs:
+            print("SECTIONED_DW_STATEMENT_ROUTE", {
+                "transactions": len(txs),
+                "income": sum(1 for tx in txs if tx.get("type") == "income"),
+                "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+            })
+            return txs
+
     if is_visual_debit_credit_balance_table(text):
         print("STATEMENT_LAYOUT_DETECTED", "visual_debit_credit_balance_table")
         txs = parse_visual_debit_credit_balance_table(text)
