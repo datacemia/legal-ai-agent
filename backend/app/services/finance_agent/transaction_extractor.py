@@ -9911,7 +9911,129 @@ def parse_sectioned_balance_history_statement(text: str) -> list[dict]:
     return transactions
 
 
+
+def is_typed_transaction_table_statement(text: str) -> bool:
+    """Global EN/FR/AR typed transaction table detector."""
+    t = str(text or "").lower()
+    return (
+        "transactions" in t
+        and "description" in t
+        and "type" in t
+        and "amount" in t
+        and ("net amount" in t or "montant net" in t or "صافي" in t)
+    )
+
+
+def parse_typed_transaction_table_statement(text: str) -> list[dict]:
+    """Parse DATE | DESCRIPTION | TYPE | AMOUNT | NET AMOUNT tables.
+
+    Used by fintech/card statements worldwide.
+    """
+    import re
+
+    raw = str(text or "")
+    lines = [ln.strip() for ln in raw.splitlines() if ln.strip()]
+
+    tx_re = re.compile(
+        r"^(?P<date>\d{1,2}/\d{1,2}/\d{4})\s+"
+        r"(?P<desc>.*?)\s+"
+        r"(?P<typ>Deposit|Purchase|ATM Withdrawal|Direct Debit|Transfer|Round Up Transfer|Fee|"
+        r"Dépôt|Depot|Achat|Retrait|Frais|Virement|تحويل|إيداع|ايداع|شراء|سحب|رسوم)\s+"
+        r"(?P<amount>-?\$?\s*\d+(?:,\d{3})*(?:\.\d{2}))\s+"
+        r"(?P<net>-?\$?\s*\d+(?:,\d{3})*(?:\.\d{2}))",
+        re.I,
+    )
+
+    def parse_money(v: str) -> float:
+        s = str(v or "").replace("$", "").replace(",", "").replace(" ", "")
+        return round(float(s), 2)
+
+    def classify_type(label: str, amount: float) -> tuple[str, bool]:
+        l = str(label or "").lower()
+
+        if any(x in l for x in ["deposit", "dépôt", "depot", "إيداع", "ايداع"]):
+            return "income", False
+
+        if any(x in l for x in ["transfer", "virement", "تحويل"]):
+            return "transfer", True
+
+        if any(x in l for x in [
+            "purchase", "atm withdrawal", "direct debit", "fee",
+            "achat", "retrait", "frais", "شراء", "سحب", "رسوم"
+        ]):
+            return "expense", False
+
+        return ("income" if amount > 0 else "expense"), False
+
+    transactions = []
+
+    for line in lines:
+        if not re.search(r"\d{1,2}/\d{1,2}/\d{4}", line):
+            continue
+
+        m = tx_re.match(line)
+        if not m:
+            continue
+
+        month, day, year = [int(x) for x in m.group("date").split("/")]
+        amount = parse_money(m.group("net"))
+        typ, is_internal_transfer = classify_type(m.group("typ"), amount)
+
+        signed = abs(amount) if typ == "income" else -abs(amount)
+        if typ == "transfer":
+            signed = amount
+
+        row = {
+            "date": f"{year:04d}-{month:02d}-{day:02d}",
+            "description": m.group("desc").strip(),
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": typ,
+            "currency": "USD",
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": typ,
+            "parser_family": "typed_transaction_table_statement",
+        }
+
+        if is_internal_transfer:
+            row["is_internal_transfer"] = True
+            row["excluded_from_financial_kpis"] = True
+            row["excluded_reason"] = "internal_transfer"
+            row["exclude_from_income"] = True
+            row["exclude_from_expense"] = True
+            row["exclude_from_score"] = True
+            row["exclude_from_savings"] = True
+            row["exclude_from_cashflow"] = True
+            row["category_hint"] = "internal_transfer"
+            row["category"] = "transfers"
+
+        transactions.append(row)
+
+    print("TYPED_TRANSACTION_TABLE_EXTRACTED", {
+        "transactions": len(transactions),
+        "income": sum(1 for tx in transactions if tx.get("type") == "income"),
+        "expenses": sum(1 for tx in transactions if tx.get("type") == "expense"),
+        "transfers": sum(1 for tx in transactions if tx.get("type") == "transfer"),
+        "income_total": round(sum(tx["amount"] for tx in transactions if tx.get("type") == "income"), 2),
+        "expense_total": round(sum(abs(tx["amount"]) for tx in transactions if tx.get("type") == "expense"), 2),
+    })
+
+    return transactions
+
 def extract_transactions(text: str) -> list[dict]:
+    if is_typed_transaction_table_statement(text):
+        print("STATEMENT_LAYOUT_DETECTED", "typed_transaction_table_statement")
+        txs = parse_typed_transaction_table_statement(text)
+        if txs:
+            print("TYPED_TRANSACTION_TABLE_ROUTE", {
+                "transactions": len(txs),
+                "income": sum(1 for tx in txs if tx.get("type") == "income"),
+                "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+                "transfers": sum(1 for tx in txs if tx.get("type") == "transfer"),
+            })
+            return txs
+
     if is_sectioned_balance_history_statement(text):
         print("STATEMENT_LAYOUT_DETECTED", "sectioned_balance_history_statement")
         txs = parse_sectioned_balance_history_statement(text)
