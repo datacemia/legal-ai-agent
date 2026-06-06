@@ -10117,25 +10117,25 @@ def parse_typed_transaction_table_statement(text: str) -> list[dict]:
 
 
 
-def is_sectioned_activity_statement(text: str) -> bool:
-    """Global sectioned activity statement detector.
 
-    Handles statements with sections like:
-    Deposits / Electronic Deposits / Checks Paid / Electronic Payments
-    and optional Daily Balance Summary.
-    """
+def is_sectioned_activity_statement(text: str) -> bool:
     t = str(text or "").lower()
-    return (
-        "daily account activity" in t
-        and "posting date" in t
-        and "description" in t
-        and "amount" in t
-        and (
-            "electronic payments" in t
-            or "checks paid" in t
-            or "electronic deposits" in t
-        )
-    )
+    has_activity = any(x in t for x in [
+        "daily account activity", "account activity", "transaction activity",
+        "activité du compte", "mouvements du compte", "opérations du compte",
+        "نشاط الحساب", "حركات الحساب", "عمليات الحساب",
+    ])
+    has_table = any(x in t for x in [
+        "posting date", "description", "amount",
+        "date d'opération", "date operation", "libellé", "libelle", "montant",
+        "تاريخ", "الوصف", "البيان", "المبلغ",
+    ])
+    has_sections = any(x in t for x in [
+        "deposits", "credits", "electronic deposits", "checks paid", "electronic payments", "withdrawals", "debits",
+        "dépôts", "depots", "crédits", "credits", "versements", "retraits", "débits", "debits", "paiements", "prélèvements", "prelevements", "chèques", "cheques",
+        "إيداعات", "إيداع", "ايداعات", "ايداع", "دائن", "مدين", "سحوبات", "مدفوعات", "خصومات", "شيكات", "تحويلات",
+    ])
+    return has_activity and has_table and has_sections
 
 
 def parse_sectioned_activity_statement(text: str) -> list[dict]:
@@ -10144,23 +10144,48 @@ def parse_sectioned_activity_statement(text: str) -> list[dict]:
     raw = str(text or "")
     lines = [ln.strip() for ln in raw.splitlines() if ln.strip()]
 
-    year_match = re.search(r"(?:statement period|statement periods?)[:\s]*.*?(20\d{2})", raw, re.I)
-    year = int(year_match.group(1)) if year_match else 2022
+    year_match = re.search(r"(20\d{2})", raw)
+    year = int(year_match.group(1)) if year_match else 2024
+
+    income_header_re = re.compile(
+        r"^(deposits?|credits?|additions?|incoming transfers?|electronic deposits?|"
+        r"d[ée]p[ôo]ts?|depots?|cr[ée]dits?|versements?|encaissements?|virements?\s+re[cç]us?|"
+        r"إيداعات|إيداع|ايداعات|ايداع|دائن|تحويلات\s+واردة|مبالغ\s+مودعة)\b",
+        re.I,
+    )
+
+    expense_header_re = re.compile(
+        r"^(withdrawals?|debits?|payments?|checks?\s+paid|electronic payments?|other withdrawals?|"
+        r"retraits?|d[ée]bits?|paiements?|pr[ée]l[èe]vements?|chèques?|cheques?|"
+        r"سحوبات|مدين|مدفوعات|خصومات|تحويلات\s+صادرة|شيكات)\b",
+        re.I,
+    )
+
+    stop_header_re = re.compile(
+        r"^(daily balance summary|balance history|how to balance|interest notice|interest rates?|fee schedule|"
+        r"r[ée]sum[ée]\s+des\s+soldes|historique\s+des\s+soldes|taux\s+d.?int[ée]r[êe]t|"
+        r"ملخص\s+الأرصدة|تاريخ\s+الرصيد|أسعار\s+الفائدة)\b",
+        re.I,
+    )
+
+    skip_re = re.compile(
+        r"^(posting date|date\s+serial|date\s+description|date\s+libell|date\s+montant|"
+        r"call\s+1-|bank deposits|statement of account|page:|statement period|cust ref|primary account|"
+        r"subtotal:?|total:?|ending balance|beginning balance|average collected balance|"
+        r"تاريخ\s+الوصف|تاريخ\s+البيان|المجموع|الرصيد)",
+        re.I,
+    )
+
+    date_amount_same = re.compile(
+        r"^(?P<date>\d{1,2}/\d{1,2})\s+(?P<desc>.*?)\s+"
+        r"(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+(?:\.\d{2}))$"
+    )
+    date_desc = re.compile(r"^(?P<date>\d{1,2}/\d{1,2})\s+(?P<desc>.+)$")
+    amount_only = re.compile(r"^(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+(?:\.\d{2}))$")
 
     section = None
     transactions = []
     pending = None
-
-    section_map = [
-        (re.compile(r"^(deposits|electronic deposits)\b", re.I), "income"),
-        (re.compile(r"^(checks paid|electronic payments|other withdrawals)\b", re.I), "expense"),
-        (re.compile(r"^(daily balance summary|how to balance|interest notice)\b", re.I), None),
-    ]
-
-    date_amount_same = re.compile(
-        r"^(?P<date>\d{1,2}/\d{1,2})\s+(?P<desc>.*?)\s+(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+(?:\.\d{2}))$"
-    )
-    amount_only = re.compile(r"^(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+(?:\.\d{2}))$")
 
     def make_date(mmdd: str) -> str:
         m, d = [int(x) for x in mmdd.split("/")]
@@ -10171,14 +10196,12 @@ def parse_sectioned_activity_statement(text: str) -> list[dict]:
 
     def flush_pending():
         nonlocal pending
-        if not pending:
-            return
-        if pending.get("amount") is None:
+        if not pending or pending.get("amount") is None:
             pending = None
             return
 
-        typ = pending["type"]
         amt = money(pending["amount"])
+        typ = pending["type"]
         signed = amt if typ == "income" else -amt
 
         transactions.append({
@@ -10196,49 +10219,35 @@ def parse_sectioned_activity_statement(text: str) -> list[dict]:
         pending = None
 
     for line in lines:
-        low = line.lower()
-
-        if re.search(r"^(subtotal|subtotal:|total\b|ending balance|beginning balance|average collected balance)", low):
+        if stop_header_re.search(line):
             flush_pending()
+            section = None
             continue
 
-        matched_section = False
-        for rx, new_section in section_map:
-            if rx.search(line):
-                flush_pending()
-                section = new_section
-                matched_section = True
-                break
-        if matched_section:
+        if income_header_re.search(line):
+            flush_pending()
+            section = "income"
             continue
 
-        if section is None:
+        if expense_header_re.search(line):
+            flush_pending()
+            section = "expense"
             continue
 
-        if re.search(r"^(posting date|date\s+serial|call 1-800|bank deposits|statement of account|page:|statement period|cust ref|primary account)", line, re.I):
+        if section is None or skip_re.search(line):
             continue
 
         m = date_amount_same.match(line)
         if m:
             flush_pending()
-            pending = {
-                "date": make_date(m.group("date")),
-                "desc": [m.group("desc").strip()],
-                "amount": m.group("amount"),
-                "type": section,
-            }
+            pending = {"date": make_date(m.group("date")), "desc": [m.group("desc").strip()], "amount": m.group("amount"), "type": section}
             flush_pending()
             continue
 
-        dm = re.match(r"^(?P<date>\d{1,2}/\d{1,2})\s+(?P<desc>.+)$", line)
+        dm = date_desc.match(line)
         if dm:
             flush_pending()
-            pending = {
-                "date": make_date(dm.group("date")),
-                "desc": [dm.group("desc").strip()],
-                "amount": None,
-                "type": section,
-            }
+            pending = {"date": make_date(dm.group("date")), "desc": [dm.group("desc").strip()], "amount": None, "type": section}
             continue
 
         am = amount_only.match(line)
@@ -10247,10 +10256,8 @@ def parse_sectioned_activity_statement(text: str) -> list[dict]:
             flush_pending()
             continue
 
-        if pending:
-            # Ignore pure card/check image IDs but keep merchant/details.
-            if not re.fullmatch(r"\d{8,}", line):
-                pending["desc"].append(line)
+        if pending and not re.fullmatch(r"\d{8,}", line):
+            pending["desc"].append(line)
 
     flush_pending()
 
