@@ -1336,46 +1336,6 @@ def handle_finance_ai(job: Job, db):
 
     # Global post-KPI metadata guard.
     # Removes statement/rate/disclosure rows that can look like dated transactions.
-    metadata_excluded = []
-    metadata_kept = []
-
-    for tx in kpi_transactions:
-        desc = str(tx.get("description") or tx.get("desc") or "").lower()
-        is_metadata = any(p in desc for p in [
-            "interest rate",
-            "interest rates",
-            "credit interest",
-            "debit interest",
-            "automatic limit",
-            "excess @",
-            "p.a.",
-            "tier 1",
-            "tier 2",
-            "page 1 of",
-            "page 2 of",
-            "page 3 of",
-        ])
-
-        if is_metadata:
-            tx["excluded_from_financial_kpis"] = True
-            tx["excluded_reason"] = "global_statement_metadata_guard"
-            metadata_excluded.append({
-                "date": tx.get("date"),
-                "amount": tx.get("amount"),
-                "type": tx.get("type"),
-                "desc": (tx.get("description") or tx.get("desc") or "")[:160],
-            })
-            continue
-
-        metadata_kept.append(tx)
-
-    if metadata_excluded:
-        print("GLOBAL_STATEMENT_METADATA_GUARD", {
-            "count": len(metadata_excluded),
-            "samples": metadata_excluded[:20],
-        })
-
-    kpi_transactions = metadata_kept
 
     savings_opportunities = detect_savings_opportunities(
         transactions=kpi_transactions,
@@ -1390,46 +1350,6 @@ def handle_finance_ai(job: Job, db):
     )
 
 
-    metadata_excluded = []
-    metadata_kept = []
-
-    for tx in kpi_transactions:
-        desc = str(tx.get("description") or tx.get("desc") or "").lower()
-        is_metadata = any(p in desc for p in [
-            "interest rate",
-            "interest rates",
-            "credit interest",
-            "debit interest",
-            "automatic limit",
-            "excess @",
-            "p.a.",
-            "tier 1",
-            "tier 2",
-            "page 1 of",
-            "page 2 of",
-            "page 3 of",
-        ])
-
-        if is_metadata:
-            tx["excluded_from_financial_kpis"] = True
-            tx["excluded_reason"] = "global_statement_metadata_guard"
-            metadata_excluded.append({
-                "date": tx.get("date"),
-                "amount": tx.get("amount"),
-                "type": tx.get("type"),
-                "desc": (tx.get("description") or tx.get("desc") or "")[:160],
-            })
-            continue
-
-        metadata_kept.append(tx)
-
-    if metadata_excluded:
-        print("GLOBAL_STATEMENT_METADATA_GUARD", {
-            "count": len(metadata_excluded),
-            "samples": metadata_excluded[:20],
-        })
-
-    kpi_transactions = metadata_kept
 
     audit_tx_stage("TX_STAGE_4_BEFORE_EXPENSE_FULL_AUDIT", kpi_transactions)
 
@@ -1484,6 +1404,47 @@ def handle_finance_ai(job: Job, db):
         fallback_income=effective_fallback_income,
         output_language=output_language,
     )
+
+    metadata_excluded = []
+    metadata_kept = []
+
+    for tx in kpi_transactions:
+        desc = str(tx.get("description") or tx.get("desc") or "").lower()
+        is_metadata = any(p in desc for p in [
+            "interest rate",
+            "interest rates",
+            "credit interest",
+            "debit interest",
+            "automatic limit",
+            "excess @",
+            "p.a.",
+            "tier 1",
+            "tier 2",
+            "page 1 of",
+            "page 2 of",
+            "page 3 of",
+        ])
+
+        if is_metadata:
+            tx["excluded_from_financial_kpis"] = True
+            tx["excluded_reason"] = "global_statement_metadata_guard"
+            metadata_excluded.append({
+                "date": tx.get("date"),
+                "amount": tx.get("amount"),
+                "type": tx.get("type"),
+                "desc": (tx.get("description") or tx.get("desc") or "")[:160],
+            })
+            continue
+
+        metadata_kept.append(tx)
+
+    if metadata_excluded:
+        print("GLOBAL_STATEMENT_METADATA_GUARD", {
+            "count": len(metadata_excluded),
+            "samples": metadata_excluded[:20],
+        })
+
+    kpi_transactions = metadata_kept
 
     print(
         "EXPENSE_TOTAL_RECALC",
