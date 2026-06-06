@@ -9763,8 +9763,8 @@ def parse_sectioned_balance_history_statement(text: str) -> list[dict]:
             re.I,
         ))
 
-    income_start = next((i for i, ln in enumerate(lines) if starts_income_section(ln)), -1)
-    expense_start = next((i for i, ln in enumerate(lines) if i > income_start and starts_expense_section(ln)), -1)
+    income_start = next((i for i, ln in enumerate(lines) if starts_income_section(ln) and "$" not in ln), -1)
+    expense_start = next((i for i, ln in enumerate(lines) if i > income_start and starts_expense_section(ln) and "$" not in ln), -1)
     balance_start = next((i for i, ln in enumerate(lines) if i > expense_start and starts_balance_section(ln)), -1)
 
     sections = []
