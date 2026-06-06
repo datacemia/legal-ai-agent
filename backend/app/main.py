@@ -39,23 +39,6 @@ from app.api import api_keys
 from app.api import public_api
 
 # Import models so SQLAlchemy registers all tables before create_all().
-from app.models.agent0_waitlist import Agent0Waitlist
-from app.models.agent_trial_usage import AgentTrialUsage
-from app.models.analysis import AnalysisResult
-from app.models.api_key import ApiKey
-from app.models.api_usage import ApiUsage
-from app.models.business_analysis import BusinessAnalysis
-from app.models.contact import ContactRequest
-from app.models.document import Document
-from app.models.finance_analysis import FinanceAnalysis
-from app.models.finance_chat_message import FinanceChatMessage
-from app.models.organization import Organization
-from app.models.organization_member import OrganizationMember
-from app.models.organization_usage_log import OrganizationUsageLog
-from app.models.payment import Payment
-from app.models.study_analysis import StudyAnalysis, StudyAttempt
-from app.models.usage_log import UsageLog
-from app.models.user import User
 
 
 app = FastAPI(

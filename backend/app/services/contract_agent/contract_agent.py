@@ -9,15 +9,6 @@ from app.services.contract_agent.risk_explainer import (
     build_risk_explanation,
 )
 from app.services.contract_agent.clause_title_extractor import extract_clause_title
-from app.services.contract_agent.cross_clause_analysis import (
-    analyze_cross_clause_risks,
-)
-from app.services.contract_agent.cross_clause_conflicts import (
-    detect_cross_clause_conflicts,
-)
-from app.services.contract_agent.obligation_extractor import (
-    extract_contract_obligations,
-)
 from app.services.contract_agent.timeline_extractor import (
     extract_contract_timeline,
 )
@@ -42,9 +33,6 @@ from app.services.contract_agent.executive_risk_narrative import (
 from app.services.contract_agent.executive_report_builder import (
     build_executive_report,
 )
-from app.services.contract_agent.enterprise_audit import (
-    generate_enterprise_audit,
-)
 from app.services.contract_agent.semantic_negotiation import (
     get_semantic_negotiation,
 )
@@ -52,12 +40,8 @@ from app.services.contract_agent.legal_reasoning_templates import (
     get_reasoning_for_text,
 )
 from app.services.contract_agent.contract_taxonomy import (
-    CLAUSE_TYPES,
-    CLAUSE_PRIORITY_ORDER,
     detect_clause_type_from_taxonomy,
-    get_all_critical_terms,
     has_clause_type_signal,
-    is_critical_clause_text,
 )
 from app.services.contract_agent.jurisdiction_profiles import (
     detect_jurisdiction,

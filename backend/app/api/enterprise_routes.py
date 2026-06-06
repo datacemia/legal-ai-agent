@@ -124,7 +124,7 @@ def get_enterprise_me(
         db.query(OrganizationAgent)
         .filter(
             OrganizationAgent.organization_id == organization.id,
-            OrganizationAgent.enabled == True,
+            OrganizationAgent.enabled,
         )
         .all()
     )

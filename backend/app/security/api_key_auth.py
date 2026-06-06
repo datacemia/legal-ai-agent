@@ -51,7 +51,7 @@ def get_current_api_context(
         db.query(ApiKey)
         .filter(
             ApiKey.key_hash == key_hash,
-            ApiKey.is_active == True,
+            ApiKey.is_active,
         )
         .first()
     )

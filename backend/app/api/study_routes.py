@@ -1,6 +1,5 @@
 import hashlib
 import json
-import os
 import time
 import uuid
 from datetime import datetime
@@ -20,7 +19,6 @@ from app.models.uploaded_file import UploadedFile
 from app.schemas.study_schema import StudyHistoryItem
 
 from app.services.study_agent.study_parser import extract_study_text
-from app.services.study_agent.study_ai_agent import analyze_study_content
 from app.services.job_service import create_job
 from app.services.supabase_storage_service import upload_file_to_supabase_storage
 from app.services.enterprise_service import (

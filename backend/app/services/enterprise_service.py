@@ -60,7 +60,7 @@ def get_enabled_enterprise_agent(
         .filter(
             OrganizationAgent.organization_id == organization_id,
             OrganizationAgent.agent_slug == agent_slug,
-            OrganizationAgent.enabled == True,
+            OrganizationAgent.enabled,
         )
         .first()
     )

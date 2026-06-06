@@ -16,25 +16,8 @@ from app.models.job import Job
 from app.models.uploaded_file import UploadedFile
 from app.schemas.finance_schema import FinanceHistoryItem
 
-from app.services.finance_agent.statement_parser import extract_statement_text
-from app.services.finance_agent.finance_ai_agent import analyze_bank_statement
 from app.services.finance_agent.finance_chat_agent import answer_finance_question
 
-from app.services.finance_agent.transaction_extractor import extract_transactions
-from app.services.finance_agent.subscription_detector import detect_recurring_subscriptions
-from app.services.finance_agent.budget_engine import build_recommended_budget
-from app.services.finance_agent.forecasting import predict_cashflow
-from app.services.finance_agent.scoring import calculate_financial_scores
-from app.services.finance_agent.charts_builder import build_financial_charts
-from app.services.finance_agent.savings_opportunities import (
-    detect_savings_opportunities,
-)
-from app.services.finance_agent.insights_engine import (
-    generate_financial_insights,
-)
-from app.services.finance_agent.alerts_engine import (
-    generate_financial_alerts,
-)
 from app.services.supabase_storage_service import (
     upload_file_to_supabase_storage,
 )
