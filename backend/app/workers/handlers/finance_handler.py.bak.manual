@@ -548,26 +548,6 @@ def finance_progress_message(key: str, language: str) -> str:
     )
 
 
-
-def normalize_signed_amounts_before_kpi(transactions):
-    normalized = []
-    for tx in transactions or []:
-        if not isinstance(tx, dict):
-            continue
-        try:
-            amount = float(tx.get("amount") or 0)
-        except Exception:
-            amount = 0.0
-        if tx.get("signed_amount") is None:
-            tx["signed_amount"] = amount
-        if tx.get("_locked_amount") is None:
-            tx["_locked_amount"] = tx["signed_amount"]
-        if tx.get("locked_amount") is None:
-            tx["locked_amount"] = tx["signed_amount"]
-        normalized.append(tx)
-    return normalized
-
-
 def handle_finance_ai(job: Job, db):
     input_data = get_job_input(job)
 
@@ -730,8 +710,6 @@ def handle_finance_ai(job: Job, db):
             elif amount < 0:
                 tx["type"] = "expense"
 
-    transactions = normalize_signed_amounts_before_kpi(transactions)
-
     audit_tx_stage("TX_STAGE_2_AFTER_CANONICALIZE", transactions)
 
 
@@ -773,8 +751,6 @@ def handle_finance_ai(job: Job, db):
         )
     ]
 
-
-    kpi_transactions = normalize_signed_amounts_before_kpi(kpi_transactions)
 
     audit_tx_stage("TX_STAGE_3_KPI_TRANSACTIONS_CREATED", kpi_transactions)
 

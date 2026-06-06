@@ -813,22 +813,6 @@ def parse_amount(value: str) -> float:
 
     return sign * float(raw)
 
-
-def ensure_transaction_signed_amount(tx):
-    if not isinstance(tx, dict):
-        return tx
-    if tx.get("signed_amount") is None:
-        try:
-            tx["signed_amount"] = float(tx.get("amount") or 0)
-        except Exception:
-            tx["signed_amount"] = 0.0
-    if tx.get("_locked_amount") is None:
-        tx["_locked_amount"] = tx["signed_amount"]
-    if tx.get("locked_amount") is None:
-        tx["locked_amount"] = tx["signed_amount"]
-    return tx
-
-
 def normalize_line_for_amount_detection(line: str) -> str:
     """Remove date-like tokens before money detection.
 
@@ -2303,23 +2287,7 @@ def extract_transaction_amount(line: str) -> float | None:
     if selected_token is not None:
         return parse_terminal_amount(selected_token, line)
 
-    amount = parse_terminal_amount(numbers[0], line)
-
-    # HOTFIX_V2_ZERO_AMOUNT_REPAIR:
-    # Avoid accepting 0.0 when the line contains a visible non-zero amount.
-    if amount == 0 and len(numbers) >= 1:
-        parsed_candidates = []
-        for token in numbers:
-            try:
-                value = parse_terminal_amount(token, line)
-                if value != 0:
-                    parsed_candidates.append(value)
-            except Exception:
-                pass
-        if parsed_candidates:
-            amount = max(parsed_candidates, key=lambda x: abs(x))
-
-    return amount
+    return parse_terminal_amount(numbers[0], line)
 
 
 
@@ -9478,7 +9446,6 @@ def extract_transactions(text: str) -> list[dict]:
 
         signed_amount = amount
 
-        tx = ensure_transaction_signed_amount(tx)
         print(
             "FINAL_TX_DEBUG",
             {
@@ -9646,7 +9613,6 @@ def extract_transactions(text: str) -> list[dict]:
 
         transactions.append(tx)
 
-        tx = ensure_transaction_signed_amount(tx)
         print(
             "FINAL_TX_DEBUG",
             {
