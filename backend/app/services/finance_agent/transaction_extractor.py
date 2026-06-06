@@ -10772,16 +10772,6 @@ def parse_global_date_boundary_ledger(text: str) -> list[dict]:
 
 
 def extract_transactions(text: str) -> list[dict]:
-    txs = parse_global_date_boundary_ledger(text)
-    if txs and len(txs) >= 5:
-        print("STATEMENT_LAYOUT_DETECTED", "global_date_boundary_ledger")
-        print("GLOBAL_DATE_BOUNDARY_LEDGER_ROUTE", {
-            "transactions": len(txs),
-            "income": sum(1 for tx in txs if tx.get("type") == "income"),
-            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
-        })
-        return txs
-
     if (
         "date amount description" in str(text or "").lower()
         or re.search(r"(?m)^\s*\d{4}\s+\d+\.\d{2}\s+\S+", str(text or ""))
@@ -10803,7 +10793,18 @@ def extract_transactions(text: str) -> list[dict]:
                 "layout": "sectioned_activity_statement",
                 "action": "skip_composite_mixed_period_pdf",
             })
-            return []
+        
+    txs = parse_global_date_boundary_ledger(text)
+    if txs and len(txs) >= 5:
+        print("STATEMENT_LAYOUT_DETECTED", "global_date_boundary_ledger")
+        print("GLOBAL_DATE_BOUNDARY_LEDGER_ROUTE", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+        })
+        return txs
+
+    return []
         else:
             print("STATEMENT_LAYOUT_DETECTED", "sectioned_activity_statement")
             txs = parse_sectioned_activity_statement(text)
