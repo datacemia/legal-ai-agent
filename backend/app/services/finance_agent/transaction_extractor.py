@@ -11350,6 +11350,7 @@ def extract_transactions(text: str) -> list[dict]:
                 "layout": "sectioned_activity_statement",
                 "action": "skip_composite_mixed_period_pdf",
             })
+            return []
         
     txs = parse_global_date_boundary_ledger(text)
     if txs and len(txs) >= 5:
