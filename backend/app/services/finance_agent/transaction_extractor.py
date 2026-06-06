@@ -10321,6 +10321,7 @@ def extract_transactions(text: str) -> list[dict]:
                 "layout": "sectioned_activity_statement",
                 "action": "skip_composite_mixed_period_pdf",
             })
+            return []
         else:
             print("STATEMENT_LAYOUT_DETECTED", "sectioned_activity_statement")
             txs = parse_sectioned_activity_statement(text)
