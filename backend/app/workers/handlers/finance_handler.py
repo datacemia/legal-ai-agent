@@ -1459,6 +1459,56 @@ def handle_finance_ai(job: Job, db):
 
     kpi_transactions = metadata_kept
 
+    # Global balance-chain no-op guard:
+    # Exclude rows that look like debit/fee transactions but do not change the running balance.
+    # This avoids counting informational fee rows displayed inside card/FX settlement details.
+    no_op_excluded = []
+    no_op_kept = []
+    prev_balance = None
+
+    for tx in kpi_transactions:
+        balance_raw = tx.get("balance") or tx.get("_balance")
+        amount = abs(float(tx.get("amount") or 0))
+
+        try:
+            balance = float(balance_raw) if balance_raw is not None else None
+        except Exception:
+            balance = None
+
+        is_no_op_balance_row = (
+            tx.get("type") == "expense"
+            and amount > 0
+            and balance is not None
+            and prev_balance is not None
+            and round(abs(prev_balance - balance), 2) == 0
+        )
+
+        if is_no_op_balance_row:
+            tx["excluded_from_financial_kpis"] = True
+            tx["excluded_reason"] = "balance_chain_noop_row"
+            no_op_excluded.append({
+                "date": tx.get("date"),
+                "amount": tx.get("amount"),
+                "balance": balance,
+                "prev_balance": prev_balance,
+                "type": tx.get("type"),
+                "desc": (tx.get("description") or tx.get("desc") or "")[:160],
+            })
+            prev_balance = balance
+            continue
+
+        no_op_kept.append(tx)
+        if balance is not None:
+            prev_balance = balance
+
+    if no_op_excluded:
+        print("BALANCE_CHAIN_NOOP_GUARD", {
+            "count": len(no_op_excluded),
+            "samples": no_op_excluded[:20],
+        })
+
+    kpi_transactions = no_op_kept
+
     print(
         "EXPENSE_TOTAL_RECALC",
         round(
