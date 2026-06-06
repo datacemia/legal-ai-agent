@@ -10011,6 +10011,18 @@ def parse_typed_transaction_table_statement(text: str) -> list[dict]:
         date_token = dm.group("date")
         rest = line[dm.end():].strip()
         desc_parts = []
+
+        # Same-line full row after the date:
+        # DATE description TYPE amount net_amount
+        tm_rest = type_amount_re.search(rest)
+        if tm_rest:
+            label = tm_rest.group("typ")
+            net = parse_money(tm_rest.group("net"))
+            desc = rest[:tm_rest.start()].strip()
+            transactions.append(make_row(date_token, desc, label, net))
+            i += 1
+            continue
+
         if rest:
             desc_parts.append(rest)
 
