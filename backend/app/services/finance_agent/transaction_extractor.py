@@ -9695,12 +9695,12 @@ def parse_sectioned_balance_history_statement(text: str) -> list[dict]:
     year = int(year_match.group(1)) if year_match else 2020
 
     deposit_header_re = re.compile(
-        r"(DEPOSITS?\s*/\s*CREDITS?|DEPOSITS?\s+CREDITS?|DEPOSITS?,\s*CREDITS?|"
+        r"^(DEPOSITS?\s*/?|CREDITS?|DEPOSITS?\s*/\s*CREDITS?|DEPOSITS?\s+CREDITS?|DEPOSITS?,\s*CREDITS?|"
         r"DEPOSITS?\s+AND\s+ADDITIONS?|D[ÉE]P[ÔO]TS?|CR[ÉE]DITS?|الإيداعات|ايداعات|إيداعات|دائن)",
         re.I,
     )
     withdrawal_header_re = re.compile(
-        r"(WITHDRAWALS?\s*/\s*DEBITS?|WITHDRAWALS?\s+DEBITS?|DEBITS?\s+PAID|WITHDRAWALS?|DEBITS?|"
+        r"^(WITHDRAWALS?\s*/?|DEBITS?\s+PAID|DEBITS?|WITHDRAWALS?\s*/\s*DEBITS?|WITHDRAWALS?\s+DEBITS?|WITHDRAWALS?|"
         r"RETRAITS?|D[ÉE]BITS?|PR[ÉE]L[ÈE]VEMENTS?|السحوبات|سحوبات|خصم|مدين)",
         re.I,
     )
