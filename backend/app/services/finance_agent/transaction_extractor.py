@@ -9752,12 +9752,12 @@ def parse_sectioned_balance_history_statement(text: str) -> list[dict]:
             sections.append((current, []))
             continue
 
-        if deposit_header_re.search(line) and "$" not in line:
+        if deposit_header_re.match(line) and "$" not in line:
             current = "income"
             sections.append((current, []))
             continue
 
-        if withdrawal_header_re.search(line) and "$" not in line:
+        if withdrawal_header_re.match(line) and "$" not in line:
             current = "expense"
             sections.append((current, []))
             continue
