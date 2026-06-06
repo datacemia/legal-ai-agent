@@ -10805,17 +10805,6 @@ def extract_transactions(text: str) -> list[dict]:
         return txs
 
     return []
-        else:
-            print("STATEMENT_LAYOUT_DETECTED", "sectioned_activity_statement")
-            txs = parse_sectioned_activity_statement(text)
-            if txs:
-                print("SECTIONED_ACTIVITY_STATEMENT_ROUTE", {
-                    "transactions": len(txs),
-                    "income": sum(1 for tx in txs if tx.get("type") == "income"),
-                    "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
-                })
-                return txs
-
     if is_typed_transaction_table_statement(text):
         print("STATEMENT_LAYOUT_DETECTED", "typed_transaction_table_statement")
         txs = parse_typed_transaction_table_statement(text)
