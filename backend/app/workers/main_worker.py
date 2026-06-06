@@ -3,6 +3,7 @@ from datetime import UTC, datetime
 
 from app.database import SessionLocal
 from app.models.job import Job
+from app.models.user import User  # needed for jobs.user_id FK resolution
 
 from app.workers.handlers.study_handler import (
     handle_study_ai,
