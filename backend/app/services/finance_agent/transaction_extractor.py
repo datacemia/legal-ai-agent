@@ -10294,17 +10294,43 @@ def parse_sectioned_activity_statement(text: str) -> list[dict]:
     return transactions
 
 
+
+def has_composite_statement_periods(text: str) -> bool:
+    """Global EN/FR/AR guard for PDFs mixing multiple statement periods."""
+    import re
+
+    raw = str(text or "")
+
+    patterns = [
+        r"(?:Statement Periods?|Statement Period)\s*:?\s*([A-Za-z]{3,9}\s+\d{1,2}\s+\d{4}\s*[-–]\s*[A-Za-z]{3,9}\s+\d{1,2}\s+\d{4})",
+        r"(?:Période|Periode|Période du relevé|Periode du releve)\s*:?\s*([A-Za-zÀ-ÿ]{3,12}\s+\d{1,2}\s+\d{4}\s*[-–]\s*[A-Za-zÀ-ÿ]{3,12}\s+\d{1,2}\s+\d{4})",
+        r"(?:فترة|فترة كشف الحساب|مدة الكشف)\s*:?\s*([^\n]{6,80})",
+    ]
+
+    periods = set()
+    for pat in patterns:
+        for m in re.finditer(pat, raw, re.I):
+            periods.add(re.sub(r"\s+", " ", m.group(1).strip()).lower())
+
+    return len(periods) > 1
+
 def extract_transactions(text: str) -> list[dict]:
     if is_sectioned_activity_statement(text):
-        print("STATEMENT_LAYOUT_DETECTED", "sectioned_activity_statement")
-        txs = parse_sectioned_activity_statement(text)
-        if txs:
-            print("SECTIONED_ACTIVITY_STATEMENT_ROUTE", {
-                "transactions": len(txs),
-                "income": sum(1 for tx in txs if tx.get("type") == "income"),
-                "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+        if has_composite_statement_periods(text):
+            print("COMPOSITE_STATEMENT_PERIOD_GUARD", {
+                "layout": "sectioned_activity_statement",
+                "action": "skip_composite_mixed_period_pdf",
             })
-            return txs
+        else:
+            print("STATEMENT_LAYOUT_DETECTED", "sectioned_activity_statement")
+            txs = parse_sectioned_activity_statement(text)
+            if txs:
+                print("SECTIONED_ACTIVITY_STATEMENT_ROUTE", {
+                    "transactions": len(txs),
+                    "income": sum(1 for tx in txs if tx.get("type") == "income"),
+                    "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+                })
+                return txs
 
     if is_typed_transaction_table_statement(text):
         print("STATEMENT_LAYOUT_DETECTED", "typed_transaction_table_statement")
