@@ -1100,6 +1100,56 @@ def extract_transaction_money_numbers(line: str) -> list[str]:
     )
 
 
+
+def correct_date_amount_fusion(parsed_amount: float, raw_token: str, line: str) -> float:
+    """Global OCR guard.
+
+    Fix examples:
+      01-04 600.00  parsed as 4600.00 -> 600.00
+      01-04 105.82  parsed as 4105.82 -> 105.82
+
+    Applies only when raw line contains a normal terminal money token and
+    parsed_amount looks like it accidentally absorbed a date digit.
+    """
+    import re
+
+    try:
+        amount = abs(float(parsed_amount or 0))
+    except Exception:
+        parsed = correct_date_amount_fusion(parsed, raw, line)
+    return parsed_amount
+
+    if amount < 1000:
+        return parsed_amount
+
+    money_tokens = re.findall(
+        r"(?<![A-Za-z0-9])(?:\d{1,3}(?:,\d{3})*|\d+)(?:[.,]\d{2})(?![A-Za-z0-9])",
+        str(line or ""),
+    )
+    if not money_tokens:
+        return parsed_amount
+
+    last = money_tokens[-1]
+    try:
+        clean = float(last.replace(",", ""))
+    except Exception:
+        return parsed_amount
+
+    # If parsed amount is like 4105.82 but visible terminal token is 105.82.
+    if clean > 0 and clean < 1000 and amount >= 1000:
+        sign = -1 if float(parsed_amount) < 0 else 1
+        print("OCR_DATE_AMOUNT_FUSION_CORRECTED", {
+            "parsed": parsed_amount,
+            "corrected": round(sign * clean, 2),
+            "token": last,
+            "line": str(line or "")[:160],
+        })
+        return round(sign * clean, 2)
+
+    return parsed_amount
+
+
+
 def parse_terminal_amount(value: str, line: str) -> float:
     """Parse a transaction movement in a terminal amount/balance pair.
 
