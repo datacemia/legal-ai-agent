@@ -652,6 +652,7 @@ def handle_finance_ai(job: Job, db):
     )
 
     transactions = extract_transactions(text)
+    transactions = append_fx_fee_transactions(transactions)
 
     # Do not deduplicate bank transactions by content.
     # Two real bank operations can have the same date, description and amount.

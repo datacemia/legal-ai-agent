@@ -814,6 +814,63 @@ def parse_amount(value: str) -> float:
     return sign * float(raw)
 
 
+
+def append_fx_fee_transactions(transactions: list[dict]) -> list[dict]:
+    """Extract FX/exchange fees from wallet rows excluded as internal transfers.
+
+    Example:
+        Change en EUR €176.00 €176.00 Frais: €1.78 €177.78 £150.00
+
+    The currency exchange principal can stay excluded from KPIs, but the fee is
+    a real expense and must be counted.
+    """
+    import re
+
+    enriched = []
+    fee_patterns = [
+        r"Frais\s*:\s*[€$£]?\s*([0-9]+(?:[.,][0-9]{1,2})?)",
+        r"Fee\s*:\s*[€$£]?\s*([0-9]+(?:[.,][0-9]{1,2})?)",
+    ]
+
+    for tx in transactions or []:
+        enriched.append(tx)
+
+        desc = str(tx.get("description") or tx.get("desc") or "")
+        if not desc:
+            continue
+
+        fee_amount = None
+        for pattern in fee_patterns:
+            match = re.search(pattern, desc, flags=re.IGNORECASE)
+            if match:
+                fee_amount = float(match.group(1).replace(",", "."))
+                break
+
+        if fee_amount is None or fee_amount <= 0:
+            continue
+
+        enriched.append({
+            "date": tx.get("date"),
+            "description": f"FX fee extracted from: {desc[:160]}",
+            "amount": -round(fee_amount, 2),
+            "signed_amount": -round(fee_amount, 2),
+            "locked_amount": -round(fee_amount, 2),
+            "_locked_amount": -round(fee_amount, 2),
+            "type": "expense",
+            "currency": tx.get("currency") or "EUR",
+            "category": "fees",
+            "category_hint": "fx_fee",
+            "is_fee": True,
+            "parent_transaction_type": tx.get("type"),
+            "parent_excluded_from_financial_kpis": tx.get("excluded_from_financial_kpis"),
+            "excluded_from_financial_kpis": False,
+            "exclude_from_expense": False,
+            "exclude_from_income": True,
+        })
+
+    return enriched
+
+
 def ensure_transaction_signed_amount(tx):
     if not isinstance(tx, dict):
         return tx
