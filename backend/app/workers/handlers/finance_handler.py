@@ -1030,14 +1030,20 @@ def handle_finance_ai(job: Job, db):
     if len(kpi_transactions) > 50 and not DEBUG_FINANCE_EXTRACTOR:
         print("KPI_INPUT_TRUNCATED", {"printed": 50, "total": len(kpi_transactions)})
 
+    # Hotfix: KPI_AUDIT must reflect parsed kpi_transactions,
+    # not stale forecast values.
+    forecast["observed_income"] = income_total
+    forecast["observed_expenses"] = expense_total
+    forecast["observed_net_cashflow"] = round(income_total - expense_total, 2)
+
     print(
         "KPI_AUDIT",
         {
             "raw_transactions": len(transactions),
             "kpi_transactions": len(kpi_transactions),
-            "income": forecast.get("observed_income"),
-            "expenses": forecast.get("observed_expenses"),
-            "net": forecast.get("observed_net_cashflow"),
+            "income": income_total,
+            "expenses": expense_total,
+            "net": round(income_total - expense_total, 2),
         },
     )
 
