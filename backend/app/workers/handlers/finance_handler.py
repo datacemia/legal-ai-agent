@@ -843,9 +843,12 @@ def handle_finance_ai(job: Job, db):
             return "cheque_number_amount_fusion"
 
         # 2) Totals / movement summaries are not transactions.
+        # Strict total-summary detection only.
+        # Do not exclude normal transactions containing REF / MOTIF / ID.
         if re.search(
             r"(TOTAUX?\s+DES\s+MOUVEMENTS|TOTAL\s+MOVEMENTS?|TOTAL\s+DEBITS?|TOTAL\s+CREDITS?|"
-            r"TOTAL\s+DES\s+OP[ÉE]RATIONS|مجموع|إجمالي|اجمالي)",
+            r"TOTAL\s+DES\s+OP[ÉE]RATIONS|TOTAL\s+TRANSACTIONS?|MOUVEMENTS\s+DU\s+MOIS|"
+            r"مجموع\s+الحركات|إجمالي\s+الحركات|اجمالي\s+الحركات)",
             upper,
             re.IGNORECASE,
         ):
@@ -940,7 +943,13 @@ def handle_finance_ai(job: Job, db):
         words = re.findall(r"[A-Za-zÀ-ÿ\u0600-\u06FF]{3,}", cleaned)
         digits = re.findall(r"\d{4,}", cleaned)
 
-        return bool(strong_markers or len(words) >= 2 or digits)
+        # Real-world safe signals:
+        # - sender/beneficiary-only rows: "De BADLYZ", "From X", Arabic sender markers
+        # - cheque/check rows with normal amounts: "CHEQUE 459" + amount 70.00
+        sender_marker = re.search(r"\b(DE|FROM|PAR|BY|من|إلى|الى)\b\s+\S+", desc, re.I)
+        cheque_marker = re.search(r"\b(CH[EÈ]QUE|CHEQUE|CHECK|CHQ|CHK|شيك|صك)\b\s*\d{1,8}\b", desc, re.I)
+
+        return bool(strong_markers or sender_marker or cheque_marker or len(words) >= 2 or digits)
 
     weak_desc_excluded = []
     kept_transactions = []
@@ -1531,7 +1540,14 @@ def handle_finance_ai(job: Job, db):
                 "kpi_transactions": len(kpi_transactions),
                 "excluded_transactions": excluded_transactions,
                 "exclusion_ratio": round(exclusion_ratio, 4),
-                "warning": "TOO_MANY_EXCLUDED_TRANSACTIONS",
+                "warning": (
+                    "EXPECTED_INTERNAL_TRANSFER_EXCLUSIONS"
+                    if all(
+                        (tx.get("is_internal_transfer") or tx.get("excluded_reason") == "internal_transfer")
+                        for tx in excluded_samples
+                    )
+                    else "TOO_MANY_EXCLUDED_TRANSACTIONS"
+                ),
                 "samples": excluded_samples,
             },
         )
