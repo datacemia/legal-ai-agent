@@ -1405,6 +1405,19 @@ def handle_finance_ai(job: Job, db):
         output_language=output_language,
     )
 
+    print("METADATA_GUARD_INPUT_DEBUG", [
+        {
+            "date": tx.get("date"),
+            "amount": tx.get("amount"),
+            "type": tx.get("type"),
+            "desc": (tx.get("description") or tx.get("desc") or "")[:200],
+        }
+        for tx in kpi_transactions
+        if any(x in str(tx.get("description") or tx.get("desc") or "").lower() for x in [
+            "interest", "rate", "automatic", "limit", "excess", "tier", "p.a"
+        ])
+    ])
+
     metadata_excluded = []
     metadata_kept = []
 
