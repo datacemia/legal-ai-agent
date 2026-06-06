@@ -9321,8 +9321,27 @@ def parse_visual_debit_credit_balance_table(text: str) -> list[dict]:
 
 
 def is_sectioned_deposit_withdrawal_statement(text: str) -> bool:
-    """International EN/FR/AR sectioned statement detector."""
+    """International EN/FR/AR simple sectioned statement detector."""
     t = str(text or "").lower()
+
+    has_balance_activity_history = (
+        "balance activity" in t
+        or "activity history" in t
+        or "balance collected" in t
+        or ("date balance" in t and "collected" in t)
+    )
+
+    print("SECTIONED_DW_DETECTOR_BALANCE_HISTORY_CHECK", {
+        "has_balance_activity_history": has_balance_activity_history,
+        "has_balance_activity": "balance activity" in t,
+        "has_activity_history": "activity history" in t,
+        "has_balance_collected": "balance collected" in t,
+        "has_date_balance_collected": ("date balance" in t and "collected" in t),
+        "preview_has_balance": t.find("balance"),
+    })
+
+    if has_balance_activity_history:
+        return False
 
     has_deposit_section = any(x in t for x in [
         "deposits and additions", "deposits", "additions",
@@ -9341,31 +9360,7 @@ def is_sectioned_deposit_withdrawal_statement(text: str) -> bool:
         "الرصيد النهائي", "رصيد ختامي", "الرصيد الختامي"
     ])
 
-    # Exclude two-column bank statements where balance history is a separate table.
-    # Those need a dedicated sectioned ledger/table parser, not the simple DW parser.
-    has_balance_activity_history = (
-        "balance activity" in t
-        or "activity history" in t
-        or ("balance collected" in t and "date balance" in t)
-    )
-
-    # Global layout guard:
-    # This is not a simple deposit/withdrawal statement if it has a separate
-    # Balance Activity History table. Those rows are balances, not transactions.
-    has_balance_activity_history = (
-        "balance activity" in t
-        or "activity history" in t
-        or "balance collected" in t
-        or ("date balance" in t and "collected" in t)
-    )
-
-    return (
-        has_deposit_section
-        and has_withdrawal_section
-        and has_balance_section
-        and not has_balance_activity_history
-    ) and not has_balance_activity_history
-
+    return has_deposit_section and has_withdrawal_section and has_balance_section
 
 def parse_sectioned_deposit_withdrawal_statement(text: str) -> list[dict]:
     """Parse sectioned bank statements.
