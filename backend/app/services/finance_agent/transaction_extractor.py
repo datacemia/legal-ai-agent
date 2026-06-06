@@ -10771,7 +10771,143 @@ def parse_global_date_boundary_ledger(text: str) -> list[dict]:
     return txs
 
 
+
+def parse_debit_credit_balance_ledger(text: str) -> list[dict]:
+    """Global EN/FR/AR Date Description Debit Credit Balance parser."""
+    import re
+
+    raw = str(text or "")
+    lines = [ln.strip() for ln in raw.splitlines() if ln.strip()]
+    normalized = raw.lower()
+
+    has_headers = (
+        ("debit" in normalized and "credit" in normalized and "balance" in normalized)
+        or ("débit" in normalized and "crédit" in normalized and "solde" in normalized)
+        or ("مدين" in normalized and "دائن" in normalized and "الرصيد" in normalized)
+    )
+    if not has_headers:
+        return []
+
+    year_m = re.search(r"(20\d{2})", raw)
+    year = int(year_m.group(1)) if year_m else 2024
+
+    month_map = {
+        "jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
+        "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12,
+        "janv": 1, "fév": 2, "fev": 2, "mars": 3, "avr": 4, "mai": 5,
+        "juin": 6, "juil": 7, "août": 8, "aout": 8, "sept": 9, "déc": 12, "dec": 12,
+    }
+
+    date_re = re.compile(
+        r"^(?P<mon>[A-Za-zÀ-ÿ]{3,9})\s+(?P<day>\d{1,2})\b\s*(?P<rest>.*)$",
+        re.I | re.UNICODE,
+    )
+    money_re = re.compile(r"\$?\s*(\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+\.\d{2})")
+
+    # Rebuild OCR columns when text extraction lists descriptions, dates, and amounts separately.
+    descriptions = []
+    dates = []
+    amounts = []
+
+    for ln in lines:
+        dm = date_re.match(ln)
+        if dm:
+            mon = month_map.get(dm.group("mon").lower())
+            if mon:
+                dates.append((mon, int(dm.group("day"))))
+            continue
+
+        if money_re.fullmatch(ln.replace(" ", "")) or re.fullmatch(r"\$?\d+(?:\.\d{2})", ln):
+            val = float(ln.replace("$", "").replace(",", "").strip())
+            amounts.append(val)
+            continue
+
+        low = ln.lower()
+        if any(k in low for k in ["purchase", "deposit", "interest", "ach", "virement", "dépot", "dépôt", "crédit", "debit", "مدين", "دائن"]):
+            descriptions.append(ln)
+
+    if not dates or not descriptions or not amounts:
+        return []
+
+    # For Bancorp-like OCR: summary amounts appear first, then descriptions, then dates.
+    # Use transaction table visible order: date count drives rows.
+    tx_count = min(len(dates), len(descriptions))
+    if tx_count < 3:
+        return []
+
+    # Extract summary totals for validation, if present.
+    summary_nums = [float(x.replace(",", "")) for x in re.findall(r"\$(\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+\.\d{2})", raw)]
+    official_credits = None
+    official_debits = None
+    if len(summary_nums) >= 4:
+        # Bancorp parsed order often includes: beginning, ending, credits, debits somewhere in first block.
+        # Use known labels if possible.
+        m_credits = re.search(r"Total Credits:\s*\$?(\d+(?:\.\d{2})?)", raw, re.I)
+        m_debits = re.search(r"Total Debits\s*\$?(\d+(?:\.\d{2})?)", raw, re.I)
+        if m_credits:
+            official_credits = float(m_credits.group(1))
+        if m_debits:
+            official_debits = float(m_debits.group(1))
+
+    # Amount stream fallback: choose amounts after summary by matching row count*3 if possible.
+    # Safer for Bancorp image OCR: derive by description keywords and known row amount order from visual table.
+    # Skip first four summary values if enough values remain.
+    detail_amounts = amounts[4:] if len(amounts) >= tx_count + 4 else amounts
+
+    txs = []
+    amt_i = 0
+
+    for idx in range(tx_count):
+        mon, day = dates[idx]
+        desc = descriptions[idx]
+        low = desc.lower()
+
+        if amt_i >= len(detail_amounts):
+            break
+
+        # In debit/credit/balance table, each row may expose tx amount plus balance.
+        # Parsed OCR frequently lists only one relevant amount per row in amount stream order.
+        amount = detail_amounts[amt_i]
+        amt_i += 1
+
+        typ = "income" if any(k in low for k in ["deposit", "interest", "credit", "ach", "crédit", "dépôt", "depot", "دائن", "إيداع"]) else "expense"
+        signed = amount if typ == "income" else -amount
+
+        txs.append({
+            "date": f"{year:04d}-{mon:02d}-{day:02d}",
+            "description": desc,
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": typ,
+            "currency": "USD" if "usd" in normalized else None,
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": typ,
+            "parser_family": "debit_credit_balance_ledger",
+        })
+
+    print("DEBIT_CREDIT_BALANCE_LEDGER_EXTRACTED", {
+        "transactions": len(txs),
+        "income": sum(1 for tx in txs if tx.get("type") == "income"),
+        "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+        "income_total": round(sum(tx["amount"] for tx in txs if tx.get("type") == "income"), 2),
+        "expense_total": round(sum(abs(tx["amount"]) for tx in txs if tx.get("type") == "expense"), 2),
+    })
+
+    return txs
+
+
 def extract_transactions(text: str) -> list[dict]:
+    txs = parse_debit_credit_balance_ledger(text)
+    if txs and len(txs) >= 3:
+        print("STATEMENT_LAYOUT_DETECTED", "debit_credit_balance_ledger")
+        print("DEBIT_CREDIT_BALANCE_LEDGER_ROUTE", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+        })
+        return txs
+
     if (
         "date amount description" in str(text or "").lower()
         or re.search(r"(?m)^\s*\d{4}\s+\d+\.\d{2}\s+\S+", str(text or ""))
