@@ -951,11 +951,42 @@ def handle_finance_ai(job: Job, db):
 
         return bool(strong_markers or sender_marker or cheque_marker or len(words) >= 2 or digits)
 
+    def is_global_non_transaction_statement_row(tx: dict) -> bool:
+        desc = str(tx.get("description") or tx.get("desc") or "").lower()
+
+        patterns = [
+            "interest rates",
+            "credit interest rates",
+            "debit interest rates",
+            "automatic limit",
+            "opening balance",
+            "closing balance",
+            "brought forward",
+            "carried forward",
+            "total debits",
+            "total credits",
+            "statement number",
+            "account number",
+        ]
+
+        return any(p in desc for p in patterns)
+
     weak_desc_excluded = []
     kept_transactions = []
 
     for tx in transactions:
         amount = abs(float(tx.get("amount") or 0))
+
+        if is_global_non_transaction_statement_row(tx):
+            tx["excluded_from_financial_kpis"] = True
+            tx["excluded_reason"] = "global_non_transaction_statement_row"
+            weak_desc_excluded.append({
+                "date": tx.get("date"),
+                "amount": tx.get("amount"),
+                "type": tx.get("type"),
+                "desc": (tx.get("description") or tx.get("desc") or "")[:160],
+            })
+            continue
 
         # Typed table rows are already structurally validated by parser family:
         # DATE + TYPE + AMOUNT + NET AMOUNT.
