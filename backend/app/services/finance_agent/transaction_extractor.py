@@ -10411,6 +10411,48 @@ def parse_date_amount_description_ledger(text: str) -> list[dict]:
             "parser_family": "date_amount_description_ledger",
         })
 
+    # Extract embedded right-column transactions left inside descriptions/unmatched lines:
+    embedded_tx_re = re.compile(
+        r"(?P<date>\d{4}|\d{1,2}/\d{1,2})\s+"
+        r"(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+\.\d{2})\s+"
+        r"(?P<desc>[A-Za-z][A-Za-z0-9 #'*./&-]{2,80})"
+    )
+
+    existing_keys = {
+        (tx["date"], round(abs(float(tx["amount"])), 2), (tx.get("description") or "")[:40])
+        for tx in transactions
+    }
+
+    for ln in lines:
+        for em in embedded_tx_re.finditer(ln):
+            d = em.group("date")
+            if "/" in d:
+                month, day = [int(x) for x in d.split("/")]
+            else:
+                month, day = int(d[:2]), int(d[2:])
+
+            amount = float(em.group("amount").replace(",", ""))
+            desc = em.group("desc").strip()
+            iso = f"{year:04d}-{month:02d}-{day:02d}"
+            key = (iso, round(amount, 2), desc[:40])
+
+            if key in existing_keys:
+                continue
+
+            transactions.append({
+                "date": iso,
+                "description": desc,
+                "amount": -round(amount, 2),
+                "signed_amount": -round(amount, 2),
+                "type": "expense",
+                "currency": "USD",
+                "locked_amount": -round(amount, 2),
+                "_locked_amount": -round(amount, 2),
+                "locked_type": "expense",
+                "parser_family": "date_amount_description_ledger",
+            })
+            existing_keys.add(key)
+
     # OCR/global vertical paired rows:
     # date
     # date
