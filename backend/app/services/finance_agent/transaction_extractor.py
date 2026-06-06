@@ -9339,81 +9339,73 @@ def parse_sectioned_deposit_withdrawal_statement(text: str) -> list[dict]:
         r"\$?\s*(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+(?:\.\d{2}))\s*$"
     )
 
-    section = None
     transactions = []
     excluded_balance_rows = []
 
-    skip_next = False
+    def find_section_index(pattern, start_at=0):
+        for idx in range(start_at, len(lines)):
+            line = lines[idx]
+            # avoid summary lines with amounts, e.g. "Deposits and additions 2 $130.00"
+            if pattern.search(line) and "$" not in line:
+                return idx
+        return -1
 
-    for i, line in enumerate(lines):
-        if skip_next:
-            skip_next = False
-            continue
+    dep_i = find_section_index(deposit_header_re)
+    wd_i = find_section_index(withdrawal_header_re, dep_i + 1 if dep_i >= 0 else 0)
+    bal_i = find_section_index(ending_balance_re, wd_i + 1 if wd_i >= 0 else 0)
 
-        upper = line.upper()
+    def parse_tx_lines(section_lines, typ):
+        for line in section_lines:
+            if total_re.search(line) or re.search(r"^\s*DATE\b", line, re.I):
+                continue
 
-        if ending_balance_re.search(line):
-            section = "balance"
-            continue
+            m = tx_re.match(line)
+            if not m:
+                continue
 
-        if deposit_header_re.search(line) and not total_re.search(line):
-            section = "income"
-            continue
+            mmdd = m.group("date")
+            month, day = [int(x) for x in mmdd.split("/")]
+            iso_date = f"{year}-{month:02d}-{day:02d}"
+            desc = m.group("desc").strip()
+            amount = float(m.group("amount").replace(",", ""))
+            signed = amount if typ == "income" else -amount
 
-        if withdrawal_header_re.search(line) and not total_re.search(line):
-            section = "expense"
-            continue
-
-        if not section or total_re.search(line):
-            continue
-
-        # OCR-safe fallback:
-        # date+description line followed by amount-only line.
-        if section in {"income", "expense"} and i + 1 < len(lines):
-            amount_only = re.match(
-                r"^\$?\s*(\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+(?:\.\d{2}))\s*$",
-                lines[i + 1],
-            )
-            date_desc_only = re.match(
-                r"^(?P<date>\d{1,2}/\d{1,2})\s+(?P<desc>.+?)\s*$",
-                line,
-            )
-            if date_desc_only and amount_only:
-                line = f"{date_desc_only.group('date')} {date_desc_only.group('desc')} {amount_only.group(1)}"
-                skip_next = True
-
-        m = tx_re.match(line)
-        if not m:
-            continue
-
-        mmdd = m.group("date")
-        month, day = [int(x) for x in mmdd.split("/")]
-        iso_date = f"{year}-{month:02d}-{day:02d}"
-        desc = m.group("desc").strip()
-        amount = float(m.group("amount").replace(",", ""))
-
-        if section == "balance":
-            excluded_balance_rows.append({
+            transactions.append({
                 "date": iso_date,
-                "amount": amount,
+                "description": desc,
+                "amount": round(signed, 2),
+                "signed_amount": round(signed, 2),
+                "type": typ,
+                "currency": "USD",
+                "locked_amount": round(signed, 2),
+                "_locked_amount": round(signed, 2),
+                "locked_type": typ,
+                "parser_family": "sectioned_deposit_withdrawal_statement",
+            })
+
+    def parse_balance_lines(section_lines):
+        for line in section_lines:
+            if re.search(r"^\s*DATE\b", line, re.I):
+                continue
+            m = tx_re.match(line)
+            if not m:
+                continue
+            month, day = [int(x) for x in m.group("date").split("/")]
+            excluded_balance_rows.append({
+                "date": f"{year}-{month:02d}-{day:02d}",
+                "amount": float(m.group("amount").replace(",", "")),
                 "desc": line[:120],
             })
-            continue
 
-        signed = amount if section == "income" else -amount
+    if dep_i >= 0 and wd_i > dep_i:
+        parse_tx_lines(lines[dep_i + 1:wd_i], "income")
 
-        transactions.append({
-            "date": iso_date,
-            "description": desc,
-            "amount": round(signed, 2),
-            "signed_amount": round(signed, 2),
-            "type": section,
-            "currency": "USD",
-            "locked_amount": round(signed, 2),
-            "_locked_amount": round(signed, 2),
-            "locked_type": section,
-            "parser_family": "sectioned_deposit_withdrawal_statement",
-        })
+    if wd_i >= 0:
+        withdrawal_end = bal_i if bal_i > wd_i else len(lines)
+        parse_tx_lines(lines[wd_i + 1:withdrawal_end], "expense")
+
+    if bal_i >= 0:
+        parse_balance_lines(lines[bal_i + 1:])
 
     income_total = round(sum(tx["amount"] for tx in transactions if tx["type"] == "income"), 2)
     expense_total = round(sum(abs(tx["amount"]) for tx in transactions if tx["type"] == "expense"), 2)
