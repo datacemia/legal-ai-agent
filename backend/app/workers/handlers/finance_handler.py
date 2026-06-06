@@ -800,6 +800,50 @@ def handle_finance_ai(job: Job, db):
 
     kpi_transactions = normalize_signed_amounts_before_kpi(kpi_transactions)
 
+    # International sanity guard:
+    # Bank statement transaction amounts should not be absurdly larger than
+    # the local running balance or common retail/business transaction scale.
+    sane_kpi_transactions = []
+    absurd_amounts = []
+
+    for tx in kpi_transactions:
+        try:
+            amount_abs = abs(float(tx.get("amount") or 0))
+            balance_abs = abs(float(tx.get("balance") or tx.get("_balance") or 0))
+        except Exception:
+            sane_kpi_transactions.append(tx)
+            continue
+
+        is_absurd = (
+            amount_abs >= 1_000_000
+            or (balance_abs > 0 and amount_abs > balance_abs * 20 and amount_abs > 10_000)
+        )
+
+        if is_absurd:
+            tx["excluded_from_financial_kpis"] = True
+            tx["excluded_reason"] = "absurd_amount_guard"
+            absurd_amounts.append({
+                "date": tx.get("date"),
+                "amount": tx.get("amount"),
+                "balance": tx.get("balance") or tx.get("_balance"),
+                "type": tx.get("type"),
+                "desc": (tx.get("description") or tx.get("desc") or "")[:120],
+            })
+            continue
+
+        sane_kpi_transactions.append(tx)
+
+    if absurd_amounts:
+        print(
+            "ABSURD_AMOUNT_GUARD",
+            {
+                "count": len(absurd_amounts),
+                "samples": absurd_amounts[:10],
+            },
+        )
+
+    kpi_transactions = sane_kpi_transactions
+
     audit_tx_stage("TX_STAGE_3_KPI_TRANSACTIONS_CREATED", kpi_transactions)
 
     print("QUALITY_CHECK")
