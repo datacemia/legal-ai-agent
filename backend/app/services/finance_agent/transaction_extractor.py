@@ -3882,6 +3882,24 @@ def normalize_untyped_incoming_credits(transactions: list[dict]) -> list[dict]:
         amount = float(row.get("amount", 0) or 0)
 
         if row.get("_balance") is not None and not row.get("_balance_locked"):
+            # International rule:
+            # Do not exclude semantically valid bank movements simply because
+            # the balance column is not locked. If a row already has a reliable
+            # type and signed amount, it must remain KPI-eligible.
+            if (
+                row.get("type") in {"income", "expense"}
+                and row.get("signed_amount") is not None
+                and abs(float(row.get("amount") or 0)) > 0
+            ):
+                row["excluded_from_financial_kpis"] = False
+                row.pop("excluded_reason", None)
+                row["category_hint"] = (
+                    row.get("category_hint")
+                    or "amount_balance_row_semantically_valid"
+                )
+                normalized.append(row)
+                continue
+
             normalized.append(
                 exclude_transaction_from_financial_kpis(
                     row,
