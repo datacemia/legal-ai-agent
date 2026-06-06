@@ -818,61 +818,47 @@ def parse_amount(value: str) -> float:
 
 
 def strip_non_transaction_balance_sections(text: str) -> str:
-    """Remove balance-summary sections before transaction extraction.
+    """Remove only balance-summary rows, not transaction sections."""
+    import re
 
-    International rule:
-    Daily balance summaries are not transactions. They are account balances.
-    EN: DAILY BALANCE SUMMARY, DATE BALANCE
-    FR: SOLDE JOURNALIER, RÉSUMÉ DES SOLDES
-    AR: الرصيد اليومي, ملخص الأرصدة
-    """
     if not text:
         return text
 
-    stop_markers = [
-        "DAILY BALANCE SUMMARY",
-        "DATE BALANCE",
-        "DATE BALA NCE",
-        "SOLDE JOURNALIER",
-        "RÉSUMÉ DES SOLDES",
-        "RESUME DES SOLDES",
-        "الرصيد اليومي",
-        "ملخص الأرصدة",
-    ]
-
-    resume_markers = [
-        "STATEMENT OF ACCOUNT",
-        "DAILY ACCOUNT ACTIVITY",
-        "POSTING DATE",
-        "DESCRIPTION AMOUNT",
-        "Electronic Payments",
-        "Deposits",
-        "Checks Paid",
-        "Call 1-800",
-        "Bank Deposits",
-    ]
-
-    lines = text.splitlines()
     kept = []
-    in_balance_section = False
+    in_balance_summary = False
 
-    for line in lines:
-        upper = line.upper()
+    balance_header_re = re.compile(
+        r"(DAILY\s+BALANCE\s+SUMMARY|DATE\s+BALA?\s*NCE|SOLDE\s+JOURNALIER|R[ÉE]SUM[ÉE]\s+DES\s+SOLDES|الرصيد\s+اليومي|ملخص\s+الأرصدة)",
+        re.IGNORECASE,
+    )
 
-        if any(marker in upper for marker in stop_markers):
-            in_balance_section = True
+    # Examples:
+    # 06105 164,852.27 06/25 116,152.40
+    # 05/31 111,957.58 06/17 126,153.26
+    balance_row_re = re.compile(
+        r"^\s*(?:\d{2}/\d{2}|\d{5})\s+[-+]?\d{1,3}(?:,\d{3})*\.\d{2}"
+        r"(?:\s+(?:\d{2}/\d{2}|\d{5})\s+[-+]?\d{1,3}(?:,\d{3})*\.\d{2})?\s*$"
+    )
+
+    transaction_section_re = re.compile(
+        r"(DAILY\s+ACCOUNT\s+ACTIVITY|POSTING\s+DATE|DESCRIPTION\s+AMOUNT|ELECTRONIC\s+PAYMENTS|DEPOSITS|CHECKS\s+PAID)",
+        re.IGNORECASE,
+    )
+
+    for line in text.splitlines():
+        if balance_header_re.search(line):
+            in_balance_summary = True
             continue
 
-        if in_balance_section and any(marker.upper() in upper for marker in resume_markers):
-            in_balance_section = False
+        if in_balance_summary and transaction_section_re.search(line):
+            in_balance_summary = False
 
-        if in_balance_section:
+        if in_balance_summary and balance_row_re.match(line):
             continue
 
         kept.append(line)
 
     return "\\n".join(kept)
-
 
 def restore_semantically_valid_kpi_rows(transactions: list[dict]) -> list[dict]:
     """International FR/EN/AR safety rule.
