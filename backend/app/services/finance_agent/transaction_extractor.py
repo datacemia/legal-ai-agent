@@ -10717,7 +10717,10 @@ def parse_global_date_boundary_ledger(text: str) -> list[dict]:
         has_credit_signal = bool(re.search(
             r"\b(cr|credit|credits|crédit|crédits|d[ée]p[ôo]t|dep[oô]t|"
             r"salaire|salary|payroll|transfert bancaire|transfer from|de\s+-|"
-            r"دائن|إيداع|ايداع|راتب)\b",
+            r"payment received|deposit|deposits|cash out visa direct|direct deposit|"
+            r"refund|refund from|received from|incoming transfer|ach credit|"
+            r"virement reçu|virement recu|versement|remboursement|"
+            r"دائن|إيداع|ايداع|راتب|تحويل وارد)\b",
             desc,
             re.I | re.UNICODE,
         ))
@@ -10740,11 +10743,13 @@ def parse_global_date_boundary_ledger(text: str) -> list[dict]:
         if has_credit_signal and len(vals) >= 2:
             amount = vals[-2]
 
-        typ = "income" if has_credit_signal and not has_debit_signal else "expense" if has_debit_signal else None
+        # Credit/income language must override generic debit/card wording.
+        # Example: Chase "Payment Received ... Cash Out Visa Direct" can still contain "Card".
+        typ = "income" if has_credit_signal else "expense" if has_debit_signal else None
         if typ is None:
             continue
 
-        signed = amount if typ == "income" else -amount
+        signed = abs(amount) if typ == "income" else -abs(amount)
 
         txs.append({
             "date": block["date"],
