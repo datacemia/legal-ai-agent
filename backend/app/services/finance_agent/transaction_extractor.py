@@ -9639,7 +9639,231 @@ def parse_sectioned_ledger_statement(text: str) -> list[dict]:
 
     return transactions
 
+
+def is_sectioned_balance_history_statement(text: str) -> bool:
+    """International EN/FR/AR sectioned statement with separate balance history."""
+    t = str(text or "").lower()
+    balance_count = t.count("balance")
+
+    has_balance_history = (
+        "balance activity" in t
+        or "activity history" in t
+        or "balance collected" in t
+        or ("date balance" in t and "collected" in t)
+        or (
+            balance_count >= 5
+            and "collected" in t
+            and "activity" in t
+            and "history" in t
+        )
+    )
+
+    has_deposit_section = any(x in t for x in [
+        "deposits/credits", "deposits credits", "deposits, credits",
+        "deposits and additions", "deposits", "credits",
+        "dépôts", "depots", "crédits",
+        "الإيداعات", "ايداعات", "إيداعات", "دائن"
+    ])
+
+    has_withdrawal_section = any(x in t for x in [
+        "withdrawals/debits", "withdrawals debits", "withdrawals",
+        "debits paid", "debits",
+        "retraits", "débits", "debits", "prélèvements", "prelevements",
+        "السحوبات", "سحوبات", "خصم", "مدين"
+    ])
+
+    return has_balance_history and has_deposit_section and has_withdrawal_section
+
+
+def parse_sectioned_balance_history_statement(text: str) -> list[dict]:
+    """Parse sectioned statements with balance history table.
+
+    Sections:
+      Deposits/Credits        -> income
+      Withdrawals/Debits Paid -> expense
+      Balance Activity History -> ignored
+    """
+    import re
+
+    raw = str(text or "")
+    lines = [ln.strip() for ln in raw.splitlines() if ln.strip()]
+
+    year_match = re.search(r"(20\d{2})", raw)
+    year = int(year_match.group(1)) if year_match else 2020
+
+    deposit_header_re = re.compile(
+        r"(DEPOSITS?\s*/\s*CREDITS?|DEPOSITS?\s+CREDITS?|DEPOSITS?,\s*CREDITS?|"
+        r"DEPOSITS?\s+AND\s+ADDITIONS?|D[ÉE]P[ÔO]TS?|CR[ÉE]DITS?|الإيداعات|ايداعات|إيداعات|دائن)",
+        re.I,
+    )
+
+    withdrawal_header_re = re.compile(
+        r"(WITHDRAWALS?\s*/\s*DEBITS?|WITHDRAWALS?\s+DEBITS?|DEBITS?\s+PAID|WITHDRAWALS?|DEBITS?|"
+        r"RETRAITS?|D[ÉE]BITS?|PR[ÉE]L[ÈE]VEMENTS?|السحوبات|سحوبات|خصم|مدين)",
+        re.I,
+    )
+
+    balance_history_re = re.compile(
+        r"(BALANCE\s+ACTIVITY|ACTIVITY\s+HISTORY|BALANCE\s+COLLECTED|"
+        r"DATE\s+BALANCE|الرصيد|رصيد)",
+        re.I,
+    )
+
+    total_re = re.compile(r"^(TOTAL|TOTAUX|مجموع|إجمالي|اجمالي)\b", re.I)
+
+    amount_only_re = re.compile(
+        r"^\$?\s*(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+(?:\.\d{2}))\s*$"
+    )
+
+    date_only_re = re.compile(
+        r"^(?P<date>\d{1,2}/\d{1,2}|[A-Za-z]{3}-\d{1,2})\s*$"
+    )
+
+    date_amount_re = re.compile(
+        r"^(?P<date>\d{1,2}/\d{1,2}|[A-Za-z]{3}-\d{1,2})\s+"
+        r"\$?\s*(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+(?:\.\d{2}))\s*$"
+    )
+
+    month_name = {
+        "jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
+        "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12,
+    }
+
+    def iso_from_token(token: str) -> str:
+        token = token.strip()
+        if "/" in token:
+            m, d = [int(x) for x in token.split("/")]
+            return f"{year}-{m:02d}-{d:02d}"
+        mon, d = token.split("-")
+        return f"{year}-{month_name[mon[:3].lower()]:02d}-{int(d):02d}"
+
+    def parse_money(token: str) -> float:
+        return float(str(token).replace(",", ""))
+
+    transactions = []
+    section = None
+    i = 0
+
+    while i < len(lines):
+        line = lines[i]
+
+        if balance_history_re.search(line):
+            section = "balance_history"
+            i += 1
+            continue
+
+        if deposit_header_re.search(line) and "$" not in line:
+            section = "income"
+            i += 1
+            continue
+
+        if withdrawal_header_re.search(line) and "$" not in line:
+            section = "expense"
+            i += 1
+            continue
+
+        if section == "balance_history":
+            i += 1
+            continue
+
+        if section not in {"income", "expense"}:
+            i += 1
+            continue
+
+        if total_re.search(line) or re.search(r"^\s*(DATE|AMOUNT|SERIAL|DESCRIPTION)\b", line, re.I):
+            i += 1
+            continue
+
+        date_token = None
+        amount = None
+        desc_parts = []
+
+        m_da = date_amount_re.match(line)
+        if m_da:
+            date_token = m_da.group("date")
+            amount = parse_money(m_da.group("amount"))
+            i += 1
+        else:
+            m_date = date_only_re.match(line)
+            if m_date and i + 1 < len(lines):
+                m_amount = amount_only_re.match(lines[i + 1])
+                if m_amount:
+                    date_token = m_date.group("date")
+                    amount = parse_money(m_amount.group("amount"))
+                    i += 2
+                else:
+                    i += 1
+                    continue
+            else:
+                # Same-line date amount description fallback.
+                m_inline = re.match(
+                    r"^(?P<date>\d{1,2}/\d{1,2}|[A-Za-z]{3}-\d{1,2})\s+"
+                    r"(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+(?:\.\d{2}))\s+"
+                    r"(?P<desc>.+)$",
+                    line,
+                )
+                if not m_inline:
+                    i += 1
+                    continue
+                date_token = m_inline.group("date")
+                amount = parse_money(m_inline.group("amount"))
+                desc_parts.append(m_inline.group("desc").strip())
+                i += 1
+
+        # Collect following description lines until next date/header/total.
+        while i < len(lines):
+            nxt = lines[i]
+            if (
+                date_only_re.match(nxt)
+                or date_amount_re.match(nxt)
+                or deposit_header_re.search(nxt)
+                or withdrawal_header_re.search(nxt)
+                or balance_history_re.search(nxt)
+                or total_re.search(nxt)
+            ):
+                break
+            if not re.search(r"^\s*(DATE|AMOUNT|SERIAL|DESCRIPTION)\b", nxt, re.I):
+                desc_parts.append(nxt)
+            i += 1
+
+        desc = " ".join(desc_parts).strip()
+        signed = amount if section == "income" else -amount
+
+        transactions.append({
+            "date": iso_from_token(date_token),
+            "description": desc,
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": section,
+            "currency": "USD",
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": section,
+            "parser_family": "sectioned_balance_history_statement",
+        })
+
+    print("SECTIONED_BALANCE_HISTORY_STATEMENT_EXTRACTED", {
+        "transactions": len(transactions),
+        "income": sum(1 for tx in transactions if tx["type"] == "income"),
+        "expenses": sum(1 for tx in transactions if tx["type"] == "expense"),
+        "income_total": round(sum(tx["amount"] for tx in transactions if tx["type"] == "income"), 2),
+        "expense_total": round(sum(abs(tx["amount"]) for tx in transactions if tx["type"] == "expense"), 2),
+    })
+
+    return transactions
+
 def extract_transactions(text: str) -> list[dict]:
+    if is_sectioned_balance_history_statement(text):
+        print("STATEMENT_LAYOUT_DETECTED", "sectioned_balance_history_statement")
+        txs = parse_sectioned_balance_history_statement(text)
+        if txs:
+            print("SECTIONED_BALANCE_HISTORY_STATEMENT_ROUTE", {
+                "transactions": len(txs),
+                "income": sum(1 for tx in txs if tx.get("type") == "income"),
+                "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+            })
+            return txs
+
     if is_sectioned_ledger_statement(text):
         print("STATEMENT_LAYOUT_DETECTED", "sectioned_ledger_statement")
         txs = parse_sectioned_ledger_statement(text)
