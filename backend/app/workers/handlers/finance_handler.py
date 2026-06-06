@@ -917,6 +917,113 @@ def handle_finance_ai(job: Job, db):
 
     transactions = kept_transactions
 
+
+    # Enterprise international quality batch: FR / EN / AR.
+    import re
+    from datetime import datetime
+
+    def description_has_min_signal(tx):
+        desc = str(tx.get("description") or tx.get("desc") or "")
+        cleaned = re.sub(r"[/\\|:_*.,;()\\-]+", " ", desc)
+        cleaned = re.sub(r"\b(20\d{2}|\d{1,2}/\d{1,2}/?\d{0,4}|SAR|EUR|USD|MAD|GBP|AED)\b", " ", cleaned, flags=re.I)
+        cleaned = re.sub(r"\s+", " ", cleaned).strip()
+
+        strong_markers = re.search(
+            r"(CARD|CARTE|MADA|مدى|PAYMENT|PAIEMENT|VIREMENT|TRANSFER|تحويل|"
+            r"DEPOSIT|DEPOT|D[ÉE]P[ÔO]T|إيداع|WITHDRAWAL|RETRAIT|سحب|ATM|DAB|"
+            r"SADAD|VAT|FEE|FEES|CHARGE|رسوم|ضريبة|MERCHANT|CITY|BANK|IBAN|CARD:|"
+            r"CREDIT CARD|PRELEVEMENT|PR[ÉE]L[ÈE]VEMENT)",
+            desc,
+            re.I,
+        )
+
+        words = re.findall(r"[A-Za-zÀ-ÿ\u0600-\u06FF]{3,}", cleaned)
+        digits = re.findall(r"\d{4,}", cleaned)
+
+        return bool(strong_markers or len(words) >= 2 or digits)
+
+    weak_desc_excluded = []
+    kept_transactions = []
+
+    for tx in transactions:
+        amount = abs(float(tx.get("amount") or 0))
+        if amount > 0 and not description_has_min_signal(tx):
+            tx["excluded_from_financial_kpis"] = True
+            tx["excluded_reason"] = "min_description_signal_guard"
+            weak_desc_excluded.append({
+                "date": tx.get("date"),
+                "amount": tx.get("amount"),
+                "type": tx.get("type"),
+                "desc": (tx.get("description") or tx.get("desc") or "")[:160],
+            })
+            continue
+        kept_transactions.append(tx)
+
+    if weak_desc_excluded:
+        print("MIN_DESCRIPTION_SIGNAL_GUARD", {
+            "count": len(weak_desc_excluded),
+            "samples": weak_desc_excluded[:20],
+        })
+
+    transactions = kept_transactions
+
+    def parse_tx_date_safe(value):
+        s = str(value or "")
+        for fmt in ("%Y-%m-%d", "%d/%m/%Y", "%m/%d/%Y", "%d-%m-%Y", "%m-%d-%Y"):
+            try:
+                return datetime.strptime(s, fmt)
+            except Exception:
+                pass
+        return None
+
+    parsed_dates = [parse_tx_date_safe(tx.get("date")) for tx in transactions]
+    parsed_dates = [d for d in parsed_dates if d is not None]
+
+    if len(parsed_dates) >= 3:
+        asc = sum(1 for a, b in zip(parsed_dates, parsed_dates[1:]) if b >= a)
+        desc = sum(1 for a, b in zip(parsed_dates, parsed_dates[1:]) if b < a)
+        order = "ascending" if asc > desc else "descending" if desc > asc else "mixed"
+
+        print("STATEMENT_ORDER_DETECTION", {
+            "order": order,
+            "ascending_pairs": asc,
+            "descending_pairs": desc,
+            "dated_transactions": len(parsed_dates),
+        })
+
+    cc_rows = []
+    cc_seen = {}
+
+    for tx in transactions:
+        desc = str(tx.get("description") or tx.get("desc") or "")
+        if re.search(r"(DEPOSIT\s+FROM\s+CREDIT\s+CARD|CREDIT\s+CARD\s+PAYMENT|CARD:|carte\s+cr[ée]dit|بطاقة\s+ائتمان)", desc, re.I):
+            key = (
+                tx.get("date"),
+                round(float(tx.get("amount") or 0), 2),
+                re.sub(r"\d", "0", desc[:80]).lower(),
+            )
+            cc_seen[key] = cc_seen.get(key, 0) + 1
+            cc_rows.append({
+                "date": tx.get("date"),
+                "amount": tx.get("amount"),
+                "type": tx.get("type"),
+                "desc": desc[:120],
+            })
+
+    repeated_cc = [
+        {"key": str(k), "count": v}
+        for k, v in cc_seen.items()
+        if v >= 2
+    ]
+
+    if cc_rows:
+        print("REPEATED_CREDIT_CARD_DEPOSIT_AUDIT", {
+            "rows": len(cc_rows),
+            "repeated_patterns": repeated_cc[:20],
+            "samples": cc_rows[:20],
+            "action": "audit_only_no_automatic_exclusion",
+        })
+
     audit_tx_stage("TX_STAGE_2_AFTER_CANONICALIZE", transactions)
 
 
