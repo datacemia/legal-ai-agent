@@ -10834,6 +10834,15 @@ def parse_debit_credit_balance_ledger(text: str) -> list[dict]:
         if any(k in low for k in ["purchase", "deposit", "interest", "ach", "virement", "dépot", "dépôt", "crédit", "debit", "مدين", "دائن"]):
             descriptions.append(ln)
 
+    print("DEBIT_CREDIT_BALANCE_COMPONENT_DEBUG", {
+        "dates": len(dates),
+        "descriptions": len(descriptions),
+        "amounts": len(amounts),
+        "date_sample": dates[:10],
+        "description_sample": descriptions[:10],
+        "amount_sample": amounts[:20],
+    })
+
     if not dates or not descriptions or not amounts:
         return []
 
