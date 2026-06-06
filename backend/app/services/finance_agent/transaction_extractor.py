@@ -10477,7 +10477,31 @@ def parse_date_amount_description_ledger(text: str) -> list[dict]:
         re.I | re.S,
     )
     if summary_m:
-        print("DATE_AMOUNT_DESCRIPTION_OFFICIAL_RECONCILIATION", {
+        matched_indexes = set()
+
+    tx_re_for_audit = re.compile(
+        r"^(?P<date>\d{4}|\d{1,2}/\d{1,2})\s+"
+        r"(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+\.\d{2})\s+"
+        r"(?P<desc>.+)$"
+    )
+
+    for idx, ln in enumerate(lines):
+        if tx_re_for_audit.match(ln):
+            matched_indexes.add(idx)
+
+    unmatched_lines = [
+        ln for idx, ln in enumerate(lines)
+        if idx not in matched_indexes
+        and ln.strip()
+        and not re.search(r"PAGE \d+|tcfbank|STATEMENT DATE|ACCOUNT NUMBER|CUSTOMER SERVICE", ln, re.I)
+    ]
+
+    print("DATE_AMOUNT_DESCRIPTION_UNMATCHED_LINES", {
+        "count": len(unmatched_lines),
+        "sample": unmatched_lines[:120],
+    })
+
+    print("DATE_AMOUNT_DESCRIPTION_OFFICIAL_RECONCILIATION", {
             "official_expense": float(summary_m.group("expense").replace(",", "")),
             "extracted_expense": round(sum(abs(tx["amount"]) for tx in transactions), 2),
             "expense_delta": round(float(summary_m.group("expense").replace(",", "")) - sum(abs(tx["amount"]) for tx in transactions), 2),
