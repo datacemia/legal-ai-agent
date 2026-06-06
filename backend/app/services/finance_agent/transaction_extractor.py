@@ -11109,7 +11109,176 @@ def parse_date_posting_description_amount_statement(text: str) -> list[dict]:
     return txs
 
 
+
+def parse_money_out_money_in_balance_ledger(text: str) -> list[dict]:
+    """Global EN/FR/AR Money out | Money in | Balance ledger parser."""
+    import re
+
+    raw = str(text or "")
+    low = raw.lower()
+
+    has_layout = (
+        ("money out" in low and "money in" in low and "balance" in low)
+        or ("sortie" in low and "entrée" in low and "solde" in low)
+        or ("مدين" in low and "دائن" in low and "الرصيد" in low)
+    )
+    if not has_layout:
+        return []
+
+    period_m = re.search(
+        r"(\d{1,2})\s+([A-Za-zÀ-ÿ]{3,9})\.?\s+(20\d{2})\s*[-–]\s*(\d{1,2})\s+([A-Za-zÀ-ÿ]{3,9})\.?\s+(20\d{2})",
+        raw,
+        re.I | re.UNICODE,
+    )
+    year = int(period_m.group(6)) if period_m else 2025
+
+    month_map = {
+        "jan": 1, "january": 1, "janv": 1, "janvier": 1,
+        "feb": 2, "february": 2, "fév": 2, "fev": 2, "février": 2, "fevrier": 2,
+        "mar": 3, "march": 3, "mars": 3,
+        "apr": 4, "april": 4, "avr": 4, "avril": 4,
+        "may": 5, "mai": 5,
+        "jun": 6, "june": 6, "juin": 6,
+        "jul": 7, "july": 7, "juil": 7, "juillet": 7,
+        "aug": 8, "august": 8, "août": 8, "aout": 8,
+        "sep": 9, "sept": 9, "september": 9,
+        "oct": 10, "october": 10, "octobre": 10,
+        "nov": 11, "november": 11, "novembre": 11,
+        "dec": 12, "december": 12, "déc": 12, "decembre": 12, "décembre": 12,
+    }
+
+    date_line_re = re.compile(r"^(?P<day>\d{1,2})\s+(?P<mon>[A-Za-zÀ-ÿ]{3,9})\b\s*(?P<rest>.*)$", re.I | re.UNICODE)
+    money_re = re.compile(r"(?<![\w])(\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+\.\d{2})(?![\w])")
+
+    income_words = [
+        "received from", "refund from", "money in", "deposit", "credit",
+        "reçu de", "remboursement", "crédit", "versement",
+        "دائن", "إيداع", "ايداع", "استرداد"
+    ]
+    expense_words = [
+        "card payment", "bill payment", "withdrawal", "fee", "charge",
+        "direct debit", "money out", "payment to",
+        "paiement", "retrait", "frais", "débit",
+        "مدين", "سحب", "رسوم", "شراء"
+    ]
+
+    txs = []
+    current_date = None
+    current_desc = []
+
+    def flush_candidate(desc_lines):
+        nonlocal current_date
+        desc = " ".join(x.strip() for x in desc_lines if x.strip())
+        desc = re.sub(r"\s+", " ", desc).strip()
+        if not current_date or not desc:
+            return
+
+        low_desc = desc.lower()
+        if any(x in low_desc for x in ["start balance", "end balance", "continued", "credit interest rates"]):
+            return
+
+        nums = [float(x.replace(",", "")) for x in money_re.findall(desc)]
+        if not nums:
+            return
+
+        typ = None
+        if any(w in low_desc for w in income_words):
+            typ = "income"
+        elif any(w in low_desc for w in expense_words):
+            typ = "expense"
+
+        if typ is None:
+            return
+
+        amount = nums[0]
+        balance = nums[-1] if len(nums) >= 2 else None
+        signed = amount if typ == "income" else -amount
+
+        txs.append({
+            "date": current_date,
+            "description": desc[:500],
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": typ,
+            "balance": balance,
+            "currency": "GBP" if "£" in raw or "barclays" in low else None,
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": typ,
+            "parser_family": "money_out_money_in_balance_ledger",
+        })
+
+    for raw_ln in raw.splitlines():
+        ln = raw_ln.strip()
+        if not ln:
+            continue
+
+        dm = date_line_re.match(ln)
+        if dm:
+            if current_desc:
+                flush_candidate(current_desc)
+                current_desc = []
+
+            mon = month_map.get(dm.group("mon").lower().replace(".", ""))
+            if mon:
+                # Barclays period crosses year: Dec belongs previous year if end year is Jan.
+                tx_year = year
+                if period_m:
+                    start_mon = month_map.get(period_m.group(2).lower().replace(".", ""), mon)
+                    end_mon = month_map.get(period_m.group(5).lower().replace(".", ""), mon)
+                    if start_mon > end_mon and mon >= start_mon:
+                        tx_year = int(period_m.group(3))
+                current_date = f"{tx_year:04d}-{mon:02d}-{int(dm.group('day')):02d}"
+                rest = dm.group("rest").strip()
+                if rest:
+                    current_desc = [rest]
+            continue
+
+        if current_date:
+            # New transaction cue without repeated date
+            l = ln.lower()
+            if current_desc and any(w in l for w in income_words + expense_words):
+                flush_candidate(current_desc)
+                current_desc = [ln]
+            else:
+                current_desc.append(ln)
+
+    if current_desc:
+        flush_candidate(current_desc)
+
+    # Remove zero/noise and summary duplicates
+    cleaned = []
+    seen = set()
+    for tx in txs:
+        key = (tx["date"], round(abs(float(tx["amount"])), 2), tx["type"], tx["description"][:80])
+        if key in seen or abs(float(tx["amount"])) == 0:
+            continue
+        seen.add(key)
+        cleaned.append(tx)
+
+    if cleaned:
+        print("MONEY_OUT_MONEY_IN_BALANCE_LEDGER_EXTRACTED", {
+            "transactions": len(cleaned),
+            "income": sum(1 for tx in cleaned if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in cleaned if tx.get("type") == "expense"),
+            "income_total": round(sum(tx["amount"] for tx in cleaned if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx["amount"]) for tx in cleaned if tx.get("type") == "expense"), 2),
+        })
+
+    return cleaned
+
+
 def extract_transactions(text: str) -> list[dict]:
+    txs = parse_money_out_money_in_balance_ledger(text)
+    if txs and len(txs) >= 3:
+        print("STATEMENT_LAYOUT_DETECTED", "money_out_money_in_balance_ledger")
+        print("MONEY_OUT_MONEY_IN_BALANCE_ROUTE", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+        })
+        return txs
+
     txs = parse_date_posting_description_amount_statement(text)
     if txs and len(txs) >= 2:
         print("STATEMENT_LAYOUT_DETECTED", "date_posting_description_amount_statement")
