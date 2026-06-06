@@ -9949,25 +9949,66 @@ def parse_typed_transaction_table_statement(text: str) -> list[dict]:
         s = str(v or "").replace("$", "").replace(",", "").replace(" ", "")
         return round(float(s), 2)
 
-    def classify_type(label: str, amount: float) -> tuple[str, bool]:
+    def classify_type(label: str, amount: float, desc: str = "") -> tuple[str, bool]:
+        """Global typed-table classification.
+
+        Never treat every Transfer as internal automatically.
+        Use the transaction label plus description.
+        """
         l = str(label or "").lower()
-        if any(x in l for x in ["deposit", "dépôt", "depot", "إيداع", "ايداع"]):
-            return "income", False
-        if "round up transfer" in l:
+        d = str(desc or "").lower()
+        ctx = f"{l} {d}"
+
+        # Savings round-ups are customer cash movement to savings.
+        # Keep as expense/savings outflow, not hidden internal transfer.
+        if "round up transfer" in ctx or "round-up transfer" in ctx:
             return "expense", False
 
-        if any(x in l for x in ["transfer", "virement", "تحويل"]):
+        # Explicit internal account movements.
+        internal_transfer_markers = [
+            "transfer from chime savings",
+            "transfer to chime savings",
+            "transfer from savings",
+            "transfer to savings",
+            "transfer from checking",
+            "transfer to checking",
+            "internal transfer",
+            "own account transfer",
+            "between accounts",
+            "virement interne",
+            "transfert interne",
+            "entre comptes",
+            "تحويل داخلي",
+            "بين الحسابات",
+        ]
+        if any(x in ctx for x in internal_transfer_markers):
             return "transfer", True
+
+        # Deposits / credits.
         if any(x in l for x in [
-            "purchase", "atm withdrawal", "direct debit", "fee",
-            "achat", "retrait", "frais", "شراء", "سحب", "رسوم"
+            "deposit", "dépôt", "depot", "credit", "crédit",
+            "إيداع", "ايداع", "دائن"
+        ]):
+            return "income", False
+
+        # Expenses / debits.
+        if any(x in l for x in [
+            "purchase", "atm withdrawal", "cash withdrawal", "direct debit", "fee",
+            "debit", "achat", "retrait", "frais", "prélèvement", "prelevement",
+            "شراء", "سحب", "رسوم", "خصم"
         ]):
             return "expense", False
+
+        # Generic transfer: do not auto-exclude globally.
+        if any(x in l for x in ["transfer", "virement", "تحويل"]):
+            return ("income" if amount > 0 else "expense"), False
+
         return ("income" if amount > 0 else "expense"), False
+
 
     def make_row(date_token: str, desc: str, label: str, net_amount: float) -> dict:
         month, day, year = [int(x) for x in date_token.split("/")]
-        typ, is_internal_transfer = classify_type(label, net_amount)
+        typ, is_internal_transfer = classify_type(label, net_amount, desc)
 
         signed = abs(net_amount) if typ == "income" else -abs(net_amount)
         if typ == "transfer":
