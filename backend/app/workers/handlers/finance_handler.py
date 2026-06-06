@@ -11,6 +11,7 @@ from app.services.finance_agent.transaction_extractor import (
     DEBUG_FINANCE_EXTRACTOR,
     debug_log,
     extract_transactions,
+    append_fx_fee_transactions,
 )
 from app.services.finance_agent.subscription_detector import detect_recurring_subscriptions
 from app.services.finance_agent.budget_engine import build_recommended_budget
