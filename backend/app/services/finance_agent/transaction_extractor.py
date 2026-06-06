@@ -10350,6 +10350,54 @@ def parse_date_amount_description_ledger(text: str) -> list[dict]:
         amount = float(m.group("amount").replace(",", ""))
         desc = m.group("desc").strip()
 
+        # OCR double-column split:
+        # "0731 22.00 DESC LEFT 0807 31.52 DESC RIGHT"
+        split_m = re.search(
+            r"(?P<left_desc>.*?)\s+"
+            r"(?P<date2>\d{4}|\d{1,2}/\d{1,2})\s+"
+            r"(?P<amount2>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+\.\d{2})\s+"
+            r"(?P<desc2>.+)$",
+            desc,
+        )
+
+        if split_m:
+            desc_left = split_m.group("left_desc").strip()
+            d2 = split_m.group("date2")
+            amount2 = float(split_m.group("amount2").replace(",", ""))
+            desc2 = split_m.group("desc2").strip()
+
+            transactions.append({
+                "date": f"{year:04d}-{month:02d}-{day:02d}",
+                "description": desc_left,
+                "amount": -round(amount, 2),
+                "signed_amount": -round(amount, 2),
+                "type": "expense",
+                "currency": "USD",
+                "locked_amount": -round(amount, 2),
+                "_locked_amount": -round(amount, 2),
+                "locked_type": "expense",
+                "parser_family": "date_amount_description_ledger",
+            })
+
+            if "/" in d2:
+                month2, day2 = [int(x) for x in d2.split("/")]
+            else:
+                month2, day2 = int(d2[:2]), int(d2[2:])
+
+            transactions.append({
+                "date": f"{year:04d}-{month2:02d}-{day2:02d}",
+                "description": desc2,
+                "amount": -round(amount2, 2),
+                "signed_amount": -round(amount2, 2),
+                "type": "expense",
+                "currency": "USD",
+                "locked_amount": -round(amount2, 2),
+                "_locked_amount": -round(amount2, 2),
+                "locked_type": "expense",
+                "parser_family": "date_amount_description_ledger",
+            })
+            continue
+
         transactions.append({
             "date": f"{year:04d}-{month:02d}-{day:02d}",
             "description": desc,
