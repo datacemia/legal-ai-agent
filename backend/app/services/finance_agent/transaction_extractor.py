@@ -10835,7 +10835,13 @@ def parse_debit_credit_balance_ledger(text: str) -> list[dict]:
             continue
 
         low = ln.lower()
-        if any(k in low for k in ["purchase", "deposit", "interest", "ach", "virement", "dépot", "dépôt", "crédit", "debit", "مدين", "دائن"]):
+        if any(k in low for k in [
+            "purchase", "deposit", "interest", "ach", "found transfer",
+            "apple.com", "bill", "from found transfer",
+            "virement", "dépot", "dépôt", "crédit", "debit",
+            "achat", "paiement", "versement",
+            "مدين", "دائن", "إيداع", "ايداع", "شراء"
+        ]):
             descriptions.append(ln)
 
     print("DEBIT_CREDIT_BALANCE_COMPONENT_DEBUG", {
