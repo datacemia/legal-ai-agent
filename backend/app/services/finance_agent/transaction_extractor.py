@@ -9737,33 +9737,44 @@ def parse_sectioned_balance_history_statement(text: str) -> list[dict]:
     def parse_money(token: str) -> float:
         return float(str(token).replace(",", ""))
 
-    # Split document into structural sections.
+    # Split document into structural sections by true section starts only.
+    # Global rule: section headers start at the beginning of a line.
+    # Do NOT treat description text like "ELECTRONIC/ACH CREDIT" as a header.
+    def starts_income_section(line: str) -> bool:
+        return bool(re.match(
+            r"^\s*(DEPOSITS?\s*/?|CREDITS?\s*$|DEPOSITS?\s+CREDITS?|DEPOSITS?,\s*CREDITS?|"
+            r"D[ÉE]P[ÔO]TS?|CR[ÉE]DITS?|الإيداعات|ايداعات|إيداعات|دائن)\b",
+            line,
+            re.I,
+        ))
+
+    def starts_expense_section(line: str) -> bool:
+        return bool(re.match(
+            r"^\s*(WITHDRAWALS?\s*/?|DEBITS?\s+PAID|DEBITS?\s*$|WITHDRAWALS?\s+DEBITS?|"
+            r"RETRAITS?|D[ÉE]BITS?|PR[ÉE]L[ÈE]VEMENTS?|السحوبات|سحوبات|خصم|مدين)\b",
+            line,
+            re.I,
+        ))
+
+    def starts_balance_section(line: str) -> bool:
+        return bool(re.match(
+            r"^\s*(BALANCE\b|ACTIVITY\b|HISTORY\b|SOLDE\b|الرصيد|رصيد)\b",
+            line,
+            re.I,
+        ))
+
+    income_start = next((i for i, ln in enumerate(lines) if starts_income_section(ln)), -1)
+    expense_start = next((i for i, ln in enumerate(lines) if i > income_start and starts_expense_section(ln)), -1)
+    balance_start = next((i for i, ln in enumerate(lines) if i > expense_start and starts_balance_section(ln)), -1)
+
     sections = []
-    current = None
-
-    print("SECTIONED_BALANCE_HISTORY_LINES_DEBUG", {
-        "count": len(lines),
-        "sample": lines[:120],
-    })
-
-    for line in lines:
-        if balance_history_re.search(line):
-            current = "balance_history"
-            sections.append((current, []))
-            continue
-
-        if deposit_header_re.match(line) and "$" not in line:
-            current = "income"
-            sections.append((current, []))
-            continue
-
-        if withdrawal_header_re.match(line) and "$" not in line:
-            current = "expense"
-            sections.append((current, []))
-            continue
-
-        if current and sections:
-            sections[-1][1].append(line)
+    if income_start >= 0 and expense_start > income_start:
+        sections.append(("income", lines[income_start + 1:expense_start]))
+    if expense_start >= 0:
+        end_expense = balance_start if balance_start > expense_start else len(lines)
+        sections.append(("expense", lines[expense_start + 1:end_expense]))
+    if balance_start >= 0:
+        sections.append(("balance_history", lines[balance_start + 1:]))
 
     transactions = []
 
