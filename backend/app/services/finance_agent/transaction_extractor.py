@@ -9498,20 +9498,61 @@ def parse_sectioned_ledger_statement(text: str) -> list[dict]:
         desc = m.group("desc").strip()
         amount = float(m.group("amount").replace(",", ".") if "," in m.group("amount") and "." not in m.group("amount") else m.group("amount").replace(",", ""))
 
-        signed = amount if section == "income" else -amount
+        lower_desc = desc.lower()
 
-        transactions.append({
+        # International semantic override:
+        # Bill/card/loan payments are outgoing even if OCR places them near a credit section.
+        payment_out_markers = [
+            "bill payment", "online bill payment", "online pmt", "online payment",
+            "card payment", "credit card payment", "loan payment", "mortgage payment",
+            " pmt ", "pymt", "payment ",
+            "paiement", "prélèvement", "prelevement", "remboursement crédit",
+            "دفع", "سداد",
+        ]
+
+        effective_type = section
+        if any(marker in f" {lower_desc} " for marker in payment_out_markers):
+            effective_type = "expense"
+
+        internal_transfer_markers = [
+            "transfer from savings",
+            "transfer to checking",
+            "transfer to savings",
+            "transfer from checking",
+            "virement interne",
+            "transfert interne",
+            "تحويل داخلي",
+        ]
+        is_internal_transfer = any(marker in lower_desc for marker in internal_transfer_markers)
+
+        signed = amount if effective_type == "income" else -amount
+
+        row = {
             "date": f"{year}-{month:02d}-{day:02d}",
             "description": desc,
             "amount": round(signed, 2),
             "signed_amount": round(signed, 2),
-            "type": section,
+            "type": "transfer" if is_internal_transfer else effective_type,
             "currency": "USD",
             "locked_amount": round(signed, 2),
             "_locked_amount": round(signed, 2),
-            "locked_type": section,
+            "locked_type": "transfer" if is_internal_transfer else effective_type,
             "parser_family": "sectioned_ledger_statement",
-        })
+        }
+
+        if is_internal_transfer:
+            row["is_internal_transfer"] = True
+            row["excluded_from_financial_kpis"] = True
+            row["excluded_reason"] = "internal_transfer"
+            row["exclude_from_income"] = True
+            row["exclude_from_expense"] = True
+            row["exclude_from_score"] = True
+            row["exclude_from_savings"] = True
+            row["exclude_from_cashflow"] = True
+            row["category_hint"] = "internal_transfer"
+            row["category"] = "transfers"
+
+        transactions.append(row)
 
     print("SECTIONED_LEDGER_STATEMENT_EXTRACTED", {
         "transactions": len(transactions),
