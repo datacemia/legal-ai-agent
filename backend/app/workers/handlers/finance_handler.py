@@ -657,6 +657,50 @@ def handle_finance_ai(job: Job, db):
     transactions = append_fx_fee_transactions(transactions)
     transactions = restore_semantically_valid_kpi_rows(transactions)
 
+    # International FR/EN/AR rule:
+    # Exclude daily-balance-summary rows from KPI while keeping real transactions.
+    balance_summary_only_rows = []
+    filtered_transactions = []
+    for tx in transactions:
+        desc = str(tx.get("description") or tx.get("desc") or "")
+        compact = desc.strip()
+
+        is_balance_summary_row = False
+
+        # TD/US pattern: "06105 164,852.27 06/25 116,152.40"
+        # means DATE BALANCE DATE BALANCE, not a transaction.
+        import re
+        if re.match(
+            r"^(?:\d{5}|\d{2}/\d{2})\s+[-+]?\d{1,3}(?:,\d{3})*\.\d{2}"
+            r"(?:\s+(?:\d{5}|\d{2}/\d{2})\s+[-+]?\d{1,3}(?:,\d{3})*\.\d{2})?$",
+            compact,
+        ):
+            is_balance_summary_row = True
+
+        if is_balance_summary_row:
+            tx["excluded_from_financial_kpis"] = True
+            tx["excluded_reason"] = "daily_balance_summary_row"
+            balance_summary_only_rows.append({
+                "date": tx.get("date"),
+                "amount": tx.get("amount"),
+                "balance": tx.get("balance") or tx.get("_balance"),
+                "desc": compact[:120],
+            })
+            continue
+
+        filtered_transactions.append(tx)
+
+    if balance_summary_only_rows:
+        print(
+            "DAILY_BALANCE_SUMMARY_ROWS_EXCLUDED",
+            {
+                "count": len(balance_summary_only_rows),
+                "samples": balance_summary_only_rows[:10],
+            },
+        )
+
+    transactions = filtered_transactions
+
     # Do not deduplicate bank transactions by content.
     # Two real bank operations can have the same date, description and amount.
     # Example: two ATM withdrawals of 2 000 MAD on the same day.

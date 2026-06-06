@@ -9090,7 +9090,8 @@ def strip_n26_spaces_sections(text: str) -> str:
 
 
 def extract_transactions(text: str) -> list[dict]:
-    text = strip_non_transaction_balance_sections(text)
+    # Do not strip text globally; it can remove valid transaction sections.
+    # Balance-summary rows are filtered later at transaction level.
     text = strip_n26_spaces_sections(text)
     statement_layout = detect_statement_layout(text)
     print("STATEMENT_LAYOUT_DETECTED", statement_layout)
