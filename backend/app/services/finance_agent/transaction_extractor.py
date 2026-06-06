@@ -9803,7 +9803,7 @@ def parse_sectioned_balance_history_statement(text: str) -> list[dict]:
 
             if not inline_tx:
                 inline_tx = re.match(
-                    r"^\s*(?P<desc_prefix>.+?)\s+"
+                    r"^\s*(?P<desc>.+?)\s+"
                     r"(?P<date>\d{1,2}/\s*\d{1,2}|[A-Za-z]{3}-\d{1,2}|20/\d{1,2})\s+"
                     r"(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+(?:\.\d{2}))\s*$",
                     line,
