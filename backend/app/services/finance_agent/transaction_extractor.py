@@ -11006,8 +11006,13 @@ def parse_date_posting_description_amount_statement(text: str) -> list[dict]:
     if not has_layout:
         return []
 
-    year_m = re.search(r"(20\d{2})", raw)
-    year = int(year_m.group(1)) if year_m else 2024
+    period_year_m = re.search(
+        r"[A-Za-z]+\s+\d{1,2}\s*[-–]\s*[A-Za-z]+\s+\d{1,2},\s*(20\d{2})",
+        raw,
+        re.I,
+    )
+    year_m = re.search(r"\b(20\d{2})\b", raw)
+    year = int(period_year_m.group(1)) if period_year_m else int(year_m.group(1)) if year_m else 2024
 
     tx_re = re.compile(
         r"^(?P<tdate>\d{1,2}/\d{1,2})\s+"
