@@ -10144,8 +10144,12 @@ def parse_sectioned_activity_statement(text: str) -> list[dict]:
     raw = str(text or "")
     lines = [ln.strip() for ln in raw.splitlines() if ln.strip()]
 
-    year_match = re.search(r"(20\d{2})", raw)
-    year = int(year_match.group(1)) if year_match else 2024
+    section = None
+    current_year = None
+    transactions = []
+    pending = None
+
+    period_year_re = re.compile(r"(?:Statement Periods?|Période|فترة).*?(20\d{2})", re.I)
 
     income_header_re = re.compile(
         r"^(deposits?|credits?|additions?|incoming transfers?|electronic deposits?|"
@@ -10153,21 +10157,18 @@ def parse_sectioned_activity_statement(text: str) -> list[dict]:
         r"إيداعات|إيداع|ايداعات|ايداع|دائن|تحويلات\s+واردة|مبالغ\s+مودعة)\b",
         re.I,
     )
-
     expense_header_re = re.compile(
         r"^(withdrawals?|debits?|payments?|checks?\s+paid|electronic payments?|other withdrawals?|"
         r"retraits?|d[ée]bits?|paiements?|pr[ée]l[èe]vements?|chèques?|cheques?|"
         r"سحوبات|مدين|مدفوعات|خصومات|تحويلات\s+صادرة|شيكات)\b",
         re.I,
     )
-
     stop_header_re = re.compile(
         r"^(daily balance summary|balance history|how to balance|interest notice|interest rates?|fee schedule|"
         r"r[ée]sum[ée]\s+des\s+soldes|historique\s+des\s+soldes|taux\s+d.?int[ée]r[êe]t|"
         r"ملخص\s+الأرصدة|تاريخ\s+الرصيد|أسعار\s+الفائدة)\b",
         re.I,
     )
-
     skip_re = re.compile(
         r"^(posting date|date\s+serial|date\s+description|date\s+libell|date\s+montant|"
         r"call\s+1-|bank deposits|statement of account|page:|statement period|cust ref|primary account|"
@@ -10176,37 +10177,37 @@ def parse_sectioned_activity_statement(text: str) -> list[dict]:
         re.I,
     )
 
+    # Normal single transaction row.
     date_amount_same = re.compile(
         r"^(?P<date>\d{1,2}/\d{1,2})\s+(?P<desc>.*?)\s+"
         r"(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+(?:\.\d{2}))$"
     )
+
+    # Check rows may contain two transactions on same line:
+    # 10/02 1027 8,800.00 10/02 1002* 1,131.47
+    check_pair_re = re.compile(
+        r"(?P<date>\d{1,2}/\d{1,2})\s+(?P<serial>\d+\*?)\s+"
+        r"(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+(?:\.\d{2}))"
+    )
+
     date_desc = re.compile(r"^(?P<date>\d{1,2}/\d{1,2})\s+(?P<desc>.+)$")
     amount_only = re.compile(r"^(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+(?:\.\d{2}))$")
-
-    section = None
-    transactions = []
-    pending = None
-
-    def make_date(mmdd: str) -> str:
-        m, d = [int(x) for x in mmdd.split("/")]
-        return f"{year:04d}-{m:02d}-{d:02d}"
 
     def money(s: str) -> float:
         return round(float(str(s).replace(",", "")), 2)
 
-    def flush_pending():
-        nonlocal pending
-        if not pending or pending.get("amount") is None:
-            pending = None
-            return
+    def make_date(mmdd: str) -> str:
+        nonlocal current_year
+        m, d = [int(x) for x in mmdd.split("/")]
+        y = current_year or 2024
+        return f"{y:04d}-{m:02d}-{d:02d}"
 
-        amt = money(pending["amount"])
-        typ = pending["type"]
+    def push_tx(date_iso: str, desc: str, amount_s: str, typ: str):
+        amt = money(amount_s)
         signed = amt if typ == "income" else -amt
-
         transactions.append({
-            "date": pending["date"],
-            "description": " ".join(pending["desc"]).strip(),
+            "date": date_iso,
+            "description": desc.strip(),
             "amount": round(signed, 2),
             "signed_amount": round(signed, 2),
             "type": typ,
@@ -10216,9 +10217,18 @@ def parse_sectioned_activity_statement(text: str) -> list[dict]:
             "locked_type": typ,
             "parser_family": "sectioned_activity_statement",
         })
+
+    def flush_pending():
+        nonlocal pending
+        if pending and pending.get("amount") is not None:
+            push_tx(pending["date"], " ".join(pending["desc"]), pending["amount"], pending["type"])
         pending = None
 
     for line in lines:
+        py = period_year_re.search(line)
+        if py:
+            current_year = int(py.group(1))
+
         if stop_header_re.search(line):
             flush_pending()
             section = None
@@ -10237,17 +10247,29 @@ def parse_sectioned_activity_statement(text: str) -> list[dict]:
         if section is None or skip_re.search(line):
             continue
 
+        # Double-column checks only for expense/check sections.
+        pairs = list(check_pair_re.finditer(line))
+        if section == "expense" and len(pairs) >= 2:
+            flush_pending()
+            for m in pairs:
+                push_tx(make_date(m.group("date")), f"CHECK {m.group('serial')}", m.group("amount"), "expense")
+            continue
+
         m = date_amount_same.match(line)
         if m:
             flush_pending()
-            pending = {"date": make_date(m.group("date")), "desc": [m.group("desc").strip()], "amount": m.group("amount"), "type": section}
-            flush_pending()
+            push_tx(make_date(m.group("date")), m.group("desc"), m.group("amount"), section)
             continue
 
         dm = date_desc.match(line)
         if dm:
             flush_pending()
-            pending = {"date": make_date(dm.group("date")), "desc": [dm.group("desc").strip()], "amount": None, "type": section}
+            pending = {
+                "date": make_date(dm.group("date")),
+                "desc": [dm.group("desc").strip()],
+                "amount": None,
+                "type": section,
+            }
             continue
 
         am = amount_only.match(line)
