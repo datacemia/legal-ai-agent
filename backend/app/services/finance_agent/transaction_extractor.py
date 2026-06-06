@@ -9341,7 +9341,15 @@ def is_sectioned_deposit_withdrawal_statement(text: str) -> bool:
         "الرصيد النهائي", "رصيد ختامي", "الرصيد الختامي"
     ])
 
-    return has_deposit_section and has_withdrawal_section and has_balance_section
+    # Exclude two-column bank statements where balance history is a separate table.
+    # Those need a dedicated sectioned ledger/table parser, not the simple DW parser.
+    has_balance_activity_history = (
+        "balance activity" in t
+        or "activity history" in t
+        or ("balance collected" in t and "date balance" in t)
+    )
+
+    return has_deposit_section and has_withdrawal_section and has_balance_section and not has_balance_activity_history
 
 
 def parse_sectioned_deposit_withdrawal_statement(text: str) -> list[dict]:
