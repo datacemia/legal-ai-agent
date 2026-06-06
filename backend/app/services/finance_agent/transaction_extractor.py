@@ -9418,7 +9418,123 @@ def parse_sectioned_deposit_withdrawal_statement(text: str) -> list[dict]:
 
     return transactions
 
+
+def is_sectioned_ledger_statement(text: str) -> bool:
+    t = str(text or "").lower()
+    has_summary = any(x in t for x in [
+        "account summary", "checking summary", "résumé du compte", "ملخص الحساب"
+    ])
+    has_withdrawals = any(x in t for x in [
+        "other withdrawals", "debits and service charges", "electronic withdrawals",
+        "retraits", "débits", "frais", "سحوبات", "مدين", "رسوم"
+    ])
+    has_deposits = any(x in t for x in [
+        "deposits, credits and interest", "deposits and additions",
+        "dépôts", "crédits", "intérêts", "إيداعات", "دائن", "فوائد"
+    ])
+    return has_summary and has_withdrawals and has_deposits
+
+
+def parse_sectioned_ledger_statement(text: str) -> list[dict]:
+    import re
+
+    raw = str(text or "")
+    lines = [ln.strip() for ln in raw.splitlines() if ln.strip()]
+
+    year_match = re.search(r"For\s+\d{2}/\d{2}/(20\d{2})|as of\s+\d{2}/\d{2}/(20\d{2})", raw, re.I)
+    year = int(next(g for g in year_match.groups() if g)) if year_match else 2020
+
+    tx_re = re.compile(
+        r"^(?P<date>\d{1,2}/\d{1,2})\s+(?P<desc>.+?)\s+"
+        r"(?P<amount>\d{1,3}(?:,\d{3})*(?:[.,]\d{2})|\d+[.,]\d{2})\s*$"
+    )
+
+    expense_headers = re.compile(
+        r"(CHECKS\b|OTHER\s+WITHDRAWALS|ELECTRONIC\s+WITHDRAWALS|DEBITS?\s+AND\s+SERVICE\s+CHARGES|"
+        r"RETRAITS|D[ÉE]BITS?|FRAIS|سحوبات|مدين|رسوم)",
+        re.I,
+    )
+    income_headers = re.compile(
+        r"(DEPOSITS?,?\s+CREDITS?\s+AND\s+INTEREST|DEPOSITS?\s+AND\s+ADDITIONS|"
+        r"D[ÉE]P[ÔO]TS?|CR[ÉE]DITS?|INT[ÉE]R[ÊE]TS?|إيداعات|دائن|فوائد)",
+        re.I,
+    )
+    stop_headers = re.compile(
+        r"(ACCOUNT\s+SUMMARY|SAVINGS\s+ACCOUNTS|AMENDMENT|QUESTIONS|ENDING\s+BALANCE|"
+        r"TOTAL\s+|TOTAUX|مجموع|إجمالي|اجمالي)",
+        re.I,
+    )
+
+    transactions = []
+    section = None
+
+    for line in lines:
+        if income_headers.search(line) and "$" not in line:
+            section = "income"
+            continue
+
+        if expense_headers.search(line) and "$" not in line:
+            section = "expense"
+            continue
+
+        if stop_headers.search(line):
+            if line.upper().startswith("TOTAL"):
+                continue
+            if "SAVINGS ACCOUNTS" in line.upper() or "AMENDMENT" in line.upper() or "QUESTIONS" in line.upper():
+                section = None
+            continue
+
+        if section not in {"income", "expense"}:
+            continue
+
+        if re.search(r"^\s*DATE\b", line, re.I):
+            continue
+
+        m = tx_re.match(line)
+        if not m:
+            continue
+
+        month, day = [int(x) for x in m.group("date").split("/")]
+        desc = m.group("desc").strip()
+        amount = float(m.group("amount").replace(",", ".") if "," in m.group("amount") and "." not in m.group("amount") else m.group("amount").replace(",", ""))
+
+        signed = amount if section == "income" else -amount
+
+        transactions.append({
+            "date": f"{year}-{month:02d}-{day:02d}",
+            "description": desc,
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": section,
+            "currency": "USD",
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": section,
+            "parser_family": "sectioned_ledger_statement",
+        })
+
+    print("SECTIONED_LEDGER_STATEMENT_EXTRACTED", {
+        "transactions": len(transactions),
+        "income": sum(1 for tx in transactions if tx["type"] == "income"),
+        "expenses": sum(1 for tx in transactions if tx["type"] == "expense"),
+        "income_total": round(sum(tx["amount"] for tx in transactions if tx["type"] == "income"), 2),
+        "expense_total": round(sum(abs(tx["amount"]) for tx in transactions if tx["type"] == "expense"), 2),
+    })
+
+    return transactions
+
 def extract_transactions(text: str) -> list[dict]:
+    if is_sectioned_ledger_statement(text):
+        print("STATEMENT_LAYOUT_DETECTED", "sectioned_ledger_statement")
+        txs = parse_sectioned_ledger_statement(text)
+        if txs:
+            print("SECTIONED_LEDGER_STATEMENT_ROUTE", {
+                "transactions": len(txs),
+                "income": sum(1 for tx in txs if tx.get("type") == "income"),
+                "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+            })
+            return txs
+
     if is_sectioned_deposit_withdrawal_statement(text):
         print("STATEMENT_LAYOUT_DETECTED", "sectioned_deposit_withdrawal_statement")
         txs = parse_sectioned_deposit_withdrawal_statement(text)
