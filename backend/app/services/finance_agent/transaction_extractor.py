@@ -10583,7 +10583,205 @@ def parse_date_amount_description_ledger(text: str) -> list[dict]:
 
     return transactions
 
+
+def parse_global_date_boundary_ledger(text: str) -> list[dict]:
+    """Global EN/FR/AR date-boundary ledger parser.
+
+    Rebuilds transaction blocks by:
+    DATE line => new transaction
+    following lines => continuation until next DATE.
+    """
+    import re
+
+    raw = str(text or "")
+    lines = [ln.strip() for ln in raw.splitlines() if ln.strip()]
+
+    month_map = {
+        "JAN": 1, "JANV": 1, "JANVIER": 1,
+        "FEB": 2, "FEV": 2, "FÉV": 2, "FEVR": 2, "FÉVR": 2, "FEBRUARY": 2,
+        "MAR": 3, "MARS": 3,
+        "APR": 4, "AVR": 4, "AVRIL": 4,
+        "MAY": 5, "MAI": 5,
+        "JUN": 6, "JUIN": 6,
+        "JUL": 7, "JUIL": 7, "JUILLET": 7,
+        "AUG": 8, "AOU": 8, "AOÛ": 8, "AOUT": 8, "AOÛT": 8,
+        "SEP": 9, "SEPT": 9,
+        "OCT": 10, "OCTOBRE": 10,
+        "NOV": 11, "NOVEMBRE": 11,
+        "DEC": 12, "DÉC": 12, "DECEMBRE": 12, "DÉCEMBRE": 12,
+    }
+
+    year_match = re.search(r"(20\d{2})", raw)
+    default_year = int(year_match.group(1)) if year_match else 2024
+
+    date_token_re = re.compile(
+        r"^(?P<date>"
+        r"\d{1,2}[A-Za-zÀ-ÿ]{3,9}\d{2,4}"
+        r"|\d{1,2}[/-]\d{1,2}[/-]\d{2,4}"
+        r"|\d{1,2}/\d{1,2}"
+        r")\b\s*(?P<rest>.*)$",
+        re.I | re.UNICODE,
+    )
+
+    def parse_date_token(tok: str) -> str | None:
+        s = str(tok or "").strip().upper().replace(".", "")
+        m = re.match(r"^(\d{1,2})([A-ZÀ-Ÿ]{3,9})(\d{2,4})$", s, re.I)
+        if m:
+            day = int(m.group(1))
+            mon_s = m.group(2).upper()
+            year_s = m.group(3)
+            month = month_map.get(mon_s)
+            if not month:
+                return None
+            year = int(year_s)
+            if year < 100:
+                year += 2000
+            return f"{year:04d}-{month:02d}-{day:02d}"
+
+        m = re.match(r"^(\d{1,2})[/-](\d{1,2})(?:[/-](\d{2,4}))?$", s)
+        if m:
+            a, b = int(m.group(1)), int(m.group(2))
+            year = int(m.group(3)) if m.group(3) else default_year
+            if year < 100:
+                year += 2000
+            # Bank statements in this corpus mostly DD-MM-YYYY for full numeric
+            # and MM/DD for US short. Use safe heuristic.
+            if m.group(3) and a > 12:
+                day, month = a, b
+            elif m.group(3) and b > 12:
+                month, day = a, b
+            else:
+                month, day = a, b
+            return f"{year:04d}-{month:02d}-{day:02d}"
+
+        return None
+
+    def money_to_float(s: str):
+        v = str(s or "").replace(" ", "").replace("\u00a0", "")
+        if "," in v and "." in v:
+            # 6,000.00
+            v = v.replace(",", "")
+        elif "," in v:
+            # 800,00
+            v = v.replace(",", ".")
+        try:
+            return round(float(v), 2)
+        except Exception:
+            return None
+
+    money_re = re.compile(r"\d{1,3}(?:[ ,]\d{3})*(?:[.,]\d{2})|\d+[.,]\d{2}")
+
+    blocks = []
+    current = None
+
+    for line in lines:
+        m = date_token_re.match(line)
+        if m:
+            iso = parse_date_token(m.group("date"))
+            if iso:
+                if current:
+                    blocks.append(current)
+                current = {"date": iso, "lines": [m.group("rest").strip()]}
+                continue
+
+        if current:
+            current["lines"].append(line)
+
+    if current:
+        blocks.append(current)
+
+    if len(blocks) < 5:
+        return []
+
+    txs = []
+
+    for block in blocks:
+        desc = " ".join(x for x in block["lines"] if x).strip()
+        low = desc.lower()
+
+        if not desc or any(x in low for x in [
+            "reporté", "reporte", "brought forward", "carried forward",
+            "page", "statement date", "relevé de compte", "ملخص",
+        ]):
+            # Keep REPORTÉ only as balance carry-forward, not transaction.
+            if len(money_re.findall(desc)) <= 1:
+                continue
+
+        nums = money_re.findall(desc)
+        vals = [money_to_float(x) for x in nums]
+        vals = [x for x in vals if x is not None]
+
+        if not vals:
+            continue
+
+        has_credit_signal = bool(re.search(
+            r"\b(cr|credit|credits|crédit|crédits|d[ée]p[ôo]t|dep[oô]t|"
+            r"salaire|salary|payroll|transfert bancaire|transfer from|de\s+-|"
+            r"دائن|إيداع|ايداع|راتب)\b",
+            desc,
+            re.I | re.UNICODE,
+        ))
+
+        has_debit_signal = bool(re.search(
+            r"\b(debit|debits|débit|débits|paiement|payment|achat|purchase|"
+            r"withdrawal|wdl|dab|gab|frais|fee|netflix|à\s+-|to\s+-|"
+            r"مدين|سحب|رسوم|شراء)\b",
+            desc,
+            re.I | re.UNICODE,
+        ))
+
+        # Last number is often balance when followed by Cr or zero balance.
+        # Prefer amount before balance when there are >=2 numbers.
+        amount = vals[-2] if len(vals) >= 2 else vals[-1]
+        balance = vals[-1] if len(vals) >= 2 else None
+
+        # If block explicitly contains huge salary/credit and balance Cr,
+        # use the largest plausible non-balance value.
+        if has_credit_signal and len(vals) >= 2:
+            amount = vals[-2]
+
+        typ = "income" if has_credit_signal and not has_debit_signal else "expense" if has_debit_signal else None
+        if typ is None:
+            continue
+
+        signed = amount if typ == "income" else -amount
+
+        txs.append({
+            "date": block["date"],
+            "description": desc[:500],
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": typ,
+            "balance": balance,
+            "currency": "AED" if "dirham" in raw.lower() or "aed" in raw.lower() else None,
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": typ,
+            "parser_family": "global_date_boundary_ledger",
+        })
+
+    print("GLOBAL_DATE_BOUNDARY_LEDGER_EXTRACTED", {
+        "transactions": len(txs),
+        "income": sum(1 for tx in txs if tx.get("type") == "income"),
+        "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+        "income_total": round(sum(tx["amount"] for tx in txs if tx.get("type") == "income"), 2),
+        "expense_total": round(sum(abs(tx["amount"]) for tx in txs if tx.get("type") == "expense"), 2),
+    })
+
+    return txs
+
+
 def extract_transactions(text: str) -> list[dict]:
+    txs = parse_global_date_boundary_ledger(text)
+    if txs and len(txs) >= 5:
+        print("STATEMENT_LAYOUT_DETECTED", "global_date_boundary_ledger")
+        print("GLOBAL_DATE_BOUNDARY_LEDGER_ROUTE", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+        })
+        return txs
+
     if (
         "date amount description" in str(text or "").lower()
         or re.search(r"(?m)^\s*\d{4}\s+\d+\.\d{2}\s+\S+", str(text or ""))
