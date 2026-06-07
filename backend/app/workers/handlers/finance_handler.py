@@ -11,6 +11,7 @@ from app.services.finance_agent.transaction_extractor import (
     DEBUG_FINANCE_EXTRACTOR,
     debug_log,
     extract_transactions,
+    extract_global_statement_summary,
     append_fx_fee_transactions,
     restore_semantically_valid_kpi_rows,
 )
