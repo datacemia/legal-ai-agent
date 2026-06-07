@@ -8484,7 +8484,7 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
             # each segment as its own row.
             internal_segments = [
                 s.strip()
-                for s in re.split(r"(?=\\b\\d{1,2}[/-]\\d{1,2}(?:[/-]\\d{2,4})?\\b)", combined)
+                for s in re.split(r"(?=\b\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?\b)", combined)
                 if s.strip()
             ]
 
