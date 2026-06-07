@@ -12435,6 +12435,17 @@ def parse_global_reference_debit_credit_value_statement(text: str) -> list[dict]
 
     if txs:
 
+        print("GLOBAL_REFERENCE_LARGE_TX_SAMPLE", [
+            {
+                "date": tx.get("date"),
+                "amount": tx.get("amount"),
+                "type": tx.get("type"),
+                "desc": str(tx.get("description") or "")[:180],
+            }
+            for tx in txs
+            if abs(float(tx.get("amount") or 0)) >= 80
+        ][:80])
+
         print("GLOBAL_REFERENCE_DEBIT_CREDIT_VALUE_EXTRACTED", {
             "transactions": len(txs),
             "income": sum(1 for tx in txs if tx.get("type") == "income"),
