@@ -12052,7 +12052,42 @@ def extract_transactions(text: str) -> list[dict]:
             "income": sum(1 for tx in txs if tx.get("type") == "income"),
             "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
         })
-        return txs
+
+        summary = extract_global_statement_summary(text)
+        expected_income = summary.get("deposits") if summary else None
+        expected_expense = summary.get("withdrawals") if summary else None
+
+        parsed_income = round(sum(
+            abs(float(tx.get("amount") or 0))
+            for tx in txs
+            if tx.get("type") == "income"
+        ), 2)
+
+        parsed_expense = round(sum(
+            abs(float(tx.get("amount") or 0))
+            for tx in txs
+            if tx.get("type") == "expense"
+        ), 2)
+
+        income_gap = None if expected_income is None else abs(round(abs(float(expected_income)) - parsed_income, 2))
+        expense_gap = None if expected_expense is None else abs(round(abs(float(expected_expense)) - parsed_expense, 2))
+
+        print("GLOBAL_DATE_BOUNDARY_ROUTE_RECON_GUARD", {
+            "expected_income": expected_income,
+            "parsed_income": parsed_income,
+            "income_gap": income_gap,
+            "expected_expense": expected_expense,
+            "parsed_expense": parsed_expense,
+            "expense_gap": expense_gap,
+        })
+
+        if (
+            (income_gap is not None and income_gap > 1)
+            or (expense_gap is not None and expense_gap > 1)
+        ):
+            print("GLOBAL_DATE_BOUNDARY_ROUTE_REJECTED_BY_RECONCILIATION")
+        else:
+            return txs
 
     return []
     if is_typed_transaction_table_statement(text):
