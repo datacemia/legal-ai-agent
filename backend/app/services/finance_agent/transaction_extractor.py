@@ -8484,14 +8484,40 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
             # One flush block may contain multiple transactions due to column OCR.
             # Split on internal posting-date boundaries and recursively handle
             # each segment as its own row.
-            internal_segments = [
+            raw_segments = [
                 s.strip()
                 for s in re.split(r"(?=\b\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?\b)", combined)
                 if s.strip()
             ]
 
+            join_with_next_re = re.compile(
+                r"(authorized\s+on|recurring\s+payment\s+authorized\s+on|deposit\s+on|"
+                r"check\s+deposit\s+on|cash\s+deposit\s+on|withdrawal\s+authorized\s+on|"
+                r"autoris[ée]?\s+le|d[ée]p[oô]t\s+le|retrait\s+autoris[ée]?\s+le|"
+                r"بتاريخ|في\s+تاريخ)",
+                re.I,
+            )
+
+            internal_segments = []
+            pending_seg = ""
+
+            for seg in raw_segments:
+                if pending_seg:
+                    pending_seg = (pending_seg + " " + seg).strip()
+                    internal_segments.append(pending_seg)
+                    pending_seg = ""
+                    continue
+
+                if join_with_next_re.search(seg) and not money_pat.search(seg):
+                    pending_seg = seg
+                    continue
+
+                internal_segments.append(seg)
+
+            if pending_seg:
+                internal_segments.append(pending_seg)
+
             if len(internal_segments) > 1:
-                original_current = current
                 for seg in internal_segments:
                     dm = date_start_re.match(seg)
                     if not dm:
