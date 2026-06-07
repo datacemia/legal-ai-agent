@@ -11105,6 +11105,16 @@ def parse_global_date_boundary_ledger(text: str) -> list[dict]:
     import re
 
     raw = str(text or "")
+    low = raw.lower()
+
+    if (
+        ("date valeur" in low and "débit" in low and "crédit" in low)
+        or ("value date" in low and "debit" in low and "credit" in low)
+        or ("تاريخ القيمة" in raw and "مدين" in raw and "دائن" in raw)
+    ):
+        print("GLOBAL_DATE_BOUNDARY_SKIPPED_FOR_VALUE_DATE_LAYOUT")
+        return []
+
     lines = [ln.strip() for ln in raw.splitlines() if ln.strip()]
 
     month_map = {
