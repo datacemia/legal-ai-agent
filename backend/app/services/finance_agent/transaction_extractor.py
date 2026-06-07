@@ -12258,6 +12258,7 @@ def extract_global_statement_summary(text: str) -> dict:
 
 
 
+
 def parse_bbva_usa_checking_summary_statement(text: str) -> list[dict]:
     """BBVA USA parser: Deposits and Additions / Electronic Withdrawals sections."""
     import re
@@ -12270,93 +12271,94 @@ def parse_bbva_usa_checking_summary_statement(text: str) -> list[dict]:
 
     currency = "USD"
 
-    summary_re = re.search(
+    lines = [
+        " ".join(str(x or "").replace("\xa0", " ").replace("\u202f", " ").split())
+        for x in raw.splitlines()
+        if str(x or "").strip()
+    ]
+
+    summary_re = re.compile(
         r"Beginning\s+Balance\s+\$?\s*([\d,]+\.\d{2}).*?"
         r"Deposits\s+and\s+additions\s+\d+\s+\$?\s*([\d,]+\.\d{2}).*?"
         r"(?:Electronic|Electronics)\s+withdrawals\s+\d+\s+\$?\s*([\d,]+\.\d{2}).*?"
         r"Ending\s+Balance\s+\d+\s+\$?\s*([\d,]+\.\d{2})",
-        raw,
         re.I | re.S,
     )
-    if summary_re:
+
+    msum = summary_re.search(" ".join(lines))
+    if msum:
         print("BBVA_USA_SUMMARY_EXTRACTED", {
-            "opening_balance": parse_amount(summary_re.group(1)),
-            "deposits": parse_amount(summary_re.group(2)),
-            "withdrawals": parse_amount(summary_re.group(3)),
-            "ending_balance": parse_amount(summary_re.group(4)),
+            "opening_balance": parse_amount(msum.group(1)),
+            "deposits": parse_amount(msum.group(2)),
+            "withdrawals": parse_amount(msum.group(3)),
+            "ending_balance": parse_amount(msum.group(4)),
         })
 
     row_re = re.compile(
-        r"^(?P<date>\d{1,2}/\d{1,2})\s+(?P<desc>.+?)\s+\$?\s*(?P<amount>\d{1,3}(?:,\d{3})*\.\d{2})\s*$",
-        re.I,
+        r"^(?P<date>\d{1,2}/\d{1,2})\s+(?P<desc>.+?)\s+\$?\s*(?P<amount>\d{1,3}(?:,\d{3})*\.\d{2})\s*$"
     )
 
     def iso_from_mmdd(tok: str) -> str | None:
         try:
             m, d = str(tok).split("/")[:2]
-            # Statement is Aug 2023-Apr 2024; 09/23 means Sep 23, 2023.
             year = 2023 if int(m) >= 8 else 2024
             return f"{year:04d}-{int(m):02d}-{int(d):02d}"
         except Exception:
             return None
 
-    def parse_section(title: str, stop_titles: str, tx_type: str, sign: int) -> list[dict]:
-        m = re.search(
-            rf"{title}\s+DATE\s+DESCRIPTIONS\s+AMOUNT(?P<body>.*?)(?:{stop_titles})",
-            raw,
-            re.I | re.S,
-        )
-        if not m:
-            return []
-
-        txs_local = []
-        for line in m.group("body").splitlines():
-            clean = " ".join(str(line or "").replace("\xa0", " ").replace("\u202f", " ").split())
-            if not clean or clean.lower().startswith("total"):
-                continue
-
-            r = row_re.match(clean)
-            if not r:
-                continue
-
-            iso = iso_from_mmdd(r.group("date"))
-            if not iso:
-                continue
-
-            amount_abs = abs(parse_amount(r.group("amount")))
-            if amount_abs <= 0 or amount_abs > 100000:
-                continue
-
-            signed = sign * amount_abs
-
-            txs_local.append({
-                "date": iso,
-                "description": clean_db_text(r.group("desc"))[:500],
-                "amount": round(signed, 2),
-                "signed_amount": round(signed, 2),
-                "type": tx_type,
-                "currency": currency,
-                "locked_amount": round(signed, 2),
-                "_locked_amount": round(signed, 2),
-                "locked_type": tx_type,
-                "parser_family": "bbva_usa_checking_summary",
-            })
-
-        return txs_local
-
     txs = []
-    txs.extend(parse_section(
-        r"DEPOSITS\s+AND\s+ADDITIONS",
-        r"Total\s+Deposits\s+and\s+Additions|ELECTRONIC\s+WITHDRAWALS|ELECTRONICS\s+WITHDRAWALS",
-        "income",
-        1,
-    ))
-    txs.extend(parse_section(
-        r"ELECTRONIC\s+WITHDRAWALS|ELECTRONICS\s+WITHDRAWALS",
-        r"Total\s+Electronic\s+Withdrawals|ENDING\s+BALANCE|NC\s+\d+",
-        "expense",
-        -1,
-    ))
+    mode = None
+
+    for line in lines:
+        upper = line.upper()
+
+        if upper == "DEPOSITS AND ADDITIONS":
+            mode = "income"
+            continue
+
+        if upper in ("ELECTRONIC WITHDRAWALS", "ELECTRONICS WITHDRAWALS"):
+            mode = "expense"
+            continue
+
+        if upper in ("ENDING BALANCE",) or upper.startswith("NC "):
+            mode = None
+            continue
+
+        if upper.startswith("TOTAL DEPOSITS") or upper.startswith("TOTAL ELECTRONIC"):
+            continue
+
+        if line.upper().startswith("DATE DESCRIPTIONS AMOUNT"):
+            continue
+
+        if mode not in ("income", "expense"):
+            continue
+
+        r = row_re.match(line)
+        if not r:
+            continue
+
+        iso = iso_from_mmdd(r.group("date"))
+        if not iso:
+            continue
+
+        amount_abs = abs(parse_amount(r.group("amount")))
+        if amount_abs <= 0 or amount_abs > 100000:
+            continue
+
+        signed = amount_abs if mode == "income" else -amount_abs
+
+        txs.append({
+            "date": iso,
+            "description": clean_db_text(r.group("desc"))[:500],
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": mode,
+            "currency": currency,
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": mode,
+            "parser_family": "bbva_usa_checking_summary",
+        })
 
     if txs:
         print("BBVA_USA_CHECKING_EXTRACTED", {
@@ -12369,6 +12371,7 @@ def parse_bbva_usa_checking_summary_statement(text: str) -> list[dict]:
         })
 
     return txs
+
 
 
 
