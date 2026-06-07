@@ -12138,9 +12138,18 @@ def extract_global_statement_summary(text: str) -> dict:
         re.I | re.UNICODE,
     )
 
+    total_mouvements_re = re.compile(
+        r"(?:total\s+des\s+mouvements|total\s+mouvements|مجموع\s+الحركات|إجمالي\s+الحركات|اجمالي\s+الحركات)"
+        r".*?"
+        r"(\d{1,3}(?:[ ., ]\d{3})*(?:[.,]\d{2})|\d+[.,]\d{2})"
+        r"\s+"
+        r"(\d{1,3}(?:[ ., ]\d{3})*(?:[.,]\d{2})|\d+[.,]\d{2})",
+        re.I | re.UNICODE,
+    )
+
     for _line in raw.splitlines():
         _clean = " ".join(str(_line or "").replace("\xa0", " ").replace("\u202f", " ").split())
-        _m = official_total_re.search(_clean)
+        _m = official_total_re.search(_clean) or total_mouvements_re.search(_clean)
         if _m:
             official = {
                 "withdrawals": abs(parse_amount(_m.group(1))),
@@ -12227,6 +12236,158 @@ def extract_global_statement_summary(text: str) -> dict:
 
 
 
+
+
+
+
+
+def parse_cih_fr_ar_date_operation_debit_credit_statement(text: str) -> list[dict]:
+    """
+    CIH / Morocco FR-AR parser:
+    DATES | OPERATION-REFERENCE | DEBIT | CREDIT | OPER | VALEUR
+
+    Handles OCR-collapsed dates like:
+    02/0302/03 VIREMENTS RECUS DE CNSS 600,00
+    04/0304/03 RETRAIT CARTE ... 200,00
+    """
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+    low = raw.lower()
+
+    has_layout = (
+        ("operation-reference" in low or "operation reference" in low or "opération-reference" in low)
+        and ("debit" in low or "débit" in low or "مدينية" in raw or "مدين" in raw)
+        and ("credit" in low or "crédit" in low or "دائنية" in raw or "دائن" in raw)
+        and ("valeur" in low or "value" in low)
+    )
+
+    if not has_layout:
+        return []
+
+    default_year = detect_document_year(raw)
+    currency = detect_currency(raw) or ("MAD" if "dirham" in low or "maroc" in low else None)
+
+    flat = " ".join(raw.replace("\xa0", " ").replace("\u202f", " ").split())
+
+    # Keep only operation zone.
+    zone = flat
+    m = re.search(r"DATES\s+OPERATION[-\s]?REFERENCE.*?(?:OPER\s+VALEUR|VALEUR)", zone, re.I | re.UNICODE)
+    if m:
+        zone = zone[m.end():]
+
+    zone = re.split(
+        r"\b(?:PAGE\s+N|TOTAL\s+DES\s+MOUVEMENTS|NOUVEAU\s+SOLDE|SOLDE\s+FIN|TOTAL\s+MOUVEMENTS)\b",
+        zone,
+        maxsplit=1,
+        flags=re.I | re.UNICODE,
+    )[0]
+
+    # Date starts can be dd/mmdd/mm or dd/mm dd/mm or dd/mm.
+    start_re = re.compile(
+        r"(?<!\d)(?P<date>\d{1,2}/\d{1,2})(?:\s*(?P<value_date>\d{1,2}/\d{1,2}))?\s+"
+        r"(?=(?:VIREMENTS?|VIRT|RETRAIT|PAIEMENT|FRAIS|PRLV|PRELEVEMENT|VERSEMENT|ACHAT|CARTE|VIR|TRANSFERT|تحويل|سحب|شراء|رسوم))",
+        re.I | re.UNICODE,
+    )
+
+    # Repair collapsed dd/mmdd/mm into dd/mm dd/mm.
+    zone = re.sub(r"(\d{1,2}/\d{1,2})(\d{1,2}/\d{1,2})", r"\1 \2", zone)
+
+    starts = list(start_re.finditer(zone))
+    if not starts:
+        return []
+
+    money_re = re.compile(
+        r"(?<!\d)(\d{1,3}(?:[ .,\u00a0]\d{3})+(?:[.,]\d{2})|\d+[.,]\d{2})(?!\d)"
+    )
+
+    income_re = re.compile(
+        r"(virements?\s+recus?|virement\s+recu|virt\s+recu|recu\s+de|"
+        r"credit|cr[ée]dit|versement|remboursement|"
+        r"تحويل\s+وارد|دائن|إيداع|ايداع)",
+        re.I | re.UNICODE,
+    )
+
+    expense_re = re.compile(
+        r"(retrait|paiement|virements?\s+emis?|virement\s+emis|frais|"
+        r"carte|gab|facture|achat|debit|d[ée]bit|"
+        r"تحويل\s+صادر|مدين|سحب|شراء|رسوم)",
+        re.I | re.UNICODE,
+    )
+
+    def iso_from_ddmm(tok: str) -> str | None:
+        try:
+            d, m = str(tok or "").split("/")[:2]
+            return f"{int(default_year):04d}-{int(m):02d}-{int(d):02d}"
+        except Exception:
+            return None
+
+    txs = []
+    seen = set()
+
+    for i, m in enumerate(starts):
+        seg_start = m.start()
+        seg_end = starts[i + 1].start() if i + 1 < len(starts) else len(zone)
+        seg = " ".join(zone[seg_start:seg_end].split())
+        if not seg:
+            continue
+
+        date_tok = m.group("date")
+        iso = iso_from_ddmm(date_tok)
+        if not iso:
+            continue
+
+        amounts = money_re.findall(seg)
+        if not amounts:
+            continue
+
+        amount_token = amounts[-1]
+        try:
+            amount_abs = abs(parse_amount(amount_token))
+        except Exception:
+            continue
+
+        if amount_abs <= 0 or amount_abs > 100000:
+            continue
+
+        if income_re.search(seg) and not expense_re.search(seg):
+            tx_type = "income"
+            signed = amount_abs
+        elif expense_re.search(seg):
+            tx_type = "expense"
+            signed = -amount_abs
+        else:
+            continue
+
+        key = (iso, round(signed, 2), seg[:120])
+        if key in seen:
+            continue
+        seen.add(key)
+
+        txs.append({
+            "date": iso,
+            "description": clean_db_text(seg)[:500],
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": tx_type,
+            "currency": currency,
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": tx_type,
+            "parser_family": "cih_fr_ar_date_operation_debit_credit",
+        })
+
+    if txs:
+        print("CIH_FR_AR_DEBIT_CREDIT_EXTRACTED", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+            "income_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "expense"), 2),
+            "sample": txs[:8],
+        })
+
+    return txs
 
 
 
@@ -13070,6 +13231,7 @@ def extract_transactions(text: str) -> list[dict]:
     candidates = []
 
     for parser_name, parser_fn, min_count in [
+        ("cih_fr_ar_date_operation_debit_credit", parse_cih_fr_ar_date_operation_debit_credit_statement, 3),
         ("fr_date_nature_valeur_debit_credit", parse_fr_date_nature_valeur_debit_credit_statement, 2),
         ("global_reference_debit_credit_value", parse_global_reference_debit_credit_value_statement, 3),
         ("global_value_date_debit_credit", parse_global_value_date_debit_credit_statement, 2),
