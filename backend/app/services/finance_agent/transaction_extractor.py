@@ -11834,10 +11834,10 @@ def extract_global_statement_summary(text: str) -> dict:
             r"(?:beginning balance|opening balance|solde initial|solde d[ée]but|الرصيد الافتتاحي|رصيد افتتاحي).*?(" + money + r")",
         ],
         "deposits": [
-            r"(?:total deposits|total credits|d[ée]p[oô]ts?|versements?|total cr[ée]dits?|إجمالي الإيداعات|اجمالي الايداعات).*?(" + money + r")",
+            r"(?:total deposits|total credits|deposits/additions|deposits\s*/\s*additions|d[ée]p[oô]ts?/cr[ée]dits?|d[ée]p[oô]ts?|versements?|total cr[ée]dits?|إجمالي الإيداعات|اجمالي الايداعات|الإيداعات/الإضافات|الايداعات/الاضافات).*?(" + money + r")",
         ],
         "withdrawals": [
-            r"(?:total withdrawals|total debits|retraits?|débits?|debits?|إجمالي السحوبات|اجمالي السحوبات).*?(" + money + r")",
+            r"(?:total withdrawals|total debits|withdrawals/subtractions|withdrawals\s*/\s*subtractions|retraits?/d[ée]bits?|retraits?|débits?|debits?|إجمالي السحوبات|اجمالي السحوبات|السحوبات/الخصومات).*?(" + money + r")",
         ],
         "ending_balance": [
             r"(?:ending balance|closing balance|solde final|الرصيد الختامي|رصيد ختامي).*?(" + money + r")",
