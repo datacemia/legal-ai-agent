@@ -10786,7 +10786,20 @@ def parse_global_date_boundary_ledger(text: str) -> list[dict]:
 
         # Last number is often balance when followed by Cr or zero balance.
         # Prefer amount before balance when there are >=2 numbers.
-        amount = vals[-2] if len(vals) >= 2 else vals[-1]
+        # Global FR/EN/AR rule:
+        # - If row has Debit/Credit + Balance/Solde columns, final numeric token is usually balance,
+        #   so movement is penultimate.
+        # - If row has only Date/Description/Value/Amount, final numeric token is the movement.
+        has_balance_column_context = (
+            "solde" in low
+            or "balance" in low
+            or "الرصيد" in low
+        )
+
+        if has_balance_column_context and len(vals) >= 2:
+            amount = vals[-2]
+        else:
+            amount = vals[-1]
         balance = vals[-1] if len(vals) >= 2 else None
 
         # If block explicitly contains huge salary/credit and balance Cr,
