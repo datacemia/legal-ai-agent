@@ -12252,6 +12252,17 @@ def parse_global_reference_debit_credit_value_statement(text: str) -> list[dict]
             and ("العمليات" in raw or "عملية" in raw or "المرجع" in raw or "مرجع" in raw)
         )
     )
+    print("GLOBAL_REFERENCE_LAYOUT_DEBUG", {
+        "has_layout": has_layout,
+        "has_date": "date" in low_ascii,
+        "has_debit": "debit" in low_ascii,
+        "has_credit": "credit" in low_ascii,
+        "has_operation": "operation" in low_ascii or "operations" in low_ascii,
+        "has_reference": "reference" in low_ascii or "référence" in low,
+        "has_valeur": "valeur" in low_ascii,
+        "raw_len": len(raw),
+    })
+
     if not has_layout:
         return []
 
