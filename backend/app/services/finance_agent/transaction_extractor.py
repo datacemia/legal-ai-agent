@@ -10584,6 +10584,64 @@ def parse_date_amount_description_ledger(text: str) -> list[dict]:
     return transactions
 
 
+
+def parse_global_money_amount(raw_amount):
+    """Global EN/FR/AR money parser.
+    Handles:
+    - 1,598.07 => 1598.07
+    - 3 982,55 => 3982.55
+    - 2.650.000 => 2650000
+    - 110.000 => 110000 for XAF/FCFA-style statements
+    """
+    import re
+
+    s = str(raw_amount or "").strip()
+    if not s:
+        return 0.0
+
+    s = (
+        s.replace("\u00a0", " ")
+         .replace("F.CFA", "")
+         .replace("FCFA", "")
+         .replace("XAF", "")
+         .replace("€", "")
+         .replace("$", "")
+         .replace("£", "")
+         .strip()
+    )
+
+    sign = -1 if s.startswith("-") else 1
+    s = s.replace("-", "").strip()
+    s = re.sub(r"\s+", "", s)
+
+    # Arabic decimal separators
+    s = s.replace("٬", ",").replace("٫", ".")
+
+    # 2.650.000 / 15.598.000 => thousands dots
+    if re.fullmatch(r"\d{1,3}(?:\.\d{3}){1,}", s):
+        return sign * float(s.replace(".", ""))
+
+    # 1,598.07 => US thousands comma + decimal dot
+    if re.fullmatch(r"\d{1,3}(?:,\d{3})+\.\d{2}", s):
+        return sign * float(s.replace(",", ""))
+
+    # 3 982,55 already spaces removed => 3982,55
+    if re.fullmatch(r"\d+,\d{2}", s):
+        return sign * float(s.replace(",", "."))
+
+    # 1.021 may be FCFA thousands if 3 digits after dot and no decimal cents context
+    if re.fullmatch(r"\d{1,3}\.\d{3}", s):
+        return sign * float(s.replace(".", ""))
+
+    try:
+        return sign * float(s.replace(",", ""))
+    except Exception:
+        nums = re.findall(r"\d+", s)
+        if not nums:
+            return 0.0
+        return sign * float("".join(nums))
+
+
 def parse_global_date_boundary_ledger(text: str) -> list[dict]:
     """Global EN/FR/AR date-boundary ledger parser.
 
