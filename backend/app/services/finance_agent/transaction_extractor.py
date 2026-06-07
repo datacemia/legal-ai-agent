@@ -12691,6 +12691,7 @@ def extract_transactions(text: str) -> list[dict]:
     statement_summary = extract_global_statement_summary(text)
 
     txs = parse_global_reference_debit_credit_value_statement(text)
+    print("GLOBAL_REFERENCE_PRE_ROUTE", {"transactions": len(txs or [])})
     if txs and len(txs) >= 3:
         print("STATEMENT_LAYOUT_DETECTED", "global_reference_debit_credit_value")
         print("GLOBAL_REFERENCE_DEBIT_CREDIT_VALUE_ROUTE", {
