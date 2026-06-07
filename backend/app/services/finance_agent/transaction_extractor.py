@@ -12456,6 +12456,17 @@ def extract_transactions(text: str) -> list[dict]:
         })
         return txs
 
+    txs = parse_global_value_date_debit_credit_statement(text)
+    if txs and len(txs) >= 2:
+        print("STATEMENT_LAYOUT_DETECTED", "global_value_date_debit_credit")
+        print("GLOBAL_VALUE_DATE_DEBIT_CREDIT_ROUTE", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+        })
+        return txs
+
+
     txs = parse_debit_credit_balance_ledger(text)
     if txs and len(txs) >= 3:
         print("STATEMENT_LAYOUT_DETECTED", "debit_credit_balance_ledger")
