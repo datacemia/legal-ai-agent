@@ -12267,6 +12267,82 @@ def extract_global_statement_summary(text: str) -> dict:
 
 
 
+
+
+def parse_arabic_balance_debit_credit_statement(text: str) -> list[dict]:
+    """Arabic balance ledger: balance SAR credit SAR debit SAR + description + date."""
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+
+    if not ("إجمالي" in raw and "السحوبات" in raw and "الإيداعات" in raw and "الرصيد" in raw):
+        return []
+
+    currency = "SAR"
+
+    row_re = re.compile(
+        r"(?P<balance>\d{1,3}(?:,\d{3})*\.\d{2})\s*SAR\s+"
+        r"(?P<credit>\d{1,3}(?:,\d{3})*\.\d{2})\s*SAR\s+"
+        r"(?P<debit>\d{1,3}(?:,\d{3})*\.\d{2})\s*SAR\s+"
+        r"(?P<body>.*?)(?P<date>\d{4}/\d{2}/\d{2})",
+        re.S | re.UNICODE,
+    )
+
+    txs = []
+    seen = set()
+
+    for i, m in enumerate(row_re.finditer(raw)):
+        balance = parse_amount(m.group("balance"))
+        credit = parse_amount(m.group("credit"))
+        debit = parse_amount(m.group("debit"))
+
+        if credit > 0:
+            signed = credit
+            tx_type = "income"
+        elif debit > 0:
+            signed = -debit
+            tx_type = "expense"
+        else:
+            continue
+
+        date = m.group("date").replace("/", "-")
+        desc = clean_db_text(" ".join(m.group("body").split()))[:500]
+
+        key = (i, date, round(signed, 2), desc[:100])
+        if key in seen:
+            continue
+        seen.add(key)
+
+        txs.append({
+            "date": date,
+            "description": desc,
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": tx_type,
+            "currency": currency,
+            "balance": round(balance, 2),
+            "_balance": round(balance, 2),
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": tx_type,
+            "_balance_locked": True,
+            "parser_family": "arabic_balance_debit_credit",
+        })
+
+    if txs:
+        print("ARABIC_BALANCE_DEBIT_CREDIT_EXTRACTED", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+            "income_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "expense"), 2),
+            "sample": txs[:5],
+        })
+
+    return txs
+
+
+
 def parse_snb_credit_card_statement(text: str) -> list[dict]:
     """SNB Saudi credit card parser: purchases positive, payments/refunds trailing '-' negative."""
     import re
@@ -14945,6 +15021,7 @@ def extract_transactions(text: str) -> list[dict]:
     candidates = []
 
     for parser_name, parser_fn, min_count in [
+        ("arabic_balance_debit_credit", parse_arabic_balance_debit_credit_statement, 3),
         ("snb_credit_card", parse_snb_credit_card_statement, 3),
         ("bmce_date_valeur_debit_credit", parse_bmce_date_valeur_debit_credit_statement, 3),
         ("banque_populaire_fr_ar", parse_banque_populaire_fr_ar_statement, 3),
