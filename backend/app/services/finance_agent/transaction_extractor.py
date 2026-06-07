@@ -12223,13 +12223,6 @@ def parse_global_value_date_debit_credit_statement(text: str) -> list[dict]:
         or ("تاريخ القيمة" in raw and "مدين" in raw and "دائن" in raw)
     )
 
-    print("GLOBAL_VALUE_DATE_LAYOUT_DEBUG", {
-        "has_layout": has_layout,
-        "date_valeur": ("date valeur" in low_ascii or ("date" in low_ascii and "valeur" in low_ascii)),
-        "debit": "debit" in low_ascii,
-        "credit": "credit" in low_ascii,
-    })
-
     if not has_layout:
         return []
 
@@ -12238,10 +12231,6 @@ def parse_global_value_date_debit_credit_statement(text: str) -> list[dict]:
         for x in raw.splitlines()
         if re.match(r"^\s*\d{1,2}[/-]\d{1,2}", " ".join(x.split()))
     ]
-    print("GLOBAL_VALUE_DATE_DEBIT_CREDIT_DEBUG", {
-        "candidate_lines": len(candidate_lines),
-        "samples": candidate_lines[:20],
-    })
 
     date_re = re.compile(
         r"^(\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?)"
@@ -12471,7 +12460,6 @@ def extract_transactions(text: str) -> list[dict]:
     statement_summary = extract_global_statement_summary(text)
 
     txs = parse_global_value_date_debit_credit_statement(text)
-    print("GLOBAL_VALUE_DATE_DEBIT_CREDIT_PRE_ROUTE", {"transactions": len(txs or [])})
     if txs and len(txs) >= 2:
         print("STATEMENT_LAYOUT_DETECTED", "global_value_date_debit_credit")
         print("GLOBAL_VALUE_DATE_DEBIT_CREDIT_ROUTE", {
