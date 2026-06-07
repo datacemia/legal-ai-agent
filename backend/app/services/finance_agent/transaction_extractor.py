@@ -8439,6 +8439,146 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
 
         previous_balance = balance
 
+    # Global FR/EN/AR OCR fallback:
+    # Date | Description | Deposits/Additions | Withdrawals/Subtractions | Balance
+    # Handles multi-line OCR where the posting date line and amount line are split.
+    if not transactions:
+        money_pat = re.compile(r"(?<!\d)(?:\$?\s*)?(\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+\.\d{2})(?!\d)")
+        date_start_re = re.compile(r"^\s*(\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?)\b")
+
+        income_markers = re.compile(
+            r"(deposit|deposits?/additions?|addition|credit|direct dep|atm cash deposit|atm check deposit|"
+            r"d[ée]p[oô]t|versement|cr[ée]dit|إيداع|ايداع|دائن)",
+            re.I,
+        )
+        expense_markers = re.compile(
+            r"(withdrawal|withdrawals?/subtractions?|subtraction|debit|payment|purchase|fee|charge|"
+            r"retrait|d[ée]bit|paiement|frais|سحب|مدين|رسوم|شراء)",
+            re.I,
+        )
+
+        guard_re = re.compile(
+            r"(beginning balance|ending balance|totals?|total deposit accounts|monthly service fee|"
+            r"items returned unpaid|summary of overdraft|how to avoid|minimum daily balance|"
+            r"solde initial|solde final|totaux|الرصيد الافتتاحي|الرصيد الختامي)",
+            re.I,
+        )
+
+        lines = [" ".join(x.split()) for x in raw.splitlines() if " ".join(x.split())]
+        rows = []
+        current = None
+
+        def flush_current():
+            nonlocal current
+            if not current:
+                return
+
+            combined = " ".join(current["parts"]).strip()
+            low = combined.lower()
+
+            if guard_re.search(combined):
+                current = None
+                return
+
+            nums = [m.group(1) for m in money_pat.finditer(combined)]
+            if not nums:
+                current = None
+                return
+
+            # Remove obvious embedded dates like 10/02 from amount logic.
+            # Amounts are decimal tokens only, so MM/DD dates are already excluded.
+            balance = None
+            amount_token = nums[-1]
+
+            if len(nums) >= 2:
+                balance = parse_amount(normalize_wdb_money(nums[-1]))
+                amount_token = nums[-2]
+
+            amount_abs = abs(parse_amount(normalize_wdb_money(amount_token)))
+
+            if amount_abs <= 0:
+                current = None
+                return
+
+            if income_markers.search(combined) and not expense_markers.search(combined):
+                tx_type = "income"
+                signed = amount_abs
+            elif expense_markers.search(combined):
+                tx_type = "expense"
+                signed = -amount_abs
+            elif len(nums) >= 2 and previous_balance is not None:
+                # Conservative fallback: infer from balance delta only.
+                try:
+                    delta = round(float(balance) - float(previous_balance), 2)
+                    if abs(delta - amount_abs) <= max(0.02, amount_abs * 0.002):
+                        tx_type = "income"
+                        signed = amount_abs
+                    elif abs(delta + amount_abs) <= max(0.02, amount_abs * 0.002):
+                        tx_type = "expense"
+                        signed = -amount_abs
+                    else:
+                        current = None
+                        return
+                except Exception:
+                    current = None
+                    return
+            else:
+                current = None
+                return
+
+            parsed_date = extract_date(
+                current["date"],
+                default_year=default_year,
+                prefer_us_date=(currency == "USD"),
+            )
+
+            if not parsed_date:
+                current = None
+                return
+
+            description = money_pat.sub("", combined)
+            description = date_start_re.sub("", description).strip()
+            description = clean_db_text(description)
+
+            transactions.append({
+                "date": parsed_date,
+                "description": description[:500],
+                "amount": round(signed, 2),
+                "type": tx_type,
+                "currency": currency,
+                "balance": round(balance, 2) if balance is not None else None,
+                "_balance": round(balance, 2) if balance is not None else None,
+                "signed_amount": round(signed, 2),
+                "locked_amount": round(signed, 2),
+                "_locked_amount": round(signed, 2),
+                "locked_type": tx_type,
+                "_balance_locked": balance is not None,
+                "parser_family": "withdraw_deposit_balance_ocr_multiline",
+            })
+
+            current = None
+
+        previous_balance = None
+
+        for line in lines:
+            m = date_start_re.match(line)
+            if m:
+                flush_current()
+                current = {"date": m.group(1), "parts": [line]}
+            elif current:
+                current["parts"].append(line)
+
+        flush_current()
+
+        print("WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED", {
+            "transactions": len(transactions),
+            "income": sum(1 for tx in transactions if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in transactions if tx.get("type") == "expense"),
+            "income_total": round(sum(tx.get("amount", 0) for tx in transactions if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in transactions if tx.get("type") == "expense"), 2),
+        })
+
+
     print(
         "WITHDRAW_DEPOSIT_BALANCE_EXTRACTED",
         {
