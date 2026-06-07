@@ -11780,6 +11780,21 @@ def extract_transactions(text: str) -> list[dict]:
         })
         return txs
 
+    # Global FR/EN/AR route:
+    # Date | Description | Deposits/Additions | Withdrawals/Subtractions | Balance
+    # Must run before generic debit/credit fallback.
+    wdb_transactions = extract_withdraw_deposit_balance_transactions(text)
+    if wdb_transactions and len(wdb_transactions) >= 3:
+        print("STATEMENT_LAYOUT_DETECTED", "withdraw_deposit_balance")
+        print("WITHDRAW_DEPOSIT_BALANCE_ROUTE", {
+            "transactions": len(wdb_transactions),
+            "income": sum(1 for tx in wdb_transactions if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in wdb_transactions if tx.get("type") == "expense"),
+            "income_total": round(sum(tx.get("amount", 0) for tx in wdb_transactions if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in wdb_transactions if tx.get("type") == "expense"), 2),
+        })
+        return wdb_transactions
+
     txs = parse_debit_credit_column_ledger(text)
     if txs and len(txs) >= 3:
         print("STATEMENT_LAYOUT_DETECTED", "debit_credit_column_ledger")
