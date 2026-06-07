@@ -11439,7 +11439,12 @@ def parse_debit_credit_column_ledger(text: str) -> list[dict]:
         ]):
             continue
 
-        nums = amount_re.findall(body)
+        # Global FR/EN/AR guard: remove statement/value dates before amount matching.
+        # Prevents "12/01 800.000" -> 1800 and "27/12 110 000" -> 12110000.
+        money_body = re.sub(r"\b\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?\b", " ", body)
+        money_body = re.sub(r"\s+", " ", money_body).strip()
+
+        nums = amount_re.findall(money_body)
         if not nums:
             continue
 
