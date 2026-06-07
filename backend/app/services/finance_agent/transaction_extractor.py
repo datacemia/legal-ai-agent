@@ -12280,16 +12280,29 @@ def parse_global_reference_debit_credit_value_statement(text: str) -> list[dict]
     txs = []
     seen = set()
 
-    for raw_line in raw.splitlines():
-        line = " ".join(str(raw_line or "").replace("\xa0", " ").replace("\u202f", " ").split())
-        if not line:
-            continue
+    normalized_lines = [
+        " ".join(str(raw_line or "").replace("\xa0", " ").replace("\u202f", " ").split())
+        for raw_line in raw.splitlines()
+        if str(raw_line or "").strip()
+    ]
 
+    blocks = []
+    current = None
+
+    for line in normalized_lines:
         m = date_re.match(line)
-        if not m:
-            continue
+        if m:
+            if current:
+                blocks.append(current)
+            current = {"date": m.group("date"), "parts": [m.group("rest").strip()]}
+        elif current:
+            current["parts"].append(line)
 
-        rest = m.group("rest").strip()
+    if current:
+        blocks.append(current)
+
+    for block in blocks:
+        rest = " ".join(x for x in block["parts"] if x).strip()
         if skip_re.search(rest):
             continue
 
@@ -12328,7 +12341,7 @@ def parse_global_reference_debit_credit_value_statement(text: str) -> list[dict]
         else:
             continue
 
-        iso = iso_from_date(m.group("date"))
+        iso = iso_from_date(block["date"])
         if not iso:
             continue
 
