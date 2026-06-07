@@ -10715,17 +10715,7 @@ def parse_global_date_boundary_ledger(text: str) -> list[dict]:
         return None
 
     def money_to_float(s: str):
-        v = str(s or "").replace(" ", "").replace("\u00a0", "")
-        if "," in v and "." in v:
-            # 6,000.00
-            v = v.replace(",", "")
-        elif "," in v:
-            # 800,00
-            v = v.replace(",", ".")
-        try:
-            return round(float(v), 2)
-        except Exception:
-            return None
+        return round(parse_global_money_amount(s), 2)
 
     money_re = re.compile(r"\d{1,3}(?:[ ,]\d{3})*(?:[.,]\d{2})|\d+[.,]\d{2}")
 
