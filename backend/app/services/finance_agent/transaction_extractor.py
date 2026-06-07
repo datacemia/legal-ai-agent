@@ -11962,7 +11962,42 @@ def extract_transactions(text: str) -> list[dict]:
             "income_total": round(sum(tx.get("amount", 0) for tx in wdb_transactions if tx.get("type") == "income"), 2),
             "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in wdb_transactions if tx.get("type") == "expense"), 2),
         })
-        return wdb_transactions
+
+        summary = extract_global_statement_summary(text)
+        expected_income = summary.get("deposits") if summary else None
+        expected_expense = summary.get("withdrawals") if summary else None
+
+        parsed_income = round(sum(
+            abs(float(tx.get("amount") or 0))
+            for tx in wdb_transactions
+            if tx.get("type") == "income"
+        ), 2)
+
+        parsed_expense = round(sum(
+            abs(float(tx.get("amount") or 0))
+            for tx in wdb_transactions
+            if tx.get("type") == "expense"
+        ), 2)
+
+        income_gap = None if expected_income is None else abs(round(abs(float(expected_income)) - parsed_income, 2))
+        expense_gap = None if expected_expense is None else abs(round(abs(float(expected_expense)) - parsed_expense, 2))
+
+        print("WDB_ROUTE_RECON_GUARD", {
+            "expected_income": expected_income,
+            "parsed_income": parsed_income,
+            "income_gap": income_gap,
+            "expected_expense": expected_expense,
+            "parsed_expense": parsed_expense,
+            "expense_gap": expense_gap,
+        })
+
+        if (
+            (income_gap is not None and income_gap > 1)
+            or (expense_gap is not None and expense_gap > 1)
+        ):
+            print("WDB_ROUTE_REJECTED_BY_RECONCILIATION")
+        else:
+            return wdb_transactions
 
     txs = parse_debit_credit_column_ledger(text)
     if txs and len(txs) >= 3:
