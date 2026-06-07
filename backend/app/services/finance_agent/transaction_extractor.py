@@ -10717,7 +10717,11 @@ def parse_global_date_boundary_ledger(text: str) -> list[dict]:
     def money_to_float(s: str):
         return round(parse_global_money_amount(s), 2)
 
-    money_re = re.compile(r"\d{1,3}(?:[ ,]\d{3})*(?:[.,]\d{2})|\d+[.,]\d{2}")
+    money_re = re.compile(
+        r"\d{1,3}(?:[ .,\u00a0]\d{3})+(?:[.,]\d{2})?"
+        r"|\d+[.,]\d{2}"
+        r"|\d+"
+    )
 
     blocks = []
     current = None
