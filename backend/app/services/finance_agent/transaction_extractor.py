@@ -11871,6 +11871,8 @@ def extract_global_statement_summary(text: str) -> dict:
                     out[key] = to_amount(vals[-1])
 
     for key, pats in patterns.items():
+        if key in out:
+            continue
         for pat in pats:
             m = re.search(pat, flat, re.I)
             if m:
