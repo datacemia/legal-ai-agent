@@ -12271,6 +12271,131 @@ def extract_global_statement_summary(text: str) -> dict:
 
 
 
+
+
+def parse_anb_arabic_amount_balance_statement(text: str) -> list[dict]:
+    """ANB Saudi Arabic statement: date/date + description + balance + signed amount."""
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+    low = raw.lower()
+
+    if not (
+        ("البنك العربي الوطني" in raw or "anb" in low)
+        and "تفاصيل كشف الحساب" in raw
+        and "إجمالي الخصم" in raw
+        and "إجمالي المبلغ الدائن" in raw
+    ):
+        return []
+
+    currency = "SAR"
+
+    lines = [
+        " ".join(str(x or "").replace("\xa0", " ").replace("\u202f", " ").split())
+        for x in raw.splitlines()
+        if str(x or "").strip()
+    ]
+
+    date_re = re.compile(r"^(?P<date>20\d{2}-\d{2}-\d{2})$")
+    money_re = re.compile(r"(?<!\d)(-?\d{1,3}(?:,\d{3})*(?:\.\d+)?|-?\d+\.\d+|-?\d+)(?!\d)")
+
+    skip_re = re.compile(
+        r"(page\s+\d+|تاريخ العملية|الوصف|الرصيد|تاريخ التنفيذ|ملخص الحساب|"
+        r"رصيد الإغلاق|إجمالي|الرصيد الافتتاحي|رقم الحساب|iban|البنك العربي الوطني)",
+        re.I | re.UNICODE,
+    )
+
+    blocks = []
+    i = 0
+
+    while i < len(lines):
+        m1 = date_re.match(lines[i])
+        if not m1:
+            i += 1
+            continue
+
+        # Usually operation date then execution date.
+        op_date = m1.group("date")
+        j = i + 1
+
+        if j < len(lines) and date_re.match(lines[j]):
+            j += 1
+
+        parts = []
+        while j < len(lines) and not date_re.match(lines[j]):
+            if not skip_re.search(lines[j]):
+                parts.append(lines[j])
+            j += 1
+
+        if parts:
+            blocks.append({"date": op_date, "parts": parts})
+
+        i = j
+
+    txs = []
+    seen = set()
+
+    for idx, block in enumerate(blocks):
+        desc = clean_db_text(" ".join(block["parts"]))
+        nums = []
+
+        for n in money_re.findall(desc):
+            s = str(n or "").strip()
+            if not s:
+                continue
+            try:
+                val = parse_amount(s)
+            except Exception:
+                continue
+            nums.append(val)
+
+        if len(nums) < 2:
+            continue
+
+        # Last two numeric values in ANB rows are balance then signed transaction amount.
+        signed = nums[-1]
+        balance = nums[-2]
+
+        if signed == 0 or abs(signed) > 1000000:
+            continue
+
+        tx_type = "income" if signed > 0 else "expense"
+
+        key = (idx, block["date"], round(signed, 2), desc[:120])
+        if key in seen:
+            continue
+        seen.add(key)
+
+        txs.append({
+            "date": block["date"],
+            "description": desc[:500],
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": tx_type,
+            "currency": currency,
+            "balance": round(balance, 2),
+            "_balance": round(balance, 2),
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": tx_type,
+            "_balance_locked": True,
+            "parser_family": "anb_arabic_amount_balance",
+        })
+
+    if txs:
+        print("ANB_ARABIC_AMOUNT_BALANCE_EXTRACTED", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+            "income_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "expense"), 2),
+            "sample": txs[:6],
+        })
+
+    return txs
+
+
+
 def parse_cbq_qatar_posting_debit_credit_statement(text: str) -> list[dict]:
     """Commercial Bank Qatar parser: Posting Date | Description | Transaction Date | Debit | Credit | Balance."""
     import re
@@ -15155,6 +15280,7 @@ def extract_transactions(text: str) -> list[dict]:
     candidates = []
 
     for parser_name, parser_fn, min_count in [
+        ("anb_arabic_amount_balance", parse_anb_arabic_amount_balance_statement, 3),
         ("cbq_qatar_posting_debit_credit", parse_cbq_qatar_posting_debit_credit_statement, 3),
         ("arabic_balance_debit_credit", parse_arabic_balance_debit_credit_statement, 3),
         ("snb_credit_card", parse_snb_credit_card_statement, 3),
