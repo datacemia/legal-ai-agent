@@ -12257,7 +12257,7 @@ def parse_n26_fr_statement(text: str) -> list[dict]:
 
     # Main account only: stop before Spaces / Relevé Espace.
     raw_main = re.split(
-        r"\b(?:BADLYZ|MOULEY|STANLEY|Spaces Vue d’ensemble|Relevé Espace|Activity Log)\b",
+        r"\b(?:Relevé Espace|Releve Espace|Spaces Vue d’ensemble|Spaces Vue d'ensemble|Activity Log)\b",
         raw,
         maxsplit=1,
         flags=re.I | re.UNICODE,
