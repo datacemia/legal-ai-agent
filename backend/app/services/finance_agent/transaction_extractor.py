@@ -12542,7 +12542,19 @@ def extract_transactions(text: str) -> list[dict]:
         "has_transaction_history": "Transaction history" in str(text),
     })
 
-    wdb_transactions = extract_withdraw_deposit_balance_transactions(text)
+    value_date_low = str(text or "").lower()
+    is_value_date_debit_credit_layout = (
+        ("date valeur" in value_date_low and "débit" in value_date_low and "crédit" in value_date_low)
+        or ("value date" in value_date_low and "debit" in value_date_low and "credit" in value_date_low)
+        or ("تاريخ القيمة" in str(text or "") and "مدين" in str(text or "") and "دائن" in str(text or ""))
+    )
+
+    if is_value_date_debit_credit_layout:
+        print("WDB_ROUTE_SKIPPED_FOR_VALUE_DATE_LAYOUT")
+        wdb_transactions = []
+    else:
+        wdb_transactions = extract_withdraw_deposit_balance_transactions(text)
+
     print("WDB_PRE_ROUTE_RESULT", {
         "transactions": len(wdb_transactions or []),
         "income": sum(1 for tx in (wdb_transactions or []) if tx.get("type") == "income"),
