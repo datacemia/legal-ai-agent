@@ -8324,7 +8324,7 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
     money_re = r"(?:\d{1,3}(?:[,.]\d{3})+|\d+)(?:[,.]\d{2})|\d{1,3}[,.]\d{2}[,.]\d{2}"
 
     row_re = re.compile(
-        r"^(?P<date>\d{1,2}[/-]\d{1,2}[/-]\d{2,4})\s+"
+        r"^(?P<date>\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?)\s+"
         r"(?P<description>.+?)\s+"
         r"(?P<withdraw>" + money_re + r")\s+"
         r"(?P<deposit>" + money_re + r")\s+"
@@ -8364,7 +8364,7 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
     normalized = " ".join(str(raw or "").split())
 
     date_row_re = re.compile(
-        r"(?=\b\d{1,2}/\d{1,2}/\d{4}\b)"
+        r"(?=\b\d{1,2}/\d{1,2}(?:/\d{2,4})?\b)"
     )
 
     candidate_rows = [
@@ -8383,7 +8383,7 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
         if any(marker in low for marker in skip_markers):
             continue
 
-        if re.match(r"^\d{1,2}/\d{1,2}/\d{4}", line):
+        if re.match(r"^\d{1,2}/\d{1,2}(?:/\d{2,4})?", line):
             print("WDB_CANDIDATE_LINE", repr(line))
             print("WDB_MATCH", bool(row_re.match(line)))
 
