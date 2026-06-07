@@ -1204,9 +1204,32 @@ def handle_finance_ai(job: Job, db):
             sane_kpi_transactions.append(tx)
             continue
 
+        desc = str(tx.get("description") or tx.get("desc") or "")
+        upper = desc.upper()
+
+        trusted_transaction_signal = re.search(
+            r"(DEPOT|D[ÉE]P[ÔO]T|DEPOSIT|CASH\\s+DEPOSIT|VERSEMENT|VERST|EPARGNE|[ÉE]PARGNE|"
+            r"RETRAIT|WITHDRAWAL|VIREMENT|TRANSFER|CHEQUE|CH[EÈ]QUE|CHECK|CHQ|"
+            r"PAIEMENT|PAYMENT|CARTE|CARD|ATM|DAB|FRAIS|FEE|FEES|COMMISSION|TAXE|TAX|"
+            r"إيداع|ايداع|سحب|تحويل|شيك|صك|دفع|بطاقة|رسوم|عمولة|ضريبة)",
+            upper,
+            re.IGNORECASE,
+        )
+
+        weak_description = len(re.findall(r"[A-Za-zÀ-ÿ\\u0600-\\u06FF]+", desc)) <= 2
+
         is_absurd = (
-            amount_abs >= 1_000_000
-            or (balance_abs > 0 and amount_abs > balance_abs * 20 and amount_abs > 10_000)
+            (
+                amount_abs >= 1_000_000
+                and not trusted_transaction_signal
+                and weak_description
+            )
+            or (
+                balance_abs > 0
+                and amount_abs > balance_abs * 20
+                and amount_abs > 10_000
+                and not trusted_transaction_signal
+            )
         )
 
         if is_absurd:
