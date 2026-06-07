@@ -11504,6 +11504,7 @@ def parse_debit_credit_column_ledger(text: str) -> list[dict]:
 
 
 def parse_month_name_ledger_transactions(text: str, detected_currency: str | None = None) -> list[dict]:
+    print("MONTH_NAME_LEDGER_VERSION", "v2-continuation-context")
     """Global FR/EN/AR month-name ledger parser.
     Supports rows like:
       OCT 15 DESCRIPTION 2,526.56
