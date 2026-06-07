@@ -12259,6 +12259,165 @@ def extract_global_statement_summary(text: str) -> dict:
 
 
 
+
+
+def parse_acme_business_checking_statement(text: str) -> list[dict]:
+    """ACME business checking parser: Date | Check | Description | Deposits/Credits | Withdrawals/Debits | Balance."""
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+    low = raw.lower()
+
+    if not ("acme" in low and "business checking" in low and "transaction history" in low):
+        return []
+
+    currency = "USD"
+
+    summary_re = re.search(
+        r"Beginning\s+balance\s+on\s+4/1\s+\$?\s*([\d,]+\.\d{2}).*?"
+        r"Deposits/Credits\s+\$?\s*([\d,]+\.\d{2}).*?"
+        r"Withdrawals/Debits\s+-?\$?\s*([\d,]+\.\d{2}).*?"
+        r"Ending\s+balance\s+on\s+4/30\s+\$?\s*([\d,]+\.\d{2})",
+        raw,
+        re.I | re.S,
+    )
+    if summary_re:
+        print("ACME_BUSINESS_SUMMARY_EXTRACTED", {
+            "opening_balance": parse_amount(summary_re.group(1)),
+            "deposits": parse_amount(summary_re.group(2)),
+            "withdrawals": parse_amount(summary_re.group(3)),
+            "ending_balance": parse_amount(summary_re.group(4)),
+        })
+
+    zone = raw
+    m = re.search(r"Transaction\s+History", zone, re.I)
+    if m:
+        zone = zone[m.end():]
+
+    zone = re.split(
+        r"\bSummary\s+of\s+checks\s+written\b|\bAccount\s+transaction\s+fees\s+summary\b|\bImportant\s+Information\b",
+        zone,
+        maxsplit=1,
+        flags=re.I,
+    )[0]
+
+    lines = [
+        " ".join(str(x or "").replace("\xa0", " ").replace("\u202f", " ").split())
+        for x in zone.splitlines()
+        if str(x or "").strip()
+    ]
+
+    date_re = re.compile(r"^(?P<date>4/\d{1,2})\s+(?P<body>.+)$")
+    money_re = re.compile(r"(?<!\d)(\d{1,3}(?:,\d{3})+\.\d{2}|\d+\.\d{2})(?!\d)")
+
+    income_re = re.compile(r"(deposit|mobile deposit|edeposit|money transfer.*from|cash app|credits?)", re.I)
+    expense_re = re.compile(r"(payment|purchase|check|withdrawal|ach debit|wf direct pay|recurring payment|debits?)", re.I)
+
+    def iso_from_mday(tok: str) -> str | None:
+        try:
+            m, d = str(tok).split("/")[:2]
+            return f"2024-{int(m):02d}-{int(d):02d}"
+        except Exception:
+            return None
+
+    blocks = []
+    current = None
+
+    for line in lines:
+        if re.search(r"^(Date|Check\s+Number|Description|Deposits/Credits|Withdrawals/Debits|Ending daily balance)$", line, re.I):
+            continue
+        if line.lower().startswith("totals"):
+            break
+        if line.lower().startswith("ending balance"):
+            break
+
+        m = date_re.match(line)
+        if m:
+            if current:
+                blocks.append(current)
+            current = {"date": m.group("date"), "parts": [m.group("body")]}
+        elif current:
+            current["parts"].append(line)
+
+    if current:
+        blocks.append(current)
+
+    txs = []
+    seen = set()
+
+    for i, b in enumerate(blocks):
+        iso = iso_from_mday(b["date"])
+        if not iso:
+            continue
+
+        desc = clean_db_text(" ".join(b["parts"]))
+        nums = money_re.findall(desc)
+
+        if not nums:
+            continue
+
+        low_desc = desc.lower()
+
+        # Last number may be ending daily balance when present.
+        candidates = []
+        for n in nums:
+            try:
+                val = abs(parse_amount(n))
+            except Exception:
+                continue
+            if 0 < val <= 1000000:
+                candidates.append(val)
+
+        if not candidates:
+            continue
+
+        amount_abs = candidates[-1]
+
+        # If a daily balance exists, transaction amount is usually previous numeric token.
+        if len(candidates) >= 2 and re.search(r"\b\d{1,3}(?:,\d{3})+\.\d{2}$", desc):
+            amount_abs = candidates[-2]
+
+        if income_re.search(low_desc) and not expense_re.search(low_desc):
+            tx_type = "income"
+            signed = amount_abs
+        elif expense_re.search(low_desc):
+            tx_type = "expense"
+            signed = -amount_abs
+        else:
+            continue
+
+        key = (i, iso, round(signed, 2), desc[:120])
+        if key in seen:
+            continue
+        seen.add(key)
+
+        txs.append({
+            "date": iso,
+            "description": desc[:500],
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": tx_type,
+            "currency": currency,
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": tx_type,
+            "parser_family": "acme_business_checking",
+        })
+
+    if txs:
+        print("ACME_BUSINESS_CHECKING_EXTRACTED", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+            "income_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "expense"), 2),
+            "sample": txs[:8],
+        })
+
+    return txs
+
+
+
 def parse_bbva_usa_checking_summary_statement(text: str) -> list[dict]:
     """BBVA USA parser: Deposits and Additions / Electronic Withdrawals sections."""
     import re
@@ -14398,6 +14557,7 @@ def extract_transactions(text: str) -> list[dict]:
     candidates = []
 
     for parser_name, parser_fn, min_count in [
+        ("acme_business_checking", parse_acme_business_checking_statement, 3),
         ("bbva_usa_checking_summary", parse_bbva_usa_checking_summary_statement, 2),
         ("keybank_hassle_free", parse_keybank_hassle_free_statement, 3),
         ("wells_fargo_checking", parse_wells_fargo_checking_statement, 3),
