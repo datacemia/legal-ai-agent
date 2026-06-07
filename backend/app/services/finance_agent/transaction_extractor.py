@@ -8452,8 +8452,10 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
             re.I,
         )
         expense_markers = re.compile(
-            r"(withdrawal|withdrawals?/subtractions?|subtraction|debit|payment|purchase|fee|charge|"
-            r"retrait|d[ée]bit|paiement|frais|سحب|مدين|رسوم|شراء)",
+            r"(withdrawal|withdrawals?/subtractions?|subtraction|debit|payment|pymt|pmts|purchase|"
+            r"recurring payment|online retry|student ln|card|ach|fee|charge|bill|"
+            r"retrait|d[ée]bit|paiement|pr[ée]l[èe]vement|frais|facture|"
+            r"سحب|مدين|رسوم|شراء|دفع|فاتورة)",
             re.I,
         )
 
