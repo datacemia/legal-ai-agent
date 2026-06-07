@@ -12429,14 +12429,22 @@ def parse_global_value_date_debit_credit_statement(text: str) -> list[dict]:
     )
 
     has_layout = (
-        ("date valeur" in low_ascii and "debit" in low_ascii and "credit" in low_ascii)
-        or ("value date" in low_ascii and "debit" in low_ascii and "credit" in low_ascii)
+        (("date valeur" in low_ascii or ("date" in low_ascii and "valeur" in low_ascii)) and "debit" in low_ascii and "credit" in low_ascii)
+        or (("value date" in low_ascii or ("value" in low_ascii and "date" in low_ascii)) and "debit" in low_ascii and "credit" in low_ascii)
         or ("تاريخ القيمة" in raw and "مدين" in raw and "دائن" in raw)
     )
 
     # This parser is only for explicit value-date-first layouts.
     # Let Date|Operations|Debit|Credit and Date|Reference|Debit|Credit|Value
     # be handled by the reference/debit/credit parser.
+    print("VALUE_DATE_GUARD_DEBUG", {
+        "has_date": "date" in low_ascii,
+        "has_operation": "operation" in low_ascii or "operations" in low_ascii,
+        "has_reference": "reference" in low_ascii,
+        "has_valeur": "valeur" in low_ascii,
+        "has_debit": "debit" in low_ascii,
+        "has_credit": "credit" in low_ascii,
+    })
 
     if (
         ("date operations" in low_ascii and "debit" in low_ascii and "credit" in low_ascii)
