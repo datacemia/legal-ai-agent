@@ -43,6 +43,16 @@ def _extract_text_with_scan_fallback(
 
     if len(text.strip()) >= MIN_TEXT_LENGTH:
         print("FINANCE_TEXT_PDF_EXTRACTED", len(text))
+        try:
+            _finance_lines = str(text or "").splitlines()
+            print("PDF_LINES_DEBUG", {
+                "line_count": len(_finance_lines),
+                "non_empty_line_count": sum(1 for _x in _finance_lines if str(_x).strip()),
+                "max_line_len": max([len(_x) for _x in _finance_lines] or [0]),
+                "first_20": [str(_x)[:220] for _x in _finance_lines[:20]],
+            })
+        except Exception as _pdf_dbg_exc:
+            print("PDF_LINES_DEBUG_FAILED", str(_pdf_dbg_exc)[:200])
         return text
 
     print("FINANCE_PDF_SCAN_DETECTED_OCR_STARTED")
