@@ -12125,6 +12125,31 @@ def extract_global_statement_summary(text: str) -> dict:
     raw = normalize_arabic_digits(str(text or ""))
     flat = re.sub(r"\s+", " ", raw)
 
+    # Global FR/EN/AR official totals line:
+    # FR: Total des opérations 4 399,98 4 614,23
+    # EN: Total operations 4,399.98 4,614.23
+    # AR: إجمالي العمليات ...
+    official_total_re = re.compile(
+        r"(?:total\s+des\s+op[ée]rations|total\s+operations|إجمالي\s+العمليات|اجمالي\s+العمليات)"
+        r".*?"
+        r"(\d{1,3}(?:[ ., ]\d{3})*(?:[.,]\d{2})|\d+[.,]\d{2})"
+        r"\s+"
+        r"(\d{1,3}(?:[ ., ]\d{3})*(?:[.,]\d{2})|\d+[.,]\d{2})",
+        re.I | re.UNICODE,
+    )
+
+    for _line in raw.splitlines():
+        _clean = " ".join(str(_line or "").replace("\xa0", " ").replace("\u202f", " ").split())
+        _m = official_total_re.search(_clean)
+        if _m:
+            official = {
+                "withdrawals": abs(parse_amount(_m.group(1))),
+                "deposits": abs(parse_amount(_m.group(2))),
+            }
+            print("STATEMENT_SUMMARY_EXTRACTED", official)
+            return official
+
+
     money = r"\(?\s*\$?\s*[-+]?\d{1,3}(?:[,\s]\d{3})*(?:[.,]\d{2})\s*\)?"
 
     def to_amount(s):
@@ -12238,16 +12263,6 @@ def parse_global_reference_debit_credit_value_statement(text: str) -> list[dict]
             and ("العمليات" in raw or "عملية" in raw or "المرجع" in raw or "مرجع" in raw)
         )
     )
-    print("GLOBAL_REFERENCE_LAYOUT_DEBUG", {
-        "has_layout": has_layout,
-        "has_date": "date" in low_ascii,
-        "has_debit": "debit" in low_ascii,
-        "has_credit": "credit" in low_ascii,
-        "has_operation": "operation" in low_ascii or "operations" in low_ascii,
-        "has_reference": "reference" in low_ascii or "référence" in low,
-        "has_valeur": "valeur" in low_ascii,
-        "raw_len": len(raw),
-    })
 
     if not has_layout:
         return []
@@ -12313,14 +12328,6 @@ def parse_global_reference_debit_credit_value_statement(text: str) -> list[dict]
 
     if current:
         blocks.append(current)
-
-    print("GLOBAL_REFERENCE_BLOCK_DEBUG", {
-        "blocks": len(blocks),
-        "samples": [
-            {"date": b.get("date"), "text": " ".join(b.get("parts", []))[:180]}
-            for b in blocks[:30]
-        ],
-    })
 
     for block in blocks:
         rest = " ".join(x for x in block["parts"] if x).strip()
@@ -12405,24 +12412,6 @@ def parse_global_reference_debit_credit_value_statement(text: str) -> list[dict]
         })
 
     if txs:
-        print("GLOBAL_REFERENCE_INCOME_SAMPLE", [
-            {
-                "date": tx.get("date"),
-                "amount": tx.get("amount"),
-                "desc": str(tx.get("description") or "")[:160],
-            }
-            for tx in txs
-            if tx.get("type") == "income"
-        ][:50])
-        print("GLOBAL_REFERENCE_EXPENSE_SAMPLE", [
-            {
-                "date": tx.get("date"),
-                "amount": tx.get("amount"),
-                "desc": str(tx.get("description") or "")[:160],
-            }
-            for tx in txs
-            if tx.get("type") == "expense"
-        ][:50])
 
         print("GLOBAL_REFERENCE_DEBIT_CREDIT_VALUE_EXTRACTED", {
             "transactions": len(txs),
@@ -12710,39 +12699,124 @@ def parse_global_multiline_debit_credit_balance_statement(text: str) -> list[dic
 
     return transactions
 
+
+def _score_finance_candidate(parser_name: str, txs: list[dict], statement_summary: dict | None) -> dict:
+    """Score parser candidates using official statement totals when available."""
+    txs = txs or []
+
+    income_total = round(sum(abs(float(tx.get("amount") or 0)) for tx in txs if tx.get("type") == "income"), 2)
+    expense_total = round(sum(abs(float(tx.get("amount") or 0)) for tx in txs if tx.get("type") == "expense"), 2)
+
+    expected_income = None
+    expected_expense = None
+
+    if statement_summary:
+        try:
+            expected_income = abs(float(statement_summary.get("deposits"))) if statement_summary.get("deposits") is not None else None
+        except Exception:
+            expected_income = None
+
+        try:
+            expected_expense = abs(float(statement_summary.get("withdrawals"))) if statement_summary.get("withdrawals") is not None else None
+        except Exception:
+            expected_expense = None
+
+    absurd_penalty = sum(
+        100000
+        for tx in txs
+        if abs(float(tx.get("amount") or 0)) > 100000
+    )
+
+    duplicate_penalty = max(0, len(txs) - len({
+        (
+            tx.get("date"),
+            round(float(tx.get("amount") or 0), 2),
+            str(tx.get("description") or "")[:80],
+        )
+        for tx in txs
+    })) * 250
+
+    if expected_income is not None and expected_expense is not None:
+        income_gap = abs(round(expected_income - income_total, 2))
+        expense_gap = abs(round(expected_expense - expense_total, 2))
+        score = income_gap + expense_gap + absurd_penalty + duplicate_penalty
+    else:
+        income_gap = None
+        expense_gap = None
+        # Without official totals, prefer usable size and penalize absurd amounts.
+        score = absurd_penalty + duplicate_penalty - min(len(txs), 200)
+
+    return {
+        "parser": parser_name,
+        "transactions": txs,
+        "count": len(txs),
+        "income_total": income_total,
+        "expense_total": expense_total,
+        "income_gap": income_gap,
+        "expense_gap": expense_gap,
+        "score": round(score, 2),
+    }
+
+
+def _choose_finance_candidate(candidates: list[dict]) -> dict | None:
+    valid = [c for c in candidates if c and c.get("count", 0) >= 3]
+    if not valid:
+        return None
+    return sorted(valid, key=lambda c: (c["score"], -c["count"]))[0]
+
+
 def extract_transactions(text: str) -> list[dict]:
     statement_summary = extract_global_statement_summary(text)
 
-    txs = parse_global_reference_debit_credit_value_statement(text)
-    print("GLOBAL_REFERENCE_PRE_ROUTE", {"transactions": len(txs or [])})
-    if txs and len(txs) >= 3:
-        print("STATEMENT_LAYOUT_DETECTED", "global_reference_debit_credit_value")
-        print("GLOBAL_REFERENCE_DEBIT_CREDIT_VALUE_ROUTE", {
-            "transactions": len(txs),
-            "income": sum(1 for tx in txs if tx.get("type") == "income"),
-            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
-        })
-        return txs
+    # Candidate engine:
+    # Do not trust the first parser that returns transactions.
+    # Run major global parsers, score them against official statement totals,
+    # and route to the best reconciled candidate.
+    candidates = []
 
-    txs = parse_global_value_date_debit_credit_statement(text)
-    if txs and len(txs) >= 2:
-        print("STATEMENT_LAYOUT_DETECTED", "global_value_date_debit_credit")
-        print("GLOBAL_VALUE_DATE_DEBIT_CREDIT_ROUTE", {
-            "transactions": len(txs),
-            "income": sum(1 for tx in txs if tx.get("type") == "income"),
-            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
-        })
-        return txs
+    for parser_name, parser_fn, min_count in [
+        ("global_reference_debit_credit_value", parse_global_reference_debit_credit_value_statement, 3),
+        ("global_value_date_debit_credit", parse_global_value_date_debit_credit_statement, 2),
+        ("global_multiline_debit_credit_balance", parse_global_multiline_debit_credit_balance_statement, 10),
+    ]:
+        try:
+            candidate_txs = parser_fn(text)
+        except Exception as exc:
+            print("CANDIDATE_PARSER_FAILED", {"parser": parser_name, "error": str(exc)[:200]})
+            candidate_txs = []
 
-    txs = parse_global_multiline_debit_credit_balance_statement(text)
-    if txs and len(txs) >= 10:
-        print("STATEMENT_LAYOUT_DETECTED", "global_multiline_debit_credit_balance")
-        print("GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_ROUTE", {
-            "transactions": len(txs),
-            "income": sum(1 for tx in txs if tx.get("type") == "income"),
-            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
-        })
-        return txs
+        if candidate_txs and len(candidate_txs) >= min_count:
+            scored = _score_finance_candidate(parser_name, candidate_txs, statement_summary)
+            candidates.append(scored)
+
+    if candidates:
+        print("FINANCE_CANDIDATE_AUDIT", [
+            {
+                "parser": c["parser"],
+                "count": c["count"],
+                "income_total": c["income_total"],
+                "expense_total": c["expense_total"],
+                "income_gap": c["income_gap"],
+                "expense_gap": c["expense_gap"],
+                "score": c["score"],
+            }
+            for c in candidates
+        ])
+
+        best = _choose_finance_candidate(candidates)
+        if best:
+            print("STATEMENT_LAYOUT_DETECTED", best["parser"])
+            print("FINANCE_CANDIDATE_SELECTED", {
+                "parser": best["parser"],
+                "transactions": best["count"],
+                "income_total": best["income_total"],
+                "expense_total": best["expense_total"],
+                "income_gap": best["income_gap"],
+                "expense_gap": best["expense_gap"],
+                "score": best["score"],
+            })
+            return best["transactions"]
+
     txs = parse_money_out_money_in_balance_ledger(text)
     if txs and len(txs) >= 3:
         print("STATEMENT_LAYOUT_DETECTED", "money_out_money_in_balance_ledger")
