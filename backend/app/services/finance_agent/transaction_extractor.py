@@ -11534,6 +11534,16 @@ def parse_date_posting_description_amount_statement(text: str) -> list[dict]:
         and "description" in low
         and "amount" in low
     )
+    print("GLOBAL_VALUE_DATE_LAYOUT_DEBUG", {
+        "has_layout": has_layout,
+        "has_date_valeur": "date valeur" in low,
+        "has_debit_fr": "débit" in low,
+        "has_credit_fr": "crédit" in low,
+        "has_value_date": "value date" in low,
+        "has_debit_en": "debit" in low,
+        "has_credit_en": "credit" in low,
+    })
+
     if not has_layout:
         return []
 
