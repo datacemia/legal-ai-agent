@@ -4808,7 +4808,6 @@ def extract_money_values_from_window(amount_window: str) -> list[float]:
                 except Exception:
                     continue
             else:
-                segment_skip_stats["no_semantic"] += 1
                 continue
 
         if value <= 0 or value > 1000000:
@@ -8655,7 +8654,6 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
 
             nums = [x.group(1) for x in row_money_re.finditer(line)]
             if not nums:
-                segment_skip_stats["no_money"] += 1
                 continue
 
             amount_abs = abs(parse_amount(normalize_wdb_money(nums[-2] if len(nums) >= 2 else nums[-1])))
@@ -8761,14 +8759,6 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
             "samples": raw_date_lines[:20],
         })
 
-        segment_skip_stats = {
-            "no_money": 0,
-            "pending_label": 0,
-            "no_semantic": 0,
-            "duplicate": 0,
-            "added": 0,
-        }
-
         pending_label = None
 
         for line in raw_date_lines:
@@ -8797,7 +8787,6 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
                 combined,
                 re.I,
             ):
-                segment_skip_stats["pending_label"] += 1
                 pending_label = combined
                 continue
 
@@ -8829,11 +8818,9 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
 
             key = (parsed_date, round(signed, 2), desc[:80])
             if key in segment_seen:
-                segment_skip_stats["duplicate"] += 1
                 continue
             segment_seen.add(key)
 
-            segment_skip_stats["added"] += 1
             segment_extra_rows.append({
                 "date": parsed_date,
                 "description": desc[:500],
@@ -8846,8 +8833,6 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
                 "locked_type": tx_type,
                 "parser_family": "withdraw_deposit_balance_segment_reconstructor",
             })
-
-        print("WDB_SEGMENT_RECONSTRUCTOR_SKIP_STATS", segment_skip_stats)
 
         if segment_extra_rows:
             before_income = round(sum(abs(float(tx.get("amount") or 0)) for tx in transactions if tx.get("type") == "income"), 2)
