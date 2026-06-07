@@ -8477,6 +8477,28 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
 
             combined = " ".join(current["parts"]).strip()
             print("WDB_FLUSH_BLOCK_SAMPLE", combined[:300])
+
+            # Global FR/EN/AR OCR rule:
+            # One flush block may contain multiple transactions due to column OCR.
+            # Split on internal posting-date boundaries and recursively handle
+            # each segment as its own row.
+            internal_segments = [
+                s.strip()
+                for s in re.split(r"(?=\\b\\d{1,2}[/-]\\d{1,2}(?:[/-]\\d{2,4})?\\b)", combined)
+                if s.strip()
+            ]
+
+            if len(internal_segments) > 1:
+                original_current = current
+                for seg in internal_segments:
+                    dm = date_start_re.match(seg)
+                    if not dm:
+                        continue
+                    current = {"date": dm.group(1), "parts": [seg]}
+                    flush_current()
+                current = None
+                return
+
             low = combined.lower()
 
             if guard_re.search(combined):
