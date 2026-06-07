@@ -12243,6 +12243,127 @@ def extract_global_statement_summary(text: str) -> dict:
 
 
 
+
+
+def parse_n26_fr_statement(text: str) -> list[dict]:
+    """N26 FR parser: dated list with signed amounts, main account only."""
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+    low = raw.lower()
+
+    if not ("n26" in low and "relevé de compte" in low):
+        return []
+
+    # Main account only: stop before Spaces / Relevé Espace.
+    raw_main = re.split(
+        r"\b(?:BADLYZ|MOULEY|STANLEY|Spaces Vue d’ensemble|Relevé Espace|Activity Log)\b",
+        raw,
+        maxsplit=1,
+        flags=re.I | re.UNICODE,
+    )[0]
+
+    default_year = detect_document_year(raw_main)
+    currency = "EUR"
+
+    lines = [
+        " ".join(str(x or "").replace("\xa0", " ").replace("\u202f", " ").split())
+        for x in raw_main.splitlines()
+        if str(x or "").strip()
+    ]
+
+    amount_re = re.compile(r"([+-]\s*\d{1,3}(?:[ .]\d{3})*(?:[.,]\d{2})|[+-]\s*\d+[.,]\d{2})\s*€?")
+    date_header_re = re.compile(
+        r"^(?:lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche),?\s+(\d{1,2})\.\s+([a-zéû]+)\s+(\d{4})",
+        re.I | re.UNICODE,
+    )
+
+    month_map = {
+        "janvier": 1, "février": 2, "fevrier": 2, "mars": 3, "avril": 4,
+        "mai": 5, "juin": 6, "juillet": 7, "août": 8, "aout": 8,
+        "septembre": 9, "octobre": 10, "novembre": 11, "décembre": 12, "decembre": 12,
+    }
+
+    skip_re = re.compile(
+        r"(ancien solde|transactions sortantes|transactions entrantes|votre nouveau solde|solde$|vue d.?ensemble)",
+        re.I | re.UNICODE,
+    )
+
+    txs = []
+    current_date = None
+    pending_desc = []
+
+    def flush(desc_lines, amount_token):
+        if not current_date or not amount_token:
+            return
+
+        desc = clean_db_text(" ".join(desc_lines)).strip()
+        if not desc or skip_re.search(desc):
+            return
+
+        try:
+            signed = parse_amount(amount_token.replace("€", "").replace(" ", ""))
+        except Exception:
+            return
+
+        if signed == 0 or abs(signed) > 100000:
+            return
+
+        tx_type = "income" if signed > 0 else "expense"
+
+        txs.append({
+            "date": current_date,
+            "description": desc[:500],
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": tx_type,
+            "currency": currency,
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": tx_type,
+            "parser_family": "n26_fr_statement",
+        })
+
+    for line in lines:
+        mdate = date_header_re.match(line)
+        if mdate:
+            d = int(mdate.group(1))
+            mo = month_map.get(mdate.group(2).lower().replace("é", "e"), None)
+            y = int(mdate.group(3))
+            if mo:
+                current_date = f"{y:04d}-{mo:02d}-{d:02d}"
+            pending_desc = []
+            continue
+
+        if not current_date:
+            continue
+
+        m_amounts = amount_re.findall(line)
+
+        if m_amounts:
+            amount_token = m_amounts[-1]
+            desc_part = amount_re.sub("", line).strip()
+            desc_lines = pending_desc + ([desc_part] if desc_part else [])
+            flush(desc_lines, amount_token)
+            pending_desc = []
+        else:
+            if not skip_re.search(line):
+                pending_desc.append(line)
+
+    if txs:
+        print("N26_FR_STATEMENT_EXTRACTED", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+            "income_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "expense"), 2),
+            "sample": txs[:8],
+        })
+
+    return txs
+
+
+
 def parse_lcl_date_libelle_valeur_debit_credit_statement(text: str) -> list[dict]:
     """
     LCL / FR parser:
@@ -13409,6 +13530,7 @@ def extract_transactions(text: str) -> list[dict]:
     candidates = []
 
     for parser_name, parser_fn, min_count in [
+        ("n26_fr_statement", parse_n26_fr_statement, 3),
         ("lcl_date_libelle_valeur_debit_credit", parse_lcl_date_libelle_valeur_debit_credit_statement, 3),
         ("cih_fr_ar_date_operation_debit_credit", parse_cih_fr_ar_date_operation_debit_credit_statement, 3),
         ("fr_date_nature_valeur_debit_credit", parse_fr_date_nature_valeur_debit_credit_statement, 2),
