@@ -11845,6 +11845,31 @@ def extract_global_statement_summary(text: str) -> dict:
     }
 
     out = {}
+
+    # Global FR/EN/AR line-first summary extraction.
+    # Prefer same-line labels to avoid cross-line capture in flattened OCR text.
+    line_patterns = {
+        "opening_balance": r"(beginning balance|opening balance|solde initial|solde d[ée]but|الرصيد الافتتاحي|رصيد افتتاحي)",
+        "deposits": r"(total deposits|total credits|deposits/additions|deposits\s*/\s*additions|d[ée]p[oô]ts?/cr[ée]dits?|d[ée]p[oô]ts?|versements?|total cr[ée]dits?|إجمالي الإيداعات|اجمالي الايداعات|الإيداعات/الإضافات|الايداعات/الاضافات)",
+        "withdrawals": r"(total withdrawals|total debits|withdrawals/subtractions|withdrawals\s*/\s*subtractions|retraits?/d[ée]bits?|retraits?|débits?|debits?|إجمالي السحوبات|اجمالي السحوبات|السحوبات/الخصومات)",
+        "ending_balance": r"(ending balance|closing balance|statement balance|solde final|الرصيد الختامي|رصيد ختامي)",
+    }
+
+    for line in str(raw or "").splitlines():
+        clean_line = re.sub(r"\s+", " ", normalize_arabic_digits(line)).strip()
+        if not clean_line:
+            continue
+
+        for key, label_pat in line_patterns.items():
+            if key in out:
+                continue
+            if re.search(label_pat, clean_line, re.I):
+                vals = re.findall(money, clean_line, re.I)
+                if vals:
+                    # Use the last amount on the same line.
+                    # Example: "Withdrawals/Subtractions - 10,295.31"
+                    out[key] = to_amount(vals[-1])
+
     for key, pats in patterns.items():
         for pat in pats:
             m = re.search(pat, flat, re.I)
