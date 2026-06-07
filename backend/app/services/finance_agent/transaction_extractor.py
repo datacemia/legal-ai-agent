@@ -8588,6 +8588,89 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
         print("WDB_MULTILINE_TX_SAMPLE", transactions[:30])
         print("WDB_MULTILINE_TOTALS_TARGET", extract_global_statement_summary(raw))
 
+        # Global FR/EN/AR extra OCR reconstruction:
+        # Extract date-ledger rows where amount appears at line end, using semantics.
+        extra_rows = []
+        seen_keys = {
+            (
+                tx.get("date"),
+                round(float(tx.get("amount") or 0), 2),
+                str(tx.get("description") or "")[:80],
+            )
+            for tx in transactions
+        }
+
+        row_money_re = re.compile(r"(?<!\d)(\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+\.\d{2})(?!\d)")
+        row_date_re = re.compile(r"^\s*(\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?)\b")
+
+        for line in lines:
+            m = row_date_re.match(line)
+            if not m:
+                continue
+
+            low = line.lower()
+            if guard_re.search(line):
+                continue
+
+            nums = [x.group(1) for x in row_money_re.finditer(line)]
+            if not nums:
+                continue
+
+            amount_abs = abs(parse_amount(normalize_wdb_money(nums[-2] if len(nums) >= 2 else nums[-1])))
+
+            if amount_abs <= 0:
+                continue
+
+            if income_markers.search(line) and not expense_markers.search(line):
+                tx_type = "income"
+                signed = amount_abs
+            elif expense_markers.search(line):
+                tx_type = "expense"
+                signed = -amount_abs
+            else:
+                continue
+
+            parsed_date = extract_date(
+                m.group(1),
+                default_year=default_year,
+                prefer_us_date=(currency == "USD"),
+            )
+            if not parsed_date:
+                continue
+
+            desc = row_money_re.sub("", line)
+            desc = row_date_re.sub("", desc).strip()
+            desc = clean_db_text(desc)
+
+            key = (parsed_date, round(signed, 2), desc[:80])
+            if key in seen_keys:
+                continue
+            seen_keys.add(key)
+
+            extra_rows.append({
+                "date": parsed_date,
+                "description": desc[:500],
+                "amount": round(signed, 2),
+                "type": tx_type,
+                "currency": currency,
+                "signed_amount": round(signed, 2),
+                "locked_amount": round(signed, 2),
+                "_locked_amount": round(signed, 2),
+                "locked_type": tx_type,
+                "parser_family": "withdraw_deposit_balance_ocr_line_semantic",
+            })
+
+        if extra_rows:
+            transactions.extend(extra_rows)
+            print("WDB_OCR_LINE_SEMANTIC_EXTRA", {
+                "transactions": len(extra_rows),
+                "income": sum(1 for tx in extra_rows if tx.get("type") == "income"),
+                "expenses": sum(1 for tx in extra_rows if tx.get("type") == "expense"),
+                "income_total": round(sum(tx.get("amount", 0) for tx in extra_rows if tx.get("type") == "income"), 2),
+                "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in extra_rows if tx.get("type") == "expense"), 2),
+            })
+
+
         print("WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED", {
             "transactions": len(transactions),
             "income": sum(1 for tx in transactions if tx.get("type") == "income"),
