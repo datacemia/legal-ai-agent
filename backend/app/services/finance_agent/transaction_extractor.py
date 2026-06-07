@@ -12208,6 +12208,22 @@ def parse_global_reference_debit_credit_value_statement(text: str) -> list[dict]
     import re
 
     raw = normalize_arabic_digits(str(text or ""))
+
+    # Global FR/EN/AR guard:
+    # keep the main/current/checking account section only.
+    # Avoid mixing savings/passbook sections into the same ledger.
+    raw = re.split(
+        r"(?:"
+        r"comptes?\s+d[’']?epargne|comptes?\s+d[’']?épargne|"
+        r"livret\s+a|ldd\s+solidaire|compte\s+sur\s+livret|"
+        r"savings\s+accounts?|savings\s+account|passbook|deposit\s+account|"
+        r"حسابات\s+التوفير|حساب\s+التوفير|دفتر\s+التوفير"
+        r")",
+        raw,
+        maxsplit=1,
+        flags=re.I | re.UNICODE,
+    )[0]
+
     low = raw.lower()
     low_ascii = (
         low.replace("é", "e").replace("è", "e").replace("ê", "e")
