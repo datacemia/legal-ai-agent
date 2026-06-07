@@ -11757,6 +11757,19 @@ def extract_transactions(text: str) -> list[dict]:
             })
             return []
         
+    typed_transactions = extract_typed_amount_balance_table_transactions(
+        text,
+        locals().get("detected_currency") or detect_currency(text),
+    )
+    if typed_transactions and len(typed_transactions) >= 3:
+        print("STATEMENT_LAYOUT_DETECTED", "typed_amount_balance_table")
+        print("TYPED_AMOUNT_BALANCE_TABLE_ROUTE", {
+            "transactions": len(typed_transactions),
+            "income": sum(1 for tx in typed_transactions if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in typed_transactions if tx.get("type") == "expense"),
+        })
+        return typed_transactions
+
     txs = parse_month_name_ledger_transactions(text, locals().get('detected_currency'))
     if txs and len(txs) >= 5:
         print("STATEMENT_LAYOUT_DETECTED", "month_name_ledger")
