@@ -1116,8 +1116,7 @@ def correct_date_amount_fusion(parsed_amount: float, raw_token: str, line: str) 
     try:
         amount = abs(float(parsed_amount or 0))
     except Exception:
-        parsed = correct_date_amount_fusion(parsed, raw, line)
-    return parsed_amount
+        return parsed_amount
 
     if amount < 1000:
         return parsed_amount
