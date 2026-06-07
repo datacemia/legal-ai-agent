@@ -12218,14 +12218,14 @@ def parse_global_value_date_debit_credit_statement(text: str) -> list[dict]:
     )
 
     has_layout = (
-        ("date valeur" in low_ascii and "debit" in low_ascii and "credit" in low_ascii)
-        or ("value date" in low_ascii and "debit" in low_ascii and "credit" in low_ascii)
+        (("date valeur" in low_ascii or ("date" in low_ascii and "valeur" in low_ascii)) and "debit" in low_ascii and "credit" in low_ascii)
+        or (("value date" in low_ascii or ("value" in low_ascii and "date" in low_ascii)) and "debit" in low_ascii and "credit" in low_ascii)
         or ("تاريخ القيمة" in raw and "مدين" in raw and "دائن" in raw)
     )
 
     print("GLOBAL_VALUE_DATE_LAYOUT_DEBUG", {
         "has_layout": has_layout,
-        "date_valeur": "date valeur" in low_ascii,
+        "date_valeur": ("date valeur" in low_ascii or ("date" in low_ascii and "valeur" in low_ascii)),
         "debit": "debit" in low_ascii,
         "credit": "credit" in low_ascii,
     })
