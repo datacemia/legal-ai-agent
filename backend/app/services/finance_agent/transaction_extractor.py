@@ -8716,6 +8716,161 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
             })
 
 
+        # Global FR/EN/AR non-recursive WDB segment reconstructor.
+        # Additive only: improves OCR rows without touching flush_current recursion.
+        segment_extra_rows = []
+        segment_seen = {
+            (
+                tx.get("date"),
+                round(float(tx.get("amount") or 0), 2),
+                str(tx.get("description") or "")[:80],
+            )
+            for tx in transactions
+        }
+
+        segment_date_re = re.compile(r"^\s*(\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?)\b")
+        segment_money_re = re.compile(r"(?<!\d)(\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+\.\d{2})(?!\d)")
+
+        segment_income_re = re.compile(
+            r"(direct\s+dep|direct\s+deposit|atm\s+cash\s+deposit|atm\s+check\s+deposit|"
+            r"check\s+deposit|cash\s+deposit|deposit|deposits?/additions?|addition|credit|"
+            r"d[ée]p[oô]t|versement|cr[ée]dit|إيداع|ايداع|دائن)",
+            re.I,
+        )
+
+        segment_expense_re = re.compile(
+            r"(withdrawal|withdrawals?/subtractions?|subtraction|debit|payment|pymt|pmts|purchase|"
+            r"recurring payment|online retry|student ln|card|ach|fee|charge|bill|"
+            r"retrait|d[ée]bit|paiement|pr[ée]l[èe]vement|frais|facture|"
+            r"سحب|مدين|رسوم|شراء|دفع|فاتورة)",
+            re.I,
+        )
+
+        segment_guard_re = re.compile(
+            r"(beginning balance|ending balance|totals?|total deposit accounts|monthly service fee|"
+            r"items returned unpaid|summary of overdraft|how to avoid|minimum daily balance|"
+            r"solde initial|solde final|totaux|الرصيد الافتتاحي|الرصيد الختامي)",
+            re.I,
+        )
+
+        raw_date_lines = [" ".join(x.split()) for x in raw.splitlines() if segment_date_re.match(" ".join(x.split()))]
+
+        pending_label = None
+
+        for line in raw_date_lines:
+            if segment_guard_re.search(line):
+                continue
+
+            m = segment_date_re.match(line)
+            if not m:
+                continue
+
+            nums = [x.group(1) for x in segment_money_re.finditer(line)]
+
+            # Handle split OCR:
+            # "10/17 ATM Cash Deposit on"
+            # "10/17 ... 150.00 ..."
+            if pending_label:
+                combined = (pending_label + " " + line).strip()
+                pending_label = None
+            else:
+                combined = line
+
+            if not nums and re.search(
+                r"(authorized\s+on|deposit\s+on|check\s+deposit\s+on|cash\s+deposit\s+on|"
+                r"withdrawal\s+authorized\s+on|autoris[ée]?\s+le|d[ée]p[oô]t\s+le|"
+                r"retrait\s+autoris[ée]?\s+le|بتاريخ|في\s+تاريخ)",
+                combined,
+                re.I,
+            ):
+                pending_label = combined
+                continue
+
+            nums = [x.group(1) for x in segment_money_re.finditer(combined)]
+            if not nums:
+                continue
+
+            if segment_income_re.search(combined) and not segment_expense_re.search(combined):
+                tx_type = "income"
+                signed = abs(parse_amount(normalize_wdb_money(nums[0])))
+            elif segment_expense_re.search(combined):
+                tx_type = "expense"
+                signed = -abs(parse_amount(normalize_wdb_money(nums[0])))
+            else:
+                continue
+
+            parsed_date = extract_date(
+                m.group(1),
+                default_year=default_year,
+                prefer_us_date=(currency == "USD"),
+            )
+
+            if not parsed_date:
+                continue
+
+            desc = segment_money_re.sub("", combined)
+            desc = segment_date_re.sub("", desc).strip()
+            desc = clean_db_text(desc)
+
+            key = (parsed_date, round(signed, 2), desc[:80])
+            if key in segment_seen:
+                continue
+            segment_seen.add(key)
+
+            segment_extra_rows.append({
+                "date": parsed_date,
+                "description": desc[:500],
+                "amount": round(signed, 2),
+                "type": tx_type,
+                "currency": currency,
+                "signed_amount": round(signed, 2),
+                "locked_amount": round(signed, 2),
+                "_locked_amount": round(signed, 2),
+                "locked_type": tx_type,
+                "parser_family": "withdraw_deposit_balance_segment_reconstructor",
+            })
+
+        if segment_extra_rows:
+            before_income = round(sum(abs(float(tx.get("amount") or 0)) for tx in transactions if tx.get("type") == "income"), 2)
+            before_expense = round(sum(abs(float(tx.get("amount") or 0)) for tx in transactions if tx.get("type") == "expense"), 2)
+
+            candidate_transactions = transactions + segment_extra_rows
+
+            after_income = round(sum(abs(float(tx.get("amount") or 0)) for tx in candidate_transactions if tx.get("type") == "income"), 2)
+            after_expense = round(sum(abs(float(tx.get("amount") or 0)) for tx in candidate_transactions if tx.get("type") == "expense"), 2)
+
+            summary_target = extract_global_statement_summary(raw)
+            target_income = summary_target.get("deposits") if summary_target else None
+            target_expense = summary_target.get("withdrawals") if summary_target else None
+
+            before_gap = 0
+            after_gap = 0
+
+            if target_income is not None:
+                before_gap += abs(abs(float(target_income)) - before_income)
+                after_gap += abs(abs(float(target_income)) - after_income)
+
+            if target_expense is not None:
+                before_gap += abs(abs(float(target_expense)) - before_expense)
+                after_gap += abs(abs(float(target_expense)) - after_expense)
+
+            print("WDB_SEGMENT_RECONSTRUCTOR_EXTRACTED", {
+                "transactions": len(segment_extra_rows),
+                "income": sum(1 for tx in segment_extra_rows if tx.get("type") == "income"),
+                "expenses": sum(1 for tx in segment_extra_rows if tx.get("type") == "expense"),
+                "income_total": round(sum(abs(tx.get("amount", 0)) for tx in segment_extra_rows if tx.get("type") == "income"), 2),
+                "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in segment_extra_rows if tx.get("type") == "expense"), 2),
+                "before_gap": round(before_gap, 2),
+                "after_gap": round(after_gap, 2),
+            })
+
+            if after_gap < before_gap:
+                transactions = candidate_transactions
+                print("WDB_SEGMENT_RECONSTRUCTOR_ACCEPTED")
+            else:
+                print("WDB_SEGMENT_RECONSTRUCTOR_REJECTED")
+
+
         print("WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED", {
             "transactions": len(transactions),
             "income": sum(1 for tx in transactions if tx.get("type") == "income"),
