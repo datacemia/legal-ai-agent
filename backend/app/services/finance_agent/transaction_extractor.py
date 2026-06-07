@@ -12320,10 +12320,24 @@ def parse_global_reference_debit_credit_value_statement(text: str) -> list[dict]
         if not nums:
             continue
 
-        amount_token = nums[-1]
-        try:
-            amount_abs = abs(parse_amount(amount_token))
-        except Exception:
+        amount_token = None
+        amount_abs = None
+
+        for candidate in nums:
+            try:
+                parsed_candidate = abs(parse_amount(candidate))
+            except Exception:
+                continue
+
+            # Global guard: ignore absurd OCR/reference captures.
+            if parsed_candidate <= 0 or parsed_candidate > 100000:
+                continue
+
+            amount_token = candidate
+            amount_abs = parsed_candidate
+            break
+
+        if amount_token is None or amount_abs is None:
             continue
 
         if amount_abs == 0:
