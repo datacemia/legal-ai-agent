@@ -8585,6 +8585,7 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
 
         flush_current()
 
+        print("WDB_MULTILINE_TX_SAMPLE", transactions[:30])
         print("WITHDRAW_DEPOSIT_BALANCE_OCR_MULTILINE_EXTRACTED", {
             "transactions": len(transactions),
             "income": sum(1 for tx in transactions if tx.get("type") == "income"),
