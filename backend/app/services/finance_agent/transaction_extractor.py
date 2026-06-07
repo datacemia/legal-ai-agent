@@ -12261,6 +12261,154 @@ def extract_global_statement_summary(text: str) -> dict:
 
 
 
+
+
+def parse_banque_populaire_fr_ar_statement(text: str) -> list[dict]:
+    """Banque Populaire / Bank Chaabi parser: Date op | Date valeur | Ref | Nature | Debit | Credit."""
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+    low = raw.lower()
+
+    if not (
+        ("banque populaire" in low or "bank chaabi" in low or "extrait de compte" in low)
+        and "date opération" in low
+        and "montant débit" in low
+        and "montant crédit" in low
+    ):
+        return []
+
+    currency = detect_currency(raw) or "MAD"
+
+    lines = [
+        " ".join(str(x or "").replace("\xa0", " ").replace("\u202f", " ").split())
+        for x in raw.splitlines()
+        if str(x or "").strip()
+    ]
+
+    row_re = re.compile(
+        r"^(?P<opd>\d{2})\s+(?P<opm>\d{2})\s+(?P<opy>\d{4})\s+"
+        r"(?P<vald>\d{2})\s+(?P<valm>\d{2})\s+(?P<valy>\d{4})\s+"
+        r"(?P<ref>[A-Z0-9]+)\s+(?P<body>.+)$",
+        re.I | re.UNICODE,
+    )
+
+    money_re = re.compile(
+        r"(?<!\d)(\d{1,3}(?:[ .,\u00a0]\d{3})*(?:[.,]\d{2})|\d+[.,]\d{2})(?!\d)"
+    )
+
+    income_re = re.compile(
+        r"(encaissement|versement|vir\.\s*recu|virement\s+re[cç]u|cr[ée]dit|remis\s+par)",
+        re.I | re.UNICODE,
+    )
+
+    expense_re = re.compile(
+        r"(commission|taxe|vir\.\s*(?:emis|digital.*emis)|virement.*[ée]mis|"
+        r"paiement|facture|cheque|ch[èe]que|cotisations?|droit\s+de\s+timbre|d[ée]bit)",
+        re.I | re.UNICODE,
+    )
+
+    skip_re = re.compile(
+        r"(ancien\s+solde|solde\s+report|solde\s+a\s+reporter|nouveau\s+solde|"
+        r"releve\s+d.identite|numero\s+de\s+compte|date\s+op[ée]ration)",
+        re.I | re.UNICODE,
+    )
+
+    txs = []
+    seen = set()
+    current = None
+
+    def flush():
+        nonlocal current
+        if not current:
+            return
+
+        desc = clean_db_text(" ".join(current["parts"]))
+        if not desc or skip_re.search(desc):
+            current = None
+            return
+
+        nums = money_re.findall(desc)
+        if not nums:
+            current = None
+            return
+
+        try:
+            amount_abs = abs(parse_amount(nums[-1]))
+        except Exception:
+            current = None
+            return
+
+        if amount_abs <= 0 or amount_abs > 1000000:
+            current = None
+            return
+
+        if income_re.search(desc) and not expense_re.search(desc):
+            tx_type = "income"
+            signed = amount_abs
+        elif expense_re.search(desc):
+            tx_type = "expense"
+            signed = -amount_abs
+        else:
+            current = None
+            return
+
+        iso = current["date"]
+
+        key = (current["idx"], iso, round(signed, 2), desc[:120])
+        if key not in seen:
+            seen.add(key)
+            txs.append({
+                "date": iso,
+                "description": desc[:500],
+                "amount": round(signed, 2),
+                "signed_amount": round(signed, 2),
+                "type": tx_type,
+                "currency": currency,
+                "locked_amount": round(signed, 2),
+                "_locked_amount": round(signed, 2),
+                "locked_type": tx_type,
+                "parser_family": "banque_populaire_fr_ar",
+            })
+
+        current = None
+
+    idx = 0
+
+    for line in lines:
+        if skip_re.search(line):
+            flush()
+            continue
+
+        m = row_re.match(line)
+
+        if m:
+            flush()
+            idx += 1
+            current = {
+                "idx": idx,
+                "date": f"{int(m.group('opy')):04d}-{int(m.group('opm')):02d}-{int(m.group('opd')):02d}",
+                "parts": [m.group("body")],
+            }
+        elif current:
+            current["parts"].append(line)
+
+    flush()
+
+    if txs:
+        print("BANQUE_POPULAIRE_FR_AR_EXTRACTED", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+            "income_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "expense"), 2),
+            "sample": txs[:8],
+        })
+
+    return txs
+
+
+
 def parse_acme_business_checking_statement(text: str) -> list[dict]:
     """ACME business checking parser: Date | Check | Description | Deposits/Credits | Withdrawals/Debits | Balance."""
     import re
@@ -14557,6 +14705,7 @@ def extract_transactions(text: str) -> list[dict]:
     candidates = []
 
     for parser_name, parser_fn, min_count in [
+        ("banque_populaire_fr_ar", parse_banque_populaire_fr_ar_statement, 3),
         ("acme_business_checking", parse_acme_business_checking_statement, 3),
         ("bbva_usa_checking_summary", parse_bbva_usa_checking_summary_statement, 2),
         ("keybank_hassle_free", parse_keybank_hassle_free_statement, 3),
