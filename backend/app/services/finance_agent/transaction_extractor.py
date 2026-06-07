@@ -12247,6 +12247,148 @@ def extract_global_statement_summary(text: str) -> dict:
 
 
 
+
+
+def parse_revolut_fr_statement(text: str) -> list[dict]:
+    """Revolut France parser: Date | Description | Argent sortant | Argent entrant | Solde."""
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+    low = raw.lower()
+
+    if not ("revolut" in low and "transactions du compte" in low):
+        return []
+
+    currency = "EUR"
+
+    # Main current account only.
+    zone = re.split(
+        r"Transactions\s+sur\s+des\s+Pockets|Pockets\s+personnelles|Page\s+2\s+sur",
+        raw,
+        maxsplit=1,
+        flags=re.I | re.UNICODE,
+    )[0]
+
+    # Start from transactions table.
+    m = re.search(r"Transactions\s+du\s+compte.*?Date\s+Description\s+Argent\s+sortant\s+Argent\s+entrant\s+Solde", zone, re.I | re.S | re.UNICODE)
+    if m:
+        zone = zone[m.end():]
+
+    lines = [
+        " ".join(str(x or "").replace("\xa0", " ").replace("\u202f", " ").split())
+        for x in zone.splitlines()
+        if str(x or "").strip()
+    ]
+
+    month_map = {
+        "janv": 1, "janvier": 1,
+        "févr": 2, "fevr": 2, "février": 2, "fevrier": 2,
+        "mars": 3, "avr": 4, "avril": 4,
+        "mai": 5, "juin": 6, "juil": 7, "juillet": 7,
+        "août": 8, "aout": 8, "sept": 9, "septembre": 9,
+        "oct": 10, "octobre": 10, "nov": 11, "novembre": 11,
+        "déc": 12, "dec": 12, "décembre": 12, "decembre": 12,
+    }
+
+    date_re = re.compile(r"^(?P<day>\d{1,2})\s+(?P<month>[A-Za-zÀ-ÿ.]+)\.?\s+(?P<year>\d{4})\s+(?P<body>.+)$", re.I | re.UNICODE)
+    money_re = re.compile(r"€\s?(\d{1,3}(?:[,.]\d{3})*(?:[.,]\d{2})|\d+[.,]\d{2})")
+
+    income_re = re.compile(r"(payment\s+from|virement\s+de|de\s*:|from\s+|change\s+en\s+eur)", re.I | re.UNICODE)
+    expense_re = re.compile(r"(à\s+eur|a\s+eur|to\s+|vers\s+|payment\s+to|frais)", re.I | re.UNICODE)
+
+    txs = []
+    current = None
+
+    def parse_month(tok: str):
+        key = str(tok or "").lower().replace(".", "").replace("é", "e").replace("û", "u")
+        return month_map.get(key)
+
+    def flush():
+        nonlocal current
+        if not current:
+            return
+
+        body = " ".join(current["parts"]).strip()
+        amounts = money_re.findall(body)
+        if not amounts:
+            current = None
+            return
+
+        try:
+            amount_abs = abs(parse_amount(amounts[0]))
+        except Exception:
+            current = None
+            return
+
+        if amount_abs <= 0 or amount_abs > 100000:
+            current = None
+            return
+
+        desc = money_re.sub("", body).strip()
+        low_desc = desc.lower()
+
+        if income_re.search(low_desc) and not expense_re.search(low_desc):
+            signed = amount_abs
+            tx_type = "income"
+        elif expense_re.search(low_desc):
+            signed = -amount_abs
+            tx_type = "expense"
+        else:
+            # Fallback: if row has two amounts, first is tx amount, last is balance.
+            if len(amounts) >= 2 and "€0.00" in body:
+                signed = -amount_abs
+                tx_type = "expense"
+            else:
+                current = None
+                return
+
+        txs.append({
+            "date": current["date"],
+            "description": clean_db_text(desc)[:500],
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": tx_type,
+            "currency": currency,
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": tx_type,
+            "parser_family": "revolut_fr_statement",
+        })
+
+        current = None
+
+    for line in lines:
+        m = date_re.match(line)
+        if m:
+            flush()
+            mo = parse_month(m.group("month"))
+            if not mo:
+                current = None
+                continue
+            current = {
+                "date": f"{int(m.group('year')):04d}-{mo:02d}-{int(m.group('day')):02d}",
+                "parts": [m.group("body")],
+            }
+        else:
+            if current:
+                current["parts"].append(line)
+
+    flush()
+
+    if txs:
+        print("REVOLUT_FR_STATEMENT_EXTRACTED", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+            "income_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "expense"), 2),
+            "sample": txs[:8],
+        })
+
+    return txs
+
+
+
 def parse_sg_date_valeur_nature_debit_credit_statement(text: str) -> list[dict]:
     """
     Société Générale FR parser:
@@ -13672,6 +13814,7 @@ def extract_transactions(text: str) -> list[dict]:
     candidates = []
 
     for parser_name, parser_fn, min_count in [
+        ("revolut_fr_statement", parse_revolut_fr_statement, 3),
         ("sg_date_valeur_nature_debit_credit", parse_sg_date_valeur_nature_debit_credit_statement, 3),
         ("n26_fr_statement", parse_n26_fr_statement, 3),
         ("lcl_date_libelle_valeur_debit_credit", parse_lcl_date_libelle_valeur_debit_credit_statement, 3),
