@@ -8492,12 +8492,40 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
 
             if len(internal_segments) > 1:
                 original_current = current
+                merged_segments = []
+                pending = ""
+
+                join_next_re = re.compile(
+                    r"(authorized\s+on|recurring\s+payment\s+authorized\s+on|"
+                    r"deposit\s+on|check\s+deposit\s+on|cash\s+deposit\s+on|"
+                    r"withdrawal\s+authorized\s+on|"
+                    r"autoris[ée]?\s+le|d[ée]p[oô]t\s+le|retrait\s+autoris[ée]?\s+le|"
+                    r"بتاريخ|في\s+تاريخ)",
+                    re.I,
+                )
+
                 for seg in internal_segments:
+                    if pending:
+                        merged_segments.append((pending + " " + seg).strip())
+                        pending = ""
+                        continue
+
+                    if join_next_re.search(seg) and not money_pat.search(seg):
+                        pending = seg
+                        continue
+
+                    merged_segments.append(seg)
+
+                if pending:
+                    merged_segments.append(pending)
+
+                for seg in merged_segments:
                     dm = date_start_re.match(seg)
                     if not dm:
                         continue
                     current = {"date": dm.group(1), "parts": [seg]}
                     flush_current()
+
                 current = None
                 return
 
