@@ -11682,7 +11682,7 @@ def extract_transactions(text: str) -> list[dict]:
             })
             return []
         
-    txs = parse_month_name_ledger_transactions(text, detected_currency)
+    txs = parse_month_name_ledger_transactions(text, locals().get('detected_currency'))
     if txs and len(txs) >= 5:
         print("STATEMENT_LAYOUT_DETECTED", "month_name_ledger")
         print("MONTH_NAME_LEDGER_ROUTE", {
