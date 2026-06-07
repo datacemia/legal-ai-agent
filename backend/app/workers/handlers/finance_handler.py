@@ -873,6 +873,20 @@ def handle_finance_ai(job: Job, db):
             return "value_date_metadata_row"
 
         # 5) Generic absurd amount guard:
+        # Global FR/EN/AR rule:
+        # A high amount is NOT absurd if the row has trusted transaction verbs.
+        trusted_transaction_signal = re.search(
+            r"(DEPOT|D[ÉE]P[ÔO]T|DEPOSIT|CASH\s+DEPOSIT|VERSEMENT|VERST|EPARGNE|[ÉE]PARGNE|"
+            r"RETRAIT|WITHDRAWAL|VIREMENT|TRANSFER|CHEQUE|CH[EÈ]QUE|CHECK|CHQ|"
+            r"إيداع|ايداع|سحب|تحويل|شيك|صك)",
+            upper,
+            re.IGNORECASE,
+        )
+
+        if trusted_transaction_signal:
+            return None
+
+        # 5) Generic absurd amount guard:
         # huge amount + weak description = likely ID/reference/balance/OCR fusion.
         strong_tx_words = re.search(
             r"(CARTE|CARD|PAYMENT|PAIEMENT|VIREMENT|VIR\s+RECU|VIR\s+EMIS|TRANSFER|"
