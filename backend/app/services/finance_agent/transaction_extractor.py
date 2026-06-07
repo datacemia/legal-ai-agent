@@ -12374,6 +12374,28 @@ def parse_global_reference_debit_credit_value_statement(text: str) -> list[dict]
         desc = clean_db_text(rest_no_value_date)
         low_desc = desc.lower()
 
+        # Global FR/EN/AR guard:
+        # exclude passbook/savings mirror transfers that appear after the main account.
+        # They usually contain a value-date marker plus a target/source account number.
+        if (
+            (
+                "date de valeur" in low_desc
+                or "value date" in low_desc
+                or "تاريخ القيمة" in desc
+            )
+            and (
+                "compte" in low_desc
+                or "account" in low_desc
+                or "حساب" in desc
+            )
+            and (
+                re.search(r"\bvirement\s+(?:pour|de)\b", low_desc, re.I)
+                or re.search(r"\btransfer\s+(?:to|from)\b", low_desc, re.I)
+                or "تحويل" in desc
+            )
+        ):
+            continue
+
         if (
             "date de valeur" in low_desc
             and re.search(r"\bvirement\s+de\b", low_desc, re.I)
