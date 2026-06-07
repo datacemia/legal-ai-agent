@@ -11232,6 +11232,7 @@ def parse_money_out_money_in_balance_ledger(text: str) -> list[dict]:
 
     txs = []
     current_date = None
+    pending_context = ""
     current_desc = []
 
     def flush_candidate(desc_lines):
@@ -11589,6 +11590,11 @@ def parse_month_name_ledger_transactions(text: str, detected_currency: str | Non
 
         nums = money_re.findall(body)
         if not nums:
+            # Global continuation line: merchant/details line without amount.
+            # It may be completed by the next line containing Signature/PIN/ACH/etc.
+            words = re.findall(r"[A-Za-zÀ-ÿ\\u0600-\\u06FF0-9*#./-]+", body)
+            if len(words) >= 2:
+                pending_context = (pending_context + " " + body).strip()
             continue
 
         amount = parse_money_token(nums[-1])
@@ -11597,6 +11603,20 @@ def parse_month_name_ledger_transactions(text: str, detected_currency: str | Non
 
         desc = money_re.sub(" ", body).strip()
         desc = re.sub(r"\s+", " ", desc)
+
+        # Global FR/EN/AR continuation repair:
+        # If current line only has weak payment-mode words, prepend previous merchant context.
+        weak_payment_mode_only = re.fullmatch(
+            r"(?i)\s*(signature|pin|pos|ach|card|carte|cb|paiement|payment|purchase|debit|credit|"
+            r"بطاقة|شراء|دفع|تحويل)\s*",
+            desc or "",
+        )
+
+        if pending_context and (weak_payment_mode_only or len(desc) < 3):
+            desc = f"{pending_context} {desc}".strip()
+
+        pending_context = ""
+
         if len(desc) < 2:
             continue
 
