@@ -12958,6 +12958,44 @@ def _score_finance_candidate(parser_name: str, txs: list[dict], statement_summar
     }
 
 
+
+def _summary_looks_inconsistent_with_candidates(statement_summary: dict | None, candidates: list[dict]) -> bool:
+    """Reject suspicious official-summary extraction when all real candidates disagree heavily."""
+    if not statement_summary or not candidates:
+        return False
+
+    try:
+        expected_income = abs(float(statement_summary.get("deposits") or 0))
+        expected_expense = abs(float(statement_summary.get("withdrawals") or 0))
+    except Exception:
+        return False
+
+    # Suspicious case: summary says tiny totals, but candidates have substantial real ledger totals.
+    best_by_ledger_size = max(
+        candidates,
+        key=lambda c: abs(float(c.get("income_total") or 0)) + abs(float(c.get("expense_total") or 0)),
+    )
+
+    ledger_income = abs(float(best_by_ledger_size.get("income_total") or 0))
+    ledger_expense = abs(float(best_by_ledger_size.get("expense_total") or 0))
+
+    expected_total = expected_income + expected_expense
+    ledger_total = ledger_income + ledger_expense
+
+    if ledger_total >= 1000 and expected_total > 0 and expected_total < ledger_total * 0.25:
+        print("STATEMENT_SUMMARY_REJECTED_AS_SUSPICIOUS", {
+            "summary": statement_summary,
+            "best_candidate_parser": best_by_ledger_size.get("parser"),
+            "ledger_income": ledger_income,
+            "ledger_expense": ledger_expense,
+            "ledger_total": ledger_total,
+            "expected_total": expected_total,
+        })
+        return True
+
+    return False
+
+
 def _choose_finance_candidate(candidates: list[dict]) -> dict | None:
     valid = [c for c in candidates if c and c.get("count", 0) >= 3]
     if not valid:
@@ -12991,6 +13029,14 @@ def extract_transactions(text: str) -> list[dict]:
             candidates.append(scored)
 
     if candidates:
+        if _summary_looks_inconsistent_with_candidates(statement_summary, candidates):
+            statement_summary = None
+            # Re-score candidates without the suspicious summary.
+            candidates = [
+                _score_finance_candidate(c["parser"], c["transactions"], statement_summary)
+                for c in candidates
+            ]
+
         print("FINANCE_CANDIDATE_AUDIT", [
             {
                 "parser": c["parser"],
