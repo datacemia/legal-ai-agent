@@ -12592,11 +12592,27 @@ def extract_transactions(text: str) -> list[dict]:
         },
     )
 
+    print("AUDIT_BEFORE_FALLBACK_DEBIT_CREDIT", {
+        "count": len(transactions),
+        "income": sum(1 for tx in transactions if tx.get("type") == "income"),
+        "expense": sum(1 for tx in transactions if tx.get("type") == "expense"),
+        "income_total": round(sum(float(tx.get("amount") or 0) for tx in transactions if tx.get("type") == "income"), 2),
+        "expense_total": round(sum(abs(float(tx.get("amount") or 0)) for tx in transactions if tx.get("type") == "expense"), 2),
+    })
+
     transactions = fallback_debit_credit_column_transactions_if_low_quality(
         transactions,
         text,
         detected_currency,
     )
+
+    print("AUDIT_AFTER_FALLBACK_DEBIT_CREDIT", {
+        "count": len(transactions),
+        "income": sum(1 for tx in transactions if tx.get("type") == "income"),
+        "expense": sum(1 for tx in transactions if tx.get("type") == "expense"),
+        "income_total": round(sum(float(tx.get("amount") or 0) for tx in transactions if tx.get("type") == "income"), 2),
+        "expense_total": round(sum(abs(float(tx.get("amount") or 0)) for tx in transactions if tx.get("type") == "expense"), 2),
+    })
 
     transactions = fallback_vertical_transactions_if_empty(
         transactions,
@@ -12604,11 +12620,27 @@ def extract_transactions(text: str) -> list[dict]:
         detected_currency,
     )
 
+    print("AUDIT_BEFORE_FALLBACK_DEBIT_CREDIT", {
+        "count": len(transactions),
+        "income": sum(1 for tx in transactions if tx.get("type") == "income"),
+        "expense": sum(1 for tx in transactions if tx.get("type") == "expense"),
+        "income_total": round(sum(float(tx.get("amount") or 0) for tx in transactions if tx.get("type") == "income"), 2),
+        "expense_total": round(sum(abs(float(tx.get("amount") or 0)) for tx in transactions if tx.get("type") == "expense"), 2),
+    })
+
     transactions = fallback_debit_credit_column_transactions_if_low_quality(
         transactions,
         text,
         detected_currency,
     )
+
+    print("AUDIT_AFTER_FALLBACK_DEBIT_CREDIT", {
+        "count": len(transactions),
+        "income": sum(1 for tx in transactions if tx.get("type") == "income"),
+        "expense": sum(1 for tx in transactions if tx.get("type") == "expense"),
+        "income_total": round(sum(float(tx.get("amount") or 0) for tx in transactions if tx.get("type") == "income"), 2),
+        "expense_total": round(sum(abs(float(tx.get("amount") or 0)) for tx in transactions if tx.get("type") == "expense"), 2),
+    })
 
     print(
         "INTERNAL_TRANSFER_STATS",
