@@ -12294,7 +12294,11 @@ def parse_global_reference_debit_credit_value_statement(text: str) -> list[dict]
             continue
 
         rest_no_value_date = value_date_re.sub("", rest).strip()
-        nums = money_re.findall(rest_no_value_date)
+        nums = re.findall(
+            r"(?<![A-Za-zÀ-ÿ0-9])(\d{1,3}(?:[ .,\u00a0]\d{3})*(?:[.,]\d{2})|\d+[.,]\d{2})(?![A-Za-zÀ-ÿ0-9])",
+            rest_no_value_date,
+            re.I | re.UNICODE,
+        )
         if not nums:
             continue
 
