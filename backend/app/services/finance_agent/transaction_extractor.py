@@ -8447,8 +8447,10 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
         date_start_re = re.compile(r"^\s*(\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?)\b")
 
         income_markers = re.compile(
-            r"(deposit|deposits?/additions?|addition|credit|direct dep|atm cash deposit|atm check deposit|"
-            r"d[ée]p[oô]t|versement|cr[ée]dit|إيداع|ايداع|دائن)",
+            r"(direct\s+dep|direct\s+deposit|atm\s+cash\s+deposit|atm\s+check\s+deposit|"
+            r"check\s+deposit|cash\s+deposit|deposit|deposits?/additions?|addition|credit|"
+            r"d[ée]p[oô]t|versement|cr[ée]dit|"
+            r"إيداع|ايداع|دائن)",
             re.I,
         )
         expense_markers = re.compile(
