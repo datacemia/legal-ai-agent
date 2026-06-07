@@ -12174,8 +12174,161 @@ def extract_global_statement_summary(text: str) -> dict:
     return out
 
 
+
+def parse_global_multiline_debit_credit_balance_statement(text: str) -> list[dict]:
+    """Global FR/EN/AR parser for OCR multiline:
+    Date | Description | Value Date | Debit | Credit | Balance
+    """
+    raw = str(text or "")
+    lower = raw.lower()
+
+    header_ok = (
+        ("debit" in lower and "credit" in lower and "balance" in lower)
+        or ("débit" in lower and "crédit" in lower and "solde" in lower)
+        or ("مدين" in raw and "دائن" in raw and "الرصيد" in raw)
+        or ("value date" in lower and "balance" in lower)
+    )
+
+    if not header_ok:
+        return []
+
+    default_year = detect_document_year(raw)
+    currency = detect_currency(raw) or "AED"
+
+    date_re = re.compile(r"^\s*(\d{1,2}[/-]\d{1,2}[/-]\d{2,4})\b")
+    money_re = re.compile(r"(?<!\d)(\d{1,3}(?:[,.]\d{3})+(?:[,.]\d{2})?|\d{1,6}[,.]\d{2})(?!\d)")
+
+    income_re = re.compile(
+        r"(salary|allowance|transfer\s+from|credit|deposit|cash\s+deposit|incoming|"
+        r"salaire|allocation|virement\s+re[cç]u|cr[ée]dit|d[ée]p[oô]t|versement|"
+        r"راتب|بدل|إيداع|ايداع|دائن|تحويل\s+من)",
+        re.I,
+    )
+
+    expense_re = re.compile(
+        r"(atm\s+withdr|withdrawal|withdrewal|point\s+of\s+sale|purchase|charges?|"
+        r"finance\s+installment|instal?l?ment|card\s+due\s+payment|transfer\s+to|debit|dr\b|"
+        r"retrait|achat|paiement|frais|pr[ée]l[èe]vement|d[ée]bit|"
+        r"سحب|شراء|رسوم|مدين|دفع|قسط|تحويل\s+إلى|تحويل\s+الى)",
+        re.I,
+    )
+
+    skip_re = re.compile(
+        r"(opening\s+balance|closing\s+balance|statement\s+of\s+account|page\s+\d+|"
+        r"\bb/f\b|balance\s+brought|solde\s+initial|الرصيد\s+الافتتاحي)",
+        re.I,
+    )
+
+    def norm_money(s: str) -> float:
+        v = str(s or "").strip()
+        if re.fullmatch(r"\d{1,3}\.\d{3}\.\d{2}", v):
+            v = v.replace(".", ",", 1)
+        if re.fullmatch(r"\d+,\d{2}", v):
+            v = v.replace(",", ".")
+        return abs(parse_amount(v))
+
+    transactions = []
+    pending_desc = ""
+
+    lines = [" ".join(x.split()) for x in raw.splitlines() if " ".join(x.split())]
+
+    for line in lines:
+        m = date_re.match(line)
+        if not m:
+            continue
+
+        row_date = m.group(1)
+        body = line[m.end():].strip()
+
+        if skip_re.search(body):
+            pending_desc = ""
+            continue
+
+        nums = [x.group(1) for x in money_re.finditer(body)]
+
+        if not nums:
+            pending_desc = body
+            continue
+
+        combined = (pending_desc + " " + body).strip()
+        low_combined = combined.lower()
+
+        if income_re.search(combined) and not expense_re.search(combined):
+            tx_type = "income"
+            amount_index = 1 if len(nums) >= 3 and norm_money(nums[0]) == 0 else 0
+            signed = norm_money(nums[amount_index])
+        elif expense_re.search(combined):
+            tx_type = "expense"
+            signed = -norm_money(nums[0])
+        else:
+            pending_desc = ""
+            continue
+
+        balance = None
+        if len(nums) >= 2:
+            try:
+                balance = norm_money(nums[-1])
+            except Exception:
+                balance = None
+
+        parsed_date = extract_date(
+            row_date,
+            default_year=default_year,
+            prefer_us_date=False,
+        )
+
+        if not parsed_date:
+            pending_desc = ""
+            continue
+
+        desc = money_re.sub("", combined)
+        desc = date_re.sub("", desc).strip()
+        desc = clean_db_text(desc)
+
+        if abs(signed) <= 0:
+            pending_desc = ""
+            continue
+
+        transactions.append({
+            "date": parsed_date,
+            "description": desc[:500],
+            "amount": round(signed, 2),
+            "type": tx_type,
+            "currency": currency,
+            "balance": round(balance, 2) if balance is not None else None,
+            "_balance": round(balance, 2) if balance is not None else None,
+            "signed_amount": round(signed, 2),
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": tx_type,
+            "_balance_locked": balance is not None,
+            "parser_family": "global_multiline_debit_credit_balance",
+        })
+
+        pending_desc = ""
+
+    print("GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_EXTRACTED", {
+        "transactions": len(transactions),
+        "income": sum(1 for tx in transactions if tx.get("type") == "income"),
+        "expenses": sum(1 for tx in transactions if tx.get("type") == "expense"),
+        "income_total": round(sum(abs(tx.get("amount", 0)) for tx in transactions if tx.get("type") == "income"), 2),
+        "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in transactions if tx.get("type") == "expense"), 2),
+    })
+
+    return transactions
+
 def extract_transactions(text: str) -> list[dict]:
     statement_summary = extract_global_statement_summary(text)
+
+    txs = parse_global_multiline_debit_credit_balance_statement(text)
+    if txs and len(txs) >= 10:
+        print("STATEMENT_LAYOUT_DETECTED", "global_multiline_debit_credit_balance")
+        print("GLOBAL_MULTILINE_DEBIT_CREDIT_BALANCE_ROUTE", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+        })
+        return txs
     txs = parse_money_out_money_in_balance_ledger(text)
     if txs and len(txs) >= 3:
         print("STATEMENT_LAYOUT_DETECTED", "money_out_money_in_balance_ledger")
