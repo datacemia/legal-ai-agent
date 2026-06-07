@@ -8569,14 +8569,27 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
             re.I,
         )
 
+        needs_amount_continuation_re = re.compile(
+            r"(authorized\s+on|recurring\s+payment\s+authorized\s+on|deposit\s+on|withdrawal\s+authorized\s+on|"
+            r"autoris[ée]?\s+le|d[ée]p[oô]t\s+le|retrait\s+autoris[ée]?\s+le|"
+            r"بتاريخ|في\s+تاريخ)",
+            re.I,
+        )
+
         for line in lines:
             m = date_start_re.match(line)
 
             if m:
                 # Global FR/EN/AR OCR rule:
-                # a date after phrases like "authorized on", "deposit on",
-                # "withdrawal on" is an embedded event date, not a new row.
-                if current and continuation_date_context_re.search(" ".join(current["parts"][-2:])):
+                # If previous row announces an authorization/deposit/withdrawal date
+                # but has no money yet, this new date line belongs to the same transaction.
+                previous_text = " ".join(current["parts"][-2:]) if current else ""
+                previous_has_money = bool(money_pat.search(previous_text))
+
+                if current and (
+                    continuation_date_context_re.search(previous_text)
+                    or (needs_amount_continuation_re.search(previous_text) and not previous_has_money)
+                ):
                     current["parts"].append(line)
                     continue
 
