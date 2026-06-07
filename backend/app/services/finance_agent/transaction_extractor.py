@@ -12218,6 +12218,16 @@ def parse_global_value_date_debit_credit_statement(text: str) -> list[dict]:
     if not has_layout:
         return []
 
+    candidate_lines = [
+        " ".join(x.split())
+        for x in raw.splitlines()
+        if re.match(r"^\\s*\\d{1,2}[/-]\\d{1,2}", " ".join(x.split()))
+    ]
+    print("GLOBAL_VALUE_DATE_DEBIT_CREDIT_DEBUG", {
+        "candidate_lines": len(candidate_lines),
+        "samples": candidate_lines[:20],
+    })
+
     date_re = re.compile(
         r"^(\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?)"
         r"(?:\s+(\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?))?"
