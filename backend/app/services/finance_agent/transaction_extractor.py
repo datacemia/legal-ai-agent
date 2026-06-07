@@ -8476,6 +8476,7 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
                 return
 
             combined = " ".join(current["parts"]).strip()
+            print("WDB_FLUSH_BLOCK_SAMPLE", combined[:300])
             low = combined.lower()
 
             if guard_re.search(combined):
