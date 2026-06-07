@@ -11569,6 +11569,8 @@ def parse_month_name_ledger_transactions(text: str, detected_currency: str | Non
     txs = []
     current_date = None
 
+    pending_context = ""
+
     for raw_line in raw.splitlines():
         line = " ".join(str(raw_line or "").replace("\xa0", " ").split())
         if not line or skip_re.search(line):
