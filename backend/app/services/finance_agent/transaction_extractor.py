@@ -12209,20 +12209,6 @@ def parse_global_reference_debit_credit_value_statement(text: str) -> list[dict]
 
     raw = normalize_arabic_digits(str(text or ""))
 
-    # Global FR/EN/AR guard:
-    # keep the main/current/checking account section only.
-    # Cut only when a real savings/passbook section starts.
-    raw = re.split(
-        r"(?im)^\s*(?:"
-        r"comptes?\s+d[’']?epargne|comptes?\s+d[’']?épargne|"
-        r"livret\s+a\b|ldd\s+solidaire\b|compte\s+sur\s+livret\b|"
-        r"savings\s+accounts?\b|savings\s+account\b|passbook\b|"
-        r"حسابات\s+التوفير|حساب\s+التوفير|دفتر\s+التوفير"
-        r")",
-        raw,
-        maxsplit=1,
-    )[0]
-
     low = raw.lower()
     low_ascii = (
         low.replace("é", "e").replace("è", "e").replace("ê", "e")
