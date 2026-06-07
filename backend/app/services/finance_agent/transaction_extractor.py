@@ -12139,7 +12139,7 @@ def extract_global_statement_summary(text: str) -> dict:
     )
 
     total_mouvements_re = re.compile(
-        r"(?:total\s+des\s+mouvements|total\s+mouvements|مجموع\s+الحركات|إجمالي\s+الحركات|اجمالي\s+الحركات)"
+        r"(?:totaux?\s+des\s+mouvements|total\s+mouvements|مجموع\s+الحركات|إجمالي\s+الحركات|اجمالي\s+الحركات)"
         r".*?"
         r"(\d{1,3}(?:[ ., ]\d{3})*(?:[.,]\d{2})|\d+[.,]\d{2})"
         r"\s+"
@@ -12242,6 +12242,148 @@ def extract_global_statement_summary(text: str) -> dict:
 
 
 
+
+
+
+
+
+def parse_sg_date_valeur_nature_debit_credit_statement(text: str) -> list[dict]:
+    """
+    Société Générale FR parser:
+    Date | Valeur | Nature de l'opération | Débit | Crédit
+    """
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+    low = raw.lower()
+
+    has_layout = (
+        ("société générale" in low or "societe generale" in low or "sg " in low)
+        and "date" in low
+        and "valeur" in low
+        and ("nature de l'opération" in low or "nature de l.operation" in low or "nature de l'op" in low)
+        and ("débit" in low or "debit" in low)
+        and ("crédit" in low or "credit" in low)
+    )
+
+    if not has_layout:
+        return []
+
+    default_year = detect_document_year(raw)
+    currency = detect_currency(raw) or ("EUR" if "euros" in low or "euro" in low or "€" in raw else None)
+
+    flat = " ".join(raw.replace("\xa0", " ").replace("\u202f", " ").split())
+
+    # Keep operation zone only.
+    m = re.search(r"Date\s+Valeur\s+Nature\s+de\s+l[’']?op[ée]ration\s+D[ée]bit\s+Cr[ée]dit", flat, re.I | re.UNICODE)
+    zone = flat[m.end():] if m else flat
+
+    zone = re.split(
+        r"\b(?:TOTAUX?\s+DES\s+MOUVEMENTS|NOUVEAU\s+SOLDE|SOLDE\s+AU|Les\s+écritures\s+précédées)\b",
+        zone,
+        maxsplit=1,
+        flags=re.I | re.UNICODE,
+    )[0]
+
+    # Start only on real transaction date pairs: dd/mm/yyyy dd/mm/yyyy
+    start_re = re.compile(
+        r"(?<!\d)(?P<date>\d{2}/\d{2}/\d{4})\s+(?P<value_date>\d{2}/\d{2}/\d{4})\s+"
+        r"(?=(?:CARTE|PRELEVEMENT|PR[ÉE]L[ÈE]VEMENT|VIR|AVANTAGE|COTISATION|RETRAIT|FRAIS|REM(?:BT|BOURSEMENT)|CHEQUE|CH[ÈE]QUE))",
+        re.I | re.UNICODE,
+    )
+
+    starts = list(start_re.finditer(zone))
+    if not starts:
+        return []
+
+    money_re = re.compile(
+        r"(?<!\d)(\d{1,3}(?:[ .,\u00a0]\d{3})+(?:[.,]\d{2})|\d+[.,]\d{2})(?!\d)"
+    )
+
+    income_re = re.compile(
+        r"(vir\s+recu|virement\s+re[cç]u|rembt|remboursement|avantage\s+commercial|cr[ée]dit|refund|transfer\s+from)",
+        re.I | re.UNICODE,
+    )
+
+    expense_re = re.compile(
+        r"(carte|prelevement|pr[ée]l[èe]vement|vir.*emis|virement.*[ée]mis|cotisation|retrait|frais|commission|paiement|achat|debit|d[ée]bit|transfer\s+to)",
+        re.I | re.UNICODE,
+    )
+
+    def iso_from_date(tok: str) -> str | None:
+        try:
+            d, m, y = str(tok or "").split("/")[:3]
+            return f"{int(y):04d}-{int(m):02d}-{int(d):02d}"
+        except Exception:
+            return None
+
+    txs = []
+    seen = set()
+
+    for i, m in enumerate(starts):
+        seg_start = m.start()
+        seg_end = starts[i + 1].start() if i + 1 < len(starts) else len(zone)
+        seg = " ".join(zone[seg_start:seg_end].split())
+        if not seg:
+            continue
+
+        iso = iso_from_date(m.group("date"))
+        if not iso:
+            continue
+
+        amounts = money_re.findall(seg)
+        if not amounts:
+            continue
+
+        amount_token = amounts[-1]
+        try:
+            amount_abs = abs(parse_amount(amount_token))
+        except Exception:
+            continue
+
+        if amount_abs <= 0 or amount_abs > 100000:
+            continue
+
+        if income_re.search(seg) and not expense_re.search(seg):
+            tx_type = "income"
+            signed = amount_abs
+        elif expense_re.search(seg):
+            tx_type = "expense"
+            signed = -amount_abs
+        else:
+            continue
+
+        desc = clean_db_text(seg)
+
+        key = (i, iso, round(signed, 2), desc[:120])
+        if key in seen:
+            continue
+        seen.add(key)
+
+        txs.append({
+            "date": iso,
+            "description": desc[:500],
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": tx_type,
+            "currency": currency,
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": tx_type,
+            "parser_family": "sg_date_valeur_nature_debit_credit",
+        })
+
+    if txs:
+        print("SG_DATE_VALEUR_NATURE_DEBIT_CREDIT_EXTRACTED", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+            "income_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "expense"), 2),
+            "sample": txs[:8],
+        })
+
+    return txs
 
 
 
@@ -13530,6 +13672,7 @@ def extract_transactions(text: str) -> list[dict]:
     candidates = []
 
     for parser_name, parser_fn, min_count in [
+        ("sg_date_valeur_nature_debit_credit", parse_sg_date_valeur_nature_debit_credit_statement, 3),
         ("n26_fr_statement", parse_n26_fr_statement, 3),
         ("lcl_date_libelle_valeur_debit_credit", parse_lcl_date_libelle_valeur_debit_credit_statement, 3),
         ("cih_fr_ar_date_operation_debit_credit", parse_cih_fr_ar_date_operation_debit_credit_statement, 3),
