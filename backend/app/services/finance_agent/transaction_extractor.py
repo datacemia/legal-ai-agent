@@ -12249,8 +12249,9 @@ def extract_global_statement_summary(text: str) -> dict:
 
 
 
+
 def parse_revolut_fr_statement(text: str) -> list[dict]:
-    """Revolut France parser: Date | Description | Argent sortant | Argent entrant | Solde."""
+    """Revolut France parser: main account only."""
     import re
 
     raw = normalize_arabic_digits(str(text or ""))
@@ -12261,18 +12262,20 @@ def parse_revolut_fr_statement(text: str) -> list[dict]:
 
     currency = "EUR"
 
-    # Main current account only.
+    # Start at main account transactions, not at summary.
+    m = re.search(r"Transactions\s+du\s+compte\s*:", raw, re.I | re.UNICODE)
+    if not m:
+        return []
+
+    zone = raw[m.start():]
+
+    # Stop before pockets section.
     zone = re.split(
-        r"Transactions\s+sur\s+des\s+Pockets|Pockets\s+personnelles|Page\s+2\s+sur",
-        raw,
+        r"Transactions\s+sur\s+des\s+Pockets|Pockets\s+personnelles|Spaces\s+Vue",
+        zone,
         maxsplit=1,
         flags=re.I | re.UNICODE,
     )[0]
-
-    # Start from transactions table.
-    m = re.search(r"Transactions\s+du\s+compte.*?Date\s+Description\s+Argent\s+sortant\s+Argent\s+entrant\s+Solde", zone, re.I | re.S | re.UNICODE)
-    if m:
-        zone = zone[m.end():]
 
     lines = [
         " ".join(str(x or "").replace("\xa0", " ").replace("\u202f", " ").split())
@@ -12282,26 +12285,29 @@ def parse_revolut_fr_statement(text: str) -> list[dict]:
 
     month_map = {
         "janv": 1, "janvier": 1,
-        "févr": 2, "fevr": 2, "février": 2, "fevrier": 2,
+        "fevr": 2, "févr": 2, "fevrier": 2, "février": 2,
         "mars": 3, "avr": 4, "avril": 4,
         "mai": 5, "juin": 6, "juil": 7, "juillet": 7,
-        "août": 8, "aout": 8, "sept": 9, "septembre": 9,
+        "aout": 8, "août": 8, "sept": 9, "septembre": 9,
         "oct": 10, "octobre": 10, "nov": 11, "novembre": 11,
-        "déc": 12, "dec": 12, "décembre": 12, "decembre": 12,
+        "dec": 12, "déc": 12, "decembre": 12, "décembre": 12,
     }
 
-    date_re = re.compile(r"^(?P<day>\d{1,2})\s+(?P<month>[A-Za-zÀ-ÿ.]+)\.?\s+(?P<year>\d{4})\s+(?P<body>.+)$", re.I | re.UNICODE)
+    date_re = re.compile(
+        r"^(?P<day>\d{1,2})\s+(?P<month>[A-Za-zÀ-ÿ.]+)\.?\s+(?P<year>\d{4})\s+(?P<body>.+)$",
+        re.I | re.UNICODE,
+    )
     money_re = re.compile(r"€\s?(\d{1,3}(?:[,.]\d{3})*(?:[.,]\d{2})|\d+[.,]\d{2})")
 
-    income_re = re.compile(r"(payment\s+from|virement\s+de|de\s*:|from\s+|change\s+en\s+eur)", re.I | re.UNICODE)
-    expense_re = re.compile(r"(à\s+eur|a\s+eur|to\s+|vers\s+|payment\s+to|frais)", re.I | re.UNICODE)
+    income_re = re.compile(r"(payment\s+from|virement\s+de|de\s*:|from\s+|change\s+en\s+eur)", re.I)
+    expense_re = re.compile(r"(à\s+eur|a\s+eur|to\s+|vers\s+|payment\s+to|frais)", re.I)
 
     txs = []
     current = None
 
-    def parse_month(tok: str):
-        key = str(tok or "").lower().replace(".", "").replace("é", "e").replace("û", "u")
-        return month_map.get(key)
+    def month_num(tok):
+        k = str(tok or "").lower().replace(".", "")
+        return month_map.get(k) or month_map.get(k.replace("é", "e").replace("û", "u"))
 
     def flush():
         nonlocal current
@@ -12310,16 +12316,12 @@ def parse_revolut_fr_statement(text: str) -> list[dict]:
 
         body = " ".join(current["parts"]).strip()
         amounts = money_re.findall(body)
-        if not amounts:
+
+        if len(amounts) < 2:
             current = None
             return
 
-        try:
-            amount_abs = abs(parse_amount(amounts[0]))
-        except Exception:
-            current = None
-            return
-
+        amount_abs = abs(parse_amount(amounts[0]))
         if amount_abs <= 0 or amount_abs > 100000:
             current = None
             return
@@ -12334,13 +12336,8 @@ def parse_revolut_fr_statement(text: str) -> list[dict]:
             signed = -amount_abs
             tx_type = "expense"
         else:
-            # Fallback: if row has two amounts, first is tx amount, last is balance.
-            if len(amounts) >= 2 and "€0.00" in body:
-                signed = -amount_abs
-                tx_type = "expense"
-            else:
-                current = None
-                return
+            current = None
+            return
 
         txs.append({
             "date": current["date"],
@@ -12358,10 +12355,13 @@ def parse_revolut_fr_statement(text: str) -> list[dict]:
         current = None
 
     for line in lines:
+        if line.lower().startswith("date description"):
+            continue
+
         m = date_re.match(line)
         if m:
             flush()
-            mo = parse_month(m.group("month"))
+            mo = month_num(m.group("month"))
             if not mo:
                 current = None
                 continue
@@ -12369,9 +12369,8 @@ def parse_revolut_fr_statement(text: str) -> list[dict]:
                 "date": f"{int(m.group('year')):04d}-{mo:02d}-{int(m.group('day')):02d}",
                 "parts": [m.group("body")],
             }
-        else:
-            if current:
-                current["parts"].append(line)
+        elif current:
+            current["parts"].append(line)
 
     flush()
 
@@ -12386,6 +12385,7 @@ def parse_revolut_fr_statement(text: str) -> list[dict]:
         })
 
     return txs
+
 
 
 
