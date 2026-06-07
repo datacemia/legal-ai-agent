@@ -12202,6 +12202,157 @@ def extract_global_statement_summary(text: str) -> dict:
 
 
 
+
+def parse_global_reference_debit_credit_value_statement(text: str) -> list[dict]:
+    """Global FR/EN/AR parser: Date | Reference | Debit | Credit | Value."""
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+    low = raw.lower()
+    low_ascii = (
+        low.replace("é", "e").replace("è", "e").replace("ê", "e")
+           .replace("à", "a").replace("ù", "u").replace("ç", "c")
+    )
+
+    has_layout = (
+        (
+            "date" in low_ascii
+            and ("reference" in low_ascii or "référence" in low)
+            and "debit" in low_ascii
+            and "credit" in low_ascii
+            and "valeur" in low_ascii
+        )
+        or (
+            "date" in low_ascii
+            and "reference" in low_ascii
+            and "debit" in low_ascii
+            and "credit" in low_ascii
+            and "value" in low_ascii
+        )
+        or (
+            "التاريخ" in raw
+            and ("المرجع" in raw or "مرجع" in raw)
+            and ("مدين" in raw or "خصم" in raw)
+            and ("دائن" in raw or "ائتمان" in raw)
+        )
+    )
+    if not has_layout:
+        return []
+
+    default_year = detect_document_year(raw)
+    currency = detect_currency(raw) or ("EUR" if "eur" in low or "euros" in low or "€" in raw else None)
+
+    date_re = re.compile(r"^\s*(?P<date>\d{1,2}[./-]\d{1,2}(?:[./-]\d{2,4})?)\s+(?P<rest>.+)$")
+    value_date_re = re.compile(r"\b\d{1,2}[./-]\d{1,2}[./-]\d{2,4}\b\s*$")
+    money_re = re.compile(r"(?<!\d)(\d{1,3}(?:[ .,\u00a0]\d{3})+(?:[.,]\d{2})?|\d+[.,]\d{2})(?!\d)")
+
+    income_re = re.compile(
+        r"(virement.*re[cç]u|virement\s+instantan[ée]\s+re[cç]u|facture\s+cb\s+cr[ée]dit|"
+        r"cr[ée]dit|remboursement|salaire|paye|salary|payroll|credit|refund|transfer\s+from|"
+        r"دائن|إيداع|ايداع|راتب|تحويل\s+وارد)",
+        re.I | re.UNICODE,
+    )
+    expense_re = re.compile(
+        r"(carte|cb\b|pr[ée]l[èe]vement|prelevement|virement.*[ée]mis|commission|frais|"
+        r"d[ée]bit|paiement|achat|purchase|card|debit|fee|charge|withdrawal|transfer\s+to|"
+        r"مدين|خصم|سحب|شراء|رسوم|تحويل\s+صادر)",
+        re.I | re.UNICODE,
+    )
+    skip_re = re.compile(
+        r"(solde\s+pr[ée]c[ée]dent|nouveau\s+solde|total\s+des\s+mouvements|total\s+des\s+frais|"
+        r"relev[ée]\s+d.op[ée]rations|situation\s+de\s+vos\s+comptes|iban|bic|page\s+\d+)",
+        re.I | re.UNICODE,
+    )
+
+    def iso_from_date(tok: str) -> str | None:
+        s = str(tok or "").replace(".", "/").replace("-", "/")
+        parts = s.split("/")
+        try:
+            day = int(parts[0])
+            month = int(parts[1])
+            year = int(parts[2]) if len(parts) > 2 else default_year
+            if year < 100:
+                year += 2000
+            return f"{year:04d}-{month:02d}-{day:02d}"
+        except Exception:
+            return None
+
+    txs = []
+    seen = set()
+
+    for raw_line in raw.splitlines():
+        line = " ".join(str(raw_line or "").replace("\xa0", " ").replace("\u202f", " ").split())
+        if not line:
+            continue
+
+        m = date_re.match(line)
+        if not m:
+            continue
+
+        rest = m.group("rest").strip()
+        if skip_re.search(rest):
+            continue
+
+        rest_no_value_date = value_date_re.sub("", rest).strip()
+        nums = money_re.findall(rest_no_value_date)
+        if not nums:
+            continue
+
+        amount_token = nums[-1]
+        try:
+            amount_abs = abs(parse_amount(amount_token))
+        except Exception:
+            continue
+
+        if amount_abs == 0:
+            continue
+
+        desc = clean_db_text(rest_no_value_date)
+        low_desc = desc.lower()
+
+        if income_re.search(desc):
+            tx_type = "income"
+            signed = amount_abs
+        elif expense_re.search(desc):
+            tx_type = "expense"
+            signed = -amount_abs
+        else:
+            continue
+
+        iso = iso_from_date(m.group("date"))
+        if not iso:
+            continue
+
+        key = (iso, round(signed, 2), desc[:100])
+        if key in seen:
+            continue
+        seen.add(key)
+
+        txs.append({
+            "date": iso,
+            "description": desc[:500],
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": tx_type,
+            "currency": currency,
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": tx_type,
+            "parser_family": "global_reference_debit_credit_value",
+        })
+
+    if txs:
+        print("GLOBAL_REFERENCE_DEBIT_CREDIT_VALUE_EXTRACTED", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+            "income_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "expense"), 2),
+        })
+
+    return txs
+
+
 def parse_global_value_date_debit_credit_statement(text: str) -> list[dict]:
     """Global FR/EN/AR Value Date | Debit | Credit parser."""
     import re
@@ -12458,6 +12609,16 @@ def parse_global_multiline_debit_credit_balance_statement(text: str) -> list[dic
 
 def extract_transactions(text: str) -> list[dict]:
     statement_summary = extract_global_statement_summary(text)
+
+    txs = parse_global_reference_debit_credit_value_statement(text)
+    if txs and len(txs) >= 3:
+        print("STATEMENT_LAYOUT_DETECTED", "global_reference_debit_credit_value")
+        print("GLOBAL_REFERENCE_DEBIT_CREDIT_VALUE_ROUTE", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+        })
+        return txs
 
     txs = parse_global_value_date_debit_credit_statement(text)
     if txs and len(txs) >= 2:
