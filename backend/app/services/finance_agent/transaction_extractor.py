@@ -12328,6 +12328,14 @@ def parse_global_reference_debit_credit_value_statement(text: str) -> list[dict]
             continue
         seen.add(key)
 
+        print("GLOBAL_REFERENCE_ROW_DEBUG", {
+            "date": iso,
+            "amount_token": amount_token,
+            "amount_abs": round(amount_abs, 2),
+            "type": tx_type,
+            "desc": desc[:160],
+        })
+
         txs.append({
             "date": iso,
             "description": desc[:500],
