@@ -11500,6 +11500,134 @@ def parse_debit_credit_column_ledger(text: str) -> list[dict]:
     return txs
 
 
+
+
+def parse_month_name_ledger_transactions(text: str, detected_currency: str | None = None) -> list[dict]:
+    """Global FR/EN/AR month-name ledger parser.
+    Supports rows like:
+      OCT 15 DESCRIPTION 2,526.56
+      15 OCT DESCRIPTION (85.30)
+      ١٥ أكتوبر DESCRIPTION (٨٥٫٣٠)
+    Lines without a date inherit the previous transaction date.
+    """
+    import re
+    from datetime import datetime
+
+    raw = normalize_arabic_digits(str(text or ""))
+
+    month_map = {
+        "jan": 1, "january": 1, "janv": 1, "janvier": 1, "يناير": 1,
+        "feb": 2, "february": 2, "fev": 2, "févr": 2, "fevrier": 2, "février": 2, "فبراير": 2,
+        "mar": 3, "march": 3, "mars": 3, "مارس": 3,
+        "apr": 4, "april": 4, "avr": 4, "avril": 4, "أبريل": 4, "ابريل": 4,
+        "may": 5, "mai": 5, "مايو": 5,
+        "jun": 6, "june": 6, "juin": 6, "يونيو": 6,
+        "jul": 7, "july": 7, "juil": 7, "juillet": 7, "يوليو": 7,
+        "aug": 8, "august": 8, "aout": 8, "août": 8, "أغسطس": 8, "اغسطس": 8,
+        "sep": 9, "sept": 9, "september": 9, "septembre": 9, "سبتمبر": 9,
+        "oct": 10, "october": 10, "octobre": 10, "أكتوبر": 10, "اكتوبر": 10,
+        "nov": 11, "november": 11, "novembre": 11, "نوفمبر": 11,
+        "dec": 12, "december": 12, "decembre": 12, "décembre": 12, "ديسمبر": 12,
+    }
+
+    month_words = "|".join(sorted((re.escape(k) for k in month_map), key=len, reverse=True))
+
+    year = detect_document_year(raw)
+    period_year = re.search(r"\b(20\d{2})\b", raw)
+    if period_year:
+        year = int(period_year.group(1))
+
+    money_re = re.compile(
+        r"(\(?\s*\$?\s*[+-]?\d{1,3}(?:[,\s]\d{3})*(?:\.\d{2})\s*\)?|\(?\s*\$?\s*[+-]?\d+(?:[.,]\d{2})\s*\)?)"
+    )
+
+    month_day_re = re.compile(rf"^\s*(?P<mon>{month_words})\s+(?P<day>\d{{1,2}})\s+(?P<body>.+)$", re.I)
+    day_month_re = re.compile(rf"^\s*(?P<day>\d{{1,2}})\s+(?P<mon>{month_words})\s+(?P<body>.+)$", re.I)
+
+    skip_re = re.compile(
+        r"(account summary|monthly account statement|beginning balance|ending balance|total withdrawals|total deposits|"
+        r"solde|relevé|fees|total overdraft|total returned|date description|page \d+|member f\.?d\.?i\.?c)",
+        re.I,
+    )
+
+    def parse_money_token(tok: str) -> float | None:
+        s = str(tok or "").strip()
+        if not s:
+            return None
+        neg = "(" in s and ")" in s
+        s = s.replace("$", "").replace("(", "").replace(")", "").replace(" ", "")
+        try:
+            val = parse_amount(s)
+        except Exception:
+            return None
+        if neg:
+            val = -abs(val)
+        return float(val)
+
+    txs = []
+    current_date = None
+
+    for raw_line in raw.splitlines():
+        line = " ".join(str(raw_line or "").replace("\xa0", " ").split())
+        if not line or skip_re.search(line):
+            continue
+
+        body = None
+        m = month_day_re.match(line) or day_month_re.match(line)
+        if m:
+            mon = m.group("mon").lower()
+            day = int(m.group("day"))
+            month = month_map.get(mon)
+            if not month:
+                continue
+            current_date = f"{year:04d}-{month:02d}-{day:02d}"
+            body = m.group("body").strip()
+        elif current_date:
+            body = line
+        else:
+            continue
+
+        nums = money_re.findall(body)
+        if not nums:
+            continue
+
+        amount = parse_money_token(nums[-1])
+        if amount is None or amount == 0:
+            continue
+
+        desc = money_re.sub(" ", body).strip()
+        desc = re.sub(r"\s+", " ", desc)
+        if len(desc) < 2:
+            continue
+
+        tx_type = "income" if amount > 0 else "expense"
+
+        txs.append({
+            "date": current_date,
+            "description": desc[:500],
+            "amount": round(amount, 2),
+            "signed_amount": round(amount, 2),
+            "locked_amount": round(amount, 2),
+            "_locked_amount": round(amount, 2),
+            "locked_type": tx_type,
+            "type": tx_type,
+            "currency": detected_currency,
+            "parser_family": "month_name_ledger",
+        })
+
+    if len(txs) < 5:
+        return []
+
+    print("MONTH_NAME_LEDGER_EXTRACTED", {
+        "transactions": len(txs),
+        "income": sum(1 for tx in txs if tx["type"] == "income"),
+        "expenses": sum(1 for tx in txs if tx["type"] == "expense"),
+        "income_total": round(sum(tx["amount"] for tx in txs if tx["type"] == "income"), 2),
+        "expense_total": round(sum(abs(tx["amount"]) for tx in txs if tx["type"] == "expense"), 2),
+    })
+    return txs
+
+
 def extract_transactions(text: str) -> list[dict]:
     txs = parse_money_out_money_in_balance_ledger(text)
     if txs and len(txs) >= 3:
@@ -11554,6 +11682,16 @@ def extract_transactions(text: str) -> list[dict]:
             })
             return []
         
+    txs = parse_month_name_ledger_transactions(text, detected_currency)
+    if txs and len(txs) >= 5:
+        print("STATEMENT_LAYOUT_DETECTED", "month_name_ledger")
+        print("MONTH_NAME_LEDGER_ROUTE", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+        })
+        return txs
+
     txs = parse_debit_credit_column_ledger(text)
     if txs and len(txs) >= 3:
         print("STATEMENT_LAYOUT_DETECTED", "debit_credit_column_ledger")
