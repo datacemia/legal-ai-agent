@@ -12317,8 +12317,133 @@ def parse_global_multiline_debit_credit_balance_statement(text: str) -> list[dic
 
     return transactions
 
+
+def parse_global_value_date_debit_credit_statement(text: str) -> list[dict]:
+    """Global FR/EN/AR parser: Date | Value Date | Details | Debit | Credit."""
+    raw = str(text or "")
+    low = raw.lower()
+
+    header_ok = (
+        ("date valeur" in low and "débit" in low and "crédit" in low)
+        or ("value date" in low and "debit" in low and "credit" in low)
+        or ("تاريخ" in raw and ("مدين" in raw or "خصم" in raw) and ("دائن" in raw or "ائتمان" in raw))
+    )
+    detail_ok = (
+        "détail des opérations" in low
+        or "details of transactions" in low
+        or "transaction details" in low
+        or "تفاصيل العمليات" in raw
+        or "كشف الحساب" in raw
+    )
+    if not (header_ok and detail_ok):
+        return []
+
+    currency = detect_currency(raw) or ("EUR" if "euros" in low or "€" in raw else None)
+    default_year = detect_document_year(raw)
+
+    line_re = re.compile(
+        r"^\s*(?P<date>\d{1,2}/\d{1,2}(?:/\d{2,4})?)\s+"
+        r"(?P<value_date>\d{1,2}/\d{1,2}(?:/\d{2,4})?)\s+"
+        r"(?P<body>.*?)\s+"
+        r"(?P<amount>\d{1,3}(?:\s\d{3})*,\d{2}|\d+,\d{2}|\d{1,3}(?:,\d{3})*\.\d{2}|\d+\.\d{2})\s*$",
+        re.I,
+    )
+
+    income_re = re.compile(
+        r"(vir\s+sepa|virement|remise|salaire|cr[ée]dit|credit|salary|deposit|transfer\s+from|"
+        r"versement|إيداع|ايداع|دائن|راتب|تحويل\s+من)",
+        re.I,
+    )
+    expense_re = re.compile(
+        r"(cb\s+|prlv|cotis|fact|paiement|d[ée]bit|debit|frais|card|purchase|payment|fee|charge|"
+        r"retrait|pr[ée]l[èe]vement|مدين|خصم|شراء|دفع|رسوم|سحب)",
+        re.I,
+    )
+    skip_re = re.compile(
+        r"(solde|balance|page\s+\d+|iban|bic|relations clientèle|perte ou vol|capital de|"
+        r"nouveau solde|synthese|identifiant client|summary|customer id|opening balance|closing balance|"
+        r"الرصيد|صفحة|ملخص|رقم العميل)",
+        re.I,
+    )
+
+    def parse_global_amount(v: str) -> float:
+        s = str(v or "").strip().replace(" ", "")
+        if "," in s and "." not in s:
+            s = s.replace(",", ".")
+        elif "," in s and "." in s:
+            s = s.replace(",", "")
+        return abs(float(s))
+
+    txs = []
+    seen = set()
+
+    for raw_line in raw.splitlines():
+        clean = " ".join(raw_line.split())
+        if not clean or skip_re.search(clean):
+            continue
+
+        m = line_re.match(clean)
+        if not m:
+            continue
+
+        desc = clean_db_text(m.group("body").strip())
+        amount = parse_global_amount(m.group("amount"))
+
+        if income_re.search(desc) and not expense_re.search(desc):
+            tx_type = "income"
+            signed = amount
+        else:
+            tx_type = "expense"
+            signed = -amount
+
+        parsed_date = extract_date(
+            m.group("date"),
+            default_year=default_year,
+            prefer_us_date=False,
+        )
+        if not parsed_date:
+            continue
+
+        key = (parsed_date, round(signed, 2), desc[:120])
+        if key in seen:
+            continue
+        seen.add(key)
+
+        txs.append({
+            "date": parsed_date,
+            "description": desc[:500],
+            "amount": round(signed, 2),
+            "type": tx_type,
+            "currency": currency,
+            "signed_amount": round(signed, 2),
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": tx_type,
+            "parser_family": "global_value_date_debit_credit",
+        })
+
+    print("GLOBAL_VALUE_DATE_DEBIT_CREDIT_EXTRACTED", {
+        "transactions": len(txs),
+        "income": sum(1 for tx in txs if tx.get("type") == "income"),
+        "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+        "income_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "income"), 2),
+        "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "expense"), 2),
+    })
+
+    return txs
+
 def extract_transactions(text: str) -> list[dict]:
     statement_summary = extract_global_statement_summary(text)
+
+    txs = parse_global_value_date_debit_credit_statement(text)
+    if txs and len(txs) >= 5:
+        print("STATEMENT_LAYOUT_DETECTED", "global_value_date_debit_credit")
+        print("GLOBAL_VALUE_DATE_DEBIT_CREDIT_ROUTE", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+        })
+        return txs
 
     txs = parse_global_multiline_debit_credit_balance_statement(text)
     if txs and len(txs) >= 10:
