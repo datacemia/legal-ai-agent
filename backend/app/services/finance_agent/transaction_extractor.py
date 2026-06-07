@@ -8560,9 +8560,24 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
 
         previous_balance = None
 
+        continuation_date_context_re = re.compile(
+            r"(authorized\s+on|deposit\s+on|withdrawal\s+on|posted\s+on|"
+            r"autoris[ée]?\s+le|d[ée]p[oô]t\s+le|retrait\s+le|"
+            r"بتاريخ|في\s+تاريخ)",
+            re.I,
+        )
+
         for line in lines:
             m = date_start_re.match(line)
+
             if m:
+                # Global FR/EN/AR OCR rule:
+                # a date after phrases like "authorized on", "deposit on",
+                # "withdrawal on" is an embedded event date, not a new row.
+                if current and continuation_date_context_re.search(" ".join(current["parts"][-2:])):
+                    current["parts"].append(line)
+                    continue
+
                 flush_current()
                 current = {"date": m.group(1), "parts": [line]}
             elif current:
