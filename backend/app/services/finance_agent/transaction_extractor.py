@@ -12254,6 +12254,130 @@ def extract_global_statement_summary(text: str) -> dict:
 
 
 
+
+
+def parse_keybank_hassle_free_statement(text: str) -> list[dict]:
+    """KeyBank parser: separate Deposits and Withdrawals sections."""
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+    low = raw.lower()
+
+    if not ("keybank" in low and "hassle-free account" in low and "withdrawals" in low):
+        return []
+
+    currency = "USD"
+
+    summary_re = re.search(
+        r"Balance\s+on\s+[A-Za-z]+\s+\d{1,2},\s+\d{4}\s+\$?([\d,]+\.\d{2}).*?"
+        r"Deposits\s+([\d,]+\.\d{2}).*?"
+        r"Withdrawals\s+([\d,]+\.\d{2}).*?"
+        r"Balance\s+on\s+[A-Za-z]+\s+\d{1,2},\s+\d{4}\s+\$?([\d,]+\.\d{2})",
+        raw,
+        re.I | re.S,
+    )
+    if summary_re:
+        print("KEYBANK_SUMMARY_EXTRACTED", {
+            "opening_balance": parse_amount(summary_re.group(1)),
+            "deposits": parse_amount(summary_re.group(2)),
+            "withdrawals": parse_amount(summary_re.group(3)),
+            "ending_balance": parse_amount(summary_re.group(4)),
+        })
+
+    money_re = re.compile(r"\$?\s*(\d{1,3}(?:,\d{3})+\.\d{2}|\d+\.\d{2})")
+    row_re = re.compile(r"^(?P<date>\d{1,2}-\d{1,2})\s+(?P<body>.+?)\s+\$?\s*(?P<amount>\d{1,3}(?:,\d{3})+\.\d{2}|\d+\.\d{2})\s*$")
+
+    def iso_from_mmdd(tok: str) -> str | None:
+        try:
+            m, d = str(tok).split("-")[:2]
+            return f"2020-{int(m):02d}-{int(d):02d}"
+        except Exception:
+            return None
+
+    def parse_section(section_name: str, tx_type: str, signed_mult: int) -> list[dict]:
+        m = re.search(
+            rf"\b{section_name}\b.*?Date\s+Description\s+Amount(?P<body>.*?)(?:\n\s*Total\s+\$?[\d,]+\.\d{{2}}|\bKeyNotes\b|\bWithdrawals\s+\(continued\))",
+            raw,
+            re.I | re.S,
+        )
+
+        parts = []
+        if m:
+            parts.append(m.group("body"))
+
+        if section_name.lower() == "withdrawals":
+            m2 = re.search(
+                r"Withdrawals\s+\(continued\).*?Date\s+Description\s+Amount(?P<body>.*?)(?:\n\s*Total\s+\$?[\d,]+\.\d{2}|\bKeyNotes\b)",
+                raw,
+                re.I | re.S,
+            )
+            if m2:
+                parts.append(m2.group("body"))
+
+        txs_local = []
+        for part in parts:
+            lines = [
+                " ".join(str(x or "").replace("\xa0", " ").replace("\u202f", " ").split())
+                for x in part.splitlines()
+                if str(x or "").strip()
+            ]
+
+            for line in lines:
+                if line.lower().startswith("total"):
+                    continue
+
+                r = row_re.match(line)
+                if not r:
+                    continue
+
+                iso = iso_from_mmdd(r.group("date"))
+                if not iso:
+                    continue
+
+                try:
+                    amount_abs = abs(parse_amount(r.group("amount")))
+                except Exception:
+                    continue
+
+                if amount_abs <= 0 or amount_abs > 100000:
+                    continue
+
+                signed = signed_mult * amount_abs
+                desc = clean_db_text(r.group("body"))
+
+                txs_local.append({
+                    "date": iso,
+                    "description": desc[:500],
+                    "amount": round(signed, 2),
+                    "signed_amount": round(signed, 2),
+                    "type": tx_type,
+                    "currency": currency,
+                    "locked_amount": round(signed, 2),
+                    "_locked_amount": round(signed, 2),
+                    "locked_type": tx_type,
+                    "parser_family": "keybank_hassle_free",
+                })
+
+        return txs_local
+
+    txs = []
+    txs.extend(parse_section("Deposits", "income", 1))
+    txs.extend(parse_section("Withdrawals", "expense", -1))
+
+    if txs:
+        print("KEYBANK_HASSLE_FREE_EXTRACTED", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+            "income_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "expense"), 2),
+            "sample": txs[:8],
+        })
+
+    return txs
+
+
+
 def parse_wells_fargo_checking_statement(text: str) -> list[dict]:
     """Wells Fargo parser: checking transaction history with deposits/additions and withdrawals/subtractions."""
     import re
@@ -14155,6 +14279,7 @@ def extract_transactions(text: str) -> list[dict]:
     candidates = []
 
     for parser_name, parser_fn, min_count in [
+        ("keybank_hassle_free", parse_keybank_hassle_free_statement, 3),
         ("wells_fargo_checking", parse_wells_fargo_checking_statement, 3),
         ("riyad_bank_ar_en_balance", parse_riyad_bank_ar_en_balance_statement, 3),
         ("revolut_fr_statement", parse_revolut_fr_statement, 3),
