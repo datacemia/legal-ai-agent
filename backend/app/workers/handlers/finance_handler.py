@@ -1306,6 +1306,29 @@ def handle_finance_ai(job: Job, db):
                 "gap": round(abs(float(statement_withdrawals)) - ledger_expense, 2),
             })
 
+        income_gap = None
+        expense_gap = None
+
+        if statement_deposits is not None:
+            income_gap = abs(round(abs(float(statement_deposits)) - ledger_income, 2))
+
+        if statement_withdrawals is not None:
+            expense_gap = abs(round(abs(float(statement_withdrawals)) - ledger_expense, 2))
+
+        status = "PERFECT_RECONCILIATION"
+
+        if (income_gap is not None and income_gap > 10) or (expense_gap is not None and expense_gap > 10):
+            status = "NEEDS_REVIEW"
+        elif (income_gap is not None and income_gap > 1) or (expense_gap is not None and expense_gap > 1):
+            status = "ACCEPTABLE_RECONCILIATION"
+        elif (income_gap is not None and income_gap > 0.01) or (expense_gap is not None and expense_gap > 0.01):
+            status = "EXCELLENT_RECONCILIATION"
+
+        print("RECONCILIATION_STATUS", status, {
+            "income_gap": income_gap,
+            "expense_gap": expense_gap,
+        })
+
     reconciliation_income_total = round(
         sum(float(tx.get("amount") or 0) for tx in kpi_transactions if tx.get("type") == "income"),
         2,
