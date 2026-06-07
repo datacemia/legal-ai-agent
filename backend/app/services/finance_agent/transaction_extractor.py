@@ -12247,7 +12247,7 @@ def parse_global_reference_debit_credit_value_statement(text: str) -> list[dict]
     money_re = re.compile(r"(?<!\d)(\d{1,3}(?:[ .,\u00a0]\d{3})+(?:[.,]\d{2})?|\d+[.,]\d{2})(?!\d)")
 
     income_re = re.compile(
-        r"(virement.*re[cç]u|virement\s+instantan[ée]\s+re[cç]u|facture\s+cb\s+cr[ée]dit|"
+        r"(virement\s+de\b|virement.*re[cç]u|virement\s+instantan[ée]\s+re[cç]u|facture\s+cb\s+cr[ée]dit|"
         r"cr[ée]dit|remboursement|salaire|paye|salary|payroll|credit|refund|transfer\s+from|"
         r"دائن|إيداع|ايداع|راتب|تحويل\s+وارد)",
         re.I | re.UNICODE,
