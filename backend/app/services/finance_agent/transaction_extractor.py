@@ -11534,16 +11534,6 @@ def parse_date_posting_description_amount_statement(text: str) -> list[dict]:
         and "description" in low
         and "amount" in low
     )
-    print("GLOBAL_VALUE_DATE_LAYOUT_DEBUG", {
-        "has_layout": has_layout,
-        "has_date_valeur": "date valeur" in low,
-        "has_debit_fr": "débit" in low,
-        "has_credit_fr": "crédit" in low,
-        "has_value_date": "value date" in low,
-        "has_debit_en": "debit" in low,
-        "has_credit_en": "credit" in low,
-    })
-
     if not has_layout:
         return []
 
@@ -12231,7 +12221,7 @@ def parse_global_value_date_debit_credit_statement(text: str) -> list[dict]:
     candidate_lines = [
         " ".join(x.split())
         for x in raw.splitlines()
-        if re.match(r"^\\s*\\d{1,2}[/-]\\d{1,2}", " ".join(x.split()))
+        if re.match(r"^\s*\d{1,2}[/-]\d{1,2}", " ".join(x.split()))
     ]
     print("GLOBAL_VALUE_DATE_DEBIT_CREDIT_DEBUG", {
         "candidate_lines": len(candidate_lines),
