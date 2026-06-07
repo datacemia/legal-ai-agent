@@ -12111,11 +12111,19 @@ def extract_global_statement_summary(text: str) -> dict:
 
     def to_amount(s):
         neg = "(" in s and ")" in s
-        s = s.replace("$", "").replace("(", "").replace(")", "").replace(" ", "").replace(",", "")
+
+        s = (
+            s.replace("$", "")
+             .replace("(", "")
+             .replace(")", "")
+             .replace(" ", "")
+        )
+
         try:
-            v = float(s)
+            v = parse_amount(s)
         except Exception:
             return None
+
         return -abs(v) if neg else v
 
     patterns = {
