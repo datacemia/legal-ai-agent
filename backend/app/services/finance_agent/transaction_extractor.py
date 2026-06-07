@@ -8660,6 +8660,11 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
                 "parser_family": "withdraw_deposit_balance_ocr_line_semantic",
             })
 
+        print("WDB_LINE_SEMANTIC_DEBUG", {
+            "candidate_date_lines": sum(1 for line in lines if row_date_re.match(line)),
+            "sample_date_lines": [line for line in lines if row_date_re.match(line)][:20],
+        })
+
         if extra_rows:
             transactions.extend(extra_rows)
             print("WDB_OCR_LINE_SEMANTIC_EXTRA", {
