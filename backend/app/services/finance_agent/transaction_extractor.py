@@ -12263,6 +12263,143 @@ def extract_global_statement_summary(text: str) -> dict:
 
 
 
+
+
+def parse_bmce_date_valeur_debit_credit_statement(text: str) -> list[dict]:
+    """BMCE Morocco parser: Date | Date valeur | Operation | Debit Dirhams | Credit Dirhams."""
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+    low = raw.lower()
+
+    if not (
+        "bmce" in low
+        and "date valeur" in low
+        and "débit dirhams" in low or "debit dirhams" in low
+    ):
+        return []
+
+    currency = "MAD"
+
+    row_re = re.compile(
+        r"^(?P<date>\d{2}/\d{2}/\d{4})\s+"
+        r"(?P<value>\d{2}/\d{2}/\d{4})\s+"
+        r"(?P<body>.+)$",
+        re.I | re.UNICODE,
+    )
+
+    origin_re = re.compile(
+        r"Origine\s*:\s*(?P<signed>[+-]?\s*\d{1,3}(?:[ .]\d{3})*(?:[.,]\d{2})|[+-]?\s*\d+[.,]\d{2})\s*MAD",
+        re.I | re.UNICODE,
+    )
+
+    money_re = re.compile(
+        r"(?<!\d)(\d{1,3}(?:[ .]\d{3})*(?:[.,]\d{2})|\d+[.,]\d{2})(?!\d)"
+    )
+
+    skip_re = re.compile(r"(solde\s+crediteur|page\s+\d+|date\s+valeur|titulaire)", re.I)
+
+    lines = [
+        " ".join(str(x or "").replace("\xa0", " ").replace("\u202f", " ").split())
+        for x in raw.splitlines()
+        if str(x or "").strip()
+    ]
+
+    blocks = []
+    current = None
+
+    for line in lines:
+        if skip_re.search(line):
+            continue
+
+        m = row_re.match(line)
+        if m:
+            if current:
+                blocks.append(current)
+            current = {
+                "date": m.group("date"),
+                "parts": [m.group("body")],
+            }
+        elif current:
+            current["parts"].append(line)
+
+    if current:
+        blocks.append(current)
+
+    def iso_from_date(tok):
+        try:
+            d, m, y = tok.split("/")[:3]
+            return f"{int(y):04d}-{int(m):02d}-{int(d):02d}"
+        except Exception:
+            return None
+
+    txs = []
+    seen = set()
+
+    for i, b in enumerate(blocks):
+        iso = iso_from_date(b["date"])
+        if not iso:
+            continue
+
+        desc = clean_db_text(" ".join(b["parts"]))
+        if not desc:
+            continue
+
+        mo = origin_re.search(desc)
+        if mo:
+            signed_origin = parse_amount(mo.group("signed"))
+            amount_abs = abs(signed_origin)
+            tx_type = "income" if signed_origin > 0 else "expense"
+            signed = amount_abs if tx_type == "income" else -amount_abs
+        else:
+            nums = money_re.findall(desc)
+            if not nums:
+                continue
+            amount_abs = abs(parse_amount(nums[-1]))
+
+            low_desc = desc.lower()
+            if re.search(r"(vrt|vir|credit|crédit|recu|reçu)", low_desc) and not re.search(r"(comm|frais|tva|acht|retr|remb|pdl)", low_desc):
+                tx_type = "income"
+                signed = amount_abs
+            else:
+                tx_type = "expense"
+                signed = -amount_abs
+
+        if amount_abs <= 0 or amount_abs > 1000000:
+            continue
+
+        key = (i, iso, round(signed, 2), desc[:120])
+        if key in seen:
+            continue
+        seen.add(key)
+
+        txs.append({
+            "date": iso,
+            "description": desc[:500],
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": tx_type,
+            "currency": currency,
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": tx_type,
+            "parser_family": "bmce_date_valeur_debit_credit",
+        })
+
+    if txs:
+        print("BMCE_DATE_VALEUR_DEBIT_CREDIT_EXTRACTED", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+            "income_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "expense"), 2),
+            "sample": txs[:8],
+        })
+
+    return txs
+
+
+
 def parse_banque_populaire_fr_ar_statement(text: str) -> list[dict]:
     """Banque Populaire / Bank Chaabi parser: Date op | Date valeur | Ref | Nature | Debit | Credit."""
     import re
@@ -14705,6 +14842,7 @@ def extract_transactions(text: str) -> list[dict]:
     candidates = []
 
     for parser_name, parser_fn, min_count in [
+        ("bmce_date_valeur_debit_credit", parse_bmce_date_valeur_debit_credit_statement, 3),
         ("banque_populaire_fr_ar", parse_banque_populaire_fr_ar_statement, 3),
         ("acme_business_checking", parse_acme_business_checking_statement, 3),
         ("bbva_usa_checking_summary", parse_bbva_usa_checking_summary_statement, 2),
