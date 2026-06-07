@@ -12446,6 +12446,16 @@ def parse_global_multiline_debit_credit_balance_statement(text: str) -> list[dic
 def extract_transactions(text: str) -> list[dict]:
     statement_summary = extract_global_statement_summary(text)
 
+    txs = parse_global_value_date_debit_credit_statement(text)
+    if txs and len(txs) >= 2:
+        print("STATEMENT_LAYOUT_DETECTED", "global_value_date_debit_credit")
+        print("GLOBAL_VALUE_DATE_DEBIT_CREDIT_ROUTE", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+        })
+        return txs
+
     txs = parse_global_multiline_debit_credit_balance_statement(text)
     if txs and len(txs) >= 10:
         print("STATEMENT_LAYOUT_DETECTED", "global_multiline_debit_credit_balance")
