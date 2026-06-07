@@ -1262,6 +1262,49 @@ def handle_finance_ai(job: Job, db):
     print("QUALITY_CHECK")
     print(quality)
 
+    # Global FR/EN/AR statement-vs-ledger reconciliation audit.
+    # Audit only: never mutates KPI transactions, never creates synthetic rows.
+    try:
+        statement_summary = extract_global_statement_summary(text)
+    except Exception:
+        statement_summary = {}
+
+    if statement_summary:
+        statement_deposits = statement_summary.get("deposits")
+        statement_withdrawals = statement_summary.get("withdrawals")
+
+        ledger_income = round(
+            sum(
+                abs(float(tx.get("amount") or 0))
+                for tx in kpi_transactions
+                if tx.get("type") == "income"
+            ),
+            2,
+        )
+
+        ledger_expense = round(
+            sum(
+                abs(float(tx.get("amount") or 0))
+                for tx in kpi_transactions
+                if tx.get("type") == "expense"
+            ),
+            2,
+        )
+
+        if statement_deposits is not None:
+            print("STATEMENT_INCOME_RECONCILIATION", {
+                "statement": round(abs(float(statement_deposits)), 2),
+                "ledger": ledger_income,
+                "gap": round(abs(float(statement_deposits)) - ledger_income, 2),
+            })
+
+        if statement_withdrawals is not None:
+            print("STATEMENT_EXPENSE_RECONCILIATION", {
+                "statement": round(abs(float(statement_withdrawals)), 2),
+                "ledger": ledger_expense,
+                "gap": round(abs(float(statement_withdrawals)) - ledger_expense, 2),
+            })
+
     reconciliation_income_total = round(
         sum(float(tx.get("amount") or 0) for tx in kpi_transactions if tx.get("type") == "income"),
         2,
