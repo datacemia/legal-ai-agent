@@ -12228,6 +12228,163 @@ def extract_global_statement_summary(text: str) -> dict:
 
 
 
+
+
+def parse_fr_date_nature_valeur_debit_credit_statement(text: str) -> list[dict]:
+    """
+    Global FR parser for OCR/table layout:
+    Date | Nature des opérations | Valeur | Débit | Crédit
+
+    Example:
+    10.09 PRLV SEPA ... 10.09 10,00
+    10.09 VIR SCT INST EMIS ... 10.09 1 080,00
+    """
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+    low = raw.lower()
+
+    has_layout = (
+        "date" in low
+        and ("nature des opérations" in low or "nature des operations" in low)
+        and "valeur" in low
+        and ("débit" in low or "debit" in low)
+        and ("crédit" in low or "credit" in low)
+    )
+
+    if not has_layout:
+        return []
+
+    default_year = detect_document_year(raw)
+    currency = detect_currency(raw) or ("EUR" if "euro" in low or "€" in raw else None)
+
+    date_re = re.compile(r"\b(?P<date>\d{1,2}[./-]\d{1,2})(?:[./-]\d{2,4})?\b")
+    money_re = re.compile(
+        r"(?<!\d)(\d{1,3}(?:[ .,\u00a0]\d{3})+(?:[.,]\d{2})|\d+[.,]\d{2})(?!\d)"
+    )
+
+    expense_re = re.compile(
+        r"(prlv|pr[ée]l[èe]vement|vir\s+sct\s+inst\s+emis|virement.*[ée]mis|"
+        r"changement\s+d\s+agence|frais|commission|carte|cb\b|paiement|achat|"
+        r"debit|d[ée]bit|withdrawal|transfer\s+to|fee|charge|"
+        r"خصم|سحب|شراء|رسوم|تحويل\s+صادر)",
+        re.I | re.UNICODE,
+    )
+
+    income_re = re.compile(
+        r"(vir\s+sct\s+recu|virement.*re[cç]u|cr[ée]dit|remboursement|salary|payroll|"
+        r"credit|refund|transfer\s+from|"
+        r"دائن|إيداع|ايداع|راتب|تحويل\s+وارد)",
+        re.I | re.UNICODE,
+    )
+
+    skip_re = re.compile(
+        r"(solde\s+crediteur|solde\s+d[ée]biteur|total\s+des\s+op[ée]rations|"
+        r"autorisation\s+de\s+d[ée]bit|iban|bic|rib|page\s+\d+)",
+        re.I | re.UNICODE,
+    )
+
+    def iso_from_ddmm(tok: str) -> str | None:
+        try:
+            s = str(tok or "").replace(".", "/").replace("-", "/")
+            d, m = s.split("/")[:2]
+            return f"{int(default_year):04d}-{int(m):02d}-{int(d):02d}"
+        except Exception:
+            return None
+
+    # Reconstruct from both real lines and OCR-flattened segments.
+    flat = " ".join(raw.replace("\xa0", " ").replace("\u202f", " ").split())
+
+    # Keep only transaction zone.
+    zone = flat
+    m = re.search(r"Date\s+Nature\s+des\s+op[ée]rations\s+Valeur\s+D[ée]bit\s+Cr[ée]dit", zone, re.I)
+    if m:
+        zone = zone[m.end():]
+
+    zone = re.split(r"\bTOTAL\s+DES\s+OP[ÉE]RATIONS\b", zone, maxsplit=1, flags=re.I)[0]
+
+    starts = list(date_re.finditer(zone))
+    segments = []
+
+    for i, m in enumerate(starts):
+        start = m.start()
+        end = starts[i + 1].start() if i + 1 < len(starts) else len(zone)
+        seg = zone[start:end].strip()
+        if seg:
+            segments.append(seg)
+
+    txs = []
+    seen = set()
+
+    for seg in segments:
+        clean = " ".join(seg.split())
+        low_seg = clean.lower()
+
+        if skip_re.search(clean):
+            continue
+
+        dates = date_re.findall(clean)
+        amounts = money_re.findall(clean)
+
+        if not dates or not amounts:
+            continue
+
+        # Avoid balances/summary amounts.
+        amount_token = amounts[-1]
+        try:
+            amount_abs = abs(parse_amount(amount_token))
+        except Exception:
+            continue
+
+        if amount_abs <= 0 or amount_abs > 100000:
+            continue
+
+        # BNP layout has Date ... ValueDate Amount.
+        op_date = dates[0]
+        iso = iso_from_ddmm(op_date)
+        if not iso:
+            continue
+
+        if income_re.search(clean) and not expense_re.search(clean):
+            tx_type = "income"
+            signed = amount_abs
+        else:
+            # For this FR layout, most visible column is Debit unless clear credit signal.
+            tx_type = "expense"
+            signed = -amount_abs
+
+        key = (iso, round(signed, 2), clean[:120])
+        if key in seen:
+            continue
+        seen.add(key)
+
+        txs.append({
+            "date": iso,
+            "description": clean[:500],
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": tx_type,
+            "currency": currency,
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": tx_type,
+            "parser_family": "fr_date_nature_valeur_debit_credit",
+        })
+
+    if txs:
+        print("FR_DATE_NATURE_VALEUR_DEBIT_CREDIT_EXTRACTED", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+            "income_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "expense"), 2),
+            "sample": txs[:8],
+        })
+
+    return txs
+
+
+
 def parse_global_reference_debit_credit_value_statement(text: str) -> list[dict]:
     """Global FR/EN/AR parser: Date | Reference | Debit | Credit | Value."""
     import re
@@ -12818,6 +12975,7 @@ def extract_transactions(text: str) -> list[dict]:
     candidates = []
 
     for parser_name, parser_fn, min_count in [
+        ("fr_date_nature_valeur_debit_credit", parse_fr_date_nature_valeur_debit_credit_statement, 2),
         ("global_reference_debit_credit_value", parse_global_reference_debit_credit_value_statement, 3),
         ("global_value_date_debit_credit", parse_global_value_date_debit_credit_statement, 2),
         ("global_multiline_debit_credit_balance", parse_global_multiline_debit_credit_balance_statement, 10),
