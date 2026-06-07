@@ -12301,6 +12301,14 @@ def parse_global_reference_debit_credit_value_statement(text: str) -> list[dict]
     if current:
         blocks.append(current)
 
+    print("GLOBAL_REFERENCE_BLOCK_DEBUG", {
+        "blocks": len(blocks),
+        "samples": [
+            {"date": b.get("date"), "text": " ".join(b.get("parts", []))[:180]}
+            for b in blocks[:30]
+        ],
+    })
+
     for block in blocks:
         rest = " ".join(x for x in block["parts"] if x).strip()
         if skip_re.search(rest):
