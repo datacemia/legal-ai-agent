@@ -12906,6 +12906,26 @@ def _score_finance_candidate(parser_name: str, txs: list[dict], statement_summar
 
     income_total = round(sum(abs(float(tx.get("amount") or 0)) for tx in txs if tx.get("type") == "income"), 2)
     expense_total = round(sum(abs(float(tx.get("amount") or 0)) for tx in txs if tx.get("type") == "expense"), 2)
+    ledger_total = round(income_total + expense_total, 2)
+
+    max_tx_abs = max([abs(float(tx.get("amount") or 0)) for tx in txs] or [0])
+    income_count = sum(1 for tx in txs if tx.get("type") == "income")
+    expense_count = sum(1 for tx in txs if tx.get("type") == "expense")
+
+    absurd_penalty = 0
+
+    # Hard OCR/reference sanity guard.
+    if max_tx_abs > 250000 or ledger_total > 1000000:
+        absurd_penalty += 100000000
+
+    duplicate_penalty = max(0, len(txs) - len({
+        (
+            tx.get("date"),
+            round(float(tx.get("amount") or 0), 2),
+            str(tx.get("description") or "")[:80],
+        )
+        for tx in txs
+    })) * 500
 
     expected_income = None
     expected_expense = None
@@ -12921,21 +12941,6 @@ def _score_finance_candidate(parser_name: str, txs: list[dict], statement_summar
         except Exception:
             expected_expense = None
 
-    absurd_penalty = sum(
-        100000
-        for tx in txs
-        if abs(float(tx.get("amount") or 0)) > 100000
-    )
-
-    duplicate_penalty = max(0, len(txs) - len({
-        (
-            tx.get("date"),
-            round(float(tx.get("amount") or 0), 2),
-            str(tx.get("description") or "")[:80],
-        )
-        for tx in txs
-    })) * 250
-
     if expected_income is not None and expected_expense is not None:
         income_gap = abs(round(expected_income - income_total, 2))
         expense_gap = abs(round(expected_expense - expense_total, 2))
@@ -12943,19 +12948,48 @@ def _score_finance_candidate(parser_name: str, txs: list[dict], statement_summar
     else:
         income_gap = None
         expense_gap = None
-        # Without official totals, prefer usable size and penalize absurd amounts.
-        score = absurd_penalty + duplicate_penalty - min(len(txs), 200)
+
+        # No reliable summary: choose plausible ledger, not simply largest count.
+        balance_penalty = 0
+        if income_count == 0 and expense_count > 8:
+            balance_penalty += 750
+        if expense_count == 0 and income_count > 3:
+            balance_penalty += 750
+
+        parser_priority = {
+            "global_value_date_debit_credit": -120,
+            "global_reference_debit_credit_value": -80,
+            "global_multiline_debit_credit_balance": -60,
+            "fr_date_nature_valeur_debit_credit": -40,
+        }.get(parser_name, 0)
+
+        size_bonus = -min(len(txs), 40)
+        plausible_total_bonus = -min(ledger_total / 100, 100)
+
+        score = (
+            absurd_penalty
+            + duplicate_penalty
+            + balance_penalty
+            + parser_priority
+            + size_bonus
+            + plausible_total_bonus
+        )
 
     return {
         "parser": parser_name,
         "transactions": txs,
         "count": len(txs),
+        "income_count": income_count,
+        "expense_count": expense_count,
         "income_total": income_total,
         "expense_total": expense_total,
+        "ledger_total": ledger_total,
+        "max_tx_abs": max_tx_abs,
         "income_gap": income_gap,
         "expense_gap": expense_gap,
         "score": round(score, 2),
     }
+
 
 
 
@@ -13000,7 +13034,30 @@ def _choose_finance_candidate(candidates: list[dict]) -> dict | None:
     valid = [c for c in candidates if c and c.get("count", 0) >= 3]
     if not valid:
         return None
+
+    non_absurd = [
+        c for c in valid
+        if float(c.get("max_tx_abs") or 0) <= 250000
+        and float(c.get("ledger_total") or 0) <= 1000000
+    ]
+
+    if non_absurd:
+        valid = non_absurd
+    else:
+        print("ALL_FINANCE_CANDIDATES_ABSURD_NEEDS_REVIEW", [
+            {
+                "parser": c.get("parser"),
+                "count": c.get("count"),
+                "ledger_total": c.get("ledger_total"),
+                "max_tx_abs": c.get("max_tx_abs"),
+                "score": c.get("score"),
+            }
+            for c in valid
+        ])
+
     return sorted(valid, key=lambda c: (c["score"], -c["count"]))[0]
+
+
 
 
 def extract_transactions(text: str) -> list[dict]:
@@ -13045,6 +13102,8 @@ def extract_transactions(text: str) -> list[dict]:
                 "expense_total": c["expense_total"],
                 "income_gap": c["income_gap"],
                 "expense_gap": c["expense_gap"],
+                "ledger_total": c.get("ledger_total"),
+                "max_tx_abs": c.get("max_tx_abs"),
                 "score": c["score"],
             }
             for c in candidates
