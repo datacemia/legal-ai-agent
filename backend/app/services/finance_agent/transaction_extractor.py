@@ -12265,6 +12265,109 @@ def extract_global_statement_summary(text: str) -> dict:
 
 
 
+
+
+def parse_snb_credit_card_statement(text: str) -> list[dict]:
+    """SNB Saudi credit card parser: purchases positive, payments/refunds trailing '-' negative."""
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+    low = raw.lower()
+
+    if not ("snb credit cards statement" in low or ("visa al fursan" in low and "transactions balance" in low)):
+        return []
+
+    currency = "SAR"
+
+    lines = [
+        " ".join(str(x or "").replace("\xa0", " ").replace("\u202f", " ").split())
+        for x in raw.splitlines()
+        if str(x or "").strip()
+    ]
+
+    row_re = re.compile(
+        r"^(?P<td>\d{2}-[A-Z]{3}-\d{2})\s+(?P<pd>\d{2}-[A-Z]{3}-\d{2})\s+(?P<body>.+?)\s+(?P<amount>\d{1,3}(?:,\d{3})*\.\d{2}-?|\d+\.\d{2}-?)$",
+        re.I,
+    )
+
+    month_map = {
+        "JAN": 1, "FEB": 2, "MAR": 3, "APR": 4, "MAY": 5, "JUN": 6,
+        "JUL": 7, "AUG": 8, "SEP": 9, "OCT": 10, "NOV": 11, "DEC": 12,
+    }
+
+    skip_re = re.compile(r"(b/f as of|page\s+\d+|card number|credit limit|exchange rate|vat|standard rate|upsar mark|sar\s+\d)", re.I)
+
+    def iso_from(tok):
+        try:
+            d, mon, y = tok.upper().split("-")
+            return f"20{int(y):02d}-{month_map[mon]:02d}-{int(d):02d}"
+        except Exception:
+            return None
+
+    txs = []
+    seen = set()
+
+    for line in lines:
+        if skip_re.search(line):
+            continue
+
+        m = row_re.match(line)
+        if not m:
+            continue
+
+        iso = iso_from(m.group("td"))
+        if not iso:
+            continue
+
+        amount_raw = m.group("amount").replace(",", "")
+        is_credit = amount_raw.endswith("-")
+        amount_abs = abs(parse_amount(amount_raw.rstrip("-")))
+
+        if amount_abs <= 0 or amount_abs > 100000:
+            continue
+
+        desc = clean_db_text(m.group("body"))
+        low_desc = desc.lower()
+
+        if is_credit or "payment" in low_desc or "refund" in low_desc:
+            tx_type = "income"
+            signed = amount_abs
+        else:
+            tx_type = "expense"
+            signed = -amount_abs
+
+        key = (iso, round(signed, 2), desc[:120])
+        if key in seen:
+            continue
+        seen.add(key)
+
+        txs.append({
+            "date": iso,
+            "description": desc[:500],
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": tx_type,
+            "currency": currency,
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": tx_type,
+            "parser_family": "snb_credit_card",
+        })
+
+    if txs:
+        print("SNB_CREDIT_CARD_EXTRACTED", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+            "income_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "expense"), 2),
+            "sample": txs[:8],
+        })
+
+    return txs
+
+
+
 def parse_bmce_date_valeur_debit_credit_statement(text: str) -> list[dict]:
     """BMCE Morocco parser: Date | Date valeur | Operation | Debit Dirhams | Credit Dirhams."""
     import re
@@ -14842,6 +14945,7 @@ def extract_transactions(text: str) -> list[dict]:
     candidates = []
 
     for parser_name, parser_fn, min_count in [
+        ("snb_credit_card", parse_snb_credit_card_statement, 3),
         ("bmce_date_valeur_debit_credit", parse_bmce_date_valeur_debit_credit_statement, 3),
         ("banque_populaire_fr_ar", parse_banque_populaire_fr_ar_statement, 3),
         ("acme_business_checking", parse_acme_business_checking_statement, 3),
