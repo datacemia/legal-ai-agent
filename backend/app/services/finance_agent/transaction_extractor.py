@@ -11651,7 +11651,59 @@ def parse_month_name_ledger_transactions(text: str, detected_currency: str | Non
     return txs
 
 
+
+
+def extract_global_statement_summary(text: str) -> dict:
+    """Global FR/EN/AR statement summary extractor.
+    Additive only: does not affect transaction extraction.
+    """
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+    flat = re.sub(r"\s+", " ", raw)
+
+    money = r"\(?\s*\$?\s*[-+]?\d{1,3}(?:[,\s]\d{3})*(?:[.,]\d{2})\s*\)?"
+
+    def to_amount(s):
+        neg = "(" in s and ")" in s
+        s = s.replace("$", "").replace("(", "").replace(")", "").replace(" ", "").replace(",", "")
+        try:
+            v = float(s)
+        except Exception:
+            return None
+        return -abs(v) if neg else v
+
+    patterns = {
+        "opening_balance": [
+            r"(?:beginning balance|opening balance|solde initial|solde d[ée]but|الرصيد الافتتاحي|رصيد افتتاحي).*?(" + money + r")",
+        ],
+        "deposits": [
+            r"(?:total deposits|total credits|d[ée]p[oô]ts?|versements?|total cr[ée]dits?|إجمالي الإيداعات|اجمالي الايداعات).*?(" + money + r")",
+        ],
+        "withdrawals": [
+            r"(?:total withdrawals|total debits|retraits?|débits?|debits?|إجمالي السحوبات|اجمالي السحوبات).*?(" + money + r")",
+        ],
+        "ending_balance": [
+            r"(?:ending balance|closing balance|solde final|الرصيد الختامي|رصيد ختامي).*?(" + money + r")",
+        ],
+    }
+
+    out = {}
+    for key, pats in patterns.items():
+        for pat in pats:
+            m = re.search(pat, flat, re.I)
+            if m:
+                out[key] = to_amount(m.group(1))
+                break
+
+    if out:
+        print("STATEMENT_SUMMARY_EXTRACTED", out)
+
+    return out
+
+
 def extract_transactions(text: str) -> list[dict]:
+    statement_summary = extract_global_statement_summary(text)
     txs = parse_money_out_money_in_balance_ledger(text)
     if txs and len(txs) >= 3:
         print("STATEMENT_LAYOUT_DETECTED", "money_out_money_in_balance_ledger")
