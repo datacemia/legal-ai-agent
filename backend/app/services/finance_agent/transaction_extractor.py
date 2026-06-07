@@ -12185,42 +12185,101 @@ def extract_global_statement_summary(text: str) -> dict:
 
 
 def parse_global_value_date_debit_credit_statement(text: str) -> list[dict]:
-    """
-    Global FR / EN / AR parser.
+    """Global FR/EN/AR Value Date | Debit | Credit parser."""
+    import re
 
-    FR:
-        Date Valeur | Détail des opérations | Débit | Crédit
+    raw = normalize_arabic_digits(str(text or ""))
+    low = raw.lower()
 
-    EN:
-        Value Date | Transaction Details | Debit | Credit
-
-    AR:
-        تاريخ القيمة | تفاصيل العمليات | مدين | دائن
-
-    Additive parser.
-    Does not affect existing routes.
-    """
-
-    transactions = []
-
-    try:
-        raw = normalize_arabic_digits(str(text or ""))
-    except Exception:
-        return []
-
-    if not raw.strip():
-        return []
-
-    print(
-        "GLOBAL_VALUE_DATE_DEBIT_CREDIT_EXTRACTED",
-        {
-            "transactions": 0,
-            "income": 0,
-            "expenses": 0,
-        },
+    has_layout = (
+        ("date valeur" in low and "débit" in low and "crédit" in low)
+        or ("value date" in low and "debit" in low and "credit" in low)
+        or ("تاريخ القيمة" in raw and "مدين" in raw and "دائن" in raw)
     )
 
-    return transactions
+    if not has_layout:
+        return []
+
+    date_re = re.compile(
+        r"^(\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?)"
+        r"(?:\s+(\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?))?"
+        r"\s+(.+)$"
+    )
+
+    money_re = re.compile(
+        r"\d{1,3}(?:[ ,. ]\d{3})*(?:[.,]\d{2})|\d+[.,]\d{2}"
+    )
+
+    income_words = [
+        "vir sepa","virement","salary","payroll",
+        "credit","transfer from",
+        "إيداع","ايداع","تحويل وارد","راتب",
+    ]
+
+    expense_words = [
+        "cb ","prlv","purchase","withdrawal",
+        "atm","transfer to","debit",
+        "paiement","retrait","frais",
+        "سحب","تحويل صادر",
+    ]
+
+    txs = []
+
+    for ln in [x.strip() for x in raw.splitlines() if x.strip()]:
+
+        m = date_re.match(ln)
+        if not m:
+            continue
+
+        rest = m.group(3)
+
+        amounts = money_re.findall(rest)
+        if not amounts:
+            continue
+
+        try:
+            amount = parse_amount(amounts[-1])
+        except Exception:
+            continue
+
+        l = ln.lower()
+
+        tx_type = None
+
+        if any(w in l for w in income_words):
+            tx_type = "income"
+        elif any(w in l for w in expense_words):
+            tx_type = "expense"
+
+        if not tx_type:
+            continue
+
+        signed = abs(amount) if tx_type == "income" else -abs(amount)
+
+        txs.append({
+            "date": m.group(1),
+            "posting_date": m.group(2),
+            "description": rest,
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": tx_type,
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": tx_type,
+            "parser_family": "global_value_date_debit_credit",
+        })
+
+    if txs:
+        print(
+            "GLOBAL_VALUE_DATE_DEBIT_CREDIT_EXTRACTED",
+            {
+                "transactions": len(txs),
+                "income": sum(1 for t in txs if t["type"] == "income"),
+                "expenses": sum(1 for t in txs if t["type"] == "expense"),
+            },
+        )
+
+    return txs
 
 
 def parse_global_multiline_debit_credit_balance_statement(text: str) -> list[dict]:
