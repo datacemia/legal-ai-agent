@@ -8754,6 +8754,10 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
         )
 
         raw_date_lines = [" ".join(x.split()) for x in raw.splitlines() if segment_date_re.match(" ".join(x.split()))]
+        print("WDB_SEGMENT_RECONSTRUCTOR_DEBUG", {
+            "raw_date_lines": len(raw_date_lines),
+            "samples": raw_date_lines[:20],
+        })
 
         pending_label = None
 
