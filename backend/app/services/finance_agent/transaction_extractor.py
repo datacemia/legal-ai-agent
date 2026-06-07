@@ -12250,6 +12250,153 @@ def extract_global_statement_summary(text: str) -> dict:
 
 
 
+
+
+def parse_riyad_bank_ar_en_balance_statement(text: str) -> list[dict]:
+    """Riyad Bank AR/EN parser: Hijri | Gregorian | Detail | Debit | Credit | Balance."""
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+    low = raw.lower()
+
+    if not ("riyad bank" in low and "account statement" in low and "openingbalance" in low):
+        return []
+
+    currency = "SAR"
+
+    summary_re = re.search(
+        r"OpeningBalance.*?Withdrawals.*?Deposits.*?ClosingBalance.*?"
+        r"(\d[\d,]*\.\d{2})\s+\d+\s+(\d[\d,]*\.\d{2})\s+\d+\s+(\d[\d,]*\.\d{2})\s+(\d[\d,]*\.\d{2})",
+        " ".join(raw.split()),
+        re.I | re.S,
+    )
+
+    opening_balance = None
+    if summary_re:
+        try:
+            opening_balance = parse_amount(summary_re.group(1))
+            print("RIYAD_SUMMARY_EXTRACTED", {
+                "opening_balance": parse_amount(summary_re.group(1)),
+                "withdrawals": parse_amount(summary_re.group(2)),
+                "deposits": parse_amount(summary_re.group(3)),
+                "closing_balance": parse_amount(summary_re.group(4)),
+            })
+        except Exception:
+            opening_balance = None
+
+    lines = [
+        " ".join(str(x or "").replace("\xa0", " ").replace("\u202f", " ").split())
+        for x in raw.splitlines()
+        if str(x or "").strip()
+    ]
+
+    start_re = re.compile(
+        r"^(?P<hijri>\d{2}-\d{2}-\d{4})\s+(?P<date>\d{4}-\d{2}-\d{2})\s+(?P<body>.+)$"
+    )
+
+    money_re = re.compile(
+        r"(?<!\d)(\d{1,3}(?:,\d{3})+\.\d{2,3}|\d+\.\d{2,3}|\d{1,3}(?:,\d{3})+\.\d{2}|\d+\.\d{2})(?!\d)"
+    )
+
+    blocks = []
+    current = None
+
+    for line in lines:
+        m = start_re.match(line)
+        if m:
+            if current:
+                blocks.append(current)
+            current = {
+                "date": m.group("date"),
+                "parts": [m.group("body")],
+            }
+        elif current:
+            current["parts"].append(line)
+
+    if current:
+        blocks.append(current)
+
+    txs = []
+    seen = set()
+    prev_balance = opening_balance
+
+    for i, block in enumerate(blocks):
+        desc = clean_db_text(" ".join(block["parts"]))
+        nums = money_re.findall(desc)
+
+        if len(nums) < 2:
+            continue
+
+        try:
+            amount_abs = abs(parse_amount(nums[-2]))
+            balance = parse_amount(nums[-1])
+        except Exception:
+            continue
+
+        if amount_abs <= 0 or amount_abs > 1000000:
+            continue
+
+        tx_type = None
+        signed = None
+
+        if prev_balance is not None:
+            delta = round(balance - prev_balance, 2)
+
+            if abs(abs(delta) - amount_abs) <= 0.05:
+                if delta > 0:
+                    tx_type = "income"
+                    signed = amount_abs
+                else:
+                    tx_type = "expense"
+                    signed = -amount_abs
+
+        # Fallback when OCR balance jump is unreliable.
+        if tx_type is None:
+            low_desc = desc.lower()
+            if re.search(r"(gosi|deposit|depositor|credit|راتب|إيداع|ايداع|دائن)", low_desc, re.I):
+                tx_type = "income"
+                signed = amount_abs
+            else:
+                tx_type = "expense"
+                signed = -amount_abs
+
+        prev_balance = balance
+
+        key = (i, block["date"], round(signed, 2), desc[:120])
+        if key in seen:
+            continue
+        seen.add(key)
+
+        txs.append({
+            "date": block["date"],
+            "description": desc[:500],
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": tx_type,
+            "currency": currency,
+            "balance": round(balance, 2),
+            "_balance": round(balance, 2),
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": tx_type,
+            "_balance_locked": True,
+            "parser_family": "riyad_bank_ar_en_balance",
+        })
+
+    if txs:
+        print("RIYAD_BANK_AR_EN_EXTRACTED", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+            "income_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "expense"), 2),
+            "sample": txs[:8],
+        })
+
+    return txs
+
+
+
 def parse_revolut_fr_statement(text: str) -> list[dict]:
     """Revolut France parser: main account only."""
     import re
@@ -13858,6 +14005,7 @@ def extract_transactions(text: str) -> list[dict]:
     candidates = []
 
     for parser_name, parser_fn, min_count in [
+        ("riyad_bank_ar_en_balance", parse_riyad_bank_ar_en_balance_statement, 3),
         ("revolut_fr_statement", parse_revolut_fr_statement, 3),
         ("sg_date_valeur_nature_debit_credit", parse_sg_date_valeur_nature_debit_credit_statement, 3),
         ("n26_fr_statement", parse_n26_fr_statement, 3),
