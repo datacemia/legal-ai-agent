@@ -9832,6 +9832,15 @@ def parse_sectioned_deposit_withdrawal_statement(text: str) -> list[dict]:
     import re
 
     raw = str(text or "")
+    low = raw.lower()
+
+    if (
+        ("date valeur" in low and "débit" in low and "crédit" in low)
+        or ("value date" in low and "debit" in low and "credit" in low)
+        or ("تاريخ القيمة" in raw and "مدين" in raw and "دائن" in raw)
+    ):
+        return []
+
     lines = [ln.strip() for ln in raw.splitlines() if ln.strip()]
 
     year_match = re.search(r"(20\d{2})", raw)
