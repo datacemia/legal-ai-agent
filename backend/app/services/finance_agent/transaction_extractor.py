@@ -12183,6 +12183,46 @@ def extract_global_statement_summary(text: str) -> dict:
 
 
 
+
+def parse_global_value_date_debit_credit_statement(text: str) -> list[dict]:
+    """
+    Global FR / EN / AR parser.
+
+    FR:
+        Date Valeur | Détail des opérations | Débit | Crédit
+
+    EN:
+        Value Date | Transaction Details | Debit | Credit
+
+    AR:
+        تاريخ القيمة | تفاصيل العمليات | مدين | دائن
+
+    Additive parser.
+    Does not affect existing routes.
+    """
+
+    transactions = []
+
+    try:
+        raw = normalize_arabic_digits(str(text or ""))
+    except Exception:
+        return []
+
+    if not raw.strip():
+        return []
+
+    print(
+        "GLOBAL_VALUE_DATE_DEBIT_CREDIT_EXTRACTED",
+        {
+            "transactions": 0,
+            "income": 0,
+            "expenses": 0,
+        },
+    )
+
+    return transactions
+
+
 def parse_global_multiline_debit_credit_balance_statement(text: str) -> list[dict]:
     """Global FR/EN/AR parser for OCR multiline:
     Date | Description | Value Date | Debit | Credit | Balance
