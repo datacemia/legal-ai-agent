@@ -12266,7 +12266,7 @@ def parse_global_reference_debit_credit_value_statement(text: str) -> list[dict]
         re.I | re.UNICODE,
     )
     expense_re = re.compile(
-        r"(carte|cb\b|pr[ée]l[èe]vement|prelevement|virement.*[ée]mis|commission|frais|"
+        r"(carte|cb\b|pr[ée]l[èe]vement|prelevement|virement.*[ée]mis|virement\s+pour\b|commission|frais|"
         r"d[ée]bit|paiement|achat|purchase|card|debit|fee|charge|withdrawal|transfer\s+to|"
         r"مدين|خصم|سحب|شراء|رسوم|تحويل\s+صادر)",
         re.I | re.UNICODE,
@@ -12366,6 +12366,12 @@ def parse_global_reference_debit_credit_value_statement(text: str) -> list[dict]
 
         desc = clean_db_text(rest_no_value_date)
         low_desc = desc.lower()
+
+        if (
+            "date de valeur" in low_desc
+            and re.search(r"\bvirement\s+de\b", low_desc, re.I)
+        ):
+            continue
 
         if income_re.search(desc):
             tx_type = "income"
