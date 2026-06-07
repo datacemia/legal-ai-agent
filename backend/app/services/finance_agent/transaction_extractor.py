@@ -12269,6 +12269,140 @@ def extract_global_statement_summary(text: str) -> dict:
 
 
 
+
+
+def parse_cbq_qatar_posting_debit_credit_statement(text: str) -> list[dict]:
+    """Commercial Bank Qatar parser: Posting Date | Description | Transaction Date | Debit | Credit | Balance."""
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+    low = raw.lower()
+
+    if not ("commercial bank" in low and "posting date" in low and "transaction description" in low and "balance" in low):
+        return []
+
+    currency = "QAR"
+
+    lines = [
+        " ".join(str(x or "").replace("\xa0", " ").replace("\u202f", " ").split())
+        for x in raw.splitlines()
+        if str(x or "").strip()
+    ]
+
+    start_re = re.compile(r"^(?P<post>\d{2}-[A-Za-z]{3}-\d{2})\s+(?P<body>.+)$")
+    end_re = re.compile(
+        r"(?P<tdate>\d{2}-[A-Za-z]{3}-\d{2})\s+"
+        r"(?P<a1>\d{1,3}(?:,\d{3})*\.\d{2})\s+"
+        r"(?P<a2>\d{1,3}(?:,\d{3})*\.\d{2})$",
+        re.I,
+    )
+
+    month_map = {
+        "JAN": 1, "FEB": 2, "MAR": 3, "APR": 4, "MAY": 5, "JUN": 6,
+        "JUL": 7, "AUG": 8, "SEP": 9, "OCT": 10, "NOV": 11, "DEC": 12,
+    }
+
+    income_re = re.compile(r"(transfer\s*-\s*credit|salary\s+transfer|credit)", re.I)
+    expense_re = re.compile(
+        r"(purchase|electron auth|naps atm|funds transfer|transfer charge|loan repayment|card bill payment|debit)",
+        re.I,
+    )
+
+    skip_re = re.compile(r"(brought forward|credit balance|posting date|account statement|everything is possible)", re.I)
+
+    def iso_from(tok: str) -> str | None:
+        try:
+            d, mon, y = tok.upper().split("-")
+            return f"20{int(y):02d}-{month_map[mon]:02d}-{int(d):02d}"
+        except Exception:
+            return None
+
+    blocks = []
+    current = None
+
+    for line in lines:
+        if skip_re.search(line):
+            continue
+
+        m = start_re.match(line)
+        if m:
+            if current:
+                blocks.append(current)
+            current = {
+                "post": m.group("post"),
+                "parts": [m.group("body")],
+            }
+        elif current:
+            current["parts"].append(line)
+
+    if current:
+        blocks.append(current)
+
+    txs = []
+    seen = set()
+
+    for i, b in enumerate(blocks):
+        iso = iso_from(b["post"])
+        if not iso:
+            continue
+
+        desc = clean_db_text(" ".join(b["parts"]))
+        e = end_re.search(desc)
+        if not e:
+            continue
+
+        amount = parse_amount(e.group("a1"))
+        balance = parse_amount(e.group("a2"))
+
+        if amount <= 0 or amount > 100000:
+            continue
+
+        low_desc = desc.lower()
+
+        if income_re.search(low_desc) and not expense_re.search(low_desc):
+            tx_type = "income"
+            signed = amount
+        elif expense_re.search(low_desc):
+            tx_type = "expense"
+            signed = -amount
+        else:
+            continue
+
+        key = (i, iso, round(signed, 2), desc[:120])
+        if key in seen:
+            continue
+        seen.add(key)
+
+        txs.append({
+            "date": iso,
+            "description": desc[:500],
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": tx_type,
+            "currency": currency,
+            "balance": round(balance, 2),
+            "_balance": round(balance, 2),
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": tx_type,
+            "_balance_locked": True,
+            "parser_family": "cbq_qatar_posting_debit_credit",
+        })
+
+    if txs:
+        print("CBQ_QATAR_POSTING_DEBIT_CREDIT_EXTRACTED", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+            "income_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "expense"), 2),
+            "sample": txs[:8],
+        })
+
+    return txs
+
+
+
 def parse_arabic_balance_debit_credit_statement(text: str) -> list[dict]:
     """Arabic balance ledger: balance SAR credit SAR debit SAR + description + date."""
     import re
@@ -15021,6 +15155,7 @@ def extract_transactions(text: str) -> list[dict]:
     candidates = []
 
     for parser_name, parser_fn, min_count in [
+        ("cbq_qatar_posting_debit_credit", parse_cbq_qatar_posting_debit_credit_statement, 3),
         ("arabic_balance_debit_credit", parse_arabic_balance_debit_credit_statement, 3),
         ("snb_credit_card", parse_snb_credit_card_statement, 3),
         ("bmce_date_valeur_debit_credit", parse_bmce_date_valeur_debit_credit_statement, 3),
