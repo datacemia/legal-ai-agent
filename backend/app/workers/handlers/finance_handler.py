@@ -877,7 +877,8 @@ def handle_finance_ai(job: Job, db):
         strong_tx_words = re.search(
             r"(CARTE|CARD|PAYMENT|PAIEMENT|VIREMENT|VIR\s+RECU|VIR\s+EMIS|TRANSFER|"
             r"PRELEVEMENT|PR[ÉE]L[ÈE]VEMENT|ATM|RETRAIT|DAB|DEPOSIT|DEPOT|D[ÉE]P[ÔO]T|"
-            r"SALAIRE|SALARY|INVOICE|FACTURE|رسوم|تحويل|دفع|سحب|إيداع)",
+            r"VERSEMENT|VERST|EPARGNE|[ÉE]PARGNE|SAVINGS|CASH\s+DEPOSIT|"
+            r"SALAIRE|SALARY|INVOICE|FACTURE|رسوم|تحويل|دفع|سحب|إيداع|ادخار|توفير)",
             upper,
             re.IGNORECASE,
         )
