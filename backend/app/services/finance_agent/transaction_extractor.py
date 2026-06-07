@@ -12252,6 +12252,156 @@ def extract_global_statement_summary(text: str) -> dict:
 
 
 
+
+
+def parse_wells_fargo_checking_statement(text: str) -> list[dict]:
+    """Wells Fargo parser: checking transaction history with deposits/additions and withdrawals/subtractions."""
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+    low = raw.lower()
+
+    if not ("wells fargo" in low and "transaction history" in low and "deposits/additions" in low):
+        return []
+
+    currency = "USD"
+
+    # Main checking only; stop before savings.
+    zone = re.split(
+        r"\bWells Fargo Way2Save\b|\bRC/RC Wells Fargo Way2Save\b|\bSavings\b",
+        raw,
+        maxsplit=1,
+        flags=re.I | re.UNICODE,
+    )[0]
+
+    summary_re = re.search(
+        r"Beginning balance.*?Deposits/Additions\s+([\d,]+\.\d{2}).*?"
+        r"Withdrawals/Subtractions\s+-\s*([\d,]+\.\d{2}).*?"
+        r"Ending balance.*?\$?([\d,]+\.\d{2})",
+        zone,
+        re.I | re.S,
+    )
+    if summary_re:
+        print("WELLS_FARGO_SUMMARY_EXTRACTED", {
+            "deposits": parse_amount(summary_re.group(1)),
+            "withdrawals": parse_amount(summary_re.group(2)),
+            "ending_balance": parse_amount(summary_re.group(3)),
+        })
+
+    m = re.search(r"Transaction history.*?Date\s+(?:Check\s+Number\s+)?Description", zone, re.I | re.S)
+    if m:
+        zone = zone[m.end():]
+
+    zone = re.split(r"\bEnding balance on\b|\bItems returned unpaid\b|\bSummary of Overdraft\b", zone, maxsplit=1, flags=re.I)[0]
+
+    lines = [
+        " ".join(str(x or "").replace("\xa0", " ").replace("\u202f", " ").split())
+        for x in zone.splitlines()
+        if str(x or "").strip()
+    ]
+
+    date_re = re.compile(r"^(?P<date>\d{1,2}/\d{1,2})\s+(?P<body>.+)$")
+    money_re = re.compile(r"(?<!\d)(\d{1,3}(?:,\d{3})+\.\d{2}|\d+\.\d{2})(?!\d)")
+
+    income_re = re.compile(r"(direct dep|deposit|credit|transfer credit|deposits?/additions)", re.I)
+    expense_re = re.compile(
+        r"(purchase|withdrawal|payment|pymt|retry|debit|save as you go transfer debit|"
+        r"student ln|geico|robinhood|service ch|web pmts|subtractions?)",
+        re.I,
+    )
+
+    def iso_from_mmdd(tok: str) -> str | None:
+        try:
+            m, d = str(tok).split("/")[:2]
+            return f"2018-{int(m):02d}-{int(d):02d}"
+        except Exception:
+            return None
+
+    blocks = []
+    current = None
+
+    for line in lines:
+        m = date_re.match(line)
+        if m:
+            if current:
+                blocks.append(current)
+            current = {"date": m.group("date"), "parts": [m.group("body")]}
+        elif current:
+            current["parts"].append(line)
+
+    if current:
+        blocks.append(current)
+
+    txs = []
+    seen = set()
+
+    for i, b in enumerate(blocks):
+        iso = iso_from_mmdd(b["date"])
+        if not iso:
+            continue
+
+        desc = clean_db_text(" ".join(b["parts"]))
+        nums = money_re.findall(desc)
+        if not nums:
+            continue
+
+        low_desc = desc.lower()
+
+        # Last number can be daily balance; transaction amount is usually previous number.
+        if len(nums) >= 2:
+            amount_token = nums[-2]
+        else:
+            amount_token = nums[-1]
+
+        try:
+            amount_abs = abs(parse_amount(amount_token))
+        except Exception:
+            continue
+
+        if amount_abs <= 0 or amount_abs > 100000:
+            continue
+
+        if income_re.search(low_desc) and not expense_re.search(low_desc):
+            tx_type = "income"
+            signed = amount_abs
+        elif expense_re.search(low_desc):
+            tx_type = "expense"
+            signed = -amount_abs
+        else:
+            continue
+
+        key = (i, iso, round(signed, 2), desc[:120])
+        if key in seen:
+            continue
+        seen.add(key)
+
+        txs.append({
+            "date": iso,
+            "description": desc[:500],
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": tx_type,
+            "currency": currency,
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": tx_type,
+            "parser_family": "wells_fargo_checking",
+        })
+
+    if txs:
+        print("WELLS_FARGO_CHECKING_EXTRACTED", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+            "income_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "expense"), 2),
+            "sample": txs[:8],
+        })
+
+    return txs
+
+
+
 def parse_riyad_bank_ar_en_balance_statement(text: str) -> list[dict]:
     """Riyad Bank AR/EN parser: Hijri | Gregorian | Detail | Debit | Credit | Balance."""
     import re
@@ -14005,6 +14155,7 @@ def extract_transactions(text: str) -> list[dict]:
     candidates = []
 
     for parser_name, parser_fn, min_count in [
+        ("wells_fargo_checking", parse_wells_fargo_checking_statement, 3),
         ("riyad_bank_ar_en_balance", parse_riyad_bank_ar_en_balance_statement, 3),
         ("revolut_fr_statement", parse_revolut_fr_statement, 3),
         ("sg_date_valeur_nature_debit_credit", parse_sg_date_valeur_nature_debit_credit_statement, 3),
