@@ -12211,17 +12211,16 @@ def parse_global_reference_debit_credit_value_statement(text: str) -> list[dict]
 
     # Global FR/EN/AR guard:
     # keep the main/current/checking account section only.
-    # Avoid mixing savings/passbook sections into the same ledger.
+    # Cut only when a real savings/passbook section starts.
     raw = re.split(
-        r"(?:"
+        r"(?im)^\s*(?:"
         r"comptes?\s+d[’']?epargne|comptes?\s+d[’']?épargne|"
-        r"livret\s+a|ldd\s+solidaire|compte\s+sur\s+livret|"
-        r"savings\s+accounts?|savings\s+account|passbook|deposit\s+account|"
+        r"livret\s+a\b|ldd\s+solidaire\b|compte\s+sur\s+livret\b|"
+        r"savings\s+accounts?\b|savings\s+account\b|passbook\b|"
         r"حسابات\s+التوفير|حساب\s+التوفير|دفتر\s+التوفير"
         r")",
         raw,
         maxsplit=1,
-        flags=re.I | re.UNICODE,
     )[0]
 
     low = raw.lower()
