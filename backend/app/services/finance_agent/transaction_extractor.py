@@ -12241,6 +12241,184 @@ def extract_global_statement_summary(text: str) -> dict:
 
 
 
+
+
+def parse_lcl_date_libelle_valeur_debit_credit_statement(text: str) -> list[dict]:
+    """
+    LCL / FR parser:
+    DATE | LIBELLE | VALEUR | DEBIT | CREDIT
+
+    Excludes balance/summary rows:
+    ANCIEN SOLDE, TOTAUX, SOLDE EN EUROS.
+    """
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+    low = raw.lower()
+
+    has_layout = (
+        "ecritures de la periode" in low
+        and "date" in low
+        and "libelle" in low
+        and "valeur" in low
+        and "debit" in low
+        and "credit" in low
+    )
+
+    if not has_layout:
+        return []
+
+    default_year = detect_document_year(raw)
+    currency = detect_currency(raw) or ("EUR" if "euro" in low or "€" in raw else None)
+
+    lines = [
+        " ".join(str(x or "").replace("\xa0", " ").replace("\u202f", " ").split())
+        for x in raw.splitlines()
+        if str(x or "").strip()
+    ]
+
+    start_idx = 0
+    for i, line in enumerate(lines):
+        if "ECRITURES DE LA PERIODE" in line.upper():
+            start_idx = i
+            break
+
+    tx_lines = lines[start_idx:]
+
+    date_re = re.compile(r"^(?P<date>\d{1,2}[./-]\d{1,2})\s+(?P<body>.+)$")
+    money_re = re.compile(
+        r"(?<!\d)(\d{1,3}(?:[ .,\u00a0]\d{3})+(?:[.,]\d{2})|\d+[.,]\d{2})(?!\d)"
+    )
+
+    skip_re = re.compile(
+        r"(ancien\s+solde|solde\s+en\s+euros|totaux|page\s+\d+|iban|bic|rib)",
+        re.I | re.UNICODE,
+    )
+
+    income_re = re.compile(
+        r"(virement|remise|credit|cr[ée]dit|versement|remboursement|salary|payroll|refund)",
+        re.I | re.UNICODE,
+    )
+
+    expense_re = re.compile(
+        r"(cb\b|carte|cotisation|assurance|lcl\s+a\s+la\s+carte|paiement|achat|debit|d[ée]bit|frais|commission)",
+        re.I | re.UNICODE,
+    )
+
+    def iso_from_ddmm(tok: str) -> str | None:
+        try:
+            s = str(tok or "").replace(".", "/").replace("-", "/")
+            d, m = s.split("/")[:2]
+            return f"{int(default_year):04d}-{int(m):02d}-{int(d):02d}"
+        except Exception:
+            return None
+
+    txs = []
+    seen = set()
+    pending = None
+
+    def flush_pending():
+        nonlocal pending
+
+        if not pending:
+            return
+
+        body = pending["body"].strip()
+        date_tok = pending["date"]
+
+        if skip_re.search(body):
+            pending = None
+            return
+
+        amounts = money_re.findall(body)
+        if not amounts:
+            pending = None
+            return
+
+        amount_token = amounts[-1]
+
+        try:
+            amount_abs = abs(parse_amount(amount_token))
+        except Exception:
+            pending = None
+            return
+
+        if amount_abs <= 0 or amount_abs > 100000:
+            pending = None
+            return
+
+        iso = iso_from_ddmm(date_tok)
+        if not iso:
+            pending = None
+            return
+
+        # LCL parsed text loses column alignment, so classify by label.
+        if income_re.search(body) and not expense_re.search(body):
+            tx_type = "income"
+            signed = amount_abs
+        elif expense_re.search(body):
+            tx_type = "expense"
+            signed = -amount_abs
+        else:
+            # In LCL table, unlabeled positive old balances are skipped above.
+            pending = None
+            return
+
+        desc = clean_db_text(body)
+
+        key = (iso, round(signed, 2), desc[:120])
+        if key not in seen:
+            seen.add(key)
+            txs.append({
+                "date": iso,
+                "description": desc[:500],
+                "amount": round(signed, 2),
+                "signed_amount": round(signed, 2),
+                "type": tx_type,
+                "currency": currency,
+                "locked_amount": round(signed, 2),
+                "_locked_amount": round(signed, 2),
+                "locked_type": tx_type,
+                "parser_family": "lcl_date_libelle_valeur_debit_credit",
+            })
+
+        pending = None
+
+    for line in tx_lines:
+        upper = line.upper()
+
+        if "TOTAUX" in upper or "SOLDE EN EUROS" in upper:
+            flush_pending()
+            break
+
+        m = date_re.match(line)
+
+        if m:
+            flush_pending()
+            pending = {
+                "date": m.group("date"),
+                "body": m.group("body"),
+            }
+        else:
+            if pending:
+                pending["body"] += " " + line
+
+    flush_pending()
+
+    if txs:
+        print("LCL_DATE_LIBELLE_VALEUR_DEBIT_CREDIT_EXTRACTED", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+            "income_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "expense"), 2),
+            "sample": txs[:10],
+        })
+
+    return txs
+
+
+
 def parse_cih_fr_ar_date_operation_debit_credit_statement(text: str) -> list[dict]:
     """
     CIH / Morocco FR-AR parser:
@@ -13231,6 +13409,7 @@ def extract_transactions(text: str) -> list[dict]:
     candidates = []
 
     for parser_name, parser_fn, min_count in [
+        ("lcl_date_libelle_valeur_debit_credit", parse_lcl_date_libelle_valeur_debit_credit_statement, 3),
         ("cih_fr_ar_date_operation_debit_credit", parse_cih_fr_ar_date_operation_debit_credit_statement, 3),
         ("fr_date_nature_valeur_debit_credit", parse_fr_date_nature_valeur_debit_credit_statement, 2),
         ("global_reference_debit_credit_value", parse_global_reference_debit_credit_value_statement, 3),
