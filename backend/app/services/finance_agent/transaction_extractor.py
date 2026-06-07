@@ -10720,7 +10720,6 @@ def parse_global_date_boundary_ledger(text: str) -> list[dict]:
     money_re = re.compile(
         r"\d{1,3}(?:[ .,\u00a0]\d{3})+(?:[.,]\d{2})?"
         r"|\d+[.,]\d{2}"
-        r"|\d+"
     )
 
     blocks = []
@@ -11350,6 +11349,140 @@ def parse_money_out_money_in_balance_ledger(text: str) -> list[dict]:
     return cleaned
 
 
+
+def parse_debit_credit_column_ledger(text: str) -> list[dict]:
+    """Global column parser:
+    Date | Description/Libellé/Nature | Value | Debit | Credit | Balance/Solde
+    Supports EN/FR/AR labels and thousands-only African/FCFA formats.
+    """
+    import re
+
+    raw = str(text or "")
+    low = raw.lower()
+
+    has_layout = (
+        ("débit" in low or "debit" in low or "مدين" in low)
+        and ("crédit" in low or "credit" in low or "دائن" in low)
+        and ("solde" in low or "balance" in low or "الرصيد" in low)
+    )
+    if not has_layout:
+        return []
+
+    period_m = re.search(
+        r"(?:du|from)?\s*(\d{1,2})[/-](\d{1,2})[/-](20\d{2})\s*(?:au|to|-|–)\s*(\d{1,2})[/-](\d{1,2})[/-](20\d{2})",
+        raw,
+        re.I,
+    )
+    default_year = int(period_m.group(6)) if period_m else 2023
+
+    date_re = re.compile(r"^\s*(?P<date>\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?)\s+(?P<body>.+)$")
+    amount_re = re.compile(
+        r"(?<![\w])(?:\d{1,3}(?:[ .,\u00a0]\d{3})+|\d+[.,]\d{2})(?![\w])"
+    )
+
+    income_words = [
+        "credit", "crédit", "depot", "dépôt", "deposit", "versement", "verst",
+        "virement recu", "virement reçu", "recu", "reçu", "remboursement",
+        "دائن", "إيداع", "ايداع", "تحويل وارد"
+    ]
+    expense_words = [
+        "debit", "débit", "retrait", "frais", "taxe", "paiement", "payment",
+        "virement bancaire", "virement par cheque", "gab", "atm", "card",
+        "مدين", "سحب", "رسوم", "شراء"
+    ]
+
+    def parse_date(ds: str) -> str | None:
+        parts = re.split(r"[/-]", ds)
+        if len(parts) < 2:
+            return None
+        d = int(parts[0])
+        m = int(parts[1])
+        y = default_year
+        if len(parts) >= 3:
+            yy = int(parts[2])
+            y = 2000 + yy if yy < 100 else yy
+        return f"{y:04d}-{m:02d}-{d:02d}"
+
+    txs = []
+
+    for raw_line in raw.splitlines():
+        line = " ".join(raw_line.replace("\xa0", " ").replace("\u202f", " ").split())
+        if not line:
+            continue
+
+        m = date_re.match(line)
+        if not m:
+            continue
+
+        iso = parse_date(m.group("date"))
+        body = m.group("body").strip()
+        if not iso or not body:
+            continue
+
+        body_low = body.lower()
+        if any(x in body_low for x in [
+            "solde initial", "solde final", "solde au", "balance",
+            "total ", "sous-total", "subtotal", "rib", "iban", "swift",
+            "releve d'identite", "relevé d’identité",
+        ]):
+            continue
+
+        nums = amount_re.findall(body)
+        if not nums:
+            continue
+
+        vals = [parse_global_money_amount(x) for x in nums]
+        vals = [v for v in vals if v is not None and abs(v) > 0]
+        if not vals:
+            continue
+
+        has_income = any(w in body_low for w in income_words)
+        has_expense = any(w in body_low for w in expense_words)
+
+        # Column-ledger rule:
+        # if the row has multiple numeric columns, the transaction amount is
+        # normally before final balance; but if description says debit/credit,
+        # use that signal to sign it.
+        amount = vals[-2] if len(vals) >= 2 else vals[-1]
+
+        typ = "income" if has_income and not has_expense else "expense" if has_expense else None
+
+        # If both signals exist, prefer explicit debit words except "debit card credit".
+        if has_income and has_expense:
+            typ = "income" if "debit card credit" in body_low or "crédit" in body_low else "expense"
+
+        if typ is None:
+            continue
+
+        signed = abs(amount) if typ == "income" else -abs(amount)
+
+        txs.append({
+            "date": iso,
+            "description": body[:500],
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": typ,
+            "currency": "XAF" if ("fcfa" in low or "francs cfa" in low) else None,
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": typ,
+            "parser_family": "debit_credit_column_ledger",
+        })
+
+    # Reject weak/noisy extracts.
+    if len(txs) < 3:
+        return []
+
+    print("DEBIT_CREDIT_COLUMN_LEDGER_EXTRACTED", {
+        "transactions": len(txs),
+        "income": sum(1 for tx in txs if tx.get("type") == "income"),
+        "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+        "income_total": round(sum(tx["amount"] for tx in txs if tx.get("type") == "income"), 2),
+        "expense_total": round(sum(abs(tx["amount"]) for tx in txs if tx.get("type") == "expense"), 2),
+    })
+    return txs
+
+
 def extract_transactions(text: str) -> list[dict]:
     txs = parse_money_out_money_in_balance_ledger(text)
     if txs and len(txs) >= 3:
@@ -11404,6 +11537,16 @@ def extract_transactions(text: str) -> list[dict]:
             })
             return []
         
+    txs = parse_debit_credit_column_ledger(text)
+    if txs and len(txs) >= 3:
+        print("STATEMENT_LAYOUT_DETECTED", "debit_credit_column_ledger")
+        print("DEBIT_CREDIT_COLUMN_LEDGER_ROUTE", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+        })
+        return txs
+
     txs = parse_global_date_boundary_ledger(text)
     if txs and len(txs) >= 5:
         print("STATEMENT_LAYOUT_DETECTED", "global_date_boundary_ledger")
