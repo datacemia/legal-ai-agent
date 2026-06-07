@@ -570,6 +570,8 @@ def normalize_signed_amounts_before_kpi(transactions):
     return normalized
 
 
+print("RUNEXA_FINANCE_HANDLER_VERSION", "v2-global-absurd-guard")
+
 def handle_finance_ai(job: Job, db):
     input_data = get_job_input(job)
 
