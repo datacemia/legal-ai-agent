@@ -8478,7 +8478,6 @@ def extract_withdraw_deposit_balance_transactions(text: str) -> list[dict]:
                 return
 
             combined = " ".join(current["parts"]).strip()
-            print("WDB_FLUSH_BLOCK_SAMPLE", combined[:300])
 
             # Global FR/EN/AR OCR rule:
             # One flush block may contain multiple transactions due to column OCR.
@@ -12447,6 +12446,7 @@ def extract_transactions(text: str) -> list[dict]:
     statement_summary = extract_global_statement_summary(text)
 
     txs = parse_global_value_date_debit_credit_statement(text)
+    print("GLOBAL_VALUE_DATE_DEBIT_CREDIT_PRE_ROUTE", {"transactions": len(txs or [])})
     if txs and len(txs) >= 2:
         print("STATEMENT_LAYOUT_DETECTED", "global_value_date_debit_credit")
         print("GLOBAL_VALUE_DATE_DEBIT_CREDIT_ROUTE", {
