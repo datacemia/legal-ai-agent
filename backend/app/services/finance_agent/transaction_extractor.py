@@ -9909,24 +9909,20 @@ def parse_sectioned_deposit_withdrawal_statement(text: str) -> list[dict]:
     bal_i = find_section_index(ending_balance_re, wd_i + 1 if wd_i >= 0 else 0)
 
     def parse_tx_lines(section_lines, typ):
-        for line in section_lines:
-            if total_re.search(line) or re.search(r"^\s*DATE\b", line, re.I):
-                continue
+        desc_buffer = []
 
-            m = tx_re.match(line)
-            if not m:
-                continue
+        def iso_from_mmdd(mmdd: str) -> str:
+            sep = "-" if "-" in mmdd else "/"
+            month, day = [int(x) for x in mmdd.split(sep)]
+            tx_year = year - 1 if month == 12 and "january" in low else year
+            return f"{tx_year}-{month:02d}-{day:02d}"
 
-            mmdd = m.group("date")
-            month, day = [int(x) for x in mmdd.split("/")]
-            iso_date = f"{year}-{month:02d}-{day:02d}"
-            desc = m.group("desc").strip()
-            amount = float(m.group("amount").replace(",", ""))
+        def add_tx(mmdd: str, desc: str, amount_raw: str):
+            amount = parse_amount(amount_raw)
             signed = amount if typ == "income" else -amount
-
             transactions.append({
-                "date": iso_date,
-                "description": desc,
+                "date": iso_from_mmdd(mmdd),
+                "description": clean_db_text(desc)[:500],
                 "amount": round(signed, 2),
                 "signed_amount": round(signed, 2),
                 "type": typ,
@@ -9934,8 +9930,37 @@ def parse_sectioned_deposit_withdrawal_statement(text: str) -> list[dict]:
                 "locked_amount": round(signed, 2),
                 "_locked_amount": round(signed, 2),
                 "locked_type": typ,
+                "_balance_locked": True,
                 "parser_family": "sectioned_deposit_withdrawal_statement",
             })
+
+        for line in section_lines:
+            if total_re.search(line) or re.search(r"^\s*(DATE|TRAN DATE|DESCRIPTION|ACCOUNT #)\b", line, re.I):
+                desc_buffer = []
+                continue
+
+            m = tx_re.match(line)
+            if m:
+                add_tx(m.group("date"), m.group("desc").strip(), m.group("amount"))
+                desc_buffer = []
+                continue
+
+            # Generic multiline checking format:
+            # description lines, then MM-DD MM-DD amount or MM-DD amount.
+            dm = re.search(
+                r"(?P<date>\d{2}-\d{2})"
+                r"(?:\s+\d{2}-\d{2})?\s+"
+                r"(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{2})|\d+(?:\.\d{2}))\s*$",
+                line,
+            )
+            if dm:
+                desc = " ".join(desc_buffer).strip() or line[:80]
+                add_tx(dm.group("date"), desc, dm.group("amount"))
+                desc_buffer = []
+                continue
+
+            if not line_is_metadata(line):
+                desc_buffer.append(line)
 
     def parse_balance_lines(section_lines):
         for line in section_lines:
