@@ -92,7 +92,7 @@ def run_worker():
                 db.commit()
 
                 import traceback
-                traceback.print_exc()
+                print(traceback.format_exc(), flush=True)
                 print(f"Failed job {job.id} type={job.job_type}: {e}", flush=True)
 
         finally:
