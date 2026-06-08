@@ -12273,6 +12273,169 @@ def extract_global_statement_summary(text: str) -> dict:
 
 
 
+
+
+def parse_snb_alahli_account_statement(text: str) -> list[dict]:
+    """SNB AlAhli Saudi account statement: Date | Type | Description | Credit | Debit | Balance."""
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+    low = raw.lower()
+
+    if not (
+        ("statement of account" in low or "snb" in low or "الأهلي" in raw)
+        and "account information" in low
+        and "transaction type" in low
+        and "balance" in low
+        and "ريال سعودي" in raw
+    ):
+        return []
+
+    currency = "SAR"
+
+    lines = [
+        " ".join(str(x or "").replace("\xa0", " ").replace("\u202f", " ").split())
+        for x in raw.splitlines()
+        if str(x or "").strip()
+    ]
+
+    money_re = re.compile(r"(?<!\d)(\d{1,3}(?:,\d{3})*\.\d{2}|\d+\.\d{2})(?!\d)")
+    date_re = re.compile(r"^(?P<date>\d{2}/\d{2}/\d{4})(?:\s+(?P<time>\d{2}:\d{2}))?$")
+
+    skip_re = re.compile(
+        r"(account information|statement information|account number|account type|"
+        r"account currency|date transaction type description|page\s+\d+|"
+        r"الرصيد السابق|statement date|iban)",
+        re.I | re.UNICODE,
+    )
+
+    def iso_from_date(tok: str) -> str | None:
+        try:
+            d, m, y = str(tok).split("/")[:3]
+            return f"{int(y):04d}-{int(m):02d}-{int(d):02d}"
+        except Exception:
+            return None
+
+    # Opening balance.
+    opening_balance = None
+    for i, line in enumerate(lines):
+        if "الرصيد السابق" in line:
+            nums = money_re.findall(line)
+            if nums:
+                opening_balance = parse_amount(nums[-1])
+                break
+            if i > 0:
+                nums = money_re.findall(lines[i - 1])
+                if nums:
+                    opening_balance = parse_amount(nums[-1])
+                    break
+
+    blocks = []
+    current = None
+
+    i = 0
+    while i < len(lines):
+        m = date_re.match(lines[i])
+        if not m:
+            i += 1
+            continue
+
+        tx_date = m.group("date")
+        parts = []
+        j = i + 1
+
+        while j < len(lines):
+            if date_re.match(lines[j]):
+                break
+            if not skip_re.search(lines[j]):
+                parts.append(lines[j])
+            j += 1
+
+        if parts:
+            blocks.append({"date": tx_date, "parts": parts})
+
+        i = j
+
+    txs = []
+    seen = set()
+    prev_balance = opening_balance
+
+    for idx, block in enumerate(blocks):
+        iso = iso_from_date(block["date"])
+        if not iso:
+            continue
+
+        desc = clean_db_text(" ".join(block["parts"]))
+        nums = []
+
+        for n in money_re.findall(desc):
+            try:
+                nums.append(parse_amount(n))
+            except Exception:
+                pass
+
+        if len(nums) < 2:
+            continue
+
+        balance = nums[-1]
+        amount_abs = nums[-2]
+
+        if amount_abs <= 0 or amount_abs > 1000000:
+            continue
+
+        signed = None
+
+        if prev_balance is not None:
+            delta = round(balance - prev_balance, 2)
+            if abs(abs(delta) - amount_abs) <= 0.05:
+                signed = delta
+
+        if signed is None:
+            low_desc = desc.lower()
+            if re.search(r"(ايداع|إيداع|اعاده|عكس|credit|salary|رواتب)", low_desc, re.I):
+                signed = amount_abs
+            else:
+                signed = -amount_abs
+
+        tx_type = "income" if signed > 0 else "expense"
+        prev_balance = balance
+
+        key = (idx, iso, round(signed, 2), desc[:120])
+        if key in seen:
+            continue
+        seen.add(key)
+
+        txs.append({
+            "date": iso,
+            "description": desc[:500],
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": tx_type,
+            "currency": currency,
+            "balance": round(balance, 2),
+            "_balance": round(balance, 2),
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": tx_type,
+            "_balance_locked": True,
+            "parser_family": "snb_alahli_account_statement",
+        })
+
+    if txs:
+        print("SNB_ALAHLI_ACCOUNT_EXTRACTED", {
+            "transactions": len(txs),
+            "income": sum(1 for tx in txs if tx.get("type") == "income"),
+            "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
+            "income_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "income"), 2),
+            "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "expense"), 2),
+            "opening_balance": opening_balance,
+            "sample": txs[:8],
+        })
+
+    return txs
+
+
+
 def parse_anb_arabic_amount_balance_statement(text: str) -> list[dict]:
     """ANB Saudi Arabic statement: date/date + description + balance + signed amount."""
     import re
@@ -15280,6 +15443,7 @@ def extract_transactions(text: str) -> list[dict]:
     candidates = []
 
     for parser_name, parser_fn, min_count in [
+        ("snb_alahli_account_statement", parse_snb_alahli_account_statement, 3),
         ("anb_arabic_amount_balance", parse_anb_arabic_amount_balance_statement, 3),
         ("cbq_qatar_posting_debit_credit", parse_cbq_qatar_posting_debit_credit_statement, 3),
         ("arabic_balance_debit_credit", parse_arabic_balance_debit_credit_statement, 3),
