@@ -9874,7 +9874,7 @@ def parse_sectioned_deposit_withdrawal_statement(text: str) -> list[dict]:
     year = int(year_match.group(1)) if year_match else 2024
 
     deposit_header_re = re.compile(
-        r"(DEPOSI\w*\s+AND\s+ADDITIONS?|DEPOSI\w*|ADDITIONS?|D[ÉE]P[ÔO]TS?|CR[ÉE]DITS?|الإيداعات|ايداعات|إيداعات|دائن)",
+        r"(DEPOSITS?\s*&\s*OTHER\s+CREDITS?|DEPOSITS?\s+AND\s+OTHER\s+CREDITS?|DEPOSI\w*\s+AND\s+ADDITIONS?|DEPOSI\w*|ADDITIONS?|D[ÉE]P[ÔO]TS?|CR[ÉE]DITS?|الإيداعات|ايداعات|إيداعات|دائن)",
         re.I,
     )
     withdrawal_header_re = re.compile(
