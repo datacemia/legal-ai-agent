@@ -9959,7 +9959,11 @@ def parse_sectioned_deposit_withdrawal_statement(text: str) -> list[dict]:
                 desc_buffer = []
                 continue
 
-            if not line_is_metadata(line):
+            low_line = line.lower()
+            if not any(marker in low_line for marker in [
+                "account #", "account number", "page number", "primary account",
+                "member fdic", "continued on next page",
+            ]):
                 desc_buffer.append(line)
 
     def parse_balance_lines(section_lines):
