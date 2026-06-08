@@ -1277,13 +1277,28 @@ def handle_finance_ai(job: Job, db):
     # International KPI filter:
     # Internal transfers must never affect income, expenses,
     # savings, scores, forecasts or charts.
+    def is_locked_real_kpi_row(tx):
+        return (
+            tx.get("type") in {"income", "expense"}
+            and not tx.get("is_internal_transfer")
+            and abs(float(tx.get("amount") or 0)) > 0
+            and (
+                tx.get("locked_amount") is not None
+                or tx.get("_locked_amount") is not None
+                or tx.get("_balance_locked")
+            )
+        )
+
     kpi_transactions = [
         tx
         for tx in transactions
-        if not (
-            tx.get("type") == "transfer"
-            or tx.get("is_internal_transfer")
-            or tx.get("excluded_from_financial_kpis")
+        if (
+            is_locked_real_kpi_row(tx)
+            or not (
+                tx.get("type") == "transfer"
+                or tx.get("is_internal_transfer")
+                or tx.get("excluded_from_financial_kpis")
+            )
         )
     ]
 
