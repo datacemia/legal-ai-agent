@@ -17461,6 +17461,7 @@ def extract_credit_card_statement_summary(text: str) -> dict:
 
 
 def extract_standard_checking_statement_summary(text: str) -> dict:
+    print("STANDARD_CHECKING_SUMMARY_VERSION", "v2-bucket-aggregation-active")
     """
     Standard checking/current account summary extractor.
 
