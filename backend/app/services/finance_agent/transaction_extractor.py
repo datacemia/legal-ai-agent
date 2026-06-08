@@ -9908,6 +9908,15 @@ def parse_sectioned_deposit_withdrawal_statement(text: str) -> list[dict]:
     wd_i = find_section_index(withdrawal_header_re, dep_i + 1 if dep_i >= 0 else 0)
     bal_i = find_section_index(ending_balance_re, wd_i + 1 if wd_i >= 0 else 0)
 
+    print("SECTIONED_DW_INDICES_DEBUG", {
+        "dep_i": dep_i,
+        "dep_line": lines[dep_i] if dep_i >= 0 else None,
+        "wd_i": wd_i,
+        "wd_line": lines[wd_i] if wd_i >= 0 else None,
+        "bal_i": bal_i,
+        "bal_line": lines[bal_i] if bal_i >= 0 else None,
+    })
+
     def parse_tx_lines(section_lines, typ):
         desc_buffer = []
 
