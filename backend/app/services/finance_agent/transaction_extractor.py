@@ -9899,8 +9899,14 @@ def parse_sectioned_deposit_withdrawal_statement(text: str) -> list[dict]:
     def find_section_index(pattern, start_at=0):
         for idx in range(start_at, len(lines)):
             line = lines[idx]
-            # avoid summary lines with amounts, e.g. "Deposits and additions 2 $130.00"
-            if pattern.search(line) and "$" not in line:
+            # Avoid account-summary rows with signed totals.
+            # A real transaction section header must not be the summary line:
+            # "Deposits & Other Credits + 1,749.00"
+            if (
+                pattern.search(line)
+                and "$" not in line
+                and not re.search(r"[+-]\s*\d{1,3}(?:[,\s]\d{3})*(?:[.,]\d{2})\s*$", line)
+            ):
                 return idx
         return -1
 
