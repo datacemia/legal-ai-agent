@@ -494,6 +494,12 @@ INTERNAL_TRANSFER_KEYWORDS = [
     "own account",
     "internal transfer",
     "transfer between accounts",
+    "transfer from mercury checking",
+    "transfer to mercury checking",
+    "mercury checking",
+    "transfer from mercury",
+    "transfer to mercury",
+
     "balance transfer",
     "virement interne",
     "transfer interne",
@@ -5227,6 +5233,11 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
 
     debug_log("FINAL_TXS", transactions)
     debug_log("=== TX_EXTRACT_DEBUG END ===")
+    try:
+        transactions = apply_mercury_internal_transfer_guard(transactions)
+    except Exception:
+        pass
+
     return transactions
 
 
@@ -5380,6 +5391,12 @@ def extract_signed_amount_fallback_transactions(
         "between accounts",
         "internal transfer",
         "transfer between accounts",
+    "transfer from mercury checking",
+    "transfer to mercury checking",
+    "mercury checking",
+    "transfer from mercury",
+    "transfer to mercury",
+
         "virement interne",
         "compte épargne",
         "compte epargne",
@@ -16869,4 +16886,34 @@ for _marker in UNIVERSAL_INCOME_MARKERS:
         INCOME_KEYWORDS.append(_marker)
     if _marker not in TRANSACTION_SIGNALS:
         TRANSACTION_SIGNALS.append(_marker)
+
+
+
+
+def apply_mercury_internal_transfer_guard(transactions: list[dict]) -> list[dict]:
+    for tx in transactions or []:
+        desc = str(tx.get("description") or "").lower()
+        tx_type_raw = str(tx.get("type") or "").lower()
+
+        is_mercury_internal = (
+            "mercury checking" in desc
+            and (
+                "transfer from" in desc
+                or "transfer to" in desc
+                or tx_type_raw in {"transfer in", "transfer out", "transfer"}
+            )
+        )
+
+        if is_mercury_internal:
+            tx["type"] = "transfer"
+            tx["is_internal_transfer"] = True
+            tx["excluded_from_financial_kpis"] = True
+            tx["exclude_from_income"] = True
+            tx["exclude_from_expense"] = True
+            tx["exclude_from_score"] = True
+            tx["exclude_from_savings"] = True
+            tx["exclude_from_cashflow"] = True
+            tx["excluded_reason"] = "mercury_own_account_transfer"
+
+    return transactions
 
