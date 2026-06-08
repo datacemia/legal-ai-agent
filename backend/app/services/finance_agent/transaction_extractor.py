@@ -9995,72 +9995,33 @@ def parse_sectioned_deposit_withdrawal_statement(text: str) -> list[dict]:
                 "desc": line[:120],
             })
 
+    if dep_i >= 0 and wd_i > dep_i:
+        parse_tx_lines(lines[dep_i + 1:wd_i], "income")
 
-    # Standard international section routing:
-    # Parse sections in document order. A debit parser must stop when an income
-    # section starts, and vice versa. Also stop at the next account group.
-    account_stop_markers = [
-        "savings accounts",
-        "saving accounts",
-        "credit card accounts",
-        "loan accounts",
-        "mortgage accounts",
-        "investment accounts",
-        "account summary interest summary",
-        "amendment to your deposit agreement",
-        "questions, comments or errors",
-        "how to reconcile your account",
-    ]
+    if wd_i >= 0:
+        withdrawal_end = bal_i if bal_i > wd_i else len(lines)
 
-    def is_summary_total_row(line: str) -> bool:
-        return bool(re.search(
-            r"([=+\-]\s*\$?\s*\d{1,3}(?:[,\s]\d{3})*(?:[.,]\d{2})\s*$|"
-            r"\btotal\b.*\$?\s*\d{1,3}(?:[,\s]\d{3})*(?:[.,]\d{2})\s*$)",
-            line,
-            re.I,
-        ))
+        # Standard multi-account statement rule:
+        # stop the current checking/current-account parser at the next account group.
+        for j in range(wd_i + 1, withdrawal_end):
+            low_line = lines[j].lower()
+            if any(marker in low_line for marker in [
+                "savings accounts",
+                "saving accounts",
+                "credit card accounts",
+                "loan accounts",
+                "mortgage accounts",
+                "investment accounts",
+                "account summary interest summary",
+                "summary of your accounts",
+            ]):
+                withdrawal_end = j
+                break
 
-    def is_next_account_group(line: str) -> bool:
-        low_line = line.lower()
-        return any(marker in low_line for marker in account_stop_markers)
+        parse_tx_lines(lines[wd_i + 1:withdrawal_end], "expense")
 
-    section_starts = []
-    seen_tx_section = False
-
-    for idx, line in enumerate(lines):
-        if is_next_account_group(line) and seen_tx_section:
-            section_starts.append((idx, "__stop__"))
-            break
-
-        if is_summary_total_row(line):
-            continue
-
-        if deposit_header_re.search(line):
-            section_starts.append((idx, "income"))
-            seen_tx_section = True
-            continue
-
-        if withdrawal_header_re.search(line):
-            section_starts.append((idx, "expense"))
-            seen_tx_section = True
-            continue
-
-        if ending_balance_re.search(line):
-            section_starts.append((idx, "__balance__"))
-            seen_tx_section = True
-            continue
-
-    for pos, (idx, typ) in enumerate(section_starts):
-        next_idx = section_starts[pos + 1][0] if pos + 1 < len(section_starts) else len(lines)
-
-        if typ == "__stop__":
-            break
-
-        if typ == "__balance__":
-            parse_balance_lines(lines[idx + 1:next_idx])
-            continue
-
-        parse_tx_lines(lines[idx + 1:next_idx], typ)
+    if bal_i >= 0:
+        parse_balance_lines(lines[bal_i + 1:])
 
     income_total = round(sum(tx["amount"] for tx in transactions if tx["type"] == "income"), 2)
     expense_total = round(sum(abs(tx["amount"]) for tx in transactions if tx["type"] == "expense"), 2)
