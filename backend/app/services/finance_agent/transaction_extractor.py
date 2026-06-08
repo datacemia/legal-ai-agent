@@ -15277,6 +15277,28 @@ def _choose_finance_candidate(candidates: list[dict]) -> dict | None:
             for c in valid
         ])
 
+    official_like = [
+        c for c in valid
+        if c.get("income_gap") is not None
+        and c.get("expense_gap") is not None
+        and (
+            float(c.get("income_gap") or 0) <= max(1000, float(c.get("income_total") or 0) * 0.25)
+            or float(c.get("expense_gap") or 0) <= max(1000, float(c.get("expense_total") or 0) * 0.25)
+        )
+    ]
+
+    if official_like:
+        print("FINANCE_CANDIDATE_OFFICIAL_GAP_FILTER", [
+            {
+                "parser": c.get("parser"),
+                "income_gap": c.get("income_gap"),
+                "expense_gap": c.get("expense_gap"),
+                "score": c.get("score"),
+            }
+            for c in official_like
+        ])
+        valid = official_like
+
     return sorted(valid, key=lambda c: (c["score"], -c["count"]))[0]
 
 
