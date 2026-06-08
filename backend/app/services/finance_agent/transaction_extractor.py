@@ -17566,6 +17566,8 @@ def extract_standard_checking_statement_summary(text: str) -> dict:
             withdrawals += abs(value)
 
     # Fallback only if no bucketed debit total was found.
+    print("STANDARD_CHECKING_SIGNED_BUCKET_TOTAL", signed_debit_bucket_total)
+
     if signed_debit_bucket_total > 0:
         withdrawals = round(signed_debit_bucket_total, 2)
     elif withdrawals <= 0:
