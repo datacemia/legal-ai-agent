@@ -11094,200 +11094,171 @@ def parse_global_money_amount(raw_amount):
         return sign * float("".join(nums))
 
 
-def parse_global_date_boundary_ledger(text: str) -> list[dict]:
-    """Global EN/FR/AR date-boundary ledger parser.
 
-    Rebuilds transaction blocks by:
-    DATE line => new transaction
-    following lines => continuation until next DATE.
+def parse_global_date_boundary_ledger(text: str) -> list[dict]:
+    """
+    Generic date-boundary ledger:
+    Date/Time block + description + amount + balance.
+    Works for EN/FR/AR bank statements where Credit/Debit columns are unstable in OCR.
+    Direction is resolved primarily from balance delta.
     """
     import re
 
-    raw = str(text or "")
+    raw = normalize_arabic_digits(str(text or ""))
     low = raw.lower()
 
-    if (
-        ("date valeur" in low and "débit" in low and "crédit" in low)
-        or ("value date" in low and "debit" in low and "credit" in low)
-        or ("تاريخ القيمة" in raw and "مدين" in raw and "دائن" in raw)
-    ):
-        print("GLOBAL_DATE_BOUNDARY_SKIPPED_FOR_VALUE_DATE_LAYOUT")
+    has_layout = (
+        "balance" in low
+        and (
+            ("date" in low and "description" in low)
+            or ("transaction type" in low)
+            or ("credit" in low and "debit" in low)
+            or ("دائن" in raw and "مدين" in raw)
+            or ("الرصيد" in raw)
+        )
+    )
+    if not has_layout:
         return []
 
-    lines = [ln.strip() for ln in raw.splitlines() if ln.strip()]
+    currency = detect_currency(raw) or (
+        "SAR" if "ريال سعودي" in raw or "snb" in low or "الأهلي" in raw else None
+    )
 
-    month_map = {
-        "JAN": 1, "JANV": 1, "JANVIER": 1,
-        "FEB": 2, "FEV": 2, "FÉV": 2, "FEVR": 2, "FÉVR": 2, "FEBRUARY": 2,
-        "MAR": 3, "MARS": 3,
-        "APR": 4, "AVR": 4, "AVRIL": 4,
-        "MAY": 5, "MAI": 5,
-        "JUN": 6, "JUIN": 6,
-        "JUL": 7, "JUIL": 7, "JUILLET": 7,
-        "AUG": 8, "AOU": 8, "AOÛ": 8, "AOUT": 8, "AOÛT": 8,
-        "SEP": 9, "SEPT": 9,
-        "OCT": 10, "OCTOBRE": 10,
-        "NOV": 11, "NOVEMBRE": 11,
-        "DEC": 12, "DÉC": 12, "DECEMBRE": 12, "DÉCEMBRE": 12,
-    }
+    lines = [
+        " ".join(str(x or "").replace("\xa0", " ").replace("\u202f", " ").split())
+        for x in raw.splitlines()
+        if str(x or "").strip()
+    ]
 
-    year_match = re.search(r"(20\d{2})", raw)
-    default_year = int(year_match.group(1)) if year_match else 2024
+    date_re = re.compile(r"^(?P<date>\d{1,2}[/-]\d{1,2}[/-]\d{4})(?:\s+(?P<time>\d{1,2}:\d{2}))?$")
+    date_inline_re = re.compile(r"^(?P<date>\d{1,2}[/-]\d{1,2}[/-]\d{4})(?:\s+(?P<time>\d{1,2}:\d{2}))?\s+(?P<body>.+)$")
+    money_re = re.compile(r"(?<!\d)(\d{1,3}(?:[,\s]\d{3})*\.\d{2}|\d+[.,]\d{2})(?!\d)")
 
-    date_token_re = re.compile(
-        r"^(?P<date>"
-        r"\d{1,2}[A-Za-zÀ-ÿ]{3,9}\d{2,4}"
-        r"|\d{1,2}[/-]\d{1,2}[/-]\d{2,4}"
-        r"|\d{1,2}/\d{1,2}"
-        r")\b\s*(?P<rest>.*)$",
+    skip_re = re.compile(
+        r"(account information|statement information|account number|account type|account currency|"
+        r"date transaction type description|page\s+\d+|iban|bic|statement date|"
+        r"الرصيد السابق|solde précédent|previous balance)",
         re.I | re.UNICODE,
     )
 
-    def parse_date_token(tok: str) -> str | None:
-        s = str(tok or "").strip().upper().replace(".", "")
-        m = re.match(r"^(\d{1,2})([A-ZÀ-Ÿ]{3,9})(\d{2,4})$", s, re.I)
-        if m:
-            day = int(m.group(1))
-            mon_s = m.group(2).upper()
-            year_s = m.group(3)
-            month = month_map.get(mon_s)
-            if not month:
-                return None
-            year = int(year_s)
-            if year < 100:
-                year += 2000
-            return f"{year:04d}-{month:02d}-{day:02d}"
+    def parse_money(x):
+        return parse_amount(str(x).replace(" ", ","))
 
-        m = re.match(r"^(\d{1,2})[/-](\d{1,2})(?:[/-](\d{2,4}))?$", s)
-        if m:
-            a, b = int(m.group(1)), int(m.group(2))
-            year = int(m.group(3)) if m.group(3) else default_year
-            if year < 100:
-                year += 2000
-            # Bank statements in this corpus mostly DD-MM-YYYY for full numeric
-            # and MM/DD for US short. Use safe heuristic.
-            if m.group(3) and a > 12:
-                day, month = a, b
-            elif m.group(3) and b > 12:
-                month, day = a, b
-            else:
-                month, day = a, b
-            return f"{year:04d}-{month:02d}-{day:02d}"
+    def iso_from_date(tok):
+        try:
+            s = str(tok).replace("-", "/")
+            d, m, y = s.split("/")[:3]
+            return f"{int(y):04d}-{int(m):02d}-{int(d):02d}"
+        except Exception:
+            return None
 
-        return None
-
-    def money_to_float(s: str):
-        return round(parse_global_money_amount(s), 2)
-
-    money_re = re.compile(
-        r"\d{1,3}(?:[ .,\u00a0]\d{3})+(?:[.,]\d{2})?"
-        r"|\d+[.,]\d{2}"
-    )
+    opening_balance = None
+    for i, line in enumerate(lines):
+        if re.search(r"(الرصيد السابق|previous balance|solde précédent)", line, re.I):
+            nums = money_re.findall(line)
+            if nums:
+                opening_balance = parse_money(nums[-1])
+                break
+            if i > 0:
+                nums = money_re.findall(lines[i - 1])
+                if nums:
+                    opening_balance = parse_money(nums[-1])
+                    break
 
     blocks = []
     current = None
 
     for line in lines:
-        m = date_token_re.match(line)
-        if m:
-            iso = parse_date_token(m.group("date"))
-            if iso:
-                if current:
-                    blocks.append(current)
-                current = {"date": iso, "lines": [m.group("rest").strip()]}
-                continue
+        if skip_re.search(line):
+            continue
+
+        mi = date_inline_re.match(line)
+        md = date_re.match(line)
+
+        if mi:
+            if current:
+                blocks.append(current)
+            current = {
+                "date": mi.group("date"),
+                "parts": [mi.group("body")],
+            }
+            continue
+
+        if md:
+            if current:
+                blocks.append(current)
+            current = {
+                "date": md.group("date"),
+                "parts": [],
+            }
+            continue
 
         if current:
-            current["lines"].append(line)
+            current["parts"].append(line)
 
     if current:
         blocks.append(current)
 
-    if len(blocks) < 5:
-        return []
-
     txs = []
+    seen = set()
+    prev_balance = opening_balance
 
-    for block in blocks:
-        desc = " ".join(x for x in block["lines"] if x).strip()
-        low = desc.lower()
-
-        if not desc or any(x in low for x in [
-            "reporté", "reporte", "brought forward", "carried forward",
-            "page", "statement date", "relevé de compte", "ملخص",
-        ]):
-            # Keep REPORTÉ only as balance carry-forward, not transaction.
-            if len(money_re.findall(desc)) <= 1:
-                continue
-
-        nums = money_re.findall(desc)
-        vals = [money_to_float(x) for x in nums]
-        vals = [x for x in vals if x is not None]
-
-        if not vals:
+    for idx, block in enumerate(blocks):
+        iso = iso_from_date(block["date"])
+        if not iso:
             continue
 
-        has_credit_signal = bool(re.search(
-            r"\b(cr|credit|credits|crédit|crédits|d[ée]p[ôo]t|dep[oô]t|"
-            r"salaire|salary|payroll|transfert bancaire|transfer from|de\s+-|"
-            r"payment received|deposit|deposits|cash out visa direct|direct deposit|"
-            r"refund|refund from|received from|incoming transfer|ach credit|"
-            r"virement reçu|virement recu|versement|remboursement|"
-            r"دائن|إيداع|ايداع|راتب|تحويل وارد)\b",
-            desc,
-            re.I | re.UNICODE,
-        ))
+        desc = clean_db_text(" ".join(block["parts"]))
+        nums = []
+        for n in money_re.findall(desc):
+            try:
+                nums.append(parse_money(n))
+            except Exception:
+                pass
 
-        has_debit_signal = bool(re.search(
-            r"\b(debit|debits|débit|débits|paiement|payment|achat|purchase|"
-            r"withdrawal|wdl|dab|gab|frais|fee|netflix|à\s+-|to\s+-|"
-            r"مدين|سحب|رسوم|شراء)\b",
-            desc,
-            re.I | re.UNICODE,
-        ))
-
-        # Last number is often balance when followed by Cr or zero balance.
-        # Prefer amount before balance when there are >=2 numbers.
-        # Global FR/EN/AR rule:
-        # - If row has Debit/Credit + Balance/Solde columns, final numeric token is usually balance,
-        #   so movement is penultimate.
-        # - If row has only Date/Description/Value/Amount, final numeric token is the movement.
-        has_balance_column_context = (
-            "solde" in low
-            or "balance" in low
-            or "الرصيد" in low
-        )
-
-        if has_balance_column_context and len(vals) >= 2:
-            amount = vals[-2]
-        else:
-            amount = vals[-1]
-        balance = vals[-1] if len(vals) >= 2 else None
-
-        # If block explicitly contains huge salary/credit and balance Cr,
-        # use the largest plausible non-balance value.
-        if has_credit_signal and len(vals) >= 2:
-            amount = vals[-2]
-
-        # Credit/income language must override generic debit/card wording.
-        # Example: Chase "Payment Received ... Cash Out Visa Direct" can still contain "Card".
-        typ = "income" if has_credit_signal else "expense" if has_debit_signal else None
-        if typ is None:
+        if len(nums) < 2:
             continue
 
-        signed = abs(amount) if typ == "income" else -abs(amount)
+        balance = nums[-1]
+        amount_abs = abs(nums[-2])
+
+        if amount_abs <= 0 or amount_abs > 1000000:
+            continue
+
+        signed = None
+        if prev_balance is not None:
+            delta = round(balance - prev_balance, 2)
+            if abs(abs(delta) - amount_abs) <= 0.05:
+                signed = delta
+
+        if signed is None:
+            low_desc = desc.lower()
+            if re.search(r"(credit|deposit|salary|payroll|refund|reversal|عكس|اعاده|إعادة|ايداع|إيداع|رواتب)", low_desc, re.I):
+                signed = amount_abs
+            else:
+                signed = -amount_abs
+
+        prev_balance = balance
+        tx_type = "income" if signed > 0 else "expense"
+
+        key = (idx, iso, round(signed, 2), round(balance, 2), desc[:100])
+        if key in seen:
+            continue
+        seen.add(key)
 
         txs.append({
-            "date": block["date"],
+            "date": iso,
             "description": desc[:500],
             "amount": round(signed, 2),
             "signed_amount": round(signed, 2),
-            "type": typ,
-            "balance": balance,
-            "currency": "AED" if "dirham" in raw.lower() or "aed" in raw.lower() else None,
+            "type": tx_type,
+            "currency": currency,
+            "balance": round(balance, 2),
+            "_balance": round(balance, 2),
             "locked_amount": round(signed, 2),
             "_locked_amount": round(signed, 2),
-            "locked_type": typ,
+            "locked_type": tx_type,
+            "_balance_locked": True,
             "parser_family": "global_date_boundary_ledger",
         })
 
@@ -11295,13 +11266,13 @@ def parse_global_date_boundary_ledger(text: str) -> list[dict]:
         "transactions": len(txs),
         "income": sum(1 for tx in txs if tx.get("type") == "income"),
         "expenses": sum(1 for tx in txs if tx.get("type") == "expense"),
-        "income_total": round(sum(tx["amount"] for tx in txs if tx.get("type") == "income"), 2),
-        "expense_total": round(sum(abs(tx["amount"]) for tx in txs if tx.get("type") == "expense"), 2),
+        "income_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "income"), 2),
+        "expense_total": round(sum(abs(tx.get("amount", 0)) for tx in txs if tx.get("type") == "expense"), 2),
+        "opening_balance": opening_balance,
+        "sample": txs[:8],
     })
 
     return txs
-
-
 
 def parse_debit_credit_balance_ledger(text: str) -> list[dict]:
     """Global EN/FR/AR Date Description Debit Credit Balance parser."""
