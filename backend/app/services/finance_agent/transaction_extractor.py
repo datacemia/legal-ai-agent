@@ -14968,6 +14968,30 @@ def parse_global_value_date_debit_credit_statement(text: str) -> list[dict]:
 
     if txs:
         print(
+        try:
+            print("GLOBAL_VALUE_DATE_INCOME_SAMPLE", [
+                {
+                    "date": tx.get("date"),
+                    "amount": tx.get("amount"),
+                    "description": str(tx.get("description", ""))[:150],
+                }
+                for tx in txs
+                if tx.get("type") == "income"
+            ][:50])
+
+            print("GLOBAL_VALUE_DATE_LARGE_EXPENSE_SAMPLE", [
+                {
+                    "date": tx.get("date"),
+                    "amount": tx.get("amount"),
+                    "description": str(tx.get("description", ""))[:150],
+                }
+                for tx in txs
+                if tx.get("type") == "expense"
+                and abs(float(tx.get("amount") or 0)) > 10000
+            ][:50])
+        except Exception:
+            pass
+
             "GLOBAL_VALUE_DATE_DEBIT_CREDIT_EXTRACTED",
             {
                 "transactions": len(txs),
