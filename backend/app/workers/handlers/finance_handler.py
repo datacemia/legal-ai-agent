@@ -1406,8 +1406,8 @@ def handle_finance_ai(job: Job, db):
             2,
         )
 
-        statement_deposits_float = _money_to__money_to_float(statement_deposits) if statement_deposits is not None else None
-        statement_withdrawals_float = _money_to__money_to_float(statement_withdrawals) if statement_withdrawals is not None else None
+        statement_deposits_float = _money_to_float(statement_deposits) if statement_deposits is not None else None
+        statement_withdrawals_float = _money_to_float(statement_withdrawals) if statement_withdrawals is not None else None
 
         if statement_deposits_float is not None:
             print("STATEMENT_INCOME_RECONCILIATION", {
