@@ -17641,7 +17641,17 @@ def extract_td_account_summary(text: str) -> dict:
     ending = find(r"Ending Balance")
     if ending is None:
         # TD sometimes prints the ending balance on the next "How to Balance" page.
-        m_end = re.search(r"Your ending balance shown on this\s+statement is:\s*.*?Ending\s+Balance\s+(" + money + r")", raw, flags=re.I)
+        m_end = re.search(
+            r"Your ending balance shown on this\s+statement is:\s*.*?Ending\s+Balance\s+(" + money + r")",
+            raw,
+            flags=re.I,
+        )
+        if not m_end:
+            m_end = re.search(
+                r"Ending\s+Balance\s+(" + money + r")\s+(?:Total\s+Deposits|DEPOSITS\s+NOT\s+ON\s+STATEMENT)",
+                raw,
+                flags=re.I,
+            )
         if m_end:
             ending = clean(m_end.group(1))
 
