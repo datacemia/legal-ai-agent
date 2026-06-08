@@ -7446,7 +7446,7 @@ def extract_standard_sectioned_statement_transactions(
 
     income_sections = [
         # EN
-        "payments and other credits", "deposits", "electronic deposits",
+        "payments and other credits", "deposits & other credits", "deposits and other credits", "deposits", "electronic deposits",
         "credits", "credit transfers", "payments received", "payment received",
         "incoming payments", "incoming transfers",
         # FR
@@ -7458,7 +7458,7 @@ def extract_standard_sectioned_statement_transactions(
 
     expense_sections = [
         # EN
-        "purchases and adjustments", "electronic payments", "checks paid",
+        "atm withdrawals & debits", "atm withdrawals and debits", "debit card purchases & debits", "debit card purchases and debits", "withdrawals & other debits", "withdrawals and other debits", "purchases and adjustments", "electronic payments", "checks paid",
         "other withdrawals", "withdrawals", "debits", "debit", "payments",
         "purchases", "card purchases", "fees charged", "interest charged",
         # FR
