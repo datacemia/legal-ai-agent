@@ -16962,13 +16962,20 @@ def extract_snb_arabic_statement_summary(text: str) -> dict:
     raw = str(text or "")
     compact = raw.replace("\u200f", "").replace("\u200e", "")
 
-    if not (
-        "SA73100000" in compact
-        or "THE SAUDI NATIONAL BANK" in compact
-        or "ﺍﻻﻫﻠﻲ" in compact
-        or "الأهلي" in compact
-        or "SNB" in compact
-    ):
+    has_arabic_ledger_structure = (
+        ("Account Currency" in compact or "Date Transaction Type Description Credit Debit Balance" in compact)
+        and ("ﺭﻳﺎﻝ" in compact or "ريال" in compact or "SAR" in compact)
+        and (
+            "PAYROLL" in compact
+            or "SAMASARI" in compact
+            or "ﺭﻭﺍﺗﺐ" in compact
+            or "ايداع رواتب" in compact
+            or "ﺣﻮﺍﻟﻪ" in compact
+            or "حواله" in compact
+        )
+    )
+
+    if not has_arabic_ledger_structure:
         return {}
 
     money = r"(?:\d{1,3}(?:,\d{3})+|\d+)(?:[.,]\d{2})"
