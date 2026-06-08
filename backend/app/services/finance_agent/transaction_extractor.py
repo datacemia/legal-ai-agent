@@ -5237,6 +5237,11 @@ def extract_arabic_ocr_transactions(text: str) -> list[dict]:
         transactions = apply_mercury_internal_transfer_guard(transactions)
     except Exception:
         pass
+    try:
+        transactions = debug_print_finance_transactions_for_audit(transactions)
+    except Exception:
+        pass
+
 
     return transactions
 
@@ -16915,5 +16920,25 @@ def apply_mercury_internal_transfer_guard(transactions: list[dict]) -> list[dict
             tx["exclude_from_cashflow"] = True
             tx["excluded_reason"] = "mercury_own_account_transfer"
 
+    return transactions
+
+
+
+
+def debug_print_finance_transactions_for_audit(transactions: list[dict]) -> list[dict]:
+    print("FINANCE_TX_DEBUG_START", {"count": len(transactions or [])})
+    for i, tx in enumerate(transactions or []):
+        print("FINANCE_TX_DEBUG", {
+            "i": i,
+            "date": tx.get("date"),
+            "description": tx.get("description"),
+            "type": tx.get("type"),
+            "amount": tx.get("amount"),
+            "signed_amount": tx.get("signed_amount"),
+            "excluded_from_financial_kpis": tx.get("excluded_from_financial_kpis"),
+            "excluded_reason": tx.get("excluded_reason"),
+            "is_internal_transfer": tx.get("is_internal_transfer"),
+        })
+    print("FINANCE_TX_DEBUG_END")
     return transactions
 
