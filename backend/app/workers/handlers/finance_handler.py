@@ -1060,6 +1060,17 @@ def handle_finance_ai(job: Job, db):
             kept_transactions.append(tx)
             continue
 
+        # Standard worldwide rule:
+        # A structurally locked transaction from a trusted table/section parser
+        # must not be removed only because OCR made its description weak.
+        if (
+            tx.get("_balance_locked")
+            or tx.get("locked_amount") is not None
+            or tx.get("_locked_amount") is not None
+        ):
+            kept_transactions.append(tx)
+            continue
+
         if amount > 0 and not description_has_min_signal(tx):
             # Standard worldwide rule:
             # A structurally locked transaction from a trusted table parser
