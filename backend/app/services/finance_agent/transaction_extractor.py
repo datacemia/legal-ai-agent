@@ -13224,7 +13224,11 @@ def parse_bbva_usa_checking_summary_statement(text: str) -> list[dict]:
     for line in lines:
         upper = line.upper()
 
-        if upper == "DEPOSITS AND ADDITIONS":
+        if (
+            upper == "DEPOSITS AND ADDITIONS"
+            or upper == "DEPOSITIS AND ADDITIONS"
+            or ("DEPOSIT" in upper and "ADDITION" in upper)
+        ):
             mode = "income"
             continue
 
