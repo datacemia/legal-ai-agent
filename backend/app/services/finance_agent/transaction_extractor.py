@@ -14913,6 +14913,11 @@ def parse_global_value_date_debit_credit_statement(text: str) -> list[dict]:
         "credit", "deposit", "cash deposit", "cheque deposit",
         "transfer from", "incoming transfer", "inward transfer",
         "funds received", "remittance received", "refund",
+        "loan disbursement", "finance disbursement", "disbursement",
+        "return", "reversal", "cash back",
+        "standing instruction credit", "si credit",
+        "salary transfer", "wps", "mol salary",
+        "transfer fr", "trf from", "from:",
         "إيداع", "ايداع", "تحويل وارد", "راتب",
     ]
 
