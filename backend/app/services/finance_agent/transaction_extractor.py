@@ -17746,6 +17746,7 @@ def parse_standard_date_particulars_debit_credit_balance(text: str) -> list[dict
             "locked_amount": round(signed, 2),
             "_locked_amount": round(signed, 2),
             "locked_type": tx_type,
+            "_balance_locked": True,
             "parser_family": "standard_date_particulars_debit_credit_balance",
         })
 
