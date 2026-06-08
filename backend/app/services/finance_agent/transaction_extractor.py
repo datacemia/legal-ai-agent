@@ -17547,10 +17547,14 @@ def extract_standard_checking_statement_summary(text: str) -> dict:
     ]
 
     withdrawals = 0.0
+    debit_debug = []
     for debit_label in debit_labels:
         value = find_amount([debit_label])
+        debit_debug.append({"label": debit_label, "value": value})
         if value is not None:
             withdrawals += abs(value)
+
+    print("STANDARD_CHECKING_DEBIT_BUCKET_DEBUG", debit_debug)
 
     # Fallback only if no bucketed debit total was found.
     if withdrawals <= 0:
