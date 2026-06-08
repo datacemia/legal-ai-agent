@@ -1071,6 +1071,21 @@ def handle_finance_ai(job: Job, db):
             kept_transactions.append(tx)
             continue
 
+        # Standard worldwide rule:
+        # Structurally locked transactions from trusted parsers must not be
+        # removed only because OCR made their description weak.
+        if (
+            tx.get("type") in {"income", "expense", "transfer"}
+            and tx.get("amount") is not None
+            and (
+                tx.get("locked_amount") is not None
+                or tx.get("_locked_amount") is not None
+                or tx.get("_balance_locked")
+            )
+        ):
+            kept_transactions.append(tx)
+            continue
+
         if amount > 0 and not description_has_min_signal(tx):
             # Standard worldwide rule:
             # A structurally locked transaction from a trusted table parser
