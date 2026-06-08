@@ -17529,6 +17529,18 @@ def extract_standard_checking_statement_summary(text: str) -> dict:
         r"الإيداعات",
     ])
 
+    # Standard account-summary aggregation:
+    # If summary has multiple signed debit buckets, sum them directly.
+    signed_debit_bucket_total = 0.0
+    for bucket_re in [
+        r"ATM\s+Withdrawals\s*&\s*Debits",
+        r"Debit\s+Card\s+Purchases\s*&\s*Debits",
+        r"Withdrawals\s*&\s*Other\s+Debits",
+    ]:
+        m_bucket = re.search(bucket_re + r"\s*-\s*(" + money + r")", raw, flags=re.I)
+        if m_bucket:
+            signed_debit_bucket_total += clean(m_bucket.group(1))
+
     # Standard checking/current-account summary rule:
     # withdrawals = sum of all debit buckets in the account summary.
     # Example buckets: ATM withdrawals, debit-card purchases, other debits.
@@ -17553,7 +17565,9 @@ def extract_standard_checking_statement_summary(text: str) -> dict:
             withdrawals += abs(value)
 
     # Fallback only if no bucketed debit total was found.
-    if withdrawals <= 0:
+    if signed_debit_bucket_total > 0:
+        withdrawals = round(signed_debit_bucket_total, 2)
+    elif withdrawals <= 0:
         withdrawals = find_amount([
             r"Withdrawals",
             r"Debits",
