@@ -12110,6 +12110,12 @@ def parse_month_name_ledger_transactions(text: str, detected_currency: str | Non
 
 
 def extract_global_statement_summary(text: str) -> dict:
+    td_summary = extract_td_account_summary(text)
+    if td_summary:
+        print("TD_ACCOUNT_SUMMARY_EARLY_RETURN", td_summary)
+        print("STATEMENT_SUMMARY_EXTRACTED", td_summary)
+        return td_summary
+
     checking_summary = extract_standard_checking_statement_summary(text)
     if checking_summary:
         print("STANDARD_CHECKING_SUMMARY_EARLY_RETURN", checking_summary)
@@ -17585,4 +17591,72 @@ def parse_standard_date_description_amount_balance(text: str) -> list[dict]:
     })
 
     return rows
+
+
+
+
+def extract_td_account_summary(text: str) -> dict:
+    """
+    TD / standard account summary extractor.
+
+    Structure:
+    ACCOUNT SUMMARY
+    Beginning Balance
+    Deposits
+    Electronic Deposits
+    Electronic Payments
+    Other Withdrawals
+    Ending Balance
+
+    Generic:
+    deposits = Deposits + Electronic Deposits
+    withdrawals = Electronic Payments + Other Withdrawals
+    """
+    import re
+
+    raw = " ".join(str(text or "").replace("\n", " ").split())
+    low = raw.lower()
+
+    if not (
+        "account summary" in low
+        and "beginning balance" in low
+        and "ending balance" in low
+        and "electronic payments" in low
+        and "other withdrawals" in low
+    ):
+        return {}
+
+    money = r"\$?\s*(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d{2})"
+
+    def clean(x):
+        return round(float(str(x).replace("$", "").replace(",", "").strip()), 2)
+
+    def find(label):
+        m = re.search(label + r"\s+(" + money + r")", raw, flags=re.I)
+        if m:
+            return clean(m.group(1))
+        return 0.0
+
+    opening = find(r"Beginning Balance")
+    deposits = find(r"Deposits")
+    electronic_deposits = find(r"Electronics? Deposits")
+    electronic_payments = find(r"Electronic Payments")
+    other_withdrawals = find(r"Other Withdrawals")
+    ending = find(r"Ending Balance")
+
+    total_deposits = round(deposits + electronic_deposits, 2)
+    total_withdrawals = round(electronic_payments + other_withdrawals, 2)
+
+    out = {
+        "opening_balance": opening,
+        "deposits": total_deposits,
+        "withdrawals": total_withdrawals,
+        "ending_balance": ending,
+    }
+
+    # sanity: opening + deposits - withdrawals ~= ending
+    if abs((opening + total_deposits - total_withdrawals) - ending) <= 1.00:
+        return out
+
+    return out
 
