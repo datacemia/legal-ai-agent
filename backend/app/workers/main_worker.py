@@ -2,6 +2,7 @@ import time
 from datetime import UTC, datetime
 
 from app.database import SessionLocal
+from app.models.user import User
 from app.models.job import Job
 
 from app.workers.handlers.study_handler import (
