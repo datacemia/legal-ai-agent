@@ -12110,6 +12110,12 @@ def parse_month_name_ledger_transactions(text: str, detected_currency: str | Non
 
 
 def extract_global_statement_summary(text: str) -> dict:
+    cbq_summary = extract_cbq_running_balance_summary(text)
+    if cbq_summary:
+        print("CBQ_RUNNING_BALANCE_SUMMARY_EARLY_RETURN", cbq_summary)
+        print("STATEMENT_SUMMARY_EXTRACTED", cbq_summary)
+        return cbq_summary
+
     official_summary = extract_official_statement_movement_summary(text)
     if official_summary:
         print("OFFICIAL_MOVEMENT_SUMMARY_EARLY_RETURN", official_summary)
@@ -17095,4 +17101,116 @@ def extract_official_statement_movement_summary(text: str) -> dict:
         "withdrawals": amt(m.group(3)),
         "ending_balance": amt(m.group(4)),
     }
+
+
+
+
+def extract_cbq_running_balance_summary(text: str) -> dict:
+    import re
+    raw = str(text or "")
+    if "BROUGHT FORWARD" not in raw or "Posting Date Transaction Description Transaction Date Debit Credit Balance" not in raw:
+        return {}
+
+    money = r"(?:\d{1,3}(?:,\d{3})+|\d+)\.\d{2}"
+    def amt(x): return round(float(str(x).replace(",", "")), 2)
+
+    open_m = re.search(rf"BROUGHT FORWARD\s+({money})", raw)
+    end_m = re.search(rf"\*\s*CREDIT BALANCE\s+({money})", raw)
+
+    prev = amt(open_m.group(1)) if open_m else None
+    opening = prev
+    deposits = 0.0
+    withdrawals = 0.0
+
+    for line in raw.splitlines():
+        s = " ".join(line.split())
+        m = re.match(rf"^\d{{2}}-[A-Za-z]{{3}}-\d{{2}}\s+({money})\s+({money})$", s)
+        if not m or prev is None:
+            continue
+        movement = amt(m.group(1))
+        bal = amt(m.group(2))
+        delta = round(bal - prev, 2)
+        if abs(abs(delta) - movement) <= 0.05:
+            if delta > 0:
+                deposits += abs(delta)
+            else:
+                withdrawals += abs(delta)
+            prev = bal
+
+    out = {
+        "opening_balance": opening,
+        "deposits": round(deposits, 2),
+        "withdrawals": round(withdrawals, 2),
+    }
+    if end_m:
+        out["ending_balance"] = amt(end_m.group(1))
+    return out
+
+
+def parse_cbq_qatar_posting_debit_credit_statement(text: str) -> list[dict]:
+    import re
+    raw = str(text or "")
+    if "BROUGHT FORWARD" not in raw or "Posting Date Transaction Description Transaction Date Debit Credit Balance" not in raw:
+        return []
+
+    money = r"(?:\d{1,3}(?:,\d{3})+|\d+)\.\d{2}"
+    date_re = r"\d{2}-[A-Za-z]{3}-\d{2}"
+
+    def amt(x): return round(float(str(x).replace(",", "")), 2)
+
+    open_m = re.search(rf"BROUGHT FORWARD\s+({money})", raw)
+    prev = amt(open_m.group(1)) if open_m else None
+    if prev is None:
+        return []
+
+    rows = []
+    pending = []
+
+    for line in raw.splitlines():
+        s = " ".join(line.split())
+        if not s or "Posting Date Transaction Description" in s or "BROUGHT FORWARD" in s:
+            continue
+
+        m = re.match(rf"^({date_re})\s+({money})\s+({money})$", s)
+        if m:
+            tx_date, movement_s, balance_s = m.group(1), m.group(2), m.group(3)
+            movement = amt(movement_s)
+            balance = amt(balance_s)
+            delta = round(balance - prev, 2)
+
+            if abs(abs(delta) - movement) <= 0.05:
+                signed = delta
+                tx_type = "income" if signed > 0 else "expense"
+                desc = " ".join(pending).strip()[:500] or "CBQ transaction"
+                rows.append({
+                    "date": tx_date,
+                    "description": desc,
+                    "amount": round(signed, 2),
+                    "signed_amount": round(signed, 2),
+                    "type": tx_type,
+                    "currency": "QAR",
+                    "balance": balance,
+                    "_balance": balance,
+                    "locked_amount": round(signed, 2),
+                    "_locked_amount": round(signed, 2),
+                    "locked_type": tx_type,
+                    "_balance_locked": True,
+                    "parser_family": "cbq_qatar_posting_debit_credit",
+                })
+                prev = balance
+
+            pending = []
+            continue
+
+        if not s.startswith("* CREDIT BALANCE"):
+            pending.append(s)
+
+    print("CBQ_QATAR_POSTING_DEBIT_CREDIT_EXTRACTED", {
+        "transactions": len(rows),
+        "income": sum(1 for x in rows if x.get("type") == "income"),
+        "expenses": sum(1 for x in rows if x.get("type") == "expense"),
+        "income_total": round(sum(abs(x["amount"]) for x in rows if x.get("type") == "income"), 2),
+        "expense_total": round(sum(abs(x["amount"]) for x in rows if x.get("type") == "expense"), 2),
+    })
+    return rows
 
