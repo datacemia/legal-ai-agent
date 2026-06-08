@@ -36,6 +36,35 @@ from app.services.finance_agent.alerts_engine import (
 from app.workers.progress import update_job_progress
 
 
+def apply_standard_own_account_transfer_guard(transactions: list[dict]) -> list[dict]:
+    for tx in transactions or []:
+        desc = str(tx.get("description") or "").lower()
+        typ = str(tx.get("type") or "").lower()
+
+        is_transfer_label = typ in {"transfer", "transfer in", "transfer out"} or "transfer in" in desc or "transfer out" in desc
+        is_own_account = (
+            "mercury checking" in desc
+            or "own account" in desc
+            or "between accounts" in desc
+            or "internal transfer" in desc
+            or "transfer from checking" in desc
+            or "transfer to checking" in desc
+        )
+
+        if is_transfer_label and is_own_account:
+            tx["type"] = "transfer"
+            tx["is_internal_transfer"] = True
+            tx["excluded_from_financial_kpis"] = True
+            tx["exclude_from_income"] = True
+            tx["exclude_from_expense"] = True
+            tx["exclude_from_score"] = True
+            tx["exclude_from_savings"] = True
+            tx["exclude_from_cashflow"] = True
+            tx["excluded_reason"] = "standard_own_account_transfer"
+
+    return transactions
+
+
 def get_job_input(job: Job) -> dict:
     """
     Safely read job input data.
@@ -658,6 +687,7 @@ def handle_finance_ai(job: Job, db):
 
     transactions = extract_transactions(text)
     transactions = append_fx_fee_transactions(transactions)
+    transactions = apply_standard_own_account_transfer_guard(transactions)
     transactions = restore_semantically_valid_kpi_rows(transactions)
 
     # International FR/EN/AR rule:
