@@ -1406,6 +1406,13 @@ def handle_finance_ai(job: Job, db):
             2,
         )
 
+        def _money_to_float(value):
+            import re
+            s = str(value or "").strip()
+            s = re.sub(r"^([+-])\\s+", r"\\1", s)
+            s = s.replace("$", "").replace(",", "").replace(" ", "")
+            return float(s)
+
         statement_deposits_float = _money_to_float(statement_deposits) if statement_deposits is not None else None
         statement_withdrawals_float = _money_to_float(statement_withdrawals) if statement_withdrawals is not None else None
 
