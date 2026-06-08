@@ -17445,6 +17445,9 @@ def extract_credit_card_statement_summary(text: str) -> dict:
         r"Nouveau solde",
     ])
 
+    if signed_debit_bucket_total > 0:
+        withdrawals = round(signed_debit_bucket_total, 2)
+
     out = {}
     if opening is not None:
         out["opening_balance"] = opening
@@ -17461,7 +17464,6 @@ def extract_credit_card_statement_summary(text: str) -> dict:
 
 
 def extract_standard_checking_statement_summary(text: str) -> dict:
-    print("STANDARD_CHECKING_SUMMARY_VERSION", "v2-bucket-aggregation-active")
     """
     Standard checking/current account summary extractor.
 
@@ -17566,8 +17568,6 @@ def extract_standard_checking_statement_summary(text: str) -> dict:
             withdrawals += abs(value)
 
     # Fallback only if no bucketed debit total was found.
-    print("STANDARD_CHECKING_SIGNED_BUCKET_TOTAL", signed_debit_bucket_total)
-
     if signed_debit_bucket_total > 0:
         withdrawals = round(signed_debit_bucket_total, 2)
     elif withdrawals <= 0:
