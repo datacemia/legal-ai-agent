@@ -15387,6 +15387,7 @@ def extract_transactions(text: str) -> list[dict]:
         ("cih_fr_ar_date_operation_debit_credit", parse_cih_fr_ar_date_operation_debit_credit_statement, 3),
         ("fr_date_nature_valeur_debit_credit", parse_fr_date_nature_valeur_debit_credit_statement, 2),
         ("global_reference_debit_credit_value", parse_global_reference_debit_credit_value_statement, 3),
+        ("sectioned_balance_history_statement", parse_sectioned_balance_history_statement, 3),
         ("standard_date_particulars_debit_credit_balance", parse_standard_date_particulars_debit_credit_balance, 5),
         ("standard_date_description_amount_balance", parse_standard_date_description_amount_balance, 5),
         ("global_value_date_debit_credit", parse_global_value_date_debit_credit_statement, 2),
