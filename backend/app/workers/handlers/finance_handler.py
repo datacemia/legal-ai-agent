@@ -1086,6 +1086,17 @@ def handle_finance_ai(job: Job, db):
             kept_transactions.append(tx)
             continue
 
+        if abs(float(tx.get("amount") or 0)) == 303.0:
+            print("MIN_DESC_303_AUDIT", {
+                "amount": tx.get("amount"),
+                "type": tx.get("type"),
+                "locked_amount": tx.get("locked_amount"),
+                "_locked_amount": tx.get("_locked_amount"),
+                "_balance_locked": tx.get("_balance_locked"),
+                "parser_family": tx.get("parser_family"),
+                "desc": str(tx.get("description") or tx.get("desc") or "")[:160],
+            })
+
         if amount > 0 and not description_has_min_signal(tx):
             # Standard worldwide rule:
             # A structurally locked transaction from a trusted table parser
