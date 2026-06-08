@@ -15376,6 +15376,7 @@ def extract_transactions(text: str) -> list[dict]:
         ("cih_fr_ar_date_operation_debit_credit", parse_cih_fr_ar_date_operation_debit_credit_statement, 3),
         ("fr_date_nature_valeur_debit_credit", parse_fr_date_nature_valeur_debit_credit_statement, 2),
         ("global_reference_debit_credit_value", parse_global_reference_debit_credit_value_statement, 3),
+        ("standard_date_description_amount_balance", parse_standard_date_description_amount_balance, 5),
         ("global_value_date_debit_credit", parse_global_value_date_debit_credit_statement, 2),
         ("global_date_boundary_ledger", parse_global_date_boundary_ledger, 10),
         ("global_multiline_debit_credit_balance", parse_global_multiline_debit_credit_balance_statement, 10),
@@ -17495,4 +17496,93 @@ def extract_standard_checking_statement_summary(text: str) -> dict:
     if len(out) >= 3:
         return out
     return {}
+
+
+
+
+def parse_standard_date_description_amount_balance(text: str) -> list[dict]:
+    """
+    Standard parser for checking statements:
+    DATE DESCRIPTION AMOUNT BALANCE
+
+    Generic:
+    - signed amount already has +/- sign
+    - positive => income
+    - negative => expense
+    - works for Chase-like layouts and similar banks
+    """
+    import re
+
+    raw = str(text or "")
+    low = raw.lower()
+
+    if not (
+        "transaction detail" in low
+        and "date" in low
+        and "description" in low
+        and "amount" in low
+        and "balance" in low
+    ):
+        return []
+
+    money = r"-?(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d{1,2})"
+    date = r"\d{1,2}/\d{1,2}"
+
+    lines = [" ".join(x.split()) for x in raw.splitlines() if x.strip()]
+    rows = []
+    pending = ""
+
+    def parse_money(x):
+        return round(float(str(x).replace(",", "")), 2)
+
+    for line in lines:
+        if "Beginning Balance" in line or "Ending Balance" in line:
+            continue
+        if "DATE DESCRIPTION AMOUNT BALANCE" in line:
+            continue
+
+        m = re.match(rf"^({date})\s+(.+?)\s+({money})\s+({money})$", line)
+        if not m:
+            # multiline description continuation
+            if re.match(rf"^({date})\s+", line):
+                pending = line
+            elif pending:
+                pending = pending + " " + line
+            continue
+
+        tx_date = m.group(1)
+        desc = m.group(2).strip()
+        amount = parse_money(m.group(3))
+        balance = parse_money(m.group(4))
+
+        if amount == 0:
+            continue
+
+        tx_type = "income" if amount > 0 else "expense"
+
+        rows.append({
+            "date": tx_date,
+            "description": desc[:500],
+            "amount": amount,
+            "signed_amount": amount,
+            "type": tx_type,
+            "currency": "USD",
+            "balance": balance,
+            "_balance": balance,
+            "locked_amount": amount,
+            "_locked_amount": amount,
+            "locked_type": tx_type,
+            "_balance_locked": True,
+            "parser_family": "standard_date_description_amount_balance",
+        })
+
+    print("STANDARD_DATE_DESCRIPTION_AMOUNT_BALANCE_EXTRACTED", {
+        "transactions": len(rows),
+        "income": sum(1 for x in rows if x.get("type") == "income"),
+        "expenses": sum(1 for x in rows if x.get("type") == "expense"),
+        "income_total": round(sum(abs(x["amount"]) for x in rows if x.get("type") == "income"), 2),
+        "expense_total": round(sum(abs(x["amount"]) for x in rows if x.get("type") == "expense"), 2),
+    })
+
+    return rows
 
