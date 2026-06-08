@@ -1097,6 +1097,9 @@ def handle_finance_ai(job: Job, db):
                 "desc": str(tx.get("description") or tx.get("desc") or "")[:160],
             })
 
+        if abs(float(tx.get("amount") or 0)) == 303.0:
+            print("TX_303_FULL_OBJECT", tx)
+
         if amount > 0 and not description_has_min_signal(tx):
             # Standard worldwide rule:
             # A structurally locked transaction from a trusted table parser
