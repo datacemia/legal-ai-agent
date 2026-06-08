@@ -7426,6 +7426,12 @@ def extract_standard_sectioned_statement_transactions(
     ]
 
     if not any(marker in normalized for marker in structure_markers):
+        print("STANDARD_SECTIONED_SKIPPED_NO_STRUCTURE", {
+            "has_deposits_other_credits": "deposits & other credits" in normalized,
+            "has_atm_withdrawals_debits": "atm withdrawals & debits" in normalized,
+            "has_debit_card_purchases": "debit card purchases & debits" in normalized,
+            "has_withdrawals_other_debits": "withdrawals & other debits" in normalized,
+        })
         return []
 
     lines = [
