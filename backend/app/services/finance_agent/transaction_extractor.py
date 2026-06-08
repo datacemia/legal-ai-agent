@@ -12110,6 +12110,12 @@ def parse_month_name_ledger_transactions(text: str, detected_currency: str | Non
 
 
 def extract_global_statement_summary(text: str) -> dict:
+    cc_summary = extract_credit_card_statement_summary(text)
+    if cc_summary:
+        print("CREDIT_CARD_SUMMARY_EARLY_RETURN", cc_summary)
+        print("STATEMENT_SUMMARY_EXTRACTED", cc_summary)
+        return cc_summary
+
     cbq_summary = extract_cbq_running_balance_summary(text)
     if cbq_summary:
         print("CBQ_RUNNING_BALANCE_SUMMARY_EARLY_RETURN", cbq_summary)
@@ -17281,4 +17287,102 @@ def parse_cbq_qatar_posting_debit_credit_statement(text: str) -> list[dict]:
         "expense_total": round(sum(abs(x["amount"]) for x in rows if x.get("type") == "expense"), 2),
     })
     return rows
+
+
+
+
+def extract_credit_card_statement_summary(text: str) -> dict:
+    """
+    Standard credit-card statement summary.
+
+    EN/FR/AR compatible by structure:
+    - Previous Balance / Solde précédent
+    - Payments and Other Credits / Paiements et crédits
+    - Purchases and Adjustments / Achats et ajustements
+    - New Balance Total / Nouveau solde
+
+    For KPI:
+    - payments/credits are income/credits
+    - purchases/fees/interest are expenses/debits
+    """
+    import re
+
+    raw = " ".join(str(text or "").replace("\n", " ").split())
+    low = raw.lower()
+
+    has_credit_card_structure = (
+        ("previous balance" in low or "solde précédent" in low or "solde precedent" in low)
+        and (
+            "payments and other credits" in low
+            or "payments & other credits" in low
+            or "paiements et crédits" in low
+            or "paiements et credits" in low
+        )
+        and (
+            "purchases and adjustments" in low
+            or "achats et ajustements" in low
+            or "purchases" in low
+        )
+        and ("new balance" in low or "nouveau solde" in low)
+    )
+
+    if not has_credit_card_structure:
+        return {}
+
+    money = r"-?\$?\s*(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d{2})"
+
+    def find_amount(labels):
+        for label in labels:
+            m = re.search(label + r"\s*(" + money + r")", raw, flags=re.I)
+            if m:
+                return round(abs(float(m.group(1).replace("$", "").replace(",", "").strip())), 2)
+        return None
+
+    opening = find_amount([
+        r"Previous Balance",
+        r"Solde précédent",
+        r"Solde precedent",
+    ])
+
+    credits = find_amount([
+        r"Payments and Other Credits",
+        r"Payments\s*&\s*Other Credits",
+        r"Paiements et crédits",
+        r"Paiements et credits",
+    ])
+
+    purchases = find_amount([
+        r"Purchases and Adjustments",
+        r"Achats et ajustements",
+    ])
+
+    fees = find_amount([
+        r"Fees Charged",
+        r"Frais facturés",
+        r"Frais factures",
+    ]) or 0.0
+
+    interest = find_amount([
+        r"Interest Charged",
+        r"Intérêts facturés",
+        r"Interets factures",
+    ]) or 0.0
+
+    ending = find_amount([
+        r"New Balance Total",
+        r"New Balance",
+        r"Nouveau solde",
+    ])
+
+    out = {}
+    if opening is not None:
+        out["opening_balance"] = opening
+    if credits is not None:
+        out["deposits"] = credits
+    if purchases is not None:
+        out["withdrawals"] = round(purchases + fees + interest, 2)
+    if ending is not None:
+        out["ending_balance"] = ending
+
+    return out
 
