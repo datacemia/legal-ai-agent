@@ -17108,7 +17108,14 @@ def extract_official_statement_movement_summary(text: str) -> dict:
 def extract_cbq_running_balance_summary(text: str) -> dict:
     import re
     raw = str(text or "")
-    if "BROUGHT FORWARD" not in raw or "Posting Date Transaction Description Transaction Date Debit Credit Balance" not in raw:
+    raw_upper = raw.upper()
+    if not (
+        "BROUGHT FORWARD" in raw_upper
+        and "POSTING DATE" in raw_upper
+        and "DEBIT" in raw_upper
+        and "CREDIT" in raw_upper
+        and "BALANCE" in raw_upper
+    ):
         return {}
 
     money = r"(?:\d{1,3}(?:,\d{3})+|\d+)\.\d{2}"
@@ -17150,7 +17157,14 @@ def extract_cbq_running_balance_summary(text: str) -> dict:
 def parse_cbq_qatar_posting_debit_credit_statement(text: str) -> list[dict]:
     import re
     raw = str(text or "")
-    if "BROUGHT FORWARD" not in raw or "Posting Date Transaction Description Transaction Date Debit Credit Balance" not in raw:
+    raw_upper = raw.upper()
+    if not (
+        "BROUGHT FORWARD" in raw_upper
+        and "POSTING DATE" in raw_upper
+        and "DEBIT" in raw_upper
+        and "CREDIT" in raw_upper
+        and "BALANCE" in raw_upper
+    ):
         return []
 
     money = r"(?:\d{1,3}(?:,\d{3})+|\d+)\.\d{2}"
