@@ -11042,10 +11042,10 @@ def parse_date_amount_description_ledger(text: str) -> list[dict]:
     })
 
     print("DATE_AMOUNT_DESCRIPTION_OFFICIAL_RECONCILIATION", {
-            "official_expense": float(summary_m.group("expense").replace(",", "")),
+            "official_expense": parse_amount(summary_m.group("expense")),
             "extracted_expense": round(sum(abs(tx["amount"]) for tx in transactions), 2),
-            "expense_delta": round(float(summary_m.group("expense").replace(",", "")) - sum(abs(tx["amount"]) for tx in transactions), 2),
-            "official_income": float(summary_m.group("income").replace(",", "")),
+            "expense_delta": round(parse_amount(summary_m.group("expense")) - sum(abs(tx["amount"]) for tx in transactions), 2),
+            "official_income": parse_amount(summary_m.group("income")),
             "extracted_income": 0,
         })
 
