@@ -14908,9 +14908,12 @@ def parse_global_value_date_debit_credit_statement(text: str) -> list[dict]:
     )
 
     income_words = [
-        "vir sepa","virement","salary","payroll",
-        "credit","transfer from",
-        "إيداع","ايداع","تحويل وارد","راتب",
+        "vir sepa", "virement reçu", "virement recu",
+        "salary", "payroll", "wages",
+        "credit", "deposit", "cash deposit", "cheque deposit",
+        "transfer from", "incoming transfer", "inward transfer",
+        "funds received", "remittance received", "refund",
+        "إيداع", "ايداع", "تحويل وارد", "راتب",
     ]
 
     expense_words = [
@@ -14943,10 +14946,19 @@ def parse_global_value_date_debit_credit_statement(text: str) -> list[dict]:
 
         tx_type = None
 
-        if any(w in l for w in income_words):
-            tx_type = "income"
-        elif any(w in l for w in expense_words):
+        # Expense-specific phrases must win before generic transfer/credit words.
+        if any(w in l for w in expense_words):
             tx_type = "expense"
+        elif any(w in l for w in income_words):
+            tx_type = "income"
+        elif (
+            "transfer" in l
+            and "transfer to" not in l
+            and "withdrawal" not in l
+            and "debit" not in l
+            and "purchase" not in l
+        ):
+            tx_type = "income"
 
         if not tx_type:
             continue
