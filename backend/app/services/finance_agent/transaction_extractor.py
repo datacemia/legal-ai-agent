@@ -12148,6 +12148,11 @@ def extract_global_statement_summary(text: str) -> dict:
                 "withdrawals": abs(parse_amount(_m.group(1))),
                 "deposits": abs(parse_amount(_m.group(2))),
             }
+            official_summary = extract_official_statement_movement_summary(text)
+            if official_summary:
+                summary.update(official_summary)
+                print("OFFICIAL_MOVEMENT_SUMMARY_OVERRIDE", summary)
+
             print("STATEMENT_SUMMARY_EXTRACTED", official)
             return official
 
