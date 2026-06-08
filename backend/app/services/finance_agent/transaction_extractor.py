@@ -15382,6 +15382,7 @@ def extract_transactions(text: str) -> list[dict]:
         ("cih_fr_ar_date_operation_debit_credit", parse_cih_fr_ar_date_operation_debit_credit_statement, 3),
         ("fr_date_nature_valeur_debit_credit", parse_fr_date_nature_valeur_debit_credit_statement, 2),
         ("global_reference_debit_credit_value", parse_global_reference_debit_credit_value_statement, 3),
+        ("standard_date_particulars_debit_credit_balance", parse_standard_date_particulars_debit_credit_balance, 5),
         ("standard_date_description_amount_balance", parse_standard_date_description_amount_balance, 5),
         ("global_value_date_debit_credit", parse_global_value_date_debit_credit_statement, 2),
         ("global_date_boundary_ledger", parse_global_date_boundary_ledger, 10),
@@ -17669,3 +17670,92 @@ def extract_td_account_summary(text: str) -> dict:
         out["ending_balance"] = ending
 
     return out if len(out) >= 3 else {}
+
+
+
+def parse_standard_date_particulars_debit_credit_balance(text: str) -> list[dict]:
+    """
+    Standard bank statement parser:
+    Date | Particulars | Debit | Credit | Balance
+
+    Works for Bankwest-like layouts and similar banks.
+    """
+    import re
+
+    raw = str(text or "")
+    low = raw.lower()
+
+    if not (
+        "date particulars debit credit balance" in low
+        or ("date" in low and "particulars" in low and "debit" in low and "credit" in low and "balance" in low)
+    ):
+        return []
+
+    money = r"\$?\s*(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d{2})"
+    date_re = r"\d{2}\s+[A-Z]{3}\s+\d{2}"
+
+    lines = [" ".join(x.split()) for x in raw.splitlines() if x.strip()]
+    rows = []
+    pending_date = None
+    pending_desc = []
+
+    def clean(x):
+        return round(float(str(x).replace("$", "").replace(",", "").strip()), 2)
+
+    for line in lines:
+        if re.search(r"OPENING BALANCE|BROUGHT FORWARD|CARRIED FORWARD|CLOSING BALANCE|TOTAL DEBITS|TOTAL CREDITS", line, re.I):
+            continue
+
+        m = re.match(rf"^({date_re})\s+(.+?)\s+({money})(?:\s+({money}))?$", line)
+        if not m:
+            if pending_desc and not re.match(rf"^{date_re}\b", line):
+                pending_desc.append(line)
+            continue
+
+        tx_date = m.group(1)
+        body = m.group(2).strip()
+        amount1 = clean(m.group(3))
+        balance = clean(m.group(4)) if m.group(4) else None
+
+        # In Bankwest OCR, debit rows often have amount on first line
+        # and balance on continuation line. Credit rows usually have amount+balance.
+        desc = body
+        tx_type = None
+        amount = amount1
+
+        if balance is not None:
+            # If description looks like income, treat amount1 as credit.
+            if re.search(r"(salary|credit|deposit|refund|received|transfer from|إيداع|راتب|تحويل وارد)", desc, re.I):
+                tx_type = "income"
+            else:
+                tx_type = "expense"
+        else:
+            tx_type = "expense"
+
+        signed = amount if tx_type == "income" else -amount
+
+        rows.append({
+            "date": tx_date,
+            "description": desc[:500],
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": tx_type,
+            "currency": "AUD",
+            "balance": balance,
+            "_balance": balance,
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": tx_type,
+            "parser_family": "standard_date_particulars_debit_credit_balance",
+        })
+
+    print("STANDARD_DATE_PARTICULARS_DCB_EXTRACTED", {
+        "transactions": len(rows),
+        "income": sum(1 for x in rows if x.get("type") == "income"),
+        "expenses": sum(1 for x in rows if x.get("type") == "expense"),
+        "income_total": round(sum(abs(x["amount"]) for x in rows if x.get("type") == "income"), 2),
+        "expense_total": round(sum(abs(x["amount"]) for x in rows if x.get("type") == "expense"), 2),
+    })
+
+    return rows
+
