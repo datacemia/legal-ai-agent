@@ -17599,28 +17599,18 @@ def extract_td_account_summary(text: str) -> dict:
     """
     TD / standard account summary extractor.
 
-    Structure:
-    ACCOUNT SUMMARY
-    Beginning Balance
-    Deposits
-    Electronic Deposits
-    Electronic Payments
-    Other Withdrawals
-    Ending Balance
-
-    Generic:
-    deposits = Deposits + Electronic Deposits
-    withdrawals = Electronic Payments + Other Withdrawals
+    Reads the ACCOUNT SUMMARY block only.
+    Prevents mixing later check-image pages or old statement sections.
     """
     import re
 
-    raw = " ".join(str(text or "").replace("\n", " ").split())
+    raw_full = str(text or "")
+    raw = " ".join(raw_full.replace("\n", " ").split())
     low = raw.lower()
 
     if not (
         "account summary" in low
         and "beginning balance" in low
-        and "ending balance" in low
         and "electronic payments" in low
         and "other withdrawals" in low
     ):
@@ -17631,32 +17621,41 @@ def extract_td_account_summary(text: str) -> dict:
     def clean(x):
         return round(float(str(x).replace("$", "").replace(",", "").strip()), 2)
 
-    def find(label):
-        m = re.search(label + r"\s+(" + money + r")", raw, flags=re.I)
+    # Limit extraction from ACCOUNT SUMMARY until DAILY ACCOUNT ACTIVITY.
+    m_block = re.search(r"ACCOUNT SUMMARY(.+?)(?:DAILY ACCOUNT ACTIVITY|How to Balance your Account|Page 2)", raw, flags=re.I)
+    block = m_block.group(1) if m_block else raw
+
+    def find(label, source=None):
+        source = source or block
+        m = re.search(label + r"\s+(" + money + r")", source, flags=re.I)
         if m:
             return clean(m.group(1))
-        return 0.0
+        return None
 
     opening = find(r"Beginning Balance")
-    deposits = find(r"Deposits")
-    electronic_deposits = find(r"Electronics? Deposits")
-    electronic_payments = find(r"Electronic Payments")
-    other_withdrawals = find(r"Other Withdrawals")
+    deposits = find(r"\bDeposits\b") or 0.0
+    electronic_deposits = find(r"Electronics? Deposits") or 0.0
+    electronic_payments = find(r"Electronic Payments") or 0.0
+    other_withdrawals = find(r"Other Withdrawals") or 0.0
+
     ending = find(r"Ending Balance")
+    if ending is None:
+        # TD sometimes prints the ending balance on the next "How to Balance" page.
+        m_end = re.search(r"Your ending balance shown on this\s+statement is:\s*.*?Ending\s+Balance\s+(" + money + r")", raw, flags=re.I)
+        if m_end:
+            ending = clean(m_end.group(1))
 
     total_deposits = round(deposits + electronic_deposits, 2)
     total_withdrawals = round(electronic_payments + other_withdrawals, 2)
 
-    out = {
-        "opening_balance": opening,
-        "deposits": total_deposits,
-        "withdrawals": total_withdrawals,
-        "ending_balance": ending,
-    }
+    out = {}
+    if opening is not None:
+        out["opening_balance"] = opening
+    if total_deposits:
+        out["deposits"] = total_deposits
+    if total_withdrawals:
+        out["withdrawals"] = total_withdrawals
+    if ending is not None:
+        out["ending_balance"] = ending
 
-    # sanity: opening + deposits - withdrawals ~= ending
-    if abs((opening + total_deposits - total_withdrawals) - ending) <= 1.00:
-        return out
-
-    return out
-
+    return out if len(out) >= 3 else {}
