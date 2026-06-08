@@ -17185,7 +17185,7 @@ def parse_cbq_qatar_posting_debit_credit_statement(text: str) -> list[dict]:
         if not s or "Posting Date Transaction Description" in s or "BROUGHT FORWARD" in s:
             continue
 
-        m = re.match(rf"^({date_re})\s+({money})\s+({money})$", s)
+        m = re.search(rf"({date_re})\s+({money})\s+({money})\s*$", s)
         if m:
             tx_date, movement_s, balance_s = m.group(1), m.group(2), m.group(3)
             movement = amt(movement_s)
