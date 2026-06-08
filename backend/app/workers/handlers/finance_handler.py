@@ -1034,7 +1034,14 @@ def handle_finance_ai(job: Job, db):
     for tx in transactions:
         amount = abs(float(tx.get("amount") or 0))
 
-        if is_global_non_transaction_statement_row(tx):
+        if (
+            is_global_non_transaction_statement_row(tx)
+            and not (
+                tx.get("locked_amount") is not None
+                or tx.get("_locked_amount") is not None
+                or tx.get("_balance_locked")
+            )
+        ):
             tx["excluded_from_financial_kpis"] = True
             tx["excluded_reason"] = "global_non_transaction_statement_row"
             weak_desc_excluded.append({
