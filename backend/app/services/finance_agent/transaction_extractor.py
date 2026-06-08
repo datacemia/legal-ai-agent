@@ -10000,6 +10000,24 @@ def parse_sectioned_deposit_withdrawal_statement(text: str) -> list[dict]:
 
     if wd_i >= 0:
         withdrawal_end = bal_i if bal_i > wd_i else len(lines)
+
+        # Standard multi-account statement rule:
+        # stop the current checking/current-account parser at the next account group.
+        for j in range(wd_i + 1, withdrawal_end):
+            low_line = lines[j].lower()
+            if any(marker in low_line for marker in [
+                "savings accounts",
+                "saving accounts",
+                "credit card accounts",
+                "loan accounts",
+                "mortgage accounts",
+                "investment accounts",
+                "account summary interest summary",
+                "summary of your accounts",
+            ]):
+                withdrawal_end = j
+                break
+
         parse_tx_lines(lines[wd_i + 1:withdrawal_end], "expense")
 
     if bal_i >= 0:
