@@ -2029,6 +2029,15 @@ def handle_finance_ai(job: Job, db):
 
     # Hotfix: KPI_AUDIT must reflect parsed kpi_transactions,
     # not stale forecast values.
+    income_total = round(
+        sum(abs(float(tx.get("amount") or 0)) for tx in kpi_transactions if tx.get("type") == "income"),
+        2,
+    )
+    expense_total = round(
+        sum(abs(float(tx.get("amount") or 0)) for tx in kpi_transactions if tx.get("type") == "expense"),
+        2,
+    )
+
     forecast["observed_income"] = income_total
     forecast["observed_expenses"] = expense_total
     forecast["observed_net_cashflow"] = round(income_total - expense_total, 2)
