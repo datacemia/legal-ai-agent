@@ -13273,6 +13273,7 @@ def parse_bbva_usa_checking_summary_statement(text: str) -> list[dict]:
             "locked_amount": round(signed, 2),
             "_locked_amount": round(signed, 2),
             "locked_type": mode,
+            "_balance_locked": True,
             "parser_family": "bbva_usa_checking_summary",
         })
 
