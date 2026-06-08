@@ -12110,6 +12110,12 @@ def parse_month_name_ledger_transactions(text: str, detected_currency: str | Non
 
 
 def extract_global_statement_summary(text: str) -> dict:
+    official_summary = extract_official_statement_movement_summary(text)
+    if official_summary:
+        print("OFFICIAL_MOVEMENT_SUMMARY_EARLY_RETURN", official_summary)
+        print("STATEMENT_SUMMARY_EXTRACTED", official_summary)
+        return official_summary
+
     """Global FR/EN/AR statement summary extractor.
     Additive only: does not affect transaction extraction.
     """
