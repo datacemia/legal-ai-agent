@@ -1406,28 +1406,31 @@ def handle_finance_ai(job: Job, db):
             2,
         )
 
-        if statement_deposits is not None:
+        statement_deposits_float = _money_to_float(statement_deposits) if statement_deposits is not None else None
+        statement_withdrawals_float = _money_to_float(statement_withdrawals) if statement_withdrawals is not None else None
+
+        if statement_deposits_float is not None:
             print("STATEMENT_INCOME_RECONCILIATION", {
-                "statement": round(abs(float(statement_deposits)), 2),
+                "statement": round(abs(statement_deposits_float), 2),
                 "ledger": ledger_income,
-                "gap": round(abs(float(statement_deposits)) - ledger_income, 2),
+                "gap": round(abs(statement_deposits_float) - ledger_income, 2),
             })
 
-        if statement_withdrawals is not None:
+        if statement_withdrawals_float is not None:
             print("STATEMENT_EXPENSE_RECONCILIATION", {
-                "statement": round(abs(float(statement_withdrawals)), 2),
+                "statement": round(abs(statement_withdrawals_float), 2),
                 "ledger": ledger_expense,
-                "gap": round(abs(float(statement_withdrawals)) - ledger_expense, 2),
+                "gap": round(abs(statement_withdrawals_float) - ledger_expense, 2),
             })
 
         income_gap = None
         expense_gap = None
 
-        if statement_deposits is not None:
-            income_gap = abs(round(abs(float(statement_deposits)) - ledger_income, 2))
+        if statement_deposits_float is not None:
+            income_gap = abs(round(abs(statement_deposits_float) - ledger_income, 2))
 
-        if statement_withdrawals is not None:
-            expense_gap = abs(round(abs(float(statement_withdrawals)) - ledger_expense, 2))
+        if statement_withdrawals_float is not None:
+            expense_gap = abs(round(abs(statement_withdrawals_float) - ledger_expense, 2))
 
         status = "PERFECT_RECONCILIATION"
 
