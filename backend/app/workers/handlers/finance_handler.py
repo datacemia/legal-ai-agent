@@ -1061,6 +1061,17 @@ def handle_finance_ai(job: Job, db):
             continue
 
         if amount > 0 and not description_has_min_signal(tx):
+            # Standard worldwide rule:
+            # A structurally locked transaction from a trusted table parser
+            # must not be removed only because OCR made its description weak.
+            if (
+                tx.get("_balance_locked")
+                or tx.get("locked_amount") is not None
+                or tx.get("_locked_amount") is not None
+            ):
+                kept_transactions.append(tx)
+                continue
+
             tx["excluded_from_financial_kpis"] = True
             tx["excluded_reason"] = "min_description_signal_guard"
             weak_desc_excluded.append({
