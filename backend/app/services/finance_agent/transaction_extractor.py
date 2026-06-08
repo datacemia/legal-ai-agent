@@ -11462,7 +11462,7 @@ def parse_debit_credit_balance_ledger(text: str) -> list[dict]:
         if m_credits:
             official_credits = float(m_credits.group(1))
         if m_debits:
-            official_debits = float(m_debits.group(1))
+            official_debits = parse_amount(m_debits.group(1))
 
     # Amount stream fallback: choose amounts after summary by matching row count*3 if possible.
     # Safer for Bancorp image OCR: derive by description keywords and known row amount order from visual table.
@@ -17356,7 +17356,7 @@ def extract_credit_card_statement_summary(text: str) -> dict:
         for label in labels:
             m = re.search(label + r"\s*(" + money + r")", raw, flags=re.I)
             if m:
-                return round(abs(float(m.group(1).replace("$", "").replace(",", "").strip())), 2)
+                return round(abs(parse_amount(m.group(1))), 2)
         return None
 
     opening = find_amount([
