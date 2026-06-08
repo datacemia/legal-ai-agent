@@ -16942,3 +16942,91 @@ def debug_print_finance_transactions_for_audit(transactions: list[dict]) -> list
     print("FINANCE_TX_DEBUG_END")
     return transactions
 
+
+
+
+def extract_snb_arabic_statement_summary(text: str) -> dict:
+    """
+    SNB / AlAhli Arabic statement summary fallback.
+
+    Fixes the case where the generic summary reads الرصيد السابق
+    as both deposits and withdrawals.
+
+    Uses transaction ledger rows:
+    - ايداع رواتب / PAYROLL = deposit
+    - purchase, transfer out, SADAD, loan installment, fees/VAT = withdrawals
+    - الرصيد السابق is opening balance, not income
+    """
+    import re
+
+    raw = str(text or "")
+    compact = raw.replace("\u200f", "").replace("\u200e", "")
+
+    if not (
+        "SA73100000" in compact
+        or "THE SAUDI NATIONAL BANK" in compact
+        or "ﺍﻻﻫﻠﻲ" in compact
+        or "الأهلي" in compact
+        or "SNB" in compact
+    ):
+        return {}
+
+    money = r"(?:\d{1,3}(?:,\d{3})+|\d+)(?:[.,]\d{2})"
+
+    def amount(x):
+        return float(str(x).replace(",", ""))
+
+    opening_balance = None
+    m_open = re.search(rf"(?:الرصيد السابق|ﺍﻟﺮﺻﻴﺪ\s*ﺍﻟﺴﺎﺑﻖ|ﺍﻟﺴﺎﺑﻖ)\s*({money})|({money})\s*(?:الرصيد السابق|ﺍﻟﺮﺻﻴﺪ\s*ﺍﻟﺴﺎﺑﻖ|ﺍﻟﺴﺎﺑﻖ)", compact)
+    if m_open:
+        opening_balance = amount(m_open.group(1) or m_open.group(2))
+
+    deposits = 0.0
+    withdrawals = 0.0
+
+    for line in compact.splitlines():
+        s = " ".join(line.split())
+        if not s:
+            continue
+
+        nums = re.findall(money, s)
+        if len(nums) < 2:
+            continue
+
+        movement = amount(nums[-2])
+
+        is_header_noise = any(x in s for x in [
+            "STATEMENT DATE",
+            "Account Number",
+            "Account Currency",
+            "Date Transaction Type",
+            "الرصيد السابق",
+            "ﺍﻟﺮﺻﻴﺪ",
+            "Page ",
+        ])
+
+        if is_header_noise:
+            continue
+
+        is_deposit = any(x in s for x in [
+            "ايداع رواتب",
+            "ﺭﻭﺍﺗﺐ ﺍﻳﺪﺍﻉ",
+            "PAYROLL",
+            "SAMASARI",
+        ])
+
+        if is_deposit:
+            deposits += movement
+        else:
+            withdrawals += movement
+
+    result = {
+        "deposits": round(deposits, 2),
+        "withdrawals": round(withdrawals, 2),
+    }
+
+    if opening_balance is not None:
+        result["opening_balance"] = round(opening_balance, 2)
+
+    return result
+
