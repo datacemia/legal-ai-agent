@@ -11970,7 +11970,6 @@ def parse_month_name_ledger_transactions(text: str, detected_currency: str | Non
     Lines without a date inherit the previous transaction date.
     """
     import re
-    from datetime import datetime
 
     raw = normalize_arabic_digits(str(text or ""))
 
@@ -12181,8 +12180,8 @@ def extract_global_statement_summary(text: str) -> dict:
             }
             official_summary = extract_official_statement_movement_summary(text)
             if official_summary:
-                summary.update(official_summary)
-                print("OFFICIAL_MOVEMENT_SUMMARY_OVERRIDE", summary)
+                official.update(official_summary)
+                print("OFFICIAL_MOVEMENT_SUMMARY_OVERRIDE", official)
 
             print("STATEMENT_SUMMARY_EXTRACTED", official)
             return official
