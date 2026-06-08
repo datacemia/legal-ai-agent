@@ -17037,3 +17037,50 @@ def extract_snb_arabic_statement_summary(text: str) -> dict:
 
     return result
 
+
+
+
+def extract_official_statement_movement_summary(text: str) -> dict:
+    """
+    Standard movement-summary extractor.
+
+    Works for statements that expose:
+    STARTING BALANCE TOTAL CREDITS TOTAL DEBITS END BALANCE
+    7,808.58 + 30,839.84 - 38,647.75 = 0.67
+
+    This is bank-neutral: it uses official movement totals when present.
+    """
+    import re
+
+    raw = " ".join(str(text or "").replace("\n", " ").split())
+
+    if not all(k in raw.upper() for k in [
+        "STARTING BALANCE",
+        "TOTAL CREDITS",
+        "TOTAL DEBITS",
+        "END BALANCE",
+    ]):
+        return {}
+
+    money = r"(?:\d{1,3}(?:,\d{3})+|\d+)(?:[.,]\d{2})"
+
+    m = re.search(
+        rf"STARTING BALANCE\s+TOTAL CREDITS\s+TOTAL DEBITS\s+END BALANCE.*?"
+        rf"({money})\s*\+\s*({money})\s*-\s*({money})\s*=\s*({money})",
+        raw,
+        flags=re.IGNORECASE,
+    )
+
+    if not m:
+        return {}
+
+    def amt(x):
+        return round(float(str(x).replace(",", "")), 2)
+
+    return {
+        "opening_balance": amt(m.group(1)),
+        "deposits": amt(m.group(2)),
+        "withdrawals": amt(m.group(3)),
+        "ending_balance": amt(m.group(4)),
+    }
+
