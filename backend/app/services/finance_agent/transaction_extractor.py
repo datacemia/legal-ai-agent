@@ -17445,6 +17445,13 @@ def extract_credit_card_statement_summary(text: str) -> dict:
         r"Nouveau solde",
     ])
 
+    print("STANDARD_CHECKING_SUMMARY_VALUES_DEBUG", {
+        "opening": opening,
+        "deposits": deposits,
+        "withdrawals": withdrawals,
+        "ending": ending,
+    })
+
     out = {}
     if opening is not None:
         out["opening_balance"] = opening
