@@ -14943,43 +14943,27 @@ def parse_global_value_date_debit_credit_statement(text: str) -> list[dict]:
             continue
 
         try:
-            amount_values = [parse_amount(x) for x in amounts]
+            amount = parse_amount(amounts[-1])
         except Exception:
             continue
 
         l = ln.lower()
+
         tx_type = None
-        amount = amount_values[-1]
 
-        # Standard FR/EN/AR column-aware logic:
-        # If a row exposes both debit and credit numeric columns, prefer columns
-        # over description keywords. This is bank-neutral and works for similar
-        # Value Date / Debit / Credit layouts.
-        if len(amount_values) >= 2:
-            possible_debit = abs(float(amount_values[-2] or 0))
-            possible_credit = abs(float(amount_values[-1] or 0))
-
-            if possible_credit > 0 and possible_debit == 0:
-                tx_type = "income"
-                amount = possible_credit
-            elif possible_debit > 0 and possible_credit == 0:
-                tx_type = "expense"
-                amount = possible_debit
-
-        if not tx_type:
-            # Expense-specific phrases must win before generic transfer/credit words.
-            if any(w in l for w in expense_words):
-                tx_type = "expense"
-            elif any(w in l for w in income_words):
-                tx_type = "income"
-            elif (
-                "transfer" in l
-                and "transfer to" not in l
-                and "withdrawal" not in l
-                and "debit" not in l
-                and "purchase" not in l
-            ):
-                tx_type = "income"
+        # Expense-specific phrases must win before generic transfer/credit words.
+        if any(w in l for w in expense_words):
+            tx_type = "expense"
+        elif any(w in l for w in income_words):
+            tx_type = "income"
+        elif (
+            "transfer" in l
+            and "transfer to" not in l
+            and "withdrawal" not in l
+            and "debit" not in l
+            and "purchase" not in l
+        ):
+            tx_type = "income"
 
         if not tx_type:
             continue
