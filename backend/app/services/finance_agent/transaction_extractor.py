@@ -15305,6 +15305,7 @@ def extract_transactions(text: str) -> list[dict]:
         ("fr_date_nature_valeur_debit_credit", parse_fr_date_nature_valeur_debit_credit_statement, 2),
         ("global_reference_debit_credit_value", parse_global_reference_debit_credit_value_statement, 3),
         ("global_value_date_debit_credit", parse_global_value_date_debit_credit_statement, 2),
+        ("global_date_boundary_ledger", parse_global_date_boundary_ledger, 10),
         ("global_multiline_debit_credit_balance", parse_global_multiline_debit_credit_balance_statement, 10),
     ]:
         try:
