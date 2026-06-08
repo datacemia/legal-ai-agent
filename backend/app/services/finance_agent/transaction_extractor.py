@@ -17529,15 +17529,37 @@ def extract_standard_checking_statement_summary(text: str) -> dict:
         r"الإيداعات",
     ])
 
-    withdrawals = find_amount([
+    # Standard checking/current-account summary rule:
+    # withdrawals = sum of all debit buckets in the account summary.
+    # Example buckets: ATM withdrawals, debit-card purchases, other debits.
+    debit_labels = [
+        r"ATM\s+Withdrawals\s*&\s*Debits",
+        r"ATM\s+Withdrawals\s+and\s+Debits",
         r"ATM\s*&\s*Debit Card Withdrawals",
-        r"Withdrawals",
+        r"Debit\s+Card\s+Purchases\s*&\s*Debits",
+        r"Debit\s+Card\s+Purchases\s+and\s+Debits",
+        r"Withdrawals\s*&\s*Other\s+Debits",
+        r"Withdrawals\s+and\s+Other\s+Debits",
         r"Money out",
         r"Total Debits",
-        r"Debits",
         r"Débits",
         r"المدفوعات",
-    ])
+    ]
+
+    withdrawals = 0.0
+    for debit_label in debit_labels:
+        value = find_amount([debit_label])
+        if value is not None:
+            withdrawals += abs(value)
+
+    # Fallback only if no bucketed debit total was found.
+    if withdrawals <= 0:
+        withdrawals = find_amount([
+            r"Withdrawals",
+            r"Debits",
+        ])
+    else:
+        withdrawals = round(withdrawals, 2)
 
     ending = find_amount([
         r"Ending Balance",
