@@ -17451,7 +17451,7 @@ def extract_standard_checking_statement_summary(text: str) -> dict:
     money = r"-?\$?\£?\€?\s*(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d{2})"
 
     def clean(x):
-        return round(abs(float(str(x).replace("$", "").replace("£", "").replace("€", "").replace(",", "").strip())), 2)
+        return round(abs(parse_amount(x)), 2)
 
     def find_amount(labels):
         for label in labels:
