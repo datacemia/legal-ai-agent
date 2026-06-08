@@ -10342,7 +10342,8 @@ def parse_sectioned_balance_history_statement(text: str) -> list[dict]:
                 "locked_amount": round(signed, 2),
                 "_locked_amount": round(signed, 2),
                 "locked_type": section_type,
-                "parser_family": "sectioned_balance_history_statement",
+                "_balance_locked": True,
+            "parser_family": "sectioned_balance_history_statement",
             })
 
     print("SECTIONED_BALANCE_HISTORY_SECTIONS_DEBUG", {
