@@ -12110,6 +12110,12 @@ def parse_month_name_ledger_transactions(text: str, detected_currency: str | Non
 
 
 def extract_global_statement_summary(text: str) -> dict:
+    checking_summary = extract_standard_checking_statement_summary(text)
+    if checking_summary:
+        print("STANDARD_CHECKING_SUMMARY_EARLY_RETURN", checking_summary)
+        print("STATEMENT_SUMMARY_EXTRACTED", checking_summary)
+        return checking_summary
+
     cc_summary = extract_credit_card_statement_summary(text)
     if cc_summary:
         print("CREDIT_CARD_SUMMARY_EARLY_RETURN", cc_summary)
@@ -17385,4 +17391,108 @@ def extract_credit_card_statement_summary(text: str) -> dict:
         out["ending_balance"] = ending
 
     return out
+
+
+
+
+def extract_standard_checking_statement_summary(text: str) -> dict:
+    """
+    Standard checking/current account summary extractor.
+
+    Works for statement summaries such as:
+    Beginning Balance
+    Deposits and Additions
+    ATM & Debit Card Withdrawals
+    Ending Balance
+
+    Generic principle:
+    - opening/start/beginning balance => opening_balance
+    - deposits/money in/credits/additions => deposits
+    - withdrawals/money out/debits/payments => withdrawals
+    - ending/end/closing balance => ending_balance
+    """
+    import re
+
+    raw = " ".join(str(text or "").replace("\n", " ").split())
+    low = raw.lower()
+
+    if not (
+        ("beginning balance" in low or "start balance" in low or "opening balance" in low)
+        and ("ending balance" in low or "end balance" in low or "closing balance" in low)
+        and (
+            "deposits and additions" in low
+            or "money in" in low
+            or "total credits" in low
+            or "credit" in low
+        )
+        and (
+            "withdrawals" in low
+            or "money out" in low
+            or "total debits" in low
+            or "debit" in low
+        )
+    ):
+        return {}
+
+    money = r"-?\$?\£?\€?\s*(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d{2})"
+
+    def clean(x):
+        return round(abs(float(str(x).replace("$", "").replace("£", "").replace("€", "").replace(",", "").strip())), 2)
+
+    def find_amount(labels):
+        for label in labels:
+            m = re.search(label + r"\s+(" + money + r")", raw, flags=re.I)
+            if m:
+                return clean(m.group(1))
+        return None
+
+    opening = find_amount([
+        r"Beginning Balance",
+        r"Start balance",
+        r"Opening balance",
+        r"Solde initial",
+        r"رصيد بداية",
+    ])
+
+    deposits = find_amount([
+        r"Deposits and Additions",
+        r"Money in",
+        r"Total Credits",
+        r"Credits",
+        r"Crédits",
+        r"Credits?",
+        r"الإيداعات",
+    ])
+
+    withdrawals = find_amount([
+        r"ATM\s*&\s*Debit Card Withdrawals",
+        r"Withdrawals",
+        r"Money out",
+        r"Total Debits",
+        r"Debits",
+        r"Débits",
+        r"المدفوعات",
+    ])
+
+    ending = find_amount([
+        r"Ending Balance",
+        r"End balance",
+        r"Closing balance",
+        r"Solde final",
+        r"رصيد نهاية",
+    ])
+
+    out = {}
+    if opening is not None:
+        out["opening_balance"] = opening
+    if deposits is not None:
+        out["deposits"] = deposits
+    if withdrawals is not None:
+        out["withdrawals"] = withdrawals
+    if ending is not None:
+        out["ending_balance"] = ending
+
+    if len(out) >= 3:
+        return out
+    return {}
 
