@@ -1098,6 +1098,14 @@ def handle_finance_ai(job: Job, db):
                 kept_transactions.append(tx)
                 continue
 
+            if (
+                tx.get("locked_amount") is not None
+                or tx.get("_locked_amount") is not None
+                or tx.get("_balance_locked")
+            ):
+                kept_transactions.append(tx)
+                continue
+
             tx["excluded_from_financial_kpis"] = True
             tx["excluded_reason"] = "min_description_signal_guard"
             weak_desc_excluded.append({
