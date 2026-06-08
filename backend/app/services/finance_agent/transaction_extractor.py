@@ -9819,13 +9819,13 @@ def is_sectioned_deposit_withdrawal_statement(text: str) -> bool:
         return False
 
     has_deposit_section = any(x in t for x in [
-        "deposits and additions", "deposits", "additions",
+        "deposits & other credits", "deposits and other credits", "deposits and additions", "deposits", "additions",
         "dépôts", "depots", "crédits", "credits",
         "الإيداعات", "ايداعات", "إيداعات", "دائن"
     ])
 
     has_withdrawal_section = any(x in t for x in [
-        "electronic withdrawals", "withdrawals", "debits",
+        "atm withdrawals & debits", "atm withdrawals and debits", "debit card purchases & debits", "debit card purchases and debits", "withdrawals & other debits", "withdrawals and other debits", "electronic withdrawals", "withdrawals", "debits",
         "retraits", "débits", "debits", "prélèvements", "prelevements",
         "السحوبات", "سحوبات", "خصم", "مدين"
     ])
