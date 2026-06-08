@@ -659,20 +659,6 @@ def handle_finance_ai(job: Job, db):
     transactions = extract_transactions(text)
     
 
-    print("FINANCE_WORKER_TX_DEBUG_START", {"count": len(transactions or [])})
-    for i, tx in enumerate(transactions or []):
-        print("FINANCE_WORKER_TX_DEBUG", {
-            "i": i,
-            "date": tx.get("date"),
-            "description": tx.get("description"),
-            "type": tx.get("type"),
-            "amount": tx.get("amount"),
-            "signed_amount": tx.get("signed_amount"),
-            "excluded_from_financial_kpis": tx.get("excluded_from_financial_kpis"),
-            "is_internal_transfer": tx.get("is_internal_transfer"),
-            "excluded_reason": tx.get("excluded_reason"),
-        })
-    print("FINANCE_WORKER_TX_DEBUG_END")
 transactions = append_fx_fee_transactions(transactions)
     transactions = restore_semantically_valid_kpi_rows(transactions)
 
