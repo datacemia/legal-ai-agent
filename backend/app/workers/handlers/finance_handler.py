@@ -1049,10 +1049,13 @@ def handle_finance_ai(job: Job, db):
         # DATE + TYPE + AMOUNT + NET AMOUNT.
         # Do not drop them only because OCR lost/shortened description text.
         if (
-            tx.get("parser_family") == "typed_transaction_table_statement"
-            and tx.get("type") in {"income", "expense", "transfer"}
+            tx.get("type") in {"income", "expense", "transfer"}
             and tx.get("amount") is not None
-            and tx.get("locked_amount") is not None
+            and (
+                tx.get("locked_amount") is not None
+                or tx.get("_locked_amount") is not None
+                or tx.get("_balance_locked")
+            )
         ):
             kept_transactions.append(tx)
             continue
