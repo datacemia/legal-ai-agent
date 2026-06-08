@@ -17537,7 +17537,7 @@ def extract_standard_checking_statement_summary(text: str) -> dict:
         r"Debit\s+Card\s+Purchases\s*&\s*Debits",
         r"Withdrawals\s*&\s*Other\s+Debits",
     ]:
-        m_bucket = re.search(bucket_re + r"\s*-\s*(" + money + r")", raw, flags=re.I)
+        m_bucket = re.search(bucket_re + r"\s+(" + money + r")", raw, flags=re.I)
         if m_bucket:
             signed_debit_bucket_total += clean(m_bucket.group(1))
 
