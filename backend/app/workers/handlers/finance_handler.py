@@ -1659,7 +1659,14 @@ def handle_finance_ai(job: Job, db):
             "page 3 of",
         ])
 
-        if is_metadata:
+        if (
+            is_metadata
+            and not (
+                tx.get("locked_amount") is not None
+                or tx.get("_locked_amount") is not None
+                or tx.get("_balance_locked")
+            )
+        ):
             tx["excluded_from_financial_kpis"] = True
             tx["excluded_reason"] = "global_statement_metadata_guard"
             metadata_excluded.append({
