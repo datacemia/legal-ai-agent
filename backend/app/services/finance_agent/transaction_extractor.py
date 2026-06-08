@@ -15257,10 +15257,25 @@ def _choose_finance_candidate(candidates: list[dict]) -> dict | None:
     if not valid:
         return None
 
+    official_total_cap = 1000000
+    official_tx_cap = 250000
+
+    try:
+        official_total_cap = max(
+            official_total_cap,
+            float(candidates[0].get("income_total") or 0) + float(candidates[0].get("expense_total") or 0),
+        )
+    except Exception:
+        pass
+
+    max_official_total = max(float(c.get("ledger_total") or 0) for c in valid) if valid else 1000000
+    dynamic_ledger_cap = max(1000000, max_official_total * 2)
+    dynamic_tx_cap = max(250000, max_official_total)
+
     non_absurd = [
         c for c in valid
-        if float(c.get("max_tx_abs") or 0) <= 250000
-        and float(c.get("ledger_total") or 0) <= 1000000
+        if float(c.get("max_tx_abs") or 0) <= dynamic_tx_cap
+        and float(c.get("ledger_total") or 0) <= dynamic_ledger_cap
     ]
 
     if non_absurd:
