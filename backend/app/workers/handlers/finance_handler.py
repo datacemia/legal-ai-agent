@@ -1408,13 +1408,38 @@ def handle_finance_ai(job: Job, db):
 
         def _money_to_float(value):
             import re
-            s = str(value or "").strip()
-            s = re.sub(r"^([+-])\\s+", r"\\1", s)
-            s = s.replace("$", "").replace(",", "").replace(" ", "")
-            return float(s)
 
-        statement_deposits_float = _money_to_float(statement_deposits) if statement_deposits is not None else None
-        statement_withdrawals_float = _money_to_float(statement_withdrawals) if statement_withdrawals is not None else None
+            if value is None:
+                return None
+
+            s = str(value).strip()
+
+            # Production-safe guard:
+            # finance summaries may return "", "$", "+", "-", or OCR-empty values.
+            # These must never crash the worker.
+            if s in {"", "$", "+", "-", "+$", "-$"}:
+                return 0.0
+
+            s = re.sub(r"^([+-])\\s+", r"\\1", s)
+            s = (
+                s.replace("$", "")
+                 .replace("€", "")
+                 .replace("£", "")
+                 .replace(",", "")
+                 .replace(" ", "")
+                 .strip()
+            )
+
+            if s in {"", "+", "-"}:
+                return 0.0
+
+            try:
+                return float(s)
+            except (TypeError, ValueError):
+                return 0.0
+
+        statement_deposits_float = _money_to_float(statement_deposits)
+        statement_withdrawals_float = _money_to_float(statement_withdrawals)
 
         if statement_deposits_float is not None:
             print("STATEMENT_INCOME_RECONCILIATION", {
