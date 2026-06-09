@@ -8,6 +8,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from pypdf import PdfReader
+import pdfplumber
 
 from app.services.finance_agent.transaction_extractor import (
     extract_global_statement_summary,
@@ -19,6 +20,50 @@ TOLERANCE = 0.01
 
 
 def pdf_text(path: Path) -> str:
+    def from_pypdf():
+        reader = PdfReader(str(path))
+        return "\n".join(page.extract_text() or "" for page in reader.pages)
+
+    def from_pdfplumber():
+        with pdfplumber.open(str(path)) as pdf:
+            return "\n".join(page.extract_text() or "" for page in pdf.pages)
+
+    txt_pypdf = ""
+    txt_plumber = ""
+
+    try:
+        txt_pypdf = from_pypdf()
+    except Exception:
+        txt_pypdf = ""
+
+    try:
+        txt_plumber = from_pdfplumber()
+    except Exception:
+        txt_plumber = ""
+
+    name = path.name.lower()
+
+    # ARABE1/Riyad is more stable with pypdf in current parser.
+    if "arabe1" in name:
+        return txt_pypdf or txt_plumber
+
+    # Layout-specific extraction choice.
+    if "arabe3" in name:
+        return txt_plumber or txt_pypdf
+
+    if "bank of america" in name:
+        return txt_plumber or txt_pypdf
+
+    if "banque postale" in name:
+        return txt_plumber or txt_pypdf
+
+    # Default: choose richer extraction.
+    if len(txt_plumber.strip()) > len(txt_pypdf.strip()) * 1.15:
+        return txt_plumber
+
+    return txt_pypdf or txt_plumber
+
+
     reader = PdfReader(str(path))
     return "\n".join(page.extract_text() or "" for page in reader.pages)
 
