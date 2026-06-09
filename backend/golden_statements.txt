@@ -1,0 +1,117 @@
+🟢 GOLDEN (42)
+1. ARABE1
+2. ARABE2
+3. ARABE3
+4. ARABE4
+5. arabe5
+
+6. BANK CHAABI
+7. bank of america
+8. BANCORP
+
+9. BANQUE POPULAIRE FRANCE
+10. BANQUE POSTALE (2)
+
+11. CIC
+12. Chase
+13. credit mutuel
+
+14. EJJAMI11
+15. EJJAMI2
+
+16. g2
+17. G3
+
+18. mercury
+
+19. Riyad Bank
+20. Dubai Islamic Bank
+
+21. GENERAL1 (CIH Bank Maroc)
+22. HABITAT (Banque de l'Habitat Tunisie)
+23. LLC (LCL France)
+
+24. N26
+25. Revolut France
+
+26. OMAR1 (Société Générale)
+27. OMAR2 (Société Générale)
+
+28. BNP 1
+29. BMCE
+30. Caisse d'Épargne
+
+31. Barclays
+32. Commercial Bank Qatar
+33. Saudi National Bank (SNB)
+
+34. Bankwest Australia
+35. SunTrust Bank
+36. Commerce Bank
+37. BB&T / Truist
+
+38. TCF National Bank
+39. Bambu
+
+40. Emirates NBD
+41. Afriland First Bank
+42. Islami Bank Bangladesh
+🟡 VERIFIED (7)
+1. Dakar (Coris Bank Sénégal)
+2. Al Hilal Bank
+3. BBVA USA (TemplateLAB)
+4. soc general (template)
+5. KeyBank (John Doe template)
+6. ACME Business Checking
+7. BBVA USA (duplicate)
+Pourquoi VERIFIED et pas GOLDEN ?
+Dakar
+→ OCR insuffisant pour démontrer la réconciliation complète
+
+Al Hilal
+→ résumé final / totaux non identifiés
+
+BBVA USA
+→ document de démonstration
+
+soc general
+→ template avec données fictives
+
+KeyBank
+→ "John Doe" = template
+
+ACME
+→ faux relevé de démonstration
+
+BBVA duplicate
+→ même problème
+🔴 NON GOLDEN (1)
+1. city bank
+Motif
+PDF composite
+
+Résumé :
+Octobre/Novembre 2022
+
+Transactions :
+Juin 2020
+
+Les pages ne correspondent pas
+à la même période bancaire.
+
+Donc :
+
+SUMMARY réel      ✅
+CANDIDATE réel    ❌
+RECONCILIATION    ❌
+KPI               ❌
+État global
+🟢 GOLDEN      : 42
+🟡 VERIFIED    : 7
+🔴 NON GOLDEN  : 1
+Total audités
+50 relevés
+Taux GOLDEN
+42 / 50
+=
+84.0 %
