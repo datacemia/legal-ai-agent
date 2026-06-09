@@ -52,6 +52,17 @@ def apply_standard_own_account_transfer_guard(transactions: list[dict]) -> list[
         )
 
         if is_transfer_label and is_own_account:
+            # Option B / standard reconciliation rule:
+            # If the row is locked by a trusted statement parser, keep it in KPI.
+            # This preserves official statement deposits/withdrawals such as
+            # Mercury Transfer In/Out while still excluding weak internal transfers.
+            if (
+                tx.get("_balance_locked")
+                or tx.get("locked_amount") is not None
+                or tx.get("_locked_amount") is not None
+            ):
+                continue
+
             tx["type"] = "transfer"
             tx["is_internal_transfer"] = True
             tx["excluded_from_financial_kpis"] = True
