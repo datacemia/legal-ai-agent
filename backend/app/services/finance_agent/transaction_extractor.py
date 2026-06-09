@@ -18233,17 +18233,7 @@ def parser_anb_arabe3_v13(text):
             balance = parse_amount(m.group("balance"))
             amount_token = m.group("amount")
 
-            # OCR/card merchant pattern: "-5037*AL DREES" means amount -50 + merchant category 37*
-            tail = line[m.start("amount"): m.start("amount") + 12]
-            if re.match(r"-?\d{3,}7\*", tail):
-                sign = -1 if amount_token.startswith("-") else 1
-                digits = re.sub(r"\D", "", amount_token)
-                if len(digits) >= 3 and digits.endswith("37"):
-                    amount = sign * float(digits[:-2])
-                else:
-                    amount = parse_amount(amount_token)
-            else:
-                amount = parse_amount(amount_token)
+            amount = parse_amount(amount_token)
         except Exception:
             continue
 
@@ -18287,7 +18277,6 @@ def parser_anb_arabe3_v13(text):
             txs.append(tx)
 
     # Generic running-balance OCR repair:
-    # If OCR glued a merchant/category code to the amount, e.g. -50 + 37* -> -5037,
     # repair by comparing previous balance and current balance.
     txs = sorted(txs, key=lambda t: (t.get("date", ""), t.get("balance", 0)))
     repaired = []
@@ -18313,7 +18302,6 @@ def parser_anb_arabe3_v13(text):
                         tx["_locked_amount"] = round(candidate, 2)
                         tx["type"] = "income" if candidate > 0 else "expense"
                         tx["locked_type"] = tx["type"]
-                        tx["parser_repair"] = "running_balance_suffix_code"
                         amt = candidate
 
         repaired.append(tx)
