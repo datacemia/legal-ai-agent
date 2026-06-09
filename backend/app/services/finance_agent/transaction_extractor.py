@@ -13777,31 +13777,47 @@ def parse_bbva_usa_checking_summary_statement(text: str) -> list[dict]:
         r"^(?P<date>\d{1,2}/\d{1,2})\s+(?P<desc>.+?)\s+\$?\s*(?P<amount>\d{1,3}(?:,\d{3})*\.\d{2})\s*$"
     )
 
+    ym = re.search(r"\b(20\d{2})\b", raw)
+    statement_year = int(ym.group(1)) if ym else detect_document_year(raw)
+
     def iso_from_mmdd(tok: str) -> str | None:
         try:
             m, d = str(tok).split("/")[:2]
-            year = 2023 if int(m) >= 8 else 2024
-            return f"{year:04d}-{int(m):02d}-{int(d):02d}"
+            return f"{statement_year:04d}-{int(m):02d}-{int(d):02d}"
         except Exception:
             return None
 
     txs = []
     mode = None
 
+    repaired_lines = []
+    for _line in lines:
+        _line = re.sub(
+            r"(\$?\s*\d{1,3}(?:,\d{3})*\.\d{2})(?=(?:0?[1-9]|1[0-2])/\d{1,2}\s+)",
+            r"\1\n",
+            _line,
+        )
+        _line = re.sub(r"(?<!^)(?=\b(?:0?[1-9]|1[0-2])/\d{1,2}\s+)", "\n", _line)
+        _line = re.sub(r"(?=Total\s+(?:Deposits|Electronic))", "\n", _line, flags=re.I)
+        repaired_lines.extend([" ".join(x.split()) for x in _line.splitlines() if " ".join(x.split())])
+    lines = repaired_lines
+
     for line in lines:
         upper = line.upper()
 
-        if (
-            upper == "DEPOSITS AND ADDITIONS"
-            or upper == "DEPOSITIS AND ADDITIONS"
-            or ("DEPOSIT" in upper and "ADDITION" in upper)
-        ):
+        if "DEPOSIT" in upper and "ADDITION" in upper:
             mode = "income"
-            continue
+            line = re.sub(r"^.*?DATE\s+DESCRIPTIONS\s+AMOUNT", "", line, flags=re.I).strip()
+            if not line:
+                continue
+            upper = line.upper()
 
-        if upper in ("ELECTRONIC WITHDRAWALS", "ELECTRONICS WITHDRAWALS"):
+        if "ELECTRONIC WITHDRAWALS" in upper or "ELECTRONICS WITHDRAWALS" in upper:
             mode = "expense"
-            continue
+            line = re.sub(r"^.*?DATE\s+DESCRIPTIONS\s+AMOUNT", "", line, flags=re.I).strip()
+            if not line:
+                continue
+            upper = line.upper()
 
         if upper in ("ENDING BALANCE",) or upper.startswith("NC "):
             mode = None
@@ -13822,6 +13838,10 @@ def parse_bbva_usa_checking_summary_statement(text: str) -> list[dict]:
 
         iso = iso_from_mmdd(r.group("date"))
         if not iso:
+            continue
+
+        desc_clean = clean_db_text(r.group("desc")).strip()
+        if desc_clean == "$" or "ENDING BALANCE" in desc_clean.upper():
             continue
 
         amount_abs = abs(parse_amount(r.group("amount")))
@@ -18485,6 +18505,23 @@ def _v11_totals(txs):
 def parser_riyad_arabe1(text):
     import re
     raw = normalize_arabic_digits(str(text or ""))
+
+    # Generic Riyad/Arabic reversed-OCR fallback:
+    # summary marker "تاعاديا" = reversed Arabic deposits.
+    if "Total Deposits" not in raw and "تاعاديا" in raw:
+        year = detect_document_year(raw)
+        dm = re.search(r"(20\d{2})[/-](\d{2})[/-](\d{2})", raw)
+        date = f"{dm.group(1)}-{dm.group(2)}-{dm.group(3)}" if dm else f"{year}-01-01"
+
+        for _line in [" ".join(x.split()) for x in raw.splitlines() if " ".join(x.split())]:
+            if "تاعاديا" not in _line:
+                continue
+            _amounts = re.findall(r"(?<!\d)(\d{1,3}(?:,\d{3})*\.\d{2})(?!\d)", _line)
+            if _amounts:
+                amount = abs(parse_amount(_amounts[0]))
+                tx = _v11_tx(date, "Arabic reversed OCR deposit", amount, "SAR", "parser_riyad_arabe1_reversed_ar")
+                return [tx] if tx else []
+
     if "Total Deposits" not in raw or "Total Withdrawals" not in raw:
         return []
     lines = [" ".join(x.split()) for x in raw.splitlines() if " ".join(x.split())]
@@ -18821,6 +18858,76 @@ def parser_anb_arabe3_v13(text):
     return txs
 
 
+
+def parser_us_fintech_deposit_column_statement(text):
+    import re
+    raw = str(text or "")
+    low = raw.lower()
+
+    if not (
+        "balance summary" in low
+        and "transaction detail" in low
+        and "deposits" in low
+        and "withdrawals" in low
+        and "direct deposit" in low
+    ):
+        return []
+
+    money_re = re.compile(r"[-+]?\$?\s*\d{1,3}(?:,\d{3})*\.\d{2}")
+    date_re = re.compile(r"\b(\d{2})/(\d{2})/(\d{4})\b")
+
+    summary_match = re.search(r"\+\$?\s*(\d{1,3}(?:,\d{3})*\.\d{2})", raw)
+    expected_total = abs(parse_amount(summary_match.group(1))) if summary_match else None
+
+    dates = []
+    for line in [" ".join(x.split()) for x in raw.splitlines() if " ".join(x.split())]:
+        if "direct deposit" in line.lower() or "incoming credit" in line.lower():
+            m = date_re.search(line)
+            if m:
+                mm, dd, yyyy = m.groups()
+                dates.append(f"{yyyy}-{mm}-{dd}")
+
+    deposit_amounts = []
+    low_raw = raw.lower()
+    dep_pos = low_raw.rfind("deposits")
+    wd_pos = low_raw.find("withdrawals balance", dep_pos)
+    if dep_pos != -1 and wd_pos != -1 and wd_pos > dep_pos:
+        body = raw[dep_pos:wd_pos]
+        vals = [abs(parse_amount(x)) for x in money_re.findall(body)]
+        deposit_amounts = [v for v in vals if v > 0]
+
+    if expected_total and deposit_amounts:
+        if abs(round(sum(deposit_amounts), 2) - expected_total) > 0.01:
+            return []
+
+    # OCR column layout can put the first transaction date on the line before
+    # "Direct Deposit - Incoming Credit". If amounts are more than detected dates,
+    # prepend the first standalone date in the transaction detail zone.
+    if len(deposit_amounts) > len(dates):
+        all_dates = []
+        for _m in date_re.finditer(raw):
+            mm, dd, yyyy = _m.groups()
+            all_dates.append(f"{yyyy}-{mm}-{dd}")
+        for _d in all_dates:
+            if _d not in dates:
+                dates.insert(0, _d)
+                break
+
+    txs = []
+    for i, amt in enumerate(deposit_amounts[:len(dates)]):
+        tx = _v11_tx(
+            dates[i],
+            "Direct Deposit - Incoming Credit",
+            amt,
+            "USD",
+            "parser_us_fintech_deposit_column_statement",
+        )
+        if tx:
+            tx["category_hint"] = "us_fintech_direct_deposit"
+            txs.append(tx)
+
+    return txs
+
 def _v11_missing_layout_candidates(text):
     parsers = [
         parser_riyad_arabe1,
@@ -18830,6 +18937,7 @@ def _v11_missing_layout_candidates(text):
         parser_bank_of_america_credit_card,
         parser_banque_postale_multiline,
         parser_bank_chaabi,
+        parser_us_fintech_deposit_column_statement,
     ]
     best = []
     audit = []
@@ -18968,6 +19076,38 @@ def extract_global_statement_summary(text: str) -> dict:
     original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
 
     raw = normalize_arabic_digits(str(text or ""))
+
+    # US_FINTECH_BALANCE_SUMMARY_FALLBACK
+    if (
+        "balance summary" in raw.lower()
+        and "deposits and credits" in raw.lower()
+        and "withdrawals and debits" in raw.lower()
+    ):
+        m_dep = re.search(r"\+\s*\$\s*([\d,]+\.\d{2})", raw, re.I)
+        m_wd = re.search(r"-\s*\$\s*([\d,]+\.\d{2})", raw, re.I)
+        if m_dep or m_wd:
+            dep = round(abs(parse_amount(m_dep.group(1))), 2) if m_dep else 0.0
+            wd = round(abs(parse_amount(m_wd.group(1))), 2) if m_wd else 0.0
+            return {
+                "deposits": dep,
+                "withdrawals": wd,
+                "opening_balance": 0.0,
+                "ending_balance": round(dep - wd, 2),
+            }
+
+
+    # AR_REVERSED_OCR_SUMMARY_FALLBACK
+    raw_ar_summary = normalize_arabic_digits(str(text or ""))
+    if is_arabic_text(raw_ar_summary) and "تاعاديا" in raw_ar_summary:
+        for _line in [" ".join(x.split()) for x in raw_ar_summary.splitlines() if " ".join(x.split())]:
+            if "تاعاديا" not in _line:
+                continue
+            _amounts = re.findall(r"(?<!\d)(\d{1,3}(?:,\d{3})*\.\d{2})(?!\d)", _line)
+            if _amounts:
+                return {
+                    "deposits": round(abs(parse_amount(_amounts[0])), 2),
+                    "withdrawals": 0.0,
+                }
 
     # Generic ANB Arabic summary parser.
     # Layout:
