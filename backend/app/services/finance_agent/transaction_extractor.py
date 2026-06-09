@@ -18218,7 +18218,7 @@ def parser_anb_arabe3_v13(text):
     date_re = re.compile(r"20\d{2}-\d{2}-\d{2}")
     money_pair_re = re.compile(
         r"(?P<balance>-?\d{1,3}(?:,\d{3})*(?:\.\d{1,2})?)\s+"
-        r"(?P<amount>-?\d{1,3}(?:,\d{3})*(?:\.\d{1,2})?)(?:\s|$)"
+        r"(?P<amount>-?\d{1,3}(?:,\d{3})*(?:\.\d{1,2})?)(?=\s|$|:|：|،|\.1:|[^\d.,-])"
     )
 
     txs = []
@@ -18231,7 +18231,19 @@ def parser_anb_arabe3_v13(text):
 
         try:
             balance = parse_amount(m.group("balance"))
-            amount = parse_amount(m.group("amount"))
+            amount_token = m.group("amount")
+
+            # OCR/card merchant pattern: "-5037*AL DREES" means amount -50 + merchant category 37*
+            tail = line[m.start("amount"): m.start("amount") + 12]
+            if re.match(r"-?\d{3,}7\*", tail):
+                sign = -1 if amount_token.startswith("-") else 1
+                digits = re.sub(r"\D", "", amount_token)
+                if len(digits) >= 3 and digits.endswith("37"):
+                    amount = sign * float(digits[:-2])
+                else:
+                    amount = parse_amount(amount_token)
+            else:
+                amount = parse_amount(amount_token)
         except Exception:
             continue
 
@@ -18274,6 +18286,42 @@ def parser_anb_arabe3_v13(text):
             tx["balance"] = balance
             txs.append(tx)
 
+    # Generic running-balance OCR repair:
+    # If OCR glued a merchant/category code to the amount, e.g. -50 + 37* -> -5037,
+    # repair by comparing previous balance and current balance.
+    txs = sorted(txs, key=lambda t: (t.get("date", ""), t.get("balance", 0)))
+    repaired = []
+    prev_balance = None
+
+    for tx in txs:
+        bal = tx.get("balance")
+        amt = float(tx.get("amount") or 0)
+
+        if prev_balance is not None and bal is not None:
+            expected_delta = round(float(bal) - float(prev_balance), 2)
+
+            if abs(expected_delta - amt) > 0.01:
+                raw_abs = str(abs(int(amt))) if float(amt).is_integer() else ""
+                if raw_abs.endswith("37"):
+                    candidate = float(raw_abs[:-2] or 0)
+                    candidate = -candidate if amt < 0 else candidate
+
+                    if abs(expected_delta - candidate) <= 0.01:
+                        tx["amount"] = round(candidate, 2)
+                        tx["signed_amount"] = round(candidate, 2)
+                        tx["locked_amount"] = round(candidate, 2)
+                        tx["_locked_amount"] = round(candidate, 2)
+                        tx["type"] = "income" if candidate > 0 else "expense"
+                        tx["locked_type"] = tx["type"]
+                        tx["parser_repair"] = "running_balance_suffix_code"
+                        amt = candidate
+
+        repaired.append(tx)
+        if bal is not None:
+            prev_balance = bal
+
+    txs = repaired
+
     print("ANB_ARABE3_V14_EXTRACTED", {
         "transactions": len(txs),
         "income_total": _v11_totals(txs)[0],
@@ -18311,6 +18359,100 @@ def _v11_missing_layout_candidates(text):
 # === END_RUNEXA_MISSING_LAYOUTS_V11 ===
 
 
+
+def _runexa_extract_anb_summary_generic(text):
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+
+    # ANB signal. Supports normal Arabic, pdfplumber Arabic presentation forms,
+    # English fallback, and account/IBAN pattern for this ANB layout family.
+    if not any(marker in raw for marker in [
+        "البنك العربي الوطني",
+        "ANB",
+        "Arab National Bank",
+        "anb.com.sa",
+        "SA323040",
+        "ملخص الحساب",
+        "ﺏﺎﺴﺤﻟﺍ ﺺﺨﻠﻣ",
+    ]):
+        return {}
+
+    money_re = r"-?\d{1,3}(?:,\d{3})+(?:\.\d{1,2})?|-?\d+(?:\.\d{1,2})?"
+
+    lines = [" ".join(x.split()) for x in raw.splitlines() if " ".join(x.split())]
+
+    def money_from_line(line):
+        vals = re.findall(money_re, line)
+        if not vals:
+            return None
+
+        tok = vals[0].strip()
+
+        try:
+            # ANB uses comma as thousands separator even without decimals: 325,458
+            if re.fullmatch(r"-?\d{1,3}(?:,\d{3})+", tok):
+                return float(tok.replace(",", ""))
+            return parse_amount(tok)
+        except Exception:
+            return None
+
+    summary = {}
+
+    # Works with both logical Arabic text and Arabic presentation-form text,
+    # because we also rely on the stable order of the first summary block.
+    for i, line in enumerate(lines[:120]):
+        val = money_from_line(line)
+        if val is None:
+            continue
+
+        # Normal Arabic labels.
+        if "الرصيد الافتتاحي" in line or "ﻲﺣﺎﺘﺘﻓﻻﺍ" in line:
+            summary["opening_balance"] = abs(val)
+            continue
+
+        if "رصيد الإغلاق" in line or "ﻕﻼﻏﻹﺍ" in line:
+            summary["ending_balance"] = abs(val)
+            continue
+
+        if "إجمالي الخصم" in line or "ﻢﺼﺨﻟﺍ" in line:
+            summary["withdrawals"] = abs(val)
+            continue
+
+        if "إجمالي المبلغ الدائن" in line or "ﻦﺋﺍﺪﻟﺍ" in line:
+            summary["deposits"] = abs(val)
+            continue
+
+    # Positional fallback for ANB pdfplumber RTL presentation text.
+    if not {"opening_balance", "ending_balance", "withdrawals", "deposits"} <= set(summary):
+        block_vals = []
+        for line in lines[:80]:
+            if any(label in line for label in [
+                "ﻲﺣﺎﺘﺘﻓﻻﺍ",
+                "ﻕﻼﻏﻹﺍ",
+                "ﻢﺼﺨﻟﺍ",
+                "ﻦﺋﺍﺪﻟﺍ",
+                "الرصيد",
+                "إجمالي",
+            ]):
+                val = money_from_line(line)
+                if val is not None:
+                    block_vals.append(val)
+
+        if len(block_vals) >= 4:
+            summary.setdefault("opening_balance", abs(block_vals[0]))
+            summary.setdefault("ending_balance", abs(block_vals[1]))
+            summary.setdefault("withdrawals", abs(block_vals[2]))
+            summary.setdefault("deposits", abs(block_vals[3]))
+
+    required = ["opening_balance", "ending_balance", "withdrawals", "deposits"]
+    if all(k in summary for k in required):
+        print("ANB_GENERIC_SUMMARY_EXTRACTED", summary)
+        return summary
+
+    return {}
+
+
 def extract_transactions(text: str) -> list[dict]:
     txs = _runexa_clean_txs(_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS(text) or []) or _v11_missing_layout_candidates(text)
     if txs:
@@ -18336,18 +18478,17 @@ def extract_global_statement_summary(text: str) -> dict:
     original_summary = _RUNEXA_ORIGINAL_EXTRACT_SUMMARY(text) or {}
 
     raw = normalize_arabic_digits(str(text or ""))
-    if (
-        "325,458" in raw
-        and "370,995.44" in raw
-        and "47,608.43" in raw
-        and "2,070.99" in raw
-    ):
-        original_summary = {
-            "opening_balance": 47608.43,
-            "ending_balance": 2070.99,
-            "withdrawals": 370995.44,
-            "deposits": 325458.0,
-        }
+
+    # Generic ANB Arabic summary parser.
+    # Layout:
+    # amount + opening balance label
+    # amount + closing balance label
+    # negative amount + total debit label
+    # amount + total credit label
+    anb_summary = _runexa_extract_anb_summary_generic(raw)
+    if anb_summary:
+        original_summary = anb_summary
+
 
     cleaned_summary = {}
     for key in ["opening_balance", "deposits", "withdrawals", "ending_balance"]:
