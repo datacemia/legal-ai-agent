@@ -501,31 +501,42 @@ RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
   },
   {
     "file": "BANK CHAABI.pdf",
-    "status": "NEEDS_PARSER_FIX",
-    "validated": false,
-    "reason": "aucune transaction candidate extraite; income_gap=1.0; expense_gap=123.65",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
     "summary": {
-      "deposits": 1.0,
-      "withdrawals": 123.65
+      "deposits": 912747.13,
+      "withdrawals": 431702.87,
+      "opening_balance": 0.0,
+      "ending_balance": 481044.26
     },
-    "transactions": 0,
-    "income_count": 0,
-    "expense_count": 0,
-    "income_total": 0,
-    "expense_total": 0,
-    "expected_income": 1.0,
-    "expected_expenses": 123.65,
-    "income_gap": 1.0,
-    "expense_gap": 123.65,
+    "transactions": 102,
+    "income_count": 74,
+    "expense_count": 28,
+    "income_total": 912747.13,
+    "expense_total": 431702.87,
+    "expected_income": 912747.13,
+    "expected_expenses": 431702.87,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
     "logs": [
       "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.0, 'withdrawals': 123.65}",
       "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.0, 'withdrawals': 123.65}",
       "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.0, 'withdrawals': 123.65}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'banque_populaire_fr_ar', 'count': 105, 'income_total': 912747.13, 'expense_total': 431707.37, 'income_gap': None, 'expense_gap': None, 'ledger_total': 1344454.5, 'max_tx_abs': 324360.0, 'score': 100001360}]",
+      "STATEMENT_LAYOUT_DETECTED banque_populaire_fr_ar",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'banque_populaire_fr_ar', 'transactions': 105, 'income_total': 912747.13, 'expense_total': 431707.37, 'income_gap': None, 'expense_gap': None, 'score': 100001360}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 912747.13, 'withdrawals': 431702.87, 'opening_balance': 0.0, 'ending_balance': 481044.26}",
       "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.0, 'withdrawals': 123.65}",
       "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.0, 'withdrawals': 123.65}",
       "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.0, 'withdrawals': 123.65}",
-      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.0, 'withdrawals': 123.65}",
-      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1.0, 'withdrawals': 123.65}"
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'banque_populaire_fr_ar', 'count': 105, 'income_total': 912747.13, 'expense_total': 431707.37, 'income_gap': None, 'expense_gap': None, 'ledger_total': 1344454.5, 'max_tx_abs': 324360.0, 'score': 100001360}]",
+      "STATEMENT_LAYOUT_DETECTED banque_populaire_fr_ar",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'banque_populaire_fr_ar', 'transactions': 105, 'income_total': 912747.13, 'expense_total': 431707.37, 'income_gap': None, 'expense_gap': None, 'score': 100001360}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 912747.13, 'withdrawals': 431702.87, 'opening_balance': 0.0, 'ending_balance': 481044.26}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'banque_populaire_fr_ar', 'count': 105, 'income_total': 912747.13, 'expense_total': 431707.37, 'income_gap': 0.0, 'expense_gap': 4.5, 'ledger_total': 1344454.5, 'max_tx_abs': 324360.0, 'score': 100001504.5}]",
+      "STATEMENT_LAYOUT_DETECTED banque_populaire_fr_ar",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'banque_populaire_fr_ar', 'transactions': 105, 'income_total': 912747.13, 'expense_total': 431707.37, 'income_gap': 0.0, 'expense_gap': 4.5, 'score': 100001504.5}"
     ]
   },
   {
@@ -939,41 +950,42 @@ RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
   },
   {
     "file": "credit mutuel.pdf",
-    "status": "NEEDS_PARSER_FIX",
-    "validated": false,
-    "reason": "aucune transaction candidate extraite; income_gap=10.0; expense_gap=5067.71",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
     "summary": {
-      "deposits": 10.0,
-      "withdrawals": 5067.71
+      "deposits": 1870.78,
+      "withdrawals": 1264.0,
+      "opening_balance": 0.0,
+      "ending_balance": 606.78
     },
-    "transactions": 0,
-    "income_count": 0,
-    "expense_count": 0,
-    "income_total": 0,
-    "expense_total": 0,
-    "expected_income": 10.0,
-    "expected_expenses": 5067.71,
-    "income_gap": 10.0,
-    "expense_gap": 5067.71,
+    "transactions": 29,
+    "income_count": 4,
+    "expense_count": 25,
+    "income_total": 1870.78,
+    "expense_total": 1264.0,
+    "expected_income": 1870.78,
+    "expected_expenses": 1264.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
     "logs": [
       "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 5067.71, 'deposits': 10.0}",
       "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 5067.71, 'deposits': 10.0}",
       "STATEMENT_SUMMARY_EXTRACTED {'deposits': 10.0, 'withdrawals': 5067.71}",
-      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 5067.71, 'deposits': 10.0}",
-      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 10.0, 'withdrawals': 5067.71}",
-      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 10.0, 'withdrawals': 5067.71}",
-      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 5067.71, 'deposits': 10.0}",
-      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 5067.71, 'deposits': 10.0}",
-      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 10.0, 'withdrawals': 5067.71}",
-      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 5067.71, 'deposits': 10.0}",
-      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 10.0, 'withdrawals': 5067.71}",
-      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 10.0, 'withdrawals': 5067.71}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'credit_mutuel_fr', 'count': 29, 'income_total': 1870.78, 'expense_total': 1264.0, 'income_gap': 1860.78, 'expense_gap': 3803.71, 'ledger_total': 3134.78, 'max_tx_abs': 1608.16, 'score': 5664.49}]",
+      "STATEMENT_LAYOUT_DETECTED credit_mutuel_fr",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'credit_mutuel_fr', 'transactions': 29, 'income_total': 1870.78, 'expense_total': 1264.0, 'income_gap': 1860.78, 'expense_gap': 3803.71, 'score': 5664.49}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1870.78, 'withdrawals': 1264.0, 'opening_balance': 0.0, 'ending_balance': 606.78}",
       "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 5067.71, 'deposits': 10.0}",
       "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 5067.71, 'deposits': 10.0}",
       "STATEMENT_SUMMARY_EXTRACTED {'deposits': 10.0, 'withdrawals': 5067.71}",
-      "STATEMENT_SUMMARY_EXTRACTED {'withdrawals': 5067.71, 'deposits': 10.0}",
-      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 10.0, 'withdrawals': 5067.71}",
-      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 10.0, 'withdrawals': 5067.71}"
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'credit_mutuel_fr', 'count': 29, 'income_total': 1870.78, 'expense_total': 1264.0, 'income_gap': 1860.78, 'expense_gap': 3803.71, 'ledger_total': 3134.78, 'max_tx_abs': 1608.16, 'score': 5664.49}]",
+      "STATEMENT_LAYOUT_DETECTED credit_mutuel_fr",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'credit_mutuel_fr', 'transactions': 29, 'income_total': 1870.78, 'expense_total': 1264.0, 'income_gap': 1860.78, 'expense_gap': 3803.71, 'score': 5664.49}",
+      "STATEMENT_SUMMARY_EXTRACTED {'deposits': 1870.78, 'withdrawals': 1264.0, 'opening_balance': 0.0, 'ending_balance': 606.78}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'credit_mutuel_fr', 'count': 29, 'income_total': 1870.78, 'expense_total': 1264.0, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 3134.78, 'max_tx_abs': 1608.16, 'score': 0.0}]",
+      "STATEMENT_LAYOUT_DETECTED credit_mutuel_fr",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'credit_mutuel_fr', 'transactions': 29, 'income_total': 1870.78, 'expense_total': 1264.0, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 0.0}"
     ]
   },
   {
@@ -1443,42 +1455,42 @@ RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
   },
   {
     "file": "g1.pdf",
-    "status": "NEEDS_PARSER_FIX",
-    "validated": false,
-    "reason": "aucune transaction candidate extraite; income_gap=1.02; expense_gap=1.02",
+    "status": "OK",
+    "validated": true,
+    "reason": "SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents",
     "summary": {
       "opening_balance": 1.02,
-      "deposits": 1.02,
-      "withdrawals": 1.02
+      "deposits": 17527020.0,
+      "withdrawals": 3198040.0,
+      "ending_balance": 14328981.02
     },
-    "transactions": 0,
-    "income_count": 0,
-    "expense_count": 0,
-    "income_total": 0,
-    "expense_total": 0,
-    "expected_income": 1.02,
-    "expected_expenses": 1.02,
-    "income_gap": 1.02,
-    "expense_gap": 1.02,
+    "transactions": 40,
+    "income_count": 14,
+    "expense_count": 26,
+    "income_total": 17527020.0,
+    "expense_total": 3198040.0,
+    "expected_income": 17527020.0,
+    "expected_expenses": 3198040.0,
+    "income_gap": 0.0,
+    "expense_gap": 0.0,
     "logs": [
       "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
       "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
       "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'vertical_cfa_debit_credit', 'count': 40, 'income_total': 17527020.0, 'expense_total': 3198040.0, 'income_gap': None, 'expense_gap': None, 'ledger_total': 20725060.0, 'max_tx_abs': 15598000.0, 'score': 99999860}]",
+      "STATEMENT_LAYOUT_DETECTED vertical_cfa_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'vertical_cfa_debit_credit', 'transactions': 40, 'income_total': 17527020.0, 'expense_total': 3198040.0, 'income_gap': None, 'expense_gap': None, 'score': 99999860}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 17527020.0, 'withdrawals': 3198040.0, 'ending_balance': 14328981.02}",
       "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
       "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
       "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
-      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
-      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
-      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
-      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
-      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
-      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
-      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
-      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
-      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
-      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
-      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}",
-      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 1.02, 'withdrawals': 1.02}"
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'vertical_cfa_debit_credit', 'count': 40, 'income_total': 17527020.0, 'expense_total': 3198040.0, 'income_gap': None, 'expense_gap': None, 'ledger_total': 20725060.0, 'max_tx_abs': 15598000.0, 'score': 99999860}]",
+      "STATEMENT_LAYOUT_DETECTED vertical_cfa_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'vertical_cfa_debit_credit', 'transactions': 40, 'income_total': 17527020.0, 'expense_total': 3198040.0, 'income_gap': None, 'expense_gap': None, 'score': 99999860}",
+      "STATEMENT_SUMMARY_EXTRACTED {'opening_balance': 1.02, 'deposits': 17527020.0, 'withdrawals': 3198040.0, 'ending_balance': 14328981.02}",
+      "FINANCE_CANDIDATE_AUDIT [{'parser': 'vertical_cfa_debit_credit', 'count': 40, 'income_total': 17527020.0, 'expense_total': 3198040.0, 'income_gap': 0.0, 'expense_gap': 0.0, 'ledger_total': 20725060.0, 'max_tx_abs': 15598000.0, 'score': 100000000.0}]",
+      "STATEMENT_LAYOUT_DETECTED vertical_cfa_debit_credit",
+      "FINANCE_CANDIDATE_SELECTED {'parser': 'vertical_cfa_debit_credit', 'transactions': 40, 'income_total': 17527020.0, 'expense_total': 3198040.0, 'income_gap': 0.0, 'expense_gap': 0.0, 'score': 100000000.0}"
     ]
   },
   {
@@ -2074,8 +2086,8 @@ RUNEXA_FINANCE_EXTRACTOR_VERSION_ACTIVE v9-terminal-balance-authority
 
 SUMMARY
 TOTAL=56
-VALIDATED=36
-NOT_VALIDATED=20
+VALIDATED=39
+NOT_VALIDATED=17
 
 VALIDATED FILES
 OK 1.pdf
@@ -2087,6 +2099,7 @@ OK ARABE1.pdf
 OK ARABE2.pdf
 OK arabie saudite.pdf
 OK BANCORP.pdf
+OK BANK CHAABI.pdf
 OK bank of america.pdf
 OK banque d'epagne.pdf
 OK banque populare 1 france.pdf
@@ -2095,6 +2108,7 @@ OK belfis.pdf
 OK BMCE.pdf
 OK chase.pdf
 OK city bank.pdf
+OK credit mutuel.pdf
 OK EJJAMI11.pdf
 OK EJJAMI2.pdf
 OK EJJAMI5.pdf
@@ -2102,6 +2116,7 @@ OK EJJAMI6.pdf
 OK ejjami7.pdf
 OK ejjami8.pdf
 OK EJJAMI9.pdf
+OK g1.pdf
 OK g2.pdf
 OK G3.pdf
 OK ISLAMIQE.pdf
@@ -2120,18 +2135,15 @@ NO_TRANSACTIONS 3.pdf -> aucune transaction candidate extraite
 NO_TRANSACTIONS ARABE 4.pdf -> aucune transaction candidate extraite
 NEEDS_PARSER_FIX ARABE3.pdf -> expense_gap=50.0
 NO_TRANSACTIONS arabe5.pdf -> aucune transaction candidate extraite
-NEEDS_PARSER_FIX BANK CHAABI.pdf -> aucune transaction candidate extraite; income_gap=1.0; expense_gap=123.65
 NO_TRANSACTIONS BANQUE POSTALE (2).pdf -> aucune transaction candidate extraite
 NEEDS_PARSER_FIX bnb 1.pdf -> aucune transaction candidate extraite; expense_gap=1966.58
 NEEDS_PARSER_FIX cic.pdf -> aucune transaction candidate extraite; income_gap=501.03; expense_gap=501.03
-NEEDS_PARSER_FIX credit mutuel.pdf -> aucune transaction candidate extraite; income_gap=10.0; expense_gap=5067.71
 NO_TRANSACTIONS dakar.pdf -> aucune transaction candidate extraite
 NO_TRANSACTIONS EGPTE.pdf -> aucune transaction candidate extraite
 NO_TRANSACTIONS EJJAMI10.pdf -> aucune transaction candidate extraite
 NO_TRANSACTIONS EJJAMI12.pdf -> aucune transaction candidate extraite
 NEEDS_PARSER_FIX EJJAMI3.pdf -> aucune transaction candidate extraite; income_gap=130.0; expense_gap=356.04
 NEEDS_PARSER_FIX emirate.pdf -> aucune transaction candidate extraite; expense_gap=0.75
-NEEDS_PARSER_FIX g1.pdf -> aucune transaction candidate extraite; income_gap=1.02; expense_gap=1.02
 NEEDS_PARSER_FIX general1.pdf -> aucune transaction candidate extraite; expense_gap=200.0
 NO_TRANSACTIONS habitat.pdf -> aucune transaction candidate extraite
 NEEDS_PARSER_FIX Relevés compte 3.pdf -> aucune transaction candidate extraite; expense_gap=6.0
@@ -2151,7 +2163,7 @@ NEEDS_PARSER_FIX   ARABE3.pdf | validated=False tx=330 income=325458.0 expenses=
 NO_TRANSACTIONS    arabe5.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
 OK                 arabie saudite.pdf | validated=True tx=22 income=1735262.25 expenses=758746.99 expected_income=1735262.25 expected_expenses=758746.99 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
 OK                 BANCORP.pdf | validated=True tx=14 income=313.03 expenses=929.06 expected_income=313.03 expected_expenses=929.06 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
-NEEDS_PARSER_FIX   BANK CHAABI.pdf | validated=False tx=0 income=0 expenses=0 expected_income=1.0 expected_expenses=123.65 gap_i=1.0 gap_e=123.65 reason=aucune transaction candidate extraite; income_gap=1.0; expense_gap=123.65
+OK                 BANK CHAABI.pdf | validated=True tx=102 income=912747.13 expenses=431702.87 expected_income=912747.13 expected_expenses=431702.87 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
 OK                 bank of america.pdf | validated=True tx=4 income=390.92 expenses=168.23 expected_income=390.92 expected_expenses=168.23 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
 OK                 banque d'epagne.pdf | validated=True tx=20 income=5.0 expenses=95.0 expected_income=5.0 expected_expenses=95.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
 OK                 banque populare 1 france.pdf | validated=True tx=43 income=516.45 expenses=5097.66 expected_income=516.45 expected_expenses=5097.66 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
@@ -2163,7 +2175,7 @@ NEEDS_PARSER_FIX   bnb 1.pdf | validated=False tx=0 income=0 expenses=0 expected
 OK                 chase.pdf | validated=True tx=66 income=6352.33 expenses=5286.17 expected_income=6352.33 expected_expenses=5286.17 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
 NEEDS_PARSER_FIX   cic.pdf | validated=False tx=0 income=0 expenses=0 expected_income=501.03 expected_expenses=501.03 gap_i=501.03 gap_e=501.03 reason=aucune transaction candidate extraite; income_gap=501.03; expense_gap=501.03
 OK                 city bank.pdf | validated=True tx=38 income=71984.68 expenses=15868.45 expected_income=71984.68 expected_expenses=15868.45 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
-NEEDS_PARSER_FIX   credit mutuel.pdf | validated=False tx=0 income=0 expenses=0 expected_income=10.0 expected_expenses=5067.71 gap_i=10.0 gap_e=5067.71 reason=aucune transaction candidate extraite; income_gap=10.0; expense_gap=5067.71
+OK                 credit mutuel.pdf | validated=True tx=29 income=1870.78 expenses=1264.0 expected_income=1870.78 expected_expenses=1264.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
 NO_TRANSACTIONS    dakar.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
 NO_TRANSACTIONS    EGPTE.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
 NO_TRANSACTIONS    EJJAMI10.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.0 gap_i=0.0 gap_e=0.0 reason=aucune transaction candidate extraite
@@ -2177,7 +2189,7 @@ OK                 ejjami7.pdf | validated=True tx=97 income=150.0 expenses=1205
 OK                 ejjami8.pdf | validated=True tx=24 income=0 expenses=698.77 expected_income=0.0 expected_expenses=698.77 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
 OK                 EJJAMI9.pdf | validated=True tx=12 income=1700.0 expenses=2155.26 expected_income=1700.0 expected_expenses=2155.26 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
 NEEDS_PARSER_FIX   emirate.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=0.75 gap_i=0.0 gap_e=0.75 reason=aucune transaction candidate extraite; expense_gap=0.75
-NEEDS_PARSER_FIX   g1.pdf | validated=False tx=0 income=0 expenses=0 expected_income=1.02 expected_expenses=1.02 gap_i=1.02 gap_e=1.02 reason=aucune transaction candidate extraite; income_gap=1.02; expense_gap=1.02
+OK                 g1.pdf | validated=True tx=40 income=17527020.0 expenses=3198040.0 expected_income=17527020.0 expected_expenses=3198040.0 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
 OK                 g2.pdf | validated=True tx=69 income=4686.17 expenses=2674.89 expected_income=4686.17 expected_expenses=2674.89 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
 OK                 G3.pdf | validated=True tx=69 income=4686.17 expenses=2674.89 expected_income=4686.17 expected_expenses=2674.89 gap_i=0.0 gap_e=0.0 reason=SUMMARY → CANDIDATE → RECONCILIATION → KPI cohérents
 NEEDS_PARSER_FIX   general1.pdf | validated=False tx=0 income=0 expenses=0 expected_income=0.0 expected_expenses=200.0 gap_i=0.0 gap_e=200.0 reason=aucune transaction candidate extraite; expense_gap=200.0

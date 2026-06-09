@@ -749,6 +749,35 @@ def normalize_ocr_numeric_text(value: str) -> str:
         value,
     )
 
+
+def parse_amount_cfa(value: str) -> float:
+    """Parse CFA/XAF/XOF amounts where dot is often thousands separator, not decimal."""
+    raw = str(value or "").strip()
+    raw = normalize_arabic_digits(raw)
+    raw = raw.replace(" ", "").replace("\xa0", "").replace("\u202f", "")
+    raw = re.sub(r"[^0-9,.\-+]", "", raw)
+
+    if not raw or raw in {"-", "+"}:
+        raise ValueError("Invalid CFA amount")
+
+    sign = -1 if raw.startswith("-") else 1
+    raw = raw.lstrip("+-")
+
+    # CFA statements generally have no cents. 1.021 means 1021, 15.598.000 means 15598000.
+    if "." in raw and "," not in raw:
+        parts = raw.split(".")
+        if all(part.isdigit() for part in parts) and all(len(part) == 3 for part in parts[1:]):
+            return sign * float("".join(parts))
+
+    # Same for comma thousands without decimals: 1,021 -> 1021
+    if "," in raw and "." not in raw:
+        parts = raw.split(",")
+        if all(part.isdigit() for part in parts) and all(len(part) == 3 for part in parts[1:]):
+            return sign * float("".join(parts))
+
+    return parse_amount(value)
+
+
 def parse_amount(value: str) -> float:
     """Parse international bank amounts safely.
 
@@ -12028,6 +12057,350 @@ def parse_debit_credit_column_ledger(text: str) -> list[dict]:
 
 
 
+
+
+
+
+def parse_gcc_debit_credit_balance_statement(text: str) -> list[dict]:
+    """GCC/UAE bilingual debit-credit-balance ledger parser.
+
+    Layout: Date | Description | Debits | Credits | Balance.
+    Handles AED/GCC statements with balances like 24,75 Cr / 0.00Cr.
+    """
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+    low = raw.lower()
+
+    if not (
+        ("debits" in low or "débits" in low or "debit" in low or "débit" in low)
+        and ("credits" in low or "crédits" in low or "credit" in low or "crédit" in low)
+        and ("balance" in low or "équilibre" in low or "equilibre" in low)
+        and ("dirham" in low or "aed" in low or "emirates nbd" in low or "uae" in low)
+    ):
+        return []
+
+    month = {
+        "JAN": "01", "FEB": "02", "FÉV": "02", "FEV": "02", "MAR": "03",
+        "APR": "04", "AVR": "04", "MAY": "05", "MAI": "05",
+        "JUN": "06", "JUIN": "06", "JUL": "07", "AUG": "08", "AOÛ": "08", "AOU": "08",
+        "SEP": "09", "OCT": "10", "NOV": "11", "DEC": "12", "DÉC": "12",
+    }
+
+    def parse_gcc_date(tok):
+        t = normalize_arabic_digits(tok.upper())
+        t = t.replace("É", "E").replace("È", "E").replace("Û", "U").replace("Î", "I")
+        m = re.match(r"^(\d{2})([A-Z]{3,4})(\d{2})$", t)
+        if not m:
+            return None
+        dd, mon, yy = m.groups()
+        mon = month.get(mon[:3])
+        if not mon:
+            return None
+        return f"20{yy}-{mon}-{dd}"
+
+    money_re = re.compile(r"(?<!\d)(\d{1,3}(?:[ ,]\d{3})*(?:[.,]\d{2})|\d+[.,]\d{2})(?:\s*Cr)?(?!\d)", re.I)
+    date_re = re.compile(r"^\d{2}[A-Za-zÉÈÊÛÙÎÏÔ]{3,4}\d{2}$", re.I)
+
+    lines = [" ".join(x.split()) for x in raw.splitlines() if " ".join(x.split())]
+
+    txs = []
+    current = None
+    seen = set()
+
+    def money_amount(tok):
+        tok = tok.replace("Cr", "").replace("cr", "").strip()
+        return parse_amount(tok)
+
+    def flush():
+        nonlocal current
+        if not current:
+            return
+
+        desc = " ".join(current["parts"]).strip()
+        if not desc or re.search(r"report[ée]|brought|statement date|page|détails|details", desc, re.I):
+            current = None
+            return
+
+        nums = money_re.findall(desc)
+        if not nums:
+            current = None
+            return
+
+        vals = []
+        for n in nums:
+            try:
+                vals.append(money_amount(n))
+            except Exception:
+                pass
+
+        vals = [v for v in vals if abs(v) > 0]
+        if not vals:
+            current = None
+            return
+
+        # Running-balance layout: usually [... amount, balance].
+        # If multiple values, transaction amount is normally penultimate when final is balance.
+        amount = vals[-2] if len(vals) >= 2 else vals[-1]
+
+        dlow = desc.lower()
+        is_credit = any(x in dlow for x in [
+            "de -", "from", "salary", "salaire", "salaires", "transfert bancaire",
+            "transfert banknet", "transmission bancaire"
+        ]) and not any(x in dlow for x in [
+            "à -", "a -", "netflix", "purchase", "achat", "wdl", "dab", "frais", "dr",
+            "payment", "paiement"
+        ])
+
+        is_expense = any(x in dlow for x in [
+            "à -", "a -", "netflix", "purchase", "achat", "wdl", "dab", "frais",
+            "payment", "paiement", "dr", "shake n save"
+        ])
+
+        if is_credit and not is_expense:
+            signed = abs(amount)
+            typ = "income"
+        elif is_expense:
+            signed = -abs(amount)
+            typ = "expense"
+        else:
+            current = None
+            return
+
+        key = (current["date"], round(signed, 2), desc[:120])
+        if key not in seen:
+            seen.add(key)
+            txs.append({
+                "date": current["date"],
+                "description": clean_db_text(desc[:500]),
+                "amount": round(signed, 2),
+                "signed_amount": round(signed, 2),
+                "type": typ,
+                "currency": "AED",
+                "locked_amount": round(signed, 2),
+                "_locked_amount": round(signed, 2),
+                "locked_type": typ,
+                "parser_family": "gcc_debit_credit_balance",
+            })
+
+        current = None
+
+    for line in lines:
+        if date_re.match(line):
+            flush()
+            iso = parse_gcc_date(line)
+            if iso:
+                current = {"date": iso, "parts": []}
+            continue
+
+        if current:
+            current["parts"].append(line)
+
+    flush()
+
+    if len(txs) < 2:
+        return []
+
+    income_total = round(sum(abs(t["amount"]) for t in txs if t["type"] == "income"), 2)
+    expense_total = round(sum(abs(t["amount"]) for t in txs if t["type"] == "expense"), 2)
+
+    # Safety guard: avoid false OK on GCC/AED statements when credits exist in text
+    # but the parser extracted only a few expenses.
+    if len(txs) < 8 and income_total == 0 and re.search(r"\d[\d\s.,]*\s*Cr\b", raw, re.I):
+        print("GCC_DEBIT_CREDIT_BALANCE_REJECTED_WEAK_EXTRACT", {
+            "transactions": len(txs),
+            "income_total": income_total,
+            "expense_total": expense_total,
+        })
+        return []
+
+    print("GCC_DEBIT_CREDIT_BALANCE_EXTRACTED", {
+        "transactions": len(txs),
+        "income_total": income_total,
+        "expense_total": expense_total,
+    })
+
+    return txs
+
+
+def parse_vertical_cfa_debit_credit_statement(text: str) -> list[dict]:
+    """Afrique francophone / CFA vertical column dump parser.
+
+    Handles PDFs where extraction returns all dates, then all descriptions,
+    then all value dates, then debit/credit numeric columns.
+    Layout: Date | Nature de l’opération | Val | Débit | Crédit.
+    """
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+    low = raw.lower()
+
+    if not (
+        ("francs cfa" in low or "fcfa" in low or "xaf" in low or "xof" in low)
+        and ("nature de l" in low or "nature de l’opération" in low or "nature de l'operation" in low)
+        and "débit" in low
+        and "crédit" in low
+        and "total" in low
+    ):
+        return []
+
+    date_re = re.compile(r"^\d{2}/\d{2}/\d{4}$")
+    val_re = re.compile(r"^\d{2}/\d{2}$")
+    amount_re = re.compile(r"^[+-]?\d{1,3}(?:[.,]\d{3})*$|^[+-]?\d+$")
+
+    lines = [" ".join(x.split()) for x in raw.splitlines() if " ".join(x.split())]
+
+    # Find header zone.
+    try:
+        header_i = next(i for i, line in enumerate(lines) if "Nature de l" in line and "Débit" in line and "Crédit" in line)
+    except StopIteration:
+        return []
+
+    body = lines[header_i + 1:]
+
+    # Stop at Total, footer or RIB repeated block.
+    stop = len(body)
+    for i, line in enumerate(body):
+        if line.lower().startswith("total ") or "solde au" in line.lower() or "n.b" in line.lower():
+            stop = i
+            break
+    body = body[:stop]
+
+    dates = []
+    descriptions = []
+    value_dates = []
+    amounts = []
+
+    phase = "dates"
+
+    for line in body:
+        if date_re.match(line):
+            if phase in {"dates", "descriptions"}:
+                dates.append(line)
+                phase = "dates"
+            else:
+                # Ignore accidental full dates after value dates.
+                pass
+            continue
+
+        if val_re.match(line):
+            value_dates.append(line)
+            phase = "value_dates"
+            continue
+
+        if amount_re.match(line):
+            amounts.append(line)
+            phase = "amounts"
+            continue
+
+        if phase in {"dates", "descriptions"}:
+            if not re.search(r"solde initial|rib|iban|swift", line, re.I):
+                descriptions.append(line)
+                phase = "descriptions"
+
+    # Remove non-transaction initial balance if present.
+    if descriptions and re.search(r"solde initial", descriptions[0], re.I):
+        descriptions = descriptions[1:]
+    if dates and len(dates) > len(descriptions):
+        dates = dates[-len(descriptions):]
+
+    n = min(len(dates), len(descriptions))
+    if n < 3:
+        return []
+
+    # The numeric dump contains debit column then credit column.
+    # Use Total line to infer split if available.
+    total_re = re.search(
+        r"Total\s+(?P<debit>\d{1,3}(?:[.,]\d{3})*)\s+(?P<credit>\d{1,3}(?:[.,]\d{3})*)",
+        raw,
+        re.I,
+    )
+
+    debit_total = credit_total = None
+    if total_re:
+        debit_total = parse_amount_cfa(total_re.group("debit"))
+        credit_total = parse_amount_cfa(total_re.group("credit"))
+
+    parsed_amounts = [parse_amount_cfa(x) for x in amounts]
+
+    best = None
+    if debit_total is not None and credit_total is not None:
+        for split in range(0, len(parsed_amounts) + 1):
+            deb = parsed_amounts[:split]
+            cre = parsed_amounts[split:]
+            if abs(sum(deb) - debit_total) <= 1 and abs(sum(cre) - credit_total) <= 1:
+                best = (deb, cre)
+                break
+
+    if best:
+        debit_amounts, credit_amounts = best
+    else:
+        # Fallback: first half debit, second half credit.
+        mid = len(parsed_amounts) // 2
+        debit_amounts, credit_amounts = parsed_amounts[:mid], parsed_amounts[mid:]
+
+    income_words = ("depot", "dépôt", "verst", "versement", "epargne", "épargne")
+    expense_words = ("retrait", "frais", "taxe", "tva", "virement bancaire", "virement par cheque")
+
+    txs = []
+    seen = set()
+    debit_i = credit_i = 0
+
+    for i in range(n):
+        desc = descriptions[i]
+        low_desc = desc.lower()
+        date = dates[i]
+        d, m, y = date.split("/")
+        iso = f"{y}-{m}-{d}"
+
+        typ = None
+        amount = None
+
+        if any(w in low_desc for w in income_words) and not any(w in low_desc for w in expense_words):
+            if credit_i < len(credit_amounts):
+                amount = credit_amounts[credit_i]
+                credit_i += 1
+                typ = "income"
+        else:
+            if debit_i < len(debit_amounts):
+                amount = debit_amounts[debit_i]
+                debit_i += 1
+                typ = "expense"
+
+        if amount is None or amount <= 0:
+            continue
+
+        signed = amount if typ == "income" else -amount
+        key = (iso, desc[:100], round(signed, 2))
+        if key in seen:
+            continue
+        seen.add(key)
+
+        txs.append({
+            "date": iso,
+            "description": clean_db_text(desc[:500]),
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": typ,
+            "currency": "XAF",
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": typ,
+            "parser_family": "vertical_cfa_debit_credit",
+        })
+
+    if len(txs) < 3:
+        return []
+
+    print("VERTICAL_CFA_LEDGER_EXTRACTED", {
+        "transactions": len(txs),
+        "income_total": round(sum(abs(t["amount"]) for t in txs if t["type"] == "income"), 2),
+        "expense_total": round(sum(abs(t["amount"]) for t in txs if t["type"] == "expense"), 2),
+    })
+
+    return txs
+
+
 def parse_month_name_ledger_transactions(text: str, detected_currency: str | None = None) -> list[dict]:
     print("MONTH_NAME_LEDGER_VERSION", "v2-continuation-context")
     """Global FR/EN/AR month-name ledger parser.
@@ -12936,6 +13309,120 @@ def parse_bmce_date_valeur_debit_credit_statement(text: str) -> list[dict]:
 
 
 
+
+
+def parse_credit_mutuel_fr_statement(text: str) -> list[dict]:
+    """Crédit Mutuel / Arkéa FR compact parser: Date | Date valeur | Libellé | Débit/Crédit."""
+    import re
+
+    raw = normalize_arabic_digits(str(text or ""))
+    low = raw.lower()
+
+    if not (
+        ("crédit mutuel" in low or "credit mutuel" in low or "cmb.fr" in low or "cmbrfr" in low)
+        and ("relevé de compte" in low or "releve de compte" in low)
+        and ("débit" in low or "debit" in low)
+        and ("crédit" in low or "credit" in low)
+    ):
+        return []
+
+    currency = "EUR"
+
+    # Summary is useful for KPI.
+    msum = re.search(
+        r"TOTAL\s+DES\s+OP[ÉE]RATIONS\s+DU\s+RELEV[ÉE]\s+"
+        r"(?P<debit>\d[\d\s.,]*[,.]\d{2})\s+"
+        r"(?P<credit>\d[\d\s.,]*[,.]\d{2})",
+        raw,
+        re.I | re.S,
+    )
+    if msum:
+        print("CREDIT_MUTUEL_FR_SUMMARY_EXTRACTED", {
+            "withdrawals": parse_amount(msum.group("debit")),
+            "deposits": parse_amount(msum.group("credit")),
+        })
+
+    txs = []
+    seen = set()
+
+    # Current section decides sign when table columns are lost by pypdf.
+    section = None
+    section_re = re.compile(
+        r"(VIREMENTS\s+RECUS|VIREMENTS\s+EMIS\s+ET\s+PRELEVEMENTS|PAIEMENTS\s+PAR\s+CARTE|RETRAITS|SERVICES\s+ET\s+FRAIS\s+BANCAIRES)",
+        re.I,
+    )
+
+    # Split compact pypdf text by every operation date pair.
+    # Example: 10/0310/03/2023VIR SIACI SAINT HONORE 7,50
+    pattern = re.compile(
+        r"(?P<opd>\d{2})/(?P<opm>\d{2})\s*(?P<vald>\d{2})/(?P<valm>\d{2})/(?P<valy>\d{4})"
+        r"(?P<body>.*?)(?=(?:\d{2}/\d{2}\s*\d{2}/\d{2}/\d{4})|TOTAL\s+DES\s+OP|NOUVEAU\s+SOLDE|$)",
+        re.I | re.S,
+    )
+
+    money_re = re.compile(r"(?<!\d)(\d{1,3}(?:\s\d{3})*(?:[,.]\d{2})|\d+[,.]\d{2})(?!\d)")
+
+    # Update section positions by scanning raw before each match.
+    for m in pattern.finditer(raw):
+        prefix = raw[max(0, m.start() - 500):m.start()]
+        found_sections = section_re.findall(prefix)
+        if found_sections:
+            section = found_sections[-1].upper()
+
+        body = " ".join(m.group("body").split())
+        if not body:
+            continue
+
+        nums = money_re.findall(body)
+        if not nums:
+            continue
+
+        amount_abs = abs(parse_amount(nums[-1]))
+        if amount_abs <= 0 or amount_abs > 1000000:
+            continue
+
+        # Exclude summary/subtotal lines accidentally captured.
+        if re.search(r"sous-total|ancien solde|nouveau solde|total des op", body, re.I):
+            continue
+
+        is_income = False
+        if section and "RECUS" in section:
+            is_income = True
+        if re.search(r"\bVIR\b.*\b(RECU|RECUS)\b|CAF|SALAIRE|SAINT HONORE", body, re.I):
+            is_income = True
+
+        signed = amount_abs if is_income else -amount_abs
+        typ = "income" if signed > 0 else "expense"
+
+        iso = f"{int(m.group('valy')):04d}-{int(m.group('opm')):02d}-{int(m.group('opd')):02d}"
+        key = (iso, round(signed, 2), body[:120])
+        if key in seen:
+            continue
+        seen.add(key)
+
+        txs.append({
+            "date": iso,
+            "description": clean_db_text(body[:500]),
+            "amount": round(signed, 2),
+            "signed_amount": round(signed, 2),
+            "type": typ,
+            "currency": currency,
+            "locked_amount": round(signed, 2),
+            "_locked_amount": round(signed, 2),
+            "locked_type": typ,
+            "parser_family": "credit_mutuel_fr",
+        })
+
+    if txs:
+        print("CREDIT_MUTUEL_FR_EXTRACTED", {
+            "transactions": len(txs),
+            "income_total": round(sum(abs(t["amount"]) for t in txs if t["type"] == "income"), 2),
+            "expense_total": round(sum(abs(t["amount"]) for t in txs if t["type"] == "expense"), 2),
+        })
+
+    return txs
+
+
 def parse_banque_populaire_fr_ar_statement(text: str) -> list[dict]:
     """Banque Populaire / Bank Chaabi parser: Date op | Date valeur | Ref | Nature | Debit | Credit."""
     import re
@@ -12943,12 +13430,21 @@ def parse_banque_populaire_fr_ar_statement(text: str) -> list[dict]:
     raw = normalize_arabic_digits(str(text or ""))
     low = raw.lower()  # noqa: F841
 
-    if not (
-        ("banque populaire" in low or "bank chaabi" in low or "extrait de compte" in low)
-        and "date opération" in low
-        and "montant débit" in low
-        and "montant crédit" in low
-    ):
+    has_fr_debit_credit_layout = (
+        ("date opération" in low or "date operation" in low)
+        and ("montant débit" in low or "montant debit" in low)
+        and ("montant crédit" in low or "montant credit" in low)
+    )
+
+    has_bank_signal = (
+        "banque populaire" in low
+        or "bank chaabi" in low
+        or "chaabi" in low
+        or "compte principal" in low
+        or "rib" in low
+    )
+
+    if not (has_fr_debit_credit_layout and has_bank_signal):
         return []
 
     currency = detect_currency(raw) or "MAD"
@@ -12971,13 +13467,16 @@ def parse_banque_populaire_fr_ar_statement(text: str) -> list[dict]:
     )
 
     income_re = re.compile(
-        r"(encaissement|versement|vir\.\s*recu|virement\s+re[cç]u|cr[ée]dit|remis\s+par)",
+        r"(encaissement|facturettes|versement\s+par\s+vous|vir\.\s*recu|"
+        r"virement\s+re[cç]u|vir\.\s*instantane\s+recu|cr[ée]dit|"
+        r"remis\s+par|cheque\s+n\s+\d+\s+remis)",
         re.I | re.UNICODE,
     )
 
     expense_re = re.compile(
         r"(commission|taxe|vir\.\s*(?:emis|digital.*emis)|virement.*[ée]mis|"
-        r"paiement|facture|cheque|ch[èe]que|cotisations?|droit\s+de\s+timbre|d[ée]bit)",
+        r"vir\.\s+emis|vir\.\s+instantane\s+en\s+faveur|"
+        r"paiement\s+de\s+facture|cotisations?|droit\s+de\s+timbre|d[ée]bit)",
         re.I | re.UNICODE,
     )
 
@@ -15442,6 +15941,9 @@ def _runexa_core_extract_transactions(text: str) -> list[dict]:
         ("arabic_balance_debit_credit", parse_arabic_balance_debit_credit_statement, 3),
         ("snb_credit_card", parse_snb_credit_card_statement, 3),
         ("bmce_date_valeur_debit_credit", parse_bmce_date_valeur_debit_credit_statement, 3),
+        ("gcc_debit_credit_balance", parse_gcc_debit_credit_balance_statement, 3),
+        ("vertical_cfa_debit_credit", parse_vertical_cfa_debit_credit_statement, 3),
+        ("credit_mutuel_fr", parse_credit_mutuel_fr_statement, 3),
         ("banque_populaire_fr_ar", parse_banque_populaire_fr_ar_statement, 3),
         ("acme_business_checking", parse_acme_business_checking_statement, 3),
         ("bbva_usa_checking_summary", parse_bbva_usa_checking_summary_statement, 2),
