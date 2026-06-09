@@ -439,6 +439,24 @@ def category_is_cashflow_neutral(category: str) -> bool:
     return _canonical_category(category) in {"transfers", "savings_investments"}
 
 
+
+def normalize_chart_date(value: object) -> str:
+    s = str(value or "").strip()
+
+    # Fix OCR/parser issue: YYYY-DD-MM -> YYYY-MM-DD
+    # Example: 2024-20-06 => 2024-06-20
+    m = re.match(r"^(20\d{2})-(\d{2})-(\d{2})$", s)
+    if m:
+        year, a, b = m.groups()
+        aa = int(a)
+        bb = int(b)
+
+        if aa > 12 and 1 <= bb <= 12:
+            return f"{year}-{bb:02d}-{aa:02d}"
+
+    return s or "unknown"
+
+
 def build_financial_charts(transactions: list[dict]) -> dict:
     spending_over_time = defaultdict(float)
     income_over_time = defaultdict(float)
@@ -458,7 +476,7 @@ def build_financial_charts(transactions: list[dict]) -> dict:
     )
 
     for tx in sorted_transactions:
-        date = tx.get("date") or "unknown"
+        date = normalize_chart_date(tx.get("date"))
         amount = float(tx.get("amount", 0) or 0)
         description = tx.get("description", "")
         tx_type = tx.get("type")
