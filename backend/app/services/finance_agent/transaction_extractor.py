@@ -15427,7 +15427,7 @@ def _choose_finance_candidate(candidates: list[dict]) -> dict | None:
 
 
 
-def extract_transactions(text: str) -> list[dict]:
+def _runexa_core_extract_transactions(text: str) -> list[dict]:
     statement_summary = extract_global_statement_summary(text)
 
     # Candidate engine:
@@ -17888,7 +17888,7 @@ try:
 except NameError:
     signed_debit_bucket_total = 0.0
 
-_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS = extract_transactions
+_RUNEXA_ORIGINAL_EXTRACT_TRANSACTIONS = _runexa_core_extract_transactions
 _RUNEXA_ORIGINAL_EXTRACT_SUMMARY = extract_global_statement_summary
 
 _RUNEXA_IN_SUMMARY_DERIVATION = False
