@@ -17,6 +17,32 @@ def _to_float(value: Any) -> float:
         return 0.0
 
 
+def _flag_enabled(payload: dict[str, Any], key: str, default: bool = True) -> bool:
+    """
+    Read KPI availability flags safely.
+
+    Newer KPI detectors expose flags such as:
+    - expenses_available
+    - profit_available
+    - profit_margin_available
+    - churn_available
+    - roas_available
+    - cac_available
+    - revenue_per_customer_available
+    - cashflow_available
+
+    If a flag is missing, default=True preserves backward compatibility.
+    """
+
+    if not isinstance(payload, dict):
+        return default
+
+    if key not in payload:
+        return default
+
+    return bool(payload.get(key))
+
+
 def _severity_rank(severity: str) -> int:
     ranks = {
         "critical": 5,
@@ -91,7 +117,7 @@ def _build_default_decision() -> dict[str, Any]:
         "why": "No critical business risk was detected from the current analysis.",
         "impact": "medium",
         "timeframe": "30 days",
-        "source": "backend_decision_engine",
+        "source": "business_decision_engine",
     }
 
 
@@ -139,7 +165,7 @@ def _build_decision_from_top_risk(top_item: dict[str, Any]) -> dict[str, Any]:
         "why": why,
         "impact": _impact_from_severity(severity),
         "timeframe": "7 days" if severity == "critical" else "30 days",
-        "source": "backend_decision_engine",
+        "source": "business_decision_engine",
         "based_on": {
             "category": category,
             "type": top_item.get("type"),
@@ -170,21 +196,47 @@ def _build_executive_summary(
     anomaly_status = str(anomalies_v2.get("status") or "normal")
     churn = _to_float(advanced_kpis.get("churn_rate_percent"))
 
+    profit_available = _flag_enabled(core_kpis, "profit_available", True)
+    margin_available = _flag_enabled(
+        core_kpis,
+        "profit_margin_available",
+        profit_available,
+    )
+    cashflow_available = _flag_enabled(core_kpis, "cashflow_available", profit_available)
+    churn_available = _flag_enabled(advanced_kpis, "churn_available", churn > 0)
+
+    if profit_available and margin_available:
+        profitability_sentence = (
+            f"profit of {round(profit, 2)}, and a profit margin of {round(margin, 2)}%. "
+        )
+    elif profit_available:
+        profitability_sentence = (
+            f"profit of {round(profit, 2)}. Profit margin could not be verified. "
+        )
+    else:
+        profitability_sentence = (
+            "profitability metrics cannot be verified because expenses or costs were not provided. "
+        )
+
+    display_cashflow = cashflow_status if cashflow_available else "unknown"
+
     summary = (
         f"This {model_label} analysis shows revenue of {round(revenue, 2)}, "
-        f"profit of {round(profit, 2)}, and a profit margin of {round(margin, 2)}%. "
-        f"Revenue growth is {round(growth, 2)}% and cashflow is {cashflow_status}. "
+        f"{profitability_sentence}"
+        f"Revenue growth is {round(growth, 2)}% and cashflow is {display_cashflow}. "
         f"The Business Health Score is {int(round(health_score))}/100 ({health_rating})."
     )
 
     if anomaly_status not in {"normal", "low_risk"}:
         summary += f" The current business risk assessment is {anomaly_status}."
 
-    if churn > 12:
-        summary += f" Customer churn is elevated at {round(churn, 2)}%, which should be treated as a priority."
+    if churn_available and churn > 12:
+        summary += (
+            f" Customer churn is elevated at {round(churn, 2)}%, "
+            "which should be treated as a priority."
+        )
 
     return summary
-
 
 def _build_risks_from_anomalies(
     anomalies_v2: dict[str, Any],
@@ -204,7 +256,7 @@ def _build_risks_from_anomalies(
                 "confidence": item.get("confidence"),
                 "description": item.get("why_it_matters") or item.get("what_happened"),
                 "business_impact": item.get("business_impact", []),
-                "source": "backend_anomaly_detection_v2",
+                "source": "business_risk_engine_v2",
             }
         )
 
@@ -223,6 +275,17 @@ def _build_opportunities(
     growth = _to_float(core_kpis.get("growth_rate_percent"))
     roas = _to_float(advanced_kpis.get("roas"))
     churn = _to_float(advanced_kpis.get("churn_rate_percent"))
+
+    profit_available = _flag_enabled(core_kpis, "profit_available", True)
+    margin_available = _flag_enabled(
+        core_kpis,
+        "profit_margin_available",
+        profit_available,
+    )
+    churn_available = _flag_enabled(advanced_kpis, "churn_available", churn > 0)
+    roas_available = _flag_enabled(advanced_kpis, "roas_available", roas > 0)
+    cac_available = _flag_enabled(advanced_kpis, "cac_available", True)
+
     cac_ratio = _to_float(
         (health.get("components") or {})
         .get("cac_efficiency", {})
@@ -230,42 +293,58 @@ def _build_opportunities(
         .get("cac_to_revenue_per_customer_ratio")
     )
 
-    if churn >= 7:
+    if churn_available and churn >= 7:
         opportunities.append(
             {
                 "opportunity": "Improve customer retention",
                 "impact": "high" if churn >= 12 else "medium",
                 "why_it_matters": "Reducing churn can improve recurring revenue quality, LTV, and growth efficiency.",
                 "recommended_action": "Launch retention analysis, improve onboarding, and segment churn by acquisition channel.",
-                "source": "backend_decision_engine",
+                "source": "business_decision_engine",
             }
         )
 
-    if roas >= 3 and cac_ratio > 0 and cac_ratio <= 0.5:
+    if roas_available and cac_available and roas >= 3 and cac_ratio > 0 and cac_ratio <= 0.5:
         opportunities.append(
             {
                 "opportunity": "Scale efficient acquisition carefully",
                 "impact": "medium",
                 "why_it_matters": "ROAS and CAC efficiency are healthy, which suggests acquisition can be scaled with monitoring.",
                 "recommended_action": "Increase spend only on channels with proven ROAS and monitor churn quality.",
-                "source": "backend_decision_engine",
+                "source": "business_decision_engine",
             }
         )
 
-    if margin >= 20 and growth >= 5:
+    if profit_available and margin_available and margin >= 20 and growth >= 5:
         opportunities.append(
             {
                 "opportunity": "Use healthy profitability to fund focused growth",
                 "impact": "medium",
                 "why_it_matters": "The business has both growth and profit margin strength.",
                 "recommended_action": "Allocate budget to the highest-return growth or retention initiative.",
-                "source": "backend_decision_engine",
+                "source": "business_decision_engine",
             }
         )
 
     insights = anomalies_v2.get("insights") or []
 
     for insight in insights[:2]:
+        category = str(insight.get("category") or "").lower()
+        title = str(insight.get("title") or "").lower()
+
+        if category == "profitability" and not (profit_available and margin_available):
+            continue
+        if category == "marketing" and not roas_available:
+            continue
+        if category == "customers" and not churn_available:
+            continue
+        if "profit" in title and not (profit_available and margin_available):
+            continue
+        if "roas" in title and not roas_available:
+            continue
+        if "churn" in title and not churn_available:
+            continue
+
         opportunities.append(
             {
                 "opportunity": insight.get("title", "Business improvement opportunity"),
@@ -273,12 +352,11 @@ def _build_opportunities(
                 "why_it_matters": insight.get("summary", ""),
                 "recommended_action": "Convert this positive signal into a repeatable operating process.",
                 "business_impact": insight.get("business_impact", []),
-                "source": "backend_anomaly_detection_v2",
+                "source": "business_risk_engine_v2",
             }
         )
 
     return opportunities[:5]
-
 
 def _build_recommendations(
     anomalies_v2: dict[str, Any],
@@ -288,7 +366,32 @@ def _build_recommendations(
     recommendations = []
     seen_actions = set()
 
+    profit_available = _flag_enabled(core_kpis, "profit_available", True)
+    margin_available = _flag_enabled(
+        core_kpis,
+        "profit_margin_available",
+        profit_available,
+    )
+    expenses_available = _flag_enabled(core_kpis, "expenses_available", profit_available)
+    revenue = _to_float(core_kpis.get("revenue"))
+    churn = _to_float(advanced_kpis.get("churn_rate_percent"))
+    churn_available = _flag_enabled(advanced_kpis, "churn_available", churn > 0)
+
     for item in _get_top_items(anomalies_v2.get("items") or [], limit=5):
+        category = str(item.get("category") or "").lower()
+        metric = str(item.get("metric") or "").lower()
+
+        if category == "profitability" and not (profit_available and margin_available):
+            continue
+        if metric in {"profit_margin_percent", "profit", "profit_change_percent"} and not (
+            profit_available and margin_available
+        ):
+            continue
+        if category == "expenses" and not expenses_available:
+            continue
+        if category == "customers" and not churn_available:
+            continue
+
         actions = item.get("recommended_actions") or []
 
         for action in actions[:2]:
@@ -306,14 +409,13 @@ def _build_recommendations(
                     "category": item.get("category", "business"),
                     "expected_impact": item.get("why_it_matters", ""),
                     "metric": item.get("metric"),
-                    "source": "backend_anomaly_detection_v2",
+                    "source": "business_risk_engine_v2",
                 }
             )
 
-    churn = _to_float(advanced_kpis.get("churn_rate_percent"))
     margin = _to_float(core_kpis.get("profit_margin_percent"))
 
-    if churn >= 12:
+    if churn_available and churn >= 12:
         recommendations.append(
             {
                 "recommendation": "Prioritize churn reduction before increasing acquisition spend.",
@@ -321,11 +423,11 @@ def _build_recommendations(
                 "category": "customers",
                 "expected_impact": "Improves retention, LTV, and recurring revenue stability.",
                 "metric": "churn_rate_percent",
-                "source": "backend_decision_engine",
+                "source": "business_decision_engine",
             }
         )
 
-    if margin < 15:
+    if profit_available and margin_available and margin < 15:
         recommendations.append(
             {
                 "recommendation": "Review pricing, direct costs, and operating expenses to protect margin.",
@@ -333,12 +435,23 @@ def _build_recommendations(
                 "category": "profitability",
                 "expected_impact": "Improves profit margin and cashflow resilience.",
                 "metric": "profit_margin_percent",
-                "source": "backend_decision_engine",
+                "source": "business_decision_engine",
+            }
+        )
+
+    if not (profit_available and margin_available) and revenue > 0:
+        recommendations.append(
+            {
+                "recommendation": "Add expense, cost, or profit columns to verify profitability before making margin decisions.",
+                "priority": "medium",
+                "category": "data_quality",
+                "expected_impact": "Improves decision quality by enabling verified margin, profit, and cashflow analysis.",
+                "metric": "profit_margin_percent",
+                "source": "business_decision_engine",
             }
         )
 
     return recommendations[:6]
-
 
 def _build_key_insights(
     core_kpis: dict[str, Any],
@@ -356,22 +469,49 @@ def _build_key_insights(
     roas = _to_float(advanced_kpis.get("roas"))
     health_score = _to_float(health.get("score"))
 
-    insights.append(
-        f"Revenue is {round(revenue, 2)} with profit of {round(profit, 2)}."
+    profit_available = _flag_enabled(core_kpis, "profit_available", True)
+    margin_available = _flag_enabled(
+        core_kpis,
+        "profit_margin_available",
+        profit_available,
     )
+    churn_available = _flag_enabled(advanced_kpis, "churn_available", churn > 0)
+    roas_available = _flag_enabled(advanced_kpis, "roas_available", roas > 0)
 
-    insights.append(
-        f"Profit margin is {round(margin, 2)}% and revenue growth is {round(growth, 2)}%."
-    )
+    if profit_available:
+        insights.append(
+            f"Revenue is {round(revenue, 2)} with profit of {round(profit, 2)}."
+        )
+    else:
+        insights.append(
+            "Profitability metrics cannot be verified because no expense, cost, or profit column was provided."
+        )
 
-    if churn > 0:
+    if margin_available:
+        insights.append(
+            f"Profit margin is {round(margin, 2)}% and revenue growth is {round(growth, 2)}%."
+        )
+    else:
+        insights.append(
+            f"Revenue growth is {round(growth, 2)}%, but profit margin could not be verified."
+        )
+
+    if churn_available and churn > 0:
         insights.append(
             f"Customer churn is estimated at {round(churn, 2)}%, which affects retention quality."
         )
+    elif not churn_available:
+        insights.append(
+            "Customer churn could not be calculated from the uploaded data."
+        )
 
-    if roas > 0:
+    if roas_available and roas > 0:
         insights.append(
             f"ROAS is {round(roas, 2)}, based on revenue and advertising spend."
+        )
+    elif not roas_available:
+        insights.append(
+            "ROAS could not be calculated because advertising spend was not provided."
         )
 
     insights.append(
@@ -385,8 +525,12 @@ def _build_key_insights(
             f"{anomaly_summary.get('total_items', 0)} business risk indicator(s) and {anomaly_summary.get('insights', 0)} positive business signal(s) were identified."
         )
 
-    return insights[:6]
+    deduped = []
+    for insight in insights:
+        if insight not in deduped:
+            deduped.append(insight)
 
+    return deduped[:6]
 
 def build_business_decision_layer(
     result: dict[str, Any],
@@ -449,7 +593,7 @@ def build_business_decision_layer(
             health=health,
             anomalies_v2=anomalies_v2,
         ),
-        "source": "backend_decision_engine",
+        "source": "business_decision_engine",
     }
 
     result["risks"] = _build_risks_from_anomalies(
@@ -471,7 +615,7 @@ def build_business_decision_layer(
 
     result["decision_engine"] = {
         "enabled": True,
-        "source": "backend_decision_engine",
+        "source": "business_decision_engine",
         "business_model": business_model,
         "based_on": {
             "core_kpis": bool(core_kpis),
