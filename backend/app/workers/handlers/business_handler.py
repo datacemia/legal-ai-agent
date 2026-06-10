@@ -86,12 +86,17 @@ def _build_safe_ai_fallback() -> dict[str, Any]:
         "executive_summary": "AI analysis returned an invalid response.",
         "business_health_score": None,
         "kpis": {
-            "revenue": 0,
-            "expenses": 0,
-            "profit": 0,
-            "profit_margin_percent": 0,
-            "growth_rate_percent": 0,
+            "revenue": None,
+            "expenses": None,
+            "profit": None,
+            "profit_margin_percent": None,
+            "growth_rate_percent": None,
             "cashflow_status": "unknown",
+            "revenue_available": False,
+            "expenses_available": False,
+            "profit_available": False,
+            "growth_available": False,
+            "cashflow_available": False,
         },
         "advanced_kpis": {},
         "monthly_series": [],
@@ -111,8 +116,8 @@ def _build_safe_ai_fallback() -> dict[str, Any]:
         "charts": [],
         "forecast": {
             "available": False,
-            "next_month_revenue": 0,
-            "next_quarter_revenue": 0,
+            "next_month_revenue": None,
+            "next_quarter_revenue": None,
             "trend": "unknown",
             "explanation": "Forecast unavailable because the analysis failed.",
         },
@@ -126,6 +131,284 @@ def _build_safe_ai_fallback() -> dict[str, Any]:
             "Verify important decisions with a qualified professional."
         ),
     }
+
+
+def _has_verified_business_performance_data(
+    detected_kpis: dict[str, Any] | None,
+) -> bool:
+    detected_kpis = detected_kpis or {}
+
+    core_kpis = detected_kpis.get("core_kpis") or {}
+    advanced_kpis = detected_kpis.get("advanced_kpis") or {}
+    forecast = detected_kpis.get("forecast") or {}
+
+    core_flags = (
+        "revenue_available",
+        "expenses_available",
+        "profit_available",
+        "growth_available",
+        "cashflow_available",
+        "orders_available",
+        "customers_available",
+    )
+
+    advanced_flags = (
+        "churn_available",
+        "roas_available",
+        "cac_available",
+        "aov_available",
+        "mrr_available",
+        "arr_available",
+        "ltv_available",
+        "retention_available",
+        "conversion_available",
+    )
+
+    if any(bool(core_kpis.get(flag)) for flag in core_flags):
+        return True
+
+    if any(bool(advanced_kpis.get(flag)) for flag in advanced_flags):
+        return True
+
+    if bool(forecast.get("available")):
+        return True
+
+    return False
+
+
+def _unknown_currency() -> dict[str, Any]:
+    return {
+        "code": None,
+        "symbol": None,
+        "name": None,
+        "locale": None,
+        "position": None,
+        "detected_from": "none",
+        "multi_currency_detected": False,
+        "detected_currencies": [],
+        "confidence": 0.0,
+    }
+
+
+def _mark_non_performance_dataset(
+    result: dict[str, Any],
+    output_language: str = "en",
+) -> dict[str, Any]:
+    messages = {
+        "en": {
+            "summary": (
+                "The uploaded file does not contain enough verified business "
+                "performance data to calculate Revenue, growth, Profitability, "
+                "cashflow, risks, forecasts, or priority decisions."
+            ),
+            "decision_title": "Upload performance data before making business decisions",
+            "decision": (
+                "Upload a file with dated Revenue, orders, Expenses, customers, "
+                "cashflow, or advertising spend before using this agent for "
+                "executive decisions."
+            ),
+            "why": (
+                "The uploaded file does not contain verified business performance "
+                "metrics."
+            ),
+            "recommendation": (
+                "Upload a file with dated Revenue, orders, Expenses, customers, "
+                "cashflow, or advertising spend before using this agent for "
+                "executive decisions."
+            ),
+            "recommendation_impact": (
+                "Enables verified KPI, risk, forecast, and decision analysis."
+            ),
+            "insight": (
+                "The uploaded file does not contain verified business performance "
+                "metrics."
+            ),
+            "health_reason": (
+                "Business health score is unavailable because insufficient "
+                "business performance data was provided."
+            ),
+            "forecast_explanation": (
+                "Forecast requires enough dated revenue or business performance data."
+            ),
+        },
+        "fr": {
+            "summary": (
+                "Le fichier importé ne contient pas suffisamment de données de "
+                "performance business vérifiées pour calculer le chiffre d’affaires, "
+                "la croissance, la rentabilité, le cashflow, les risques, les "
+                "prévisions ou les décisions prioritaires."
+            ),
+            "decision_title": (
+                "Importer des données de performance avant de prendre des décisions business"
+            ),
+            "decision": (
+                "Importez un fichier avec des revenus datés, commandes, dépenses, "
+                "clients, cashflow ou dépenses publicitaires avant d’utiliser cet "
+                "agent pour des décisions exécutives."
+            ),
+            "why": (
+                "Le fichier importé ne contient pas de métriques de performance "
+                "business vérifiées."
+            ),
+            "recommendation": (
+                "Importez un fichier avec des revenus datés, commandes, dépenses, "
+                "clients, cashflow ou dépenses publicitaires avant d’utiliser cet "
+                "agent pour des décisions exécutives."
+            ),
+            "recommendation_impact": (
+                "Permet une analyse vérifiée des KPI, des risques, des prévisions "
+                "et des décisions."
+            ),
+            "insight": (
+                "Le fichier importé ne contient pas de métriques de performance "
+                "business vérifiées."
+            ),
+            "health_reason": (
+                "Le score de santé business est indisponible faute de données de "
+                "performance suffisantes."
+            ),
+            "forecast_explanation": (
+                "Les prévisions nécessitent suffisamment de données datées sur les "
+                "revenus ou la performance business."
+            ),
+        },
+        "ar": {
+            "summary": (
+                "لا يحتوي الملف المرفوع على بيانات أداء أعمال موثقة وكافية لحساب "
+                "الإيرادات أو النمو أو الربحية أو التدفق النقدي أو المخاطر أو "
+                "التوقعات أو القرارات ذات الأولوية."
+            ),
+            "decision_title": "ارفع بيانات أداء قبل اتخاذ قرارات أعمال",
+            "decision": (
+                "ارفع ملفاً يحتوي على إيرادات مؤرخة أو طلبات أو مصروفات أو عملاء "
+                "أو تدفق نقدي أو إنفاق إعلاني قبل استخدام هذا الوكيل لاتخاذ "
+                "قرارات تنفيذية."
+            ),
+            "why": "لا يحتوي الملف المرفوع على مؤشرات أداء أعمال موثقة.",
+            "recommendation": (
+                "ارفع ملفاً يحتوي على إيرادات مؤرخة أو طلبات أو مصروفات أو عملاء "
+                "أو تدفق نقدي أو إنفاق إعلاني قبل استخدام هذا الوكيل لاتخاذ "
+                "قرارات تنفيذية."
+            ),
+            "recommendation_impact": (
+                "يتيح تحليلاً موثقاً للمؤشرات والمخاطر والتوقعات والقرارات."
+            ),
+            "insight": "لا يحتوي الملف المرفوع على مؤشرات أداء أعمال موثقة.",
+            "health_reason": (
+                "درجة صحة الأعمال غير متاحة بسبب عدم توفر بيانات أداء كافية."
+            ),
+            "forecast_explanation": (
+                "تتطلب التوقعات بيانات كافية ومؤرخة عن الإيرادات أو أداء الأعمال."
+            ),
+        },
+    }
+
+    text = messages.get(output_language, messages["en"])
+
+    result["analysis_available"] = False
+    result["confidence_level"] = "low"
+    result["executive_summary"] = text["summary"]
+
+    result["kpis"] = {
+        "revenue": None,
+        "expenses": None,
+        "profit": None,
+        "profit_margin_percent": None,
+        "growth_rate_percent": None,
+        "cashflow_status": "unknown",
+        "revenue_available": False,
+        "expenses_available": False,
+        "profit_available": False,
+        "growth_available": False,
+        "cashflow_available": False,
+    }
+
+    result["advanced_kpis"] = {}
+    result["monthly_series"] = []
+    result["charts"] = []
+
+    result["forecast"] = {
+        "available": False,
+        "next_month_revenue": None,
+        "next_quarter_revenue": None,
+        "trend": "unknown",
+        "explanation": text["forecast_explanation"],
+    }
+
+    result["business_health_score"] = None
+    result["business_health"] = {
+        "available": False,
+        "score": None,
+        "rating": "not_available",
+        "reason": text["health_reason"],
+        "components": {},
+        "weights": {},
+        "strengths": [],
+        "warnings": [text["insight"]],
+        "availability": {
+            "profit": False,
+            "roas": False,
+            "churn": False,
+            "cac": False,
+        },
+        "source": "business_health_scoring",
+    }
+
+    result["currency"] = _unknown_currency()
+
+    result["risks"] = []
+    result["opportunities"] = []
+    result["recommendations"] = [
+        {
+            "recommendation": text["recommendation"],
+            "priority": "medium",
+            "expected_impact": text["recommendation_impact"],
+            "action_steps": [
+                text["recommendation"],
+            ],
+        }
+    ]
+
+    result["smart_insights"] = {
+        "most_important_decision": {
+            "title": text["decision_title"],
+            "decision": text["decision"],
+            "why": text["why"],
+            "impact": "medium",
+            "timeframe": "before executive decisions",
+        },
+        "key_insights": [
+            text["insight"],
+            text["health_reason"],
+        ],
+    }
+
+    result.setdefault("data_quality", {})
+    result["data_quality"]["score"] = int(result["data_quality"].get("score") or 0)
+    limitations = result["data_quality"].get("limitations")
+    if not isinstance(limitations, list):
+        limitations = []
+    if text["insight"] not in limitations:
+        limitations.append(text["insight"])
+    result["data_quality"]["limitations"] = limitations
+
+    missing_fields = result["data_quality"].get("missing_fields")
+    if not isinstance(missing_fields, list):
+        missing_fields = []
+    for field in (
+        "revenue",
+        "expenses",
+        "profit",
+        "cashflow",
+        "customers",
+        "orders",
+        "marketing_spend",
+    ):
+        if field not in missing_fields:
+            missing_fields.append(field)
+    result["data_quality"]["missing_fields"] = missing_fields
+
+    return result
 
 
 def _force_backend_financial_truth(
@@ -223,6 +506,10 @@ def handle_business_ai(job: Job, db):
         column_mapping=column_mapping,
     )
 
+    has_verified_business_performance_data = _has_verified_business_performance_data(
+        detected_kpis
+    )
+
     update_job_progress(job, db, 42, business_progress_message("analyzing", output_language))
 
     try:
@@ -247,10 +534,20 @@ def handle_business_ai(job: Job, db):
 
     result = _force_backend_financial_truth(result, detected_kpis, business_model)
 
+    if not has_verified_business_performance_data:
+        result = _mark_non_performance_dataset(
+            result=result,
+            output_language=output_language,
+        )
+
     update_job_progress(job, db, 58, business_progress_message("charts", output_language))
 
-    charts = build_business_charts(rows=normalized_rows, column_mapping=column_mapping)
-    forecast = forecast_business_performance(rows=normalized_rows, column_mapping=column_mapping)
+    if has_verified_business_performance_data:
+        charts = build_business_charts(rows=normalized_rows, column_mapping=column_mapping)
+        forecast = forecast_business_performance(rows=normalized_rows, column_mapping=column_mapping)
+    else:
+        charts = []
+        forecast = result.get("forecast", {})
 
     result["charts"] = charts
     result["forecast"] = forecast
@@ -276,6 +573,13 @@ def handle_business_ai(job: Job, db):
 
     result = attach_business_memory(db=db, user_id=job.user_id, current_result=result)
     result = _force_backend_financial_truth(result, detected_kpis, business_model)
+
+    if not has_verified_business_performance_data:
+        result = _mark_non_performance_dataset(
+            result=result,
+            output_language=output_language,
+        )
+
     result = apply_backend_health_score(result=result, detected_kpis=detected_kpis)
     result = attach_business_anomalies_v2(
         result=result,
@@ -284,7 +588,10 @@ def handle_business_ai(job: Job, db):
         strictness="professional",
     )
     result = build_business_decision_layer(result=result, detected_kpis=detected_kpis)
-    result = attach_currency_to_result(result=result, rows=normalized_rows, default_currency="USD")
+    result = attach_currency_to_result(result=result, rows=normalized_rows, default_currency=None)
+
+    if not has_verified_business_performance_data:
+        result["currency"] = _unknown_currency()
 
     update_job_progress(job, db, 85, business_progress_message("localizing", output_language))
 
