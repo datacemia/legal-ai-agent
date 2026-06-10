@@ -382,9 +382,8 @@ def _build_insufficient_data_layer(
         insight = "Product catalog/reference data detected; performance KPIs are unavailable."
     else:
         summary = (
-            "The uploaded file does not contain enough verified business performance "
-            "data to calculate revenue, growth, profitability, cashflow, risks, or "
-            "priority decisions."
+            "Insufficient verified business performance data was provided. "
+            "Executive KPI, risk, forecast, and priority decision analysis is unavailable."
         )
         decision = (
             "Upload a file with dated revenue, orders, expenses, customers, cashflow, "
