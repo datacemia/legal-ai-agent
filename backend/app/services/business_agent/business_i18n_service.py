@@ -863,7 +863,7 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
         )
 
     if profit_available:
-        profit_display = _display_metric(profit)
+        profit_display = _display_metric(profit, lang)
         margin_display = _display_percent(margin)
 
         if lang == "fr":
@@ -1013,8 +1013,8 @@ def _build_key_insights(payload: dict[str, Any], language: str) -> list[str]:
     elif revenue_available and profit_available:
         insights.append(
             PHRASE_TRANSLATIONS["Revenue is {revenue} with profit of {profit}."][lang].format(
-                revenue=_display_metric(revenue),
-                profit=_display_metric(profit),
+                revenue=_display_metric(revenue, lang),
+                profit=_display_metric(profit, lang),
             )
         )
     elif revenue_available:
@@ -1022,7 +1022,7 @@ def _build_key_insights(payload: dict[str, Any], language: str) -> list[str]:
             PHRASE_TRANSLATIONS[
                 "Revenue is {revenue}. Profit could not be calculated because no expense, cost, or profit column was provided."
             ][lang].format(
-                revenue=_display_metric(revenue),
+                revenue=_display_metric(revenue, lang),
             )
         )
     else:
