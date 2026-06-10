@@ -25,7 +25,7 @@ def build_default_business_result(
         "business_model": "general",
         "confidence_level": "low",
         "executive_summary": executive_summary,
-        "business_health_score": 0,
+        "business_health_score": None,
         "kpis": {
             "revenue": 0,
             "expenses": 0,
@@ -70,11 +70,21 @@ def ensure_business_result_shape(result: dict[str, Any]) -> dict[str, Any]:
     """
     Keeps the API response stable even if the AI omits a field.
     This avoids breaking the frontend while still returning the richer AI CFO shape.
+
+    Important:
+    - business_health_score is allowed to be None when health cannot be calculated.
+    - Do not replace None business_health_score with 0, because 0/100 is a real
+      critical score and would be misleading for product catalogs or incomplete files.
     """
 
     default_result = build_default_business_result()
 
     for key, value in default_result.items():
+        if key == "business_health_score":
+            if key not in result:
+                result[key] = value
+            continue
+
         if key not in result or result[key] is None:
             result[key] = value
 
@@ -198,6 +208,17 @@ def apply_backend_source_of_truth(
 
         if confidence:
             result["confidence_level"] = confidence
+
+    # Preserve explicit backend unavailable health score.
+    # Some downstream layers intentionally set business_health_score=None for
+    # non-performance files. Do not coerce that to 0 here.
+    if result.get("business_health_score") is None:
+        business_health = result.get("business_health")
+
+        if isinstance(business_health, dict):
+            business_health.setdefault("available", False)
+            business_health.setdefault("score", None)
+            business_health.setdefault("rating", "not_available")
 
     # Store strict backend metadata for debugging / auditability.
     result["backend_truth"] = {
