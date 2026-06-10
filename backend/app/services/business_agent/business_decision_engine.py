@@ -23,7 +23,31 @@ def _is_real_number(value: Any) -> bool:
     return isinstance(value, (int, float)) and not isinstance(value, bool)
 
 
-def _flag_enabled(payload: dict[str, Any], key: str, default: bool = True) -> bool:
+def _is_available_value(value: Any) -> bool:
+    return value not in (None, "", "None", "null", "NULL", "N/A", "n/a")
+
+
+def _format_metric(value: Any) -> str:
+    if not _is_available_value(value):
+        return "N/A"
+
+    if _is_real_number(value):
+        return str(round(float(value), 2))
+
+    return str(value)
+
+
+def _format_percent(value: Any) -> str:
+    if not _is_available_value(value):
+        return "N/A"
+
+    if _is_real_number(value):
+        return f"{round(float(value), 2)}%"
+
+    return f"{value}%"
+
+
+def _flag_enabled(payload: dict[str, Any], key: str, default: bool = False) -> bool:
     """
     Read KPI availability flags safely.
 
@@ -37,7 +61,7 @@ def _flag_enabled(payload: dict[str, Any], key: str, default: bool = True) -> bo
     - revenue_per_customer_available
     - cashflow_available
 
-    If a flag is missing, default=True preserves backward compatibility.
+    If a flag is missing, default=False prevents missing KPI fields from being treated as verified data.
     """
 
     if not isinstance(payload, dict):
@@ -167,20 +191,63 @@ def _has_available_business_signal(
     result: dict[str, Any],
 ) -> bool:
     """
-    Decide whether the uploaded file contains real business performance data.
+    Decide whether the uploaded file contains verified business performance data.
 
-    A product catalog can contain price/list_price/inventory columns, but those
-    are not the same as verified revenue, orders, expenses, cashflow, customers,
-    or advertising spend. This guard prevents turning missing business metrics
-    into fake $0 / 0% analysis.
+    Worldwide rule:
+    - Product catalogs, reviews, inventories, SKU tables, reference tables,
+      user lists, content lists, event logs, and similar files are useful context
+      but are not performance datasets by themselves.
+    - price, stock, rating, review_count, product_id, user_id, or date columns
+      are not enough to calculate executive KPIs.
+    - A file is performance-ready only when it explicitly provides verified
+      revenue/sales amounts, expenses/costs, profit, cashflow, orders with
+      monetary value, customers/churn/retention, subscriptions, MRR/ARR, or
+      marketing spend/CAC/ROAS.
     """
 
+    if not isinstance(core_kpis, dict):
+        core_kpis = {}
+
+    if not isinstance(advanced_kpis, dict):
+        advanced_kpis = {}
+
+    performance_flags = (
+        (core_kpis, "revenue_available"),
+        (core_kpis, "sales_available"),
+        (core_kpis, "expenses_available"),
+        (core_kpis, "profit_available"),
+        (core_kpis, "profit_margin_available"),
+        (core_kpis, "cashflow_available"),
+        (core_kpis, "orders_available"),
+        (core_kpis, "customers_available"),
+        (advanced_kpis, "churn_available"),
+        (advanced_kpis, "retention_available"),
+        (advanced_kpis, "roas_available"),
+        (advanced_kpis, "cac_available"),
+        (advanced_kpis, "ad_spend_available"),
+        (advanced_kpis, "mrr_available"),
+        (advanced_kpis, "arr_available"),
+        (advanced_kpis, "ltv_available"),
+        (advanced_kpis, "revenue_per_customer_available"),
+        (advanced_kpis, "conversion_available"),
+    )
+
+    if any(payload.get(flag) is True for payload, flag in performance_flags):
+        return True
+
+    # Preserve legitimate files that provide positive verified KPI values even
+    # if an older detector did not add availability flags.
     if _metric_has_positive_value(
         core_kpis,
         "revenue",
+        "sales",
         "expenses",
         "expense",
+        "cost",
         "profit",
+        "cashflow",
+        "orders",
+        "customers",
     ):
         return True
 
@@ -193,26 +260,15 @@ def _has_available_business_signal(
         "ad_spend",
         "mrr",
         "arr",
+        "revenue_per_customer",
+        "cac",
+        "roas",
     ):
         return True
 
-    charts = result.get("charts") or []
-
-    if isinstance(charts, list) and charts:
-        return True
-
-    forecast = result.get("forecast") or {}
-
-    if isinstance(forecast, dict) and forecast.get("available") is True:
-        return True
-
-    # If the upstream extractor explicitly marks revenue as available, preserve
-    # backward compatibility for legitimate zero-revenue files.
-    if isinstance(core_kpis, dict) and core_kpis.get("revenue_available") is True:
-        return True
-
+    # Do NOT use charts or forecast as proof. They can be generated from
+    # dates, ratings, prices, or counts in non-financial files.
     return False
-
 
 def _looks_like_reference_or_catalog_file(
     result: dict[str, Any],
@@ -497,54 +553,73 @@ def _build_executive_summary(
     anomalies_v2: dict[str, Any],
 ) -> str:
     model_label = _business_model_label(business_model)
-    revenue = _to_float(core_kpis.get("revenue"))
-    profit = _to_float(core_kpis.get("profit"))
-    margin = _to_float(core_kpis.get("profit_margin_percent"))
-    growth = _to_float(core_kpis.get("growth_rate_percent"))
+
+    revenue = core_kpis.get("revenue")
+    profit = core_kpis.get("profit")
+    margin = core_kpis.get("profit_margin_percent")
+    growth = core_kpis.get("growth_rate_percent")
     cashflow_status = str(core_kpis.get("cashflow_status") or "unknown")
+
     health_score_raw = health.get("score")
-    health_score_available = _is_real_number(health_score_raw)
-    health_score = _to_float(health_score_raw) if health_score_available else 0.0
     health_rating = str(health.get("rating") or "unknown")
     anomaly_status = str(anomalies_v2.get("status") or "normal")
-    churn = _to_float(advanced_kpis.get("churn_rate_percent"))
+    churn = advanced_kpis.get("churn_rate_percent")
 
-    profit_available = _flag_enabled(core_kpis, "profit_available", True)
+    revenue_available = _flag_enabled(core_kpis, "revenue_available", False)
+    profit_available = _flag_enabled(core_kpis, "profit_available", False)
     margin_available = _flag_enabled(
         core_kpis,
         "profit_margin_available",
         profit_available,
     )
-    cashflow_available = _flag_enabled(core_kpis, "cashflow_available", profit_available)
-    churn_available = _flag_enabled(advanced_kpis, "churn_available", churn > 0)
+    growth_available = _flag_enabled(core_kpis, "growth_available", False)
+    cashflow_available = _flag_enabled(core_kpis, "cashflow_available", False)
+    churn_available = _flag_enabled(advanced_kpis, "churn_available", False)
 
-    if profit_available and margin_available:
-        profitability_sentence = (
-            f"profit of {round(profit, 2)}, and a profit margin of {round(margin, 2)}%. "
-        )
-    elif profit_available:
-        profitability_sentence = (
-            f"profit of {round(profit, 2)}. Profit margin could not be verified. "
+    if not (
+        revenue_available
+        or profit_available
+        or margin_available
+        or growth_available
+        or cashflow_available
+        or churn_available
+    ):
+        summary = (
+            f"This {model_label} analysis does not contain enough verified "
+            "business performance data. Revenue, growth, profitability, cashflow, "
+            "customer churn, risks, and priority decisions cannot be calculated "
+            "reliably from this file alone."
         )
     else:
-        profitability_sentence = (
-            "profitability metrics cannot be verified because expenses or costs were not provided. "
+        revenue_display = _format_metric(revenue) if revenue_available else "N/A"
+        growth_display = _format_percent(growth) if growth_available else "N/A"
+
+        if profit_available and margin_available:
+            profitability_sentence = (
+                f"profit of {_format_metric(profit)}, and a profit margin of "
+                f"{_format_percent(margin)}. "
+            )
+        elif profit_available:
+            profitability_sentence = (
+                f"profit of {_format_metric(profit)}. Profit margin could not be verified. "
+            )
+        else:
+            profitability_sentence = (
+                "profitability metrics cannot be verified because expenses or costs were not provided. "
+            )
+
+        display_cashflow = cashflow_status if cashflow_available else "unknown"
+
+        summary = (
+            f"This {model_label} analysis shows revenue of {revenue_display}, "
+            f"{profitability_sentence}"
+            f"Revenue growth is {growth_display} and cashflow is {display_cashflow}."
         )
 
-    display_cashflow = cashflow_status if cashflow_available else "unknown"
-
-    summary = (
-        f"This {model_label} analysis shows revenue of {round(revenue, 2)}, "
-        f"{profitability_sentence}"
-        f"Revenue growth is {round(growth, 2)}% and cashflow is {display_cashflow}."
-    )
-
-    raw_health_score = health.get("score")
-
-    if _is_real_number(raw_health_score):
+    if _is_real_number(health_score_raw):
         summary += (
             f" The Business Health Score is "
-            f"{int(round(raw_health_score))}/100 ({health_rating})."
+            f"{int(round(health_score_raw))}/100 ({health_rating})."
         )
     else:
         summary += (
@@ -555,9 +630,9 @@ def _build_executive_summary(
     if anomaly_status not in {"normal", "low_risk"}:
         summary += f" The current business risk assessment is {anomaly_status}."
 
-    if churn_available and churn > 12:
+    if churn_available and _is_available_value(churn) and _to_float(churn) > 12:
         summary += (
-            f" Customer churn is elevated at {round(churn, 2)}%, "
+            f" Customer churn is elevated at {_format_percent(churn)}, "
             "which should be treated as a priority."
         )
 
@@ -601,7 +676,7 @@ def _build_opportunities(
     roas = _to_float(advanced_kpis.get("roas"))
     churn = _to_float(advanced_kpis.get("churn_rate_percent"))
 
-    profit_available = _flag_enabled(core_kpis, "profit_available", True)
+    profit_available = _flag_enabled(core_kpis, "profit_available", False)
     margin_available = _flag_enabled(
         core_kpis,
         "profit_margin_available",
@@ -609,7 +684,7 @@ def _build_opportunities(
     )
     churn_available = _flag_enabled(advanced_kpis, "churn_available", churn > 0)
     roas_available = _flag_enabled(advanced_kpis, "roas_available", roas > 0)
-    cac_available = _flag_enabled(advanced_kpis, "cac_available", True)
+    cac_available = _flag_enabled(advanced_kpis, "cac_available", False)
 
     cac_ratio = _to_float(
         (health.get("components") or {})
@@ -691,7 +766,7 @@ def _build_recommendations(
     recommendations = []
     seen_actions = set()
 
-    profit_available = _flag_enabled(core_kpis, "profit_available", True)
+    profit_available = _flag_enabled(core_kpis, "profit_available", False)
     margin_available = _flag_enabled(
         core_kpis,
         "profit_margin_available",
@@ -786,66 +861,69 @@ def _build_key_insights(
 ) -> list[str]:
     insights = []
 
-    revenue = _to_float(core_kpis.get("revenue"))
-    profit = _to_float(core_kpis.get("profit"))
-    margin = _to_float(core_kpis.get("profit_margin_percent"))
-    growth = _to_float(core_kpis.get("growth_rate_percent"))
-    churn = _to_float(advanced_kpis.get("churn_rate_percent"))
-    roas = _to_float(advanced_kpis.get("roas"))
+    revenue = core_kpis.get("revenue")
+    profit = core_kpis.get("profit")
+    margin = core_kpis.get("profit_margin_percent")
+    growth = core_kpis.get("growth_rate_percent")
+    churn = advanced_kpis.get("churn_rate_percent")
+    roas = advanced_kpis.get("roas")
     health_score_raw = health.get("score")
-    health_score_available = _is_real_number(health_score_raw)
-    health_score = _to_float(health_score_raw) if health_score_available else 0.0
 
-    profit_available = _flag_enabled(core_kpis, "profit_available", True)
+    revenue_available = _flag_enabled(core_kpis, "revenue_available", False)
+    profit_available = _flag_enabled(core_kpis, "profit_available", False)
     margin_available = _flag_enabled(
         core_kpis,
         "profit_margin_available",
         profit_available,
     )
-    churn_available = _flag_enabled(advanced_kpis, "churn_available", churn > 0)
-    roas_available = _flag_enabled(advanced_kpis, "roas_available", roas > 0)
+    growth_available = _flag_enabled(core_kpis, "growth_available", False)
+    churn_available = _flag_enabled(advanced_kpis, "churn_available", False)
+    roas_available = _flag_enabled(advanced_kpis, "roas_available", False)
 
-    if profit_available:
+    if revenue_available:
         insights.append(
-            f"Revenue is {round(revenue, 2)} with profit of {round(profit, 2)}."
+            f"Revenue is {_format_metric(revenue)} with profit of "
+            f"{_format_metric(profit) if profit_available else 'N/A'}."
+        )
+    else:
+        insights.append("Revenue could not be calculated from the uploaded data.")
+
+    if margin_available:
+        insights.append(
+            f"Profit margin is {_format_percent(margin)} and revenue growth is "
+            f"{_format_percent(growth) if growth_available else 'N/A'}."
         )
     else:
         insights.append(
             "Profitability metrics cannot be verified because no expense, cost, or profit column was provided."
         )
 
-    if margin_available:
+    if not growth_available:
+        insights.append("Revenue growth could not be calculated from the uploaded data.")
+
+    if churn_available and _is_available_value(churn):
         insights.append(
-            f"Profit margin is {round(margin, 2)}% and revenue growth is {round(growth, 2)}%."
+            f"Customer churn is estimated at {_format_percent(churn)}, which affects retention quality."
         )
     else:
-        insights.append(
-            f"Revenue growth is {round(growth, 2)}%, but profit margin could not be verified."
-        )
-
-    if churn_available and churn > 0:
-        insights.append(
-            f"Customer churn is estimated at {round(churn, 2)}%, which affects retention quality."
-        )
-    elif not churn_available:
         insights.append(
             "Customer churn could not be calculated from the uploaded data."
         )
 
-    if roas_available and roas > 0:
+    if roas_available and _is_available_value(roas):
         insights.append(
-            f"ROAS is {round(roas, 2)}, based on revenue and advertising spend."
+            f"ROAS is {_format_metric(roas)}, based on revenue and advertising spend."
         )
-    elif not roas_available:
+    else:
         insights.append(
             "ROAS could not be calculated because advertising spend was not provided."
         )
 
     insights.append(
         (
-            f"Business Health Score is {int(round(health_score))}/100."
-            if _is_real_number(health.get("score"))
-            else "Business Health Score could not be calculated from the uploaded data."
+            f"Business Health Score is {int(round(health_score_raw))}/100."
+            if _is_real_number(health_score_raw)
+            else "Business Health Score could not be calculated because insufficient business performance data was provided."
         )
     )
 
