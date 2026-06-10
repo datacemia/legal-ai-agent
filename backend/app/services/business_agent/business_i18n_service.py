@@ -107,7 +107,7 @@ TERM_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
     "unknown": {
         "en": "Unknown",
-        "fr": "Inconnu",
+        "fr": "Indisponible",
         "ar": "غير معروف",
     },
 
