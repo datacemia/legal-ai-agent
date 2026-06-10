@@ -2348,7 +2348,7 @@ export default function BusinessClient() {
       noRecommendation: "Analyze a business file to see verified recommendations.",
     },
     fr: {
-      kpiDashboard: "Tableau KPI",
+      kpiDashboard: "Tableau des indicateurs clés",
       live: result ? "LIVE" : "PRÊT",
       businessInsights: "Insights business",
       aiRecommendations: "Recommandations IA",
