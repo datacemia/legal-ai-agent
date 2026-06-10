@@ -235,7 +235,15 @@ const normalizeBackendText = (
     return "-";
   }
 
-  let text = String(value);
+  let text = String(value)
+    .replace(
+      /The Business Health Score is\s+(None|null|undefined)\/100\s*\([^)]*\)\.?/gi,
+      "Business Health Score could not be calculated because insufficient business performance data was provided."
+    )
+    .replace(
+      /Business Health Score is\s+(None|null|undefined)\/100\.?/gi,
+      "Business Health Score could not be calculated from the uploaded data."
+    );
 
   const dictionaries: Record<Locale, Record<string, string>> = {
     en: {},
@@ -1876,9 +1884,18 @@ export default function BusinessClient() {
     }
   };
 
-  const score = Number(
-    result?.business_health_score || 0
-  );
+  const rawHealthScore =
+    result?.business_health_score ??
+    result?.business_health?.score ??
+    null;
+
+  const healthScoreAvailable =
+    typeof rawHealthScore === "number" &&
+    Number.isFinite(rawHealthScore);
+
+  const score = healthScoreAvailable
+    ? Math.max(0, Math.min(100, Number(rawHealthScore)))
+    : null;
 
   const labels: Record<Locale, Record<string, any>> = {
     en: {
@@ -2183,8 +2200,12 @@ export default function BusinessClient() {
   const t = labels[locale] || labels.en;
 
   const getScoreColor = (
-    score: number
+    score: number | null
   ) => {
+    if (score === null) {
+      return "bg-slate-300";
+    }
+
     if (score >= 80) {
       return "bg-green-500";
     }
@@ -2196,7 +2217,14 @@ export default function BusinessClient() {
     return "bg-red-500";
   };
 
-  const getBusinessHealthStatus = (score: number) => {
+  const getBusinessHealthStatus = (score: number | null) => {
+    if (score === null) {
+      return {
+        label: unavailableMetricLabel(),
+        className: "border-slate-200 bg-slate-50 text-slate-700",
+      };
+    }
+
     if (score >= 80) {
       return {
         label: t.statusHealthy,
@@ -2771,7 +2799,7 @@ export default function BusinessClient() {
                 </span>
 
                 <span className="font-black text-slate-950">
-                  {score}/100
+                  {score === null ? unavailableMetricLabel() : `${score}/100`}
                 </span>
               </div>
 
@@ -2781,10 +2809,7 @@ export default function BusinessClient() {
                     score
                   )}`}
                   style={{
-                    width: `${Math.min(
-                      Math.max(score, 0),
-                      100
-                    )}%`,
+                    width: `${score === null ? 0 : score}%`,
                   }}
                 />
               </div>
