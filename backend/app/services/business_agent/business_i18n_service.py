@@ -307,6 +307,13 @@ TERM_TRANSLATIONS: dict[str, dict[str, str]] = {
 
 
 PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
+    "Insufficient verified business performance data was provided. Executive KPI, risk, forecast, and priority decision analysis is unavailable.": {
+        "en": "Insufficient verified business performance data was provided. Executive KPI, risk, forecast, and priority decision analysis is unavailable.",
+        "fr": "Les données de performance business vérifiées sont insuffisantes. L’analyse des KPI, des risques, des prévisions et des décisions prioritaires n’est pas disponible.",
+        "ar": "بيانات أداء الأعمال الموثقة غير كافية. تحليل مؤشرات الأداء والمخاطر والتوقعات والقرارات ذات الأولوية غير متاح."
+    },
+
+
     # Decision engine
     "Prioritize retention before scaling acquisition": {
         "en": "Prioritize retention before scaling acquisition",
