@@ -273,7 +273,15 @@ MONEY_KEYWORDS = {
     "payroll",
     "rent",
     "revenue_per_customer",
+    "total_amount",
+    "order_total",
+    "line_total",
+    "item_total",
+    "gross_amount",
+    "net_amount",
+    "purchase_amount",
 }
+
 
 
 def normalize_currency_code(value: Any) -> str | None:
@@ -333,9 +341,22 @@ def detect_currency_in_text(value: Any) -> str | None:
 
     upper_text = text.upper()
 
-    # Prefer explicit ISO codes over ambiguous symbols.
+    # Avoid false positives from UUIDs / random identifiers such as
+    # "684ddd4e-..." or chunks that accidentally contain CAD, MAD, AED, etc.
+    # Currency codes should appear as standalone tokens, usually next to a number
+    # or in a dedicated currency column.
+    looks_like_identifier = bool(
+        re.fullmatch(r"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}", text)
+        or re.fullmatch(r"[0-9a-fA-F\-]{16,}", text)
+    )
+
+    if looks_like_identifier:
+        return None
+
+    # Prefer explicit ISO codes over ambiguous symbols, but require non-alphanumeric
+    # boundaries so codes are not detected inside IDs or ordinary words.
     for code in CURRENCY_METADATA.keys():
-        pattern = rf"(?<![A-Z]){re.escape(code)}(?![A-Z])"
+        pattern = rf"(?<![A-Z0-9]){re.escape(code)}(?![A-Z0-9])"
 
         if re.search(pattern, upper_text):
             return code
@@ -348,10 +369,14 @@ def detect_currency_in_text(value: Any) -> str | None:
     )
 
     for symbol in sorted_symbols:
-        if symbol and symbol in text:
-            return CURRENCY_SYMBOL_TO_CODE[symbol]
+        if not symbol:
+            continue
 
-        if symbol and symbol.upper() in upper_text:
+        # ISO alphabetic codes were already handled above with safe boundaries.
+        if symbol.isalpha() and len(symbol) == 3:
+            continue
+
+        if symbol in text or symbol.upper() in upper_text:
             return CURRENCY_SYMBOL_TO_CODE[symbol]
 
     return None
@@ -529,13 +554,10 @@ def detect_currency_from_values(rows: list[dict[str, Any]]) -> list[str]:
             if value is None:
                 continue
 
+            # Currency detection from arbitrary non-money columns creates false
+            # positives with UUIDs/product IDs. Only money-like columns or explicit
+            # currency columns should influence currency detection.
             if not is_money_column(key):
-                # Still detect if value contains explicit currency symbol/code.
-                code = detect_currency_in_text(value)
-
-                if code:
-                    detected.append(code)
-
                 continue
 
             code = detect_currency_in_text(value)

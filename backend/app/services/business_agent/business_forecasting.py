@@ -1,6 +1,7 @@
 from collections import defaultdict
 from datetime import date, datetime
 from typing import Any
+import re
 
 
 def _safe_float(value: Any) -> float:
@@ -31,14 +32,35 @@ def _safe_float(value: Any) -> float:
         .replace("MAD", "")
         .replace("DH", "")
         .replace("dhs", "")
+        .replace("USD", "")
+        .replace("EUR", "")
+        .replace("CAD", "")
+        .replace("AUD", "")
+        .replace("AED", "")
+        .replace("SAR", "")
         .replace(" ", "")
         .strip()
     )
 
+    text = re.sub(r"[^0-9,\.\-]", "", text)
+
+    if not text:
+        return 0.0
+
     if "," in text and "." in text:
-        text = text.replace(",", "")
+        last_comma = text.rfind(",")
+        last_dot = text.rfind(".")
+
+        if last_comma > last_dot:
+            text = text.replace(".", "").replace(",", ".")
+        else:
+            text = text.replace(",", "")
     elif "," in text and "." not in text:
-        text = text.replace(",", ".")
+        parts = text.split(",")
+        if len(parts[-1]) in {1, 2}:
+            text = text.replace(",", ".")
+        else:
+            text = text.replace(",", "")
 
     try:
         number = float(text)
@@ -62,7 +84,13 @@ def _format_period(value: Any) -> str:
     if not text:
         return "Unknown"
 
-    # Try common date formats.
+    # Accept ISO datetimes with time / fractional seconds, including nanoseconds
+    # such as "2023-01-15 18:05:44.055402424".
+    iso_date_match = re.match(r"^(\d{4})-(\d{2})-(\d{2})", text)
+
+    if iso_date_match:
+        return f"{iso_date_match.group(1)}-{iso_date_match.group(2)}"
+
     known_formats = [
         "%Y-%m-%d",
         "%Y/%m/%d",
@@ -71,6 +99,7 @@ def _format_period(value: Any) -> str:
         "%Y-%m",
         "%m-%Y",
         "%d-%m-%Y",
+        "%Y.%m.%d",
     ]
 
     for fmt in known_formats:
@@ -80,7 +109,13 @@ def _format_period(value: Any) -> str:
         except ValueError:
             continue
 
-    return text[:30]
+    if re.match(r"^\d{4}-\d{2}$", text):
+        return text
+
+    if len(text) <= 20 and re.search(r"\d{4}", text):
+        return text
+
+    return "Unknown"
 
 
 def _sort_periods(periods: list[str]) -> list[str]:
@@ -93,20 +128,37 @@ def _sort_periods(periods: list[str]) -> list[str]:
     return sorted(periods, key=sort_key)
 
 
+def _get_mapped_column(
+    column_mapping: dict[str, str],
+    *keys: str,
+) -> str | None:
+    for key in keys:
+        value = column_mapping.get(key)
+
+        if value:
+            return value
+
+    return None
+
+
 def build_monthly_financial_series(
     rows: list[dict[str, Any]] | None,
     column_mapping: dict[str, str] | None,
 ) -> list[dict[str, float | str]]:
     """
     Build monthly revenue / expenses / profit series from parsed rows.
+
+    Supports both legacy mapping key "expense" and current canonical key
+    "expenses" so global datasets do not lose cost data.
     """
 
     if not rows or not column_mapping:
         return []
 
-    date_column = column_mapping.get("date")
-    revenue_column = column_mapping.get("revenue")
-    expense_column = column_mapping.get("expense")
+    date_column = _get_mapped_column(column_mapping, "date", "period", "month")
+    revenue_column = _get_mapped_column(column_mapping, "revenue", "sales", "amount")
+    expense_column = _get_mapped_column(column_mapping, "expenses", "expense", "cost", "costs")
+    profit_column = _get_mapped_column(column_mapping, "profit", "net_profit", "gross_profit")
 
     if not date_column or not revenue_column:
         return []
@@ -115,8 +167,12 @@ def build_monthly_financial_series(
         lambda: {
             "revenue": 0.0,
             "expenses": 0.0,
+            "profit": 0.0,
         }
     )
+
+    has_expenses = bool(expense_column)
+    has_profit = bool(profit_column)
 
     for row in rows:
         period = _format_period(row.get(date_column))
@@ -124,14 +180,13 @@ def build_monthly_financial_series(
         if period == "Unknown":
             continue
 
-        grouped[period]["revenue"] += _safe_float(
-            row.get(revenue_column)
-        )
+        grouped[period]["revenue"] += _safe_float(row.get(revenue_column))
 
         if expense_column:
-            grouped[period]["expenses"] += _safe_float(
-                row.get(expense_column)
-            )
+            grouped[period]["expenses"] += _safe_float(row.get(expense_column))
+
+        if profit_column:
+            grouped[period]["profit"] += _safe_float(row.get(profit_column))
 
     if not grouped:
         return []
@@ -143,16 +198,25 @@ def build_monthly_financial_series(
     for period in periods:
         revenue = grouped[period]["revenue"]
         expenses = grouped[period]["expenses"]
-        profit = revenue - expenses
 
-        series.append(
-            {
-                "period": period,
-                "revenue": round(revenue, 2),
-                "expenses": round(expenses, 2),
-                "profit": round(profit, 2),
-            }
-        )
+        if has_profit:
+            profit = grouped[period]["profit"]
+        elif has_expenses:
+            profit = revenue - expenses
+        else:
+            # Revenue-only datasets cannot verify profitability.
+            profit = 0.0
+
+        item: dict[str, float | str] = {
+            "period": period,
+            "revenue": round(revenue, 2),
+            "expenses": round(expenses, 2),
+            "profit": round(profit, 2),
+            "profit_available": has_profit or has_expenses,
+            "expenses_available": has_expenses,
+        }
+
+        series.append(item)
 
     return series
 
@@ -199,6 +263,9 @@ def _detect_cashflow_risk(
         return "unknown"
 
     last = monthly_series[-1]
+
+    if not last.get("expenses_available"):
+        return "unknown"
 
     revenue = float(last.get("revenue", 0) or 0)
     expenses = float(last.get("expenses", 0) or 0)
