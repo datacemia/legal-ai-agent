@@ -163,6 +163,23 @@ const getCurrencyDisplay = (
   return `${symbol} ${code}`;
 };
 
+const isMetricAvailable = (
+  source: AnyObject | null | undefined,
+  keys: string[],
+  fallback = true
+) => {
+  for (const key of keys) {
+    if (typeof source?.[key] === "boolean") {
+      return Boolean(source[key]);
+    }
+  }
+
+  return fallback;
+};
+
+const unavailableMetricLabel = () => "N/A";
+
+
 const downloadBlob = async (
   response: Response,
   fallbackName: string
@@ -988,6 +1005,19 @@ export default function BusinessDashboardPage() {
   } = derived;
 
   const healthScore = Number(result.business_health_score || health.score || 0);
+  const expensesAvailable = isMetricAvailable(
+    kpis,
+    ["expenses_available", "expense_available"]
+  );
+  const profitAvailable = isMetricAvailable(
+    kpis,
+    ["profit_available", "profitability_available"]
+  );
+  const profitMarginAvailable = isMetricAvailable(
+    kpis,
+    ["profit_margin_available", "margin_available", "profitability_available"],
+    profitAvailable
+  );
   const anomalyItems = asArray(anomalies.items);
   const latestDate = latest.created_at
     ? new Date(latest.created_at).toLocaleString(
@@ -1103,19 +1133,31 @@ export default function BusinessDashboardPage() {
 
             <StatCard
               label={t.expenses}
-              value={formatMoney(kpis.expenses, currency, locale)}
+              value={
+                expensesAvailable
+                  ? formatMoney(kpis.expenses, currency, locale)
+                  : unavailableMetricLabel()
+              }
               tone="amber"
             />
 
             <StatCard
               label={t.profit}
-              value={formatMoney(kpis.profit, currency, locale)}
-              tone={Number(kpis.profit) >= 0 ? "green" : "red"}
+              value={
+                profitAvailable
+                  ? formatMoney(kpis.profit, currency, locale)
+                  : unavailableMetricLabel()
+              }
+              tone={profitAvailable && Number(kpis.profit) < 0 ? "red" : "green"}
             />
 
             <StatCard
               label={t.margin}
-              value={formatPercent(kpis.profit_margin_percent, locale)}
+              value={
+                profitMarginAvailable
+                  ? formatPercent(kpis.profit_margin_percent, locale)
+                  : unavailableMetricLabel()
+              }
             />
 
             <StatCard
