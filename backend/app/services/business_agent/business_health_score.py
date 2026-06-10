@@ -451,7 +451,46 @@ def apply_backend_health_score(
     Mutates and returns result with deterministic business health score.
 
     Use after backend KPIs have been calculated and injected.
+
+    If an earlier validation / decision layer marks the upload as not
+    suitable for business performance analysis, do not force a synthetic
+    health score. This prevents product catalogs, SKU lists, inventory
+    reference files, and other non-performance datasets from becoming
+    misleading 0/100 or 59/100 business-health results.
     """
+
+    if result.get("analysis_available") is False:
+        existing_health = result.get("business_health")
+        existing_reason = ""
+
+        if isinstance(existing_health, dict):
+            existing_reason = str(existing_health.get("reason") or "").strip()
+
+        reason = (
+            existing_reason
+            or "Business health score is unavailable because insufficient business performance data was provided."
+        )
+
+        result["business_health_score"] = None
+        result["business_health"] = {
+            "available": False,
+            "score": None,
+            "rating": "not_available",
+            "reason": reason,
+            "components": {},
+            "weights": {},
+            "strengths": [],
+            "warnings": [],
+            "availability": {
+                "profit": False,
+                "roas": False,
+                "churn": False,
+                "cac": False,
+            },
+            "source": "business_health_scoring",
+        }
+
+        return result
 
     detected_kpis = detected_kpis or {}
 
@@ -459,7 +498,10 @@ def apply_backend_health_score(
         core_kpis=detected_kpis.get("core_kpis", {}),
         advanced_kpis=detected_kpis.get("advanced_kpis", {}),
         data_quality=detected_kpis.get("data_quality", {}),
-        business_model=detected_kpis.get("business_model", result.get("business_model", "general")),
+        business_model=detected_kpis.get(
+            "business_model",
+            result.get("business_model", "general"),
+        ),
     )
 
     result["business_health_score"] = health["score"]
