@@ -396,6 +396,100 @@ KPI_ALIASES = {
 }
 
 
+# Columns that may look financial by name but are profile, demographic,
+# segmentation, or reference-table attributes. They must never be treated as
+# verified business revenue.
+NON_BUSINESS_REVENUE_COLUMNS = {
+    "income_level",
+    "user_income_level",
+    "customer_income_level",
+    "household_income",
+    "personal_income",
+    "annual_income",
+    "monthly_income",
+    "salary",
+    "salary_range",
+    "wage",
+    "wage_range",
+    "income_band",
+    "income_bracket",
+    "niveau_revenu",
+    "niveau_de_revenu",
+    "tranche_revenu",
+    "salaire",
+    "tranche_salaire",
+}
+
+# Standalone profile/reference identifiers or dimensions are not performance
+# metrics. They can be useful context, but they do not prove revenue, growth,
+# churn, customers, or orders by themselves.
+NON_PERFORMANCE_IDENTIFIER_COLUMNS = {
+    "user_id",
+    "customer_id",
+    "client_id",
+    "member_id",
+    "account_id",
+    "profile_id",
+    "person_id",
+    "contact_id",
+    "email",
+    "phone",
+    "name",
+    "first_name",
+    "last_name",
+    "gender",
+    "age",
+    "country",
+    "city",
+    "state",
+    "region",
+    "signup_date",
+    "registration_date",
+    "created_at",
+    "preferred_category",
+    "preference",
+    "loyalty_tier",
+    "segment",
+    "income_level",
+}
+
+# These columns are profile/customer-list fields. Counting them is not enough
+# to calculate customer performance KPIs unless paired with true acquisition,
+# churn, retention, order, subscription, or revenue data.
+PROFILE_CUSTOMER_COLUMNS = {
+    "user_id",
+    "customer_id",
+    "client_id",
+    "member_id",
+    "account_id",
+    "profile_id",
+    "person_id",
+    "contact_id",
+}
+
+# Product/catalog attributes are not sales performance by themselves.
+CATALOG_REFERENCE_COLUMNS = {
+    "product_id",
+    "sku",
+    "product",
+    "product_name",
+    "name",
+    "description",
+    "category",
+    "preferred_category",
+    "subcategory",
+    "brand",
+    "stock",
+    "stock_quantity",
+    "inventory",
+    "price",
+    "list_price",
+    "rating",
+    "rating_avg",
+    "review_count",
+}
+
+
 def normalize_text(value: Any) -> str:
     text = str(value or "").strip().lower()
 
@@ -424,6 +518,73 @@ def normalize_text(value: Any) -> str:
     text = re.sub(r"_+", "_", text).strip("_")
 
     return text
+
+
+def is_non_business_revenue_column(column: Any) -> bool:
+    normalized = normalize_text(column)
+
+    if normalized in NON_BUSINESS_REVENUE_COLUMNS:
+        return True
+
+    # Avoid substring false positives such as "income_level" matching "income".
+    profile_suffixes = (
+        "_level",
+        "_band",
+        "_bracket",
+        "_range",
+        "_tier",
+        "_segment",
+        "_category",
+    )
+
+    if "income" in normalized and any(normalized.endswith(suffix) for suffix in profile_suffixes):
+        return True
+
+    if "salary" in normalized and any(normalized.endswith(suffix) for suffix in profile_suffixes):
+        return True
+
+    return False
+
+
+def is_profile_customer_column(column: Any) -> bool:
+    return normalize_text(column) in PROFILE_CUSTOMER_COLUMNS
+
+
+def is_non_performance_identifier_column(column: Any) -> bool:
+    return normalize_text(column) in NON_PERFORMANCE_IDENTIFIER_COLUMNS
+
+
+def has_verified_amount_values(
+    rows: list[dict[str, Any]],
+    column: str | None,
+) -> bool:
+    if not column:
+        return False
+
+    numeric_values = [
+        value
+        for row in rows
+        for value in [to_float(row.get(column))]
+        if value is not None
+    ]
+
+    if not numeric_values:
+        return False
+
+    # A valid business amount column may legitimately sum to zero, but it must
+    # contain numeric amount-like values. Profile labels such as "low"/"high"
+    # produce no numeric values and are rejected.
+    return True
+
+
+def has_positive_amount_values(
+    rows: list[dict[str, Any]],
+    column: str | None,
+) -> bool:
+    if not column:
+        return False
+
+    return any((to_float(row.get(column)) or 0.0) > 0 for row in rows)
 
 
 def to_float(value: Any) -> float | None:
@@ -563,11 +724,24 @@ def resolve_column(
         mapped = column_mapping.get(key)
 
         if mapped:
+            if canonical_name == "revenue" and is_non_business_revenue_column(mapped):
+                continue
+
+            if canonical_name == "customers" and is_profile_customer_column(mapped):
+                continue
+
             return mapped
 
     detected = detect_kpi_columns(columns)
+    candidate = detected.get(canonical_name)
 
-    return detected.get(canonical_name)
+    if canonical_name == "revenue" and is_non_business_revenue_column(candidate):
+        return None
+
+    if canonical_name == "customers" and is_profile_customer_column(candidate):
+        return None
+
+    return candidate
 
 
 def detect_kpi_columns(columns: list[str]) -> dict[str, str]:
@@ -592,6 +766,17 @@ def detect_kpi_columns(columns: list[str]) -> dict[str, str]:
 
         if kpi not in detected:
             for normalized_column, original_column in normalized_columns.items():
+                if kpi == "revenue" and is_non_business_revenue_column(original_column):
+                    continue
+
+                if kpi == "customers" and is_profile_customer_column(original_column):
+                    continue
+
+                if kpi in {"revenue", "customers", "orders"}:
+                    # For high-impact KPIs, avoid loose substring matches like
+                    # income_level -> income or user_id -> user/customer.
+                    continue
+
                 if any(
                     alias and alias in normalized_column
                     for alias in normalized_aliases
@@ -602,11 +787,63 @@ def detect_kpi_columns(columns: list[str]) -> dict[str, str]:
     return detected
 
 
+def looks_like_profile_or_reference_file(columns: list[str]) -> bool:
+    normalized = {normalize_text(column) for column in columns if column}
+
+    if not normalized:
+        return False
+
+    performance_markers = {
+        "revenue",
+        "sales",
+        "sale",
+        "turnover",
+        "gross_sales",
+        "net_sales",
+        "amount",
+        "total_amount",
+        "order_total",
+        "purchase_amount",
+        "payment_amount",
+        "expenses",
+        "expense",
+        "cost",
+        "costs",
+        "profit",
+        "cashflow",
+        "ad_spend",
+        "marketing_spend",
+        "mrr",
+        "arr",
+        "churned_customers",
+        "new_customers",
+    }
+
+    if normalized.intersection(performance_markers):
+        return False
+
+    profile_hits = len(normalized.intersection(NON_PERFORMANCE_IDENTIFIER_COLUMNS))
+    catalog_hits = len(normalized.intersection(CATALOG_REFERENCE_COLUMNS))
+
+    return profile_hits >= 2 or catalog_hits >= 2
+
+
 def detect_business_model_details(
     columns: list[str],
     rows: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     rows = rows or []
+
+    if looks_like_profile_or_reference_file(columns):
+        return {
+            "business_model": "general",
+            "confidence": "low",
+            "scores": {
+                model: 0
+                for model in BUSINESS_MODELS
+            },
+        }
+
     text_parts = list(columns)
 
     for row in rows[:100]:
@@ -749,18 +986,18 @@ def calculate_core_kpis(
     expenses = 0.0
     explicit_profit = 0.0
 
-    has_revenue = bool(revenue_col)
-    has_expenses = bool(expenses_col)
-    has_explicit_profit = bool(profit_col)
+    has_revenue = bool(revenue_col and has_verified_amount_values(rows, revenue_col))
+    has_expenses = bool(expenses_col and has_verified_amount_values(rows, expenses_col))
+    has_explicit_profit = bool(profit_col and has_verified_amount_values(rows, profit_col))
 
     for row in rows:
-        if revenue_col:
+        if has_revenue and revenue_col:
             revenue += to_float(row.get(revenue_col)) or 0.0
 
-        if expenses_col:
+        if has_expenses and expenses_col:
             expenses += to_float(row.get(expenses_col)) or 0.0
 
-        if profit_col:
+        if has_explicit_profit and profit_col:
             explicit_profit += to_float(row.get(profit_col)) or 0.0
 
     if has_explicit_profit:
@@ -817,6 +1054,9 @@ def calculate_core_kpis(
         "revenue_available": bool(has_revenue),
         "expenses_available": bool(has_expenses),
         "profit_available": bool(profit_available),
+        "profit_margin_available": bool(profit_available),
+        "growth_available": bool(has_revenue and len(monthly_series) >= 2),
+        "cashflow_available": bool(profit_available),
         "profit_source": (
             "explicit_profit_column"
             if has_explicit_profit
@@ -1084,13 +1324,19 @@ def calculate_advanced_kpis(
     total_churned_customers = float(customer_metrics["churned_customers"])
     churn_rate_percent = float(customer_metrics["churn_rate_percent"])
 
+    has_verified_revenue = bool(revenue_col and has_verified_amount_values(rows, revenue_col))
+    has_verified_ad_spend = bool(ad_spend_col and has_positive_amount_values(rows, ad_spend_col))
+    has_real_customer_movement = bool(new_customers_col or churned_customers_col or churn_rate_col)
+
     churn_available = bool(churn_rate_col or churned_customers_col)
-    roas_available = bool(ad_spend_col and total_ad_spend > 0)
-    cac_available = bool(ad_spend_col and total_ad_spend > 0 and total_new_customers > 0)
-    aov_available = bool(revenue_col and total_revenue > 0 and total_orders > 0)
+    roas_available = bool(has_verified_ad_spend and total_ad_spend > 0 and total_revenue > 0)
+    cac_available = bool(has_verified_ad_spend and total_ad_spend > 0 and total_new_customers > 0)
+    aov_available = bool(has_verified_revenue and total_revenue > 0 and total_orders > 0)
     revenue_per_customer_available = bool(
-        revenue_col and total_revenue > 0 and total_customers > 0
+        has_verified_revenue and total_revenue > 0 and total_customers > 0
     )
+    customers_available = bool(has_real_customer_movement or revenue_per_customer_available)
+    orders_available = bool(orders_col and has_verified_revenue and total_orders > 0)
 
     advanced: dict[str, Any] = {
         "aov": round_money(safe_divide(total_revenue, total_orders)) if aov_available else 0.0,
@@ -1100,8 +1346,8 @@ def calculate_advanced_kpis(
         "revenue_per_customer": round_money(
             safe_divide(total_revenue, total_customers)
         ) if revenue_per_customer_available else 0.0,
-        "orders": round_money(total_orders),
-        "customers": round_money(total_customers),
+        "orders": round_money(total_orders) if orders_available else 0.0,
+        "customers": round_money(total_customers) if customers_available else 0.0,
         "latest_customers": customer_metrics["latest_customers"],
         "max_customers": customer_metrics["max_customers"],
         "distinct_customers": customer_metrics.get("distinct_customers", 0),
@@ -1113,7 +1359,10 @@ def calculate_advanced_kpis(
         "roas_available": roas_available,
         "churn_available": churn_available,
         "revenue_per_customer_available": revenue_per_customer_available,
-        "customer_series": customer_metrics["customer_series"],
+        "orders_available": orders_available,
+        "customers_available": customers_available,
+        "ad_spend_available": has_verified_ad_spend,
+        "customer_series": customer_metrics["customer_series"] if customers_available else [],
     }
 
     if mrr_col:
@@ -1300,14 +1549,20 @@ def detect_smart_kpis(
         columns=columns,
         column_mapping=column_mapping,
     ) if rows else {
-        "revenue": 0,
-        "expenses": 0,
-        "profit": 0,
-        "profit_margin_percent": 0,
-        "growth_rate_percent": 0,
+        "revenue": None,
+        "expenses": None,
+        "profit": None,
+        "profit_margin_percent": None,
+        "growth_rate_percent": None,
         "cashflow_status": "unknown",
         "periods_count": 0,
         "latest_period": "",
+        "revenue_available": False,
+        "expenses_available": False,
+        "profit_available": False,
+        "profit_margin_available": False,
+        "growth_available": False,
+        "cashflow_available": False,
         "source": "verified_calculation",
     }
 
@@ -1331,8 +1586,32 @@ def detect_smart_kpis(
         detected_columns=detected_columns,
     )
 
+    has_financial_performance = bool(
+        core_kpis.get("revenue_available")
+        or core_kpis.get("expenses_available")
+        or core_kpis.get("profit_available")
+        or core_kpis.get("cashflow_available")
+        or advanced_kpis.get("orders_available")
+        or advanced_kpis.get("customers_available")
+        or advanced_kpis.get("churn_available")
+        or advanced_kpis.get("roas_available")
+        or advanced_kpis.get("cac_available")
+        or advanced_kpis.get("mrr_available")
+        or advanced_kpis.get("arr_available")
+    )
+
+    if not has_financial_performance:
+        business_model = "general"
+        model_details = {
+            **model_details,
+            "business_model": "general",
+            "confidence": "low",
+        }
+
     return {
         "business_model": business_model,
+        "analysis_available": has_financial_performance,
+        "dataset_type": "business_performance" if has_financial_performance else "non_performance_dataset",
         "model_detection": model_details,
         "confidence_level": model_details["confidence"],
         "detected_kpi_columns": detected_columns,
@@ -1386,7 +1665,9 @@ def detect_business_kpis(
 
     return {
         "business_model": smart["business_model"],
-        "available": True,
+        "available": bool(smart.get("analysis_available")),
+        "analysis_available": bool(smart.get("analysis_available")),
+        "dataset_type": smart.get("dataset_type", "business_performance"),
         "rows_count": len(rows),
         "column_mapping": column_mapping,
         "detected_kpi_columns": smart["detected_kpi_columns"],
