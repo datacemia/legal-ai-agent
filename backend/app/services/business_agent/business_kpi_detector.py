@@ -674,14 +674,19 @@ def build_monthly_series(
     date_col = resolve_column("date", columns, column_mapping)
     revenue_col = resolve_column("revenue", columns, column_mapping)
     expenses_col = resolve_column("expenses", columns, column_mapping)
+    profit_col = resolve_column("profit", columns, column_mapping)
 
     if not date_col or not revenue_col:
         return []
+
+    has_expenses = bool(expenses_col)
+    has_explicit_profit = bool(profit_col)
 
     grouped: dict[str, dict[str, float]] = defaultdict(
         lambda: {
             "revenue": 0.0,
             "expenses": 0.0,
+            "profit": 0.0,
         }
     )
 
@@ -696,6 +701,9 @@ def build_monthly_series(
         if expenses_col:
             grouped[period]["expenses"] += to_float(row.get(expenses_col)) or 0.0
 
+        if profit_col:
+            grouped[period]["profit"] += to_float(row.get(profit_col)) or 0.0
+
     periods = sort_periods(list(grouped.keys()))
 
     series = []
@@ -703,7 +711,16 @@ def build_monthly_series(
     for period in periods:
         revenue = grouped[period]["revenue"]
         expenses = grouped[period]["expenses"]
-        profit = revenue - expenses
+
+        if has_explicit_profit:
+            profit = grouped[period]["profit"]
+            profit_margin_percent = safe_divide(profit, revenue) * 100
+        elif has_expenses:
+            profit = revenue - expenses
+            profit_margin_percent = safe_divide(profit, revenue) * 100
+        else:
+            profit = 0.0
+            profit_margin_percent = 0.0
 
         series.append(
             {
@@ -711,14 +728,13 @@ def build_monthly_series(
                 "revenue": round_money(revenue),
                 "expenses": round_money(expenses),
                 "profit": round_money(profit),
-                "profit_margin_percent": round_money(
-                    safe_divide(profit, revenue) * 100
-                ),
+                "profit_margin_percent": round_money(profit_margin_percent),
+                "profit_available": bool(has_explicit_profit or has_expenses),
+                "expenses_available": bool(has_expenses),
             }
         )
 
     return series
-
 
 def calculate_core_kpis(
     rows: list[dict[str, Any]],
@@ -732,6 +748,9 @@ def calculate_core_kpis(
     revenue = 0.0
     expenses = 0.0
     explicit_profit = 0.0
+
+    has_revenue = bool(revenue_col)
+    has_expenses = bool(expenses_col)
     has_explicit_profit = bool(profit_col)
 
     for row in rows:
@@ -744,8 +763,20 @@ def calculate_core_kpis(
         if profit_col:
             explicit_profit += to_float(row.get(profit_col)) or 0.0
 
-    profit = explicit_profit if has_explicit_profit else revenue - expenses
-    profit_margin_percent = safe_divide(profit, revenue) * 100
+    if has_explicit_profit:
+        profit = explicit_profit
+        profit_margin_percent = safe_divide(profit, revenue) * 100
+        profit_available = True
+    elif has_expenses:
+        profit = revenue - expenses
+        profit_margin_percent = safe_divide(profit, revenue) * 100
+        profit_available = True
+    else:
+        # Revenue-only datasets, such as many e-commerce order exports, do not
+        # contain costs/expenses. Do not present revenue as profit.
+        profit = 0.0
+        profit_margin_percent = 0.0
+        profit_available = False
 
     monthly_series = build_monthly_series(
         rows=rows,
@@ -764,10 +795,13 @@ def calculate_core_kpis(
             previous,
         ) * 100 if previous else 0.0
 
-    if profit > 0:
-        cashflow_status = "positive"
-    elif profit < 0:
-        cashflow_status = "negative"
+    if profit_available:
+        if profit > 0:
+            cashflow_status = "positive"
+        elif profit < 0:
+            cashflow_status = "negative"
+        else:
+            cashflow_status = "unknown"
     else:
         cashflow_status = "unknown"
 
@@ -780,9 +814,18 @@ def calculate_core_kpis(
         "cashflow_status": cashflow_status,
         "periods_count": len(monthly_series),
         "latest_period": monthly_series[-1]["period"] if monthly_series else "",
-        "source": "backend_calculated",
+        "revenue_available": bool(has_revenue),
+        "expenses_available": bool(has_expenses),
+        "profit_available": bool(profit_available),
+        "profit_source": (
+            "explicit_profit_column"
+            if has_explicit_profit
+            else "revenue_minus_expenses"
+            if has_expenses
+            else "unavailable_missing_expenses"
+        ),
+        "source": "verified_calculation",
     }
-
 
 def sum_column(
     rows: list[dict[str, Any]],
@@ -1020,6 +1063,8 @@ def calculate_advanced_kpis(
     take_rate_col = resolve_column("take_rate", columns, column_mapping)
     billable_hours_col = resolve_column("billable_hours", columns, column_mapping)
     conversion_rate_col = resolve_column("conversion_rate", columns, column_mapping)
+    churn_rate_col = resolve_column("churn_rate", columns, column_mapping)
+    churned_customers_col = resolve_column("churned_customers", columns, column_mapping)
 
     total_revenue = sum_column(rows, revenue_col)
     total_expenses = sum_column(rows, expenses_col)
@@ -1039,14 +1084,22 @@ def calculate_advanced_kpis(
     total_churned_customers = float(customer_metrics["churned_customers"])
     churn_rate_percent = float(customer_metrics["churn_rate_percent"])
 
+    churn_available = bool(churn_rate_col or churned_customers_col)
+    roas_available = bool(ad_spend_col and total_ad_spend > 0)
+    cac_available = bool(ad_spend_col and total_ad_spend > 0 and total_new_customers > 0)
+    aov_available = bool(revenue_col and total_revenue > 0 and total_orders > 0)
+    revenue_per_customer_available = bool(
+        revenue_col and total_revenue > 0 and total_customers > 0
+    )
+
     advanced: dict[str, Any] = {
-        "aov": round_money(safe_divide(total_revenue, total_orders)),
-        "cac": round_money(safe_divide(total_ad_spend, total_new_customers)),
-        "roas": round_money(safe_divide(total_revenue, total_ad_spend)),
-        "churn_rate_percent": round_money(churn_rate_percent),
+        "aov": round_money(safe_divide(total_revenue, total_orders)) if aov_available else 0.0,
+        "cac": round_money(safe_divide(total_ad_spend, total_new_customers)) if cac_available else 0.0,
+        "roas": round_money(safe_divide(total_revenue, total_ad_spend)) if roas_available else 0.0,
+        "churn_rate_percent": round_money(churn_rate_percent) if churn_available else 0.0,
         "revenue_per_customer": round_money(
             safe_divide(total_revenue, total_customers)
-        ),
+        ) if revenue_per_customer_available else 0.0,
         "orders": round_money(total_orders),
         "customers": round_money(total_customers),
         "latest_customers": customer_metrics["latest_customers"],
@@ -1055,6 +1108,11 @@ def calculate_advanced_kpis(
         "new_customers": round_money(total_new_customers),
         "churned_customers": round_money(total_churned_customers),
         "ad_spend": round_money(total_ad_spend),
+        "aov_available": aov_available,
+        "cac_available": cac_available,
+        "roas_available": roas_available,
+        "churn_available": churn_available,
+        "revenue_per_customer_available": revenue_per_customer_available,
         "customer_series": customer_metrics["customer_series"],
     }
 
@@ -1141,7 +1199,9 @@ def build_data_quality(
         limitations.append("No clear revenue column; financial analysis is limited.")
 
     if "expenses" in missing_fields:
-        limitations.append("No clear expenses column; profit may be incomplete.")
+        limitations.append(
+            "No clear expenses, cost, or profit column was detected; profitability metrics cannot be verified."
+        )
 
     score = 100
     score -= len(missing_fields) * 20
@@ -1248,7 +1308,7 @@ def detect_smart_kpis(
         "cashflow_status": "unknown",
         "periods_count": 0,
         "latest_period": "",
-        "source": "backend_calculated",
+        "source": "verified_calculation",
     }
 
     advanced_kpis = calculate_advanced_kpis(
@@ -1281,7 +1341,7 @@ def detect_smart_kpis(
         "monthly_series": monthly_series,
         "suggested_kpis": suggested_kpis_for_model(business_model),
         "data_quality": data_quality,
-        "source": "backend_calculated_strict",
+        "source": "verified_calculation_strict",
     }
 
 
@@ -1336,5 +1396,5 @@ def detect_business_kpis(
         "suggested_kpis": smart["suggested_kpis"],
         "data_quality": smart["data_quality"],
         "model_detection": smart["model_detection"],
-        "source": "backend_calculated_strict",
+        "source": "verified_calculation_strict",
     }

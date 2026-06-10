@@ -57,6 +57,15 @@ def _score_profit_margin(profit_margin_percent: float) -> dict[str, Any]:
     }
 
 
+
+def _score_profitability_unavailable() -> dict[str, Any]:
+    return {
+        "score": 50,
+        "signal": "profitability_unavailable",
+        "label": "Profitability unavailable because expenses or costs were not provided.",
+        "value": "unavailable",
+    }
+
 def _score_growth(growth_rate_percent: float) -> dict[str, Any]:
     """
     Growth score.
@@ -283,18 +292,19 @@ def calculate_backend_health_score(
     business_model: str = "general",
 ) -> dict[str, Any]:
     """
-    Deterministic backend health scoring.
-
-    This should override AI-generated business_health_score.
+    Deterministic business health scoring.
 
     Score dimensions:
-    - Profit margin
+    - Profit margin when profitability is available
     - Revenue growth
     - Cashflow
-    - Churn
-    - ROAS
-    - CAC efficiency
+    - Churn when available
+    - ROAS when available
+    - CAC efficiency when available
     - Data quality
+
+    Missing KPIs are treated as neutral/unavailable rather than as strong
+    positives or negatives. This avoids inflated scores for revenue-only files.
     """
 
     core_kpis = core_kpis or {}
@@ -311,13 +321,44 @@ def calculate_backend_health_score(
     revenue_per_customer = _to_float(advanced_kpis.get("revenue_per_customer"))
     data_quality_score = _to_float(data_quality.get("score", 50))
 
+    profit_available = bool(core_kpis.get("profit_available", True))
+    roas_available = bool(advanced_kpis.get("roas_available", roas > 0))
+    churn_available = bool(advanced_kpis.get("churn_available", churn_rate > 0))
+    cac_available = bool(advanced_kpis.get("cac_available", cac > 0 and revenue_per_customer > 0))
+
     components = {
-        "profit_margin": _score_profit_margin(profit_margin),
+        "profit_margin": (
+            _score_profit_margin(profit_margin)
+            if profit_available
+            else _score_profitability_unavailable()
+        ),
         "growth": _score_growth(growth_rate),
-        "cashflow": _score_cashflow(cashflow_status),
-        "churn": _score_churn(churn_rate),
-        "roas": _score_roas(roas),
-        "cac_efficiency": _score_cac_efficiency(cac, revenue_per_customer),
+        "cashflow": _score_cashflow(cashflow_status if profit_available else "unknown"),
+        "churn": _score_churn(churn_rate) if churn_available else {
+            "score": 50,
+            "signal": "churn_unavailable",
+            "label": "Churn unavailable.",
+            "value": "unavailable",
+        },
+        "roas": _score_roas(roas) if roas_available else {
+            "score": 50,
+            "signal": "roas_unavailable",
+            "label": "ROAS unavailable.",
+            "value": "unavailable",
+        },
+        "cac_efficiency": (
+            _score_cac_efficiency(cac, revenue_per_customer)
+            if cac_available
+            else {
+                "score": 50,
+                "signal": "cac_efficiency_unavailable",
+                "label": "CAC efficiency unavailable.",
+                "value": {
+                    "cac": round(cac, 2),
+                    "revenue_per_customer": round(revenue_per_customer, 2),
+                },
+            }
+        ),
         "data_quality": _score_data_quality(data_quality_score),
     }
 
@@ -392,16 +433,21 @@ def calculate_backend_health_score(
         "weights": weights,
         "strengths": strengths[:5],
         "warnings": warnings[:5],
-        "source": "backend_health_scoring",
+        "availability": {
+            "profit": profit_available,
+            "roas": roas_available,
+            "churn": churn_available,
+            "cac": cac_available,
+        },
+        "source": "business_health_scoring",
     }
-
 
 def apply_backend_health_score(
     result: dict[str, Any],
     detected_kpis: dict[str, Any],
 ) -> dict[str, Any]:
     """
-    Mutates and returns result with deterministic backend health score.
+    Mutates and returns result with deterministic business health score.
 
     Use after backend KPIs have been calculated and injected.
     """

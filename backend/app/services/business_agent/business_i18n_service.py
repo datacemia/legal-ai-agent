@@ -445,6 +445,23 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
         "ar": "يحسن الاحتفاظ وقيمة العميل واستقرار الإيرادات المتكررة.",
     },
 
+    # KPI availability / limitations
+    "Profitability metrics cannot be verified because no expense, cost, or profit column was provided.": {
+        "en": "Profitability metrics cannot be verified because no expense, cost, or profit column was provided.",
+        "fr": "Les indicateurs de rentabilité ne peuvent pas être vérifiés car aucune colonne de dépenses, de coûts ou de profit n’a été fournie.",
+        "ar": "لا يمكن التحقق من مؤشرات الربحية لأنه لم يتم توفير أي عمود للمصاريف أو التكاليف أو الربح.",
+    },
+    "Customer churn could not be calculated from the uploaded data.": {
+        "en": "Customer churn could not be calculated from the uploaded data.",
+        "fr": "Le churn client n’a pas pu être calculé à partir des données importées.",
+        "ar": "تعذر حساب معدل فقدان العملاء من البيانات المرفوعة.",
+    },
+    "ROAS could not be calculated because advertising spend was not provided.": {
+        "en": "ROAS could not be calculated because advertising spend was not provided.",
+        "fr": "Le ROAS n’a pas pu être calculé car les dépenses publicitaires n’ont pas été fournies.",
+        "ar": "تعذر حساب عائد الإنفاق الإعلاني لأن الإنفاق الإعلاني غير متوفر.",
+    },
+
     # Memory / forecast / disclaimers
     "No major business change detected compared with the previous analysis.": {
         "en": "No major business change detected compared with the previous analysis.",
@@ -573,33 +590,85 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
     anomaly_status = translate_term(anomalies.get("status", "normal"), lang)
     churn = advanced.get("churn_rate_percent", 0)
 
+    profit_available = bool(kpis.get("profit_available", True))
+    churn_available = bool(advanced.get("churn_available", churn not in (0, 0.0, "0", "0.0")))
+
+    if profit_available:
+        if lang == "fr":
+            profitability_sentence = (
+                f"un profit de {profit} et une marge bénéficiaire de {margin}%. "
+            )
+        elif lang == "ar":
+            profitability_sentence = (
+                f"وربحًا قدره {profit}، وهامش ربح قدره {margin}%. "
+            )
+        else:
+            profitability_sentence = (
+                f"profit of {profit}, and a profit margin of {margin}%. "
+            )
+    else:
+        if lang == "fr":
+            profitability_sentence = (
+                "les indicateurs de rentabilité ne peuvent pas être vérifiés "
+                "car les dépenses ou les coûts ne sont pas fournis. "
+            )
+        elif lang == "ar":
+            profitability_sentence = (
+                "ولا يمكن التحقق من مؤشرات الربحية لأن المصاريف أو التكاليف غير متوفرة. "
+            )
+        else:
+            profitability_sentence = (
+                "profitability metrics cannot be verified because expenses or costs were not provided. "
+            )
+
+    if churn_available:
+        if lang == "fr":
+            churn_sentence = (
+                f"Le churn client est estimé à {churn}%, ce qui doit être surveillé."
+            )
+        elif lang == "ar":
+            churn_sentence = (
+                f"يُقدر معدل فقدان العملاء بـ {churn}% ويجب مراقبته."
+            )
+        else:
+            churn_sentence = (
+                f"Customer churn is estimated at {churn}% and should be monitored."
+            )
+    else:
+        if lang == "fr":
+            churn_sentence = "Le churn client n’a pas pu être calculé à partir des données fournies."
+        elif lang == "ar":
+            churn_sentence = "تعذر حساب معدل فقدان العملاء من البيانات المقدمة."
+        else:
+            churn_sentence = "Customer churn could not be calculated from the uploaded data."
+
     if lang == "fr":
         return (
             f"Cette analyse {model} montre des revenus de {revenue}, "
-            f"un profit de {profit} et une marge bénéficiaire de {margin}%. "
+            f"{profitability_sentence}"
             f"La croissance des revenus est de {growth}% et le cashflow est {cashflow}. "
             f"Le score de santé business est de {score}/100 ({rating}). "
             f"L’évaluation actuelle du risque business est {anomaly_status}. "
-            f"Le churn client est élevé à {churn}%, ce qui doit être traité en priorité."
+            f"{churn_sentence}"
         )
 
     if lang == "ar":
         return (
             f"يوضح تحليل {model} إيرادات قدرها {revenue}، "
-            f"وربحًا قدره {profit}، وهامش ربح قدره {margin}%. "
+            f"{profitability_sentence}"
             f"نمو الإيرادات هو {growth}% والتدفق النقدي {cashflow}. "
             f"درجة صحة النشاط هي {score}/100 ({rating}). "
             f"تقييم مخاطر الأعمال الحالي هو {anomaly_status}. "
-            f"معدل فقدان العملاء مرتفع عند {churn}% ويجب التعامل معه كأولوية."
+            f"{churn_sentence}"
         )
 
     return (
         f"This {model} analysis shows revenue of {revenue}, "
-        f"profit of {profit}, and a profit margin of {margin}%. "
+        f"{profitability_sentence}"
         f"Revenue growth is {growth}% and cashflow is {cashflow}. "
         f"The Business Health Score is {score}/100 ({rating}). "
         f"The current business risk assessment is {anomaly_status}. "
-        f"Customer churn is elevated at {churn}%, which should be treated as a priority."
+        f"{churn_sentence}"
     )
 
 
@@ -612,32 +681,83 @@ def _build_key_insights(payload: dict[str, Any], language: str) -> list[str]:
     anomalies = payload.get("anomalies_v2") or payload.get("anomalies") or {}
     summary = anomalies.get("summary") or {}
 
-    values = {
-        "revenue": kpis.get("revenue", 0),
-        "profit": kpis.get("profit", 0),
-        "margin": kpis.get("profit_margin_percent", 0),
-        "growth": kpis.get("growth_rate_percent", 0),
-        "churn": advanced.get("churn_rate_percent", 0),
-        "roas": advanced.get("roas", 0),
-        "score": payload.get("business_health_score", health.get("score", 0)),
-        "total": summary.get("total_items", 0),
-        "insights": summary.get("insights", 0),
-    }
+    revenue = kpis.get("revenue", 0)
+    profit = kpis.get("profit", 0)
+    margin = kpis.get("profit_margin_percent", 0)
+    growth = kpis.get("growth_rate_percent", 0)
+    churn = advanced.get("churn_rate_percent", 0)
+    roas = advanced.get("roas", 0)
+    score = payload.get("business_health_score", health.get("score", 0))
+    total = summary.get("total_items", 0)
+    positive_insights = summary.get("insights", 0)
 
-    templates = [
-        "Revenue is {revenue} with profit of {profit}.",
-        "Profit margin is {margin}% and revenue growth is {growth}%.",
-        "Customer churn is estimated at {churn}%, which affects retention quality.",
-        "ROAS is {roas}, based on revenue and advertising spend.",
-        "Business Health Score is {score}/100.",
-        "{total} business risk indicator(s) and {insights} positive business signal(s) were identified.",
+    profit_available = bool(kpis.get("profit_available", True))
+    churn_available = bool(advanced.get("churn_available", churn not in (0, 0.0, "0", "0.0")))
+    roas_available = bool(advanced.get("roas_available", roas not in (0, 0.0, "0", "0.0")))
+
+    insights: list[str] = [
+        PHRASE_TRANSLATIONS["Revenue is {revenue} with profit of {profit}."][lang].format(
+            revenue=revenue,
+            profit=profit if profit_available else translate_term("unknown", lang),
+        )
+        if profit_available
+        else PHRASE_TRANSLATIONS[
+            "Profitability metrics cannot be verified because no expense, cost, or profit column was provided."
+        ][lang],
+        PHRASE_TRANSLATIONS["Profit margin is {margin}% and revenue growth is {growth}%."][lang].format(
+            margin=margin if profit_available else translate_term("unknown", lang),
+            growth=growth,
+        )
+        if profit_available
+        else PHRASE_TRANSLATIONS[
+            "Profitability metrics cannot be verified because no expense, cost, or profit column was provided."
+        ][lang],
     ]
 
-    return [
-        PHRASE_TRANSLATIONS[template][lang].format(**values)
-        for template in templates
-    ]
+    if churn_available:
+        insights.append(
+            PHRASE_TRANSLATIONS[
+                "Customer churn is estimated at {churn}%, which affects retention quality."
+            ][lang].format(churn=churn)
+        )
+    else:
+        insights.append(
+            PHRASE_TRANSLATIONS[
+                "Customer churn could not be calculated from the uploaded data."
+            ][lang]
+        )
 
+    if roas_available:
+        insights.append(
+            PHRASE_TRANSLATIONS[
+                "ROAS is {roas}, based on revenue and advertising spend."
+            ][lang].format(roas=roas)
+        )
+    else:
+        insights.append(
+            PHRASE_TRANSLATIONS[
+                "ROAS could not be calculated because advertising spend was not provided."
+            ][lang]
+        )
+
+    insights.extend(
+        [
+            PHRASE_TRANSLATIONS["Business Health Score is {score}/100."][lang].format(
+                score=score
+            ),
+            PHRASE_TRANSLATIONS[
+                "{total} business risk indicator(s) and {insights} positive business signal(s) were identified."
+            ][lang].format(total=total, insights=positive_insights),
+        ]
+    )
+
+    # Avoid duplicate profitability limitation in short insight lists.
+    deduped: list[str] = []
+    for insight in insights:
+        if insight not in deduped:
+            deduped.append(insight)
+
+    return deduped[:6]
 
 def translate_payload(value: Any, language: str = "en") -> Any:
     lang = normalize_language(language)
