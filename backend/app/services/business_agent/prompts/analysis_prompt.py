@@ -55,14 +55,14 @@ DOMAIN RULES:
 - Use general business analysis when the domain is unclear.
 
 ANTI-HALLUCINATION RULES:
-- If a metric is not directly supported, keep it at 0 or explain the limitation.
+- If a metric is not directly supported, keep it unavailable or explain the limitation.
 - Do not create fake CAC, LTV, churn, MRR, ARR, AOV, ROAS, runway, or conversion rate.
 - Do not infer exact values from vague text.
 - Prefer fewer accurate insights over many unsupported insights.
 
 STRICT OUTPUT RULES:
 - Return only valid JSON.
-- business_health_score must be an integer between 0 and 100.
+- business_health_score must be an integer between 0 and 100 only when enough business performance data exists.\n- If there is not enough business performance data, set business_health_score to null.
 - confidence_level must be: low, medium, or high.
 - risk severity must be: low, medium, or high.
 - opportunity impact must be: low, medium, or high.
@@ -71,7 +71,7 @@ STRICT OUTPUT RULES:
 - Do not invent forecasts.
 - If there is not enough dated historical data, set forecast.available to false.
 - data_quality.score must be an integer between 0 and 100.
-- Do not return null values.
+- Do not return null values except for unavailable KPI scores such as business_health_score.
 - Never mention backend, backend-calculated, deterministic backend, internal engine, server, database, API, or system architecture in any user-facing text.
 - Use "Business Health Score" instead of any technical score wording.
 - Use "verified business metrics" instead of "backend-calculated metrics".
@@ -82,7 +82,7 @@ Return EXACT JSON:
   "business_model": "general",
   "confidence_level": "low",
   "executive_summary": "short business summary",
-  "business_health_score": 0,
+  "business_health_score": null,
   "kpis": {{
     "revenue": 0,
     "expenses": 0,
