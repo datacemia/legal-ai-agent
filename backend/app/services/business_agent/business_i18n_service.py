@@ -309,7 +309,7 @@ TERM_TRANSLATIONS: dict[str, dict[str, str]] = {
 PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     "Insufficient verified business performance data was provided. Executive KPI, risk, forecast, and priority decision analysis is unavailable.": {
         "en": "Insufficient verified business performance data was provided. Executive KPI, risk, forecast, and priority decision analysis is unavailable.",
-        "fr": "Les données de performance business vérifiées sont insuffisantes. L’analyse des KPI, des risques, des prévisions et des décisions prioritaires n’est pas disponible.",
+        "fr": "Les données de performance de l'entreprise vérifiées sont insuffisantes. L’analyse des KPI, des risques, des prévisions et des décisions prioritaires n’est pas disponible.",
         "ar": "بيانات أداء الأعمال الموثقة غير كافية. تحليل مؤشرات الأداء والمخاطر والتوقعات والقرارات ذات الأولوية غير متاح."
     },
 
@@ -353,27 +353,27 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
 
     "Continue monitoring business performance": {
         "en": "Continue monitoring business performance",
-        "fr": "Continuer à surveiller la performance business",
+        "fr": "Continuer à surveiller la performance de l'entreprise",
         "ar": "مواصلة مراقبة أداء الأعمال",
     },
     "Keep tracking revenue, expenses, cashflow, and customer metrics before making major changes.": {
         "en": "Keep tracking revenue, expenses, cashflow, and customer metrics before making major changes.",
-        "fr": "Continuez à suivre les revenus, les dépenses, le flux de trésorerie et les métriques clients avant tout changement majeur.",
+        "fr": "Continuez à suivre les revenus, les dépenses, le flux de trésorerie et les indicateurs clients avant tout changement majeur.",
         "ar": "استمر في تتبع الإيرادات والمصاريف والتدفق النقدي ومؤشرات العملاء قبل إجراء تغييرات كبيرة.",
     },
     "No Critical business risk was detected from the current analysis.": {
         "en": "No Critical business risk was detected from the current analysis.",
-        "fr": "Aucun risque business critique n’a été détecté dans l’analyse actuelle.",
+        "fr": "Aucun risque de l'entreprise critique n’a été détecté dans l’analyse actuelle.",
         "ar": "لم يتم اكتشاف أي خطر أعمال حرج في التحليل الحالي.",
     },
     "No critical business risk was detected from the current analysis.": {
         "en": "No critical business risk was detected from the current analysis.",
-        "fr": "Aucun risque business critique n’a été détecté dans l’analyse actuelle.",
+        "fr": "Aucun risque de l'entreprise critique n’a été détecté dans l’analyse actuelle.",
         "ar": "لم يتم اكتشاف أي خطر أعمال حرج في التحليل الحالي.",
     },
     "No major business risk was detected from the current analysis.": {
         "en": "No major business risk was detected from the current analysis.",
-        "fr": "Aucun risque business majeur n’a été détecté dans l’analyse actuelle.",
+        "fr": "Aucun risque de l'entreprise majeur n’a été détecté dans l’analyse actuelle.",
         "ar": "لم يتم اكتشاف أي خطر أعمال كبير في التحليل الحالي.",
     },
     "Add expense, cost, or profit columns to verify profitability before making margin decisions.": {
@@ -388,7 +388,7 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
     "Upload performance data before making business decisions": {
         "en": "Upload performance data before making business decisions",
-        "fr": "Importer des données de performance avant de prendre des décisions business",
+        "fr": "Importer des données de performance avant de prendre des décisions d'entreprise",
         "ar": "ارفع بيانات أداء قبل اتخاذ قرارات أعمال",
     },
     "Upload a file with dated revenue, orders, expenses, customers, cashflow, or advertising spend before using this agent for executive decisions.": {
@@ -445,7 +445,7 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
     "Business performance metrics are unavailable because the uploaded file does not contain verified business performance data.": {
         "en": "Business performance metrics are unavailable because the uploaded file does not contain verified business performance data.",
-        "fr": "Les indicateurs de performance business sont indisponibles car le fichier importé ne contient pas de données de performance vérifiées.",
+        "fr": "Les indicateurs de performance de l'entreprise sont indisponibles car le fichier importé ne contient pas de données de performance vérifiées.",
         "ar": "مؤشرات أداء الأعمال غير متاحة لأن الملف المرفوع لا يحتوي على بيانات أداء موثقة.",
     },
     "Revenue is {revenue}. Profit could not be calculated because no expense, cost, or profit column was provided.": {
@@ -460,7 +460,7 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
     "{total} business risk indicator(s) and {insights} positive business signal(s) were identified.": {
         "en": "{total} business risk indicator(s) and {insights} positive business signal(s) were identified.",
-        "fr": "{total} indicateur(s) de risque business et {insights} signal(aux) positif(s) ont été identifiés.",
+        "fr": "{total} indicateur(s) de risque de l'entreprise et {insights} signal(aux) positif(s) ont été identifiés.",
         "ar": "تم تحديد {total} مؤشر مخاطر للأعمال و{insights} إشارة إيجابية للأعمال.",
     },
 
@@ -835,11 +835,11 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
         if lang == "fr":
             return (
                 f"Cette analyse {model} ne contient pas suffisamment de données "
-                "de performance business vérifiées. Les revenus, la croissance, "
+                "de performance de l'entreprise vérifiées. Les revenus, la croissance, "
                 "la rentabilité, le flux de trésorerie, les risques avancés et les prévisions "
                 "ne peuvent pas être calculés de manière fiable. "
                 f"{PHRASE_TRANSLATIONS['Business Health Score could not be calculated because insufficient business performance data was provided.'][lang]} "
-                f"Le niveau de risque business actuel est {anomaly_status}. "
+                f"Le niveau de risque de l'entreprise actuel est {anomaly_status}. "
                 f"{PHRASE_TRANSLATIONS['Customer churn could not be calculated from the uploaded data.'][lang]}"
             )
 
@@ -931,7 +931,7 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
             f"{profitability_sentence}"
             f"La croissance des revenus est {growth_display} et le flux de trésorerie est {cashflow}. "
             f"{health_sentence}"
-            f"Le niveau de risque business actuel est {anomaly_status}. "
+            f"Le niveau de risque de l'entreprise actuel est {anomaly_status}. "
             f"{churn_sentence}"
         )
 
@@ -1144,7 +1144,7 @@ def _normalize_generated_phrase(text: Any) -> Any:
         "Améliore la qualité des décisions en permettant une analyse vérifiée des marges, du profit et du Flux de trésorerie.": (
             "Improves decision quality by enabling verified margin, profit, and cashflow analysis."
         ),
-        "Continuez à suivre les revenus, les dépenses, le Flux de trésorerie et les métriques clients avant tout changement majeur.": (
+        "Continuez à suivre les revenus, les dépenses, le Flux de trésorerie et les indicateurs clients avant tout changement majeur.": (
             "Keep tracking revenue, expenses, cashflow, and customer metrics before making major changes."
         ),
         "Les revenus sont de {revenue}, avec un Bénéfice net de N/A.": (
@@ -1201,7 +1201,7 @@ def _normalize_generated_phrase(text: Any) -> Any:
 
     if (
         stripped.startswith("Continuez à suivre les revenus, les dépenses")
-        and "métriques clients avant tout changement majeur." in stripped
+        and "indicateurs clients avant tout changement majeur." in stripped
     ):
         return "Keep tracking revenue, expenses, cashflow, and customer metrics before making major changes."
 

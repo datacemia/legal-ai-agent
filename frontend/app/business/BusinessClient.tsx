@@ -662,7 +662,7 @@ const chartLabels: Record<Locale, Record<string, string>> = {
   fr: {
     visualIntelligence: "Intelligence visuelle",
 
-    businessCharts: "Visualisations business",
+    businessCharts: "Visualisations d'entreprise",
 
     chartsSubtitle:
       "Tendances et analyses visuelles du chiffre d’affaires, des dépenses, du profit, des flux de trésorerie et des catégories de dépenses.",
@@ -2041,16 +2041,16 @@ export default function BusinessClient() {
     },
 
     fr: {
-      title: "Intelligence décisionnelle business",
+      title: "Intelligence décisionnelle d'entreprise",
       heroPower: "Analyse exécutive IA pour entreprises modernes",
       subtitle:
         "Importez vos données business pour recevoir une analyse exécutive vérifiée par les données avec KPIs, risques, opportunités, prévisions et décisions prioritaires.",
-      eyebrow: "Agent business IA universel",
+      eyebrow: "Agent IA d'analyse d'entreprise",
       chooseFile: "Choisir un fichier",
       noFile: "Aucun fichier sélectionné",
       analyze: "Analyser le business",
       loading: "Analyse des données business...",
-      results: "Analyse exécutive business IA",
+      results: "Analyse exécutive IA d'entreprise",
       summary: "Résumé exécutif",
       score: "Score de santé de l’entreprise",
       businessModel: "Modèle économique",

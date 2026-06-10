@@ -525,7 +525,7 @@ const labels: Record<Locale, Record<string, string>> = {
     title: "Tableau de bord exécutif",
 
     subtitle:
-      "Vue d’ensemble vérifiée par les données de votre performance business, des risques, des opportunités et des priorités stratégiques.",
+      "Vue d’ensemble vérifiée par les données de votre performance de l'entreprise, des risques, des opportunités et des priorités stratégiques.",
 
     latestFile: "Dernière analyse",
 
