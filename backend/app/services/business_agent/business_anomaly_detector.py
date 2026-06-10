@@ -85,6 +85,30 @@ def _build_anomaly(
     }
 
 
+
+
+def _flag_enabled(payload: dict[str, Any], key: str, default: bool = True) -> bool:
+    """
+    Read KPI availability flags safely.
+
+    Newer KPI detectors expose flags such as profit_available,
+    expenses_available, churn_available, and roas_available.
+    If a flag is missing, default=True preserves backward compatibility.
+    """
+
+    if key not in payload:
+        return default
+
+    return bool(payload.get(key))
+
+
+def _series_has_positive_values(
+    monthly_series: list[dict[str, Any]],
+    key: str,
+) -> bool:
+    return any(_to_float(item.get(key)) > 0 for item in monthly_series)
+
+
 def _series_values(
     monthly_series: list[dict[str, Any]],
     key: str,
@@ -224,7 +248,10 @@ def detect_profit_anomalies(
 ) -> list[dict[str, Any]]:
     anomalies = []
 
-    if len(monthly_series) >= 2:
+    profit_available = _flag_enabled(core_kpis, "profit_available", True)
+    margin_available = _flag_enabled(core_kpis, "profit_margin_available", profit_available)
+
+    if profit_available and len(monthly_series) >= 2:
         previous = _to_float(monthly_series[-2].get("profit"))
         current = _to_float(monthly_series[-1].get("profit"))
         change = round(_percent_change(previous, current), 2)
@@ -266,7 +293,7 @@ def detect_profit_anomalies(
 
     profit_margin = _to_float(core_kpis.get("profit_margin_percent"))
 
-    if profit_margin < 10:
+    if margin_available and profit_margin < 10:
         anomalies.append(
             _build_anomaly(
                 anomaly_type="thin_margin",
@@ -289,16 +316,17 @@ def detect_customer_anomalies(
 ) -> list[dict[str, Any]]:
     anomalies = []
 
-    churn_rate = _to_float(advanced_kpis.get("churn_rate_percent"))
+    churn_available = _flag_enabled(advanced_kpis, "churn_available", True)
     customers = _to_float(advanced_kpis.get("customers"))
     new_customers = _to_float(advanced_kpis.get("new_customers"))
     churned_customers = _to_float(advanced_kpis.get("churned_customers"))
+    churn_rate = _to_float(advanced_kpis.get("churn_rate_percent")) if churn_available else 0.0
 
-    if churn_rate >= 20:
+    if churn_available and churn_rate >= 20:
         severity = "critical"
-    elif churn_rate >= 12:
+    elif churn_available and churn_rate >= 12:
         severity = "high"
-    elif churn_rate >= 7:
+    elif churn_available and churn_rate >= 7:
         severity = "medium"
     else:
         severity = ""
@@ -320,7 +348,7 @@ def detect_customer_anomalies(
             )
         )
 
-    if new_customers > 0 and churned_customers > new_customers * 0.5:
+    if churn_available and new_customers > 0 and churned_customers > new_customers * 0.5:
         anomalies.append(
             _build_anomaly(
                 anomaly_type="churn_vs_acquisition_risk",
@@ -372,12 +400,24 @@ def detect_marketing_anomalies(
 ) -> list[dict[str, Any]]:
     anomalies = []
 
-    roas = _to_float(advanced_kpis.get("roas"))
-    cac = _to_float(advanced_kpis.get("cac"))
-    revenue_per_customer = _to_float(advanced_kpis.get("revenue_per_customer"))
+    roas_available = _flag_enabled(advanced_kpis, "roas_available", True)
+    cac_available = _flag_enabled(advanced_kpis, "cac_available", True)
+    revenue_per_customer_available = _flag_enabled(
+        advanced_kpis,
+        "revenue_per_customer_available",
+        True,
+    )
+
+    roas = _to_float(advanced_kpis.get("roas")) if roas_available else 0.0
+    cac = _to_float(advanced_kpis.get("cac")) if cac_available else 0.0
+    revenue_per_customer = (
+        _to_float(advanced_kpis.get("revenue_per_customer"))
+        if revenue_per_customer_available
+        else 0.0
+    )
     ad_spend = _to_float(advanced_kpis.get("ad_spend"))
 
-    if ad_spend > 0 and roas > 0 and roas < 1.5:
+    if roas_available and ad_spend > 0 and roas > 0 and roas < 1.5:
         severity = "critical" if roas < 1 else "high"
 
         anomalies.append(
@@ -394,7 +434,7 @@ def detect_marketing_anomalies(
             )
         )
 
-    if cac > 0 and revenue_per_customer > 0:
+    if cac_available and revenue_per_customer_available and cac > 0 and revenue_per_customer > 0:
         cac_ratio = cac / revenue_per_customer
 
         if cac_ratio >= 1:
@@ -424,10 +464,11 @@ def detect_cashflow_anomalies(
     anomalies = []
 
     forecast = forecast or {}
+    cashflow_available = _flag_enabled(core_kpis, "cashflow_available", True)
     cashflow_status = str(core_kpis.get("cashflow_status") or "").lower()
     forecast_cashflow_risk = str(forecast.get("cashflow_risk") or "").lower()
 
-    if cashflow_status == "negative":
+    if cashflow_available and cashflow_status == "negative":
         anomalies.append(
             _build_anomaly(
                 anomaly_type="negative_cashflow",
@@ -469,7 +510,7 @@ def detect_business_anomalies(
     Deterministic anomaly detection for the Business Agent.
 
     Designed for:
-    - backend strictness
+    - deterministic business rules
     - dashboards
     - CEO weekly reports
     - future alerting system
@@ -487,8 +528,14 @@ def detect_business_anomalies(
 
     if isinstance(monthly_series, list):
         anomalies.extend(detect_revenue_anomalies(monthly_series))
-        anomalies.extend(detect_expense_anomalies(monthly_series))
-        anomalies.extend(detect_profit_anomalies(monthly_series, core_kpis))
+
+        if _flag_enabled(core_kpis, "expenses_available", True) and _series_has_positive_values(monthly_series, "expenses"):
+            anomalies.extend(detect_expense_anomalies(monthly_series))
+
+        if _flag_enabled(core_kpis, "profit_available", True):
+            anomalies.extend(detect_profit_anomalies(monthly_series, core_kpis))
+        else:
+            anomalies.extend(detect_profit_anomalies([], core_kpis))
 
     anomalies.extend(detect_customer_anomalies(advanced_kpis))
     anomalies.extend(detect_marketing_anomalies(advanced_kpis))
@@ -523,7 +570,7 @@ def detect_business_anomalies(
         "high_count": high_count,
         "medium_count": medium_count,
         "items": anomalies,
-        "source": "backend_anomaly_detection",
+        "source": "business_risk_engine",
     }
 
 
@@ -533,7 +580,7 @@ def attach_business_anomalies(
     forecast: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """
-    Mutates and returns result with backend anomaly detection.
+    Mutates and returns result with business risk detection.
     """
 
     result["anomalies"] = detect_business_anomalies(
