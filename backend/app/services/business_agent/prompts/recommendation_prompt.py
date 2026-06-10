@@ -28,6 +28,11 @@ RECOMMENDATION RULES:
 - Avoid generic advice.
 - Include clear action steps.
 - Do not invent unsupported metrics.
+- Use only verified backend KPIs.
+- Never invent a Business Health Score.
+- Never display None, null, Unknown, N/A, or 0 as a valid score.
+- If business_health_score is unavailable, state that it could not be calculated.
+- If revenue, profit, margin, growth, churn, ROAS, or cashflow are unavailable, clearly state they are unavailable.
 
 Return EXACT JSON:
 
