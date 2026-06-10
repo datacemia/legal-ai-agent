@@ -371,6 +371,16 @@ const normalizeBackendText = (
 
   Object.entries(dictionary).forEach(([source, target]) => {
     const escaped = source.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+    if (text.trim().toLowerCase() === source.toLowerCase()) {
+      text = target;
+      return;
+    }
+
+    if (["Profit", "Cashflow", "Revenue", "Expenses"].includes(source)) {
+      return;
+    }
+
     text = text.replace(
       new RegExp(`(^|[^A-Za-z])${escaped}(?=$|[^A-Za-z])`, "gi"),
       (_match, prefix) => `${prefix}${target}`
@@ -384,7 +394,14 @@ const normalizeBackendText = (
       .replaceAll("score de santé backend est de 73/100 (Sain)", "score de santé backend est de 73/100 (sain)")
       .replaceAll("situation actuelle comme Critique", "situation actuelle comme critique")
       .replaceAll("Volatilité moyen", "Volatilité moyenne")
-      .replaceAll("Risque cashflow faible", "Risque de cashflow faible");
+      .replaceAll("Risque cashflow faible", "Risque de cashflow faible")
+      .replaceAll("Le Profit", "Le profit")
+      .replaceAll("le Profit", "le profit")
+      .replaceAll("du Profit", "du profit")
+      .replaceAll("de Profit", "de profit")
+      .replaceAll("ou de Profit", "ou de profit")
+      .replaceAll("du Flux de trésorerie", "du flux de trésorerie")
+      .replaceAll("le Flux de trésorerie", "le flux de trésorerie");
   }
 
   return text;
