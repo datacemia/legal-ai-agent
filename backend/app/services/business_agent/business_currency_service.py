@@ -4,7 +4,7 @@ from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 from typing import Any
 
 
-DEFAULT_CURRENCY_CODE = "USD"
+DEFAULT_CURRENCY_CODE = None
 UNKNOWN_CURRENCY: dict[str, Any] = {
     "code": None,
     "symbol": None,
@@ -328,17 +328,32 @@ def normalize_currency_code(value: Any) -> str | None:
     return None
 
 
-def get_currency_metadata(code: str | None) -> dict[str, str]:
-    normalized = normalize_currency_code(code) or DEFAULT_CURRENCY_CODE
+def get_currency_metadata(code: str | None) -> dict[str, Any]:
+    normalized = normalize_currency_code(code)
 
-    metadata = CURRENCY_METADATA.get(
-        normalized,
-        CURRENCY_METADATA[DEFAULT_CURRENCY_CODE],
-    ).copy()
+    if normalized is None:
+        return {
+            "code": None,
+            "symbol": None,
+            "name": None,
+            "position": None,
+            "locale": None,
+        }
 
-    metadata["code"] = normalized
+    metadata = CURRENCY_METADATA.get(normalized)
 
-    return metadata
+    if metadata is None:
+        return {
+            "code": None,
+            "symbol": None,
+            "name": None,
+            "position": None,
+            "locale": None,
+        }
+
+    result = metadata.copy()
+    result["code"] = normalized
+    return result
 
 
 def detect_currency_in_text(value: Any) -> str | None:
@@ -794,7 +809,7 @@ def get_money_display_fields(
     fields: list[str],
     decimals: int = 2,
 ) -> dict[str, str]:
-    currency = result.get("currency") or get_currency_metadata(DEFAULT_CURRENCY_CODE)
+    currency = result.get("currency") or UNKNOWN_CURRENCY.copy()
     output: dict[str, str] = {}
 
     for field in fields:
