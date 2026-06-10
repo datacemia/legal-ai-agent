@@ -125,6 +125,56 @@ def _format_money(value: Any, currency: dict[str, Any] | None, language: str) ->
     return f"{display_currency}{number}"
 
 
+def _format_health_score(
+    analysis: dict[str, Any],
+    business_health: dict[str, Any] | None = None,
+) -> str:
+    """
+    Format Business Health Score without converting unavailable values to 0/100.
+
+    Product catalogs, inventory files, reference tables, and incomplete datasets can
+    legitimately have business_health_score = None. In those cases, PowerPoint
+    exports must show N/A, matching the web dashboard and PDF export.
+    """
+
+    business_health = business_health or {}
+    score = analysis.get("business_health_score")
+
+    if score is None:
+        score = business_health.get("score")
+
+    if isinstance(score, bool):
+        return "N/A"
+
+    if isinstance(score, int | float):
+        return f"{int(round(float(score)))}/100"
+
+    return "N/A"
+
+
+def _health_score_color(
+    analysis: dict[str, Any],
+    business_health: dict[str, Any] | None = None,
+) -> RGBColor:
+    """
+    Pick a safe color for Business Health Score cards.
+    Unavailable score uses neutral ink instead of red/green.
+    """
+
+    business_health = business_health or {}
+    score = analysis.get("business_health_score")
+
+    if score is None:
+        score = business_health.get("score")
+
+    if isinstance(score, bool) or not isinstance(score, int | float):
+        return COLORS["ink"]
+
+    return COLORS["green"] if float(score) >= 60 else COLORS["red"]
+
+
+
+
 def _labels(language: str) -> dict[str, str]:
     labels = {
         "en": {
@@ -874,7 +924,9 @@ def _create_cover(prs, analysis, labels, language, source_file_name):
     slide = _blank_slide(prs)
     _background(slide, COLORS["navy"])
 
-    score = float(analysis.get("business_health_score", 0) or 0)
+    business_health = analysis.get("business_health") or {}
+    health_score_display = _format_health_score(analysis, business_health)
+    health_score_color = _health_score_color(analysis, business_health)
     currency = analysis.get("currency") or {}
     generated_at = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
     source_file = source_file_name or analysis.get("file_metadata", {}).get("file_name", "-")
@@ -932,13 +984,13 @@ def _create_cover(prs, analysis, labels, language, source_file_name):
     _add_card(
         slide,
         labels["health"],
-        f"{score:.0f}/100",
+        health_score_display,
         Inches(9.35),
         Inches(1.25),
         Inches(3.1),
         Inches(1.25),
         language,
-        COLORS["green"] if score >= 60 else COLORS["red"],
+        health_score_color,
     )
 
     _add_card(
