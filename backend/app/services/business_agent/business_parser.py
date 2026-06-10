@@ -13,9 +13,16 @@ COLUMN_ALIASES = {
         "date",
         "day",
         "transaction_date",
+        "order_date",
+        "purchase_date",
+        "invoice_date",
+        "payment_date",
+        "checkout_date",
+        "booking_date",
         "created_at",
         "created",
         "time",
+        "timestamp",
         "month",
         "period",
         "jour",
@@ -23,6 +30,9 @@ COLUMN_ALIASES = {
         "période",
         "periode",
         "date_transaction",
+        "date_commande",
+        "date_achat",
+        "date_paiement",
         "date_creation",
         "تاريخ",
         "يوم",
@@ -35,6 +45,16 @@ COLUMN_ALIASES = {
         "sale",
         "income",
         "turnover",
+        "amount",
+        "total_amount",
+        "order_total",
+        "line_total",
+        "item_total",
+        "subtotal",
+        "total",
+        "price_total",
+        "purchase_amount",
+        "payment_amount",
         "amount_in",
         "credit",
         "credits",
@@ -43,6 +63,14 @@ COLUMN_ALIASES = {
         "gross_sales",
         "net_sales",
         "total_sales",
+        "gross_amount",
+        "net_amount",
+        "revenue_amount",
+        "vente_totale",
+        "montant_total",
+        "total_commande",
+        "montant_achat",
+        "montant_paiement",
         "revenu",
         "revenus",
         "chiffre_affaires",
@@ -59,6 +87,40 @@ COLUMN_ALIASES = {
         "المداخيل",
         "مداخيل",
         "مبلغ_داخل",
+    ],
+    "expenses": [
+        "expense",
+        "expenses",
+        "cost",
+        "costs",
+        "amount_out",
+        "debit",
+        "debits",
+        "spend",
+        "spending",
+        "paid",
+        "payment",
+        "ad_cost",
+        "ads_cost",
+        "marketing_cost",
+        "fees",
+        "charge",
+        "charges",
+        "depense",
+        "depenses",
+        "cout",
+        "couts",
+        "frais",
+        "paiement",
+        "montant_sortant",
+        "مصروف",
+        "مصروفات",
+        "تكلفة",
+        "تكاليف",
+        "نفقات",
+        "دفع",
+        "رسوم",
+        "مبلغ_خارج",
     ],
     "expense": [
         "expense",
@@ -148,6 +210,48 @@ COLUMN_ALIASES = {
         "مصدر",
         "قناة",
     ],
+    "orders": [
+        "orders",
+        "order",
+        "order_id",
+        "purchase_id",
+        "transaction_id",
+        "invoice_id",
+        "receipt_id",
+        "checkout_id",
+        "booking_id",
+        "nombre_commandes",
+        "commande_id",
+        "id_commande",
+        "achat_id",
+        "id_achat",
+        "طلبات",
+        "طلب",
+        "معرف_الطلب",
+        "معرف_الشراء",
+    ],
+    "customers": [
+        "customers",
+        "customer",
+        "customer_id",
+        "user_id",
+        "client_id",
+        "buyer_id",
+        "account_id",
+        "member_id",
+        "subscriber_id",
+        "clients",
+        "client",
+        "id_client",
+        "utilisateur_id",
+        "acheteur_id",
+        "عملاء",
+        "عميل",
+        "زبائن",
+        "مستخدم",
+        "معرف_العميل",
+        "معرف_المستخدم",
+    ],
 }
 
 
@@ -196,9 +300,9 @@ def detect_column_mapping(fieldnames: list[str]) -> dict[str, str]:
             for alias in aliases
         ]
 
-        for normalized_field, original_field in normalized_fields.items():
-            if normalized_field in normalized_aliases:
-                mapping[target] = original_field
+        for alias in normalized_aliases:
+            if alias in normalized_fields:
+                mapping[target] = normalized_fields[alias]
                 break
 
         if target not in mapping:
@@ -351,6 +455,13 @@ def parse_period(value: Any) -> str:
 
     if not text:
         return "Unknown"
+
+    # Accept ISO datetimes with time / fractional seconds, including nanoseconds
+    # such as "2023-01-15 18:05:44.055402424".
+    iso_date_match = re.match(r"^(\d{4})-(\d{2})-(\d{2})", text)
+
+    if iso_date_match:
+        return f"{iso_date_match.group(1)}-{iso_date_match.group(2)}"
 
     known_formats = [
         "%Y-%m-%d",

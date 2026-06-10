@@ -137,7 +137,14 @@ KPI_ALIASES = {
         "period",
         "created_at",
         "transaction_date",
+        "order_date",
+        "purchase_date",
+        "invoice_date",
+        "payment_date",
+        "checkout_date",
+        "booking_date",
         "time",
+        "timestamp",
         "jour",
         "mois",
         "periode",
@@ -156,6 +163,24 @@ KPI_ALIASES = {
         "gross_sales",
         "net_sales",
         "total_sales",
+        "amount",
+        "total_amount",
+        "order_total",
+        "line_total",
+        "item_total",
+        "subtotal",
+        "total",
+        "price_total",
+        "purchase_amount",
+        "payment_amount",
+        "gross_amount",
+        "net_amount",
+        "revenue_amount",
+        "vente_totale",
+        "montant_total",
+        "total_commande",
+        "montant_achat",
+        "montant_paiement",
         "amount_in",
         "credit",
         "received",
@@ -280,7 +305,19 @@ KPI_ALIASES = {
         "customer_count",
         "active_customers",
         "clients",
+        "client",
         "client_count",
+        "customer",
+        "customer_id",
+        "user_id",
+        "client_id",
+        "buyer_id",
+        "account_id",
+        "member_id",
+        "subscriber_id",
+        "id_client",
+        "utilisateur_id",
+        "acheteur_id",
         "utilisateurs",
         "عملاء",
         "زبائن",
@@ -318,6 +355,13 @@ KPI_ALIASES = {
     "orders": [
         "orders",
         "order_count",
+        "order_id",
+        "purchase_id",
+        "transaction_id",
+        "invoice_id",
+        "receipt_id",
+        "checkout_id",
+        "booking_id",
         "transactions",
         "purchases",
         "commandes",
@@ -459,6 +503,13 @@ def parse_period(value: Any) -> str:
     if not text:
         return "Unknown"
 
+    # Accept ISO datetimes with time / fractional seconds, including nanoseconds
+    # such as "2023-01-15 18:05:44.055402424".
+    iso_date_match = re.match(r"^(\d{4})-(\d{2})-(\d{2})", text)
+
+    if iso_date_match:
+        return f"{iso_date_match.group(1)}-{iso_date_match.group(2)}"
+
     known_formats = [
         "%Y-%m-%d",
         "%Y/%m/%d",
@@ -534,9 +585,9 @@ def detect_kpi_columns(columns: list[str]) -> dict[str, str]:
             for alias in aliases
         ]
 
-        for normalized_column, original_column in normalized_columns.items():
-            if normalized_column in normalized_aliases:
-                detected[kpi] = original_column
+        for alias in normalized_aliases:
+            if alias in normalized_columns:
+                detected[kpi] = normalized_columns[alias]
                 break
 
         if kpi not in detected:
@@ -748,6 +799,54 @@ def sum_column(
     return total
 
 
+def count_distinct_values(
+    rows: list[dict[str, Any]],
+    column: str | None,
+) -> float:
+    if not column:
+        return 0.0
+
+    values = {
+        str(row.get(column)).strip()
+        for row in rows
+        if row.get(column) not in (None, "")
+    }
+
+    return float(len(values))
+
+
+def count_or_sum_identifier_column(
+    rows: list[dict[str, Any]],
+    column: str | None,
+) -> float:
+    if not column:
+        return 0.0
+
+    summed = sum_column(rows, column)
+    distinct = count_distinct_values(rows, column)
+
+    # Identifier columns such as order_id, purchase_id, user_id, client_id
+    # are often UUID/text values. They should be counted, not summed.
+    normalized = normalize_text(column)
+    identifier_tokens = [
+        "id",
+        "uuid",
+        "order",
+        "purchase",
+        "transaction",
+        "invoice",
+        "customer",
+        "client",
+        "user",
+        "buyer",
+    ]
+
+    if distinct > 0 and (summed <= 0 or any(token in normalized for token in identifier_tokens)):
+        return distinct
+
+    return summed
+
+
 def latest_column_value(
     rows: list[dict[str, Any]],
     column: str | None,
@@ -863,9 +962,12 @@ def calculate_customer_metrics(
 
     latest_customers = latest_column_value(rows, customers_col)
     max_customers = max_column_value(rows, customers_col)
+    distinct_customers = count_distinct_values(rows, customers_col)
 
     # Strongest observed customer denominator.
-    effective_customers = max(latest_customers, max_customers)
+    # For e-commerce exports, customers_col may be user_id/customer_id,
+    # so distinct IDs are safer than numeric summation.
+    effective_customers = max(latest_customers, max_customers, distinct_customers)
 
     # Conservative fallback when only acquisition/churn movement exists.
     if effective_customers <= 0 and (total_new_customers > 0 or total_churned_customers > 0):
@@ -890,6 +992,7 @@ def calculate_customer_metrics(
         "customers": round_money(effective_customers),
         "latest_customers": round_money(latest_customers),
         "max_customers": round_money(max_customers),
+        "distinct_customers": round_money(distinct_customers),
         "new_customers": round_money(total_new_customers),
         "churned_customers": round_money(total_churned_customers),
         "churn_rate_percent": round_money(churn_rate_percent),
@@ -920,7 +1023,7 @@ def calculate_advanced_kpis(
 
     total_revenue = sum_column(rows, revenue_col)
     total_expenses = sum_column(rows, expenses_col)
-    total_orders = sum_column(rows, orders_col)
+    total_orders = count_or_sum_identifier_column(rows, orders_col)
     total_ad_spend = sum_column(rows, ad_spend_col)
     total_gmv = sum_column(rows, gmv_col)
     total_billable_hours = sum_column(rows, billable_hours_col)
@@ -948,6 +1051,7 @@ def calculate_advanced_kpis(
         "customers": round_money(total_customers),
         "latest_customers": customer_metrics["latest_customers"],
         "max_customers": customer_metrics["max_customers"],
+        "distinct_customers": customer_metrics.get("distinct_customers", 0),
         "new_customers": round_money(total_new_customers),
         "churned_customers": round_money(total_churned_customers),
         "ad_spend": round_money(total_ad_spend),
