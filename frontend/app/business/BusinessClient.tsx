@@ -209,6 +209,23 @@ const getCurrencyDisplay = (
   return `${symbol} ${code}`;
 };
 
+const isMetricAvailable = (
+  source: Record<string, any> | null | undefined,
+  keys: string[],
+  fallback = true
+) => {
+  for (const key of keys) {
+    if (typeof source?.[key] === "boolean") {
+      return Boolean(source[key]);
+    }
+  }
+
+  return fallback;
+};
+
+const unavailableMetricLabel = () => "N/A";
+
+
 
 const normalizeBackendText = (
   value: any,
@@ -1907,7 +1924,7 @@ export default function BusinessClient() {
       howItWorks: "How it works",
       dataTypes: "Supported business data",
       enterpriseReady: "Public & enterprise-ready",
-      trustedData: "Numbers stay backend-calculated. AI explains, the backend verifies.",
+      trustedData: "Numbers are verified by deterministic calculations. AI explains the results.",
       supportedFiles: "Supported: CSV, XLSX",
       maxSize: "Max size: 25MB",
       executiveDashboardLabel: "Executive AI Decision Dashboard",
@@ -1922,7 +1939,7 @@ export default function BusinessClient() {
       ],
       whatYouGetDescriptions: [
         "Understand revenue, profit, margin, growth, cashflow, and operational signals in one clear view.",
-        "The backend calculates core metrics and advanced KPIs before any narrative is generated.",
+        "Core metrics and advanced KPIs are calculated before any narrative is generated.",
         "Detect churn pressure, profitability risks, cashflow issues, and unusual business signals.",
         "Receive practical decisions, opportunities, and next actions for public users or enterprise teams.",
       ],
@@ -2006,7 +2023,7 @@ export default function BusinessClient() {
       howItWorks: "Fonctionnement",
       dataTypes: "Données business prises en charge",
       enterpriseReady: "Prêt public & entreprise",
-      trustedData: "Les chiffres restent calculés par le backend. L’IA explique, le backend vérifie.",
+      trustedData: "Les chiffres sont vérifiés par des calculs déterministes. L’IA explique les résultats.",
       supportedFiles: "Formats supportés : CSV, XLSX",
       maxSize: "Taille max : 25MB",
       executiveDashboardLabel: "Dashboard exécutif IA",
@@ -2021,7 +2038,7 @@ export default function BusinessClient() {
       ],
       whatYouGetDescriptions: [
         "Comprendre revenus, profit, marge, croissance, cashflow et signaux opérationnels dans une vue claire.",
-        "Le backend calcule les métriques clés et les KPIs avancés avant toute génération narrative.",
+        "Les métriques clés et les KPIs avancés sont calculés avant toute génération narrative.",
         "Détecter churn, risques de rentabilité, pression cashflow et signaux business inhabituels.",
         "Recevoir des décisions pratiques, opportunités et prochaines actions pour utilisateurs publics ou équipes entreprise.",
       ],
@@ -2105,7 +2122,7 @@ export default function BusinessClient() {
       howItWorks: "آلية العمل",
       dataTypes: "أنواع بيانات الأعمال المدعومة",
       enterpriseReady: "جاهز للاستخدام العام والمؤسسات",
-      trustedData: "الأرقام تُحسب في النظام الخلفي. الذكاء الاصطناعي يشرح، والنظام الخلفي يتحقق.",
+      trustedData: "يتم التحقق من الأرقام عبر حسابات حتمية. الذكاء الاصطناعي يشرح النتائج.",
       supportedFiles: "الملفات المدعومة: CSV, XLSX",
       maxSize: "الحجم الأقصى: 25MB",
       executiveDashboardLabel: "لوحة القرارات التنفيذية الذكية",
@@ -2120,7 +2137,7 @@ export default function BusinessClient() {
       ],
       whatYouGetDescriptions: [
         "فهم الإيرادات والربح والهامش والنمو والتدفق النقدي والإشارات التشغيلية في واجهة واضحة.",
-        "النظام الخلفي يحسب المؤشرات الأساسية والمتقدمة قبل إنشاء أي سرد أو تفسير.",
+        "يتم حساب المؤشرات الأساسية والمتقدمة قبل إنشاء أي سرد أو تفسير.",
         "كشف ضغط فقدان العملاء ومخاطر الربحية ومشاكل التدفق النقدي والإشارات غير المعتادة.",
         "الحصول على قرارات عملية وفرص وخطوات تالية للمستخدمين العامين أو فرق المؤسسات.",
       ],
@@ -2222,6 +2239,20 @@ export default function BusinessClient() {
 
   const currency = result?.currency || null;
   const hasCurrency = Boolean(currency?.code || currency?.symbol);
+  const kpis = result?.kpis || {};
+  const expensesAvailable = isMetricAvailable(
+    kpis,
+    ["expenses_available", "expense_available"]
+  );
+  const profitAvailable = isMetricAvailable(
+    kpis,
+    ["profit_available", "profitability_available"]
+  );
+  const profitMarginAvailable = isMetricAvailable(
+    kpis,
+    ["profit_margin_available", "margin_available", "profitability_available"],
+    profitAvailable
+  );
 
   return (
     <main
@@ -2683,19 +2714,31 @@ export default function BusinessClient() {
 
               <KpiCard
                 label={t.expenses}
-                value={formatMoney(result.kpis?.expenses, currency, locale)}
+                value={
+                  expensesAvailable
+                    ? formatMoney(result.kpis?.expenses, currency, locale)
+                    : unavailableMetricLabel()
+                }
                 tone="amber"
               />
 
               <KpiCard
                 label={t.profit}
-                value={formatMoney(result.kpis?.profit, currency, locale)}
+                value={
+                  profitAvailable
+                    ? formatMoney(result.kpis?.profit, currency, locale)
+                    : unavailableMetricLabel()
+                }
                 tone="green"
               />
 
               <KpiCard
                 label={t.margin}
-                value={formatPercent(result.kpis?.profit_margin_percent, locale)}
+                value={
+                  profitMarginAvailable
+                    ? formatPercent(result.kpis?.profit_margin_percent, locale)
+                    : unavailableMetricLabel()
+                }
               />
 
               <KpiCard
