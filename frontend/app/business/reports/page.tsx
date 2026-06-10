@@ -217,7 +217,7 @@ const normalizeBackendText = (
 
     "Revenue": "Chiffre d’affaires",
     "Expenses": "Dépenses",
-    "Profit": "Bénéfice net",
+    "Profit": "Profit",
 
     "Profit Margin Percent": "Taux de marge bénéficiaire",
     "Growth Rate Percent": "Taux de croissance"
@@ -431,7 +431,7 @@ const labels: Record<Locale, Record<string, string>> = {
 
     expenses: "Dépenses",
 
-    profit: "Bénéfice net",
+    profit: "Profit",
 
     margin: "Marge bénéficiaire",
 

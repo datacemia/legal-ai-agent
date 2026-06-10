@@ -511,7 +511,7 @@ const labels: Record<Locale, Record<string, string>> = {
 
     revenue: "Chiffre d’affaires",
     expenses: "Dépenses",
-    profit: "Bénéfice net",
+    profit: "Profit",
 
     margin: "Marge bénéficiaire",
     growth: "Croissance",

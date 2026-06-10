@@ -305,7 +305,7 @@ const normalizeBackendText = (
 
     "Revenue": "Chiffre d’affaires",
     "Expenses": "Dépenses",
-    "Profit": "Bénéfice net",
+    "Profit": "Profit",
 
     "Profit Margin Percent": "Taux de marge bénéficiaire",
     "Growth Rate Percent": "Taux de croissance"
@@ -630,7 +630,7 @@ const chartLabels: Record<Locale, Record<string, string>> = {
     businessCharts: "Visualisations business",
 
     chartsSubtitle:
-      "Tendances et analyses visuelles du chiffre d’affaires, des dépenses, du bénéfice net, des flux de trésorerie et des catégories de dépenses.",
+      "Tendances et analyses visuelles du chiffre d’affaires, des dépenses, du profit, des flux de trésorerie et des catégories de dépenses.",
 
     chartsCount: "graphiques",
 
@@ -647,7 +647,7 @@ const chartLabels: Record<Locale, Record<string, string>> = {
 
     expenseTrend: "Évolution des dépenses",
 
-    profitEvolution: "Évolution du bénéfice net",
+    profitEvolution: "Évolution du profit",
 
     cashflowTrend: "Évolution du flux de trésorerie",
 
