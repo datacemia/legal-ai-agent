@@ -747,11 +747,15 @@ function HealthRing({
   rating,
   label,
 }: {
-  score: number;
+  score: number | null | undefined;
   rating?: string;
   label: string;
 }) {
-  const safeScore = Math.max(0, Math.min(100, Number(score) || 0));
+  const scoreAvailable =
+    typeof score === "number" && Number.isFinite(score);
+  const safeScore = scoreAvailable
+    ? Math.max(0, Math.min(100, Number(score)))
+    : null;
 
   return (
     <div className="rounded-3xl border border-slate-200 bg-slate-950 p-6 text-white shadow-sm">
@@ -761,22 +765,24 @@ function HealthRing({
 
       <div className="mt-5 flex items-end gap-3">
         <p className="text-6xl font-black tracking-tight">
-          {safeScore}
+          {safeScore !== null ? safeScore : unavailableMetricLabel()}
         </p>
 
-        <p className="pb-2 text-lg font-bold text-slate-400">
-          /100
-        </p>
+        {safeScore !== null && (
+          <p className="pb-2 text-lg font-bold text-slate-400">
+            /100
+          </p>
+        )}
       </div>
 
       <div className="mt-5 h-3 overflow-hidden rounded-full bg-white/10">
         <div
           className="h-full rounded-full bg-white"
-          style={{ width: `${safeScore}%` }}
+          style={{ width: `${safeScore ?? 0}%` }}
         />
       </div>
 
-      {rating && (
+      {rating && rating !== "not_available" && (
         <p className="mt-4 text-sm font-semibold capitalize text-slate-200">
           {rating}
         </p>
@@ -1004,7 +1010,11 @@ export default function BusinessDashboardPage() {
     currency,
   } = derived;
 
-  const healthScore = Number(result.business_health_score || health.score || 0);
+  const rawHealthScore = result.business_health_score ?? health.score;
+  const healthScore =
+    typeof rawHealthScore === "number" && Number.isFinite(rawHealthScore)
+      ? rawHealthScore
+      : null;
   const expensesAvailable = isMetricAvailable(
     kpis,
     ["expenses_available", "expense_available"]
@@ -1248,7 +1258,9 @@ export default function BusinessDashboardPage() {
                   </p>
 
                   <p className="mt-2 text-2xl font-black text-slate-950">
-                    {component.score}/100
+                    {typeof component.score === "number" && Number.isFinite(component.score)
+                      ? `${component.score}/100`
+                      : unavailableMetricLabel()}
                   </p>
 
                   <p className="mt-1 text-xs leading-5 text-slate-500">
@@ -1399,7 +1411,9 @@ export default function BusinessDashboardPage() {
           title={t.dataQuality}
           action={
             <Badge tone={Number(dataQuality.score) >= 90 ? "green" : "amber"}>
-              {dataQuality.score ?? 0}/100
+              {typeof dataQuality.score === "number" && Number.isFinite(dataQuality.score)
+                ? `${dataQuality.score}/100`
+                : unavailableMetricLabel()}
             </Badge>
           }
         >
