@@ -89,6 +89,10 @@ const formatNumber = (
   value: any,
   language: Locale = "en"
 ) => {
+  if (isUnavailableValue(value)) {
+    return unavailableMetricLabel(language);
+  }
+
   if (typeof value !== "number" || Number.isNaN(value)) {
     return value ?? "-";
   }
@@ -109,6 +113,10 @@ const formatPercent = (
   value: any,
   language: Locale = "en"
 ) => {
+  if (isUnavailableValue(value)) {
+    return unavailableMetricLabel(language);
+  }
+
   if (typeof value !== "number" || Number.isNaN(value)) {
     return value ?? "-";
   }
@@ -121,6 +129,10 @@ const formatMoney = (
   currency: any,
   language: Locale = "en"
 ) => {
+  if (isUnavailableValue(value)) {
+    return unavailableMetricLabel(language);
+  }
+
   if (typeof value !== "number" || Number.isNaN(value)) {
     return value ?? "-";
   }
@@ -190,6 +202,13 @@ const unavailableMetricLabel = (locale: Locale = "en") => {
   if (locale === "fr") return "Indisponible";
   return "N/A";
 };
+
+const isUnavailableValue = (value: any) =>
+  value === null ||
+  value === undefined ||
+  value === "" ||
+  value === "N/A" ||
+  value === "n/a";
 
 
 const downloadBlob = async (
