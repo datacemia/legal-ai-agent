@@ -1179,7 +1179,11 @@ export default function BusinessDashboardPage() {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-3 lg:grid-cols-3">
             <StatCard
               label={t.revenue}
-              value={formatMoney(kpis.revenue, currency, locale)}
+              value={
+                isMetricAvailable(kpis, ["revenue_available"], false)
+                  ? formatMoney(kpis.revenue, currency, locale)
+                  : unavailableMetricLabel(locale)
+              }
               tone="green"
             />
 
@@ -1214,7 +1218,11 @@ export default function BusinessDashboardPage() {
 
             <StatCard
               label={t.growth}
-              value={formatPercent(kpis.growth_rate_percent, locale)}
+              value={
+                isMetricAvailable(kpis, ["growth_available"], false)
+                  ? formatPercent(kpis.growth_rate_percent, locale)
+                  : unavailableMetricLabel(locale)
+              }
               tone={Number(kpis.growth_rate_percent) >= 0 ? "green" : "red"}
             />
 
