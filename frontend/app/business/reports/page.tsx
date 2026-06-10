@@ -132,11 +132,19 @@ const getCurrencyDisplay = (
   currency: WeeklyReport["currency"],
   language: Locale = "en"
 ) => {
-  const code = currency?.code || "USD";
+  const code = currency?.code || "";
   const symbol = currency?.symbol || "";
+
+  if (!code && !symbol) {
+    return "N/A";
+  }
 
   if (!symbol) {
     return code;
+  }
+
+  if (!code) {
+    return symbol;
   }
 
   if (language === "ar") {
