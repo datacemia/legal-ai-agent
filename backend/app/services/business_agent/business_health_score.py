@@ -60,7 +60,7 @@ def _score_profit_margin(profit_margin_percent: float) -> dict[str, Any]:
 
 def _score_profitability_unavailable() -> dict[str, Any]:
     return {
-        "score": 50,
+        "score": 60,
         "signal": "profitability_unavailable",
         "label": "Profitability unavailable because expenses or costs were not provided.",
         "value": "unavailable",
@@ -117,9 +117,9 @@ def _score_cashflow(cashflow_status: str) -> dict[str, Any]:
         signal = "negative_cashflow"
         label = "Negative cashflow."
     else:
-        score = 50
+        score = 60
         signal = "unknown_cashflow"
-        label = "Cashflow status is unclear."
+        label = "Cashflow status is unavailable or unclear."
 
     return {
         "score": score,
@@ -175,7 +175,7 @@ def _score_roas(roas: float) -> dict[str, Any]:
     """
 
     if roas <= 0:
-        score = 50
+        score = 60
         signal = "roas_unavailable"
         label = "ROAS unavailable."
     elif roas >= 5:
@@ -215,7 +215,7 @@ def _score_cac_efficiency(cac: float, revenue_per_customer: float) -> dict[str, 
 
     if cac <= 0 or revenue_per_customer <= 0:
         return {
-            "score": 50,
+            "score": 60,
             "signal": "cac_efficiency_unavailable",
             "label": "CAC efficiency unavailable.",
             "value": {
@@ -304,7 +304,8 @@ def calculate_backend_health_score(
     - Data quality
 
     Missing KPIs are treated as neutral/unavailable rather than as strong
-    positives or negatives. This avoids inflated scores for revenue-only files.
+    positives or negatives. Revenue-only ecommerce files should not be
+    punished as if margin, ROAS, churn, CAC, or cashflow were bad.
     """
 
     core_kpis = core_kpis or {}
@@ -335,13 +336,13 @@ def calculate_backend_health_score(
         "growth": _score_growth(growth_rate),
         "cashflow": _score_cashflow(cashflow_status if profit_available else "unknown"),
         "churn": _score_churn(churn_rate) if churn_available else {
-            "score": 50,
+            "score": 60,
             "signal": "churn_unavailable",
             "label": "Churn unavailable.",
             "value": "unavailable",
         },
         "roas": _score_roas(roas) if roas_available else {
-            "score": 50,
+            "score": 60,
             "signal": "roas_unavailable",
             "label": "ROAS unavailable.",
             "value": "unavailable",
@@ -350,7 +351,7 @@ def calculate_backend_health_score(
             _score_cac_efficiency(cac, revenue_per_customer)
             if cac_available
             else {
-                "score": 50,
+                "score": 60,
                 "signal": "cac_efficiency_unavailable",
                 "label": "CAC efficiency unavailable.",
                 "value": {
