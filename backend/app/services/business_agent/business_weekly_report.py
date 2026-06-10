@@ -128,7 +128,7 @@ Return EXACT JSON:
   "source_file_name": "",
   "executive_brief": "short executive CEO-style brief",
   "weekly_summary": "summary of the latest business situation",
-  "business_health_score": 0,
+  "business_health_score": null,
   "kpi_snapshot": {{
     "revenue": 0,
     "expenses": 0,
