@@ -164,6 +164,28 @@ def _build_item(
     }
 
 
+def _flag_enabled(payload: dict[str, Any], key: str, default: bool = True) -> bool:
+    """
+    Read KPI availability flags safely.
+
+    Newer KPI detectors expose flags such as profit_available,
+    expenses_available, churn_available, roas_available, and cashflow_available.
+    If a flag is missing, default=True preserves backward compatibility.
+    """
+
+    if key not in payload:
+        return default
+
+    return bool(payload.get(key))
+
+
+def _series_has_positive_values(
+    monthly_series: list[dict[str, Any]],
+    key: str,
+) -> bool:
+    return any(_to_float(item.get(key)) > 0 for item in monthly_series)
+
+
 def _detect_revenue_items(
     monthly_series: list[dict[str, Any]],
     data_quality_score: float,
@@ -409,10 +431,16 @@ def _detect_profit_items(
     data_quality_score: float,
 ) -> list[dict[str, Any]]:
     items: list[dict[str, Any]] = []
+    profit_available = _flag_enabled(core_kpis, "profit_available", True)
+    margin_available = _flag_enabled(
+        core_kpis,
+        "profit_margin_available",
+        profit_available,
+    )
     margin = _to_float(core_kpis.get("profit_margin_percent"))
     period = _latest_period(monthly_series)
 
-    if margin < 10:
+    if margin_available and margin < 10:
         items.append(
             _build_item(
                 kind="risk",
@@ -447,7 +475,7 @@ def _detect_profit_items(
             )
         )
 
-    if len(monthly_series) >= 2:
+    if profit_available and len(monthly_series) >= 2:
         previous = _to_float(monthly_series[-2].get("profit"))
         current = _to_float(monthly_series[-1].get("profit"))
         change = round(_percent_change(previous, current), 2)
@@ -496,15 +524,25 @@ def _detect_customer_items(
 ) -> list[dict[str, Any]]:
     items: list[dict[str, Any]] = []
 
+    churn_available = _flag_enabled(advanced_kpis, "churn_available", True)
+    customer_series_available = _flag_enabled(
+        advanced_kpis,
+        "customer_series_available",
+        True,
+    )
     customers = _to_float(advanced_kpis.get("customers"))
     new_customers = _to_float(advanced_kpis.get("new_customers"))
     churned_customers = _to_float(advanced_kpis.get("churned_customers"))
-    churn_rate = _to_float(advanced_kpis.get("churn_rate_percent"))
+    churn_rate = (
+        _to_float(advanced_kpis.get("churn_rate_percent"))
+        if churn_available
+        else 0.0
+    )
     customer_series = advanced_kpis.get("customer_series")
 
     periods_count = len(customer_series) if isinstance(customer_series, list) else 1
 
-    if churn_rate >= 7:
+    if churn_available and churn_rate >= 7:
         if churn_rate >= 20:
             severity_score = 88
         elif churn_rate >= 12:
@@ -548,7 +586,7 @@ def _detect_customer_items(
             )
         )
 
-    if new_customers > 0 and churned_customers > new_customers * 0.5:
+    if churn_available and new_customers > 0 and churned_customers > new_customers * 0.5:
         ratio = round(churned_customers / new_customers, 2)
 
         items.append(
@@ -589,7 +627,7 @@ def _detect_customer_items(
             )
         )
 
-    if isinstance(customer_series, list) and len(customer_series) >= 2:
+    if customer_series_available and isinstance(customer_series, list) and len(customer_series) >= 2:
         previous = _to_float(customer_series[-2].get("customers"))
         current = _to_float(customer_series[-1].get("customers"))
         change = round(_percent_change(previous, current), 2)
@@ -639,12 +677,23 @@ def _detect_marketing_items(
 ) -> list[dict[str, Any]]:
     items: list[dict[str, Any]] = []
 
-    roas = _to_float(advanced_kpis.get("roas"))
-    cac = _to_float(advanced_kpis.get("cac"))
-    revenue_per_customer = _to_float(advanced_kpis.get("revenue_per_customer"))
+    roas_available = _flag_enabled(advanced_kpis, "roas_available", True)
+    cac_available = _flag_enabled(advanced_kpis, "cac_available", True)
+    revenue_per_customer_available = _flag_enabled(
+        advanced_kpis,
+        "revenue_per_customer_available",
+        True,
+    )
+    roas = _to_float(advanced_kpis.get("roas")) if roas_available else 0.0
+    cac = _to_float(advanced_kpis.get("cac")) if cac_available else 0.0
+    revenue_per_customer = (
+        _to_float(advanced_kpis.get("revenue_per_customer"))
+        if revenue_per_customer_available
+        else 0.0
+    )
     ad_spend = _to_float(advanced_kpis.get("ad_spend"))
 
-    if ad_spend > 0 and roas > 0 and roas < 2:
+    if roas_available and ad_spend > 0 and roas > 0 and roas < 2:
         items.append(
             _build_item(
                 kind="risk",
@@ -679,7 +728,7 @@ def _detect_marketing_items(
             )
         )
 
-    if cac > 0 and revenue_per_customer > 0:
+    if cac_available and revenue_per_customer_available and cac > 0 and revenue_per_customer > 0:
         ratio = cac / revenue_per_customer
 
         if ratio >= 0.75:
@@ -728,10 +777,11 @@ def _detect_cashflow_items(
 ) -> list[dict[str, Any]]:
     items: list[dict[str, Any]] = []
 
+    cashflow_available = _flag_enabled(core_kpis, "cashflow_available", True)
     cashflow_status = str(core_kpis.get("cashflow_status") or "unknown").lower()
     cashflow_risk = str(forecast.get("cashflow_risk") or "").lower()
 
-    if cashflow_status == "negative":
+    if cashflow_available and cashflow_status == "negative":
         items.append(
             _build_item(
                 kind="anomaly",
@@ -810,12 +860,25 @@ def _generate_insights(
 ) -> list[dict[str, Any]]:
     insights: list[dict[str, Any]] = []
 
+    profit_available = _flag_enabled(core_kpis, "profit_available", True)
+    margin_available = _flag_enabled(
+        core_kpis,
+        "profit_margin_available",
+        profit_available,
+    )
+    roas_available = _flag_enabled(advanced_kpis, "roas_available", True)
+    churn_available = _flag_enabled(advanced_kpis, "churn_available", True)
+
     profit_margin = _to_float(core_kpis.get("profit_margin_percent"))
     growth_rate = _to_float(core_kpis.get("growth_rate_percent"))
-    roas = _to_float(advanced_kpis.get("roas"))
-    churn_rate = _to_float(advanced_kpis.get("churn_rate_percent"))
+    roas = _to_float(advanced_kpis.get("roas")) if roas_available else 0.0
+    churn_rate = (
+        _to_float(advanced_kpis.get("churn_rate_percent"))
+        if churn_available
+        else 0.0
+    )
 
-    if profit_margin >= 20 and growth_rate >= 5:
+    if margin_available and profit_margin >= 20 and growth_rate >= 5:
         insights.append(
             {
                 "kind": "insight",
@@ -829,7 +892,7 @@ def _generate_insights(
             }
         )
 
-    if roas >= 3:
+    if roas_available and roas >= 3:
         insights.append(
             {
                 "kind": "insight",
@@ -842,7 +905,7 @@ def _generate_insights(
             }
         )
 
-    if churn_rate > 0 and churn_rate < 7:
+    if churn_available and churn_rate > 0 and churn_rate < 7:
         insights.append(
             {
                 "kind": "insight",
@@ -855,7 +918,7 @@ def _generate_insights(
             }
         )
 
-    if len(monthly_series) >= 3:
+    if profit_available and len(monthly_series) >= 3:
         latest_profit = _to_float(monthly_series[-1].get("profit"))
         average_profit = _safe_mean(_series_values(monthly_series[:-1], "profit"))
 
@@ -904,7 +967,13 @@ def detect_business_anomalies_v2(
 
     if isinstance(monthly_series, list):
         items.extend(_detect_revenue_items(monthly_series, data_quality_score))
-        items.extend(_detect_expense_items(monthly_series, data_quality_score))
+
+        if (
+            _flag_enabled(core_kpis, "expenses_available", True)
+            and _series_has_positive_values(monthly_series, "expenses")
+        ):
+            items.extend(_detect_expense_items(monthly_series, data_quality_score))
+
         items.extend(_detect_profit_items(monthly_series, core_kpis, data_quality_score))
 
     items.extend(_detect_customer_items(advanced_kpis, data_quality_score))
@@ -970,7 +1039,7 @@ def detect_business_anomalies_v2(
         "risks": risks,
         "early_warnings": early_warnings,
         "insights": insights,
-        "source": "backend_anomaly_detection_v2",
+        "source": "business_risk_engine_v2",
     }
 
 
