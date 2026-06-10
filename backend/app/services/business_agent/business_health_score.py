@@ -493,10 +493,60 @@ def apply_backend_health_score(
         return result
 
     detected_kpis = detected_kpis or {}
+    core_kpis = detected_kpis.get("core_kpis", {}) or {}
+    advanced_kpis = detected_kpis.get("advanced_kpis", {}) or {}
+
+    has_verified_performance_data = any(
+        bool(core_kpis.get(flag))
+        for flag in (
+            "revenue_available",
+            "expenses_available",
+            "profit_available",
+            "growth_available",
+            "cashflow_available",
+        )
+    ) or any(
+        bool(advanced_kpis.get(flag))
+        for flag in (
+            "churn_available",
+            "roas_available",
+            "cac_available",
+            "aov_available",
+            "mrr_available",
+            "arr_available",
+        )
+    )
+
+    if not has_verified_performance_data:
+        result["analysis_available"] = False
+        result["business_health_score"] = None
+        result["business_health"] = {
+            "available": False,
+            "score": None,
+            "rating": "not_available",
+            "reason": (
+                "Business health score is unavailable because insufficient "
+                "business performance data was provided."
+            ),
+            "components": {},
+            "weights": {},
+            "strengths": [],
+            "warnings": [
+                "The uploaded file does not contain verified business performance metrics."
+            ],
+            "availability": {
+                "profit": False,
+                "roas": False,
+                "churn": False,
+                "cac": False,
+            },
+            "source": "business_health_scoring",
+        }
+        return result
 
     health = calculate_backend_health_score(
-        core_kpis=detected_kpis.get("core_kpis", {}),
-        advanced_kpis=detected_kpis.get("advanced_kpis", {}),
+        core_kpis=core_kpis,
+        advanced_kpis=advanced_kpis,
         data_quality=detected_kpis.get("data_quality", {}),
         business_model=detected_kpis.get(
             "business_model",
