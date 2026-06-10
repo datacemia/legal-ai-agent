@@ -96,7 +96,13 @@ const formatPercent = (
     return "-";
   }
 
-  return `${formatNumber(value, language)}%`;
+  const formatted = formatNumber(value, language);
+
+  if (language === "fr") {
+    return `${formatted} %`;
+  }
+
+  return `${formatted}%`;
 };
 
 const formatMoney = (
