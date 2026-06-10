@@ -77,7 +77,6 @@ def build_weekly_report_prompt(
         "business_model": latest_result.get("business_model", "general"),
         "business_health_score": latest_result.get(
             "business_health_score",
-            0,
         ),
         "kpis": latest_result.get("kpis", {}),
         "forecast": latest_result.get("forecast", {}),
@@ -307,7 +306,6 @@ def build_fallback_weekly_report(
         "weekly_summary": weekly_summary,
         "business_health_score": latest_result.get(
             "business_health_score",
-            0,
         ),
         "kpi_snapshot": {
             "revenue": kpis.get("revenue", 0),
@@ -389,7 +387,7 @@ def generate_weekly_report_for_user(
             "source_file_name": "",
             "executive_brief": "No business analysis is available yet.",
             "weekly_summary": "Upload and analyze a business file first.",
-            "business_health_score": 0,
+            "business_health_score": None,
             "kpi_snapshot": {
                 "revenue": 0,
                 "expenses": 0,
