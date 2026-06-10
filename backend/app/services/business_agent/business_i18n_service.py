@@ -330,10 +330,10 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
 
     # Key insights templates
-    "Backend-calculated revenue is {revenue} with profit of {profit}.": {
-        "en": "Backend-calculated revenue is {revenue} with profit of {profit}.",
-        "fr": "Les revenus calculés par le backend sont de {revenue}, avec un profit de {profit}.",
-        "ar": "الإيرادات المحسوبة من النظام الخلفي هي {revenue} مع ربح قدره {profit}.",
+    "Revenue is {revenue} with profit of {profit}.": {
+        "en": "Revenue is {revenue} with profit of {profit}.",
+        "fr": "Les revenus sont de {revenue}, avec un profit de {profit}.",
+        "ar": "بلغت الإيرادات {revenue} مع ربح قدره {profit}.",
     },
     "Profit margin is {margin}% and revenue growth is {growth}%.": {
         "en": "Profit margin is {margin}% and revenue growth is {growth}%.",
@@ -345,20 +345,20 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
         "fr": "Le churn client est estimé à {churn}%, ce qui affecte la qualité de rétention.",
         "ar": "يُقدر معدل فقدان العملاء بـ {churn}%، مما يؤثر على جودة الاحتفاظ.",
     },
-    "ROAS is {roas}, based on backend-calculated revenue and ad spend.": {
-        "en": "ROAS is {roas}, based on backend-calculated revenue and ad spend.",
-        "fr": "Le ROAS est de {roas}, basé sur les revenus et dépenses publicitaires calculés par le backend.",
-        "ar": "عائد الإنفاق الإعلاني هو {roas}، بناءً على الإيرادات والإنفاق الإعلاني المحسوبين من النظام الخلفي.",
+    "ROAS is {roas}, based on revenue and advertising spend.": {
+        "en": "ROAS is {roas}, based on revenue and advertising spend.",
+        "fr": "Le ROAS est de {roas}, basé sur les revenus et les dépenses publicitaires.",
+        "ar": "عائد الإنفاق الإعلاني هو {roas}، بناءً على الإيرادات والإنفاق الإعلاني.",
     },
-    "The deterministic backend health score is {score}/100.": {
-        "en": "The deterministic backend health score is {score}/100.",
-        "fr": "Le score de santé backend déterministe est de {score}/100.",
-        "ar": "درجة صحة النشاط المحسوبة من النظام الخلفي هي {score}/100.",
+    "Business Health Score is {score}/100.": {
+        "en": "Business Health Score is {score}/100.",
+        "fr": "Le score de santé business est de {score}/100.",
+        "ar": "درجة صحة النشاط هي {score}/100.",
     },
-    "Anomaly engine detected {total} active risk item(s) and {insights} positive insight(s).": {
-        "en": "Anomaly engine detected {total} active risk item(s) and {insights} positive insight(s).",
-        "fr": "Le moteur d’anomalies a détecté {total} risque(s) actif(s) et {insights} insight(s) positif(s).",
-        "ar": "اكتشف محرك الشذوذ {total} عنصر مخاطر نشط و{insights} إشارة إيجابية.",
+    "{total} business risk indicator(s) and {insights} positive business signal(s) were identified.": {
+        "en": "{total} business risk indicator(s) and {insights} positive business signal(s) were identified.",
+        "fr": "{total} indicateur(s) de risque business et {insights} signal(aux) positif(s) ont été identifiés.",
+        "ar": "تم تحديد {total} مؤشر مخاطر للأعمال و{insights} إشارة إيجابية للأعمال.",
     },
 
     # Opportunities
@@ -578,8 +578,8 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
             f"Cette analyse {model} montre des revenus de {revenue}, "
             f"un profit de {profit} et une marge bénéficiaire de {margin}%. "
             f"La croissance des revenus est de {growth}% et le cashflow est {cashflow}. "
-            f"Le score de santé backend est de {score}/100 ({rating}). "
-            f"Le moteur d’anomalies classe la situation actuelle comme {anomaly_status}. "
+            f"Le score de santé business est de {score}/100 ({rating}). "
+            f"L’évaluation actuelle du risque business est {anomaly_status}. "
             f"Le churn client est élevé à {churn}%, ce qui doit être traité en priorité."
         )
 
@@ -588,8 +588,8 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
             f"يوضح تحليل {model} إيرادات قدرها {revenue}، "
             f"وربحًا قدره {profit}، وهامش ربح قدره {margin}%. "
             f"نمو الإيرادات هو {growth}% والتدفق النقدي {cashflow}. "
-            f"درجة صحة النشاط من النظام الخلفي هي {score}/100 ({rating}). "
-            f"يصنف محرك الشذوذ الوضع الحالي على أنه {anomaly_status}. "
+            f"درجة صحة النشاط هي {score}/100 ({rating}). "
+            f"تقييم مخاطر الأعمال الحالي هو {anomaly_status}. "
             f"معدل فقدان العملاء مرتفع عند {churn}% ويجب التعامل معه كأولوية."
         )
 
@@ -597,8 +597,8 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
         f"This {model} analysis shows revenue of {revenue}, "
         f"profit of {profit}, and a profit margin of {margin}%. "
         f"Revenue growth is {growth}% and cashflow is {cashflow}. "
-        f"The backend health score is {score}/100 ({rating}). "
-        f"The anomaly engine classifies the current situation as {anomaly_status}. "
+        f"The Business Health Score is {score}/100 ({rating}). "
+        f"The current business risk assessment is {anomaly_status}. "
         f"Customer churn is elevated at {churn}%, which should be treated as a priority."
     )
 
@@ -625,12 +625,12 @@ def _build_key_insights(payload: dict[str, Any], language: str) -> list[str]:
     }
 
     templates = [
-        "Backend-calculated revenue is {revenue} with profit of {profit}.",
+        "Revenue is {revenue} with profit of {profit}.",
         "Profit margin is {margin}% and revenue growth is {growth}%.",
         "Customer churn is estimated at {churn}%, which affects retention quality.",
-        "ROAS is {roas}, based on backend-calculated revenue and ad spend.",
-        "The deterministic backend health score is {score}/100.",
-        "Anomaly engine detected {total} active risk item(s) and {insights} positive insight(s).",
+        "ROAS is {roas}, based on revenue and advertising spend.",
+        "Business Health Score is {score}/100.",
+        "{total} business risk indicator(s) and {insights} positive business signal(s) were identified.",
     ]
 
     return [
@@ -728,7 +728,7 @@ def translate_business_analysis_payload(
     - Support any input language -> en/fr/ar output.
     - Never change numeric KPI truth.
     - Translate public-facing business narratives.
-    - Keep backend codes available internally but add/translate display text.
+    - Keep internal codes available while translating display text.
     """
 
     lang = normalize_language(language)
@@ -737,7 +737,7 @@ def translate_business_analysis_payload(
     result = translate_payload(result, lang)
 
     # Rebuild deterministic public-facing summary and key insights
-    # from backend KPI truth to avoid mixed-language fragments.
+    # from verified KPI truth to avoid mixed-language fragments.
     result["executive_summary"] = _build_executive_summary(result, lang)
 
     if isinstance(result.get("smart_insights"), dict):
@@ -763,17 +763,17 @@ def translate_business_analysis_payload(
                 if lang == "fr":
                     decision["why"] = (
                         f"{translate_phrase('High churn reduces growth quality and can make acquisition spend less efficient.', lang)} "
-                        f"Le backend a détecté {metric_label} = {value}."
+                        f"L’analyse a détecté {metric_label} = {value}."
                     )
                 elif lang == "ar":
                     decision["why"] = (
                         f"{translate_phrase('High churn reduces growth quality and can make acquisition spend less efficient.', lang)} "
-                        f"اكتشف النظام الخلفي {metric_label} = {value}."
+                        f"كشف التحليل {metric_label} = {value}."
                     )
                 else:
                     decision["why"] = (
                         f"{translate_phrase('High churn reduces growth quality and can make acquisition spend less efficient.', lang)} "
-                        f"Backend detected {metric_label} = {value}."
+                        f"Analysis detected {metric_label} = {value}."
                     )
 
     result = translate_chart_titles(result, lang)
