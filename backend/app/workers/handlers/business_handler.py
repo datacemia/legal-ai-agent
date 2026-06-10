@@ -84,7 +84,7 @@ def _build_safe_ai_fallback() -> dict[str, Any]:
         "business_model": "general",
         "confidence_level": "low",
         "executive_summary": "AI analysis returned an invalid response.",
-        "business_health_score": 0,
+        "business_health_score": None,
         "kpis": {
             "revenue": 0,
             "expenses": 0,
@@ -292,12 +292,21 @@ def handle_business_ai(job: Job, db):
 
     update_job_progress(job, db, 92, business_progress_message("saving", output_language))
 
+    raw_health_score = result.get("business_health_score")
+
+    health_score_for_db = (
+        int(round(raw_health_score))
+        if isinstance(raw_health_score, (int, float))
+        and not isinstance(raw_health_score, bool)
+        else None
+    )
+
     analysis = BusinessAnalysis(
         user_id=job.user_id,
         file_name=file_name,
         result=json.dumps(result, ensure_ascii=False),
         business_model=str(result.get("business_model", "general")),
-        business_health_score=int(result.get("business_health_score", 0) or 0),
+        business_health_score=health_score_for_db,
         access_type=access_type,
         credits_used=credits_used,
         output_language=output_language,
