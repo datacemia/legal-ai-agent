@@ -231,7 +231,11 @@ const isMetricAvailable = (
   return fallback;
 };
 
-const unavailableMetricLabel = () => "N/A";
+const unavailableMetricLabel = (locale: Locale = "en") => {
+  if (locale === "ar") return "غير متاح";
+  if (locale === "fr") return "Indisponible";
+  return "N/A";
+};
 
 
 
@@ -2245,7 +2249,7 @@ export default function BusinessClient() {
   const getBusinessHealthStatus = (score: number | null) => {
     if (score === null) {
       return {
-        label: unavailableMetricLabel(),
+        label: unavailableMetricLabel(locale),
         className: "border-slate-200 bg-slate-50 text-slate-700",
       };
     }
@@ -2363,7 +2367,7 @@ export default function BusinessClient() {
       label: t.profit,
       value: profitAvailable
         ? formatMoney(kpis.profit, currency, locale)
-        : unavailableMetricLabel(),
+        : unavailableMetricLabel(locale),
     },
     {
       label: t.growth,
@@ -2376,7 +2380,7 @@ export default function BusinessClient() {
       label: t.cashflow,
       value: cashflowAvailable
         ? normalizeBackendText(kpis.cashflow_status || "unknown", locale)
-        : unavailableMetricLabel(),
+        : unavailableMetricLabel(locale),
     },
   ];
 
@@ -2399,19 +2403,19 @@ export default function BusinessClient() {
       label: t.cashflow,
       value: cashflowAvailable
         ? normalizeBackendText(kpis.cashflow_status || "unknown", locale)
-        : unavailableMetricLabel(),
+        : unavailableMetricLabel(locale),
     },
     {
       label: normalizeBackendText("Churn", locale),
       value: churnAvailable
         ? formatPercent(advancedKpis.churn_rate_percent, locale)
-        : unavailableMetricLabel(),
+        : unavailableMetricLabel(locale),
     },
     {
       label: t.expenses,
       value: expensesAvailable
         ? formatMoney(kpis.expenses, currency, locale)
-        : unavailableMetricLabel(),
+        : unavailableMetricLabel(locale),
     },
     {
       label: t.growth,
@@ -2824,7 +2828,7 @@ export default function BusinessClient() {
                 </span>
 
                 <span className="font-black text-slate-950">
-                  {score === null ? unavailableMetricLabel() : `${score}/100`}
+                  {score === null ? unavailableMetricLabel(locale) : `${score}/100`}
                 </span>
               </div>
 
@@ -2864,7 +2868,7 @@ export default function BusinessClient() {
                 value={
                   expensesAvailable
                     ? formatMoney(result.kpis?.expenses, currency, locale)
-                    : unavailableMetricLabel()
+                    : unavailableMetricLabel(locale)
                 }
                 tone="amber"
               />
@@ -2874,7 +2878,7 @@ export default function BusinessClient() {
                 value={
                   profitAvailable
                     ? formatMoney(result.kpis?.profit, currency, locale)
-                    : unavailableMetricLabel()
+                    : unavailableMetricLabel(locale)
                 }
                 tone="green"
               />
@@ -2884,7 +2888,7 @@ export default function BusinessClient() {
                 value={
                   profitMarginAvailable
                     ? formatPercent(result.kpis?.profit_margin_percent, locale)
-                    : unavailableMetricLabel()
+                    : unavailableMetricLabel(locale)
                 }
               />
 

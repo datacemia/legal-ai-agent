@@ -185,7 +185,11 @@ const isMetricAvailable = (
   return fallback;
 };
 
-const unavailableMetricLabel = () => "N/A";
+const unavailableMetricLabel = (locale: Locale = "en") => {
+  if (locale === "ar") return "غير متاح";
+  if (locale === "fr") return "Indisponible";
+  return "N/A";
+};
 
 
 const downloadBlob = async (
@@ -773,7 +777,7 @@ function HealthRing({
 
       <div className="mt-5 flex items-end gap-3">
         <p className="text-6xl font-black tracking-tight">
-          {safeScore !== null ? safeScore : unavailableMetricLabel()}
+          {safeScore !== null ? safeScore : unavailableMetricLabel(locale)}
         </p>
 
         {safeScore !== null && (
@@ -1154,7 +1158,7 @@ export default function BusinessDashboardPage() {
               value={
                 expensesAvailable
                   ? formatMoney(kpis.expenses, currency, locale)
-                  : unavailableMetricLabel()
+                  : unavailableMetricLabel(locale)
               }
               tone="amber"
             />
@@ -1164,7 +1168,7 @@ export default function BusinessDashboardPage() {
               value={
                 profitAvailable
                   ? formatMoney(kpis.profit, currency, locale)
-                  : unavailableMetricLabel()
+                  : unavailableMetricLabel(locale)
               }
               tone={profitAvailable && Number(kpis.profit) < 0 ? "red" : "green"}
             />
@@ -1174,7 +1178,7 @@ export default function BusinessDashboardPage() {
               value={
                 profitMarginAvailable
                   ? formatPercent(kpis.profit_margin_percent, locale)
-                  : unavailableMetricLabel()
+                  : unavailableMetricLabel(locale)
               }
             />
 
@@ -1268,7 +1272,7 @@ export default function BusinessDashboardPage() {
                   <p className="mt-2 text-2xl font-black text-slate-950">
                     {typeof component.score === "number" && Number.isFinite(component.score)
                       ? `${component.score}/100`
-                      : unavailableMetricLabel()}
+                      : unavailableMetricLabel(locale)}
                   </p>
 
                   <p className="mt-1 text-xs leading-5 text-slate-500">
@@ -1351,7 +1355,7 @@ export default function BusinessDashboardPage() {
                       currency,
                       locale
                     )
-                  : unavailableMetricLabel()
+                  : unavailableMetricLabel(locale)
               }
             />
 
@@ -1364,7 +1368,7 @@ export default function BusinessDashboardPage() {
                       currency,
                       locale
                     )
-                  : unavailableMetricLabel()
+                  : unavailableMetricLabel(locale)
               }
             />
 
@@ -1376,7 +1380,7 @@ export default function BusinessDashboardPage() {
                       forecast.trend || "-",
                       locale
                     )
-                  : unavailableMetricLabel()
+                  : unavailableMetricLabel(locale)
               }
               tone={forecast?.available ? toneFromValue(forecast.trend) : "slate"}
             />
@@ -1389,7 +1393,7 @@ export default function BusinessDashboardPage() {
                       forecast.cashflow_risk || "-",
                       locale
                     )
-                  : unavailableMetricLabel()
+                  : unavailableMetricLabel(locale)
               }
               tone={forecast?.available ? toneFromValue(forecast.cashflow_risk) : "slate"}
             />
@@ -1402,7 +1406,7 @@ export default function BusinessDashboardPage() {
                       forecast.volatility || "-",
                       locale
                     )
-                  : unavailableMetricLabel()
+                  : unavailableMetricLabel(locale)
               }
               tone={forecast?.available ? toneFromValue(forecast.volatility) : "slate"}
             />
@@ -1421,7 +1425,7 @@ export default function BusinessDashboardPage() {
             <Badge tone={Number(dataQuality.score) >= 90 ? "green" : "amber"}>
               {typeof dataQuality.score === "number" && Number.isFinite(dataQuality.score)
                 ? `${dataQuality.score}/100`
-                : unavailableMetricLabel()}
+                : unavailableMetricLabel(locale)}
             </Badge>
           }
         >
