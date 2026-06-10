@@ -26,6 +26,9 @@ FORECASTING RULES:
 - Do not invent forecasts.
 - Forecast only when there is enough dated historical data.
 - If fewer than 3 reliable periods exist, set available to false.
+- If revenue data is unavailable, keep next_month_revenue and next_quarter_revenue at 0 and explain why forecasting is unavailable.
+- Never infer revenue forecasts from product catalogs, inventory files, CRM exports, reference tables, or non-performance datasets.
+- Do not treat missing revenue as revenue equal to 0.
 - Explain limitations clearly.
 - Keep predictions conservative.
 
@@ -39,7 +42,7 @@ Return EXACT JSON:
   "confidence": "low",
   "cashflow_risk": "unknown",
   "seasonality_detected": false,
-  "explanation": ""
+  "explanation": "Forecast unavailable because insufficient dated revenue data was provided."
 }}
 
 Historical data:
