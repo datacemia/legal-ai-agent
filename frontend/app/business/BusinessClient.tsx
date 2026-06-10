@@ -408,6 +408,14 @@ const normalizeBackendText = (
       .replaceAll("le Flux de trésorerie", "le flux de trésorerie");
   }
 
+  if (language === "ar" && text === "N/A") {
+    return "غير متاح";
+  }
+
+  if (language === "fr" && text === "N/A") {
+    return "Indisponible";
+  }
+
   return text;
 };
 

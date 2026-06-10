@@ -346,6 +346,14 @@ const normalizeBackendText = (
       .replaceAll("Risque cashflow faible", "Risque de cashflow faible");
   }
 
+  if (language === "ar" && text === "N/A") {
+    return "غير متاح";
+  }
+
+  if (language === "fr" && text === "N/A") {
+    return "Indisponible";
+  }
+
   return text;
 };
 
