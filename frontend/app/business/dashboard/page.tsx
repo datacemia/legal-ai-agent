@@ -1322,14 +1322,73 @@ export default function BusinessDashboardPage() {
 
         <SectionCard title={t.forecast}>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-5">
-            <StatCard label={t.nextMonth} value={formatMoney(forecast.next_month_revenue ?? 0, currency, locale)} />
-            <StatCard label={t.nextQuarter} value={formatMoney(forecast.next_quarter_revenue ?? 0, currency, locale)} />
-            <StatCard label={t.trend} value={normalizeBackendText(forecast.trend || "-", locale)} tone={toneFromValue(forecast.trend)} />
-            <StatCard label={t.cashflowRisk} value={normalizeBackendText(forecast.cashflow_risk || "-", locale)} tone={toneFromValue(forecast.cashflow_risk)} />
-            <StatCard label={t.volatility} value={normalizeBackendText(forecast.volatility || "-", locale)} tone={toneFromValue(forecast.volatility)} />
+            <StatCard
+              label={t.nextMonth}
+              value={
+                forecast?.available
+                  ? formatMoney(
+                      forecast.next_month_revenue,
+                      currency,
+                      locale
+                    )
+                  : unavailableMetricLabel()
+              }
+            />
+
+            <StatCard
+              label={t.nextQuarter}
+              value={
+                forecast?.available
+                  ? formatMoney(
+                      forecast.next_quarter_revenue,
+                      currency,
+                      locale
+                    )
+                  : unavailableMetricLabel()
+              }
+            />
+
+            <StatCard
+              label={t.trend}
+              value={
+                forecast?.available
+                  ? normalizeBackendText(
+                      forecast.trend || "-",
+                      locale
+                    )
+                  : unavailableMetricLabel()
+              }
+              tone={forecast?.available ? toneFromValue(forecast.trend) : "slate"}
+            />
+
+            <StatCard
+              label={t.cashflowRisk}
+              value={
+                forecast?.available
+                  ? normalizeBackendText(
+                      forecast.cashflow_risk || "-",
+                      locale
+                    )
+                  : unavailableMetricLabel()
+              }
+              tone={forecast?.available ? toneFromValue(forecast.cashflow_risk) : "slate"}
+            />
+
+            <StatCard
+              label={t.volatility}
+              value={
+                forecast?.available
+                  ? normalizeBackendText(
+                      forecast.volatility || "-",
+                      locale
+                    )
+                  : unavailableMetricLabel()
+              }
+              tone={forecast?.available ? toneFromValue(forecast.volatility) : "slate"}
+            />
           </div>
 
-          {forecast.explanation && (
+          {forecast?.available && forecast.explanation && (
             <p className="mt-4 rounded-2xl bg-slate-50 p-4 text-sm leading-6 text-slate-600">
               {normalizeBackendText(forecast.explanation, locale)}
             </p>
