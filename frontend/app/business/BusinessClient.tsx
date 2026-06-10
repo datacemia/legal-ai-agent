@@ -2402,7 +2402,7 @@ export default function BusinessClient() {
         : unavailableMetricLabel(),
     },
     {
-      label: "Churn",
+      label: normalizeBackendText("Churn", locale),
       value: churnAvailable
         ? formatPercent(advancedKpis.churn_rate_percent, locale)
         : unavailableMetricLabel(),
