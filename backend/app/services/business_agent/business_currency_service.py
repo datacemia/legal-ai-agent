@@ -5,6 +5,17 @@ from typing import Any
 
 
 DEFAULT_CURRENCY_CODE = "USD"
+UNKNOWN_CURRENCY: dict[str, Any] = {
+    "code": None,
+    "symbol": None,
+    "name": None,
+    "locale": None,
+    "position": None,
+    "detected_from": "none",
+    "multi_currency_detected": False,
+    "detected_currencies": [],
+    "confidence": 0.0,
+}
 
 
 CURRENCY_METADATA: dict[str, dict[str, str]] = {
@@ -570,7 +581,7 @@ def detect_currency_from_values(rows: list[dict[str, Any]]) -> list[str]:
 
 def detect_currency(
     rows: list[dict[str, Any]] | None,
-    default_currency: str = DEFAULT_CURRENCY_CODE,
+    default_currency: str | None = None,
 ) -> dict[str, Any]:
     safe_rows = rows or []
 
@@ -584,8 +595,12 @@ def detect_currency(
         code = counts.most_common(1)[0][0]
         detected_from = "columns" if code in column_codes else "values"
     else:
-        code = normalize_currency_code(default_currency) or DEFAULT_CURRENCY_CODE
-        counts = Counter({code: 1})
+        fallback_code = normalize_currency_code(default_currency)
+
+        if not fallback_code:
+            return UNKNOWN_CURRENCY.copy()
+
+        code = fallback_code
         detected_from = "default"
 
     metadata = get_currency_metadata(code)
@@ -666,10 +681,12 @@ def format_money(
 
     if isinstance(currency, dict):
         code = currency.get("code")
+        unknown_currency = code is None
     else:
         code = currency
+        unknown_currency = code is None
 
-    metadata = get_currency_metadata(code)
+    metadata = None if unknown_currency else get_currency_metadata(code)
 
     quantizer = Decimal("1") if decimals <= 0 else Decimal("1." + ("0" * decimals))
 
@@ -694,6 +711,9 @@ def format_money(
 
         if decimals > 0:
             number = number.rstrip("0").rstrip(".")
+
+    if metadata is None:
+        return number
 
     symbol = metadata["symbol"]
 
@@ -733,7 +753,7 @@ def normalize_money_columns(
 def attach_currency_to_result(
     result: dict[str, Any],
     rows: list[dict[str, Any]] | None,
-    default_currency: str = DEFAULT_CURRENCY_CODE,
+    default_currency: str | None = None,
 ) -> dict[str, Any]:
     currency = detect_currency(
         rows=rows,
