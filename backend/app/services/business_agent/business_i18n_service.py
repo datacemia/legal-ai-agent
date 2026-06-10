@@ -360,6 +360,21 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
         "fr": "Le score de santé business n’a pas pu être calculé faute de données de performance suffisantes.",
         "ar": "تعذر حساب درجة صحة النشاط بسبب عدم توفر بيانات أداء كافية.",
     },
+    "Revenue could not be calculated from the uploaded data.": {
+        "en": "Revenue could not be calculated from the uploaded data.",
+        "fr": "Les revenus n’ont pas pu être calculés à partir des données importées.",
+        "ar": "تعذر حساب الإيرادات من البيانات المرفوعة.",
+    },
+    "Revenue growth could not be calculated from the uploaded data.": {
+        "en": "Revenue growth could not be calculated from the uploaded data.",
+        "fr": "La croissance des revenus n’a pas pu être calculée à partir des données importées.",
+        "ar": "تعذر حساب نمو الإيرادات من البيانات المرفوعة.",
+    },
+    "Business performance metrics are unavailable because the uploaded file does not contain verified business performance data.": {
+        "en": "Business performance metrics are unavailable because the uploaded file does not contain verified business performance data.",
+        "fr": "Les indicateurs de performance business sont indisponibles car le fichier importé ne contient pas de données de performance vérifiées.",
+        "ar": "مؤشرات أداء الأعمال غير متاحة لأن الملف المرفوع لا يحتوي على بيانات أداء موثقة.",
+    },
     "{total} business risk indicator(s) and {insights} positive business signal(s) were identified.": {
         "en": "{total} business risk indicator(s) and {insights} positive business signal(s) were identified.",
         "fr": "{total} indicateur(s) de risque business et {insights} signal(aux) positif(s) ont été identifiés.",
@@ -576,6 +591,77 @@ def _translate_list(values: Any, language: str) -> Any:
     ]
 
 
+def _is_available(value: Any) -> bool:
+    return value not in (None, "", "None", "null", "NULL", "N/A", "n/a")
+
+
+def _metric_available(
+    source: dict[str, Any],
+    flag_name: str,
+    value: Any,
+    default: bool = False,
+) -> bool:
+    if isinstance(source.get(flag_name), bool):
+        return bool(source.get(flag_name))
+
+    return default and _is_available(value)
+
+
+def _display_metric(value: Any) -> str:
+    return str(value) if _is_available(value) else "N/A"
+
+
+def _display_percent(value: Any) -> str:
+    return f"{value}%" if _is_available(value) else "N/A"
+
+
+def _has_business_performance(payload: dict[str, Any]) -> bool:
+    if payload.get("analysis_available") is False:
+        return False
+
+    kpis = payload.get("kpis") or {}
+    advanced = payload.get("advanced_kpis") or {}
+    forecast = payload.get("forecast") or {}
+
+    core_flags = (
+        "revenue_available",
+        "expenses_available",
+        "profit_available",
+        "growth_available",
+        "cashflow_available",
+        "orders_available",
+        "customers_available",
+    )
+
+    advanced_flags = (
+        "churn_available",
+        "roas_available",
+        "cac_available",
+        "aov_available",
+        "mrr_available",
+        "arr_available",
+        "ltv_available",
+        "retention_available",
+        "conversion_available",
+    )
+
+    if any(bool(kpis.get(flag)) for flag in core_flags):
+        return True
+
+    if any(bool(advanced.get(flag)) for flag in advanced_flags):
+        return True
+
+    return bool(forecast.get("available"))
+
+
+def _business_performance_unavailable_sentence(language: str) -> str:
+    lang = normalize_language(language)
+
+    return PHRASE_TRANSLATIONS[
+        "Business performance metrics are unavailable because the uploaded file does not contain verified business performance data."
+    ][lang]
+
+
 def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
     lang = normalize_language(language)
 
@@ -585,31 +671,92 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
     anomalies = payload.get("anomalies_v2") or payload.get("anomalies") or {}
 
     model = translate_term(payload.get("business_model", "general"), lang)
-    revenue = kpis.get("revenue", 0)
-    profit = kpis.get("profit", 0)
-    margin = kpis.get("profit_margin_percent", 0)
-    growth = kpis.get("growth_rate_percent", 0)
+    revenue = kpis.get("revenue")
+    profit = kpis.get("profit")
+    margin = kpis.get("profit_margin_percent")
+    growth = kpis.get("growth_rate_percent")
     cashflow = translate_term(kpis.get("cashflow_status", "unknown"), lang)
-    score = payload.get("business_health_score", health.get("score", 0))
+    score = payload.get("business_health_score", health.get("score"))
     rating = translate_term(health.get("rating", "unknown"), lang)
     anomaly_status = translate_term(anomalies.get("status", "normal"), lang)
-    churn = advanced.get("churn_rate_percent", 0)
+    churn = advanced.get("churn_rate_percent")
 
-    profit_available = bool(kpis.get("profit_available", True))
-    churn_available = bool(advanced.get("churn_available", churn not in (0, 0.0, "0", "0.0")))
+    has_performance_data = _has_business_performance(payload)
+
+    revenue_available = _metric_available(
+        kpis,
+        "revenue_available",
+        revenue,
+        default=has_performance_data,
+    )
+    profit_available = _metric_available(
+        kpis,
+        "profit_available",
+        profit,
+        default=False,
+    )
+    growth_available = _metric_available(
+        kpis,
+        "growth_available",
+        growth,
+        default=has_performance_data,
+    )
+    churn_available = _metric_available(
+        advanced,
+        "churn_available",
+        churn,
+        default=False,
+    )
+
+    revenue_display = _display_metric(revenue) if revenue_available else "N/A"
+    growth_display = _display_percent(growth) if growth_available else "N/A"
+
+    if not has_performance_data:
+        if lang == "fr":
+            return (
+                f"Cette analyse {model} ne contient pas suffisamment de données "
+                "de performance business vérifiées. Les revenus, la croissance, "
+                "la rentabilité, le cashflow, les risques avancés et les prévisions "
+                "ne peuvent pas être calculés de manière fiable. "
+                f"{PHRASE_TRANSLATIONS['Business Health Score could not be calculated because insufficient business performance data was provided.'][lang]} "
+                f"L’évaluation actuelle du risque business est {anomaly_status}. "
+                f"{PHRASE_TRANSLATIONS['Customer churn could not be calculated from the uploaded data.'][lang]}"
+            )
+
+        if lang == "ar":
+            return (
+                f"لا يحتوي تحليل {model} على بيانات أداء أعمال موثقة وكافية. "
+                "لا يمكن حساب الإيرادات أو النمو أو الربحية أو التدفق النقدي أو "
+                "المخاطر المتقدمة أو التوقعات بشكل موثوق. "
+                f"{PHRASE_TRANSLATIONS['Business Health Score could not be calculated because insufficient business performance data was provided.'][lang]} "
+                f"تقييم مخاطر الأعمال الحالي هو {anomaly_status}. "
+                f"{PHRASE_TRANSLATIONS['Customer churn could not be calculated from the uploaded data.'][lang]}"
+            )
+
+        return (
+            f"This {model} analysis does not contain enough verified business "
+            "performance data. Revenue, growth, profitability, cashflow, advanced "
+            "risks, and forecasts cannot be calculated reliably. "
+            f"{PHRASE_TRANSLATIONS['Business Health Score could not be calculated because insufficient business performance data was provided.'][lang]} "
+            f"The current business risk assessment is {anomaly_status}. "
+            f"{PHRASE_TRANSLATIONS['Customer churn could not be calculated from the uploaded data.'][lang]}"
+        )
 
     if profit_available:
+        profit_display = _display_metric(profit)
+        margin_display = _display_percent(margin)
+
         if lang == "fr":
             profitability_sentence = (
-                f"un profit de {profit} et une marge bénéficiaire de {margin}%. "
+                f"un profit de {profit_display} et une marge bénéficiaire de {margin_display}. "
             )
         elif lang == "ar":
             profitability_sentence = (
-                f"وربحًا قدره {profit}، وهامش ربح قدره {margin}%. "
+                f"وربحًا قدره {profit_display}، وهامش ربح قدره {margin_display}. "
             )
         else:
             profitability_sentence = (
-                f"profit of {profit}, and a profit margin of {margin}%. "
+                f"profit of {profit_display}, and a profit margin of {margin_display}. "
             )
     else:
         if lang == "fr":
@@ -627,41 +774,29 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
             )
 
     if churn_available:
+        churn_display = _display_percent(churn)
+
         if lang == "fr":
             churn_sentence = (
-                f"Le churn client est estimé à {churn}%, ce qui doit être surveillé."
+                f"Le churn client est estimé à {churn_display}, ce qui doit être surveillé."
             )
         elif lang == "ar":
             churn_sentence = (
-                f"يُقدر معدل فقدان العملاء بـ {churn}% ويجب مراقبته."
+                f"يُقدر معدل فقدان العملاء بـ {churn_display} ويجب مراقبته."
             )
         else:
             churn_sentence = (
-                f"Customer churn is estimated at {churn}% and should be monitored."
+                f"Customer churn is estimated at {churn_display} and should be monitored."
             )
     else:
-        if lang == "fr":
-            churn_sentence = "Le churn client n’a pas pu être calculé à partir des données fournies."
-        elif lang == "ar":
-            churn_sentence = "تعذر حساب معدل فقدان العملاء من البيانات المقدمة."
-        else:
-            churn_sentence = "Customer churn could not be calculated from the uploaded data."
+        churn_sentence = PHRASE_TRANSLATIONS[
+            "Customer churn could not be calculated from the uploaded data."
+        ][lang]
 
     if score is None:
-        if lang == "fr":
-            health_sentence = (
-                "Le score de santé business n’a pas pu être calculé faute de "
-                "données de performance suffisantes. "
-            )
-        elif lang == "ar":
-            health_sentence = (
-                "تعذر حساب درجة صحة النشاط بسبب عدم توفر بيانات أداء كافية. "
-            )
-        else:
-            health_sentence = (
-                "Business Health Score could not be calculated because insufficient "
-                "business performance data was provided. "
-            )
+        health_sentence = PHRASE_TRANSLATIONS[
+            "Business Health Score could not be calculated because insufficient business performance data was provided."
+        ][lang] + " "
     else:
         if lang == "fr":
             health_sentence = f"Le score de santé business est de {score}/100 ({rating}). "
@@ -672,9 +807,9 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
 
     if lang == "fr":
         return (
-            f"Cette analyse {model} montre des revenus de {revenue}, "
+            f"Cette analyse {model} montre des revenus de {revenue_display}, "
             f"{profitability_sentence}"
-            f"La croissance des revenus est de {growth}% et le cashflow est {cashflow}. "
+            f"La croissance des revenus est {growth_display} et le cashflow est {cashflow}. "
             f"{health_sentence}"
             f"L’évaluation actuelle du risque business est {anomaly_status}. "
             f"{churn_sentence}"
@@ -682,23 +817,22 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
 
     if lang == "ar":
         return (
-            f"يوضح تحليل {model} إيرادات قدرها {revenue}، "
+            f"يوضح تحليل {model} إيرادات قدرها {revenue_display}، "
             f"{profitability_sentence}"
-            f"نمو الإيرادات هو {growth}% والتدفق النقدي {cashflow}. "
+            f"نمو الإيرادات هو {growth_display} والتدفق النقدي {cashflow}. "
             f"{health_sentence}"
             f"تقييم مخاطر الأعمال الحالي هو {anomaly_status}. "
             f"{churn_sentence}"
         )
 
     return (
-        f"This {model} analysis shows revenue of {revenue}, "
+        f"This {model} analysis shows revenue of {revenue_display}, "
         f"{profitability_sentence}"
-        f"Revenue growth is {growth}% and cashflow is {cashflow}. "
+        f"Revenue growth is {growth_display} and cashflow is {cashflow}. "
         f"{health_sentence}"
         f"The current business risk assessment is {anomaly_status}. "
         f"{churn_sentence}"
     )
-
 
 def _build_key_insights(payload: dict[str, Any], language: str) -> list[str]:
     lang = normalize_language(language)
@@ -709,44 +843,95 @@ def _build_key_insights(payload: dict[str, Any], language: str) -> list[str]:
     anomalies = payload.get("anomalies_v2") or payload.get("anomalies") or {}
     summary = anomalies.get("summary") or {}
 
-    revenue = kpis.get("revenue", 0)
-    profit = kpis.get("profit", 0)
-    margin = kpis.get("profit_margin_percent", 0)
-    growth = kpis.get("growth_rate_percent", 0)
-    churn = advanced.get("churn_rate_percent", 0)
-    roas = advanced.get("roas", 0)
-    score = payload.get("business_health_score", health.get("score", 0))
+    revenue = kpis.get("revenue")
+    profit = kpis.get("profit")
+    margin = kpis.get("profit_margin_percent")
+    growth = kpis.get("growth_rate_percent")
+    churn = advanced.get("churn_rate_percent")
+    roas = advanced.get("roas")
+    score = payload.get("business_health_score", health.get("score"))
     total = summary.get("total_items", 0)
     positive_insights = summary.get("insights", 0)
 
-    profit_available = bool(kpis.get("profit_available", True))
-    churn_available = bool(advanced.get("churn_available", churn not in (0, 0.0, "0", "0.0")))
-    roas_available = bool(advanced.get("roas_available", roas not in (0, 0.0, "0", "0.0")))
+    has_performance_data = _has_business_performance(payload)
 
-    insights: list[str] = [
-        PHRASE_TRANSLATIONS["Revenue is {revenue} with profit of {profit}."][lang].format(
-            revenue=revenue,
-            profit=profit if profit_available else translate_term("unknown", lang),
+    revenue_available = _metric_available(
+        kpis,
+        "revenue_available",
+        revenue,
+        default=has_performance_data,
+    )
+    profit_available = _metric_available(
+        kpis,
+        "profit_available",
+        profit,
+        default=False,
+    )
+    growth_available = _metric_available(
+        kpis,
+        "growth_available",
+        growth,
+        default=has_performance_data,
+    )
+    churn_available = _metric_available(
+        advanced,
+        "churn_available",
+        churn,
+        default=False,
+    )
+    roas_available = _metric_available(
+        advanced,
+        "roas_available",
+        roas,
+        default=False,
+    )
+
+    insights: list[str] = []
+
+    if not has_performance_data:
+        insights.append(_business_performance_unavailable_sentence(lang))
+    elif revenue_available:
+        insights.append(
+            PHRASE_TRANSLATIONS["Revenue is {revenue} with profit of {profit}."][lang].format(
+                revenue=_display_metric(revenue),
+                profit=_display_metric(profit) if profit_available else "N/A",
+            )
         )
-        if profit_available
-        else PHRASE_TRANSLATIONS[
-            "Profitability metrics cannot be verified because no expense, cost, or profit column was provided."
-        ][lang],
-        PHRASE_TRANSLATIONS["Profit margin is {margin}% and revenue growth is {growth}%."][lang].format(
-            margin=margin if profit_available else translate_term("unknown", lang),
-            growth=growth,
+    else:
+        insights.append(
+            PHRASE_TRANSLATIONS[
+                "Revenue could not be calculated from the uploaded data."
+            ][lang]
         )
-        if profit_available
-        else PHRASE_TRANSLATIONS[
-            "Profitability metrics cannot be verified because no expense, cost, or profit column was provided."
-        ][lang],
-    ]
+
+    if profit_available:
+        insights.append(
+            PHRASE_TRANSLATIONS[
+                "Profit margin is {margin}% and revenue growth is {growth}%."
+            ][lang].format(
+                margin=_display_metric(margin),
+                growth=_display_metric(growth) if growth_available else "N/A",
+            )
+        )
+    else:
+        insights.append(
+            PHRASE_TRANSLATIONS[
+                "Profitability metrics cannot be verified because no expense, cost, or profit column was provided."
+            ][lang]
+        )
+
+    if has_performance_data and not growth_available:
+        insights.append(
+            PHRASE_TRANSLATIONS[
+                "Revenue growth could not be calculated from the uploaded data."
+            ][lang]
+        )
 
     if churn_available:
         insights.append(
             PHRASE_TRANSLATIONS[
                 "Customer churn is estimated at {churn}%, which affects retention quality."
-            ][lang].format(churn=churn)
+            ][lang].format(churn=_display_metric(churn))
         )
     else:
         insights.append(
@@ -759,7 +944,7 @@ def _build_key_insights(payload: dict[str, Any], language: str) -> list[str]:
         insights.append(
             PHRASE_TRANSLATIONS[
                 "ROAS is {roas}, based on revenue and advertising spend."
-            ][lang].format(roas=roas)
+            ][lang].format(roas=_display_metric(roas))
         )
     else:
         insights.append(
@@ -787,7 +972,6 @@ def _build_key_insights(payload: dict[str, Any], language: str) -> list[str]:
         ][lang].format(total=total, insights=positive_insights)
     )
 
-    # Avoid duplicate profitability limitation in short insight lists.
     deduped: list[str] = []
     for insight in insights:
         if insight not in deduped:
