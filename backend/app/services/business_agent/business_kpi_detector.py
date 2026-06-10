@@ -1304,6 +1304,7 @@ def calculate_advanced_kpis(
     billable_hours_col = resolve_column("billable_hours", columns, column_mapping)
     conversion_rate_col = resolve_column("conversion_rate", columns, column_mapping)
     churn_rate_col = resolve_column("churn_rate", columns, column_mapping)
+    new_customers_col = resolve_column("new_customers", columns, column_mapping)
     churned_customers_col = resolve_column("churned_customers", columns, column_mapping)
 
     total_revenue = sum_column(rows, revenue_col)
@@ -1659,9 +1660,20 @@ def detect_business_kpis(
         column_mapping=column_mapping,
     )
 
-    # Keep router-provided model if it is valid; otherwise use detected model.
-    if business_model in BUSINESS_MODELS or business_model == "general":
+    # Keep router-provided model only when verified business performance data exists.
+    # For profile/reference/catalog/review files, force general to avoid false
+    # e-commerce/restaurant/etc. classification from words like product/category/user.
+    if smart.get("analysis_available") and (
+        business_model in BUSINESS_MODELS or business_model == "general"
+    ):
         smart["business_model"] = business_model
+    elif not smart.get("analysis_available"):
+        smart["business_model"] = "general"
+        smart["model_detection"] = {
+            **(smart.get("model_detection") or {}),
+            "business_model": "general",
+            "confidence": "low",
+        }
 
     return {
         "business_model": smart["business_model"],
