@@ -355,6 +355,11 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
         "fr": "Le score de santé business est de {score}/100.",
         "ar": "درجة صحة النشاط هي {score}/100.",
     },
+    "Business Health Score could not be calculated because insufficient business performance data was provided.": {
+        "en": "Business Health Score could not be calculated because insufficient business performance data was provided.",
+        "fr": "Le score de santé business n’a pas pu être calculé faute de données de performance suffisantes.",
+        "ar": "تعذر حساب درجة صحة النشاط بسبب عدم توفر بيانات أداء كافية.",
+    },
     "{total} business risk indicator(s) and {insights} positive business signal(s) were identified.": {
         "en": "{total} business risk indicator(s) and {insights} positive business signal(s) were identified.",
         "fr": "{total} indicateur(s) de risque business et {insights} signal(aux) positif(s) ont été identifiés.",
@@ -642,12 +647,35 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
         else:
             churn_sentence = "Customer churn could not be calculated from the uploaded data."
 
+    if score is None:
+        if lang == "fr":
+            health_sentence = (
+                "Le score de santé business n’a pas pu être calculé faute de "
+                "données de performance suffisantes. "
+            )
+        elif lang == "ar":
+            health_sentence = (
+                "تعذر حساب درجة صحة النشاط بسبب عدم توفر بيانات أداء كافية. "
+            )
+        else:
+            health_sentence = (
+                "Business Health Score could not be calculated because insufficient "
+                "business performance data was provided. "
+            )
+    else:
+        if lang == "fr":
+            health_sentence = f"Le score de santé business est de {score}/100 ({rating}). "
+        elif lang == "ar":
+            health_sentence = f"درجة صحة النشاط هي {score}/100 ({rating}). "
+        else:
+            health_sentence = f"The Business Health Score is {score}/100 ({rating}). "
+
     if lang == "fr":
         return (
             f"Cette analyse {model} montre des revenus de {revenue}, "
             f"{profitability_sentence}"
             f"La croissance des revenus est de {growth}% et le cashflow est {cashflow}. "
-            f"Le score de santé business est de {score}/100 ({rating}). "
+            f"{health_sentence}"
             f"L’évaluation actuelle du risque business est {anomaly_status}. "
             f"{churn_sentence}"
         )
@@ -657,7 +685,7 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
             f"يوضح تحليل {model} إيرادات قدرها {revenue}، "
             f"{profitability_sentence}"
             f"نمو الإيرادات هو {growth}% والتدفق النقدي {cashflow}. "
-            f"درجة صحة النشاط هي {score}/100 ({rating}). "
+            f"{health_sentence}"
             f"تقييم مخاطر الأعمال الحالي هو {anomaly_status}. "
             f"{churn_sentence}"
         )
@@ -666,7 +694,7 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
         f"This {model} analysis shows revenue of {revenue}, "
         f"{profitability_sentence}"
         f"Revenue growth is {growth}% and cashflow is {cashflow}. "
-        f"The Business Health Score is {score}/100 ({rating}). "
+        f"{health_sentence}"
         f"The current business risk assessment is {anomaly_status}. "
         f"{churn_sentence}"
     )
@@ -740,15 +768,23 @@ def _build_key_insights(payload: dict[str, Any], language: str) -> list[str]:
             ][lang]
         )
 
-    insights.extend(
-        [
+    if score is None:
+        insights.append(
+            PHRASE_TRANSLATIONS[
+                "Business Health Score could not be calculated because insufficient business performance data was provided."
+            ][lang]
+        )
+    else:
+        insights.append(
             PHRASE_TRANSLATIONS["Business Health Score is {score}/100."][lang].format(
                 score=score
-            ),
-            PHRASE_TRANSLATIONS[
-                "{total} business risk indicator(s) and {insights} positive business signal(s) were identified."
-            ][lang].format(total=total, insights=positive_insights),
-        ]
+            )
+        )
+
+    insights.append(
+        PHRASE_TRANSLATIONS[
+            "{total} business risk indicator(s) and {insights} positive business signal(s) were identified."
+        ][lang].format(total=total, insights=positive_insights)
     )
 
     # Avoid duplicate profitability limitation in short insight lists.
