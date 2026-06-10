@@ -217,6 +217,32 @@ def _format_money(
     return f"{display_currency}{number}"
 
 
+def _format_health_score(
+    analysis: dict[str, Any],
+    business_health: dict[str, Any],
+) -> str:
+    """
+    Format Business Health Score without converting unavailable values to 0/100.
+
+    Product catalogs, inventory files, reference tables, and incomplete datasets can
+    legitimately have business_health_score = None. In those cases, PDF exports
+    must show N/A, matching the web dashboard.
+    """
+
+    score = analysis.get("business_health_score")
+
+    if score is None:
+        score = business_health.get("score")
+
+    if isinstance(score, bool):
+        return "N/A"
+
+    if isinstance(score, int | float):
+        return f"{int(round(float(score)))}/100"
+
+    return "N/A"
+
+
 def _labels(language: str) -> dict[str, str]:
     labels = {
         "en": {
@@ -937,6 +963,7 @@ def build_business_pdf_report(
 
     generated_at = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
     source_file = source_file_name or (analysis.get("file_metadata") or {}).get("file_name") or "-"
+    health_score_display = _format_health_score(analysis, business_health)
 
     # Cover
     story.append(_p(BRAND_NAME, styles["cover_brand"], language))
@@ -948,7 +975,7 @@ def build_business_pdf_report(
     story.append(Spacer(1, 0.5 * cm))
 
     hero_cards = [
-        _kpi_cell(labels["health"], f"{analysis.get('business_health_score') or business_health.get('score') or 0}/100", styles, language),
+        _kpi_cell(labels["health"], health_score_display, styles, language),
         _kpi_cell(labels["revenue"], _format_money(kpis.get("revenue"), currency, language), styles, language),
         _kpi_cell(labels["profit"], _format_money(kpis.get("profit"), currency, language), styles, language),
     ]
@@ -998,7 +1025,7 @@ def build_business_pdf_report(
     # Health + decision + forecast
     story.extend(_section(labels["health"], styles, language))
     health_rows = [
-        [_p(labels["score"], styles["small"], language), _p(f"{analysis.get('business_health_score') or business_health.get('score') or 0}/100", styles["body_bold"], language)],
+        [_p(labels["score"], styles["small"], language), _p(health_score_display, styles["body_bold"], language)],
         [_p(labels["rating"], styles["small"], language), _p(_translate_common_value(business_health.get("rating") or "-", language), styles["body"], language)],
     ]
     story.append(_table(health_rows, [4.5 * cm, 11 * cm], background=WHITE))
