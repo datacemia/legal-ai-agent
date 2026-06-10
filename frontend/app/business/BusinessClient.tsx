@@ -2253,6 +2253,121 @@ export default function BusinessClient() {
     ["profit_margin_available", "margin_available", "profitability_available"],
     profitAvailable
   );
+  const advancedKpis = result?.advanced_kpis || {};
+  const churnAvailable = isMetricAvailable(
+    advancedKpis,
+    ["churn_available"],
+    false
+  );
+  const cashflowAvailable = isMetricAvailable(
+    kpis,
+    ["cashflow_available"],
+    profitAvailable
+  );
+
+  const previewText = {
+    en: {
+      kpiDashboard: "KPI Dashboard",
+      live: result ? "LIVE" : "READY",
+      businessInsights: "Business insights",
+      aiRecommendations: "AI recommendations",
+      riskMatrix: "Risk matrix",
+      normalRisk: "Normal",
+      noInsight: "Analyze a business file to see verified insights.",
+      noRecommendation: "Analyze a business file to see verified recommendations.",
+    },
+    fr: {
+      kpiDashboard: "Tableau KPI",
+      live: result ? "LIVE" : "PRÊT",
+      businessInsights: "Insights business",
+      aiRecommendations: "Recommandations IA",
+      riskMatrix: "Matrice de risque",
+      normalRisk: "Normal",
+      noInsight: "Analysez un fichier business pour voir les insights vérifiés.",
+      noRecommendation: "Analysez un fichier business pour voir les recommandations vérifiées.",
+    },
+    ar: {
+      kpiDashboard: "لوحة مؤشرات الأداء",
+      live: result ? "مباشر" : "جاهز",
+      businessInsights: "رؤى الأعمال",
+      aiRecommendations: "توصيات الذكاء الاصطناعي",
+      riskMatrix: "مصفوفة المخاطر",
+      normalRisk: "طبيعي",
+      noInsight: "حلّل ملف أعمال لعرض الرؤى الموثقة.",
+      noRecommendation: "حلّل ملف أعمال لعرض التوصيات الموثقة.",
+    },
+  }[locale];
+
+  const dashboardKpiCards = [
+    {
+      label: t.revenue,
+      value:
+        typeof kpis.revenue === "number"
+          ? formatMoney(kpis.revenue, currency, locale)
+          : "-",
+    },
+    {
+      label: t.profit,
+      value: profitAvailable
+        ? formatMoney(kpis.profit, currency, locale)
+        : unavailableMetricLabel(),
+    },
+    {
+      label: t.growth,
+      value:
+        typeof kpis.growth_rate_percent === "number"
+          ? formatPercent(kpis.growth_rate_percent, locale)
+          : "-",
+    },
+    {
+      label: t.cashflow,
+      value: cashflowAvailable
+        ? normalizeBackendText(kpis.cashflow_status || "unknown", locale)
+        : unavailableMetricLabel(),
+    },
+  ];
+
+  const dashboardInsights = keyInsights.length > 0
+    ? keyInsights.slice(0, 3)
+    : [previewText.noInsight];
+
+  const dashboardRecommendations = recommendations.length > 0
+    ? recommendations.slice(0, 3).map((item) =>
+        normalizeBackendText(getItemTitle(item), locale)
+      )
+    : [previewText.noRecommendation];
+
+  const dashboardRiskBadge = risks.length > 0
+    ? normalizeBackendText(getItemBadge(risks[0]) || "medium", locale)
+    : previewText.normalRisk;
+
+  const dashboardRiskCards = [
+    {
+      label: t.cashflow,
+      value: cashflowAvailable
+        ? normalizeBackendText(kpis.cashflow_status || "unknown", locale)
+        : unavailableMetricLabel(),
+    },
+    {
+      label: "Churn",
+      value: churnAvailable
+        ? formatPercent(advancedKpis.churn_rate_percent, locale)
+        : unavailableMetricLabel(),
+    },
+    {
+      label: t.expenses,
+      value: expensesAvailable
+        ? formatMoney(kpis.expenses, currency, locale)
+        : unavailableMetricLabel(),
+    },
+    {
+      label: t.growth,
+      value:
+        typeof kpis.growth_rate_percent === "number"
+          ? formatPercent(kpis.growth_rate_percent, locale)
+          : "-",
+    },
+  ];
 
   return (
     <main
@@ -2473,31 +2588,26 @@ export default function BusinessClient() {
           <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
             <div className="flex items-center justify-between">
               <p className="text-sm font-semibold text-slate-600">
-                KPI Dashboard
+                {previewText.kpiDashboard}
               </p>
 
               <span className="rounded-full bg-emerald-100 px-2 py-1 text-xs font-bold text-emerald-700">
-                LIVE
+                {previewText.live}
               </span>
             </div>
 
             <div className="mt-5 grid grid-cols-2 gap-3">
-              {[
-                ["Revenue", "+18%"],
-                ["Profit", "+11%"],
-                ["Growth", "+24%"],
-                ["Churn", "-4%"],
-              ].map(([label, value]) => (
+              {dashboardKpiCards.map((item) => (
                 <div
-                  key={label}
+                  key={item.label}
                   className="rounded-2xl bg-slate-50 p-3"
                 >
                   <p className="text-xs text-slate-500">
-                    {label}
+                    {item.label}
                   </p>
 
                   <p className="mt-1 text-lg font-black text-slate-900">
-                    {value}
+                    {item.value}
                   </p>
                 </div>
               ))}
@@ -2507,20 +2617,16 @@ export default function BusinessClient() {
           {/* BUSINESS INSIGHTS */}
           <div className="rounded-3xl border border-blue-200 bg-blue-50 p-5 shadow-sm">
             <p className="text-sm font-semibold text-blue-900">
-              Business insights
+              {previewText.businessInsights}
             </p>
 
             <div className="mt-4 space-y-3">
-              {[
-                "Revenue trend accelerating",
-                "Marketing efficiency improving",
-                "Customer retention stable",
-              ].map((item) => (
+              {dashboardInsights.map((item) => (
                 <div
-                  key={item}
+                  key={String(item)}
                   className="rounded-2xl bg-white px-3 py-2 text-sm text-blue-800"
                 >
-                  {item}
+                  {normalizeBackendText(item, locale)}
                 </div>
               ))}
             </div>
@@ -2529,20 +2635,16 @@ export default function BusinessClient() {
           {/* AI RECOMMENDATIONS */}
           <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-5 shadow-sm">
             <p className="text-sm font-semibold text-emerald-900">
-              AI recommendations
+              {previewText.aiRecommendations}
             </p>
 
             <div className="mt-4 space-y-3">
-              {[
-                "Increase high-performing ad budget",
-                "Reduce software overhead",
-                "Focus on retention campaigns",
-              ].map((item) => (
+              {dashboardRecommendations.map((item) => (
                 <div
-                  key={item}
+                  key={String(item)}
                   className="rounded-2xl bg-white px-3 py-2 text-sm text-emerald-800"
                 >
-                  {item}
+                  {normalizeBackendText(item, locale)}
                 </div>
               ))}
             </div>
@@ -2552,31 +2654,26 @@ export default function BusinessClient() {
           <div className="rounded-3xl border border-red-200 bg-red-50 p-5 shadow-sm">
             <div className="flex items-center justify-between">
               <p className="text-sm font-semibold text-red-900">
-                Risk matrix
+                {previewText.riskMatrix}
               </p>
 
               <span className="rounded-full bg-white px-2 py-1 text-xs font-bold text-red-700">
-                Medium Risk
+                {dashboardRiskBadge}
               </span>
             </div>
 
             <div className="mt-5 grid grid-cols-2 gap-2">
-              {[
-                ["Cashflow", "Low"],
-                ["Churn", "Medium"],
-                ["Expenses", "Low"],
-                ["Growth", "Healthy"],
-              ].map(([label, value]) => (
+              {dashboardRiskCards.map((item) => (
                 <div
-                  key={label}
+                  key={item.label}
                   className="rounded-2xl bg-white p-3"
                 >
                   <p className="text-xs text-slate-500">
-                    {label}
+                    {item.label}
                   </p>
 
                   <p className="mt-1 text-sm font-bold text-slate-900">
-                    {value}
+                    {item.value}
                   </p>
                 </div>
               ))}
