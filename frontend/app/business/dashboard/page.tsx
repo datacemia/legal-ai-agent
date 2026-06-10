@@ -766,10 +766,12 @@ function HealthRing({
   score,
   rating,
   label,
+  language = "en",
 }: {
   score: number | null | undefined;
   rating?: string;
   label: string;
+  language?: Locale;
 }) {
   const scoreAvailable =
     typeof score === "number" && Number.isFinite(score);
@@ -785,7 +787,7 @@ function HealthRing({
 
       <div className="mt-5 flex items-end gap-3">
         <p className="text-6xl font-black tracking-tight">
-          {safeScore !== null ? safeScore : unavailableMetricLabel(locale)}
+          {safeScore !== null ? safeScore : unavailableMetricLabel(language)}
         </p>
 
         {safeScore !== null && (
@@ -1151,6 +1153,7 @@ export default function BusinessDashboardPage() {
               score={healthScore}
               rating={health.rating}
               label={t.healthScore}
+              language={locale}
             />
           </div>
 
