@@ -193,13 +193,13 @@ const formatMoney = (
 
 const getCurrencyDisplay = (
   currency: any,
-  language = "en"
+  language: Locale = "en"
 ) => {
   const code = currency?.code || "";
   const symbol = currency?.symbol || "";
 
   if (!code && !symbol) {
-    return "N/A";
+    return unavailableMetricLabel(language);
   }
 
   if (!symbol) {
@@ -2366,10 +2366,9 @@ export default function BusinessClient() {
   const dashboardKpiCards = [
     {
       label: t.revenue,
-      value:
-        typeof kpis.revenue === "number"
-          ? formatMoney(kpis.revenue, currency, locale)
-          : "-",
+      value: isMetricAvailable(kpis, ["revenue_available"], false)
+        ? formatMoney(kpis.revenue, currency, locale)
+        : unavailableMetricLabel(locale),
     },
     {
       label: t.profit,
@@ -2379,10 +2378,9 @@ export default function BusinessClient() {
     },
     {
       label: t.growth,
-      value:
-        typeof kpis.growth_rate_percent === "number"
-          ? formatPercent(kpis.growth_rate_percent, locale)
-          : "-",
+      value: isMetricAvailable(kpis, ["growth_available"], false)
+        ? formatPercent(kpis.growth_rate_percent, locale)
+        : unavailableMetricLabel(locale),
     },
     {
       label: t.cashflow,
@@ -2427,10 +2425,9 @@ export default function BusinessClient() {
     },
     {
       label: t.growth,
-      value:
-        typeof kpis.growth_rate_percent === "number"
-          ? formatPercent(kpis.growth_rate_percent, locale)
-          : "-",
+      value: isMetricAvailable(kpis, ["growth_available"], false)
+        ? formatPercent(kpis.growth_rate_percent, locale)
+        : unavailableMetricLabel(locale),
     },
   ];
 
@@ -2867,7 +2864,11 @@ export default function BusinessClient() {
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-6">
               <KpiCard
                 label={t.revenue}
-                value={formatMoney(result.kpis?.revenue, currency, locale)}
+                value={
+                  isMetricAvailable(result.kpis, ["revenue_available"], false)
+                    ? formatMoney(result.kpis?.revenue, currency, locale)
+                    : unavailableMetricLabel(locale)
+                }
                 tone="green"
               />
 
@@ -2902,7 +2903,11 @@ export default function BusinessClient() {
 
               <KpiCard
                 label={t.growth}
-                value={formatPercent(result.kpis?.growth_rate_percent, locale)}
+                value={
+                  isMetricAvailable(result.kpis, ["growth_available"], false)
+                    ? formatPercent(result.kpis?.growth_rate_percent, locale)
+                    : unavailableMetricLabel(locale)
+                }
                 tone="blue"
               />
 
