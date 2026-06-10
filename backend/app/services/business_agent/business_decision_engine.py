@@ -88,7 +88,7 @@ def _build_default_decision() -> dict[str, Any]:
     return {
         "title": "Continue monitoring business performance",
         "decision": "Keep tracking revenue, expenses, cashflow, and customer metrics before making major changes.",
-        "why": "No critical backend risk was detected from the current analysis.",
+        "why": "No critical business risk was detected from the current analysis.",
         "impact": "medium",
         "timeframe": "30 days",
         "source": "backend_decision_engine",
@@ -128,9 +128,9 @@ def _build_decision_from_top_risk(top_item: dict[str, Any]) -> dict[str, Any]:
 
     if metric:
         why = (
-            f"{why} Backend detected {metric} = {value}."
+            f"{why} Analysis detected {metric} = {value}."
             if why
-            else f"Backend detected {metric} = {value}."
+            else f"Analysis detected {metric} = {value}."
         )
 
     return {
@@ -174,11 +174,11 @@ def _build_executive_summary(
         f"This {model_label} analysis shows revenue of {round(revenue, 2)}, "
         f"profit of {round(profit, 2)}, and a profit margin of {round(margin, 2)}%. "
         f"Revenue growth is {round(growth, 2)}% and cashflow is {cashflow_status}. "
-        f"The backend health score is {int(round(health_score))}/100 ({health_rating})."
+        f"The Business Health Score is {int(round(health_score))}/100 ({health_rating})."
     )
 
     if anomaly_status not in {"normal", "low_risk"}:
-        summary += f" The anomaly engine classifies the current situation as {anomaly_status}."
+        summary += f" The current business risk assessment is {anomaly_status}."
 
     if churn > 12:
         summary += f" Customer churn is elevated at {round(churn, 2)}%, which should be treated as a priority."
@@ -357,7 +357,7 @@ def _build_key_insights(
     health_score = _to_float(health.get("score"))
 
     insights.append(
-        f"Backend-calculated revenue is {round(revenue, 2)} with profit of {round(profit, 2)}."
+        f"Revenue is {round(revenue, 2)} with profit of {round(profit, 2)}."
     )
 
     insights.append(
@@ -371,18 +371,18 @@ def _build_key_insights(
 
     if roas > 0:
         insights.append(
-            f"ROAS is {round(roas, 2)}, based on backend-calculated revenue and ad spend."
+            f"ROAS is {round(roas, 2)}, based on revenue and advertising spend."
         )
 
     insights.append(
-        f"The deterministic backend health score is {int(round(health_score))}/100."
+        f"Business Health Score is {int(round(health_score))}/100."
     )
 
     anomaly_summary = anomalies_v2.get("summary") or {}
 
     if anomaly_summary:
         insights.append(
-            f"Anomaly engine detected {anomaly_summary.get('total_items', 0)} active risk item(s) and {anomaly_summary.get('insights', 0)} positive insight(s)."
+            f"{anomaly_summary.get('total_items', 0)} business risk indicator(s) and {anomaly_summary.get('insights', 0)} positive business signal(s) were identified."
         )
 
     return insights[:6]
@@ -393,7 +393,7 @@ def build_business_decision_layer(
     detected_kpis: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """
-    Backend-first decision engine.
+    Business decision engine.
 
     This module prevents LLM hallucination from controlling:
     - executive summary
@@ -403,7 +403,7 @@ def build_business_decision_layer(
     - recommendations
     - key insights
 
-    It uses only deterministic backend outputs:
+    It uses verified deterministic analysis outputs:
     - kpis
     - advanced_kpis
     - business_health
