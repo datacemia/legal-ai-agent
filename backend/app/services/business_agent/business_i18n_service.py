@@ -238,7 +238,7 @@ TERM_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
     "cashflow_pressure": {
         "en": "Cashflow pressure",
-        "fr": "Pression sur le cashflow",
+        "fr": "Pression sur le flux de trésorerie",
         "ar": "ضغط على التدفق النقدي",
     },
     "forecast_risk": {
@@ -280,7 +280,7 @@ TERM_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
     "positive_cashflow": {
         "en": "Positive cashflow.",
-        "fr": "Cashflow positif.",
+        "fr": "Flux de trésorerie positif.",
         "ar": "تدفق نقدي إيجابي.",
     },
     "critical_churn": {
@@ -358,7 +358,7 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
     "Keep tracking revenue, expenses, cashflow, and customer metrics before making major changes.": {
         "en": "Keep tracking revenue, expenses, cashflow, and customer metrics before making major changes.",
-        "fr": "Continuez à suivre les revenus, les dépenses, le cashflow et les métriques clients avant tout changement majeur.",
+        "fr": "Continuez à suivre les revenus, les dépenses, le flux de trésorerie et les métriques clients avant tout changement majeur.",
         "ar": "استمر في تتبع الإيرادات والمصاريف والتدفق النقدي ومؤشرات العملاء قبل إجراء تغييرات كبيرة.",
     },
     "No Critical business risk was detected from the current analysis.": {
@@ -383,7 +383,7 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
     "Improves decision quality by enabling verified margin, profit, and cashflow analysis.": {
         "en": "Improves decision quality by enabling verified margin, profit, and cashflow analysis.",
-        "fr": "Améliore la qualité des décisions en permettant une analyse vérifiée des marges, du profit et du cashflow.",
+        "fr": "Améliore la qualité des décisions en permettant une analyse vérifiée des marges, du profit et du flux de trésorerie.",
         "ar": "يحسن جودة القرار من خلال تمكين تحليل موثق للهامش والربح والتدفق النقدي.",
     },
     "Upload performance data before making business decisions": {
@@ -393,7 +393,7 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
     "Upload a file with dated revenue, orders, expenses, customers, cashflow, or advertising spend before using this agent for executive decisions.": {
         "en": "Upload a file with dated revenue, orders, expenses, customers, cashflow, or advertising spend before using this agent for executive decisions.",
-        "fr": "Importez un fichier avec des revenus datés, des commandes, des dépenses, des clients, du cashflow ou des dépenses publicitaires avant d’utiliser cet agent pour des décisions exécutives.",
+        "fr": "Importez un fichier avec des revenus datés, des commandes, des dépenses, des clients, du flux de trésorerie ou des dépenses publicitaires avant d’utiliser cet agent pour des décisions exécutives.",
         "ar": "ارفع ملفاً يحتوي على إيرادات مؤرخة أو طلبات أو مصروفات أو عملاء أو تدفق نقدي أو إنفاق إعلاني قبل استخدام هذا الوكيل لاتخاذ قرارات تنفيذية.",
     },
     "Enables verified KPI, risk, forecast, and decision analysis.": {
@@ -597,7 +597,7 @@ CHART_TITLE_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
     "Cashflow Trend": {
         "en": "Cashflow Trend",
-        "fr": "Évolution du cashflow",
+        "fr": "Évolution du flux de trésorerie",
         "ar": "تطور التدفق النقدي",
     },
     "Expenses by Category": {
@@ -816,7 +816,7 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
                 "la rentabilité, le flux de trésorerie, les risques avancés et les prévisions "
                 "ne peuvent pas être calculés de manière fiable. "
                 f"{PHRASE_TRANSLATIONS['Business Health Score could not be calculated because insufficient business performance data was provided.'][lang]} "
-                f"L’évaluation actuelle du risque business est {anomaly_status}. "
+                f"Le niveau de risque business actuel est {anomaly_status}. "
                 f"{PHRASE_TRANSLATIONS['Customer churn could not be calculated from the uploaded data.'][lang]}"
             )
 
@@ -908,7 +908,7 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
             f"{profitability_sentence}"
             f"La croissance des revenus est {growth_display} et le flux de trésorerie est {cashflow}. "
             f"{health_sentence}"
-            f"L’évaluation actuelle du risque business est {anomaly_status}. "
+            f"Le niveau de risque business actuel est {anomaly_status}. "
             f"{churn_sentence}"
         )
 
@@ -1282,7 +1282,7 @@ def _cleanup_mixed_business_terms(value: Any, language: str) -> Any:
 
         # Keep the executive-summary style natural.
         cleaned = cleaned.replace(
-            "et le cashflow est",
+            "et le flux de trésorerie est",
             "et le flux de trésorerie est",
         )
 
