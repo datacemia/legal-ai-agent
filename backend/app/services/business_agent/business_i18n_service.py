@@ -55,6 +55,21 @@ TERM_TRANSLATIONS: dict[str, dict[str, str]] = {
         "fr": "Sain",
         "ar": "صحي",
     },
+    "excellent": {
+        "en": "Excellent",
+        "fr": "Excellent",
+        "ar": "ممتاز",
+    },
+    "moderate": {
+        "en": "Moderate",
+        "fr": "Modéré",
+        "ar": "متوسط",
+    },
+    "weak": {
+        "en": "Weak",
+        "fr": "Faible",
+        "ar": "ضعيف",
+    },
     "watch": {
         "en": "Watch",
         "fr": "À surveiller",
@@ -329,6 +344,57 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
         "ar": "معدل فقدان العملاء المقدر هو 28.65٪.",
     },
 
+    "Continue monitoring business performance": {
+        "en": "Continue monitoring business performance",
+        "fr": "Continuer à surveiller la performance business",
+        "ar": "مواصلة مراقبة أداء الأعمال",
+    },
+    "Keep tracking revenue, expenses, cashflow, and customer metrics before making major changes.": {
+        "en": "Keep tracking revenue, expenses, cashflow, and customer metrics before making major changes.",
+        "fr": "Continuez à suivre les revenus, les dépenses, le cashflow et les métriques clients avant tout changement majeur.",
+        "ar": "استمر في تتبع الإيرادات والمصاريف والتدفق النقدي ومؤشرات العملاء قبل إجراء تغييرات كبيرة.",
+    },
+    "No Critical business risk was detected from the current analysis.": {
+        "en": "No Critical business risk was detected from the current analysis.",
+        "fr": "Aucun risque business critique n’a été détecté dans l’analyse actuelle.",
+        "ar": "لم يتم اكتشاف أي خطر أعمال حرج في التحليل الحالي.",
+    },
+    "No critical business risk was detected from the current analysis.": {
+        "en": "No critical business risk was detected from the current analysis.",
+        "fr": "Aucun risque business critique n’a été détecté dans l’analyse actuelle.",
+        "ar": "لم يتم اكتشاف أي خطر أعمال حرج في التحليل الحالي.",
+    },
+    "No major business risk was detected from the current analysis.": {
+        "en": "No major business risk was detected from the current analysis.",
+        "fr": "Aucun risque business majeur n’a été détecté dans l’analyse actuelle.",
+        "ar": "لم يتم اكتشاف أي خطر أعمال كبير في التحليل الحالي.",
+    },
+    "Add expense, cost, or profit columns to verify profitability before making margin decisions.": {
+        "en": "Add expense, cost, or profit columns to verify profitability before making margin decisions.",
+        "fr": "Ajoutez des colonnes de dépenses, de coûts ou de profit pour vérifier la rentabilité avant de prendre des décisions sur les marges.",
+        "ar": "أضف أعمدة للمصاريف أو التكاليف أو الربح للتحقق من الربحية قبل اتخاذ قرارات بشأن الهوامش.",
+    },
+    "Improves decision quality by enabling verified margin, profit, and cashflow analysis.": {
+        "en": "Improves decision quality by enabling verified margin, profit, and cashflow analysis.",
+        "fr": "Améliore la qualité des décisions en permettant une analyse vérifiée des marges, du profit et du cashflow.",
+        "ar": "يحسن جودة القرار من خلال تمكين تحليل موثق للهامش والربح والتدفق النقدي.",
+    },
+    "Upload performance data before making business decisions": {
+        "en": "Upload performance data before making business decisions",
+        "fr": "Importer des données de performance avant de prendre des décisions business",
+        "ar": "ارفع بيانات أداء قبل اتخاذ قرارات أعمال",
+    },
+    "Upload a file with dated revenue, orders, expenses, customers, cashflow, or advertising spend before using this agent for executive decisions.": {
+        "en": "Upload a file with dated revenue, orders, expenses, customers, cashflow, or advertising spend before using this agent for executive decisions.",
+        "fr": "Importez un fichier avec des revenus datés, des commandes, des dépenses, des clients, du cashflow ou des dépenses publicitaires avant d’utiliser cet agent pour des décisions exécutives.",
+        "ar": "ارفع ملفاً يحتوي على إيرادات مؤرخة أو طلبات أو مصروفات أو عملاء أو تدفق نقدي أو إنفاق إعلاني قبل استخدام هذا الوكيل لاتخاذ قرارات تنفيذية.",
+    },
+    "Enables verified KPI, risk, forecast, and decision analysis.": {
+        "en": "Enables verified KPI, risk, forecast, and decision analysis.",
+        "fr": "Permet une analyse vérifiée des KPI, des risques, des prévisions et des décisions.",
+        "ar": "يتيح تحليلاً موثقاً للمؤشرات والمخاطر والتوقعات والقرارات.",
+    },
+
     # Key insights templates
     "Revenue is {revenue} with profit of {profit}.": {
         "en": "Revenue is {revenue} with profit of {profit}.",
@@ -558,6 +624,8 @@ def translate_term(key: Any, language: str = "en") -> Any:
 def translate_phrase(text: Any, language: str = "en") -> Any:
     lang = normalize_language(language)
 
+    text = _normalize_generated_phrase(text)
+
     if not isinstance(text, str):
         return text
 
@@ -571,10 +639,14 @@ def translate_phrase(text: Any, language: str = "en") -> Any:
     for source, translations in PHRASE_TRANSLATIONS.items():
         translated = translated.replace(source, translations.get(lang, source))
 
-    for source, translations in TERM_TRANSLATIONS.items():
-        # Avoid replacing tiny/generic words inside larger words too aggressively.
-        if len(source) >= 4:
-            translated = translated.replace(source, translations.get(lang, source))
+    # If the phrase was not fully translated, avoid partial term replacement.
+    # Partial replacements created mixed-language strings such as:
+    # "Add expense, cost, or Bénéfice net columns..."
+    if translated == stripped:
+        for source, translations in TERM_TRANSLATIONS.items():
+            # Avoid replacing tiny/generic words inside larger words too aggressively.
+            if len(source) >= 4:
+                translated = translated.replace(source, translations.get(lang, source))
 
     return translated
 
@@ -979,6 +1051,39 @@ def _build_key_insights(payload: dict[str, Any], language: str) -> list[str]:
 
     return deduped[:6]
 
+def _normalize_generated_phrase(text: Any) -> Any:
+    if not isinstance(text, str):
+        return text
+
+    stripped = text.strip()
+
+    normalized_variants = {
+        "Add expense, cost, or Bénéfice net columns to verify Profitability before making margin decisions.": (
+            "Add expense, cost, or profit columns to verify profitability before making margin decisions."
+        ),
+        "Add expense, cost, or profit columns to verify Profitability before making margin decisions.": (
+            "Add expense, cost, or profit columns to verify profitability before making margin decisions."
+        ),
+        "Add expense, cost, or Bénéfice net columns to verify profitability before making margin decisions.": (
+            "Add expense, cost, or profit columns to verify profitability before making margin decisions."
+        ),
+        "Improves decision quality by enabling verified margin, Bénéfice net, and Flux de trésorerie analysis.": (
+            "Improves decision quality by enabling verified margin, profit, and cashflow analysis."
+        ),
+        "Improves decision quality by enabling verified margin, profit, and Flux de trésorerie analysis.": (
+            "Improves decision quality by enabling verified margin, profit, and cashflow analysis."
+        ),
+        "Keep tracking Revenus, Dépenses, Flux de trésorerie, and customer metrics before making major changes.": (
+            "Keep tracking revenue, expenses, cashflow, and customer metrics before making major changes."
+        ),
+        "No Critique business risk was detected from the current analysis.": (
+            "No Critical business risk was detected from the current analysis."
+        ),
+    }
+
+    return normalized_variants.get(stripped, text)
+
+
 def translate_payload(value: Any, language: str = "en") -> Any:
     lang = normalize_language(language)
 
@@ -1032,7 +1137,7 @@ def translate_payload(value: Any, language: str = "en") -> Any:
         return translated
 
     if isinstance(value, str):
-        return translate_phrase(value, lang)
+        return translate_phrase(_normalize_generated_phrase(value), lang)
 
     return value
 
