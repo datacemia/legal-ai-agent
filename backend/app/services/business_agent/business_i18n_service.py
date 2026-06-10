@@ -1105,6 +1105,18 @@ def _normalize_generated_phrase(text: Any) -> Any:
         "No Critique business risk was detected from the current analysis.": (
             "No Critical business risk was detected from the current analysis."
         ),
+        "Ajoutez des colonnes de dépenses, de coûts ou de Bénéfice net pour vérifier la rentabilité avant de prendre des décisions sur les marges.": (
+            "Add expense, cost, or profit columns to verify profitability before making margin decisions."
+        ),
+        "Améliore la qualité des décisions en permettant une analyse vérifiée des marges, du Bénéfice net et du Flux de trésorerie.": (
+            "Improves decision quality by enabling verified margin, profit, and cashflow analysis."
+        ),
+        "Améliore la qualité des décisions en permettant une analyse vérifiée des marges, du profit et du Flux de trésorerie.": (
+            "Improves decision quality by enabling verified margin, profit, and cashflow analysis."
+        ),
+        "Continuez à suivre les revenus, les dépenses, le Flux de trésorerie et les métriques clients avant tout changement majeur.": (
+            "Keep tracking revenue, expenses, cashflow, and customer metrics before making major changes."
+        ),
         "Les revenus sont de {revenue}, avec un Bénéfice net de N/A.": (
             "Revenue is {revenue}. Profit could not be calculated because no expense, cost, or profit column was provided."
         ),
@@ -1133,6 +1145,35 @@ def _normalize_generated_phrase(text: Any) -> Any:
             f"{revenue_value}. "
             "Profit could not be calculated because no expense, cost, or profit column was provided."
         )
+
+    if stripped.startswith(french_revenue_profit_na) and (
+        "Le Bénéfice net n’a pas pu être calculé" in stripped
+        or "Le profit n’a pas pu être calculé" in stripped
+    ):
+        revenue_value = stripped[len(french_revenue_profit_na):].split(".", 1)[0].strip()
+        return (
+            "Revenue is "
+            f"{revenue_value}. "
+            "Profit could not be calculated because no expense, cost, or profit column was provided."
+        )
+
+    if (
+        stripped.startswith("Ajoutez des colonnes de dépenses, de coûts ou de ")
+        and "pour vérifier la rentabilité avant de prendre des décisions sur les marges." in stripped
+    ):
+        return "Add expense, cost, or profit columns to verify profitability before making margin decisions."
+
+    if (
+        stripped.startswith("Améliore la qualité des décisions en permettant une analyse vérifiée des marges")
+        and ("Bénéfice net" in stripped or "Flux de trésorerie" in stripped)
+    ):
+        return "Improves decision quality by enabling verified margin, profit, and cashflow analysis."
+
+    if (
+        stripped.startswith("Continuez à suivre les revenus, les dépenses")
+        and "métriques clients avant tout changement majeur." in stripped
+    ):
+        return "Keep tracking revenue, expenses, cashflow, and customer metrics before making major changes."
 
     english_revenue_profit_na = "Revenue is "
     if stripped.startswith(english_revenue_profit_na) and "with profit of N/A" in stripped:
@@ -1200,6 +1241,48 @@ def translate_payload(value: Any, language: str = "en") -> Any:
 
     if isinstance(value, str):
         return translate_phrase(_normalize_generated_phrase(value), lang)
+
+    return value
+
+
+def _cleanup_mixed_business_terms(value: Any, language: str) -> Any:
+    lang = normalize_language(language)
+
+    if isinstance(value, list):
+        return [_cleanup_mixed_business_terms(item, lang) for item in value]
+
+    if isinstance(value, dict):
+        return {
+            key: _cleanup_mixed_business_terms(nested_value, lang)
+            for key, nested_value in value.items()
+        }
+
+    if not isinstance(value, str):
+        return value
+
+    if lang == "fr":
+        replacements = {
+            "Bénéfice net": "profit",
+            "bénéfice net": "profit",
+            "Flux de trésorerie": "cashflow",
+            "flux de trésorerie": "flux de trésorerie",
+            "Le profit n’a pas pu être calculé car aucune colonne de dépenses, de coûts ou de profit n’a été fournie.": "Le profit n’a pas pu être calculé car aucune colonne de dépenses, de coûts ou de profit n’a été fournie.",
+        }
+
+        cleaned = value
+        for source, target in replacements.items():
+            cleaned = cleaned.replace(source, target)
+
+        # Keep the executive-summary style natural.
+        cleaned = cleaned.replace(
+            "et le cashflow est",
+            "et le flux de trésorerie est",
+        )
+
+        return cleaned
+
+    if lang == "ar":
+        return value
 
     return value
 
@@ -1300,5 +1383,7 @@ def translate_business_analysis_payload(
             "This is for business decision support only. "
             "Verify important decisions with a qualified professional."
         )
+
+    result = _cleanup_mixed_business_terms(result, lang)
 
     return result
