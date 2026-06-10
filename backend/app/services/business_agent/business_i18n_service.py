@@ -171,12 +171,12 @@ TERM_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
     "cashflow_status": {
         "en": "Cashflow status",
-        "fr": "Statut cashflow",
+        "fr": "Statut du flux de trésorerie",
         "ar": "حالة التدفق النقدي",
     },
     "churn_rate_percent": {
         "en": "Customer churn",
-        "fr": "Churn client",
+        "fr": "Taux d’attrition client",
         "ar": "معدل فقدان العملاء",
     },
     "roas": {
@@ -408,7 +408,7 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
     "Customer churn is estimated at {churn}%, which affects retention quality.": {
         "en": "Customer churn is estimated at {churn}%, which affects retention quality.",
-        "fr": "Le churn client est estimé à {churn}%, ce qui affecte la qualité de rétention.",
+        "fr": "Le taux d’attrition client est estimé à {churn}%, ce qui affecte la qualité de rétention.",
         "ar": "يُقدر معدل فقدان العملاء بـ {churn}%، مما يؤثر على جودة الاحتفاظ.",
     },
     "ROAS is {roas}, based on revenue and advertising spend.": {
@@ -440,6 +440,16 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
         "en": "Business performance metrics are unavailable because the uploaded file does not contain verified business performance data.",
         "fr": "Les indicateurs de performance business sont indisponibles car le fichier importé ne contient pas de données de performance vérifiées.",
         "ar": "مؤشرات أداء الأعمال غير متاحة لأن الملف المرفوع لا يحتوي على بيانات أداء موثقة.",
+    },
+    "Revenue is {revenue}. Profit could not be calculated because no expense, cost, or profit column was provided.": {
+        "en": "Revenue is {revenue}. Profit could not be calculated because no expense, cost, or profit column was provided.",
+        "fr": "Les revenus sont de {revenue}. Le profit n’a pas pu être calculé car aucune colonne de dépenses, de coûts ou de profit n’a été fournie.",
+        "ar": "بلغت الإيرادات {revenue}. تعذر حساب الربح لأنه لم يتم توفير أي عمود للمصاريف أو التكاليف أو الربح.",
+    },
+    "Profit could not be calculated because no expense, cost, or profit column was provided.": {
+        "en": "Profit could not be calculated because no expense, cost, or profit column was provided.",
+        "fr": "Le profit n’a pas pu être calculé car aucune colonne de dépenses, de coûts ou de profit n’a été fournie.",
+        "ar": "تعذر حساب الربح لأنه لم يتم توفير أي عمود للمصاريف أو التكاليف أو الربح.",
     },
     "{total} business risk indicator(s) and {insights} positive business signal(s) were identified.": {
         "en": "{total} business risk indicator(s) and {insights} positive business signal(s) were identified.",
@@ -539,7 +549,7 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
     "Customer churn could not be calculated from the uploaded data.": {
         "en": "Customer churn could not be calculated from the uploaded data.",
-        "fr": "Le churn client n’a pas pu être calculé à partir des données importées.",
+        "fr": "Le taux d’attrition client n’a pas pu être calculé à partir des données importées.",
         "ar": "تعذر حساب معدل فقدان العملاء من البيانات المرفوعة.",
     },
     "ROAS could not be calculated because advertising spend was not provided.": {
@@ -633,6 +643,14 @@ def translate_phrase(text: Any, language: str = "en") -> Any:
 
     if stripped in PHRASE_TRANSLATIONS:
         return PHRASE_TRANSLATIONS[stripped].get(lang, stripped)
+
+    revenue_prefix = "Revenue is "
+    revenue_suffix = ". Profit could not be calculated because no expense, cost, or profit column was provided."
+    if stripped.startswith(revenue_prefix) and stripped.endswith(revenue_suffix):
+        revenue_value = stripped[len(revenue_prefix):-len(revenue_suffix)].strip()
+        return PHRASE_TRANSLATIONS[
+            "Revenue is {revenue}. Profit could not be calculated because no expense, cost, or profit column was provided."
+        ][lang].format(revenue=revenue_value)
 
     translated = stripped
 
@@ -788,7 +806,7 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
             return (
                 f"Cette analyse {model} ne contient pas suffisamment de données "
                 "de performance business vérifiées. Les revenus, la croissance, "
-                "la rentabilité, le cashflow, les risques avancés et les prévisions "
+                "la rentabilité, le flux de trésorerie, les risques avancés et les prévisions "
                 "ne peuvent pas être calculés de manière fiable. "
                 f"{PHRASE_TRANSLATIONS['Business Health Score could not be calculated because insufficient business performance data was provided.'][lang]} "
                 f"L’évaluation actuelle du risque business est {anomaly_status}. "
@@ -881,7 +899,7 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
         return (
             f"Cette analyse {model} montre des revenus de {revenue_display}, "
             f"{profitability_sentence}"
-            f"La croissance des revenus est {growth_display} et le cashflow est {cashflow}. "
+            f"La croissance des revenus est {growth_display} et le flux de trésorerie est {cashflow}. "
             f"{health_sentence}"
             f"L’évaluation actuelle du risque business est {anomaly_status}. "
             f"{churn_sentence}"
@@ -962,11 +980,19 @@ def _build_key_insights(payload: dict[str, Any], language: str) -> list[str]:
 
     if not has_performance_data:
         insights.append(_business_performance_unavailable_sentence(lang))
-    elif revenue_available:
+    elif revenue_available and profit_available:
         insights.append(
             PHRASE_TRANSLATIONS["Revenue is {revenue} with profit of {profit}."][lang].format(
                 revenue=_display_metric(revenue),
-                profit=_display_metric(profit) if profit_available else "N/A",
+                profit=_display_metric(profit),
+            )
+        )
+    elif revenue_available:
+        insights.append(
+            PHRASE_TRANSLATIONS[
+                "Revenue is {revenue}. Profit could not be calculated because no expense, cost, or profit column was provided."
+            ][lang].format(
+                revenue=_display_metric(revenue),
             )
         )
     else:
@@ -1079,9 +1105,45 @@ def _normalize_generated_phrase(text: Any) -> Any:
         "No Critique business risk was detected from the current analysis.": (
             "No Critical business risk was detected from the current analysis."
         ),
+        "Les revenus sont de {revenue}, avec un Bénéfice net de N/A.": (
+            "Revenue is {revenue}. Profit could not be calculated because no expense, cost, or profit column was provided."
+        ),
+        "Les revenus sont de {revenue}, avec un profit de N/A.": (
+            "Revenue is {revenue}. Profit could not be calculated because no expense, cost, or profit column was provided."
+        ),
+        "Les revenus sont de 129510.85, avec un Bénéfice net de N/A.": (
+            "Revenue is 129510.85. Profit could not be calculated because no expense, cost, or profit column was provided."
+        ),
+        "Les revenus sont de 129510.85, avec un profit de N/A.": (
+            "Revenue is 129510.85. Profit could not be calculated because no expense, cost, or profit column was provided."
+        ),
     }
 
-    return normalized_variants.get(stripped, text)
+    if stripped in normalized_variants:
+        return normalized_variants[stripped]
+
+    french_revenue_profit_na = "Les revenus sont de "
+    if stripped.startswith(french_revenue_profit_na) and (
+        "avec un Bénéfice net de N/A" in stripped
+        or "avec un profit de N/A" in stripped
+    ):
+        revenue_value = stripped[len(french_revenue_profit_na):].split(",", 1)[0].strip()
+        return (
+            "Revenue is "
+            f"{revenue_value}. "
+            "Profit could not be calculated because no expense, cost, or profit column was provided."
+        )
+
+    english_revenue_profit_na = "Revenue is "
+    if stripped.startswith(english_revenue_profit_na) and "with profit of N/A" in stripped:
+        revenue_value = stripped[len(english_revenue_profit_na):].split(" with profit of N/A", 1)[0].strip()
+        return (
+            "Revenue is "
+            f"{revenue_value}. "
+            "Profit could not be calculated because no expense, cost, or profit column was provided."
+        )
+
+    return text
 
 
 def translate_payload(value: Any, language: str = "en") -> Any:
