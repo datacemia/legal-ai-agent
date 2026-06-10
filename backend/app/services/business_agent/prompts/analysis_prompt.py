@@ -72,6 +72,9 @@ STRICT OUTPUT RULES:
 - If there is not enough dated historical data, set forecast.available to false.
 - data_quality.score must be an integer between 0 and 100.
 - Do not return null values.
+- Never mention backend, backend-calculated, deterministic backend, internal engine, server, database, API, or system architecture in any user-facing text.
+- Use "Business Health Score" instead of any technical score wording.
+- Use "verified business metrics" instead of "backend-calculated metrics".
 
 Return EXACT JSON:
 
