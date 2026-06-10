@@ -98,6 +98,311 @@ def _business_model_label(business_model: str) -> str:
     return labels.get(str(business_model or "general").lower(), "general business")
 
 
+def _collect_text_tokens(value: Any) -> set[str]:
+    """
+    Collect lightweight text tokens from nested metadata/mapping structures.
+
+    This helps the decision layer recognize catalog/reference files without
+    depending on one exact upstream schema.
+    """
+
+    tokens: set[str] = set()
+
+    def walk(item: Any) -> None:
+        if item is None:
+            return
+
+        if isinstance(item, dict):
+            for key, nested_value in item.items():
+                walk(key)
+                walk(nested_value)
+            return
+
+        if isinstance(item, (list, tuple, set)):
+            for nested_value in item:
+                walk(nested_value)
+            return
+
+        if isinstance(item, str):
+            normalized = (
+                item.lower()
+                .replace("_", " ")
+                .replace("-", " ")
+                .replace(".", " ")
+                .strip()
+            )
+
+            for token in normalized.split():
+                if token:
+                    tokens.add(token)
+
+    walk(value)
+
+    return tokens
+
+
+def _explicit_flag_false(payload: dict[str, Any], key: str) -> bool:
+    if not isinstance(payload, dict):
+        return False
+
+    return payload.get(key) is False
+
+
+def _metric_has_positive_value(payload: dict[str, Any], *keys: str) -> bool:
+    if not isinstance(payload, dict):
+        return False
+
+    return any(_to_float(payload.get(key)) > 0 for key in keys)
+
+
+def _has_available_business_signal(
+    core_kpis: dict[str, Any],
+    advanced_kpis: dict[str, Any],
+    result: dict[str, Any],
+) -> bool:
+    """
+    Decide whether the uploaded file contains real business performance data.
+
+    A product catalog can contain price/list_price/inventory columns, but those
+    are not the same as verified revenue, orders, expenses, cashflow, customers,
+    or advertising spend. This guard prevents turning missing business metrics
+    into fake $0 / 0% analysis.
+    """
+
+    if _metric_has_positive_value(
+        core_kpis,
+        "revenue",
+        "expenses",
+        "expense",
+        "profit",
+    ):
+        return True
+
+    if _metric_has_positive_value(
+        advanced_kpis,
+        "orders",
+        "customers",
+        "new_customers",
+        "churned_customers",
+        "ad_spend",
+        "mrr",
+        "arr",
+    ):
+        return True
+
+    charts = result.get("charts") or []
+
+    if isinstance(charts, list) and charts:
+        return True
+
+    forecast = result.get("forecast") or {}
+
+    if isinstance(forecast, dict) and forecast.get("available") is True:
+        return True
+
+    # If the upstream extractor explicitly marks revenue as available, preserve
+    # backward compatibility for legitimate zero-revenue files.
+    if isinstance(core_kpis, dict) and core_kpis.get("revenue_available") is True:
+        return True
+
+    return False
+
+
+def _looks_like_reference_or_catalog_file(
+    result: dict[str, Any],
+    detected_kpis: dict[str, Any],
+) -> bool:
+    """
+    Detect files such as products.csv, catalog exports, SKU lists, price books,
+    and inventory reference tables.
+
+    These files can be useful business context, but they are not sufficient for
+    executive performance analysis by themselves.
+    """
+
+    tokens = _collect_text_tokens(
+        {
+            "result": {
+                "dataset_type": result.get("dataset_type"),
+                "file_metadata": result.get("file_metadata"),
+                "column_mapping": result.get("column_mapping"),
+                "detected_columns": result.get("detected_columns"),
+                "data_quality": result.get("data_quality"),
+            },
+            "detected_kpis": detected_kpis,
+        }
+    )
+
+    catalog_tokens = {
+        "product",
+        "products",
+        "catalog",
+        "catalogue",
+        "sku",
+        "brand",
+        "brands",
+        "inventory",
+        "stock",
+        "category",
+        "subcategory",
+        "description",
+        "rating",
+        "price",
+        "pricing",
+    }
+
+    performance_tokens = {
+        "revenue",
+        "sales",
+        "sale",
+        "purchase",
+        "purchases",
+        "order",
+        "orders",
+        "expense",
+        "expenses",
+        "cost",
+        "costs",
+        "profit",
+        "customer",
+        "customers",
+        "cashflow",
+        "cash",
+        "ad",
+        "spend",
+    }
+
+    catalog_hits = len(tokens.intersection(catalog_tokens))
+    performance_hits = len(tokens.intersection(performance_tokens))
+
+    explicit_dataset_type = str(
+        result.get("dataset_type")
+        or detected_kpis.get("dataset_type")
+        or ""
+    ).lower()
+
+    if explicit_dataset_type in {
+        "product_catalog",
+        "catalog",
+        "reference",
+        "inventory_catalog",
+    }:
+        return True
+
+    return catalog_hits >= 2 and performance_hits <= 2
+
+
+def _build_insufficient_data_layer(
+    result: dict[str, Any],
+    business_model: str,
+    core_kpis: dict[str, Any],
+    detected_kpis: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Return a safe decision layer when the uploaded file is not enough for
+    business performance analysis.
+    """
+
+    is_catalog = _looks_like_reference_or_catalog_file(result, detected_kpis)
+    dataset_type = "product_catalog" if is_catalog else "insufficient_business_data"
+
+    if is_catalog:
+        summary = (
+            "This file appears to contain product catalog or reference data. "
+            "It does not include verified business performance fields such as "
+            "dated revenue, orders, expenses, customers, cashflow, or advertising spend, "
+            "so executive KPI analysis is not available from this file alone."
+        )
+        decision = (
+            "Upload a sales, orders, purchases, finance, or customer activity file "
+            "to generate verified revenue, growth, profitability, and risk analysis."
+        )
+        insight = "Product catalog/reference data detected; performance KPIs are unavailable."
+    else:
+        summary = (
+            "The uploaded file does not contain enough verified business performance "
+            "data to calculate revenue, growth, profitability, cashflow, risks, or "
+            "priority decisions."
+        )
+        decision = (
+            "Upload a file with dated revenue, orders, expenses, customers, cashflow, "
+            "or advertising spend before using this agent for executive decisions."
+        )
+        insight = "Insufficient business performance data detected."
+
+    safe_kpis = {
+        **(core_kpis if isinstance(core_kpis, dict) else {}),
+        "revenue": "N/A",
+        "expenses": "N/A",
+        "profit": "N/A",
+        "profit_margin_percent": "N/A",
+        "growth_rate_percent": "N/A",
+        "cashflow_status": "unknown",
+        "revenue_available": False,
+        "expenses_available": False,
+        "profit_available": False,
+        "profit_margin_available": False,
+        "growth_available": False,
+        "cashflow_available": False,
+    }
+
+    result["dataset_type"] = dataset_type
+    result["analysis_available"] = False
+    result["business_model"] = "general"
+    result["kpis"] = safe_kpis
+    result["business_health_score"] = None
+    result["business_health"] = {
+        "available": False,
+        "score": None,
+        "rating": "not_available",
+        "reason": summary,
+    }
+    result["executive_summary"] = summary
+    result["smart_insights"] = {
+        "most_important_decision": {
+            "title": "Upload performance data before making business decisions",
+            "decision": decision,
+            "why": summary,
+            "impact": "medium",
+            "timeframe": "before decision-making",
+            "source": "business_decision_engine",
+        },
+        "key_insights": [
+            insight,
+            "Revenue, growth, profit, cashflow, churn, ROAS, and risk scores were not calculated because the required columns were not provided.",
+            "Use this file together with purchases, orders, accounting, marketing, or customer activity data for a complete business analysis.",
+        ],
+        "source": "business_decision_engine",
+    }
+    result["risks"] = []
+    result["opportunities"] = []
+    result["recommendations"] = [
+        {
+            "recommendation": decision,
+            "priority": "medium",
+            "category": "data_quality",
+            "expected_impact": "Enables verified KPI, risk, forecast, and decision analysis.",
+            "metric": "business_performance_data",
+            "source": "business_decision_engine",
+        }
+    ]
+    result["decision_engine"] = {
+        "enabled": True,
+        "source": "business_decision_engine",
+        "business_model": business_model,
+        "analysis_available": False,
+        "dataset_type": dataset_type,
+        "based_on": {
+            "core_kpis": False,
+            "advanced_kpis": False,
+            "business_health": False,
+            "anomalies_v2": False,
+        },
+    }
+
+    return result
+
+
 def _get_top_items(items: list[dict[str, Any]], limit: int = 3) -> list[dict[str, Any]]:
     return sorted(
         items,
@@ -568,6 +873,18 @@ def build_business_decision_layer(
     advanced_kpis = detected_kpis.get("advanced_kpis") or result.get("advanced_kpis") or {}
     health = result.get("business_health") or {}
     anomalies_v2 = result.get("anomalies_v2") or result.get("anomalies") or {}
+
+    if not _has_available_business_signal(
+        core_kpis=core_kpis,
+        advanced_kpis=advanced_kpis,
+        result=result,
+    ):
+        return _build_insufficient_data_layer(
+            result=result,
+            business_model=business_model,
+            core_kpis=core_kpis,
+            detected_kpis=detected_kpis,
+        )
 
     items = anomalies_v2.get("items") or []
     top_items = _get_top_items(items, limit=1)
