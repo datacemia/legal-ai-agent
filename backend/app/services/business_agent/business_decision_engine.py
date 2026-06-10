@@ -496,7 +496,12 @@ def _build_executive_summary(
     margin = _to_float(core_kpis.get("profit_margin_percent"))
     growth = _to_float(core_kpis.get("growth_rate_percent"))
     cashflow_status = str(core_kpis.get("cashflow_status") or "unknown")
-    health_score = _to_float(health.get("score"))
+    health_score_raw = health.get("score")
+    health_score_available = (
+        isinstance(health_score_raw, (int, float))
+        and not isinstance(health_score_raw, bool)
+    )
+    health_score = _to_float(health_score_raw) if health_score_available else 0.0
     health_rating = str(health.get("rating") or "unknown")
     anomaly_status = str(anomalies_v2.get("status") or "normal")
     churn = _to_float(advanced_kpis.get("churn_rate_percent"))
@@ -528,9 +533,19 @@ def _build_executive_summary(
     summary = (
         f"This {model_label} analysis shows revenue of {round(revenue, 2)}, "
         f"{profitability_sentence}"
-        f"Revenue growth is {round(growth, 2)}% and cashflow is {display_cashflow}. "
-        f"The Business Health Score is {int(round(health_score))}/100 ({health_rating})."
+        f"Revenue growth is {round(growth, 2)}% and cashflow is {display_cashflow}."
     )
+
+    if health_score_available:
+        summary += (
+            f" The Business Health Score is "
+            f"{int(round(health_score))}/100 ({health_rating})."
+        )
+    else:
+        summary += (
+            " Business Health Score could not be calculated "
+            "because insufficient business performance data was provided."
+        )
 
     if anomaly_status not in {"normal", "low_risk"}:
         summary += f" The current business risk assessment is {anomaly_status}."
@@ -772,7 +787,12 @@ def _build_key_insights(
     growth = _to_float(core_kpis.get("growth_rate_percent"))
     churn = _to_float(advanced_kpis.get("churn_rate_percent"))
     roas = _to_float(advanced_kpis.get("roas"))
-    health_score = _to_float(health.get("score"))
+    health_score_raw = health.get("score")
+    health_score_available = (
+        isinstance(health_score_raw, (int, float))
+        and not isinstance(health_score_raw, bool)
+    )
+    health_score = _to_float(health_score_raw) if health_score_available else 0.0
 
     profit_available = _flag_enabled(core_kpis, "profit_available", True)
     margin_available = _flag_enabled(
@@ -819,9 +839,14 @@ def _build_key_insights(
             "ROAS could not be calculated because advertising spend was not provided."
         )
 
-    insights.append(
-        f"Business Health Score is {int(round(health_score))}/100."
-    )
+    if health_score_available:
+        insights.append(
+            f"Business Health Score is {int(round(health_score))}/100."
+        )
+    else:
+        insights.append(
+            "Business Health Score could not be calculated because insufficient business performance data was provided."
+        )
 
     anomaly_summary = anomalies_v2.get("summary") or {}
 
