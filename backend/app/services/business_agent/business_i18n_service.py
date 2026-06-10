@@ -704,13 +704,36 @@ def _metric_available(
     return default and _is_available(value)
 
 
-def _display_metric(value: Any) -> str:
-    return str(value) if _is_available(value) else "N/A"
+def _display_metric(value: Any, language: str = "en") -> str:
+    if value is None:
+        return "N/A"
 
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return str(value)
 
-def _display_percent(value: Any) -> str:
-    return f"{value}%" if _is_available(value) else "N/A"
+    if language == "fr":
+        formatted = f"{number:,.2f}".replace(",", " ").replace(".", ",")
+        return formatted.rstrip("0").rstrip(",")
 
+    if language == "ar":
+        formatted = f"{number:,.2f}".replace(",", " ")
+        return formatted.rstrip("0").rstrip(".")
+
+    formatted = f"{number:,.2f}"
+    return formatted.rstrip("0").rstrip(".")
+
+def _display_percent(value: Any, language: str = "en") -> str:
+    if not _is_available(value):
+        return "N/A"
+
+    number = _display_metric(value, language)
+
+    if language == "fr":
+        return f"{number} %"
+
+    return f"{number}%"
 
 def _has_business_performance(payload: dict[str, Any]) -> bool:
     if payload.get("analysis_available") is False:
@@ -805,8 +828,8 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
         default=False,
     )
 
-    revenue_display = _display_metric(revenue) if revenue_available else "N/A"
-    growth_display = _display_percent(growth) if growth_available else "N/A"
+    revenue_display = _display_metric(revenue, lang) if revenue_available else "N/A"
+    growth_display = _display_percent(growth, lang) if growth_available else "N/A"
 
     if not has_performance_data:
         if lang == "fr":
