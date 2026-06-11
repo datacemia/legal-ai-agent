@@ -1242,6 +1242,12 @@ def ensure_derived_revenue(
         quantity = to_float(row.get(quantity_col)) or 0.0
         row[derived_col] = round_money(price * quantity)
 
+    if column_mapping is not None:
+        column_mapping["revenue"] = derived_col
+        column_mapping["revenue_source"] = "derived_price_times_quantity"
+        column_mapping["price"] = price_col
+        column_mapping["quantity"] = quantity_col
+
     return derived_col
 
 
@@ -1759,7 +1765,7 @@ def build_data_quality(
 ) -> dict[str, Any]:
     missing_fields = []
 
-    if not resolve_column("revenue", columns, column_mapping):
+    if not ensure_derived_revenue(rows, columns, column_mapping):
         missing_fields.append("revenue")
 
     if not resolve_column("expenses", columns, column_mapping):
@@ -1886,6 +1892,14 @@ def detect_smart_kpis(
     business_model = model_details["business_model"]
 
     detected_columns = detect_kpi_columns(columns)
+
+    # Make derived revenue visible to all downstream quality/reporting logic.
+    derived_revenue_col = ensure_derived_revenue(rows, columns, column_mapping) if rows else None
+
+    if derived_revenue_col == "__derived_revenue__":
+        detected_columns["revenue"] = "__derived_revenue__"
+        detected_columns["price"] = column_mapping.get("price", "")
+        detected_columns["quantity"] = column_mapping.get("quantity", "")
 
     core_kpis = calculate_core_kpis(
         rows=rows,
