@@ -7,6 +7,8 @@ from typing import Any
 from fastapi import UploadFile
 from openpyxl import load_workbook
 
+from app.services.business_agent.business_kpi_detector import detect_kpi_columns
+
 
 COLUMN_ALIASES = {
     "date": [
@@ -638,7 +640,7 @@ async def extract_business_data(file: UploadFile) -> dict[str, Any]:
             "file_name": filename,
         }
 
-    column_mapping = detect_column_mapping(fieldnames)
+    column_mapping = detect_kpi_columns(fieldnames)
     numeric_columns = detect_numeric_columns(rows, fieldnames)
     date_columns = detect_date_columns(rows, fieldnames)
 
