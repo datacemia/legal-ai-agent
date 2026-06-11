@@ -1549,7 +1549,7 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
     rating = translate_term(health.get("rating", "unknown"), lang)
     anomaly_status_raw = anomalies.get("status", "normal")
 
-    business_health = result.get("business_health") or {}
+    business_health = payload.get("business_health") or {}
     if isinstance(business_health, dict):
         health_risk_status = str(business_health.get("risk_status") or "").strip()
         if health_risk_status:
