@@ -644,6 +644,17 @@ TERM_TRANSLATIONS: dict[str, dict[str, str]] = {
 
 
 PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
+    "Review pricing, direct costs, and operating expenses to protect margin.": {
+        "en": "Review pricing, direct costs, and operating expenses to protect margin.",
+        "fr": "Revoir les prix, les coûts directs et les dépenses d’exploitation afin de protéger la marge.",
+        "ar": "راجع التسعير والتكاليف المباشرة والمصاريف التشغيلية لحماية الهامش.",
+    },
+    "Improves profit margin and cashflow resilience.": {
+        "en": "Improves profit margin and cashflow resilience.",
+        "fr": "Améliore la marge bénéficiaire et la résilience du flux de trésorerie.",
+        "ar": "يحسن هامش الربح ويعزز مرونة التدفق النقدي.",
+    },
+
 
     "Churn appears controlled.": {
         "en": "Churn appears controlled.",
