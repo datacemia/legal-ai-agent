@@ -947,6 +947,7 @@ def _build_key_insights(
 def build_business_decision_layer(
     result: dict[str, Any],
     detected_kpis: dict[str, Any] | None = None,
+    language: str | None = None,
 ) -> dict[str, Any]:
     """
     Business decision engine.
@@ -981,7 +982,8 @@ def build_business_decision_layer(
     health = result.get("business_health") or {}
     anomalies_v2 = result.get("anomalies_v2") or result.get("anomalies") or {}
     language = (
-        result.get("output_language")
+        language
+        or result.get("output_language")
         or result.get("language")
         or detected_kpis.get("output_language")
         or detected_kpis.get("language")
