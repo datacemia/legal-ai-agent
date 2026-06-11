@@ -519,6 +519,27 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
         "ar": "تم تحديد {total} مؤشر مخاطر للأعمال و{insights} إشارة إيجابية للأعمال.",
     },
 
+    "Improve profitability before expanding costs": {
+        "en": "Improve profitability before expanding costs",
+        "fr": "Améliorer la rentabilité avant d’augmenter les coûts",
+        "ar": "حسّن الربحية قبل زيادة التكاليف",
+    },
+    "Compare revenue growth and expense growth side by side.": {
+        "en": "Compare revenue growth and expense growth side by side.",
+        "fr": "Comparez côte à côte la croissance des revenus et celle des dépenses.",
+        "ar": "قارن نمو الإيرادات ونمو المصروفات جنباً إلى جنب.",
+    },
+    "Profit declined materially.": {
+        "en": "Profit declined materially.",
+        "fr": "Le profit a diminué de manière significative.",
+        "ar": "انخفض الربح بشكل ملحوظ.",
+    },
+    "Expenses are growing faster than revenue.": {
+        "en": "Expenses are growing faster than revenue.",
+        "fr": "Les dépenses augmentent plus rapidement que les revenus.",
+        "ar": "تنمو المصروفات بوتيرة أسرع من الإيرادات.",
+    },
+
     # Opportunities
     "Improve customer retention": {
         "en": "Improve customer retention",
@@ -724,15 +745,9 @@ def translate_phrase(text: Any, language: str = "en") -> Any:
     for source, translations in PHRASE_TRANSLATIONS.items():
         translated = translated.replace(source, translations.get(lang, source))
 
-    # If the phrase was not fully translated, avoid partial term replacement.
-    # Partial replacements created mixed-language strings such as:
-    # "Add expense, cost, or Bénéfice net columns..."
-    if translated == stripped:
-        for source, translations in TERM_TRANSLATIONS.items():
-            # Avoid replacing tiny/generic words inside larger words too aggressively.
-            if len(source) >= 4:
-                translated = translated.replace(source, translations.get(lang, source))
-
+    # Do not partially translate full sentences term-by-term.
+    # This prevents broken mixed-language strings like:
+    # "Compare Revenus Croissance and expense Croissance side by side."
     return translated
 
 
