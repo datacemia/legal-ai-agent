@@ -969,7 +969,13 @@ def _generate_insights(
         latest_profit = _to_float(monthly_series[-1].get("profit"))
         average_profit = _safe_mean(_series_values(monthly_series[:-1], "profit"))
 
-        if average_profit > 0 and latest_profit > average_profit:
+        profit_lift = (
+            (latest_profit - average_profit) / average_profit
+            if average_profit > 0
+            else 0
+        )
+
+        if profit_lift >= 0.05:
             insights.append(
                 {
                     "kind": "insight",

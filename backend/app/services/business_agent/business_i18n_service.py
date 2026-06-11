@@ -1228,7 +1228,7 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     "{total} business risk indicator(s) and {insights} positive business signal(s) were identified.": {
         "en": "{total} business risk indicator(s) and {insights} positive business signal(s) were identified.",
         "fr": "{total} indicateur(s) de risque de l'entreprise et {insights} signal(aux) positif(s) ont été identifiés.",
-        "ar": "تم تحديد {total} مؤشر مخاطر للأعمال و{insights} إشارة إيجابية للأعمال.",
+        "ar": "تم تحديد {total} مؤشر مخاطر للأعمال و{insights} إشارات إيجابية للأعمال.",
     },
 
     # Opportunities
