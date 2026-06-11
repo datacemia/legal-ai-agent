@@ -1066,10 +1066,14 @@ def detect_business_anomalies_v2(
 
     if critical_count:
         status = "critical"
-    elif high_count:
+    elif high_count >= 2:
         status = "high_risk"
-    elif medium_count:
+    elif high_count == 1:
         status = "watch"
+    elif medium_count >= 2:
+        status = "watch"
+    elif medium_count == 1:
+        status = "low_risk"
     elif filtered_items:
         status = "low_risk"
     else:
