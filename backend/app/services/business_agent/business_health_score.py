@@ -539,6 +539,16 @@ def apply_backend_health_score(
     result["data_completeness_score"] = completeness_score
     result["confidence_score"] = completeness_score
     result["confidence_level"] = confidence_level
+    result["data_completeness"] = {
+        "score": completeness_score,
+        "level": confidence_level,
+        "available": True,
+    }
+    result["confidence"] = {
+        "score": completeness_score,
+        "level": confidence_level,
+        "available": True,
+    }
 
     data_quality = detected_kpis.get("data_quality", {}) or {}
     if isinstance(data_quality, dict):
@@ -611,6 +621,11 @@ def apply_backend_health_score(
             result.get("business_model", "general"),
         ),
     )
+
+    health["available"] = True
+    health.setdefault("data_completeness_score", result.get("data_completeness_score"))
+    health.setdefault("confidence_score", result.get("confidence_score"))
+    health.setdefault("confidence_level", result.get("confidence_level"))
 
     result["business_health_score"] = health["score"]
     result["business_health"] = health
