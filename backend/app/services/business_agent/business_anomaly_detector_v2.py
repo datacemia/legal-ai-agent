@@ -404,7 +404,11 @@ def _detect_expense_items(
                 value=gap,
                 period=period,
                 what_happened=f"Expense growth exceeded revenue growth by {gap} percentage points.",
-                why_it_matters="This can compress margins even if revenue continues to grow.",
+                why_it_matters={
+                    "en": "This can compress margins even if revenue continues to grow.",
+                    "fr": "Cela peut réduire les marges même si les revenus continuent de progresser.",
+                    "ar": "قد يؤدي ذلك إلى ضغط الهوامش حتى إذا استمرت الإيرادات في النمو.",
+                }.get(language, "This can compress margins even if revenue continues to grow."),
                 possible_causes=[
                     "Scaling costs too quickly",
                     "Inefficient acquisition spend",
@@ -412,8 +416,16 @@ def _detect_expense_items(
                     "Vendor cost creep",
                 ],
                 recommended_actions=[
-                    "Compare each major cost category against revenue contribution.",
-                    "Review whether the spending increase produces measurable return.",
+                    {
+                    "en": "Compare each major cost category against revenue contribution.",
+                    "fr": "Comparez chaque grande catégorie de coûts à sa contribution aux revenus.",
+                    "ar": "قارن كل فئة تكلفة رئيسية بمساهمتها في الإيرادات.",
+                }.get(language, "Compare each major cost category against revenue contribution."),
+                    {
+                    "en": "Review whether the spending increase produces measurable return.",
+                    "fr": "Vérifiez si l’augmentation des dépenses génère un retour mesurable.",
+                    "ar": "راجع ما إذا كانت زيادة الإنفاق تحقق عائداً قابلاً للقياس.",
+                }.get(language, "Review whether the spending increase produces measurable return."),
                 ],
                 business_impact=[
                     "margin_pressure",
@@ -502,7 +514,11 @@ def _detect_profit_items(
                     value=change,
                     period=period,
                     what_happened=f"Profit changed by {change}% compared with the previous period.",
-                    why_it_matters="Profit deterioration can happen even while revenue is stable or growing.",
+                    why_it_matters={
+                    "en": "Profit deterioration can happen even while revenue is stable or growing.",
+                    "fr": "La dégradation du profit peut se produire même lorsque les revenus sont stables ou en croissance.",
+                    "ar": "قد يتراجع الربح حتى عندما تكون الإيرادات مستقرة أو في نمو.",
+                }.get(language, "Profit deterioration can happen even while revenue is stable or growing."),
                     possible_causes=[
                         "Expense growth",
                         "Revenue mix change",
@@ -515,7 +531,11 @@ def _detect_profit_items(
                             "fr": "Comparez la croissance des revenus et celle des dépenses côte à côte.",
                             "ar": "قارن نمو الإيرادات ونمو المصاريف جنباً إلى جنب.",
                         }.get(language, "Compare revenue growth and expense growth side by side."),
-                        "Identify the cost categories that changed most.",
+                        {
+                            "en": "Identify the cost categories that changed most.",
+                            "fr": "Identifiez les catégories de coûts qui ont le plus changé.",
+                            "ar": "حدد فئات التكاليف التي تغيرت أكثر.",
+                        }.get(language, "Identify the cost categories that changed most."),
                     ],
                     business_impact=[
                         "profitability_risk",
