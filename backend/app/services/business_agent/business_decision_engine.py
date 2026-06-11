@@ -745,6 +745,32 @@ def _build_opportunities(
             }
         )
 
+    profit = _to_float(core_kpis.get("profit"))
+    cashflow_status = str(core_kpis.get("cashflow_status") or "").lower()
+    cashflow_available = _flag_enabled(core_kpis, "cashflow_available", False)
+
+    if profit_available and margin_available and profit > 0 and margin >= 40:
+        opportunities.append(
+            {
+                "opportunity": "Protect strong profitability",
+                "impact": "medium",
+                "why_it_matters": "The business is profitable with a strong margin, even if growth is currently limited.",
+                "recommended_action": "Protect current margins while monitoring revenue and expense trends.",
+                "source": "business_decision_engine",
+            }
+        )
+
+    if profit_available and cashflow_available and profit > 0 and cashflow_status == "positive":
+        opportunities.append(
+            {
+                "opportunity": "Preserve positive cashflow discipline",
+                "impact": "medium",
+                "why_it_matters": "Positive cashflow gives the business more flexibility for planning and execution.",
+                "recommended_action": "Maintain cashflow discipline and preserve liquidity flexibility.",
+                "source": "business_decision_engine",
+            }
+        )
+
     insights = anomalies_v2.get("insights") or []
 
     for insight in insights[:2]:

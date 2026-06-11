@@ -644,6 +644,36 @@ TERM_TRANSLATIONS: dict[str, dict[str, str]] = {
 
 
 PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
+    "Protect strong profitability": {
+        "en": "Protect strong profitability",
+        "fr": "Protéger une forte rentabilité",
+        "ar": "حماية الربحية القوية",
+    },
+    "The business is profitable with a strong margin, even if growth is currently limited.": {
+        "en": "The business is profitable with a strong margin, even if growth is currently limited.",
+        "fr": "L’activité est rentable avec une marge solide, même si la croissance est actuellement limitée.",
+        "ar": "النشاط مربح بهامش قوي، حتى إذا كان النمو محدوداً حالياً.",
+    },
+    "Protect current margins while monitoring revenue and expense trends.": {
+        "en": "Protect current margins while monitoring revenue and expense trends.",
+        "fr": "Protéger les marges actuelles tout en surveillant l’évolution des revenus et des dépenses.",
+        "ar": "حافظ على الهوامش الحالية مع مراقبة اتجاهات الإيرادات والمصاريف.",
+    },
+    "Preserve positive cashflow discipline": {
+        "en": "Preserve positive cashflow discipline",
+        "fr": "Préserver la discipline du flux de trésorerie positif",
+        "ar": "الحفاظ على انضباط التدفق النقدي الإيجابي",
+    },
+    "Positive cashflow gives the business more flexibility for planning and execution.": {
+        "en": "Positive cashflow gives the business more flexibility for planning and execution.",
+        "fr": "Un flux de trésorerie positif donne à l’entreprise plus de flexibilité pour la planification et l’exécution.",
+        "ar": "يوفر التدفق النقدي الإيجابي مرونة أكبر للتخطيط والتنفيذ.",
+    },
+    "Maintain cashflow discipline and preserve liquidity flexibility.": {
+        "en": "Maintain cashflow discipline and preserve liquidity flexibility.",
+        "fr": "Maintenir la discipline du flux de trésorerie et préserver la flexibilité de liquidité.",
+        "ar": "حافظ على انضباط التدفق النقدي ومرونة السيولة.",
+    },
     "Review pricing, direct costs, and operating expenses to protect margin.": {
         "en": "Review pricing, direct costs, and operating expenses to protect margin.",
         "fr": "Revoir les prix, les coûts directs et les dépenses d’exploitation afin de protéger la marge.",
