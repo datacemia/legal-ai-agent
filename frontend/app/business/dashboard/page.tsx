@@ -283,7 +283,7 @@ const normalizeBackendText = (
 
       "Profit Margin": "Marge bénéficiaire",
       "Growth": "Croissance",
-      "Cashflow": "Flux de trésorerie",
+      "Cashflow": "Cashflow",
       "Churn": "Attrition client",
       "Roas": "ROAS",
       "Cac Efficiency": "Efficacité CAC",
@@ -552,7 +552,7 @@ const labels: Record<Locale, Record<string, string>> = {
 
     margin: "Marge bénéficiaire",
     growth: "Croissance",
-    cashflow: "Flux de trésorerie",
+    cashflow: "Cashflow",
 
     forecast: "Prévisions",
 

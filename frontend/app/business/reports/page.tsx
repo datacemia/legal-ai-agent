@@ -213,7 +213,7 @@ const normalizeBackendText = (
 
     "Profit Margin": "Marge bénéficiaire",
     "Growth": "Croissance",
-    "Cashflow": "Flux de trésorerie",
+    "Cashflow": "Cashflow",
     "Churn": "Attrition client",
 
     "Roas": "ROAS",

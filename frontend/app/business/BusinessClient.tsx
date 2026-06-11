@@ -305,7 +305,7 @@ const normalizeBackendText = (
 
     "Profit Margin": "Marge bénéficiaire",
     "Growth": "Croissance",
-    "Cashflow": "Flux de trésorerie",
+    "Cashflow": "Cashflow",
     "Churn": "Attrition client",
 
     "Roas": "ROAS",
@@ -1966,7 +1966,7 @@ export default function BusinessClient() {
       profit: "Profit",
       margin: "Margin",
       growth: "Growth",
-      cashflow: "Flux de trésorerie",
+      cashflow: "Cashflow",
       currency: "Currency",
       multiCurrencyWarning: "Multiple currencies detected",
       confidence: "Confidence",
@@ -2065,7 +2065,7 @@ export default function BusinessClient() {
       profit: "Profit",
       margin: "Marge",
       growth: "Croissance",
-      cashflow: "Flux de trésorerie",
+      cashflow: "Cashflow",
       currency: "Devise",
       multiCurrencyWarning: "Plusieurs devises détectées",
       confidence: "Confiance",
