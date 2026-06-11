@@ -1542,7 +1542,15 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
     cashflow = translate_term(kpis.get("cashflow_status", "unknown"), lang)
     score = payload.get("business_health_score", health.get("score"))
     rating = translate_term(health.get("rating", "unknown"), lang)
-    anomaly_status = translate_term(anomalies.get("status", "normal"), lang)
+    anomaly_status_raw = anomalies.get("status", "normal")
+
+    business_health = result.get("business_health") or {}
+    if isinstance(business_health, dict):
+        health_risk_status = str(business_health.get("risk_status") or "").strip()
+        if health_risk_status:
+            anomaly_status_raw = health_risk_status
+
+    anomaly_status = translate_term(anomaly_status_raw, lang)
     churn = advanced.get("churn_rate_percent")
 
     has_performance_data = _has_business_performance(payload)
