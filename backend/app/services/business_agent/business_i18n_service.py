@@ -660,6 +660,11 @@ CHART_TITLE_TRANSLATIONS: dict[str, dict[str, str]] = {
         "fr": "Dépenses par catégorie",
         "ar": "المصاريف حسب الفئة",
     },
+    "Revenue by Category": {
+        "en": "Revenue by Category",
+        "fr": "Revenus par catégorie",
+        "ar": "الإيرادات حسب الفئة",
+    },
 }
 
 

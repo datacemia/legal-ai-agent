@@ -804,6 +804,7 @@ def _chart_title(title: str, language: str) -> str:
         "Profit Evolution": {"fr": "Évolution du profit", "ar": "تطور الأرباح"},
         "Cashflow Trend": {"fr": "Évolution du cashflow", "ar": "تطور التدفق النقدي"},
         "Expenses by Category": {"fr": "Dépenses par catégorie", "ar": "المصاريف حسب الفئة"},
+        "Revenue by Category": {"fr": "Revenus par catégorie", "ar": "الإيرادات حسب الفئة"},
     }
 
     return mapping.get(title, {}).get(language, title)
