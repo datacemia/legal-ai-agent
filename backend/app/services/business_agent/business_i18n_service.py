@@ -1484,7 +1484,22 @@ def translate_business_analysis_payload(
     lang = normalize_language(language)
     result = deepcopy(payload or {})
 
+    original_decision_based_on = (
+        payload.get("smart_insights", {})
+        .get("most_important_decision", {})
+        .get("based_on")
+        if isinstance(payload, dict)
+        else None
+    )
+
     result = translate_payload(result, lang)
+
+    if (
+        isinstance(original_decision_based_on, dict)
+        and isinstance(result.get("smart_insights"), dict)
+        and isinstance(result["smart_insights"].get("most_important_decision"), dict)
+    ):
+        result["smart_insights"]["most_important_decision"]["based_on"] = original_decision_based_on
 
     # Rebuild deterministic public-facing summary and key insights
     # from verified KPI truth to avoid mixed-language fragments.
@@ -1544,7 +1559,7 @@ def translate_business_analysis_payload(
                             f"Analysis detected a profit decrease of {value_display}."
                         )
 
-                elif metric_key in {"cashflow_status", "statut du flux de trésorerie", "flux de trésorerie"}:
+                elif metric_key == "cashflow_status":
                     if lang == "fr":
                         decision["why"] = (
                             f"{translate_phrase(decision.get('why', ''), lang)} "
