@@ -2207,16 +2207,47 @@ def translate_business_analysis_payload(
                             f"Analysis detected negative cashflow."
                         )
 
-                else:
+                elif metric_key == "revenue_change_percent" and isinstance(value, (int, float)):
+                    value_display = _display_percent(abs(value), lang)
+
                     if lang == "fr":
                         decision["why"] = (
                             f"{translate_phrase(decision.get('why', ''), lang)} "
-                            f"L’analyse a détecté {metric_label} = {value}."
+                            + (
+                                f"L’analyse a détecté une baisse des revenus de {value_display}."
+                                if value < 0
+                                else f"L’analyse a détecté une hausse des revenus de {value_display}."
+                            )
                         )
                     elif lang == "ar":
                         decision["why"] = (
                             f"{translate_phrase(decision.get('why', ''), lang)} "
-                            f"كشف التحليل {metric_label} = {value}."
+                            + (
+                                f"كشف التحليل انخفاضاً في الإيرادات بنسبة {value_display}."
+                                if value < 0
+                                else f"كشف التحليل ارتفاعاً في الإيرادات بنسبة {value_display}."
+                            )
+                        )
+                    else:
+                        decision["why"] = (
+                            f"{translate_phrase(decision.get('why', ''), lang)} "
+                            + (
+                                f"Analysis detected a revenue decline of {value_display}."
+                                if value < 0
+                                else f"Analysis detected a revenue increase of {value_display}."
+                            )
+                        )
+
+                else:
+                    if lang == "fr":
+                        decision["why"] = (
+                            f"{translate_phrase(decision.get('why', ''), lang)} "
+                            f"L’analyse a détecté {translate_term(metric_label, lang)} = {value}."
+                        )
+                    elif lang == "ar":
+                        decision["why"] = (
+                            f"{translate_phrase(decision.get('why', ''), lang)} "
+                            f"كشف التحليل {translate_term(metric_label, lang)} = {value}."
                         )
                     else:
                         decision["why"] = (
