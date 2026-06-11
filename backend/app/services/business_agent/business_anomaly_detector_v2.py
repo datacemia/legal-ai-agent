@@ -555,6 +555,7 @@ def _detect_profit_items(
 def _detect_customer_items(
     advanced_kpis: dict[str, Any],
     data_quality_score: float,
+    language: str = "en",
 ) -> list[dict[str, Any]]:
     items: list[dict[str, Any]] = []
 
@@ -1031,7 +1032,7 @@ def detect_business_anomalies_v2(
 
         items.extend(_detect_profit_items(monthly_series, core_kpis, data_quality_score, language))
 
-    items.extend(_detect_customer_items(advanced_kpis, data_quality_score))
+    items.extend(_detect_customer_items(advanced_kpis, data_quality_score, language))
     items.extend(_detect_marketing_items(advanced_kpis, data_quality_score, periods_count))
     items.extend(_detect_cashflow_items(core_kpis, forecast, data_quality_score, periods_count))
 
