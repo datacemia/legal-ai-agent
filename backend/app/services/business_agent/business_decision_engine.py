@@ -784,6 +784,7 @@ def _build_recommendations(
 ) -> list[dict[str, Any]]:
     recommendations = []
     seen_actions = set()
+    seen_business_keys = set()
 
     profit_available = _flag_enabled(core_kpis, "profit_available", False)
     margin_available = _flag_enabled(
@@ -819,7 +820,17 @@ def _build_recommendations(
             if not normalized or normalized in seen_actions:
                 continue
 
+            business_key = (
+                str(item.get("category") or "").lower(),
+                str(item.get("metric") or "").lower(),
+            )
+
+            if business_key in seen_business_keys:
+                continue
+
             seen_actions.add(normalized)
+            if any(business_key):
+                seen_business_keys.add(business_key)
 
             recommendations.append(
                 {
@@ -834,7 +845,12 @@ def _build_recommendations(
 
     margin = _to_float(core_kpis.get("profit_margin_percent"))
 
-    if churn_available and churn >= 12:
+    if (
+        churn_available
+        and churn >= 12
+        and ("customers", "churn_rate_percent") not in seen_business_keys
+    ):
+        seen_business_keys.add(("customers", "churn_rate_percent"))
         recommendations.append(
             {
                 "recommendation": "Prioritize churn reduction before increasing acquisition spend.",
@@ -846,7 +862,13 @@ def _build_recommendations(
             }
         )
 
-    if profit_available and margin_available and margin < 15:
+    if (
+        profit_available
+        and margin_available
+        and margin < 15
+        and ("profitability", "profit_margin_percent") not in seen_business_keys
+    ):
+        seen_business_keys.add(("profitability", "profit_margin_percent"))
         recommendations.append(
             {
                 "recommendation": "Review pricing, direct costs, and operating expenses to protect margin.",
@@ -858,7 +880,12 @@ def _build_recommendations(
             }
         )
 
-    if not (profit_available and margin_available) and revenue > 0:
+    if (
+        not (profit_available and margin_available)
+        and revenue > 0
+        and ("data_quality", "profit_margin_percent") not in seen_business_keys
+    ):
+        seen_business_keys.add(("data_quality", "profit_margin_percent"))
         recommendations.append(
             {
                 "recommendation": "Add expense, cost, or profit columns to verify profitability before making margin decisions.",
