@@ -1543,6 +1543,24 @@ def translate_business_analysis_payload(
                             f"{translate_phrase(decision.get('why', ''), lang)} "
                             f"Analysis detected a profit decrease of {value_display}."
                         )
+
+                elif metric_key == "cashflow_status":
+                    if lang == "fr":
+                        decision["why"] = (
+                            f"{translate_phrase(decision.get('why', ''), lang)} "
+                            f"L’analyse a détecté un flux de trésorerie négatif."
+                        )
+                    elif lang == "ar":
+                        decision["why"] = (
+                            f"{translate_phrase(decision.get('why', ''), lang)} "
+                            f"كشف التحليل تدفقاً نقدياً سلبياً."
+                        )
+                    else:
+                        decision["why"] = (
+                            f"{translate_phrase(decision.get('why', ''), lang)} "
+                            f"Analysis detected negative cashflow."
+                        )
+
                 else:
                     if lang == "fr":
                         decision["why"] = (
