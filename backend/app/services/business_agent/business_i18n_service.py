@@ -398,6 +398,11 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
         "fr": "Revoir les encaissements et les délais de paiement.",
         "ar": "مراجعة التحصيل وتوقيتات الدفع.",
     },
+    "Identify costs that can be reduced without harming revenue.": {
+        "en": "Identify costs that can be reduced without harming revenue.",
+        "fr": "Identifier les coûts pouvant être réduits sans nuire aux revenus.",
+        "ar": "تحديد التكاليف التي يمكن خفضها دون الإضرار بالإيرادات.",
+    },
     "Review pricing, direct costs, and operating expenses.": {
         "en": "Review pricing, direct costs, and operating expenses.",
         "fr": "Revoir les prix, les coûts directs et les dépenses d’exploitation.",
@@ -439,7 +444,7 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
     "Analyze churn reasons and cancellation timing.": {
         "en": "Analyze churn reasons and cancellation timing.",
-        "fr": "Analyser les raisons du churn et le moment des annulations.",
+        "fr": "Analyser les causes de l’attrition client et le moment des annulations.",
         "ar": "تحليل أسباب فقدان العملاء وتوقيت الإلغاءات.",
     },
     "Improve onboarding and customer success follow-up.": {
@@ -614,7 +619,7 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
     "Reducing churn can improve recurring revenue quality, LTV, and growth efficiency.": {
         "en": "Reducing churn can improve recurring revenue quality, LTV, and growth efficiency.",
-        "fr": "Réduire le churn peut améliorer la qualité des revenus récurrents, la LTV et l’efficacité de croissance.",
+        "fr": "Réduire le taux d’attrition client peut améliorer la qualité des revenus récurrents, la LTV et l’efficacité de croissance.",
         "ar": "تقليل فقدان العملاء يمكن أن يحسن جودة الإيرادات المتكررة وقيمة العميل وكفاءة النمو.",
     },
     "ROAS and CAC efficiency are healthy, which suggests acquisition can be scaled with monitoring.": {
