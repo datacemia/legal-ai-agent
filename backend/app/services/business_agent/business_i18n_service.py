@@ -990,7 +990,7 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
 
     if lang == "fr":
         return (
-            f"Cette analyse {model} montre des revenus de {revenue_display}, "
+            f"Cette analyse montre des revenus de {revenue_display}, "
             f"{profitability_sentence}"
             f"La croissance des revenus est {growth_display} et le flux de trésorerie est {cashflow}. "
             f"{health_sentence}"
@@ -1000,7 +1000,7 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
 
     if lang == "ar":
         return (
-            f"يوضح تحليل {model} إيرادات قدرها {revenue_display}، "
+            f"يوضح هذا التحليل إيرادات قدرها {revenue_display}، "
             f"{profitability_sentence}"
             f"نمو الإيرادات هو {growth_display} والتدفق النقدي هو {cashflow}. "
             f"{health_sentence}"
@@ -1009,7 +1009,7 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
         )
 
     return (
-        f"This {model} analysis shows revenue of {revenue_display}, "
+        f"This analysis shows revenue of {revenue_display}, "
         f"{profitability_sentence}"
         f"Revenue growth is {growth_display} and cashflow is {cashflow}. "
         f"{health_sentence}"
