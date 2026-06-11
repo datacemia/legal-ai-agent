@@ -1415,8 +1415,12 @@ def translate_phrase(text: Any, language: str = "en") -> Any:
     # "Add expense, cost, or Bénéfice net columns..."
     if translated == stripped:
         for source, translations in TERM_TRANSLATIONS.items():
+            # Avoid replacing internal keys like high_risk partially into مرتفع_risk.
+            if "_" in translated:
+                break
+
             # Avoid replacing tiny/generic words inside larger words too aggressively.
-            if len(source) >= 4:
+            if len(source) >= 4 and "_" not in source:
                 translated = translated.replace(source, translations.get(lang, source))
 
     return translated
