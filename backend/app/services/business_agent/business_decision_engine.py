@@ -502,13 +502,29 @@ def _build_decision_from_top_risk(top_item: dict[str, Any], language: str = "en"
     )
 
     if category == "customers":
-        decision_title = "Prioritize retention before scaling acquisition"
+        decision_title = {
+            "en": "Prioritize retention before scaling acquisition",
+            "fr": "Prioriser la rétention avant d’augmenter l’acquisition",
+            "ar": "أعطِ الأولوية للاحتفاظ بالعملاء قبل توسيع الاكتساب",
+        }.get(language, "Prioritize retention before scaling acquisition")
     elif category == "marketing":
-        decision_title = "Improve acquisition efficiency before increasing spend"
+        decision_title = {
+            "en": "Improve acquisition efficiency before increasing spend",
+            "fr": "Améliorer l’efficacité d’acquisition avant d’augmenter les dépenses",
+            "ar": "حسّن كفاءة الاكتساب قبل زيادة الإنفاق",
+        }.get(language, "Improve acquisition efficiency before increasing spend")
     elif category == "cashflow":
-        decision_title = "Protect cashflow and reduce near-term financial risk"
+        decision_title = {
+            "en": "Protect cashflow and reduce near-term financial risk",
+            "fr": "Protéger le flux de trésorerie et réduire le risque financier à court terme",
+            "ar": "حماية التدفق النقدي وتقليل المخاطر المالية قصيرة الأجل",
+        }.get(language, "Protect cashflow and reduce near-term financial risk")
     elif category == "expenses":
-        decision_title = "Control expense growth before scaling further"
+        decision_title = {
+            "en": "Control expense growth before scaling further",
+            "fr": "Maîtriser la croissance des dépenses avant de poursuivre l’expansion",
+            "ar": "اضبط نمو المصروفات قبل التوسع أكثر",
+        }.get(language, "Control expense growth before scaling further")
     elif category == "profitability":
         decision_title = {
             "en": "Improve profitability before expanding costs",

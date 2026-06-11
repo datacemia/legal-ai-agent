@@ -296,6 +296,16 @@ TERM_TRANSLATIONS: dict[str, dict[str, str]] = {
         "fr": "Pression sur le flux de trésorerie",
         "ar": "ضغط على التدفق النقدي",
     },
+    "liquidity_risk": {
+        "en": "Liquidity risk",
+        "fr": "Risque de liquidité",
+        "ar": "مخاطر السيولة",
+    },
+    "revenue_risk": {
+        "en": "Revenue risk",
+        "fr": "Risque sur les revenus",
+        "ar": "مخاطر الإيرادات",
+    },
     "forecast_risk": {
         "en": "Forecast risk",
         "fr": "Risque de prévision",
@@ -362,6 +372,58 @@ TERM_TRANSLATIONS: dict[str, dict[str, str]] = {
 
 
 PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
+
+    "Cashflow is negative.": {
+        "en": "Cashflow is negative.",
+        "fr": "Le flux de trésorerie est négatif.",
+        "ar": "التدفق النقدي سلبي.",
+    },
+    "Negative cashflow can create short-term liquidity pressure.": {
+        "en": "Negative cashflow can create short-term liquidity pressure.",
+        "fr": "Un flux de trésorerie négatif peut créer une pression de liquidité à court terme.",
+        "ar": "يمكن أن يؤدي التدفق النقدي السلبي إلى ضغط سيولة قصير الأجل.",
+    },
+    "The business generated negative cashflow.": {
+        "en": "The business generated negative cashflow.",
+        "fr": "L’entreprise a généré un flux de trésorerie négatif.",
+        "ar": "حققت الشركة تدفقاً نقدياً سلبياً.",
+    },
+    "Reduce non-essential expenses.": {
+        "en": "Reduce non-essential expenses.",
+        "fr": "Réduire les dépenses non essentielles.",
+        "ar": "تقليل المصروفات غير الأساسية.",
+    },
+    "Review collections and payment timing.": {
+        "en": "Review collections and payment timing.",
+        "fr": "Revoir les encaissements et les délais de paiement.",
+        "ar": "مراجعة التحصيل وتوقيتات الدفع.",
+    },
+    "Review pricing, direct costs, and operating expenses.": {
+        "en": "Review pricing, direct costs, and operating expenses.",
+        "fr": "Revoir les prix, les coûts directs et les dépenses d’exploitation.",
+        "ar": "مراجعة التسعير والتكاليف المباشرة والمصاريف التشغيلية.",
+    },
+    "Customer base declined.": {
+        "en": "Customer base declined.",
+        "fr": "La base clients a diminué.",
+        "ar": "انخفضت قاعدة العملاء.",
+    },
+    "Customer base decline can weaken recurring revenue and future growth.": {
+        "en": "Customer base decline can weaken recurring revenue and future growth.",
+        "fr": "La baisse de la base clients peut affaiblir les revenus récurrents et la croissance future.",
+        "ar": "يمكن أن يؤدي انخفاض قاعدة العملاء إلى إضعاف الإيرادات المتكررة والنمو المستقبلي.",
+    },
+    "A thin margin leaves less room for growth investment and unexpected costs.": {
+        "en": "A thin margin leaves less room for growth investment and unexpected costs.",
+        "fr": "Une marge faible laisse moins de marge de manœuvre pour investir dans la croissance et absorber les coûts imprévus.",
+        "ar": "الهامش الضعيف يترك مساحة أقل للاستثمار في النمو وتحمل التكاليف غير المتوقعة.",
+    },
+    "Profit margin is below a healthy range.": {
+        "en": "Profit margin is below a healthy range.",
+        "fr": "La marge bénéficiaire est inférieure à un niveau sain.",
+        "ar": "هامش الربح أقل من المستوى الصحي.",
+    },
+
     "Insufficient verified business performance data was provided. Executive KPI, risk, forecast, and priority decision analysis is unavailable.": {
         "en": "Insufficient verified business performance data was provided. Executive KPI, risk, forecast, and priority decision analysis is unavailable.",
         "fr": "Les données de performance de l'entreprise vérifiées sont insuffisantes. L’analyse des KPI, des risques, des prévisions et des décisions prioritaires n’est pas disponible.",
@@ -382,7 +444,7 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
     "Improve onboarding and customer success follow-up.": {
         "en": "Improve onboarding and customer success follow-up.",
-        "fr": "Améliorer l’onboarding et le suivi customer success.",
+        "fr": "Améliorer l’intégration et le suivi de la réussite client.",
         "ar": "تحسين تهيئة العملاء ومتابعة نجاح العملاء.",
     },
     "Prioritize churn reduction before increasing acquisition spend.": {
@@ -582,7 +644,7 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
     "Launch retention analysis, improve onboarding, and segment churn by acquisition channel.": {
         "en": "Launch retention analysis, improve onboarding, and segment churn by acquisition channel.",
-        "fr": "Lancer une analyse de rétention, améliorer l’onboarding et segmenter le churn par canal d’acquisition.",
+        "fr": "Lancer une analyse de rétention, améliorer l’intégration et segmenter l’attrition par canal d’acquisition.",
         "ar": "إطلاق تحليل للاحتفاظ، وتحسين تهيئة العملاء، وتقسيم فقدان العملاء حسب قناة الاكتساب.",
     },
     "Increase spend only on channels with proven ROAS and monitor churn quality.": {
@@ -961,7 +1023,7 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
 
         if lang == "fr":
             churn_sentence = (
-                f"Le churn client est estimé à {churn_display}, ce qui doit être surveillé."
+                f"Le taux d’attrition client est estimé à {churn_display}, ce qui doit être surveillé."
             )
         elif lang == "ar":
             churn_sentence = (
