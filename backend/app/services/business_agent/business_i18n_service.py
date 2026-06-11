@@ -372,6 +372,306 @@ TERM_TRANSLATIONS: dict[str, dict[str, str]] = {
 
 
 PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
+    "Validate whether the drop is one-time or recurring.": {
+        "en": "Validate whether the drop is one-time or recurring.",
+        "fr": "Vérifier si la baisse est ponctuelle ou récurrente.",
+        "ar": "التحقق مما إذا كان الانخفاض مؤقتاً أم متكرراً.",
+    },
+
+    "Separate recurring expenses from one-time expenses.": {
+        "en": "Separate recurring expenses from one-time expenses.",
+        "fr": "Séparer les dépenses récurrentes des dépenses ponctuelles.",
+        "ar": "فصل المصروفات المتكررة عن المصروفات لمرة واحدة.",
+    },
+
+    "Segment churn by acquisition channel or plan.": {
+        "en": "Segment churn by acquisition channel or plan.",
+        "fr": "Segmenter l’attrition par canal d’acquisition ou par offre.",
+        "ar": "تقسيم فقدان العملاء حسب قناة الاكتساب أو الخطة.",
+    },
+
+    "Review whether the spending increase produces measurable return.": {
+        "en": "Review whether the spending increase produces measurable return.",
+        "fr": "Vérifier si l’augmentation des dépenses génère un retour mesurable.",
+        "ar": "راجع ما إذا كانت زيادة الإنفاق تحقق عائداً قابلاً للقياس.",
+    },
+
+    "Review the biggest expense categories.": {
+        "en": "Review the biggest expense categories.",
+        "fr": "Examiner les principales catégories de dépenses.",
+        "ar": "مراجعة أكبر فئات المصروفات.",
+    },
+
+    "Review revenue by channel, product, and customer segment.": {
+        "en": "Review revenue by channel, product, and customer segment.",
+        "fr": "Analyser les revenus par canal, produit et segment client.",
+        "ar": "مراجعة الإيرادات حسب القناة والمنتج وشريحة العملاء.",
+    },
+
+    "Review campaign-level ROAS.": {
+        "en": "Review campaign-level ROAS.",
+        "fr": "Examiner le ROAS au niveau des campagnes.",
+        "ar": "مراجعة ROAS على مستوى الحملات.",
+    },
+
+    "Review acquisition and conversion for the latest period.": {
+        "en": "Review acquisition and conversion for the latest period.",
+        "fr": "Analyser l’acquisition et la conversion sur la dernière période.",
+        "ar": "مراجعة الاكتساب والتحويل خلال أحدث فترة.",
+    },
+
+    "Reduce spend on low-quality acquisition channels.": {
+        "en": "Reduce spend on low-quality acquisition channels.",
+        "fr": "Réduire les dépenses sur les canaux d’acquisition de faible qualité.",
+        "ar": "تقليل الإنفاق على قنوات الاكتساب منخفضة الجودة.",
+    },
+
+    "Prioritize retention before increasing acquisition spend.": {
+        "en": "Prioritize retention before increasing acquisition spend.",
+        "fr": "Prioriser la rétention avant d’augmenter les dépenses d’acquisition.",
+        "ar": "إعطاء الأولوية للاحتفاظ بالعملاء قبل زيادة الإنفاق على الاكتساب.",
+    },
+
+    "Prepare a short-term cash preservation plan.": {
+        "en": "Prepare a short-term cash preservation plan.",
+        "fr": "Préparer un plan de préservation de trésorerie à court terme.",
+        "ar": "إعداد خطة قصيرة الأجل للحفاظ على النقد.",
+    },
+
+    "Pause non-essential spending until the driver is understood.": {
+        "en": "Pause non-essential spending until the driver is understood.",
+        "fr": "Suspendre les dépenses non essentielles jusqu’à ce que la cause soit comprise.",
+        "ar": "إيقاف الإنفاق غير الأساسي حتى يتم فهم السبب.",
+    },
+
+    "Pause low-return campaigns.": {
+        "en": "Pause low-return campaigns.",
+        "fr": "Suspendre les campagnes à faible rendement.",
+        "ar": "إيقاف الحملات منخفضة العائد.",
+    },
+
+    "Monitor weekly revenue and expense movement.": {
+        "en": "Monitor weekly revenue and expense movement.",
+        "fr": "Suivre chaque semaine l’évolution des revenus et des dépenses.",
+        "ar": "مراقبة حركة الإيرادات والمصروفات أسبوعياً.",
+    },
+
+    "Inspect channel-level revenue movement.": {
+        "en": "Inspect channel-level revenue movement.",
+        "fr": "Analyser l’évolution des revenus par canal.",
+        "ar": "فحص حركة الإيرادات على مستوى القنوات.",
+    },
+
+    "Increase revenue per customer through pricing or upsell.": {
+        "en": "Increase revenue per customer through pricing or upsell.",
+        "fr": "Augmenter le revenu par client via la tarification ou l’upsell.",
+        "ar": "زيادة الإيراد لكل عميل عبر التسعير أو البيع الإضافي.",
+    },
+
+    "Improve landing page and offer conversion.": {
+        "en": "Improve landing page and offer conversion.",
+        "fr": "Améliorer la page d’atterrissage et la conversion de l’offre.",
+        "ar": "تحسين صفحة الهبوط وتحويل العرض.",
+    },
+
+    "Improve conversion before scaling spend.": {
+        "en": "Improve conversion before scaling spend.",
+        "fr": "Améliorer la conversion avant d’augmenter les dépenses.",
+        "ar": "تحسين التحويل قبل زيادة الإنفاق.",
+    },
+
+    "Identify the cost categories that changed most.": {
+        "en": "Identify the cost categories that changed most.",
+        "fr": "Identifier les catégories de coûts qui ont le plus changé.",
+        "ar": "حدد فئات التكاليف التي تغيرت أكثر.",
+    },
+
+    "Create a cashflow contingency plan.": {
+        "en": "Create a cashflow contingency plan.",
+        "fr": "Créer un plan de contingence pour le flux de trésorerie.",
+        "ar": "إنشاء خطة طوارئ للتدفق النقدي.",
+    },
+
+    "Compare revenue growth and expense growth side by side.": {
+        "en": "Compare revenue growth and expense growth side by side.",
+        "fr": "Comparer la croissance des revenus et celle des dépenses côte à côte.",
+        "ar": "قارن نمو الإيرادات ونمو المصاريف جنباً إلى جنب.",
+    },
+
+    "Compare new customers, churned customers, and ad spend movement.": {
+        "en": "Compare new customers, churned customers, and ad spend movement.",
+        "fr": "Comparer l’évolution des nouveaux clients, des clients perdus et des dépenses publicitaires.",
+        "ar": "مقارنة حركة العملاء الجدد والعملاء المفقودين والإنفاق الإعلاني.",
+    },
+
+    "Compare latest revenue against historical baseline and pipeline.": {
+        "en": "Compare latest revenue against historical baseline and pipeline.",
+        "fr": "Comparer les derniers revenus à la référence historique et au pipeline.",
+        "ar": "مقارنة أحدث الإيرادات بالمرجع التاريخي وخط المبيعات.",
+    },
+
+    "Compare each major cost category against revenue contribution.": {
+        "en": "Compare each major cost category against revenue contribution.",
+        "fr": "Comparer chaque grande catégorie de coûts à sa contribution aux revenus.",
+        "ar": "قارن كل فئة تكلفة رئيسية بمساهمتها في الإيرادات.",
+    },
+
+    "Compare churn by campaign, plan, or customer segment.": {
+        "en": "Compare churn by campaign, plan, or customer segment.",
+        "fr": "Comparer l’attrition par campagne, offre ou segment client.",
+        "ar": "مقارنة فقدان العملاء حسب الحملة أو الخطة أو شريحة العملاء.",
+    },
+
+    "Check whether churn or acquisition slowed.": {
+        "en": "Check whether churn or acquisition slowed.",
+        "fr": "Vérifier si l’attrition a augmenté ou si l’acquisition a ralenti.",
+        "ar": "التحقق مما إذا كان فقدان العملاء قد ارتفع أو أن الاكتساب تباطأ.",
+    },
+
+    "This can compress margins even if revenue continues to grow.": {
+        "en": "This can compress margins even if revenue continues to grow.",
+        "fr": "Cela peut réduire les marges même si les revenus continuent de progresser.",
+        "ar": "قد يؤدي ذلك إلى ضغط الهوامش حتى إذا استمرت الإيرادات في النمو.",
+    },
+
+    "The latest period outperformed the recent profit baseline.": {
+        "en": "The latest period outperformed the recent profit baseline.",
+        "fr": "La dernière période a dépassé la référence récente de profit.",
+        "ar": "تفوقت الفترة الأخيرة على خط الأساس الأخير للربح.",
+    },
+
+    "Latest revenue is materially below the recent historical baseline.": {
+        "en": "Latest revenue is materially below the recent historical baseline.",
+        "fr": "Les derniers revenus sont nettement inférieurs à la référence historique récente.",
+        "ar": "أحدث الإيرادات أقل بشكل ملحوظ من المستوى التاريخي الأخير.",
+    },
+
+    "Expenses are growing faster than revenue.": {
+        "en": "Expenses are growing faster than revenue.",
+        "fr": "Les dépenses augmentent plus vite que les revenus.",
+        "ar": "المصاريف تنمو أسرع من الإيرادات.",
+    },
+
+    "Expense growth exceeded revenue growth by": {
+        "en": "Expense growth exceeded revenue growth by",
+        "fr": "La croissance des dépenses a dépassé la croissance des revenus de",
+        "ar": "تجاوز نمو المصروفات نمو الإيرادات بمقدار",
+    },
+
+    "Estimated churn is not currently in a high-risk range.": {
+        "en": "Estimated churn is not currently in a high-risk range.",
+        "fr": "Le taux d’attrition estimé n’est pas actuellement dans une zone à risque élevé.",
+        "ar": "معدل فقدان العملاء المقدر ليس حالياً ضمن نطاق عالي المخاطر.",
+    },
+
+    "Customer losses are high relative to new customers.": {
+        "en": "Customer losses are high relative to new customers.",
+        "fr": "Les pertes de clients sont élevées par rapport aux nouveaux clients.",
+        "ar": "فقدان العملاء مرتفع مقارنة بالعملاء الجدد.",
+    },
+
+    "Customer acquisition cost is high compared with revenue per customer.": {
+        "en": "Customer acquisition cost is high compared with revenue per customer.",
+        "fr": "Le coût d’acquisition client est élevé par rapport au revenu par client.",
+        "ar": "تكلفة اكتساب العميل مرتفعة مقارنة بالإيراد لكل عميل.",
+    },
+
+    "Churned customers represent a high share of newly acquired customers.": {
+        "en": "Churned customers represent a high share of newly acquired customers.",
+        "fr": "Les clients perdus représentent une part élevée des nouveaux clients acquis.",
+        "ar": "يمثل العملاء المفقودون نسبة كبيرة من العملاء الجدد المكتسبين.",
+    },
+
+    "Acquiring customers while losing many existing customers can hide weak net growth.": {
+        "en": "Acquiring customers while losing many existing customers can hide weak net growth.",
+        "fr": "Acquérir des clients tout en en perdant beaucoup peut masquer une faible croissance nette.",
+        "ar": "اكتساب عملاء مع فقدان عدد كبير من العملاء الحاليين قد يخفي ضعف النمو الصافي.",
+    },
+
+    "Forward-looking cashflow risk should be addressed before it becomes urgent.": {
+        "en": "Forward-looking cashflow risk should be addressed before it becomes urgent.",
+        "fr": "Le risque futur lié au flux de trésorerie doit être traité avant qu’il ne devienne urgent.",
+        "ar": "يجب معالجة مخاطر التدفق النقدي المستقبلية قبل أن تصبح عاجلة.",
+    },
+
+    "Forecast indicates cashflow risk.": {
+        "en": "Forecast indicates cashflow risk.",
+        "fr": "Les prévisions indiquent un risque sur le flux de trésorerie.",
+        "ar": "تشير التوقعات إلى مخاطر في التدفق النقدي.",
+    },
+
+    "If CAC approaches or exceeds revenue per customer, growth may become unprofitable.": {
+        "en": "If CAC approaches or exceeds revenue per customer, growth may become unprofitable.",
+        "fr": "Si le CAC approche ou dépasse le revenu par client, la croissance peut devenir non rentable.",
+        "ar": "إذا اقتربت تكلفة اكتساب العميل من الإيراد لكل عميل أو تجاوزته فقد يصبح النمو غير مربح.",
+    },
+
+    "Weak ROAS can reduce profitability and make growth expensive.": {
+        "en": "Weak ROAS can reduce profitability and make growth expensive.",
+        "fr": "Un ROAS faible peut réduire la rentabilité et rendre la croissance coûteuse.",
+        "ar": "قد يؤدي انخفاض ROAS إلى تقليل الربحية وجعل النمو مكلفاً.",
+    },
+
+    "CAC efficiency needs attention.": {
+        "en": "CAC efficiency needs attention.",
+        "fr": "L’efficacité du CAC nécessite une attention particulière.",
+        "ar": "كفاءة تكلفة اكتساب العميل تحتاج إلى اهتمام.",
+    },
+
+    "Marketing return appears weak.": {
+        "en": "Marketing return appears weak.",
+        "fr": "Le rendement marketing semble faible.",
+        "ar": "يبدو أن عائد التسويق ضعيف.",
+    },
+
+    "Expense spikes can reduce profit margin even when revenue is growing.": {
+        "en": "Expense spikes can reduce profit margin even when revenue is growing.",
+        "fr": "Une forte hausse des dépenses peut réduire la marge bénéficiaire même si les revenus augmentent.",
+        "ar": "قد تؤدي الزيادات الكبيرة في المصروفات إلى خفض هامش الربح حتى مع نمو الإيرادات.",
+    },
+
+    "Expenses increased materially.": {
+        "en": "Expenses increased materially.",
+        "fr": "Les dépenses ont fortement augmenté.",
+        "ar": "ارتفعت المصروفات بشكل ملحوظ.",
+    },
+
+    "Revenue below trend may indicate a structural issue.": {
+        "en": "Revenue below trend may indicate a structural issue.",
+        "fr": "Des revenus inférieurs à la tendance peuvent indiquer un problème structurel.",
+        "ar": "قد تشير الإيرادات الأقل من الاتجاه العام إلى مشكلة هيكلية.",
+    },
+
+    "A weakening growth trend can appear before a visible revenue drop.": {
+        "en": "A weakening growth trend can appear before a visible revenue drop.",
+        "fr": "Un ralentissement de la croissance peut apparaître avant une baisse visible des revenus.",
+        "ar": "قد يظهر تباطؤ النمو قبل حدوث انخفاض واضح في الإيرادات.",
+    },
+
+    "Revenue decline can affect profitability, cash planning, and forecasts.": {
+        "en": "Revenue decline can affect profitability, cash planning, and forecasts.",
+        "fr": "La baisse des revenus peut affecter la rentabilité, la trésorerie et les prévisions.",
+        "ar": "قد يؤثر انخفاض الإيرادات على الربحية والتخطيط النقدي والتوقعات.",
+    },
+
+    "Revenue is below recent trend.": {
+        "en": "Revenue is below recent trend.",
+        "fr": "Les revenus sont inférieurs à la tendance récente.",
+        "ar": "الإيرادات أقل من الاتجاه الأخير.",
+    },
+
+    "Revenue growth momentum is weakening.": {
+        "en": "Revenue growth momentum is weakening.",
+        "fr": "La dynamique de croissance des revenus s’affaiblit.",
+        "ar": "زخم نمو الإيرادات يتراجع.",
+    },
+
+    "Revenue declined materially.": {
+        "en": "Revenue declined materially.",
+        "fr": "Les revenus ont fortement diminué.",
+        "ar": "انخفضت الإيرادات بشكل ملحوظ.",
+    },
+
 
     "Cashflow is negative.": {
         "en": "Cashflow is negative.",
