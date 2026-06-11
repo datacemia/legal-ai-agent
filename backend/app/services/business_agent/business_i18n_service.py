@@ -142,6 +142,56 @@ TERM_TRANSLATIONS: dict[str, dict[str, str]] = {
         "fr": "Entreprise générale",
         "ar": "نشاط عام",
     },
+    "retail": {
+        "en": "Retail",
+        "fr": "Commerce de détail",
+        "ar": "تجارة التجزئة",
+    },
+    "wholesale": {
+        "en": "Wholesale",
+        "fr": "Commerce de gros",
+        "ar": "تجارة الجملة",
+    },
+    "manufacturing": {
+        "en": "Manufacturing",
+        "fr": "Industrie / fabrication",
+        "ar": "التصنيع",
+    },
+    "services": {
+        "en": "Services",
+        "fr": "Services",
+        "ar": "الخدمات",
+    },
+    "healthcare": {
+        "en": "Healthcare",
+        "fr": "Santé",
+        "ar": "الرعاية الصحية",
+    },
+    "education": {
+        "en": "Education",
+        "fr": "Éducation",
+        "ar": "التعليم",
+    },
+    "real_estate": {
+        "en": "Real estate",
+        "fr": "Immobilier",
+        "ar": "العقارات",
+    },
+    "logistics": {
+        "en": "Logistics",
+        "fr": "Logistique",
+        "ar": "الخدمات اللوجستية",
+    },
+    "hospitality": {
+        "en": "Hospitality",
+        "fr": "Hôtellerie / hospitalité",
+        "ar": "الضيافة",
+    },
+    "finance": {
+        "en": "Finance",
+        "fr": "Finance",
+        "ar": "المالية",
+    },
 
     # KPI labels
     "revenue": {
