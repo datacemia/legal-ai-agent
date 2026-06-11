@@ -1210,13 +1210,48 @@ def detect_business_model(
     )["business_model"]
 
 
+
+def ensure_derived_revenue(
+    rows: list[dict[str, Any]],
+    columns: list[str],
+    column_mapping: dict[str, str] | None = None,
+) -> str | None:
+    """
+    Derive revenue from price * quantity when no explicit revenue column exists.
+
+    This allows POS/e-commerce/ERP exports with columns like:
+    - unit_price + quantity
+    - prix_net + quantité_vendue
+    - السعر_الصافي + الكمية_المباعة
+    """
+    revenue_col = resolve_column("revenue", columns, column_mapping)
+
+    if revenue_col:
+        return revenue_col
+
+    price_col = resolve_column("price", columns, column_mapping)
+    quantity_col = resolve_column("quantity", columns, column_mapping)
+
+    if not price_col or not quantity_col:
+        return None
+
+    derived_col = "__derived_revenue__"
+
+    for row in rows:
+        price = to_float(row.get(price_col)) or 0.0
+        quantity = to_float(row.get(quantity_col)) or 0.0
+        row[derived_col] = round_money(price * quantity)
+
+    return derived_col
+
+
 def build_monthly_series(
     rows: list[dict[str, Any]],
     columns: list[str],
     column_mapping: dict[str, str] | None = None,
 ) -> list[dict[str, Any]]:
     date_col = resolve_column("date", columns, column_mapping)
-    revenue_col = resolve_column("revenue", columns, column_mapping)
+    revenue_col = ensure_derived_revenue(rows, columns, column_mapping)
     expenses_col = resolve_column("expenses", columns, column_mapping)
     profit_col = resolve_column("profit", columns, column_mapping)
 
@@ -1285,7 +1320,7 @@ def calculate_core_kpis(
     columns: list[str],
     column_mapping: dict[str, str] | None = None,
 ) -> dict[str, Any]:
-    revenue_col = resolve_column("revenue", columns, column_mapping)
+    revenue_col = ensure_derived_revenue(rows, columns, column_mapping)
     expenses_col = resolve_column("expenses", columns, column_mapping)
     profit_col = resolve_column("profit", columns, column_mapping)
 
@@ -1600,7 +1635,7 @@ def calculate_advanced_kpis(
     columns: list[str],
     column_mapping: dict[str, str] | None = None,
 ) -> dict[str, Any]:
-    revenue_col = resolve_column("revenue", columns, column_mapping)
+    revenue_col = ensure_derived_revenue(rows, columns, column_mapping)
     expenses_col = resolve_column("expenses", columns, column_mapping)
     orders_col = resolve_column("orders", columns, column_mapping)
     ad_spend_col = resolve_column("ad_spend", columns, column_mapping)
