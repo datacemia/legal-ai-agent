@@ -552,7 +552,7 @@ const labels: Record<Locale, Record<string, string>> = {
 
     margin: "Marge bénéficiaire",
     growth: "Croissance",
-    cashflow: "Cashflow",
+    cashflow: "Flux de trésorerie",
 
     forecast: "Prévisions",
 
