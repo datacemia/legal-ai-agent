@@ -1076,18 +1076,38 @@ def build_business_decision_layer(
         anomalies_v2=anomalies_v2,
     )
 
-    result["opportunities"] = _build_opportunities(
+    opportunities = _build_opportunities(
         core_kpis=core_kpis,
         advanced_kpis=advanced_kpis,
         health=health,
         anomalies_v2=anomalies_v2,
     )
 
-    result["recommendations"] = _build_recommendations(
+    result["opportunities"] = opportunities
+
+    recommendations = _build_recommendations(
         anomalies_v2=anomalies_v2,
         core_kpis=core_kpis,
         advanced_kpis=advanced_kpis,
     )
+
+    if not recommendations and opportunities:
+        recommendations = [
+            {
+                "recommendation": opportunity.get(
+                    "recommended_action",
+                    "Convert this positive signal into a repeatable operating process.",
+                ),
+                "priority": str(opportunity.get("impact") or "medium"),
+                "category": "opportunity",
+                "expected_impact": opportunity.get("why_it_matters", ""),
+                "metric": "positive_signal",
+                "source": "business_opportunity_engine",
+            }
+            for opportunity in opportunities[:3]
+        ]
+
+    result["recommendations"] = recommendations
 
     result["decision_engine"] = {
         "enabled": True,
