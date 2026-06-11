@@ -792,14 +792,14 @@ const getChartChange = (chart: BusinessChart) => {
     return null;
   }
 
-  const first = Number(data[0]?.[yKey]);
+  const previous = Number(data[data.length - 2]?.[yKey]);
   const last = Number(data[data.length - 1]?.[yKey]);
 
-  if (!Number.isFinite(first) || !Number.isFinite(last) || first === 0) {
+  if (!Number.isFinite(previous) || !Number.isFinite(last) || previous === 0) {
     return null;
   }
 
-  return ((last - first) / Math.abs(first)) * 100;
+  return ((last - previous) / Math.abs(previous)) * 100;
 };
 
 function MiniLineChart({

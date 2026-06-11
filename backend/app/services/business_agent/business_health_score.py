@@ -496,18 +496,18 @@ def apply_backend_health_score(
     core_kpis = detected_kpis.get("core_kpis", {}) or {}
     advanced_kpis = detected_kpis.get("advanced_kpis", {}) or {}
 
-    has_verified_performance_data = any(
-        bool(core_kpis.get(flag))
-        for flag in (
-            "revenue_available",
-            "expenses_available",
-            "profit_available",
-            "growth_available",
-            "cashflow_available",
-        )
-    ) or any(
+    revenue_available = bool(core_kpis.get("revenue_available"))
+    growth_available = bool(core_kpis.get("growth_available"))
+    expenses_available = bool(core_kpis.get("expenses_available"))
+    profit_available = bool(core_kpis.get("profit_available"))
+    margin_available = bool(core_kpis.get("profit_margin_available"))
+    cashflow_available = bool(core_kpis.get("cashflow_available"))
+
+    customer_or_marketing_available = any(
         bool(advanced_kpis.get(flag))
         for flag in (
+            "customers_available",
+            "orders_available",
             "churn_available",
             "roas_available",
             "cac_available",
@@ -517,28 +517,86 @@ def apply_backend_health_score(
         )
     )
 
-    if not has_verified_performance_data:
-        result["analysis_available"] = False
+    verified_dimensions = sum(
+        [
+            revenue_available,
+            growth_available,
+            expenses_available,
+            profit_available,
+            margin_available,
+            cashflow_available,
+            customer_or_marketing_available,
+        ]
+    )
+
+    completeness_score = int(round((verified_dimensions / 7) * 100))
+    confidence_level = (
+        "high" if completeness_score >= 75
+        else "medium" if completeness_score >= 45
+        else "low"
+    )
+
+    result["data_completeness_score"] = completeness_score
+    result["confidence_score"] = completeness_score
+    result["confidence_level"] = confidence_level
+
+    data_quality = detected_kpis.get("data_quality", {}) or {}
+    if isinstance(data_quality, dict):
+        data_quality["data_completeness_score"] = completeness_score
+        data_quality["confidence_score"] = completeness_score
+        data_quality["confidence_level"] = confidence_level
+        result["data_quality"] = data_quality
+
+    has_verified_performance_data = any(
+        [
+            revenue_available,
+            growth_available,
+            expenses_available,
+            profit_available,
+            margin_available,
+            cashflow_available,
+            customer_or_marketing_available,
+        ]
+    )
+
+    has_minimum_health_basis = (
+        revenue_available
+        and (
+            expenses_available
+            or profit_available
+            or margin_available
+            or cashflow_available
+            or customer_or_marketing_available
+        )
+    )
+
+    if not has_verified_performance_data or not has_minimum_health_basis:
         result["business_health_score"] = None
         result["business_health"] = {
             "available": False,
             "score": None,
-            "rating": "not_available",
+            "rating": "insufficient_data",
             "reason": (
-                "Business health score is unavailable because insufficient "
-                "business performance data was provided."
+                "Business health score is unavailable because revenue alone is not enough. "
+                "Add expenses, profit, margin, cashflow, customers, marketing, or retention data."
             ),
+            "data_completeness_score": completeness_score,
+            "confidence_score": completeness_score,
+            "confidence_level": confidence_level,
             "components": {},
             "weights": {},
             "strengths": [],
             "warnings": [
-                "The uploaded file does not contain verified business performance metrics."
+                "Insufficient data to assess business health reliably."
             ],
             "availability": {
-                "profit": False,
-                "roas": False,
-                "churn": False,
-                "cac": False,
+                "revenue": revenue_available,
+                "growth": growth_available,
+                "expenses": expenses_available,
+                "profit": profit_available,
+                "margin": margin_available,
+                "cashflow": cashflow_available,
+                "customer_or_marketing": customer_or_marketing_available,
             },
             "source": "business_health_scoring",
         }
