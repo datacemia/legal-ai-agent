@@ -1357,14 +1357,7 @@ def translate_term(key: Any, language: str = "en") -> Any:
         return key
 
     normalized_key = key.strip()
-
-    if normalized_key in TERM_TRANSLATIONS:
-        return TERM_TRANSLATIONS[normalized_key].get(lang, normalized_key)
-
     lowered = normalized_key.lower()
-
-    if lowered in TERM_TRANSLATIONS:
-        return TERM_TRANSLATIONS[lowered].get(lang, normalized_key)
 
     canonical_key = (
         lowered
@@ -1378,8 +1371,15 @@ def translate_term(key: Any, language: str = "en") -> Any:
 
     canonical_key = canonical_key.strip("_")
 
+    if normalized_key in TERM_TRANSLATIONS:
+        return TERM_TRANSLATIONS[normalized_key].get(lang, normalized_key)
+
+    if lowered in TERM_TRANSLATIONS:
+        return TERM_TRANSLATIONS[lowered].get(lang, normalized_key)
+
     if canonical_key in TERM_TRANSLATIONS:
         return TERM_TRANSLATIONS[canonical_key].get(lang, normalized_key)
+
 
     return key
 
