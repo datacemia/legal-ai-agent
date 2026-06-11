@@ -589,12 +589,24 @@ def _detect_customer_items(
                 kind="risk",
                 category="customers",
                 item_type="elevated_churn",
-                title="Customer churn is elevated.",
+                title={
+                    "en": "Customer churn is elevated.",
+                    "fr": "Le taux d’attrition client est élevé.",
+                    "ar": "معدل فقدان العملاء مرتفع.",
+                }.get(language, "Customer churn is elevated."),
                 severity_score=severity_score,
                 metric="churn_rate_percent",
                 value=round(churn_rate, 2),
-                what_happened=f"Estimated churn rate is {round(churn_rate, 2)}%.",
-                why_it_matters="High churn reduces growth quality and can make acquisition spend less efficient.",
+                what_happened={
+                    "en": f"Estimated churn rate is {round(churn_rate, 2)}%.",
+                    "fr": f"Le taux d’attrition client estimé est de {round(churn_rate, 2)}%.",
+                    "ar": f"معدل فقدان العملاء المقدر هو {round(churn_rate, 2)}%.",
+                }.get(language, f"Estimated churn rate is {round(churn_rate, 2)}%."),
+                why_it_matters={
+                    "en": "High customer churn reduces growth quality and can make acquisition spend less efficient.",
+                    "fr": "Un taux d’attrition client élevé réduit la qualité de la croissance et peut rendre les dépenses d’acquisition moins efficaces.",
+                    "ar": "ارتفاع معدل فقدان العملاء يقلل جودة النمو وقد يجعل الإنفاق على الاكتساب أقل كفاءة.",
+                }.get(language, "High customer churn reduces growth quality and can make acquisition spend less efficient."),
                 possible_causes=[
                     "Weak onboarding",
                     "Poor retention",

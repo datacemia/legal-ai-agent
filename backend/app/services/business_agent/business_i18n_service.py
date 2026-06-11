@@ -390,10 +390,10 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
         "fr": "Prioriser la réduction du churn avant d’augmenter les dépenses d’acquisition.",
         "ar": "إعطاء الأولوية لتقليل فقدان العملاء قبل زيادة الإنفاق على الاكتساب.",
     },
-    "High churn reduces growth quality and can make acquisition spend less efficient.": {
-        "en": "High churn reduces growth quality and can make acquisition spend less efficient.",
-        "fr": "Un churn élevé réduit la qualité de la croissance et peut rendre les dépenses d’acquisition moins efficaces.",
-        "ar": "ارتفاع فقدان العملاء يقلل جودة النمو وقد يجعل إنفاق الاكتساب أقل كفاءة.",
+    "High customer churn reduces growth quality and can make acquisition spend less efficient.": {
+        "en": "High customer churn reduces growth quality and can make acquisition spend less efficient.",
+        "fr": "Un taux d’attrition client élevé réduit la qualité de la croissance et peut rendre les dépenses d’acquisition moins efficaces.",
+        "ar": "ارتفاع معدل فقدان العملاء يقلل جودة النمو وقد يجعل الإنفاق على الاكتساب أقل كفاءة.",
     },
     "Customer churn is elevated.": {
         "en": "Customer churn is elevated.",
@@ -927,7 +927,7 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
 
     if profit_available:
         profit_display = _display_metric(profit, lang)
-        margin_display = _display_percent(margin)
+        margin_display = _display_percent(margin, lang)
 
         if lang == "fr":
             profitability_sentence = (
@@ -957,7 +957,7 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
             )
 
     if churn_available:
-        churn_display = _display_percent(churn)
+        churn_display = _display_percent(churn, lang)
 
         if lang == "fr":
             churn_sentence = (
@@ -1443,21 +1443,47 @@ def translate_business_analysis_payload(
             if metric and value is not None:
                 metric_label = translate_term(metric, lang)
 
-                if lang == "fr":
-                    decision["why"] = (
-                        f"{translate_phrase('High churn reduces growth quality and can make acquisition spend less efficient.', lang)} "
-                        f"L’analyse a détecté {metric_label} = {value}."
-                    )
-                elif lang == "ar":
-                    decision["why"] = (
-                        f"{translate_phrase('High churn reduces growth quality and can make acquisition spend less efficient.', lang)} "
-                        f"كشف التحليل {metric_label} = {value}."
-                    )
+                numeric_value = None
+
+                try:
+                    numeric_value = abs(float(value))
+                except (TypeError, ValueError):
+                    numeric_value = None
+
+                if metric == "profit_change_percent" and numeric_value is not None:
+                    value_display = _display_percent(numeric_value, lang)
+
+                    if lang == "fr":
+                        decision["why"] = (
+                            f"{translate_phrase(decision.get('why', ''), lang)} "
+                            f"L’analyse a détecté une baisse du profit de {value_display}."
+                        )
+                    elif lang == "ar":
+                        decision["why"] = (
+                            f"{translate_phrase(decision.get('why', ''), lang)} "
+                            f"كشف التحليل انخفاضاً في الربح بنسبة {value_display}."
+                        )
+                    else:
+                        decision["why"] = (
+                            f"{translate_phrase(decision.get('why', ''), lang)} "
+                            f"Analysis detected a profit decrease of {value_display}."
+                        )
                 else:
-                    decision["why"] = (
-                        f"{translate_phrase('High churn reduces growth quality and can make acquisition spend less efficient.', lang)} "
-                        f"Analysis detected {metric_label} = {value}."
-                    )
+                    if lang == "fr":
+                        decision["why"] = (
+                            f"{translate_phrase(decision.get('why', ''), lang)} "
+                            f"L’analyse a détecté {metric_label} = {value}."
+                        )
+                    elif lang == "ar":
+                        decision["why"] = (
+                            f"{translate_phrase(decision.get('why', ''), lang)} "
+                            f"كشف التحليل {metric_label} = {value}."
+                        )
+                    else:
+                        decision["why"] = (
+                            f"{translate_phrase(decision.get('why', ''), lang)} "
+                            f"Analysis detected {metric_label} = {value}."
+                        )
 
     result = translate_chart_titles(result, lang)
 
