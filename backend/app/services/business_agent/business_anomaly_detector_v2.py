@@ -977,6 +977,7 @@ def detect_business_anomalies_v2(
     detected_kpis: dict[str, Any] | None = None,
     forecast: dict[str, Any] | None = None,
     strictness: str = "professional",
+    language: str | None = None,
 ) -> dict[str, Any]:
     result = result or {}
     detected_kpis = detected_kpis or {}
@@ -987,7 +988,8 @@ def detect_business_anomalies_v2(
     monthly_series = detected_kpis.get("monthly_series") or result.get("monthly_series") or []
     data_quality = detected_kpis.get("data_quality") or result.get("data_quality") or {}
     language = (
-        result.get("output_language")
+        language
+        or result.get("output_language")
         or result.get("language")
         or detected_kpis.get("output_language")
         or detected_kpis.get("language")
