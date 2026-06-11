@@ -352,6 +352,11 @@ TERM_TRANSLATIONS: dict[str, dict[str, str]] = {
         "fr": "Critique",
         "ar": "حرج",
     },
+    "elevated_risk": {
+        "en": "Elevated Risk",
+        "fr": "Risque accru",
+        "ar": "مخاطر مرتفعة نسبياً",
+    },
     "high_risk": {
         "en": "High risk",
         "fr": "Risque élevé",
