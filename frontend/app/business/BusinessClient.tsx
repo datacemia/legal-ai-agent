@@ -1843,10 +1843,7 @@ export default function BusinessClient() {
       setResult(nextResult);
 
       saveLastBusinessAnalysis(
-        {
-          analysis_id: nextResult.analysis_id,
-          file_metadata: nextResult.file_metadata,
-        },
+        nextResult,
         file.name
       );
 
