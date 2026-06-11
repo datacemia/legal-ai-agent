@@ -224,6 +224,11 @@ TERM_TRANSLATIONS: dict[str, dict[str, str]] = {
         "fr": "Statut du flux de trésorerie",
         "ar": "حالة التدفق النقدي",
     },
+    "cashflow": {
+        "en": "Cashflow",
+        "fr": "Flux de trésorerie",
+        "ar": "التدفق النقدي",
+    },
     "churn_rate_percent": {
         "en": "Customer churn",
         "fr": "Taux d’attrition client",
