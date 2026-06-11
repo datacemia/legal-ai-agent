@@ -1111,6 +1111,14 @@ def build_business_decision_layer(
 
     result["opportunities"] = opportunities
 
+    if isinstance(anomalies_v2, dict):
+        summary = anomalies_v2.setdefault("summary", {})
+        if isinstance(summary, dict):
+            summary["insights"] = max(
+                int(summary.get("insights") or 0),
+                len(opportunities),
+            )
+
     recommendations = _build_recommendations(
         anomalies_v2=anomalies_v2,
         core_kpis=core_kpis,
