@@ -487,7 +487,7 @@ def _build_default_decision() -> dict[str, Any]:
     }
 
 
-def _build_decision_from_top_risk(top_item: dict[str, Any]) -> dict[str, Any]:
+def _build_decision_from_top_risk(top_item: dict[str, Any], language: str = "en") -> dict[str, Any]:
     category = top_item.get("category", "business")
     severity = top_item.get("severity", "medium")
     title = str(top_item.get("title") or "Business risk detected")
@@ -980,6 +980,13 @@ def build_business_decision_layer(
     advanced_kpis = detected_kpis.get("advanced_kpis") or result.get("advanced_kpis") or {}
     health = result.get("business_health") or {}
     anomalies_v2 = result.get("anomalies_v2") or result.get("anomalies") or {}
+    language = (
+        result.get("output_language")
+        or result.get("language")
+        or detected_kpis.get("output_language")
+        or detected_kpis.get("language")
+        or "en"
+    )
 
     if not _has_available_business_signal(
         core_kpis=core_kpis,
@@ -997,7 +1004,7 @@ def build_business_decision_layer(
     top_items = _get_top_items(items, limit=1)
 
     if top_items:
-        most_important_decision = _build_decision_from_top_risk(top_items[0])
+        most_important_decision = _build_decision_from_top_risk(top_items[0], language)
     else:
         most_important_decision = _build_default_decision()
 
