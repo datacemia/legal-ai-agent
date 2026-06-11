@@ -522,13 +522,6 @@ def _build_decision_from_top_risk(top_item: dict[str, Any], language: str = "en"
 
     why = str(top_item.get("why_it_matters") or "")
 
-    if metric:
-        why = (
-            f"{why} Analysis detected {metric} = {value}."
-            if why
-            else f"Analysis detected {metric} = {value}."
-        )
-
     return {
         "title": decision_title,
         "decision": first_action,
