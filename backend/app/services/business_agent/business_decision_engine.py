@@ -557,6 +557,18 @@ def _build_decision_from_top_risk(top_item: dict[str, Any], language: str = "en"
     }
 
 
+def _risk_status_from_health_score(score: float) -> str:
+    if score >= 85:
+        return "low_risk"
+    if score >= 70:
+        return "moderate_risk"
+    if score >= 55:
+        return "elevated_risk"
+    if score >= 40:
+        return "high_risk"
+    return "critical_risk"
+
+
 def _build_executive_summary(
     business_model: str,
     core_kpis: dict[str, Any],
@@ -574,7 +586,10 @@ def _build_executive_summary(
 
     health_score_raw = health.get("score")
     health_rating = str(health.get("rating") or "unknown")
-    anomaly_status = str(anomalies_v2.get("status") or "normal")
+    raw_anomaly_status = str(anomalies_v2.get("status") or "normal")
+    anomaly_status = raw_anomaly_status
+    if _is_real_number(health_score_raw):
+        anomaly_status = _risk_status_from_health_score(float(health_score_raw))
     churn = advanced_kpis.get("churn_rate_percent")
 
     revenue_available = _flag_enabled(core_kpis, "revenue_available", False)
