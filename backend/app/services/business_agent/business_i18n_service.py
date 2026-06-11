@@ -108,7 +108,7 @@ TERM_TRANSLATIONS: dict[str, dict[str, str]] = {
     "unknown": {
         "en": "Unknown",
         "fr": "Indisponible",
-        "ar": "غير معروف",
+        "ar": "غير متاح",
     },
 
     # Business model labels
@@ -426,12 +426,12 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     "Business Health Score is {score}/100.": {
         "en": "Business Health Score is {score}/100.",
         "fr": "Le score de santé business est de {score}/100.",
-        "ar": "درجة صحة النشاط هي {score}/100.",
+        "ar": "درجة صحة الأعمال هي {score}/100.",
     },
     "Business Health Score could not be calculated because insufficient business performance data was provided.": {
         "en": "Business Health Score could not be calculated because insufficient business performance data was provided.",
         "fr": "Le score de santé business n’a pas pu être calculé faute de données de performance suffisantes.",
-        "ar": "تعذر حساب درجة صحة النشاط بسبب عدم توفر بيانات أداء كافية.",
+        "ar": "تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء كافية.",
     },
     "Revenue could not be calculated from the uploaded data.": {
         "en": "Revenue could not be calculated from the uploaded data.",
@@ -718,7 +718,7 @@ def _display_metric(value: Any, language: str = "en") -> str:
         return formatted.rstrip("0").rstrip(",")
 
     if language == "ar":
-        formatted = f"{number:,.2f}".replace(",", " ")
+        formatted = f"{number:,.2f}"
         return formatted.rstrip("0").rstrip(".")
 
     formatted = f"{number:,.2f}"
@@ -732,6 +732,9 @@ def _display_percent(value: Any, language: str = "en") -> str:
 
     if language == "fr":
         return f"{number} %"
+
+    if language == "ar":
+        return f"{number}٪"
 
     return f"{number}%"
 
@@ -849,7 +852,7 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
                 "لا يمكن حساب الإيرادات أو النمو أو الربحية أو التدفق النقدي أو "
                 "المخاطر المتقدمة أو التوقعات بشكل موثوق. "
                 f"{PHRASE_TRANSLATIONS['Business Health Score could not be calculated because insufficient business performance data was provided.'][lang]} "
-                f"تقييم مخاطر الأعمال الحالي هو {anomaly_status}. "
+                f"مستوى مخاطر الأعمال الحالي هو {anomaly_status}. "
                 f"{PHRASE_TRANSLATIONS['Customer churn could not be calculated from the uploaded data.'][lang]}"
             )
 
@@ -921,7 +924,7 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
         if lang == "fr":
             health_sentence = f"Le score de santé business est de {score}/100 ({rating}). "
         elif lang == "ar":
-            health_sentence = f"درجة صحة النشاط هي {score}/100 ({rating}). "
+            health_sentence = f"درجة صحة الأعمال هي {score}/100 ({rating}). "
         else:
             health_sentence = f"The Business Health Score is {score}/100 ({rating}). "
 
@@ -939,9 +942,9 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
         return (
             f"يوضح تحليل {model} إيرادات قدرها {revenue_display}، "
             f"{profitability_sentence}"
-            f"نمو الإيرادات هو {growth_display} والتدفق النقدي {cashflow}. "
+            f"نمو الإيرادات هو {growth_display} والتدفق النقدي هو {cashflow}. "
             f"{health_sentence}"
-            f"تقييم مخاطر الأعمال الحالي هو {anomaly_status}. "
+            f"مستوى مخاطر الأعمال الحالي هو {anomaly_status}. "
             f"{churn_sentence}"
         )
 
