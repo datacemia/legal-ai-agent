@@ -1089,12 +1089,14 @@ def attach_business_anomalies_v2(
     detected_kpis: dict[str, Any],
     forecast: dict[str, Any] | None = None,
     strictness: str = "professional",
+    language: str = "en",
 ) -> dict[str, Any]:
     result["anomalies_v2"] = detect_business_anomalies_v2(
         result=result,
         detected_kpis=detected_kpis,
         forecast=forecast,
         strictness=strictness,
+        language=language,
     )
 
     result["anomalies"] = result["anomalies_v2"]

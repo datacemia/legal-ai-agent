@@ -560,8 +560,13 @@ def handle_business_ai(job: Job, db):
         detected_kpis=detected_kpis,
         forecast=forecast,
         strictness="professional",
+        language=output_language,
     )
-    result = build_business_decision_layer(result=result, detected_kpis=detected_kpis)
+    result = build_business_decision_layer(
+        result=result,
+        detected_kpis=detected_kpis,
+        language=output_language,
+    )
 
     result["file_metadata"] = {
         "file_name": file_name,
@@ -586,8 +591,13 @@ def handle_business_ai(job: Job, db):
         detected_kpis=detected_kpis,
         forecast=forecast,
         strictness="professional",
+        language=output_language,
     )
-    result = build_business_decision_layer(result=result, detected_kpis=detected_kpis)
+    result = build_business_decision_layer(
+        result=result,
+        detected_kpis=detected_kpis,
+        language=output_language,
+    )
     result = attach_currency_to_result(result=result, rows=normalized_rows, default_currency=None)
 
     if not has_verified_business_performance_data:
