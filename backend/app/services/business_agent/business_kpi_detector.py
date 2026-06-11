@@ -296,6 +296,17 @@ KPI_ALIASES = {
         "دخل",
         "المداخيل",
         "مداخيل",
+        "tuition",
+        "tuition_fee",
+        "school_fee",
+        "course_fee",
+        "student_fee",
+        "education_fee",
+        "frais_scolarite",
+        "frais_scolarité",
+        "frais_inscription",
+        "frais_d_inscription",
+
     ],
     "expenses": [
         "expense",
