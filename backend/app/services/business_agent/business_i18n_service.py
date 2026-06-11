@@ -1441,7 +1441,8 @@ def translate_business_analysis_payload(
             )
 
             if metric and value is not None:
-                metric_label = translate_term(metric, lang)
+                metric_key = str(metric or "").strip().lower()
+                metric_label = translate_term(metric_key, lang)
 
                 numeric_value = None
 
@@ -1450,7 +1451,7 @@ def translate_business_analysis_payload(
                 except (TypeError, ValueError):
                     numeric_value = None
 
-                if metric == "profit_change_percent" and numeric_value is not None:
+                if metric_key == "profit_change_percent" and numeric_value is not None:
                     value_display = _display_percent(numeric_value, lang)
 
                     if lang == "fr":
