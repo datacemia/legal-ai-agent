@@ -334,6 +334,7 @@ def _detect_revenue_items(
 def _detect_expense_items(
     monthly_series: list[dict[str, Any]],
     data_quality_score: float,
+    language: str = "en",
 ) -> list[dict[str, Any]]:
     items: list[dict[str, Any]] = []
 
@@ -433,6 +434,7 @@ def _detect_profit_items(
     monthly_series: list[dict[str, Any]],
     core_kpis: dict[str, Any],
     data_quality_score: float,
+    language: str = "en",
 ) -> list[dict[str, Any]]:
     items: list[dict[str, Any]] = []
     profit_available = _flag_enabled(core_kpis, "profit_available", True)
@@ -964,6 +966,13 @@ def detect_business_anomalies_v2(
     advanced_kpis = detected_kpis.get("advanced_kpis") or result.get("advanced_kpis") or {}
     monthly_series = detected_kpis.get("monthly_series") or result.get("monthly_series") or []
     data_quality = detected_kpis.get("data_quality") or result.get("data_quality") or {}
+    language = (
+        result.get("output_language")
+        or result.get("language")
+        or detected_kpis.get("output_language")
+        or detected_kpis.get("language")
+        or "en"
+    )
 
     data_quality_score = _to_float(data_quality.get("score", 75))
     periods_count = len(monthly_series) if isinstance(monthly_series, list) else 0
@@ -984,9 +993,9 @@ def detect_business_anomalies_v2(
             _flag_enabled(core_kpis, "expenses_available", True)
             and _series_has_positive_values(monthly_series, "expenses")
         ):
-            items.extend(_detect_expense_items(monthly_series, data_quality_score))
+            items.extend(_detect_expense_items(monthly_series, data_quality_score, language))
 
-        items.extend(_detect_profit_items(monthly_series, core_kpis, data_quality_score))
+        items.extend(_detect_profit_items(monthly_series, core_kpis, data_quality_score, language))
 
     items.extend(_detect_customer_items(advanced_kpis, data_quality_score))
     items.extend(_detect_marketing_items(advanced_kpis, data_quality_score, periods_count))
