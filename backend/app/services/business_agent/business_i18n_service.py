@@ -24,6 +24,273 @@ def normalize_language(language: str | None) -> str:
 
 
 TERM_TRANSLATIONS: dict[str, dict[str, str]] = {
+
+    "customer_churn": {
+        "en": "Customer churn",
+        "fr": "Attrition client",
+        "ar": "فقدان العملاء",
+    },
+    "customer_dissatisfaction": {
+        "en": "Customer dissatisfaction",
+        "fr": "Insatisfaction client",
+        "ar": "عدم رضا العملاء",
+    },
+    "delayed_collections": {
+        "en": "Delayed collections",
+        "fr": "Retards d’encaissement",
+        "ar": "تأخر التحصيل",
+    },
+    "delayed_payments": {
+        "en": "Delayed payments",
+        "fr": "Retards de paiement",
+        "ar": "تأخر المدفوعات",
+    },
+    "demand_weakness": {
+        "en": "Demand weakness",
+        "fr": "Faiblesse de la demande",
+        "ar": "ضعف الطلب",
+    },
+    "discounting": {
+        "en": "Discounting",
+        "fr": "Remises excessives",
+        "ar": "الخصومات المفرطة",
+    },
+    "expense_growth": {
+        "en": "Expense growth",
+        "fr": "Croissance des dépenses",
+        "ar": "نمو المصروفات",
+    },
+    "expenses_exceed_revenue": {
+        "en": "Expenses exceed revenue",
+        "fr": "Les dépenses dépassent les revenus",
+        "ar": "المصروفات تتجاوز الإيرادات",
+    },
+    "expensive_paid_acquisition": {
+        "en": "Expensive paid acquisition",
+        "fr": "Acquisition payante coûteuse",
+        "ar": "اكتساب مدفوع مرتفع التكلفة",
+    },
+    "high_acquisition_cost": {
+        "en": "High acquisition cost",
+        "fr": "Coût d’acquisition élevé",
+        "ar": "ارتفاع تكلفة الاكتساب",
+    },
+    "high_churn": {
+        "en": "High churn",
+        "fr": "Attrition élevée",
+        "ar": "ارتفاع فقدان العملاء",
+    },
+    "high_operating_costs": {
+        "en": "High operating costs",
+        "fr": "Coûts d’exploitation élevés",
+        "ar": "ارتفاع التكاليف التشغيلية",
+    },
+    "higher_churn": {
+        "en": "Higher churn",
+        "fr": "Hausse de l’attrition",
+        "ar": "زيادة فقدان العملاء",
+    },
+    "inefficient_acquisition_spend": {
+        "en": "Inefficient acquisition spend",
+        "fr": "Dépenses d’acquisition inefficaces",
+        "ar": "إنفاق اكتساب غير فعال",
+    },
+    "inefficient_marketing_spend": {
+        "en": "Inefficient marketing spend",
+        "fr": "Dépenses marketing inefficaces",
+        "ar": "إنفاق تسويقي غير فعال",
+    },
+    "low_conversion_rate": {
+        "en": "Low conversion rate",
+        "fr": "Faible taux de conversion",
+        "ar": "انخفاض معدل التحويل",
+    },
+    "low_customer_monetization": {
+        "en": "Low customer monetization",
+        "fr": "Faible monétisation client",
+        "ar": "ضعف تحقيق الإيرادات من العملاء",
+    },
+    "low_gross_margin": {
+        "en": "Low gross margin",
+        "fr": "Faible marge brute",
+        "ar": "انخفاض الهامش الإجمالي",
+    },
+    "low_quality_acquisition_channels": {
+        "en": "Low-quality acquisition channels",
+        "fr": "Canaux d’acquisition de faible qualité",
+        "ar": "قنوات اكتساب منخفضة الجودة",
+    },
+    "lower_acquisition": {
+        "en": "Lower acquisition",
+        "fr": "Baisse de l’acquisition",
+        "ar": "انخفاض الاكتساب",
+    },
+    "lower_conversion": {
+        "en": "Lower conversion",
+        "fr": "Baisse de la conversion",
+        "ar": "انخفاض التحويل",
+    },
+    "lower_conversion_rate": {
+        "en": "Lower conversion rate",
+        "fr": "Taux de conversion en baisse",
+        "ar": "تراجع معدل التحويل",
+    },
+    "lower_demand": {
+        "en": "Lower demand",
+        "fr": "Demande en baisse",
+        "ar": "انخفاض الطلب",
+    },
+    "margin_compression": {
+        "en": "Margin compression",
+        "fr": "Compression des marges",
+        "ar": "ضغط الهوامش",
+    },
+    "marketing_efficiency_decline": {
+        "en": "Marketing efficiency decline",
+        "fr": "Baisse de l’efficacité marketing",
+        "ar": "تراجع كفاءة التسويق",
+    },
+    "marketing_spend_increase": {
+        "en": "Marketing spend increase",
+        "fr": "Hausse des dépenses marketing",
+        "ar": "زيادة الإنفاق التسويقي",
+    },
+    "mismatch_between_marketing_promise_and_product_experience": {
+        "en": "Mismatch between marketing promise and product experience",
+        "fr": "Décalage entre la promesse marketing et l’expérience produit",
+        "ar": "عدم تطابق بين الوعود التسويقية وتجربة المنتج",
+    },
+    "one_time_costs": {
+        "en": "One-time costs",
+        "fr": "Coûts ponctuels",
+        "ar": "تكاليف لمرة واحدة",
+    },
+    "one_time_operational_expense": {
+        "en": "One-time operational expense",
+        "fr": "Dépense opérationnelle ponctuelle",
+        "ar": "مصروف تشغيلي لمرة واحدة",
+    },
+    "operational_bottleneck": {
+        "en": "Operational bottleneck",
+        "fr": "Goulot d’étranglement opérationnel",
+        "ar": "اختناق تشغيلي",
+    },
+    "payroll_expansion_ahead_of_revenue": {
+        "en": "Payroll expansion ahead of revenue",
+        "fr": "Croissance des effectifs avant les revenus",
+        "ar": "زيادة الرواتب قبل نمو الإيرادات",
+    },
+    "payroll_increase": {
+        "en": "Payroll increase",
+        "fr": "Hausse de la masse salariale",
+        "ar": "زيادة الرواتب",
+    },
+    "poor_campaign_targeting": {
+        "en": "Poor campaign targeting",
+        "fr": "Ciblage de campagne inefficace",
+        "ar": "استهداف ضعيف للحملات",
+    },
+    "poor_retention": {
+        "en": "Poor retention",
+        "fr": "Faible rétention",
+        "ar": "ضعف الاحتفاظ بالعملاء",
+    },
+    "pricing_friction": {
+        "en": "Pricing friction",
+        "fr": "Friction tarifaire",
+        "ar": "عوائق التسعير",
+    },
+    "pricing_issue": {
+        "en": "Pricing issue",
+        "fr": "Problème de tarification",
+        "ar": "مشكلة في التسعير",
+    },
+    "pricing_or_product_changes": {
+        "en": "Pricing or product changes",
+        "fr": "Changements de prix ou de produit",
+        "ar": "تغييرات في التسعير أو المنتج",
+    },
+    "pricing_too_low": {
+        "en": "Pricing too low",
+        "fr": "Prix trop bas",
+        "ar": "التسعير منخفض جداً",
+    },
+    "product_market_mismatch": {
+        "en": "Product-market mismatch",
+        "fr": "Inadéquation produit-marché",
+        "ar": "عدم توافق المنتج مع السوق",
+    },
+    "reduced_marketing_efficiency": {
+        "en": "Reduced marketing efficiency",
+        "fr": "Réduction de l’efficacité marketing",
+        "ar": "انخفاض كفاءة التسويق",
+    },
+    "retention_problems": {
+        "en": "Retention problems",
+        "fr": "Problèmes de rétention",
+        "ar": "مشكلات الاحتفاظ بالعملاء",
+    },
+    "revenue_mix_change": {
+        "en": "Revenue mix change",
+        "fr": "Changement de composition des revenus",
+        "ar": "تغير مزيج الإيرادات",
+    },
+    "revenue_volatility": {
+        "en": "Revenue volatility",
+        "fr": "Volatilité des revenus",
+        "ar": "تقلب الإيرادات",
+    },
+    "scaling_costs_too_quickly": {
+        "en": "Scaling costs too quickly",
+        "fr": "Croissance trop rapide des coûts",
+        "ar": "التوسع السريع في التكاليف",
+    },
+    "seasonality": {
+        "en": "Seasonality",
+        "fr": "Saisonnalité",
+        "ar": "الموسمية",
+    },
+    "slower_acquisition": {
+        "en": "Slower acquisition",
+        "fr": "Acquisition plus lente",
+        "ar": "تباطؤ الاكتساب",
+    },
+    "software_or_vendor_costs": {
+        "en": "Software or vendor costs",
+        "fr": "Coûts logiciels ou fournisseurs",
+        "ar": "تكاليف البرمجيات أو الموردين",
+    },
+    "support_or_quality_issues": {
+        "en": "Support or quality issues",
+        "fr": "Problèmes de support ou de qualité",
+        "ar": "مشكلات الدعم أو الجودة",
+    },
+    "vendor_cost_creep": {
+        "en": "Vendor cost creep",
+        "fr": "Hausse progressive des coûts fournisseurs",
+        "ar": "ارتفاع تدريجي في تكاليف الموردين",
+    },
+    "weak_margin": {
+        "en": "Weak margin",
+        "fr": "Marge faible",
+        "ar": "هامش ضعيف",
+    },
+    "weak_offer_or_funnel": {
+        "en": "Weak offer or funnel",
+        "fr": "Offre ou tunnel de conversion faible",
+        "ar": "عرض أو مسار تحويل ضعيف",
+    },
+    "weak_onboarding": {
+        "en": "Weak onboarding",
+        "fr": "Intégration client insuffisante",
+        "ar": "تهيئة العملاء ضعيفة",
+    },
+    "weak_retention": {
+        "en": "Weak retention",
+        "fr": "Rétention faible",
+        "ar": "ضعف الاحتفاظ بالعملاء",
+    },
+
     # Severity / status
     "critical": {
         "en": "Critical",
@@ -372,6 +639,28 @@ TERM_TRANSLATIONS: dict[str, dict[str, str]] = {
 
 
 PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
+
+    "Churn appears controlled.": {
+        "en": "Churn appears controlled.",
+        "fr": "L’attrition semble maîtrisée.",
+        "ar": "يبدو أن فقدان العملاء تحت السيطرة.",
+    },
+    "Churn or lower repeat purchases": {
+        "en": "Churn or lower repeat purchases",
+        "fr": "Attrition ou baisse des achats répétés",
+        "ar": "فقدان العملاء أو انخفاض عمليات الشراء المتكررة",
+    },
+    "Profit declined materially.": {
+        "en": "Profit declined materially.",
+        "fr": "Le profit a fortement diminué.",
+        "ar": "انخفض الربح بشكل ملحوظ.",
+    },
+    "Profit deterioration can happen even while revenue is stable or growing.": {
+        "en": "Profit deterioration can happen even while revenue is stable or growing.",
+        "fr": "La dégradation du profit peut se produire même lorsque les revenus sont stables ou en croissance.",
+        "ar": "قد يتراجع الربح حتى عندما تكون الإيرادات مستقرة أو في نمو.",
+    },
+
     "Validate whether the drop is one-time or recurring.": {
         "en": "Validate whether the drop is one-time or recurring.",
         "fr": "Vérifier si la baisse est ponctuelle ou récurrente.",
@@ -1071,6 +1360,21 @@ def translate_term(key: Any, language: str = "en") -> Any:
 
     if lowered in TERM_TRANSLATIONS:
         return TERM_TRANSLATIONS[lowered].get(lang, normalized_key)
+
+    canonical_key = (
+        lowered
+        .replace("-", "_")
+        .replace("/", "_")
+        .replace(" ", "_")
+    )
+
+    while "__" in canonical_key:
+        canonical_key = canonical_key.replace("__", "_")
+
+    canonical_key = canonical_key.strip("_")
+
+    if canonical_key in TERM_TRANSLATIONS:
+        return TERM_TRANSLATIONS[canonical_key].get(lang, normalized_key)
 
     return key
 
