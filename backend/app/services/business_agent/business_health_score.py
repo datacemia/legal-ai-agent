@@ -285,6 +285,18 @@ def _score_data_quality(data_quality_score: float) -> dict[str, Any]:
     }
 
 
+
+def _risk_status_from_health_score(score: float) -> str:
+    if score >= 85:
+        return "low_risk"
+    if score >= 70:
+        return "watch"
+    if score >= 55:
+        return "watch"
+    if score >= 40:
+        return "high_risk"
+    return "critical"
+
 def calculate_backend_health_score(
     core_kpis: dict[str, Any] | None = None,
     advanced_kpis: dict[str, Any] | None = None,
@@ -430,6 +442,8 @@ def calculate_backend_health_score(
     return {
         "score": score,
         "rating": rating,
+        "risk_status": _risk_status_from_health_score(score),
+        "risk_source": "business_health_score",
         "components": components,
         "weights": weights,
         "strengths": strengths[:5],
