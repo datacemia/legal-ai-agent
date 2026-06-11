@@ -289,12 +289,16 @@ def _score_data_quality(data_quality_score: float) -> dict[str, Any]:
 def _risk_status_from_health_score(score: float) -> str:
     if score >= 85:
         return "low_risk"
+
     if score >= 70:
         return "watch"
+
     if score >= 55:
-        return "watch"
+        return "elevated_risk"
+
     if score >= 40:
         return "high_risk"
+
     return "critical"
 
 def calculate_backend_health_score(
