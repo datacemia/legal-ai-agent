@@ -599,6 +599,103 @@ for _field, _aliases in EXTRA_KPI_ALIASES.items():
         if _alias not in KPI_ALIASES[_field]:
             KPI_ALIASES[_field].append(_alias)
 
+# Additional global business aliases for broader international datasets.
+MORE_GLOBAL_BUSINESS_ALIASES = {
+    "expenses": [
+        "operating_cost", "operating_expense", "operation_cost", "operation_expense",
+        "cost_of_goods_sold", "cogs", "direct_cost", "indirect_cost",
+        "fixed_cost", "variable_cost", "supplier_cost",
+        "charges_fixes", "charges_variables", "cout_direct", "coût_direct",
+        "cout_indirect", "coût_indirect", "cout_fournisseur", "coût_fournisseur",
+        "تكلفة_البضاعة", "تكلفة_المبيعات", "تكاليف_تشغيلية",
+        "تكلفة_مباشرة", "تكلفة_غير_مباشرة", "تكاليف_ثابتة", "تكاليف_متغيرة",
+    ],
+    "profit": [
+        "ebitda", "ebit", "operating_income", "net_earnings",
+        "resultat_exploitation", "résultat_exploitation",
+        "resultat_operationnel", "résultat_opérationnel",
+        "excédent_brut", "excedent_brut",
+        "الأرباح_الصافية", "الربح_التشغيلي", "الدخل_التشغيلي",
+    ],
+    "cashflow": [
+        "cash_in", "cash_out", "cash_balance", "cash_position",
+        "solde_tresorerie", "solde_trésorerie", "entrees_tresorerie",
+        "entrées_trésorerie", "sorties_tresorerie", "sorties_trésorerie",
+        "الرصيد_النقدي", "النقد_الداخل", "النقد_الخارج",
+    ],
+    "orders": [
+        "sales_count", "transaction_count", "invoice_count", "receipt_count",
+        "nombre_achats", "nombre_transactions", "nombre_factures",
+        "عدد_المعاملات", "عدد_الفواتير", "عدد_المشتريات",
+    ],
+    "customers": [
+        "client_code", "customer_code", "user_code", "buyer_code",
+        "code_client", "code_utilisateur", "code_acheteur",
+        "كود_العميل", "رمز_العميل", "كود_المستخدم", "رمز_المستخدم",
+    ],
+    "new_customers": [
+        "new_accounts", "new_subscribers", "new_buyers",
+        "nouveaux_comptes", "nouveaux_acheteurs",
+        "حسابات_جديدة", "مشترون_جدد", "مشتركين_جدد",
+    ],
+    "churned_customers": [
+        "cancelled_accounts", "canceled_accounts", "closed_accounts",
+        "comptes_resilies", "comptes_résiliés", "comptes_fermes", "comptes_fermés",
+        "حسابات_ملغاة", "حسابات_مغلقة",
+    ],
+    "ad_spend": [
+        "media_spend", "campaign_spend", "paid_media_cost",
+        "depenses_media", "dépenses_média", "cout_campagne", "coût_campagne",
+        "إنفاق_الحملة", "تكلفة_الحملة", "تكلفة_الوسائط",
+    ],
+    "conversion_rate": [
+        "lead_conversion_rate", "sales_conversion_rate",
+        "taux_conversion_leads", "taux_conversion_ventes",
+        "معدل_تحويل_العملاء_المحتملين", "معدل_تحويل_المبيعات",
+    ],
+    "quantity": [
+        "sold_quantity", "quantity_sold", "units_sold",
+        "quantite_vendue", "quantité_vendue", "unites_vendues", "unités_vendues",
+        "الكمية_المباعة", "الوحدات_المباعة",
+    ],
+    "price": [
+        "net_price", "gross_price", "sale_price",
+        "prix_net", "prix_brut", "prix_ttc", "prix_ht",
+        "السعر_الصافي", "السعر_الإجمالي", "السعر_قبل_الضريبة", "السعر_بعد_الضريبة",
+    ],
+    "region": [
+        "province", "state", "wilaya", "governorate",
+        "province", "etat", "état", "wilaya",
+        "ولاية", "محافظة", "جهة",
+    ],
+    "store": [
+        "store_id", "store_name", "branch_id", "branch_name",
+        "id_magasin", "nom_magasin", "id_boutique", "nom_boutique",
+        "معرف_المتجر", "اسم_المتجر", "معرف_الفرع", "اسم_الفرع",
+    ],
+    "department": [
+        "cost_center", "profit_center", "business_line",
+        "centre_cout", "centre_coût", "centre_profit", "ligne_metier", "ligne_métier",
+        "مركز_تكلفة", "مركز_ربح", "خط_الأعمال",
+    ],
+    "channel": [
+        "sales_channel", "acquisition_channel", "marketing_channel",
+        "canal_vente", "canal_acquisition", "canal_marketing",
+        "قناة_البيع", "قناة_الاكتساب", "قناة_التسويق",
+    ],
+    "campaign": [
+        "utm_campaign", "marketing_campaign", "ad_campaign",
+        "campagne_marketing", "campagne_publicitaire",
+        "حملة_تسويقية", "حملة_إعلانية",
+    ],
+}
+
+for _field, _aliases in MORE_GLOBAL_BUSINESS_ALIASES.items():
+    KPI_ALIASES.setdefault(_field, [])
+    for _alias in _aliases:
+        if _alias not in KPI_ALIASES[_field]:
+            KPI_ALIASES[_field].append(_alias)
+
 
 # Columns that may look financial by name but are profile, demographic,
 # segmentation, or reference-table attributes. They must never be treated as
