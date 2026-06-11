@@ -1544,7 +1544,7 @@ def translate_business_analysis_payload(
                             f"Analysis detected a profit decrease of {value_display}."
                         )
 
-                elif metric_key == "cashflow_status":
+                elif metric_key in {"cashflow_status", "statut du flux de trésorerie", "flux de trésorerie"}:
                     if lang == "fr":
                         decision["why"] = (
                             f"{translate_phrase(decision.get('why', ''), lang)} "
