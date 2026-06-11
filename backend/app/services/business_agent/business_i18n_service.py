@@ -442,6 +442,16 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
         "fr": "Prioriser la rétention avant d’augmenter l’acquisition",
         "ar": "إعطاء الأولوية للاحتفاظ بالعملاء قبل توسيع الاكتساب",
     },
+    "Review churn and acquisition for the latest period.": {
+        "en": "Review churn and acquisition for the latest period.",
+        "fr": "Analyser l’attrition et l’acquisition sur la dernière période.",
+        "ar": "مراجعة فقدان العملاء والاكتساب خلال أحدث فترة.",
+    },
+    "Contact recently churned customers to identify root causes.": {
+        "en": "Contact recently churned customers to identify root causes.",
+        "fr": "Contacter les clients récemment perdus afin d’identifier les causes principales.",
+        "ar": "التواصل مع العملاء الذين غادروا مؤخراً لتحديد الأسباب الجذرية.",
+    },
     "Analyze churn reasons and cancellation timing.": {
         "en": "Analyze churn reasons and cancellation timing.",
         "fr": "Analyser les causes de l’attrition client et le moment des annulations.",
