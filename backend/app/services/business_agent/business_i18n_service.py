@@ -1442,6 +1442,13 @@ def translate_business_analysis_payload(
 
             if metric and value is not None:
                 metric_key = str(metric or "").strip().lower()
+                metric_key = (
+                    metric_key
+                    .replace("الأرباح_", "profit_")
+                    .replace("الربح_", "profit_")
+                    .replace("bénéfice_", "profit_")
+                    .replace("profit_", "profit_")
+                )
                 metric_label = translate_term(metric_key, lang)
 
                 numeric_value = None
