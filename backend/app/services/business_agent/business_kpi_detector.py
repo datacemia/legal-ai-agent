@@ -396,6 +396,210 @@ KPI_ALIASES = {
 }
 
 
+# International EN/FR/AR business field coverage.
+# Keep canonical keys in English. User-uploaded columns may be English, French, Arabic,
+# accented, spaced, underscored, or exported from common business tools.
+EXTRA_KPI_ALIASES = {
+    "date": [
+        "sale_date", "sales_date", "date_sale", "date_sales",
+        "date_creation", "date_mise_a_jour", "date_transaction", "date_commande",
+        "date_achat", "date_facture", "date_paiement", "date_vente",
+        "تاريخ_الإنشاء", "تاريخ_التحديث", "تاريخ_المعاملة",
+        "تاريخ_الطلب", "تاريخ_الشراء", "تاريخ_الفاتورة",
+        "تاريخ_الدفع", "تاريخ_البيع", "الوقت", "الطابع_الزمني",
+    ],
+    "revenue": [
+        "revenues", "sales_amount", "order_amount", "transaction_amount",
+        "gross_revenue", "net_revenue", "total_revenue",
+        "chiffre_d_affaires", "montant", "montant_ht", "montant_ttc",
+        "total_vente", "total_ventes", "valeur_commande", "valeur_vente",
+        "montant_transaction", "prix_total", "ventes_totales",
+        "الإيراد", "الإيرادات", "ايراد", "الايراد", "ايرادات", "الايرادات",
+        "المبيعات", "بيع", "المبيع", "الدخل", "المبلغ", "مبلغ",
+        "المبلغ_الإجمالي", "مبلغ_إجمالي", "اجمالي_المبلغ", "إجمالي_المبلغ",
+        "الإجمالي", "اجمالي", "إجمالي", "إجمالي_المبيعات", "اجمالي_المبيعات",
+        "قيمة_المبيعات", "قيمة_البيع", "قيمة_الطلب", "قيمة_المعاملة",
+        "مبلغ_الطلب", "مبلغ_الشراء", "مبلغ_الدفع",
+        "السعر_الإجمالي", "المجموع", "المجموع_الفرعي",
+    ],
+    "expenses": [
+        "total_cost", "operating_expenses", "opex", "marketing_cost",
+        "shipping_cost", "production_cost",
+        "montant_sortant", "debit", "débit", "cout_total", "coût_total",
+        "couts_totaux", "coûts_totaux", "charges_operationnelles",
+        "depenses_operationnelles", "dépenses_opérationnelles",
+        "frais_marketing", "cout_livraison", "coût_livraison",
+        "المصروفات", "نفقة", "النفقات", "التكاليف",
+        "إجمالي_التكاليف", "اجمالي_التكاليف", "تكلفة_إجمالية",
+        "التكلفة_الإجمالية", "مدفوع", "المدفوعات", "الرسم",
+        "الرسوم", "خصم", "مدين", "مبلغ_خارج",
+        "تكلفة_التسويق", "تكلفة_الشحن", "تكلفة_الإنتاج",
+    ],
+    "profit": [
+        "operating_profit", "margin_value", "earnings", "net_income",
+        "profit_net", "benefice_net", "bénéfice_net", "benefice_brut",
+        "bénéfice_brut", "resultat_net", "résultat_net", "marge_brute",
+        "marge_nette",
+        "الربح", "الأرباح", "الربح_الصافي", "إجمالي_الربح",
+        "الربح_الإجمالي", "الهامش", "الدخل_الصافي", "النتيجة",
+    ],
+    "cashflow": [
+        "cashflow", "cash_flow", "net_cashflow", "net_cash_flow",
+        "operating_cashflow", "free_cashflow",
+        "flux_tresorerie", "flux_trésorerie", "flux_de_tresorerie",
+        "flux_de_trésorerie", "tresorerie", "trésorerie",
+        "flux_net_tresorerie", "flux_net_trésorerie",
+        "التدفق_النقدي", "تدفق_نقدي", "صافي_التدفق_النقدي",
+        "التدفق_النقدي_الصافي", "التدفق_النقدي_التشغيلي",
+        "النقدية", "السيولة",
+    ],
+    "orders": [
+        "sales_orders", "order_number", "purchase_number",
+        "commande", "id_commande", "identifiant_commande", "id_achat",
+        "identifiant_achat", "id_transaction", "id_facture", "id_recu",
+        "id_reçu", "achats",
+        "الطلبات", "طلب", "الطلب", "عدد_الطلبات",
+        "معرف_الطلب", "رقم_الطلب", "معرف_الشراء",
+        "معرف_المعاملة", "معرف_الفاتورة", "معرف_الإيصال",
+        "المعاملات", "الشراء", "المشتريات",
+    ],
+    "customers": [
+        "customer_name", "client_name", "active_users", "users",
+        "nombre_clients", "clients_actifs", "identifiant_client",
+        "id_utilisateur", "identifiant_utilisateur", "id_acheteur",
+        "abonne", "abonné",
+        "العملاء", "عميل", "العميل", "الزبائن", "عدد_العملاء",
+        "معرف_العميل", "معرف_المستخدم", "رقم_العميل",
+        "المستخدم", "المشتري", "مشترك", "المشترك",
+    ],
+    "new_customers": [
+        "new_users", "acquired_customers",
+        "clients_acquis", "nouveaux_abonnes", "nouveaux_abonnés",
+        "العملاء_الجدد", "مستخدمون_جدد", "عملاء_مكتسبون",
+    ],
+    "churned_customers": [
+        "canceled_customers", "lost_users",
+        "utilisateurs_perdus", "clients_resilies", "clients_résiliés",
+        "abonnes_perdus", "abonnés_perdus",
+        "العملاء_المفقودون", "عملاء_ملغون",
+        "مستخدمون_مفقودون", "إلغاءات_الاشتراك",
+    ],
+    "churn_rate": [
+        "churn_percentage", "cancellation_rate", "retention_loss_rate",
+        "taux_attrition", "taux_d_attrition", "taux_resiliation",
+        "taux_résiliation",
+        "معدل_فقدان_العملاء", "نسبة_فقدان_العملاء",
+        "معدل_الإلغاء", "نسبة_الإلغاء", "معدل_إلغاء_الاشتراك",
+    ],
+    "ad_spend": [
+        "advertising_spend", "advertising_cost",
+        "cout_marketing", "coût_marketing", "budget_publicitaire",
+        "depenses_marketing", "dépenses_marketing",
+        "الإنفاق_الإعلاني", "تكلفة_الإعلانات", "تكلفة_الإعلان",
+        "إنفاق_تسويقي", "تكلفة_التسويق", "ميزانية_الإعلانات",
+    ],
+    "conversion_rate": [
+        "conversion_percent", "pourcentage_conversion",
+        "معدل_التحويل", "نسبة_التحويل", "التحويل",
+    ],
+    "mrr": [
+        "revenu_récurrent_mensuel", "revenu_mensuel_recurrent",
+        "revenu_mensuel_récurrent",
+        "الإيراد_الشهري_المتكرر", "الايراد_الشهري_المتكرر",
+    ],
+    "arr": [
+        "revenu_récurrent_annuel", "revenu_annuel_recurrent",
+        "revenu_annuel_récurrent",
+        "الإيراد_السنوي_المتكرر", "الايراد_السنوي_المتكرر",
+    ],
+    "gmv": [
+        "volume_brut_marchandises", "valeur_brute_marchandises",
+        "القيمة_الإجمالية_للبضائع",
+    ],
+    "take_rate": [
+        "taux_de_commission", "معدل_العمولة", "نسبة_العمولة", "عمولة",
+    ],
+    "billable_hours": [
+        "worked_hours", "heures_travaillees", "heures_travaillées",
+        "ساعات_قابلة_للفوترة", "ساعات_العمل",
+    ],
+    "product_id": [
+        "product_id", "product", "products", "sku", "item_id", "item",
+        "variant_id", "product_code",
+        "id_produit", "identifiant_produit", "produit", "produits",
+        "reference_produit", "référence_produit", "code_produit",
+        "id_article", "article",
+        "معرف_المنتج", "رقم_المنتج", "المنتج", "منتج",
+        "رمز_المنتج", "كود_المنتج", "معرف_الصنف", "الصنف",
+    ],
+    "quantity": [
+        "quantity", "qty", "units", "unit_count", "items_count",
+        "count", "number_of_items",
+        "quantite", "quantité", "qte", "qté", "unites", "unités",
+        "nombre", "nombre_unites", "nombre_unités", "nombre_articles",
+        "الكمية", "كمية", "عدد", "العدد", "عدد_الوحدات",
+        "عدد_العناصر", "عدد_المنتجات",
+    ],
+    "price": [
+        "price", "unit_price", "selling_price", "list_price",
+        "prix", "prix_unitaire", "prix_vente", "prix_de_vente", "prix_liste",
+        "السعر", "سعر", "سعر_الوحدة", "السعر_الوحدوي",
+        "ثمن_الوحدة", "سعر_البيع",
+    ],
+    "region": [
+        "region", "territory", "area", "market",
+        "région", "territoire", "zone", "marche", "marché",
+        "المنطقة", "منطقة", "الإقليم", "اقليم", "السوق",
+    ],
+    "store": [
+        "store", "shop", "branch", "location", "outlet",
+        "magasin", "boutique", "succursale", "agence", "point_de_vente",
+        "متجر", "المتجر", "فرع", "الفرع", "نقطة_بيع",
+    ],
+    "department": [
+        "department", "division", "business_unit", "team",
+        "departement", "département", "unite", "unité", "equipe", "équipe",
+        "القسم", "قسم", "الإدارة", "ادارة", "وحدة", "الفريق",
+    ],
+    "currency": [
+        "currency", "currency_code", "devise", "code_devise",
+        "العملة", "رمز_العملة",
+    ],
+    "refund": [
+        "refund", "refunds", "returned_amount", "return_amount",
+        "remboursement", "remboursements", "montant_rembourse",
+        "montant_remboursé",
+        "استرداد", "المبالغ_المستردة", "مبلغ_مسترد",
+    ],
+    "discount": [
+        "discount", "discounts", "coupon", "promo",
+        "remise", "remises", "reduction", "réduction", "code_promo",
+        "خصم", "الخصومات", "كوبون", "قسيمة",
+    ],
+    "tax": [
+        "tax", "taxes", "vat", "sales_tax",
+        "taxe", "taxes", "tva", "taxe_vente",
+        "ضريبة", "الضريبة", "ضرائب", "ضريبة_القيمة_المضافة",
+    ],
+    "channel": [
+        "channel", "source", "medium", "traffic_source",
+        "canal", "source", "support", "source_traffic",
+        "القناة", "قناة", "المصدر", "مصدر",
+    ],
+    "campaign": [
+        "campaign", "campaign_id", "campaign_name",
+        "campagne", "id_campagne", "nom_campagne",
+        "حملة", "الحملة", "معرف_الحملة", "اسم_الحملة",
+    ],
+}
+
+for _field, _aliases in EXTRA_KPI_ALIASES.items():
+    KPI_ALIASES.setdefault(_field, [])
+    for _alias in _aliases:
+        if _alias not in KPI_ALIASES[_field]:
+            KPI_ALIASES[_field].append(_alias)
+
+
 # Columns that may look financial by name but are profile, demographic,
 # segmentation, or reference-table attributes. They must never be treated as
 # verified business revenue.
@@ -770,6 +974,12 @@ def detect_kpi_columns(columns: list[str]) -> dict[str, str]:
                     continue
 
                 if kpi == "customers" and is_profile_customer_column(original_column):
+                    continue
+
+                if kpi == "category" and any(
+                    token in normalized_column
+                    for token in ("id", "identifier", "identifiant", "معرف", "رقم")
+                ):
                     continue
 
                 if kpi in {"revenue", "customers", "orders"}:
