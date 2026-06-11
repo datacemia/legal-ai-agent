@@ -1092,20 +1092,36 @@ def build_business_decision_layer(
     )
 
     if not recommendations and opportunities:
-        recommendations = [
-            {
-                "recommendation": opportunity.get(
+        seen_opportunity_actions = set()
+
+        for opportunity in opportunities:
+            action = str(
+                opportunity.get(
                     "recommended_action",
                     "Convert this positive signal into a repeatable operating process.",
-                ),
-                "priority": str(opportunity.get("impact") or "medium"),
-                "category": "opportunity",
-                "expected_impact": opportunity.get("why_it_matters", ""),
-                "metric": "positive_signal",
-                "source": "business_opportunity_engine",
-            }
-            for opportunity in opportunities[:3]
-        ]
+                )
+            ).strip()
+
+            normalized_action = action.lower()
+
+            if not action or normalized_action in seen_opportunity_actions:
+                continue
+
+            seen_opportunity_actions.add(normalized_action)
+
+            recommendations.append(
+                {
+                    "recommendation": action,
+                    "priority": str(opportunity.get("impact") or "medium"),
+                    "category": "opportunity",
+                    "expected_impact": opportunity.get("why_it_matters", ""),
+                    "metric": "positive_signal",
+                    "source": "business_opportunity_engine",
+                }
+            )
+
+            if len(recommendations) >= 3:
+                break
 
     result["recommendations"] = recommendations
 
