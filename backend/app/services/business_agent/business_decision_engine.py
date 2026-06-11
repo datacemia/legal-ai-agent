@@ -510,7 +510,11 @@ def _build_decision_from_top_risk(top_item: dict[str, Any]) -> dict[str, Any]:
     elif category == "expenses":
         decision_title = "Control expense growth before scaling further"
     elif category == "profitability":
-        decision_title = "Improve profitability before expanding costs"
+        decision_title = {
+            "en": "Improve profitability before expanding costs",
+            "fr": "Améliorer la rentabilité avant d’augmenter les coûts",
+            "ar": "حسّن الربحية قبل زيادة التكاليف",
+        }.get(language, "Improve profitability before expanding costs")
     elif category == "revenue":
         decision_title = "Stabilize revenue performance"
     else:

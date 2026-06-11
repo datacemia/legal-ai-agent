@@ -393,7 +393,11 @@ def _detect_expense_items(
                 kind="risk",
                 category="expenses",
                 item_type="expenses_growing_faster_than_revenue",
-                title="Expenses are growing faster than revenue.",
+                title={
+                    "en": "Expenses are growing faster than revenue.",
+                    "fr": "Les dépenses augmentent plus vite que les revenus.",
+                    "ar": "المصاريف تنمو أسرع من الإيرادات.",
+                }.get(language, "Expenses are growing faster than revenue."),
                 severity_score=min(85, 35 + gap * 2.2),
                 metric="expense_vs_revenue_growth_gap",
                 value=gap,
@@ -486,7 +490,11 @@ def _detect_profit_items(
                     kind="anomaly",
                     category="profitability",
                     item_type="profit_drop",
-                    title="Profit declined materially.",
+                    title={
+                    "en": "Profit declined materially.",
+                    "fr": "Le profit a fortement diminué.",
+                    "ar": "انخفض الربح بشكل ملحوظ.",
+                }.get(language, "Profit declined materially."),
                     severity_score=min(90, abs(change) * 2.6),
                     metric="profit_change_percent",
                     value=change,
@@ -500,7 +508,11 @@ def _detect_profit_items(
                         "Churn or lower repeat purchases",
                     ],
                     recommended_actions=[
-                        "Compare revenue growth and expense growth side by side.",
+                        {
+                            "en": "Compare revenue growth and expense growth side by side.",
+                            "fr": "Comparez la croissance des revenus et celle des dépenses côte à côte.",
+                            "ar": "قارن نمو الإيرادات ونمو المصاريف جنباً إلى جنب.",
+                        }.get(language, "Compare revenue growth and expense growth side by side."),
                         "Identify the cost categories that changed most.",
                     ],
                     business_impact=[
