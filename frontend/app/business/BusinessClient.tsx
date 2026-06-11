@@ -1967,7 +1967,7 @@ export default function BusinessClient() {
       margin: "Margin",
       growth: "Growth",
       cashflow: "Cashflow",
-      currency: "Devise",
+      currency: "Currency",
       multiCurrencyWarning: "Multiple currencies detected",
       confidence: "Confidence",
       source: "Source",
