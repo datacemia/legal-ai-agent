@@ -520,6 +520,16 @@ EXTRA_KPI_ALIASES = {
         "قيمة_المبيعات", "قيمة_البيع", "قيمة_الطلب", "قيمة_المعاملة",
         "مبلغ_الطلب", "مبلغ_الشراء", "مبلغ_الدفع",
         "السعر_الإجمالي", "المجموع", "المجموع_الفرعي",
+        "tuition_fees",
+        "school_fees",
+        "course_fees",
+        "student_fees",
+        "education_fees",
+        "school_income",
+        "course_income",
+        "رسوم_دراسية",
+        "الرسوم_الدراسية",
+        "رسوم_التسجيل",
     ],
     "expenses": [
         "total_cost", "operating_expenses", "opex", "marketing_cost",
@@ -533,6 +543,10 @@ EXTRA_KPI_ALIASES = {
         "التكلفة_الإجمالية", "مدفوع", "المدفوعات", "الرسم",
         "الرسوم", "خصم", "مدين", "مبلغ_خارج",
         "تكلفة_التسويق", "تكلفة_الشحن", "تكلفة_الإنتاج",
+        "المصاريف",
+        "مصاريف",
+        "المصروفات",
+        "مصروفات",
     ],
     "profit": [
         "operating_profit", "margin_value", "earnings", "net_income",
@@ -1181,6 +1195,9 @@ def detect_kpi_columns(columns: list[str]) -> dict[str, str]:
                 if kpi in {"revenue", "customers", "orders"}:
                     # For high-impact KPIs, avoid loose substring matches like
                     # income_level -> income or user_id -> user/customer.
+                    continue
+
+                if original_column in detected.values():
                     continue
 
                 if any(
