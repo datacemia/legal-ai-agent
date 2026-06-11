@@ -270,6 +270,11 @@ const normalizeBackendText = (
     "down": "en baisse",
     "stable": "stable",
 
+    "high_risk": "Risque élevé",
+    "elevated_risk": "Risque accru",
+    "low_risk": "Risque faible",
+    "watch": "À surveiller",
+
     "low": "faible",
     "medium": "moyen",
     "high": "élevé",
@@ -324,6 +329,11 @@ const normalizeBackendText = (
     "up": "في ارتفاع",
     "down": "في انخفاض",
     "stable": "مستقر",
+
+    "high_risk": "مخاطر مرتفعة",
+    "elevated_risk": "مخاطر مرتفعة نسبياً",
+    "low_risk": "مخاطر منخفضة",
+    "watch": "قيد المراقبة",
 
     "low": "منخفض",
     "medium": "متوسط",
