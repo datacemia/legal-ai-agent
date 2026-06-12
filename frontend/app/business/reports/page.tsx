@@ -174,7 +174,8 @@ const normalizeBackendText = (
   let text = String(value);
 
   const dictionaries: Record<Locale, Record<string, string>> = {
-    en: {},
+    en: {
+      "N/A": "Unavailable",},
       fr: {
     "up": "en hausse",
     "down": "en baisse",
