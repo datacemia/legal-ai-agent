@@ -407,7 +407,9 @@ const normalizeBackendText = (
       .replaceAll("عائد الإنفاق الإعلاني unavailable.", "عائد الإنفاق الإعلاني غير متاح.")
       .replaceAll("إيجابي التدفق النقدي.", "تدفق نقدي إيجابي.")
       .replaceAll("هامش الربح Percent", "هامش الربح")
-      .replaceAll("النمو Rate Percent", "معدل النمو");
+      .replaceAll("النمو Rate Percent", "معدل النمو")
+      .replaceAll("New العملاء", "العملاء الجدد")
+      .replaceAll("Churned العملاء", "العملاء المفقودون");
   }
 
   if (language === "fr") {
