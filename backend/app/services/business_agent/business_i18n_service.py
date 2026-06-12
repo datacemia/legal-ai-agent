@@ -1440,7 +1440,7 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
     "Business Health Score": {
         "en": "Business Health Score",
-        "fr": "Score de santé business",
+        "fr": "Score de santé de l\'entreprise",
         "ar": "مؤشر صحة الأعمال",
     },
     "Executive Summary": {
