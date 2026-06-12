@@ -208,7 +208,7 @@ const isMetricAvailable = (
 const unavailableMetricLabel = (locale: Locale = "en") => {
   if (locale === "ar") return "غير متاح";
   if (locale === "fr") return "Indisponible";
-  return "N/A";
+  return "Not specified";
 };
 
 const isUnavailableValue = (value: any) => {
@@ -450,6 +450,55 @@ const normalizeBackendText = (
   }
 
   return text;
+};
+
+
+const displayLevelLabel = (
+  value: any,
+  language: Locale = "en"
+) => {
+  const raw = normalizeBackendText(value, language);
+  const key = String(raw || "").trim().toLowerCase();
+
+  const mappings: Record<Locale, Record<string, string>> = {
+    en: {
+      low: "Low",
+      medium: "Medium",
+      high: "High",
+      critical: "Critical",
+      stable: "Stable",
+      normal: "Normal",
+    },
+    fr: {
+      faible: "Faible",
+      moyen: "Moyen",
+      élevé: "Élevé",
+      critique: "Critique",
+      stable: "Stable",
+      normal: "Normal",
+    },
+    ar: {
+      منخفض: "منخفض",
+      متوسط: "متوسط",
+      مرتفع: "مرتفع",
+      حرج: "حرج",
+      مستقر: "مستقر",
+      طبيعي: "طبيعي",
+    },
+  };
+
+  return mappings[language]?.[key] || raw;
+};
+
+const displayDaysLabel = (
+  value: any,
+  language: Locale = "en"
+) => {
+  const days = Number(String(value || "").replace(/[^0-9]/g, "") || 30);
+
+  if (language === "fr") return `${days} jours`;
+  if (language === "ar") return `${days} يومًا`;
+  return `${days} days`;
 };
 
 const localizedKeyLabel = (
@@ -1349,7 +1398,7 @@ export default function BusinessDashboardPage() {
               {decision.timeframe && (
                 <div className="mt-4">
                   <Badge tone="amber">
-                    {normalizeBackendText(decision.timeframe, locale)}
+                    {displayDaysLabel(decision.timeframe, locale)}
                   </Badge>
                 </div>
               )}
@@ -1494,7 +1543,7 @@ export default function BusinessDashboardPage() {
               label={t.trend}
               value={
                 forecast?.available
-                  ? normalizeBackendText(
+                  ? displayLevelLabel(
                       forecast.trend || "-",
                       locale
                     )
@@ -1507,7 +1556,7 @@ export default function BusinessDashboardPage() {
               label={t.cashflowRisk}
               value={
                 forecast?.available
-                  ? normalizeBackendText(
+                  ? displayLevelLabel(
                       forecast.cashflow_risk || "-",
                       locale
                     )
@@ -1520,7 +1569,7 @@ export default function BusinessDashboardPage() {
               label={t.volatility}
               value={
                 forecast?.available
-                  ? normalizeBackendText(
+                  ? displayLevelLabel(
                       forecast.volatility || "-",
                       locale
                     )
