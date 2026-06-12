@@ -785,7 +785,7 @@ def _clean_export_text(value: Any, language: str) -> str:
     return text
 
 def _p(value: Any, style: ParagraphStyle, language: str) -> Paragraph:
-    text = _xml_escape(_display_text(value, language))
+    text = _xml_escape(_display_text(_clean_export_text(value, language), language))
     return Paragraph(text, style)
 
 

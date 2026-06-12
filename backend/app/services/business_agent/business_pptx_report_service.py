@@ -791,6 +791,19 @@ def _background(slide, color=COLORS["light"]):
     fill.fore_color.rgb = color
 
 
+def _clean_export_text(value: Any, language: str) -> str:
+    text = str(value)
+
+    if language == "fr":
+        text = re.sub(r"(-?\d+)\.(\d+)%", r"\1,\2 %", text)
+        text = re.sub(r"\b(\d{1,3}),(\d{3})\.(\d{2})\b", r"\1 \2,\3", text)
+        text = text.replace("Score: moyen", "Priorité : Moyenne")
+        text = text.replace("Score: faible", "Priorité : Faible")
+        text = text.replace("Score: élevé", "Priorité : Élevée")
+
+    return text
+
+
 def _add_text(
     slide,
     text: str,
@@ -814,7 +827,7 @@ def _add_text(
     p.alignment = align or _align(language)
 
     run = p.add_run()
-    run.text = _text(text)
+    run.text = _clean_export_text(_text(text), language)
     run.font.name = "Arial"
     run.font.size = Pt(font_size)
     run.font.bold = bold
