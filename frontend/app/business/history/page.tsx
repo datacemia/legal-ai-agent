@@ -127,6 +127,10 @@ const normalizeBackendText = (
       .replaceAll("Risque de flux de trésorerie faible", "Risque de flux de trésorerie faible");
   }
 
+  if (language === "fr") {
+    text = text.replace(/(\d+)\.(\d+)%/g, "$1,$2 %");
+  }
+
   return text;
 };
 

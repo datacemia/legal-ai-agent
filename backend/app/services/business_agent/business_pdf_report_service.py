@@ -254,7 +254,7 @@ def _labels(language: str) -> dict[str, str]:
             "summary": "Executive Summary",
             "kpis": "Core KPIs",
             "health": "Business Health",
-            "business_model": "Business Model",
+            "business_model": "Industry Sector",
             "score": "Score",
             "rating": "Rating",
             "currency": "Currency",

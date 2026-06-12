@@ -440,6 +440,10 @@ const normalizeBackendText = (
     return "Unknown";
   }
 
+  if (language === "fr") {
+    text = text.replace(/(\d+)\.(\d+)%/g, "$1,$2 %");
+  }
+
   return text;
 };
 
@@ -1969,7 +1973,7 @@ export default function BusinessClient() {
       results: "AI Executive Business Analysis",
       summary: "Executive Summary",
       score: "Business Health Score",
-      businessModel: "Business Model",
+      businessModel: "Industry Sector",
       insights: "Key Insights",
       risks: "Risks",
       opportunities: "Opportunities",
@@ -2060,15 +2064,15 @@ export default function BusinessClient() {
       heroPower: "Analyse exécutive IA pour entreprises modernes",
       subtitle:
         "Importez vos données business pour recevoir une analyse exécutive vérifiée par les données avec KPIs, risques, opportunités, prévisions et décisions prioritaires.",
-      eyebrow: "Agent IA d'analyse d'entreprise",
+      eyebrow: "Agent d'analyse d'entreprise",
       chooseFile: "Choisir un fichier",
       noFile: "Aucun fichier sélectionné",
       analyze: "Analyser le business",
       loading: "Analyse des données business...",
-      results: "Analyse exécutive IA d'entreprise",
+      results: "Analyse exécutive de l'entreprise",
       summary: "Résumé exécutif",
       score: "Score de santé de l’entreprise",
-      businessModel: "Modèle économique",
+      businessModel: "Secteur d'activité",
       insights: "Points clés",
       risks: "Risques",
       opportunities: "Opportunités",
@@ -2106,7 +2110,7 @@ export default function BusinessClient() {
       statusStable: "Stable",
       statusCritical: "Critique",
       whatYouGetItems: [
-        "Résumé exécutif business",
+        "Résumé exécutif de l'entreprise",
         "Calcul des KPIs financiers",
         "Détection des risques et anomalies",
         "Recommandations stratégiques",
@@ -2870,7 +2874,7 @@ export default function BusinessClient() {
               </div>
             </div>
 
-            {/* Business Model */}
+            {/* Industry Sector */}
             <div className="rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-5 shadow-sm">
               <p className="text-sm text-slate-500 mb-1">
                 {t.businessModel}

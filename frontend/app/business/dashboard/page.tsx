@@ -430,6 +430,10 @@ const normalizeBackendText = (
     return "Indisponible";
   }
 
+  if (language === "fr") {
+    text = text.replace(/(\d+)\.(\d+)%/g, "$1,$2 %");
+  }
+
   return text;
 };
 
@@ -507,7 +511,7 @@ const labels: Record<Locale, Record<string, string>> = {
 
     multiCurrencyWarning: "Multiple currencies detected",
 
-    businessModel: "Business Model",
+    businessModel: "Industry Sector",
 
     revenue: "Revenue",
     expenses: "Expenses",
@@ -595,7 +599,7 @@ const labels: Record<Locale, Record<string, string>> = {
 
     multiCurrencyWarning: "Plusieurs devises détectées",
 
-    businessModel: "Modèle économique",
+    businessModel: "Secteur d'activité",
 
     revenue: "Chiffre d’affaires",
     expenses: "Dépenses",
@@ -683,7 +687,7 @@ const labels: Record<Locale, Record<string, string>> = {
 
     multiCurrencyWarning: "تم اكتشاف عدة عملات",
 
-    businessModel: "نموذج الأعمال",
+    businessModel: "قطاع النشاط",
 
     revenue: "الإيرادات",
     expenses: "المصروفات",

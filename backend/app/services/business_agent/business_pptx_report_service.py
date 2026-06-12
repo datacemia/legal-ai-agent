@@ -190,7 +190,7 @@ def _labels(language: str) -> dict[str, str]:
             "forecast": "Forecast",
             "data_quality": "Data Quality",
             "health": "Business Health",
-            "business_model": "Business Model",
+            "business_model": "Industry Sector",
             "currency": "Currency",
             "revenue": "Revenue",
             "expenses": "Expenses",

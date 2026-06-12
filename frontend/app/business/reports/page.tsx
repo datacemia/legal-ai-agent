@@ -142,7 +142,9 @@ const getCurrencyDisplay = (
   const symbol = currency?.symbol || "";
 
   if (!code && !symbol) {
-    return "N/A";
+    if (language === "ar") return "غير محددة";
+    if (language === "fr") return "Non définie";
+    return "Not specified";
   }
 
   if (!symbol) {
@@ -313,6 +315,10 @@ const normalizeBackendText = (
     return "Indisponible";
   }
 
+  if (language === "fr") {
+    text = text.replace(/(\d+)\.(\d+)%/g, "$1,$2 %");
+  }
+
   return text;
 };
 
@@ -348,7 +354,7 @@ const labels: Record<Locale, Record<string, string>> = {
 
     healthScore: "Business Health Score",
 
-    businessModel: "Business Model",
+    businessModel: "Industry Sector",
 
     currency: "Currency",
 
@@ -427,7 +433,7 @@ const labels: Record<Locale, Record<string, string>> = {
 
     healthScore: "Score de santé de l'entreprise",
 
-    businessModel: "Modèle économique",
+    businessModel: "Secteur d'activité",
 
     currency: "Devise",
 
@@ -506,7 +512,7 @@ const labels: Record<Locale, Record<string, string>> = {
 
     healthScore: "مؤشر صحة الأعمال",
 
-    businessModel: "نموذج الأعمال",
+    businessModel: "قطاع النشاط",
 
     currency: "العملة",
 
