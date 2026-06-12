@@ -2001,7 +2001,7 @@ export default function BusinessClient() {
       enterpriseReady: "Public & enterprise-ready",
       trustedData: "Numbers are verified by deterministic calculations. AI explains the results.",
       supportedFiles: "Supported: CSV, XLSX",
-      maxSize: "Max size: 25MB",
+      maxSize: "Max size: 10MB",
       executiveDashboardLabel: "Executive AI Decision Dashboard",
       statusHealthy: "Healthy",
       statusStable: "Stable",
