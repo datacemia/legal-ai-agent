@@ -205,8 +205,10 @@ const isMetricAvailable = (
   return fallback;
 };
 
-const unavailableMetricLabel = (_locale: Locale = "en") => {
-  return "N/A";
+const unavailableMetricLabel = (locale: Locale = "en") => {
+  if (locale === "ar") return "غير متاح";
+  if (locale === "fr") return "N/D";
+  return "Not specified";
 };
 
 const isUnavailableValue = (value: any) => {
