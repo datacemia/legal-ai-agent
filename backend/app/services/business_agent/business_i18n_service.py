@@ -650,8 +650,8 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
         "ar": "الحفاظ على مستوى الربحية المرتفع",
     },
     "The business is profitable with a strong margin, even if growth is currently limited.": {
-        "en": "The business is profitable with a strong margin, even if growth is currently limited.",
-        "fr": "L’activité est rentable avec une marge solide, même si la croissance est actuellement limitée.",
+        "en": "The business maintains a strong profit margin despite slower current growth.",
+        "fr": "L’activité conserve une marge bénéficiaire solide malgré un ralentissement actuel de la croissance.",
         "ar": "يحقق النشاط هامش ربح مرتفعاً رغم تباطؤ النمو الحالي.",
     },
     "Protect current margins while monitoring revenue and expense trends.": {
@@ -1119,8 +1119,8 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
 
     "Continue monitoring business performance": {
-        "en": "Continue monitoring business performance",
-        "fr": "Continuer à surveiller la performance de l'entreprise",
+        "en": "Address slowing revenue growth",
+        "fr": "Traiter le ralentissement de la croissance des revenus",
         "ar": "معالجة تباطؤ نمو الإيرادات",
     },
     "Keep tracking revenue, expenses, cashflow, and customer metrics before making major changes.": {
@@ -1130,12 +1130,12 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
     "No Critical business risk was detected from the current analysis.": {
         "en": "No Critical business risk was detected from the current analysis.",
-        "fr": "Aucun risque de l'entreprise critique n’a été détecté dans l’analyse actuelle.",
+        "fr": "Aucun risque critique n’a été détecté dans l’analyse actuelle.",
         "ar": "لم يتم رصد مخاطر حرجة في التحليل الحالي.",
     },
     "No critical business risk was detected from the current analysis.": {
-        "en": "No critical business risk was detected from the current analysis.",
-        "fr": "Aucun risque de l'entreprise critique n’a été détecté dans l’analyse actuelle.",
+        "en": "No critical risks were detected in the current analysis.",
+        "fr": "Aucun risque critique n’a été détecté dans l’analyse actuelle.",
         "ar": "لم يتم رصد مخاطر حرجة في التحليل الحالي.",
     },
     "No major business risk was detected from the current analysis.": {
@@ -1226,8 +1226,8 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
         "ar": "تعذر حساب الربح لأنه لم يتم توفير أي عمود للمصاريف أو التكاليف أو الربح.",
     },
     "{total} business risk indicator(s) and {insights} positive business signal(s) were identified.": {
-        "en": "{total} business risk indicator(s) and {insights} positive business signal(s) were identified.",
-        "fr": "{total} indicateur(s) de risque de l'entreprise et {insights} signal(aux) positif(s) ont été identifiés.",
+        "en": "{total} risks and {insights} positive signals were detected.",
+        "fr": "{total} risque(s) et {insights} signal(aux) positif(s) ont été détectés.",
         "ar": "تم رصد {total} مخاطر و{insights} إشارات إيجابية.",
     },
 
