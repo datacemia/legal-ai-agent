@@ -12,7 +12,6 @@ from pptx.enum.shapes import MSO_SHAPE
 from pptx.enum.text import MSO_AUTO_SIZE, PP_ALIGN
 from pptx.util import Inches, Pt
 
-from app.services.business_agent.business_i18n_service import translate_text
 from app.services.business_agent.business_chart_image_service import (
     cleanup_chart_images,
     generate_business_chart_images,
@@ -179,14 +178,14 @@ def _health_score_color(
 def _labels(language: str) -> dict[str, str]:
     labels = {
         "en": {
-            "title": translate_text("Executive Business Report", language),
+            "title": "Executive Business Report",
             "subtitle": "Board-ready business intelligence deck",
             "verified": "Data-verified analysis",
-            "summary": translate_text("Executive Summary", language),
+            "summary": "Executive Summary",
             "kpis": "Core KPIs",
-            "decision": translate_text("Priority Decision", language),
+            "decision": "Priority Decision",
             "risks": "Top Risks",
-            "opportunities": translate_text("Top Opportunities", language),
+            "opportunities": "Top Opportunities",
             "recommendations": "Recommendations",
             "forecast": "Forecast",
             "data_quality": "Data Quality",
