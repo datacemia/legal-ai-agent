@@ -87,6 +87,29 @@ def _number(value: Any) -> float | None:
         return None
 
 
+
+def _format_locale_number(value: Any, language: str, decimals: int = 2) -> str:
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return str(value)
+
+    formatted = f"{number:,.{decimals}f}"
+    if language == "fr":
+        return formatted.replace(",", " ").replace(".", ",")
+    return formatted
+
+
+def _format_locale_percent(value: Any, language: str) -> str:
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return str(value)
+
+    if language == "fr":
+        return f"{number:.2f}".replace(".", ",") + " %"
+    return f"{number:.2f}%"
+
 def _format_number(value: Any) -> str:
     numeric = _number(value)
     if numeric is None:
