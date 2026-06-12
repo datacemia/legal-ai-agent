@@ -609,7 +609,7 @@ def _empty_list_message(kind: str, language: str) -> str:
             "en": "No major limitations",
         },
         "risks": {
-            "ar": "لم يتم اكتشاف مخاطر حرجة",
+            "ar": "لم يتم رصد مخاطر حرجة",
             "fr": "Aucun risque critique détecté",
             "en": "No critical risks detected",
         },
@@ -892,7 +892,7 @@ def _add_bullets(slide, items: list[Any], left, top, width, height, language: st
         p = frame.paragraphs[0]
         p.alignment = align
         run = p.add_run()
-        run.text = "-"
+        run.text = _empty_list_message("risks", language)
         run.font.name = "Arial"
         run.font.size = Pt(13)
         run.font.color.rgb = COLORS["muted"]
