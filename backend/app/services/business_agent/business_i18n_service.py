@@ -2,6 +2,18 @@ from copy import deepcopy
 from typing import Any
 
 
+def _format_i18n_percent_number(value: Any, language: str) -> str:
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return str(value)
+
+    formatted = f"{number:.2f}"
+    if language == "fr":
+        return formatted.replace(".", ",")
+    return formatted
+
+
 SUPPORTED_LANGUAGES = {"en", "fr", "ar"}
 
 
@@ -1970,8 +1982,8 @@ def _build_key_insights(payload: dict[str, Any], language: str) -> list[str]:
             PHRASE_TRANSLATIONS[
                 "Profit margin is {margin}% and revenue growth is {growth}%."
             ][lang].format(
-                margin=_display_metric(margin),
-                growth=_display_metric(growth) if growth_available else "N/A",
+                margin=_format_i18n_percent_number(margin, lang),
+                growth=_format_i18n_percent_number(growth, lang) if growth_available else "N/A",
             )
         )
     else:

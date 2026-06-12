@@ -2942,7 +2942,7 @@ export default function BusinessClient() {
 
               <KpiCard
                 label={t.currency}
-                value={hasCurrency ? getCurrencyDisplay(currency, locale) : "-"}
+                value={getCurrencyDisplay(currency, locale)}
                 helper={
                   currency?.multi_currency_detected
                     ? t.multiCurrencyWarning

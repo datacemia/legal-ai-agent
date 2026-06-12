@@ -319,6 +319,10 @@ const normalizeBackendText = (
     text = text.replace(/(\d+)\.(\d+)%/g, "$1,$2 %");
   }
 
+  if (language === "fr") {
+    text = text.replace(/(-?\d+)\.(\d+)%/g, "$1,$2 %");
+  }
+
   return text;
 };
 
