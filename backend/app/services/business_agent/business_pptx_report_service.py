@@ -594,6 +594,38 @@ def _translate_and_normalize(value: Any, language: str) -> str:
     return translated
 
 
+
+def _display_currency(currency: dict[str, Any] | None, language: str) -> str:
+    currency = currency or {}
+    code = currency.get("code")
+    symbol = currency.get("symbol")
+
+    parts = [
+        str(part).strip()
+        for part in (code, symbol)
+        if part not in (None, "", "-", "None", "unknown", "N/A")
+    ]
+
+    if parts:
+        return " ".join(parts)
+
+    return {
+        "ar": "غير محددة",
+        "fr": "Non définie",
+        "en": "Not specified",
+    }.get(language, "Not specified")
+
+
+def _display_metric(value: Any, language: str) -> str:
+    if value in (None, "", 0, 0.0, "0", "0.0", "unknown", "N/A"):
+        return {
+            "ar": "غير متاح",
+            "fr": "Indisponible",
+            "en": "Unavailable",
+        }.get(language, "Unavailable")
+
+    return _format_number(value)
+
 def _format_narrative_text(
     text: Any,
     language: str,
@@ -972,7 +1004,7 @@ def _create_cover(prs, analysis, labels, language, source_file_name):
 
     _add_text(
         slide,
-        f"{labels['generated_at']}: {generated_at}\n{labels['source_file']}: {source_file}\n{labels['business_model']}: {_translate_and_normalize(analysis.get('business_model', '-'), language)}\n{labels['currency']}: {currency.get('code', '-')} {currency.get('symbol', '')}",
+        f"{labels['generated_at']}: {generated_at}\n{labels['source_file']}: {source_file}\n{labels['business_model']}: {_translate_and_normalize(analysis.get('business_model', '-'), language)}\n{labels['currency']}: {_display_currency(currency, language)}",
         Inches(0.78),
         Inches(3.4),
         Inches(7.5),
@@ -1335,8 +1367,8 @@ def _create_quality(prs, analysis, labels, language):
     _add_headline(slide, _strategic_headline(analysis, language, "quality"), language)
     _add_subline(slide, labels["data_quality"], language)
     _add_card(slide, labels["quality_score"], f"{data_quality.get('score', 0)}/100", Inches(0.75), Inches(1.72), Inches(3.35), Inches(1.35), language, COLORS["green"])
-    _add_card(slide, "ROAS", _format_number(advanced.get("roas")), Inches(4.75), Inches(1.72), Inches(3.35), Inches(1.35), language, COLORS["blue"])
-    _add_card(slide, "CAC", _format_money(advanced.get("cac"), currency, language), Inches(8.75), Inches(1.72), Inches(3.35), Inches(1.35), language, COLORS["ink"])
+    _add_card(slide, "ROAS", _display_metric(advanced.get("roas"), language), Inches(4.75), Inches(1.72), Inches(3.35), Inches(1.35), language, COLORS["blue"])
+    _add_card(slide, "CAC", _display_metric(advanced.get("cac"), language), Inches(8.75), Inches(1.72), Inches(3.35), Inches(1.35), language, COLORS["ink"])
 
     limitations = data_quality.get("limitations") or [labels["limitations_ok"]]
     _add_bullets(slide, limitations, Inches(0.85), Inches(3.72), Inches(11.5), Inches(2.7), language, max_items=5)

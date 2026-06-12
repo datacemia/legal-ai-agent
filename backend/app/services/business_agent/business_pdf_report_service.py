@@ -396,7 +396,7 @@ def _translate_common_value(value: Any, language: str) -> str:
             "medium": "متوسط",
             "high": "مرتفع",
             "critical": "حرج",
-            "healthy": "صحي",
+            "healthy": "جيد",
             "positive": "إيجابي",
             "negative": "سلبي",
             "general": "عام",
