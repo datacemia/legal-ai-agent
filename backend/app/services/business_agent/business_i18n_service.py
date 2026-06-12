@@ -1438,6 +1438,41 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
         "fr": "Excellente qualité des données.",
         "ar": "جودة بيانات ممتازة.",
     },
+    "Business Health Score": {
+        "en": "Business Health Score",
+        "fr": "Score de santé business",
+        "ar": "مؤشر صحة الأعمال",
+    },
+    "Executive Summary": {
+        "en": "Executive Summary",
+        "fr": "Résumé exécutif",
+        "ar": "الملخص التنفيذي",
+    },
+    "Priority Decision": {
+        "en": "Priority Decision",
+        "fr": "Décision prioritaire",
+        "ar": "القرار الأولوي",
+    },
+    "Top Opportunities": {
+        "en": "Top Opportunities",
+        "fr": "Opportunités principales",
+        "ar": "أهم الفرص",
+    },
+    "Management focus": {
+        "en": "Management focus",
+        "fr": "Priorité management",
+        "ar": "تركيز الإدارة",
+    },
+    "Executive implication": {
+        "en": "Executive implication",
+        "fr": "Implication exécutive",
+        "ar": "الأثر التنفيذي",
+    },
+    "Forecast data is unavailable or limited.": {
+        "en": "Forecast data is unavailable or limited.",
+        "fr": "Les données de prévision sont limitées ou indisponibles.",
+        "ar": "بيانات التوقعات غير متاحة أو محدودة.",
+    },
 }
 
 
