@@ -1343,7 +1343,53 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
         "fr": "La prévision est basée sur les revenus mensuels récents, une croissance plafonnée et une moyenne pondérée prudente. Elle doit être considérée comme indicative, non garantie.",
         "ar": "تعتمد التوقعات على الإيرادات الشهرية الأخيرة، ونمو محدود، ومتوسط مرجح محافظ. يجب اعتبارها اتجاهية وليست مضمونة.",
     },
+    "Forecast unavailable because the analysis could not be completed.": {
+        "en": "Forecast unavailable because the analysis could not be completed.",
+        "fr": "Prévision indisponible car l’analyse n’a pas pu être finalisée.",
+        "ar": "التوقعات غير متاحة لأن التحليل لم يكتمل.",
+    },
+    "Retry the analysis with a cleaner business file.": {
+        "en": "Retry the analysis with a cleaner business file.",
+        "fr": "Relancez l’analyse avec un fichier business plus propre.",
+        "ar": "أعد تشغيل التحليل باستخدام ملف أعمال أكثر تنظيماً.",
+    },
+    "Multiple currencies detected in uploaded data.": {
+        "en": "Multiple currencies detected in uploaded data.",
+        "fr": "Plusieurs devises détectées dans les données importées.",
+        "ar": "تم اكتشاف عدة عملات في البيانات المرفوعة.",
+    },
+    "Forecast requires at least 3 dated revenue periods.": {
+        "en": "Forecast requires at least 3 dated revenue periods.",
+        "fr": "La prévision nécessite au moins 3 périodes de revenus datées.",
+        "ar": "تتطلب التوقعات 3 فترات إيرادات مؤرخة على الأقل.",
+    },
+    "CAC efficiency unavailable.": {
+        "en": "CAC efficiency unavailable.",
+        "fr": "Efficacité CAC indisponible.",
+        "ar": "كفاءة تكلفة اكتساب العميل غير متاحة.",
+    },
+    "Profitability unavailable because expenses or costs were not provided.": {
+        "en": "Profitability unavailable because expenses or costs were not provided.",
+        "fr": "Rentabilité indisponible car les dépenses ou les coûts n’ont pas été fournis.",
+        "ar": "الربحية غير متاحة لأنه لم يتم توفير المصاريف أو التكاليف.",
+    },
+    "No previous business analysis found for comparison.": {
+        "en": "No previous business analysis found for comparison.",
+        "fr": "Aucune analyse business précédente trouvée pour comparaison.",
+        "ar": "لم يتم العثور على تحليل أعمال سابق للمقارنة.",
+    },
+    "Analyze a business file first.": {
+        "en": "Analyze a business file first.",
+        "fr": "Analysez d’abord un fichier business.",
+        "ar": "حلّل ملف أعمال أولاً.",
+    },
+    "Forecast unavailable because insufficient dated revenue data was provided.": {
+        "en": "Forecast unavailable because insufficient dated revenue data was provided.",
+        "fr": "Prévision indisponible car les données de revenus datées sont insuffisantes.",
+        "ar": "التوقعات غير متاحة بسبب عدم توفر بيانات إيرادات مؤرخة كافية.",
+    },
 }
+
 
 
 CHART_TITLE_TRANSLATIONS: dict[str, dict[str, str]] = {
