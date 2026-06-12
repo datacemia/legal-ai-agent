@@ -239,7 +239,7 @@ const isMetricAvailable = (
 
 const unavailableMetricLabel = (locale: Locale = "en") => {
   if (locale === "ar") return "غير متاح";
-  if (locale === "fr") return "Indisponible";
+  if (locale === "fr") return "N/D";
   return "N/A";
 };
 
@@ -429,14 +429,14 @@ const normalizeBackendText = (
   }
 
   if (language === "fr" && text === "N/A") {
-    return "Indisponible";
+    return "N/D";
   }
 
   const normalized = text.trim().toLowerCase();
 
   if (normalized === "unknown") {
     if (language === "ar") return "غير متاح";
-    if (language === "fr") return "Indisponible";
+    if (language === "fr") return "N/D";
     return "Unknown";
   }
 
