@@ -1388,6 +1388,31 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
         "fr": "Prévision indisponible car les données de revenus datées sont insuffisantes.",
         "ar": "التوقعات غير متاحة بسبب عدم توفر بيانات إيرادات مؤرخة كافية.",
     },
+    "Forecast requires enough dated revenue data.": {
+        "en": "Forecast requires enough dated revenue data.",
+        "fr": "La prévision nécessite suffisamment de données de revenus datées.",
+        "ar": "تتطلب التوقعات بيانات إيرادات مؤرخة كافية.",
+    },
+    "Most important decision this month": {
+        "en": "Most important decision this month",
+        "fr": "Décision la plus importante ce mois-ci",
+        "ar": "أهم قرار هذا الشهر",
+    },
+    "Executive Business Report": {
+        "en": "Executive Business Report",
+        "fr": "Rapport exécutif business",
+        "ar": "تقرير تنفيذي للأعمال",
+    },
+    "AI CEO Weekly Report": {
+        "en": "AI CEO Weekly Report",
+        "fr": "Rapport hebdomadaire IA pour dirigeant",
+        "ar": "تقرير أسبوعي بالذكاء الاصطناعي للرئيس التنفيذي",
+    },
+    "single most important decision": {
+        "en": "single most important decision",
+        "fr": "décision unique la plus importante",
+        "ar": "القرار الأهم الوحيد",
+    },
 }
 
 

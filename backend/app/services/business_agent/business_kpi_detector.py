@@ -40,6 +40,12 @@ BUSINESS_MODELS = {
         "revendeur", "fournisseur", "commande_achat",
         "جملة", "بيع_بالجملة", "موزع", "توزيع", "مورد",
         "طلب_شراء", "تاجر_جملة",
+        "wholesale_revenue",
+        "ventes_en_gros",
+        "revenu_gros",
+        "bulk_sales",
+        "إيرادات_الجملة",
+
     ],
     "manufacturing": [
         "manufacturing", "production", "factory", "plant", "work_order",
@@ -123,6 +129,16 @@ BUSINESS_MODELS = {
         "مالية", "تمويل", "محاسبة", "دفتر_الأستاذ", "حساب",
         "معاملة", "رصيد", "أصل", "التزام", "حقوق_ملكية",
         "تدفق_نقدي", "ميزانية", "توقعات", "فاتورة", "دفع", "بنك", "قرض",
+        "revenue",
+        "finance_revenue",
+        "financial_revenue",
+        "interest_income",
+        "fee_income",
+        "commission_income",
+        "revenu_financier",
+        "produits_financiers",
+        "إيرادات_مالية",
+
     ],
     "ecommerce": [
         "order",
@@ -152,6 +168,14 @@ BUSINESS_MODELS = {
         "منتجات",
         "شحن",
         "مرتجع",
+        "ecommerce_revenue",
+        "online_sales",
+        "web_sales",
+        "shopify_revenue",
+        "woocommerce_revenue",
+        "ventes_en_ligne",
+        "المبيعات_الإلكترونية",
+
     ],
     "agency": [
         "client",
@@ -177,6 +201,14 @@ BUSINESS_MODELS = {
         "فاتورة",
         "خدمة",
         "ساعات",
+        "agency_revenue",
+        "project_revenue",
+        "retainer_revenue",
+        "billable_revenue",
+        "consulting_revenue",
+        "revenu_projet",
+        "إيرادات_المشاريع",
+
     ],
     "restaurant": [
         "restaurant",
@@ -201,6 +233,14 @@ BUSINESS_MODELS = {
         "مطبخ",
         "مكون",
         "حجز",
+        "restaurant_revenue",
+        "food_sales",
+        "beverage_sales",
+        "meal_revenue",
+        "dining_revenue",
+        "ventes_restaurant",
+        "إيرادات_المطعم",
+
     ],
     "marketplace": [
         "gmv",
@@ -224,6 +264,17 @@ BUSINESS_MODELS = {
         "سوق",
         "بائع",
         "مشتري",
+        "commission_revenue",
+        "marketplace_revenue",
+        "take_rate_revenue",
+        "seller_fees",
+        "vendor_fees",
+        "gmv_revenue",
+        "revenu_marketplace",
+        "revenu_commission",
+        "إيرادات_السوق",
+        "إيرادات_العمولات",
+
     ],
     "agriculture": [
         "farm",
