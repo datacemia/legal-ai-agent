@@ -171,7 +171,9 @@ const getCurrencyDisplay = (
   const symbol = currency?.symbol || "";
 
   if (!code && !symbol) {
-    return "N/A";
+    if (language === "ar") return "غير محددة";
+    if (language === "fr") return "Non définie";
+    return "Not specified";
   }
 
   if (!symbol) {
@@ -209,12 +211,21 @@ const unavailableMetricLabel = (locale: Locale = "en") => {
   return "N/A";
 };
 
-const isUnavailableValue = (value: any) =>
-  value === null ||
-  value === undefined ||
-  value === "" ||
-  value === "N/A" ||
-  value === "n/a";
+const isUnavailableValue = (value: any) => {
+  const normalized =
+    typeof value === "string" ? value.trim().toLowerCase() : value;
+
+  return (
+    value === null ||
+    value === undefined ||
+    value === "" ||
+    normalized === "n/a" ||
+    normalized === "na" ||
+    normalized === "none" ||
+    normalized === "unknown" ||
+    normalized === "unavailable"
+  );
+};
 
 
 const downloadBlob = async (
@@ -248,7 +259,18 @@ const normalizeBackendText = (
   let text = String(value);
 
   const dictionaries: Record<Locale, Record<string, string>> = {
-    en: {},
+    en: {
+      "unavailable": "Unavailable",
+      "N/A": "Unavailable",
+      "unknown": "Unavailable",
+      "none": "Unavailable",
+      "Excellent profit margin.": "Excellent profit margin.",
+      "Excellent data quality.": "Excellent data quality.",
+      "Revenue is declining.": "Revenue is declining.",
+      "Positive cashflow.": "Positive cashflow.",
+      "Profit Margin Percent": "Profit Margin",
+      "Growth Rate Percent": "Growth Rate",
+    },
     fr: {
       "up": "en hausse",
       "down": "en baisse",
@@ -292,9 +314,15 @@ const normalizeBackendText = (
       "Expenses": "Dépenses",
       "Profit": "Bénéfice",
       "Profit Margin Percent": "Taux de marge bénéficiaire",
-      "Growth Rate Percent": "Taux de croissance"
-    },
-    ar: {
+      "Growth Rate Percent": "Taux de croissance",
+      "unavailable": "Indisponible",
+      "N/A": "Indisponible",
+      "unknown": "Indisponible",
+      "none": "Indisponible",
+      "Excellent profit margin.": "Excellente marge bénéficiaire.",
+      "Excellent data quality.": "Excellente qualité des données.",
+      "Revenue is declining.": "Le chiffre d’affaires est en baisse.",
+    },    ar: {
     "up": "في ارتفاع",
     "down": "في انخفاض",
     "stable": "مستقر",
@@ -347,8 +375,17 @@ const normalizeBackendText = (
     "Profit": "صافي الربح",
 
     "Profit Margin Percent": "نسبة هامش الربح",
-    "Growth Rate Percent": "معدل النمو"
-  },
+    "Growth Rate Percent": "معدل النمو",
+    "unavailable": "غير متاح",
+    "N/A": "غير متاح",
+    "unknown": "غير متاح",
+    "none": "غير متاح",
+    "Excellent profit margin.": "هامش ربح ممتاز.",
+    "Excellent data quality.": "جودة بيانات ممتازة.",
+    "Revenue is declining.": "الإيرادات في تراجع.",
+    "Excellent Profit Margin.": "هامش ربح ممتاز.",
+    "Excellent Data Quality.": "جودة بيانات ممتازة.",
+    "Revenue Is Declining.": "الإيرادات في تراجع."  },
   };
 
   const dictionary = dictionaries[language] || {};
@@ -360,6 +397,18 @@ const normalizeBackendText = (
       (_match, prefix) => `${prefix}${target}`
     );
   });
+
+  if (language === "ar") {
+    text = text
+      .replaceAll("Excellent هامش الربح.", "هامش ربح ممتاز.")
+      .replaceAll("Excellent جودة البيانات.", "جودة بيانات ممتازة.")
+      .replaceAll("الإيرادات is declining.", "الإيرادات في تراجع.")
+      .replaceAll("معدل فقدان العملاء unavailable.", "معدل فقدان العملاء غير متاح.")
+      .replaceAll("عائد الإنفاق الإعلاني unavailable.", "عائد الإنفاق الإعلاني غير متاح.")
+      .replaceAll("إيجابي التدفق النقدي.", "تدفق نقدي إيجابي.")
+      .replaceAll("هامش الربح Percent", "هامش الربح")
+      .replaceAll("النمو Rate Percent", "معدل النمو");
+  }
 
   if (language === "fr") {
     text = text
@@ -1285,22 +1334,22 @@ export default function BusinessDashboardPage() {
 
         <SectionCard title={t.advancedKpis}>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-6">
-            <StatCard label="AOV" value={formatMoney(advanced.aov, currency, locale)} />
-            <StatCard label="CAC" value={formatMoney(advanced.cac, currency, locale)} />
-            <StatCard label="ROAS" value={formatNumber(advanced.roas, locale)} />
-            <StatCard label="MRR" value={formatMoney(advanced.mrr, currency, locale)} />
-            <StatCard label="ARR" value={formatMoney(advanced.arr, currency, locale)} />
+            <StatCard label="AOV" value={Number(advanced.aov) > 0 ? formatMoney(advanced.aov, currency, locale) : unavailableMetricLabel(locale)} />
+            <StatCard label="CAC" value={Number(advanced.cac) > 0 ? formatMoney(advanced.cac, currency, locale) : unavailableMetricLabel(locale)} />
+            <StatCard label="ROAS" value={Number(advanced.roas) > 0 ? formatNumber(advanced.roas, locale) : unavailableMetricLabel(locale)} />
+            <StatCard label="MRR" value={Number(advanced.mrr) > 0 ? formatMoney(advanced.mrr, currency, locale) : unavailableMetricLabel(locale)} />
+            <StatCard label="ARR" value={Number(advanced.arr) > 0 ? formatMoney(advanced.arr, currency, locale) : unavailableMetricLabel(locale)} />
             <StatCard
               label={normalizeBackendText("Churn", locale)}
-              value={formatPercent(advanced.churn_rate_percent, locale)}
+              value={Number(advanced.churn_rate_percent) > 0 ? formatPercent(advanced.churn_rate_percent, locale) : unavailableMetricLabel(locale)}
               tone={Number(advanced.churn_rate_percent) > 10 ? "red" : "slate"}
             />
-            <StatCard label={normalizeBackendText("Customers", locale)} value={formatNumber(advanced.customers, locale)} />
-            <StatCard label={normalizeBackendText("New customers", locale)} value={formatNumber(advanced.new_customers, locale)} />
-            <StatCard label={normalizeBackendText("Churned customers", locale)} value={formatNumber(advanced.churned_customers, locale)} />
-            <StatCard label={normalizeBackendText("Revenue/customer", locale)} value={formatMoney(advanced.revenue_per_customer, currency, locale)} />
-            <StatCard label={normalizeBackendText("Orders", locale)} value={formatNumber(advanced.orders, locale)} />
-            <StatCard label={normalizeBackendText("Ad spend", locale)} value={formatMoney(advanced.ad_spend, currency, locale)} />
+            <StatCard label={normalizeBackendText("Customers", locale)} value={Number(advanced.customers) > 0 ? formatNumber(advanced.customers, locale) : unavailableMetricLabel(locale)} />
+            <StatCard label={normalizeBackendText("New customers", locale)} value={Number(advanced.new_customers) > 0 ? formatNumber(advanced.new_customers, locale) : unavailableMetricLabel(locale)} />
+            <StatCard label={normalizeBackendText("Churned customers", locale)} value={Number(advanced.churned_customers) > 0 ? formatNumber(advanced.churned_customers, locale) : unavailableMetricLabel(locale)} />
+            <StatCard label={normalizeBackendText("Revenue/customer", locale)} value={Number(advanced.revenue_per_customer) > 0 ? formatMoney(advanced.revenue_per_customer, currency, locale) : unavailableMetricLabel(locale)} />
+            <StatCard label={normalizeBackendText("Orders", locale)} value={Number(advanced.orders) > 0 ? formatNumber(advanced.orders, locale) : unavailableMetricLabel(locale)} />
+            <StatCard label={normalizeBackendText("Ad spend", locale)} value={Number(advanced.ad_spend) > 0 ? formatMoney(advanced.ad_spend, currency, locale) : unavailableMetricLabel(locale)} />
           </div>
         </SectionCard>
 
