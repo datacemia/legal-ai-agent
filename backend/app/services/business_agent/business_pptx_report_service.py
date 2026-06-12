@@ -618,6 +618,34 @@ def _translate_category(value: Any, language: str) -> str:
 
 
 
+
+def _display_level_label(value: Any, language: str) -> str:
+    text = _translate_and_normalize(value, language)
+    raw = str(text).strip()
+    key = raw.lower()
+
+    mappings = {
+        "fr": {
+            "low": "Faible", "faible": "Faible",
+            "medium": "Moyen", "moyen": "Moyen",
+            "high": "Élevé", "élevé": "Élevé",
+            "critical": "Critique", "critique": "Critique",
+        },
+        "en": {
+            "low": "Low", "medium": "Medium",
+            "high": "High", "critical": "Critical",
+        },
+        "ar": {
+            "low": "منخفض", "منخفض": "منخفض",
+            "medium": "متوسط", "متوسط": "متوسط",
+            "high": "مرتفع", "مرتفع": "مرتفع",
+            "critical": "حرج", "حرج": "حرج",
+        },
+    }
+
+    return mappings.get(language, {}).get(key, raw)
+
+
 def _translate_and_normalize(value: Any, language: str) -> str:
     translated = _translate_common_value(value, language)
 
@@ -1221,7 +1249,7 @@ def _create_summary(prs, analysis, labels, language):
     _add_insight_card(
         slide,
         story["watch"],
-        _translate_and_normalize(
+        _display_level_label(
             ((analysis.get("forecast") or {}).get("cashflow_risk")) or "-",
             language,
         ),
