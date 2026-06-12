@@ -511,6 +511,51 @@ def _translate_and_normalize(value: Any, language: str) -> str:
     return translated
 
 
+
+def _display_currency(currency: dict[str, Any] | None, language: str) -> str:
+    currency = currency or {}
+    code = currency.get("code")
+    symbol = currency.get("symbol")
+
+    parts = [
+        str(part).strip()
+        for part in (code, symbol)
+        if part not in (None, "", "-", "None")
+    ]
+
+    if parts:
+        return " ".join(parts)
+
+    return translate_text("Not specified", language)
+
+
+def _format_advanced_metric(
+    value: Any,
+    language: str,
+    *,
+    is_money: bool = False,
+    is_percent: bool = False,
+    currency: dict[str, Any] | None = None,
+) -> str:
+    if value in (None, "", "unknown", "N/A"):
+        return translate_text("N/A", language)
+
+    try:
+        numeric = float(value)
+    except (TypeError, ValueError):
+        return str(value)
+
+    if numeric == 0:
+        return translate_text("N/A", language)
+
+    if is_percent:
+        return f"{numeric:.2f}%"
+
+    if is_money:
+        return _format_money(numeric, currency, language)
+
+    return _format_number(numeric, language)
+
 def _format_narrative_text(
     text: Any,
     language: str,
@@ -987,7 +1032,7 @@ def build_business_pdf_report(
         [_p(labels["generated_at"], styles["small"], language), _p(generated_at, styles["body"], language)],
         [_p(labels["source_file"], styles["small"], language), _p(source_file, styles["body"], language)],
         [_p(labels["business_model"], styles["small"], language), _p(_translate_common_value(analysis.get("business_model") or "-", language), styles["body"], language)],
-        [_p(labels["currency"], styles["small"], language), _p(f"{currency.get('code', '-')} {currency.get('symbol', '')}", styles["body"], language)],
+        [_p(labels["currency"], styles["small"], language), _p(_display_currency(currency, language), styles["body"], language)],
     ]
     story.append(_table(metadata_rows, [4.5 * cm, 11 * cm], header=False, background=WHITE))
 
@@ -1115,24 +1160,25 @@ def build_business_pdf_report(
         ]
 
         fields = [
-            ("AOV", advanced.get("aov"), True),
-            ("CAC", advanced.get("cac"), True),
-            ("ROAS", advanced.get("roas"), False),
-            ("MRR", advanced.get("mrr"), True),
-            ("ARR", advanced.get("arr"), True),
-            ("Churn", _format_percent(advanced.get("churn_rate_percent")), False),
-            ("Customers", advanced.get("customers"), False),
-            ("Orders", advanced.get("orders"), False),
-            ("Ad spend", advanced.get("ad_spend"), True),
+            ("AOV", advanced.get("aov"), True, False),
+            ("CAC", advanced.get("cac"), True, False),
+            ("ROAS", advanced.get("roas"), False, False),
+            ("MRR", advanced.get("mrr"), True, False),
+            ("ARR", advanced.get("arr"), True, False),
+            ("Churn", advanced.get("churn_rate_percent"), False, True),
+            ("Customers", advanced.get("customers"), False, False),
+            ("Orders", advanced.get("orders"), False, False),
+            ("Ad spend", advanced.get("ad_spend"), True, False),
         ]
 
-        for metric, value, money in fields:
-            if money:
-                display = _format_money(value, currency, language)
-            elif isinstance(value, str):
-                display = value
-            else:
-                display = _format_number(value)
+        for metric, value, money, percent in fields:
+            display = _format_advanced_metric(
+                value,
+                language,
+                is_money=money,
+                is_percent=percent,
+                currency=currency,
+            )
 
             rows.append([_p(_localized_metric_label(metric, language), styles["body"], language), _p(display, styles["body"], language)])
 

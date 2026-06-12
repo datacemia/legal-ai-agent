@@ -1413,6 +1413,31 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
         "fr": "décision unique la plus importante",
         "ar": "القرار الأهم الوحيد",
     },
+    "flat": {
+        "en": "Flat",
+        "fr": "Stable",
+        "ar": "مستقر",
+    },
+    "Not specified": {
+        "en": "Not specified",
+        "fr": "Non définie",
+        "ar": "غير محددة",
+    },
+    "Excellent profit margin.": {
+        "en": "Excellent profit margin.",
+        "fr": "Excellente marge bénéficiaire.",
+        "ar": "هامش ربح ممتاز.",
+    },
+    "Revenue is declining.": {
+        "en": "Revenue is declining.",
+        "fr": "Les revenus sont en baisse.",
+        "ar": "الإيرادات في تراجع.",
+    },
+    "Excellent data quality.": {
+        "en": "Excellent data quality.",
+        "fr": "Excellente qualité des données.",
+        "ar": "جودة بيانات ممتازة.",
+    },
 }
 
 
