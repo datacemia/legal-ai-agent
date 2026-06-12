@@ -1252,8 +1252,8 @@ def _create_kpis(prs, analysis, labels, language):
         (labels["revenue"], _format_money(kpis.get("revenue"), currency, language), COLORS["green"]),
         (labels["expenses"], _format_money(kpis.get("expenses"), currency, language), COLORS["amber"]),
         (labels["profit"], _format_money(kpis.get("profit"), currency, language), COLORS["green"]),
-        (labels["margin"], _format_export_percent(kpis.get("profit_margin_percent", language)), COLORS["ink"]),
-        (labels["growth"], _format_export_percent(kpis.get("growth_rate_percent", language)), COLORS["blue"]),
+        (labels["margin"], _format_export_percent(kpis.get("profit_margin_percent"), language), COLORS["ink"]),
+        (labels["growth"], _format_export_percent(kpis.get("growth_rate_percent"), language), COLORS["blue"]),
         (labels["cashflow"], _translate_and_normalize(kpis.get("cashflow_status"), language), COLORS["green"]),
     ]
 

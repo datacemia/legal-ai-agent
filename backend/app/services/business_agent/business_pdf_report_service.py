@@ -1146,8 +1146,8 @@ def build_business_pdf_report(
         _kpi_cell(labels["revenue"], _format_money(kpis.get("revenue"), currency, language), styles, language),
         _kpi_cell(labels["expenses"], _format_money(kpis.get("expenses"), currency, language), styles, language),
         _kpi_cell(labels["profit"], _format_money(kpis.get("profit"), currency, language), styles, language),
-        _kpi_cell(labels["margin"], _format_export_percent(kpis.get("profit_margin_percent", language)), styles, language),
-        _kpi_cell(labels["growth"], _format_export_percent(kpis.get("growth_rate_percent", language)), styles, language),
+        _kpi_cell(labels["margin"], _format_export_percent(kpis.get("profit_margin_percent"), language), styles, language),
+        _kpi_cell(labels["growth"], _format_export_percent(kpis.get("growth_rate_percent"), language), styles, language),
         _kpi_cell(labels["cashflow"], _translate_and_normalize(kpis.get("cashflow_status") or "-", language), styles, language),
     ]
 
