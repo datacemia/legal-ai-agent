@@ -1,3 +1,4 @@
+from app.services.business_agent.business_i18n_service import translate_severity
 import os
 import re
 import tempfile
@@ -797,9 +798,9 @@ def _clean_export_text(value: Any, language: str) -> str:
     if language == "fr":
         text = re.sub(r"(-?\d+)\.(\d+)%", r"\1,\2 %", text)
         text = re.sub(r"\b(\d{1,3}),(\d{3})\.(\d{2})\b", r"\1 \2,\3", text)
-        text = text.replace("Score: moyen", "Priorité : Moyenne")
-        text = text.replace("Score: faible", "Priorité : Faible")
-        text = text.replace("Score: élevé", "Priorité : Élevée")
+        text = text.replace("Priorité : Moyenne", "Priorité : Moyenne")
+        text = text.replace("Priorité : Faible", "Priorité : Faible")
+        text = text.replace("Priorité : Élevée", "Priorité : Élevée")
 
     return text
 

@@ -1534,6 +1534,14 @@ PROTECTED_STRUCTURE_KEYS = {
 }
 
 
+
+def translate_severity(value: Any, language: str = "en") -> str:
+    if value in (None, ""):
+        return ""
+
+    normalized = str(value).strip().lower()
+    return str(translate_term(normalized, language))
+
 def translate_term(key: Any, language: str = "en") -> Any:
     lang = normalize_language(language)
 

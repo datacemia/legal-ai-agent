@@ -33,6 +33,7 @@ from app.services.business_agent.business_chart_image_service import (
     generate_business_chart_images,
 )
 
+from app.services.business_agent.business_i18n_service import translate_severity
 
 BRAND_NAME = "Runexa Systems"
 SUPPORTED_LANGUAGES = {"en", "fr", "ar"}
@@ -914,7 +915,7 @@ def _list_items(
     for index, item in enumerate(items[:max_items], start=1):
         title = _translate_and_normalize(_item_title(item), language)
         description = _format_narrative_text(_translate_and_normalize(_item_description(item), language), language, None)
-        badge = _translate_and_normalize(_item_badge(item), language)
+        badge = translate_severity(_item_badge(item), language) or _translate_and_normalize(_item_badge(item), language)
 
         block = [
             _p(f"{index}. {title}", styles["body_bold"], language),
