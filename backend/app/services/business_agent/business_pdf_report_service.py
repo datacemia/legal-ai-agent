@@ -888,6 +888,25 @@ def _item_description(item: Any) -> str:
     )
 
 
+
+def _display_level_label(value: Any, language: str) -> str:
+    text = _translate_and_normalize(value, language)
+
+    if language == "fr":
+        mapping = {
+            "faible": "Faible",
+            "moyen": "Moyen",
+            "élevé": "Élevé",
+            "critique": "Critique",
+        }
+        return mapping.get(str(text).strip(), str(text).capitalize())
+
+    if language == "en":
+        return str(text).capitalize()
+
+    return str(text)
+
+
 def _item_badge(item: Any) -> str:
     if not isinstance(item, dict):
         return ""
@@ -915,7 +934,7 @@ def _list_items(
     for index, item in enumerate(items[:max_items], start=1):
         title = _translate_and_normalize(_item_title(item), language)
         description = _format_narrative_text(_translate_and_normalize(_item_description(item), language), language, None)
-        badge = translate_severity(_item_badge(item), language) or _translate_and_normalize(_item_badge(item), language)
+        badge = translate_severity(_item_badge(item), language) or _display_level_label(_item_badge(item), language)
 
         block = [
             _p(f"{index}. {title}", styles["body_bold"], language),
