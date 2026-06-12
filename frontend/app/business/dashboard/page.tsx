@@ -208,7 +208,7 @@ const isMetricAvailable = (
 const unavailableMetricLabel = (locale: Locale = "en") => {
   if (locale === "ar") return "غير متاح";
   if (locale === "fr") return "N/D";
-  return "Not specified";
+  return "N/A";
 };
 
 const isUnavailableValue = (value: any) => {
