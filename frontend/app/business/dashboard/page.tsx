@@ -313,8 +313,8 @@ const normalizeBackendText = (
       "Revenue": "Chiffre d’affaires",
       "Expenses": "Dépenses",
       "Profit": "Bénéfice",
-      "Profit Margin Percent": "Taux de marge bénéficiaire",
-      "Growth Rate Percent": "Taux de croissance",
+      "Profit Margin Percent": "Marge bénéficiaire",
+      "Growth Rate Percent": "Croissance",
       "unavailable": "Indisponible",
       "N/A": "Indisponible",
       "unknown": "Indisponible",
@@ -322,6 +322,7 @@ const normalizeBackendText = (
       "Excellent profit margin.": "Excellente marge bénéficiaire.",
       "Excellent data quality.": "Excellente qualité des données.",
       "Revenue is declining.": "Le chiffre d’affaires est en baisse.",
+      "Chiffre d’affaires is declining.": "Le chiffre d’affaires est en baisse.",
     },    ar: {
     "up": "في ارتفاع",
     "down": "في انخفاض",
@@ -414,6 +415,16 @@ const normalizeBackendText = (
 
   if (language === "fr") {
     text = text
+      .replaceAll("Excellent Marge bénéficiaire.", "Excellente marge bénéficiaire.")
+      .replaceAll("Excellent Qualité des données.", "Excellente qualité des données.")
+      .replaceAll("positif Flux de trésorerie.", "Flux de trésorerie positif.")
+      .replaceAll("Attrition client Indisponible.", "Attrition client indisponible.")
+      .replaceAll("ROAS Indisponible.", "ROAS indisponible.")
+      .replaceAll("Chiffre d’affaires is declining.", "Le chiffre d’affaires est en baisse.")
+      .replaceAll("Marge bénéficiaire Percent", "Marge bénéficiaire")
+      .replaceAll("Croissance Rate Percent", "Croissance")
+      .replaceAll("New Clients", "Nouveaux clients")
+      .replaceAll("Churned Clients", "Clients perdus")
       .replaceAll("cashffaible", "cashflow")
       .replaceAll("cashflow est Positif", "cashflow est positif")
       .replaceAll("score de santé backend est de 73/100 (Sain)", "score de santé backend est de 73/100 (sain)")
@@ -908,7 +919,11 @@ function ListItemCard({
 }) {
   const text = normalizeBackendText(readableText(item), language);
   const explanation = normalizeBackendText(readableDescription(item), language);
-  const badge = normalizeBackendText(item?.severity || item?.priority || item?.impact || "", language);
+  const rawBadge = normalizeBackendText(item?.severity || item?.priority || item?.impact || "", language);
+  const badge =
+    language === "fr" && ["faible", "moyen", "élevé", "critique"].includes(rawBadge)
+      ? rawBadge.charAt(0).toUpperCase() + rawBadge.slice(1)
+      : rawBadge;
 
   return (
     <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
