@@ -1209,10 +1209,7 @@ def _create_summary(prs, analysis, labels, language):
     _add_insight_card(
         slide,
         story["implication"],
-        _translate_and_normalize(
-            (decision or {}).get("impact") or (analysis.get("business_health") or {}).get("rating") or "-",
-            language,
-        ),
+        _translate_and_normalize((decision or {}).get("impact") or (analysis.get("business_health") or {}).get("rating") or "-", language).capitalize(),
         Inches(0.75),
         Inches(5.62),
         Inches(3.6),

@@ -1191,7 +1191,12 @@ def build_business_pdf_report(
             story.append(_p(_format_narrative_text(decision.get("why"), language, currency), styles["small"], language))
 
         if decision.get("impact"):
-            story.append(_p(f"{labels['score']}: {_translate_and_normalize(decision.get('impact'), language)}", styles["small"], language))
+            impact_label = {
+                "fr": "Priorité",
+                "ar": "الأولوية",
+                "en": "Priority",
+            }.get(language, "Priority")
+            story.append(_p(f"{impact_label}: {_translate_and_normalize(decision.get('impact'), language).capitalize()}", styles["small"], language))
 
     if forecast:
         story.extend(_section(labels["forecast"], styles, language))
