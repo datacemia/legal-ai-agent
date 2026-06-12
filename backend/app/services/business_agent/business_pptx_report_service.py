@@ -110,6 +110,28 @@ def _format_locale_percent(value: Any, language: str) -> str:
         return f"{number:.2f}".replace(".", ",") + " %"
     return f"{number:.2f}%"
 
+
+def _format_export_number(value: Any, language: str, decimals: int = 2) -> str:
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return str(value)
+
+    if language == "fr":
+        return f"{number:,.{decimals}f}".replace(",", " ").replace(".", ",")
+    return f"{number:,.{decimals}f}"
+
+
+def _format_export_percent(value: Any, language: str) -> str:
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return str(value)
+
+    if language == "fr":
+        return f"{number:.2f}".replace(".", ",") + " %"
+    return f"{number:.2f}%"
+
 def _format_number(value: Any) -> str:
     numeric = _number(value)
     if numeric is None:
@@ -119,7 +141,7 @@ def _format_number(value: Any) -> str:
     return f"{numeric:,.2f}".rstrip("0").rstrip(".")
 
 
-def _format_percent(value: Any) -> str:
+def _format_export_percent(value: Any, language) -> str:
     numeric = _number(value)
     if numeric is None:
         return "-"
@@ -435,8 +457,8 @@ def _signal_line(analysis: dict[str, Any], language: str) -> str:
 
     return (
         f"{labels['health_score']}: {_format_number(signal['score'])}/100 · "
-        f"{labels['revenue_growth']}: {_format_percent(signal['growth'])} · "
-        f"{labels['profit_margin']}: {_format_percent(signal['margin'])}"
+        f"{labels['revenue_growth']}: {_format_export_percent(signal['growth'], language)} · "
+        f"{labels['profit_margin']}: {_format_export_percent(signal['margin'], language)}"
     )
 
 
@@ -696,9 +718,9 @@ def _format_narrative_text(
         "137300.0": _format_money(137300.0, currency, language),
         "98650.0": _format_money(98650.0, currency, language),
         "38650.0": _format_money(38650.0, currency, language),
-        "28.15%": _format_percent(28.15),
-        "10.32%": _format_percent(10.32),
-        "28.65%": _format_percent(28.65),
+        "28.15%": _format_export_percent(28.15, language),
+        "10.32%": _format_export_percent(10.32, language),
+        "28.65%": _format_export_percent(28.65, language),
         "28.65": _format_number(28.65),
     }
 
@@ -1230,8 +1252,8 @@ def _create_kpis(prs, analysis, labels, language):
         (labels["revenue"], _format_money(kpis.get("revenue"), currency, language), COLORS["green"]),
         (labels["expenses"], _format_money(kpis.get("expenses"), currency, language), COLORS["amber"]),
         (labels["profit"], _format_money(kpis.get("profit"), currency, language), COLORS["green"]),
-        (labels["margin"], _format_percent(kpis.get("profit_margin_percent")), COLORS["ink"]),
-        (labels["growth"], _format_percent(kpis.get("growth_rate_percent")), COLORS["blue"]),
+        (labels["margin"], _format_export_percent(kpis.get("profit_margin_percent", language)), COLORS["ink"]),
+        (labels["growth"], _format_export_percent(kpis.get("growth_rate_percent", language)), COLORS["blue"]),
         (labels["cashflow"], _translate_and_normalize(kpis.get("cashflow_status"), language), COLORS["green"]),
     ]
 
@@ -1333,8 +1355,8 @@ def _create_forecast(prs, analysis, labels, language):
     _add_subline(slide, _signal_line(analysis, language), language)
 
     cards = [
-        (labels["next_month"], _format_money(forecast.get("next_month_revenue"), currency, language), COLORS["green"]),
-        (labels["next_quarter"], _format_money(forecast.get("next_quarter_revenue"), currency, language), COLORS["blue"]),
+        (labels["next_month"], _format_export_number(forecast.get("next_month_revenue"), language), COLORS["green"]),
+        (labels["next_quarter"], _format_export_number(forecast.get("next_quarter_revenue"), language), COLORS["blue"]),
         (labels["trend"], _translate_and_normalize(forecast.get("trend"), language), COLORS["ink"]),
         (labels["cashflow_risk"], _translate_and_normalize(forecast.get("cashflow_risk"), language), COLORS["amber"]),
         (labels["volatility"], _translate_and_normalize(forecast.get("volatility"), language), COLORS["amber"]),

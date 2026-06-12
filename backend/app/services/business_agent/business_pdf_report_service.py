@@ -192,6 +192,28 @@ def _format_locale_percent(value: Any, language: str) -> str:
         return f"{number:.2f}".replace(".", ",") + " %"
     return f"{number:.2f}%"
 
+
+def _format_export_number(value: Any, language: str, decimals: int = 2) -> str:
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return str(value)
+
+    if language == "fr":
+        return f"{number:,.{decimals}f}".replace(",", " ").replace(".", ",")
+    return f"{number:,.{decimals}f}"
+
+
+def _format_export_percent(value: Any, language: str) -> str:
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return str(value)
+
+    if language == "fr":
+        return f"{number:.2f}".replace(".", ",") + " %"
+    return f"{number:.2f}%"
+
 def _format_number(value: Any) -> str:
     numeric = _number(value)
 
@@ -204,7 +226,7 @@ def _format_number(value: Any) -> str:
     return f"{numeric:,.2f}".rstrip("0").rstrip(".")
 
 
-def _format_percent(value: Any) -> str:
+def _format_export_percent(value: Any, language) -> str:
     numeric = _number(value)
 
     if numeric is None:
@@ -626,9 +648,9 @@ def _format_narrative_text(
         "137300.0": _format_money(137300.0, currency, language),
         "98650.0": _format_money(98650.0, currency, language),
         "38650.0": _format_money(38650.0, currency, language),
-        "28.15%": _format_percent(28.15),
-        "10.32%": _format_percent(10.32),
-        "28.65%": _format_percent(28.65),
+        "28.15%": _format_export_percent(28.15, language),
+        "10.32%": _format_export_percent(10.32, language),
+        "28.65%": _format_export_percent(28.65, language),
         "28.65": _format_number(28.65),
         "73/100": "73/100",
     }
@@ -750,6 +772,17 @@ def _styles(language: str) -> dict[str, ParagraphStyle]:
         ),
     }
 
+
+
+def _clean_export_text(value: Any, language: str) -> str:
+    text = str(value)
+    if language == "fr":
+        text = re.sub(r"(-?\d+)\.(\d+)%", r"\1,\2 %", text)
+        text = re.sub(r"\b(\d{1,3}),(\d{3})\.(\d{2})\b", r"\1 \2,\3", text)
+        text = text.replace("Priorité : Moyenne", "Priorité : Moyenne")
+        text = text.replace("Priorité : Faible", "Priorité : Faible")
+        text = text.replace("Priorité : Élevée", "Priorité : Élevée")
+    return text
 
 def _p(value: Any, style: ParagraphStyle, language: str) -> Paragraph:
     text = _xml_escape(_display_text(value, language))
@@ -1113,8 +1146,8 @@ def build_business_pdf_report(
         _kpi_cell(labels["revenue"], _format_money(kpis.get("revenue"), currency, language), styles, language),
         _kpi_cell(labels["expenses"], _format_money(kpis.get("expenses"), currency, language), styles, language),
         _kpi_cell(labels["profit"], _format_money(kpis.get("profit"), currency, language), styles, language),
-        _kpi_cell(labels["margin"], _format_percent(kpis.get("profit_margin_percent")), styles, language),
-        _kpi_cell(labels["growth"], _format_percent(kpis.get("growth_rate_percent")), styles, language),
+        _kpi_cell(labels["margin"], _format_export_percent(kpis.get("profit_margin_percent", language)), styles, language),
+        _kpi_cell(labels["growth"], _format_export_percent(kpis.get("growth_rate_percent", language)), styles, language),
         _kpi_cell(labels["cashflow"], _translate_and_normalize(kpis.get("cashflow_status") or "-", language), styles, language),
     ]
 
@@ -1162,8 +1195,8 @@ def build_business_pdf_report(
     if forecast:
         story.extend(_section(labels["forecast"], styles, language))
         forecast_rows = [
-            [_p(labels["next_month"], styles["small"], language), _p(_format_money(forecast.get("next_month_revenue"), currency, language), styles["body"], language)],
-            [_p(labels["next_quarter"], styles["small"], language), _p(_format_money(forecast.get("next_quarter_revenue"), currency, language), styles["body"], language)],
+            [_p(labels["next_month"], styles["small"], language), _p(_format_export_number(forecast.get("next_month_revenue"), language), styles["body"], language)],
+            [_p(labels["next_quarter"], styles["small"], language), _p(_format_export_number(forecast.get("next_quarter_revenue"), language), styles["body"], language)],
             [_p(labels["trend"], styles["small"], language), _p(_translate_and_normalize(forecast.get("trend") or "-", language), styles["body"], language)],
             [_p(labels["cashflow_risk"], styles["small"], language), _p(_translate_and_normalize(forecast.get("cashflow_risk") or "-", language), styles["body"], language)],
             [_p(labels["volatility"], styles["small"], language), _p(_translate_and_normalize(forecast.get("volatility") or "-", language), styles["body"], language)],
