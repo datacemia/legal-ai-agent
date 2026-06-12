@@ -1177,7 +1177,7 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
     "Profit margin is {margin}% and revenue growth is {growth}%.": {
         "en": "Profit margin is {margin}% and revenue growth is {growth}%.",
-        "fr": "La marge bénéficiaire est de {margin}% et la croissance des revenus est de {growth}%.",
+        "fr": "La marge bénéficiaire est de {margin} % et la croissance des revenus est de {growth} %.",
         "ar": "هامش الربح هو {margin}% ونمو الإيرادات هو {growth}%.",
     },
     "Customer churn is estimated at {churn}%, which affects retention quality.": {
