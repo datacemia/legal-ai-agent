@@ -386,6 +386,12 @@ def _translate_common_value(value: Any, language: str) -> str:
             "up": "صاعد",
             "down": "هابط",
             "stable": "مستقر",
+            "flat": "مستقر",
+            "not specified": "غير محددة",
+            "n/a": "غير متاح",
+            "excellent profit margin.": "هامش ربح ممتاز.",
+            "revenue is declining.": "الإيرادات في تراجع.",
+            "excellent data quality.": "جودة بيانات ممتازة.",
             "low": "منخفض",
             "medium": "متوسط",
             "high": "مرتفع",
@@ -413,6 +419,12 @@ def _translate_common_value(value: Any, language: str) -> str:
             "up": "hausse",
             "down": "baisse",
             "stable": "stable",
+            "flat": "stable",
+            "not specified": "Non définie",
+            "n/a": "Indisponible",
+            "excellent profit margin.": "Excellente marge bénéficiaire.",
+            "revenue is declining.": "Les revenus sont en baisse.",
+            "excellent data quality.": "Excellente qualité des données.",
             "low": "faible",
             "medium": "moyen",
             "high": "élevé",
@@ -526,7 +538,7 @@ def _display_currency(currency: dict[str, Any] | None, language: str) -> str:
     if parts:
         return " ".join(parts)
 
-    return translate_text("Not specified", language)
+    return _translate_common_value("Not specified", language)
 
 
 def _format_advanced_metric(
@@ -538,7 +550,7 @@ def _format_advanced_metric(
     currency: dict[str, Any] | None = None,
 ) -> str:
     if value in (None, "", "unknown", "N/A"):
-        return translate_text("N/A", language)
+        return _translate_common_value("N/A", language)
 
     try:
         numeric = float(value)
@@ -546,7 +558,7 @@ def _format_advanced_metric(
         return str(value)
 
     if numeric == 0:
-        return translate_text("N/A", language)
+        return _translate_common_value("N/A", language)
 
     if is_percent:
         return f"{numeric:.2f}%"
