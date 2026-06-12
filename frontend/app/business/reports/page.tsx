@@ -213,7 +213,7 @@ const normalizeBackendText = (
 
     "Profit Margin": "Marge bénéficiaire",
     "Growth": "Croissance",
-    "Cashflow": "Cashflow",
+    "Cashflow": "Flux de trésorerie",
     "Churn": "Attrition client",
 
     "Roas": "ROAS",
@@ -302,7 +302,7 @@ const normalizeBackendText = (
       .replaceAll("score de santé backend est de 73/100 (Sain)", "score de santé backend est de 73/100 (sain)")
       .replaceAll("situation actuelle comme Critique", "situation actuelle comme critique")
       .replaceAll("Volatilité moyen", "Volatilité moyenne")
-      .replaceAll("Risque cashflow faible", "Risque de cashflow faible");
+      .replaceAll("Risque de flux de trésorerie faible", "Risque de flux de trésorerie faible");
   }
 
   if (language === "ar" && text === "N/A") {
@@ -425,7 +425,7 @@ const labels: Record<Locale, Record<string, string>> = {
 
     source: "Analyse source",
 
-    healthScore: "Score de santé business",
+    healthScore: "Score de santé de l'entreprise",
 
     businessModel: "Modèle économique",
 

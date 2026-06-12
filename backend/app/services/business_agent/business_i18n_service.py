@@ -1192,12 +1192,12 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
     "Business Health Score is {score}/100.": {
         "en": "Business Health Score is {score}/100.",
-        "fr": "Le score de santé business est de {score}/100.",
+        "fr": "Le score de santé de l'entreprise est de {score}/100.",
         "ar": "درجة صحة الأعمال هي {score}/100.",
     },
     "Business Health Score could not be calculated because insufficient business performance data was provided.": {
         "en": "Business Health Score could not be calculated because insufficient business performance data was provided.",
-        "fr": "Le score de santé business n’a pas pu être calculé faute de données de performance suffisantes.",
+        "fr": "Le score de santé de l'entreprise n’a pas pu être calculé faute de données de performance suffisantes.",
         "ar": "تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء كافية.",
     },
     "Revenue could not be calculated from the uploaded data.": {
@@ -1852,7 +1852,7 @@ def _build_executive_summary(payload: dict[str, Any], language: str) -> str:
         ][lang] + " "
     else:
         if lang == "fr":
-            health_sentence = f"Le score de santé business est de {score}/100 ({rating}). "
+            health_sentence = f"Le score de santé de l'entreprise est de {score}/100 ({rating}). "
         elif lang == "ar":
             health_sentence = f"درجة صحة الأعمال هي {score}/100 ({rating}). "
         else:

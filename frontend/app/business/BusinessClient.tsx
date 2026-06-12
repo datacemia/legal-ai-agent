@@ -310,7 +310,7 @@ const normalizeBackendText = (
 
     "Profit Margin": "Marge bénéficiaire",
     "Growth": "Croissance",
-    "Cashflow": "Cashflow",
+    "Cashflow": "Flux de trésorerie",
     "Churn": "Attrition client",
 
     "Roas": "ROAS",
@@ -414,7 +414,7 @@ const normalizeBackendText = (
       .replaceAll("score de santé backend est de 73/100 (Sain)", "score de santé backend est de 73/100 (sain)")
       .replaceAll("situation actuelle comme Critique", "situation actuelle comme critique")
       .replaceAll("Volatilité moyen", "Volatilité moyenne")
-      .replaceAll("Risque cashflow faible", "Risque de cashflow faible")
+      .replaceAll("Risque de flux de trésorerie faible", "Risque de flux de trésorerie faible")
       .replaceAll("Le Profit", "Le profit")
       .replaceAll("le Profit", "le profit")
       .replaceAll("du Profit", "du profit")
@@ -757,7 +757,7 @@ const normalizeChartTitle = (
     "Évolution des revenus": t.revenueTrend,
     "Évolution des dépenses": t.expenseTrend,
     "Évolution du profit": t.profitEvolution,
-    "Évolution du cashflow": t.cashflowTrend,
+    "Évolution du flux de trésorerie": t.cashflowTrend,
     "Dépenses par catégorie": t.expensesByCategory,
 
     "تطور الإيرادات": t.revenueTrend,

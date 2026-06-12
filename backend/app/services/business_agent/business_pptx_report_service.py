@@ -197,13 +197,13 @@ def _labels(language: str) -> dict[str, str]:
             "profit": "Profit",
             "margin": "Margin",
             "growth": "Growth",
-            "cashflow": "Cashflow",
+            "cashflow": "Flux de trésorerie",
             "next_month": "Next Month Revenue",
             "next_quarter": "Next Quarter Revenue",
             "generated_at": "Generated at",
             "source_file": "Source file",
             "trend": "Trend",
-            "cashflow_risk": "Cashflow Risk",
+            "cashflow_risk": "Cash Flow Risk",
             "volatility": "Volatility",
             "charts": "Financial Trends",
             "quality_score": "Quality Score",
@@ -229,13 +229,13 @@ def _labels(language: str) -> dict[str, str]:
             "profit": "Profit",
             "margin": "Marge",
             "growth": "Croissance",
-            "cashflow": "Cashflow",
+            "cashflow": "Flux de trésorerie",
             "next_month": "Revenus mois prochain",
             "next_quarter": "Revenus prochain trimestre",
             "generated_at": "Généré le",
             "source_file": "Fichier source",
             "trend": "Tendance",
-            "cashflow_risk": "Risque de cashflow",
+            "cashflow_risk": "Risque de flux de trésorerie",
             "volatility": "Volatilité",
             "charts": "Tendances financières",
             "quality_score": "Score qualité",
@@ -584,7 +584,7 @@ def _translate_and_normalize(value: Any, language: str) -> str:
             "Positif": "positif",
             "Faible": "faible",
             "Volatilité moyen": "Volatilité moyenne",
-            "Risque cashflow faible": "Risque de cashflow faible",
+            "Risque de flux de trésorerie faible": "Risque de flux de trésorerie faible",
             "cashflow est Positif": "cashflow est positif",
             "cashflow est Healthy": "cashflow est sain",
             "situation actuelle comme Critique": "situation actuelle comme critique",
@@ -713,8 +713,8 @@ def _format_narrative_text(
         result = result.replace("score de santé backend est de 73/100 (Sain)", "score de santé backend est de 73/100 (sain)")
         result = result.replace("Volatilité moyen", "Volatilité moyenne")
         result = result.replace("Volatilité\nmoyen", "Volatilité\nmoyenne")
-        result = result.replace("Risque cashflow faible", "Risque de cashflow faible")
-        result = result.replace("Risque de cashflow\nfaible", "Risque de cashflow\nfaible")
+        result = result.replace("Risque de flux de trésorerie faible", "Risque de flux de trésorerie faible")
+        result = result.replace("Risque de flux de trésorerie\nfaible", "Risque de flux de trésorerie\nfaible")
 
     return result
 
@@ -929,7 +929,7 @@ def _chart_title(title: str, language: str) -> str:
         "Revenue Trend": {"fr": "Évolution des revenus", "ar": "تطور الإيرادات"},
         "Expense Trend": {"fr": "Évolution des dépenses", "ar": "تطور المصاريف"},
         "Profit Evolution": {"fr": "Évolution du profit", "ar": "تطور الأرباح"},
-        "Cashflow Trend": {"fr": "Évolution du cashflow", "ar": "تطور التدفق النقدي"},
+        "Cashflow Trend": {"fr": "Évolution du flux de trésorerie", "ar": "تطور التدفق النقدي"},
         "Expenses by Category": {"fr": "Dépenses par catégorie", "ar": "المصاريف حسب الفئة"},
         "Revenue by Category": {"fr": "Revenus par catégorie", "ar": "الإيرادات حسب الفئة"},
     }

@@ -37,7 +37,7 @@ const normalizeBackendText = (
       "saas": "SaaS / abonnement",
       "Healthy profit margin.": "Marge bénéficiaire saine.",
       "Healthy growth.": "Croissance saine.",
-      "Positive cashflow.": "Cashflow positif.",
+      "Positive cashflow.": "Flux de trésorerie positif.",
       "Healthy ROAS.": "ROAS sain.",
       "Healthy CAC efficiency.": "Efficacité CAC saine.",
       "Critical churn level.": "Niveau de churn critique.",
@@ -52,7 +52,7 @@ const normalizeBackendText = (
       "Ad spend": "Dépenses publicitaires",
       "Profit Margin": "Marge bénéficiaire",
       "Growth": "Croissance",
-      "Cashflow": "Cashflow",
+      "Cashflow": "Flux de trésorerie",
       "Churn": "Attrition client",
       "Roas": "ROAS",
       "Cac Efficiency": "Efficacité CAC",
@@ -124,7 +124,7 @@ const normalizeBackendText = (
       .replaceAll("score de santé backend est de 73/100 (Sain)", "score de santé backend est de 73/100 (sain)")
       .replaceAll("situation actuelle comme Critique", "situation actuelle comme critique")
       .replaceAll("Volatilité moyen", "Volatilité moyenne")
-      .replaceAll("Risque cashflow faible", "Risque de cashflow faible");
+      .replaceAll("Risque de flux de trésorerie faible", "Risque de flux de trésorerie faible");
   }
 
   return text;
