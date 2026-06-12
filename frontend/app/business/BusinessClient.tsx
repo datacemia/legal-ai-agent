@@ -432,6 +432,14 @@ const normalizeBackendText = (
     return "Indisponible";
   }
 
+  const normalized = text.trim().toLowerCase();
+
+  if (normalized === "unknown") {
+    if (language === "ar") return "غير متاح";
+    if (language === "fr") return "Indisponible";
+    return "Unknown";
+  }
+
   return text;
 };
 
