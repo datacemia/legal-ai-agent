@@ -826,7 +826,12 @@ def _list_items(
     story: list[Any] = []
 
     if not items:
-        story.append(_p("-", styles["body"], language))
+        empty_message = {
+            "ar": "لم يتم اكتشاف مخاطر حرجة",
+            "fr": "Aucun risque critique détecté",
+            "en": "No critical risks detected",
+        }.get(language, "No critical risks detected")
+        story.append(_p(empty_message, styles["body"], language))
         return story
 
     for index, item in enumerate(items[:max_items], start=1):
