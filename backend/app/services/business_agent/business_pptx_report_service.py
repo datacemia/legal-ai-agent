@@ -595,6 +595,27 @@ def _translate_and_normalize(value: Any, language: str) -> str:
 
 
 
+
+def _empty_list_message(kind: str, language: str) -> str:
+    messages = {
+        "missing_fields": {
+            "ar": "لا توجد حقول ناقصة",
+            "fr": "Aucun champ manquant",
+            "en": "No missing fields",
+        },
+        "limitations": {
+            "ar": "لا توجد قيود كبيرة",
+            "fr": "Aucune limitation majeure",
+            "en": "No major limitations",
+        },
+        "risks": {
+            "ar": "لم يتم اكتشاف مخاطر حرجة",
+            "fr": "Aucun risque critique détecté",
+            "en": "No critical risks detected",
+        },
+    }
+    return messages.get(kind, {}).get(language, messages.get(kind, {}).get("en", "-"))
+
 def _display_currency(currency: dict[str, Any] | None, language: str) -> str:
     currency = currency or {}
     code = currency.get("code")

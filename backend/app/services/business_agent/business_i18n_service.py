@@ -647,7 +647,7 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     "Protect strong profitability": {
         "en": "Protect strong profitability",
         "fr": "Protéger une forte rentabilité",
-        "ar": "الحفاظ على الربحية القوية",
+        "ar": "الحفاظ على مستوى الربحية المرتفع",
     },
     "The business is profitable with a strong margin, even if growth is currently limited.": {
         "en": "The business is profitable with a strong margin, even if growth is currently limited.",
@@ -1228,7 +1228,7 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     "{total} business risk indicator(s) and {insights} positive business signal(s) were identified.": {
         "en": "{total} business risk indicator(s) and {insights} positive business signal(s) were identified.",
         "fr": "{total} indicateur(s) de risque de l'entreprise et {insights} signal(aux) positif(s) ont été identifiés.",
-        "ar": "تم تحديد {total} مؤشر مخاطر و{insights} مؤشرات إيجابية للأعمال.",
+        "ar": "تم رصد {total} مخاطر و{insights} مؤشرات إيجابية.",
     },
 
     # Opportunities

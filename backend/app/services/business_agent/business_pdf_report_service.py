@@ -524,6 +524,27 @@ def _translate_and_normalize(value: Any, language: str) -> str:
 
 
 
+
+def _empty_list_message(kind: str, language: str) -> str:
+    messages = {
+        "missing_fields": {
+            "ar": "لا توجد حقول ناقصة",
+            "fr": "Aucun champ manquant",
+            "en": "No missing fields",
+        },
+        "limitations": {
+            "ar": "لا توجد قيود كبيرة",
+            "fr": "Aucune limitation majeure",
+            "en": "No major limitations",
+        },
+        "risks": {
+            "ar": "لم يتم اكتشاف مخاطر حرجة",
+            "fr": "Aucun risque critique détecté",
+            "en": "No critical risks detected",
+        },
+    }
+    return messages.get(kind, {}).get(language, messages.get(kind, {}).get("en", "-"))
+
 def _display_currency(currency: dict[str, Any] | None, language: str) -> str:
     currency = currency or {}
     code = currency.get("code")
@@ -1204,8 +1225,8 @@ def build_business_pdf_report(
     story.extend(_section(labels["data_quality"], styles, language))
     quality_rows = [
         [_p(labels["score"], styles["small"], language), _p(f"{data_quality.get('score', 0)}/100", styles["body_bold"], language)],
-        [_p(labels["missing_fields"], styles["small"], language), _p(", ".join(data_quality.get("missing_fields") or []) or "-", styles["body"], language)],
-        [_p(labels["limitations"], styles["small"], language), _p(", ".join(data_quality.get("limitations") or []) or "-", styles["body"], language)],
+        [_p(labels["missing_fields"], styles["small"], language), _p(", ".join(data_quality.get("missing_fields") or []) or _empty_list_message("missing_fields", language), styles["body"], language)],
+        [_p(labels["limitations"], styles["small"], language), _p(", ".join(data_quality.get("limitations") or []) or _empty_list_message("limitations", language), styles["body"], language)],
     ]
     story.append(_table(quality_rows, [5 * cm, 10.5 * cm], background=WHITE))
 
