@@ -15,6 +15,10 @@ from app.services.finance_agent.transaction_extractor import (
     append_fx_fee_transactions,
     restore_semantically_valid_kpi_rows,
 )
+from app.services.finance_agent.transaction_extractor import (
+    extract_transactions,
+    extract_transactions_from_pdf_path,
+)
 from app.services.finance_agent.subscription_detector import detect_recurring_subscriptions
 from app.services.finance_agent.budget_engine import build_recommended_budget
 from app.services.finance_agent.forecasting import predict_cashflow
@@ -696,7 +700,10 @@ def handle_finance_ai(job: Job, db):
         finance_progress_message("transactions", output_language),
     )
 
-    transactions = extract_transactions(text)
+    if "file_path" in locals() and file_path:
+        transactions = extract_transactions_from_pdf_path(str(file_path), text)
+    else:
+        transactions = extract_transactions(text)
     transactions = append_fx_fee_transactions(transactions)
     transactions = apply_standard_own_account_transfer_guard(transactions)
     transactions = restore_semantically_valid_kpi_rows(transactions)
