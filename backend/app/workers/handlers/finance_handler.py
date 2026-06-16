@@ -704,6 +704,17 @@ def handle_finance_ai(job: Job, db):
         transactions = extract_transactions_from_pdf_path(str(file_path), text)
     else:
         transactions = extract_transactions(text)
+    if not transactions:
+        return {
+            "status": "unsupported_document",
+            "reason": "unsupported_statement_format",
+            "transactions": [],
+            "summary": {},
+            "totals": {
+                "income": 0,
+                "expenses": 0,
+            },
+        }
     transactions = append_fx_fee_transactions(transactions)
     transactions = apply_standard_own_account_transfer_guard(transactions)
     transactions = restore_semantically_valid_kpi_rows(transactions)

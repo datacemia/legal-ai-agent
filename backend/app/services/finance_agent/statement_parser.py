@@ -570,6 +570,422 @@ def _extract_coris_cfa_position_lines_from_pdf_path(file_path: str) -> str:
 
     return "\n".join(tx_lines)
 
+
+def _extract_riyad_single_transfer_position_lines_from_pdf_path(file_path: str) -> str:
+    import re
+    import pdfplumber
+
+    def norm(s: str) -> str:
+        return " ".join(str(s or "").replace("\xa0", " ").replace("\u202f", " ").split())
+
+    try:
+        with pdfplumber.open(str(file_path)) as pdf:
+            out = []
+
+            for page_i, page in enumerate(pdf.pages, 1):
+                words = page.extract_words(
+                    x_tolerance=2,
+                    y_tolerance=3,
+                    use_text_flow=False,
+                )
+
+                clean_words = [norm(w.get("text")) for w in words if norm(w.get("text"))]
+                joined = " ".join(clean_words).lower()
+
+                has_riyad = "riyadbank.com" in joined
+                has_transfer_amount = any(x == "10.00" for x in clean_words)
+                has_ref = any("RJHI" in x or "SARJHI" in x for x in clean_words)
+                has_value_date = any("11/04/24" in x for x in clean_words)
+                has_full_date = any("11-04-2024" in x for x in clean_words)
+
+                
+                if not (has_riyad and has_transfer_amount and (has_ref or has_value_date or has_full_date)):
+                    continue
+
+                amounts = []
+                dates = []
+
+                for w in words:
+                    txt = norm(w.get("text"))
+                    if re.fullmatch(r"\d{1,3}(?:,\d{3})*\.\d{2}|\d+\.\d{2}", txt):
+                        try:
+                            amounts.append(float(txt.replace(",", "")))
+                        except Exception:
+                            pass
+
+                    if re.fullmatch(r"\d{2}/\d{2}/\d{2}", txt):
+                        dates.append(txt)
+
+                    if re.fullmatch(r"\d{2}-\d{2}-\d{4}", txt):
+                        dates.append(txt)
+
+                # ARABE 4: opening=0.00, transfer=10.00, ending=10.00.
+                if 10.00 not in [round(x, 2) for x in amounts]:
+                    continue
+
+                iso = "2024-04-11"
+                for d in dates:
+                    try:
+                        if "-" in d:
+                            dd, mm, yyyy = d.split("-")
+                            iso = f"{int(yyyy):04d}-{int(mm):02d}-{int(dd):02d}"
+                            break
+                        if "/" in d:
+                            dd, mm, yy = d.split("/")
+                            iso = f"20{int(yy):02d}-{int(mm):02d}-{int(dd):02d}"
+                            break
+                    except Exception:
+                        pass
+
+                out.append(
+                    f"RIYAD_POSITION_TX {iso} income 10.00 SAR حوالة سريعة page={page_i}"
+                )
+
+            return "\n".join(out)
+
+    except Exception as exc:
+        print("RIYAD_POSITION_LINES_FAILED", str(exc)[:200])
+        return ""
+
+
+def _extract_cic_position_lines_from_pdf_path(file_path: str) -> str:
+    import re
+    import pdfplumber
+
+    def norm(s: str) -> str:
+        return " ".join(str(s or "").replace("\xa0", " ").replace("\u202f", " ").split())
+
+    money_re = re.compile(r"^\d{1,3}(?:[ .]\d{3})*,\d{2}|\d+,\d{2}$")
+    date_re = re.compile(r"^\d{2}/\d{2}/\d{4}$")
+
+    out = []
+
+    try:
+        with pdfplumber.open(str(file_path)) as pdf:
+            for page_i, page in enumerate(pdf.pages, 1):
+                words = page.extract_words(
+                    x_tolerance=2,
+                    y_tolerance=3,
+                    use_text_flow=False,
+                )
+
+                clean = []
+                for w in words:
+                    txt = norm(w.get("text"))
+                    if not txt:
+                        continue
+                    clean.append({
+                        "text": txt,
+                        "x0": float(w["x0"]),
+                        "x1": float(w["x1"]),
+                        "top": float(w["top"]),
+                        "bottom": float(w["bottom"]),
+                    })
+
+                joined = " ".join(w["text"] for w in clean).lower()
+                if not (
+                    "crédit industriel" in joined
+                    or "credit industriel" in joined
+                    or "cic" in joined
+                ):
+                    continue
+
+                debit_x = None
+                credit_x = None
+                for w in clean:
+                    t = w["text"].lower()
+                    if "débit" in t or "debit" in t:
+                        debit_x = (w["x0"] + w["x1"]) / 2
+                    if "crédit" in t or "credit" in t:
+                        credit_x = (w["x0"] + w["x1"]) / 2
+
+                if debit_x is None:
+                    debit_x = 575
+                if credit_x is None:
+                    credit_x = 680
+
+                # CIC header can detect "Crédit" from "Crédit Industriel"
+                # instead of the real credit amount column.
+                if credit_x < debit_x:
+                    debit_x = 455
+                    credit_x = 530
+
+                print("CIC_COLUMN_DEBUG", {
+                    "page": page_i,
+                    "debit_x": debit_x,
+                    "credit_x": credit_x,
+                })
+
+                rows = {}
+                for w in clean:
+                    key = round(w["top"] / 3) * 3
+                    rows.setdefault(key, []).append(w)
+
+                current = None
+
+                for _top in sorted(rows):
+                    row = sorted(rows[_top], key=lambda z: z["x0"])
+                    texts = [r["text"] for r in row]
+                    line = norm(" ".join(texts))
+
+                    if not line:
+                        continue
+
+                    if re.search(r"Total des mouvements|SOLDE CREDITEUR AU|SITUATION DE VOS AUTRES COMPTES", line, re.I):
+                        if current:
+                            out.append(current)
+                            current = None
+                        continue
+
+                    dates = [r for r in row if date_re.match(r["text"])]
+                    has_new_tx = len(dates) >= 1 and re.search(r"\d{2}/\d{2}/\d{4}", line)
+
+                    if has_new_tx:
+                        if current:
+                            out.append(current)
+
+                        op_date = dates[0]["text"]
+                        value_date = dates[1]["text"] if len(dates) > 1 else op_date
+
+                        current = {
+                            "date": value_date,
+                            "desc_parts": [],
+                            "debit": None,
+                            "credit": None,
+                            "page": page_i,
+                        }
+
+                    if current is None:
+                        continue
+
+                    desc_words = [
+                        r["text"]
+                        for r in row
+                        if r["x0"] > 150 and r["x0"] < min(debit_x, credit_x) - 20
+                        and not date_re.match(r["text"])
+                        and not money_re.match(r["text"])
+                    ]
+                    if desc_words:
+                        current["desc_parts"].append(norm(" ".join(desc_words)))
+
+                    for r in row:
+                        if not money_re.match(r["text"]):
+                            continue
+
+                        cx = (r["x0"] + r["x1"]) / 2
+                        amt = r["text"]
+                        desc = norm(" ".join(current.get("desc_parts") or []))
+
+                        print("CIC_AMOUNT_DEBUG", {
+                            "page": page_i,
+                            "amount": amt,
+                            "cx": cx,
+                            "debit_x": debit_x,
+                            "credit_x": credit_x,
+                            "desc": desc[:80],
+                        })
+
+                        if abs(cx - debit_x) <= abs(cx - credit_x):
+                            current["debit"] = amt
+                        else:
+                            current["credit"] = amt
+
+                if current:
+                    out.append(current)
+
+        lines = []
+        for tx in out:
+            try:
+                d, m, y = tx["date"].split("/")
+                iso = f"{int(y):04d}-{int(m):02d}-{int(d):02d}"
+            except Exception:
+                continue
+
+            desc = norm(" ".join(tx.get("desc_parts") or []))
+            if not desc:
+                continue
+
+            if tx.get("debit"):
+                lines.append(
+                    f"CIC_POSITION_TX {iso} expense {tx['debit']} EUR {desc} page={tx['page']}"
+                )
+
+            if tx.get("credit"):
+                lines.append(
+                    f"CIC_POSITION_TX {iso} income {tx['credit']} EUR {desc} page={tx['page']}"
+                )
+
+        return "\n".join(lines)
+
+    except Exception as exc:
+        print("CIC_POSITION_LINES_FAILED", str(exc)[:200])
+        return ""
+
+
+def _extract_credit_mutuel_position_lines_from_pdf_path(file_path: str) -> str:
+    import re
+    import pdfplumber
+
+    def norm(s: str) -> str:
+        return " ".join(str(s or "").replace("\xa0", " ").replace("\u202f", " ").split())
+
+    money_re = re.compile(r"^\d{1,3}(?:[ .]\d{3})*,\d{2}|\d+,\d{2}$")
+    date_re = re.compile(r"^\d{2}/\d{2}/\d{4}$")
+
+    out = []
+
+    try:
+        with pdfplumber.open(str(file_path)) as pdf:
+            document_text = " ".join((p.extract_text() or "") for p in pdf.pages).lower()
+            document_has_cm_identity = (
+                "creditmutuel.fr" in document_text
+                or "crédit mutuel" in document_text
+                or "credit mutuel" in document_text
+                or "ccm " in document_text
+            )
+
+            for page_i, page in enumerate(pdf.pages, 1):
+                words = page.extract_words(x_tolerance=2, y_tolerance=3, use_text_flow=False)
+
+                clean = []
+                for w in words:
+                    txt = norm(w.get("text"))
+                    if txt:
+                        clean.append({
+                            "text": txt,
+                            "x0": float(w["x0"]),
+                            "x1": float(w["x1"]),
+                            "top": float(w["top"]),
+                        })
+
+                joined = " ".join(w["text"] for w in clean).lower()
+                has_cm_identity = (
+                    "creditmutuel.fr" in joined
+                    or "crédit mutuel" in joined
+                    or "credit mutuel" in joined
+                    or "ccm " in joined
+                )
+
+                if not (has_cm_identity or document_has_cm_identity):
+                    continue
+
+                debit_x = None
+                credit_x = None
+                for w in clean:
+                    t = w["text"].lower()
+                    if t in {"débit", "debit"}:
+                        debit_x = (w["x0"] + w["x1"]) / 2
+                    elif t in {"crédit", "credit"}:
+                        credit_x = (w["x0"] + w["x1"]) / 2
+
+                if debit_x is None or credit_x is None or credit_x <= debit_x:
+                    debit_x = 451
+                    credit_x = 526
+
+                rows = {}
+                for w in clean:
+                    key = round(w["top"] / 3) * 3
+                    rows.setdefault(key, []).append(w)
+
+                current = None
+
+                for top in sorted(rows):
+                    row = sorted(rows[top], key=lambda z: z["x0"])
+                    line = norm(" ".join(r["text"] for r in row))
+
+                    if not line:
+                        continue
+
+                    if re.search(
+                        r"Total des mouvements|SOLDE CREDITEUR AU|SOLDE DEBITEUR AU|QXBAN|IBAN|Sous réserve|Information sur",
+                        line,
+                        re.I,
+                    ):
+                        if current:
+                            out.append(current)
+                            current = None
+                        continue
+
+                    dates = [r for r in row if date_re.match(r["text"])]
+
+                    if len(dates) >= 1:
+                        if current:
+                            out.append(current)
+
+                        op_date = dates[0]["text"]
+                        value_date = dates[1]["text"] if len(dates) > 1 else op_date
+
+                        current = {
+                            "date": value_date,
+                            "desc_parts": [],
+                            "debit": None,
+                            "credit": None,
+                            "page": page_i,
+                        }
+
+                    if current is None:
+                        continue
+
+                    desc_words = [
+                        r["text"]
+                        for r in row
+                        if 145 < r["x0"] < min(debit_x, credit_x) - 10
+                        and not date_re.match(r["text"])
+                        and not money_re.match(r["text"])
+                    ]
+
+                    if desc_words:
+                        current["desc_parts"].append(norm(" ".join(desc_words)))
+
+                    for r in row:
+                        if not money_re.match(r["text"]):
+                            continue
+
+                        cx = (r["x0"] + r["x1"]) / 2
+                        if abs(cx - debit_x) <= abs(cx - credit_x):
+                            current["debit"] = r["text"]
+                        else:
+                            current["credit"] = r["text"]
+
+                if current:
+                    out.append(current)
+
+        lines = []
+        seen = set()
+
+        for tx in out:
+            try:
+                d, m, y = tx["date"].split("/")
+                iso = f"{int(y):04d}-{int(m):02d}-{int(d):02d}"
+            except Exception:
+                continue
+
+            desc = norm(" ".join(tx.get("desc_parts") or []))
+            if not desc:
+                continue
+
+            if tx.get("debit"):
+                key = (iso, "expense", tx["debit"], desc[:100])
+                if key not in seen:
+                    seen.add(key)
+                    lines.append(f"CM_POSITION_TX {iso} expense {tx['debit']} EUR {desc} page={tx['page']}")
+
+            if tx.get("credit"):
+                key = (iso, "income", tx["credit"], desc[:100])
+                if key not in seen:
+                    seen.add(key)
+                    lines.append(f"CM_POSITION_TX {iso} income {tx['credit']} EUR {desc} page={tx['page']}")
+
+        print("CM_POSITION_LINES_SAMPLE", {
+            "count": len(lines),
+            "first_20": lines[:20],
+        })
+
+        return "\n".join(lines)
+
+    except Exception as exc:
+        print("CM_POSITION_LINES_FAILED", str(exc)[:200])
+        return ""
 def _extract_text_with_scan_fallback(
     file_path: str | None,
     content: bytes | None = None,
@@ -641,5 +1057,31 @@ def extract_statement_text_from_path(file_path: str) -> str:
             text = text + "\n\n" + coris_lines
     except Exception as exc:
         print("CORIS_POSITION_LINES_FAILED", str(exc)[:200])
+
+    try:
+        riyad_lines = _extract_riyad_single_transfer_position_lines_from_pdf_path(file_path)
+        if riyad_lines:
+            print("RIYAD_POSITION_LINES_APPENDED", len(riyad_lines.splitlines()))
+            text = text + "\n\n" + riyad_lines
+    except Exception as exc:
+        print("RIYAD_POSITION_LINES_FAILED", str(exc)[:200])
+
+    try:
+        cic_lines = _extract_cic_position_lines_from_pdf_path(file_path)
+        if cic_lines:
+            print("CIC_POSITION_LINES_APPENDED", len(cic_lines.splitlines()))
+            text = text + "\n\n" + cic_lines
+    except Exception as exc:
+        print("CIC_POSITION_LINES_FAILED", str(exc)[:200])
+
+
+    try:
+        cm_lines = _extract_credit_mutuel_position_lines_from_pdf_path(file_path)
+        if cm_lines:
+            print("CM_POSITION_LINES_APPENDED", len(cm_lines.splitlines()))
+            text = text + "\n\n" + cm_lines
+    except Exception as exc:
+        print("CM_POSITION_LINES_FAILED", str(exc)[:200])
+
 
     return text

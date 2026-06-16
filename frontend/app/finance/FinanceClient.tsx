@@ -351,6 +351,9 @@ const labels: any = {
     riskNotes: "Risk notes",
     noFile: "No file selected",
     chooseFile: "Choose file",
+    unsupportedDocumentTitle: "Statement format not supported yet",
+    unsupportedDocumentMessage:
+      "This bank or statement format is not yet supported by the Finance Agent. No automatic analysis was generated to avoid inaccurate results. Support for this format will be added in a future update.",
   },
   fr: {
     title: "Coach financier personnel",
@@ -503,6 +506,9 @@ const labels: any = {
     riskNotes: "Notes de risque",
     noFile: "Aucun fichier sélectionné",
     chooseFile: "Choisir un fichier",
+    unsupportedDocumentTitle: "Format de relevé non encore pris en charge",
+    unsupportedDocumentMessage:
+      "Cette banque ou ce format de relevé n’est pas encore reconnu par l’agent Finance. Aucune analyse automatique n’a été générée afin d’éviter des résultats inexacts. Ce format sera pris en charge dans une prochaine mise à jour.",
   },
   ar: {
     title: "وكيل الإدارة المالية الشخصية",
@@ -655,6 +661,9 @@ const labels: any = {
     riskNotes: "ملاحظات المخاطر",
     noFile: "لم يتم اختيار ملف",
     chooseFile: "اختيار ملف",
+    unsupportedDocumentTitle: "تنسيق كشف الحساب غير مدعوم حالياً",
+    unsupportedDocumentMessage:
+      "هذا البنك أو تنسيق كشف الحساب غير مدعوم حالياً من قبل وكيل التحليل المالي. لم يتم إنشاء أي تحليل تلقائي لتجنب تقديم نتائج غير دقيقة. سيتم دعم هذا التنسيق في تحديث قادم.",
   },
 };
 
@@ -717,6 +726,11 @@ export default function FinanceClient() {
   const isInsufficientData =
     result?.status === "insufficient_data" ||
     result?.analysis_status === "insufficient_data";
+
+  const isUnsupportedDocument =
+    result?.status === "unsupported_document" ||
+    result?.reason === "unsupported_statement_format" ||
+    result?.reason === "no_transactions_extracted";
 
 
   const translateInsightText = (value: any) => {
@@ -1507,15 +1521,27 @@ export default function FinanceClient() {
           <div className="bg-white p-6 rounded-2xl border space-y-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
             <h2 className="text-xl font-semibold">{t.results}</h2>
 
-            <button
-              onClick={exportFinanceReportPdf}
-              className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white transition-all duration-300 hover:bg-slate-800 hover:shadow-md"
-            >
-              {t.exportPdf}
-            </button>
+            {!isUnsupportedDocument && (
+              <button
+                onClick={exportFinanceReportPdf}
+                className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white transition-all duration-300 hover:bg-slate-800 hover:shadow-md"
+              >
+                {t.exportPdf}
+              </button>
+            )}
 
             {result.detail ? (
               <p className="text-red-600">{result.detail}</p>
+            ) : isUnsupportedDocument ? (
+              <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
+                <p className="text-sm font-semibold text-amber-900">
+                  {t.unsupportedDocumentTitle}
+                </p>
+
+                <p className="mt-2 text-sm leading-7 text-amber-800">
+                  {t.unsupportedDocumentMessage}
+                </p>
+              </div>
             ) : (
               <>
                 {isInsufficientData ? (
