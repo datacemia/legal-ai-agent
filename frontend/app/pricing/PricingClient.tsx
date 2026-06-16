@@ -89,6 +89,9 @@ type PricingLabels = {
   proDesc: string;
   month: string;
   proFeatures: string[];
+  proUsage: string;
+  proCreditsPolicy: string;
+  proPurchasedCredits: string;
   upgradePro: string;
   enterprise: string;
   premiumDesc: string;
@@ -283,14 +286,20 @@ const labels: Record<Language, PricingLabels> = {
 
     proFeatures: [
       "500 Credits per Month",
-      "Up to 100 Study Sessions, 71 Financial Analyses, 41 Legal Reviews, or 16 Business Decision Analyses every month.",
-      "500 credits renew every month. Unused subscription credits do not carry over to the next billing cycle.",
-      "Purchased credits never expire and remain available until they are used.",
       "Usable Across All Agents",
       "Priority Processing",
       "Access to Legal, Finance, Study, and Business AI",
       "Future AI Agents Included",
     ],
+
+    proUsage:
+      "Includes up to 100 Study Sessions, 71 Financial Analyses, 41 Legal Reviews, or 16 Business Decision Analyses per month.",
+
+    proCreditsPolicy:
+      "Subscription credits renew every month and do not carry over to the next billing cycle.",
+
+    proPurchasedCredits:
+      "Purchased credit packs never expire.",
 
     upgradePro: "Upgrade to Pro",
 
@@ -586,14 +595,21 @@ const labels: Record<Language, PricingLabels> = {
     month: "/mois",
     proFeatures: [
       "500 crédits par mois",
-      "Jusqu’à 100 sessions d’apprentissage, 71 analyses financières, 41 revues juridiques ou 16 analyses de décision d’entreprise chaque mois.",
-      "500 crédits sont ajoutés à votre compte chaque mois. Les crédits inclus dans l’abonnement non utilisés ne sont pas reportés au cycle de facturation suivant.",
-      "Les crédits achetés n’expirent jamais et restent disponibles jusqu’à leur utilisation.",
       "Utilisables sur tous les agents",
       "Traitement prioritaire",
       "Accès aux agents IA Juridique, Finance, Étude et Business",
       "Nouveaux agents IA inclus",
     ],
+
+    proUsage:
+      "Comprend jusqu'à 100 sessions d'apprentissage, 71 analyses financières, 41 revues juridiques ou 16 analyses de décision d'entreprise par mois.",
+
+    proCreditsPolicy:
+      "Les crédits d'abonnement sont renouvelés chaque mois et ne sont pas reportés au cycle de facturation suivant.",
+
+    proPurchasedCredits:
+      "Les packs de crédits achetés n'expirent jamais.",
+
     upgradePro: "Passer à Runexa Pro",
     enterprise: "Entreprise",
     premiumDesc:
@@ -866,14 +882,21 @@ const labels: Record<Language, PricingLabels> = {
     month: "/شهر",
     proFeatures: [
       "500 رصيد شهرياً",
-      "ما يصل إلى 100 جلسة تعلم، أو 71 تحليلاً مالياً، أو 41 مراجعة قانونية، أو 16 تحليلاً لاتخاذ القرارات التجارية كل شهر.",
-      "تتم إضافة 500 رصيد إلى حسابك كل شهر. الأرصدة غير المستخدمة ضمن الاشتراك لا تُرحّل إلى دورة الفوترة التالية.",
-      "الأرصدة التي يتم شراؤها لا تنتهي صلاحيتها وتبقى متاحة حتى يتم استخدامها.",
       "صالحة للاستخدام على جميع الوكلاء",
       "معالجة ذات أولوية",
       "الوصول إلى وكلاء القانون والمالية والدراسة والأعمال",
       "الوكلاء الجدد مشمولون",
     ],
+
+    proUsage:
+      "يتضمن ما يصل إلى 100 جلسة تعلم، أو 71 تحليلاً مالياً، أو 41 مراجعة قانونية، أو 16 تحليلاً لاتخاذ القرارات التجارية شهرياً.",
+
+    proCreditsPolicy:
+      "يتم تجديد أرصدة الاشتراك شهرياً ولا يتم ترحيلها إلى دورة الفوترة التالية.",
+
+    proPurchasedCredits:
+      "حزم الأرصدة المشتراة لا تنتهي صلاحيتها.",
+
     upgradePro: "الترقية إلى Runexa Pro",
     enterprise: "المؤسسات",
     premiumDesc:
@@ -1307,6 +1330,12 @@ export default function PricingClient() {
                     <li key={feature}>✔ {feature}</li>
                   ))}
                 </ul>
+
+                <div className="mt-6 space-y-3 border-t border-white/10 pt-6 text-sm leading-6 text-slate-300">
+                  <p>{t.proUsage}</p>
+                  <p>{t.proCreditsPolicy}</p>
+                  <p>{t.proPurchasedCredits}</p>
+                </div>
 
                 <button
                   onClick={handleUpgradePro}
