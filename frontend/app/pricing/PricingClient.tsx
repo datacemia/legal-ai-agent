@@ -421,7 +421,7 @@ const labels: Record<Language, PricingLabels> = {
     {
       name: "Scale",
       credits: 500,
-      price: "$89",
+      price: "$75",
       description:
         "Designed for professionals, teams, and higher-volume AI workloads.",
     },
@@ -720,7 +720,7 @@ const labels: Record<Language, PricingLabels> = {
     {
       name: "Scale",
       credits: 500,
-      price: "$89",
+      price: "$75",
       description:
         "Conçu pour les professionnels, les équipes et les volumes d’utilisation plus importants.",
     },
@@ -1006,7 +1006,7 @@ const labels: Record<Language, PricingLabels> = {
     {
       name: "Scale",
       credits: 500,
-      price: "$89",
+      price: "$75",
       description:
         "مصمم للمحترفين والفرق وأحجام الاستخدام الأكبر.",
     },
