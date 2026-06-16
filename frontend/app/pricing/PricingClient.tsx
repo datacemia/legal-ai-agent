@@ -283,6 +283,9 @@ const labels: Record<Language, PricingLabels> = {
 
     proFeatures: [
       "500 Credits per Month",
+      "Up to 100 Study Sessions, 71 Financial Analyses, 41 Legal Reviews, or 16 Business Decision Analyses every month.",
+      "500 credits renew every month. Unused subscription credits do not carry over to the next billing cycle.",
+      "Purchased credits never expire and remain available until they are used.",
       "Usable Across All Agents",
       "Priority Processing",
       "Access to Legal, Finance, Study, and Business AI",
@@ -582,7 +585,10 @@ const labels: Record<Language, PricingLabels> = {
       "Pour les particuliers et les professionnels qui ont besoin d’un accès continu à plusieurs agents IA.",
     month: "/mois",
     proFeatures: [
-      "200 crédits par mois",
+      "500 crédits par mois",
+      "Jusqu’à 100 sessions d’apprentissage, 71 analyses financières, 41 revues juridiques ou 16 analyses de décision d’entreprise chaque mois.",
+      "500 crédits sont ajoutés à votre compte chaque mois. Les crédits inclus dans l’abonnement non utilisés ne sont pas reportés au cycle de facturation suivant.",
+      "Les crédits achetés n’expirent jamais et restent disponibles jusqu’à leur utilisation.",
       "Utilisables sur tous les agents",
       "Traitement prioritaire",
       "Accès aux agents IA Juridique, Finance, Étude et Business",
@@ -859,7 +865,10 @@ const labels: Record<Language, PricingLabels> = {
       "للأفراد والمحترفين الذين يحتاجون إلى وصول مستمر إلى عدة وكلاء ذكاء اصطناعي.",
     month: "/شهر",
     proFeatures: [
-      "200 رصيد شهرياً",
+      "500 رصيد شهرياً",
+      "ما يصل إلى 100 جلسة تعلم، أو 71 تحليلاً مالياً، أو 41 مراجعة قانونية، أو 16 تحليلاً لاتخاذ القرارات التجارية كل شهر.",
+      "تتم إضافة 500 رصيد إلى حسابك كل شهر. الأرصدة غير المستخدمة ضمن الاشتراك لا تُرحّل إلى دورة الفوترة التالية.",
+      "الأرصدة التي يتم شراؤها لا تنتهي صلاحيتها وتبقى متاحة حتى يتم استخدامها.",
       "صالحة للاستخدام على جميع الوكلاء",
       "معالجة ذات أولوية",
       "الوصول إلى وكلاء القانون والمالية والدراسة والأعمال",
