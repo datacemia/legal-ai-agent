@@ -119,19 +119,29 @@ def _create_price_data(
     return price_data
 
 
+def _to_plain_dict(obj):
+    """
+    Convert StripeObject instances into plain Python dictionaries.
+    This avoids AttributeError: get with some stripe-python versions.
+    """
+    if obj is None:
+        return {}
+
+    if isinstance(obj, dict):
+        return obj
+
+    if hasattr(obj, "to_dict_recursive"):
+        return obj.to_dict_recursive()
+
+    if hasattr(obj, "to_dict"):
+        return obj.to_dict()
+
+    return dict(obj)
+
+
 def _stripe_get(obj, key: str, default=None):
-    """
-    Safely read values from Stripe objects.
-
-    Stripe objects look like dictionaries but do not always support .get()
-    depending on the installed stripe-python version.
-    """
-    try:
-        value = obj[key]
-    except (KeyError, TypeError):
-        value = getattr(obj, key, default)
-
-    return value if value is not None else default
+    data = _to_plain_dict(obj)
+    return data.get(key, default)
 
 
 def _create_payment_record(
@@ -378,8 +388,9 @@ def _record_credit_transaction(
 
 
 def _handle_checkout_completed(db: Session, event):
-    session = event["data"]["object"]
-    metadata = _stripe_get(session, "metadata") or {}
+    event = _to_plain_dict(event)
+    session = _to_plain_dict(event["data"]["object"])
+    metadata = _to_plain_dict(_stripe_get(session, "metadata"))
 
     user_id = metadata.get("user_id")
     product_type = metadata.get("product_type")
@@ -491,7 +502,8 @@ def _handle_checkout_completed(db: Session, event):
 
 
 def _handle_invoice_paid(db: Session, event):
-    invoice = event["data"]["object"]
+    event = _to_plain_dict(event)
+    invoice = _to_plain_dict(event["data"]["object"])
     subscription_id = _stripe_get(invoice, "subscription")
 
     if not subscription_id:
@@ -537,8 +549,9 @@ def _handle_invoice_paid(db: Session, event):
 
 
 def _handle_subscription_updated(db: Session, event):
-    subscription = event["data"]["object"]
-    metadata = _stripe_get(subscription, "metadata") or {}
+    event = _to_plain_dict(event)
+    subscription = _to_plain_dict(event["data"]["object"])
+    metadata = _to_plain_dict(_stripe_get(subscription, "metadata"))
 
     user_id = metadata.get("user_id")
 
@@ -567,8 +580,9 @@ def _handle_subscription_updated(db: Session, event):
 
 
 def _handle_subscription_deleted(db: Session, event):
-    subscription = event["data"]["object"]
-    metadata = _stripe_get(subscription, "metadata") or {}
+    event = _to_plain_dict(event)
+    subscription = _to_plain_dict(event["data"]["object"])
+    metadata = _to_plain_dict(_stripe_get(subscription, "metadata"))
 
     user_id = metadata.get("user_id")
 
@@ -604,6 +618,7 @@ async def stripe_webhook(request: Request, db: Session = Depends(get_db)):
             sig_header,
             STRIPE_WEBHOOK_SECRET,
         )
+        event = _to_plain_dict(event)
     except Exception:
         raise HTTPException(status_code=400, detail="Invalid webhook signature")
 
