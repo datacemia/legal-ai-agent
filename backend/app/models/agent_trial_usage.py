@@ -20,4 +20,10 @@ class AgentTrialUsage(Base):
     # user already consumed the trial analysis
     trial_used = Column(Boolean, default=False)
 
+    # Stripe Checkout session that paid this trial
+    stripe_session_id = Column(String, nullable=True)
+
     created_at = Column(DateTime, default=datetime.utcnow)
+
+    # when the trial was consumed
+    used_at = Column(DateTime, nullable=True)

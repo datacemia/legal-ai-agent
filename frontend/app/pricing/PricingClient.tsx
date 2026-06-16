@@ -1067,12 +1067,46 @@ export default function PricingClient() {
     setMessage(t.messages.credits);
   };
 
-  const handleUpgradePro = () => {
+  const handleUpgradePro = async () => {
     if (!requireAuth()) return;
 
-    setMessage(t.messages.pro);
-  };
+    try {
+      const token = localStorage.getItem("token");
 
+      const response = await fetch(
+        "https://api.runexa.ai/payments/create-checkout-session",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            product_type: "subscription",
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.detail || "Unable to create checkout session");
+      }
+
+      if (data.checkout_url) {
+        window.location.href = data.checkout_url;
+        return;
+      }
+
+      throw new Error("Checkout URL not returned");
+    } catch (error) {
+      console.error(error);
+
+      setMessage(
+        "Unable to start Stripe checkout. Please try again."
+      );
+    }
+  };
   return (
     <main
       dir={language === "ar" ? "rtl" : "ltr"}

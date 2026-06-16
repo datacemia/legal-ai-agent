@@ -13,6 +13,7 @@ from starlette.middleware.sessions import SessionMiddleware
 load_dotenv()
 
 from app.config import FRONTEND_URL
+from app.models.credit_transaction import CreditTransaction
 from app.database import Base, engine
 
 from app.api.agent0_waitlist_routes import router as agent0_waitlist_router

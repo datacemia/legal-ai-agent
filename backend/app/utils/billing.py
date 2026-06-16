@@ -14,7 +14,14 @@ AGENT_CREDIT_COSTS = {
 }
 
 
-ACTIVE_PLANS = {"paid", "pro", "premium"}
+ACTIVE_SUBSCRIPTION_PLANS = {"pro", "premium"}
+
+
+def _get_int(value, default: int = 0) -> int:
+    try:
+        return int(value or default)
+    except (TypeError, ValueError):
+        return default
 
 
 def check_and_consume_agent_access(
@@ -22,11 +29,35 @@ def check_and_consume_agent_access(
     user: User,
     agent_slug: str,
 ):
+    """
+    Runexa agent access rules:
+
+    1. Admin users have free unlimited access.
+    2. Subscription credits are consumed first.
+    3. Purchased credits are consumed second.
+    4. A paid $1 trial gives one use per agent.
+    5. If none of the above applies, payment is required.
+
+    Expected User fields:
+    - role
+    - plan
+    - subscription_status
+    - subscription_credits_balance
+    - credits_balance
+
+    Notes:
+    - subscription_credits_balance = monthly Pro credits that reset each billing cycle.
+    - credits_balance = purchased credits that do not expire.
+    """
+
     if agent_slug not in AGENT_CREDIT_COSTS:
         raise HTTPException(status_code=400, detail="Unknown agent")
 
     user_role = (user.role or "user").lower().strip()
-    user_plan = (user.plan or "trial").lower().strip()
+    user_plan = (user.plan or "free").lower().strip()
+    subscription_status = (getattr(user, "subscription_status", "") or "").lower().strip()
+
+    credit_cost = AGENT_CREDIT_COSTS[agent_slug]
 
     # Admin has free unlimited access
     if user_role == "admin":
@@ -35,6 +66,7 @@ def check_and_consume_agent_access(
             agent_slug=agent_slug,
             access_type="admin",
             credits_used=0,
+            credits_source="admin",
         )
 
         db.add(usage)
@@ -43,37 +75,53 @@ def check_and_consume_agent_access(
         return {
             "access_type": "admin",
             "credits_used": 0,
+            "credits_source": "admin",
         }
 
-    # Paid plans have active access without $1 trial requirement
-    if user_plan in ACTIVE_PLANS:
-        usage = UsageLog(
-            user_id=user.id,
-            agent_slug=agent_slug,
-            access_type=user_plan,
-            credits_used=0,
+    # Active Pro/Premium subscription uses monthly subscription credits first
+    is_active_subscription = (
+        user_plan in ACTIVE_SUBSCRIPTION_PLANS
+        and subscription_status in {"active", "trialing", "paid"}
+    )
+
+    if is_active_subscription:
+        subscription_credits = _get_int(
+            getattr(user, "subscription_credits_balance", 0)
         )
 
-        db.add(usage)
-        db.commit()
+        if subscription_credits >= credit_cost:
+            user.subscription_credits_balance = subscription_credits - credit_cost
 
-        return {
-            "access_type": user_plan,
-            "credits_used": 0,
-        }
+            usage = UsageLog(
+                user_id=user.id,
+                agent_slug=agent_slug,
+                access_type=user_plan,
+                credits_used=credit_cost,
+                credits_source="subscription",
+            )
 
-    credit_cost = AGENT_CREDIT_COSTS[agent_slug]
-    credits_balance = int(user.credits_balance or 0)
+            db.add(usage)
+            db.commit()
+            db.refresh(user)
 
-    # Global credits usable across all agents
-    if credits_balance >= credit_cost:
-        user.credits_balance = credits_balance - credit_cost
+            return {
+                "access_type": user_plan,
+                "credits_used": credit_cost,
+                "credits_source": "subscription",
+            }
+
+    # Purchased credits are global and do not expire
+    purchased_credits = _get_int(getattr(user, "credits_balance", 0))
+
+    if purchased_credits >= credit_cost:
+        user.credits_balance = purchased_credits - credit_cost
 
         usage = UsageLog(
             user_id=user.id,
             agent_slug=agent_slug,
             access_type="credits",
             credits_used=credit_cost,
+            credits_source="purchased",
         )
 
         db.add(usage)
@@ -83,6 +131,7 @@ def check_and_consume_agent_access(
         return {
             "access_type": "credits",
             "credits_used": credit_cost,
+            "credits_source": "purchased",
         }
 
     # $1 trial per agent
@@ -114,6 +163,7 @@ def check_and_consume_agent_access(
         agent_slug=agent_slug,
         access_type="trial",
         credits_used=0,
+        credits_source="trial",
     )
 
     db.add(usage)
@@ -122,4 +172,5 @@ def check_and_consume_agent_access(
     return {
         "access_type": "trial",
         "credits_used": 0,
+        "credits_source": "trial",
     }

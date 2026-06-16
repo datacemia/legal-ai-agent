@@ -38,8 +38,28 @@ class User(Base):
     # enterprise
     plan = Column(String, default="trial")
 
-    # Global credits usable across all operational agents
+    # Purchased credits usable across all operational agents.
+    # These credits do not expire.
     credits_balance = Column(Integer, default=0)
+
+    # Stripe customer linked to this Runexa user.
+    stripe_customer_id = Column(String, nullable=True)
+
+    # Stripe subscription status:
+    # none
+    # active
+    # trialing
+    # past_due
+    # canceled
+    # unpaid
+    subscription_status = Column(String, default="none")
+
+    # Monthly subscription credits for Pro/Premium.
+    # These reset every billing cycle and do not roll over.
+    subscription_credits_balance = Column(Integer, default=0)
+
+    # End date of the current Stripe billing period.
+    subscription_current_period_end = Column(DateTime, nullable=True)
 
     # API access is a separate paid product
     api_enabled = Column(Boolean, default=False)
