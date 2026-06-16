@@ -119,6 +119,21 @@ def _create_price_data(
     return price_data
 
 
+def _stripe_get(obj, key: str, default=None):
+    """
+    Safely read values from Stripe objects.
+
+    Stripe objects look like dictionaries but do not always support .get()
+    depending on the installed stripe-python version.
+    """
+    try:
+        value = obj[key]
+    except (KeyError, TypeError):
+        value = getattr(obj, key, default)
+
+    return value if value is not None else default
+
+
 def _create_payment_record(
     db: Session,
     user_id: int,
@@ -132,10 +147,10 @@ def _create_payment_record(
 ):
     payment = Payment(
         user_id=user_id,
-        stripe_customer_id=session.get("customer"),
-        stripe_session_id=session.get("id"),
-        stripe_payment_intent_id=session.get("payment_intent"),
-        stripe_subscription_id=stripe_subscription_id or session.get("subscription"),
+        stripe_customer_id=_stripe_get(session, "customer"),
+        stripe_session_id=_stripe_get(session, "id"),
+        stripe_payment_intent_id=_stripe_get(session, "payment_intent"),
+        stripe_subscription_id=stripe_subscription_id or _stripe_get(session, "subscription"),
         product_type=product_type,
         plan=plan or "free",
         agent_slug=agent_slug,
@@ -319,15 +334,15 @@ def create_checkout_session(
 def _mark_payment_paid(db: Session, session, status: str = "paid"):
     payment = (
         db.query(Payment)
-        .filter(Payment.stripe_session_id == session.get("id"))
+        .filter(Payment.stripe_session_id == _stripe_get(session, "id"))
         .first()
     )
 
     if payment:
         payment.status = status
-        payment.stripe_customer_id = session.get("customer")
-        payment.stripe_payment_intent_id = session.get("payment_intent")
-        payment.stripe_subscription_id = session.get("subscription")
+        payment.stripe_customer_id = _stripe_get(session, "customer")
+        payment.stripe_payment_intent_id = _stripe_get(session, "payment_intent")
+        payment.stripe_subscription_id = _stripe_get(session, "subscription")
         payment.updated_at = datetime.utcnow()
 
 
@@ -364,7 +379,7 @@ def _record_credit_transaction(
 
 def _handle_checkout_completed(db: Session, event):
     session = event["data"]["object"]
-    metadata = session.get("metadata") or {}
+    metadata = _stripe_get(session, "metadata") or {}
 
     user_id = metadata.get("user_id")
     product_type = metadata.get("product_type")
@@ -377,7 +392,7 @@ def _handle_checkout_completed(db: Session, event):
     if not user:
         return
 
-    user.stripe_customer_id = session.get("customer") or user.stripe_customer_id
+    user.stripe_customer_id = _stripe_get(session, "customer") or user.stripe_customer_id
 
     _mark_payment_paid(db, session, status="paid")
 
@@ -402,13 +417,13 @@ def _handle_checkout_completed(db: Session, event):
                 agent_slug=agent_slug,
                 trial_paid=True,
                 trial_used=False,
-                stripe_session_id=session.get("id"),
+                stripe_session_id=_stripe_get(session, "id"),
                 created_at=datetime.utcnow(),
             )
             db.add(trial)
         else:
             trial.trial_paid = True
-            trial.stripe_session_id = session.get("id")
+            trial.stripe_session_id = _stripe_get(session, "id")
 
         _record_credit_transaction(
             db=db,
@@ -477,13 +492,13 @@ def _handle_checkout_completed(db: Session, event):
 
 def _handle_invoice_paid(db: Session, event):
     invoice = event["data"]["object"]
-    subscription_id = invoice.get("subscription")
+    subscription_id = _stripe_get(invoice, "subscription")
 
     if not subscription_id:
         return
 
     subscription = stripe.Subscription.retrieve(subscription_id)
-    metadata = subscription.get("metadata") or {}
+    metadata = _stripe_get(subscription, "metadata") or {}
 
     user_id = metadata.get("user_id")
     product_type = metadata.get("product_type")
@@ -501,7 +516,7 @@ def _handle_invoice_paid(db: Session, event):
     user.subscription_status = "active"
     user.subscription_credits_balance = credits
 
-    current_period_end = subscription.get("current_period_end")
+    current_period_end = _stripe_get(subscription, "current_period_end")
 
     if current_period_end:
         user.subscription_current_period_end = datetime.utcfromtimestamp(
@@ -523,7 +538,7 @@ def _handle_invoice_paid(db: Session, event):
 
 def _handle_subscription_updated(db: Session, event):
     subscription = event["data"]["object"]
-    metadata = subscription.get("metadata") or {}
+    metadata = _stripe_get(subscription, "metadata") or {}
 
     user_id = metadata.get("user_id")
 
@@ -535,9 +550,9 @@ def _handle_subscription_updated(db: Session, event):
     if not user:
         return
 
-    user.subscription_status = subscription.get("status") or "none"
+    user.subscription_status = _stripe_get(subscription, "status") or "none"
 
-    current_period_end = subscription.get("current_period_end")
+    current_period_end = _stripe_get(subscription, "current_period_end")
 
     if current_period_end:
         user.subscription_current_period_end = datetime.utcfromtimestamp(
@@ -553,7 +568,7 @@ def _handle_subscription_updated(db: Session, event):
 
 def _handle_subscription_deleted(db: Session, event):
     subscription = event["data"]["object"]
-    metadata = subscription.get("metadata") or {}
+    metadata = _stripe_get(subscription, "metadata") or {}
 
     user_id = metadata.get("user_id")
 
