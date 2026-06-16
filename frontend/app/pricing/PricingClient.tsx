@@ -282,7 +282,7 @@ const labels: Record<Language, PricingLabels> = {
     month: "/month",
 
     proFeatures: [
-      "200 Credits per Month",
+      "500 Credits per Month",
       "Usable Across All Agents",
       "Priority Processing",
       "Access to Legal, Finance, Study, and Business AI",
