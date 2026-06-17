@@ -1715,7 +1715,7 @@ export default function BusinessClient() {
         pack: "starter",
       });
     } catch (error: any) {
-      setMessage(error?.message || "Unable to start checkout.");
+      setMessage(getFriendlyPaymentMessage(error));
     }
   };
 
@@ -1723,7 +1723,7 @@ export default function BusinessClient() {
     try {
       await startStripeCheckout("subscription");
     } catch (error: any) {
-      setMessage(error?.message || "Unable to start checkout.");
+      setMessage(getFriendlyPaymentMessage(error));
     }
   };
 
@@ -1743,7 +1743,7 @@ export default function BusinessClient() {
         agent_slug: "business",
       });
     } catch (error: any) {
-      setMessage(error?.message || "Unable to start checkout.");
+      setMessage(getFriendlyPaymentMessage(error));
     }
   };
 
@@ -2369,10 +2369,42 @@ export default function BusinessClient() {
 
   const businessTrialUsedMessage =
     locale === "fr"
-      ? "Vous avez déjà utilisé votre essai à 1$ pour ce compte. Achetez des crédits ou passez au plan Pro."
+      ? "Votre essai à 1 $ a déjà été utilisé pour ce compte. Vous pouvez continuer avec des crédits ou un abonnement Pro."
       : locale === "ar"
-      ? "تم استخدام تجربة الأعمال. اشترِ أرصدة أو قم بالترقية إلى Pro."
-      : "Business trial already used. Buy credits or upgrade to Pro.";
+      ? "لقد تم استخدام تجربة 1 دولار الخاصة بهذا الحساب بالفعل. يمكنك المتابعة باستخدام الأرصدة أو الاشتراك في خطة Pro."
+      : "Your $1 trial has already been used on this account. You can continue with credits or a Pro plan.";
+
+  const getCheckoutErrorMessage = () => {
+    if (locale === "fr") {
+      return "Impossible d’ouvrir la page de paiement Stripe. Veuillez réessayer.";
+    }
+
+    if (locale === "ar") {
+      return "تعذر فتح صفحة الدفع عبر Stripe. يرجى المحاولة مرة أخرى.";
+    }
+
+    return "Unable to start Stripe checkout. Please try again.";
+  };
+
+  const getFriendlyPaymentMessage = (error: any) => {
+    const rawMessage = String(error?.message || "");
+
+    if (
+      rawMessage.includes("already been activated") ||
+      rawMessage.includes("already activated") ||
+      rawMessage.includes("already used") ||
+      rawMessage.includes("$1 trial") ||
+      rawMessage.includes("409")
+    ) {
+      return businessTrialUsedMessage;
+    }
+
+    if (rawMessage.includes("Unable to start checkout")) {
+      return getCheckoutErrorMessage();
+    }
+
+    return rawMessage || getCheckoutErrorMessage();
+  };
 
   const buyCreditsLabel =
     locale === "fr"
