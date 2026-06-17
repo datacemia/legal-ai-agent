@@ -640,6 +640,36 @@ export default function UploadClient() {
       ? "تم تفعيل تجربة الوكيل القانوني. ارفع العقد ثم اضغط على تحليل العقد."
       : "Legal trial activated. Upload your contract and click Analyze Contract.";
 
+  const getCheckoutErrorMessage = () => {
+    if (language === "fr") {
+      return "Impossible d’ouvrir la page de paiement Stripe. Veuillez réessayer.";
+    }
+
+    if (language === "ar") {
+      return "تعذر فتح صفحة الدفع عبر Stripe. يرجى المحاولة مرة أخرى.";
+    }
+
+    return "Unable to start Stripe checkout. Please try again.";
+  };
+
+  const getFriendlyPaymentMessage = (error: any) => {
+    const rawMessage = String(error?.message || "");
+
+    if (
+      rawMessage.includes("already been activated") ||
+      rawMessage.includes("already used") ||
+      rawMessage.includes("$1 trial")
+    ) {
+      return t.trialUsed;
+    }
+
+    if (rawMessage.includes("Unable to start checkout")) {
+      return getCheckoutErrorMessage();
+    }
+
+    return rawMessage || getCheckoutErrorMessage();
+  };
+
   useEffect(() => {
     const savedLocale = getSavedLocale();
 
@@ -969,7 +999,7 @@ export default function UploadClient() {
         pack: "starter",
       });
     } catch (error: any) {
-      setMessage(error?.message || "Unable to start checkout.");
+      setMessage(getFriendlyPaymentMessage(error));
     }
   };
 
@@ -977,7 +1007,7 @@ export default function UploadClient() {
     try {
       await startStripeCheckout("subscription");
     } catch (error: any) {
-      setMessage(error?.message || "Unable to start checkout.");
+      setMessage(getFriendlyPaymentMessage(error));
     }
   };
 
@@ -997,7 +1027,7 @@ export default function UploadClient() {
         agent_slug: "legal",
       });
     } catch (error: any) {
-      setMessage(error?.message || "Unable to start checkout.");
+      setMessage(getFriendlyPaymentMessage(error));
     }
   };
 
