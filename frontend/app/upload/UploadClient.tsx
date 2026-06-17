@@ -52,7 +52,7 @@ const labels: any = {
       "Payments are temporarily unavailable during platform rollout. Pro access will be available soon.",
     trialInfo: "$1 trial per account. You can also skip the trial and continue with global credits or a Pro plan.",
     upgradePro: "Upgrade to Pro",
-    trialUsed: "You have already used your $1 trial for this account",
+    trialUsed: "Your $1 trial has already been used on this account. You can continue with credits or a Pro plan.",
     paymentRequired: "$1 Legal trial activation required",
     heroTitle: "AI Legal Intelligence Platform",
     heroDesc:
@@ -143,7 +143,7 @@ const labels: any = {
       "Les paiements sont temporairement indisponibles pendant le déploiement de la plateforme. L’accès Pro sera bientôt disponible.",
     trialInfo: "Essai à 1$ par compte. Vous pouvez aussi passer directement aux crédits globaux ou au plan Pro.",
     upgradePro: "Passer au plan Pro",
-    trialUsed: "Vous avez déjà utilisé votre essai à 1$ pour ce compte",
+    trialUsed: "Votre essai à 1 $ a déjà été utilisé pour ce compte. Vous pouvez continuer avec des crédits ou un abonnement Pro.",
     paymentRequired: "Activation de l’essai Legal à 1$ requise",
     heroTitle: "Plateforme d’intelligence juridique IA",
     heroDesc:
@@ -234,7 +234,7 @@ const labels: any = {
       "المدفوعات غير متاحة مؤقتاً أثناء إطلاق المنصة. سيتوفر وصول Pro قريباً.",
     trialInfo: "تجربة واحدة بقيمة 1 دولار لكل حساب. يمكنك أيضاً المتابعة مباشرة بالأرصدة العامة أو خطة Pro.",
     upgradePro: "الترقية إلى Pro",
-    trialUsed: "لقد استخدمت بالفعل تجربة 1 دولار لهذا الحساب",
+    trialUsed: "لقد تم استخدام تجربة 1 دولار الخاصة بهذا الحساب بالفعل. يمكنك المتابعة باستخدام الأرصدة أو الاشتراك في خطة Pro.",
     paymentRequired: "يلزم تفعيل تجربة القانون بقيمة 1 دولار",
     heroTitle: "منصة ذكاء قانوني مدعومة بالذكاء الاصطناعي",
     heroDesc:
