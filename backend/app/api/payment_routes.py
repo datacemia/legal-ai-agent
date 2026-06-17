@@ -27,6 +27,13 @@ if STRIPE_SECRET_KEY:
 
 TRIAL_AGENTS = {"legal", "finance", "study", "business"}
 
+TRIAL_SUCCESS_PATHS = {
+    "legal": "/upload",
+    "finance": "/finance",
+    "study": "/study",
+    "business": "/business",
+}
+
 CREDIT_PACKS = {
     "starter": {
         "name": "Runexa Credits Starter",
@@ -325,12 +332,17 @@ def create_checkout_session(
     else:
         raise HTTPException(status_code=400, detail="Invalid product type")
 
+    success_path = "/dashboard"
+
+    if product_type == "trial" and agent_slug:
+        success_path = TRIAL_SUCCESS_PATHS.get(agent_slug, "/dashboard")
+
     session = stripe.checkout.Session.create(
         mode=mode,
         customer=customer_id,
         payment_method_types=["card"],
         line_items=[line_item],
-        success_url=f"{FRONTEND_URL}/dashboard?payment=success",
+        success_url=f"{FRONTEND_URL}{success_path}?payment=success",
         cancel_url=f"{FRONTEND_URL}/pricing?payment=cancel",
         metadata=metadata,
         subscription_data={
