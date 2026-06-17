@@ -224,6 +224,40 @@ export default function DashboardPage() {
     }
   }
 
+
+  const handleManageSubscription = async () => {
+    try {
+      const token = getToken();
+
+      if (!token) {
+        window.location.href = "/login";
+        return;
+      }
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL || "https://api.runexa.ai"}/payments/customer-portal`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.url) {
+        window.location.href = data.url;
+        return;
+      }
+
+      setMessage("Unable to open subscription portal.");
+    } catch (error) {
+      console.error(error);
+      setMessage("Unable to open subscription portal.");
+    }
+  };
+
   const handleBuyCredit = async () => {
     setMessage(
       "Stripe is not configured yet. Credits and subscriptions will be available soon."
@@ -259,14 +293,10 @@ export default function DashboardPage() {
             </button>
 
             <button
-              onClick={() =>
-                setMessage(
-                  "Pro subscription is not configured yet. Stripe will be activated soon."
-                )
-              }
+              onClick={handleManageSubscription}
               className="px-5 py-2 bg-blue-600 text-white rounded-xl"
             >
-              {t.upgrade}
+              Manage Subscription
             </button>
 
           </div>
