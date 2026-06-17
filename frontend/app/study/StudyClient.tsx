@@ -145,9 +145,9 @@ const labels: any = {
       "Payments are temporarily unavailable during platform rollout. $1 trial activation, credits, and plans will be available soon.",
     proMessage:
       "Pro plan is not configured yet. Payments are temporarily unavailable during platform rollout.",
-    trialInfo: "$1 trial per agent. After your trial, continue with credits or a plan.",
+    trialInfo: "$1 trial per account. After your trial, continue with credits or a plan.",
     startTrial: "Start $1 trial",
-    trialUsed: "Trial already used for study",
+    trialUsed: "You have already used your $1 trial for this account",
     paymentRequired: "$1 Study trial activation required",
     errorMessage: "Failed to connect to Study Agent API.",
     noFile: "No file selected",
@@ -235,9 +235,9 @@ const labels: any = {
       "Les paiements sont temporairement indisponibles pendant le déploiement de la plateforme. L’activation de l’essai à 1$, les crédits et les abonnements seront bientôt disponibles.",
     proMessage:
       "Le plan Pro n’est pas encore configuré. Les paiements sont temporairement indisponibles pendant le déploiement de la plateforme.",
-    trialInfo: "Essai à 1$ par agent. Après l’essai, continuez avec des crédits ou un abonnement.",
+    trialInfo: "Essai à 1$ par compte. Après l’essai, continuez avec des crédits ou un abonnement.",
     startTrial: "Activer l’essai à 1$",
-    trialUsed: "Essai Study déjà utilisé",
+    trialUsed: "Vous avez déjà utilisé votre essai à 1$ pour ce compte",
     paymentRequired: "Activation de l’essai Study à 1$ requise",
     errorMessage: "Impossible de se connecter à l’API Study Agent.",
     noFile: "Aucun fichier sélectionné",
@@ -324,7 +324,7 @@ const labels: any = {
       "المدفوعات غير متاحة مؤقتاً أثناء إطلاق المنصة. تفعيل تجربة 1 دولار، الأرصدة والاشتراكات ستكون متاحة قريباً.",
     proMessage:
       "خطة Pro غير مفعلة حالياً. المدفوعات غير متاحة مؤقتاً أثناء إطلاق المنصة.",
-    trialInfo: "تجربة بقيمة 1 دولار لكل وكيل. بعد التجربة يمكنك المتابعة بالأرصدة أو الاشتراك.",
+    trialInfo: "تجربة واحدة بقيمة 1 دولار لكل حساب. بعد التجربة يمكنك المتابعة بالأرصدة أو الاشتراك.",
     startTrial: "تفعيل تجربة 1 دولار",
     trialUsed: "تم استخدام تجربة وكيل الدراسة",
     paymentRequired: "يلزم تفعيل تجربة الدراسة بقيمة 1 دولار",

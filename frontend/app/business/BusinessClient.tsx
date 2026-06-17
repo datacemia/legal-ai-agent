@@ -2355,10 +2355,10 @@ export default function BusinessClient() {
 
   const trialInfoMessage =
     locale === "fr"
-      ? "Essai à 1$ par agent. Vous pouvez aussi passer directement aux crédits globaux ou au plan Pro."
+      ? "Essai à 1$ par compte. Vous pouvez aussi passer directement aux crédits globaux ou au plan Pro."
       : locale === "ar"
-      ? "تجربة بقيمة 1 دولار لكل وكيل. يمكنك أيضاً المتابعة مباشرة بالأرصدة العامة أو خطة Pro."
-      : "$1 trial per agent. You can also skip the trial and continue with global credits or a Pro plan.";
+      ? "تجربة واحدة بقيمة 1 دولار لكل حساب. يمكنك أيضاً المتابعة مباشرة بالأرصدة العامة أو خطة Pro."
+      : "$1 trial per account. You can also skip the trial and continue with global credits or a Pro plan.";
 
   const businessTrialActivatedMessage =
     locale === "fr"
@@ -2369,7 +2369,7 @@ export default function BusinessClient() {
 
   const businessTrialUsedMessage =
     locale === "fr"
-      ? "Essai Business déjà utilisé. Achetez des crédits ou passez au plan Pro."
+      ? "Vous avez déjà utilisé votre essai à 1$ pour ce compte. Achetez des crédits ou passez au plan Pro."
       : locale === "ar"
       ? "تم استخدام تجربة الأعمال. اشترِ أرصدة أو قم بالترقية إلى Pro."
       : "Business trial already used. Buy credits or upgrade to Pro.";
