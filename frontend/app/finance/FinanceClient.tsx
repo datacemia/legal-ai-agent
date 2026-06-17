@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import jsPDF from "jspdf";
 import ReactMarkdown from "react-markdown";
 import { analyzeFinanceStatement } from "../../lib/api";
+import { startStripeCheckout } from "../../lib/stripeCheckout";
 import { getSavedLocale, setSavedLocale } from "../../lib/i18n";
 import {
   PieChart,
@@ -1425,15 +1426,25 @@ export default function FinanceClient() {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <button
-              onClick={handleAnalyze}
-              disabled={!file || loading}
+              onClick={() =>
+                hasActiveAccess
+                  ? handleAnalyze()
+                  : startStripeCheckout("trial", {
+                      agent_slug: "finance",
+                    })
+              }
+              disabled={hasActiveAccess ? !file || loading : loading}
               className="w-full rounded-xl bg-slate-900 py-3 text-white transition-all duration-300 hover:bg-slate-800 hover:shadow-xl disabled:bg-slate-400 disabled:hover:shadow-none"
             >
               {loading ? t.analyzing : primaryCtaLabel}
             </button>
 
             <button
-              onClick={() => setPaymentMessage(t.paymentMessage)}
+              onClick={() =>
+                startStripeCheckout("credits_pack", {
+                  pack: "starter",
+                })
+              }
               className="w-full rounded-xl border border-slate-300 bg-white py-3 text-slate-800 transition-all duration-300 hover:border-blue-200 hover:bg-slate-50 hover:shadow-md"
             >
               <span className="flex items-center justify-center gap-2">
@@ -1443,7 +1454,7 @@ export default function FinanceClient() {
 
             <button
               onClick={() =>
-                setPaymentMessage(t.proMessage)
+                startStripeCheckout("subscription")
               }
               className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 py-3 text-white transition-all duration-300 hover:shadow-xl"
             >
