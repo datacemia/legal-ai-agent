@@ -656,6 +656,29 @@ def get_trial_status(
     }
 
 
+@router.post("/customer-portal")
+def create_customer_portal_session(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    _require_stripe_config()
+
+    if not current_user.stripe_customer_id:
+        raise HTTPException(
+            status_code=400,
+            detail="No Stripe customer found for this account",
+        )
+
+    session = stripe.billing_portal.Session.create(
+        customer=current_user.stripe_customer_id,
+        return_url=f"{FRONTEND_URL}/dashboard",
+    )
+
+    return {
+        "url": session.url,
+    }
+
+
 @router.post("/webhook")
 async def stripe_webhook(request: Request, db: Session = Depends(get_db)):
     if not STRIPE_ENABLED or not STRIPE_WEBHOOK_SECRET:
