@@ -26,7 +26,7 @@ const labels: any = {
     pricing: "Plans & Pricing",
     blog: "Insights",
     trustLine:
-      "$1 trial per agent · Unified credits · Secure AI platform",
+      "$1 trial per account · Unified credits · Secure AI platform",
     choose: "Choose Your AI Agent",
     chooseDesc:
       "One Runexa account gives you access to specialized AI agents. Analyze legal documents, optimize your finances, learn more effectively, and make smarter business decisions.",
@@ -153,7 +153,7 @@ const labels: any = {
     pricing: "Plans et tarifs",
     blog: "Ressources & Insights",
     trustLine:
-      "Essai à 1 $ par agent · Crédits unifiés · Plateforme IA sécurisée",
+      "Un essai à 1 $ par compte · Crédits unifiés · Plateforme IA sécurisée",
     tryLegal: "Runexa Legal Agent",
     tryFinance: "Runexa Finance Coach",
     tryStudy: "Runexa Study Agent",
@@ -281,7 +281,7 @@ const labels: any = {
     explore: "استكشف حلول الذكاء الاصطناعي",
     pricing: "الخطط والأسعار",
     blog: "المدونة",
-    trustLine: "تجربة مقابل دولار واحد لكل وكيل · أرصدة موحدة · منصة ذكاء اصطناعي آمنة",
+    trustLine: "تجربة واحدة بقيمة 1 دولار لكل حساب · أرصدة موحدة · منصة ذكاء اصطناعي آمنة",
     tryLegal: "Runexa Legal Agent",
     tryFinance: "Runexa Finance Coach",
     tryStudy: "Runexa Study Agent",
