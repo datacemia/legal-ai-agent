@@ -1315,6 +1315,36 @@ export default function StudyClient() {
       ? "تم تفعيل تجربة الدراسة. ارفع الملف ثم اضغط على إنشاء تقرير الدراسة."
       : "Study trial activated. Upload your document and click Generate Study Report.";
 
+  const getCheckoutErrorMessage = () => {
+    if (language === "fr") {
+      return "Impossible d’ouvrir la page de paiement Stripe. Veuillez réessayer.";
+    }
+
+    if (language === "ar") {
+      return "تعذر فتح صفحة الدفع عبر Stripe. يرجى المحاولة مرة أخرى.";
+    }
+
+    return "Unable to start Stripe checkout. Please try again.";
+  };
+
+  const getFriendlyPaymentMessage = (error: any) => {
+    const rawMessage = String(error?.message || "");
+
+    if (
+      rawMessage.includes("already been activated") ||
+      rawMessage.includes("already used") ||
+      rawMessage.includes("$1 trial")
+    ) {
+      return t.trialUsed;
+    }
+
+    if (rawMessage.includes("Unable to start checkout")) {
+      return getCheckoutErrorMessage();
+    }
+
+    return rawMessage || getCheckoutErrorMessage();
+  };
+
   const primaryCtaLabel = hasActiveAccess
     ? t.analyze
     : hasUsedStudyTrial
@@ -1570,7 +1600,7 @@ export default function StudyClient() {
         pack: "starter",
       });
     } catch (error: any) {
-      setPaymentMessage(error?.message || "Unable to start checkout.");
+      setPaymentMessage(getFriendlyPaymentMessage(error));
     }
   };
 
@@ -1596,7 +1626,7 @@ export default function StudyClient() {
         agent_slug: "study",
       });
     } catch (error: any) {
-      setPaymentMessage(error?.message || "Unable to start checkout.");
+      setPaymentMessage(getFriendlyPaymentMessage(error));
     }
   };
 
