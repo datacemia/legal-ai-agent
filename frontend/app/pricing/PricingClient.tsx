@@ -1061,7 +1061,46 @@ export default function PricingClient() {
     setMessage(t.messages.trial(agentName));
   };
 
-  const handleBuyCredits = () => {
+  const handleBuyCredits = async (pack: "starter" | "growth" | "scale") => {
+    if (!requireAuth()) return;
+
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        "https://api.runexa.ai/payments/create-checkout-session",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            product_type: "credits_pack",
+            pack,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.detail || "Unable to create checkout session");
+      }
+
+      if (data.checkout_url) {
+        window.location.href = data.checkout_url;
+        return;
+      }
+
+      throw new Error("Checkout URL not returned");
+    } catch (error) {
+      console.error(error);
+      setMessage("Unable to start Stripe checkout. Please try again.");
+    }
+  };
+
+  const handleStartApiPlan = () => {
     if (!requireAuth()) return;
 
     setMessage(t.messages.credits);
@@ -1302,7 +1341,15 @@ export default function PricingClient() {
                 </p>
 
                 <button
-                  onClick={handleBuyCredits}
+                  onClick={() =>
+                    handleBuyCredits(
+                      pack.name.toLowerCase() === "starter"
+                        ? "starter"
+                        : pack.name.toLowerCase() === "growth"
+                          ? "growth"
+                          : "scale"
+                    )
+                  }
                   className={`mt-7 w-full rounded-xl px-5 py-3 text-sm font-bold transition ${
                     pack.highlighted
                       ? "bg-blue-600 text-white hover:bg-blue-700"
@@ -1455,7 +1502,7 @@ export default function PricingClient() {
                   </a>
                 ) : (
                   <button
-                    onClick={handleBuyCredits}
+                    onClick={handleStartApiPlan}
                     className={`mt-8 w-full rounded-xl px-5 py-3 text-sm font-bold transition ${
                       plan.highlighted
                         ? "bg-blue-600 text-white hover:bg-blue-700"
