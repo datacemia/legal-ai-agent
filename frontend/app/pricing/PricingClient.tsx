@@ -190,7 +190,7 @@ const labels: Record<Language, PricingLabels> = {
     powerUserBadge:
       "Most Popular for Professionals",
     activateTrialCta:
-      "Start Any AI Agent for $1",
+      "Start Your One-Time $1 Trial",
     viewPlans:
       "Compare Plans",
     audience:
@@ -239,16 +239,16 @@ const labels: Record<Language, PricingLabels> = {
     trialsTitle: "$1 Trials",
 
     trialsDesc:
-      "Activate any Runexa AI agent with a one-time $1 trial. Explore the agent you need before using credits or upgrading to a plan.",
+      "Each account includes one one-time $1 trial. Choose one Runexa AI agent and explore it before using credits or upgrading to a plan.",
 
     trialsBadge: "Choose Your AI Agent",
 
-    oneTimeTrial: "One-Time Trial",
+    oneTimeTrial: "One-Time Trial per Account",
 
     trialAnalysis: "One AI-Powered Analysis",
 
     trialReassurance:
-      "Instant access after activation.",
+      "One $1 trial per account. Instant access after activation.",
 
     startTrial: "Start Trial",
 
@@ -333,7 +333,7 @@ const labels: Record<Language, PricingLabels> = {
     infoCards: [
     {
       title: "Start Your Way",
-      desc: "Try any AI agent for $1 or go directly to credits or a subscription plan.",
+      desc: "Try one AI agent for $1 per account, or go directly to credits or a subscription plan.",
     },
 
     {
@@ -522,7 +522,7 @@ const labels: Record<Language, PricingLabels> = {
     powerUserBadge:
       "Le choix privilégié des professionnels",
     activateTrialCta:
-      "Tester n’importe quel agent IA pour 1 $",
+      "Commencer votre essai unique à 1 $",
     viewPlans:
       "Comparer les offres",
     audience:
@@ -568,12 +568,12 @@ const labels: Record<Language, PricingLabels> = {
     section4: "Utilisation des crédits par agent",
     trialsTitle: "Essais à 1 $",
     trialsDesc:
-      "Activez n’importe quel agent IA Runexa avec un essai unique à 1 $. Découvrez l’agent dont vous avez besoin avant d’utiliser des crédits ou de passer à une offre.",
+      "Chaque compte bénéficie d’un seul essai à 1 $. Choisissez un agent IA Runexa et découvrez-le avant d’utiliser des crédits ou de passer à une offre.",
     trialsBadge: "Choisissez votre agent IA",
-    oneTimeTrial: "Essai unique",
+    oneTimeTrial: "Essai unique par compte",
     trialAnalysis: "Une analyse alimentée par l’IA",
     trialReassurance:
-      "Accès instantané après activation.",
+      "Un seul essai à 1 $ par compte. Accès instantané après activation.",
     startTrial: "Commencer l’essai",
     creditsTitle: "Crédits unifiés",
     mostFlexible: "Le plus flexible",
@@ -634,7 +634,7 @@ const labels: Record<Language, PricingLabels> = {
       {
         title: "Accès flexible",
         desc:
-          "Commencez avec un essai à 1 $, achetez des crédits ou choisissez une offre par abonnement.",
+          "Commencez avec un seul essai à 1 $ par compte, achetez des crédits ou choisissez une offre par abonnement.",
       },
       {
         title: "Un solde de crédits unique",
@@ -812,7 +812,7 @@ const labels: Record<Language, PricingLabels> = {
     powerUserBadge:
       "الخيار المفضل للمحترفين",
     activateTrialCta:
-      "جرّب أي وكيل ذكي مقابل 1 دولار",
+      "ابدأ تجربتك الوحيدة مقابل 1 دولار",
     viewPlans:
       "مقارنة الخطط",
     audience:
@@ -855,12 +855,12 @@ const labels: Record<Language, PricingLabels> = {
     section4: "استخدام الأرصدة حسب الوكيل",
     trialsTitle: "تجارب بقيمة 1 دولار",
     trialsDesc:
-      "فعّل أي وكيل ذكاء اصطناعي من Runexa مقابل 1 دولار لمرة واحدة. استكشف الوكيل الذي تحتاجه قبل استخدام الأرصدة أو الترقية إلى إحدى الخطط.",
+      "يمنح كل حساب تجربة واحدة فقط مقابل 1 دولار. اختر وكيلاً واحداً من Runexa واستكشفه قبل استخدام الأرصدة أو الترقية إلى إحدى الخطط.",
     trialsBadge: "اختر وكيل الذكاء الاصطناعي",
-    oneTimeTrial: "تجربة لمرة واحدة",
+    oneTimeTrial: "تجربة واحدة لكل حساب",
     trialAnalysis: "تحليل مدعوم بالذكاء الاصطناعي",
     trialReassurance:
-      "وصول فوري بعد التفعيل.",
+      "تجربة واحدة فقط بقيمة 1 دولار لكل حساب. وصول فوري بعد التفعيل.",
     startTrial: "ابدأ التجربة",
     creditsTitle: "الأرصدة الموحّدة",
     mostFlexible: "الأكثر مرونة",
@@ -921,7 +921,7 @@ const labels: Record<Language, PricingLabels> = {
     {
       title: "وصول مرن",
       desc:
-        "ابدأ بتجربة مقابل 1 دولار، أو اشترِ أرصدة، أو اختر إحدى الخطط المناسبة لك.",
+        "ابدأ بتجربة واحدة فقط مقابل 1 دولار لكل حساب، أو اشترِ أرصدة، أو اختر إحدى الخطط المناسبة لك.",
     },
 
     {
