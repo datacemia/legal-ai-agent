@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { uploadDocument, runAnalysis } from "../../lib/api";
+import { startStripeCheckout } from "../../lib/stripeCheckout";
 import { trackEvent } from "../../lib/track";
 import { getSavedLocale, setSavedLocale } from "../../lib/i18n";
 import RiskBadge from "../../components/RiskBadge";
@@ -611,6 +612,8 @@ export default function UploadClient() {
   const [plan, setPlan] = useState("");
   const [role, setRole] = useState("");
   const [creditsBalance, setCreditsBalance] = useState(0);
+  const [legalTrialPaid, setLegalTrialPaid] = useState(false);
+  const [legalTrialUsed, setLegalTrialUsed] = useState(false);
   const [analysisStartedAt, setAnalysisStartedAt] = useState<number | null>(null);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [jobId, setJobId] = useState<number | null>(null);
@@ -618,12 +621,24 @@ export default function UploadClient() {
   const [jobStartedAt, setJobStartedAt] = useState("");
   const [jobCompletedAt, setJobCompletedAt] = useState("");
 
-  const hasActiveAccess =
+  const hasPaidLegalTrial = legalTrialPaid && !legalTrialUsed;
+  const hasUsedLegalTrial = legalTrialPaid && legalTrialUsed;
+
+  const hasAccountAccess =
     role === "admin" ||
     role === "enterprise_admin" ||
     role === "enterprise_member" ||
     ["paid", "pro", "premium"].includes(plan) ||
     creditsBalance > 0;
+
+  const hasActiveAccess = hasAccountAccess || hasPaidLegalTrial;
+
+  const legalTrialActivatedMessage =
+    language === "fr"
+      ? "Essai Legal activé. Importez votre contrat et cliquez sur Analyser le contrat."
+      : language === "ar"
+      ? "تم تفعيل تجربة الوكيل القانوني. ارفع العقد ثم اضغط على تحليل العقد."
+      : "Legal trial activated. Upload your contract and click Analyze Contract.";
 
   useEffect(() => {
     const savedLocale = getSavedLocale();
@@ -657,6 +672,7 @@ export default function UploadClient() {
 
     syncBillingState();
     refreshUserBilling();
+    refreshLegalTrial();
 
     window.addEventListener("storage", syncBillingState);
 
@@ -684,7 +700,9 @@ export default function UploadClient() {
 
   const primaryButtonLabel = hasActiveAccess
     ? t.analyzeButton
-    : t.signupCta;
+    : hasUsedLegalTrial
+      ? t.trialUsed
+      : t.signupCta;
 
   const loadingTimeline = [
     {
@@ -919,17 +937,68 @@ export default function UploadClient() {
     window.dispatchEvent(new Event("storage"));
   };
 
-  const handleBuyCredit = async () => {
+  const refreshLegalTrial = async () => {
     const token = safeGetLocalStorage("token");
 
-    if (!token) {
-      window.location.href = "/register";
+    if (!token) return;
+
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/payments/trial-status/legal`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!res.ok) return;
+
+      const data = await res.json();
+
+      setLegalTrialPaid(Boolean(data.trial_paid));
+      setLegalTrialUsed(Boolean(data.trial_used));
+    } catch (error) {
+      console.error("Could not refresh legal trial status:", error);
+    }
+  };
+
+  const handleBuyCredit = async () => {
+    try {
+      await startStripeCheckout("credits_pack", {
+        pack: "starter",
+      });
+    } catch (error: any) {
+      setMessage(error?.message || "Unable to start checkout.");
+    }
+  };
+
+  const handleUpgradePro = async () => {
+    try {
+      await startStripeCheckout("subscription");
+    } catch (error: any) {
+      setMessage(error?.message || "Unable to start checkout.");
+    }
+  };
+
+  const handlePrimaryAction = async () => {
+    if (hasActiveAccess) {
+      await handleUpload();
       return;
     }
 
-    setMessage(
-      "Payments are temporarily unavailable during platform rollout. Credits and Pro access will be available soon."
-    );
+    if (hasUsedLegalTrial) {
+      setMessage(t.trialUsed);
+      return;
+    }
+
+    try {
+      await startStripeCheckout("trial", {
+        agent_slug: "legal",
+      });
+    } catch (error: any) {
+      setMessage(error?.message || "Unable to start checkout.");
+    }
   };
 
   const handleUpload = async () => {
@@ -1113,6 +1182,7 @@ export default function UploadClient() {
       );
 
       await refreshUserBilling();
+      await refreshLegalTrial();
     } catch (err: any) {
       const detail =
         err?.response?.data?.detail ||
@@ -1219,16 +1289,28 @@ export default function UploadClient() {
             <option value="ar">العربية</option>
           </select>
 
-          {!hasActiveAccess && (
+          {!hasActiveAccess && !hasUsedLegalTrial && (
             <div className="rounded-xl border border-blue-100 bg-blue-50 p-3 text-sm text-blue-700">
               {t.trialInfo}
             </div>
           )}
 
+          {hasPaidLegalTrial && !hasAccountAccess && (
+            <div className="rounded-xl border border-green-100 bg-green-50 p-3 text-sm text-green-700">
+              {legalTrialActivatedMessage}
+            </div>
+          )}
+
+          {hasUsedLegalTrial && !hasAccountAccess && (
+            <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-700">
+              {t.trialUsed}
+            </div>
+          )}
+
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             <button
-              onClick={handleUpload}
-              disabled={!file || loading}
+              onClick={handlePrimaryAction}
+              disabled={hasActiveAccess ? !file || loading : loading || hasUsedLegalTrial}
               className="w-full rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-slate-800 hover:shadow-xl disabled:bg-slate-400 disabled:hover:shadow-none"
             >
               {loading ? t.loading : primaryButtonLabel}
@@ -1242,9 +1324,7 @@ export default function UploadClient() {
             </button>
 
             <button
-              onClick={() =>
-                setMessage(t.proMessage)
-              }
+              onClick={handleUpgradePro}
               className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:shadow-xl"
             >
               {t.upgradePro}

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { getToken } from "../../lib/auth";
+import { startStripeCheckout } from "../../lib/stripeCheckout";
 import { getSavedLocale, setSavedLocale } from "../../lib/i18n";
 
 const API_URL =
@@ -1287,12 +1288,16 @@ export default function StudyClient() {
   const [userPlan, setUserPlan] = useState("trial");
   const [userRole, setUserRole] = useState("user");
   const [creditsBalance, setCreditsBalance] = useState(0);
+  const [studyTrialPaid, setStudyTrialPaid] = useState(false);
+  const [studyTrialUsed, setStudyTrialUsed] = useState(false);
 
   const t = labels[language] || labels.en;
 
   const hasCredits = creditsBalance > 0;
+  const hasPaidStudyTrial = studyTrialPaid && !studyTrialUsed;
+  const hasUsedStudyTrial = studyTrialPaid && studyTrialUsed;
 
-  const hasActiveAccess =
+  const hasAccountAccess =
     userRole === "admin" ||
     userRole === "enterprise_admin" ||
     userRole === "enterprise_member" ||
@@ -1301,9 +1306,20 @@ export default function StudyClient() {
     userPlan === "premium" ||
     hasCredits;
 
+  const hasActiveAccess = hasAccountAccess || hasPaidStudyTrial;
+
+  const studyTrialActivatedMessage =
+    language === "fr"
+      ? "Essai Study activé. Importez votre document et cliquez sur Générer le rapport d’étude IA."
+      : language === "ar"
+      ? "تم تفعيل تجربة الدراسة. ارفع الملف ثم اضغط على إنشاء تقرير الدراسة."
+      : "Study trial activated. Upload your document and click Generate Study Report.";
+
   const primaryCtaLabel = hasActiveAccess
     ? t.analyze
-    : t.startTrial;
+    : hasUsedStudyTrial
+      ? t.trialUsed
+      : t.startTrial;
 
   const formatDuration = (seconds: number) => {
     const safeSeconds = Math.max(0, Math.floor(seconds));
@@ -1405,6 +1421,7 @@ export default function StudyClient() {
 
     syncBillingState();
     refreshUserBilling();
+    refreshStudyTrial();
 
     window.addEventListener("storage", syncBillingState);
 
@@ -1521,6 +1538,68 @@ export default function StudyClient() {
     window.dispatchEvent(new Event("storage"));
   };
 
+  const refreshStudyTrial = async () => {
+    const token = getToken?.() || safeGetLocalStorage("token");
+
+    if (!token) return;
+
+    try {
+      const res = await fetch(
+        `${API_URL}/payments/trial-status/study`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!res.ok) return;
+
+      const data = await res.json();
+
+      setStudyTrialPaid(Boolean(data.trial_paid));
+      setStudyTrialUsed(Boolean(data.trial_used));
+    } catch (error) {
+      console.error("Could not refresh study trial status:", error);
+    }
+  };
+
+  const handleBuyCredits = async () => {
+    try {
+      await startStripeCheckout("credits_pack", {
+        pack: "starter",
+      });
+    } catch (error: any) {
+      setPaymentMessage(error?.message || "Unable to start checkout.");
+    }
+  };
+
+  const handlePrimaryAction = async () => {
+    if (hasActiveAccess) {
+      setResult(null);
+      setSelectedAnswers({});
+      setQuizSubmitted(false);
+      setPaymentMessage("");
+      setRetryCount(0);
+      setSelectedNode(null);
+      setShowLevelModal(true);
+      return;
+    }
+
+    if (hasUsedStudyTrial) {
+      setPaymentMessage(t.trialUsed);
+      return;
+    }
+
+    try {
+      await startStripeCheckout("trial", {
+        agent_slug: "study",
+      });
+    } catch (error: any) {
+      setPaymentMessage(error?.message || "Unable to start checkout.");
+    }
+  };
+
   const handleAnalyze = async () => {
     if (!file || !educationLevel) return;
 
@@ -1585,6 +1664,7 @@ export default function StudyClient() {
         setResult(data);
 
         await refreshUserBilling();
+        await refreshStudyTrial();
 
         return;
       }
@@ -1631,6 +1711,7 @@ export default function StudyClient() {
           setResult(statusData.result);
 
           await refreshUserBilling();
+          await refreshStudyTrial();
 
           setLoadingProgress(100);
           completed = true;
@@ -2211,9 +2292,21 @@ export default function StudyClient() {
             </label>
           </div>
 
-          {!hasActiveAccess && (
+          {!hasActiveAccess && !hasUsedStudyTrial && (
             <div className="rounded-xl border border-blue-100 bg-blue-50 p-3 text-sm text-blue-700">
               {t.trialInfo}
+            </div>
+          )}
+
+          {hasPaidStudyTrial && !hasAccountAccess && (
+            <div className="rounded-xl border border-green-100 bg-green-50 p-3 text-sm text-green-700">
+              {studyTrialActivatedMessage}
+            </div>
+          )}
+
+          {hasUsedStudyTrial && !hasAccountAccess && (
+            <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-700">
+              {t.trialUsed}
             </div>
           )}
 
@@ -2223,16 +2316,8 @@ export default function StudyClient() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <button
-              onClick={() => {
-                setResult(null);
-                setSelectedAnswers({});
-                setQuizSubmitted(false);
-                setPaymentMessage("");
-                setRetryCount(0);
-                setSelectedNode(null);
-                setShowLevelModal(true);
-              }}
-              disabled={!file || loading}
+              onClick={handlePrimaryAction}
+              disabled={hasActiveAccess ? !file || loading : loading || hasUsedStudyTrial}
               className="flex w-full items-center justify-center gap-2 bg-slate-900 text-white py-3 rounded-xl transition-all duration-300 hover:bg-slate-800 hover:shadow-xl disabled:bg-slate-400 disabled:hover:shadow-none"
             >
               {loading ? (
@@ -2246,7 +2331,7 @@ export default function StudyClient() {
             </button>
 
             <button
-              onClick={() => setPaymentMessage(t.paymentMessage)}
+              onClick={handleBuyCredits}
               className="w-full bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 transition"
             >
               {t.buyCredits}

@@ -15,6 +15,7 @@ import {
 } from "recharts";
 
 import { analyzeBusinessFile } from "../../lib/api";
+import { startStripeCheckout } from "../../lib/stripeCheckout";
 import {
   getSavedLocale,
   setSavedLocale,
@@ -1539,6 +1540,8 @@ export default function BusinessClient() {
   const [plan, setPlan] = useState("");
   const [role, setRole] = useState("");
   const [creditsBalance, setCreditsBalance] = useState(0);
+  const [businessTrialPaid, setBusinessTrialPaid] = useState(false);
+  const [businessTrialUsed, setBusinessTrialUsed] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [loadingStep, setLoadingStep] = useState("");
   const [startedAt, setStartedAt] = useState<number | null>(null);
@@ -1593,6 +1596,7 @@ export default function BusinessClient() {
     );
 
     refreshUserBilling();
+    refreshBusinessTrial();
 
     return () => {
       window.removeEventListener(
@@ -1677,6 +1681,70 @@ export default function BusinessClient() {
     window.dispatchEvent(
       new Event("storage")
     );
+  };
+
+  const refreshBusinessTrial = async () => {
+    const token = safeGetLocalStorage("token");
+
+    if (!token) return;
+
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/payments/trial-status/business`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!res.ok) return;
+
+      const data = await res.json();
+
+      setBusinessTrialPaid(Boolean(data.trial_paid));
+      setBusinessTrialUsed(Boolean(data.trial_used));
+    } catch (error) {
+      console.error("Could not refresh business trial status:", error);
+    }
+  };
+
+  const handleBuyCredits = async () => {
+    try {
+      await startStripeCheckout("credits_pack", {
+        pack: "starter",
+      });
+    } catch (error: any) {
+      setMessage(error?.message || "Unable to start checkout.");
+    }
+  };
+
+  const handleUpgradePro = async () => {
+    try {
+      await startStripeCheckout("subscription");
+    } catch (error: any) {
+      setMessage(error?.message || "Unable to start checkout.");
+    }
+  };
+
+  const handlePrimaryAction = async () => {
+    if (hasActiveAccess) {
+      await handleAnalyze();
+      return;
+    }
+
+    if (hasUsedBusinessTrial) {
+      setMessage(businessTrialUsedMessage);
+      return;
+    }
+
+    try {
+      await startStripeCheckout("trial", {
+        agent_slug: "business",
+      });
+    } catch (error: any) {
+      setMessage(error?.message || "Unable to start checkout.");
+    }
   };
 
   const parseBackendDateToMs = (value: string) => {
@@ -1874,6 +1942,7 @@ export default function BusinessClient() {
       );
 
       await refreshUserBilling();
+      await refreshBusinessTrial();
     } catch (error: any) {
       setMessage(
         error?.message ||
@@ -2265,6 +2334,66 @@ export default function BusinessClient() {
   const locale = getLocale(language);
   const t = labels[locale] || labels.en;
 
+  const hasPaidBusinessTrial = businessTrialPaid && !businessTrialUsed;
+  const hasUsedBusinessTrial = businessTrialPaid && businessTrialUsed;
+
+  const hasAccountAccess =
+    role === "admin" ||
+    role === "enterprise_admin" ||
+    role === "enterprise_member" ||
+    ["paid", "pro", "premium"].includes(plan) ||
+    creditsBalance > 0;
+
+  const hasActiveAccess = hasAccountAccess || hasPaidBusinessTrial;
+
+  const startTrialLabel =
+    locale === "fr"
+      ? "Activer l’essai à 1$"
+      : locale === "ar"
+      ? "تفعيل تجربة 1 دولار"
+      : "Start $1 trial";
+
+  const trialInfoMessage =
+    locale === "fr"
+      ? "Essai à 1$ par agent. Vous pouvez aussi passer directement aux crédits globaux ou au plan Pro."
+      : locale === "ar"
+      ? "تجربة بقيمة 1 دولار لكل وكيل. يمكنك أيضاً المتابعة مباشرة بالأرصدة العامة أو خطة Pro."
+      : "$1 trial per agent. You can also skip the trial and continue with global credits or a Pro plan.";
+
+  const businessTrialActivatedMessage =
+    locale === "fr"
+      ? "Essai Business activé. Importez votre fichier et cliquez sur Analyser Business."
+      : locale === "ar"
+      ? "تم تفعيل تجربة الأعمال. ارفع الملف ثم اضغط على تحليل الأعمال."
+      : "Business trial activated. Upload your file and click Analyze Business.";
+
+  const businessTrialUsedMessage =
+    locale === "fr"
+      ? "Essai Business déjà utilisé. Achetez des crédits ou passez au plan Pro."
+      : locale === "ar"
+      ? "تم استخدام تجربة الأعمال. اشترِ أرصدة أو قم بالترقية إلى Pro."
+      : "Business trial already used. Buy credits or upgrade to Pro.";
+
+  const buyCreditsLabel =
+    locale === "fr"
+      ? "Acheter des crédits"
+      : locale === "ar"
+      ? "شراء رصيد"
+      : "Buy credits";
+
+  const upgradeProLabel =
+    locale === "fr"
+      ? "Passer au plan Pro"
+      : locale === "ar"
+      ? "الترقية إلى Pro"
+      : "Upgrade to Pro";
+
+  const primaryCtaLabel = hasActiveAccess
+    ? t.analyze
+    : hasUsedBusinessTrial
+      ? businessTrialUsedMessage
+      : startTrialLabel;
+
   const getScoreColor = (
     score: number | null
   ) => {
@@ -2641,15 +2770,49 @@ export default function BusinessClient() {
             </div>
           </div>
 
-          <button
-            onClick={handleAnalyze}
-            disabled={!file || loading}
-            className="w-full rounded-3xl bg-slate-950 px-6 py-4 text-sm font-black text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-md disabled:translate-y-0 disabled:bg-slate-400 disabled:shadow-none"
-          >
-            {loading
-              ? t.loading
-              : t.analyze}
-          </button>
+          {!hasActiveAccess && !hasUsedBusinessTrial && (
+            <div className="rounded-2xl border border-blue-100 bg-blue-50 px-4 py-3 text-sm font-semibold text-blue-700">
+              {trialInfoMessage}
+            </div>
+          )}
+
+          {hasPaidBusinessTrial && !hasAccountAccess && (
+            <div className="rounded-2xl border border-green-100 bg-green-50 px-4 py-3 text-sm font-semibold text-green-700">
+              {businessTrialActivatedMessage}
+            </div>
+          )}
+
+          {hasUsedBusinessTrial && !hasAccountAccess && (
+            <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-semibold text-amber-700">
+              {businessTrialUsedMessage}
+            </div>
+          )}
+
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <button
+              onClick={handlePrimaryAction}
+              disabled={hasActiveAccess ? !file || loading : loading || hasUsedBusinessTrial}
+              className="w-full rounded-3xl bg-slate-950 px-6 py-4 text-sm font-black text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-md disabled:translate-y-0 disabled:bg-slate-400 disabled:shadow-none"
+            >
+              {loading
+                ? t.loading
+                : primaryCtaLabel}
+            </button>
+
+            <button
+              onClick={handleBuyCredits}
+              className="w-full rounded-3xl border border-slate-200 bg-white px-6 py-4 text-sm font-black text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:bg-slate-50 hover:shadow-md"
+            >
+              {buyCreditsLabel}
+            </button>
+
+            <button
+              onClick={handleUpgradePro}
+              className="w-full rounded-3xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4 text-sm font-black text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+            >
+              {upgradeProLabel}
+            </button>
+          </div>
 
           {message && (
             <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-center text-sm text-red-700">
