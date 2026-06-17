@@ -210,15 +210,15 @@ def create_checkout_session(
             db.query(AgentTrialUsage)
             .filter(
                 AgentTrialUsage.user_id == current_user.id,
-                AgentTrialUsage.agent_slug == payload.agent_slug,
+                AgentTrialUsage.trial_paid == True,
             )
             .first()
         )
 
-        if existing_trial and existing_trial.trial_paid:
+        if existing_trial:
             raise HTTPException(
                 status_code=409,
-                detail=f"Trial already activated for {payload.agent_slug}",
+                detail="A $1 trial has already been activated for this account",
             )
 
         agent_slug = payload.agent_slug
@@ -637,10 +637,22 @@ def get_trial_status(
         .first()
     )
 
+    any_trial = (
+        db.query(AgentTrialUsage)
+        .filter(
+            AgentTrialUsage.user_id == current_user.id,
+            AgentTrialUsage.trial_paid == True,
+        )
+        .first()
+    )
+
     return {
         "agent_slug": normalized_agent_slug,
         "trial_paid": bool(trial and trial.trial_paid),
         "trial_used": bool(trial and trial.trial_used),
+        "has_any_trial": bool(any_trial),
+        "any_trial_agent_slug": any_trial.agent_slug if any_trial else None,
+        "any_trial_used": bool(any_trial and any_trial.trial_used),
     }
 
 
