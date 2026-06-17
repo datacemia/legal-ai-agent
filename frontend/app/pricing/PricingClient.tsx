@@ -1133,10 +1133,43 @@ export default function PricingClient() {
     }
   };
 
-  const handleStartApiPlan = () => {
+  const handleStartApiPlan = async (apiPlan: "api_starter" | "api_pro") => {
     if (!requireAuth()) return;
 
-    setMessage(t.messages.credits);
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        "https://api.runexa.ai/payments/create-checkout-session",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            product_type: "api",
+            api_plan: apiPlan,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.detail || "Unable to create checkout session");
+      }
+
+      if (data.checkout_url) {
+        window.location.href = data.checkout_url;
+        return;
+      }
+
+      throw new Error("Checkout URL not returned");
+    } catch (error) {
+      console.error(error);
+      setMessage("Unable to start API Stripe checkout. Please try again.");
+    }
   };
 
   const handleUpgradePro = async () => {
@@ -1535,7 +1568,11 @@ export default function PricingClient() {
                   </a>
                 ) : (
                   <button
-                    onClick={handleStartApiPlan}
+                    onClick={() =>
+                      handleStartApiPlan(
+                        plan.name === "API Pro" ? "api_pro" : "api_starter"
+                      )
+                    }
                     className={`mt-8 w-full rounded-xl px-5 py-3 text-sm font-bold transition ${
                       plan.highlighted
                         ? "bg-blue-600 text-white hover:bg-blue-700"
