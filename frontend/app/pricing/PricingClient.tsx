@@ -1055,6 +1055,30 @@ export default function PricingClient() {
     return true;
   };
 
+  const getTrialAlreadyUsedMessage = () => {
+    if (language === "fr") {
+      return "Votre essai à 1 $ a déjà été utilisé pour ce compte. Vous pouvez continuer avec des crédits ou un abonnement Pro.";
+    }
+
+    if (language === "ar") {
+      return "لقد تم استخدام تجربة 1 دولار الخاصة بهذا الحساب بالفعل. يمكنك المتابعة باستخدام الأرصدة أو الاشتراك في خطة Pro.";
+    }
+
+    return "Your $1 trial has already been used on this account. You can continue with credits or a Pro plan.";
+  };
+
+  const getStripeCheckoutErrorMessage = () => {
+    if (language === "fr") {
+      return "Impossible d’ouvrir la page de paiement Stripe. Veuillez réessayer.";
+    }
+
+    if (language === "ar") {
+      return "تعذر فتح صفحة الدفع عبر Stripe. يرجى المحاولة مرة أخرى.";
+    }
+
+    return "Unable to start Stripe checkout. Please try again.";
+  };
+
   const handleStartTrial = async (agentSlug: string) => {
     if (!requireAuth()) return;
 
@@ -1078,6 +1102,11 @@ export default function PricingClient() {
 
       const data = await response.json();
 
+      if (response.status === 409) {
+        setMessage(getTrialAlreadyUsedMessage());
+        return;
+      }
+
       if (!response.ok) {
         throw new Error(data.detail || "Unable to create checkout session");
       }
@@ -1088,9 +1117,21 @@ export default function PricingClient() {
       }
 
       throw new Error("Checkout URL not returned");
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      setMessage("Unable to start Stripe checkout. Please try again.");
+
+      const errorMessage = String(error?.message || "");
+
+      if (
+        errorMessage.includes("already been activated") ||
+        errorMessage.includes("already used") ||
+        errorMessage.includes("$1 trial")
+      ) {
+        setMessage(getTrialAlreadyUsedMessage());
+        return;
+      }
+
+      setMessage(getStripeCheckoutErrorMessage());
     }
   };
 
@@ -1129,7 +1170,7 @@ export default function PricingClient() {
       throw new Error("Checkout URL not returned");
     } catch (error) {
       console.error(error);
-      setMessage("Unable to start Stripe checkout. Please try again.");
+      setMessage(getStripeCheckoutErrorMessage());
     }
   };
 
@@ -1168,7 +1209,13 @@ export default function PricingClient() {
       throw new Error("Checkout URL not returned");
     } catch (error) {
       console.error(error);
-      setMessage("Unable to start API Stripe checkout. Please try again.");
+      setMessage(
+        language === "fr"
+          ? "Impossible d’ouvrir le paiement API Stripe. Veuillez réessayer."
+          : language === "ar"
+            ? "تعذر فتح صفحة دفع API عبر Stripe. يرجى المحاولة مرة أخرى."
+            : "Unable to start API Stripe checkout. Please try again."
+      );
     }
   };
 
@@ -1207,9 +1254,7 @@ export default function PricingClient() {
     } catch (error) {
       console.error(error);
 
-      setMessage(
-        "Unable to start Stripe checkout. Please try again."
-      );
+      setMessage(getStripeCheckoutErrorMessage());
     }
   };
   return (
