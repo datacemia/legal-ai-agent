@@ -257,7 +257,7 @@ const labels: any = {
     trialInfo: "$1 trial per account. You can also skip the trial and continue with global credits or a Pro plan.",
     startTrial: "Start $1 trial",
     upgradePro: "Upgrade to Pro",
-    trialUsed: "You have already used your $1 trial for this account",
+    trialUsed: "Your $1 trial has already been used on this account. You can continue with credits or a Pro plan.",
     paymentRequired: "$1 Finance trial activation required",
     apiError: "Failed to connect to the finance analysis API.",
     results: "Results",
@@ -412,7 +412,7 @@ const labels: any = {
     trialInfo: "Essai à 1$ par compte. Vous pouvez aussi passer directement aux crédits globaux ou au plan Pro.",
     startTrial: "Activer l’essai à 1$",
     upgradePro: "Passer au plan Pro",
-    trialUsed: "Vous avez déjà utilisé votre essai à 1$ pour ce compte",
+    trialUsed: "Votre essai à 1 $ a déjà été utilisé pour ce compte. Vous pouvez continuer avec des crédits ou un abonnement Pro.",
     paymentRequired: "Activation de l’essai Finance à 1$ requise",
     apiError: "Impossible de se connecter à l’API d’analyse financière.",
     results: "Résultats",
@@ -567,7 +567,7 @@ const labels: any = {
     trialInfo: "تجربة واحدة بقيمة 1 دولار لكل حساب. يمكنك أيضاً المتابعة مباشرة بالأرصدة العامة أو خطة Pro.",
     startTrial: "تفعيل تجربة 1 دولار",
     upgradePro: "الترقية إلى Pro",
-    trialUsed: "تم استخدام تجربة وكيل المالية",
+    trialUsed: "لقد تم استخدام تجربة 1 دولار الخاصة بهذا الحساب بالفعل. يمكنك المتابعة باستخدام الأرصدة أو الاشتراك في خطة Pro.",
     paymentRequired: "يلزم تفعيل تجربة المالية بقيمة 1 دولار",
     apiError: "تعذر الاتصال بواجهة تحليل المالية.",
     results: "النتائج",
@@ -814,6 +814,38 @@ export default function FinanceClient() {
       : language === "ar"
       ? "تم تفعيل تجربة المالية. ارفع كشف الحساب ثم اضغط على تحليل الكشف."
       : "Finance trial activated. Upload your statement and click Analyze statement.";
+
+  const getCheckoutErrorMessage = () => {
+    if (language === "fr") {
+      return "Impossible d’ouvrir la page de paiement Stripe. Veuillez réessayer.";
+    }
+
+    if (language === "ar") {
+      return "تعذر فتح صفحة الدفع عبر Stripe. يرجى المحاولة مرة أخرى.";
+    }
+
+    return "Unable to start Stripe checkout. Please try again.";
+  };
+
+  const getFriendlyPaymentMessage = (error: any) => {
+    const rawMessage = String(error?.message || "");
+
+    if (
+      rawMessage.includes("already been activated") ||
+      rawMessage.includes("already activated") ||
+      rawMessage.includes("already used") ||
+      rawMessage.includes("$1 trial") ||
+      rawMessage.includes("409")
+    ) {
+      return t.trialUsed;
+    }
+
+    if (rawMessage.includes("Unable to start checkout")) {
+      return getCheckoutErrorMessage();
+    }
+
+    return rawMessage || getCheckoutErrorMessage();
+  };
 
   const primaryCtaLabel = hasActiveAccess
     ? t.analyze
@@ -1119,22 +1151,9 @@ export default function FinanceClient() {
       await startStripeCheckout("trial", {
         agent_slug: "finance",
       });
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : t.paymentRequired;
-
+    } catch (error: any) {
       await refreshFinanceTrial();
-
-      if (
-        errorMessage.includes("Trial already activated") ||
-        errorMessage.includes("already activated") ||
-        errorMessage.includes("409")
-      ) {
-        setPaymentMessage(trialActivatedMessage);
-        return;
-      }
-
-      setPaymentMessage(errorMessage || t.paymentRequired);
+      setPaymentMessage(getFriendlyPaymentMessage(error));
     }
   };
 
@@ -1523,11 +1542,15 @@ export default function FinanceClient() {
             </button>
 
             <button
-              onClick={() =>
-                startStripeCheckout("credits_pack", {
-                  pack: "starter",
-                })
-              }
+              onClick={async () => {
+                try {
+                  await startStripeCheckout("credits_pack", {
+                    pack: "starter",
+                  });
+                } catch (error: any) {
+                  setPaymentMessage(getFriendlyPaymentMessage(error));
+                }
+              }}
               className="w-full rounded-xl border border-slate-300 bg-white py-3 text-slate-800 transition-all duration-300 hover:border-blue-200 hover:bg-slate-50 hover:shadow-md"
             >
               <span className="flex items-center justify-center gap-2">
@@ -1536,9 +1559,13 @@ export default function FinanceClient() {
             </button>
 
             <button
-              onClick={() =>
-                startStripeCheckout("subscription")
-              }
+              onClick={async () => {
+                try {
+                  await startStripeCheckout("subscription");
+                } catch (error: any) {
+                  setPaymentMessage(getFriendlyPaymentMessage(error));
+                }
+              }}
               className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 py-3 text-white transition-all duration-300 hover:shadow-xl"
             >
               {t.upgradePro}
