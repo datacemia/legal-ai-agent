@@ -15,6 +15,8 @@ import {
   Globe,
 } from "lucide-react";
 
+type Locale = "en" | "fr" | "ar";
+
 const labels: any = {
   en: {
     platform: "Runexa AI Platform",
@@ -328,6 +330,7 @@ const labels: any = {
     enterpriseFooter:
       "عمليات مترابطة • رؤية موحدة • قرارات أسرع",
     enterpriseTag: "حلول المؤسسات",
+    enterpriseHeader: "Runexa Business AI",
     ctaTitle:
       "منصة واحدة. وكلاء ذكاء اصطناعي متخصصة. نتائج ملموسة.",
     ctaDesc:
@@ -449,19 +452,37 @@ const agentStyles: any = {
   },
 };
 
-export default function HomeClient() {
-  const [language, setLanguage] = useState("en");
+export default function HomeClient({
+  initialLanguage = "en",
+  lockInitialLanguage = false,
+}: {
+  initialLanguage?: Locale;
+  lockInitialLanguage?: boolean;
+}) {
+  const [language, setLanguage] = useState<Locale>(initialLanguage);
   const t = labels[language] || labels.en;
 
   useEffect(() => {
+    if (lockInitialLanguage) {
+      setLanguage(initialLanguage);
+      return;
+    }
+
     const saved = localStorage.getItem("locale");
 
-    if (saved && labels[saved]) {
+    if (
+      saved === "en" ||
+      saved === "fr" ||
+      saved === "ar"
+    ) {
       setLanguage(saved);
+      return;
     }
-  }, []);
 
-  const handleLanguageChange = (lang: string) => {
+    setLanguage(initialLanguage);
+  }, [initialLanguage, lockInitialLanguage]);
+
+  const handleLanguageChange = (lang: Locale) => {
     setLanguage(lang);
     localStorage.setItem("locale", lang);
     window.dispatchEvent(new Event("locale-change"));
@@ -477,7 +498,17 @@ export default function HomeClient() {
           <div className="flex justify-center">
             <select
               value={language}
-              onChange={(e) => handleLanguageChange(e.target.value)}
+              onChange={(e) => {
+                const nextLanguage = e.target.value;
+
+                if (
+                  nextLanguage === "en" ||
+                  nextLanguage === "fr" ||
+                  nextLanguage === "ar"
+                ) {
+                  handleLanguageChange(nextLanguage);
+                }
+              }}
               className="border rounded-lg px-3 py-2 bg-white"
             >
               <option value="en">English</option>

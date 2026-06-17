@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import HomeClient from "./HomeClient";
+import HomeClient from "../HomeClient";
 
 const siteUrl = "https://runexa.ai";
 
