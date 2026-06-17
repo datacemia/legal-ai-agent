@@ -4,27 +4,27 @@ import HomeClient from "../HomeClient";
 const siteUrl = "https://runexa.ai";
 
 export const metadata: Metadata = {
-  title: "Runexa | Enterprise AI Workspace & Specialized AI Agents",
+  title: "Runexa | منصة ذكاء اصطناعي بوكلاء متخصصين",
 
   description:
-    "Runexa is an AI workspace platform with specialized AI agents for legal analysis, finance intelligence, study workflows, and business decision support.",
+    "Runexa منصة ذكاء اصطناعي تضم وكلاء متخصصين للتحليل القانوني والمالي والتعلّم ودعم قرارات الأعمال.",
 
   keywords: [
-    "AI workspace",
-    "AI agents",
-    "legal AI",
-    "finance AI",
-    "study AI",
-    "business AI",
-    "enterprise AI",
-    "AI workflow automation",
-    "AI business intelligence",
+    "منصة ذكاء اصطناعي",
+    "وكلاء ذكاء اصطناعي",
+    "ذكاء اصطناعي قانوني",
+    "ذكاء اصطناعي مالي",
+    "ذكاء اصطناعي للتعلم",
+    "ذكاء اصطناعي للأعمال",
+    "ذكاء اصطناعي للمؤسسات",
+    "أتمتة سير العمل بالذكاء الاصطناعي",
+    "ذكاء الأعمال بالذكاء الاصطناعي",
     "Runexa",
-    "AI infrastructure",
+    "بنية تحتية للذكاء الاصطناعي",
   ],
 
   alternates: {
-    canonical: siteUrl,
+    canonical: `${siteUrl}/ar`,
     languages: {
       en: `${siteUrl}/en`,
       fr: `${siteUrl}/fr`,
@@ -34,12 +34,12 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Runexa AI Workspace",
+    title: "Runexa | منصة ذكاء اصطناعي بوكلاء متخصصين",
 
     description:
-      "Specialized AI agents for legal, finance, study, and business workflows.",
+      "وكلاء ذكاء اصطناعي متخصصون للتحليل القانوني والمالي والتعلّم وقرارات الأعمال.",
 
-    url: siteUrl,
+    url: `${siteUrl}/ar`,
 
     siteName: "Runexa Systems LLC",
 
@@ -52,9 +52,9 @@ export const metadata: Metadata = {
       },
     ],
 
-    locale: "en_US",
+    locale: "ar_AR",
 
-    alternateLocale: ["fr_FR", "ar_AR"],
+    alternateLocale: ["en_US", "fr_FR"],
 
     type: "website",
   },
@@ -62,10 +62,10 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
 
-    title: "Runexa AI Workspace",
+    title: "Runexa | منصة ذكاء اصطناعي بوكلاء متخصصين",
 
     description:
-      "AI workspace platform for legal analysis, finance intelligence, study assistance, and business workflows.",
+      "منصة ذكاء اصطناعي للتحليل القانوني والمالي والتعلّم وسير العمل التجاري.",
 
     images: ["/og-image.png"],
   },
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <HomeClient initialLanguage="en" />
+      <HomeClient initialLanguage="ar" lockInitialLanguage />
 
       <script
         type="application/ld+json"
@@ -99,7 +99,7 @@ export default function Page() {
               sameAs: [],
 
               description:
-                "AI workspace platform with specialized AI agents for legal analysis, finance intelligence, study assistance, and business workflows.",
+                "منصة ذكاء اصطناعي تضم وكلاء متخصصين للتحليل القانوني والمالي والتعلّم ودعم قرارات الأعمال.",
 
               knowsAbout: [
                 "Artificial Intelligence",
@@ -118,9 +118,9 @@ export default function Page() {
 
               name: "Runexa",
 
-              url: siteUrl,
+              url: `${siteUrl}/ar`,
 
-              inLanguage: ["en", "fr", "ar"],
+              inLanguage: "ar",
 
               publisher: {
                 "@type": "Organization",

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: siteUrl,
+    canonical: `${siteUrl}/en`,
     languages: {
       en: `${siteUrl}/en`,
       fr: `${siteUrl}/fr`,
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     description:
       "Specialized AI agents for legal, finance, study, and business workflows.",
 
-    url: siteUrl,
+    url: `${siteUrl}/en`,
 
     siteName: "Runexa Systems LLC",
 
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <HomeClient initialLanguage="en" />
+      <HomeClient initialLanguage="en" lockInitialLanguage />
 
       <script
         type="application/ld+json"
@@ -118,9 +118,9 @@ export default function Page() {
 
               name: "Runexa",
 
-              url: siteUrl,
+              url: `${siteUrl}/en`,
 
-              inLanguage: ["en", "fr", "ar"],
+              inLanguage: "en",
 
               publisher: {
                 "@type": "Organization",
