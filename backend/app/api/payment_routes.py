@@ -601,6 +601,34 @@ def _handle_subscription_deleted(db: Session, event):
     db.commit()
 
 
+
+@router.get("/trial-status/{agent_slug}")
+def get_trial_status(
+    agent_slug: str,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    normalized_agent_slug = (agent_slug or "").lower().strip()
+
+    if normalized_agent_slug not in TRIAL_AGENTS:
+        raise HTTPException(status_code=400, detail="Invalid trial agent")
+
+    trial = (
+        db.query(AgentTrialUsage)
+        .filter(
+            AgentTrialUsage.user_id == current_user.id,
+            AgentTrialUsage.agent_slug == normalized_agent_slug,
+        )
+        .first()
+    )
+
+    return {
+        "agent_slug": normalized_agent_slug,
+        "trial_paid": bool(trial and trial.trial_paid),
+        "trial_used": bool(trial and trial.trial_used),
+    }
+
+
 @router.post("/webhook")
 async def stripe_webhook(request: Request, db: Session = Depends(get_db)):
     if not STRIPE_ENABLED or not STRIPE_WEBHOOK_SECRET:

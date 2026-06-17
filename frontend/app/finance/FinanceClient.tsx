@@ -677,6 +677,8 @@ export default function FinanceClient() {
   const [plan, setPlan] = useState("");
   const [role, setRole] = useState("");
   const [creditsBalance, setCreditsBalance] = useState(0);
+  const [financeTrialPaid, setFinanceTrialPaid] = useState(false);
+  const [financeTrialUsed, setFinanceTrialUsed] = useState(false);
   const [chatMessages, setChatMessages] = useState<any[]>([]);
   const [chatInput, setChatInput] = useState("");
   const [chatLoading, setChatLoading] = useState(false);
@@ -702,6 +704,7 @@ export default function FinanceClient() {
 
     syncBillingState();
     refreshUserBilling();
+    refreshFinanceTrial();
 
     window.addEventListener("storage", syncBillingState);
 
@@ -794,12 +797,23 @@ export default function FinanceClient() {
     return severityLabels[value]?.[language] || value;
   };
 
-  const hasActiveAccess =
+  const hasPaidFinanceTrial = financeTrialPaid && !financeTrialUsed;
+
+  const hasAccountAccess =
     role === "admin" ||
     role === "enterprise_admin" ||
     role === "enterprise_member" ||
     ["paid", "pro", "premium"].includes(plan) ||
     creditsBalance > 0;
+
+  const hasActiveAccess = hasAccountAccess || hasPaidFinanceTrial;
+
+  const trialActivatedMessage =
+    language === "fr"
+      ? "Essai Finance activé. Importez votre relevé et cliquez sur Analyser le relevé."
+      : language === "ar"
+      ? "تم تفعيل تجربة المالية. ارفع كشف الحساب ثم اضغط على تحليل الكشف."
+      : "Finance trial activated. Upload your statement and click Analyze statement.";
 
   const primaryCtaLabel = hasActiveAccess
     ? t.analyze
@@ -907,6 +921,32 @@ export default function FinanceClient() {
     setCreditsBalance(nextCreditsBalance);
 
     window.dispatchEvent(new Event("storage"));
+  };
+
+  const refreshFinanceTrial = async () => {
+    const token = safeGetLocalStorage("token");
+
+    if (!token) return;
+
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/payments/trial-status/finance`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!res.ok) return;
+
+      const data = await res.json();
+
+      setFinanceTrialPaid(Boolean(data.trial_paid));
+      setFinanceTrialUsed(Boolean(data.trial_used));
+    } catch (error) {
+      console.error("Could not refresh finance trial status:", error);
+    }
   };
 
   const loadFinanceChatHistory = async (analysisId: number) => {
@@ -1038,6 +1078,7 @@ export default function FinanceClient() {
       }
 
       await refreshUserBilling();
+      await refreshFinanceTrial();
     } catch (error) {
       console.error("Finance analysis failed");
 
@@ -1421,6 +1462,12 @@ export default function FinanceClient() {
           {!hasActiveAccess && (
             <div className="rounded-xl border border-blue-100 bg-blue-50 p-3 text-sm text-blue-700">
               {t.trialInfo}
+            </div>
+          )}
+
+          {hasPaidFinanceTrial && !hasAccountAccess && (
+            <div className="rounded-xl border border-green-100 bg-green-50 p-3 text-sm text-green-700">
+              {trialActivatedMessage}
             </div>
           )}
 
