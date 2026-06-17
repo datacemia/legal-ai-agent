@@ -817,6 +817,8 @@ export default function FinanceClient() {
 
   const primaryCtaLabel = hasActiveAccess
     ? t.analyze
+    : financeTrialUsed
+    ? t.trialUsed
     : t.startTrial;
 
   const COLORS = [
@@ -1097,6 +1099,42 @@ export default function FinanceClient() {
     } finally {
       setLoading(false);
       setStartedAt(null);
+    }
+  };
+
+  const handlePrimaryCta = async () => {
+    setPaymentMessage("");
+
+    if (hasActiveAccess) {
+      await handleAnalyze();
+      return;
+    }
+
+    if (financeTrialUsed) {
+      setPaymentMessage(t.trialUsed);
+      return;
+    }
+
+    try {
+      await startStripeCheckout("trial", {
+        agent_slug: "finance",
+      });
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : t.paymentRequired;
+
+      await refreshFinanceTrial();
+
+      if (
+        errorMessage.includes("Trial already activated") ||
+        errorMessage.includes("already activated") ||
+        errorMessage.includes("409")
+      ) {
+        setPaymentMessage(trialActivatedMessage);
+        return;
+      }
+
+      setPaymentMessage(errorMessage || t.paymentRequired);
     }
   };
 
@@ -1473,14 +1511,12 @@ export default function FinanceClient() {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <button
-              onClick={() =>
+              onClick={handlePrimaryCta}
+              disabled={
                 hasActiveAccess
-                  ? handleAnalyze()
-                  : startStripeCheckout("trial", {
-                      agent_slug: "finance",
-                    })
+                  ? !file || loading
+                  : loading || financeTrialUsed
               }
-              disabled={hasActiveAccess ? !file || loading : loading}
               className="w-full rounded-xl bg-slate-900 py-3 text-white transition-all duration-300 hover:bg-slate-800 hover:shadow-xl disabled:bg-slate-400 disabled:hover:shadow-none"
             >
               {loading ? t.analyzing : primaryCtaLabel}
