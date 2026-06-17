@@ -206,6 +206,21 @@ def create_checkout_session(
         if not payload.agent_slug or payload.agent_slug not in TRIAL_AGENTS:
             raise HTTPException(status_code=400, detail="Invalid trial agent")
 
+        existing_trial = (
+            db.query(AgentTrialUsage)
+            .filter(
+                AgentTrialUsage.user_id == current_user.id,
+                AgentTrialUsage.agent_slug == payload.agent_slug,
+            )
+            .first()
+        )
+
+        if existing_trial and existing_trial.trial_paid:
+            raise HTTPException(
+                status_code=409,
+                detail=f"Trial already activated for {payload.agent_slug}",
+            )
+
         agent_slug = payload.agent_slug
         credits = 0
         amount = 100
