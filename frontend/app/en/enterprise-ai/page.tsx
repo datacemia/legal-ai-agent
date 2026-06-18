@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import EnterpriseAIClient from "./EnterpriseAIClient";
+import EnterpriseAIClient from "../../enterprise-ai/EnterpriseAIClient";
 
 const siteUrl = "https://runexa.ai";
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/enterprise-ai",
+    canonical: "https://runexa.ai/en/enterprise-ai",
     languages: {
       en: `${siteUrl}/en/enterprise-ai`,
       fr: `${siteUrl}/fr/enterprise-ai`,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description:
       "Secure enterprise AI workflows for legal analysis, financial reporting, business intelligence, learning operations, and organizational decision support.",
 
-    url: "https://runexa.ai/enterprise-ai",
+    url: "https://runexa.ai/en/enterprise-ai",
 
     siteName: "Runexa Systems LLC",
 
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 export default function EnterpriseAIPage() {
   return (
     <>
-      <EnterpriseAIClient initialLocale="en" />
+      <EnterpriseAIClient initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -93,7 +93,7 @@ export default function EnterpriseAIPage() {
 
               operatingSystem: "Web",
 
-              url: "https://runexa.ai/enterprise-ai",
+              url: "https://runexa.ai/en/enterprise-ai",
 
               inLanguage: "en",
 
