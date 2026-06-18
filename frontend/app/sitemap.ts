@@ -40,6 +40,10 @@ const routes = [
   "/fr/finance",
   "/ar/finance",
 
+  "/en/study",
+  "/fr/study",
+  "/ar/study",
+
   "/upload",
   "/legal-ai",
   "/finance-ai",

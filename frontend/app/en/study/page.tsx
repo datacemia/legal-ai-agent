@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import StudyClient from "./StudyClient";
+import StudyClient from "../../study/StudyClient";
 
 const siteUrl = "https://runexa.ai";
 
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/study",
+    canonical: "https://runexa.ai/en/study",
     languages: {
       en: `${siteUrl}/en/study`,
       fr: `${siteUrl}/fr/study`,
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     description:
       "AI-powered study workspace with summaries, quizzes, flashcards, and adaptive learning.",
 
-    url: "https://runexa.ai/study",
+    url: "https://runexa.ai/en/study",
 
     siteName: "Runexa Systems",
 
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
 export default function StudyPage() {
   return (
     <>
-      <StudyClient initialLocale="en" />
+      <StudyClient initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -97,7 +97,7 @@ export default function StudyPage() {
             description:
               "AI-powered study workspace with summaries, quizzes, flashcards, visual learning, and adaptive study plans.",
 
-            url: "https://runexa.ai/study",
+            url: "https://runexa.ai/en/study",
 
             inLanguage: "en",
 

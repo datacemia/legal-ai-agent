@@ -1,29 +1,29 @@
 import type { Metadata } from "next";
-import StudyClient from "./StudyClient";
+import StudyClient from "../../study/StudyClient";
 
 const siteUrl = "https://runexa.ai";
 
 export const metadata: Metadata = {
-  title: "AI Study Workspace & Learning Assistant | Runexa",
+  title: "مساحة دراسة ومساعد تعلم بالذكاء الاصطناعي | Runexa",
 
   description:
-    "Generate AI summaries, quizzes, flashcards, audio explanations, mind maps, and personalized study plans with Runexa Study Agent.",
+    "أنشئ ملخصات واختبارات وبطاقات مراجعة وشرحاً صوتياً وخرائط ذهنية وخطط دراسة مخصصة باستخدام Runexa Study Agent.",
 
   keywords: [
-    "AI study assistant",
-    "AI learning workspace",
-    "AI flashcards",
-    "AI quizzes",
-    "AI study plan",
-    "AI education",
-    "AI summaries",
-    "AI learning platform",
+    "مساعد دراسة بالذكاء الاصطناعي",
+    "مساحة تعلم بالذكاء الاصطناعي",
+    "بطاقات مراجعة بالذكاء الاصطناعي",
+    "اختبارات بالذكاء الاصطناعي",
+    "خطة دراسة بالذكاء الاصطناعي",
+    "تعليم بالذكاء الاصطناعي",
+    "ملخصات بالذكاء الاصطناعي",
+    "منصة تعلم بالذكاء الاصطناعي",
     "Runexa study AI",
-    "adaptive learning AI",
+    "تعلم تكيفي بالذكاء الاصطناعي",
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/study",
+    canonical: "https://runexa.ai/ar/study",
     languages: {
       en: `${siteUrl}/en/study`,
       fr: `${siteUrl}/fr/study`,
@@ -36,9 +36,9 @@ export const metadata: Metadata = {
     title: "Runexa Study Agent",
 
     description:
-      "AI-powered study workspace with summaries, quizzes, flashcards, and adaptive learning.",
+      "مساحة دراسة بالذكاء الاصطناعي مع ملخصات واختبارات وبطاقات مراجعة وتعلم تكيفي.",
 
-    url: "https://runexa.ai/study",
+    url: "https://runexa.ai/ar/study",
 
     siteName: "Runexa Systems",
 
@@ -51,9 +51,9 @@ export const metadata: Metadata = {
       },
     ],
 
-    locale: "en_US",
+    locale: "ar_AR",
 
-    alternateLocale: ["fr_FR", "ar_AR"],
+    alternateLocale: ["en_US", "fr_FR"],
 
     type: "website",
   },
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     title: "Runexa Study Agent",
 
     description:
-      "AI summaries, quizzes, flashcards, audio explanations, and adaptive learning workflows.",
+      "ملخصات واختبارات وبطاقات مراجعة وشرح صوتي وتدفقات تعلم تكيفية بالذكاء الاصطناعي.",
 
     images: ["/og-image.png"],
   },
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
 export default function StudyPage() {
   return (
     <>
-      <StudyClient initialLocale="en" />
+      <StudyClient initialLocale="ar" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -95,11 +95,11 @@ export default function StudyPage() {
             operatingSystem: "Web",
 
             description:
-              "AI-powered study workspace with summaries, quizzes, flashcards, visual learning, and adaptive study plans.",
+              "مساحة دراسة مدعومة بالذكاء الاصطناعي مع ملخصات واختبارات وبطاقات مراجعة وتعلم بصري وخطط دراسة تكيفية.",
 
-            url: "https://runexa.ai/study",
+            url: "https://runexa.ai/ar/study",
 
-            inLanguage: "en",
+            inLanguage: "ar",
 
             creator: {
               "@type": "Organization",

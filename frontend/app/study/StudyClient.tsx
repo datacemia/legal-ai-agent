@@ -5,6 +5,8 @@ import { getToken } from "../../lib/auth";
 import { startStripeCheckout } from "../../lib/stripeCheckout";
 import { getSavedLocale, setSavedLocale } from "../../lib/i18n";
 
+type Locale = "en" | "fr" | "ar";
+
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL ||
   "https://api.runexa.ai";
@@ -1265,7 +1267,30 @@ function resolveAudioUrl(payload: any): string {
   return "";
 }
 
-export default function StudyClient() {
+const normalizeLocale = (
+  value: string,
+  fallback: Locale = "en"
+): Locale => {
+  if (value === "fr" || value === "ar" || value === "en") {
+    return value;
+  }
+
+  return fallback;
+};
+
+const getClientLocale = (
+  fallback: Locale = "en"
+): Locale => {
+  return normalizeLocale(getSavedLocale(), fallback);
+};
+
+export default function StudyClient({
+  initialLocale = "en",
+  lockInitialLocale = false,
+}: {
+  initialLocale?: Locale;
+  lockInitialLocale?: boolean;
+}) {
   const [file, setFile] = useState<File | null>(null);
   const [result, setResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
@@ -1276,7 +1301,7 @@ export default function StudyClient() {
   const [paymentMessage, setPaymentMessage] = useState("");
   const [showLevelModal, setShowLevelModal] = useState(false);
   const [educationLevel, setEducationLevel] = useState("");
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState<Locale>(initialLocale);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string>>(
     {}
   );
@@ -1429,7 +1454,11 @@ export default function StudyClient() {
   ];
 
   useEffect(() => {
-    setLanguage(getSavedLocale());
+    if (lockInitialLocale) {
+      setLanguage(initialLocale);
+    } else {
+      setLanguage(getClientLocale(initialLocale));
+    }
 
     const syncBillingState = () => {
       setUserPlan(
@@ -1458,7 +1487,7 @@ export default function StudyClient() {
     return () => {
       window.removeEventListener("storage", syncBillingState);
     };
-  }, []);
+  }, [initialLocale, lockInitialLocale]);
 
   useEffect(() => {
     return () => {
@@ -2274,8 +2303,8 @@ export default function StudyClient() {
             value={language}
             onChange={(e) => {
               stopAudio();
-              setLanguage(e.target.value);
-              setSavedLocale(e.target.value);
+              setLanguage(normalizeLocale(e.target.value, initialLocale));
+              setSavedLocale(normalizeLocale(e.target.value, initialLocale));
               setResult(null);
               setSelectedAnswers({});
               setQuizSubmitted(false);
