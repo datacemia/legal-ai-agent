@@ -1,114 +1,57 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { Metadata } from "next";
 import {
   defaultLocale,
   getSavedLocale,
   getTranslations,
 } from "../../../lib/i18n";
 
-export const metadata: Metadata = {
-  title: "Acceptable Use Policy | Runexa Systems",
+type Locale = "en" | "fr" | "ar";
+type LegalTranslations = Record<string, string>;
 
-  description:
-    "Review the Acceptable Use Policy governing the use of Runexa Systems AI services, platforms, software, APIs, and enterprise infrastructure.",
+const normalizeLocale = (
+  value: string | null | undefined,
+  fallback: Locale = "en"
+): Locale => {
+  if (value === "en" || value === "fr" || value === "ar") {
+    return value;
+  }
 
-  keywords: [
-    "acceptable use policy",
-    "Runexa policy",
-    "AI acceptable use",
-    "AI compliance",
-    "AI platform rules",
-    "enterprise AI policy",
-    "AI service terms",
-  ],
-
-  alternates: {
-    canonical: "https://runexa.ai/legal/acceptable-use",
-  },
-
-  openGraph: {
-    title: "Acceptable Use Policy | Runexa Systems",
-
-    description:
-      "Review the Acceptable Use Policy governing Runexa Systems AI services, APIs, and enterprise platforms.",
-
-    url: "https://runexa.ai/legal/acceptable-use",
-
-    siteName: "Runexa Systems",
-
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Runexa Acceptable Use Policy",
-      },
-    ],
-
-    locale: "en_US",
-
-    type: "website",
-  },
-
-  twitter: {
-    card: "summary_large_image",
-
-    title: "Acceptable Use Policy | Runexa Systems",
-
-    description:
-      "Review the acceptable use requirements for Runexa AI services and enterprise infrastructure.",
-
-    images: ["/og-image.png"],
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-  },
+  return fallback;
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-
-  "@type": "WebPage",
-
-  name: "Runexa Acceptable Use Policy",
-
-  description:
-    "Acceptable Use Policy governing access to and usage of Runexa Systems AI services, APIs, and enterprise infrastructure.",
-
-  url: "https://runexa.ai/legal/acceptable-use",
-
-  publisher: {
-    "@type": "Organization",
-    name: "Runexa Systems LLC",
-    url: "https://runexa.ai",
-  },
+const getDefaultLocale = (): Locale => {
+  return normalizeLocale(defaultLocale, "en");
 };
 
-export default function AcceptableUseClient() {
-  const [locale, setLocale] = useState(defaultLocale);
+export default function AcceptableUseClient({
+  initialLocale,
+  lockInitialLocale = false,
+}: {
+  initialLocale?: Locale;
+  lockInitialLocale?: boolean;
+}) {
+  const resolvedInitialLocale = initialLocale || getDefaultLocale();
+
+  const [locale, setLocale] = useState<Locale>(resolvedInitialLocale);
 
   useEffect(() => {
-    setLocale(getSavedLocale());
-  }, []);
+    if (lockInitialLocale) {
+      setLocale(resolvedInitialLocale);
+      return;
+    }
 
-  const t = getTranslations(locale);
+    setLocale(normalizeLocale(getSavedLocale(), resolvedInitialLocale));
+  }, [resolvedInitialLocale, lockInitialLocale]);
+
+  const t = getTranslations(locale) as LegalTranslations;
 
   return (
     <main
       dir={locale === "ar" ? "rtl" : "ltr"}
       className="min-h-screen bg-slate-50 px-4 py-12"
     >
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd),
-        }}
-      />
-
       <div className="mx-auto max-w-3xl space-y-8 rounded-3xl border bg-white p-8 shadow-sm">
         <div>
           <h1 className="text-3xl font-bold text-slate-900">

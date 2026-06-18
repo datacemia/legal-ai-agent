@@ -39,6 +39,9 @@ const routes = [
   "/en/docs",
   "/fr/docs",
   "/ar/docs",
+  "/en/legal/acceptable-use",
+  "/fr/legal/acceptable-use",
+  "/ar/legal/acceptable-use",
 
   "/en/terms",
   "/fr/terms",

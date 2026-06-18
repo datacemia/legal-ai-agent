@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import AcceptableUseClient from "./AcceptableUseClient";
+import AcceptableUseClient from "../../../legal/acceptable-use/AcceptableUseClient";
 
 const siteUrl = "https://runexa.ai";
 
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
 export default function AcceptableUsePage() {
   return (
     <>
-      <AcceptableUseClient initialLocale="en" />
+      <AcceptableUseClient initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"
