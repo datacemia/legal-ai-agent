@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import PricingClient from "./PricingClient";
+import PricingClient from "../../pricing/PricingClient";
 
 const siteUrl = "https://runexa.ai";
 
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/pricing",
+    canonical: "https://runexa.ai/en/pricing",
     languages: {
       en: `${siteUrl}/en/pricing`,
       fr: `${siteUrl}/fr/pricing`,
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     description:
       "Compare Runexa AI pricing plans including AI trials, global credits, Pro subscriptions, and enterprise API workflows.",
 
-    url: "https://runexa.ai/pricing",
+    url: "https://runexa.ai/en/pricing",
 
     siteName: "Runexa Systems LLC",
 
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
 export default function PricingPage() {
   return (
     <>
-      <PricingClient initialLanguage="en" />
+      <PricingClient initialLanguage="en" lockInitialLanguage />
 
       <script
         type="application/ld+json"
@@ -96,7 +96,7 @@ export default function PricingPage() {
             description:
               "AI platform for legal analysis, finance intelligence, study workflows, and business decision support.",
 
-            url: "https://runexa.ai/pricing",
+            url: "https://runexa.ai/en/pricing",
 
             inLanguage: "en",
 

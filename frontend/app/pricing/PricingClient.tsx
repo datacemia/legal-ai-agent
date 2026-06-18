@@ -1014,8 +1014,14 @@ const labels: Record<Language, PricingLabels> = {
   },
 };
 
-export default function PricingClient() {
-  const [language, setLanguage] = useState<Language>("en");
+export default function PricingClient({
+  initialLanguage = "en",
+  lockInitialLanguage = false,
+}: {
+  initialLanguage?: Language;
+  lockInitialLanguage?: boolean;
+}) {
+  const [language, setLanguage] = useState<Language>(initialLanguage);
   const [message, setMessage] = useState("");
 
   const t = labels[language] || labels.en;
@@ -1023,10 +1029,17 @@ export default function PricingClient() {
   const creditPacks = t.creditPacks;
 
   useEffect(() => {
+    if (lockInitialLanguage) {
+      setLanguage(initialLanguage);
+      return;
+    }
+
     const saved = localStorage.getItem("locale") as Language | null;
 
     if (saved && labels[saved]) {
       setLanguage(saved);
+    } else {
+      setLanguage(initialLanguage);
     }
 
     const handleLocaleChange = () => {
@@ -1034,6 +1047,8 @@ export default function PricingClient() {
 
       if (updated && labels[updated]) {
         setLanguage(updated);
+      } else {
+        setLanguage(initialLanguage);
       }
     };
 
@@ -1042,7 +1057,7 @@ export default function PricingClient() {
     return () => {
       window.removeEventListener("locale-change", handleLocaleChange);
     };
-  }, []);
+  }, [initialLanguage, lockInitialLanguage]);
 
   const requireAuth = () => {
     const token = localStorage.getItem("token");

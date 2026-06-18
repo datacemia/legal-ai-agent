@@ -40,6 +40,10 @@ const routes = [
   "/fr/finance",
   "/ar/finance",
 
+  "/en/pricing",
+  "/fr/pricing",
+  "/ar/pricing",
+
   "/en/study",
   "/fr/study",
   "/ar/study",

@@ -1,28 +1,28 @@
 import type { Metadata } from "next";
-import PricingClient from "./PricingClient";
+import PricingClient from "../../pricing/PricingClient";
 
 const siteUrl = "https://runexa.ai";
 
 export const metadata: Metadata = {
-  title: "Runexa Pricing | AI Agents, Credits & API Plans",
+  title: "Tarifs Runexa | Agents IA, crédits et plans API",
 
   description:
-    "Compare Runexa AI pricing plans including AI trials, global credits, Pro subscriptions, and enterprise API workflows.",
+    "Comparez les offres Runexa AI : essais IA, crédits globaux, abonnements Pro et workflows API entreprise.",
 
   keywords: [
-    "AI pricing",
-    "AI agents pricing",
-    "legal AI pricing",
-    "finance AI pricing",
-    "AI API pricing",
-    "enterprise AI pricing",
-    "Runexa pricing",
-    "AI credits",
-    "AI subscriptions",
+    "tarifs IA",
+    "prix agents IA",
+    "tarif IA juridique",
+    "tarif IA finance",
+    "tarif API IA",
+    "tarif IA entreprise",
+    "tarifs Runexa",
+    "crédits IA",
+    "abonnements IA",
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/pricing",
+    canonical: "https://runexa.ai/fr/pricing",
     languages: {
       en: `${siteUrl}/en/pricing`,
       fr: `${siteUrl}/fr/pricing`,
@@ -32,12 +32,12 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Runexa Pricing | AI Agents, Credits & API Plans",
+    title: "Tarifs Runexa | Agents IA, crédits et plans API",
 
     description:
-      "Compare Runexa AI pricing plans including AI trials, global credits, Pro subscriptions, and enterprise API workflows.",
+      "Comparez les offres Runexa AI : essais IA, crédits globaux, abonnements Pro et workflows API entreprise.",
 
-    url: "https://runexa.ai/pricing",
+    url: "https://runexa.ai/fr/pricing",
 
     siteName: "Runexa Systems LLC",
 
@@ -50,9 +50,9 @@ export const metadata: Metadata = {
       },
     ],
 
-    locale: "en_US",
+    locale: "fr_FR",
 
-    alternateLocale: ["fr_FR", "ar_AR"],
+    alternateLocale: ["en_US", "ar_AR"],
 
     type: "website",
   },
@@ -60,10 +60,10 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
 
-    title: "Runexa Pricing | AI Agents, Credits & API Plans",
+    title: "Tarifs Runexa | Agents IA, crédits et plans API",
 
     description:
-      "Compare AI subscriptions, global credits, API workflows, and enterprise pricing plans from Runexa.",
+      "Comparez les abonnements IA, crédits globaux, workflows API et offres entreprise de Runexa.",
 
     images: ["/og-image.png"],
   },
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
 export default function PricingPage() {
   return (
     <>
-      <PricingClient initialLanguage="en" />
+      <PricingClient initialLanguage="fr" lockInitialLanguage />
 
       <script
         type="application/ld+json"
@@ -94,11 +94,11 @@ export default function PricingPage() {
             operatingSystem: "Web",
 
             description:
-              "AI platform for legal analysis, finance intelligence, study workflows, and business decision support.",
+              "Plateforme IA pour l’analyse juridique, l’intelligence financière, les workflows d’étude et l’aide à la décision business.",
 
-            url: "https://runexa.ai/pricing",
+            url: "https://runexa.ai/fr/pricing",
 
-            inLanguage: "en",
+            inLanguage: "fr",
 
             publisher: {
               "@type": "Organization",
@@ -119,12 +119,12 @@ export default function PricingPage() {
             ],
 
             knowsAbout: [
-              "AI Pricing",
-              "AI Agents Pricing",
-              "AI Credits",
-              "AI API Plans",
-              "Enterprise AI Pricing",
-              "AI Subscriptions",
+              "Tarifs IA",
+              "Prix agents IA",
+              "Crédits IA",
+              "Plans API IA",
+              "Tarifs IA entreprise",
+              "Abonnements IA",
             ],
           }),
         }}
