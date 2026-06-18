@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import BlogClient from "./BlogClient";
+import BlogClient from "../../blog/BlogClient";
 
 const siteUrl = "https://runexa.ai";
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/blog",
+    canonical: "https://runexa.ai/en/blog",
     languages: {
       en: `${siteUrl}/en/blog`,
       fr: `${siteUrl}/fr/blog`,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description:
       "Insights about legal AI, finance AI, enterprise AI workflows, business intelligence, and AI-powered operational systems.",
 
-    url: "https://runexa.ai/blog",
+    url: "https://runexa.ai/en/blog",
 
     siteName: "Runexa Systems LLC",
 
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   return (
     <>
-      <BlogClient initialLocale="en" />
+      <BlogClient initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -91,7 +91,7 @@ export default function BlogPage() {
             description:
               "Insights about legal AI, finance AI, enterprise AI workflows, business intelligence, and AI-powered operational systems.",
 
-            url: "https://runexa.ai/blog",
+            url: "https://runexa.ai/en/blog",
 
             inLanguage: "en",
 

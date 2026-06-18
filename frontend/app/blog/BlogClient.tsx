@@ -4,18 +4,40 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getSavedLocale } from "../../lib/i18n";
 
+type Locale = "en" | "fr" | "ar";
 
+const normalizeLocale = (
+  value: string | null | undefined,
+  fallback: Locale = "en"
+): Locale => {
+  if (value === "en" || value === "fr" || value === "ar") {
+    return value;
+  }
 
-export default function BlogClient() {
-  const [locale, setLocale] = useState<"en" | "fr" | "ar">("en");
+  return fallback;
+};
+
+export default function BlogClient({
+  initialLocale = "en",
+  lockInitialLocale = false,
+}: {
+  initialLocale?: Locale;
+  lockInitialLocale?: boolean;
+}) {
+  const [locale, setLocale] = useState<Locale>(initialLocale);
 
   useEffect(() => {
+    if (lockInitialLocale) {
+      setLocale(initialLocale);
+      return;
+    }
+
     const saved = getSavedLocale();
 
     if (saved === "fr" || saved === "ar") {
       setLocale(saved);
     } else {
-      setLocale("en");
+      setLocale(initialLocale);
     }
 
     const handleLocaleChange = () => {
@@ -24,7 +46,7 @@ export default function BlogClient() {
       if (updated === "fr" || updated === "ar") {
         setLocale(updated);
       } else {
-        setLocale("en");
+        setLocale(initialLocale);
       }
     };
 
@@ -33,7 +55,7 @@ export default function BlogClient() {
     return () => {
       window.removeEventListener("locale-change", handleLocaleChange);
     };
-  }, []);
+  }, [initialLocale, lockInitialLocale]);
 
   const translations = {
     en: {
@@ -114,6 +136,24 @@ export default function BlogClient() {
       locale as keyof typeof translations
     ] || translations.en;
 
+  const localizedHref = (href: string) => {
+    const normalizedLocale = normalizeLocale(locale);
+
+    if (normalizedLocale === "fr") {
+      return `/fr${href}`;
+    }
+
+    if (normalizedLocale === "ar") {
+      return `/ar${href}`;
+    }
+
+    if (normalizedLocale === "en") {
+      return `/en${href}`;
+    }
+
+    return href;
+  };
+
   const articles = [
     {
       title:
@@ -122,11 +162,11 @@ export default function BlogClient() {
           : locale === "ar"
           ? "تحليل العقود بالذكاء الاصطناعي"
           : "AI Contract Analysis",
-  
+
       category: t.legalAi,
-  
+
       href: "/blog/ai-contract-analysis",
-  
+
       description:
         locale === "fr"
           ? "Comment l’IA analyse les contrats, clauses à risque et obligations juridiques."
@@ -134,7 +174,7 @@ export default function BlogClient() {
           ? "كيف يساعد الذكاء الاصطناعي في تحليل العقود والبنود الخطرة والالتزامات القانونية."
           : "How AI helps analyze contracts, risky clauses, and legal obligations.",
     },
-  
+
     {
       title:
         locale === "fr"
@@ -142,11 +182,11 @@ export default function BlogClient() {
           : locale === "ar"
           ? "التحليل المالي بالذكاء الاصطناعي"
           : "AI Finance Analysis",
-  
+
       category: t.financeAi,
-  
+
       href: "/blog/ai-finance-analysis",
-  
+
       description:
         locale === "fr"
           ? "Utiliser l’IA pour comprendre dépenses, abonnements et habitudes financières."
@@ -154,7 +194,7 @@ export default function BlogClient() {
           ? "استخدام الذكاء الاصطناعي لفهم المصاريف والاشتراكات والعادات المالية."
           : "Using AI to understand spending patterns, subscriptions, and financial habits.",
     },
-  
+
     {
       title:
         locale === "fr"
@@ -162,11 +202,11 @@ export default function BlogClient() {
           : locale === "ar"
           ? "مساعد الدراسة بالذكاء الاصطناعي"
           : "AI Study Assistant",
-  
+
       category: t.studyAi,
-  
+
       href: "/blog/ai-study-assistant",
-  
+
       description:
         locale === "fr"
           ? "Comment l’IA améliore résumés, quiz, flashcards et workflows d’apprentissage."
@@ -174,7 +214,7 @@ export default function BlogClient() {
           ? "كيف يحسن الذكاء الاصطناعي الملخصات والاختبارات والبطاقات التعليمية."
           : "How AI improves summaries, quizzes, flashcards, and learning workflows.",
     },
-  
+
     {
       title:
         locale === "fr"
@@ -182,11 +222,11 @@ export default function BlogClient() {
           : locale === "ar"
           ? "تدفقات عمل الذكاء الاصطناعي للمؤسسات"
           : "Enterprise AI Workflows",
-  
+
       category: t.enterpriseAi,
-  
+
       href: "/blog/enterprise-ai-workflows",
-  
+
       description:
         locale === "fr"
           ? "Comment les organisations construisent des workflows IA pour les opérations business."
@@ -194,7 +234,7 @@ export default function BlogClient() {
           ? "كيف تبني المؤسسات تدفقات عمل ذكاء اصطناعي للعمليات واتخاذ القرار."
           : "How organizations build AI workflows for business operations and decision support.",
     },
-  
+
     {
       title:
         locale === "fr"
@@ -202,11 +242,11 @@ export default function BlogClient() {
           : locale === "ar"
           ? "ذكاء الأعمال بالذكاء الاصطناعي"
           : "AI Business Intelligence",
-  
+
       category: t.businessAi,
-  
+
       href: "/blog/ai-business-intelligence",
-  
+
       description:
         locale === "fr"
           ? "Utiliser l’IA pour analyser les données business, risques et opportunités stratégiques."
@@ -237,7 +277,7 @@ export default function BlogClient() {
           {articles.map((article) => (
             <Link
               key={article.href}
-              href={article.href}
+              href={localizedHref(article.href)}
               className="rounded-3xl border bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
             >
               <p className="text-sm font-semibold text-blue-600">
@@ -270,14 +310,14 @@ export default function BlogClient() {
 
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
-              href="/pricing"
+              href={localizedHref("/pricing")}
               className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-blue-600"
             >
               {t.pricing}
             </Link>
 
             <Link
-              href="/developers"
+              href={localizedHref("/developers")}
               className="rounded-xl border border-blue-300 px-6 py-3 text-sm font-semibold text-white"
             >
               {t.developers}
