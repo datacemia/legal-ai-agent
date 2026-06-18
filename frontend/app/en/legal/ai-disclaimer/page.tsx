@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import AIDisclaimerClient from "./AIDisclaimerClient";
+import AIDisclaimerClient from "../../../legal/ai-disclaimer/AIDisclaimerClient";
 
 export const revalidate = 3600;
 
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/legal/ai-disclaimer",
+    canonical: "https://runexa.ai/en/legal/ai-disclaimer",
     languages: {
       en: `${siteUrl}/en/legal/ai-disclaimer`,
       fr: `${siteUrl}/fr/legal/ai-disclaimer`,
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     description:
       "Review AI transparency, limitations, and human review requirements for Runexa Systems AI services and enterprise platforms.",
 
-    url: "https://runexa.ai/legal/ai-disclaimer",
+    url: "https://runexa.ai/en/legal/ai-disclaimer",
 
     siteName: "Runexa Systems LLC",
 
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
 export default function AIDisclaimerPage() {
   return (
     <>
-      <AIDisclaimerClient initialLocale="en" />
+      <AIDisclaimerClient initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -93,7 +93,7 @@ export default function AIDisclaimerPage() {
             description:
               "AI disclaimer and transparency information governing the use of Runexa AI systems, enterprise platforms, APIs, and intelligent services.",
 
-            url: "https://runexa.ai/legal/ai-disclaimer",
+            url: "https://runexa.ai/en/legal/ai-disclaimer",
 
             inLanguage: "en",
 

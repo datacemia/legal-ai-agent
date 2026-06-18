@@ -36,6 +36,10 @@ const routes = [
   "/fr/upload",
   "/ar/upload",
 
+  "/en/legal/ai-disclaimer",
+  "/fr/legal/ai-disclaimer",
+  "/ar/legal/ai-disclaimer",
+
   "/en/docs",
   "/fr/docs",
   "/ar/docs",

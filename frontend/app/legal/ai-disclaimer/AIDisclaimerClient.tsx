@@ -7,14 +7,46 @@ import {
   getTranslations,
 } from "../../../lib/i18n";
 
-export default function AIDisclaimerClient() {
-  const [locale, setLocale] = useState(defaultLocale);
+type Locale = "en" | "fr" | "ar";
+
+type LegalTranslations = Record<string, string>;
+
+const normalizeLocale = (
+  value: string | null | undefined,
+  fallback: Locale = "en"
+): Locale => {
+  if (value === "en" || value === "fr" || value === "ar") {
+    return value;
+  }
+
+  return fallback;
+};
+
+const getDefaultLocale = (): Locale => {
+  return normalizeLocale(defaultLocale, "en");
+};
+
+export default function AIDisclaimerClient({
+  initialLocale,
+  lockInitialLocale = false,
+}: {
+  initialLocale?: Locale;
+  lockInitialLocale?: boolean;
+}) {
+  const resolvedInitialLocale = initialLocale || getDefaultLocale();
+
+  const [locale, setLocale] = useState<Locale>(resolvedInitialLocale);
 
   useEffect(() => {
-    setLocale(getSavedLocale());
-  }, []);
+    if (lockInitialLocale) {
+      setLocale(resolvedInitialLocale);
+      return;
+    }
 
-  const t = getTranslations(locale);
+    setLocale(normalizeLocale(getSavedLocale(), resolvedInitialLocale));
+  }, [resolvedInitialLocale, lockInitialLocale]);
+
+  const t = getTranslations(locale) as LegalTranslations;
 
   return (
     <main
