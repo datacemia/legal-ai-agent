@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ProductTermsClient from "./ProductTermsClient";
+import ProductTermsClient from "../../../../products/ai-legal-agent/terms/ProductTermsClient";
 
 const siteUrl = "https://runexa.ai";
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/products/ai-legal-agent/terms",
+    canonical: "https://runexa.ai/en/products/ai-legal-agent/terms",
     languages: {
       en: `${siteUrl}/en/products/ai-legal-agent/terms`,
       fr: `${siteUrl}/fr/products/ai-legal-agent/terms`,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description:
       "Product-specific terms, limitations, disclaimers, and liability information for Runexa AI agents including legal, finance, study, and business AI systems.",
 
-    url: "https://runexa.ai/products/ai-legal-agent/terms",
+    url: "https://runexa.ai/en/products/ai-legal-agent/terms",
 
     siteName: "Runexa Systems LLC",
 
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 export default function ProductTermsPage() {
   return (
     <>
-      <ProductTermsClient initialLocale="en" />
+      <ProductTermsClient initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -91,7 +91,7 @@ export default function ProductTermsPage() {
             description:
               "Product terms and AI limitation disclosures for Runexa AI agents and enterprise AI services.",
 
-            url: "https://runexa.ai/products/ai-legal-agent/terms",
+            url: "https://runexa.ai/en/products/ai-legal-agent/terms",
 
             inLanguage: "en",
 

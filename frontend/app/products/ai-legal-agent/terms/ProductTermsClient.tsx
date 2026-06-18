@@ -310,15 +310,42 @@ const productTermsTranslations: any = {
   },
 };
 
-export default function ProductTermsClient() {
-  const [locale, setLocale] = useState(defaultLocale);
+type Locale = "en" | "fr" | "ar";
+
+const normalizeLocale = (
+  value: string | null | undefined,
+  fallback: Locale = "en"
+): Locale => {
+  if (value === "en" || value === "fr" || value === "ar") {
+    return value;
+  }
+
+  return fallback;
+};
+
+export default function ProductTermsClient({
+  initialLocale,
+  lockInitialLocale = false,
+}: {
+  initialLocale?: Locale;
+  lockInitialLocale?: boolean;
+}) {
+  const resolvedInitialLocale = normalizeLocale(initialLocale, normalizeLocale(defaultLocale));
+
+  const [locale, setLocale] = useState<Locale>(resolvedInitialLocale);
 
   useEffect(() => {
-    setLocale(getSavedLocale());
-  }, []);
+    if (lockInitialLocale) {
+      setLocale(resolvedInitialLocale);
+      return;
+    }
+
+    setLocale(normalizeLocale(getSavedLocale(), resolvedInitialLocale));
+  }, [resolvedInitialLocale, lockInitialLocale]);
 
   const t =
-    productTermsTranslations[locale] || productTermsTranslations[defaultLocale];
+    productTermsTranslations[locale] ||
+    productTermsTranslations[normalizeLocale(defaultLocale)];
 
   return (
     <main
