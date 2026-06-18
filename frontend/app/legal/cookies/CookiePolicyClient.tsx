@@ -1,114 +1,58 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { Metadata } from "next";
 import {
   defaultLocale,
   getSavedLocale,
   getTranslations,
 } from "../../../lib/i18n";
 
-export const metadata: Metadata = {
-  title: "Cookie Policy | Runexa Systems",
+type Locale = "en" | "fr" | "ar";
 
-  description:
-    "Review the Cookie Policy for Runexa Systems LLC, including how cookies, analytics, security technologies, and related services are used across our AI platforms and enterprise infrastructure.",
+type LegalTranslations = Record<string, string>;
 
-  keywords: [
-    "cookie policy",
-    "Runexa cookies",
-    "AI platform cookies",
-    "analytics cookies",
-    "security cookies",
-    "enterprise AI compliance",
-    "Runexa privacy",
-  ],
+const normalizeLocale = (
+  value: string | null | undefined,
+  fallback: Locale = "en"
+): Locale => {
+  if (value === "en" || value === "fr" || value === "ar") {
+    return value;
+  }
 
-  alternates: {
-    canonical: "https://runexa.ai/legal/cookies",
-  },
-
-  openGraph: {
-    title: "Cookie Policy | Runexa Systems",
-
-    description:
-      "Review the Cookie Policy governing cookies, analytics, and security technologies used by Runexa Systems LLC.",
-
-    url: "https://runexa.ai/legal/cookies",
-
-    siteName: "Runexa Systems",
-
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Runexa Cookie Policy",
-      },
-    ],
-
-    locale: "en_US",
-
-    type: "website",
-  },
-
-  twitter: {
-    card: "summary_large_image",
-
-    title: "Cookie Policy | Runexa Systems",
-
-    description:
-      "Review how cookies, analytics, and security technologies are used across Runexa AI services and platforms.",
-
-    images: ["/og-image.png"],
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-  },
+  return fallback;
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-
-  "@type": "WebPage",
-
-  name: "Runexa Cookie Policy",
-
-  description:
-    "Cookie Policy governing cookies, analytics technologies, and security-related technologies used by Runexa Systems LLC.",
-
-  url: "https://runexa.ai/legal/cookies",
-
-  publisher: {
-    "@type": "Organization",
-    name: "Runexa Systems LLC",
-    url: "https://runexa.ai",
-  },
+const getDefaultLocale = (): Locale => {
+  return normalizeLocale(defaultLocale, "en");
 };
 
-export default function CookiePolicyClient() {
-  const [locale, setLocale] = useState(defaultLocale);
+export default function CookiePolicyClient({
+  initialLocale,
+  lockInitialLocale = false,
+}: {
+  initialLocale?: Locale;
+  lockInitialLocale?: boolean;
+}) {
+  const resolvedInitialLocale = initialLocale || getDefaultLocale();
+
+  const [locale, setLocale] = useState<Locale>(resolvedInitialLocale);
 
   useEffect(() => {
-    setLocale(getSavedLocale());
-  }, []);
+    if (lockInitialLocale) {
+      setLocale(resolvedInitialLocale);
+      return;
+    }
 
-  const t = getTranslations(locale);
+    setLocale(normalizeLocale(getSavedLocale(), resolvedInitialLocale));
+  }, [resolvedInitialLocale, lockInitialLocale]);
+
+  const t = getTranslations(locale) as LegalTranslations;
 
   return (
     <main
       dir={locale === "ar" ? "rtl" : "ltr"}
       className="min-h-screen bg-slate-50 px-4 py-12"
     >
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd),
-        }}
-      />
-
       <div className="mx-auto max-w-3xl space-y-8 rounded-3xl border bg-white p-8 shadow-sm">
         <div>
           <h1 className="text-3xl font-bold text-slate-900">

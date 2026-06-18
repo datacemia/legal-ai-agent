@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import CookiePolicyClient from "./CookiePolicyClient";
+import CookiePolicyClient from "../../../legal/cookies/CookiePolicyClient";
 
 const siteUrl = "https://runexa.ai";
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/legal/cookies",
+    canonical: "https://runexa.ai/en/legal/cookies",
     languages: {
       en: `${siteUrl}/en/legal/cookies`,
       fr: `${siteUrl}/fr/legal/cookies`,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description:
       "Review how Runexa Systems LLC uses cookies, analytics, authentication, and security technologies across AI platforms and enterprise services.",
 
-    url: "https://runexa.ai/legal/cookies",
+    url: "https://runexa.ai/en/legal/cookies",
 
     siteName: "Runexa Systems LLC",
 
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 export default function CookiePolicyPage() {
   return (
     <>
-      <CookiePolicyClient initialLocale="en" />
+      <CookiePolicyClient initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -91,7 +91,7 @@ export default function CookiePolicyPage() {
             description:
               "Cookie usage, analytics technologies, authentication systems, and browser tracking disclosures for Runexa AI services and enterprise platforms.",
 
-            url: "https://runexa.ai/legal/cookies",
+            url: "https://runexa.ai/en/legal/cookies",
 
             inLanguage: "en",
 
