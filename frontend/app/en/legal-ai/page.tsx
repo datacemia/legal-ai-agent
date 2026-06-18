@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import LegalAIClient from "./LegalAIClient";
+import LegalAIClient from "../../legal-ai/LegalAIClient";
 
 const siteUrl = "https://runexa.ai";
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/legal-ai",
+    canonical: "https://runexa.ai/en/legal-ai",
     languages: {
       en: `${siteUrl}/en/legal-ai`,
       fr: `${siteUrl}/fr/legal-ai`,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description:
       "Analyze contracts, detect risky clauses, extract obligations, and generate legal document summaries with Runexa Legal AI.",
 
-    url: "https://runexa.ai/legal-ai",
+    url: "https://runexa.ai/en/legal-ai",
 
     siteName: "Runexa Systems LLC",
 
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 export default function LegalAIPage() {
   return (
     <>
-      <LegalAIClient initialLocale="en" />
+      <LegalAIClient initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -93,7 +93,7 @@ export default function LegalAIPage() {
 
               operatingSystem: "Web",
 
-              url: "https://runexa.ai/legal-ai",
+              url: "https://runexa.ai/en/legal-ai",
 
               inLanguage: "en",
 

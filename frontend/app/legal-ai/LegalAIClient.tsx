@@ -162,17 +162,29 @@ const translations = {
   },
 };
 
-export default function LegalAIClient() {
-  const [locale, setLocale] =
-    useState<"en" | "fr" | "ar">("en");
+type Locale = "en" | "fr" | "ar";
+
+export default function LegalAIClient({
+  initialLocale = "en",
+  lockInitialLocale = false,
+}: {
+  initialLocale?: Locale;
+  lockInitialLocale?: boolean;
+}) {
+  const [locale, setLocale] = useState<Locale>(initialLocale);
 
   useEffect(() => {
+    if (lockInitialLocale) {
+      setLocale(initialLocale);
+      return;
+    }
+
     const saved = getSavedLocale();
 
     if (saved === "fr" || saved === "ar") {
       setLocale(saved);
     } else {
-      setLocale("en");
+      setLocale(initialLocale);
     }
 
     const handleLocaleChange = () => {
@@ -181,7 +193,7 @@ export default function LegalAIClient() {
       if (updated === "fr" || updated === "ar") {
         setLocale(updated);
       } else {
-        setLocale("en");
+        setLocale(initialLocale);
       }
     };
 
@@ -196,7 +208,7 @@ export default function LegalAIClient() {
         handleLocaleChange
       );
     };
-  }, []);
+  }, [initialLocale, lockInitialLocale]);
 
   const t = translations[locale];
 
