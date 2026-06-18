@@ -569,19 +569,31 @@ const docsTranslations = {
     },
 };
 
-export default function DocsClient() {
-  const [locale, setLocale] =
-    useState<"en" | "fr" | "ar">("en");
+type Locale = "en" | "fr" | "ar";
+
+export default function DocsClient({
+  initialLocale = "en",
+  lockInitialLocale = false,
+}: {
+  initialLocale?: Locale;
+  lockInitialLocale?: boolean;
+}) {
+  const [locale, setLocale] = useState<Locale>(initialLocale);
 
   useEffect(() => {
+    if (lockInitialLocale) {
+      setLocale(initialLocale);
+      return;
+    }
+
     const saved = getSavedLocale();
 
-    if (saved === "fr" || saved === "ar") {
+    if (saved === "fr" || saved === "ar" || saved === "en") {
       setLocale(saved);
     } else {
-      setLocale("en");
+      setLocale(initialLocale);
     }
-  }, []);
+  }, [initialLocale, lockInitialLocale]);
 
   const t = docsTranslations[locale];
 

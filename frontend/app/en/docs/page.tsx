@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import DocsClient from "./DocsClient";
+import DocsClient from "../../docs/DocsClient";
 
 const siteUrl = "https://runexa.ai";
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/docs",
+    canonical: "https://runexa.ai/en/docs",
     languages: {
       en: `${siteUrl}/en/docs`,
       fr: `${siteUrl}/fr/docs`,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description:
       "Technical documentation for Runexa AI APIs including legal analysis, finance intelligence, business workflows, asynchronous jobs, authentication, and enterprise integrations.",
 
-    url: "https://runexa.ai/docs",
+    url: "https://runexa.ai/en/docs",
 
     siteName: "Runexa Systems LLC",
 
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 export default function DocsPage() {
   return (
     <>
-      <DocsClient initialLocale="en" />
+      <DocsClient initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -93,7 +93,7 @@ export default function DocsPage() {
             description:
               "Technical documentation for Runexa asynchronous AI APIs, authentication, jobs, legal analysis, finance intelligence, study automation, business workflows, and enterprise integrations.",
 
-            url: "https://runexa.ai/docs",
+            url: "https://runexa.ai/en/docs",
 
             inLanguage: "en",
 
