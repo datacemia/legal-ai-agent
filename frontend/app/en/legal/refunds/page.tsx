@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import RefundPolicyClient from "./RefundPolicyClient";
+import RefundPolicyClient from "../../../legal/refunds/RefundPolicyClient";
 
 const siteUrl = "https://runexa.ai";
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/legal/refunds",
+    canonical: "https://runexa.ai/en/legal/refunds",
     languages: {
       en: `${siteUrl}/en/legal/refunds`,
       fr: `${siteUrl}/fr/legal/refunds`,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description:
       "Refund and billing policy for Runexa AI services, subscriptions, credits, enterprise plans, and intelligent workflows.",
 
-    url: "https://runexa.ai/legal/refunds",
+    url: "https://runexa.ai/en/legal/refunds",
 
     siteName: "Runexa Systems LLC",
 
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 export default function RefundPolicyPage() {
   return (
     <>
-      <RefundPolicyClient initialLocale="en" />
+      <RefundPolicyClient initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -91,7 +91,7 @@ export default function RefundPolicyPage() {
             description:
               "Refund and billing policy for Runexa AI services, subscriptions, AI credits, enterprise workflows, and intelligent platforms.",
 
-            url: "https://runexa.ai/legal/refunds",
+            url: "https://runexa.ai/en/legal/refunds",
 
             inLanguage: "en",
 
