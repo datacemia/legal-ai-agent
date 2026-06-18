@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import AIFinanceAnalysisArticle from "./AIFinanceAnalysisArticle";
+import AIFinanceAnalysisArticle from "../../../blog/ai-finance-analysis/AIFinanceAnalysisArticle";
 
 const siteUrl = "https://runexa.ai";
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/blog/ai-finance-analysis",
+    canonical: "https://runexa.ai/en/blog/ai-finance-analysis",
     languages: {
       en: `${siteUrl}/en/blog/ai-finance-analysis`,
       fr: `${siteUrl}/fr/blog/ai-finance-analysis`,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description:
       "Learn how AI finance analysis helps users understand spending patterns, subscriptions, savings opportunities, and financial habits.",
 
-    url: "https://runexa.ai/blog/ai-finance-analysis",
+    url: "https://runexa.ai/en/blog/ai-finance-analysis",
 
     siteName: "Runexa Systems LLC",
 
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 export default function AIFinanceAnalysisPage() {
   return (
     <>
-      <AIFinanceAnalysisArticle initialLocale="en" />
+      <AIFinanceAnalysisArticle initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -88,7 +88,7 @@ export default function AIFinanceAnalysisPage() {
 
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": "https://runexa.ai/blog/ai-finance-analysis",
+              "@id": "https://runexa.ai/en/blog/ai-finance-analysis",
             },
 
             headline:
