@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import PrivacyClient from "./PrivacyClient";
+import PrivacyClient from "../../privacy/PrivacyClient";
 
 const siteUrl = "https://runexa.ai";
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/privacy",
+    canonical: "https://runexa.ai/en/privacy",
     languages: {
       en: `${siteUrl}/en/privacy`,
       fr: `${siteUrl}/fr/privacy`,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description:
       "Privacy Policy explaining how Runexa Systems LLC collects, uses, stores, protects, and processes personal information and uploaded content.",
 
-    url: "https://runexa.ai/privacy",
+    url: "https://runexa.ai/en/privacy",
 
     siteName: "Runexa Systems LLC",
 
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <>
-      <PrivacyClient initialLocale="en" />
+      <PrivacyClient initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -91,7 +91,7 @@ export default function PrivacyPage() {
             description:
               "Privacy and data processing disclosures for Runexa AI services, APIs, uploads, and enterprise workflows.",
 
-            url: "https://runexa.ai/privacy",
+            url: "https://runexa.ai/en/privacy",
 
             inLanguage: "en",
 

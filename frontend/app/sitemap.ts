@@ -40,6 +40,10 @@ const routes = [
   "/fr/security",
   "/ar/security",
 
+  "/en/privacy",
+  "/fr/privacy",
+  "/ar/privacy",
+
   "/en/products/ai-legal-agent/terms",
   "/fr/products/ai-legal-agent/terms",
   "/ar/products/ai-legal-agent/terms",

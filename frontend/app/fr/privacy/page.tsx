@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import PrivacyClient from "./PrivacyClient";
+import PrivacyClient from "../../privacy/PrivacyClient";
 
 const siteUrl = "https://runexa.ai";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Runexa",
+  title: "Politique de confidentialité | Runexa",
 
   description:
-    "Privacy Policy explaining how Runexa Systems LLC collects, uses, stores, protects, and processes personal information and uploaded content.",
+    "Politique de confidentialité expliquant comment Runexa Systems LLC collecte, utilise, stocke, protège et traite les informations personnelles et contenus importés.",
 
   keywords: [
     "privacy policy",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/privacy",
+    canonical: "https://runexa.ai/fr/privacy",
     languages: {
       en: `${siteUrl}/en/privacy`,
       fr: `${siteUrl}/fr/privacy`,
@@ -31,12 +31,12 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Privacy Policy | Runexa",
+    title: "Politique de confidentialité | Runexa",
 
     description:
-      "Privacy Policy explaining how Runexa Systems LLC collects, uses, stores, protects, and processes personal information and uploaded content.",
+      "Politique de confidentialité expliquant comment Runexa Systems LLC collecte, utilise, stocke, protège et traite les informations personnelles et contenus importés.",
 
-    url: "https://runexa.ai/privacy",
+    url: "https://runexa.ai/fr/privacy",
 
     siteName: "Runexa Systems LLC",
 
@@ -49,9 +49,9 @@ export const metadata: Metadata = {
       },
     ],
 
-    locale: "en_US",
+    locale: "fr_FR",
 
-    alternateLocale: ["fr_FR", "ar_AR"],
+    alternateLocale: ["en_US", "ar_AR"],
 
     type: "website",
   },
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
 
-    title: "Privacy Policy | Runexa",
+    title: "Politique de confidentialité | Runexa",
 
     description:
       "Privacy and data processing disclosures for Runexa AI services, APIs, uploads, and enterprise workflows.",
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <>
-      <PrivacyClient initialLocale="en" />
+      <PrivacyClient initialLocale="fr" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -86,14 +86,14 @@ export default function PrivacyPage() {
 
             "@type": "WebPage",
 
-            name: "Runexa Privacy Policy",
+            name: "Politique de confidentialité Runexa",
 
             description:
               "Privacy and data processing disclosures for Runexa AI services, APIs, uploads, and enterprise workflows.",
 
-            url: "https://runexa.ai/privacy",
+            url: "https://runexa.ai/fr/privacy",
 
-            inLanguage: "en",
+            inLanguage: "fr",
 
             publisher: {
               "@type": "Organization",
