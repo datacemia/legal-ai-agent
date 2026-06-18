@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import DevelopersClient from "./DevelopersClient";
+import DevelopersClient from "../../developers/DevelopersClient";
 
 const siteUrl = "https://runexa.ai";
 
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/developers",
+    canonical: "https://runexa.ai/en/developers",
     languages: {
       en: `${siteUrl}/en/developers`,
       fr: `${siteUrl}/fr/developers`,
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     description:
       "Build AI-powered workflows with Runexa APIs for legal analysis, finance intelligence, study automation, and business decision support.",
 
-    url: "https://runexa.ai/developers",
+    url: "https://runexa.ai/en/developers",
 
     siteName: "Runexa Systems LLC",
 
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
 export default function DevelopersPage() {
   return (
     <>
-      <DevelopersClient initialLocale="en" />
+      <DevelopersClient initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -94,7 +94,7 @@ export default function DevelopersPage() {
             description:
               "Developer platform for building AI-powered workflows with Runexa APIs for legal analysis, finance intelligence, study automation, and business decision support.",
 
-            url: "https://runexa.ai/developers",
+            url: "https://runexa.ai/en/developers",
 
             inLanguage: "en",
 
