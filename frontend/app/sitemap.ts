@@ -20,6 +20,10 @@ const routes = [
   "/fr/finance-ai",
   "/ar/finance-ai",
 
+  "/en/study-ai",
+  "/fr/study-ai",
+  "/ar/study-ai",
+
   "/upload",
   "/legal-ai",
   "/finance-ai",
