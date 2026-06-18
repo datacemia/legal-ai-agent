@@ -1531,12 +1531,30 @@ function KpiCard({
 }
 
 
-export default function BusinessClient() {
+const getClientLocale = (
+  fallback: Locale = "en"
+): Locale => {
+  const saved = getSavedLocale();
+
+  if (saved === "fr" || saved === "ar" || saved === "en") {
+    return saved;
+  }
+
+  return fallback;
+};
+
+export default function BusinessClient({
+  initialLocale = "en",
+  lockInitialLocale = false,
+}: {
+  initialLocale?: Locale;
+  lockInitialLocale?: boolean;
+}) {
   const [file, setFile] = useState<File | null>(null);
   const [result, setResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState<Locale>(initialLocale);
   const [plan, setPlan] = useState("");
   const [role, setRole] = useState("");
   const [creditsBalance, setCreditsBalance] = useState(0);
@@ -1554,7 +1572,11 @@ export default function BusinessClient() {
   const [jobCompletedAt, setJobCompletedAt] = useState("");
 
   useEffect(() => {
-    setLanguage(getSavedLocale());
+    if (lockInitialLocale) {
+      setLanguage(initialLocale);
+    } else {
+      setLanguage(getClientLocale(initialLocale));
+    }
 
     const syncBillingState = () => {
       const savedPlan = safeGetLocalStorage("plan");
@@ -1587,13 +1609,17 @@ export default function BusinessClient() {
     );
 
     const handleLocaleChange = () => {
-      setLanguage(getSavedLocale());
+      if (!lockInitialLocale) {
+        setLanguage(getClientLocale(initialLocale));
+      }
     };
 
-    window.addEventListener(
-      "locale-change",
-      handleLocaleChange
-    );
+    if (!lockInitialLocale) {
+      window.addEventListener(
+        "locale-change",
+        handleLocaleChange
+      );
+    }
 
     refreshUserBilling();
     refreshBusinessTrial();
@@ -1604,12 +1630,14 @@ export default function BusinessClient() {
         syncBillingState
       );
 
-      window.removeEventListener(
-        "locale-change",
-        handleLocaleChange
-      );
+      if (!lockInitialLocale) {
+        window.removeEventListener(
+          "locale-change",
+          handleLocaleChange
+        );
+      }
     };
-  }, []);
+  }, [initialLocale, lockInitialLocale]);
 
   useEffect(() => {
     if (!loading || !startedAt) {
@@ -2742,8 +2770,14 @@ export default function BusinessClient() {
           <select
             value={language}
             onChange={(e) => {
-              setLanguage(e.target.value);
-              setSavedLocale(e.target.value);
+              if (lockInitialLocale) {
+                return;
+              }
+
+              const nextLocale = getLocale(e.target.value);
+
+              setLanguage(nextLocale);
+              setSavedLocale(nextLocale);
             }}
             className="w-full rounded-2xl border border-slate-300 bg-white px-4 py-4 text-sm font-semibold outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
           >
