@@ -1,118 +1,58 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { Metadata } from "next";
 import {
   defaultLocale,
   getSavedLocale,
   getTranslations,
 } from "../../../lib/i18n";
 
-export const metadata: Metadata = {
-  title: "Company Information | Runexa Systems",
+type Locale = "en" | "fr" | "ar";
 
-  description:
-    "Official company information for Runexa Systems LLC, including registered address, contact details, services, and governing law.",
+type LegalTranslations = Record<string, string>;
 
-  keywords: [
-    "Runexa Systems LLC",
-    "Runexa company information",
-    "Runexa contact",
-    "Runexa registered address",
-    "Runexa legal information",
-    "AI company information",
-  ],
+const normalizeLocale = (
+  value: string | null | undefined,
+  fallback: Locale = "en"
+): Locale => {
+  if (value === "en" || value === "fr" || value === "ar") {
+    return value;
+  }
 
-  alternates: {
-    canonical: "https://runexa.ai/legal/company",
-  },
-
-  openGraph: {
-    title: "Company Information | Runexa Systems",
-
-    description:
-      "Official company information for Runexa Systems LLC, including registered address, contact details, services, and governing law.",
-
-    url: "https://runexa.ai/legal/company",
-
-    siteName: "Runexa Systems",
-
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Runexa Systems Company Information",
-      },
-    ],
-
-    locale: "en_US",
-
-    type: "website",
-  },
-
-  twitter: {
-    card: "summary_large_image",
-
-    title: "Company Information | Runexa Systems",
-
-    description:
-      "Official company details, registered address, contact information, and governing law for Runexa Systems LLC.",
-
-    images: ["/og-image.png"],
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-  },
+  return fallback;
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-
-  "@type": "Organization",
-
-  name: "Runexa Systems LLC",
-
-  url: "https://runexa.ai",
-
-  email: "contact@runexa.ai",
-
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "1309 Coffeen Avenue, Suite 1200",
-    addressLocality: "Sheridan",
-    addressRegion: "WY",
-    postalCode: "82801",
-    addressCountry: "US",
-  },
-
-  description:
-    "Runexa Systems LLC develops and operates AI-powered tools, applications, AI agents, and related software services.",
+const getDefaultLocale = (): Locale => {
+  return normalizeLocale(defaultLocale, "en");
 };
 
-export default function CompanyClient() {
-  const [locale, setLocale] = useState(defaultLocale);
+export default function CompanyClient({
+  initialLocale,
+  lockInitialLocale = false,
+}: {
+  initialLocale?: Locale;
+  lockInitialLocale?: boolean;
+}) {
+  const resolvedInitialLocale = initialLocale || getDefaultLocale();
+
+  const [locale, setLocale] = useState<Locale>(resolvedInitialLocale);
 
   useEffect(() => {
-    setLocale(getSavedLocale());
-  }, []);
+    if (lockInitialLocale) {
+      setLocale(resolvedInitialLocale);
+      return;
+    }
 
-  const t = getTranslations(locale);
+    setLocale(normalizeLocale(getSavedLocale(), resolvedInitialLocale));
+  }, [resolvedInitialLocale, lockInitialLocale]);
+
+  const t = getTranslations(locale) as LegalTranslations;
 
   return (
     <main
       dir={locale === "ar" ? "rtl" : "ltr"}
       className="min-h-screen bg-slate-50 px-4 py-12"
     >
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd),
-        }}
-      />
-
       <div className="mx-auto max-w-3xl space-y-8 rounded-3xl border bg-white p-8 shadow-sm">
         <div>
           <h1 className="text-3xl font-bold text-slate-900">

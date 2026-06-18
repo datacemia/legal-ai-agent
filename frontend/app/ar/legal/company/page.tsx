@@ -1,26 +1,26 @@
 import type { Metadata } from "next";
-import CompanyClient from "./CompanyClient";
+import CompanyClient from "../../../legal/company/CompanyClient";
 
 const siteUrl = "https://runexa.ai";
 
 export const metadata: Metadata = {
-  title: "Company Information | Runexa",
+  title: "معلومات الشركة | Runexa",
 
   description:
-    "Official company information, registered address, contact details, services, and governing law for Runexa Systems LLC.",
+    "معلومات رسمية عن Runexa Systems LLC، بما في ذلك العنوان المسجل وبيانات الاتصال والخدمات والقانون الحاكم.",
 
   keywords: [
     "Runexa Systems LLC",
-    "Runexa company information",
-    "Runexa contact",
-    "Runexa registered address",
-    "AI company information",
-    "enterprise AI company",
-    "Runexa legal information",
+    "معلومات شركة Runexa",
+    "اتصال Runexa",
+    "العنوان المسجل Runexa",
+    "معلومات شركة ذكاء اصطناعي",
+    "شركة ذكاء اصطناعي للمؤسسات",
+    "معلومات Runexa القانونية",
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/legal/company",
+    canonical: "https://runexa.ai/ar/legal/company",
     languages: {
       en: `${siteUrl}/en/legal/company`,
       fr: `${siteUrl}/fr/legal/company`,
@@ -30,12 +30,12 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Company Information | Runexa",
+    title: "معلومات الشركة | Runexa",
 
     description:
-      "Official company information, registered address, contact details, services, and governing law for Runexa Systems LLC.",
+      "معلومات رسمية عن Runexa Systems LLC، بما في ذلك العنوان المسجل وبيانات الاتصال والخدمات والقانون الحاكم.",
 
-    url: "https://runexa.ai/legal/company",
+    url: "https://runexa.ai/ar/legal/company",
 
     siteName: "Runexa Systems LLC",
 
@@ -48,9 +48,9 @@ export const metadata: Metadata = {
       },
     ],
 
-    locale: "en_US",
+    locale: "ar_AR",
 
-    alternateLocale: ["fr_FR", "ar_AR"],
+    alternateLocale: ["en_US", "fr_FR"],
 
     type: "website",
   },
@@ -58,10 +58,10 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
 
-    title: "Company Information | Runexa",
+    title: "معلومات الشركة | Runexa",
 
     description:
-      "Official company details, address, governing law, and contact information for Runexa Systems LLC.",
+      "تفاصيل الشركة الرسمية والعنوان والقانون الحاكم ومعلومات الاتصال الخاصة بـ Runexa Systems LLC.",
 
     images: ["/og-image.png"],
   },
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
 export default function CompanyPage() {
   return (
     <>
-      <CompanyClient initialLocale="en" />
+      <CompanyClient initialLocale="ar" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -103,7 +103,7 @@ export default function CompanyPage() {
             sameAs: [siteUrl],
 
             description:
-              "Runexa Systems LLC develops and operates AI-powered tools, AI agents, enterprise workflows, and intelligent software services.",
+              "تقوم Runexa Systems LLC بتطوير وتشغيل أدوات مدعومة بالذكاء الاصطناعي ووكلاء ذكاء اصطناعي وسير عمل للمؤسسات وخدمات برمجية ذكية.",
           }),
         }}
       />

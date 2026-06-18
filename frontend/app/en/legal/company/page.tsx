@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import CompanyClient from "./CompanyClient";
+import CompanyClient from "../../../legal/company/CompanyClient";
 
 const siteUrl = "https://runexa.ai";
 
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/legal/company",
+    canonical: "https://runexa.ai/en/legal/company",
     languages: {
       en: `${siteUrl}/en/legal/company`,
       fr: `${siteUrl}/fr/legal/company`,
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     description:
       "Official company information, registered address, contact details, services, and governing law for Runexa Systems LLC.",
 
-    url: "https://runexa.ai/legal/company",
+    url: "https://runexa.ai/en/legal/company",
 
     siteName: "Runexa Systems LLC",
 
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
 export default function CompanyPage() {
   return (
     <>
-      <CompanyClient initialLocale="en" />
+      <CompanyClient initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"
