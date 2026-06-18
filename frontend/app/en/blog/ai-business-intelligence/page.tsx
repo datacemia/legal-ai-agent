@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import AIBusinessIntelligenceArticle from "./AIBusinessIntelligenceArticle";
+import AIBusinessIntelligenceArticle from "../../../blog/ai-business-intelligence/AIBusinessIntelligenceArticle";
 
 const siteUrl = "https://runexa.ai";
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/blog/ai-business-intelligence",
+    canonical: "https://runexa.ai/en/blog/ai-business-intelligence",
     languages: {
       en: `${siteUrl}/en/blog/ai-business-intelligence`,
       fr: `${siteUrl}/fr/blog/ai-business-intelligence`,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description:
       "Learn how AI business intelligence helps teams analyze data, detect risks, identify opportunities, and improve strategic decision-making.",
 
-    url: "https://runexa.ai/blog/ai-business-intelligence",
+    url: "https://runexa.ai/en/blog/ai-business-intelligence",
 
     siteName: "Runexa Systems LLC",
 
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 export default function AIBusinessIntelligencePage() {
   return (
     <>
-      <AIBusinessIntelligenceArticle initialLocale="en" />
+      <AIBusinessIntelligenceArticle initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -100,7 +100,7 @@ export default function AIBusinessIntelligencePage() {
 
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": "https://runexa.ai/blog/ai-business-intelligence",
+              "@id": "https://runexa.ai/en/blog/ai-business-intelligence",
             },
 
             author: {
