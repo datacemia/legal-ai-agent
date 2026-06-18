@@ -40,6 +40,10 @@ const routes = [
   "/fr/docs",
   "/ar/docs",
 
+  "/en/terms",
+  "/fr/terms",
+  "/ar/terms",
+
   "/en/api",
   "/fr/api",
   "/ar/api",

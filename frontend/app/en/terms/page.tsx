@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import TermsClient from "./TermsClient";
+import TermsClient from "../../terms/TermsClient";
 
 const siteUrl = "https://runexa.ai";
 
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <>
-      <TermsClient initialLocale="en" />
+      <TermsClient initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"

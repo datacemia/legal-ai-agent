@@ -7,14 +7,46 @@ import {
   getTranslations,
 } from "../../lib/i18n";
 
-export default function TermsClient() {
-  const [locale, setLocale] = useState(defaultLocale);
+type Locale = "en" | "fr" | "ar";
+
+type TermsTranslations = Record<string, string>;
+
+const normalizeLocale = (
+  value: string | null | undefined,
+  fallback: Locale = "en"
+): Locale => {
+  if (value === "en" || value === "fr" || value === "ar") {
+    return value;
+  }
+
+  return fallback;
+};
+
+const getDefaultLocale = (): Locale => {
+  return normalizeLocale(defaultLocale, "en");
+};
+
+export default function TermsClient({
+  initialLocale,
+  lockInitialLocale = false,
+}: {
+  initialLocale?: Locale;
+  lockInitialLocale?: boolean;
+}) {
+  const resolvedInitialLocale = initialLocale || getDefaultLocale();
+
+  const [locale, setLocale] = useState<Locale>(resolvedInitialLocale);
 
   useEffect(() => {
-    setLocale(getSavedLocale());
-  }, []);
+    if (lockInitialLocale) {
+      setLocale(resolvedInitialLocale);
+      return;
+    }
 
-  const t = getTranslations(locale);
+    setLocale(normalizeLocale(getSavedLocale(), resolvedInitialLocale));
+  }, [resolvedInitialLocale, lockInitialLocale]);
+
+  const t = getTranslations(locale) as TermsTranslations;
 
   return (
     <main
@@ -22,7 +54,6 @@ export default function TermsClient() {
       className="min-h-screen bg-slate-50 px-4 py-12"
     >
       <div className="max-w-3xl mx-auto bg-white p-8 rounded-3xl border shadow-sm space-y-8">
-
         <div>
           <h1 className="text-3xl font-bold text-slate-900">
             {t.termsTitle || "Terms of Service"}
@@ -81,17 +112,14 @@ export default function TermsClient() {
               {t.termsUse1 ||
                 "You may not use the services for illegal, harmful, or fraudulent activity."}
             </li>
-
             <li>
               {t.termsUse2 ||
                 "You may not upload data, documents, or content that you do not have the right to use."}
             </li>
-
             <li>
               {t.termsUse3 ||
                 "You may not abuse, disrupt, reverse engineer, or attempt to bypass the platform."}
             </li>
-
             <li>
               {t.termsUse4 ||
                 "You may not use the services to infringe intellectual property, privacy, or third-party rights."}
@@ -201,7 +229,6 @@ export default function TermsClient() {
             contact@runexa.ai
           </p>
         </section>
-
       </div>
     </main>
   );
