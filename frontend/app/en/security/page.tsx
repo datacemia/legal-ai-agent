@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import SecurityClient from "./SecurityClient";
+import SecurityClient from "../../security/SecurityClient";
 
 const siteUrl = "https://runexa.ai";
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/security",
+    canonical: "https://runexa.ai/en/security",
     languages: {
       en: `${siteUrl}/en/security`,
       fr: `${siteUrl}/fr/security`,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description:
       "Learn about Runexa security practices, encryption, infrastructure safeguards, access controls, payment security, and AI platform protections.",
 
-    url: "https://runexa.ai/security",
+    url: "https://runexa.ai/en/security",
 
     siteName: "Runexa Systems LLC",
 
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 export default function SecurityPage() {
   return (
     <>
-      <SecurityClient initialLocale="en" />
+      <SecurityClient initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -91,7 +91,7 @@ export default function SecurityPage() {
             description:
               "Security practices and infrastructure protections for Runexa AI systems and enterprise AI workflows.",
 
-            url: "https://runexa.ai/security",
+            url: "https://runexa.ai/en/security",
 
             inLanguage: "en",
 

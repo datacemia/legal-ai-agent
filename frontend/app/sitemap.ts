@@ -36,6 +36,10 @@ const routes = [
   "/fr/legal/refunds",
   "/ar/legal/refunds",
 
+  "/en/security",
+  "/fr/security",
+  "/ar/security",
+
   "/en/upload",
   "/fr/upload",
   "/ar/upload",
