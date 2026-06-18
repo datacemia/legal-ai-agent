@@ -225,18 +225,31 @@ const translations = {
     },
 };
 
-export default function ApiClient() {
-  const [locale, setLocale] = useState<"en" | "fr" | "ar">("en");
+type Locale = "en" | "fr" | "ar";
+
+export default function ApiClient({
+  initialLocale = "en",
+  lockInitialLocale = false,
+}: {
+  initialLocale?: Locale;
+  lockInitialLocale?: boolean;
+}) {
+  const [locale, setLocale] = useState<Locale>(initialLocale);
 
   useEffect(() => {
+    if (lockInitialLocale) {
+      setLocale(initialLocale);
+      return;
+    }
+
     const savedLocale = getSavedLocale();
 
-    if (savedLocale === "fr" || savedLocale === "ar") {
+    if (savedLocale === "fr" || savedLocale === "ar" || savedLocale === "en") {
       setLocale(savedLocale);
     } else {
-      setLocale("en");
+      setLocale(initialLocale);
     }
-  }, []);
+  }, [initialLocale, lockInitialLocale]);
 
   const t = translations[locale];
 

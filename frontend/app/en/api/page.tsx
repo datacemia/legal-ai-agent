@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ApiClient from "./ApiClient";
+import ApiClient from "../../api/ApiClient";
 
 const siteUrl = "https://runexa.ai";
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/api",
+    canonical: "https://runexa.ai/en/api",
     languages: {
       en: `${siteUrl}/en/api`,
       fr: `${siteUrl}/fr/api`,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description:
       "Integrate Runexa AI APIs for legal analysis, finance intelligence, study automation, and business decision support workflows.",
 
-    url: "https://runexa.ai/api",
+    url: "https://runexa.ai/en/api",
 
     siteName: "Runexa Systems LLC",
 
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 export default function ApiPage() {
   return (
     <>
-      <ApiClient initialLocale="en" />
+      <ApiClient initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -95,7 +95,7 @@ export default function ApiPage() {
             description:
               "Runexa AI API platform for legal analysis, finance intelligence, study automation, business decision support, asynchronous processing, and agent infrastructure.",
 
-            url: "https://runexa.ai/api",
+            url: "https://runexa.ai/en/api",
 
             inLanguage: "en",
 
