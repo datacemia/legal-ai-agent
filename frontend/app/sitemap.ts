@@ -36,6 +36,10 @@ const routes = [
   "/fr/legal/refunds",
   "/ar/legal/refunds",
 
+  "/en/blog/enterprise-ai-workflows",
+  "/fr/blog/enterprise-ai-workflows",
+  "/ar/blog/enterprise-ai-workflows",
+
   "/en/blog/ai-study-assistant",
   "/fr/blog/ai-study-assistant",
   "/ar/blog/ai-study-assistant",

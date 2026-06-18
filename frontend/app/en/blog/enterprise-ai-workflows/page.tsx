@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import EnterpriseAIWorkflowsArticle from "./EnterpriseAIWorkflowsArticle";
+import EnterpriseAIWorkflowsArticle from "../../../blog/enterprise-ai-workflows/EnterpriseAIWorkflowsArticle";
 
 const siteUrl = "https://runexa.ai";
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/blog/enterprise-ai-workflows",
+    canonical: "https://runexa.ai/en/blog/enterprise-ai-workflows",
     languages: {
       en: `${siteUrl}/en/blog/enterprise-ai-workflows`,
       fr: `${siteUrl}/fr/blog/enterprise-ai-workflows`,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description:
       "Learn how enterprise AI workflows help organizations automate analysis, improve decision-making, reduce repetitive work, and scale operational intelligence.",
 
-    url: "https://runexa.ai/blog/enterprise-ai-workflows",
+    url: "https://runexa.ai/en/blog/enterprise-ai-workflows",
 
     siteName: "Runexa Systems LLC",
 
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 export default function EnterpriseAIWorkflowsPage() {
   return (
     <>
-      <EnterpriseAIWorkflowsArticle initialLocale="en" />
+      <EnterpriseAIWorkflowsArticle initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -88,7 +88,7 @@ export default function EnterpriseAIWorkflowsPage() {
 
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": "https://runexa.ai/blog/enterprise-ai-workflows",
+              "@id": "https://runexa.ai/en/blog/enterprise-ai-workflows",
             },
 
             headline:
