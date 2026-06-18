@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import UploadClient from "./UploadClient";
+import UploadClient from "../../upload/UploadClient";
 
 const siteUrl = "https://runexa.ai";
 
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/upload",
+    canonical: "https://runexa.ai/en/upload",
     languages: {
       en: `${siteUrl}/en/upload`,
       fr: `${siteUrl}/fr/upload`,
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     description:
       "AI-powered contract analysis, legal risk detection, obligation extraction, and structured legal intelligence.",
 
-    url: "https://runexa.ai/upload",
+    url: "https://runexa.ai/en/upload",
 
     siteName: "Runexa Systems",
 
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
 export default function UploadPage() {
   return (
     <>
-      <UploadClient initialLocale="en" />
+      <UploadClient initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -96,7 +96,7 @@ export default function UploadPage() {
             description:
               "AI-powered legal document analysis platform for contracts, obligations, risk detection, and negotiation insights.",
 
-            url: "https://runexa.ai/upload",
+            url: "https://runexa.ai/en/upload",
 
             inLanguage: "en",
 

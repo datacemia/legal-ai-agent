@@ -1,28 +1,28 @@
 import type { Metadata } from "next";
-import UploadClient from "./UploadClient";
+import UploadClient from "../../upload/UploadClient";
 
 const siteUrl = "https://runexa.ai";
 
 export const metadata: Metadata = {
-  title: "AI Contract Review & Legal Document Analysis | Runexa",
+  title: "Analyse de contrats IA et documents juridiques | Runexa",
 
   description:
-    "Analyze contracts, detect risky clauses, understand obligations, and receive structured legal intelligence with Runexa AI Legal Agent.",
+    "Analysez des contrats, détectez les clauses à risque, comprenez les obligations et recevez une intelligence juridique structurée avec Runexa AI Legal Agent.",
 
   keywords: [
-    "AI contract review",
-    "legal AI",
-    "contract analysis AI",
-    "legal document analysis",
-    "AI legal assistant",
-    "contract risk analysis",
-    "enterprise legal AI",
+    "analyse contrat IA",
+    "IA juridique",
+    "analyse de contrat IA",
+    "analyse document juridique",
+    "assistant juridique IA",
+    "analyse risque contrat",
+    "IA juridique entreprise",
     "Runexa legal agent",
-    "AI contract intelligence",
+    "intelligence contractuelle IA",
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/upload",
+    canonical: "https://runexa.ai/fr/upload",
     languages: {
       en: `${siteUrl}/en/upload`,
       fr: `${siteUrl}/fr/upload`,
@@ -35,9 +35,9 @@ export const metadata: Metadata = {
     title: "Runexa Legal AI",
 
     description:
-      "AI-powered contract analysis, legal risk detection, obligation extraction, and structured legal intelligence.",
+      "Analyse de contrats par IA, détection des risques juridiques, extraction des obligations et intelligence juridique structurée.",
 
-    url: "https://runexa.ai/upload",
+    url: "https://runexa.ai/fr/upload",
 
     siteName: "Runexa Systems",
 
@@ -50,9 +50,9 @@ export const metadata: Metadata = {
       },
     ],
 
-    locale: "en_US",
+    locale: "fr_FR",
 
-    alternateLocale: ["fr_FR", "ar_AR"],
+    alternateLocale: ["en_US", "ar_AR"],
 
     type: "website",
   },
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     title: "Runexa Legal AI",
 
     description:
-      "Analyze contracts and legal documents with AI-powered legal intelligence.",
+      "Analysez des contrats et documents juridiques avec une intelligence juridique alimentée par l’IA.",
 
     images: ["/og-image.png"],
   },
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
 export default function UploadPage() {
   return (
     <>
-      <UploadClient initialLocale="en" />
+      <UploadClient initialLocale="fr" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -94,11 +94,11 @@ export default function UploadPage() {
             operatingSystem: "Web",
 
             description:
-              "AI-powered legal document analysis platform for contracts, obligations, risk detection, and negotiation insights.",
+              "Plateforme d’analyse de documents juridiques par IA pour les contrats, obligations, détection des risques et conseils de négociation.",
 
-            url: "https://runexa.ai/upload",
+            url: "https://runexa.ai/fr/upload",
 
-            inLanguage: "en",
+            inLanguage: "fr",
 
             provider: {
               "@type": "Organization",
@@ -119,12 +119,12 @@ export default function UploadPage() {
             },
 
             knowsAbout: [
-              "AI Contract Review",
-              "Legal AI",
-              "Contract Analysis",
-              "Legal Document Analysis",
-              "Contract Risk Analysis",
-              "Obligation Extraction",
+              "Analyse de contrat IA",
+              "IA juridique",
+              "Analyse de contrats",
+              "Analyse de documents juridiques",
+              "Risques contractuels",
+              "Extraction des obligations",
             ],
           }),
         }}

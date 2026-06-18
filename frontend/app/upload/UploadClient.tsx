@@ -10,6 +10,8 @@ import RiskScore from "../../components/RiskScore";
 import UploadBox from "../../components/UploadBox";
 import ExecutiveDashboard from "../../components/ExecutiveDashboard";
 
+type Locale = "en" | "fr" | "ar";
+
 
 const safeGetLocalStorage = (key: string, fallback = "") => {
   if (typeof window === "undefined") return fallback;
@@ -572,6 +574,23 @@ const uiText = (
   );
 };
 
+const normalizeLocale = (
+  value: string,
+  fallback: Locale = "en"
+): Locale => {
+  if (value === "fr" || value === "ar" || value === "en") {
+    return value;
+  }
+
+  return fallback;
+};
+
+const getClientLocale = (
+  fallback: Locale = "en"
+): Locale => {
+  return normalizeLocale(getSavedLocale(), fallback);
+};
+
 
 const EnterpriseIcon = ({ index }: { index: number }) => {
   const paths = [
@@ -597,14 +616,20 @@ const EnterpriseIcon = ({ index }: { index: number }) => {
   );
 };
 
-export default function UploadClient() {
+export default function UploadClient({
+  initialLocale = "en",
+  lockInitialLocale = false,
+}: {
+  initialLocale?: Locale;
+  lockInitialLocale?: boolean;
+}) {
   const [file, setFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState("");
   const [result, setResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState("");
   const [loadingProgress, setLoadingProgress] = useState(0);
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState<Locale>(initialLocale);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState("overview");
   const [riskFilter, setRiskFilter] = useState("medium");
@@ -671,9 +696,11 @@ export default function UploadClient() {
   };
 
   useEffect(() => {
-    const savedLocale = getSavedLocale();
+    const selectedLocale = lockInitialLocale
+      ? initialLocale
+      : getClientLocale(initialLocale);
 
-    setLanguage(savedLocale);
+    setLanguage(selectedLocale);
 
     const savedResult = safeGetLocalStorage(LEGAL_LAST_RESULT_KEY);
     const savedResultLanguage = safeGetLocalStorage(LEGAL_LAST_LANGUAGE_KEY);
@@ -682,8 +709,8 @@ export default function UploadClient() {
       try {
         setResult(JSON.parse(savedResult));
 
-        if (savedResultLanguage) {
-          setLanguage(savedResultLanguage);
+        if (!lockInitialLocale && savedResultLanguage) {
+          setLanguage(normalizeLocale(savedResultLanguage, initialLocale));
         }
       } catch {
         safeRemoveLocalStorage(LEGAL_LAST_RESULT_KEY);
@@ -709,7 +736,7 @@ export default function UploadClient() {
     return () => {
       window.removeEventListener("storage", syncBillingState);
     };
-  }, []);
+  }, [initialLocale, lockInitialLocale]);
 
   const t = labels[language] || labels.en;
 
@@ -1306,8 +1333,14 @@ export default function UploadClient() {
           <select
             value={language}
             onChange={(e) => {
-              setLanguage(e.target.value);
-              setSavedLocale(e.target.value);
+              if (lockInitialLocale) {
+                return;
+              }
+
+              const nextLocale = normalizeLocale(e.target.value, initialLocale);
+
+              setLanguage(nextLocale);
+              setSavedLocale(nextLocale);
               setResult(null);
               safeRemoveLocalStorage(LEGAL_LAST_RESULT_KEY);
               safeRemoveLocalStorage(LEGAL_LAST_LANGUAGE_KEY);
