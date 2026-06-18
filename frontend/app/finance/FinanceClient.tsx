@@ -6,6 +6,8 @@ import ReactMarkdown from "react-markdown";
 import { analyzeFinanceStatement } from "../../lib/api";
 import { startStripeCheckout } from "../../lib/stripeCheckout";
 import { getSavedLocale, setSavedLocale } from "../../lib/i18n";
+type Locale = "en" | "fr" | "ar";
+
 import {
   PieChart,
   Pie,
@@ -668,12 +670,35 @@ const labels: any = {
   },
 };
 
-export default function FinanceClient() {
+const normalizeLocale = (
+  value: string,
+  fallback: Locale = "en"
+): Locale => {
+  if (value === "fr" || value === "ar" || value === "en") {
+    return value;
+  }
+
+  return fallback;
+};
+
+const getClientLocale = (
+  fallback: Locale = "en"
+): Locale => {
+  return normalizeLocale(getSavedLocale(), fallback);
+};
+
+export default function FinanceClient({
+  initialLocale = "en",
+  lockInitialLocale = false,
+}: {
+  initialLocale?: Locale;
+  lockInitialLocale?: boolean;
+}) {
   const [file, setFile] = useState<File | null>(null);
   const [result, setResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [paymentMessage, setPaymentMessage] = useState("");
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState<Locale>(initialLocale);
   const [plan, setPlan] = useState("");
   const [role, setRole] = useState("");
   const [creditsBalance, setCreditsBalance] = useState(0);
@@ -691,7 +716,11 @@ export default function FinanceClient() {
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
 
   useEffect(() => {
-    setLanguage(getSavedLocale());
+    if (lockInitialLocale) {
+      setLanguage(initialLocale);
+    } else {
+      setLanguage(getClientLocale(initialLocale));
+    }
 
     const syncBillingState = () => {
       const savedPlan = safeGetLocalStorage("plan");
@@ -711,7 +740,7 @@ export default function FinanceClient() {
     return () => {
       window.removeEventListener("storage", syncBillingState);
     };
-  }, []);
+  }, [initialLocale, lockInitialLocale]);
 
   useEffect(() => {
     if (!loading || !startedAt) return;
@@ -1474,8 +1503,14 @@ export default function FinanceClient() {
           <select
             value={language}
             onChange={(e) => {
-              setLanguage(e.target.value);
-              setSavedLocale(e.target.value);
+              if (lockInitialLocale) {
+                return;
+              }
+
+              const nextLocale = normalizeLocale(e.target.value, initialLocale);
+
+              setLanguage(nextLocale);
+              setSavedLocale(nextLocale);
               setResult(null);
               setPaymentMessage("");
             }}

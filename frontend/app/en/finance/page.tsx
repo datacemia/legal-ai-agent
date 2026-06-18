@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import FinanceClient from "./FinanceClient";
+import FinanceClient from "../../finance/FinanceClient";
 
 const siteUrl = "https://runexa.ai";
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/finance",
+    canonical: "https://runexa.ai/en/finance",
     languages: {
       en: `${siteUrl}/en/finance`,
       fr: `${siteUrl}/fr/finance`,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description:
       "Analyze bank statements, detect subscriptions, monitor spending, discover savings opportunities, and receive AI financial coaching with Runexa Finance AI.",
 
-    url: "https://runexa.ai/finance",
+    url: "https://runexa.ai/en/finance",
 
     siteName: "Runexa Systems",
 
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 export default function FinancePage() {
   return (
     <>
-      <FinanceClient initialLocale="en" />
+      <FinanceClient initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -95,7 +95,7 @@ export default function FinancePage() {
             description:
               "AI financial intelligence platform for bank statement analysis, subscription detection, budgeting, and savings optimization.",
 
-            url: "https://runexa.ai/finance",
+            url: "https://runexa.ai/en/finance",
 
             inLanguage: "en",
 
