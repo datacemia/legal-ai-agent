@@ -7,6 +7,9 @@ const routes = [
   "/en",
   "/fr",
   "/ar",
+  "/en/legal-ai",
+  "/fr/legal-ai",
+  "/ar/legal-ai",
 
   "/upload",
   "/legal-ai",
