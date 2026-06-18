@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import AgentZeroClient from "./AgentZeroClient";
+import AgentZeroClient from "../../../labs/agent-0/AgentZeroClient";
 
 const siteUrl = "https://runexa.ai";
 
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/labs/agent-0",
+    canonical: "https://runexa.ai/en/labs/agent-0",
     languages: {
       en: `${siteUrl}/en/labs/agent-0`,
       fr: `${siteUrl}/fr/labs/agent-0`,
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     description:
       "Future AI safety infrastructure combining cameras, sensors, GPS, and intelligent reasoning systems for smart monitoring.",
 
-    url: "https://runexa.ai/labs/agent-0",
+    url: "https://runexa.ai/en/labs/agent-0",
 
     siteName: "Runexa Systems",
 
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
 export default function AgentZeroPage() {
   return (
     <>
-      <AgentZeroClient initialLanguage="en" />
+      <AgentZeroClient initialLanguage="en" lockInitialLanguage />
 
       <script
         type="application/ld+json"
@@ -95,7 +95,7 @@ export default function AgentZeroPage() {
             description:
               "Experimental AI safety infrastructure concept combining cameras, sensors, GPS, and intelligent reasoning systems.",
 
-            url: "https://runexa.ai/labs/agent-0",
+            url: "https://runexa.ai/en/labs/agent-0",
 
             inLanguage: "en",
 

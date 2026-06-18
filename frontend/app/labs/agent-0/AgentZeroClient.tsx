@@ -2,64 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Runexa Agent 0 | AI Safety Infrastructure & Smart Home Intelligence",
-
-  description:
-    "Runexa Agent 0 is a future AI safety infrastructure concept combining cameras, sensors, GPS, and intelligent reasoning for smart home monitoring and autonomous safety systems.",
-
-  keywords: [
-    "AI smart home",
-    "AI security infrastructure",
-    "AI home monitoring",
-    "AI camera reasoning",
-    "sensor fusion AI",
-    "GPS geofencing AI",
-    "smart home AI",
-    "AI safety system",
-    "Runexa Labs",
-    "Agent 0",
-  ],
-
-  alternates: {
-    canonical: "https://runexa.ai/labs/agent-0",
-  },
-
-  openGraph: {
-    title:
-      "Runexa Agent 0 | AI Safety Infrastructure & Smart Home Intelligence",
-    description:
-      "Future AI infrastructure combining cameras, sensors, GPS, and intelligent reasoning for smart home safety systems.",
-    url: "https://runexa.ai/labs/agent-0",
-    siteName: "Runexa Systems",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Runexa Agent 0",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-
-  twitter: {
-    card: "summary_large_image",
-    title:
-      "Runexa Agent 0 | AI Safety Infrastructure & Smart Home Intelligence",
-    description:
-      "Future AI infrastructure for cameras, sensors, GPS, and autonomous home monitoring.",
-    images: ["/og-image.png"],
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+type Locale = "en" | "fr" | "ar";
 
 const labels: any = {
   en: {
@@ -312,38 +255,37 @@ const labels: any = {
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "Runexa Agent 0",
-  applicationCategory: "SecurityApplication",
-  operatingSystem: "Web",
-  description:
-    "Future AI safety infrastructure combining cameras, sensors, GPS, and intelligent reasoning for smart homes.",
-  url: "https://runexa.ai/labs/agent-0",
-  publisher: {
-    "@type": "Organization",
-    name: "Runexa Systems",
-    url: "https://runexa.ai",
-  },
-};
-
-export default function AgentZeroClient() {
-  const [language, setLanguage] = useState("en");
+export default function AgentZeroClient({
+  initialLanguage = "en",
+  lockInitialLanguage = false,
+}: {
+  initialLanguage?: Locale;
+  lockInitialLanguage?: boolean;
+}) {
+  const [language, setLanguage] = useState<Locale>(initialLanguage);
   const t = labels[language] || labels.en;
 
   useEffect(() => {
+    if (lockInitialLanguage) {
+      setLanguage(initialLanguage);
+      return;
+    }
+
     const saved = localStorage.getItem("locale");
 
     if (saved && labels[saved]) {
-      setLanguage(saved);
+      setLanguage(saved as Locale);
+    } else {
+      setLanguage(initialLanguage);
     }
 
     const handleLocaleChange = () => {
       const nextLocale = localStorage.getItem("locale");
 
       if (nextLocale && labels[nextLocale]) {
-        setLanguage(nextLocale);
+        setLanguage(nextLocale as Locale);
+      } else {
+        setLanguage(initialLanguage);
       }
     };
 
@@ -352,20 +294,13 @@ export default function AgentZeroClient() {
     return () => {
       window.removeEventListener("locale-change", handleLocaleChange);
     };
-  }, []);
+  }, [initialLanguage, lockInitialLanguage]);
 
   return (
     <main
       dir={language === "ar" ? "rtl" : "ltr"}
       className="min-h-screen bg-slate-950 text-white"
     >
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd),
-        }}
-      />
-
       <section className="relative overflow-hidden px-6 py-24">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-slate-950 to-cyan-500/10" />
         <div className="absolute left-1/2 top-20 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-500/20 blur-3xl" />

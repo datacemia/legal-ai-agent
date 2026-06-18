@@ -1,29 +1,29 @@
 import type { Metadata } from "next";
-import AgentZeroClient from "./AgentZeroClient";
+import AgentZeroClient from "../../../labs/agent-0/AgentZeroClient";
 
 const siteUrl = "https://runexa.ai";
 
 export const metadata: Metadata = {
   title:
-    "Runexa Agent 0 | AI Safety Infrastructure & Smart Home Intelligence",
+    "Runexa Agent 0 | Infrastructure de sécurité IA et maison intelligente",
 
   description:
-    "Runexa Agent 0 is a future AI safety and smart monitoring concept combining cameras, sensors, GPS, and intelligent reasoning systems.",
+    "Runexa Agent 0 est un concept futur de sécurité IA et de surveillance intelligente combinant caméras, capteurs, GPS et systèmes de raisonnement intelligent.",
 
   keywords: [
-    "AI safety system",
-    "smart home AI",
-    "AI monitoring",
-    "AI sensors",
-    "AI camera intelligence",
-    "AI home automation",
-    "AI security infrastructure",
+    "système sécurité IA",
+    "maison intelligente IA",
+    "surveillance IA",
+    "capteurs IA",
+    "intelligence caméra IA",
+    "automatisation maison IA",
+    "infrastructure sécurité IA",
     "Runexa Labs",
     "Agent 0",
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/labs/agent-0",
+    canonical: "https://runexa.ai/fr/labs/agent-0",
     languages: {
       en: `${siteUrl}/en/labs/agent-0`,
       fr: `${siteUrl}/fr/labs/agent-0`,
@@ -34,12 +34,12 @@ export const metadata: Metadata = {
 
   openGraph: {
     title:
-      "Runexa Agent 0 | AI Safety Infrastructure & Smart Home Intelligence",
+      "Runexa Agent 0 | Infrastructure de sécurité IA et maison intelligente",
 
     description:
-      "Future AI safety infrastructure combining cameras, sensors, GPS, and intelligent reasoning systems for smart monitoring.",
+      "Infrastructure future de sécurité IA combinant caméras, capteurs, GPS et raisonnement intelligent pour la surveillance intelligente.",
 
-    url: "https://runexa.ai/labs/agent-0",
+    url: "https://runexa.ai/fr/labs/agent-0",
 
     siteName: "Runexa Systems",
 
@@ -52,9 +52,9 @@ export const metadata: Metadata = {
       },
     ],
 
-    locale: "en_US",
+    locale: "fr_FR",
 
-    alternateLocale: ["fr_FR", "ar_AR"],
+    alternateLocale: ["en_US", "ar_AR"],
 
     type: "website",
   },
@@ -63,10 +63,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
 
     title:
-      "Runexa Agent 0 | AI Safety Infrastructure & Smart Home Intelligence",
+      "Runexa Agent 0 | Infrastructure de sécurité IA et maison intelligente",
 
     description:
-      "Experimental AI safety infrastructure combining cameras, sensors, GPS, and intelligent reasoning systems.",
+      "Infrastructure expérimentale de sécurité IA combinant caméras, capteurs, GPS et systèmes de raisonnement intelligent.",
 
     images: ["/og-image.png"],
   },
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
 export default function AgentZeroPage() {
   return (
     <>
-      <AgentZeroClient initialLanguage="en" />
+      <AgentZeroClient initialLanguage="fr" lockInitialLanguage />
 
       <script
         type="application/ld+json"
@@ -93,11 +93,11 @@ export default function AgentZeroPage() {
             name: "Runexa Agent 0",
 
             description:
-              "Experimental AI safety infrastructure concept combining cameras, sensors, GPS, and intelligent reasoning systems.",
+              "Concept expérimental d’infrastructure de sécurité IA combinant caméras, capteurs, GPS et systèmes de raisonnement intelligent.",
 
-            url: "https://runexa.ai/labs/agent-0",
+            url: "https://runexa.ai/fr/labs/agent-0",
 
-            inLanguage: "en",
+            inLanguage: "fr",
 
             creator: {
               "@type": "Organization",
