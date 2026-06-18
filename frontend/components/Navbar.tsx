@@ -3,16 +3,52 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { getSavedLocale, translations } from "../lib/i18n";
 
+type Locale = "en" | "fr" | "ar";
+
+const getLocaleFromPathname = (pathname: string | null): Locale | null => {
+  if (!pathname) {
+    return null;
+  }
+
+  if (pathname === "/en" || pathname.startsWith("/en/")) {
+    return "en";
+  }
+
+  if (pathname === "/fr" || pathname.startsWith("/fr/")) {
+    return "fr";
+  }
+
+  if (pathname === "/ar" || pathname.startsWith("/ar/")) {
+    return "ar";
+  }
+
+  return null;
+};
+
+const normalizeLocale = (
+  value: string | null | undefined,
+  fallback: Locale = "en"
+): Locale => {
+  if (value === "en" || value === "fr" || value === "ar") {
+    return value;
+  }
+
+  return fallback;
+};
+
 export default function Navbar() {
+  const pathname = usePathname();
+
   const [isLogged, setIsLogged] = useState(false);
   const [role, setRole] = useState("");
   const [plan, setPlan] = useState("");
   const [credits, setCredits] = useState<string | null>(null);
   const [isEnterpriseMember, setIsEnterpriseMember] = useState(false);
   const [apiEnabled, setApiEnabled] = useState(false);
-  const [locale, setLocale] = useState("en");
+  const [locale, setLocale] = useState<Locale>("en");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const checkAuth = () => {
@@ -42,14 +78,24 @@ export default function Navbar() {
     setApiEnabled(savedApiEnabled);
   };
 
+  const resolveLocale = (): Locale => {
+    const pathLocale = getLocaleFromPathname(pathname);
+
+    if (pathLocale) {
+      return pathLocale;
+    }
+
+    return normalizeLocale(getSavedLocale(), "en");
+  };
+
   useEffect(() => {
     checkAuth();
-    setLocale(getSavedLocale());
+    setLocale(resolveLocale());
 
     window.addEventListener("storage", checkAuth);
 
     const handleLocaleChange = () => {
-      setLocale(getSavedLocale());
+      setLocale(resolveLocale());
     };
 
     window.addEventListener("locale-change", handleLocaleChange);
@@ -58,7 +104,7 @@ export default function Navbar() {
       window.removeEventListener("storage", checkAuth);
       window.removeEventListener("locale-change", handleLocaleChange);
     };
-  }, []);
+  }, [pathname]);
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);

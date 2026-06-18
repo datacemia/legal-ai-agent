@@ -3,32 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { getSavedLocale, translations } from "../lib/i18n";
 
-export default function Footer() {
-  const [locale, setLocale] = useState("en");
-  const [apiEnabled, setApiEnabled] = useState(false);
-
-  useEffect(() => {
-    setLocale(getSavedLocale());
-
-    const savedApiEnabled =
-      localStorage.getItem("api_enabled") === "true";
-
-    setApiEnabled(savedApiEnabled);
-
-    const handleLocaleChange = () => {
-      setLocale(getSavedLocale());
-    };
-
-    window.addEventListener("locale-change", handleLocaleChange);
-
-    return () => {
-      window.removeEventListener("locale-change", handleLocaleChange);
-    };
-  }, []);
-
-  const t = translations[locale] || translations.en;
+type Locale = "en" | "fr" | "ar";
 
 type LegalLabels = {
   terms: string;
@@ -42,7 +20,75 @@ type LegalLabels = {
   company: string;
 };
 
-  const legalLabels: Record<string, LegalLabels> = {
+const getLocaleFromPathname = (pathname: string | null): Locale | null => {
+  if (!pathname) {
+    return null;
+  }
+
+  if (pathname === "/en" || pathname.startsWith("/en/")) {
+    return "en";
+  }
+
+  if (pathname === "/fr" || pathname.startsWith("/fr/")) {
+    return "fr";
+  }
+
+  if (pathname === "/ar" || pathname.startsWith("/ar/")) {
+    return "ar";
+  }
+
+  return null;
+};
+
+const normalizeLocale = (
+  value: string | null | undefined,
+  fallback: Locale = "en"
+): Locale => {
+  if (value === "en" || value === "fr" || value === "ar") {
+    return value;
+  }
+
+  return fallback;
+};
+
+export default function Footer() {
+  const pathname = usePathname();
+
+  const [locale, setLocale] = useState<Locale>("en");
+  const [apiEnabled, setApiEnabled] = useState(false);
+
+  const resolveLocale = (): Locale => {
+    const pathLocale = getLocaleFromPathname(pathname);
+
+    if (pathLocale) {
+      return pathLocale;
+    }
+
+    return normalizeLocale(getSavedLocale(), "en");
+  };
+
+  useEffect(() => {
+    setLocale(resolveLocale());
+
+    const savedApiEnabled =
+      localStorage.getItem("api_enabled") === "true";
+
+    setApiEnabled(savedApiEnabled);
+
+    const handleLocaleChange = () => {
+      setLocale(resolveLocale());
+    };
+
+    window.addEventListener("locale-change", handleLocaleChange);
+
+    return () => {
+      window.removeEventListener("locale-change", handleLocaleChange);
+    };
+  }, [pathname]);
+
+  const t = translations[locale] || translations.en;
+
+  const legalLabels: Record<Locale, LegalLabels> = {
     en: {
       terms: "Terms of Service",
       privacy: "Privacy Policy",
