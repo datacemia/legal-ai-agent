@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import BusinessAIClient from "./BusinessAIClient";
+import BusinessAIClient from "../../business-ai/BusinessAIClient";
 
 const siteUrl = "https://runexa.ai";
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/business-ai",
+    canonical: "https://runexa.ai/en/business-ai",
     languages: {
       en: `${siteUrl}/en/business-ai`,
       fr: `${siteUrl}/fr/business-ai`,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description:
       "Analyze business data, detect risks, discover opportunities, and improve strategic decisions with Runexa Business AI.",
 
-    url: "https://runexa.ai/business-ai",
+    url: "https://runexa.ai/en/business-ai",
 
     siteName: "Runexa Systems LLC",
 
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 export default function BusinessAIPage() {
   return (
     <>
-      <BusinessAIClient initialLocale="en" />
+      <BusinessAIClient initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -93,7 +93,7 @@ export default function BusinessAIPage() {
 
               operatingSystem: "Web",
 
-              url: "https://runexa.ai/business-ai",
+              url: "https://runexa.ai/en/business-ai",
 
               inLanguage: "en",
 
