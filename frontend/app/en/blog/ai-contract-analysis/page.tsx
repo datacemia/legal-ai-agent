@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import AIContractAnalysisArticle from "./AIContractAnalysisArticle";
+import AIContractAnalysisArticle from "../../../blog/ai-contract-analysis/AIContractAnalysisArticle";
 
 const siteUrl = "https://runexa.ai";
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/blog/ai-contract-analysis",
+    canonical: "https://runexa.ai/en/blog/ai-contract-analysis",
     languages: {
       en: `${siteUrl}/en/blog/ai-contract-analysis`,
       fr: `${siteUrl}/fr/blog/ai-contract-analysis`,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description:
       "Learn how AI contract analysis helps identify risky clauses, summarize obligations, and support legal document review workflows.",
 
-    url: "https://runexa.ai/blog/ai-contract-analysis",
+    url: "https://runexa.ai/en/blog/ai-contract-analysis",
 
     siteName: "Runexa Systems LLC",
 
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 export default function AIContractAnalysisPage() {
   return (
     <>
-      <AIContractAnalysisArticle initialLocale="en" />
+      <AIContractAnalysisArticle initialLocale="en" lockInitialLocale />
 
       <script
         type="application/ld+json"
@@ -88,7 +88,7 @@ export default function AIContractAnalysisPage() {
 
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": "https://runexa.ai/blog/ai-contract-analysis",
+              "@id": "https://runexa.ai/en/blog/ai-contract-analysis",
             },
 
             headline:
