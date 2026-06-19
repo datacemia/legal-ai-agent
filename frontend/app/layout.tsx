@@ -1,7 +1,9 @@
 import "./globals.css";
 import AppShell from "../components/AppShell";
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://runexa.ai"),
@@ -164,6 +166,26 @@ export default function RootLayout({
         <AppShell>
           {children}
         </AppShell>
+
+        <Script
+          id="microsoft-clarity"
+          strategy="afterInteractive"
+        >
+          {`
+            (function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){
+                (c[a].q=c[a].q||[]).push(arguments);
+              };
+              t=l.createElement(r);
+              t.async=1;
+              t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+              y=l.getElementsByTagName(r)[0];
+              y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "x9f4f630sd");
+          `}
+        </Script>
+
+        <GoogleAnalytics gaId="G-LCSF21FG31" />
 
         <Analytics />
       </body>

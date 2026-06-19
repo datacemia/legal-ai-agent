@@ -8,7 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@next/third-parties": "^16.2.4",
+    "@next/third-parties": "^16.2.9",
     "@panzoom/panzoom": "^4.6.2",
     "@vercel/analytics": "^2.0.1",
     "jspdf": "^4.2.1",
