@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "سياسة الخصوصية | Runexa",
 
   description:
-    "سياسة الخصوصية التي توضّح كيف تجمع Runexa Systems LLC المعلومات الشخصية والمحتوى المرفوع وتستخدمه وتخزنه وتحميه وتعالجه.",
+    "سياسة الخصوصية التي توضّح كيف تقوم Runexa Systems LLC بجمع واستخدام وتخزين وحماية ومعالجة ونقل وتأمين المعلومات الشخصية والمحتوى المرفوع للمستخدمين الدوليين.",
 
   keywords: [
     "privacy policy",
@@ -18,6 +18,11 @@ export const metadata: Metadata = {
     "AI platform privacy",
     "AI uploads privacy",
     "AI compliance",
+    "AI model training",
+    "international data transfers",
+    "automated processing",
+    "GDPR",
+    "UK GDPR",
   ],
 
   alternates: {
@@ -34,7 +39,7 @@ export const metadata: Metadata = {
     title: "سياسة الخصوصية | Runexa",
 
     description:
-      "سياسة الخصوصية التي توضّح كيف تجمع Runexa Systems LLC المعلومات الشخصية والمحتوى المرفوع وتستخدمه وتخزنه وتحميه وتعالجه.",
+      "سياسة الخصوصية التي توضّح كيف تقوم Runexa Systems LLC بجمع واستخدام وتخزين وحماية ومعالجة ونقل وتأمين المعلومات الشخصية والمحتوى المرفوع للمستخدمين الدوليين.",
 
     url: "https://runexa.ai/ar/privacy",
 
@@ -62,7 +67,7 @@ export const metadata: Metadata = {
     title: "سياسة الخصوصية | Runexa",
 
     description:
-      "Privacy and data processing disclosures for Runexa AI services, APIs, uploads, and enterprise workflows.",
+      "سياسة الخصوصية التي توضّح كيف تقوم Runexa Systems LLC بجمع واستخدام وتخزين وحماية ومعالجة ونقل وتأمين المعلومات الشخصية والمحتوى المرفوع للمستخدمين الدوليين.",
 
     images: ["/og-image.png"],
   },
@@ -84,12 +89,12 @@ export default function PrivacyPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
 
-            "@type": "WebPage",
+            "@type": "PrivacyPolicy",
 
-            name: "سياسة الخصوصية من Runexa",
+            name: "Runexa Privacy Policy",
 
             description:
-              "Privacy and data processing disclosures for Runexa AI services, APIs, uploads, and enterprise workflows.",
+              "سياسة الخصوصية التي توضّح كيف تقوم Runexa Systems LLC بجمع واستخدام وتخزين وحماية ومعالجة ونقل وتأمين المعلومات الشخصية والمحتوى المرفوع للمستخدمين الدوليين.",
 
             url: "https://runexa.ai/ar/privacy",
 
@@ -100,6 +105,13 @@ export default function PrivacyPage() {
               name: "Runexa Systems LLC",
               url: siteUrl,
             },
+
+            jurisdiction: [
+              "United States",
+              "European Union",
+              "United Kingdom",
+              "International",
+            ],
           }),
         }}
       />

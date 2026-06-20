@@ -26,6 +26,76 @@ const getDefaultLocale = (): Locale => {
   return normalizeLocale(defaultLocale, "en");
 };
 
+
+const privacyGovernanceText = {
+  en: {
+    aiTrainingTitle: "15. AI Model Training",
+    aiTrainingText:
+      "Runexa Systems LLC does not use customer-uploaded documents, contracts, financial records, study materials, business data, or other private content to train public AI models unless explicitly authorized by the user or clearly disclosed where permitted by applicable law.",
+
+    automatedProcessingTitle: "16. Automated Processing",
+    automatedProcessingText:
+      "Runexa services may use automated systems and AI models to analyze, classify, summarize, extract, transform, and generate information from uploaded content. Users should independently review AI-generated outputs before relying on them.",
+
+    internationalTransfersTitle: "17. International Data Transfers",
+    internationalTransfersText:
+      "Runexa Systems LLC is a United States company that provides services internationally. If you access the services from outside the United States, your information may be transferred to, stored in, or processed in the United States or other jurisdictions where our service providers operate. Where required, Runexa uses reasonable safeguards designed to protect personal information in accordance with applicable law.",
+
+    enterpriseHandlingTitle: "18. Enterprise Data Handling",
+    enterpriseHandlingText:
+      "Enterprise customers and organizations may request additional contractual, operational, or security information where available. Organizations remain responsible for assessing their own compliance, governance, security, and regulatory obligations when using Runexa services.",
+
+    deletionRequestsTitle: "19. Deletion Requests",
+    deletionRequestsText:
+      "Users may contact Runexa to request deletion of personal information or uploaded content, subject to legal, security, billing, fraud-prevention, backup, and operational retention requirements.",
+  },
+
+  fr: {
+    aiTrainingTitle: "15. Entraînement des modèles IA",
+    aiTrainingText:
+      "Runexa Systems LLC n’utilise pas les documents téléchargés par les clients, contrats, relevés financiers, supports d’étude, données business ou autres contenus privés pour entraîner des modèles d’IA publics, sauf autorisation explicite de l’utilisateur ou information claire lorsque la loi applicable le permet.",
+
+    automatedProcessingTitle: "16. Traitement automatisé",
+    automatedProcessingText:
+      "Les services Runexa peuvent utiliser des systèmes automatisés et des modèles d’IA pour analyser, classer, résumer, extraire, transformer et générer des informations à partir du contenu téléchargé. Les utilisateurs doivent vérifier indépendamment les résultats générés par l’IA avant de s’y fier.",
+
+    internationalTransfersTitle: "17. Transferts internationaux de données",
+    internationalTransfersText:
+      "Runexa Systems LLC est une société américaine qui fournit ses services à l’international. Si vous accédez aux services depuis l’extérieur des États-Unis, vos informations peuvent être transférées, stockées ou traitées aux États-Unis ou dans d’autres juridictions où nos prestataires opèrent. Lorsque cela est requis, Runexa utilise des garanties raisonnables conçues pour protéger les informations personnelles conformément à la loi applicable.",
+
+    enterpriseHandlingTitle: "18. Traitement des données entreprise",
+    enterpriseHandlingText:
+      "Les clients entreprise et les organisations peuvent demander des informations contractuelles, opérationnelles ou de sécurité supplémentaires lorsqu’elles sont disponibles. Les organisations restent responsables de l’évaluation de leurs propres obligations de conformité, gouvernance, sécurité et réglementation lorsqu’elles utilisent les services Runexa.",
+
+    deletionRequestsTitle: "19. Demandes de suppression",
+    deletionRequestsText:
+      "Les utilisateurs peuvent contacter Runexa pour demander la suppression de leurs informations personnelles ou contenus téléchargés, sous réserve des obligations légales, de sécurité, de facturation, de prévention de la fraude, de sauvegarde et de conservation opérationnelle.",
+  },
+
+  ar: {
+    aiTrainingTitle: "15. تدريب نماذج الذكاء الاصطناعي",
+    aiTrainingText:
+      "لا تستخدم Runexa Systems LLC المستندات التي يرفعها العملاء أو العقود أو السجلات المالية أو مواد الدراسة أو بيانات الأعمال أو أي محتوى خاص آخر لتدريب نماذج ذكاء اصطناعي عامة، ما لم يصرّح المستخدم بذلك صراحةً أو يتم الإفصاح عنه بوضوح عندما يسمح القانون المعمول به.",
+
+    automatedProcessingTitle: "16. المعالجة الآلية",
+    automatedProcessingText:
+      "قد تستخدم خدمات Runexa أنظمة آلية ونماذج ذكاء اصطناعي لتحليل المحتوى المرفوع وتصنيفه وتلخيصه واستخراج المعلومات منه وتحويله وإنشاء مخرجات بناءً عليه. يجب على المستخدمين مراجعة المخرجات التي يولدها الذكاء الاصطناعي بشكل مستقل قبل الاعتماد عليها.",
+
+    internationalTransfersTitle: "17. نقل البيانات دولياً",
+    internationalTransfersText:
+      "Runexa Systems LLC شركة أمريكية تقدم خدماتها دولياً. إذا كنت تستخدم الخدمات من خارج الولايات المتحدة، فقد يتم نقل معلوماتك أو تخزينها أو معالجتها في الولايات المتحدة أو في ولايات قضائية أخرى يعمل فيها مزودو الخدمة لدينا. عند الحاجة، تستخدم Runexa ضمانات معقولة مصممة لحماية المعلومات الشخصية وفقاً للقانون المعمول به.",
+
+    enterpriseHandlingTitle: "18. معالجة بيانات المؤسسات",
+    enterpriseHandlingText:
+      "يمكن لعملاء المؤسسات والمنظمات طلب معلومات تعاقدية أو تشغيلية أو أمنية إضافية عندما تكون متاحة. تبقى المنظمات مسؤولة عن تقييم التزاماتها الخاصة بالامتثال والحوكمة والأمن والمتطلبات التنظيمية عند استخدام خدمات Runexa.",
+
+    deletionRequestsTitle: "19. طلبات الحذف",
+    deletionRequestsText:
+      "يمكن للمستخدمين التواصل مع Runexa لطلب حذف المعلومات الشخصية أو المحتوى المرفوع، مع مراعاة متطلبات الاحتفاظ القانونية والأمنية والفوترة ومنع الاحتيال والنسخ الاحتياطي والتشغيل.",
+  },
+};
+
+
 export default function PrivacyClient({
   initialLocale,
   lockInitialLocale = false,
@@ -47,6 +117,7 @@ export default function PrivacyClient({
   }, [resolvedInitialLocale, lockInitialLocale]);
 
   const t = getTranslations(locale) as PrivacyTranslations;
+  const g = privacyGovernanceText[locale] || privacyGovernanceText.en;
 
   return (
     <main
@@ -273,6 +344,56 @@ export default function PrivacyClient({
 
           <p className="mt-2 text-slate-600 break-words whitespace-normal">
             contact@runexa.ai
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-xl font-semibold">
+            {g.aiTrainingTitle}
+          </h2>
+
+          <p className="mt-2 text-slate-600 break-words whitespace-normal">
+            {g.aiTrainingText}
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-xl font-semibold">
+            {g.automatedProcessingTitle}
+          </h2>
+
+          <p className="mt-2 text-slate-600 break-words whitespace-normal">
+            {g.automatedProcessingText}
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-xl font-semibold">
+            {g.internationalTransfersTitle}
+          </h2>
+
+          <p className="mt-2 text-slate-600 break-words whitespace-normal">
+            {g.internationalTransfersText}
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-xl font-semibold">
+            {g.enterpriseHandlingTitle}
+          </h2>
+
+          <p className="mt-2 text-slate-600 break-words whitespace-normal">
+            {g.enterpriseHandlingText}
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-xl font-semibold">
+            {g.deletionRequestsTitle}
+          </h2>
+
+          <p className="mt-2 text-slate-600 break-words whitespace-normal">
+            {g.deletionRequestsText}
           </p>
         </section>
 

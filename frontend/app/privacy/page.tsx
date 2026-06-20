@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Privacy Policy | Runexa",
 
   description:
-    "Privacy Policy explaining how Runexa Systems LLC collects, uses, stores, protects, and processes personal information and uploaded content.",
+    "Privacy Policy explaining how Runexa Systems LLC collects, uses, stores, protects, processes, transfers, and safeguards personal information and uploaded content for international users.",
 
   keywords: [
     "privacy policy",
@@ -18,6 +18,11 @@ export const metadata: Metadata = {
     "AI platform privacy",
     "AI uploads privacy",
     "AI compliance",
+    "AI model training",
+    "international data transfers",
+    "automated processing",
+    "GDPR",
+    "UK GDPR",
   ],
 
   alternates: {
@@ -34,7 +39,7 @@ export const metadata: Metadata = {
     title: "Privacy Policy | Runexa",
 
     description:
-      "Privacy Policy explaining how Runexa Systems LLC collects, uses, stores, protects, and processes personal information and uploaded content.",
+      "Privacy Policy explaining how Runexa Systems LLC collects, uses, stores, protects, processes, transfers, and safeguards personal information and uploaded content for international users.",
 
     url: "https://runexa.ai/privacy",
 
@@ -62,7 +67,7 @@ export const metadata: Metadata = {
     title: "Privacy Policy | Runexa",
 
     description:
-      "Privacy and data processing disclosures for Runexa AI services, APIs, uploads, and enterprise workflows.",
+      "Privacy and data processing disclosures for Runexa AI services, APIs, uploads, enterprise workflows, international users, and AI-assisted processing.",
 
     images: ["/og-image.png"],
   },
@@ -84,12 +89,12 @@ export default function PrivacyPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
 
-            "@type": "WebPage",
+            "@type": "PrivacyPolicy",
 
             name: "Runexa Privacy Policy",
 
             description:
-              "Privacy and data processing disclosures for Runexa AI services, APIs, uploads, and enterprise workflows.",
+              "Privacy and data processing disclosures for Runexa AI services, APIs, uploads, enterprise workflows, international users, AI-assisted processing, model training, and data transfers.",
 
             url: "https://runexa.ai/privacy",
 
@@ -100,6 +105,13 @@ export default function PrivacyPage() {
               name: "Runexa Systems LLC",
               url: siteUrl,
             },
+
+            jurisdiction: [
+              "United States",
+              "European Union",
+              "United Kingdom",
+              "International",
+            ],
           }),
         }}
       />
