@@ -7,15 +7,18 @@ export const metadata: Metadata = {
   title: "Politique d’utilisation acceptable | Runexa",
 
   description:
-    "Politique d’utilisation acceptable Runexa encadrant l’usage légal et responsable des systèmes IA, API, workflows et services entreprise.",
+    "Politique d’utilisation acceptable de Runexa régissant l’utilisation légale, responsable et autorisée des systèmes IA, API, téléchargements, workflows et services entreprise.",
 
   keywords: [
     "politique d’utilisation acceptable",
     "politique IA",
     "conformité IA",
-    "politique IA entreprise",
-    "règles usage IA",
+    "politique IA pour entreprises",
+    "règles d’utilisation de l’IA",
     "politique Runexa",
+    "téléversements autorisés",
+    "utilisation responsable de l’IA",
+    "règles de la plateforme IA",
   ],
 
   alternates: {
@@ -32,7 +35,7 @@ export const metadata: Metadata = {
     title: "Politique d’utilisation acceptable | Runexa",
 
     description:
-      "Politique d’utilisation acceptable Runexa pour les systèmes IA, API, workflows entreprise et services intelligents.",
+      "Politique d’utilisation acceptable de Runexa régissant l’utilisation légale, responsable et autorisée des systèmes IA, API, téléchargements, workflows et services entreprise.",
 
     url: "https://runexa.ai/fr/legal/acceptable-use",
 
@@ -60,7 +63,7 @@ export const metadata: Metadata = {
     title: "Politique d’utilisation acceptable | Runexa",
 
     description:
-      "Consultez les exigences d’utilisation acceptable des services IA et systèmes entreprise Runexa.",
+      "Politique d’utilisation acceptable de Runexa régissant l’utilisation légale, responsable et autorisée des systèmes IA, API, téléchargements, workflows et services entreprise.",
 
     images: ["/og-image.png"],
   },
@@ -84,10 +87,10 @@ export default function AcceptableUsePage() {
 
             "@type": "WebPage",
 
-            name: "Politique d’utilisation acceptable Runexa",
+            name: "Runexa Acceptable Use Policy",
 
             description:
-              "Politique d’utilisation acceptable pour les services IA Runexa, API, workflows entreprise et systèmes intelligents.",
+              "Politique d’utilisation acceptable pour l’utilisation légale, responsable et autorisée des services IA Runexa, API, téléchargements, workflows entreprise et systèmes intelligents.",
 
             url: "https://runexa.ai/fr/legal/acceptable-use",
 

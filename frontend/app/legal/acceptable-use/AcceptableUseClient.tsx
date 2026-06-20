@@ -25,6 +25,17 @@ const getDefaultLocale = (): Locale => {
   return normalizeLocale(defaultLocale, "en");
 };
 
+const acceptableUseResponsibilityText: Record<Locale, string> = {
+  en:
+    "Users are responsible for all content uploaded, processed, generated, or shared through the services, for ensuring they have the legal right to use such content, and for uploading only information reasonably necessary for the requested analysis.",
+
+  fr:
+    "Les utilisateurs sont responsables de tout contenu téléchargé, traité, généré ou partagé via les services, doivent s’assurer qu’ils disposent du droit légal d’utiliser ce contenu, et ne doivent télécharger que les informations raisonnablement nécessaires à l’analyse demandée.",
+
+  ar:
+    "يتحمل المستخدمون مسؤولية جميع المحتويات التي يتم رفعها أو معالجتها أو إنشاؤها أو مشاركتها عبر الخدمات، ومسؤولية التأكد من امتلاكهم الحق القانوني في استخدام هذا المحتوى، ورفع المعلومات الضرورية فقط وبشكل معقول للتحليل المطلوب.",
+};
+
 export default function AcceptableUseClient({
   initialLocale,
   lockInitialLocale = false,
@@ -170,8 +181,7 @@ export default function AcceptableUseClient({
           </h2>
 
           <p className="mt-2 text-slate-600">
-            {t.acceptableUseResponsibilityText ||
-              "Users are responsible for all content uploaded, processed, generated, or shared through the services and for ensuring they have the legal right to use such content."}
+            {acceptableUseResponsibilityText[locale]}
           </p>
         </section>
 

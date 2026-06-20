@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Acceptable Use Policy | Runexa",
 
   description:
-    "Runexa acceptable use policy governing the lawful and responsible use of AI systems, APIs, workflows, and enterprise services.",
+    "Runexa acceptable use policy governing lawful, responsible, and authorized use of AI systems, APIs, uploads, workflows, and enterprise services.",
 
   keywords: [
     "acceptable use policy",
@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     "enterprise AI policy",
     "AI usage rules",
     "Runexa policy",
+    "authorized uploads",
+    "responsible AI use",
+    "AI platform rules",
   ],
 
   alternates: {
@@ -32,7 +35,7 @@ export const metadata: Metadata = {
     title: "Acceptable Use Policy | Runexa",
 
     description:
-      "Runexa acceptable use policy governing AI systems, APIs, enterprise workflows, and intelligent services.",
+      "Runexa acceptable use policy governing lawful, responsible, and authorized use of AI systems, APIs, uploads, workflows, and enterprise services.",
 
     url: "https://runexa.ai/legal/acceptable-use",
 
@@ -60,7 +63,7 @@ export const metadata: Metadata = {
     title: "Acceptable Use Policy | Runexa",
 
     description:
-      "Review the acceptable use requirements for Runexa AI services and enterprise systems.",
+      "Runexa acceptable use policy governing lawful, responsible, and authorized use of AI systems, APIs, uploads, workflows, and enterprise services.",
 
     images: ["/og-image.png"],
   },
@@ -87,7 +90,7 @@ export default function AcceptableUsePage() {
             name: "Runexa Acceptable Use Policy",
 
             description:
-              "Acceptable use policy for Runexa AI services, APIs, enterprise workflows, and intelligent systems.",
+              "Acceptable use policy for lawful, responsible, and authorized use of Runexa AI services, APIs, uploads, enterprise workflows, and intelligent systems.",
 
             url: "https://runexa.ai/legal/acceptable-use",
 
