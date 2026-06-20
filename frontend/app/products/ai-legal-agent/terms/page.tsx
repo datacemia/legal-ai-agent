@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "AI Product Terms | Runexa Systems LLC",
 
   description:
-    "Product-specific terms, limitations, disclaimers, and liability information for Runexa AI agents including legal, finance, study, and business AI systems.",
+    "Product-specific terms, limitations, disclaimers, human review requirements, data-processing notices, and liability information for Runexa AI agents including legal, finance, study, and business AI systems.",
 
   keywords: [
     "AI product terms",
@@ -17,6 +17,9 @@ export const metadata: Metadata = {
     "AI business disclaimer",
     "Runexa terms",
     "AI liability limitation",
+    "AI human review",
+    "AI transparency",
+    "AI data processing",
     "enterprise AI compliance",
   ],
 
@@ -34,7 +37,7 @@ export const metadata: Metadata = {
     title: "AI Product Terms | Runexa Systems LLC",
 
     description:
-      "Product-specific terms, limitations, disclaimers, and liability information for Runexa AI agents including legal, finance, study, and business AI systems.",
+      "Product-specific terms, limitations, disclaimers, human review requirements, data-processing notices, and liability information for Runexa AI agents including legal, finance, study, and business AI systems.",
 
     url: "https://runexa.ai/products/ai-legal-agent/terms",
 
@@ -62,7 +65,7 @@ export const metadata: Metadata = {
     title: "AI Product Terms | Runexa Systems LLC",
 
     description:
-      "AI product limitations, liability disclosures, and operational terms for Runexa AI systems.",
+      "AI product limitations, human review requirements, data-processing notices, and operational terms for Runexa AI systems.",
 
     images: ["/og-image.png"],
   },
@@ -89,7 +92,7 @@ export default function ProductTermsPage() {
             name: "Runexa AI Product Terms",
 
             description:
-              "Product terms and AI limitation disclosures for Runexa AI agents and enterprise AI services.",
+              "Product terms, AI limitation disclosures, human review requirements, data-processing notices, model-training clarification, and non-professional-advice notices for Runexa AI agents and enterprise AI services.",
 
             url: "https://runexa.ai/products/ai-legal-agent/terms",
 

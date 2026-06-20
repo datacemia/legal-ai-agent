@@ -7,17 +7,20 @@ export const metadata: Metadata = {
   title: "شروط منتجات الذكاء الاصطناعي | Runexa Systems LLC",
 
   description:
-    "شروط خاصة بالمنتج وقيود وإخلاءات مسؤولية ومعلومات المسؤولية لوكلاء Runexa للذكاء الاصطناعي، بما في ذلك الأنظمة القانونية والمالية والدراسية وأنظمة الأعمال.",
+    "شروط خاصة بالمنتج وقيود وإخلاءات مسؤولية ومتطلبات مراجعة بشرية وإشعارات معالجة البيانات ومعلومات المسؤولية لوكلاء Runexa للذكاء الاصطناعي.",
 
   keywords: [
-    "شروط منتجات الذكاء الاصطناعي",
-    "إخلاء مسؤولية الذكاء القانوني",
-    "إخلاء مسؤولية الذكاء المالي",
-    "إخلاء مسؤولية ذكاء الدراسة",
-    "إخلاء مسؤولية ذكاء الأعمال",
-    "شروط Runexa",
-    "تحديد مسؤولية الذكاء الاصطناعي",
-    "امتثال الذكاء الاصطناعي للمؤسسات",
+    "AI product terms",
+    "AI legal disclaimer",
+    "AI finance disclaimer",
+    "AI study disclaimer",
+    "AI business disclaimer",
+    "Runexa terms",
+    "AI liability limitation",
+    "AI human review",
+    "AI transparency",
+    "AI data processing",
+    "enterprise AI compliance",
   ],
 
   alternates: {
@@ -34,7 +37,7 @@ export const metadata: Metadata = {
     title: "شروط منتجات الذكاء الاصطناعي | Runexa Systems LLC",
 
     description:
-      "شروط خاصة وقيود وإخلاءات مسؤولية ومعلومات المسؤولية لوكلاء Runexa للذكاء الاصطناعي بما في ذلك القانون والمالية والدراسة والأعمال.",
+      "شروط خاصة بالمنتج وقيود وإخلاءات مسؤولية ومتطلبات مراجعة بشرية وإشعارات معالجة البيانات ومعلومات المسؤولية لوكلاء Runexa للذكاء الاصطناعي.",
 
     url: "https://runexa.ai/ar/products/ai-legal-agent/terms",
 
@@ -62,7 +65,7 @@ export const metadata: Metadata = {
     title: "شروط منتجات الذكاء الاصطناعي | Runexa Systems LLC",
 
     description:
-      "قيود منتجات الذكاء الاصطناعي وإفصاحات المسؤولية والشروط التشغيلية لأنظمة Runexa للذكاء الاصطناعي.",
+      "AI product limitations, human review requirements, data-processing notices, and operational terms for Runexa AI systems.",
 
     images: ["/og-image.png"],
   },
@@ -89,7 +92,7 @@ export default function ProductTermsPage() {
             name: "شروط منتجات Runexa للذكاء الاصطناعي",
 
             description:
-              "شروط المنتج وإفصاحات قيود الذكاء الاصطناعي لوكلاء Runexa للذكاء الاصطناعي وخدمات المؤسسات.",
+              "شروط المنتج وإفصاحات قيود الذكاء الاصطناعي ومتطلبات المراجعة البشرية وإشعارات معالجة البيانات وتوضيح تدريب النماذج وعدم تقديم المشورة المهنية لوكلاء Runexa للذكاء الاصطناعي.",
 
             url: "https://runexa.ai/ar/products/ai-legal-agent/terms",
 

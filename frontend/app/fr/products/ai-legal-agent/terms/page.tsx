@@ -7,17 +7,20 @@ export const metadata: Metadata = {
   title: "Conditions produit IA | Runexa Systems LLC",
 
   description:
-    "Conditions spécifiques, limites, avertissements et informations de responsabilité pour les agents IA Runexa, notamment les systèmes juridique, finance, étude et business.",
+    "Conditions spécifiques, limites, avertissements, exigences de vérification humaine, notices de traitement des données et informations de responsabilité pour les agents IA Runexa.",
 
   keywords: [
-    "conditions produit IA",
-    "avertissement IA juridique",
-    "avertissement IA finance",
-    "avertissement IA étude",
-    "avertissement IA business",
-    "conditions Runexa",
-    "limitation responsabilité IA",
-    "conformité IA entreprise",
+    "AI product terms",
+    "AI legal disclaimer",
+    "AI finance disclaimer",
+    "AI study disclaimer",
+    "AI business disclaimer",
+    "Runexa terms",
+    "AI liability limitation",
+    "AI human review",
+    "AI transparency",
+    "AI data processing",
+    "enterprise AI compliance",
   ],
 
   alternates: {
@@ -34,7 +37,7 @@ export const metadata: Metadata = {
     title: "Conditions produit IA | Runexa Systems LLC",
 
     description:
-      "Conditions spécifiques, limites, avertissements et informations de responsabilité pour les agents IA Runexa, notamment juridique, finance, étude et business.",
+      "Conditions spécifiques, limites, avertissements, exigences de vérification humaine, notices de traitement des données et informations de responsabilité pour les agents IA Runexa.",
 
     url: "https://runexa.ai/fr/products/ai-legal-agent/terms",
 
@@ -62,7 +65,7 @@ export const metadata: Metadata = {
     title: "Conditions produit IA | Runexa Systems LLC",
 
     description:
-      "Limites produit IA, divulgations de responsabilité et conditions opérationnelles pour les systèmes IA Runexa.",
+      "AI product limitations, human review requirements, data-processing notices, and operational terms for Runexa AI systems.",
 
     images: ["/og-image.png"],
   },
@@ -89,7 +92,7 @@ export default function ProductTermsPage() {
             name: "Conditions produit IA Runexa",
 
             description:
-              "Conditions produit et divulgations des limites IA pour les agents IA Runexa et services IA entreprise.",
+              "Conditions produit, divulgations des limites IA, exigences de vérification humaine, notices de traitement des données, clarification de l’entraînement des modèles et absence de conseil professionnel pour les agents IA Runexa.",
 
             url: "https://runexa.ai/fr/products/ai-legal-agent/terms",
 
