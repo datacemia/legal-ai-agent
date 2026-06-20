@@ -26,6 +26,28 @@ const getDefaultLocale = (): Locale => {
   return normalizeLocale(defaultLocale, "en");
 };
 
+const termsEligibilityText: Record<Locale, string> = {
+  en:
+    "The Services are not intended for children under 13. Individuals aged 13 to 17 may use the Services only with consent and supervision of a parent or legal guardian.",
+
+  fr:
+    "Les Services ne sont pas destinés aux enfants de moins de 13 ans. Les personnes âgées de 13 à 17 ans peuvent utiliser les Services uniquement avec le consentement et la supervision d’un parent ou tuteur légal.",
+
+  ar:
+    "الخدمات غير مخصصة للأطفال دون سن 13 عاماً. يمكن للأفراد الذين تتراوح أعمارهم بين 13 و17 عاماً استخدام الخدمات فقط بموافقة وإشراف أحد الوالدين أو الوصي القانوني.",
+};
+
+const termsDataUsageText: Record<Locale, string> = {
+  en:
+    "You retain ownership of the data and content you upload. Runexa Systems LLC processes your data to provide, secure, operate, maintain, and support the services, as described in the Privacy Policy.",
+
+  fr:
+    "Vous conservez la propriété des données et contenus que vous téléchargez. Runexa Systems LLC traite vos données afin de fournir, sécuriser, exploiter, maintenir et soutenir les services, comme décrit dans la Politique de confidentialité.",
+
+  ar:
+    "تحتفظ بملكية البيانات والمحتوى الذي ترفعه. تقوم Runexa Systems LLC بمعالجة بياناتك لتقديم الخدمات وتأمينها وتشغيلها وصيانتها ودعمها، كما هو موضح في سياسة الخصوصية.",
+};
+
 export default function TermsClient({
   initialLocale,
   lockInitialLocale = false,
@@ -86,8 +108,7 @@ export default function TermsClient({
           </h2>
 
           <p className="mt-2 text-slate-600 break-words whitespace-normal">
-            {t.termsEligibilityText ||
-              "You must be at least 18 years old to use the services."}
+            {termsEligibilityText[locale]}
           </p>
         </section>
 
@@ -160,8 +181,7 @@ export default function TermsClient({
           </h2>
 
           <p className="mt-2 text-slate-600 break-words whitespace-normal">
-            {t.termsDataText ||
-              "You retain ownership of the data and content you upload. Runexa Systems LLC processes your data only to provide, secure, maintain, and improve the services, as described in the Privacy Policy."}
+            {termsDataUsageText[locale]}
           </p>
         </section>
 

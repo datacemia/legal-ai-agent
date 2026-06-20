@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Terms of Service | Runexa",
 
   description:
-    "Terms of Service governing the use of Runexa AI agents, APIs, enterprise workflows, credits, subscriptions, and AI-powered services.",
+    "Terms of Service governing Runexa AI agents, APIs, uploads, credits, subscriptions, minors’ use, billing, and AI-powered services.",
 
   keywords: [
     "terms of service",
@@ -18,10 +18,13 @@ export const metadata: Metadata = {
     "enterprise AI terms",
     "AI subscriptions",
     "AI credits",
+    "minors use",
+    "AI uploads",
+    "billing terms",
   ],
 
   alternates: {
-    canonical: "https://runexa.ai/terms",
+    canonical: "https://runexa.ai/en/terms",
     languages: {
       en: `${siteUrl}/en/terms`,
       fr: `${siteUrl}/fr/terms`,
@@ -34,9 +37,9 @@ export const metadata: Metadata = {
     title: "Terms of Service | Runexa",
 
     description:
-      "Terms governing the use of Runexa AI systems, APIs, and enterprise AI workflows.",
+      "Terms of Service governing Runexa AI agents, APIs, uploads, credits, subscriptions, minors’ use, billing, and AI-powered services.",
 
-    url: "https://runexa.ai/terms",
+    url: "https://runexa.ai/en/terms",
 
     siteName: "Runexa Systems LLC",
 
@@ -59,10 +62,10 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
 
-    title: "Runexa Terms of Service",
+    title: "Terms of Service | Runexa",
 
     description:
-      "Terms governing the use of Runexa AI systems, APIs, and enterprise workflows.",
+      "Terms of Service governing Runexa AI agents, APIs, uploads, credits, subscriptions, minors’ use, billing, and AI-powered services.",
 
     images: ["/og-image.png"],
   },
@@ -89,9 +92,9 @@ export default function TermsPage() {
             name: "Runexa Terms of Service",
 
             description:
-              "Terms governing Runexa AI agents, APIs, enterprise workflows, and AI-powered services.",
+              "Terms governing Runexa AI agents, APIs, uploads, enterprise workflows, credits, subscriptions, minors’ use, billing, and AI-powered services.",
 
-            url: "https://runexa.ai/terms",
+            url: "https://runexa.ai/en/terms",
 
             inLanguage: "en",
 

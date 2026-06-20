@@ -7,17 +7,20 @@ export const metadata: Metadata = {
   title: "Conditions d’utilisation | Runexa",
 
   description:
-    "Conditions d’utilisation régissant les agents IA Runexa, les API, les workflows entreprise, les crédits, les abonnements et les services alimentés par l’IA.",
+    "Conditions d’utilisation régissant les agents IA Runexa, API, téléchargements, crédits, abonnements, utilisation par les mineurs, facturation et services alimentés par l’IA.",
 
   keywords: [
     "conditions d’utilisation",
-    "conditions plateforme IA",
+    "conditions de la plateforme IA",
     "conditions Runexa",
     "conditions SaaS IA",
-    "conditions API IA",
-    "conditions IA entreprise",
+    "conditions d’utilisation de l’API IA",
+    "conditions IA pour entreprises",
     "abonnements IA",
     "crédits IA",
+    "utilisation par les mineurs",
+    "fichiers téléversés IA",
+    "conditions de facturation",
   ],
 
   alternates: {
@@ -34,7 +37,7 @@ export const metadata: Metadata = {
     title: "Conditions d’utilisation | Runexa",
 
     description:
-      "Conditions régissant l’utilisation des systèmes IA Runexa, des API et des workflows IA entreprise.",
+      "Conditions d’utilisation régissant les agents IA Runexa, API, téléchargements, crédits, abonnements, utilisation par les mineurs, facturation et services alimentés par l’IA.",
 
     url: "https://runexa.ai/fr/terms",
 
@@ -59,10 +62,10 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
 
-    title: "Conditions d’utilisation Runexa",
+    title: "Conditions d’utilisation | Runexa",
 
     description:
-      "Conditions régissant l’utilisation des systèmes IA Runexa, des API et des workflows entreprise.",
+      "Conditions d’utilisation régissant les agents IA Runexa, API, téléchargements, crédits, abonnements, utilisation par les mineurs, facturation et services alimentés par l’IA.",
 
     images: ["/og-image.png"],
   },
@@ -86,10 +89,10 @@ export default function TermsPage() {
 
             "@type": "WebPage",
 
-            name: "Conditions d’utilisation Runexa",
+            name: "Runexa Terms of Service",
 
             description:
-              "Conditions régissant les agents IA Runexa, les API, les workflows entreprise et les services alimentés par l’IA.",
+              "Conditions régissant les agents IA Runexa, API, téléchargements, workflows entreprise, crédits, abonnements, utilisation par les mineurs, facturation et services alimentés par l’IA.",
 
             url: "https://runexa.ai/fr/terms",
 
