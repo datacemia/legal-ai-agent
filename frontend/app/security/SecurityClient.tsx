@@ -26,6 +26,17 @@ const getDefaultLocale = (): Locale => {
   return normalizeLocale(defaultLocale, "en");
 };
 
+const securityResponsibleUploadText: Record<Locale, string> = {
+  en:
+    "Users should upload only information reasonably necessary for the requested analysis and should avoid including unrelated sensitive data.",
+
+  fr:
+    "Les utilisateurs doivent télécharger uniquement les informations raisonnablement nécessaires à l’analyse demandée et éviter d’inclure des données sensibles non pertinentes.",
+
+  ar:
+    "يجب على المستخدمين رفع المعلومات الضرورية فقط وبشكل معقول للتحليل المطلوب، وتجنب تضمين بيانات حساسة غير مرتبطة بالتحليل.",
+};
+
 export default function SecurityClient({
   initialLocale,
   lockInitialLocale = false,
@@ -145,8 +156,7 @@ export default function SecurityClient({
           </p>
 
           <p className="mt-2 text-slate-600 break-words whitespace-normal">
-            {t.securityUserText2 ||
-              "Users should avoid uploading highly sensitive information unless necessary and appropriate safeguards are in place."}
+            {securityResponsibleUploadText[locale]}
           </p>
         </section>
 

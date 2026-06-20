@@ -7,19 +7,20 @@ export const metadata: Metadata = {
   title: "Sécurité et infrastructure | Runexa",
 
   description:
-    "Découvrez les pratiques de sécurité Runexa, le chiffrement, les protections d’infrastructure, les contrôles d’accès, la sécurité des paiements et les protections de la plateforme IA.",
+    "Découvrez les pratiques de sécurité de Runexa, le chiffrement, les protections d’infrastructure, les contrôles d’accès, la sécurité des paiements, les téléchargements responsables et la protection de la plateforme IA.",
 
   keywords: [
-    "sécurité IA",
-    "sécurité IA entreprise",
+    "sécurité de l’IA",
+    "sécurité de l’IA pour entreprises",
     "infrastructure IA",
     "sécurité Runexa",
-    "sécurité plateforme IA",
-    "chiffrement IA",
-    "protection données IA",
-    "conformité IA entreprise",
+    "sécurité de la plateforme IA",
+    "chiffrement de l’IA",
+    "protection des données IA",
+    "conformité IA pour entreprises",
+    "téléversements responsables",
+    "flux de travail IA sécurisés",
   ],
-
   alternates: {
     canonical: "https://runexa.ai/fr/security",
     languages: {
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
     title: "Sécurité et infrastructure | Runexa",
 
     description:
-      "Découvrez les pratiques de sécurité Runexa, le chiffrement, les protections d’infrastructure, les contrôles d’accès, la sécurité des paiements et les protections de plateforme IA.",
+      "Découvrez les pratiques de sécurité de Runexa, le chiffrement, les protections d’infrastructure, les contrôles d’accès, la sécurité des paiements, les téléchargements responsables et la protection de la plateforme IA.",
 
     url: "https://runexa.ai/fr/security",
 
@@ -62,7 +63,7 @@ export const metadata: Metadata = {
     title: "Sécurité et infrastructure | Runexa",
 
     description:
-      "Sécurité IA entreprise, chiffrement, protections d’infrastructure et protections de plateforme IA par Runexa.",
+      "Découvrez les pratiques de sécurité de Runexa, le chiffrement, les protections d’infrastructure, les contrôles d’accès, la sécurité des paiements, les téléchargements responsables et la protection de la plateforme IA.",
 
     images: ["/og-image.png"],
   },
@@ -86,10 +87,10 @@ export default function SecurityPage() {
 
             "@type": "WebPage",
 
-            name: "Sécurité Runexa",
+            name: "Runexa Security",
 
             description:
-              "Pratiques de sécurité et protections d’infrastructure pour les systèmes IA Runexa et les workflows IA entreprise.",
+              "Pratiques de sécurité, recommandations de téléchargement responsable et protections d’infrastructure pour les systèmes IA Runexa et les workflows IA entreprise.",
 
             url: "https://runexa.ai/fr/security",
 

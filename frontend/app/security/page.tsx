@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Security & Infrastructure | Runexa",
 
   description:
-    "Learn about Runexa security practices, encryption, infrastructure safeguards, access controls, payment security, and AI platform protections.",
+    "Learn about Runexa security practices, encryption, infrastructure safeguards, access controls, payment security, responsible uploads, and AI platform protections.",
 
   keywords: [
     "AI security",
@@ -18,6 +18,8 @@ export const metadata: Metadata = {
     "AI encryption",
     "AI data protection",
     "enterprise AI compliance",
+    "responsible uploads",
+    "secure AI workflows",
   ],
 
   alternates: {
@@ -34,7 +36,7 @@ export const metadata: Metadata = {
     title: "Security & Infrastructure | Runexa",
 
     description:
-      "Learn about Runexa security practices, encryption, infrastructure safeguards, access controls, payment security, and AI platform protections.",
+      "Learn about Runexa security practices, encryption, infrastructure safeguards, access controls, payment security, responsible uploads, and AI platform protections.",
 
     url: "https://runexa.ai/security",
 
@@ -62,7 +64,7 @@ export const metadata: Metadata = {
     title: "Security & Infrastructure | Runexa",
 
     description:
-      "Enterprise AI security, encryption, infrastructure safeguards, and AI platform protections from Runexa.",
+      "Learn about Runexa security practices, encryption, infrastructure safeguards, access controls, payment security, responsible uploads, and AI platform protections.",
 
     images: ["/og-image.png"],
   },
@@ -89,7 +91,7 @@ export default function SecurityPage() {
             name: "Runexa Security",
 
             description:
-              "Security practices and infrastructure protections for Runexa AI systems and enterprise AI workflows.",
+              "Security practices, responsible upload guidance, and infrastructure protections for Runexa AI systems and enterprise AI workflows.",
 
             url: "https://runexa.ai/security",
 
