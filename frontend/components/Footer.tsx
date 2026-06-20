@@ -143,6 +143,16 @@ export default function Footer() {
   const financeDemoLabel =
     financeDemoLabels[locale] || financeDemoLabels.en;
 
+
+  const legalDemoLabels: Record<Locale, string> = {
+    en: "Legal Agent Demo",
+    fr: "Démo Agent Juridique",
+    ar: "عرض الوكيل القانوني",
+  };
+
+  const legalDemoLabel =
+    legalDemoLabels[locale] || legalDemoLabels.en;
+
   const aboutPageLabels: Record<Locale, string> = {
     en: "About Runexa",
     fr: "À propos de Runexa",
@@ -266,6 +276,14 @@ export default function Footer() {
                 className="block hover:text-white transition"
               >
                 {financeDemoLabel}
+              </Link>
+
+
+              <Link
+                href={localizedHref("/demo/legal-agent")}
+                className="block hover:text-white transition"
+              >
+                {legalDemoLabel}
               </Link>
 
               <Link
