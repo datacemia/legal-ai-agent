@@ -126,6 +126,30 @@ export default function Footer() {
 
   const legal = legalLabels[locale] || legalLabels.en;
 
+  const demoLabels: Record<Locale, string> = {
+    en: "Study Agent Demo",
+    fr: "Démo Agent d’Étude",
+    ar: "عرض وكيل الدراسة",
+  };
+
+  const demoLabel = demoLabels[locale] || demoLabels.en;
+
+  const localizedHref = (href: string) => {
+    if (pathname === "/en" || pathname?.startsWith("/en/")) {
+      return `/en${href}`;
+    }
+
+    if (pathname === "/fr" || pathname?.startsWith("/fr/")) {
+      return `/fr${href}`;
+    }
+
+    if (pathname === "/ar" || pathname?.startsWith("/ar/")) {
+      return `/ar${href}`;
+    }
+
+    return href;
+  };
+
   return (
     <footer
       dir={locale === "ar" ? "rtl" : "ltr"}
@@ -211,6 +235,13 @@ export default function Footer() {
                 className="block hover:text-white transition"
               >
                 {t.blog}
+              </Link>
+
+              <Link
+                href={localizedHref("/demo/study-agent")}
+                className="block hover:text-white transition"
+              >
+                {demoLabel}
               </Link>
 
               <Link

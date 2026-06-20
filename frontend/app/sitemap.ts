@@ -40,6 +40,11 @@ const routes = [
   "/fr/blog",
   "/ar/blog",
 
+  "/demo/study-agent",
+  "/en/demo/study-agent",
+  "/fr/demo/study-agent",
+  "/ar/demo/study-agent",
+
   "/en/blog/enterprise-ai-workflows",
   "/fr/blog/enterprise-ai-workflows",
   "/ar/blog/enterprise-ai-workflows",
