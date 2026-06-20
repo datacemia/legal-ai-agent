@@ -7,13 +7,15 @@ export const metadata: Metadata = {
   title: "عن Runexa | قصة المؤسس ووكلاء الذكاء الاصطناعي المتخصصون",
 
   description:
-    "تعرّف على سبب إنشاء Dr. Rachid Ejjami لشركة Runexa Systems LLC وكيف ألهمت التحديات الواقعية إنشاء Study Agent وLegal Agent وFinance Coach وBusiness Decision Agent.",
+    "تعرّف على سبب إنشاء الدكتور رشيد الجامعي لشركة Runexa Systems LLC وكيف ألهمت التحديات الواقعية تطوير Study Agent وLegal Agent وFinance Coach وBusiness Decision Agent.",
 
   keywords: [
     "Runexa",
     "Runexa Systems LLC",
     "الدكتور رشيد الجامعي",
+    "د. رشيد الجامعي",
     "تم الإنشاء بواسطة الدكتور رشيد الجامعي",
+    "مؤسس Runexa",
     "وكلاء الذكاء الاصطناعي",
     "وكلاء ذكاء اصطناعي متخصصون",
     "مساحة عمل الذكاء الاصطناعي",
@@ -39,7 +41,7 @@ export const metadata: Metadata = {
     title: "عن Runexa | قصة المؤسس ووكلاء الذكاء الاصطناعي المتخصصون",
 
     description:
-      "تعرّف على سبب إنشاء Dr. Rachid Ejjami لشركة Runexa Systems LLC وكيف ألهمت التحديات الواقعية إنشاء Study Agent وLegal Agent وFinance Coach وBusiness Decision Agent.",
+      "تعرّف على سبب إنشاء الدكتور رشيد الجامعي لشركة Runexa Systems LLC وكيف ألهمت التحديات الواقعية تطوير Study Agent وLegal Agent وFinance Coach وBusiness Decision Agent.",
 
     url: "https://runexa.ai/ar/about",
 
@@ -67,7 +69,7 @@ export const metadata: Metadata = {
     title: "عن Runexa | قصة المؤسس ووكلاء الذكاء الاصطناعي المتخصصون",
 
     description:
-      "تعرّف على سبب إنشاء Dr. Rachid Ejjami لشركة Runexa Systems LLC وكيف ألهمت التحديات الواقعية إنشاء Study Agent وLegal Agent وFinance Coach وBusiness Decision Agent.",
+      "تعرّف على سبب إنشاء الدكتور رشيد الجامعي لشركة Runexa Systems LLC وكيف ألهمت التحديات الواقعية تطوير Study Agent وLegal Agent وFinance Coach وBusiness Decision Agent.",
 
     images: ["/og-image.png"],
   },
@@ -95,7 +97,7 @@ export default function AboutPage() {
               name: "عن Runexa | قصة المؤسس ووكلاء الذكاء الاصطناعي المتخصصون",
 
               description:
-                "تعرّف على سبب إنشاء Dr. Rachid Ejjami لشركة Runexa Systems LLC وكيف ألهمت التحديات الواقعية إنشاء Study Agent وLegal Agent وFinance Coach وBusiness Decision Agent.",
+                "تعرّف على سبب إنشاء الدكتور رشيد الجامعي لشركة Runexa Systems LLC وكيف ألهمت التحديات الواقعية تطوير Study Agent وLegal Agent وFinance Coach وBusiness Decision Agent.",
 
               url: "https://runexa.ai/ar/about",
 
@@ -118,8 +120,9 @@ export default function AboutPage() {
 
               founder: {
                 "@type": "Person",
-                name: "Dr. Rachid Ejjami",
-                jobTitle: "Founder and Managing Member",
+                name: "الدكتور رشيد الجامعي",
+                alternateName: "Dr. Rachid Ejjami",
+                jobTitle: "المؤسس والعضو المدير",
               },
 
               address: {
@@ -132,7 +135,7 @@ export default function AboutPage() {
               },
 
               description:
-                "Runexa Systems LLC builds specialized AI agents for legal document analysis, learning support, personal finance coaching, business decision support, and responsible AI workflows.",
+                "شركة Runexa Systems LLC تطور وكلاء ذكاء اصطناعي متخصصين لتحليل المستندات القانونية، ودعم التعلم، والإرشاد المالي الشخصي، ودعم اتخاذ القرارات التجارية، وتطبيقات الذكاء الاصطناعي المسؤول.",
 
               knowsAbout: [
                 "Artificial Intelligence",
