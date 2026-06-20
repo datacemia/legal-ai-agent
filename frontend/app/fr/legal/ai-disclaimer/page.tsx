@@ -9,17 +9,20 @@ export const metadata: Metadata = {
   title: "Avertissement IA et transparence | Runexa",
 
   description:
-    "Consultez l’avertissement IA et les informations de transparence de Runexa Systems concernant les résultats générés par IA, les limites, la revue humaine et l’usage IA en entreprise.",
+    "Consultez l’avertissement et les informations de transparence IA de Runexa Systems concernant les résultats générés par l’IA, les limitations, les exigences de vérification humaine, l’absence de conseil professionnel et l’usage responsable de l’IA.",
 
-  keywords: [
+ keywords: [
     "avertissement IA",
-    "transparence IA",
-    "limites IA",
+    "transparence de l’IA",
+    "limites de l’IA",
     "conformité IA",
-    "avertissement IA entreprise",
-    "gouvernance IA",
-    "divulgation risques IA",
-    "politique IA Runexa",
+    "avertissement IA pour entreprises",
+    "gouvernance de l’IA",
+    "divulgation des risques liés à l’IA",
+    "politique IA de Runexa",
+    "utilisation responsable de l’IA",
+    "conseils non professionnels",
+    "validation humaine des résultats IA",
   ],
 
   alternates: {
@@ -36,7 +39,7 @@ export const metadata: Metadata = {
     title: "Avertissement IA et transparence | Runexa",
 
     description:
-      "Consultez la transparence IA, les limites et les exigences de revue humaine pour les services IA et plateformes entreprise Runexa Systems.",
+      "Consultez l’avertissement et les informations de transparence IA de Runexa Systems concernant les résultats générés par l’IA, les limitations, les exigences de vérification humaine, l’absence de conseil professionnel et l’usage responsable de l’IA.",
 
     url: "https://runexa.ai/fr/legal/ai-disclaimer",
 
@@ -64,7 +67,7 @@ export const metadata: Metadata = {
     title: "Avertissement IA et transparence | Runexa",
 
     description:
-      "Consultez les limites IA, notices de transparence et exigences de revue humaine pour les systèmes IA Runexa.",
+      "Consultez l’avertissement et les informations de transparence IA de Runexa Systems concernant les résultats générés par l’IA, les limitations, les exigences de vérification humaine, l’absence de conseil professionnel et l’usage responsable de l’IA.",
 
     images: ["/og-image.png"],
   },
@@ -88,10 +91,10 @@ export default function AIDisclaimerPage() {
 
             "@type": "WebPage",
 
-            name: "Avertissement IA et transparence Runexa",
+            name: "Runexa AI Disclaimer & Transparency",
 
             description:
-              "Avertissement IA et informations de transparence régissant l’usage des systèmes IA Runexa, plateformes entreprise, API et services intelligents.",
+              "Informations d’avertissement et de transparence IA couvrant les résultats générés par l’IA, les limitations, les exigences de vérification humaine, l’absence de conseil professionnel et l’usage responsable de l’IA.",
 
             url: "https://runexa.ai/fr/legal/ai-disclaimer",
 

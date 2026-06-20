@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "AI Disclaimer & Transparency | Runexa",
 
   description:
-    "Review Runexa Systems AI disclaimer and transparency information regarding AI-generated outputs, limitations, human review requirements, and enterprise AI usage.",
+    "Review Runexa Systems AI disclaimer and transparency information regarding AI-generated outputs, limitations, human review requirements, non-professional advice, and responsible AI usage.",
 
   keywords: [
     "AI disclaimer",
@@ -20,6 +20,9 @@ export const metadata: Metadata = {
     "AI governance",
     "AI risk disclosure",
     "Runexa AI policy",
+    "responsible AI usage",
+    "non-professional advice",
+    "human review AI",
   ],
 
   alternates: {
@@ -36,7 +39,7 @@ export const metadata: Metadata = {
     title: "AI Disclaimer & Transparency | Runexa",
 
     description:
-      "Review AI transparency, limitations, and human review requirements for Runexa Systems AI services and enterprise platforms.",
+      "Review Runexa Systems AI disclaimer and transparency information regarding AI-generated outputs, limitations, human review requirements, non-professional advice, and responsible AI usage.",
 
     url: "https://runexa.ai/legal/ai-disclaimer",
 
@@ -64,7 +67,7 @@ export const metadata: Metadata = {
     title: "AI Disclaimer & Transparency | Runexa",
 
     description:
-      "Review AI limitations, transparency notices, and human review requirements for Runexa AI systems.",
+      "Review Runexa Systems AI disclaimer and transparency information regarding AI-generated outputs, limitations, human review requirements, non-professional advice, and responsible AI usage.",
 
     images: ["/og-image.png"],
   },
@@ -91,7 +94,7 @@ export default function AIDisclaimerPage() {
             name: "Runexa AI Disclaimer & Transparency",
 
             description:
-              "AI disclaimer and transparency information governing the use of Runexa AI systems, enterprise platforms, APIs, and intelligent services.",
+              "AI disclaimer and transparency information covering AI-generated outputs, limitations, human review requirements, non-professional advice, and responsible AI usage.",
 
             url: "https://runexa.ai/legal/ai-disclaimer",
 
