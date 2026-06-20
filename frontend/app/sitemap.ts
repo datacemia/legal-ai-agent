@@ -29,6 +29,11 @@ const routes = [
   "/fr/study-ai",
   "/ar/study-ai",
 
+  "/demo/business-agent",
+  "/en/demo/business-agent",
+  "/fr/demo/business-agent",
+  "/ar/demo/business-agent",
+
   "/demo/legal-agent",
   "/en/demo/legal-agent",
   "/fr/demo/legal-agent",
