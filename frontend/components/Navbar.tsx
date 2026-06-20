@@ -145,6 +145,29 @@ export default function Navbar() {
       ? "المؤسسات"
       : "Enterprise";
 
+  const aboutLabel =
+    locale === "fr"
+      ? "À propos"
+      : locale === "ar"
+      ? "عن Runexa"
+      : "About";
+
+  const localizedHref = (href: string) => {
+    if (pathname === "/en" || pathname?.startsWith("/en/")) {
+      return `/en${href}`;
+    }
+
+    if (pathname === "/fr" || pathname?.startsWith("/fr/")) {
+      return `/fr${href}`;
+    }
+
+    if (pathname === "/ar" || pathname?.startsWith("/ar/")) {
+      return `/ar${href}`;
+    }
+
+    return href;
+  };
+
 
   const isAdmin = role === "admin";
   const isEnterpriseAdmin = role === "enterprise_admin";
@@ -255,10 +278,17 @@ export default function Navbar() {
 
           {/* PRICING */}
           <Link
-            href="/pricing"
+            href={localizedHref("/pricing")}
             className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
           >
             {t.pricing || "Pricing"}
+          </Link>
+
+          <Link
+            href={localizedHref("/about")}
+            className="text-sm font-medium text-slate-600 transition hover:text-slate-900"
+          >
+            {aboutLabel}
           </Link>
 
           {!isLogged && (
@@ -391,11 +421,19 @@ export default function Navbar() {
             </Link>
 
             <Link
-              href="/pricing"
+              href={localizedHref("/pricing")}
               onClick={closeMobileMenu}
               className={mobileLinkClass}
             >
               {t.pricing || "Pricing"}
+            </Link>
+
+            <Link
+              href={localizedHref("/about")}
+              onClick={closeMobileMenu}
+              className={mobileLinkClass}
+            >
+              {aboutLabel}
             </Link>
 
             {!isLogged && (

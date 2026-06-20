@@ -134,6 +134,14 @@ export default function Footer() {
 
   const demoLabel = demoLabels[locale] || demoLabels.en;
 
+  const aboutPageLabels: Record<Locale, string> = {
+    en: "About Runexa",
+    fr: "À propos de Runexa",
+    ar: "عن Runexa",
+  };
+
+  const aboutPageLabel = aboutPageLabels[locale] || aboutPageLabels.en;
+
   const localizedHref = (href: string) => {
     if (pathname === "/en" || pathname?.startsWith("/en/")) {
       return `/en${href}`;
@@ -316,6 +324,13 @@ export default function Footer() {
             <p className="mt-4 text-sm font-medium text-blue-400">
               {t.builtBy}
             </p>
+
+            <Link
+              href={localizedHref("/about")}
+              className="mt-5 inline-block text-sm font-semibold text-blue-400 hover:text-blue-300 transition"
+            >
+              {aboutPageLabel}
+            </Link>
           </div>
         </div>
 
