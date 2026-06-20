@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Privacy Policy | Runexa",
 
   description:
-    "Privacy Policy explaining how Runexa Systems LLC collects, uses, stores, protects, processes, transfers, and safeguards personal information and uploaded content for international users.",
+    "Privacy Policy explaining how Runexa Systems LLC collects, uses, stores, protects, processes, transfers, and safeguards personal information, uploaded content, and minors’ privacy for international users.",
 
   keywords: [
     "privacy policy",
@@ -23,6 +23,8 @@ export const metadata: Metadata = {
     "automated processing",
     "GDPR",
     "UK GDPR",
+    "children privacy",
+    "minors privacy",
   ],
 
   alternates: {
@@ -39,7 +41,7 @@ export const metadata: Metadata = {
     title: "Privacy Policy | Runexa",
 
     description:
-      "Privacy Policy explaining how Runexa Systems LLC collects, uses, stores, protects, processes, transfers, and safeguards personal information and uploaded content for international users.",
+      "Privacy Policy explaining how Runexa Systems LLC collects, uses, stores, protects, processes, transfers, and safeguards personal information, uploaded content, and minors’ privacy for international users.",
 
     url: "https://runexa.ai/en/privacy",
 
@@ -67,7 +69,7 @@ export const metadata: Metadata = {
     title: "Privacy Policy | Runexa",
 
     description:
-      "Privacy Policy explaining how Runexa Systems LLC collects, uses, stores, protects, processes, transfers, and safeguards personal information and uploaded content for international users.",
+      "Privacy Policy explaining how Runexa Systems LLC collects, uses, stores, protects, processes, transfers, and safeguards personal information, uploaded content, and minors’ privacy for international users.",
 
     images: ["/og-image.png"],
   },
@@ -94,7 +96,7 @@ export default function PrivacyPage() {
             name: "Runexa Privacy Policy",
 
             description:
-              "Privacy Policy explaining how Runexa Systems LLC collects, uses, stores, protects, processes, transfers, and safeguards personal information and uploaded content for international users.",
+              "Privacy Policy explaining how Runexa Systems LLC collects, uses, stores, protects, processes, transfers, and safeguards personal information, uploaded content, and minors’ privacy for international users.",
 
             url: "https://runexa.ai/en/privacy",
 

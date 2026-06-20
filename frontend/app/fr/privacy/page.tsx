@@ -7,24 +7,23 @@ export const metadata: Metadata = {
   title: "Politique de confidentialité | Runexa",
 
   description:
-    "Politique de confidentialité expliquant comment Runexa Systems LLC collecte, utilise, stocke, protège, traite, transfère et sécurise les informations personnelles et contenus téléchargés pour les utilisateurs internationaux.",
+    "Politique de confidentialité expliquant comment Runexa Systems LLC collecte, utilise, stocke, protège, traite, transfère et sécurise les informations personnelles, les contenus téléchargés et la confidentialité des mineurs pour les utilisateurs internationaux.",
 
   keywords: [
-    "privacy policy",
-    "AI privacy",
-    "Runexa privacy",
-    "AI data processing",
-    "enterprise AI privacy",
-    "AI platform privacy",
-    "AI uploads privacy",
-    "AI compliance",
-    "AI model training",
-    "international data transfers",
-    "automated processing",
-    "GDPR",
-    "UK GDPR",
+    "politique de confidentialité",
+    "confidentialité IA",
+    "confidentialité Runexa",
+    "traitement des données IA",
+    "confidentialité IA pour entreprises",
+    "confidentialité plateforme IA",
+    "confidentialité des fichiers téléversés IA",
+    "conformité IA",
+    "entraînement des modèles IA",
+    "transferts internationaux de données",
+    "traitement automatisé",
+    "RGPD",
+    "RGPD Royaume-Uni",
   ],
-
   alternates: {
     canonical: "https://runexa.ai/fr/privacy",
     languages: {
@@ -39,7 +38,7 @@ export const metadata: Metadata = {
     title: "Politique de confidentialité | Runexa",
 
     description:
-      "Politique de confidentialité expliquant comment Runexa Systems LLC collecte, utilise, stocke, protège, traite, transfère et sécurise les informations personnelles et contenus téléchargés pour les utilisateurs internationaux.",
+      "Politique de confidentialité expliquant comment Runexa Systems LLC collecte, utilise, stocke, protège, traite, transfère et sécurise les informations personnelles, les contenus téléchargés et la confidentialité des mineurs pour les utilisateurs internationaux.",
 
     url: "https://runexa.ai/fr/privacy",
 
@@ -67,7 +66,7 @@ export const metadata: Metadata = {
     title: "Politique de confidentialité | Runexa",
 
     description:
-      "Politique de confidentialité expliquant comment Runexa Systems LLC collecte, utilise, stocke, protège, traite, transfère et sécurise les informations personnelles et contenus téléchargés pour les utilisateurs internationaux.",
+      "Politique de confidentialité expliquant comment Runexa Systems LLC collecte, utilise, stocke, protège, traite, transfère et sécurise les informations personnelles, les contenus téléchargés et la confidentialité des mineurs pour les utilisateurs internationaux.",
 
     images: ["/og-image.png"],
   },
@@ -94,7 +93,7 @@ export default function PrivacyPage() {
             name: "Runexa Privacy Policy",
 
             description:
-              "Politique de confidentialité expliquant comment Runexa Systems LLC collecte, utilise, stocke, protège, traite, transfère et sécurise les informations personnelles et contenus téléchargés pour les utilisateurs internationaux.",
+              "Politique de confidentialité expliquant comment Runexa Systems LLC collecte, utilise, stocke, protège, traite, transfère et sécurise les informations personnelles, les contenus téléchargés et la confidentialité des mineurs pour les utilisateurs internationaux.",
 
             url: "https://runexa.ai/fr/privacy",
 

@@ -27,6 +27,46 @@ const getDefaultLocale = (): Locale => {
 };
 
 
+
+const privacyChildrenAndMinorsText = {
+  en: {
+    title: "12. Children and Minors",
+    text1:
+      "The Services are not intended for children under the age of 13.",
+    text2:
+      "Individuals between the ages of 13 and 17 may use the Services only with the consent and supervision of a parent or legal guardian. By allowing a minor to use the Services, the parent or legal guardian represents that they have reviewed and accepted these Terms and the Privacy Policy on the minor’s behalf.",
+    text3:
+      "We do not knowingly collect personal information from children under 13. If we become aware that we have collected personal information from a child under 13 without appropriate parental consent, we will take reasonable steps to delete such information promptly.",
+    text4:
+      "Parents or legal guardians who believe that a child has provided us with personal information in violation of this section may contact us to request its deletion.",
+  },
+
+  fr: {
+    title: "12. Enfants et mineurs",
+    text1:
+      "Les Services ne sont pas destinés aux enfants de moins de 13 ans.",
+    text2:
+      "Les personnes âgées de 13 à 17 ans peuvent utiliser les Services uniquement avec le consentement et la supervision d’un parent ou tuteur légal. En autorisant un mineur à utiliser les Services, le parent ou tuteur légal déclare avoir examiné et accepté les présentes Conditions et la Politique de confidentialité au nom du mineur.",
+    text3:
+      "Nous ne collectons pas sciemment d’informations personnelles auprès d’enfants de moins de 13 ans. Si nous apprenons que nous avons collecté des informations personnelles auprès d’un enfant de moins de 13 ans sans consentement parental approprié, nous prendrons des mesures raisonnables pour supprimer rapidement ces informations.",
+    text4:
+      "Les parents ou tuteurs légaux qui pensent qu’un enfant nous a fourni des informations personnelles en violation de cette section peuvent nous contacter pour demander leur suppression.",
+  },
+
+  ar: {
+    title: "12. الأطفال والقاصرون",
+    text1:
+      "الخدمات غير مخصصة للأطفال دون سن 13 عاماً.",
+    text2:
+      "يمكن للأفراد الذين تتراوح أعمارهم بين 13 و17 عاماً استخدام الخدمات فقط بموافقة وإشراف أحد الوالدين أو الوصي القانوني. وبالسماح للقاصر باستخدام الخدمات، يقر الوالد أو الوصي القانوني بأنه قد راجع وقبل هذه الشروط وسياسة الخصوصية نيابة عن القاصر.",
+    text3:
+      "نحن لا نجمع عن علم معلومات شخصية من الأطفال دون سن 13 عاماً. إذا علمنا أننا جمعنا معلومات شخصية من طفل دون سن 13 عاماً دون موافقة أبوية مناسبة، فسنتخذ خطوات معقولة لحذف هذه المعلومات بسرعة.",
+    text4:
+      "يمكن للوالدين أو الأوصياء القانونيين الذين يعتقدون أن طفلاً قدم لنا معلومات شخصية بالمخالفة لهذا القسم التواصل معنا لطلب حذفها.",
+  },
+};
+
+
 const privacyGovernanceText = {
   en: {
     aiTrainingTitle: "15. AI Model Training",
@@ -117,6 +157,7 @@ export default function PrivacyClient({
   }, [resolvedInitialLocale, lockInitialLocale]);
 
   const t = getTranslations(locale) as PrivacyTranslations;
+  const c = privacyChildrenAndMinorsText[locale] || privacyChildrenAndMinorsText.en;
   const g = privacyGovernanceText[locale] || privacyGovernanceText.en;
 
   return (
@@ -317,12 +358,23 @@ export default function PrivacyClient({
 
         <section>
           <h2 className="text-xl font-semibold">
-            {t.privacyChildrenTitle || "12. Children"}
+            {c.title}
           </h2>
 
           <p className="mt-2 text-slate-600 break-words whitespace-normal">
-            {t.privacyChildrenText ||
-              "The services are not intended for users under 18 years old. We do not knowingly collect personal information from children under 18."}
+            {c.text1}
+          </p>
+
+          <p className="mt-2 text-slate-600 break-words whitespace-normal">
+            {c.text2}
+          </p>
+
+          <p className="mt-2 text-slate-600 break-words whitespace-normal">
+            {c.text3}
+          </p>
+
+          <p className="mt-2 text-slate-600 break-words whitespace-normal">
+            {c.text4}
           </p>
         </section>
 

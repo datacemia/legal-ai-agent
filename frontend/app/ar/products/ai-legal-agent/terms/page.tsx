@@ -9,19 +9,20 @@ export const metadata: Metadata = {
   description:
     "شروط خاصة بالمنتج وقيود وإخلاءات مسؤولية ومتطلبات مراجعة بشرية وإشعارات معالجة البيانات ومعلومات المسؤولية لوكلاء Runexa للذكاء الاصطناعي.",
 
-  keywords: [
-    "AI product terms",
-    "AI legal disclaimer",
-    "AI finance disclaimer",
-    "AI study disclaimer",
-    "AI business disclaimer",
-    "Runexa terms",
-    "AI liability limitation",
-    "AI human review",
-    "AI transparency",
-    "AI data processing",
-    "enterprise AI compliance",
-  ],
+ keywords: [
+  "conditions d’utilisation de l’IA",
+  "clause de non-responsabilité IA",
+  "clause de non-responsabilité juridique IA",
+  "clause de non-responsabilité financière IA",
+  "clause de non-responsabilité pour les études IA",
+  "clause de non-responsabilité commerciale IA",
+  "conditions Runexa",
+  "limitation de responsabilité IA",
+  "validation humaine de l’IA",
+  "transparence de l’IA",
+  "traitement des données IA",
+  "conformité IA pour entreprises",
+],
 
   alternates: {
     canonical: "https://runexa.ai/ar/products/ai-legal-agent/terms",

@@ -23,6 +23,8 @@ export const metadata: Metadata = {
     "automated processing",
     "GDPR",
     "UK GDPR",
+    "children privacy",
+    "minors privacy",
   ],
 
   alternates: {
@@ -67,7 +69,7 @@ export const metadata: Metadata = {
     title: "Privacy Policy | Runexa",
 
     description:
-      "Privacy and data processing disclosures for Runexa AI services, APIs, uploads, enterprise workflows, international users, and AI-assisted processing.",
+      "Privacy and data processing disclosures for Runexa AI services, APIs, uploads, enterprise workflows, international users, minors, and AI-assisted processing.",
 
     images: ["/og-image.png"],
   },
@@ -94,7 +96,7 @@ export default function PrivacyPage() {
             name: "Runexa Privacy Policy",
 
             description:
-              "Privacy and data processing disclosures for Runexa AI services, APIs, uploads, enterprise workflows, international users, AI-assisted processing, model training, and data transfers.",
+              "Privacy and data processing disclosures for Runexa AI services, APIs, uploads, enterprise workflows, international users, minors, AI-assisted processing, model training, and data transfers.",
 
             url: "https://runexa.ai/privacy",
 
