@@ -26,6 +26,28 @@ const getDefaultLocale = (): Locale => {
   return normalizeLocale(defaultLocale, "en");
 };
 
+const refundConsumerRightsText: Record<Locale, string> = {
+  en:
+    "Consumer protection rights, cancellation rights, cooling-off periods, and refund rights may vary by jurisdiction and apply only where required by applicable law.",
+
+  fr:
+    "Les droits de protection des consommateurs, droits d’annulation, délais de rétractation et droits au remboursement peuvent varier selon la juridiction et s’appliquent uniquement lorsque la loi applicable l’exige.",
+
+  ar:
+    "قد تختلف حقوق حماية المستهلك وحقوق الإلغاء وفترات التراجع وحقوق الاسترداد حسب الولاية القضائية، ولا تنطبق إلا عندما يقتضي القانون المعمول به ذلك.",
+};
+
+const refundSubscriptionNoticeText: Record<Locale, string> = {
+  en:
+    "Users are responsible for canceling subscriptions before renewal if they do not want to continue the service.",
+
+  fr:
+    "Les utilisateurs sont responsables de l’annulation de leur abonnement avant le renouvellement s’ils ne souhaitent pas continuer le service.",
+
+  ar:
+    "يتحمل المستخدمون مسؤولية إلغاء الاشتراكات قبل التجديد إذا كانوا لا يرغبون في مواصلة الخدمة.",
+};
+
 export default function RefundPolicyClient({
   initialLocale,
   lockInitialLocale = false,
@@ -105,6 +127,10 @@ export default function RefundPolicyClient({
             {t.refundSubscriptionText2 ||
               "Users may cancel subscriptions at any time, but fees already paid are generally non-refundable."}
           </p>
+
+          <p className="mt-2 text-slate-600">
+            {refundSubscriptionNoticeText[locale]}
+          </p>
         </section>
 
         <section>
@@ -148,6 +174,10 @@ export default function RefundPolicyClient({
           <p className="mt-2 text-slate-600">
             {t.refundExceptionsText ||
               "Runexa Systems LLC may, at its sole discretion, provide refunds, credits, or account adjustments in exceptional situations."}
+          </p>
+
+          <p className="mt-2 text-slate-600">
+            {refundConsumerRightsText[locale]}
           </p>
         </section>
 

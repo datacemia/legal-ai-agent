@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Refund Policy | Runexa",
 
   description:
-    "Refund policy for Runexa Systems LLC covering AI credits, subscriptions, billing disputes, chargebacks, and enterprise services.",
+    "Refund policy for Runexa Systems LLC covering AI credits, subscriptions, billing disputes, chargebacks, consumer rights where applicable, and enterprise services.",
 
   keywords: [
     "refund policy",
@@ -18,6 +18,9 @@ export const metadata: Metadata = {
     "SaaS refund policy",
     "AI billing disputes",
     "subscription cancellation",
+    "consumer protection",
+    "cooling-off rights",
+    "billing transparency",
   ],
 
   alternates: {
@@ -34,7 +37,7 @@ export const metadata: Metadata = {
     title: "Refund Policy | Runexa",
 
     description:
-      "Refund and billing policy for Runexa AI services, subscriptions, credits, enterprise plans, and intelligent workflows.",
+      "Refund policy for Runexa Systems LLC covering AI credits, subscriptions, billing disputes, chargebacks, consumer rights where applicable, and enterprise services.",
 
     url: "https://runexa.ai/legal/refunds",
 
@@ -62,7 +65,7 @@ export const metadata: Metadata = {
     title: "Refund Policy | Runexa",
 
     description:
-      "Review refund eligibility, billing terms, subscriptions, AI credits, and enterprise billing policies for Runexa Systems LLC.",
+      "Refund policy for Runexa Systems LLC covering AI credits, subscriptions, billing disputes, chargebacks, consumer rights where applicable, and enterprise services.",
 
     images: ["/og-image.png"],
   },
@@ -89,7 +92,7 @@ export default function RefundPolicyPage() {
             name: "Runexa Refund Policy",
 
             description:
-              "Refund and billing policy for Runexa AI services, subscriptions, AI credits, enterprise workflows, and intelligent platforms.",
+              "Refund and billing policy for Runexa AI services, subscriptions, AI credits, enterprise workflows, billing disputes, cancellations, and consumer protection rights where applicable.",
 
             url: "https://runexa.ai/legal/refunds",
 
