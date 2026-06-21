@@ -9,32 +9,33 @@ export const metadata: Metadata = {
     "Découvrez une démonstration complète de l’Agent Juridique Runexa. Analysez des contrats, détectez les clauses à risque, extrayez les obligations, résumez les documents juridiques et examinez les documents de conformité avec l’IA.",
 
   keywords: [
-  "Runexa Legal Agent",
-  "démo IA juridique",
-  "analyse de contrats par IA",
-  "révision de contrats par IA",
-  "analyse de documents juridiques",
-  "détection des risques contractuels",
-  "assistant juridique IA",
-  "IA pour les processus juridiques",
-  "analyse juridique automatisée",
-  "résumé de contrats par IA",
-  "identification des clauses importantes",
-  "évaluation des risques contractuels",
-  "vérification de contrats",
-  "lecture intelligente de contrats",
-  "analyse de documents légaux",
-  "conformité contractuelle",
-  "outil IA pour juristes",
-  "assistant d’analyse juridique",
-  "workflow juridique intelligent",
-  "revue de documents par IA",
-  "analyse de conditions contractuelles",
-  "détection de clauses à risque",
-  "IA pour cabinets juridiques",
-  "gestion des contrats",
-  "intelligence artificielle juridique",
- ],
+    "Runexa Legal Agent",
+    "démo IA juridique",
+    "analyse de contrats par IA",
+    "révision de contrats par IA",
+    "analyse de documents juridiques",
+    "détection des risques contractuels",
+    "assistant juridique IA",
+    "IA pour les processus juridiques",
+    "analyse juridique automatisée",
+    "résumé de contrats par IA",
+    "identification des clauses importantes",
+    "évaluation des risques contractuels",
+    "vérification de contrats",
+    "lecture intelligente de contrats",
+    "analyse de documents légaux",
+    "conformité contractuelle",
+    "outil IA pour juristes",
+    "assistant d’analyse juridique",
+    "workflow juridique intelligent",
+    "revue de documents par IA",
+    "analyse de conditions contractuelles",
+    "détection de clauses à risque",
+    "IA pour cabinets juridiques",
+    "gestion des contrats",
+    "intelligence artificielle juridique",
+  ],
+
   alternates: {
     canonical: "https://runexa.ai/fr/demo/legal-agent",
     languages: {
@@ -47,14 +48,10 @@ export const metadata: Metadata = {
 
   openGraph: {
     title: "Démo Agent Juridique Runexa",
-
     description:
       "Découvrez une démonstration complète de l’Agent Juridique Runexa. Analysez des contrats, détectez les clauses à risque, extrayez les obligations, résumez les documents juridiques et examinez les documents de conformité avec l’IA.",
-
     url: "https://runexa.ai/fr/demo/legal-agent",
-
     siteName: "Runexa Systems",
-
     images: [
       {
         url: "/og-image.png",
@@ -63,22 +60,16 @@ export const metadata: Metadata = {
         alt: "Runexa Legal Agent Demo",
       },
     ],
-
     locale: "fr_FR",
-
     alternateLocale: ["en_US", "ar_AR"],
-
     type: "website",
   },
 
   twitter: {
     card: "summary_large_image",
-
     title: "Démo Agent Juridique Runexa",
-
     description:
       "Découvrez une démonstration complète de l’Agent Juridique Runexa. Analysez des contrats, détectez les clauses à risque, extrayez les obligations, résumez les documents juridiques et examinez les documents de conformité avec l’IA.",
-
     images: ["/og-image.png"],
   },
 
@@ -90,22 +81,14 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-
   "@type": "SoftwareApplication",
-
   name: "Agent Juridique Runexa",
-
   applicationCategory: "BusinessApplication",
-
   operatingSystem: "Web",
-
   url: "https://runexa.ai/fr/demo/legal-agent",
-
   inLanguage: "fr",
-
   description:
     "Découvrez une démonstration complète de l’Agent Juridique Runexa. Analysez des contrats, détectez les clauses à risque, extrayez les obligations, résumez les documents juridiques et examinez les documents de conformité avec l’IA.",
-
   publisher: {
     "@type": "Organization",
     name: "Runexa Systems LLC",
@@ -115,10 +98,7 @@ const jsonLd = {
 
 export default function LegalAgentDemoPage() {
   return (
-    <main
-      dir="ltr"
-      className="min-h-screen bg-slate-50 px-6 py-16"
-    >
+    <main dir="ltr" className="min-h-screen bg-slate-50 px-6 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -132,7 +112,10 @@ export default function LegalAgentDemoPage() {
         </h1>
 
         <p className="mt-6 max-w-3xl text-lg text-slate-600">
-          Importez des contrats, accords, politiques et documents juridiques pour générer des résumés IA, détecter les clauses à risque, extraire les obligations, identifier les échéances et obtenir une analyse juridique structurée.
+          Importez des contrats, accords, politiques et documents juridiques
+          pour générer des résumés IA, détecter les clauses à risque, extraire
+          les obligations, identifier les échéances et obtenir une analyse
+          juridique structurée.
         </p>
 
         <div className="mt-10">
@@ -141,12 +124,12 @@ export default function LegalAgentDemoPage() {
             alt="Démo Agent Juridique Runexa"
             width={1440}
             height={5000}
-            priority
-            className="rounded-3xl border border-slate-200 shadow-lg"
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1152px"
+            className="h-auto w-full rounded-3xl border border-slate-200 shadow-lg"
           />
         </div>
 
-        <div className="mt-10 rounded-3xl border bg-white p-8 shadow-sm">
+        <div className="mt-10 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
           <h2 className="text-2xl font-bold text-slate-900">
             Que peut faire l’Agent Juridique ?
           </h2>

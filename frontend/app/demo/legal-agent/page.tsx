@@ -31,14 +31,10 @@ export const metadata: Metadata = {
 
   openGraph: {
     title: "Runexa Legal Agent Demo",
-
     description:
       "See a complete demonstration of the Runexa Legal Agent. Analyze contracts, detect risky clauses, extract obligations, summarize legal documents, and review compliance materials using AI.",
-
     url: "https://runexa.ai/demo/legal-agent",
-
     siteName: "Runexa Systems",
-
     images: [
       {
         url: "/og-image.png",
@@ -47,22 +43,16 @@ export const metadata: Metadata = {
         alt: "Runexa Legal Agent Demo",
       },
     ],
-
     locale: "en_US",
-
     alternateLocale: ["fr_FR", "ar_AR"],
-
     type: "website",
   },
 
   twitter: {
     card: "summary_large_image",
-
     title: "Runexa Legal Agent Demo",
-
     description:
       "See a complete demonstration of the Runexa Legal Agent. Analyze contracts, detect risky clauses, extract obligations, summarize legal documents, and review compliance materials using AI.",
-
     images: ["/og-image.png"],
   },
 
@@ -74,22 +64,14 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-
   "@type": "SoftwareApplication",
-
   name: "Runexa Legal Agent",
-
   applicationCategory: "BusinessApplication",
-
   operatingSystem: "Web",
-
   url: "https://runexa.ai/demo/legal-agent",
-
   inLanguage: "en",
-
   description:
     "See a complete demonstration of the Runexa Legal Agent. Analyze contracts, detect risky clauses, extract obligations, summarize legal documents, and review compliance materials using AI.",
-
   publisher: {
     "@type": "Organization",
     name: "Runexa Systems LLC",
@@ -99,10 +81,7 @@ const jsonLd = {
 
 export default function LegalAgentDemoPage() {
   return (
-    <main
-      dir="ltr"
-      className="min-h-screen bg-slate-50 px-6 py-16"
-    >
+    <main dir="ltr" className="min-h-screen bg-slate-50 px-6 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -116,7 +95,9 @@ export default function LegalAgentDemoPage() {
         </h1>
 
         <p className="mt-6 max-w-3xl text-lg text-slate-600">
-          Upload contracts, agreements, policies, and legal documents to generate AI-powered summaries, risky clause detection, obligation extraction, deadline insights, and structured legal analysis.
+          Upload contracts, agreements, policies, and legal documents to
+          generate AI-powered summaries, risky clause detection, obligation
+          extraction, deadline insights, and structured legal analysis.
         </p>
 
         <div className="mt-10">
@@ -125,12 +106,12 @@ export default function LegalAgentDemoPage() {
             alt="Runexa Legal Agent Demo"
             width={1440}
             height={5000}
-            priority
-            className="rounded-3xl border border-slate-200 shadow-lg"
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1152px"
+            className="h-auto w-full rounded-3xl border border-slate-200 shadow-lg"
           />
         </div>
 
-        <div className="mt-10 rounded-3xl border bg-white p-8 shadow-sm">
+        <div className="mt-10 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
           <h2 className="text-2xl font-bold text-slate-900">
             What can the Legal Agent do?
           </h2>

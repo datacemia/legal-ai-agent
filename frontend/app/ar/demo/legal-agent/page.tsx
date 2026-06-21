@@ -8,33 +8,33 @@ export const metadata: Metadata = {
   description:
     "شاهد عرضًا توضيحيًا كاملًا لوكيل Runexa القانوني. حلّل العقود واكتشف البنود عالية المخاطر واستخرج الالتزامات ولخّص المستندات القانونية وراجع مواد الامتثال باستخدام الذكاء الاصطناعي.",
 
-keywords: [
-  "Runexa Legal Agent",
-  "عرض توضيحي للذكاء الاصطناعي القانوني",
-  "تحليل العقود بالذكاء الاصطناعي",
-  "مراجعة العقود بالذكاء الاصطناعي",
-  "تحليل المستندات القانونية",
-  "اكتشاف المخاطر التعاقدية",
-  "مساعد قانوني بالذكاء الاصطناعي",
-  "الذكاء الاصطناعي لسير العمل القانوني",
-  "التحليل القانوني الآلي",
-  "تلخيص العقود بالذكاء الاصطناعي",
-  "تحديد البنود المهمة",
-  "تقييم المخاطر القانونية",
-  "فحص العقود",
-  "قراءة العقود بذكاء",
-  "تحليل الوثائق القانونية",
-  "الامتثال التعاقدي",
-  "أداة ذكاء اصطناعي للمحامين",
-  "مساعد التحليل القانوني",
-  "سير عمل قانوني ذكي",
-  "مراجعة المستندات بالذكاء الاصطناعي",
-  "تحليل الشروط التعاقدية",
-  "اكتشاف البنود الخطرة",
-  "الذكاء الاصطناعي للمكاتب القانونية",
-  "إدارة العقود",
-  "الذكاء الاصطناعي القانوني",
-],
+  keywords: [
+    "Runexa Legal Agent",
+    "عرض توضيحي للذكاء الاصطناعي القانوني",
+    "تحليل العقود بالذكاء الاصطناعي",
+    "مراجعة العقود بالذكاء الاصطناعي",
+    "تحليل المستندات القانونية",
+    "اكتشاف المخاطر التعاقدية",
+    "مساعد قانوني بالذكاء الاصطناعي",
+    "الذكاء الاصطناعي لسير العمل القانوني",
+    "التحليل القانوني الآلي",
+    "تلخيص العقود بالذكاء الاصطناعي",
+    "تحديد البنود المهمة",
+    "تقييم المخاطر القانونية",
+    "فحص العقود",
+    "قراءة العقود بذكاء",
+    "تحليل الوثائق القانونية",
+    "الامتثال التعاقدي",
+    "أداة ذكاء اصطناعي للمحامين",
+    "مساعد التحليل القانوني",
+    "سير عمل قانوني ذكي",
+    "مراجعة المستندات بالذكاء الاصطناعي",
+    "تحليل الشروط التعاقدية",
+    "اكتشاف البنود الخطرة",
+    "الذكاء الاصطناعي للمكاتب القانونية",
+    "إدارة العقود",
+    "الذكاء الاصطناعي القانوني",
+  ],
 
   alternates: {
     canonical: "https://runexa.ai/ar/demo/legal-agent",
@@ -48,14 +48,10 @@ keywords: [
 
   openGraph: {
     title: "عرض وكيل Runexa القانوني",
-
     description:
       "شاهد عرضًا توضيحيًا كاملًا لوكيل Runexa القانوني. حلّل العقود واكتشف البنود عالية المخاطر واستخرج الالتزامات ولخّص المستندات القانونية وراجع مواد الامتثال باستخدام الذكاء الاصطناعي.",
-
     url: "https://runexa.ai/ar/demo/legal-agent",
-
     siteName: "Runexa Systems",
-
     images: [
       {
         url: "/og-image.png",
@@ -64,22 +60,16 @@ keywords: [
         alt: "Runexa Legal Agent Demo",
       },
     ],
-
     locale: "ar_AR",
-
     alternateLocale: ["en_US", "fr_FR"],
-
     type: "website",
   },
 
   twitter: {
     card: "summary_large_image",
-
     title: "عرض وكيل Runexa القانوني",
-
     description:
       "شاهد عرضًا توضيحيًا كاملًا لوكيل Runexa القانوني. حلّل العقود واكتشف البنود عالية المخاطر واستخرج الالتزامات ولخّص المستندات القانونية وراجع مواد الامتثال باستخدام الذكاء الاصطناعي.",
-
     images: ["/og-image.png"],
   },
 
@@ -91,22 +81,14 @@ keywords: [
 
 const jsonLd = {
   "@context": "https://schema.org",
-
   "@type": "SoftwareApplication",
-
   name: "وكيل Runexa القانوني",
-
   applicationCategory: "BusinessApplication",
-
   operatingSystem: "Web",
-
   url: "https://runexa.ai/ar/demo/legal-agent",
-
   inLanguage: "ar",
-
   description:
     "شاهد عرضًا توضيحيًا كاملًا لوكيل Runexa القانوني. حلّل العقود واكتشف البنود عالية المخاطر واستخرج الالتزامات ولخّص المستندات القانونية وراجع مواد الامتثال باستخدام الذكاء الاصطناعي.",
-
   publisher: {
     "@type": "Organization",
     name: "Runexa Systems LLC",
@@ -116,10 +98,7 @@ const jsonLd = {
 
 export default function LegalAgentDemoPage() {
   return (
-    <main
-      dir="rtl"
-      className="min-h-screen bg-slate-50 px-6 py-16"
-    >
+    <main dir="rtl" className="min-h-screen bg-slate-50 px-6 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -133,7 +112,9 @@ export default function LegalAgentDemoPage() {
         </h1>
 
         <p className="mt-6 max-w-3xl text-lg text-slate-600">
-          ارفع العقود والاتفاقيات والسياسات والمستندات القانونية لإنشاء ملخصات مدعومة بالذكاء الاصطناعي، واكتشاف البنود عالية المخاطر، واستخراج الالتزامات والمواعيد النهائية، والحصول على تحليل قانوني منظم.
+          ارفع العقود والاتفاقيات والسياسات والمستندات القانونية لإنشاء ملخصات
+          مدعومة بالذكاء الاصطناعي، واكتشاف البنود عالية المخاطر، واستخراج
+          الالتزامات والمواعيد النهائية، والحصول على تحليل قانوني منظم.
         </p>
 
         <div className="mt-10">
@@ -142,12 +123,12 @@ export default function LegalAgentDemoPage() {
             alt="عرض وكيل Runexa القانوني"
             width={1440}
             height={5000}
-            priority
-            className="rounded-3xl border border-slate-200 shadow-lg"
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1152px"
+            className="h-auto w-full rounded-3xl border border-slate-200 shadow-lg"
           />
         </div>
 
-        <div className="mt-10 rounded-3xl border bg-white p-8 shadow-sm">
+        <div className="mt-10 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
           <h2 className="text-2xl font-bold text-slate-900">
             ماذا يمكن أن يفعل الوكيل القانوني؟
           </h2>
