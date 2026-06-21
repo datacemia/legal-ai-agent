@@ -21,6 +21,6 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: "https://runexa.ai/sitemap.xml",
-    host: "https://runexa.ai",
+    
   };
 }
