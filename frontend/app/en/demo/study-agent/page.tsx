@@ -21,12 +21,12 @@ export default function StudyAgentDemoPage() {
             alt="Runexa Study Agent Demo"
             width={1440}
             height={5000}
-            priority
-            className="rounded-3xl border border-slate-200 shadow-lg"
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1152px"
+            className="h-auto w-full rounded-3xl border border-slate-200 shadow-lg"
           />
         </div>
 
-        <div className="mt-10 rounded-3xl border bg-white p-8 shadow-sm">
+        <div className="mt-10 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
           <h2 className="text-2xl font-bold text-slate-900">
             What can the Study Agent do?
           </h2>

@@ -8,7 +8,7 @@ export default function StudyAgentDemoArPage() {
       className="min-h-screen bg-slate-50 px-6 py-16"
     >
       <div className="mx-auto max-w-6xl">
-        <h1 className="text-5xl font-bold">
+        <h1 className="text-5xl font-bold tracking-tight text-slate-900">
           عرض توضيحي لوكيل الدراسة من Runexa
         </h1>
 
@@ -24,15 +24,15 @@ export default function StudyAgentDemoArPage() {
             alt="عرض توضيحي لوكيل الدراسة من Runexa"
             width={1440}
             height={5000}
-            priority
-            className="rounded-3xl border shadow-lg"
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1152px"
+            className="h-auto w-full rounded-3xl border border-slate-200 shadow-lg"
           />
         </div>
 
         <div className="mt-10 text-center">
           <Link
             href="/ar/study"
-            className="inline-flex rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700"
+            className="inline-flex rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
           >
             جرّب وكيل الدراسة
           </Link>
