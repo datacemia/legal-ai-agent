@@ -9,6 +9,7 @@ from slowapi.middleware import SlowAPIMiddleware
 from slowapi.util import get_remote_address
 from slowapi import _rate_limit_exceeded_handler
 from starlette.middleware.sessions import SessionMiddleware
+from fastapi.responses import PlainTextResponse
 
 load_dotenv()
 
@@ -143,7 +144,12 @@ app.include_router(agent0_waitlist_router)
 app.include_router(enterprise_router)
 app.include_router(enterprise_agent_access_router)
 
-
+@app.get("/robots.txt", include_in_schema=False)
+def robots_txt():
+    return PlainTextResponse(
+        "User-agent: *\nDisallow: /\n",
+        media_type="text/plain",
+    )
 @app.get("/")
 @limiter.limit("60/minute")
 def root(request: Request):
