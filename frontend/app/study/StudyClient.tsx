@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { getToken } from "../../lib/auth";
 import { startStripeCheckout } from "../../lib/stripeCheckout";
 import { getSavedLocale, setSavedLocale } from "../../lib/i18n";
+import StudyOutputShowcase from "../../components/StudyOutputShowcase";
 
 type Locale = "en" | "fr" | "ar";
 
@@ -1284,6 +1285,7 @@ const getClientLocale = (
   return normalizeLocale(getSavedLocale(), fallback);
 };
 
+
 export default function StudyClient({
   initialLocale = "en",
   lockInitialLocale = false,
@@ -2153,102 +2155,9 @@ export default function StudyClient({
           </div>
         </div>
 
-        <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="text-sm font-semibold text-violet-600">
-                {language === "fr"
-                  ? "Aperçu de l’espace d’étude IA"
-                  : language === "ar"
-                  ? "معاينة مساحة الدراسة الذكية"
-                  : "AI Study Preview"}
-              </p>
+        <StudyOutputShowcase locale={language} />
 
-              <h2 className="mt-1 text-xl font-semibold text-slate-900">
-                {language === "fr"
-                  ? "Résumé, quiz, flashcards et progression"
-                  : language === "ar"
-                  ? "ملخص واختبار وبطاقات مراجعة وتقدم التعلم"
-                  : "Summary, quiz, flashcards, and learning progress"}
-              </h2>
-            </div>
-
-            <span className="rounded-full bg-violet-50 px-3 py-1 text-xs font-semibold text-violet-700">
-              {language === "fr"
-                ? "Exemple IA"
-                : language === "ar"
-                ? "مثال ذكي"
-                : "AI sample"}
-            </span>
-          </div>
-
-          <div className="mt-6 grid gap-4 lg:grid-cols-4">
-            <div className="rounded-2xl border border-violet-200 bg-violet-50 p-4 lg:col-span-2">
-              <p className="text-sm font-bold text-violet-900">
-                {language === "fr"
-                  ? "Résumé IA"
-                  : language === "ar"
-                  ? "ملخص ذكي"
-                  : "AI Summary"}
-              </p>
-
-              <p className="mt-3 text-sm leading-6 text-violet-800">
-                {language === "fr"
-                  ? "Le document explique les concepts clés, leurs définitions et les relations importantes à retenir pour la révision."
-                  : language === "ar"
-                  ? "يشرح المستند المفاهيم الأساسية وتعريفاتها والعلاقات المهمة التي يجب تذكرها أثناء المراجعة."
-                  : "The document explains the key concepts, definitions, and important relationships to remember during revision."}
-              </p>
-            </div>
-
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <p className="text-sm font-bold text-slate-900">
-                Flashcard
-              </p>
-
-              <div className="mt-3 rounded-xl bg-white p-3 text-sm text-slate-700">
-                <p className="font-semibold">Q: Key concept?</p>
-                <p className="mt-2 text-slate-500">
-                  A: Short explanation for memorization.
-                </p>
-              </div>
-            </div>
-
-            <div className="rounded-2xl border border-blue-200 bg-blue-50 p-4">
-              <p className="text-sm font-bold text-blue-900">
-                Quiz
-              </p>
-
-              <p className="mt-3 text-sm text-blue-800">
-                1. What is the main idea?
-              </p>
-
-              <div className="mt-3 space-y-2 text-xs">
-                <div className="rounded-lg bg-white px-3 py-2">A. Definition</div>
-                <div className="rounded-lg bg-white px-3 py-2">B. Example</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-5 rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
-            <div className="flex items-center justify-between text-sm">
-              <span className="font-semibold text-emerald-900">
-                {language === "fr"
-                  ? "Progression d’apprentissage"
-                  : language === "ar"
-                  ? "تقدم التعلم"
-                  : "Learning progress"}
-              </span>
-              <span className="font-bold text-emerald-700">78%</span>
-            </div>
-
-            <div className="mt-3 h-2 overflow-hidden rounded-full bg-white">
-              <div className="h-full w-[78%] rounded-full bg-emerald-600" />
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white p-6 rounded-2xl border space-y-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
+<div className="bg-white p-6 rounded-2xl border space-y-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
           <div className="rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm text-slate-600 space-y-3 transition-all duration-300 hover:border-blue-200 hover:bg-white hover:shadow-md">
             <p>
               <strong>{t.howTitle}</strong> {t.how1}
