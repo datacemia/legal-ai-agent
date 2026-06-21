@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
@@ -81,6 +81,8 @@ function VerifyEmailContent() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
 
+  const hasRequestedVerification = useRef(false);
+
   const [language, setLanguage] = useState("en");
   const t = labels[language] || labels.en;
 
@@ -119,6 +121,12 @@ function VerifyEmailContent() {
       setMessage(currentLabels.invalidLink);
       return;
     }
+
+    if (hasRequestedVerification.current) {
+      return;
+    }
+
+    hasRequestedVerification.current = true;
 
     setStatus("loading");
     setMessage(currentLabels.verifying);
