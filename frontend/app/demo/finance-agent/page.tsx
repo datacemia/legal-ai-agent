@@ -31,14 +31,10 @@ export const metadata: Metadata = {
 
   openGraph: {
     title: "Runexa Finance Coach Demo",
-
     description:
       "See a complete demonstration of the Runexa Finance Coach. Analyze financial documents, spending patterns, subscriptions, savings opportunities, and personal finance insights using AI.",
-
     url: "https://runexa.ai/demo/finance-agent",
-
     siteName: "Runexa Systems",
-
     images: [
       {
         url: "/og-image.png",
@@ -47,22 +43,16 @@ export const metadata: Metadata = {
         alt: "Runexa Finance Coach Demo",
       },
     ],
-
     locale: "en_US",
-
     alternateLocale: ["fr_FR", "ar_AR"],
-
     type: "website",
   },
 
   twitter: {
     card: "summary_large_image",
-
     title: "Runexa Finance Coach Demo",
-
     description:
       "See a complete demonstration of the Runexa Finance Coach. Analyze financial documents, spending patterns, subscriptions, savings opportunities, and personal finance insights using AI.",
-
     images: ["/og-image.png"],
   },
 
@@ -74,22 +64,14 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-
   "@type": "SoftwareApplication",
-
   name: "Runexa Finance Coach",
-
   applicationCategory: "FinanceApplication",
-
   operatingSystem: "Web",
-
   url: "https://runexa.ai/demo/finance-agent",
-
   inLanguage: "en",
-
   description:
     "See a complete demonstration of the Runexa Finance Coach. Analyze financial documents, spending patterns, subscriptions, savings opportunities, and personal finance insights using AI.",
-
   publisher: {
     "@type": "Organization",
     name: "Runexa Systems LLC",
@@ -99,10 +81,7 @@ const jsonLd = {
 
 export default function FinanceAgentDemoPage() {
   return (
-    <main
-      dir="ltr"
-      className="min-h-screen bg-slate-50 px-6 py-16"
-    >
+    <main dir="ltr" className="min-h-screen bg-slate-50 px-6 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -116,7 +95,9 @@ export default function FinanceAgentDemoPage() {
         </h1>
 
         <p className="mt-6 max-w-3xl text-lg text-slate-600">
-          Upload financial documents, statements, expense files, and personal finance data to generate AI-powered spending insights, subscription detection, savings opportunities, and personalized financial coaching.
+          Upload financial documents, statements, expense files, and personal
+          finance data to generate AI-powered spending insights, subscription
+          detection, savings opportunities, and personalized financial coaching.
         </p>
 
         <div className="mt-10">
@@ -125,12 +106,12 @@ export default function FinanceAgentDemoPage() {
             alt="Runexa Finance Coach Demo"
             width={1440}
             height={5000}
-            priority
-            className="rounded-3xl border border-slate-200 shadow-lg"
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1152px"
+            className="h-auto w-full rounded-3xl border border-slate-200 shadow-lg"
           />
         </div>
 
-        <div className="mt-10 rounded-3xl border bg-white p-8 shadow-sm">
+        <div className="mt-10 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
           <h2 className="text-2xl font-bold text-slate-900">
             What can the Finance Coach do?
           </h2>

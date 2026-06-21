@@ -116,10 +116,7 @@ const jsonLd = {
 
 export default function FinanceAgentDemoPage() {
   return (
-    <main
-      dir="rtl"
-      className="min-h-screen bg-slate-50 px-6 py-16"
-    >
+    <main dir="rtl" className="min-h-screen bg-slate-50 px-6 py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -133,7 +130,9 @@ export default function FinanceAgentDemoPage() {
         </h1>
 
         <p className="mt-6 max-w-3xl text-lg text-slate-600">
-          ارفع المستندات المالية وكشوف الحساب وملفات المصاريف وبيانات التمويل الشخصي لإنشاء رؤى مدعومة بالذكاء الاصطناعي حول الإنفاق، واكتشاف الاشتراكات، وفرص الادخار، والتوجيه المالي الشخصي.
+          ارفع المستندات المالية وكشوف الحساب وملفات المصاريف وبيانات التمويل
+          الشخصي لإنشاء رؤى مدعومة بالذكاء الاصطناعي حول الإنفاق، واكتشاف
+          الاشتراكات، وفرص الادخار، والتوجيه المالي الشخصي.
         </p>
 
         <div className="mt-10">
@@ -142,12 +141,12 @@ export default function FinanceAgentDemoPage() {
             alt="عرض مدرب المالية من Runexa"
             width={1440}
             height={5000}
-            priority
-            className="rounded-3xl border border-slate-200 shadow-lg"
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1152px"
+            className="h-auto w-full rounded-3xl border border-slate-200 shadow-lg"
           />
         </div>
 
-        <div className="mt-10 rounded-3xl border bg-white p-8 shadow-sm">
+        <div className="mt-10 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
           <h2 className="text-2xl font-bold text-slate-900">
             ماذا يمكن أن يفعل مدرب المالية؟
           </h2>
