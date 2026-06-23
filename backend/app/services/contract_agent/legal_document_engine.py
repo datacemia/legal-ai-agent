@@ -282,7 +282,7 @@ def build_legal_document_tree(text: str) -> list[LegalNode]:
 
 def flatten_legal_tree_to_clause_objects(
     nodes: list[LegalNode],
-    min_length: int = 80,
+    min_length: int = 25,
 ) -> list[dict]:
 
     clauses = []
@@ -327,7 +327,7 @@ def flatten_legal_tree_to_clause_objects(
 
 def flatten_legal_tree_to_clauses(
     nodes: list[LegalNode],
-    min_length: int = 80,
+    min_length: int = 25,
 ) -> list[str]:
 
     clause_objects = flatten_legal_tree_to_clause_objects(
