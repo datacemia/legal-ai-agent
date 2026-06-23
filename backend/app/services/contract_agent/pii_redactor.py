@@ -98,7 +98,23 @@ def replace_by_spans(text: str, replacements: list[tuple[int, int, str]]) -> str
 
     return redacted
 
+def redact_arabic_contract_parties(text: str) -> str:
+    if not text:
+        return text
 
+    text = re.sub(
+        r"(الطرف\s+الأول\s*:\s*)([^\n\r]+)",
+        r"\1[ORGANIZATION]",
+        text,
+    )
+
+    text = re.sub(
+        r"(الطرف\s+الثاني\s*:\s*)([^\n\r]+)",
+        r"\1[PERSON]",
+        text,
+    )
+
+    return text
 def role_aware_party_pseudonymize(text: str) -> str:
     if not text:
         return ""
@@ -245,6 +261,8 @@ def gliner_redact(text: str) -> str:
 def redact_sensitive_data(text: str) -> str:
     if not text:
         return ""
+
+    text = redact_arabic_contract_parties(text)
 
     redacted = role_aware_party_pseudonymize(text)
     redacted = regex_redact(redacted)
