@@ -989,6 +989,8 @@ Contract text:
         text,
     )
 
+    data = display_safe_party_labels(data, language)
+    data = force_generic_parties(data, language)
     data = normalize_contract_summary(data, language)
 
     if (
@@ -1169,6 +1171,23 @@ def display_safe_party_labels(value, language: str = "en"):
     return output
 
 
+def force_generic_parties(data: dict, language: str) -> dict:
+    labels = {
+        "en": ["Contracting Party A", "Contracting Party B"],
+        "fr": ["Partie contractante A", "Partie contractante B"],
+        "ar": ["الطرف أ", "الطرف ب"],
+    }
+
+    safe = labels.get(language, labels["en"])
+
+    parties = data.get("parties")
+
+    if isinstance(parties, list) and len(parties) >= 2:
+        data["parties"] = safe[:2]
+
+    return data
+
+
 def render_summary_text(data: dict, language: str = "en") -> str:
     """
     Backward-compatible text renderer.
@@ -1332,6 +1351,8 @@ Contract text:
         data,
         language,
     )
+
+    data = display_safe_party_labels(data, language)
 
     return normalize_simplified_contract(data, language)
 

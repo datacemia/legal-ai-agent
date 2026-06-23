@@ -89,6 +89,7 @@ def looks_like_contract_role(value: str) -> bool:
 
     return normalized in role_words
 
+
 def replace_by_spans(text: str, replacements: list[tuple[int, int, str]]) -> str:
     replacements = sorted(replacements, key=lambda x: x[0], reverse=True)
 
@@ -97,6 +98,7 @@ def replace_by_spans(text: str, replacements: list[tuple[int, int, str]]) -> str
         redacted = redacted[:start] + replacement + redacted[end:]
 
     return redacted
+
 
 def redact_arabic_contract_parties(text: str) -> str:
     if not text:
@@ -115,6 +117,55 @@ def redact_arabic_contract_parties(text: str) -> str:
     )
 
     return text
+
+
+def redact_labeled_contract_parties(text: str) -> str:
+    if not text:
+        return text
+
+    patterns = [
+        # Arabic
+        (
+            r"(الطرف\s+الأول\s*:\s*)([^\n\r]+)",
+            r"\1[ORGANIZATION]",
+        ),
+        (
+            r"(الطرف\s+الثاني\s*:\s*)([^\n\r]+)",
+            r"\1[PERSON]",
+        ),
+
+        # English
+        (
+            r"((?:Company|Employer|Client)\s*:\s*)([^\n\r]+)",
+            r"\1[ORGANIZATION]",
+        ),
+        (
+            r"((?:Employee|Executive|Consultant|Contractor|Service Provider)\s*:\s*)([^\n\r]+)",
+            r"\1[PERSON]",
+        ),
+
+        # French
+        (
+            r"((?:Société|Employeur|Client)\s*:\s*)([^\n\r]+)",
+            r"\1[ORGANIZATION]",
+        ),
+        (
+            r"((?:Employé|Salarié|Prestataire|Consultant)\s*:\s*)([^\n\r]+)",
+            r"\1[PERSON]",
+        ),
+    ]
+
+    for pattern, replacement in patterns:
+        text = re.sub(
+            pattern,
+            replacement,
+            text,
+            flags=re.IGNORECASE,
+        )
+
+    return text
+
+
 def role_aware_party_pseudonymize(text: str) -> str:
     if not text:
         return ""
@@ -262,7 +313,7 @@ def redact_sensitive_data(text: str) -> str:
     if not text:
         return ""
 
-    text = redact_arabic_contract_parties(text)
+    text = redact_labeled_contract_parties(text)
 
     redacted = role_aware_party_pseudonymize(text)
     redacted = regex_redact(redacted)
