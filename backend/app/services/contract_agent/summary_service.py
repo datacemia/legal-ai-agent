@@ -1367,6 +1367,8 @@ def render_simplified_text(data: dict, language: str = "en") -> str:
     t = get_labels(language)
 
     data = display_safe_party_labels(data, language)
+    print("SIMPLIFIED AFTER SAFE LABELS")
+    print(data)
 
     if language != "ar":
         roles = get_display_roles(
@@ -1374,7 +1376,11 @@ def render_simplified_text(data: dict, language: str = "en") -> str:
             text=data.get("simplified_version", ""),
             language=language,
         )
+        print("SIMPLIFIED ROLES")
+        print(roles)
         data = apply_display_roles(data, roles, language)
+        print("SIMPLIFIED AFTER ROLES")
+        print(data)
 
     data = display_safe_party_labels(data, language)
 
