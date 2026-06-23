@@ -28,7 +28,23 @@ const labels: any = {
     pricing: "Plans & Pricing",
     blog: "Insights",
     trustLine:
-      "$1 trial per account · Unified credits · Secure AI platform",
+      "$1 trial per account · Unified credits · Privacy-first AI platform",
+    privacyIntroTitle: "Trust & Privacy by Design",
+    privacyIntroDesc:
+      "Runexa is built for sensitive work: files are processed for your requested analysis, personal identifiers may be masked before AI processing, customer content is not used to train public AI models, and uploaded files are automatically removed from processing storage after analysis.",
+    privacyFlow: [
+      "Upload",
+      "Privacy protection",
+      "AI analysis",
+      "Report generated",
+      "File deletion",
+    ],
+    privacyPromises: [
+      "Personal identifiers may be replaced before AI processing",
+      "Customer content is not used to train public AI models",
+      "Uploaded files are automatically removed after analysis",
+      "Customer data stays isolated between users and workspaces",
+    ],
     choose: "Choose Your AI Agent",
     chooseDesc:
       "One Runexa account gives you access to specialized AI agents. Analyze legal documents, optimize your finances, learn more effectively, and make smarter business decisions.",
@@ -41,10 +57,10 @@ const labels: any = {
       "Receive actionable insights, recommendations, and reports",
     ],
     trustCards: [
-    ["Secure & Reliable", "Your data stays protected"],
-    ["Unified Credits", "Use them across all agents"],
-    ["Instant Access", "Get started in minutes"],
-    ["Built for Real Work", "For individuals and professionals"],
+    ["Privacy-first workflow", "Upload → protect → analyze → delete"],
+    ["No public model training", "Customer content is not used to train public AI models"],
+    ["Automatic file deletion", "Uploaded files are removed after analysis"],
+    ["Workspace isolation", "Customer data stays separated between users"],
   ],
     enterpriseBadge: "Custom AI Solutions",
     enterpriseTitle: "Runexa for Enterprises",
@@ -155,7 +171,23 @@ const labels: any = {
     pricing: "Plans et tarifs",
     blog: "Ressources & Insights",
     trustLine:
-      "Un essai à 1 $ par compte · Crédits unifiés · Plateforme IA sécurisée",
+      "Un essai à 1 $ par compte · Crédits unifiés · Plateforme IA conçue pour la confidentialité",
+    privacyIntroTitle: "Confiance et confidentialité dès la conception",
+    privacyIntroDesc:
+      "Runexa est conçu pour les documents sensibles : les fichiers sont traités pour l’analyse demandée, les identifiants personnels peuvent être masqués avant le traitement IA, les contenus clients ne servent pas à entraîner des modèles IA publics, et les fichiers importés sont supprimés automatiquement du stockage de traitement après analyse.",
+    privacyFlow: [
+      "Import",
+      "Protection des données",
+      "Analyse IA",
+      "Rapport généré",
+      "Suppression du fichier",
+    ],
+    privacyPromises: [
+      "Les identifiants personnels peuvent être remplacés avant le traitement IA",
+      "Les contenus clients ne servent pas à entraîner des modèles IA publics",
+      "Les fichiers importés sont supprimés automatiquement après analyse",
+      "Les données restent isolées entre utilisateurs et espaces de travail",
+    ],
     tryLegal: "Runexa Legal Agent",
     tryFinance: "Runexa Finance Coach",
     tryStudy: "Runexa Study Agent",
@@ -172,10 +204,10 @@ const labels: any = {
       "Recevez des recommandations et des insights exploitables",
     ],
     trustCards: [
-      ["Sécurisé et fiable", "Vos données sont protégées"],
-      ["Crédits unifiés", "Valables sur tous les agents"],
-      ["Accès immédiat", "Commencez instantanément"],
-      ["Conçu pour un usage réel", "Particuliers et professionnels"],
+      ["Confidentialité intégrée", "Importer → protéger → analyser → supprimer"],
+      ["Pas d’entraînement public", "Les contenus clients n’entraînent pas de modèles IA publics"],
+      ["Suppression automatique", "Les fichiers importés sont supprimés après analyse"],
+      ["Isolation des espaces", "Les données restent séparées entre utilisateurs"],
     ],
     enterpriseBadge: "Solutions IA personnalisées",
     enterpriseTitle: "Runexa pour les entreprises",
@@ -283,7 +315,23 @@ const labels: any = {
     explore: "استكشف حلول الذكاء الاصطناعي",
     pricing: "الخطط والأسعار",
     blog: "المدونة",
-    trustLine: "تجربة واحدة بقيمة 1 دولار لكل حساب · أرصدة موحدة · منصة ذكاء اصطناعي آمنة",
+    trustLine: "تجربة واحدة بقيمة 1 دولار لكل حساب · أرصدة موحدة · منصة ذكاء اصطناعي مصممة لحماية الخصوصية",
+    privacyIntroTitle: "الثقة والخصوصية منذ التصميم",
+    privacyIntroDesc:
+      "تم تصميم Runexa للتعامل مع الأعمال الحساسة: تتم معالجة الملفات فقط لإنجاز التحليل المطلوب، ويمكن إخفاء المعرفات الشخصية قبل معالجة الذكاء الاصطناعي، ولا تُستخدم محتويات العملاء لتدريب نماذج ذكاء اصطناعي عامة، ويتم حذف الملفات المرفوعة تلقائياً من تخزين المعالجة بعد اكتمال التحليل.",
+    privacyFlow: [
+      "رفع الملف",
+      "حماية الخصوصية",
+      "تحليل بالذكاء الاصطناعي",
+      "إنشاء التقرير",
+      "حذف الملف",
+    ],
+    privacyPromises: [
+      "يمكن استبدال المعرفات الشخصية قبل معالجة الذكاء الاصطناعي",
+      "لا تُستخدم محتويات العملاء لتدريب نماذج ذكاء اصطناعي عامة",
+      "يتم حذف الملفات المرفوعة تلقائياً بعد اكتمال التحليل",
+      "تبقى بيانات العملاء معزولة بين المستخدمين ومساحات العمل",
+    ],
     tryLegal: "Runexa Legal Agent",
     tryFinance: "Runexa Finance Coach",
     tryStudy: "Runexa Study Agent",
@@ -300,10 +348,10 @@ const labels: any = {
       "احصل على رؤى وتوصيات قابلة للتنفيذ",
     ],
     trustCards: [
-      ["آمن وموثوق", "بياناتك محمية"],
-      ["أرصدة موحدة", "لجميع الوكلاء"],
-      ["وصول فوري", "ابدأ فورًا"],
-      ["مصمم للعمل الحقيقي", "للأفراد والمحترفين"],
+      ["خصوصية منذ التصميم", "رفع → حماية → تحليل → حذف"],
+      ["بدون تدريب عام", "لا تُستخدم محتويات العملاء لتدريب نماذج عامة"],
+      ["حذف تلقائي", "يتم حذف الملفات المرفوعة بعد التحليل"],
+      ["عزل مساحات العمل", "تبقى بيانات العملاء منفصلة بين المستخدمين"],
     ],
     enterpriseBadge: "حلول ذكاء اصطناعي للمؤسسات",
 
@@ -547,6 +595,74 @@ export default function HomeClient({
           </div>
 
           <p className="text-sm text-slate-500">{t.trustLine}</p>
+
+          <div className="mx-auto max-w-5xl rounded-[28px] border border-blue-100 bg-white/90 p-5 text-left shadow-sm backdrop-blur md:p-6">
+            <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
+              <div className="max-w-3xl">
+                <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
+                  <ShieldCheck className="h-4 w-4" />
+                  <span>
+                    {language === "fr"
+                      ? "Traitement des données"
+                      : language === "ar"
+                      ? "معالجة البيانات"
+                      : "Data handling"}
+                  </span>
+                </div>
+
+                <h2 className="mt-3 text-2xl font-bold text-slate-900">
+                  {t.privacyIntroTitle}
+                </h2>
+
+                <p className="mt-3 text-sm leading-6 text-slate-600 md:text-base md:leading-7">
+                  {t.privacyIntroDesc}
+                </p>
+              </div>
+
+              <Link
+                href="/security"
+                className="inline-flex shrink-0 items-center justify-center rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-sm font-semibold text-blue-700 hover:bg-blue-100 transition"
+              >
+                {language === "fr"
+                  ? "Voir la sécurité"
+                  : language === "ar"
+                  ? "عرض الأمان"
+                  : "View security"}
+              </Link>
+            </div>
+
+            <div className="mt-6 grid gap-3 md:grid-cols-5">
+              {t.privacyFlow.map((item: string, index: number) => (
+                <div
+                  key={item}
+                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-center"
+                >
+                  <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">
+                    {index + 1}
+                  </div>
+
+                  <p className="mt-3 text-sm font-semibold text-slate-800">
+                    {item}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-5 grid gap-3 md:grid-cols-2">
+              {t.privacyPromises.map((item: string) => (
+                <div
+                  key={item}
+                  className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-4"
+                >
+                  <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-blue-600" />
+                  <p className="text-sm font-medium text-slate-700">
+                    {item}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
 
           <div className="relative mt-10">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-100/40 via-transparent to-emerald-100/30 blur-3xl" />

@@ -3,379 +3,6 @@
 import { useEffect, useState } from "react";
 import { defaultLocale, getSavedLocale } from "../../../../lib/i18n";
 
-const productTermsTranslations: any = {
-  en: {
-    title: "Runexa Systems LLC — Product Terms",
-    updated: "Last updated: April 2026",
-    intro:
-      "These Product Terms apply to AI agents and services provided by Runexa Systems LLC through the Runexa platform.",
-
-    legalTitle: "Runexa Legal Agent",
-    studyTitle: "Runexa Study Agent",
-    financeTitle: "Runexa Finance Coach",
-    businessTitle: "Runexa Business Decision Agent",
-
-    descriptionTitle: "1. Description",
-    legalDescription1:
-      "The Runexa Legal Agent is an AI-powered tool designed to assist users in reviewing legal documents, identifying potential risks, and generating simplified explanations.",
-    legalDescription2:
-      "It is part of the Runexa platform of specialized AI agents.",
-
-    legalAdviceTitle: "2. No Legal Advice",
-    legalAdvice1:
-      "The Runexa Legal Agent is not a law firm and does not provide legal advice.",
-    legalAdvice2:
-      "Outputs should not be considered a substitute for professional legal counsel.",
-
-    accuracyTitle: "3. Accuracy Disclaimer",
-    legalAccuracy1: "May misinterpret clauses",
-    legalAccuracy2: "May miss important risks",
-    legalAccuracy3: "May provide incomplete summaries",
-
-    userResponsibilityTitle: "4. User Responsibility",
-    legalResponsibility:
-      "Users are responsible for reviewing all outputs, making their own legal decisions, and consulting qualified professionals when necessary.",
-
-    highRiskTitle: "5. High-Risk Use",
-    legalHighRisk:
-      "Do not rely solely on this tool for contracts, legal disputes, financial decisions, or other high-impact matters.",
-
-    liabilityTitle: "6. Liability Limitation",
-    legalLiability:
-      "Runexa Systems LLC is not responsible for legal disputes, contract issues, financial losses, or legal consequences resulting from AI outputs.",
-
-    studyDescription:
-      "The Runexa Study Agent is an AI-powered tool designed to help users analyze study materials, generate summaries, create quizzes, and build revision plans.",
-
-    studyGuaranteeTitle: "2. No Educational Guarantee",
-    studyGuarantee:
-      "The Runexa Study Agent does not guarantee academic success, exam results, grades, admissions, or certifications.",
-
-    studyAccuracy1: "May summarize content incorrectly",
-    studyAccuracy2: "May generate inaccurate quizzes or explanations",
-    studyAccuracy3: "May provide incomplete learning recommendations",
-
-    studyResponsibility:
-      "Users are responsible for verifying educational content and using official learning materials where necessary.",
-
-    studyIntegrityTitle: "5. Academic Integrity",
-    studyIntegrity:
-      "Users must not use the Runexa Study Agent to cheat, plagiarize, or violate academic rules or institutional policies.",
-
-    studyLiability:
-      "Runexa Systems LLC is not responsible for academic penalties, poor grades, failed exams, or educational outcomes resulting from AI outputs.",
-
-    financeDescription:
-      "The Runexa Finance Coach is an AI-powered tool designed to help users analyze expenses, identify spending patterns, and generate saving suggestions.",
-
-    financeAdviceTitle: "2. No Financial Advice",
-    financeAdvice:
-      "The Runexa Finance Coach does not provide financial, tax, accounting, investment, or legal advice.",
-
-    financeAccuracy1: "May misclassify transactions",
-    financeAccuracy2: "May miss important financial context",
-    financeAccuracy3: "May provide incomplete recommendations",
-
-    financeHighRiskTitle: "4. High-Risk Use",
-    financeHighRisk:
-      "Do not rely solely on this tool for investments, taxes, loans, retirement planning, or other major financial decisions.",
-
-    financeLiabilityTitle: "5. Liability Limitation",
-    financeLiability:
-      "Runexa Systems LLC is not responsible for financial losses, tax issues, missed payments, or financial consequences resulting from AI outputs.",
-
-    businessDescription:
-      "The Runexa Business Decision Agent is an AI-powered tool designed to help users analyze business information, detect trends, and support strategic decision-making.",
-
-    businessAdviceTitle: "2. No Professional Advice",
-    businessAdvice:
-      "The Runexa Business Decision Agent does not provide legal, accounting, tax, financial, or management consulting advice.",
-
-    businessAccuracy1: "May misinterpret business data",
-    businessAccuracy2: "May miss market risks or operational issues",
-    businessAccuracy3: "May generate incomplete recommendations",
-
-    businessResponsibility:
-      "Users are responsible for validating outputs and making their own operational and strategic business decisions.",
-
-    businessHighRisk:
-      "Do not rely solely on this tool for investments, hiring decisions, financing, acquisitions, legal disputes, or other high-impact business matters.",
-
-    businessLiability:
-      "Runexa Systems LLC is not responsible for business losses, operational issues, financial damages, or legal consequences resulting from AI outputs.",
-
-    additionalTermsTitle: "Additional AI Terms",
-
-    humanReviewTitle: "7. Human Review Required",
-    humanReview:
-      "Users must independently review, verify, and validate all AI-generated outputs before relying on them or taking action.",
-
-    dataProcessingTitle: "8. Data Processing",
-    dataProcessing:
-      "Uploaded files may be processed by AI systems and infrastructure providers solely to provide the requested analysis and related functionality in accordance with the Privacy Policy.",
-
-    trainingTitle: "9. Model Training",
-    trainingText:
-      "User-uploaded content is not used to train proprietary AI models unless explicitly disclosed and permitted by applicable law.",
-
-    transparencyTitle: "10. AI Transparency",
-    transparencyText:
-      "Users are interacting with AI-generated systems. Outputs are generated by machine-learning models and may contain errors, omissions, inaccurate interpretations, or incomplete information.",
-
-    enterpriseTitle: "11. Enterprise Use",
-    enterpriseText:
-      "Organizations remain responsible for their own compliance, governance, security reviews, internal approvals, and regulatory obligations when using Runexa services.",
-  },
-
-  fr: {
-    title: "Runexa Systems LLC — Conditions produit",
-    updated: "Dernière mise à jour : avril 2026",
-    intro:
-      "Ces Conditions produit s’appliquent aux agents IA et services fournis par Runexa Systems LLC via la plateforme Runexa.",
-
-    legalTitle: "Agent juridique Runexa",
-    studyTitle: "Agent étude Runexa",
-    financeTitle: "Coach financier Runexa",
-    businessTitle: "Agent de décision business Runexa",
-
-    descriptionTitle: "1. Description",
-    legalDescription1:
-      "L’Agent juridique Runexa est un outil alimenté par l’IA conçu pour aider les utilisateurs à examiner des documents juridiques, identifier des risques potentiels et générer des explications simplifiées.",
-    legalDescription2:
-      "Il fait partie de la plateforme Runexa d’agents IA spécialisés.",
-
-    legalAdviceTitle: "2. Absence de conseil juridique",
-    legalAdvice1:
-      "L’Agent juridique Runexa n’est pas un cabinet d’avocats et ne fournit pas de conseil juridique.",
-    legalAdvice2:
-      "Les résultats ne doivent pas être considérés comme un substitut à un conseil juridique professionnel.",
-
-    accuracyTitle: "3. Avertissement sur l’exactitude",
-    legalAccuracy1: "Peut mal interpréter certaines clauses",
-    legalAccuracy2: "Peut manquer des risques importants",
-    legalAccuracy3: "Peut fournir des résumés incomplets",
-
-    userResponsibilityTitle: "4. Responsabilité de l’utilisateur",
-    legalResponsibility:
-      "Les utilisateurs sont responsables de l’examen de tous les résultats, de leurs propres décisions juridiques et de la consultation de professionnels qualifiés si nécessaire.",
-
-    highRiskTitle: "5. Utilisation à haut risque",
-    legalHighRisk:
-      "Ne vous fiez pas uniquement à cet outil pour des contrats, litiges juridiques, décisions financières ou autres sujets à fort impact.",
-
-    liabilityTitle: "6. Limitation de responsabilité",
-    legalLiability:
-      "Runexa Systems LLC n’est pas responsable des litiges juridiques, problèmes contractuels, pertes financières ou conséquences juridiques résultant des sorties IA.",
-
-    studyDescription:
-      "L’Agent étude Runexa est un outil alimenté par l’IA conçu pour aider les utilisateurs à analyser des supports d’étude, générer des résumés, créer des quiz et construire des plans de révision.",
-
-    studyGuaranteeTitle: "2. Aucune garantie éducative",
-    studyGuarantee:
-      "L’Agent étude Runexa ne garantit pas la réussite académique, les résultats d’examen, les notes, les admissions ou les certifications.",
-
-    studyAccuracy1: "Peut résumer le contenu de manière incorrecte",
-    studyAccuracy2: "Peut générer des quiz ou explications inexacts",
-    studyAccuracy3:
-      "Peut fournir des recommandations d’apprentissage incomplètes",
-
-    studyResponsibility:
-      "Les utilisateurs sont responsables de vérifier le contenu éducatif et d’utiliser les supports officiels lorsque nécessaire.",
-
-    studyIntegrityTitle: "5. Intégrité académique",
-    studyIntegrity:
-      "Les utilisateurs ne doivent pas utiliser l’Agent étude Runexa pour tricher, plagier ou violer des règles académiques ou politiques institutionnelles.",
-
-    studyLiability:
-      "Runexa Systems LLC n’est pas responsable des sanctions académiques, mauvaises notes, examens échoués ou résultats éducatifs découlant des sorties IA.",
-
-    financeDescription:
-      "Le Coach financier Runexa est un outil alimenté par l’IA conçu pour aider les utilisateurs à analyser leurs dépenses, identifier des habitudes de dépense et générer des suggestions d’épargne.",
-
-    financeAdviceTitle: "2. Absence de conseil financier",
-    financeAdvice:
-      "Le Coach financier Runexa ne fournit pas de conseil financier, fiscal, comptable, d’investissement ou juridique.",
-
-    financeAccuracy1: "Peut mal classer des transactions",
-    financeAccuracy2: "Peut manquer un contexte financier important",
-    financeAccuracy3: "Peut fournir des recommandations incomplètes",
-
-    financeHighRiskTitle: "4. Utilisation à haut risque",
-    financeHighRisk:
-      "Ne vous fiez pas uniquement à cet outil pour les investissements, impôts, prêts, planification de retraite ou autres décisions financières majeures.",
-
-    financeLiabilityTitle: "5. Limitation de responsabilité",
-    financeLiability:
-      "Runexa Systems LLC n’est pas responsable des pertes financières, problèmes fiscaux, paiements manqués ou conséquences financières résultant des sorties IA.",
-
-    businessDescription:
-      "L’Agent de décision business Runexa est un outil alimenté par l’IA conçu pour aider les utilisateurs à analyser des informations business, détecter des tendances et soutenir la prise de décision stratégique.",
-
-    businessAdviceTitle: "2. Absence de conseil professionnel",
-    businessAdvice:
-      "L’Agent de décision business Runexa ne fournit pas de conseil juridique, comptable, fiscal, financier ou en management.",
-
-    businessAccuracy1: "Peut mal interpréter des données business",
-    businessAccuracy2:
-      "Peut manquer des risques de marché ou problèmes opérationnels",
-    businessAccuracy3: "Peut générer des recommandations incomplètes",
-
-    businessResponsibility:
-      "Les utilisateurs sont responsables de valider les résultats et de prendre leurs propres décisions opérationnelles et stratégiques.",
-
-    businessHighRisk:
-      "Ne vous fiez pas uniquement à cet outil pour les investissements, décisions d’embauche, financements, acquisitions, litiges juridiques ou autres sujets business à fort impact.",
-
-    businessLiability:
-      "Runexa Systems LLC n’est pas responsable des pertes business, problèmes opérationnels, dommages financiers ou conséquences juridiques résultant des sorties IA.",
-
-    additionalTermsTitle: "Conditions IA supplémentaires",
-
-    humanReviewTitle: "7. Vérification humaine requise",
-    humanReview:
-      "Les utilisateurs doivent examiner, vérifier et valider de manière indépendante tous les résultats générés par l’IA avant de s’y fier ou de prendre une décision.",
-
-    dataProcessingTitle: "8. Traitement des données",
-    dataProcessing:
-      "Les fichiers téléchargés peuvent être traités par des systèmes d’intelligence artificielle et des fournisseurs d’infrastructure uniquement afin de fournir l’analyse demandée et les fonctionnalités associées conformément à la Politique de confidentialité.",
-
-    trainingTitle: "9. Entraînement des modèles",
-    trainingText:
-      "Le contenu téléchargé par les utilisateurs n’est pas utilisé pour entraîner des modèles d’IA propriétaires sauf indication contraire explicite et lorsque la loi applicable le permet.",
-
-    transparencyTitle: "10. Transparence de l’IA",
-    transparencyText:
-      "Les utilisateurs interagissent avec des systèmes générés par intelligence artificielle. Les résultats sont produits par des modèles d’apprentissage automatique et peuvent contenir des erreurs, omissions, interprétations inexactes ou informations incomplètes.",
-
-    enterpriseTitle: "11. Utilisation entreprise",
-    enterpriseText:
-      "Les organisations restent responsables de leur propre conformité, gouvernance, vérification de sécurité, approbations internes et obligations réglementaires lorsqu’elles utilisent les services Runexa.",
-  },
-
-  ar: {
-    title: "Runexa Systems LLC — شروط المنتج",
-    updated: "آخر تحديث: أبريل 2026",
-    intro:
-      "تنطبق شروط المنتج هذه على وكلاء الذكاء الاصطناعي والخدمات المقدمة من Runexa Systems LLC عبر منصة Runexa.",
-
-    legalTitle: "وكيل Runexa القانوني",
-    studyTitle: "وكيل Runexa للدراسة",
-    financeTitle: "مدرب Runexa المالي",
-    businessTitle: "وكيل Runexa لقرارات الأعمال",
-
-    descriptionTitle: "1. الوصف",
-    legalDescription1:
-      "وكيل Runexa القانوني هو أداة مدعومة بالذكاء الاصطناعي مصممة لمساعدة المستخدمين في مراجعة المستندات القانونية وتحديد المخاطر المحتملة وإنشاء تفسيرات مبسطة.",
-    legalDescription2:
-      "وهو جزء من منصة Runexa لوكلاء الذكاء الاصطناعي المتخصصين.",
-
-    legalAdviceTitle: "2. لا توجد نصيحة قانونية",
-    legalAdvice1:
-      "وكيل Runexa القانوني ليس مكتب محاماة ولا يقدم نصائح قانونية.",
-    legalAdvice2:
-      "لا ينبغي اعتبار المخرجات بديلاً عن الاستشارة القانونية المهنية.",
-
-    accuracyTitle: "3. إخلاء مسؤولية الدقة",
-    legalAccuracy1: "قد يسيء تفسير البنود",
-    legalAccuracy2: "قد يغفل مخاطر مهمة",
-    legalAccuracy3: "قد يقدم ملخصات غير مكتملة",
-
-    userResponsibilityTitle: "4. مسؤولية المستخدم",
-    legalResponsibility:
-      "المستخدمون مسؤولون عن مراجعة جميع المخرجات واتخاذ قراراتهم القانونية الخاصة واستشارة المتخصصين المؤهلين عند الحاجة.",
-
-    highRiskTitle: "5. الاستخدام عالي المخاطر",
-    legalHighRisk:
-      "لا تعتمد على هذه الأداة وحدها في العقود أو النزاعات القانونية أو القرارات المالية أو غيرها من المسائل عالية التأثير.",
-
-    liabilityTitle: "6. تحديد المسؤولية",
-    legalLiability:
-      "لا تتحمل Runexa Systems LLC مسؤولية النزاعات القانونية أو مشكلات العقود أو الخسائر المالية أو العواقب القانونية الناتجة عن مخرجات الذكاء الاصطناعي.",
-
-    studyDescription:
-      "وكيل Runexa للدراسة هو أداة مدعومة بالذكاء الاصطناعي مصممة لمساعدة المستخدمين على تحليل مواد الدراسة وإنشاء ملخصات واختبارات وخطط مراجعة.",
-
-    studyGuaranteeTitle: "2. لا توجد ضمانات تعليمية",
-    studyGuarantee:
-      "لا يضمن وكيل Runexa للدراسة النجاح الأكاديمي أو نتائج الامتحانات أو الدرجات أو القبول أو الشهادات.",
-
-    studyAccuracy1: "قد يلخص المحتوى بشكل غير صحيح",
-    studyAccuracy2: "قد ينشئ اختبارات أو تفسيرات غير دقيقة",
-    studyAccuracy3: "قد يقدم توصيات تعلم غير مكتملة",
-
-    studyResponsibility:
-      "المستخدمون مسؤولون عن التحقق من المحتوى التعليمي واستخدام المواد التعليمية الرسمية عند الحاجة.",
-
-    studyIntegrityTitle: "5. النزاهة الأكاديمية",
-    studyIntegrity:
-      "يجب ألا يستخدم المستخدمون وكيل Runexa للدراسة للغش أو الانتحال أو انتهاك القواعد الأكاديمية أو سياسات المؤسسات.",
-
-    studyLiability:
-      "لا تتحمل Runexa Systems LLC مسؤولية العقوبات الأكاديمية أو الدرجات الضعيفة أو الامتحانات الفاشلة أو النتائج التعليمية الناتجة عن مخرجات الذكاء الاصطناعي.",
-
-    financeDescription:
-      "مدرب Runexa المالي هو أداة مدعومة بالذكاء الاصطناعي مصممة لمساعدة المستخدمين على تحليل المصاريف وتحديد أنماط الإنفاق وإنشاء اقتراحات للتوفير.",
-
-    financeAdviceTitle: "2. لا توجد نصيحة مالية",
-    financeAdvice:
-      "لا يقدم مدرب Runexa المالي نصائح مالية أو ضريبية أو محاسبية أو استثمارية أو قانونية.",
-
-    financeAccuracy1: "قد يصنف المعاملات بشكل غير صحيح",
-    financeAccuracy2: "قد يغفل سياقًا ماليًا مهمًا",
-    financeAccuracy3: "قد يقدم توصيات غير مكتملة",
-
-    financeHighRiskTitle: "4. الاستخدام عالي المخاطر",
-    financeHighRisk:
-      "لا تعتمد على هذه الأداة وحدها للاستثمارات أو الضرائب أو القروض أو تخطيط التقاعد أو غيرها من القرارات المالية الكبرى.",
-
-    financeLiabilityTitle: "5. تحديد المسؤولية",
-    financeLiability:
-      "لا تتحمل Runexa Systems LLC مسؤولية الخسائر المالية أو المشكلات الضريبية أو المدفوعات الفائتة أو العواقب المالية الناتجة عن مخرجات الذكاء الاصطناعي.",
-
-    businessDescription:
-      "وكيل Runexa لقرارات الأعمال هو أداة مدعومة بالذكاء الاصطناعي مصممة لمساعدة المستخدمين على تحليل معلومات الأعمال واكتشاف الاتجاهات ودعم اتخاذ القرارات الاستراتيجية.",
-
-    businessAdviceTitle: "2. لا توجد نصيحة مهنية",
-    businessAdvice:
-      "لا يقدم وكيل Runexa لقرارات الأعمال نصائح قانونية أو محاسبية أو ضريبية أو مالية أو استشارية إدارية.",
-
-    businessAccuracy1: "قد يسيء تفسير بيانات الأعمال",
-    businessAccuracy2: "قد يغفل مخاطر السوق أو المشكلات التشغيلية",
-    businessAccuracy3: "قد ينشئ توصيات غير مكتملة",
-
-    businessResponsibility:
-      "المستخدمون مسؤولون عن التحقق من المخرجات واتخاذ قراراتهم التشغيلية والاستراتيجية الخاصة.",
-
-    businessHighRisk:
-      "لا تعتمد على هذه الأداة وحدها للاستثمارات أو قرارات التوظيف أو التمويل أو الاستحواذات أو النزاعات القانونية أو غيرها من مسائل الأعمال عالية التأثير.",
-
-    businessLiability:
-      "لا تتحمل Runexa Systems LLC مسؤولية خسائر الأعمال أو المشكلات التشغيلية أو الأضرار المالية أو العواقب القانونية الناتجة عن مخرجات الذكاء الاصطناعي.",
-
-    additionalTermsTitle: "شروط إضافية للذكاء الاصطناعي",
-
-    humanReviewTitle: "7. المراجعة البشرية مطلوبة",
-    humanReview:
-      "يجب على المستخدمين مراجعة جميع المخرجات التي ينتجها الذكاء الاصطناعي والتحقق منها بشكل مستقل قبل الاعتماد عليها أو اتخاذ أي إجراء.",
-
-    dataProcessingTitle: "8. معالجة البيانات",
-    dataProcessing:
-      "قد تتم معالجة الملفات المرفوعة بواسطة أنظمة الذكاء الاصطناعي ومزودي البنية التحتية فقط لتقديم التحليل المطلوب والوظائف المرتبطة به وفقًا لسياسة الخصوصية.",
-
-    trainingTitle: "9. تدريب النماذج",
-    trainingText:
-      "لا يتم استخدام المحتوى الذي يرفعه المستخدمون لتدريب نماذج الذكاء الاصطناعي الخاصة إلا إذا تم الإفصاح عن ذلك صراحةً وكان مسموحًا به بموجب القانون.",
-
-    transparencyTitle: "10. شفافية الذكاء الاصطناعي",
-    transparencyText:
-      "يتفاعل المستخدمون مع أنظمة تعتمد على الذكاء الاصطناعي. قد تحتوي المخرجات التي يتم إنشاؤها بواسطة نماذج التعلم الآلي على أخطاء أو سهو أو تفسيرات غير دقيقة أو معلومات غير مكتملة.",
-
-    enterpriseTitle: "11. استخدام المؤسسات",
-    enterpriseText:
-      "تظل المؤسسات مسؤولة عن امتثالها وحوكمتها ومراجعاتها الأمنية وموافقاتها الداخلية والتزاماتها التنظيمية عند استخدام خدمات Runexa.",
-  },
-};
-
 type Locale = "en" | "fr" | "ar";
 
 const normalizeLocale = (
@@ -389,6 +16,432 @@ const normalizeLocale = (
   return fallback;
 };
 
+const getDefaultLocale = (): Locale => {
+  return normalizeLocale(defaultLocale, "en");
+};
+
+const productTermsCopy = {
+  en: {
+    title: "Product Terms",
+    updated: "Last updated: June 2026",
+    eyebrow: "Product-specific terms",
+    heroTitle: "Clear terms for each Runexa AI agent.",
+    heroText:
+      "These Product Terms explain how Runexa’s specialized AI agents may be used, what each agent is designed to do, and the product-specific limits users should understand before relying on outputs.",
+    primaryCta: "Contact Runexa",
+    secondaryCta: "Read Terms of Service",
+
+    quickTitle: "What this page covers",
+    quickItems: [
+      "Agent-specific purpose and intended use",
+      "Product limits for legal, finance, study, and business agents",
+      "User responsibilities by agent type",
+      "High-impact use restrictions",
+      "Enterprise and workspace product conditions",
+      "Relationship with the Terms of Service and AI Disclaimer",
+    ],
+
+    agentOverviewTitle: "Runexa agent family",
+    agentOverviewSubtitle:
+      "Each agent is designed for a specific workflow. These Product Terms should be read together with the Terms of Service, AI Disclaimer, Privacy Policy, Security page, and Acceptable Use Policy.",
+    agentCards: [
+      {
+        name: "Runexa Legal Agent",
+        tag: "Contract and legal-document intelligence",
+        description:
+          "Assists with contract review, risk signals, clause summaries, obligations, simplified explanations, and negotiation priorities.",
+      },
+      {
+        name: "Runexa Finance Coach",
+        tag: "Personal finance insights",
+        description:
+          "Assists with expense analysis, spending patterns, budgeting observations, and general financial awareness.",
+      },
+      {
+        name: "Runexa Study Agent",
+        tag: "Learning support",
+        description:
+          "Assists with study summaries, quizzes, revision plans, learning explanations, and educational organization.",
+      },
+      {
+        name: "Runexa Business Decision Agent",
+        tag: "Business decision support",
+        description:
+          "Assists with business analysis, scenario review, operational insights, decision briefs, and structured recommendations.",
+      },
+    ],
+
+    sections: [
+      {
+        title: "1. Scope of These Product Terms",
+        text:
+          "These Product Terms apply to the AI agents, workflows, reports, dashboards, previews, generated outputs, and related product features provided through the Runexa platform. If these Product Terms conflict with the general Terms of Service, the more specific product condition applies only for the relevant agent or feature.",
+      },
+      {
+        title: "2. Runexa Legal Agent",
+        text:
+          "The Runexa Legal Agent is designed to assist with legal-document review, including clause identification, risk indicators, simplified explanations, summaries, obligations, missing-clause observations, and negotiation priorities. It is not a law firm, lawyer, or legal adviser. Outputs should be reviewed by the user and, where appropriate, by a qualified legal professional before signing, rejecting, negotiating, or relying on a contract or legal document.",
+      },
+      {
+        title: "3. Legal Agent Limits",
+        text:
+          "The Legal Agent may miss clauses, misclassify risk, misunderstand jurisdiction-specific rules, overstate or understate legal exposure, or produce incomplete interpretations. It should not be used as the sole basis for litigation strategy, contract execution, regulatory compliance, legal filings, legal disputes, employment decisions, immigration matters, criminal matters, or other high-impact legal decisions.",
+      },
+      {
+        title: "4. Runexa Finance Coach",
+        text:
+          "The Runexa Finance Coach is designed to assist with expense analysis, spending patterns, budget awareness, recurring-payment observations, and general financial insights. It does not provide financial, investment, tax, accounting, credit, lending, insurance, or retirement advice. Users remain responsible for verifying transactions, amounts, categories, and recommendations before acting.",
+      },
+      {
+        title: "5. Finance Coach Limits",
+        text:
+          "The Finance Coach may misclassify transactions, miss financial context, misunderstand income or expenses, overlook account-specific details, or generate incomplete suggestions. It should not be used as the sole basis for investment decisions, tax filings, loan decisions, debt restructuring, retirement planning, insurance decisions, emergency financial decisions, or regulated financial activity.",
+      },
+      {
+        title: "6. Runexa Study Agent",
+        text:
+          "The Runexa Study Agent is designed to support learning by generating summaries, study plans, quizzes, explanations, revision structures, and learning assistance. It does not guarantee grades, admissions, certifications, exam success, academic progress, or learning outcomes. Users should compare outputs with official course materials, teacher instructions, and institution rules.",
+      },
+      {
+        title: "7. Study Agent Limits and Academic Integrity",
+        text:
+          "The Study Agent may summarize content incorrectly, generate inaccurate quizzes, omit important context, or provide incomplete explanations. Users must not use the Study Agent to cheat, plagiarize, impersonate original work, bypass academic rules, or violate school, university, exam, or institutional policies.",
+      },
+      {
+        title: "8. Runexa Business Decision Agent",
+        text:
+          "The Runexa Business Decision Agent is designed to assist with business analysis, structured decision briefs, scenario comparison, operational insights, trend review, and planning support. It does not provide management consulting, legal, tax, accounting, investment, employment, procurement, or regulated professional advice.",
+      },
+      {
+        title: "9. Business Agent Limits",
+        text:
+          "The Business Decision Agent may misunderstand business context, miss operational constraints, misread market signals, generate incomplete recommendations, or rely on incomplete inputs. It should not be used as the sole basis for hiring, firing, financing, acquisitions, investments, legal disputes, compliance decisions, layoffs, safety-critical decisions, or major business commitments.",
+      },
+      {
+        title: "10. Output Formats and Product Features",
+        text:
+          "Runexa outputs may include summaries, scores, classifications, risk levels, charts, graphs, recommendations, reports, action items, generated text, or structured data. These formats are designed to make information easier to review; they are not guarantees of accuracy, completeness, priority, risk, legality, financial outcome, academic outcome, or business success.",
+      },
+      {
+        title: "11. Credits, Plans, and Usage",
+        text:
+          "Agent usage may consume credits or be subject to plan limits, file-size limits, usage quotas, fair-use restrictions, workspace limits, feature availability, or enterprise terms. Credit usage and available features may vary by agent, plan, file type, processing complexity, region, account status, or promotional offer.",
+      },
+      {
+        title: "12. Experimental and Preview Features",
+        text:
+          "Some Runexa features may be experimental, beta, preview, limited-release, or subject to change. Experimental features may be less reliable, may change without notice, and may be removed, renamed, restricted, or replaced as the platform evolves.",
+      },
+      {
+        title: "13. Enterprise and Workspace Use",
+        text:
+          "Organizations using Runexa are responsible for user access, internal approvals, workspace configuration, compliance review, professional review, data-governance decisions, and determining whether the product is appropriate for their use case. Enterprise features may be subject to separate written agreements or additional product conditions.",
+      },
+      {
+        title: "14. User Responsibility",
+        text:
+          "Users are responsible for selecting the correct agent, providing accurate and lawful inputs, reviewing outputs, verifying important information, complying with applicable rules, and deciding whether professional advice or additional review is required before acting.",
+      },
+      {
+        title: "15. Relationship With Other Terms",
+        text:
+          "These Product Terms supplement the Terms of Service. The AI Disclaimer explains general AI limitations and human-review requirements. The Privacy Policy explains data handling. The Security page explains safeguards. The Acceptable Use Policy explains prohibited uses. The Refund Policy explains refund conditions.",
+      },
+      {
+        title: "16. Contact",
+        text:
+          "Questions about these Product Terms may be sent to contact@runexa.ai.",
+      },
+    ],
+  },
+
+  fr: {
+    title: "Conditions du produit",
+    updated: "Dernière mise à jour : juin 2026",
+    eyebrow: "Conditions propres aux produits",
+    heroTitle: "Des conditions claires pour chaque agent IA Runexa.",
+    heroText:
+      "Ces Conditions du produit expliquent comment les agents IA spécialisés de Runexa peuvent être utilisés, ce que chaque agent est conçu pour faire et les limites spécifiques à comprendre avant de s’appuyer sur les résultats.",
+    primaryCta: "Contacter Runexa",
+    secondaryCta: "Lire les Conditions d’utilisation",
+
+    quickTitle: "Ce que couvre cette page",
+    quickItems: [
+      "Objectif et usage prévu de chaque agent",
+      "Limites propres aux agents juridique, finance, étude et business",
+      "Responsabilités utilisateur par type d’agent",
+      "Restrictions pour les usages à impact élevé",
+      "Conditions produit pour les entreprises et espaces de travail",
+      "Lien avec les Conditions d’utilisation et l’Avertissement IA",
+    ],
+
+    agentOverviewTitle: "Famille d’agents Runexa",
+    agentOverviewSubtitle:
+      "Chaque agent est conçu pour un workflow spécifique. Ces Conditions du produit doivent être lues avec les Conditions d’utilisation, l’Avertissement IA, la Politique de confidentialité, la page Sécurité et la Politique d’utilisation acceptable.",
+    agentCards: [
+      {
+        name: "Agent juridique Runexa",
+        tag: "Intelligence contractuelle et documents juridiques",
+        description:
+          "Aide à la revue de contrats, aux signaux de risque, résumés de clauses, obligations, explications simplifiées et priorités de négociation.",
+      },
+      {
+        name: "Coach financier Runexa",
+        tag: "Insights de finances personnelles",
+        description:
+          "Aide à analyser les dépenses, repérer les habitudes de consommation, observer le budget et améliorer la compréhension financière.",
+      },
+      {
+        name: "Agent étude Runexa",
+        tag: "Soutien à l’apprentissage",
+        description:
+          "Aide à générer des résumés, quiz, plans de révision, explications pédagogiques et organisation de l’apprentissage.",
+      },
+      {
+        name: "Agent de décision business Runexa",
+        tag: "Aide à la décision business",
+        description:
+          "Aide à l’analyse business, aux scénarios, insights opérationnels, notes de décision et recommandations structurées.",
+      },
+    ],
+
+    sections: [
+      {
+        title: "1. Champ d’application de ces Conditions du produit",
+        text:
+          "Ces Conditions du produit s’appliquent aux agents IA, workflows, rapports, tableaux de bord, aperçus, résultats générés et fonctionnalités liées fournis via la plateforme Runexa. En cas de conflit avec les Conditions d’utilisation générales, la condition produit la plus spécifique s’applique uniquement à l’agent ou à la fonctionnalité concernée.",
+      },
+      {
+        title: "2. Agent juridique Runexa",
+        text:
+          "L’Agent juridique Runexa est conçu pour assister la revue de documents juridiques, notamment l’identification de clauses, les indicateurs de risque, les explications simplifiées, les résumés, les obligations, les observations sur clauses manquantes et les priorités de négociation. Il n’est pas un cabinet d’avocats, un avocat ou un conseiller juridique. Les résultats doivent être relus par l’utilisateur et, le cas échéant, par un professionnel du droit qualifié avant de signer, refuser, négocier ou s’appuyer sur un contrat ou document juridique.",
+      },
+      {
+        title: "3. Limites de l’Agent juridique",
+        text:
+          "L’Agent juridique peut manquer des clauses, mal classifier un risque, mal comprendre des règles propres à une juridiction, surestimer ou sous-estimer une exposition juridique, ou produire des interprétations incomplètes. Il ne doit pas être utilisé comme base unique pour une stratégie contentieuse, la signature d’un contrat, la conformité réglementaire, des dépôts juridiques, des litiges, décisions d’emploi, sujets d’immigration, affaires pénales ou autres décisions juridiques à impact élevé.",
+      },
+      {
+        title: "4. Coach financier Runexa",
+        text:
+          "Le Coach financier Runexa est conçu pour aider à analyser les dépenses, les habitudes de consommation, la compréhension budgétaire, les paiements récurrents et les insights financiers généraux. Il ne fournit pas de conseil financier, d’investissement, fiscal, comptable, de crédit, de prêt, d’assurance ou de retraite. Les utilisateurs restent responsables de vérifier les transactions, montants, catégories et recommandations avant d’agir.",
+      },
+      {
+        title: "5. Limites du Coach financier",
+        text:
+          "Le Coach financier peut mal classifier des transactions, manquer un contexte financier, mal comprendre les revenus ou dépenses, ignorer des détails propres à un compte ou générer des suggestions incomplètes. Il ne doit pas être utilisé comme base unique pour des investissements, déclarations fiscales, décisions de prêt, restructuration de dettes, planification retraite, décisions d’assurance, décisions financières urgentes ou activités financières réglementées.",
+      },
+      {
+        title: "6. Agent étude Runexa",
+        text:
+          "L’Agent étude Runexa est conçu pour soutenir l’apprentissage en générant des résumés, plans d’étude, quiz, explications, structures de révision et assistance pédagogique. Il ne garantit pas les notes, admissions, certifications, réussites d’examen, progrès académiques ou résultats d’apprentissage. Les utilisateurs doivent comparer les résultats avec les supports officiels, consignes des enseignants et règles de leur établissement.",
+      },
+      {
+        title: "7. Limites de l’Agent étude et intégrité académique",
+        text:
+          "L’Agent étude peut résumer incorrectement un contenu, générer des quiz inexacts, omettre un contexte important ou fournir des explications incomplètes. Les utilisateurs ne doivent pas utiliser l’Agent étude pour tricher, plagier, présenter un contenu comme un travail original, contourner des règles académiques ou violer les politiques d’une école, université, examen ou institution.",
+      },
+      {
+        title: "8. Agent de décision business Runexa",
+        text:
+          "L’Agent de décision business Runexa est conçu pour assister l’analyse business, les notes de décision structurées, la comparaison de scénarios, les insights opérationnels, l’examen de tendances et le soutien à la planification. Il ne fournit pas de conseil en management, juridique, fiscal, comptable, d’investissement, d’emploi, d’achat ou autre conseil professionnel réglementé.",
+      },
+      {
+        title: "9. Limites de l’Agent business",
+        text:
+          "L’Agent de décision business peut mal comprendre le contexte, manquer des contraintes opérationnelles, mal lire des signaux de marché, générer des recommandations incomplètes ou s’appuyer sur des données incomplètes. Il ne doit pas être utilisé comme base unique pour l’embauche, le licenciement, le financement, les acquisitions, les investissements, les litiges, la conformité, les licenciements collectifs, les décisions critiques de sécurité ou les engagements business majeurs.",
+      },
+      {
+        title: "10. Formats de sortie et fonctionnalités produit",
+        text:
+          "Les résultats Runexa peuvent inclure des résumés, scores, classifications, niveaux de risque, graphiques, recommandations, rapports, actions, texte généré ou données structurées. Ces formats visent à faciliter la revue de l’information ; ils ne garantissent pas l’exactitude, l’exhaustivité, la priorité, le risque, la légalité, le résultat financier, le résultat académique ou la réussite business.",
+      },
+      {
+        title: "11. Crédits, plans et usage",
+        text:
+          "L’utilisation des agents peut consommer des crédits ou être soumise à des limites de plan, taille de fichier, quotas d’usage, restrictions d’usage raisonnable, limites d’espace de travail, disponibilité de fonctionnalités ou conditions entreprise. L’usage des crédits et les fonctionnalités disponibles peuvent varier selon l’agent, le plan, le type de fichier, la complexité du traitement, la région, le statut du compte ou l’offre promotionnelle.",
+      },
+      {
+        title: "12. Fonctionnalités expérimentales et aperçus",
+        text:
+          "Certaines fonctionnalités Runexa peuvent être expérimentales, bêta, en aperçu, en diffusion limitée ou susceptibles d’évoluer. Les fonctionnalités expérimentales peuvent être moins fiables, changer sans préavis, être supprimées, renommées, restreintes ou remplacées à mesure que la plateforme évolue.",
+      },
+      {
+        title: "13. Utilisation entreprise et espaces de travail",
+        text:
+          "Les organisations utilisant Runexa sont responsables de l’accès des utilisateurs, des approbations internes, de la configuration des espaces de travail, de la revue de conformité, de la revue professionnelle, des décisions de gouvernance des données et de l’évaluation de l’adéquation du produit à leur cas d’usage. Les fonctionnalités entreprise peuvent être soumises à des accords écrits séparés ou à des conditions produit additionnelles.",
+      },
+      {
+        title: "14. Responsabilité de l’utilisateur",
+        text:
+          "Les utilisateurs sont responsables de choisir le bon agent, fournir des entrées exactes et licites, relire les résultats, vérifier les informations importantes, respecter les règles applicables et déterminer si un avis professionnel ou une revue supplémentaire est nécessaire avant d’agir.",
+      },
+      {
+        title: "15. Relation avec les autres conditions",
+        text:
+          "Ces Conditions du produit complètent les Conditions d’utilisation. L’Avertissement IA explique les limites générales de l’IA et les exigences de revue humaine. La Politique de confidentialité explique le traitement des données. La page Sécurité explique les mesures de protection. La Politique d’utilisation acceptable explique les usages interdits. La Politique de remboursement explique les conditions de remboursement.",
+      },
+      {
+        title: "16. Contact",
+        text:
+          "Les questions concernant ces Conditions du produit peuvent être envoyées à contact@runexa.ai.",
+      },
+    ],
+  },
+
+  ar: {
+    title: "شروط المنتج",
+    updated: "آخر تحديث: يونيو 2026",
+    eyebrow: "شروط خاصة بالمنتج",
+    heroTitle: "شروط واضحة لكل وكيل ذكاء اصطناعي في Runexa.",
+    heroText:
+      "توضح شروط المنتج هذه كيفية استخدام وكلاء Runexa المتخصصين، وما صُمم كل وكيل للقيام به، والحدود الخاصة بكل منتج التي يجب على المستخدمين فهمها قبل الاعتماد على المخرجات.",
+    primaryCta: "تواصل مع Runexa",
+    secondaryCta: "قراءة شروط الاستخدام",
+
+    quickTitle: "ما الذي تغطيه هذه الصفحة",
+    quickItems: [
+      "الغرض والاستخدام المقصود لكل وكيل",
+      "حدود المنتج للوكلاء القانوني والمالي والدراسي والتجاري",
+      "مسؤوليات المستخدم حسب نوع الوكيل",
+      "قيود الاستخدامات عالية التأثير",
+      "شروط المنتج للمؤسسات ومساحات العمل",
+      "العلاقة مع شروط الاستخدام وإخلاء مسؤولية الذكاء الاصطناعي",
+    ],
+
+    agentOverviewTitle: "مجموعة وكلاء Runexa",
+    agentOverviewSubtitle:
+      "تم تصميم كل وكيل لسير عمل محدد. يجب قراءة شروط المنتج هذه مع شروط الاستخدام وإخلاء مسؤولية الذكاء الاصطناعي وسياسة الخصوصية وصفحة الأمان وسياسة الاستخدام المقبول.",
+    agentCards: [
+      {
+        name: "وكيل Runexa القانوني",
+        tag: "ذكاء العقود والمستندات القانونية",
+        description:
+          "يساعد في مراجعة العقود وإشارات المخاطر وملخصات البنود والالتزامات والتفسيرات المبسطة وأولويات التفاوض.",
+      },
+      {
+        name: "مدرب Runexa المالي",
+        tag: "رؤى مالية شخصية",
+        description:
+          "يساعد في تحليل المصاريف وأنماط الإنفاق وملاحظات الميزانية والوعي المالي العام.",
+      },
+      {
+        name: "وكيل Runexa للدراسة",
+        tag: "دعم التعلم",
+        description:
+          "يساعد في الملخصات الدراسية والاختبارات وخطط المراجعة والتفسيرات التعليمية وتنظيم التعلم.",
+      },
+      {
+        name: "وكيل Runexa لقرارات الأعمال",
+        tag: "دعم قرارات الأعمال",
+        description:
+          "يساعد في تحليل الأعمال ومراجعة السيناريوهات والرؤى التشغيلية ومذكرات القرار والتوصيات المنظمة.",
+      },
+    ],
+
+    sections: [
+      {
+        title: "1. نطاق شروط المنتج",
+        text:
+          "تنطبق شروط المنتج هذه على وكلاء الذكاء الاصطناعي وسير العمل والتقارير ولوحات المعلومات والمعاينات والمخرجات والميزات ذات الصلة المقدمة عبر منصة Runexa. إذا تعارضت شروط المنتج هذه مع شروط الاستخدام العامة، فإن الشرط الأكثر تحديداً ينطبق فقط على الوكيل أو الميزة ذات الصلة.",
+      },
+      {
+        title: "2. وكيل Runexa القانوني",
+        text:
+          "تم تصميم وكيل Runexa القانوني للمساعدة في مراجعة المستندات القانونية، بما في ذلك تحديد البنود، ومؤشرات المخاطر، والتفسيرات المبسطة، والملخصات، والالتزامات، وملاحظات البنود المفقودة، وأولويات التفاوض. وهو ليس مكتب محاماة أو محامياً أو مستشاراً قانونياً. يجب على المستخدم مراجعة المخرجات، وعند الاقتضاء مراجعتها مع مهني قانوني مؤهل قبل توقيع أو رفض أو التفاوض بشأن أو الاعتماد على عقد أو مستند قانوني.",
+      },
+      {
+        title: "3. حدود الوكيل القانوني",
+        text:
+          "قد يفوت الوكيل القانوني بعض البنود، أو يخطئ في تصنيف المخاطر، أو يسيء فهم قواعد خاصة بولاية قضائية، أو يبالغ أو يقلل من التعرض القانوني، أو ينتج تفسيرات غير مكتملة. لا ينبغي استخدامه كأساس وحيد لاستراتيجية التقاضي أو تنفيذ العقود أو الامتثال التنظيمي أو الإيداعات القانونية أو النزاعات أو قرارات العمل أو مسائل الهجرة أو القضايا الجنائية أو غيرها من القرارات القانونية عالية التأثير.",
+      },
+      {
+        title: "4. مدرب Runexa المالي",
+        text:
+          "تم تصميم مدرب Runexa المالي للمساعدة في تحليل المصاريف وأنماط الإنفاق والوعي بالميزانية وملاحظات المدفوعات المتكررة والرؤى المالية العامة. لا يقدم مشورة مالية أو استثمارية أو ضريبية أو محاسبية أو ائتمانية أو متعلقة بالقروض أو التأمين أو التقاعد. يبقى المستخدمون مسؤولين عن التحقق من المعاملات والمبالغ والتصنيفات والتوصيات قبل اتخاذ أي إجراء.",
+      },
+      {
+        title: "5. حدود المدرب المالي",
+        text:
+          "قد يخطئ المدرب المالي في تصنيف المعاملات، أو يفوّت سياقاً مالياً مهماً، أو يسيء فهم الدخل أو المصاريف، أو يتجاهل تفاصيل خاصة بالحساب، أو يولد اقتراحات غير مكتملة. لا ينبغي استخدامه كأساس وحيد للاستثمارات أو التصريحات الضريبية أو قرارات القروض أو إعادة هيكلة الديون أو تخطيط التقاعد أو قرارات التأمين أو القرارات المالية الطارئة أو الأنشطة المالية المنظمة.",
+      },
+      {
+        title: "6. وكيل Runexa للدراسة",
+        text:
+          "تم تصميم وكيل Runexa للدراسة لدعم التعلم من خلال إنشاء ملخصات وخطط دراسة واختبارات وتفسيرات وهياكل مراجعة ومساعدة تعليمية. لا يضمن الدرجات أو القبول أو الشهادات أو النجاح في الامتحانات أو التقدم الأكاديمي أو نتائج التعلم. يجب على المستخدمين مقارنة المخرجات بالمواد الرسمية وتعليمات المدرسين وقواعد المؤسسة.",
+      },
+      {
+        title: "7. حدود وكيل الدراسة والنزاهة الأكاديمية",
+        text:
+          "قد يلخص وكيل الدراسة المحتوى بشكل غير صحيح، أو ينشئ اختبارات غير دقيقة، أو يغفل سياقاً مهماً، أو يقدم تفسيرات غير مكتملة. يجب ألا يستخدم المستخدمون وكيل الدراسة للغش أو الانتحال أو تقديم محتوى كعمل أصلي أو تجاوز القواعد الأكاديمية أو انتهاك سياسات المدرسة أو الجامعة أو الامتحان أو المؤسسة.",
+      },
+      {
+        title: "8. وكيل Runexa لقرارات الأعمال",
+        text:
+          "تم تصميم وكيل Runexa لقرارات الأعمال للمساعدة في تحليل الأعمال، ومذكرات القرار المنظمة، ومقارنة السيناريوهات، والرؤى التشغيلية، ومراجعة الاتجاهات، ودعم التخطيط. لا يقدم استشارات إدارية أو قانونية أو ضريبية أو محاسبية أو استثمارية أو متعلقة بالتوظيف أو المشتريات أو أي مشورة مهنية منظمة.",
+      },
+      {
+        title: "9. حدود وكيل الأعمال",
+        text:
+          "قد يسيء وكيل قرارات الأعمال فهم سياق الأعمال، أو يفوت قيوداً تشغيلية، أو يقرأ إشارات السوق بشكل غير صحيح، أو يولد توصيات غير مكتملة، أو يعتمد على مدخلات غير كاملة. لا ينبغي استخدامه كأساس وحيد للتوظيف أو الفصل أو التمويل أو الاستحواذات أو الاستثمارات أو النزاعات القانونية أو قرارات الامتثال أو التسريح أو قرارات السلامة الحرجة أو الالتزامات التجارية الكبرى.",
+      },
+      {
+        title: "10. صيغ المخرجات وميزات المنتج",
+        text:
+          "قد تشمل مخرجات Runexa ملخصات أو درجات أو تصنيفات أو مستويات مخاطر أو مخططات أو رسوم بيانية أو توصيات أو تقارير أو عناصر عمل أو نصوصاً مولدة أو بيانات منظمة. تهدف هذه الصيغ إلى تسهيل مراجعة المعلومات؛ ولا تمثل ضماناً للدقة أو الاكتمال أو الأولوية أو المخاطر أو القانونية أو النتيجة المالية أو النتيجة الأكاديمية أو النجاح التجاري.",
+      },
+      {
+        title: "11. الأرصدة والخطط والاستخدام",
+        text:
+          "قد يستهلك استخدام الوكلاء أرصدة أو يخضع لحدود الخطة أو حجم الملف أو حصص الاستخدام أو قيود الاستخدام العادل أو حدود مساحة العمل أو توفر الميزات أو شروط المؤسسات. قد يختلف استخدام الأرصدة والميزات المتاحة حسب الوكيل والخطة ونوع الملف وتعقيد المعالجة والمنطقة وحالة الحساب أو العرض الترويجي.",
+      },
+      {
+        title: "12. الميزات التجريبية والمعاينات",
+        text:
+          "قد تكون بعض ميزات Runexa تجريبية أو في مرحلة بيتا أو معاينة أو إصدار محدود أو قابلة للتغيير. قد تكون الميزات التجريبية أقل موثوقية، وقد تتغير دون إشعار، أو تُحذف أو يُعاد تسميتها أو تُقيّد أو تُستبدل مع تطور المنصة.",
+      },
+      {
+        title: "13. استخدام المؤسسات ومساحات العمل",
+        text:
+          "تتحمل المؤسسات التي تستخدم Runexa مسؤولية وصول المستخدمين والموافقات الداخلية وإعداد مساحات العمل ومراجعة الامتثال والمراجعة المهنية وقرارات حوكمة البيانات وتحديد ما إذا كان المنتج مناسباً لحالة الاستخدام الخاصة بها. قد تخضع ميزات المؤسسات لاتفاقيات مكتوبة منفصلة أو شروط منتج إضافية.",
+      },
+      {
+        title: "14. مسؤولية المستخدم",
+        text:
+          "يتحمل المستخدمون مسؤولية اختيار الوكيل الصحيح، وتقديم مدخلات دقيقة وقانونية، ومراجعة المخرجات، والتحقق من المعلومات المهمة، والامتثال للقواعد المعمول بها، وتحديد ما إذا كانت هناك حاجة إلى مشورة مهنية أو مراجعة إضافية قبل اتخاذ إجراء.",
+      },
+      {
+        title: "15. العلاقة مع الشروط الأخرى",
+        text:
+          "تكمل شروط المنتج هذه شروط الاستخدام. يوضح إخلاء مسؤولية الذكاء الاصطناعي حدود الذكاء الاصطناعي العامة ومتطلبات المراجعة البشرية. توضح سياسة الخصوصية معالجة البيانات. تشرح صفحة الأمان الضمانات. توضح سياسة الاستخدام المقبول الاستخدامات المحظورة. وتوضح سياسة الاسترداد شروط الاسترداد.",
+      },
+      {
+        title: "16. التواصل",
+        text:
+          "يمكن إرسال الأسئلة المتعلقة بشروط المنتج هذه إلى contact@runexa.ai.",
+      },
+    ],
+  },
+} satisfies Record<Locale, {
+  title: string;
+  updated: string;
+  eyebrow: string;
+  heroTitle: string;
+  heroText: string;
+  primaryCta: string;
+  secondaryCta: string;
+  quickTitle: string;
+  quickItems: string[];
+  agentOverviewTitle: string;
+  agentOverviewSubtitle: string;
+  agentCards: {
+    name: string;
+    tag: string;
+    description: string;
+  }[];
+  sections: { title: string; text: string }[];
+}>;
+
 export default function ProductTermsClient({
   initialLocale,
   lockInitialLocale = false,
@@ -396,7 +449,7 @@ export default function ProductTermsClient({
   initialLocale?: Locale;
   lockInitialLocale?: boolean;
 }) {
-  const resolvedInitialLocale = normalizeLocale(initialLocale, normalizeLocale(defaultLocale));
+  const resolvedInitialLocale = initialLocale || getDefaultLocale();
 
   const [locale, setLocale] = useState<Locale>(resolvedInitialLocale);
 
@@ -409,256 +462,124 @@ export default function ProductTermsClient({
     setLocale(normalizeLocale(getSavedLocale(), resolvedInitialLocale));
   }, [resolvedInitialLocale, lockInitialLocale]);
 
-  const t =
-    productTermsTranslations[locale] ||
-    productTermsTranslations[normalizeLocale(defaultLocale)];
+  const t = productTermsCopy[locale];
 
   return (
     <main
       dir={locale === "ar" ? "rtl" : "ltr"}
-      className="min-h-screen bg-slate-50 px-4 py-12"
+      className="min-h-screen bg-slate-950 px-4 py-10 text-slate-900"
     >
-      <div className="max-w-3xl mx-auto bg-white p-8 rounded-3xl border shadow-sm space-y-14">
-        <div>
-          <h1 className="text-4xl font-bold text-slate-900">{t.title}</h1>
+      <div className="mx-auto max-w-6xl space-y-8">
+        <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-white shadow-2xl">
+          <div className="grid gap-0 lg:grid-cols-[1.15fr_0.85fr]">
+            <div className="p-8 md:p-12">
+              <p className="text-sm font-semibold uppercase tracking-wide text-blue-600">
+                {t.eyebrow}
+              </p>
 
-          <p className="text-sm text-slate-500 mt-2">{t.updated}</p>
+              <h1 className="mt-4 max-w-3xl text-4xl font-bold tracking-tight text-slate-950 md:text-5xl">
+                {t.heroTitle}
+              </h1>
 
-          <p className="mt-4 text-slate-600">{t.intro}</p>
-        </div>
+              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
+                {t.heroText}
+              </p>
 
-        {/* LEGAL AGENT */}
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a
+                  href="mailto:contact@runexa.ai"
+                  className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-700"
+                >
+                  {t.primaryCta}
+                </a>
 
-        <div className="border-t pt-10">
-          <h2 className="text-3xl font-bold text-slate-900">
-            {t.legalTitle}
+                <a
+                  href="/terms"
+                  className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 hover:bg-slate-50"
+                >
+                  {t.secondaryCta}
+                </a>
+              </div>
+
+              <p className="mt-6 text-sm text-slate-500">
+                {t.updated}
+              </p>
+            </div>
+
+            <div className="bg-slate-950 p-8 text-white md:p-12">
+              <h2 className="text-2xl font-bold">
+                {t.quickTitle}
+              </h2>
+
+              <div className="mt-8 space-y-4">
+                {t.quickItems.map((item) => (
+                  <div
+                    key={item}
+                    className="rounded-2xl border border-white/10 bg-white/5 p-4"
+                  >
+                    <p className="text-sm leading-6 text-slate-200">
+                      {item}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="rounded-[2rem] border border-white/10 bg-white p-8 shadow-xl md:p-10">
+          <h2 className="text-2xl font-bold text-slate-950">
+            {t.agentOverviewTitle}
           </h2>
-        </div>
 
-        <section>
-          <h3 className="text-xl font-semibold">{t.descriptionTitle}</h3>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600">
+            {t.agentOverviewSubtitle}
+          </p>
 
-          <p className="mt-2 text-slate-600">{t.legalDescription1}</p>
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            {t.agentCards.map((agent) => (
+              <article
+                key={agent.name}
+                className="rounded-2xl border border-slate-200 bg-slate-50 p-5"
+              >
+                <p className="text-xs font-semibold uppercase tracking-wide text-blue-600">
+                  {agent.tag}
+                </p>
 
-          <p className="mt-2 text-slate-600">{t.legalDescription2}</p>
+                <h3 className="mt-2 text-lg font-semibold text-slate-950">
+                  {agent.name}
+                </h3>
+
+                <p className="mt-2 text-sm leading-6 text-slate-600">
+                  {agent.description}
+                </p>
+              </article>
+            ))}
+          </div>
         </section>
 
-        <section>
-          <h3 className="text-xl font-semibold">{t.legalAdviceTitle}</h3>
+        <section className="rounded-[2rem] border border-white/10 bg-white p-8 shadow-xl md:p-10">
+          <h1 className="text-3xl font-bold text-slate-950">
+            {t.title}
+          </h1>
 
-          <p className="mt-2 text-slate-600">{t.legalAdvice1}</p>
+          <p className="mt-2 text-sm text-slate-500">
+            {t.updated}
+          </p>
 
-          <p className="mt-2 text-slate-600">{t.legalAdvice2}</p>
-        </section>
+          <div className="mt-8 space-y-8">
+            {t.sections.map((section) => (
+              <section key={section.title}>
+                <h2 className="text-xl font-semibold text-slate-950">
+                  {section.title}
+                </h2>
 
-        <section>
-          <h3 className="text-xl font-semibold">{t.accuracyTitle}</h3>
-
-          <ul className="mt-2 list-disc pl-5 text-slate-600 space-y-1">
-            <li>{t.legalAccuracy1}</li>
-            <li>{t.legalAccuracy2}</li>
-            <li>{t.legalAccuracy3}</li>
-          </ul>
-        </section>
-
-        <section>
-          <h3 className="text-xl font-semibold">
-            {t.userResponsibilityTitle}
-          </h3>
-
-          <p className="mt-2 text-slate-600">{t.legalResponsibility}</p>
-        </section>
-
-        <section>
-          <h3 className="text-xl font-semibold">{t.highRiskTitle}</h3>
-
-          <p className="mt-2 text-slate-600">{t.legalHighRisk}</p>
-        </section>
-
-        <section>
-          <h3 className="text-xl font-semibold">{t.liabilityTitle}</h3>
-
-          <p className="mt-2 text-slate-600">{t.legalLiability}</p>
-        </section>
-
-        {/* STUDY AGENT */}
-
-        <div className="border-t pt-10">
-          <h2 className="text-3xl font-bold text-slate-900">
-            {t.studyTitle}
-          </h2>
-        </div>
-
-        <section>
-          <h3 className="text-xl font-semibold">{t.descriptionTitle}</h3>
-
-          <p className="mt-2 text-slate-600">{t.studyDescription}</p>
-        </section>
-
-        <section>
-          <h3 className="text-xl font-semibold">{t.studyGuaranteeTitle}</h3>
-
-          <p className="mt-2 text-slate-600">{t.studyGuarantee}</p>
-        </section>
-
-        <section>
-          <h3 className="text-xl font-semibold">{t.accuracyTitle}</h3>
-
-          <ul className="mt-2 list-disc pl-5 text-slate-600 space-y-1">
-            <li>{t.studyAccuracy1}</li>
-            <li>{t.studyAccuracy2}</li>
-            <li>{t.studyAccuracy3}</li>
-          </ul>
-        </section>
-
-        <section>
-          <h3 className="text-xl font-semibold">
-            {t.userResponsibilityTitle}
-          </h3>
-
-          <p className="mt-2 text-slate-600">{t.studyResponsibility}</p>
-        </section>
-
-        <section>
-          <h3 className="text-xl font-semibold">{t.studyIntegrityTitle}</h3>
-
-          <p className="mt-2 text-slate-600">{t.studyIntegrity}</p>
-        </section>
-
-        <section>
-          <h3 className="text-xl font-semibold">{t.liabilityTitle}</h3>
-
-          <p className="mt-2 text-slate-600">{t.studyLiability}</p>
-        </section>
-
-        {/* FINANCE AGENT */}
-
-        <div className="border-t pt-10">
-          <h2 className="text-3xl font-bold text-slate-900">
-            {t.financeTitle}
-          </h2>
-        </div>
-
-        <section>
-          <h3 className="text-xl font-semibold">{t.descriptionTitle}</h3>
-
-          <p className="mt-2 text-slate-600">{t.financeDescription}</p>
-        </section>
-
-        <section>
-          <h3 className="text-xl font-semibold">{t.financeAdviceTitle}</h3>
-
-          <p className="mt-2 text-slate-600">{t.financeAdvice}</p>
-        </section>
-
-        <section>
-          <h3 className="text-xl font-semibold">{t.accuracyTitle}</h3>
-
-          <ul className="mt-2 list-disc pl-5 text-slate-600 space-y-1">
-            <li>{t.financeAccuracy1}</li>
-            <li>{t.financeAccuracy2}</li>
-            <li>{t.financeAccuracy3}</li>
-          </ul>
-        </section>
-
-        <section>
-          <h3 className="text-xl font-semibold">{t.financeHighRiskTitle}</h3>
-
-          <p className="mt-2 text-slate-600">{t.financeHighRisk}</p>
-        </section>
-
-        <section>
-          <h3 className="text-xl font-semibold">{t.financeLiabilityTitle}</h3>
-
-          <p className="mt-2 text-slate-600">{t.financeLiability}</p>
-        </section>
-
-        {/* BUSINESS AGENT */}
-
-        <div className="border-t pt-10">
-          <h2 className="text-3xl font-bold text-slate-900">
-            {t.businessTitle}
-          </h2>
-        </div>
-
-        <section>
-          <h3 className="text-xl font-semibold">{t.descriptionTitle}</h3>
-
-          <p className="mt-2 text-slate-600">{t.businessDescription}</p>
-        </section>
-
-        <section>
-          <h3 className="text-xl font-semibold">{t.businessAdviceTitle}</h3>
-
-          <p className="mt-2 text-slate-600">{t.businessAdvice}</p>
-        </section>
-
-        <section>
-          <h3 className="text-xl font-semibold">{t.accuracyTitle}</h3>
-
-          <ul className="mt-2 list-disc pl-5 text-slate-600 space-y-1">
-            <li>{t.businessAccuracy1}</li>
-            <li>{t.businessAccuracy2}</li>
-            <li>{t.businessAccuracy3}</li>
-          </ul>
-        </section>
-
-        <section>
-          <h3 className="text-xl font-semibold">
-            {t.userResponsibilityTitle}
-          </h3>
-
-          <p className="mt-2 text-slate-600">{t.businessResponsibility}</p>
-        </section>
-
-        <section>
-          <h3 className="text-xl font-semibold">{t.highRiskTitle}</h3>
-
-          <p className="mt-2 text-slate-600">{t.businessHighRisk}</p>
-        </section>
-
-        <section>
-          <h3 className="text-xl font-semibold">{t.liabilityTitle}</h3>
-
-          <p className="mt-2 text-slate-600">{t.businessLiability}</p>
-        </section>
-
-        {/* ADDITIONAL AI TERMS */}
-
-        <div className="border-t pt-10">
-          <h2 className="text-3xl font-bold text-slate-900">
-            {t.additionalTermsTitle}
-          </h2>
-        </div>
-
-        <section>
-          <h3 className="text-xl font-semibold">{t.humanReviewTitle}</h3>
-
-          <p className="mt-2 text-slate-600">{t.humanReview}</p>
-        </section>
-
-        <section>
-          <h3 className="text-xl font-semibold">{t.dataProcessingTitle}</h3>
-
-          <p className="mt-2 text-slate-600">{t.dataProcessing}</p>
-        </section>
-
-        <section>
-          <h3 className="text-xl font-semibold">{t.trainingTitle}</h3>
-
-          <p className="mt-2 text-slate-600">{t.trainingText}</p>
-        </section>
-
-        <section>
-          <h3 className="text-xl font-semibold">{t.transparencyTitle}</h3>
-
-          <p className="mt-2 text-slate-600">{t.transparencyText}</p>
-        </section>
-
-        <section>
-          <h3 className="text-xl font-semibold">{t.enterpriseTitle}</h3>
-
-          <p className="mt-2 text-slate-600">{t.enterpriseText}</p>
+                <p className="mt-2 whitespace-normal break-words text-slate-600">
+                  {section.text}
+                </p>
+              </section>
+            ))}
+          </div>
         </section>
       </div>
     </main>
