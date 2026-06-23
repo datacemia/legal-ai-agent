@@ -226,7 +226,7 @@ def handle_contract_ai(job: Job, db):
     )
     print("TEXT SENT TO LLM CHECK")
     print(cleaned_text[:3000])
-    
+
     summary_data = generate_summary_data(
         cleaned_text,
         output_language,
@@ -252,6 +252,8 @@ def handle_contract_ai(job: Job, db):
         cleaned_text,
         output_language,
     )
+    print("FINAL SIMPLIFIED STRING")
+    print(simplified)
 
     recommendations = [
         "Review all medium and high risk clauses.",
@@ -264,7 +266,8 @@ def handle_contract_ai(job: Job, db):
         90,
         legal_progress_message("saving", output_language),
     )
-
+    print("SAVING TO DB")
+    print(simplified)
     analysis = AnalysisResult(
         document_id=document.id,
         summary=summary,
