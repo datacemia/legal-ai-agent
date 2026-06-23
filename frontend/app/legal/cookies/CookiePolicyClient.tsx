@@ -457,7 +457,7 @@ export default function CookiePolicyClient({
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
-                  href="mailto:contact@runexa.ai"
+                  href="/contact-entreprise/contact"
                   className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-700"
                 >
                   {t.primaryCta}

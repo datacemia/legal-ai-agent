@@ -457,7 +457,7 @@ export default function PrivacyClient({
                 </a>
 
                 <a
-                  href="mailto:contact@runexa.ai"
+                  href="/contact-entreprise/contact"
                   className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 hover:bg-slate-50"
                 >
                   {t.contactLink}
