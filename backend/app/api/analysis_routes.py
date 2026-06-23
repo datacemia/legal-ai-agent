@@ -191,7 +191,7 @@ def run_analysis(
         status_message="Queued legal analysis...",
         input={
             "document_id": document.id,
-            "storage_path": document.storage_path,
+            "storage_path": document.file_path,
             "output_language": output_language,
             "access_type": billing.get("access_type"),
             "credits_used": billing.get("credits_used", 0),

@@ -116,8 +116,7 @@ def upload_document(
         file_type=extension,
         contract_type=contract_type,
         status="uploaded",
-        file_path=file_path,
-        storage_path=storage_result["storage_path"],
+        file_path=storage_result["storage_path"],
     )
 
     db.add(document)
