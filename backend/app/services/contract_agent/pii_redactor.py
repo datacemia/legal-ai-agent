@@ -314,8 +314,12 @@ def redact_sensitive_data(text: str) -> str:
         return ""
 
     text = redact_labeled_contract_parties(text)
+    print("AFTER LABELED REDACTION")
+    print(text[:1000])
 
     redacted = role_aware_party_pseudonymize(text)
+    print("AFTER PARTY PSEUDONYMIZATION")
+    print(redacted[:1000])
     redacted = regex_redact(redacted)
     redacted = gliner_redact(redacted)
 
