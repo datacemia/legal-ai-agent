@@ -206,6 +206,8 @@ def handle_contract_ai(job: Job, db):
     )
 
     print("START analyze_contract_clauses")
+    print("TEXT SENT TO LLM CHECK")
+    print(cleaned_text[:3000])
 
     clause_results = analyze_contract_clauses(
         clauses,
@@ -222,7 +224,9 @@ def handle_contract_ai(job: Job, db):
         70,
         legal_progress_message("summary", output_language),
     )
-
+    print("TEXT SENT TO LLM CHECK")
+    print(cleaned_text[:3000])
+    
     summary_data = generate_summary_data(
         cleaned_text,
         output_language,
@@ -234,13 +238,15 @@ def handle_contract_ai(job: Job, db):
     )
     print("SUMMARY DATA")
     print(summary_data)
-    
+
     update_job_progress(
         job,
         db,
         82,
         legal_progress_message("simplified", output_language),
     )
+    print("TEXT SENT TO LLM CHECK")
+    print(cleaned_text[:3000])
 
     simplified = generate_simplified_version(
         cleaned_text,
