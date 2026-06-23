@@ -191,7 +191,12 @@ def handle_contract_ai(job: Job, db):
         legal_progress_message("splitting", output_language),
     )
 
-    clauses = [cleaned_text]
+    clauses = split_into_clauses(cleaned_text)
+
+    if not clauses:
+        clauses = [cleaned_text]
+
+    print("LEGAL CLAUSES COUNT:", len(clauses))
 
     update_job_progress(
         job,
@@ -200,10 +205,14 @@ def handle_contract_ai(job: Job, db):
         legal_progress_message("analyzing", output_language),
     )
 
+    print("START analyze_contract_clauses")
+
     clause_results = analyze_contract_clauses(
         clauses,
         output_language,
     )
+
+    print("END analyze_contract_clauses")
 
     global_risk = calculate_global_risk(clause_results)
 
