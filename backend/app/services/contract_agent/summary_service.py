@@ -1204,6 +1204,8 @@ def render_summary_text(data: dict, language: str = "en") -> str:
 
     t = get_labels(language)
 
+    data = display_safe_party_labels(data, language)
+
     if language != "ar":
         roles = get_display_roles(
             contract_type=data.get("contract_type", ""),
@@ -1211,8 +1213,6 @@ def render_summary_text(data: dict, language: str = "en") -> str:
             language=language,
         )
         data = apply_display_roles(data, roles, language)
-
-    data = display_safe_party_labels(data, language)
 
     output = ""
     output += f"{t['type']}: {data['contract_type']}\n"
@@ -1365,6 +1365,8 @@ Contract text:
 
 def render_simplified_text(data: dict, language: str = "en") -> str:
     t = get_labels(language)
+
+    data = display_safe_party_labels(data, language)
 
     if language != "ar":
         roles = get_display_roles(
