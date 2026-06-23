@@ -1404,11 +1404,19 @@ def generate_simplified_version(text: str, language: str = "en") -> str:
 
 
 def calculate_global_risk(clause_results):
+    if isinstance(clause_results, dict):
+        if isinstance(clause_results.get("results"), list):
+            clause_results = clause_results["results"]
+        elif (
+            isinstance(clause_results.get("clauses"), dict)
+            and isinstance(clause_results["clauses"].get("results"), list)
+        ):
+            clause_results = clause_results["clauses"]["results"]
+        else:
+            clause_results = []
+
     if not isinstance(clause_results, list):
-        return {
-            "risk_level": "low",
-            "risk_score": 20,
-        }
+        clause_results = []
 
     clause_results = [
         item
