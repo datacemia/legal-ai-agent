@@ -10,7 +10,6 @@ from app.models.analysis import AnalysisResult
 from app.models.job import Job
 from app.models.user import User
 from app.schemas.analysis_schema import AnalysisResponse
-from app.services.contract_agent.pii_redactor import redact_sensitive_data
 
 from app.utils.security import get_current_user
 from app.utils.billing import check_and_consume_agent_access
@@ -19,9 +18,6 @@ from app.services.enterprise_service import (
     consume_enterprise_agent_quota,
     consume_enterprise_credits,
 )
-
-from app.services.contract_agent.contract_parser import extract_text
-from app.services.text_cleaner import clean_text
 
 router = APIRouter(prefix="/analysis", tags=["Analysis"])
 
@@ -182,24 +178,6 @@ def run_analysis(
     if output_language not in ["en", "fr", "ar"]:
         output_language = "en"
 
-    try:
-        raw_text = extract_text(
-            document.file_path,
-            document.file_type,
-        )
-
-        document_text = clean_text(raw_text)
-
-    except Exception as e:
-        document.status = "failed"
-
-        db.commit()
-
-        raise HTTPException(
-            status_code=400,
-            detail=f"Could not read uploaded file: {str(e)}",
-        )
-
     document.status = "processing"
 
     db.commit()
@@ -213,7 +191,7 @@ def run_analysis(
         status_message="Queued legal analysis...",
         input={
             "document_id": document.id,
-            "document_text": document_text,
+            "storage_path": document.storage_path,
             "output_language": output_language,
             "access_type": billing.get("access_type"),
             "credits_used": billing.get("credits_used", 0),
