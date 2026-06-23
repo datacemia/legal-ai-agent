@@ -542,12 +542,59 @@ def split_into_clause_objects(
     if not text or not text.strip():
         return []
 
+    arabic_article_pattern = re.compile(
+        r"(?=^المادة\s+[0-9٠-٩]+\s*[-–—:]?\s*)",
+        re.MULTILINE,
+    )
+
+    if "المادة" in text:
+        parts = [
+            p.strip()
+            for p in arabic_article_pattern.split(text)
+            if p.strip().startswith("المادة")
+        ]
+
+        if len(parts) >= 3:
+            return [
+                {
+                    "id": f"ar_article_{i}",
+                    "title": part.split("\n")[0][:120],
+                    "text": part,
+                    "level": 1,
+                    "depth": 1,
+                    "parent_id": None,
+                    "parent_clause_id": None,
+                    "semantic_parent": None,
+                    "section_path": [],
+                    "children": [],
+                    "confidence": 0.8,
+                }
+                for i, part in enumerate(parts)
+            ]
+
     objects = parse_legal_document_objects(text)
+    fallback_clauses = split_into_clauses(text)
+
+    if len(fallback_clauses) > len(objects):
+        return [
+            {
+                "id": f"fallback_{i}",
+                "title": clause.split("\n")[0][:120],
+                "text": clause,
+                "level": 1,
+                "depth": 1,
+                "parent_id": None,
+                "parent_clause_id": None,
+                "semantic_parent": None,
+                "section_path": [],
+                "children": [],
+                "confidence": 0.6,
+            }
+            for i, clause in enumerate(fallback_clauses)
+        ]
 
     if len(objects) >= 3:
         return objects
-
-    clauses = split_into_clauses(text)
 
     return [
         {
@@ -563,6 +610,5 @@ def split_into_clause_objects(
             "children": [],
             "confidence": 0.3,
         }
-        for i, clause in enumerate(clauses)
+        for i, clause in enumerate(fallback_clauses)
     ]
-

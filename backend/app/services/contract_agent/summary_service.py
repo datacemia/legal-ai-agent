@@ -7,6 +7,11 @@ from app.services.contract_agent.summary_normalizer import (
     normalize_contract_summary,
     normalize_simplified_contract,
 )
+from app.services.contract_agent.party_role_detector import (
+    get_display_roles,
+    apply_display_roles,
+    strip_role_articles,
+)
 from app.services.contract_agent.validator import (
     validate_contract_result,
 )
@@ -169,9 +174,15 @@ RULES:
 - Do not change the legal meaning.
 - Do not invent facts.
 - Do not add risks, obligations, clauses, warnings, or recommendations.
-- Preserve company names, person names, dates, amounts, article references, addresses, and court names when they are legal identifiers.
+- Preserve anonymized party labels, dates, amounts, article references, addresses, court names, and legal identifiers.
 - Translate surrounding explanatory text into the requested output language.
-- Avoid generic party labels like "first party", "second party", "premier partie", "deuxième partie", "الطرف الأول", or "الطرف الثاني" when a party name is available.
+PARTY IDENTITY RULES:
+- Preserve all party references exactly.
+- Never shorten party references.
+- Never replace a specific party reference with a generic word.
+- Never rewrite "الطرف الأول" as "الطرف".
+- Never rewrite "الطرف الثاني" as "الطرف".
+- Every obligation must explicitly identify the responsible party.
 - Mixed-language output is forbidden except for preserved legal identifiers.
 
 JSON to repair:
@@ -223,9 +234,15 @@ RULES:
 - Do not change the legal meaning.
 - Do not invent facts.
 - Do not add risks, obligations, warnings, or recommendations.
-- Preserve company names, person names, dates, amounts, article references, addresses, and court names when they are legal identifiers.
+- Preserve anonymized party labels, dates, amounts, article references, addresses, court names, and legal identifiers.
 - Translate surrounding explanatory text into the requested output language.
-- Avoid generic party labels like "first party", "second party", "premier partie", "deuxième partie", "الطرف الأول", or "الطرف الثاني" when a party name is available.
+PARTY IDENTITY RULES:
+- Preserve all party references exactly.
+- Never shorten party references.
+- Never replace a specific party reference with a generic word.
+- Never rewrite "الطرف الأول" as "الطرف".
+- Never rewrite "الطرف الثاني" as "الطرف".
+- Every obligation must explicitly identify the responsible party.
 - Mixed-language output is forbidden except for preserved legal identifiers.
 
 JSON to repair:
@@ -821,8 +838,29 @@ CRITICAL:
 Translate every generated JSON value into this output language.
 The contract source language may be different.
 Do not copy source-language sentences into generated fields.
-Preserve the legal identity of company names and person names.
-If the output language is different from the source language, provide a readable localized/transliterated display name when possible, while keeping the original legal name if needed.
+Preserve anonymized party identities exactly as provided.
+
+Anonymized entities may include:
+
+[PERSON]
+[ORGANIZATION]
+[PARTY_1]
+[PARTY_2]
+[PARTY_3]
+
+These labels represent legal parties.
+
+Do not reconstruct, infer, or replace real names.
+
+If rights, ownership, payments,
+confidentiality obligations,
+termination rights,
+intellectual property rights,
+or liabilities belong to an anonymized party,
+preserve the recipient exactly as written.
+
+Never transfer a right or obligation
+from one anonymized party to another.
 Dates, amounts, article references, and court names must remain accurate.
 
 LANGUAGE CONSISTENCY ENFORCEMENT:
@@ -848,6 +886,15 @@ Contract text:
         data,
         language,
     )
+
+    if language == "ar":
+        data["main_obligations"] = [
+            item
+            .replace("يلتزم الطرف بتقديم", "يلتزم الطرف ب بتقديم")
+            .replace("يلتزم الطرف بالحفاظ", "يلتزم الطرف ب بالحفاظ")
+            for item in data.get("main_obligations", [])
+        ]
+   
 
     protections = detect_balancing_protections(
         [text]
@@ -964,6 +1011,164 @@ Contract text:
     return data
 
 
+def display_safe_party_labels(value, language: str = "en"):
+    labels = {
+        "en": {
+            "[CLIENT]": "Contracting Party A",
+            "[SERVICE_PROVIDER]": "Contracting Party B",
+            "[EMPLOYER]": "Contracting Party A",
+            "[EMPLOYEE]": "Contracting Party B",
+            "[BUYER]": "Contracting Party A",
+            "[SELLER]": "Contracting Party B",
+            "[LESSOR]": "Contracting Party A",
+            "[LESSEE]": "Contracting Party B",
+            "[LENDER]": "Contracting Party A",
+            "[BORROWER]": "Contracting Party B",
+            "[PARTY_1]": "Contracting Party A",
+            "[PARTY_2]": "Contracting Party B",
+            "[PARTY_3]": "Contracting Party C",
+            "[ORGANIZATION]": "Contracting Party A",
+            "[PERSON]": "Contracting Party B",
+
+            "the Company": "Contracting Party A",
+            "The Company": "Contracting Party A",
+            "Company": "Contracting Party A",
+            "the company": "Contracting Party A",
+            "company": "Contracting Party A",
+            "the employer": "Contracting Party A",
+            "employer": "Contracting Party A",
+            "the Employer": "Contracting Party A",
+            "The Employer": "Contracting Party A",
+            "Employer": "Contracting Party A",
+            "the Client": "Contracting Party A",
+            "The Client": "Contracting Party A",
+            "Client": "Contracting Party A",
+            "the Buyer": "Contracting Party A",
+            "The Buyer": "Contracting Party A",
+            "Buyer": "Contracting Party A",
+            "the Lender": "Contracting Party A",
+            "The Lender": "Contracting Party A",
+            "Lender": "Contracting Party A",
+
+            "the Employee": "Contracting Party B",
+            "The Employee": "Contracting Party B",
+            "Employee": "Contracting Party B",
+            "the employee": "Contracting Party B",
+            "employee": "Contracting Party B",
+            "the Service Provider": "Contracting Party B",
+            "The Service Provider": "Contracting Party B",
+            "Service Provider": "Contracting Party B",
+            "the Provider": "Contracting Party B",
+            "The Provider": "Contracting Party B",
+            "Provider": "Contracting Party B",
+            "the Contractor": "Contracting Party B",
+            "The Contractor": "Contracting Party B",
+            "Contractor": "Contracting Party B",
+            "the Consultant": "Contracting Party B",
+            "The Consultant": "Contracting Party B",
+            "Consultant": "Contracting Party B",
+            "the Seller": "Contracting Party B",
+            "The Seller": "Contracting Party B",
+            "Seller": "Contracting Party B",
+            "the Borrower": "Contracting Party B",
+            "The Borrower": "Contracting Party B",
+            "Borrower": "Contracting Party B",
+        },
+        "fr": {
+            "[CLIENT]": "Partie contractante A",
+            "[SERVICE_PROVIDER]": "Partie contractante B",
+            "[EMPLOYER]": "Partie contractante A",
+            "[EMPLOYEE]": "Partie contractante B",
+            "[BUYER]": "Partie contractante A",
+            "[SELLER]": "Partie contractante B",
+            "[LESSOR]": "Partie contractante A",
+            "[LESSEE]": "Partie contractante B",
+            "[LENDER]": "Partie contractante A",
+            "[BORROWER]": "Partie contractante B",
+            "[PARTY_1]": "Partie contractante A",
+            "[PARTY_2]": "Partie contractante B",
+            "[PARTY_3]": "Partie contractante C",
+
+            "du Client": "de la Partie contractante A",
+            "au Client": "à la Partie contractante A",
+            "le Client": "la Partie contractante A",
+            "Le Client": "La Partie contractante A",
+            "Client": "Partie contractante A",
+
+            "du Prestataire": "de la Partie contractante B",
+            "au Prestataire": "à la Partie contractante B",
+            "le Prestataire": "la Partie contractante B",
+            "Le Prestataire": "La Partie contractante B",
+            "Prestataire": "Partie contractante B",
+        },
+        "ar": {
+            "[CLIENT]": "الطرف أ",
+            "[SERVICE_PROVIDER]": "الطرف ب",
+            "[EMPLOYER]": "الطرف أ",
+            "[EMPLOYEE]": "الطرف ب",
+            "[BUYER]": "الطرف أ",
+            "[SELLER]": "الطرف ب",
+            "[LESSOR]": "الطرف أ",
+            "[LESSEE]": "الطرف ب",
+            "[LENDER]": "الطرف أ",
+            "[BORROWER]": "الطرف ب",
+            "[PARTY_1]": "الطرف أ",
+            "[PARTY_2]": "الطرف ب",
+            "[PARTY_3]": "الطرف ج",
+            "[ORGANIZATION]": "الطرف أ",
+            "[PERSON]": "الطرف ب",
+
+            "للطرف الثاني": "للطرف ب",
+            "للطرف الأول": "للطرف أ",
+            "بالطرف الثاني": "بالطرف ب",
+            "بالطرف الأول": "بالطرف أ",
+            "من الطرف الثاني": "من الطرف ب",
+            "من الطرف الأول": "من الطرف أ",
+            "إلى الطرف الثاني": "إلى الطرف ب",
+            "إلى الطرف الأول": "إلى الطرف أ",
+            "الطرف الثاني": "الطرف ب",
+            "الطرف الأول": "الطرف أ",
+            "الطرف الثالث": "الطرف ج",
+
+        },
+    }
+
+    mapping = labels.get(language, labels["en"])
+
+    if isinstance(value, list):
+        return [display_safe_party_labels(item, language) for item in value]
+
+    if isinstance(value, dict):
+        return {
+            key: display_safe_party_labels(item, language)
+            for key, item in value.items()
+        }
+
+    if not isinstance(value, str):
+        return value
+
+    output = value
+
+    for old, new in mapping.items():
+        output = output.replace(old, new)
+
+    if language == "ar":
+        output = output.replace("الطرف الأول", "الطرف أ")
+        output = output.replace("الطرف الثاني", "الطرف ب")
+        output = output.replace("الطرف الثالث", "الطرف ج")
+
+        cleanup = {
+            "الطرف الطرف أ": "الطرف أ",
+            "الطرف الطرف ب": "الطرف ب",
+            "الطرف الطرف ج": "الطرف ج",
+        }
+
+        for old, new in cleanup.items():
+            output = output.replace(old, new)
+
+    return output
+
+
 def render_summary_text(data: dict, language: str = "en") -> str:
     """
     Backward-compatible text renderer.
@@ -974,9 +1179,27 @@ def render_summary_text(data: dict, language: str = "en") -> str:
 
     t = get_labels(language)
 
+    if language != "ar":
+        roles = get_display_roles(
+            contract_type=data.get("contract_type", ""),
+            text=data.get("global_summary", ""),
+            language=language,
+        )
+        data = apply_display_roles(data, roles, language)
+
+    data = display_safe_party_labels(data, language)
+
     output = ""
     output += f"{t['type']}: {data['contract_type']}\n"
-    output += f"{t['parties']}: {', '.join(data['parties'])}\n"
+    if language == "ar":
+        display_parties = data["parties"]
+    else:
+        display_parties = [
+            strip_role_articles(p, language)
+            for p in data["parties"]
+        ]
+
+    output += f"{t['parties']}: {', '.join(display_parties)}\n"
     output += f"{t['duration']}: {data['duration']}\n"
     output += f"{t['payment']}: {data['payment_terms']}\n\n"
 
@@ -1012,7 +1235,8 @@ def render_summary_text(data: dict, language: str = "en") -> str:
     if data.get("practical_decision"):
         output += f"\n{t['practical_decision']}:\n"
         output += data["practical_decision"]
-
+    print("MAIN OBLIGATIONS RAW")
+    print(data["main_obligations"])
     return output.strip()
 
 
@@ -1060,8 +1284,29 @@ CRITICAL:
 Translate every generated JSON value into this output language.
 The contract source language may be different.
 Do not copy source-language sentences into generated fields.
-Preserve the legal identity of company names and person names.
-If the output language is different from the source language, provide a readable localized/transliterated display name when possible, while keeping the original legal name if needed.
+Preserve anonymized party identities exactly as provided.
+
+Anonymized entities may include:
+
+[PERSON]
+[ORGANIZATION]
+[PARTY_1]
+[PARTY_2]
+[PARTY_3]
+
+These labels represent legal parties.
+
+Do not reconstruct, infer, or replace real names.
+
+If rights, ownership, payments,
+confidentiality obligations,
+termination rights,
+intellectual property rights,
+or liabilities belong to an anonymized party,
+preserve the recipient exactly as written.
+
+Never transfer a right or obligation
+from one anonymized party to another.
 Dates, amounts, article references, and court names must remain accurate.
 
 LANGUAGE CONSISTENCY ENFORCEMENT:
@@ -1093,6 +1338,16 @@ Contract text:
 
 def render_simplified_text(data: dict, language: str = "en") -> str:
     t = get_labels(language)
+
+    if language != "ar":
+        roles = get_display_roles(
+            contract_type=data.get("contract_type", ""),
+            text=data.get("simplified_version", ""),
+            language=language,
+        )
+        data = apply_display_roles(data, roles, language)
+
+    data = display_safe_party_labels(data, language)
 
     output = data.get("simplified_version", "")
 

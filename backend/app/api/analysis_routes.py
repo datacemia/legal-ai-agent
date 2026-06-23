@@ -10,6 +10,7 @@ from app.models.analysis import AnalysisResult
 from app.models.job import Job
 from app.models.user import User
 from app.schemas.analysis_schema import AnalysisResponse
+from app.services.contract_agent.pii_redactor import redact_sensitive_data
 
 from app.utils.security import get_current_user
 from app.utils.billing import check_and_consume_agent_access

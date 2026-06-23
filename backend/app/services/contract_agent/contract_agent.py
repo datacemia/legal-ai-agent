@@ -46,6 +46,10 @@ from app.services.contract_agent.contract_taxonomy import (
 from app.services.contract_agent.jurisdiction_profiles import (
     detect_jurisdiction,
 )
+from app.services.contract_agent.party_role_detector import (
+    get_display_roles,
+    apply_display_roles,
+)
 from app.services.contract_agent.clause_splitter import (
     split_into_clause_objects,
 )
@@ -96,40 +100,321 @@ def normalize_final_clause_title(
 ) -> str:
     title = extract_clause_title(title)
 
-    return AR_TITLE_FIXES.get(
+    title = AR_TITLE_FIXES.get(
         title.strip(),
         title,
     )
 
+    prefixes = [
+        "Contracting Party A ",
+        "Contracting Party B ",
+        "Contracting Party C ",
+        "Party A ",
+        "Party B ",
+        "Party C ",
+        "Employer ",
+        "Employee ",
+        "Company ",
+        "Contractor ",
+        "Vendor ",
+        "Client ",
+
+        "Partie contractante A ",
+        "Partie contractante B ",
+        "Partie contractante C ",
+        "Employeur ",
+        "Employé ",
+        "Société ",
+        "Prestataire ",
+        "Client ",
+
+        "الطرف المتعاقد أ ",
+        "الطرف المتعاقد ب ",
+        "الطرف المتعاقد ج ",
+        "صاحب العمل ",
+        "الموظف ",
+        "الشركة ",
+        "المقاول ",
+        "المورد ",
+        "العميل ",
+    ]
+
+    for prefix in prefixes:
+        if title.startswith(prefix):
+            title = title[len(prefix):].strip()
+    if title == "[ADDRESS]":
+        return "Contact Information"
+
+    return title
+
 
 ALLOWED_CLAUSE_TYPES = {
+    # Commercial & Financial
     "payment",
+    "pricing",
+    "invoice",
+    "tax",
+    "late_payment",
+    "refund",
+    "expense_reimbursement",
+    "fees",
+    "commission",
+    "bonus",
+    "royalties",
+
+    # Contract lifecycle
+    "term",
+    "duration",
+    "renewal",
+    "automatic_renewal",
     "termination",
-    "confidentiality",
-    "intellectual_property",
+    "termination_for_cause",
+    "termination_for_convenience",
+    "notice",
+    "default",
+    "cure_period",
+
+    # Liability & risk
     "liability",
     "limitation_of_liability",
     "indemnity",
+    "insurance",
+    "warranty",
+    "disclaimer",
     "penalty",
-    "exclusivity",
-    "non_compete",
+    "liquidated_damages",
+    "force_majeure",
+
+    # IP & licensing
+    "intellectual_property",
+    "ip_assignment",
+    "ownership",
+    "license",
+    "invention_assignment",
+    "work_product",
+    "moral_rights",
+
+    # Confidentiality, data & security
+    "confidentiality",
     "data_protection",
-    "arbitration",
+    "privacy",
+    "data_processing",
+    "security",
+    "cybersecurity",
+    "audit_rights",
+
+    # Employment / HR
+    "employment",
+    "compensation",
+    "benefits",
+    "vacation",
+    "non_compete",
+    "non_solicitation",
+    "conflict_of_interest",
+    "post_termination_obligations",
+
+    # Services / SaaS / operations
+    "services",
+    "service_level",
+    "support",
+    "maintenance",
+    "delivery",
+    "acceptance",
+    "performance",
+    "change_request",
+
+    # Corporate / governance / compliance
+    "assignment",
+    "change_of_control",
+    "compliance",
+    "anti_bribery",
+    "sanctions",
+    "governance",
+    "subcontracting",
+
+    # Real estate
+    "lease",
+    "rent",
+    "deposit",
+    "property_use",
+    "repairs",
+    "utilities",
+
+    # Finance / lending
+    "loan",
+    "interest",
+    "security_interest",
+    "collateral",
+    "guarantee",
+    "repayment",
+    "acceleration",
+
+    # Dispute resolution
     "governing_law",
     "jurisdiction",
     "venue",
-    "warranty",
-    "service_level",
-    "insurance",
-    "assignment",
+    "arbitration",
+    "mediation",
+    "dispute_resolution",
+
+    # Boilerplate
     "amendment",
-    "renewal",
-    "default",
-    "security",
-    "maintenance",
-    "repair",
-    "covenant",
+    "waiver",
+    "severability",
+    "entire_agreement",
+    "counterparts",
+    "notices",
+    "definitions",
+
+    # Fallback
     "other",
+    # Additional ontology-backed clause types
+    "financing",
+
+}
+
+CLAUSE_GROUPS = {
+    "commercial_finance": {
+        "types": {
+            "payment", "pricing", "invoice", "tax", "late_payment",
+            "refund", "expense_reimbursement", "fees", "commission",
+            "bonus", "royalties",
+        },
+        "labels": {
+            "en": "Commercial & Finance",
+            "fr": "Commercial et finance",
+            "ar": "الشروط التجارية والمالية",
+        },
+    },
+    "contract_lifecycle": {
+        "types": {
+            "term", "duration", "renewal", "automatic_renewal",
+            "termination", "termination_for_cause",
+            "termination_for_convenience", "notice", "default",
+            "cure_period",
+        },
+        "labels": {
+            "en": "Contract Lifecycle",
+            "fr": "Cycle de vie du contrat",
+            "ar": "دورة حياة العقد",
+        },
+    },
+    "liability_risk": {
+        "types": {
+            "liability", "limitation_of_liability", "indemnity",
+            "insurance", "warranty", "disclaimer", "penalty",
+            "liquidated_damages", "force_majeure",
+        },
+        "labels": {
+            "en": "Liability & Risk",
+            "fr": "Responsabilité et risques",
+            "ar": "المسؤولية والمخاطر",
+        },
+    },
+    "ip_licensing": {
+        "types": {
+            "intellectual_property", "ip_assignment", "ownership",
+            "license", "invention_assignment", "work_product",
+            "moral_rights",
+        },
+        "labels": {
+            "en": "IP & Licensing",
+            "fr": "Propriété intellectuelle et licences",
+            "ar": "الملكية الفكرية والتراخيص",
+        },
+    },
+    "data_confidentiality": {
+        "types": {
+            "confidentiality", "data_protection", "privacy",
+            "data_processing", "security", "cybersecurity",
+            "audit_rights",
+        },
+        "labels": {
+            "en": "Data & Confidentiality",
+            "fr": "Données et confidentialité",
+            "ar": "البيانات والسرية",
+        },
+    },
+    "employment_hr": {
+        "types": {
+            "employment", "compensation", "benefits", "vacation",
+            "non_compete", "non_solicitation", "conflict_of_interest",
+            "post_termination_obligations",
+        },
+        "labels": {
+            "en": "Employment & HR",
+            "fr": "Emploi et ressources humaines",
+            "ar": "العمل والموارد البشرية",
+        },
+    },
+    "services_operations": {
+        "types": {
+            "services", "service_level", "support", "maintenance",
+            "delivery", "acceptance", "performance", "change_request",
+        },
+        "labels": {
+            "en": "Services & Operations",
+            "fr": "Services et opérations",
+            "ar": "الخدمات والعمليات",
+        },
+    },
+    "governance_compliance": {
+        "types": {
+            "assignment", "change_of_control", "compliance",
+            "anti_bribery", "sanctions", "governance",
+            "subcontracting",
+        },
+        "labels": {
+            "en": "Governance & Compliance",
+            "fr": "Gouvernance et conformité",
+            "ar": "الحوكمة والامتثال",
+        },
+    },
+    "real_estate": {
+        "types": {
+            "lease", "rent", "deposit", "property_use",
+            "repairs", "utilities",
+        },
+        "labels": {
+            "en": "Real Estate",
+            "fr": "Immobilier",
+            "ar": "العقارات",
+        },
+    },
+    "finance_lending": {
+        "types": {
+            "loan", "interest", "security_interest", "collateral",
+            "guarantee", "repayment", "acceleration",
+        },
+        "labels": {
+            "en": "Finance & Lending",
+            "fr": "Financement et crédit",
+            "ar": "التمويل والإقراض",
+        },
+    },
+    "dispute_resolution": {
+        "types": {
+            "governing_law", "jurisdiction", "venue",
+            "arbitration", "mediation", "dispute_resolution",
+        },
+        "labels": {
+            "en": "Dispute Resolution",
+            "fr": "Règlement des litiges",
+            "ar": "تسوية النزاعات",
+        },
+    },
+    "general_provisions": {
+        "types": {
+            "amendment", "waiver", "severability",
+            "entire_agreement", "counterparts", "notices",
+            "definitions", "other",
+        },
+        "labels": {
+            "en": "General Provisions",
+            "fr": "Dispositions générales",
+            "ar": "أحكام عامة",
+        },
+    },
 }
 
 ALLOWED_RISK_LEVELS = {"low", "medium", "high"}
@@ -1348,9 +1633,23 @@ def analyze_clause(
 
     ai_result["language"] = language
 
-    ai_result = normalize_clause_result(
+    print(
+        "RAW CLAUSE:",
+        ai_result.get("clause_title"),
+        ai_result.get("clause_type"),
+    )
+
+    normalized = normalize_clause_result(
         ai_result
     )
+
+    print(
+        "NORMALIZED:",
+        normalized["clause_title"],
+        normalized["clause_type"],
+    )
+
+    ai_result = normalized
 
     # -------------------------------------------------
     # Taxonomy fallback classification
@@ -3147,7 +3446,11 @@ def _analyze_contract_clauses_impl(
 
     critical_terms = get_clause_signal_terms("critical")
 
+    print("CLAUSES INPUT TYPE:", type(clauses[0]) if clauses else None, flush=True)
+    print("CLAUSES INPUT LEN:", len(clauses) if clauses else 0, flush=True)
+
     if clauses and isinstance(clauses[0], dict):
+        print("FIRST CLAUSE OBJECT:", clauses[0], flush=True)
         clause_objects = clauses
     else:
         full_text_for_objects = "\n\n".join([
@@ -4214,6 +4517,143 @@ def _analyze_contract_clauses_impl(
     return deduped
 
 
+
+def display_safe_clause_labels(value, language: str = "en"):
+    labels = {
+        "en": {
+            "[CLIENT]": "Contracting Party A",
+            "[ORGANIZATION]": "Contracting Party A",
+            "[EMPLOYER]": "Contracting Party A",
+            "[COMPANY]": "Contracting Party A",
+            "[BUYER]": "Contracting Party A",
+            "[LENDER]": "Contracting Party A",
+
+            "[SERVICE_PROVIDER]": "Contracting Party B",
+            "[PERSON]": "Contracting Party B",
+            "[EMPLOYEE]": "Contracting Party B",
+            "[SELLER]": "Contracting Party B",
+            "[BORROWER]": "Contracting Party B",
+
+            "The Company": "Contracting Party A",
+            "the Company": "Contracting Party A",
+            "Company": "Contracting Party A",
+            "the company": "Contracting Party A",
+            "company": "Contracting Party A",
+            "the employer": "Contracting Party A",
+            "employer": "Contracting Party A",
+            "The Employer": "Contracting Party A",
+            "the Employer": "Contracting Party A",
+            "Employer": "Contracting Party A",
+            "The Client": "Contracting Party A",
+            "the Client": "Contracting Party A",
+            "Client": "Contracting Party A",
+
+            "all Employees": "the applicable employee group",
+            "All Employees": "The applicable employee group",
+            "Employees": "applicable employees",
+            "employees": "applicable employees",
+
+            "all Contracting Party Bs": "the applicable employee group",
+            "Contracting Party Bs": "applicable employees",
+
+            "The Employee": "Contracting Party B",
+            "the Employee": "Contracting Party B",
+            "Employee": "Contracting Party B",
+            "the employee": "Contracting Party B",
+            "employee": "Contracting Party B",
+            "The Service Provider": "Contracting Party B",
+            "the Service Provider": "Contracting Party B",
+            "Service Provider": "Contracting Party B",
+            "The Contractor": "Contracting Party B",
+            "the Contractor": "Contracting Party B",
+            "Contractor": "Contracting Party B",
+            "The Consultant": "Contracting Party B",
+            "the Consultant": "Contracting Party B",
+            "Consultant": "Contracting Party B",
+        },
+        "fr": {
+            "[CLIENT]": "Partie contractante A",
+            "[ORGANIZATION]": "Partie contractante A",
+            "[EMPLOYER]": "Partie contractante A",
+            "[COMPANY]": "Partie contractante A",
+            "[BUYER]": "Partie contractante A",
+            "[LENDER]": "Partie contractante A",
+
+            "[SERVICE_PROVIDER]": "Partie contractante B",
+            "[PERSON]": "Partie contractante B",
+            "[EMPLOYEE]": "Partie contractante B",
+            "[SELLER]": "Partie contractante B",
+            "[BORROWER]": "Partie contractante B",
+
+            "du Client": "de la Partie contractante A",
+            "au Client": "à la Partie contractante A",
+            "Le Client": "La Partie contractante A",
+            "le Client": "la Partie contractante A",
+            "Client": "Partie contractante A",
+
+            "du Prestataire": "de la Partie contractante B",
+            "au Prestataire": "à la Partie contractante B",
+            "Le Prestataire": "La Partie contractante B",
+            "le Prestataire": "la Partie contractante B",
+            "Prestataire": "Partie contractante B",
+        },
+        "ar": {
+            "[CLIENT]": "الطرف المتعاقد أ",
+            "[ORGANIZATION]": "الطرف المتعاقد أ",
+            "[EMPLOYER]": "الطرف المتعاقد أ",
+            "[COMPANY]": "الطرف المتعاقد أ",
+            "[BUYER]": "الطرف المتعاقد أ",
+            "[LENDER]": "الطرف المتعاقد أ",
+
+            "[SERVICE_PROVIDER]": "الطرف المتعاقد ب",
+            "[PERSON]": "الطرف المتعاقد ب",
+            "[EMPLOYEE]": "الطرف المتعاقد ب",
+            "[SELLER]": "الطرف المتعاقد ب",
+            "[BORROWER]": "الطرف المتعاقد ب",
+
+            "الشركة": "الطرف المتعاقد أ",
+            "صاحب العمل": "الطرف المتعاقد أ",
+            "العميل": "الطرف المتعاقد أ",
+            "المشتري": "الطرف المتعاقد أ",
+            "المقرض": "الطرف المتعاقد أ",
+
+            "الموظف": "الطرف المتعاقد ب",
+            "الأجير": "الطرف المتعاقد ب",
+            "العامل": "الطرف المتعاقد ب",
+            "مقدم الخدمة": "الطرف المتعاقد ب",
+            "المزود": "الطرف المتعاقد ب",
+            "المتعاقد": "الطرف المتعاقد ب",
+            "الاستشاري": "الطرف المتعاقد ب",
+            "البائع": "الطرف المتعاقد ب",
+            "المقترض": "الطرف المتعاقد ب",
+        },
+    }
+
+    mapping = labels.get(language, labels["en"])
+
+    if isinstance(value, list):
+        return [
+            display_safe_clause_labels(item, language)
+            for item in value
+        ]
+
+    if isinstance(value, dict):
+        return {
+            key: display_safe_clause_labels(item, language)
+            for key, item in value.items()
+        }
+
+    if not isinstance(value, str):
+        return value
+
+    output = value
+
+    for old, new in mapping.items():
+        output = output.replace(old, new)
+
+    return output
+
+
 class ClauseAnalysisPipeline:
     """
     Explicit orchestration wrapper for clause analysis.
@@ -4255,7 +4695,69 @@ class ClauseAnalysisPipeline:
         return results
 
     def run_cleanup(self, results: list[dict]) -> list[dict]:
-        return results
+        cleaned = display_safe_clause_labels(
+            results,
+            self.language,
+        )
+
+        combined_text = " ".join(
+            str(item.get("clause_title", "")) + " " +
+            str(item.get("explanation_simple", "")) + " " +
+            str(item.get("quoted_text", ""))
+            for item in cleaned
+        )
+
+        roles = get_display_roles(
+            contract_type="",
+            text=combined_text,
+            language=self.language,
+        )
+
+        cleaned = apply_display_roles(
+            cleaned,
+            roles,
+            self.language,
+        )
+
+        party_a = roles.get("party_a")
+        party_b = roles.get("party_b")
+
+        for item in cleaned:
+            favours = str(item.get("favours", "")).strip().lower()
+
+            favours_map = {
+                "company": party_a,
+                "employer": party_a,
+                "client": party_a,
+                "buyer": party_a,
+                "lender": party_a,
+                "lessor": party_a,
+
+                "employee": party_b,
+                "contractor": party_b,
+                "service provider": party_b,
+                "vendor": party_b,
+                "seller": party_b,
+                "borrower": party_b,
+                "lessee": party_b,
+
+                "balanced": {
+                    "en": "Balanced",
+                    "fr": "Équilibré",
+                    "ar": "متوازن",
+                }.get(self.language, "Balanced"),
+
+                "unclear": {
+                    "en": "Unclear",
+                    "fr": "Non clair",
+                    "ar": "غير واضح",
+                }.get(self.language, "Unclear"),
+            }
+
+            if favours in favours_map:
+                item["favours"] = favours_map[favours]
+
+        return cleaned
 
     def run(self) -> dict:
         results = self.run_detection()
@@ -4291,7 +4793,7 @@ class ClauseAnalysisPipeline:
                 "edges": [],
             }
 
-        clause_groups = build_clause_groups(results)
+        clause_groups = build_clause_groups(results, self.language)
 
         contradictions = detect_contract_contradictions(results)
 

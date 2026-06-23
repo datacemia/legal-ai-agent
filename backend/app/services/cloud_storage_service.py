@@ -60,3 +60,21 @@ def download_api_file_from_cloud(
     tmp.close()
 
     return tmp.name
+def delete_api_file_from_cloud(
+    storage_path: str | None,
+    bucket: str | None = None,
+) -> bool:
+    if not storage_path:
+        return False
+
+    try:
+        client = get_supabase_client()
+        bucket_name = bucket or SUPABASE_STORAGE_BUCKET
+
+        client.storage.from_(bucket_name).remove([storage_path])
+
+        return True
+
+    except Exception as e:
+        print("CLOUD FILE DELETE ERROR:", str(e))
+        return False

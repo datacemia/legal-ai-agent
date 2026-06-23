@@ -225,6 +225,14 @@ LEGAL_ONTOLOGY = {
             "jurisdiction_selection",
         ],
     },
+
+    "employment_hr": {'concepts': ['employee', 'employment', 'salary', 'termination of employment', 'vacation', 'benefits', 'employer', 'compensation', 'non-compete', 'non-solicitation', 'conflict of interest', 'employé', 'emploi', 'salaire', 'congés', 'avantages', 'employeur', 'rémunération', 'non-concurrence', 'non-sollicitation', "conflit d'intérêt", 'موظف', 'عمل', 'راتب', 'إجازة', 'مزايا', 'صاحب العمل', 'تعويض', 'عدم المنافسة', 'عدم الاستقطاب'], 'roles': ['employment_relationship', 'compensation_obligation', 'post_employment_restriction', 'employee_benefit']},
+
+    "finance_lending": {'concepts': ['loan', 'financing', 'interest', 'collateral', 'guarantee', 'repayment', 'acceleration', 'borrower', 'lender', 'security interest', 'prêt', 'financement', 'intérêt', 'garantie', 'sûreté', 'remboursement', 'exigibilité', 'emprunteur', 'prêteur', 'قرض', 'تمويل', 'فائدة', 'ضمان', 'حق ضمان', 'سداد', 'مقترض', 'مقرض'], 'roles': ['loan_obligation', 'repayment_obligation', 'security_interest', 'default_consequence']},
+
+    "real_estate": {'concepts': ['lease', 'rent', 'deposit', 'premises', 'property', 'repairs', 'utilities', 'tenant', 'landlord', 'bail', 'loyer', 'dépôt', 'locaux', 'bien immobilier', 'réparations', 'charges', 'locataire', 'bailleur', 'إيجار', 'أجرة', 'وديعة', 'عقار', 'إصلاحات', 'مرافق', 'مستأجر', 'مؤجر'], 'roles': ['lease_obligation', 'rent_obligation', 'property_use', 'maintenance_obligation']},
+
+    "governance_compliance": {'concepts': ['assignment', 'change of control', 'compliance', 'anti-bribery', 'sanctions', 'governance', 'subcontracting', 'audit', 'board', 'director', 'shareholder', 'cession', 'changement de contrôle', 'conformité', 'lutte contre la corruption', 'sanctions', 'gouvernance', 'sous-traitance', 'audit', 'conseil', 'administrateur', 'actionnaire', 'التنازل', 'تغيير السيطرة', 'الامتثال', 'مكافحة الرشوة', 'العقوبات', 'الحوكمة', 'التعاقد من الباطن', 'التدقيق', 'مجلس الإدارة', 'مدير', 'مساهم'], 'roles': ['governance_constraint', 'approval_condition', 'compliance_obligation', 'third_party_control']},
 }
 
 

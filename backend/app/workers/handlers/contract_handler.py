@@ -6,11 +6,15 @@ from app.models.document import Document
 from app.models.analysis import AnalysisResult
 
 from app.services.contract_agent.contract_parser import extract_text
-from app.services.cloud_storage_service import download_api_file_from_cloud
+from app.services.cloud_storage_service import (
+    download_api_file_from_cloud,
+    delete_api_file_from_cloud,
+)
 from app.services.text_cleaner import clean_text
 from app.services.contract_agent.clause_splitter import split_into_clauses
 from app.services.language_service import detect_language
 from app.services.contract_agent.contract_agent import analyze_contract_clauses
+from app.services.contract_agent.pii_redactor import redact_sensitive_data
 
 from app.services.contract_agent.summary_service import (
     generate_summary_data,
@@ -25,6 +29,7 @@ from app.services.contract_agent.validator import (
 )
 
 from app.workers.progress import update_job_progress
+
 
 def delete_local_file_safely(file_path: str | None):
     if not file_path:
@@ -117,7 +122,6 @@ def handle_contract_ai(job: Job, db):
     output_language = input_data.get("output_language", "en")
     access_type = input_data.get("access_type")
     credits_used = input_data.get("credits_used", 0)
-    document_text = input_data.get("document_text")
     storage_path = input_data.get("storage_path")
 
     if output_language not in ["en", "fr", "ar"]:
@@ -142,23 +146,28 @@ def handle_contract_ai(job: Job, db):
         legal_progress_message("extracting", output_language),
     )
 
-    if document_text:
-        raw_text = document_text
-    else:
-        file_path = document.file_path
+    downloaded_temp_file_path = None
+    file_path = document.file_path
 
-        if storage_path:
-            file_path = download_api_file_from_cloud(
-                storage_path=str(storage_path),
-                suffix=f".{document.file_type}",
-            )
-
-        raw_text = extract_text(
-            file_path,
-            document.file_type,
+    if storage_path:
+        downloaded_temp_file_path = download_api_file_from_cloud(
+            storage_path=str(storage_path),
+            suffix=f".{document.file_type}",
         )
+        file_path = downloaded_temp_file_path
+
+    raw_text = extract_text(
+        file_path,
+        document.file_type,
+    )
 
     cleaned_text = clean_text(raw_text)
+    cleaned_text = redact_sensitive_data(cleaned_text)
+    print("\n=== PRIVACY CHECK AFTER REDACTION ===")
+    print(cleaned_text[:3000])
+    print("=== END PRIVACY CHECK ===\n")
+
+    print("PRIVACY CHECK:", cleaned_text[:800])
 
     if not is_probably_contract(cleaned_text):
         document.status = "rejected"
@@ -182,7 +191,7 @@ def handle_contract_ai(job: Job, db):
         legal_progress_message("splitting", output_language),
     )
 
-    clauses = split_into_clauses(cleaned_text)
+    clauses = [cleaned_text]
 
     update_job_progress(
         job,
@@ -258,6 +267,8 @@ def handle_contract_ai(job: Job, db):
     db.commit()
     db.refresh(analysis)
 
+    delete_api_file_from_cloud(storage_path)
+    delete_local_file_safely(downloaded_temp_file_path)
     delete_local_file_safely(document.file_path)
 
     response = {
