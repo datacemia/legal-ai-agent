@@ -232,7 +232,9 @@ def handle_contract_ai(job: Job, db):
         summary_data,
         output_language,
     )
-
+    print("SUMMARY DATA")
+    print(summary_data)
+    
     update_job_progress(
         job,
         db,
