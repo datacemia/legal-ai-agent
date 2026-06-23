@@ -1031,6 +1031,8 @@ def display_safe_party_labels(value, language: str = "en"):
             "[PARTY_3]": "Contracting Party C",
             "[ORGANIZATION]": "Contracting Party A",
             "[PERSON]": "Contracting Party B",
+            "[COMPANY]": "Contracting Party A",
+            "[EXECUTIVE]": "Contracting Party B",
 
             "the Company": "Contracting Party A",
             "The Company": "Contracting Party A",
@@ -1090,6 +1092,8 @@ def display_safe_party_labels(value, language: str = "en"):
             "[PARTY_1]": "Partie contractante A",
             "[PARTY_2]": "Partie contractante B",
             "[PARTY_3]": "Partie contractante C",
+            "[COMPANY]": "Partie contractante A",
+            "[EXECUTIVE]": "Partie contractante B",
 
             "du Client": "de la Partie contractante A",
             "au Client": "à la Partie contractante A",
@@ -1119,6 +1123,8 @@ def display_safe_party_labels(value, language: str = "en"):
             "[PARTY_3]": "الطرف ج",
             "[ORGANIZATION]": "الطرف أ",
             "[PERSON]": "الطرف ب",
+            "[COMPANY]": "الطرف أ",
+            "[EXECUTIVE]": "الطرف ب",
 
             "للطرف الثاني": "للطرف ب",
             "للطرف الأول": "للطرف أ",
