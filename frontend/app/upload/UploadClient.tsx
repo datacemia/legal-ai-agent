@@ -1558,11 +1558,12 @@ export default function UploadClient({
               <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
                 {t.sampleRiskScore}
               </p>
-
+              {!result && (
               <div className="mt-4 flex items-end gap-2">
                 <span className="text-4xl font-bold text-amber-600">62</span>
                 <span className="mb-1 text-sm text-slate-500">/100</span>
               </div>
+              )}
 
               <p className="mt-2 text-sm font-semibold text-amber-700">
                 {t.sampleRiskLevel}
