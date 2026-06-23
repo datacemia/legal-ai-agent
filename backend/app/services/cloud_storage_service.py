@@ -71,8 +71,8 @@ def delete_api_file_from_cloud(
         client = get_supabase_client()
         bucket_name = bucket or SUPABASE_STORAGE_BUCKET
 
-        client.storage.from_(bucket_name).remove([storage_path])
-
+        result = client.storage.from_(bucket_name).remove([storage_path])
+        print("CLOUD DELETE:", bucket_name, storage_path, result)
         return True
 
     except Exception as e:
