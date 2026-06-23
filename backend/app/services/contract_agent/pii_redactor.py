@@ -172,6 +172,10 @@ def role_aware_party_pseudonymize(text: str) -> str:
 
     patterns = [
         re.compile(
+            r"\b(?:between|by\s+and\s+between)\s+(.{2,220}?),\s*(?:a\s+[^,\n()]{2,120}\s*)?\([^)]*[\"'](?:the\s+)?([^\"']{2,70})[\"'][^)]*\)\s*,?\s+and\s+(.{2,180}?)\s*\([^)]*[\"'](?:the\s+)?([^\"']{2,70})[\"'][^)]*\)",
+            re.IGNORECASE | re.DOTALL,
+        ),
+        re.compile(
             r"(?:conclu|signé|établi|passé)?\s*(?:entre)\s+(.{2,180}?),\s*ci-après\s+[«\"]\s*(?:le|la|l’|l')?\s*([^»\"]{2,70})\s*[»\"]\s*,?\s+(?:et|avec)\s+(.{2,180}?)(?:,\s*[^,\n]{0,120})?,\s*ci-après\s+[«\"]\s*(?:le|la|l’|l')?\s*([^»\"]{2,70})\s*[»\"]",
             re.IGNORECASE | re.DOTALL,
         ),
@@ -314,12 +318,8 @@ def redact_sensitive_data(text: str) -> str:
         return ""
 
     text = redact_labeled_contract_parties(text)
-    print("AFTER LABELED REDACTION")
-    print(text[:1000])
 
     redacted = role_aware_party_pseudonymize(text)
-    print("AFTER PARTY PSEUDONYMIZATION")
-    print(redacted[:1000])
     redacted = regex_redact(redacted)
     redacted = gliner_redact(redacted)
 
