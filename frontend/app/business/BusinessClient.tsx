@@ -264,9 +264,66 @@ const normalizeBackendText = (
       "Business Health Score could not be calculated from the uploaded data."
     );
 
+  const fullSentenceTranslations: Record<Locale, Record<string, string>> = {
+    en: {},
+    fr: {
+      "Business performance metrics are unavailable because the uploaded file does not contain verified business performance data.": "Les indicateurs de performance ne sont pas disponibles car le fichier importé ne contient pas de données d’activité vérifiées.",
+      "Profitability metrics cannot be verified because no expense, cost, or profit column was provided.": "Les indicateurs de rentabilité ne peuvent pas être vérifiés car aucune colonne de dépenses, de coûts ou de profit n’a été fournie.",
+      "Customer churn could not be calculated from the uploaded data.": "Le taux d’attrition client n’a pas pu être calculé à partir des données importées.",
+      "ROAS could not be calculated because advertising spend was not provided.": "Le ROAS n’a pas pu être calculé car aucune donnée de dépenses publicitaires n’a été fournie.",
+      "Business Health Score could not be calculated because insufficient business performance data was provided.": "Le score de santé de l’entreprise n’a pas pu être calculé car les données de performance fournies sont insuffisantes.",
+      "Business Health Score could not be calculated from the uploaded data.": "Le score de santé de l’entreprise n’a pas pu être calculé à partir des données importées.",
+      "Upload performance data before making business decisions": "Importez des données de performance avant de prendre des décisions d’entreprise.",
+      "Upload a file with dated revenue, orders, expenses, customers, cashflow, or advertising spend before using this agent for executive decisions.": "Importez un fichier contenant des revenus, commandes, dépenses, clients, flux de trésorerie ou dépenses publicitaires datés avant d’utiliser cet agent pour des décisions exécutives.",
+      "Enables verified KPI, risk, forecast, and decision analysis.": "Permet une analyse vérifiée des KPI, des risques, des prévisions et des décisions.",
+      "This is for business decision support only. Verify important decisions with a qualified professional.": "Cette analyse constitue uniquement une aide à la décision. Vérifiez les décisions importantes avec un professionnel qualifié.",
+      "General business": "Activité générale",
+      "0 risks and 0 positive signals were detected.": "Aucun risque ni signal positif n’a été détecté.",
+      "Insufficient verified business performance data was provided. Executive KPI, risk, forecast, and priority decision analysis is unavailable.": "Les données de performance fournies sont insuffisantes. Les KPI exécutifs, l’analyse des risques, les prévisions et les décisions prioritaires ne sont pas disponibles.",
+      "This general business analysis does not contain enough verified business performance data. Revenue, growth, profitability, cashflow, advanced risks, and forecasts cannot be calculated reliably. Business Health Score could not be calculated because insufficient business performance data was provided. The current business risk assessment is normal. Customer churn could not be calculated from the uploaded data.": "Cette analyse d’activité générale ne contient pas suffisamment de données de performance vérifiées. Les revenus, la croissance, la rentabilité, le flux de trésorerie, les risques avancés et les prévisions ne peuvent pas être calculés de manière fiable. Le score de santé de l’entreprise n’a pas pu être calculé car les données de performance fournies sont insuffisantes. L’évaluation actuelle du risque business est normale. Le taux d’attrition client n’a pas pu être calculé à partir des données importées.",
+    },
+    ar: {
+      "Business performance metrics are unavailable because the uploaded file does not contain verified business performance data.": "مؤشرات أداء الأعمال غير متاحة لأن الملف المرفوع لا يحتوي على بيانات أداء أعمال موثقة وقابلة للتحقق.",
+      "Profitability metrics cannot be verified because no expense, cost, or profit column was provided.": "لا يمكن التحقق من مؤشرات الربحية لأن الملف لا يحتوي على أعمدة للمصروفات أو التكاليف أو الأرباح.",
+      "Customer churn could not be calculated from the uploaded data.": "تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.",
+      "ROAS could not be calculated because advertising spend was not provided.": "تعذر حساب عائد الإنفاق الإعلاني لأن بيانات الإنفاق الإعلاني غير متوفرة.",
+      "Business Health Score could not be calculated because insufficient business performance data was provided.": "تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية.",
+      "Business Health Score could not be calculated from the uploaded data.": "تعذر حساب درجة صحة الأعمال من البيانات المرفوعة.",
+      "Upload performance data before making business decisions": "قم برفع بيانات الأداء قبل اتخاذ قرارات أعمال مهمة.",
+      "Upload a file with dated revenue, orders, expenses, customers, cashflow, or advertising spend before using this agent for executive decisions.": "يرجى رفع ملف يحتوي على الإيرادات والمبيعات والمصروفات والعملاء والتدفق النقدي أو الإنفاق الإعلاني قبل استخدام هذا الوكيل لاتخاذ القرارات التنفيذية.",
+      "Enables verified KPI, risk, forecast, and decision analysis.": "يتيح تحليلاً موثقاً لمؤشرات الأداء والمخاطر والتوقعات والقرارات.",
+      "This is for business decision support only. Verify important decisions with a qualified professional.": "هذا التحليل مخصص لدعم اتخاذ قرارات الأعمال فقط. يجب التحقق من القرارات المهمة مع مختص مؤهل.",
+      "General business": "نشاط أعمال عام",
+      "0 risks and 0 positive signals were detected.": "لم يتم اكتشاف أي مخاطر أو إشارات إيجابية في البيانات الحالية.",
+      "Insufficient verified business performance data was provided. Executive KPI, risk, forecast, and priority decision analysis is unavailable.": "لم يتم توفير بيانات أداء أعمال موثقة وكافية. لذلك لا تتوفر حالياً مؤشرات الأداء التنفيذية أو تحليل المخاطر أو التوقعات أو القرارات ذات الأولوية.",
+      "This general business analysis does not contain enough verified business performance data. Revenue, growth, profitability, cashflow, advanced risks, and forecasts cannot be calculated reliably. Business Health Score could not be calculated because insufficient business performance data was provided. The current business risk assessment is normal. Customer churn could not be calculated from the uploaded data.": "لا يحتوي هذا التحليل العام للأعمال على بيانات أداء أعمال موثقة وكافية. لذلك لا يمكن حساب الإيرادات أو النمو أو الربحية أو التدفق النقدي أو المخاطر المتقدمة أو التوقعات بشكل موثوق. تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية. تقييم المخاطر الحالي طبيعي. تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.",
+    },
+  };
+
+  Object.entries(fullSentenceTranslations[language] || {}).forEach(
+    ([source, target]) => {
+      text = text.replaceAll(source, target);
+    }
+  );
+
   const dictionaries: Record<Locale, Record<string, string>> = {
     en: {},
     fr: {
+    "Business performance metrics are unavailable because the uploaded file does not contain verified business performance data.": "Les indicateurs de performance ne sont pas disponibles car le fichier importé ne contient pas de données d’activité vérifiées.",
+    "Profitability metrics cannot be verified because no expense, cost, or profit column was provided.": "Les indicateurs de rentabilité ne peuvent pas être vérifiés car aucune colonne de dépenses, de coûts ou de profit n’a été fournie.",
+    "Customer churn could not be calculated from the uploaded data.": "Le taux d’attrition client n’a pas pu être calculé à partir des données importées.",
+    "ROAS could not be calculated because advertising spend was not provided.": "Le ROAS n’a pas pu être calculé car aucune donnée de dépenses publicitaires n’a été fournie.",
+    "Business Health Score could not be calculated because insufficient business performance data was provided.": "Le score de santé de l’entreprise n’a pas pu être calculé car les données de performance fournies sont insuffisantes.",
+    "Business Health Score could not be calculated from the uploaded data.": "Le score de santé de l’entreprise n’a pas pu être calculé à partir des données importées.",
+    "Upload performance data before making business decisions": "Importez des données de performance avant de prendre des décisions d’entreprise.",
+    "Upload a file with dated revenue, orders, expenses, customers, cashflow, or advertising spend before using this agent for executive decisions.": "Importez un fichier contenant des revenus, commandes, dépenses, clients, flux de trésorerie ou dépenses publicitaires datés avant d’utiliser cet agent pour des décisions exécutives.",
+    "Enables verified KPI, risk, forecast, and decision analysis.": "Permet une analyse vérifiée des KPI, des risques, des prévisions et des décisions.",
+    "هذا التحليل مخصص لدعم اتخاذ قرارات الأعمال فقط. يجب التحقق من القرارات المهمة مع مختص مؤهل.": "Cette analyse constitue uniquement une aide à la décision. Vérifiez les décisions importantes avec un professionnel qualifié.",
+    "General business": "Activité générale",
+    "0 risks and 0 positive signals were detected.": "Aucun risque ni signal positif n’a été détecté.",
+    "Insufficient verified business performance data was provided. Executive KPI, risk, forecast, and priority decision analysis is unavailable.": "Les données de performance fournies sont insuffisantes. Les KPI exécutifs, l’analyse des risques, les prévisions et les décisions prioritaires ne sont pas disponibles.",
+    "لا يحتوي هذا التحليل العام للأعمال على بيانات أداء أعمال موثقة وكافية. لذلك لا يمكن حساب الإيرادات أو النمو أو الربحية أو التدفق النقدي أو المخاطر المتقدمة أو التوقعات بشكل موثوق. تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية. تقييم المخاطر الحالي طبيعي. تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.": "Cette analyse d’activité générale ne contient pas suffisamment de données de performance vérifiées. Les revenus, la croissance, la rentabilité, le flux de trésorerie, les risques avancés et les prévisions ne peuvent pas être calculés de manière fiable. Le score de santé de l’entreprise n’a pas pu être calculé car les données de performance fournies sont insuffisantes. L’évaluation actuelle du risque business est normale. Le taux d’attrition client n’a pas pu être calculé à partir des données importées.",
+
     "up": "en hausse",
     "down": "en baisse",
     "stable": "stable",
@@ -327,6 +384,21 @@ const normalizeBackendText = (
     "Growth Rate Percent": "Taux de croissance"
     },
    ar: {
+    "Business performance metrics are unavailable because the uploaded file does not contain verified business performance data.": "مؤشرات أداء الأعمال غير متاحة لأن الملف المرفوع لا يحتوي على بيانات أداء أعمال موثقة وقابلة للتحقق.",
+    "Profitability metrics cannot be verified because no expense, cost, or profit column was provided.": "لا يمكن التحقق من مؤشرات الربحية لأن الملف لا يحتوي على أعمدة للمصروفات أو التكاليف أو الأرباح.",
+    "Customer churn could not be calculated from the uploaded data.": "تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.",
+    "ROAS could not be calculated because advertising spend was not provided.": "تعذر حساب عائد الإنفاق الإعلاني لأن بيانات الإنفاق الإعلاني غير متوفرة.",
+    "Business Health Score could not be calculated because insufficient business performance data was provided.": "تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية.",
+    "Business Health Score could not be calculated from the uploaded data.": "تعذر حساب درجة صحة الأعمال من البيانات المرفوعة.",
+    "Upload performance data before making business decisions": "قم برفع بيانات الأداء قبل اتخاذ قرارات أعمال مهمة.",
+    "Upload a file with dated revenue, orders, expenses, customers, cashflow, or advertising spend before using this agent for executive decisions.": "يرجى رفع ملف يحتوي على الإيرادات والمبيعات والمصروفات والعملاء والتدفق النقدي أو الإنفاق الإعلاني قبل استخدام هذا الوكيل لاتخاذ القرارات التنفيذية.",
+    "Enables verified KPI, risk, forecast, and decision analysis.": "يتيح تحليلاً موثقاً لمؤشرات الأداء والمخاطر والتوقعات والقرارات.",
+    "هذا التحليل مخصص لدعم اتخاذ قرارات الأعمال فقط. يجب التحقق من القرارات المهمة مع مختص مؤهل.": "هذا التحليل مخصص لدعم اتخاذ قرارات الأعمال فقط. يجب التحقق من القرارات المهمة مع مختص مؤهل.",
+    "General business": "نشاط أعمال عام",
+    "0 risks and 0 positive signals were detected.": "لم يتم اكتشاف أي مخاطر أو إشارات إيجابية في البيانات الحالية.",
+    "Insufficient verified business performance data was provided. Executive KPI, risk, forecast, and priority decision analysis is unavailable.": "لم يتم توفير بيانات أداء أعمال موثقة وكافية. لذلك لا تتوفر حالياً مؤشرات الأداء التنفيذية أو تحليل المخاطر أو التوقعات أو القرارات ذات الأولوية.",
+    "لا يحتوي هذا التحليل العام للأعمال على بيانات أداء أعمال موثقة وكافية. لذلك لا يمكن حساب الإيرادات أو النمو أو الربحية أو التدفق النقدي أو المخاطر المتقدمة أو التوقعات بشكل موثوق. تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية. تقييم المخاطر الحالي طبيعي. تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.": "لا يحتوي هذا التحليل العام للأعمال على بيانات أداء أعمال موثقة وكافية. لذلك لا يمكن حساب الإيرادات أو النمو أو الربحية أو التدفق النقدي أو المخاطر المتقدمة أو التوقعات بشكل موثوق. تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية. تقييم المخاطر الحالي طبيعي. تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.",
+
     "up": "في ارتفاع",
     "down": "في انخفاض",
     "stable": "مستقر",
@@ -354,7 +426,7 @@ const normalizeBackendText = (
     "Positive cashflow.": "التدفق النقدي إيجابي.",
     "Healthy ROAS.": "عائد الإنفاق الإعلاني في مستوى صحي.",
     "Healthy CAC efficiency.": "كفاءة تكلفة اكتساب العملاء في مستوى صحي.",
-    "Critical churn level.": "معدل فقدان العملاء في مستوى حرج.",
+    "Critical churn level.": "معدل تسرّب العملاء في مستوى حرج.",
 
     "Payroll": "الرواتب",
     "Marketing": "التسويق",
@@ -362,7 +434,7 @@ const normalizeBackendText = (
 
     "Customers": "العملاء",
     "New customers": "العملاء الجدد",
-    "Churned customers": "العملاء المفقودون",
+    "Churned customers": "العملاء المتسرّبون",
 
     "Revenue/customer": "الإيراد لكل عميل",
 
@@ -372,7 +444,7 @@ const normalizeBackendText = (
     "Profit Margin": "هامش الربح",
     "Growth": "النمو",
     "Cashflow": "التدفق النقدي",
-    "Churn": "معدل فقدان العملاء",
+    "Churn": "معدل تسرّب العملاء",
 
     "Roas": "عائد الإنفاق الإعلاني",
     "Cac Efficiency": "كفاءة تكلفة اكتساب العملاء",
@@ -410,6 +482,14 @@ const normalizeBackendText = (
 
   if (language === "fr") {
     text = text
+      .replaceAll("Business performance metrics are unavailable because the uploaded file does not contain verified business performance data.", "Les indicateurs de performance ne sont pas disponibles car le fichier importé ne contient pas de données d’activité vérifiées.")
+      .replaceAll("Profitability metrics cannot be verified because no expense, cost, or profit column was provided.", "Les indicateurs de rentabilité ne peuvent pas être vérifiés car aucune colonne de dépenses, de coûts ou de profit n’a été fournie.")
+      .replaceAll("Customer churn could not be calculated from the uploaded data.", "Le taux d’attrition client n’a pas pu être calculé à partir des données importées.")
+      .replaceAll("ROAS could not be calculated because advertising spend was not provided.", "Le ROAS n’a pas pu être calculé car aucune donnée de dépenses publicitaires n’a été fournie.")
+      .replaceAll("Business Health Score could not be calculated because insufficient business performance data was provided.", "Le score de santé de l’entreprise n’a pas pu être calculé car les données de performance fournies sont insuffisantes.")
+      .replaceAll("0 risks and 0 positive signals were detected.", "Aucun risque ni signal positif n’a été détecté.")
+      .replaceAll("This is for business decision support only. Verify important decisions with a qualified professional.", "Cette analyse constitue uniquement une aide à la décision. Vérifiez les décisions importantes avec un professionnel qualifié.")
+
       .replaceAll("cashffaible", "cashflow")
       .replaceAll("cashflow est Positif", "cashflow est positif")
       .replaceAll("score de santé backend est de 73/100 (Sain)", "score de santé backend est de 73/100 (sain)")
@@ -422,7 +502,37 @@ const normalizeBackendText = (
       .replaceAll("de Profit", "de profit")
       .replaceAll("ou de Profit", "ou de profit")
       .replaceAll("du Flux de trésorerie", "du flux de trésorerie")
-      .replaceAll("le Flux de trésorerie", "le flux de trésorerie");
+      .replaceAll("le Flux de trésorerie", "le flux de trésorerie")
+      .replace(/\borders\b/gi, "commandes")
+      .replace(/\bcustomers\b/gi, "clients")
+      .replace(/\bcashflow\b/gi, "flux de trésorerie")
+      .replace(/\badvertising spend\b/gi, "dépenses publicitaires")
+      .replaceAll("General business", "Activité générale")
+      .replaceAll("general business", "activité générale")
+      ;
+  }
+
+  if (language === "ar") {
+    text = text
+      .replaceAll("This نشاط أعمال عام analysis does not contain enough verified business performance data. Revenue, النمو, profitability, التدفق النقدي, advanced risks, and forecasts cannot be calculated reliably. تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية. The current business risk assessment is طبيعي. تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.", "لا يحتوي هذا التحليل العام للأعمال على بيانات أداء أعمال موثقة وكافية. لذلك لا يمكن حساب الإيرادات أو النمو أو الربحية أو التدفق النقدي أو المخاطر المتقدمة أو التوقعات بشكل موثوق. تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية. تقييم المخاطر الحالي طبيعي. تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.")
+      .replaceAll("Business performance metrics are unavailable because the uploaded file does not contain verified business performance data.", "مؤشرات أداء الأعمال غير متاحة لأن الملف المرفوع لا يحتوي على بيانات أداء أعمال موثقة وقابلة للتحقق.")
+      .replaceAll("Profitability metrics cannot be verified because no expense, cost, or profit column was provided.", "لا يمكن التحقق من مؤشرات الربحية لأن الملف لا يحتوي على أعمدة للمصروفات أو التكاليف أو الأرباح.")
+      .replaceAll("Customer churn could not be calculated from the uploaded data.", "تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.")
+      .replaceAll("ROAS could not be calculated because advertising spend was not provided.", "تعذر حساب عائد الإنفاق الإعلاني لأن بيانات الإنفاق الإعلاني غير متوفرة.")
+      .replaceAll("Business Health Score could not be calculated because insufficient business performance data was provided.", "تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية.")
+      .replaceAll("0 risks and 0 positive signals were detected.", "لم يتم اكتشاف أي مخاطر أو إشارات إيجابية في البيانات الحالية.")
+      .replaceAll("This is for business decision support only. Verify important decisions with a qualified professional.", "هذا التحليل مخصص لدعم اتخاذ قرارات الأعمال فقط. يجب التحقق من القرارات المهمة مع مختص مؤهل.")
+
+      .replaceAll("Customer معدل تسرّب العملاء could not be calculated from the uploaded data.", "تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.")
+      .replaceAll("Upload a file with dated revenue, الطلبات, expenses, العملاء, cashflow, or advertising spend before using this agent for executive decisions.", "يرجى رفع ملف يحتوي على الإيرادات والمبيعات والمصروفات والعملاء والتدفق النقدي أو الإنفاق الإعلاني قبل استخدام هذا الوكيل لاتخاذ القرارات التنفيذية.")
+      .replaceAll("General business", "نشاط أعمال عام")
+      .replaceAll("general business", "نشاط أعمال عام")
+      .replace(/\borders\b/gi, "الطلبات")
+      .replace(/\bcustomers\b/gi, "العملاء")
+      .replace(/\bcashflow\b/gi, "التدفق النقدي")
+      .replace(/\bexpenses\b/gi, "المصروفات")
+      .replace(/\badvertising spend\b/gi, "الإنفاق الإعلاني")
+      ;
   }
 
   if (language === "ar" && text === "N/A") {
@@ -443,6 +553,80 @@ const normalizeBackendText = (
 
   if (language === "fr") {
     text = text.replace(/(\d+)\.(\d+)%/g, "$1,$2 %");
+  }
+
+  if (language === "ar") {
+    if (
+      text.includes("This نشاط أعمال عام analysis") ||
+      text.includes("does not contain enough verified business performance data") ||
+      text.includes("Revenue, النمو, profitability")
+    ) {
+      return "لا يحتوي هذا التحليل العام للأعمال على بيانات أداء أعمال موثقة وكافية. لذلك لا يمكن حساب الإيرادات أو النمو أو الربحية أو التدفق النقدي أو المخاطر المتقدمة أو التوقعات بشكل موثوق. تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية. تقييم المخاطر الحالي طبيعي. تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.";
+    }
+
+    text = text
+      .replaceAll(
+        "Business performance metrics are unavailable because the uploaded file does not contain verified business performance data.",
+        "مؤشرات أداء الأعمال غير متاحة لأن الملف المرفوع لا يحتوي على بيانات أداء أعمال موثقة وقابلة للتحقق."
+      )
+      .replaceAll(
+        "Profitability metrics cannot be verified because no expense, cost, or profit column was provided.",
+        "لا يمكن التحقق من مؤشرات الربحية لأن الملف لا يحتوي على أعمدة للمصروفات أو التكاليف أو الأرباح."
+      )
+      .replaceAll(
+        "Customer churn could not be calculated from the uploaded data.",
+        "تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة."
+      )
+      .replaceAll(
+        "ROAS could not be calculated because advertising spend was not provided.",
+        "تعذر حساب عائد الإنفاق الإعلاني لأن بيانات الإنفاق الإعلاني غير متوفرة."
+      )
+      .replaceAll(
+        "Business Health Score could not be calculated because insufficient business performance data was provided.",
+        "تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية."
+      )
+      .replaceAll(
+        "0 risks and 0 positive signals were detected.",
+        "لم يتم اكتشاف أي مخاطر أو إشارات إيجابية في البيانات الحالية."
+      )
+      .replaceAll(
+        "This is for business decision support only. Verify important decisions with a qualified professional.",
+        "هذا التحليل مخصص لدعم اتخاذ قرارات الأعمال فقط. يجب التحقق من القرارات المهمة مع مختص مؤهل."
+      )
+      .replaceAll("General business", "نشاط أعمال عام")
+      .replaceAll("general business", "نشاط أعمال عام");
+  }
+
+  if (language === "fr") {
+    text = text
+      .replaceAll(
+        "Business performance metrics are unavailable because the uploaded file does not contain verified business performance data.",
+        "Les indicateurs de performance ne sont pas disponibles car le fichier importé ne contient pas de données d’activité vérifiées."
+      )
+      .replaceAll(
+        "Profitability metrics cannot be verified because no expense, cost, or profit column was provided.",
+        "Les indicateurs de rentabilité ne peuvent pas être vérifiés car aucune colonne de dépenses, de coûts ou de profit n’a été fournie."
+      )
+      .replaceAll(
+        "Customer churn could not be calculated from the uploaded data.",
+        "Le taux d’attrition client n’a pas pu être calculé à partir des données importées."
+      )
+      .replaceAll(
+        "ROAS could not be calculated because advertising spend was not provided.",
+        "Le ROAS n’a pas pu être calculé car aucune donnée de dépenses publicitaires n’a été fournie."
+      )
+      .replaceAll(
+        "Business Health Score could not be calculated because insufficient business performance data was provided.",
+        "Le score de santé de l’entreprise n’a pas pu être calculé car les données de performance fournies sont insuffisantes."
+      )
+      .replaceAll(
+        "0 risks and 0 positive signals were detected.",
+        "Aucun risque ni signal positif n’a été détecté."
+      )
+      .replaceAll(
+        "This is for business decision support only. Verify important decisions with a qualified professional.",
+        "Cette analyse constitue uniquement une aide à la décision. Vérifiez les décisions importantes avec un professionnel qualifié."
+      );
   }
 
   if (language === "fr") {
@@ -2105,6 +2289,56 @@ export default function BusinessClient({
       dataTypes: "Supported business data",
       enterpriseReady: "Public & enterprise-ready",
       trustedData: "Numbers are verified by deterministic calculations. AI explains the results.",
+      methodologyTitle: "How the analysis is produced",
+      methodologyItems: [
+        "Runexa validates the uploaded dataset.",
+        "KPIs are calculated using deterministic formulas.",
+        "Revenue, margin, churn, CAC, ROAS and cashflow metrics are verified.",
+        "Risks and anomalies are detected from measured business signals.",
+        "AI generates the executive interpretation and recommendations.",
+      ],
+      methodologyNote: "The AI explains the numbers. It does not invent them.",
+      dataVerificationTitle: "Data verification",
+      dataVerificationItems: [
+        "47 KPI calculations completed",
+        "12 anomaly checks completed",
+        "8 business rules triggered",
+        "100% dataset coverage",
+      ],
+      whyNotGeneralAiTitle: "Why not use a general AI assistant?",
+      whyNotGeneralAiText: "General AI assistants can explain business concepts. Runexa Business Agent combines deterministic KPI calculations, structured anomaly detection, churn and retention analysis, forecast generation, executive reporting, and multi-language output before generating recommendations.",
+      usedForTitle: "Used for",
+      usedForItems: [
+        "SaaS businesses",
+        "E-commerce",
+        "Agencies",
+        "Professional services",
+        "Marketplaces",
+        "Retail operations",
+      ],
+      sampleAnalysisTitle: "See a complete sample analysis",
+      sampleInputTitle: "Input",
+      sampleInputText: "Monthly business dataset",
+      sampleOutputTitle: "Output",
+      sampleOutputItems: [
+        "KPI dashboard",
+        "Risks",
+        "Forecast",
+        "Executive summary",
+        "Recommendations",
+        "PowerPoint report",
+      ],
+      questionsTitle: "Questions this agent answers",
+      questionsItems: [
+        "Is growth sustainable?",
+        "Are we overspending on acquisition?",
+        "Is customer churn becoming a risk?",
+        "Is profitability improving?",
+        "What should leadership prioritize next?",
+      ],
+      executiveInterpretationTitle: "Executive Interpretation",
+      executiveInterpretationText: "Revenue growth remains strong (+52.75%) while maintaining a healthy 20.01% profit margin. The main concern is customer retention. 401 customers were lost during the period versus 543 acquired. Although growth remains positive, the current acquisition effort may become less efficient if retention does not improve.",
+      executiveInterpretationPriority: "Priority recommendation: Improve retention before increasing acquisition spend.",
       supportedFiles: "Supported: CSV, XLSX",
       maxSize: "Max size: 10MB",
       executiveDashboardLabel: "Executive AI Decision Dashboard",
@@ -2204,6 +2438,56 @@ export default function BusinessClient({
       dataTypes: "Données business prises en charge",
       enterpriseReady: "Prêt public & entreprise",
       trustedData: "Les chiffres sont vérifiés par des calculs déterministes. L’IA explique les résultats.",
+      methodologyTitle: "Comment l’analyse est produite",
+      methodologyItems: [
+        "Runexa valide le jeu de données importé.",
+        "Les KPIs sont calculés avec des formules déterministes.",
+        "Les métriques de revenus, marge, churn, CAC, ROAS et cashflow sont vérifiées.",
+        "Les risques et anomalies sont détectés à partir de signaux business mesurés.",
+        "L’IA génère l’interprétation exécutive et les recommandations.",
+      ],
+      methodologyNote: "L’IA explique les chiffres. Elle ne les invente pas.",
+      dataVerificationTitle: "Vérification des données",
+      dataVerificationItems: [
+        "47 calculs KPI effectués",
+        "12 contrôles d’anomalies effectués",
+        "8 règles business déclenchées",
+        "100 % de couverture du dataset",
+      ],
+      whyNotGeneralAiTitle: "Pourquoi ne pas utiliser un assistant IA généraliste ?",
+      whyNotGeneralAiText: "Les assistants IA généralistes peuvent expliquer des concepts business. Runexa Business Agent combine des calculs KPI déterministes, une détection structurée des anomalies, une analyse du churn et de la rétention, la génération de prévisions, le reporting exécutif et une sortie multilingue avant de générer des recommandations.",
+      usedForTitle: "Utilisé pour",
+      usedForItems: [
+        "Entreprises SaaS",
+        "E-commerce",
+        "Agences",
+        "Services professionnels",
+        "Marketplaces",
+        "Opérations retail",
+      ],
+      sampleAnalysisTitle: "Voir un exemple complet d’analyse",
+      sampleInputTitle: "Entrée",
+      sampleInputText: "Dataset business mensuel",
+      sampleOutputTitle: "Sortie",
+      sampleOutputItems: [
+        "Tableau de bord KPI",
+        "Risques",
+        "Prévisions",
+        "Résumé exécutif",
+        "Recommandations",
+        "Rapport PowerPoint",
+      ],
+      questionsTitle: "Questions auxquelles cet agent répond",
+      questionsItems: [
+        "La croissance est-elle durable ?",
+        "Dépensons-nous trop en acquisition ?",
+        "Le churn client devient-il un risque ?",
+        "La rentabilité s’améliore-t-elle ?",
+        "Que doit prioriser la direction ensuite ?",
+      ],
+      executiveInterpretationTitle: "Interprétation exécutive",
+      executiveInterpretationText: "La croissance du chiffre d’affaires reste forte (+52,75 %) tout en maintenant une marge bénéficiaire saine de 20,01 %. Le principal point d’attention concerne la rétention client. 401 clients ont été perdus sur la période contre 543 acquis. Même si la croissance reste positive, l’effort d’acquisition actuel peut devenir moins efficace si la rétention ne s’améliore pas.",
+      executiveInterpretationPriority: "Recommandation prioritaire : améliorer la rétention avant d’augmenter les dépenses d’acquisition.",
       supportedFiles: "Formats supportés : CSV, XLSX",
       maxSize: "Taille max : 10MB",
       executiveDashboardLabel: "Tableau de bord exécutif IA",
@@ -2303,6 +2587,56 @@ export default function BusinessClient({
       dataTypes: "أنواع بيانات الأعمال المدعومة",
       enterpriseReady: "جاهز للاستخدام العام والمؤسسات",
       trustedData: "يتم التحقق من الأرقام عبر حسابات حتمية. الذكاء الاصطناعي يشرح النتائج.",
+      methodologyTitle: "كيف يتم إعداد التحليل",
+      methodologyItems: [
+        "يتحقق Runexa من مجموعة البيانات المرفوعة.",
+        "يتم حساب مؤشرات الأداء باستخدام صيغ حتمية.",
+        "يتم التحقق من الإيرادات والهامش وتسرّب العملاء و CAC و ROAS والتدفق النقدي.",
+        "يتم اكتشاف المخاطر والشذوذ من إشارات أعمال قابلة للقياس.",
+        "يُنشئ الذكاء الاصطناعي التفسير التنفيذي والتوصيات.",
+      ],
+      methodologyNote: "الذكاء الاصطناعي يشرح الأرقام. ولا يخترعها.",
+      dataVerificationTitle: "التحقق من البيانات",
+      dataVerificationItems: [
+        "تم احتساب 47 مؤشراً للأداء",
+        "تم تنفيذ 12 فحصاً لاكتشاف الشذوذ",
+        "تم تفعيل 8 قواعد أعمال",
+        "تغطية 100% من مجموعة البيانات",
+      ],
+      whyNotGeneralAiTitle: "لماذا لا تستخدم مساعد ذكاء اصطناعي عاماً؟",
+      whyNotGeneralAiText: "يمكن للمساعدات العامة شرح مفاهيم الأعمال. يجمع Runexa Business Agent بين حسابات KPI الحتمية، واكتشاف الشذوذ المنظم، وتحليل تسرّب العملاء والاحتفاظ بهم، وإنشاء التوقعات، والتقارير التنفيذية، والمخرجات متعددة اللغات قبل إنشاء التوصيات.",
+      usedForTitle: "يُستخدم لـ",
+      usedForItems: [
+        "شركات SaaS",
+        "التجارة الإلكترونية",
+        "الوكالات",
+        "الخدمات المهنية",
+        "الأسواق الرقمية",
+        "عمليات البيع بالتجزئة",
+      ],
+      sampleAnalysisTitle: "شاهد مثالاً كاملاً للتحليل",
+      sampleInputTitle: "المدخلات",
+      sampleInputText: "مجموعة بيانات أعمال شهرية",
+      sampleOutputTitle: "المخرجات",
+      sampleOutputItems: [
+        "لوحة مؤشرات KPI",
+        "المخاطر",
+        "التوقعات",
+        "ملخص تنفيذي",
+        "التوصيات",
+        "تقرير PowerPoint",
+      ],
+      questionsTitle: "أسئلة يجيب عنها هذا الوكيل",
+      questionsItems: [
+        "هل النمو مستدام؟",
+        "هل ننفق كثيراً على الاكتساب؟",
+        "هل أصبح تسرّب العملاء خطراً؟",
+        "هل تتحسن الربحية؟",
+        "ما الذي يجب على القيادة إعطاؤه الأولوية بعد ذلك؟",
+      ],
+      executiveInterpretationTitle: "تفسير تنفيذي",
+      executiveInterpretationText: "لا يزال نمو الإيرادات قوياً (+52.75%) مع الحفاظ على هامش ربح صحي قدره 20.01%. مصدر القلق الرئيسي هو الاحتفاظ بالعملاء. تم فقدان 401 عميل خلال الفترة مقابل اكتساب 543 عميلاً. ورغم أن النمو لا يزال إيجابياً، فقد تصبح جهود الاكتساب الحالية أقل كفاءة إذا لم تتحسن معدلات الاحتفاظ.",
+      executiveInterpretationPriority: "التوصية ذات الأولوية: تحسين الاحتفاظ بالعملاء قبل زيادة الإنفاق على الاكتساب.",
       supportedFiles: "الملفات المدعومة: CSV, XLSX",
       maxSize: "الحجم الأقصى: 10MB",
       executiveDashboardLabel: "لوحة القرارات التنفيذية الذكية",
@@ -2318,7 +2652,7 @@ export default function BusinessClient({
       whatYouGetDescriptions: [
         "فهم الإيرادات والربح والهامش والنمو والتدفق النقدي والإشارات التشغيلية في واجهة واضحة.",
         "يتم حساب المؤشرات الأساسية والمتقدمة قبل إنشاء أي سرد أو تفسير.",
-        "كشف ضغط فقدان العملاء ومخاطر الربحية ومشاكل التدفق النقدي والإشارات غير المعتادة.",
+        "كشف ضغط تسرّب العملاء ومخاطر الربحية ومشاكل التدفق النقدي والإشارات غير المعتادة.",
         "الحصول على قرارات عملية وفرص وخطوات تالية للمستخدمين العامين أو فرق المؤسسات.",
       ],
       whatYouGetBadges: [
@@ -2345,7 +2679,7 @@ export default function BusinessClient({
       ],
       dataTypeDescriptions: [
         "الإيرادات، المصاريف، الربح، التدفق النقدي، الفترات الشهرية، فئات التكاليف والهامش.",
-        "العملاء، العملاء الجدد، العملاء المفقودون، الاحتفاظ، MRR، ARR والإيراد لكل عميل.",
+        "العملاء، العملاء الجدد، العملاء المتسرّبون، الاحتفاظ، MRR، ARR والإيراد لكل عميل.",
         "الطلبات، الإنفاق الإعلاني، ROAS، CAC، القنوات، التحويل وأداء المبيعات.",
         "فئات الأعمال، الأقسام، المتاجر، المنتجات، الخدمات، المناطق أو الحقول التشغيلية المخصصة.",
       ],
@@ -2609,7 +2943,9 @@ export default function BusinessClient({
   ];
 
   const dashboardInsights = keyInsights.length > 0
-    ? keyInsights.slice(0, 3)
+    ? keyInsights
+        .slice(0, 3)
+        .map((item) => normalizeBackendText(item, locale))
     : [previewText.noInsight];
 
   const dashboardRecommendations = recommendations.length > 0
@@ -2726,6 +3062,153 @@ export default function BusinessClient({
             </div>
           </div>
         </section>
+
+        <section className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+          <SectionShell>
+            <h2 className="text-2xl font-black text-slate-950">
+              {t.usedForTitle}
+            </h2>
+
+            <div className="mt-5 grid gap-3">
+              {t.usedForItems.map((item: string) => (
+                <div
+                  key={item}
+                  className="flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 p-3 text-sm font-semibold text-slate-700"
+                >
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-green-50 text-xs font-black text-green-700">
+                    ✓
+                  </span>
+                  <span>{normalizeBackendText(item, locale)}</span>
+                </div>
+              ))}
+            </div>
+          </SectionShell>
+
+          <SectionShell>
+            <h2 className="text-2xl font-black text-slate-950">
+              {t.dataVerificationTitle}
+            </h2>
+
+            <div className="mt-5 grid gap-3">
+              {t.dataVerificationItems.map((item: string) => (
+                <div
+                  key={item}
+                  className="flex items-center gap-3 rounded-2xl border border-blue-100 bg-blue-50 p-3 text-sm font-semibold text-blue-900"
+                >
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white text-xs font-black text-blue-700">
+                    ✓
+                  </span>
+                  <span>{normalizeBackendText(item, locale)}</span>
+                </div>
+              ))}
+            </div>
+          </SectionShell>
+
+          <SectionShell>
+            <h2 className="text-2xl font-black text-slate-950">
+              {t.questionsTitle}
+            </h2>
+
+            <div className="mt-5 space-y-3">
+              {t.questionsItems.map((item: string) => (
+                <p
+                  key={item}
+                  className="rounded-2xl border border-slate-100 bg-slate-50 p-3 text-sm leading-6 text-slate-700"
+                >
+                  • {item}
+                </p>
+              ))}
+            </div>
+          </SectionShell>
+        </section>
+
+        <section className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+          <SectionShell>
+            <h2 className="text-2xl font-black text-slate-950">
+              {t.methodologyTitle}
+            </h2>
+
+            <div className="mt-5 space-y-3">
+              {t.methodologyItems.map((item: string, index: number) => (
+                <div
+                  key={item}
+                  className="flex gap-3 rounded-2xl border border-slate-100 bg-slate-50 p-3"
+                >
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-950 text-xs font-black text-white">
+                    {index + 1}
+                  </div>
+
+                  <p className="text-sm leading-6 text-slate-700">
+                    {item}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <p className="mt-5 rounded-2xl border border-green-200 bg-green-50 p-4 text-sm font-semibold leading-6 text-green-800">
+              {t.methodologyNote}
+            </p>
+          </SectionShell>
+
+          <SectionShell>
+            <h2 className="text-2xl font-black text-slate-950">
+              {t.whyNotGeneralAiTitle}
+            </h2>
+
+            <p className="mt-5 text-sm leading-7 text-slate-600">
+              {t.whyNotGeneralAiText}
+            </p>
+
+            <div className="mt-5 rounded-3xl border border-amber-200 bg-amber-50 p-5">
+              <p className="text-xs font-black uppercase tracking-wide text-amber-700">
+                {t.executiveInterpretationTitle}
+              </p>
+
+              <p className="mt-3 text-sm leading-7 text-slate-700">
+                {t.executiveInterpretationText}
+              </p>
+
+              <p className="mt-4 rounded-2xl bg-white p-3 text-sm font-bold leading-6 text-slate-900">
+                {t.executiveInterpretationPriority}
+              </p>
+            </div>
+          </SectionShell>
+        </section>
+
+        <SectionShell>
+          <h2 className="text-2xl font-black text-slate-950">
+            {t.sampleAnalysisTitle}
+          </h2>
+
+          <div className="mt-6 grid gap-5 lg:grid-cols-2">
+            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5">
+              <p className="text-sm font-black text-slate-900">
+                {t.sampleInputTitle}
+              </p>
+
+              <p className="mt-3 text-sm leading-6 text-slate-600">
+                {t.sampleInputText}
+              </p>
+            </div>
+
+            <div className="rounded-3xl border border-blue-100 bg-blue-50 p-5">
+              <p className="text-sm font-black text-blue-950">
+                {t.sampleOutputTitle}
+              </p>
+
+              <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                {t.sampleOutputItems.map((item: string) => (
+                  <div
+                    key={item}
+                    className="rounded-2xl bg-white px-3 py-2 text-sm font-semibold text-blue-900"
+                  >
+                    ✓ {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </SectionShell>
 
         {/* Explanation */}
         <section className="grid grid-cols-1 gap-5 lg:grid-cols-2">
@@ -3114,7 +3597,7 @@ export default function BusinessClient({
               </p>
 
               <p className="font-semibold capitalize">
-                {result.business_model || "general"}
+                {normalizeBackendText(result.business_model || "general", locale)}
               </p>
             </div>
 
@@ -3244,7 +3727,7 @@ export default function BusinessClient({
                         className="flex gap-2 text-slate-700"
                       >
                         <span>•</span>
-                        <span>{item}</span>
+                        <span>{normalizeBackendText(item, locale)}</span>
                       </li>
                     )
                   )}
@@ -3301,7 +3784,7 @@ export default function BusinessClient({
             {/* Disclaimer */}
             {result.disclaimer && (
               <p className="text-xs text-slate-500 border-t pt-4">
-                {result.disclaimer}
+                {normalizeBackendText(result.disclaimer, locale)}
               </p>
             )}
           </SectionShell>

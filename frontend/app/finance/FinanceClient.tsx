@@ -206,10 +206,34 @@ const labels: any = {
   en: {
     title: "Personal Finance Coach",
     subtitle:
-      "Upload your bank statement PDF to analyze spending, detect waste, and get saving strategies.",
+      "Turn your bank statement into an AI financial advisor. Detect waste. Track subscriptions. Improve cashflow. Build savings.",
     heroSupport:
-      "AI-powered financial insights, subscription detection, savings analysis, and personalized coaching.",
+      "Upload a bank statement PDF and receive structured insights about spending, recurring charges, cashflow, and saving opportunities.",
     uploadBadges: ["PDF bank statements", "Private analysis", "Multi-language"],
+    whoTitle: "Who is this for?",
+    whoItems: [
+      "Individuals",
+      "Freelancers",
+      "Consultants",
+      "Small business owners",
+      "Startups",
+    ],
+    privacyTitle: "Your statements remain private",
+    privacyItems: [
+      "Secure processing",
+      "No financial advice",
+      "Encrypted storage",
+      "User-controlled deletion",
+    ],
+    sampleIncomeLabel: "Monthly income",
+    sampleDetectedLabel: "Detected",
+    sampleAnnualSavingsLabel: "Potential annual savings",
+    sampleSubscriptions: [
+      ["Netflix", "$15.99"],
+      ["Spotify", "$10.99"],
+      ["Hostinger", "$19.99"],
+    ],
+    sampleAnnualSavings: "$564",
     sampleOutputTitle: "See example AI financial analysis",
     sampleOutputSubtitle:
       "Preview the kind of insights Runexa generates from a bank statement.",
@@ -361,10 +385,34 @@ const labels: any = {
   fr: {
     title: "Coach financier personnel",
     subtitle:
-      "Téléchargez votre relevé bancaire PDF pour analyser vos dépenses, détecter le gaspillage et obtenir des stratégies d’épargne.",
+      "Transformez votre relevé bancaire en conseiller financier IA. Détectez les dépenses inutiles. Suivez les abonnements. Améliorez votre cashflow. Construisez votre épargne.",
     heroSupport:
-      "Analyse financière IA, détection des abonnements, stratégies d’épargne et coaching personnalisé.",
+      "Importez un relevé bancaire PDF et recevez des insights structurés sur les dépenses, les frais récurrents, le cashflow et les opportunités d’épargne.",
     uploadBadges: ["Relevés bancaires PDF", "Analyse privée", "Multilingue"],
+    whoTitle: "Pour qui ?",
+    whoItems: [
+      "Particuliers",
+      "Freelances",
+      "Consultants",
+      "Petits entrepreneurs",
+      "Startups",
+    ],
+    privacyTitle: "Vos relevés restent privés",
+    privacyItems: [
+      "Traitement sécurisé",
+      "Aucun conseil financier",
+      "Stockage chiffré",
+      "Suppression contrôlée par l’utilisateur",
+    ],
+    sampleIncomeLabel: "Revenu mensuel",
+    sampleDetectedLabel: "Détecté",
+    sampleAnnualSavingsLabel: "Économies annuelles potentielles",
+    sampleSubscriptions: [
+      ["Netflix", "15,99 $"],
+      ["Spotify", "10,99 $"],
+      ["Hostinger", "19,99 $"],
+    ],
+    sampleAnnualSavings: "564 $",
     sampleOutputTitle: "Voir un exemple d’analyse financière IA",
     sampleOutputSubtitle:
       "Aperçu du type d’insights que Runexa génère à partir d’un relevé bancaire.",
@@ -516,10 +564,34 @@ const labels: any = {
   ar: {
     title: "وكيل الإدارة المالية الشخصية",
     subtitle:
-      "ارفع كشف حسابك البنكي بصيغة PDF لتحليل المصاريف، كشف الهدر، والحصول على استراتيجيات ادخار.",
+      "حوّل كشف حسابك البنكي إلى مستشار مالي بالذكاء الاصطناعي. اكتشف الهدر. تابع الاشتراكات. حسّن التدفق النقدي. ابنِ مدخراتك.",
     heroSupport:
-      "تحليل مالي بالذكاء الاصطناعي، كشف الاشتراكات، استراتيجيات الادخار، وتوجيه مالي ذكي.",
+      "ارفع كشف حساب بنكي بصيغة PDF واحصل على رؤى منظمة حول الإنفاق، الرسوم المتكررة، التدفق النقدي وفرص الادخار.",
     uploadBadges: ["كشوفات بنكية PDF", "تحليل خاص", "متعدد اللغات"],
+    whoTitle: "لمن هذا الوكيل؟",
+    whoItems: [
+      "الأفراد",
+      "العاملون المستقلون",
+      "المستشارون",
+      "أصحاب الأعمال الصغيرة",
+      "الشركات الناشئة",
+    ],
+    privacyTitle: "تبقى كشوفاتك خاصة",
+    privacyItems: [
+      "معالجة آمنة",
+      "ليست نصيحة مالية",
+      "تخزين مشفّر",
+      "حذف يتحكم به المستخدم",
+    ],
+    sampleIncomeLabel: "الدخل الشهري",
+    sampleDetectedLabel: "تم اكتشاف",
+    sampleAnnualSavingsLabel: "وفورات سنوية محتملة",
+    sampleSubscriptions: [
+      ["Netflix", "15.99 $"],
+      ["Spotify", "10.99 $"],
+      ["Hostinger", "19.99 $"],
+    ],
+    sampleAnnualSavings: "564 $",
     sampleOutputTitle: "شاهد مثالاً لتحليل مالي بالذكاء الاصطناعي",
     sampleOutputSubtitle:
       "معاينة لنوع الرؤى التي تولدها Runexa من كشف الحساب البنكي.",
@@ -1384,6 +1456,48 @@ export default function FinanceClient({
           </p>
         </div>
 
+        <div className="grid gap-4 md:grid-cols-2">
+          <section className="rounded-2xl border bg-white p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
+            <p className="text-sm font-semibold text-slate-900">
+              {t.whoTitle}
+            </p>
+
+            <div className="mt-4 grid gap-2 sm:grid-cols-2">
+              {t.whoItems.map((item: string) => (
+                <div
+                  key={item}
+                  className="flex items-center gap-2 text-sm text-slate-600"
+                >
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-green-50 text-xs font-bold text-green-700">
+                    ✓
+                  </span>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="rounded-2xl border bg-white p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
+            <p className="text-sm font-semibold text-slate-900">
+              {t.privacyTitle}
+            </p>
+
+            <div className="mt-4 grid gap-2 sm:grid-cols-2">
+              {t.privacyItems.map((item: string) => (
+                <div
+                  key={item}
+                  className="flex items-center gap-2 text-sm text-slate-600"
+                >
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-bold text-blue-700">
+                    ✓
+                  </span>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+
         <div className="rounded-2xl border bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -1402,65 +1516,51 @@ export default function FinanceClient({
             </span>
           </div>
 
-          <div className="mt-6 grid gap-4 lg:grid-cols-4">
-            <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
+          <div className="mt-6 grid gap-4 lg:grid-cols-3">
+            <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
               <p className="text-sm font-semibold text-emerald-900">
-                {t.previewFinancialScore}
+                {t.sampleIncomeLabel}
               </p>
 
               <div className="mt-3 flex items-end gap-2">
-                <span className="text-4xl font-bold text-emerald-700">78</span>
-                <span className="mb-1 text-sm text-emerald-700">/100</span>
+                <span className="text-4xl font-bold text-emerald-700">$4,200</span>
               </div>
 
-              <div className="mt-4 h-2 overflow-hidden rounded-full bg-white">
-                <div className="h-full w-[78%] rounded-full bg-emerald-600" />
-              </div>
-            </div>
-
-            <div className="rounded-2xl border border-slate-200 bg-white p-4">
-              <p className="text-sm font-semibold text-slate-900">
-                {t.previewSpendingBreakdown}
+              <p className="mt-4 text-sm leading-6 text-emerald-800">
+                {t.sampleNarrative}
               </p>
-
-              <div className="mt-4 flex items-center justify-center">
-                <div className="h-28 w-28 rounded-full bg-[conic-gradient(#22c55e_0_38%,#3b82f6_38%_62%,#f59e0b_62%_82%,#ef4444_82%_100%)]" />
-              </div>
-
-              <div className="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-600">
-                <span>● {t.previewNeeds}</span>
-                <span>● {t.previewBills}</span>
-                <span>● {t.previewSubscriptions}</span>
-                <span>● {t.previewOther}</span>
-              </div>
             </div>
 
-            <div className="rounded-2xl border border-red-200 bg-red-50 p-4">
+            <div className="rounded-2xl border border-red-200 bg-red-50 p-5">
               <p className="text-sm font-semibold text-red-900">
-                {t.previewSubscriptionsDetected}
+                {t.sampleDetectedLabel}
               </p>
 
               <div className="mt-4 space-y-3">
-                {[
-                  ["Hostinger", "$19.99"],
-                  ["Railway", "$7.39"],
-                  ["Streaming", "$12.99"],
-                ].map(([name, amount]) => (
+                {t.sampleSubscriptions.map(([name, amount]: string[]) => (
                   <div
                     key={name}
                     className="flex items-center justify-between rounded-xl bg-white px-3 py-2 text-sm"
                   >
-                    <span className="font-medium text-slate-700">{name}</span>
+                    <span className="font-medium text-slate-700">
+                      ✓ {name}
+                    </span>
                     <span className="font-semibold text-red-600">{amount}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="rounded-2xl border border-blue-200 bg-blue-50 p-4">
+            <div className="rounded-2xl border border-blue-200 bg-blue-50 p-5">
               <p className="text-sm font-semibold text-blue-900">
-                {t.previewSavingsOpportunities}
+                {t.sampleAnnualSavingsLabel}
               </p>
+
+              <div className="mt-3 flex items-end gap-2">
+                <span className="text-4xl font-bold text-blue-700">
+                  {t.sampleAnnualSavings}
+                </span>
+              </div>
 
               <div className="mt-4 space-y-3">
                 {[
