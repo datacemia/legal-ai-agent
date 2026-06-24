@@ -254,7 +254,23 @@ const normalizeBackendText = (
     return "-";
   }
 
-  let text = String(value)
+  let text = String(value).trim();
+
+  if (!text) {
+    return "-";
+  }
+
+  const unavailable = unavailableMetricLabel(language);
+
+  if (/^(N\/A|None|null|undefined)$/i.test(text)) {
+    return unavailable;
+  }
+
+  if (/^unknown$/i.test(text)) {
+    return language === "en" ? "Unknown" : unavailable;
+  }
+
+  text = text
     .replace(
       /The Business Health Score is\s+(None|null|undefined)\/100\s*\([^)]*\)\.?/gi,
       "Business Health Score could not be calculated because insufficient business performance data was provided."
@@ -267,6 +283,7 @@ const normalizeBackendText = (
   const fullSentenceTranslations: Record<Locale, Record<string, string>> = {
     en: {},
     fr: {
+      "This general business analysis does not contain enough verified business performance data. Revenue, growth, profitability, cashflow, advanced risks, and forecasts cannot be calculated reliably. Business Health Score could not be calculated because insufficient business performance data was provided. The current business risk assessment is normal. Customer churn could not be calculated from the uploaded data.": "Cette analyse d’activité générale ne contient pas suffisamment de données de performance vérifiées. Les revenus, la croissance, la rentabilité, le flux de trésorerie, les risques avancés et les prévisions ne peuvent pas être calculés de manière fiable. Le score de santé de l’entreprise n’a pas pu être calculé car les données de performance fournies sont insuffisantes. L’évaluation actuelle du risque de l’entreprise est normale. Le taux d’attrition client n’a pas pu être calculé à partir des données importées.",
       "Business performance metrics are unavailable because the uploaded file does not contain verified business performance data.": "Les indicateurs de performance ne sont pas disponibles car le fichier importé ne contient pas de données d’activité vérifiées.",
       "Profitability metrics cannot be verified because no expense, cost, or profit column was provided.": "Les indicateurs de rentabilité ne peuvent pas être vérifiés car aucune colonne de dépenses, de coûts ou de profit n’a été fournie.",
       "Customer churn could not be calculated from the uploaded data.": "Le taux d’attrition client n’a pas pu être calculé à partir des données importées.",
@@ -280,9 +297,9 @@ const normalizeBackendText = (
       "General business": "Activité générale",
       "0 risks and 0 positive signals were detected.": "Aucun risque ni signal positif n’a été détecté.",
       "Insufficient verified business performance data was provided. Executive KPI, risk, forecast, and priority decision analysis is unavailable.": "Les données de performance fournies sont insuffisantes. Les KPI exécutifs, l’analyse des risques, les prévisions et les décisions prioritaires ne sont pas disponibles.",
-      "This general business analysis does not contain enough verified business performance data. Revenue, growth, profitability, cashflow, advanced risks, and forecasts cannot be calculated reliably. Business Health Score could not be calculated because insufficient business performance data was provided. The current business risk assessment is normal. Customer churn could not be calculated from the uploaded data.": "Cette analyse d’activité générale ne contient pas suffisamment de données de performance vérifiées. Les revenus, la croissance, la rentabilité, le flux de trésorerie, les risques avancés et les prévisions ne peuvent pas être calculés de manière fiable. Le score de santé de l’entreprise n’a pas pu être calculé car les données de performance fournies sont insuffisantes. L’évaluation actuelle du risque business est normale. Le taux d’attrition client n’a pas pu être calculé à partir des données importées.",
     },
     ar: {
+      "This general business analysis does not contain enough verified business performance data. Revenue, growth, profitability, cashflow, advanced risks, and forecasts cannot be calculated reliably. Business Health Score could not be calculated because insufficient business performance data was provided. The current business risk assessment is normal. Customer churn could not be calculated from the uploaded data.": "لا يحتوي هذا التحليل العام للأعمال على بيانات أداء أعمال موثقة وكافية. لذلك لا يمكن حساب الإيرادات أو النمو أو الربحية أو التدفق النقدي أو المخاطر المتقدمة أو التوقعات بشكل موثوق. تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية. تقييم المخاطر الحالي طبيعي. تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.",
       "Business performance metrics are unavailable because the uploaded file does not contain verified business performance data.": "مؤشرات أداء الأعمال غير متاحة لأن الملف المرفوع لا يحتوي على بيانات أداء أعمال موثقة وقابلة للتحقق.",
       "Profitability metrics cannot be verified because no expense, cost, or profit column was provided.": "لا يمكن التحقق من مؤشرات الربحية لأن الملف لا يحتوي على أعمدة للمصروفات أو التكاليف أو الأرباح.",
       "Customer churn could not be calculated from the uploaded data.": "تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.",
@@ -296,7 +313,6 @@ const normalizeBackendText = (
       "General business": "نشاط أعمال عام",
       "0 risks and 0 positive signals were detected.": "لم يتم اكتشاف أي مخاطر أو إشارات إيجابية في البيانات الحالية.",
       "Insufficient verified business performance data was provided. Executive KPI, risk, forecast, and priority decision analysis is unavailable.": "لم يتم توفير بيانات أداء أعمال موثقة وكافية. لذلك لا تتوفر حالياً مؤشرات الأداء التنفيذية أو تحليل المخاطر أو التوقعات أو القرارات ذات الأولوية.",
-      "This general business analysis does not contain enough verified business performance data. Revenue, growth, profitability, cashflow, advanced risks, and forecasts cannot be calculated reliably. Business Health Score could not be calculated because insufficient business performance data was provided. The current business risk assessment is normal. Customer churn could not be calculated from the uploaded data.": "لا يحتوي هذا التحليل العام للأعمال على بيانات أداء أعمال موثقة وكافية. لذلك لا يمكن حساب الإيرادات أو النمو أو الربحية أو التدفق النقدي أو المخاطر المتقدمة أو التوقعات بشكل موثوق. تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية. تقييم المخاطر الحالي طبيعي. تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.",
     },
   };
 
@@ -306,157 +322,121 @@ const normalizeBackendText = (
     }
   );
 
+  if (language === "fr") {
+    if (
+      text.includes("This Activité générale analysis") ||
+      text.includes("does not contain enough verified business performance data") ||
+      text.includes("Revenue, Croissance, profitability") ||
+      text.includes("advanced risks, and forecasts cannot be calculated reliably")
+    ) {
+      return "Cette analyse d’activité générale ne contient pas suffisamment de données de performance vérifiées. Les revenus, la croissance, la rentabilité, le flux de trésorerie, les risques avancés et les prévisions ne peuvent pas être calculés de manière fiable. Le score de santé de l’entreprise n’a pas pu être calculé car les données de performance fournies sont insuffisantes. L’évaluation actuelle du risque de l’entreprise est normale. Le taux d’attrition client n’a pas pu être calculé à partir des données importées.";
+    }
+  }
+
+  if (language === "ar") {
+    if (
+      text.includes("This نشاط أعمال عام analysis") ||
+      text.includes("does not contain enough verified business performance data") ||
+      text.includes("Revenue, النمو, profitability") ||
+      text.includes("advanced risks, and forecasts cannot be calculated reliably")
+    ) {
+      return "لا يحتوي هذا التحليل العام للأعمال على بيانات أداء أعمال موثقة وكافية. لذلك لا يمكن حساب الإيرادات أو النمو أو الربحية أو التدفق النقدي أو المخاطر المتقدمة أو التوقعات بشكل موثوق. تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية. تقييم المخاطر الحالي طبيعي. تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.";
+    }
+  }
+
   const dictionaries: Record<Locale, Record<string, string>> = {
     en: {},
     fr: {
-    "Business performance metrics are unavailable because the uploaded file does not contain verified business performance data.": "Les indicateurs de performance ne sont pas disponibles car le fichier importé ne contient pas de données d’activité vérifiées.",
-    "Profitability metrics cannot be verified because no expense, cost, or profit column was provided.": "Les indicateurs de rentabilité ne peuvent pas être vérifiés car aucune colonne de dépenses, de coûts ou de profit n’a été fournie.",
-    "Customer churn could not be calculated from the uploaded data.": "Le taux d’attrition client n’a pas pu être calculé à partir des données importées.",
-    "ROAS could not be calculated because advertising spend was not provided.": "Le ROAS n’a pas pu être calculé car aucune donnée de dépenses publicitaires n’a été fournie.",
-    "Business Health Score could not be calculated because insufficient business performance data was provided.": "Le score de santé de l’entreprise n’a pas pu être calculé car les données de performance fournies sont insuffisantes.",
-    "Business Health Score could not be calculated from the uploaded data.": "Le score de santé de l’entreprise n’a pas pu être calculé à partir des données importées.",
-    "Upload performance data before making business decisions": "Importez des données de performance avant de prendre des décisions d’entreprise.",
-    "Upload a file with dated revenue, orders, expenses, customers, cashflow, or advertising spend before using this agent for executive decisions.": "Importez un fichier contenant des revenus, commandes, dépenses, clients, flux de trésorerie ou dépenses publicitaires datés avant d’utiliser cet agent pour des décisions exécutives.",
-    "Enables verified KPI, risk, forecast, and decision analysis.": "Permet une analyse vérifiée des KPI, des risques, des prévisions et des décisions.",
-    "هذا التحليل مخصص لدعم اتخاذ قرارات الأعمال فقط. يجب التحقق من القرارات المهمة مع مختص مؤهل.": "Cette analyse constitue uniquement une aide à la décision. Vérifiez les décisions importantes avec un professionnel qualifié.",
-    "General business": "Activité générale",
-    "0 risks and 0 positive signals were detected.": "Aucun risque ni signal positif n’a été détecté.",
-    "Insufficient verified business performance data was provided. Executive KPI, risk, forecast, and priority decision analysis is unavailable.": "Les données de performance fournies sont insuffisantes. Les KPI exécutifs, l’analyse des risques, les prévisions et les décisions prioritaires ne sont pas disponibles.",
-    "لا يحتوي هذا التحليل العام للأعمال على بيانات أداء أعمال موثقة وكافية. لذلك لا يمكن حساب الإيرادات أو النمو أو الربحية أو التدفق النقدي أو المخاطر المتقدمة أو التوقعات بشكل موثوق. تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية. تقييم المخاطر الحالي طبيعي. تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.": "Cette analyse d’activité générale ne contient pas suffisamment de données de performance vérifiées. Les revenus, la croissance, la rentabilité, le flux de trésorerie, les risques avancés et les prévisions ne peuvent pas être calculés de manière fiable. Le score de santé de l’entreprise n’a pas pu être calculé car les données de performance fournies sont insuffisantes. L’évaluation actuelle du risque business est normale. Le taux d’attrition client n’a pas pu être calculé à partir des données importées.",
-
-    "up": "en hausse",
-    "down": "en baisse",
-    "stable": "stable",
-
-    "high_risk": "Risque élevé",
-    "elevated_risk": "Risque accru",
-    "low_risk": "Risque faible",
-    "watch": "À surveiller",
-
-    "low": "faible",
-    "medium": "moyen",
-    "high": "élevé",
-    "critical": "critique",
-
-    "healthy": "sain",
-    "positive": "positif",
-    "negative": "négatif",
-    "normal": "normal",
-
-    "general": "général",
-    "saas": "SaaS / abonnement",
-
-    "Healthy profit margin.": "Marge bénéficiaire saine.",
-    "Healthy growth.": "Croissance saine.",
-    "Positive cashflow.": "Flux de trésorerie positif.",
-    "Healthy ROAS.": "ROAS sain.",
-    "Healthy CAC efficiency.": "Efficacité CAC saine.",
-    "Critical churn level.": "Taux de churn critique.",
-
-    "Payroll": "Masse salariale",
-    "Marketing": "Marketing",
-    "Software": "Logiciels",
-
-    "Customers": "Clients",
-    "New customers": "Nouveaux clients",
-    "Churned customers": "Clients perdus",
-
-    "Revenue/customer": "Revenu par client",
-
-    "Orders": "Commandes",
-    "Ad spend": "Dépenses publicitaires",
-
-    "Profit Margin": "Marge bénéficiaire",
-    "Growth": "Croissance",
-    "Cashflow": "Flux de trésorerie",
-    "Churn": "Attrition client",
-
-    "Roas": "ROAS",
-    "Cac Efficiency": "Efficacité CAC",
-
-    "Data Quality": "Qualité des données",
-
-    "Revenue": "Chiffre d’affaires",
-    "Expenses": "Dépenses",
-    "Profit": "Profit",
-
-    "Profit Margin Percent": "Taux de marge bénéficiaire",
-    "Growth Rate Percent": "Taux de croissance"
+      "up": "en hausse",
+      "down": "en baisse",
+      "stable": "stable",
+      "high_risk": "Risque élevé",
+      "elevated_risk": "Risque accru",
+      "low_risk": "Risque faible",
+      "watch": "À surveiller",
+      "low": "faible",
+      "medium": "moyen",
+      "high": "élevé",
+      "critical": "critique",
+      "healthy": "sain",
+      "positive": "positif",
+      "negative": "négatif",
+      "normal": "normal",
+      "general": "général",
+      "saas": "SaaS / abonnement",
+      "Healthy profit margin.": "Marge bénéficiaire saine.",
+      "Healthy growth.": "Croissance saine.",
+      "Positive cashflow.": "Flux de trésorerie positif.",
+      "Healthy ROAS.": "ROAS sain.",
+      "Healthy CAC efficiency.": "Efficacité CAC saine.",
+      "Critical churn level.": "Taux d’attrition critique.",
+      "Payroll": "Masse salariale",
+      "Marketing": "Marketing",
+      "Software": "Logiciels",
+      "Customers": "Clients",
+      "New customers": "Nouveaux clients",
+      "Churned customers": "Clients perdus",
+      "Revenue/customer": "Revenu par client",
+      "Orders": "Commandes",
+      "Ad spend": "Dépenses publicitaires",
+      "Profit Margin": "Marge bénéficiaire",
+      "Growth": "Croissance",
+      "Cashflow": "Flux de trésorerie",
+      "Churn": "Attrition client",
+      "Roas": "ROAS",
+      "Cac Efficiency": "Efficacité CAC",
+      "Data Quality": "Qualité des données",
+      "Revenue": "Chiffre d’affaires",
+      "Expenses": "Dépenses",
+      "Profit": "Profit",
+      "Profit Margin Percent": "Taux de marge bénéficiaire",
+      "Growth Rate Percent": "Taux de croissance",
     },
-   ar: {
-    "Business performance metrics are unavailable because the uploaded file does not contain verified business performance data.": "مؤشرات أداء الأعمال غير متاحة لأن الملف المرفوع لا يحتوي على بيانات أداء أعمال موثقة وقابلة للتحقق.",
-    "Profitability metrics cannot be verified because no expense, cost, or profit column was provided.": "لا يمكن التحقق من مؤشرات الربحية لأن الملف لا يحتوي على أعمدة للمصروفات أو التكاليف أو الأرباح.",
-    "Customer churn could not be calculated from the uploaded data.": "تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.",
-    "ROAS could not be calculated because advertising spend was not provided.": "تعذر حساب عائد الإنفاق الإعلاني لأن بيانات الإنفاق الإعلاني غير متوفرة.",
-    "Business Health Score could not be calculated because insufficient business performance data was provided.": "تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية.",
-    "Business Health Score could not be calculated from the uploaded data.": "تعذر حساب درجة صحة الأعمال من البيانات المرفوعة.",
-    "Upload performance data before making business decisions": "قم برفع بيانات الأداء قبل اتخاذ قرارات أعمال مهمة.",
-    "Upload a file with dated revenue, orders, expenses, customers, cashflow, or advertising spend before using this agent for executive decisions.": "يرجى رفع ملف يحتوي على الإيرادات والمبيعات والمصروفات والعملاء والتدفق النقدي أو الإنفاق الإعلاني قبل استخدام هذا الوكيل لاتخاذ القرارات التنفيذية.",
-    "Enables verified KPI, risk, forecast, and decision analysis.": "يتيح تحليلاً موثقاً لمؤشرات الأداء والمخاطر والتوقعات والقرارات.",
-    "هذا التحليل مخصص لدعم اتخاذ قرارات الأعمال فقط. يجب التحقق من القرارات المهمة مع مختص مؤهل.": "هذا التحليل مخصص لدعم اتخاذ قرارات الأعمال فقط. يجب التحقق من القرارات المهمة مع مختص مؤهل.",
-    "General business": "نشاط أعمال عام",
-    "0 risks and 0 positive signals were detected.": "لم يتم اكتشاف أي مخاطر أو إشارات إيجابية في البيانات الحالية.",
-    "Insufficient verified business performance data was provided. Executive KPI, risk, forecast, and priority decision analysis is unavailable.": "لم يتم توفير بيانات أداء أعمال موثقة وكافية. لذلك لا تتوفر حالياً مؤشرات الأداء التنفيذية أو تحليل المخاطر أو التوقعات أو القرارات ذات الأولوية.",
-    "لا يحتوي هذا التحليل العام للأعمال على بيانات أداء أعمال موثقة وكافية. لذلك لا يمكن حساب الإيرادات أو النمو أو الربحية أو التدفق النقدي أو المخاطر المتقدمة أو التوقعات بشكل موثوق. تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية. تقييم المخاطر الحالي طبيعي. تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.": "لا يحتوي هذا التحليل العام للأعمال على بيانات أداء أعمال موثقة وكافية. لذلك لا يمكن حساب الإيرادات أو النمو أو الربحية أو التدفق النقدي أو المخاطر المتقدمة أو التوقعات بشكل موثوق. تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية. تقييم المخاطر الحالي طبيعي. تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.",
-
-    "up": "في ارتفاع",
-    "down": "في انخفاض",
-    "stable": "مستقر",
-
-    "high_risk": "مخاطر مرتفعة",
-    "elevated_risk": "مخاطر مرتفعة نسبياً",
-    "low_risk": "مخاطر منخفضة",
-    "watch": "قيد المراقبة",
-
-    "low": "منخفض",
-    "medium": "متوسط",
-    "high": "مرتفع",
-    "critical": "حرج",
-
-    "healthy": "سليم",
-    "positive": "إيجابي",
-    "negative": "سلبي",
-    "normal": "طبيعي",
-
-    "general": "عام",
-    "saas": "البرمجيات كخدمة (SaaS)",
-
-    "Healthy profit margin.": "هامش الربح في مستوى صحي.",
-    "Healthy growth.": "النمو في مستوى صحي.",
-    "Positive cashflow.": "التدفق النقدي إيجابي.",
-    "Healthy ROAS.": "عائد الإنفاق الإعلاني في مستوى صحي.",
-    "Healthy CAC efficiency.": "كفاءة تكلفة اكتساب العملاء في مستوى صحي.",
-    "Critical churn level.": "معدل تسرّب العملاء في مستوى حرج.",
-
-    "Payroll": "الرواتب",
-    "Marketing": "التسويق",
-    "Software": "البرمجيات",
-
-    "Customers": "العملاء",
-    "New customers": "العملاء الجدد",
-    "Churned customers": "العملاء المتسرّبون",
-
-    "Revenue/customer": "الإيراد لكل عميل",
-
-    "Orders": "الطلبات",
-    "Ad spend": "الإنفاق الإعلاني",
-
-    "Profit Margin": "هامش الربح",
-    "Growth": "النمو",
-    "Cashflow": "التدفق النقدي",
-    "Churn": "معدل تسرّب العملاء",
-
-    "Roas": "عائد الإنفاق الإعلاني",
-    "Cac Efficiency": "كفاءة تكلفة اكتساب العملاء",
-
-    "Data Quality": "جودة البيانات",
-
-    "Revenue": "الإيرادات",
-    "Expenses": "المصروفات",
-    "Profit": "صافي الربح",
-
-    "Profit Margin Percent": "نسبة هامش الربح",
-    "Growth Rate Percent": "معدل النمو"
+    ar: {
+      "up": "في ارتفاع",
+      "down": "في انخفاض",
+      "stable": "مستقر",
+      "high_risk": "مخاطر مرتفعة",
+      "elevated_risk": "مخاطر مرتفعة نسبياً",
+      "low_risk": "مخاطر منخفضة",
+      "watch": "قيد المراقبة",
+      "low": "منخفض",
+      "medium": "متوسط",
+      "high": "مرتفع",
+      "critical": "حرج",
+      "healthy": "سليم",
+      "positive": "إيجابي",
+      "negative": "سلبي",
+      "normal": "طبيعي",
+      "general": "عام",
+      "saas": "البرمجيات كخدمة",
+      "Healthy profit margin.": "هامش الربح في مستوى صحي.",
+      "Healthy growth.": "النمو في مستوى صحي.",
+      "Positive cashflow.": "التدفق النقدي إيجابي.",
+      "Healthy ROAS.": "عائد الإنفاق الإعلاني في مستوى صحي.",
+      "Healthy CAC efficiency.": "كفاءة تكلفة اكتساب العملاء في مستوى صحي.",
+      "Critical churn level.": "معدل تسرّب العملاء في مستوى حرج.",
+      "Payroll": "الرواتب",
+      "Marketing": "التسويق",
+      "Software": "البرمجيات",
+      "Customers": "العملاء",
+      "New customers": "العملاء الجدد",
+      "Churned customers": "العملاء المتسرّبون",
+      "Revenue/customer": "الإيراد لكل عميل",
+      "Orders": "الطلبات",
+      "Ad spend": "الإنفاق الإعلاني",
+      "Profit Margin": "هامش الربح",
+      "Growth": "النمو",
+      "Cashflow": "التدفق النقدي",
+      "Churn": "معدل تسرّب العملاء",
+      "Roas": "عائد الإنفاق الإعلاني",
+      "Cac Efficiency": "كفاءة تكلفة اكتساب العملاء",
+      "Data Quality": "جودة البيانات",
+      "Revenue": "الإيرادات",
+      "Expenses": "المصروفات",
+      "Profit": "صافي الربح",
+      "Profit Margin Percent": "نسبة هامش الربح",
+      "Growth Rate Percent": "معدل النمو",
     },
   };
 
@@ -470,7 +450,7 @@ const normalizeBackendText = (
       return;
     }
 
-    if (["Profit", "Cashflow", "Revenue", "Expenses"].includes(source)) {
+    if (["Profit", "Cashflow", "Revenue", "Expenses", "Growth"].includes(source)) {
       return;
     }
 
@@ -482,20 +462,21 @@ const normalizeBackendText = (
 
   if (language === "fr") {
     text = text
+      .replaceAll("This Activité générale analysis does not contain enough verified business performance data.", "Cette analyse d’activité générale ne contient pas suffisamment de données de performance vérifiées.")
+      .replaceAll("Revenue, Croissance, profitability, flux de trésorerie, advanced risks, and forecasts cannot be calculated reliably.", "Les revenus, la croissance, la rentabilité, le flux de trésorerie, les risques avancés et les prévisions ne peuvent pas être calculés de manière fiable.")
+      .replaceAll("The current business risk assessment is normal.", "L’évaluation actuelle du risque de l’entreprise est normale.")
+      .replaceAll("This general business analysis does not contain enough verified business performance data.", "Cette analyse d’activité générale ne contient pas suffisamment de données de performance vérifiées.")
+      .replaceAll("Revenue, growth, profitability, cashflow, advanced risks, and forecasts cannot be calculated reliably.", "Les revenus, la croissance, la rentabilité, le flux de trésorerie, les risques avancés et les prévisions ne peuvent pas être calculés de manière fiable.")
       .replaceAll("Business performance metrics are unavailable because the uploaded file does not contain verified business performance data.", "Les indicateurs de performance ne sont pas disponibles car le fichier importé ne contient pas de données d’activité vérifiées.")
       .replaceAll("Profitability metrics cannot be verified because no expense, cost, or profit column was provided.", "Les indicateurs de rentabilité ne peuvent pas être vérifiés car aucune colonne de dépenses, de coûts ou de profit n’a été fournie.")
       .replaceAll("Customer churn could not be calculated from the uploaded data.", "Le taux d’attrition client n’a pas pu être calculé à partir des données importées.")
       .replaceAll("ROAS could not be calculated because advertising spend was not provided.", "Le ROAS n’a pas pu être calculé car aucune donnée de dépenses publicitaires n’a été fournie.")
       .replaceAll("Business Health Score could not be calculated because insufficient business performance data was provided.", "Le score de santé de l’entreprise n’a pas pu être calculé car les données de performance fournies sont insuffisantes.")
+      .replaceAll("Business Health Score could not be calculated from the uploaded data.", "Le score de santé de l’entreprise n’a pas pu être calculé à partir des données importées.")
       .replaceAll("0 risks and 0 positive signals were detected.", "Aucun risque ni signal positif n’a été détecté.")
       .replaceAll("This is for business decision support only. Verify important decisions with a qualified professional.", "Cette analyse constitue uniquement une aide à la décision. Vérifiez les décisions importantes avec un professionnel qualifié.")
-
       .replaceAll("cashffaible", "cashflow")
       .replaceAll("cashflow est Positif", "cashflow est positif")
-      .replaceAll("score de santé backend est de 73/100 (Sain)", "score de santé backend est de 73/100 (sain)")
-      .replaceAll("situation actuelle comme Critique", "situation actuelle comme critique")
-      .replaceAll("Volatilité moyen", "Volatilité moyenne")
-      .replaceAll("Risque de flux de trésorerie faible", "Risque de flux de trésorerie faible")
       .replaceAll("Le Profit", "Le profit")
       .replaceAll("le Profit", "le profit")
       .replaceAll("du Profit", "du profit")
@@ -509,20 +490,24 @@ const normalizeBackendText = (
       .replace(/\badvertising spend\b/gi, "dépenses publicitaires")
       .replaceAll("General business", "Activité générale")
       .replaceAll("general business", "activité générale")
-      ;
+      .replace(/(-?\d+)\.(\d+)%/g, "$1,$2 %");
   }
 
   if (language === "ar") {
     text = text
-      .replaceAll("This نشاط أعمال عام analysis does not contain enough verified business performance data. Revenue, النمو, profitability, التدفق النقدي, advanced risks, and forecasts cannot be calculated reliably. تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية. The current business risk assessment is طبيعي. تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.", "لا يحتوي هذا التحليل العام للأعمال على بيانات أداء أعمال موثقة وكافية. لذلك لا يمكن حساب الإيرادات أو النمو أو الربحية أو التدفق النقدي أو المخاطر المتقدمة أو التوقعات بشكل موثوق. تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية. تقييم المخاطر الحالي طبيعي. تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.")
+      .replaceAll("This نشاط أعمال عام analysis does not contain enough verified business performance data.", "لا يحتوي هذا التحليل العام للأعمال على بيانات أداء أعمال موثقة وكافية.")
+      .replaceAll("Revenue, النمو, profitability, التدفق النقدي, advanced risks, and forecasts cannot be calculated reliably.", "لذلك لا يمكن حساب الإيرادات أو النمو أو الربحية أو التدفق النقدي أو المخاطر المتقدمة أو التوقعات بشكل موثوق.")
+      .replaceAll("The current business risk assessment is طبيعي.", "تقييم المخاطر الحالي طبيعي.")
+      .replaceAll("This general business analysis does not contain enough verified business performance data.", "لا يحتوي هذا التحليل العام للأعمال على بيانات أداء أعمال موثقة وكافية.")
+      .replaceAll("Revenue, growth, profitability, cashflow, advanced risks, and forecasts cannot be calculated reliably.", "لذلك لا يمكن حساب الإيرادات أو النمو أو الربحية أو التدفق النقدي أو المخاطر المتقدمة أو التوقعات بشكل موثوق.")
       .replaceAll("Business performance metrics are unavailable because the uploaded file does not contain verified business performance data.", "مؤشرات أداء الأعمال غير متاحة لأن الملف المرفوع لا يحتوي على بيانات أداء أعمال موثقة وقابلة للتحقق.")
       .replaceAll("Profitability metrics cannot be verified because no expense, cost, or profit column was provided.", "لا يمكن التحقق من مؤشرات الربحية لأن الملف لا يحتوي على أعمدة للمصروفات أو التكاليف أو الأرباح.")
       .replaceAll("Customer churn could not be calculated from the uploaded data.", "تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.")
       .replaceAll("ROAS could not be calculated because advertising spend was not provided.", "تعذر حساب عائد الإنفاق الإعلاني لأن بيانات الإنفاق الإعلاني غير متوفرة.")
       .replaceAll("Business Health Score could not be calculated because insufficient business performance data was provided.", "تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية.")
+      .replaceAll("Business Health Score could not be calculated from the uploaded data.", "تعذر حساب درجة صحة الأعمال من البيانات المرفوعة.")
       .replaceAll("0 risks and 0 positive signals were detected.", "لم يتم اكتشاف أي مخاطر أو إشارات إيجابية في البيانات الحالية.")
       .replaceAll("This is for business decision support only. Verify important decisions with a qualified professional.", "هذا التحليل مخصص لدعم اتخاذ قرارات الأعمال فقط. يجب التحقق من القرارات المهمة مع مختص مؤهل.")
-
       .replaceAll("Customer معدل تسرّب العملاء could not be calculated from the uploaded data.", "تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.")
       .replaceAll("Upload a file with dated revenue, الطلبات, expenses, العملاء, cashflow, or advertising spend before using this agent for executive decisions.", "يرجى رفع ملف يحتوي على الإيرادات والمبيعات والمصروفات والعملاء والتدفق النقدي أو الإنفاق الإعلاني قبل استخدام هذا الوكيل لاتخاذ القرارات التنفيذية.")
       .replaceAll("General business", "نشاط أعمال عام")
@@ -531,106 +516,7 @@ const normalizeBackendText = (
       .replace(/\bcustomers\b/gi, "العملاء")
       .replace(/\bcashflow\b/gi, "التدفق النقدي")
       .replace(/\bexpenses\b/gi, "المصروفات")
-      .replace(/\badvertising spend\b/gi, "الإنفاق الإعلاني")
-      ;
-  }
-
-  if (language === "ar" && text === "N/A") {
-    return "غير متاح";
-  }
-
-  if (language === "fr" && text === "N/A") {
-    return "N/D";
-  }
-
-  const normalized = text.trim().toLowerCase();
-
-  if (normalized === "unknown") {
-    if (language === "ar") return "غير متاح";
-    if (language === "fr") return "N/D";
-    return "Unknown";
-  }
-
-  if (language === "fr") {
-    text = text.replace(/(\d+)\.(\d+)%/g, "$1,$2 %");
-  }
-
-  if (language === "ar") {
-    if (
-      text.includes("This نشاط أعمال عام analysis") ||
-      text.includes("does not contain enough verified business performance data") ||
-      text.includes("Revenue, النمو, profitability")
-    ) {
-      return "لا يحتوي هذا التحليل العام للأعمال على بيانات أداء أعمال موثقة وكافية. لذلك لا يمكن حساب الإيرادات أو النمو أو الربحية أو التدفق النقدي أو المخاطر المتقدمة أو التوقعات بشكل موثوق. تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية. تقييم المخاطر الحالي طبيعي. تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة.";
-    }
-
-    text = text
-      .replaceAll(
-        "Business performance metrics are unavailable because the uploaded file does not contain verified business performance data.",
-        "مؤشرات أداء الأعمال غير متاحة لأن الملف المرفوع لا يحتوي على بيانات أداء أعمال موثقة وقابلة للتحقق."
-      )
-      .replaceAll(
-        "Profitability metrics cannot be verified because no expense, cost, or profit column was provided.",
-        "لا يمكن التحقق من مؤشرات الربحية لأن الملف لا يحتوي على أعمدة للمصروفات أو التكاليف أو الأرباح."
-      )
-      .replaceAll(
-        "Customer churn could not be calculated from the uploaded data.",
-        "تعذر حساب معدل تسرّب العملاء من البيانات المرفوعة."
-      )
-      .replaceAll(
-        "ROAS could not be calculated because advertising spend was not provided.",
-        "تعذر حساب عائد الإنفاق الإعلاني لأن بيانات الإنفاق الإعلاني غير متوفرة."
-      )
-      .replaceAll(
-        "Business Health Score could not be calculated because insufficient business performance data was provided.",
-        "تعذر حساب درجة صحة الأعمال بسبب عدم توفر بيانات أداء أعمال كافية."
-      )
-      .replaceAll(
-        "0 risks and 0 positive signals were detected.",
-        "لم يتم اكتشاف أي مخاطر أو إشارات إيجابية في البيانات الحالية."
-      )
-      .replaceAll(
-        "This is for business decision support only. Verify important decisions with a qualified professional.",
-        "هذا التحليل مخصص لدعم اتخاذ قرارات الأعمال فقط. يجب التحقق من القرارات المهمة مع مختص مؤهل."
-      )
-      .replaceAll("General business", "نشاط أعمال عام")
-      .replaceAll("general business", "نشاط أعمال عام");
-  }
-
-  if (language === "fr") {
-    text = text
-      .replaceAll(
-        "Business performance metrics are unavailable because the uploaded file does not contain verified business performance data.",
-        "Les indicateurs de performance ne sont pas disponibles car le fichier importé ne contient pas de données d’activité vérifiées."
-      )
-      .replaceAll(
-        "Profitability metrics cannot be verified because no expense, cost, or profit column was provided.",
-        "Les indicateurs de rentabilité ne peuvent pas être vérifiés car aucune colonne de dépenses, de coûts ou de profit n’a été fournie."
-      )
-      .replaceAll(
-        "Customer churn could not be calculated from the uploaded data.",
-        "Le taux d’attrition client n’a pas pu être calculé à partir des données importées."
-      )
-      .replaceAll(
-        "ROAS could not be calculated because advertising spend was not provided.",
-        "Le ROAS n’a pas pu être calculé car aucune donnée de dépenses publicitaires n’a été fournie."
-      )
-      .replaceAll(
-        "Business Health Score could not be calculated because insufficient business performance data was provided.",
-        "Le score de santé de l’entreprise n’a pas pu être calculé car les données de performance fournies sont insuffisantes."
-      )
-      .replaceAll(
-        "0 risks and 0 positive signals were detected.",
-        "Aucun risque ni signal positif n’a été détecté."
-      )
-      .replaceAll(
-        "This is for business decision support only. Verify important decisions with a qualified professional.",
-        "Cette analyse constitue uniquement une aide à la décision. Vérifiez les décisions importantes avec un professionnel qualifié."
-      );
-  }
-
-  if (language === "fr") {
-    text = text.replace(/(-?\d+)\.(\d+)%/g, "$1,$2 %");
+      .replace(/\badvertising spend\b/gi, "الإنفاق الإعلاني");
   }
 
   return text;
@@ -2396,13 +2282,13 @@ export default function BusinessClient({
 
     fr: {
       title: "Intelligence décisionnelle d'entreprise",
-      heroPower: "Analyse exécutive IA pour entreprises modernes",
+      heroPower: "Analyse exécutive IA pour les entreprises modernes",
       subtitle:
         "Importez vos données business pour recevoir une analyse exécutive vérifiée par les données avec KPIs, risques, opportunités, prévisions et décisions prioritaires.",
       eyebrow: "Agent d'analyse d'entreprise",
       chooseFile: "Choisir un fichier",
       noFile: "Aucun fichier sélectionné",
-      analyze: "Analyser le business",
+      analyze: "Analyser l’entreprise",
       loading: "Analyse des données business...",
       results: "Analyse exécutive de l'entreprise",
       summary: "Résumé exécutif",
@@ -2435,7 +2321,7 @@ export default function BusinessClient({
       dashboard: "Ouvrir le tableau de bord",
       whatItIs: "Ce que fait cet agent",
       howItWorks: "Fonctionnement",
-      dataTypes: "Données business prises en charge",
+      dataTypes: "Données d’entreprise prises en charge",
       enterpriseReady: "Prêt public & entreprise",
       trustedData: "Les chiffres sont vérifiés par des calculs déterministes. L’IA explique les résultats.",
       methodologyTitle: "Comment l’analyse est produite",
@@ -2443,7 +2329,7 @@ export default function BusinessClient({
         "Runexa valide le jeu de données importé.",
         "Les KPIs sont calculés avec des formules déterministes.",
         "Les métriques de revenus, marge, churn, CAC, ROAS et cashflow sont vérifiées.",
-        "Les risques et anomalies sont détectés à partir de signaux business mesurés.",
+        "Les risques et anomalies sont détectés à partir de signaux d’entreprise mesurés.",
         "L’IA génère l’interprétation exécutive et les recommandations.",
       ],
       methodologyNote: "L’IA explique les chiffres. Elle ne les invente pas.",
@@ -2455,7 +2341,7 @@ export default function BusinessClient({
         "100 % de couverture du dataset",
       ],
       whyNotGeneralAiTitle: "Pourquoi ne pas utiliser un assistant IA généraliste ?",
-      whyNotGeneralAiText: "Les assistants IA généralistes peuvent expliquer des concepts business. Runexa Business Agent combine des calculs KPI déterministes, une détection structurée des anomalies, une analyse du churn et de la rétention, la génération de prévisions, le reporting exécutif et une sortie multilingue avant de générer des recommandations.",
+      whyNotGeneralAiText: "Les assistants IA généralistes peuvent expliquer des concepts d’entreprise. Runexa Business Agent combine des calculs KPI déterministes, une détection structurée des anomalies, une analyse du churn et de la rétention, la génération de prévisions, le reporting exécutif et une sortie multilingue avant de générer des recommandations.",
       usedForTitle: "Utilisé pour",
       usedForItems: [
         "Entreprises SaaS",
@@ -2467,7 +2353,7 @@ export default function BusinessClient({
       ],
       sampleAnalysisTitle: "Voir un exemple complet d’analyse",
       sampleInputTitle: "Entrée",
-      sampleInputText: "Dataset business mensuel",
+      sampleInputText: "Jeu de données d’entreprise mensuel",
       sampleOutputTitle: "Sortie",
       sampleOutputItems: [
         "Tableau de bord KPI",
@@ -2503,7 +2389,7 @@ export default function BusinessClient({
       whatYouGetDescriptions: [
         "Comprendre revenus, profit, marge, croissance, cashflow et signaux opérationnels dans une vue claire.",
         "Les métriques clés et les KPIs avancés sont calculés avant toute génération narrative.",
-        "Détecter churn, risques de rentabilité, pression cashflow et signaux business inhabituels.",
+        "Détecter churn, risques de rentabilité, pression cashflow et signaux d’entreprise inhabituels.",
         "Recevoir des décisions pratiques, opportunités et prochaines actions pour utilisateurs publics ou équipes entreprise.",
       ],
       whatYouGetBadges: [
@@ -2532,7 +2418,7 @@ export default function BusinessClient({
         "Revenus, dépenses, profit, cashflow, périodes mensuelles, catégories de coûts et marges.",
         "Clients, nouveaux clients, clients perdus, rétention, MRR, ARR et revenus par client.",
         "Commandes, dépenses publicitaires, ROAS, CAC, canaux, conversion et performance commerciale.",
-        "Catégories business, départements, magasins, produits, services, régions ou champs opérationnels personnalisés.",
+        "Catégories d’entreprise, départements, magasins, produits, services, régions ou champs opérationnels personnalisés.",
       ],
       loadingSteps: {
         quality: "Vérification de la qualité des données...",
@@ -3484,8 +3370,8 @@ export default function BusinessClient({
           </div>
         </div>
 
-        {/* Results */}
-        {result && (
+        {/* Results removed from public render to avoid showing the full executive dashboard block here. */}
+        {false && result && (
           <SectionShell className="space-y-8">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
