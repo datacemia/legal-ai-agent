@@ -89,6 +89,29 @@ const labels: any = {
       "Upload a PDF, Word document, or scanned study file. The Study Agent turns it into a complete, personalized learning workspace in minutes.",
     how2:
       "Before analysis, choose your education level and output language. The agent adapts summaries, explanations, quizzes, flashcards, and study plans to your level.",
+    methodologyTitle: "How Runexa Study Agent works",
+    methodologySteps: [
+      "Extracts text from uploaded study material",
+      "Identifies key concepts and learning objectives",
+      "Generates structured summaries and explanations",
+      "Creates quizzes and flashcards",
+      "Detects weak areas after quiz completion",
+      "Adapts future revision recommendations",
+    ],
+    learnerValueTitle: "What learners receive",
+    learnerValueItems: [
+      "Structured summary",
+      "Detailed explanation",
+      "Visual learning map",
+      "Flashcards",
+      "Theoretical quiz",
+      "Practical quiz",
+      "Personalized study plan",
+      "Weak-point analysis",
+    ],
+    multilingualTitle: "Multilingual study support",
+    multilingualText:
+      "Input documents can be in English, French, or Arabic. Study outputs can be generated in English, French, or Arabic.",
     items: [
       "Structured summary and detailed explanation",
       "Audio playback for the detailed summary",
@@ -179,6 +202,29 @@ const labels: any = {
       "Téléchargez un PDF, un document Word ou un fichier scanné. L’Agent étude le transforme en espace d’apprentissage complet et personnalisé en quelques minutes.",
     how2:
       "Avant l’analyse, choisissez votre niveau d’étude et la langue de sortie. L’agent adapte les résumés, explications, quiz, flashcards et plans de révision à votre niveau.",
+    methodologyTitle: "Comment fonctionne Runexa Study Agent",
+    methodologySteps: [
+      "Extrait le texte du support d’étude importé",
+      "Identifie les concepts clés et les objectifs d’apprentissage",
+      "Génère des résumés structurés et des explications",
+      "Crée des quiz et des flashcards",
+      "Détecte les points faibles après les quiz",
+      "Adapte les recommandations de révision futures",
+    ],
+    learnerValueTitle: "Ce que les apprenants reçoivent",
+    learnerValueItems: [
+      "Résumé structuré",
+      "Explication détaillée",
+      "Carte visuelle d’apprentissage",
+      "Flashcards",
+      "Quiz théorique",
+      "Quiz pratique",
+      "Plan d’étude personnalisé",
+      "Analyse des points faibles",
+    ],
+    multilingualTitle: "Support d’étude multilingue",
+    multilingualText:
+      "Les documents d’entrée peuvent être en anglais, français ou arabe. Les résultats d’étude peuvent être générés en anglais, français ou arabe.",
     items: [
       "Résumé structuré et explication détaillée",
       "Lecture audio du résumé détaillé",
@@ -269,6 +315,29 @@ const labels: any = {
       "ارفع ملف PDF أو Word أو مستنداً ممسوحاً ضوئياً. يحوّله وكيل الدراسة إلى مساحة تعلم كاملة وشخصية خلال دقائق.",
     how2:
       "قبل التحليل، اختر مستواك التعليمي ولغة النتائج. يقوم الوكيل بتكييف الملخصات، الشروحات، الاختبارات، بطاقات المراجعة وخطة الدراسة حسب مستواك.",
+    methodologyTitle: "كيف يعمل Runexa Study Agent",
+    methodologySteps: [
+      "يستخرج النص من المادة الدراسية المرفوعة",
+      "يحدد المفاهيم الأساسية وأهداف التعلم",
+      "ينشئ ملخصات منظمة وشروحات واضحة",
+      "ينشئ اختبارات وبطاقات مراجعة",
+      "يكشف نقاط الضعف بعد إكمال الاختبار",
+      "يكيّف توصيات المراجعة المستقبلية",
+    ],
+    learnerValueTitle: "ما الذي يحصل عليه المتعلمون",
+    learnerValueItems: [
+      "ملخص منظم",
+      "شرح مفصل",
+      "خريطة تعلم بصرية",
+      "بطاقات مراجعة",
+      "اختبار نظري",
+      "اختبار عملي",
+      "خطة دراسة مخصصة",
+      "تحليل نقاط الضعف",
+    ],
+    multilingualTitle: "دعم دراسي متعدد اللغات",
+    multilingualText:
+      "يمكن أن تكون المستندات المرفوعة باللغة الإنجليزية أو الفرنسية أو العربية. ويمكن إنشاء نتائج الدراسة باللغة الإنجليزية أو الفرنسية أو العربية.",
     items: [
       "ملخص منظم وشرح مفصل",
       "استماع صوتي للملخص المفصل",
@@ -2156,6 +2225,60 @@ export default function StudyClient({
         </div>
 
         <StudyOutputShowcase locale={language} />
+
+        <section className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
+            <h2 className="text-2xl font-bold text-slate-950">
+              {t.methodologyTitle}
+            </h2>
+
+            <div className="mt-5 space-y-3">
+              {t.methodologySteps.map((step: string, index: number) => (
+                <div
+                  key={`${step}-${index}`}
+                  className="flex gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">
+                    {index + 1}
+                  </span>
+
+                  <p className="text-sm leading-6 text-slate-700">
+                    {step}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-6">
+            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
+              <h2 className="text-2xl font-bold text-slate-950">
+                {t.learnerValueTitle}
+              </h2>
+
+              <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                {t.learnerValueItems.map((item: string) => (
+                  <div
+                    key={item}
+                    className="rounded-2xl border border-green-100 bg-green-50 px-4 py-3 text-sm font-medium text-green-800"
+                  >
+                    ✓ {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-blue-100 bg-blue-50 p-6 shadow-sm">
+              <h2 className="text-xl font-bold text-blue-950">
+                {t.multilingualTitle}
+              </h2>
+
+              <p className="mt-3 text-sm leading-6 text-blue-800">
+                {t.multilingualText}
+              </p>
+            </div>
+          </div>
+        </section>
 
 <div className="bg-white p-6 rounded-2xl border space-y-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
           <div className="rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm text-slate-600 space-y-3 transition-all duration-300 hover:border-blue-200 hover:bg-white hover:shadow-md">
