@@ -53,7 +53,10 @@ const aboutContent = {
 
     missionTitle: "Our mission",
     missionText:
-      "Runexa’s mission is simple: to build practical, specialized AI agents that help people learn more effectively, understand complex information, and make better-informed decisions in both their personal and professional lives.",
+      "Runexa’s mission is to transform complex documents, data, and information into structured, understandable, and actionable analysis through specialized AI agents.",
+
+    outputsTitle: "What Runexa agents produce",
+    outputsText: "Runexa agents generate structured analysis from documents and data provided by users. Depending on the agent used, outputs may include identification of contractual clauses and legal risks, extraction of obligations and recommendations, spending analysis and savings opportunities, educational summaries and study plans, as well as performance indicators, forecasts, and business recommendations. Public demonstrations are available for each agent.",
 
     approachTitle: "Our approach to responsible AI",
     approachItems: [
@@ -99,6 +102,8 @@ const aboutContent = {
     founderName: "Dr. Rachid Ejjami",
     founderRole: "Founder and Managing Member",
     founderCompany: "Runexa Systems LLC",
+    founderBio:
+      "Doctor of Business Administration (DBA), applied artificial intelligence researcher, and Editor-in-Chief of the Journal of Next-Generation Research (JNGR). Author of multiple books and publications on the application of artificial intelligence in healthcare, finance, insurance, energy, and supply chain management. His work focuses on the responsible use of AI for document analysis, decision support, and knowledge automation.",
 
     companyTitle: "Company information",
     companyName: "Runexa Systems LLC",
@@ -141,7 +146,10 @@ const aboutContent = {
 
     missionTitle: "Notre mission",
     missionText:
-      "La mission de Runexa est simple : créer des agents IA pratiques et spécialisés qui aident les personnes à apprendre plus efficacement, comprendre des informations complexes et prendre de meilleures décisions dans leur vie personnelle et professionnelle.",
+      "La mission de Runexa est de transformer des documents, données et informations complexes en analyses structurées, compréhensibles et exploitables grâce à des agents IA spécialisés.",
+
+    outputsTitle: "Ce que les agents Runexa produisent",
+    outputsText: "Les agents Runexa génèrent des analyses structurées à partir des documents et données fournis par les utilisateurs. Selon l’agent utilisé, les résultats peuvent inclure l’identification des clauses contractuelles et des risques juridiques, l’extraction d’obligations et de recommandations, l’analyse des dépenses et des opportunités d’économies, des résumés pédagogiques et plans d’étude, ainsi que des indicateurs de performance, prévisions et recommandations business. Des démonstrations publiques sont disponibles pour chaque agent.",
 
     approachTitle: "Notre approche de l’IA responsable",
     approachItems: [
@@ -187,6 +195,8 @@ const aboutContent = {
     founderName: "Dr. Rachid Ejjami",
     founderRole: "Fondateur et Managing Member",
     founderCompany: "Runexa Systems LLC",
+    founderBio:
+      "Docteur en administration des affaires (DBA), chercheur en intelligence artificielle appliquée et rédacteur en chef du Journal of Next-Generation Research (JNGR). Auteur de plusieurs ouvrages et publications consacrés aux applications de l’intelligence artificielle dans la santé, la finance, l’assurance, l’énergie et la supply chain. Ses travaux portent sur l’utilisation responsable de l’IA pour l’analyse documentaire, l’aide à la décision et l’automatisation des connaissances.",
 
     companyTitle: "Informations sur l’entreprise",
     companyName: "Runexa Systems LLC",
@@ -209,7 +219,7 @@ const aboutContent = {
 
     storyTitle: "القصة وراء Runexa",
     storyIntro:
-       "أنا الدكتور رشيد الجامعي، مؤسس شركة Runexa Systems. لم تبدأ Runexa كمجرد مشروع تقني، بل انطلقت من تحديات واقعية واجهتها في حياتي اليومية.",
+      "أنا الدكتور رشيد الجامعي، مؤسس شركة Runexa Systems. لم تبدأ Runexa كمجرد مشروع تقني، بل انطلقت من تحديات واقعية واجهتها في حياتي اليومية.",
     studyTitle: "لماذا يوجد Study Agent",
     studyText:
       "كأب، رأيت أطفالي يدرسون مواد مختلفة ويتنقلون باستمرار بين المواقع والفيديوهات والشبكات الاجتماعية ومحركات البحث وأدوات الذكاء الاصطناعي المختلفة لفهم دروسهم. كانت المعلومات متوفرة في كل مكان، لكن موثوقيتها كانت غالباً غير مؤكدة، كما أن الشروحات لم تكن دائماً مصممة بما يناسب احتياجاتهم التعليمية. أردت طريقة أفضل لمساعدة المتعلمين على فهم دروسهم. ومن هنا جاءت فكرة Runexa Study Agent.",
@@ -228,7 +238,10 @@ const aboutContent = {
 
     missionTitle: "مهمتنا",
     missionText:
-      "مهمة Runexa بسيطة: بناء وكلاء ذكاء اصطناعي عمليين ومتخصصين يساعدون الناس على التعلم بفعالية أكبر، وفهم المعلومات المعقدة، واتخاذ قرارات أفضل في حياتهم الشخصية والمهنية.",
+      "تتمثل مهمة Runexa في تحويل المستندات والبيانات والمعلومات المعقدة إلى تحليلات منظمة وواضحة وقابلة للتنفيذ من خلال وكلاء ذكاء اصطناعي متخصصين.",
+
+    outputsTitle: "ما الذي ينتجه وكلاء Runexa",
+    outputsText: "ينتج وكلاء Runexa تحليلات منظمة انطلاقاً من المستندات والبيانات التي يقدمها المستخدمون. وقد تشمل النتائج تحديد البنود التعاقدية والمخاطر القانونية، واستخراج الالتزامات والتوصيات، وتحليل النفقات وفرص التوفير، والملخصات التعليمية وخطط الدراسة، بالإضافة إلى مؤشرات الأداء والتوقعات والتوصيات التجارية. تتوفر عروض توضيحية عامة لكل وكيل.",
 
     approachTitle: "نهجنا في الذكاء الاصطناعي المسؤول",
     approachItems: [
@@ -274,6 +287,8 @@ const aboutContent = {
     founderName: "الدكتور رشيد الجامعي",
     founderRole: "المؤسس والعضو الإداري",
     founderCompany: "Runexa Systems LLC",
+    founderBio:
+      "الدكتور رشيد الجامعي حاصل على دكتوراه إدارة الأعمال (DBA)، وباحث في الذكاء الاصطناعي التطبيقي، ورئيس تحرير Journal of Next-Generation Research (JNGR). وهو مؤلف لعدة كتب ومنشورات حول تطبيقات الذكاء الاصطناعي في الصحة والتمويل والتأمين والطاقة وسلاسل الإمداد. تركز أعماله على الاستخدام المسؤول للذكاء الاصطناعي في تحليل المستندات ودعم القرار وأتمتة المعرفة.",
 
     companyTitle: "معلومات الشركة",
     companyName: "Runexa Systems LLC",
@@ -400,6 +415,10 @@ export default function AboutClient({
             <p className="mt-1 text-slate-600">
               {t.founderCompany}
             </p>
+
+            <p className="mt-4 text-sm leading-7 text-slate-600">
+              {t.founderBio}
+            </p>
           </div>
 
           <div className="rounded-3xl border bg-white p-8 shadow-sm">
@@ -470,6 +489,16 @@ export default function AboutClient({
             ))}
           </ul>
         </div>
+      </section>
+
+      <section className="mx-auto mt-16 max-w-6xl rounded-3xl border bg-white p-8 shadow-sm">
+        <h2 className="text-3xl font-bold">
+          {t.outputsTitle}
+        </h2>
+
+        <p className="mt-4 leading-8 text-slate-600">
+          {t.outputsText}
+        </p>
       </section>
 
       <section className="mx-auto mt-16 max-w-6xl">
