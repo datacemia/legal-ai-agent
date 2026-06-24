@@ -597,6 +597,58 @@ export default function HomeClient({
 
           <p className="text-sm text-slate-500">{t.trustLine}</p>
 
+          <div className="mx-auto max-w-5xl rounded-3xl border border-blue-100 bg-blue-50/80 p-5 text-left shadow-sm md:p-6">
+            <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+              <div>
+                <p className="text-sm font-semibold text-blue-700">
+                  {language === "fr"
+                    ? "Avant d’importer un document"
+                    : language === "ar"
+                    ? "قبل رفع أي ملف"
+                    : "Before you upload"}
+                </p>
+
+                <div className="mt-4 grid gap-3 md:grid-cols-3">
+                  {[
+                    language === "fr"
+                      ? "Les identifiants personnels peuvent être anonymisés avant le traitement IA lorsque cela est applicable"
+                      : language === "ar"
+                      ? "قد يتم إخفاء أو استبدال المعرفات الشخصية قبل معالجة الذكاء الاصطناعي عند الاقتضاء"
+                      : "Personal identifiers may be anonymized before AI processing when applicable",
+                    language === "fr"
+                      ? "Les contenus clients ne servent jamais à entraîner des modèles IA publics"
+                      : language === "ar"
+                      ? "لا يتم استخدام محتوى العملاء لتدريب نماذج الذكاء الاصطناعي العامة"
+                      : "Customer content is never used to train public AI models",
+                    language === "fr"
+                      ? "Les fichiers importés sont automatiquement supprimés après analyse"
+                      : language === "ar"
+                      ? "يتم حذف الملفات المرفوعة تلقائياً بعد انتهاء التحليل"
+                      : "Uploaded files are automatically deleted after analysis",
+                  ].map((item) => (
+                    <div
+                      key={item}
+                      className="rounded-2xl border border-blue-100 bg-white p-4 text-sm font-medium leading-6 text-slate-700"
+                    >
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <Link
+                href="/security"
+                className="inline-flex shrink-0 items-center justify-center rounded-xl border border-blue-200 bg-white px-4 py-3 text-sm font-semibold text-blue-700 hover:bg-blue-50 transition"
+              >
+                {language === "fr"
+                  ? "Découvrez comment Runexa traite les documents"
+                  : language === "ar"
+                  ? "تعرّف على كيفية معالجة المستندات داخل Runexa"
+                  : "Learn how Runexa handles documents"}
+              </Link>
+            </div>
+          </div>
+
           <div className="mx-auto max-w-5xl rounded-[28px] border border-blue-100 bg-white/90 p-5 text-left shadow-sm backdrop-blur md:p-6">
             <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
               <div className="max-w-3xl">
@@ -1890,6 +1942,110 @@ export default function HomeClient({
         </div>
       </section>
 
+      
+      
+      <section className="px-6 py-12">
+        <div className="max-w-6xl mx-auto">
+          <div className="rounded-3xl border border-blue-100 bg-white p-8 shadow-sm md:p-12">
+            <p className="text-sm font-semibold text-blue-600">
+              {language === "fr"
+                ? "Retours indépendants"
+                : language === "ar"
+                ? "آراء مستقلة"
+                : "Independent Feedback"}
+            </p>
+
+            <p className="mt-4 text-slate-600">
+              {language === "fr"
+                ? "Observations reçues de professionnels ayant évalué publiquement la plateforme."
+                : language === "ar"
+                ? "ملاحظات وردت من مهنيين قاموا بمراجعة المنصة بشكل علني."
+                : "Observations received from professionals who reviewed the public platform."}
+            </p>
+
+            <div className="mt-8 grid gap-4 md:grid-cols-3">
+              <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                <h3 className="font-semibold">
+                  {language === "fr"
+                    ? "Confiance et gestion des données"
+                    : language === "ar"
+                    ? "الثقة ومعالجة البيانات"
+                    : "Trust & Data Handling"}
+                </h3>
+
+                <p className="mt-3">
+                  {language === "fr"
+                    ? "« La confiance est une condition préalable avant que toute capacité d’IA ne devienne pertinente. »"
+                    : language === "ar"
+                    ? "« الثقة شرط أساسي قبل أن تصبح أي قدرة للذكاء الاصطناعي ذات قيمة حقيقية. »"
+                    : "“Trust is a prerequisite before any AI capability becomes relevant.”"}
+                </p>
+
+                <p className="mt-4 text-sm font-semibold">— Frédéric Pack</p>
+              </div>
+
+              <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                <h3 className="font-semibold">
+                  {language === "fr"
+                    ? "Éducation et apprentissage"
+                    : language === "ar"
+                    ? "التعليم والتعلّم"
+                    : "Education & Learning"}
+                </h3>
+
+                <p className="mt-3">
+                  {language === "fr"
+                    ? "« L’IA peut devenir un précieux compagnon d’apprentissage lorsqu’elle est utilisée correctement. »"
+                    : language === "ar"
+                    ? "« يمكن للذكاء الاصطناعي أن يصبح رفيقاً تعليمياً قيّماً عند استخدامه بالشكل الصحيح. »"
+                    : "“AI can become a valuable learning companion when used correctly.”"}
+                </p>
+
+                <p className="mt-4 text-sm font-semibold">— Georgios L.</p>
+              </div>
+
+              <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                <h3 className="font-semibold">
+                  {language === "fr"
+                    ? "Positionnement du produit"
+                    : language === "ar"
+                    ? "تموضع المنتج"
+                    : "Product Positioning"}
+                </h3>
+
+                <p className="mt-3">
+                  {language === "fr"
+                    ? "« La proposition de valeur est claire. »"
+                    : language === "ar"
+                    ? "« عرض القيمة واضح. »"
+                    : "“The value proposition is clear.”"}
+                </p>
+
+                <p className="mt-4 text-sm font-semibold">— Mark Day</p>
+              </div>
+            </div>
+
+            <h3 className="mt-8 text-lg font-bold">
+              {language === "fr"
+                ? "Pourquoi partageons-nous ces retours ?"
+                : language === "ar"
+                ? "لماذا نشارك هذه الآراء؟"
+                : "Why We Share This Feedback"}
+            </h3>
+
+            <p className="mt-3 text-sm leading-6 text-slate-600">
+              {language === "fr"
+                ? "Runexa publie une sélection d’observations reçues de professionnels ayant évalué publiquement la plateforme. Ces commentaires reflètent des perspectives externes sur la confiance, l’apprentissage, l’analyse financière, l’aide à la décision business et le positionnement du produit."
+                : language === "ar"
+                ? "تنشر Runexa مجموعة مختارة من الملاحظات الواردة من مهنيين قاموا بمراجعة المنصة بشكل علني. وتعكس هذه التعليقات وجهات نظر خارجية حول الثقة والتعلّم والتحليل المالي ودعم قرارات الأعمال وتموضع المنتج."
+                : "Runexa publishes selected observations received from professionals who reviewed the platform publicly. These comments reflect external perspectives on trust, learning, financial analysis, business decision support, and product positioning."}
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+
       <section className="px-6 py-12">
         <div className="max-w-6xl mx-auto">
           <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm md:p-12">
@@ -1962,11 +2118,35 @@ export default function HomeClient({
                   </h3>
 
                   <ul className="mt-4 space-y-2 text-sm leading-6 text-slate-600">
-                    <li>• AI in Healthcare: A Hands-On Journey Through Two Groundbreaking Case Studies (2025)</li>
-                    <li>• AI-Powered Energy Management: Forecasting Consumption and Detecting Fraud with Machine Learning (2025)</li>
-                    <li>• Smart Supply Chain Solutions with AI: From Forecasting to Delivery (2025)</li>
-                    <li>• Machine Learning in Banking: Building Predictive Models for Risk and Fraud (2025)</li>
-                    <li>• Mastering AI Models in the Insurance Domain (2025)</li>
+                    {[
+                      language === "fr"
+                        ? "L’IA dans la santé : un parcours pratique à travers deux études de cas majeures (2025)"
+                        : language === "ar"
+                        ? "الذكاء الاصطناعي في الرعاية الصحية: دراستان تطبيقيتان في الابتكار الصحي (2025)"
+                        : "AI in Healthcare: A Hands-On Journey Through Two Groundbreaking Case Studies (2025)",
+                      language === "fr"
+                        ? "Gestion énergétique alimentée par l’IA : prévoir la consommation et détecter la fraude avec le machine learning (2025)"
+                        : language === "ar"
+                        ? "إدارة الطاقة المعتمدة على الذكاء الاصطناعي: التنبؤ بالاستهلاك واكتشاف الاحتيال (2025)"
+                        : "AI-Powered Energy Management: Forecasting Consumption and Detecting Fraud with Machine Learning (2025)",
+                      language === "fr"
+                        ? "Solutions de supply chain intelligentes avec l’IA : de la prévision à la livraison (2025)"
+                        : language === "ar"
+                        ? "سلاسل الإمداد الذكية بالذكاء الاصطناعي: من التنبؤ إلى التنفيذ والتسليم (2025)"
+                        : "Smart Supply Chain Solutions with AI: From Forecasting to Delivery (2025)",
+                      language === "fr"
+                        ? "Machine learning dans la banque : construire des modèles prédictifs pour le risque et la fraude (2025)"
+                        : language === "ar"
+                        ? "تعلم الآلة في الخدمات المصرفية: نماذج تنبؤية للمخاطر والاحتيال (2025)"
+                        : "Machine Learning in Banking: Building Predictive Models for Risk and Fraud (2025)",
+                      language === "fr"
+                        ? "Maîtriser les modèles d’IA dans le secteur de l’assurance (2025)"
+                        : language === "ar"
+                        ? "نماذج الذكاء الاصطناعي المتقدمة في قطاع التأمين (2025)"
+                        : "Mastering AI Models in the Insurance Domain (2025)",
+                    ].map((book) => (
+                      <li key={book}>• {book}</li>
+                    ))}
                   </ul>
                 </div>
 
