@@ -30,18 +30,18 @@ const labels: any = {
     blog: "Insights",
     trustLine:
       "$1 trial per account · Unified credits · Privacy-first AI platform",
-    privacyIntroTitle: "Built for Sensitive Documents",
+    privacyIntroTitle: "Privacy Controls for Document Analysis",
     privacyIntroDesc:
-      "Runexa is designed for document analysis workflows where privacy matters. Uploaded files are processed only to generate the requested analysis. Personal identifiers are anonymized before AI processing. Customer content is never used to train public AI models. Uploaded files are automatically deleted from processing storage after analysis, and customer data remains isolated between users and workspaces.",
+      "Runexa is designed for document analysis workflows where privacy matters. Uploaded files are processed only to generate the requested analysis. Personal identifiers may be replaced with neutral labels before AI processing when applicable. Customer content is never used to train public AI models. Uploaded files are automatically deleted from processing storage after analysis, and customer data remains isolated between users and workspaces.",
     privacyFlow: [
       "Upload file",
-      "Identifiers anonymized",
+      "Identifiers anonymized when applicable",
       "AI analysis",
       "Report generated",
       "File deleted",
     ],
     privacyPromises: [
-      "Personal identifiers are anonymized before AI processing",
+      "Personal identifiers may be anonymized before AI processing when applicable",
       "Customer content is never used to train public AI models",
       "Uploaded files are automatically deleted after analysis",
       "Customer data remains isolated between users and workspaces",
@@ -58,7 +58,7 @@ const labels: any = {
       "Receive actionable insights, recommendations, and reports",
     ],
     trustCards: [
-    ["Privacy-first workflow", "Upload → anonymize → analyze → delete"],
+    ["Privacy-first workflow", "Upload → minimize → analyze → delete"],
     ["No public model training", "Customer content is never used to train public AI models"],
     ["Automatic file deletion", "Uploaded files are automatically deleted after analysis"],
     ["Workspace isolation", "Customer data remains isolated between users"],
@@ -173,18 +173,18 @@ const labels: any = {
     blog: "Ressources & Insights",
     trustLine:
       "Un essai à 1 $ par compte · Crédits unifiés · Plateforme IA conçue pour la confidentialité",
-    privacyIntroTitle: "Conçu pour les documents sensibles",
+    privacyIntroTitle: "Contrôles de confidentialité pour l’analyse documentaire",
     privacyIntroDesc:
-      "Runexa est conçu pour les workflows d’analyse documentaire où la confidentialité est essentielle. Les fichiers importés sont traités uniquement pour générer l’analyse demandée. Les identifiants personnels sont anonymisés avant le traitement par l’IA. Les contenus clients ne servent jamais à entraîner des modèles IA publics. Les fichiers importés sont automatiquement supprimés du stockage de traitement après analyse, et les données restent isolées entre utilisateurs et espaces de travail.",
+      "Runexa est conçu pour les workflows d’analyse documentaire où la confidentialité est essentielle. Les fichiers importés sont traités uniquement pour générer l’analyse demandée. Les identifiants personnels peuvent être remplacés par des libellés neutres avant le traitement par l’IA lorsque cela est applicable. Les contenus clients ne servent jamais à entraîner des modèles IA publics. Les fichiers importés sont automatiquement supprimés du stockage de traitement après analyse, et les données restent isolées entre utilisateurs et espaces de travail.",
     privacyFlow: [
       "Importer le fichier",
-      "Identifiants anonymisés",
+      "Identifiants anonymisés si applicable",
       "Analyse IA",
       "Rapport généré",
       "Fichier supprimé",
     ],
     privacyPromises: [
-      "Les identifiants personnels sont anonymisés avant le traitement par l’IA",
+      "Les identifiants personnels peuvent être anonymisés avant le traitement par l’IA lorsque cela est applicable",
       "Les contenus clients ne servent jamais à entraîner des modèles IA publics",
       "Les fichiers importés sont supprimés automatiquement après analyse",
       "Les données restent isolées entre utilisateurs et espaces de travail",
@@ -205,7 +205,7 @@ const labels: any = {
       "Recevez des recommandations et des insights exploitables",
     ],
     trustCards: [
-      ["Workflow confidentiel", "Importer → anonymiser → analyser → supprimer"],
+      ["Workflow confidentiel", "Importer → limiter → analyser → supprimer"],
       ["Pas d’entraînement public", "Les contenus clients ne servent jamais à entraîner des modèles IA publics"],
       ["Suppression automatique", "Les fichiers importés sont supprimés après analyse"],
       ["Isolation des espaces", "Les données restent isolées entre utilisateurs"],
@@ -317,18 +317,18 @@ const labels: any = {
     pricing: "الخطط والأسعار",
     blog: "المدونة",
     trustLine: "تجربة واحدة بقيمة 1 دولار لكل حساب · أرصدة موحدة · منصة ذكاء اصطناعي مصممة لحماية الخصوصية",
-    privacyIntroTitle: "مصمم للمستندات الحساسة",
+    privacyIntroTitle: "ضوابط الخصوصية لتحليل المستندات",
     privacyIntroDesc:
-      "تم تصميم Runexa لتدفقات عمل تحليل المستندات التي تتطلب الخصوصية. تُعالج الملفات المرفوعة فقط لإنشاء التحليل المطلوب. يتم إخفاء هوية المعرّفات الشخصية قبل المعالجة بالذكاء الاصطناعي. لا تُستخدم محتويات العملاء أبداً لتدريب نماذج ذكاء اصطناعي عامة. ويتم حذف الملفات المرفوعة تلقائياً من تخزين المعالجة بعد اكتمال التحليل، وتبقى بيانات العملاء معزولة بين المستخدمين ومساحات العمل.",
+      "تم تصميم Runexa لتدفقات عمل تحليل المستندات التي تتطلب الخصوصية. تُعالج الملفات المرفوعة فقط لإنشاء التحليل المطلوب. يمكن استبدال المعرّفات الشخصية بوسوم محايدة قبل المعالجة بالذكاء الاصطناعي عندما يكون ذلك مناسباً. لا تُستخدم محتويات العملاء أبداً لتدريب نماذج ذكاء اصطناعي عامة. ويتم حذف الملفات المرفوعة تلقائياً من تخزين المعالجة بعد اكتمال التحليل، وتبقى بيانات العملاء معزولة بين المستخدمين ومساحات العمل.",
     privacyFlow: [
       "رفع الملف",
-      "إخفاء الهوية",
+      "إخفاء الهوية عند الاقتضاء",
       "تحليل بالذكاء الاصطناعي",
       "إنشاء التقرير",
       "حذف الملف",
     ],
     privacyPromises: [
-      "يتم إخفاء هوية المعرّفات الشخصية قبل المعالجة بالذكاء الاصطناعي",
+      "يمكن إخفاء هوية المعرّفات الشخصية قبل المعالجة بالذكاء الاصطناعي عندما يكون ذلك مناسباً",
       "لا تُستخدم محتويات العملاء أبداً لتدريب نماذج ذكاء اصطناعي عامة",
       "يتم حذف الملفات المرفوعة تلقائياً بعد اكتمال التحليل",
       "تبقى بيانات العملاء معزولة بين المستخدمين ومساحات العمل",
@@ -349,7 +349,7 @@ const labels: any = {
       "احصل على رؤى وتوصيات قابلة للتنفيذ",
     ],
     trustCards: [
-      ["Workflow يركز على الخصوصية", "رفع → إخفاء الهوية → تحليل → حذف"],
+      ["Workflow يركز على الخصوصية", "رفع → تقليل البيانات → تحليل → حذف"],
       ["بدون تدريب عام", "لا تُستخدم محتويات العملاء أبداً لتدريب نماذج عامة"],
       ["حذف تلقائي", "يتم حذف الملفات المرفوعة بعد التحليل"],
       ["عزل مساحات العمل", "تبقى بيانات العملاء معزولة بين المستخدمين"],
@@ -813,10 +813,10 @@ export default function HomeClient({
                 <div>
                   <p className="text-sm font-semibold text-blue-600">
                     {language === "fr"
-                      ? "Aperçu de la plateforme IA"
+                      ? "Exemples représentatifs d’analyses"
                       : language === "ar"
-                      ? "معاينة منصة الذكاء الاصطناعي"
-                      : "AI Platform Preview"}
+                      ? "أمثلة تمثيلية للتحليلات"
+                      : "Representative Analysis Examples"}
                   </p>
 
                  <h2 className="mt-3 text-3xl font-bold text-slate-900">
@@ -1772,7 +1772,7 @@ export default function HomeClient({
                 ? "Preuves d’usage"
                 : language === "ar"
                 ? "إشارات استخدام فعلية"
-                : "Usage proof"}
+                : "Representative analysis examples"}
             </p>
 
             <h2 className="mt-3 text-3xl font-bold text-slate-900">
@@ -1857,25 +1857,25 @@ export default function HomeClient({
               <div className="mt-4 grid gap-3 md:grid-cols-2">
                 {[
                   language === "fr"
-                    ? "Exemples d’analyse disponibles pour Legal, Finance, Study et Business"
+                    ? "Des exemples représentatifs d’analyses sont disponibles pour tous les agents IA Runexa"
                     : language === "ar"
-                    ? "أمثلة تحليل متاحة لوكلاء Legal وFinance وStudy وBusiness"
-                    : "Analysis examples available for Legal, Finance, Study, and Business",
+                    ? "تتوفر أمثلة تمثيلية للتحليلات لجميع وكلاء Runexa المعتمدين على الذكاء الاصطناعي"
+                    : "Representative analysis examples available across all Runexa AI agents",
                   language === "fr"
-                    ? "Démos publiques disponibles pour tester les agents"
+                    ? "Une offre d’essai à 1 $ est disponible pour les nouveaux utilisateurs"
                     : language === "ar"
-                    ? "عروض عامة متاحة لاختبار الوكلاء"
-                    : "Public demos available to test agents",
+                    ? "تتوفر تجربة أولية بقيمة دولار واحد للمستخدمين الجدد"
+                    : "$1 trial available for first-time users",
                   language === "fr"
-                    ? "Produit dirigé par un fondateur identifiable"
+                    ? "Fondé par Dr. Rachid Ejjami, auteur de 5 ouvrages sur l’intelligence artificielle, chercheur et Rédacteur en chef du JNGR 5.0"
                     : language === "ar"
-                    ? "منتج يقوده مؤسس واضح الهوية"
-                    : "Founder-led product with identifiable background",
+                    ? "أسس المنصة الدكتور رشيد الجامعي، مؤلف خمسة كتب في الذكاء الاصطناعي، وباحث علمي، ورئيس تحرير JNGR 5.0"
+                    : "Founded by Dr. Rachid Ejjami, author of 5 AI books, researcher, and Editor-in-Chief of JNGR 5.0",
                   language === "fr"
-                    ? "Témoignages et références clients à ajouter après validation publique"
+                    ? "Les références clients, témoignages et études de cas seront publiés uniquement après autorisation explicite de publication"
                     : language === "ar"
-                    ? "سيتم إضافة الشهادات ومراجع العملاء بعد التحقق والموافقة على النشر"
-                    : "Testimonials and customer references to be added after public validation",
+                    ? "سيتم نشر مراجع العملاء والشهادات ودراسات الحالة فقط بعد الحصول على موافقة صريحة على النشر"
+                    : "Customer references and case studies will be published only when approved for publication.",
                 ].map((item) => (
                   <div
                     key={item}
@@ -1935,11 +1935,11 @@ export default function HomeClient({
 
                 <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
                   {[
-                    language === "fr" ? "42+ publications" : language === "ar" ? "أكثر من 42 منشوراً" : "42+ publications",
-                    language === "fr" ? "5 livres IA" : language === "ar" ? "5 كتب في الذكاء الاصطناعي" : "5 AI books",
-                    language === "fr" ? "629+ citations" : language === "ar" ? "أكثر من 629 استشهاداً" : "629+ citations",
+                    language === "fr" ? "42 publications" : language === "ar" ? "42 منشوراً علمياً" : "42 publications",
+                    language === "fr" ? "5 livres sur l’intelligence artificielle" : language === "ar" ? "5 كتب في الذكاء الاصطناعي" : "5 AI books",
+                    language === "fr" ? "629 citations" : language === "ar" ? "629 استشهاداً علمياً" : "629 citations",
                     language === "fr" ? "h-index 13" : language === "ar" ? "مؤشر h: 13" : "h-index 13",
-                    language === "fr" ? "Recherche IA & gouvernance" : language === "ar" ? "بحث في الذكاء الاصطناعي والحوكمة" : "AI research & governance",
+                    language === "fr" ? "Domaines : gouvernance de l’IA, intelligence décisionnelle, IA d’entreprise, IA juridique, IA financière, IA pour l’éducation" : language === "ar" ? "مجالات البحث: حوكمة الذكاء الاصطناعي، الذكاء الداعم للقرار، الذكاء الاصطناعي للأعمال، القانون، المالية والتعليم" : "Research areas: AI Governance, Decision Intelligence, Business AI, Legal AI, Financial AI, Educational AI",
                   ].map((item) => (
                     <div
                       key={item}
