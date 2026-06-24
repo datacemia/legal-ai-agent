@@ -50,23 +50,23 @@ const privacyCopy: Record<Locale, PrivacyCopy> = {
     eyebrow: "Privacy by design",
     heroTitle: "How Runexa handles your data",
     heroText:
-      "Runexa is designed for sensitive documents. Uploaded files are processed solely to provide the requested analysis. Personal identifiers are replaced with neutral placeholders before AI processing. Customer content is not used to train public AI models, and uploaded files are automatically removed from processing storage once the analysis is complete.",
+      "Runexa is designed for sensitive documents. Uploaded files are processed solely to provide the requested analysis. Runexa is designed to detect and replace personal identifiers with neutral placeholders before AI processing when technically feasible. Customer content is not used to train public AI models, and uploaded files are automatically removed from processing storage once the analysis is complete.",
     securityLink: "Security & Data Handling",
     contactLink: "Contact Runexa",
     quickTitle: "At a glance",
     quickItems: [
       "Customer files are not used to train public AI models.",
-      "Personal identifiers are replaced with neutral placeholders before AI processing.",
+      "Runexa is designed to detect and replace personal identifiers with neutral placeholders before AI processing when technically feasible.",
       "Uploaded files are removed from processing storage after analysis.",
       "Generated results may remain available in your workspace until deleted or retained as required.",
-      "Customer data is logically isolated between users and workspaces.",
+      "User accounts and generated results are logically isolated across users and workspaces.",
       "Runexa does not sell personal information.",
     ],
     flowTitle: "Document processing flow",
     flowItems: [
       ["1", "Upload", "You upload a file or content for a selected Runexa agent."],
       ["2", "Extract", "Runexa extracts the text or data needed to generate the requested output."],
-      ["3", "Protect", "Personal identifiers are replaced with neutral placeholders before AI processing."],
+      ["3", "Protect", "Runexa is designed to detect and replace personal identifiers with neutral placeholders before AI processing when technically feasible."],
       ["4", "Analyze", "AI systems and supporting infrastructure generate the requested analysis."],
       ["5", "Delete file", "The uploaded file is removed from processing storage after analysis is completed."],
     ],
@@ -84,7 +84,7 @@ const privacyCopy: Record<Locale, PrivacyCopy> = {
       {
         title: "3. Uploaded Content",
         text:
-          "Uploaded content may include contracts, financial records, study materials, business documents, files, text, and other information provided for analysis. Uploaded files are processed solely to generate the analysis or output requested by the user. Runexa replaces personal identifiers with neutral placeholders before AI processing. Once the analysis is complete, uploaded content and associated files are automatically removed from processing storage.",
+          "Uploaded content may include contracts, financial records, study materials, business documents, files, text, and other information provided for analysis. Uploaded files are processed solely to generate the analysis or output requested by the user. Runexa is designed to detect and replace personal identifiers with neutral placeholders before AI processing when technically feasible. Once the analysis is complete, uploaded content and associated files are automatically removed from processing storage.",
       },
       {
         title: "4. How We Use Your Data",
@@ -119,12 +119,12 @@ const privacyCopy: Record<Locale, PrivacyCopy> = {
       {
         title: "10. Workspace Isolation and Internal Access",
         text:
-          "Account data is logically separated between users and workspaces. Users cannot access information or results associated with another account through the platform. Operational access, when required for security, support, abuse prevention, or legal reasons, is restricted and controlled.",
+          "User accounts and generated results are logically isolated across users and workspaces. Users cannot access information or results associated with another account through the platform. Operational access, when required for security, support, abuse prevention, or legal reasons, is restricted and controlled.",
       },
       {
         title: "11. Security",
         text:
-          "We implement reasonable technical, administrative, and organizational safeguards designed to protect user information, uploaded content, accounts, and platform integrity. However, no internet-based platform, software system, AI system, or storage system can be guaranteed to be completely secure.",
+          "We implement reasonable technical, administrative, and organizational measures designed to protect user accounts, account information, and content processed through the platform. However, no computer system or online service can guarantee absolute security.",
       },
       {
         title: "12. International Users and Transfers",
@@ -170,23 +170,23 @@ const privacyCopy: Record<Locale, PrivacyCopy> = {
     eyebrow: "Confidentialité dès la conception",
     heroTitle: "Comment Runexa traite vos données",
     heroText:
-      "Runexa est conçu pour les documents sensibles. Les fichiers importés sont traités uniquement pour fournir l’analyse demandée. Les identifiants personnels sont remplacés par des libellés neutres avant le traitement par l’IA. Les contenus clients ne servent pas à entraîner des modèles IA publics, et les fichiers importés sont automatiquement supprimés du stockage de traitement une fois l’analyse terminée.",
+      "Runexa est conçu pour les documents sensibles. Les fichiers importés sont traités uniquement pour fournir l’analyse demandée. Runexa est conçu pour détecter et remplacer les identifiants personnels par des libellés neutres avant le traitement par l’IA lorsque cela est techniquement possible. Les contenus clients ne servent pas à entraîner des modèles IA publics, et les fichiers importés sont automatiquement supprimés du stockage de traitement une fois l’analyse terminée.",
     securityLink: "Sécurité et traitement des données",
     contactLink: "Contacter Runexa",
     quickTitle: "En résumé",
     quickItems: [
       "Les fichiers clients ne servent pas à entraîner des modèles IA publics.",
-      "Les identifiants personnels sont remplacés par des libellés neutres avant le traitement par l’IA.",
+      "Runexa est conçu pour détecter et remplacer les identifiants personnels par des libellés neutres avant le traitement par l’IA lorsque cela est techniquement possible.",
       "Les fichiers importés sont supprimés du stockage de traitement après analyse.",
       "Les résultats générés peuvent rester disponibles dans votre espace jusqu’à leur suppression ou conservation nécessaire.",
-      "Les données clients sont isolées logiquement entre utilisateurs et espaces de travail.",
+      "Les comptes utilisateurs et les résultats générés sont isolés logiquement entre utilisateurs et espaces de travail.",
       "Runexa ne vend pas les informations personnelles.",
     ],
     flowTitle: "Flux de traitement des documents",
     flowItems: [
       ["1", "Import", "Vous importez un fichier ou contenu pour un agent Runexa sélectionné."],
       ["2", "Extraction", "Runexa extrait le texte ou les données nécessaires pour générer le résultat demandé."],
-      ["3", "Protection", "Les identifiants personnels sont remplacés par des libellés neutres avant le traitement par l’IA."],
+      ["3", "Protection", "Runexa est conçu pour détecter et remplacer les identifiants personnels par des libellés neutres avant le traitement par l’IA lorsque cela est techniquement possible."],
       ["4", "Analyse", "Les systèmes IA et l’infrastructure associée génèrent l’analyse demandée."],
       ["5", "Suppression", "Le fichier importé est supprimé du stockage de traitement après analyse."],
     ],
@@ -204,7 +204,7 @@ const privacyCopy: Record<Locale, PrivacyCopy> = {
       {
         title: "3. Contenu importé",
         text:
-          "Le contenu importé peut inclure des contrats, relevés financiers, supports d’apprentissage, documents professionnels, fichiers, textes et autres informations fournies pour analyse. Les fichiers importés sont traités uniquement afin de générer l’analyse ou le résultat demandé par l’utilisateur. Runexa remplace les identifiants personnels par des libellés neutres avant le traitement par l’IA. Une fois l’analyse terminée, le contenu importé et les fichiers associés sont automatiquement supprimés du stockage de traitement.",
+          "Le contenu importé peut inclure des contrats, relevés financiers, supports d’apprentissage, documents professionnels, fichiers, textes et autres informations fournies pour analyse. Les fichiers importés sont traités uniquement afin de générer l’analyse ou le résultat demandé par l’utilisateur. Runexa est conçu pour détecter et remplacer les identifiants personnels par des libellés neutres avant le traitement par l’IA lorsque cela est techniquement possible. Une fois l’analyse terminée, le contenu importé et les fichiers associés sont automatiquement supprimés du stockage de traitement.",
       },
       {
         title: "4. Utilisation des données",
@@ -239,12 +239,12 @@ const privacyCopy: Record<Locale, PrivacyCopy> = {
       {
         title: "10. Isolation des espaces et accès interne",
         text:
-          "Les données de compte sont séparées logiquement entre utilisateurs et espaces de travail. Les utilisateurs ne peuvent pas accéder aux informations ou résultats associés à un autre compte via la plateforme. Les accès opérationnels, lorsqu’ils sont nécessaires pour la sécurité, le support, la prévention des abus ou des raisons légales, sont restreints et contrôlés.",
+          "Les comptes utilisateurs et les résultats générés sont isolés logiquement entre utilisateurs et espaces de travail. Les utilisateurs ne peuvent pas accéder aux informations ou résultats associés à un autre compte via la plateforme. Les accès opérationnels, lorsqu’ils sont nécessaires pour la sécurité, le support, la prévention des abus ou des raisons légales, sont restreints et contrôlés.",
       },
       {
         title: "11. Sécurité",
         text:
-          "Nous mettons en œuvre des mesures techniques, administratives et organisationnelles raisonnables conçues pour protéger les informations utilisateur, contenus importés, comptes et l’intégrité de la plateforme. Toutefois, aucune plateforme internet, logiciel, système IA ou système de stockage ne peut être garanti comme totalement sécurisé.",
+          "Nous mettons en œuvre des mesures techniques, administratives et organisationnelles raisonnables destinées à protéger les comptes utilisateurs, les informations de compte et les contenus traités par la plateforme. Toutefois, aucun système informatique ou service en ligne ne peut garantir un niveau de sécurité absolu.",
       },
       {
         title: "12. Utilisateurs internationaux et transferts",
@@ -290,23 +290,23 @@ const privacyCopy: Record<Locale, PrivacyCopy> = {
     eyebrow: "الخصوصية منذ التصميم",
     heroTitle: "كيف يتعامل Runexa مع بياناتك",
     heroText:
-      "تم تصميم Runexa للمستندات الحساسة. تُعالج الملفات المرفوعة حصرياً لتقديم التحليل المطلوب. ويتم استبدال المعرّفات الشخصية بعلامات تعريف محايدة قبل المعالجة بالذكاء الاصطناعي. ولا تُستخدم محتويات العملاء لتدريب نماذج ذكاء اصطناعي عامة، كما تُحذف الملفات المرفوعة تلقائياً من مساحة تخزين المعالجة فور اكتمال التحليل.",
+      "تم تصميم Runexa للمستندات الحساسة. تُعالج الملفات المرفوعة حصرياً لتقديم التحليل المطلوب. وتم تصميم Runexa لاكتشاف المعرّفات الشخصية واستبدالها بعلامات تعريف محايدة قبل المعالجة بالذكاء الاصطناعي عندما يكون ذلك ممكناً من الناحية التقنية. ولا تُستخدم محتويات العملاء لتدريب نماذج ذكاء اصطناعي عامة، كما تُحذف الملفات المرفوعة تلقائياً من مساحة تخزين المعالجة فور اكتمال التحليل.",
     securityLink: "الأمان ومعالجة البيانات",
     contactLink: "تواصل مع Runexa",
     quickTitle: "لمحة سريعة",
     quickItems: [
       "لا تُستخدم ملفات العملاء لتدريب نماذج ذكاء اصطناعي عامة.",
-      "يتم استبدال المعرّفات الشخصية بعلامات تعريف محايدة قبل المعالجة بالذكاء الاصطناعي.",
+      "تم تصميم Runexa لاكتشاف المعرّفات الشخصية واستبدالها بعلامات تعريف محايدة قبل المعالجة بالذكاء الاصطناعي عندما يكون ذلك ممكناً من الناحية التقنية.",
       "تُحذف الملفات المرفوعة من تخزين المعالجة بعد التحليل.",
       "قد تبقى النتائج المولدة متاحة في مساحة العمل الخاصة بك إلى أن يتم حذفها أو يلزم الاحتفاظ بها.",
-      "يتم عزل بيانات العملاء منطقياً بين المستخدمين ومساحات العمل.",
+      "يتم عزل حسابات المستخدمين والنتائج المُولدة منطقياً بين المستخدمين ومساحات العمل.",
       "لا تبيع Runexa المعلومات الشخصية.",
     ],
     flowTitle: "مسار معالجة المستندات",
     flowItems: [
       ["1", "رفع", "ترفع ملفاً أو محتوى لاستخدامه مع وكيل Runexa محدد."],
       ["2", "استخراج", "يستخرج Runexa النص أو البيانات اللازمة لإنشاء النتيجة المطلوبة."],
-      ["3", "حماية", "يتم استبدال المعرّفات الشخصية بعلامات تعريف محايدة قبل المعالجة بالذكاء الاصطناعي."],
+      ["3", "حماية", "تم تصميم Runexa لاكتشاف المعرّفات الشخصية واستبدالها بعلامات تعريف محايدة قبل المعالجة بالذكاء الاصطناعي عندما يكون ذلك ممكناً من الناحية التقنية."],
       ["4", "تحليل", "تنشئ أنظمة الذكاء الاصطناعي والبنية الداعمة التحليل المطلوب."],
       ["5", "حذف الملف", "يتم حذف الملف المرفوع من تخزين المعالجة بعد اكتمال التحليل."],
     ],
@@ -324,7 +324,7 @@ const privacyCopy: Record<Locale, PrivacyCopy> = {
       {
         title: "3. المحتوى المرفوع",
         text:
-          "قد يشمل المحتوى المرفوع العقود والسجلات المالية ومواد الدراسة ومستندات الأعمال والملفات والنصوص وغيرها من المعلومات المقدمة للتحليل. تُعالج الملفات المرفوعة حصرياً لإنشاء التحليل أو النتيجة التي يطلبها المستخدم. تستبدل Runexa المعرّفات الشخصية بعلامات تعريف محايدة قبل المعالجة بالذكاء الاصطناعي. وبعد اكتمال التحليل، يُحذف المحتوى المرفوع والملفات المرتبطة به تلقائياً من مساحة تخزين المعالجة.",
+          "قد يشمل المحتوى المرفوع العقود والسجلات المالية ومواد الدراسة ومستندات الأعمال والملفات والنصوص وغيرها من المعلومات المقدمة للتحليل. تُعالج الملفات المرفوعة حصرياً لإنشاء التحليل أو النتيجة التي يطلبها المستخدم. تم تصميم Runexa لاكتشاف المعرّفات الشخصية واستبدالها بعلامات تعريف محايدة قبل المعالجة بالذكاء الاصطناعي عندما يكون ذلك ممكناً من الناحية التقنية. وبعد اكتمال التحليل، يُحذف المحتوى المرفوع والملفات المرتبطة به تلقائياً من مساحة تخزين المعالجة.",
       },
       {
         title: "4. كيف نستخدم بياناتك",
@@ -359,12 +359,12 @@ const privacyCopy: Record<Locale, PrivacyCopy> = {
       {
         title: "10. عزل مساحات العمل والوصول الداخلي",
         text:
-          "يتم فصل بيانات الحسابات منطقياً بين المستخدمين ومساحات العمل. ولا يمكن لأي مستخدم الوصول إلى المعلومات أو النتائج المرتبطة بحساب مستخدم آخر عبر المنصة. ويكون الوصول التشغيلي، عند الحاجة لأسباب تتعلق بالأمان أو الدعم أو منع إساءة الاستخدام أو المتطلبات القانونية، مقيداً وخاضعاً للرقابة.",
+          "يتم عزل حسابات المستخدمين والنتائج المُولدة منطقياً بين المستخدمين ومساحات العمل. ولا يمكن للمستخدمين الوصول إلى المعلومات أو النتائج المرتبطة بحساب آخر عبر المنصة. ويكون الوصول التشغيلي، عند الحاجة لأسباب تتعلق بالأمان أو الدعم أو منع إساءة الاستخدام أو المتطلبات القانونية، مقيداً وخاضعاً للرقابة.",
       },
       {
         title: "11. الأمان",
         text:
-          "نطبق إجراءات تقنية وإدارية وتنظيمية معقولة مصممة لحماية معلومات المستخدم والمحتوى المرفوع والحسابات وسلامة المنصة. ومع ذلك، لا يمكن ضمان أن أي منصة إنترنت أو برنامج أو نظام ذكاء اصطناعي أو نظام تخزين آمن بالكامل.",
+          "نطبق تدابير تقنية وإدارية وتنظيمية معقولة تهدف إلى حماية حسابات المستخدمين ومعلومات الحساب والمحتوى الذي تتم معالجته عبر المنصة. ومع ذلك، لا يمكن لأي نظام معلوماتي أو خدمة عبر الإنترنت أن تضمن مستوىً مطلقاً من الأمان.",
       },
       {
         title: "12. المستخدمون الدوليون ونقل البيانات",

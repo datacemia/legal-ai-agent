@@ -73,9 +73,9 @@ const securityCopy = {
           "Runexa personnel do not access customer documents. Uploaded files are used solely to generate the requested analysis and are automatically deleted from processing storage once the analysis is complete.",
       },
       {
-        title: "Secure infrastructure",
+        title: "Operational security measures",
         text:
-          "Runexa uses cloud, database, payment, and AI infrastructure providers to operate the platform, with safeguards designed to protect accounts, uploads, analysis workflows, and platform integrity.",
+          "Runexa applies multiple measures designed to reduce data exposure and protect user accounts, including logical workspace isolation, automatic deletion of uploaded files after analysis, secure payment processing through Stripe, and account access controls.",
       },
     ],
 
@@ -94,7 +94,7 @@ const securityCopy = {
       "Runexa uses AI-assisted systems to extract, classify, summarize, analyze, and generate outputs. AI results may be incomplete or inaccurate and should be independently reviewed before important legal, financial, educational, or business decisions.",
     responsibleTitle: "Responsible uploads",
     responsibleText:
-      "Users should upload only information reasonably necessary for the requested analysis and should avoid including unrelated sensitive data.",
+      "Runexa is designed to analyze documents provided by users. Users should upload only the documents and information necessary for the requested analysis and avoid including information unrelated to the purpose of the processing.",
     paymentsTitle: "Payment security",
     paymentsText:
       "Payments are processed by Stripe, a secure third-party payment provider. Runexa does not store payment card information on its own servers.",
@@ -103,7 +103,7 @@ const securityCopy = {
       "Security concerns, suspected abuse, or vulnerability reports may be sent to:",
     guaranteeTitle: "No absolute security guarantee",
     guaranteeText:
-      "No internet-based platform, software system, AI system, or storage system can be guaranteed to be completely secure. Runexa implements reasonable safeguards, but users should always use appropriate judgment when uploading sensitive content.",
+      "While Runexa implements measures designed to protect data processed through the platform, no computer system or online service can be considered entirely free of risk. Runexa applies privacy and processing controls intended to limit the exposure of uploaded information, but users remain responsible for the data they choose to submit for analysis.",
   },
 
   fr: {
@@ -112,7 +112,7 @@ const securityCopy = {
     eyebrow: "Confiance dès la conception",
     heroTitle: "Conçu pour les documents sensibles.",
     heroText:
-      "Runexa est conçu pour traiter des contrats, documents financiers, supports d’apprentissage et fichiers professionnels avec des contrôles orientés confidentialité. Les fichiers importés sont utilisés pour générer l’analyse demandée, les identifiants personnels sont anonymisés avant le traitement IA, les contenus clients ne servent pas à entraîner des modèles IA publics, et les fichiers importés sont supprimés du stockage de traitement après analyse.",
+      "Runexa est conçu pour traiter des contrats, documents financiers, supports d’apprentissage et fichiers professionnels avec des contrôles orientés confidentialité. Les fichiers importés sont utilisés uniquement pour générer l’analyse demandée. Les identifiants personnels détectés peuvent être remplacés par des libellés neutres avant le traitement par l’IA lorsque cela est applicable. Les contenus clients ne servent pas à entraîner des modèles IA publics. Les fichiers importés sont supprimés du stockage de traitement après analyse.",
     primaryCta: "Contacter Runexa",
     secondaryCta: "Lire la politique de confidentialité",
 
@@ -122,7 +122,7 @@ const securityCopy = {
     flow: [
       ["1", "Import", "Vous importez un document pour un agent IA sélectionné."],
       ["2", "Extraction", "Runexa extrait le texte nécessaire à l’analyse."],
-      ["3", "Protection", "Les identifiants personnels sont remplacés par des libellés neutres avant le traitement par l’IA."],
+      ["3", "Anonymisation", "Les identifiants personnels détectés peuvent être remplacés par des libellés neutres avant le traitement par l’IA."],
       ["4", "Analyse IA", "Les systèmes IA génèrent le rapport ou l’insight demandé."],
       ["5", "Suppression", "Le fichier importé est supprimé du stockage de traitement après analyse."],
     ],
@@ -137,7 +137,7 @@ const securityCopy = {
       {
         title: "Protection avant l’analyse IA",
         text:
-          "Les identifiants personnels tels que les noms, adresses e-mail, numéros de téléphone, noms d’organisations et toute autre information permettant d’identifier une personne ou une entité sont remplacés par des libellés neutres avant le traitement par l’IA.",
+          "Lorsque cela est applicable, les identifiants personnels détectés tels que les noms, adresses e-mail, numéros de téléphone, noms d’organisations et autres informations permettant d’identifier une personne ou une entité peuvent être remplacés par des libellés neutres avant le traitement par l’IA.",
       },
       {
         title: "Suppression automatique des fichiers",
@@ -152,18 +152,18 @@ const securityCopy = {
       {
         title: "Accès opérationnel limité",
         text:
-          "Les équipes Runexa ne consultent pas les documents clients. Les fichiers importés sont utilisés uniquement pour générer l’analyse demandée puis sont automatiquement supprimés du stockage de traitement une fois l’analyse terminée.",
+          "Les équipes Runexa ne consultent pas les documents clients dans le cadre normal du fonctionnement du service. Tout accès opérationnel exceptionnel est limité, contrôlé et réservé aux besoins de sécurité, de support technique, de prévention des abus ou aux obligations légales. Les fichiers importés sont utilisés uniquement pour générer l’analyse demandée puis sont supprimés du stockage de traitement une fois l’analyse terminée.",
       },
       {
-        title: "Infrastructure sécurisée",
+        title: "Mesures de sécurité opérationnelles",
         text:
-          "Runexa utilise des fournisseurs cloud, base de données, paiement et IA pour opérer la plateforme, avec des mesures conçues pour protéger les comptes, imports, workflows d’analyse et l’intégrité de la plateforme.",
+          "Runexa applique plusieurs mesures destinées à réduire l’exposition des données et à protéger les comptes utilisateurs, notamment l’isolation logique des espaces de travail, la suppression automatique des fichiers importés après analyse, le traitement sécurisé des paiements via Stripe et des contrôles d’accès destinés à protéger les comptes utilisateurs. Ces mesures visent à limiter l’exposition des données pendant leur traitement et leur utilisation au sein de la plateforme.",
       },
     ],
 
     piiTitle: "Exemples de protection de la confidentialité",
     piiText:
-      "Avant l’analyse par l’IA, Runexa transforme les identifiants directs et toute autre information permettant d’identifier une personne ou une entité en libellés neutres. L’IA analyse ainsi le contenu et la structure du document sans avoir accès à l’identité réelle des parties concernées.",
+      "Avant l’analyse par l’IA, Runexa peut remplacer certains identifiants directs et autres informations permettant d’identifier une personne ou une entité par des libellés neutres lorsque cela est applicable. L’IA analyse ainsi principalement le contenu et la structure du document sans dépendre de l’identité réelle des parties concernées.",
     examples: [
       ["Jean Dupont", "[PERSON]"],
       ["Société Exemple SAS", "[ORGANIZATION]"],
@@ -176,7 +176,7 @@ const securityCopy = {
       "Runexa utilise des systèmes assistés par IA pour extraire, classifier, résumer, analyser et générer des résultats. Les résultats IA peuvent être incomplets ou inexacts et doivent être vérifiés indépendamment avant toute décision juridique, financière, éducative ou professionnelle importante.",
     responsibleTitle: "Imports responsables",
     responsibleText:
-      "Les utilisateurs doivent importer uniquement les informations raisonnablement nécessaires à l’analyse demandée et éviter d’inclure des données sensibles non pertinentes.",
+      "Runexa est conçu pour analyser les documents fournis par les utilisateurs. Les utilisateurs doivent importer uniquement les documents et informations nécessaires à l’analyse demandée et éviter d’inclure des informations sans rapport avec l’objectif du traitement.",
     paymentsTitle: "Sécurité des paiements",
     paymentsText:
       "Les paiements sont traités par Stripe, prestataire de paiement tiers sécurisé. Runexa ne stocke pas les informations de carte bancaire sur ses propres serveurs.",
@@ -185,7 +185,7 @@ const securityCopy = {
       "Les préoccupations de sécurité, abus suspectés ou rapports de vulnérabilité peuvent être envoyés à :",
     guaranteeTitle: "Aucune garantie de sécurité absolue",
     guaranteeText:
-      "Aucune plateforme internet, aucun logiciel, système IA ou système de stockage ne peut être garanti comme totalement sécurisé. Runexa met en œuvre des mesures raisonnables, mais les utilisateurs doivent toujours faire preuve de discernement lorsqu’ils importent du contenu sensible.",
+      "Bien que Runexa mette en œuvre des mesures destinées à protéger les données traitées par la plateforme, aucun système informatique ou service en ligne ne peut être considéré comme totalement exempt de risques. Runexa applique des contrôles de confidentialité et de traitement conçus pour limiter l’exposition des informations importées, mais les utilisateurs demeurent responsables des données qu’ils choisissent de soumettre à l’analyse.",
   },
 
   ar: {
@@ -237,9 +237,9 @@ const securityCopy = {
           "لا يطّلع فريق Runexa على مستندات العملاء. تُستخدم الملفات المرفوعة حصرياً لإنشاء التحليل المطلوب، ثم تُحذف تلقائياً من مساحة تخزين المعالجة فور اكتمال التحليل.",
       },
       {
-        title: "بنية تحتية آمنة",
+        title: "إجراءات الأمان التشغيلية",
         text:
-          "يستخدم Runexa مزودي بنية تحتية سحابية وقواعد بيانات ودفع وذكاء اصطناعي لتشغيل المنصة، مع ضوابط مصممة لحماية الحسابات والملفات وسير عمل التحليل وسلامة المنصة.",
+          "يطبق Runexa مجموعة من الإجراءات المصممة لتقليل تعرّض البيانات وحماية حسابات المستخدمين، بما في ذلك العزل المنطقي لمساحات العمل، والحذف التلقائي للملفات المرفوعة بعد التحليل، ومعالجة المدفوعات بشكل آمن عبر Stripe، وضوابط الوصول المخصصة لحماية حسابات المستخدمين.",
       },
     ],
 
@@ -258,7 +258,7 @@ const securityCopy = {
       "يستخدم Runexa أنظمة مدعومة بالذكاء الاصطناعي لاستخراج المعلومات وتصنيفها وتلخيصها وتحليلها وإنشاء النتائج. قد تكون مخرجات الذكاء الاصطناعي غير مكتملة أو غير دقيقة، ويجب مراجعتها بشكل مستقل قبل اتخاذ قرارات قانونية أو مالية أو تعليمية أو مهنية مهمة.",
     responsibleTitle: "رفع مسؤول للملفات",
     responsibleText:
-      "يجب على المستخدمين رفع المعلومات الضرورية فقط وبشكل معقول للتحليل المطلوب، وتجنب تضمين بيانات حساسة غير مرتبطة بالتحليل.",
+      "تم تصميم Runexa لتحليل المستندات التي يقدمها المستخدمون. يجب على المستخدمين رفع المستندات والمعلومات الضرورية فقط للتحليل المطلوب، وتجنب تضمين معلومات غير مرتبطة بهدف المعالجة.",
     paymentsTitle: "أمان المدفوعات",
     paymentsText:
       "تتم معالجة المدفوعات عبر Stripe، وهو مزود دفع خارجي آمن. ولا تخزن Runexa معلومات بطاقة الدفع على خوادمها الخاصة.",
@@ -267,7 +267,7 @@ const securityCopy = {
       "يمكن إرسال المخاوف الأمنية أو الاشتباه في إساءة الاستخدام أو تقارير الثغرات إلى:",
     guaranteeTitle: "لا توجد ضمانة أمان مطلقة",
     guaranteeText:
-      "لا يمكن ضمان أن أي منصة قائمة على الإنترنت أو برنامج أو نظام ذكاء اصطناعي أو نظام تخزين آمن بالكامل. يطبق Runexa إجراءات حماية معقولة، لكن يجب على المستخدمين دائماً استخدام الحكم المناسب عند رفع محتوى حساس.",
+      "على الرغم من أن Runexa يطبق إجراءات مصممة لحماية البيانات التي تتم معالجتها عبر المنصة، فلا يمكن اعتبار أي نظام معلوماتي أو خدمة عبر الإنترنت خالياً تماماً من المخاطر. يطبق Runexa ضوابط للخصوصية والمعالجة تهدف إلى الحد من تعرض المعلومات المرفوعة، إلا أن المستخدمين يظلون مسؤولين عن البيانات التي يختارون تقديمها للتحليل.",
   },
 } satisfies Record<Locale, {
   title: string;
