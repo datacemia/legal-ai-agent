@@ -108,7 +108,39 @@ const labels: any = {
     limitedNotice:
       "Trial analysis may be limited. Continue with credits or Pro to unlock full usage.",
     heroStats:
-      "OCR-ready • Enterprise-grade • Structured legal analysis",
+      "OCR-ready • Clause-level legal intelligence • Structured legal analysis",
+    trustedTitle: "Trusted by founders, consultants and legal teams",
+    trustedItems: [
+      "Contract risk scoring",
+      "Clause-level analysis",
+      "Negotiation recommendations",
+      "Executive reporting",
+      "Multilingual support",
+    ],
+    methodologyTitle: "How Runexa analyzes contracts",
+    methodologyItems: [
+      "Extracts text from PDF, DOCX, or OCR documents",
+      "Detects legal clauses and obligations",
+      "Assesses legal and operational risks",
+      "Compares clauses against common contract patterns",
+      "Generates negotiation recommendations",
+      "Produces an executive legal report",
+    ],
+    realExampleTitle: "Realistic contract example",
+    realExampleType: "Employment Agreement",
+    realExampleRiskScore: "Risk Score: 62/100",
+    realExampleIssuesTitle: "Detected Issues",
+    realExampleIssues: [
+      "Broad termination clause",
+      "Unclear intellectual property ownership",
+      "Unlimited liability provision",
+    ],
+    realExampleRecommendationsTitle: "Recommendations",
+    realExampleRecommendations: [
+      "Define notice periods",
+      "Clarify IP ownership",
+      "Cap liability exposure",
+    ],
     sampleOutputTitle: "Sample AI analysis",
     sampleOutputSubtitle:
       "Preview the kind of structured legal intelligence Runexa generates.",
@@ -199,7 +231,39 @@ const labels: any = {
     limitedNotice:
       "L’analyse d’essai peut être limitée. Continuez avec des crédits ou Pro pour débloquer l’usage complet.",
     heroStats:
-      "OCR-ready • Niveau entreprise • Analyse juridique structurée",
+      "OCR-ready • Intelligence juridique par clause • Analyse juridique structurée",
+    trustedTitle: "Utilisé par des fondateurs, consultants et équipes juridiques",
+    trustedItems: [
+      "Score de risque contractuel",
+      "Analyse par clause",
+      "Recommandations de négociation",
+      "Rapport exécutif",
+      "Support multilingue",
+    ],
+    methodologyTitle: "Comment Runexa analyse les contrats",
+    methodologyItems: [
+      "Extrait le texte des documents PDF, DOCX ou OCR",
+      "Détecte les clauses juridiques et les obligations",
+      "Évalue les risques juridiques et opérationnels",
+      "Compare les clauses aux modèles contractuels courants",
+      "Génère des recommandations de négociation",
+      "Produit un rapport juridique exécutif",
+    ],
+    realExampleTitle: "Exemple concret de contrat",
+    realExampleType: "Contrat de travail",
+    realExampleRiskScore: "Score de risque : 62/100",
+    realExampleIssuesTitle: "Problèmes détectés",
+    realExampleIssues: [
+      "Clause de résiliation trop large",
+      "Propriété intellectuelle peu claire",
+      "Disposition de responsabilité illimitée",
+    ],
+    realExampleRecommendationsTitle: "Recommandations",
+    realExampleRecommendations: [
+      "Définir les délais de préavis",
+      "Clarifier la propriété intellectuelle",
+      "Limiter l’exposition à la responsabilité",
+    ],
     sampleOutputTitle: "Exemple d’analyse IA",
     sampleOutputSubtitle:
       "Aperçu du type d’intelligence juridique structurée générée par Runexa.",
@@ -290,7 +354,39 @@ const labels: any = {
     limitedNotice:
       "قد يكون تحليل التجربة محدوداً. تابع باستخدام الأرصدة أو Pro لفتح الاستخدام الكامل.",
     heroStats:
-      "جاهز للتعرف الضوئي OCR • بمستوى المؤسسات • تحليل قانوني منظم",
+      "جاهز للتعرف الضوئي OCR • ذكاء قانوني على مستوى البنود • تحليل قانوني منظم",
+    trustedTitle: "موثوق به من قبل مؤسسين ومستشارين وفرق قانونية",
+    trustedItems: [
+      "تقييم مخاطر العقود",
+      "تحليل على مستوى البنود",
+      "توصيات تفاوضية",
+      "تقرير تنفيذي",
+      "دعم متعدد اللغات",
+    ],
+    methodologyTitle: "كيف يحلل Runexa العقود",
+    methodologyItems: [
+      "يستخرج النص من ملفات PDF أو DOCX أو مستندات OCR",
+      "يكتشف البنود القانونية والالتزامات",
+      "يقيّم المخاطر القانونية والتشغيلية",
+      "يقارن البنود بأنماط العقود الشائعة",
+      "ينشئ توصيات تفاوضية",
+      "ينتج تقريراً قانونياً تنفيذياً",
+    ],
+    realExampleTitle: "مثال واقعي لعقد",
+    realExampleType: "عقد عمل",
+    realExampleRiskScore: "درجة المخاطر: 62/100",
+    realExampleIssuesTitle: "المشكلات المكتشفة",
+    realExampleIssues: [
+      "بند إنهاء واسع",
+      "ملكية فكرية غير واضحة",
+      "بند مسؤولية غير محدود",
+    ],
+    realExampleRecommendationsTitle: "التوصيات",
+    realExampleRecommendations: [
+      "تحديد فترات الإشعار",
+      "توضيح ملكية الملكية الفكرية",
+      "تحديد سقف التعرض للمسؤولية",
+    ],
     sampleOutputTitle: "مثال على تحليل الذكاء الاصطناعي",
     sampleOutputSubtitle:
       "معاينة لنوع الذكاء القانوني المنظم الذي تولده Runexa.",
@@ -436,7 +532,7 @@ const UI_TRANSLATIONS: any = {
     clauseGroups: "Clause Groups",
     structuredDomains: "Structured legal domains",
     noCriticalRisks: "No critical legal risks detected",
-    enterpriseGrade: "Enterprise-grade",
+    enterpriseGrade: "Clause-level legal intelligence",
     all: "All",
     high: "High",
     medium: "Medium",
@@ -454,7 +550,7 @@ const UI_TRANSLATIONS: any = {
     clauseGroups: "Groupes de clauses",
     structuredDomains: "Domaines juridiques structurés",
     noCriticalRisks: "Aucun risque juridique critique détecté",
-    enterpriseGrade: "Niveau entreprise",
+    enterpriseGrade: "Intelligence juridique par clause",
     all: "Tous",
     high: "Élevé",
     medium: "Moyen",
@@ -472,7 +568,7 @@ const UI_TRANSLATIONS: any = {
     clauseGroups: "مجموعات البنود",
     structuredDomains: "المجالات القانونية المنظمة",
     noCriticalRisks: "لم يتم اكتشاف مخاطر قانونية حرجة",
-    enterpriseGrade: "بمستوى المؤسسات",
+    enterpriseGrade: "ذكاء قانوني على مستوى البنود",
     all: "الكل",
     high: "مرتفع",
     medium: "متوسط",
@@ -534,9 +630,9 @@ const uiText = (
 ) => {
   const fallbackMap: any = {
     enterpriseGrade: {
-      en: "Enterprise-grade",
-      fr: "Niveau entreprise",
-      ar: "بمستوى المؤسسات",
+      en: "Clause-level legal intelligence",
+      fr: "Intelligence juridique par clause",
+      ar: "ذكاء قانوني على مستوى البنود",
     },
     all: {
       en: "All",
@@ -1311,6 +1407,26 @@ export default function UploadClient({
           <div className="mt-5 flex flex-wrap items-center justify-center gap-3 text-sm font-medium text-slate-500">
             {t.heroStats}
           </div>
+
+          <div className="mx-auto mt-6 max-w-3xl rounded-3xl border border-slate-200 bg-white p-5 text-left shadow-sm">
+            <p className="text-sm font-semibold text-slate-900">
+              {t.trustedTitle}
+            </p>
+
+            <div className="mt-4 grid gap-2 sm:grid-cols-2">
+              {t.trustedItems.map((item: string) => (
+                <div
+                  key={item}
+                  className="flex items-center gap-2 text-sm text-slate-600"
+                >
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-green-50 text-xs font-bold text-green-700">
+                    ✓
+                  </span>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="bg-gradient-to-b from-white to-slate-50/80 p-6 rounded-3xl shadow-sm border space-y-5 transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
@@ -1530,6 +1646,78 @@ export default function UploadClient({
               </div>
             </div>
           )}
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2">
+          <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
+            <p className="text-sm font-medium text-blue-600">
+              {t.methodologyTitle}
+            </p>
+
+            <div className="mt-5 space-y-3">
+              {t.methodologyItems.map((item: string, index: number) => (
+                <div
+                  key={item}
+                  className="flex gap-3 rounded-2xl border border-slate-100 bg-slate-50 p-3"
+                >
+                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-900 text-xs font-bold text-white">
+                    {index + 1}
+                  </div>
+                  <p className="text-sm leading-6 text-slate-700">
+                    {item}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
+            <p className="text-sm font-medium text-blue-600">
+              {t.realExampleTitle}
+            </p>
+
+            <div className="mt-4 rounded-2xl border border-amber-200 bg-amber-50 p-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h2 className="text-xl font-semibold text-slate-900">
+                  {t.realExampleType}
+                </h2>
+
+                <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800">
+                  {t.realExampleRiskScore}
+                </span>
+              </div>
+
+              <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                <div>
+                  <p className="text-sm font-semibold text-slate-900">
+                    {t.realExampleIssuesTitle}
+                  </p>
+
+                  <ul className="mt-3 space-y-2">
+                    {t.realExampleIssues.map((item: string) => (
+                      <li key={item} className="text-sm leading-6 text-slate-700">
+                        - {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <p className="text-sm font-semibold text-slate-900">
+                    {t.realExampleRecommendationsTitle}
+                  </p>
+
+                  <ul className="mt-3 space-y-2">
+                    {t.realExampleRecommendations.map((item: string) => (
+                      <li key={item} className="text-sm leading-6 text-slate-700">
+                        - {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
 
         <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
