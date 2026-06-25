@@ -21,16 +21,15 @@ type Locale = "en" | "fr" | "ar";
 const labels: any = {
   en: {
     platform: "Runexa AI Platform",
-    title:
-      "Analyze contracts, financial documents, study materials, and business reports in minutes.",
+    title: "Upload Your Document.\nGet the Intelligence You Need to Decide.",
     desc:
-      "Upload documents, detect risks, uncover insights, generate recommendations, and make faster decisions with specialized AI workflows built for real-world work.",
+      "Contracts.\nFinance.\nLearning.\nBusiness.\n\nOne Platform.\nMultiple AI Agents.",
     explore: "Explore AI Agents",
     pricing: "Plans & Pricing",
     blog: "Insights",
     trustLine:
       "$1 trial per account · Unified credits · Privacy-first AI platform",
-    privacyIntroTitle: "Privacy Controls for Document Analysis",
+    privacyIntroTitle: "Trusted Document Processing",
     privacyIntroDesc:
       "Runexa is designed for document analysis workflows where privacy matters. Uploaded files are processed only to generate the requested analysis. Personal identifiers may be replaced with neutral labels before AI processing when applicable. Customer content is never used to train public AI models. Uploaded files are automatically deleted from processing storage after analysis, and customer data remains isolated between users and workspaces.",
     privacyFlow: [
@@ -164,16 +163,15 @@ const labels: any = {
 
   fr: {
     platform: "Plateforme IA Runexa",
-    title:
-      "Analysez des contrats, documents financiers, supports d’apprentissage et rapports business en quelques minutes.",
+    title: "Importez votre document.\nObtenez l’intelligence nécessaire pour décider.",
     desc:
-      "Importez vos documents, détectez les risques, extrayez les insights, générez des recommandations et prenez des décisions plus rapidement avec des workflows IA spécialisés.",
+      "Contrats.\nFinance.\nFormation.\nBusiness.\n\nUne plateforme.\nPlusieurs agents IA.",
     explore: "Découvrir les agents IA",
     pricing: "Plans et tarifs",
     blog: "Ressources & Insights",
     trustLine:
       "Un essai à 1 $ par compte · Crédits unifiés · Plateforme IA conçue pour la confidentialité",
-    privacyIntroTitle: "Contrôles de confidentialité pour l’analyse documentaire",
+    privacyIntroTitle: "Traitement documentaire conçu pour la confidentialité",
     privacyIntroDesc:
       "Runexa est conçu pour les workflows d’analyse documentaire où la confidentialité est essentielle. Les fichiers importés sont traités uniquement pour générer l’analyse demandée. Les identifiants personnels peuvent être remplacés par des libellés neutres avant le traitement par l’IA lorsque cela est applicable. Les contenus clients ne servent jamais à entraîner des modèles IA publics. Les fichiers importés sont automatiquement supprimés du stockage de traitement après analyse, et les données restent isolées entre utilisateurs et espaces de travail.",
     privacyFlow: [
@@ -311,13 +309,13 @@ const labels: any = {
 
   ar: {
     platform: "مساحة Runexa للذكاء الاصطناعي",
-    title: "حلّل العقود والمستندات المالية ومواد الدراسة وتقارير الأعمال خلال دقائق",
-    desc: "ارفع مستنداتك، واكتشف المخاطر، واستخرج الرؤى، وأنشئ توصيات قابلة للتنفيذ عبر تدفقات عمل ذكاء اصطناعي متخصصة للأعمال الواقعية",
+    title: "ارفع مستندك.\nواحصل على التحليل الذي يساعدك على اتخاذ القرار.",
+    desc: "العقود.\nالمالية.\nالتعلم.\nالأعمال.\n\nمنصة واحدة.\nوكلاء ذكاء اصطناعي متعددون.",
     explore: "استكشف حلول الذكاء الاصطناعي",
     pricing: "الخطط والأسعار",
     blog: "المدونة",
     trustLine: "تجربة واحدة بقيمة 1 دولار لكل حساب · أرصدة موحدة · منصة ذكاء اصطناعي مصممة لحماية الخصوصية",
-    privacyIntroTitle: "ضوابط الخصوصية لتحليل المستندات",
+    privacyIntroTitle: "معالجة مستندات تراعي الخصوصية",
     privacyIntroDesc:
       "تم تصميم Runexa لتدفقات عمل تحليل المستندات التي تتطلب الخصوصية. تُعالج الملفات المرفوعة فقط لإنشاء التحليل المطلوب. يمكن استبدال المعرّفات الشخصية بوسوم محايدة قبل المعالجة بالذكاء الاصطناعي عندما يكون ذلك مناسباً. لا تُستخدم محتويات العملاء أبداً لتدريب نماذج ذكاء اصطناعي عامة. ويتم حذف الملفات المرفوعة تلقائياً من تخزين المعالجة بعد اكتمال التحليل، وتبقى بيانات العملاء معزولة بين المستخدمين ومساحات العمل.",
     privacyFlow: [
@@ -566,36 +564,362 @@ export default function HomeClient({
             </select>
           </div>
 
-          <p className="text-blue-600 font-semibold">{t.platform}</p>
-          <h1 className="text-5xl font-bold leading-tight">{t.title}</h1>
-          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-            {t.desc}
-          </p>
+          <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[34px] border border-white/80 bg-white/90 p-6 text-left shadow-[0_30px_100px_rgba(37,99,235,0.16)] backdrop-blur-xl md:p-10 lg:p-12">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.14),transparent_34%),radial-gradient(circle_at_75%_30%,rgba(124,58,237,0.12),transparent_30%),linear-gradient(135deg,rgba(255,255,255,0.96),rgba(239,246,255,0.68))]" />
+            <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-blue-200/30 blur-3xl" />
+            <div className="absolute -bottom-28 left-1/2 h-72 w-72 rounded-full bg-violet-200/30 blur-3xl" />
 
-          <div className="flex flex-col sm:flex-row justify-center gap-3">
-            <a
-              href="#agents"
-              className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-700 transition"
-            >
-              {t.explore}
-            </a>
+            <div className="relative grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+              <div className="space-y-7">
+                <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/90 px-4 py-2 text-xs font-bold uppercase tracking-wide text-blue-700 shadow-sm">
+                  <Sparkles className="h-4 w-4" />
+                  <span>
+                    {language === "fr"
+                      ? "Plateforme IA pour les décisions réelles"
+                      : language === "ar"
+                      ? "منصة ذكاء اصطناعي لقرارات واقعية"
+                      : "AI Platform for Real-World Decisions"}
+                  </span>
+                </div>
 
-            <Link
-              href="/pricing"
-              className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-900 hover:bg-slate-50 transition"
-            >
-              {t.pricing}
-            </Link>
+                <div className="space-y-4">
+                  <h1 className="max-w-4xl text-4xl font-black leading-[1.05] tracking-tight text-slate-950 md:text-6xl">
+                    <span>{String(t.title).split("\n")[0]}</span>
+                    <br />
+                    <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent">
+                      {String(t.title).split("\n")[1] || ""}
+                    </span>
+                  </h1>
 
-            <Link
-              href="/blog"
-              className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-900 hover:bg-slate-50 transition"
-            >
-              {t.blog}
-            </Link>
+                  <div className="flex flex-wrap gap-3">
+                    {(language === "fr"
+                      ? [
+                          ["Contrats", Scale, "border-blue-100 bg-blue-50 text-blue-700"],
+                          ["Finance", BarChart3, "border-emerald-100 bg-emerald-50 text-emerald-700"],
+                          ["Formation", GraduationCap, "border-violet-100 bg-violet-50 text-violet-700"],
+                          ["Business", BriefcaseBusiness, "border-orange-100 bg-orange-50 text-orange-700"],
+                        ]
+                      : language === "ar"
+                      ? [
+                          ["العقود", Scale, "border-blue-100 bg-blue-50 text-blue-700"],
+                          ["المالية", BarChart3, "border-emerald-100 bg-emerald-50 text-emerald-700"],
+                          ["التعلم", GraduationCap, "border-violet-100 bg-violet-50 text-violet-700"],
+                          ["الأعمال", BriefcaseBusiness, "border-orange-100 bg-orange-50 text-orange-700"],
+                        ]
+                      : [
+                          ["Contracts", Scale, "border-blue-100 bg-blue-50 text-blue-700"],
+                          ["Finance", BarChart3, "border-emerald-100 bg-emerald-50 text-emerald-700"],
+                          ["Learning", GraduationCap, "border-violet-100 bg-violet-50 text-violet-700"],
+                          ["Business", BriefcaseBusiness, "border-orange-100 bg-orange-50 text-orange-700"],
+                        ]
+                    ).map(([label, Icon, className]: any) => (
+                      <div
+                        key={label}
+                        className={`inline-flex items-center gap-2 rounded-2xl border px-4 py-3 text-sm font-bold shadow-sm ${className}`}
+                      >
+                        <Icon className="h-4 w-4" />
+                        <span>{label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="flex items-start gap-4 rounded-3xl border border-slate-200 bg-white/75 p-5 shadow-sm">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-blue-700">
+                      <Sparkles className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-slate-950">
+                        {language === "fr"
+                          ? "Une plateforme."
+                          : language === "ar"
+                          ? "منصة واحدة."
+                          : "One Platform."}
+                      </p>
+                      <p className="mt-1 text-sm leading-6 text-slate-500">
+                        {language === "fr"
+                          ? "Tous vos besoins d’analyse documentaire."
+                          : language === "ar"
+                          ? "لكل احتياجات تحليل المستندات."
+                          : "All your document analysis needs."}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4 rounded-3xl border border-slate-200 bg-white/75 p-5 shadow-sm">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-violet-50 text-violet-700">
+                      <Zap className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-slate-950">
+                        {language === "fr"
+                          ? "Plusieurs agents IA."
+                          : language === "ar"
+                          ? "وكلاء ذكاء اصطناعي متعددون."
+                          : "Multiple AI Agents."}
+                      </p>
+                      <p className="mt-1 text-sm leading-6 text-slate-500">
+                        {language === "fr"
+                          ? "Spécialisés pour chaque domaine."
+                          : language === "ar"
+                          ? "متخصصون لكل مجال."
+                          : "Specialized for every domain."}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <a
+                    href="#agents"
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl bg-blue-600 px-7 py-4 text-sm font-bold text-white shadow-xl shadow-blue-200 transition hover:-translate-y-0.5 hover:bg-blue-700"
+                  >
+                    {t.explore}
+                    <span>→</span>
+                  </a>
+
+                  <Link
+                    href="/pricing"
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-7 py-4 text-sm font-bold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-50"
+                  >
+                    <ShieldCheck className="h-4 w-4" />
+                    {t.pricing}
+                  </Link>
+
+                  <Link
+                    href="/blog"
+                    className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-7 py-4 text-sm font-bold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-50"
+                  >
+                    <Globe className="h-4 w-4" />
+                    {t.blog}
+                  </Link>
+                </div>
+
+                <div className="inline-flex max-w-full items-center gap-2 rounded-2xl border border-slate-200 bg-white/80 px-5 py-3 text-sm font-semibold text-slate-600 shadow-sm">
+                  <ShieldCheck className="h-5 w-5 shrink-0 text-blue-600" />
+                  <span>{t.trustLine}</span>
+                </div>
+              </div>
+
+              <div className="relative min-h-[420px]">
+                <div className="absolute left-1/2 top-8 h-[380px] w-[280px] -translate-x-1/2 rounded-[34px] border border-slate-200 bg-white p-7 shadow-[0_25px_80px_rgba(37,99,235,0.24)]">
+                  <div className="absolute -right-4 -top-4 h-20 w-20 rounded-bl-[28px] rounded-tr-[34px] bg-gradient-to-br from-slate-50 to-blue-100 shadow-inner" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-700">
+                    <Sparkles className="h-6 w-6" />
+                  </div>
+
+                  <div className="mt-8">
+                    <p className="text-xl font-black text-slate-950">
+                      {language === "fr"
+                        ? "Votre document"
+                        : language === "ar"
+                        ? "مستندك"
+                        : "Your Document"}
+                    </p>
+                    <p className="mt-1 text-sm font-semibold text-slate-400">
+                      PDF · 2.4 MB
+                    </p>
+                  </div>
+
+                  <div className="mt-8 space-y-3">
+                    <div className="h-3 rounded-full bg-slate-200" />
+                    <div className="h-3 w-11/12 rounded-full bg-slate-200" />
+                    <div className="h-3 w-4/5 rounded-full bg-slate-200" />
+                    <div className="h-3 w-10/12 rounded-full bg-slate-200" />
+                    <div className="h-3 w-7/12 rounded-full bg-slate-200" />
+                  </div>
+
+                  <div className="mt-10 inline-flex items-center gap-2 rounded-2xl bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-700">
+                    <span>✓</span>
+                    <span>
+                      {language === "fr"
+                        ? "Analyse terminée"
+                        : language === "ar"
+                        ? "اكتمل التحليل"
+                        : "Analysis Complete"}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="absolute right-0 top-6 rounded-2xl border border-violet-100 bg-white/90 px-5 py-4 shadow-xl">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-violet-100 text-violet-700">
+                      <ShieldCheck className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-black text-slate-900">
+                        {language === "fr"
+                          ? "Confidentiel"
+                          : language === "ar"
+                          ? "خصوصية"
+                          : "Private"}
+                      </p>
+                      <p className="text-xs font-semibold text-slate-500">
+                        {language === "fr"
+                          ? "par conception"
+                          : language === "ar"
+                          ? "حسب التصميم"
+                          : "by Design"}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="absolute right-0 top-40 rounded-2xl border border-emerald-100 bg-white/90 px-5 py-4 shadow-xl">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700">
+                      <BarChart3 className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-black text-slate-900">
+                        {language === "fr"
+                          ? "Insights clés"
+                          : language === "ar"
+                          ? "رؤى رئيسية"
+                          : "Key Insights"}
+                      </p>
+                      <p className="text-xs font-semibold text-slate-500">
+                        {language === "fr"
+                          ? "extraits"
+                          : language === "ar"
+                          ? "مستخرجة"
+                          : "Extracted"}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="absolute right-0 bottom-16 rounded-2xl border border-blue-100 bg-white/90 px-5 py-4 shadow-xl">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-100 text-blue-700">
+                      <Globe className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-black text-slate-900">
+                        {language === "fr"
+                          ? "Rapport structuré"
+                          : language === "ar"
+                          ? "تقرير منظم"
+                          : "Structured Report"}
+                      </p>
+                      <p className="text-xs font-semibold text-slate-500">
+                        {language === "fr"
+                          ? "prêt"
+                          : language === "ar"
+                          ? "جاهز"
+                          : "Ready"}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="absolute left-2 bottom-8 rounded-2xl border border-blue-100 bg-white/90 px-5 py-4 shadow-xl">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-100 text-blue-700">
+                      <Lock className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-black text-slate-900">
+                        {language === "fr"
+                          ? "Données"
+                          : language === "ar"
+                          ? "البيانات"
+                          : "Data"}
+                      </p>
+                      <p className="text-xs font-semibold text-slate-500">
+                        {language === "fr"
+                          ? "non entraînées"
+                          : language === "ar"
+                          ? "لا تُستخدم للتدريب"
+                          : "Never Trained"}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="absolute bottom-0 left-1/2 h-24 w-80 -translate-x-1/2 rounded-full border border-blue-200/80 bg-blue-100/30 blur-sm" />
+              </div>
+            </div>
           </div>
 
-          <p className="text-sm text-slate-500">{t.trustLine}</p>
+          <div className="mx-auto max-w-5xl rounded-[28px] border border-slate-200 bg-white p-5 text-left shadow-sm md:p-6">
+            <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+              <div className="max-w-3xl">
+                <p className="text-sm font-semibold text-blue-600">
+                  {language === "fr"
+                    ? "Pourquoi Runexa plutôt qu’une IA généraliste ?"
+                    : language === "ar"
+                    ? "لماذا Runexa بدلاً من الذكاء الاصطناعي العام؟"
+                    : "Why Runexa Instead of Generic AI?"}
+                </p>
+
+                <h2 className="mt-3 text-2xl font-bold text-slate-900">
+                  {language === "fr"
+                    ? "La plupart des IA génèrent des réponses. Runexa exécute des workflows spécialisés."
+                    : language === "ar"
+                    ? "معظم أدوات الذكاء الاصطناعي تولد إجابات. أما Runexa فينفذ سير عمل متخصصاً."
+                    : "Most AI tools generate answers. Runexa executes specialized workflows."}
+                </h2>
+
+                <p className="mt-3 text-sm leading-6 text-slate-600 md:text-base md:leading-7">
+                  {language === "fr"
+                    ? "Importez un document. Recevez une analyse structurée. Prenez une décision."
+                    : language === "ar"
+                    ? "ارفع مستنداً. احصل على تحليل منظم. اتخذ قراراً أفضل."
+                    : "Upload a document. Receive structured analysis. Take action."}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200">
+              <div className="grid grid-cols-3 bg-slate-50 text-xs font-bold uppercase tracking-wide text-slate-500">
+                <div className="p-3">
+                  {language === "fr" ? "Concurrent" : language === "ar" ? "المنافس" : "Competitor"}
+                </div>
+                <div className="p-3">
+                  {language === "fr" ? "Approche" : language === "ar" ? "النهج" : "Their Approach"}
+                </div>
+                <div className="p-3">
+                  {language === "fr" ? "Avantage Runexa" : language === "ar" ? "ميزة Runexa" : "Runexa Advantage"}
+                </div>
+              </div>
+
+              {(language === "fr"
+                ? [
+                    ["ChatGPT", "Conversation générale", "Workflow documentaire structuré"],
+                    ["Claude", "Analyse documentaire avancée mais nécessite du prompting", "Importer → Analyser → Rapport"],
+                    ["Gemini", "IA généraliste", "Workflows spécialisés orientés décision"],
+                    ["Harvey AI", "Solution juridique entreprise", "Accessible aux indépendants, consultants et PME"],
+                    ["Outils IA génériques", "Résumé et rédaction", "Scoring des risques, KPI et aide à la décision"],
+                  ]
+                : language === "ar"
+                ? [
+                    ["ChatGPT", "محادثة عامة", "سير عمل منظم للمستندات"],
+                    ["Claude", "تحليل قوي للمستندات لكنه يحتاج إلى توجيه دقيق", "رفع → تحليل → تقرير"],
+                    ["Gemini", "ذكاء اصطناعي عام", "سير عمل متخصص لدعم القرار"],
+                    ["Harvey AI", "منصة قانونية للمؤسسات", "متاحة للأفراد والمستشارين والشركات الصغيرة"],
+                    ["أدوات الذكاء الاصطناعي العامة", "تلخيص وكتابة", "تقييم المخاطر وتحليل المؤشرات ودعم القرار"],
+                  ]
+                : [
+                    ["ChatGPT", "General chat and prompting", "Structured document workflows"],
+                    ["Claude", "Powerful document analysis but requires prompting expertise", "Upload → Analyze → Report"],
+                    ["Gemini", "General-purpose AI", "Specialized decision workflows"],
+                    ["Harvey AI", "Enterprise legal platform", "Accessible to individuals, consultants, and SMBs"],
+                    ["Generic AI Tools", "Writing and summarization", "Decision intelligence, risk scoring, KPI analysis"],
+                  ]
+              ).map((row) => (
+                <div
+                  key={row[0]}
+                  className="grid grid-cols-3 border-t border-slate-200 text-sm text-slate-700"
+                >
+                  <div className="p-3 font-semibold text-slate-900">{row[0]}</div>
+                  <div className="p-3">{row[1]}</div>
+                  <div className="p-3 font-medium text-blue-700">{row[2]}</div>
+                </div>
+              ))}
+            </div>
+          </div>
 
           <div className="mx-auto max-w-5xl rounded-3xl border border-blue-100 bg-blue-50/80 p-5 text-left shadow-sm md:p-6">
             <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
@@ -717,7 +1041,7 @@ export default function HomeClient({
           </div>
 
 
-          <div className="relative mt-10">
+          <div id="agents" className="relative mt-10 scroll-mt-24">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-100/40 via-transparent to-emerald-100/30 blur-3xl" />
 
             <div className="relative rounded-[32px] border border-slate-200/80 bg-white/80 p-6 shadow-[0_20px_80px_rgba(15,23,42,0.08)] backdrop-blur-xl md:p-10">
@@ -1521,103 +1845,6 @@ export default function HomeClient({
         </div>
       </section>
 
-      <section id="agents" className="px-6 py-12">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold">{t.choose}</h2>
-            <p className="mt-3 text-slate-600 max-w-3xl mx-auto">
-              {t.chooseDesc}
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {t.agents.map((agent: string[]) => {
-              const style = agentStyles[agent[3]];
-              const Icon = style.icon;
-
-              return (
-                <div
-                  key={agent[0]}
-                  className="bg-white p-6 rounded-2xl border shadow-sm flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-center justify-between gap-3">
-                      <div className={`flex h-11 w-11 items-center justify-center rounded-2xl ${style.iconBox}`}>
-                        <Icon className={`h-6 w-6 ${style.iconColor}`} />
-                      </div>
-
-                      <span className="text-xs bg-slate-100 text-slate-600 px-3 py-1 rounded-full">
-                        {t.available}
-                      </span>
-                    </div>
-
-                    <h3 className="mt-4 text-xl font-bold">
-                      {agent[0]}
-                    </h3>
-
-                    <p className="mt-4 text-slate-600">{agent[1]}</p>
-                  </div>
-
-                  <Link
-                    href={agent[2]}
-                    className="inline-block mt-6 text-center px-4 py-2 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition"
-                  >
-                    {t.open}
-                  </Link>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="px-6 py-12">
-        <div className="max-w-6xl mx-auto">
-          <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm md:p-12">
-            <p className="text-sm font-semibold text-blue-600">
-              {language === "fr"
-                ? "Pourquoi Runexa"
-                : language === "ar"
-                ? "لماذا Runexa"
-                : "Why Runexa"}
-            </p>
-
-            <h2 className="mt-3 text-3xl font-bold text-slate-900">
-              {language === "fr"
-                ? "Pourquoi utiliser Runexa plutôt qu’un chatbot IA généraliste ?"
-                : language === "ar"
-                ? "لماذا تستخدم Runexa بدلاً من روبوت ذكاء اصطناعي عام؟"
-                : "Why use Runexa instead of a general AI chatbot?"}
-            </h2>
-
-            <p className="mt-4 max-w-4xl text-slate-600 leading-7">
-              {language === "fr"
-                ? "Runexa n’est pas seulement une zone de chat. Chaque agent suit un workflow spécialisé pour transformer des documents réels en analyses structurées, recommandations et rapports exploitables."
-                : language === "ar"
-                ? "Runexa ليست مجرد مساحة دردشة. يتبع كل وكيل تدفق عمل متخصصاً لتحويل المستندات الواقعية إلى تحليلات منظمة وتوصيات وتقارير قابلة للاستخدام."
-                : "Runexa is not just a chat box. Each agent follows a specialized workflow to turn real documents into structured analysis, recommendations, and usable reports."}
-            </p>
-
-            <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
-              {[
-                language === "fr" ? "Workflows spécialisés" : language === "ar" ? "تدفقات عمل متخصصة" : "Specialized workflows",
-                language === "fr" ? "Rapports structurés" : language === "ar" ? "تقارير منظمة" : "Structured reports",
-                language === "fr" ? "Analyse centrée document" : language === "ar" ? "تحليل يركز على المستندات" : "Document-focused analysis",
-                language === "fr" ? "Traitement orienté confidentialité" : language === "ar" ? "معالجة تركز على الخصوصية" : "Privacy-focused processing",
-                language === "fr" ? "Plusieurs agents dans un espace" : language === "ar" ? "عدة وكلاء في مساحة واحدة" : "Multiple agents in one workspace",
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm font-semibold text-slate-700"
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="px-6 py-12">
         <div className="max-w-6xl mx-auto">
           <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
@@ -1900,34 +2127,34 @@ export default function HomeClient({
             <div className="mt-8 rounded-3xl border border-blue-100 bg-blue-50 p-6">
               <p className="text-sm font-semibold text-blue-700">
                 {language === "fr"
-                  ? "Statut actuel"
+                  ? "État actuel de la plateforme"
                   : language === "ar"
-                  ? "الوضع الحالي"
-                  : "Current status"}
+                  ? "الوضع الحالي للمنصة"
+                  : "Current Status"}
               </p>
 
               <div className="mt-4 grid gap-3 md:grid-cols-2">
                 {[
                   language === "fr"
-                    ? "Des exemples représentatifs d’analyses sont disponibles pour tous les agents IA Runexa"
+                    ? "✓ Exemples représentatifs disponibles pour tous les agents IA Runexa"
                     : language === "ar"
-                    ? "تتوفر أمثلة تمثيلية للتحليلات لجميع وكلاء Runexa المعتمدين على الذكاء الاصطناعي"
-                    : "Representative analysis examples available across all Runexa AI agents",
+                    ? "✓ أمثلة تحليلية متاحة لجميع وكلاء Runexa"
+                    : "✓ Representative analysis examples available across all Runexa AI agents",
                   language === "fr"
-                    ? "Une offre d’essai à 1 $ est disponible pour les nouveaux utilisateurs"
+                    ? "✓ Essai à 1 $ disponible pour les nouveaux utilisateurs"
                     : language === "ar"
-                    ? "تتوفر تجربة أولية بقيمة دولار واحد للمستخدمين الجدد"
-                    : "$1 trial available for first-time users",
+                    ? "✓ تجربة أولى بقيمة دولار واحد للمستخدمين الجدد"
+                    : "✓ $1 trial available for first-time users",
                   language === "fr"
-                    ? "Fondé par Dr. Rachid Ejjami, auteur de 5 ouvrages sur l’intelligence artificielle, chercheur et Rédacteur en chef du JNGR 5.0"
+                    ? "✓ Créé par Dr. Rachid Ejjami, DBA, chercheur et rédacteur en chef du JNGR 5.0"
                     : language === "ar"
-                    ? "أسس المنصة الدكتور رشيد الجامعي، مؤلف خمسة كتب في الذكاء الاصطناعي، وباحث علمي، ورئيس تحرير JNGR 5.0"
-                    : "Founded by Dr. Rachid Ejjami, author of 5 AI books, researcher, and Editor-in-Chief of JNGR 5.0",
+                    ? "✓ تم تطوير المنصة بواسطة الدكتور رشيد الجعمي، DBA، باحث ورئيس تحرير JNGR 5.0"
+                    : "✓ Built by Dr. Rachid Ejjami, DBA, researcher and Editor-in-Chief of JNGR 5.0",
                   language === "fr"
-                    ? "Les références clients, témoignages et études de cas seront publiés uniquement après autorisation explicite de publication"
+                    ? "✓ Les références clients et études de cas seront publiées après autorisation de publication"
                     : language === "ar"
-                    ? "سيتم نشر مراجع العملاء والشهادات ودراسات الحالة فقط بعد الحصول على موافقة صريحة على النشر"
-                    : "Customer references and case studies will be published only when approved for publication.",
+                    ? "✓ سيتم نشر قصص العملاء ودراسات الحالة بعد الحصول على الموافقات اللازمة"
+                    : "✓ Customer references and case studies will be published only when approved for publication",
                 ].map((item) => (
                   <div
                     key={item}
@@ -1944,108 +2171,6 @@ export default function HomeClient({
 
       
       
-      <section className="px-6 py-12">
-        <div className="max-w-6xl mx-auto">
-          <div className="rounded-3xl border border-blue-100 bg-white p-8 shadow-sm md:p-12">
-            <p className="text-sm font-semibold text-blue-600">
-              {language === "fr"
-                ? "Retours indépendants"
-                : language === "ar"
-                ? "آراء مستقلة"
-                : "Independent Feedback"}
-            </p>
-
-            <p className="mt-4 text-slate-600">
-              {language === "fr"
-                ? "Observations reçues de professionnels ayant évalué publiquement la plateforme."
-                : language === "ar"
-                ? "ملاحظات وردت من مهنيين قاموا بمراجعة المنصة بشكل علني."
-                : "Observations received from professionals who reviewed the public platform."}
-            </p>
-
-            <div className="mt-8 grid gap-4 md:grid-cols-3">
-              <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
-                <h3 className="font-semibold">
-                  {language === "fr"
-                    ? "Confiance et gestion des données"
-                    : language === "ar"
-                    ? "الثقة ومعالجة البيانات"
-                    : "Trust & Data Handling"}
-                </h3>
-
-                <p className="mt-3">
-                  {language === "fr"
-                    ? "« La confiance est une condition préalable avant que toute capacité d’IA ne devienne pertinente. »"
-                    : language === "ar"
-                    ? "« الثقة شرط أساسي قبل أن تصبح أي قدرة للذكاء الاصطناعي ذات قيمة حقيقية. »"
-                    : "“Trust is a prerequisite before any AI capability becomes relevant.”"}
-                </p>
-
-                <p className="mt-4 text-sm font-semibold">— Frédéric Pack</p>
-              </div>
-
-              <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
-                <h3 className="font-semibold">
-                  {language === "fr"
-                    ? "Éducation et apprentissage"
-                    : language === "ar"
-                    ? "التعليم والتعلّم"
-                    : "Education & Learning"}
-                </h3>
-
-                <p className="mt-3">
-                  {language === "fr"
-                    ? "« L’IA peut devenir un précieux compagnon d’apprentissage lorsqu’elle est utilisée correctement. »"
-                    : language === "ar"
-                    ? "« يمكن للذكاء الاصطناعي أن يصبح رفيقاً تعليمياً قيّماً عند استخدامه بالشكل الصحيح. »"
-                    : "“AI can become a valuable learning companion when used correctly.”"}
-                </p>
-
-                <p className="mt-4 text-sm font-semibold">— Georgios L.</p>
-              </div>
-
-              <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
-                <h3 className="font-semibold">
-                  {language === "fr"
-                    ? "Positionnement du produit"
-                    : language === "ar"
-                    ? "تموضع المنتج"
-                    : "Product Positioning"}
-                </h3>
-
-                <p className="mt-3">
-                  {language === "fr"
-                    ? "« La proposition de valeur est claire. »"
-                    : language === "ar"
-                    ? "« عرض القيمة واضح. »"
-                    : "“The value proposition is clear.”"}
-                </p>
-
-                <p className="mt-4 text-sm font-semibold">— Mark Day</p>
-              </div>
-            </div>
-
-            <h3 className="mt-8 text-lg font-bold">
-              {language === "fr"
-                ? "Pourquoi partageons-nous ces retours ?"
-                : language === "ar"
-                ? "لماذا نشارك هذه الآراء؟"
-                : "Why We Share This Feedback"}
-            </h3>
-
-            <p className="mt-3 text-sm leading-6 text-slate-600">
-              {language === "fr"
-                ? "Runexa publie une sélection d’observations reçues de professionnels ayant évalué publiquement la plateforme. Ces commentaires reflètent des perspectives externes sur la confiance, l’apprentissage, l’analyse financière, l’aide à la décision business et le positionnement du produit."
-                : language === "ar"
-                ? "تنشر Runexa مجموعة مختارة من الملاحظات الواردة من مهنيين قاموا بمراجعة المنصة بشكل علني. وتعكس هذه التعليقات وجهات نظر خارجية حول الثقة والتعلّم والتحليل المالي ودعم قرارات الأعمال وتموضع المنتج."
-                : "Runexa publishes selected observations received from professionals who reviewed the platform publicly. These comments reflect external perspectives on trust, learning, financial analysis, business decision support, and product positioning."}
-            </p>
-          </div>
-        </div>
-      </section>
-
-
-
       <section className="px-6 py-12">
         <div className="max-w-6xl mx-auto">
           <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm md:p-12">
@@ -2105,7 +2230,6 @@ export default function HomeClient({
                     </div>
                   ))}
                 </div>
-
 
 
                 <div className="mt-8">
@@ -2178,6 +2302,131 @@ export default function HomeClient({
                     : "These details are provided as founder context and are not a security certification or performance guarantee."}
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <section className="px-6 py-12">
+        <div className="max-w-6xl mx-auto">
+          <div className="rounded-3xl border border-blue-100 bg-white p-8 shadow-sm md:p-12">
+            <p className="text-sm font-semibold text-blue-600">
+              {language === "fr"
+                ? "Résultats utilisateurs représentatifs"
+                : language === "ar"
+                ? "نتائج مستخدمين تمثيلية"
+                : "Representative User Outcomes"}
+            </p>
+
+            <p className="mt-4 max-w-4xl text-slate-600 leading-7">
+              {language === "fr"
+                ? "Ces exemples illustrent le type de résultat concret que Runexa vise à produire pour les particuliers, étudiants, freelances, consultants et entreprises."
+                : language === "ar"
+                ? "توضح هذه الأمثلة نوع النتائج العملية التي تسعى Runexa إلى تقديمها للأفراد والطلاب والمستقلين والمستشارين والشركات."
+                : "These examples show the type of practical results Runexa is designed to create for individuals, students, freelancers, consultants, and businesses."}
+            </p>
+
+            <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              {[
+                {
+                  title:
+                    language === "fr"
+                      ? "Contrat freelance"
+                      : language === "ar"
+                      ? "عقد عمل مستقل"
+                      : "Freelance Contract",
+                  quote:
+                    language === "fr"
+                      ? "« J’ai importé un contrat freelance et Runexa a mis en évidence 3 clauses que j’avais complètement manquées. »"
+                      : language === "ar"
+                      ? "« رفعت عقد عمل مستقل، وسلطت Runexa الضوء على 3 بنود لم أكن قد انتبهت إليها إطلاقاً. »"
+                      : "“I uploaded a freelance contract and Runexa highlighted 3 clauses I had completely missed.”",
+                  person:
+                    language === "fr"
+                      ? "— Freelance"
+                      : language === "ar"
+                      ? "— مستقل"
+                      : "— Freelancer",
+                },
+                {
+                  title:
+                    language === "fr"
+                      ? "Contrat de location"
+                      : language === "ar"
+                      ? "عقد إيجار"
+                      : "Rental Agreement",
+                  quote:
+                    language === "fr"
+                      ? "« Runexa m’a aidé à comprendre un contrat de location en moins de 5 minutes. »"
+                      : language === "ar"
+                      ? "« ساعدتني Runexa على فهم عقد إيجار في أقل من 5 دقائق. »"
+                      : "“Runexa helped me understand a rental agreement in less than 5 minutes.”",
+                  person:
+                    language === "fr"
+                      ? "— Consultant indépendant"
+                      : language === "ar"
+                      ? "— مستشار مستقل"
+                      : "— Independent Consultant",
+                },
+                {
+                  title:
+                    language === "fr"
+                      ? "Révision universitaire"
+                      : language === "ar"
+                      ? "مراجعة جامعية"
+                      : "Study Revision",
+                  quote:
+                    language === "fr"
+                      ? "« L’agent Study a transformé un chapitre complet en plan de révision avec quiz et flashcards. »"
+                      : language === "ar"
+                      ? "« حوّل وكيل الدراسة فصلاً كاملاً إلى خطة مراجعة مع اختبارات وبطاقات تعليمية. »"
+                      : "“The Study Agent turned an entire chapter into a structured revision plan with quizzes and flashcards.”",
+                  person:
+                    language === "fr"
+                      ? "— Étudiant universitaire"
+                      : language === "ar"
+                      ? "— طالب جامعي"
+                      : "— University Student",
+                },
+                {
+                  title:
+                    language === "fr"
+                      ? "Finance personnelle"
+                      : language === "ar"
+                      ? "المالية الشخصية"
+                      : "Personal Finance",
+                  quote:
+                    language === "fr"
+                      ? "« L’agent Finance a identifié des abonnements récurrents et des opportunités d’économies que je n’avais jamais remarqués. »"
+                      : language === "ar"
+                      ? "« اكتشف وكيل المالية اشتراكات متكررة وفرص توفير لم أكن قد لاحظتها من قبل. »"
+                      : "“The Finance Agent identified recurring subscriptions and savings opportunities I had never noticed.”",
+                  person:
+                    language === "fr"
+                      ? "— Petit entrepreneur"
+                      : language === "ar"
+                      ? "— صاحب عمل صغير"
+                      : "— Small Business Owner",
+                },
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  className="rounded-3xl border border-slate-200 bg-slate-50 p-6"
+                >
+                  <h3 className="font-semibold text-slate-900">
+                    {item.title}
+                  </h3>
+
+                  <p className="mt-3 text-sm leading-6 text-slate-700">
+                    {item.quote}
+                  </p>
+
+                  <p className="mt-4 text-sm font-semibold text-slate-900">
+                    {item.person}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
