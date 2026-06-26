@@ -179,7 +179,7 @@ export default function HomeClient({
               const next = e.target.value;
               if (next === "en" || next === "fr" || next === "ar") handleLanguageChange(next);
             }}
-            className="rounded-lg border bg-white px-3 py-2"
+            className="rounded-lg border bg-white px-3 py-2 transition-all duration-200 hover:border-blue-300 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             <option value="en">English</option>
             <option value="fr">Français</option>
@@ -216,18 +216,18 @@ export default function HomeClient({
                 </div>
 
                 <div className="flex flex-col gap-3 sm:flex-row">
-                  <a href="#agents" className="inline-flex items-center justify-center gap-2 rounded-2xl bg-blue-600 px-7 py-4 text-sm font-bold text-white shadow-xl shadow-blue-200 transition hover:-translate-y-0.5 hover:bg-blue-700">
+                  <a href="#agents" className="inline-flex items-center justify-center gap-2 rounded-2xl bg-blue-600 px-7 py-4 text-sm font-bold text-white shadow-xl shadow-blue-200 transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-blue-700 hover:shadow-2xl active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                     {t.explore} <span>→</span>
                   </a>
-                  <Link href="/pricing" className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-7 py-4 text-sm font-bold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-50">
+                  <Link href="/pricing" className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-7 py-4 text-sm font-bold text-slate-900 shadow-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:border-blue-200 hover:bg-slate-50 hover:shadow-lg active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                     <ShieldCheck className="h-4 w-4" /> {t.pricing}
                   </Link>
-                  <Link href="/blog" className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-7 py-4 text-sm font-bold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-50">
+                  <Link href="/blog" className="inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-7 py-4 text-sm font-bold text-slate-900 shadow-sm transition-all duration-200 ease-out hover:-translate-y-1 hover:border-blue-200 hover:bg-slate-50 hover:shadow-lg active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                     <Globe className="h-4 w-4" /> {t.blog}
                   </Link>
                 </div>
 
-                <Link href="/pricing" className="block max-w-2xl rounded-3xl border border-blue-200 bg-gradient-to-r from-blue-600 to-indigo-600 p-5 text-white shadow-xl shadow-blue-200 transition hover:-translate-y-0.5">
+                <Link href="/pricing" className="block max-w-2xl rounded-3xl border border-blue-200 bg-gradient-to-r from-blue-600 to-indigo-600 p-5 text-white shadow-xl shadow-blue-200 transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-2xl active:translate-y-0 active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <p className="text-lg font-black">{language === "fr" ? "Essayez Runexa pour 1 $" : language === "ar" ? "جرّب Runexa مقابل دولار واحد" : "Try Runexa for $1"}</p>
@@ -310,7 +310,7 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
         const style = agentStyles[agent[3]];
         const Icon = style.icon;
         const dark = agent[3] === "finance";
-        return <Link key={agent[0]} href={agent[2]} className={`group relative overflow-hidden rounded-3xl border p-5 shadow-lg transition duration-300 hover:-translate-y-1 ${style.card}`}>
+        return <Link key={agent[0]} href={agent[2]} className={`group relative overflow-hidden rounded-3xl border p-5 shadow-lg transition-all duration-200 ease-out hover:-translate-y-1.5 hover:shadow-2xl active:translate-y-0 active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${style.card}`}>
           <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${style.iconBox}`}><Icon className={`h-6 w-6 ${style.iconColor}`} /></div>
           <h3 className={`mt-4 text-base font-bold ${dark ? "text-white" : "text-slate-900"}`}>{agent[0]}</h3>
           <p className={`mt-2 text-sm leading-6 ${dark ? "text-emerald-100" : "text-slate-500"}`}>{agent[1]}</p>
@@ -440,7 +440,7 @@ function ResultTestimonialsSection({ language }: { language: Locale }) {
         {t.items.map((item) => (
           <div
             key={item.useCase}
-            className="rounded-3xl border border-slate-200 bg-slate-50 p-6"
+            className="rounded-3xl border border-slate-200 bg-slate-50 p-6 transition-all duration-200 hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-lg"
           >
             <p className="text-xs font-bold uppercase tracking-wide text-blue-600">
               {item.useCase}
@@ -470,7 +470,7 @@ function FeedbackSection({ language }: { language: Locale }) {
   return <section className="rounded-3xl border border-blue-100 bg-white p-8 text-left shadow-sm md:p-12">
     <p className="text-sm font-semibold text-blue-600">{language === "fr" ? "Ce que nos utilisateurs obtiennent" : language === "ar" ? "أمثلة على نتائج المستخدمين" : "Representative Customer Results"}</p>
     <h2 className="mt-3 text-3xl font-bold text-slate-900">{language === "fr" ? "Des workflows conçus pour aider à décider plus vite." : language === "ar" ? "سير عمل مصمم للمساعدة على اتخاذ قرارات أسرع." : "Workflows designed to help users decide faster."}</h2>
-    <div className="mt-6 grid gap-4 md:grid-cols-3">{items.map((item) => <div key={item} className="rounded-2xl border border-slate-200 bg-slate-50 p-5"><MessageSquareQuote className="h-6 w-6 text-blue-600" /><p className="mt-3 font-semibold text-slate-800">{item}</p></div>)}</div>
+    <div className="mt-6 grid gap-4 md:grid-cols-3">{items.map((item) => <div key={item} className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-md"><MessageSquareQuote className="h-6 w-6 text-blue-600" /><p className="mt-3 font-semibold text-slate-800">{item}</p></div>)}</div>
   </section>;
 }
 
@@ -479,23 +479,23 @@ function PricingSection({ language }: { language: Locale }) {
     <p className="text-sm font-semibold text-blue-600">{language === "fr" ? "Plans simples" : language === "ar" ? "خطط بسيطة" : "Simple plans"}</p>
     <h2 className="mt-3 text-3xl font-bold text-slate-900">{language === "fr" ? "Commencez avec l’essai à 1 $, puis passez au plan adapté." : language === "ar" ? "ابدأ بتجربة 1 دولار ثم اختر الخطة المناسبة." : "Start with the $1 trial, then choose the plan that fits."}</h2>
     <div className="mt-6 grid gap-4 md:grid-cols-3">
-      {(language === "fr" ? ["Essai", "Pro", "Entreprise"] : language === "ar" ? ["التجربة", "Pro", "المؤسسات"] : ["Trial", "Pro", "Enterprise"]).map((plan) => <div key={plan} className="rounded-2xl border border-slate-200 bg-slate-50 p-5"><p className="text-xl font-black text-slate-900">{plan}</p><p className="mt-2 text-sm text-slate-600">{language === "fr" ? "Crédits unifiés pour les agents Runexa." : language === "ar" ? "أرصدة موحدة لوكلاء Runexa." : "Unified credits for Runexa agents."}</p><CheckCircle2 className="mt-4 h-5 w-5 text-blue-600" /></div>)}
+      {(language === "fr" ? ["Essai", "Pro", "Entreprise"] : language === "ar" ? ["التجربة", "Pro", "المؤسسات"] : ["Trial", "Pro", "Enterprise"]).map((plan) => <div key={plan} className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-md"><p className="text-xl font-black text-slate-900">{plan}</p><p className="mt-2 text-sm text-slate-600">{language === "fr" ? "Crédits unifiés pour les agents Runexa." : language === "ar" ? "أرصدة موحدة لوكلاء Runexa." : "Unified credits for Runexa agents."}</p><CheckCircle2 className="mt-4 h-5 w-5 text-blue-600" /></div>)}
     </div>
-    <Link href="/pricing" className="mt-6 inline-flex rounded-2xl bg-blue-600 px-6 py-3 text-sm font-bold text-white hover:bg-blue-700">{language === "fr" ? "Voir les tarifs" : language === "ar" ? "عرض الأسعار" : "View pricing"}</Link>
+    <Link href="/pricing" className="mt-6 inline-flex rounded-2xl bg-blue-600 px-6 py-3 text-sm font-bold text-white transition-all duration-200 ease-out hover:-translate-y-1 hover:bg-blue-700 hover:shadow-lg active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">{language === "fr" ? "Voir les tarifs" : language === "ar" ? "عرض الأسعار" : "View pricing"}</Link>
   </section>;
 }
 
 function FAQSection({ t }: { t: any }) {
   return <section className="rounded-3xl border border-slate-200 bg-white p-8 text-left shadow-sm md:p-12">
     <p className="text-sm font-semibold text-blue-600">FAQ</p><h2 className="mt-3 text-3xl font-bold text-slate-900">{t.faqTitle}</h2>
-    <div className="mt-6 grid gap-4 md:grid-cols-2">{t.faqItems.map(([q, a]: string[]) => <div key={q} className="rounded-2xl border border-slate-200 bg-slate-50 p-5"><h3 className="font-bold text-slate-900">{q}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{a}</p></div>)}</div>
+    <div className="mt-6 grid gap-4 md:grid-cols-2">{t.faqItems.map(([q, a]: string[]) => <div key={q} className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-md"><h3 className="font-bold text-slate-900">{q}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{a}</p></div>)}</div>
   </section>;
 }
 
 function CTASection({ t }: { t: any }) {
   return <section className="rounded-3xl bg-blue-600 p-10 text-center text-white">
     <h2 className="text-3xl font-bold">{t.ctaTitle}</h2><p className="mx-auto mt-4 max-w-2xl text-blue-100">{t.ctaDesc}</p>
-    <Link href="/register" className="mt-6 inline-block rounded-xl bg-white px-6 py-3 font-semibold text-blue-600">{t.ctaButton}</Link>
+    <Link href="/register" className="mt-6 inline-block rounded-xl bg-white px-6 py-3 font-semibold text-blue-600 transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-lg active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">{t.ctaButton}</Link>
     <p className="mx-auto mt-8 max-w-2xl text-sm text-blue-100">{t.disclaimer}</p>
   </section>;
 }
