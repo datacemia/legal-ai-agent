@@ -261,6 +261,7 @@ export default function HomeClient({
             </div>
           </div>
 
+          <IntelligencePreviewCard language={language} />
           <WhyRunexa language={language} />
           <PrivacySection t={t} language={language} />
           <AgentsSection t={t} language={language} />
@@ -271,6 +272,155 @@ export default function HomeClient({
         </div>
       </section>
     </main>
+  );
+}
+
+
+function IntelligencePreviewCard({ language }: { language: Locale }) {
+  const preview = {
+    en: {
+      eyebrow: "Runexa Intelligence Report",
+      status: "Analysis Complete",
+      documentLabel: "Document",
+      documentName: "Employment_Contract.pdf",
+      scoreLabel: "Overall Risk",
+      scoreValue: "Medium",
+      findingsLabel: "Key findings",
+      findings: [
+        "25 clauses identified",
+        "1 high-risk clause detected",
+        "7 medium-risk clauses found",
+        "112 clause dependencies mapped",
+      ],
+      recommendationLabel: "Decision recommendation",
+      recommendation: "Negotiate key clauses before signing.",
+      footer: "Legal · Finance · Study · Business",
+    },
+    fr: {
+      eyebrow: "Rapport d’intelligence Runexa",
+      status: "Analyse terminée",
+      documentLabel: "Document",
+      documentName: "Contrat_de_travail.pdf",
+      scoreLabel: "Risque global",
+      scoreValue: "Moyen",
+      findingsLabel: "Insights clés",
+      findings: [
+        "25 clauses identifiées",
+        "1 clause à risque élevé détectée",
+        "7 clauses à risque moyen trouvées",
+        "112 dépendances entre clauses cartographiées",
+      ],
+      recommendationLabel: "Recommandation de décision",
+      recommendation: "Négocier les clauses clés avant signature.",
+      footer: "Juridique · Finance · Étude · Business",
+    },
+    ar: {
+      eyebrow: "تقرير Runexa الذكي",
+      status: "اكتمل التحليل",
+      documentLabel: "المستند",
+      documentName: "عقد_عمل.pdf",
+      scoreLabel: "مستوى المخاطر",
+      scoreValue: "متوسط",
+      findingsLabel: "رؤى رئيسية",
+      findings: [
+        "تم تحديد 25 بنداً",
+        "تم اكتشاف بند عالي المخاطر",
+        "تم العثور على 7 بنود متوسطة المخاطر",
+        "تم ربط 112 علاقة بين البنود",
+      ],
+      recommendationLabel: "توصية القرار",
+      recommendation: "يُنصح بالتفاوض على البنود الأساسية قبل التوقيع.",
+      footer: "القانون · المالية · الدراسة · الأعمال",
+    },
+  };
+
+  const t = preview[language] || preview.en;
+
+  return (
+    <section className="mx-auto max-w-5xl rounded-[32px] border border-slate-200 bg-white p-5 text-left shadow-[0_24px_80px_rgba(15,23,42,0.10)] md:p-8">
+      <div className="flex flex-col gap-6 md:flex-row md:items-stretch md:justify-between">
+        <div className="flex-1 rounded-3xl bg-slate-950 p-6 text-white">
+          <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-5">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wide text-blue-300">
+                {t.eyebrow}
+              </p>
+              <p className="mt-2 text-lg font-black">{t.status}</p>
+            </div>
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-400/10 text-emerald-300">
+              <CheckCircle2 className="h-6 w-6" />
+            </div>
+          </div>
+
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <p className="text-xs text-slate-400">{t.documentLabel}</p>
+              <p className="mt-1 font-bold text-slate-100">{t.documentName}</p>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <p className="text-xs text-slate-400">{t.scoreLabel}</p>
+              <p className="mt-1 font-bold text-amber-300">{t.scoreValue}</p>
+            </div>
+          </div>
+
+          <div className="mt-5 rounded-2xl border border-white/10 bg-white/5 p-4">
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+              {t.findingsLabel}
+            </p>
+
+            <div className="mt-4 grid gap-3 md:grid-cols-2">
+              {t.findings.map((finding) => (
+                <div key={finding} className="flex items-start gap-3 text-sm text-slate-200">
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-500/20 text-xs font-bold text-blue-200">
+                    ✓
+                  </span>
+                  <span>{finding}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="flex min-w-0 flex-1 flex-col justify-between rounded-3xl border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-indigo-50 p-6">
+          <div>
+            <p className="text-sm font-bold text-blue-700">{t.recommendationLabel}</p>
+            <h3 className="mt-3 text-2xl font-black leading-tight text-slate-950">
+              {t.recommendation}
+            </h3>
+
+            <div className="mt-6 space-y-3">
+              {[
+                language === "fr"
+                  ? "Analyse structurée"
+                  : language === "ar"
+                  ? "تحليل منظم"
+                  : "Structured analysis",
+                language === "fr"
+                  ? "Insights orientés décision"
+                  : language === "ar"
+                  ? "رؤى تساعد على اتخاذ القرار"
+                  : "Decision-ready insights",
+                language === "fr"
+                  ? "Rapport exploitable"
+                  : language === "ar"
+                  ? "تقرير قابل للاستخدام"
+                  : "Actionable report",
+              ].map((item) => (
+                <div key={item} className="flex items-center gap-3 rounded-2xl border border-blue-100 bg-white/80 p-3 text-sm font-semibold text-slate-700">
+                  <Sparkles className="h-4 w-4 text-blue-600" />
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <p className="mt-6 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center text-sm font-bold text-slate-700">
+            {t.footer}
+          </p>
+        </div>
+      </div>
+    </section>
   );
 }
 
