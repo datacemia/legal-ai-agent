@@ -475,6 +475,17 @@ export default function Footer() {
             >
               {t.aboutPage}
             </Link>
+
+            <Link
+              href="/contact-entreprise/contact"
+              className="mt-3 block text-sm font-semibold text-blue-400 hover:text-blue-300 transition"
+            >
+              {locale === "en"
+                ? "Contact"
+                : locale === "fr"
+                ? "Contact"
+                : "اتصل بنا"}
+            </Link>
           </div>
         </div>
 
