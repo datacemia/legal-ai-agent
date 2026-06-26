@@ -82,7 +82,7 @@ export const metadata: Metadata = {
     title: "Runexa AI Workspace",
 
     description:
-      "Specialized AI agents for legal, finance, study, and business workflows.",
+       "Runexa is an AI workspace with specialized agents for legal analysis, financial intelligence, study workflows, document analysis, and business decision support.",
 
     url: siteUrl,
 
