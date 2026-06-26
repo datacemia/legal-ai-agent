@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { getSavedLocale, translations } from "../lib/i18n";
+import { getSavedLocale } from "../lib/i18n";
 
 type Locale = "en" | "fr" | "ar";
 
@@ -18,6 +18,43 @@ type LegalLabels = {
   refunds: string;
   security: string;
   company: string;
+};
+
+type FooterCopy = {
+  slogan: string;
+  footerDesc: string;
+  companyAddress: string;
+  products: string;
+  resources: string;
+  developers: string;
+  docs: string;
+  apiDashboard: string;
+  platform: string;
+  about: string;
+  available: string;
+  legalAgent: string;
+  studyAgent: string;
+  financeAgent: string;
+  businessAgent: string;
+  legalResource: string;
+  financeResource: string;
+  studyResource: string;
+  businessResource: string;
+  blog: string;
+  studyDemo: string;
+  financeDemo: string;
+  legalDemo: string;
+  businessDemo: string;
+  exploreAgents: string;
+  tryLegalAgent: string;
+  tryStudyAgent: string;
+  tryFinanceAgent: string;
+  login: string;
+  register: string;
+  aboutText: string;
+  builtBy: string;
+  aboutPage: string;
+  copyright: string;
 };
 
 const getLocaleFromPathname = (pathname: string | null): Locale | null => {
@@ -51,6 +88,162 @@ const normalizeLocale = (
   return fallback;
 };
 
+const footerCopy: Record<Locale, FooterCopy> = {
+  en: {
+    slogan: "Specialized AI agents for real-world work",
+    footerDesc:
+      "Specialized AI agents for legal analysis, financial intelligence, learning, and enterprise decision support.",
+    companyAddress:
+      "Runexa Systems LLC\n1309 Coffeen Avenue, Suite 1200\nSheridan, WY 82801, USA",
+    products: "Products",
+    resources: "Resources",
+    developers: "Developers",
+    docs: "Docs",
+    apiDashboard: "API Dashboard",
+    platform: "Platform",
+    about: "About",
+    available: "Available",
+    legalAgent: "Runexa Legal Agent",
+    studyAgent: "Runexa Study Workspace",
+    financeAgent: "Runexa Finance Intelligence Agent",
+    businessAgent: "Runexa Business Decision Intelligence",
+    legalResource: "Runexa Legal Agent",
+    financeResource: "Runexa Finance Intelligence Agent",
+    studyResource: "Runexa Study Workspace",
+    businessResource: "Runexa Business Decision Intelligence",
+    blog: "Blog",
+    studyDemo: "Runexa Study Workspace Demo",
+    financeDemo: "Runexa Finance Intelligence Demo",
+    legalDemo: "Runexa Legal Agent Demo",
+    businessDemo: "Runexa Business Decision Intelligence Demo",
+    exploreAgents: "Explore agents",
+    tryLegalAgent: "Try Runexa Legal Agent",
+    tryStudyAgent: "Try Runexa Study Workspace",
+    tryFinanceAgent: "Try Runexa Finance Intelligence Agent",
+    login: "Login",
+    register: "Register",
+    aboutText:
+      "Runexa Systems is an AI platform that provides specialized AI agents to help users analyze documents, learn faster, gain financial intelligence, and make smarter business decisions.",
+    builtBy: "Built by Dr. Rachid Ejjami",
+    aboutPage: "About Runexa",
+    copyright: "© 2026 Runexa Systems LLC. All rights reserved.",
+  },
+  fr: {
+    slogan: "Des agents IA spécialisés pour le travail réel",
+    footerDesc:
+      "Des agents IA spécialisés pour l’analyse juridique, l’intelligence financière, l’apprentissage et l’aide à la décision en entreprise.",
+    companyAddress:
+      "Runexa Systems LLC\n1309 Coffeen Avenue, Suite 1200\nSheridan, WY 82801, États-Unis",
+    products: "Produits",
+    resources: "Ressources",
+    developers: "Développeurs",
+    docs: "Documentation",
+    apiDashboard: "Tableau de bord API",
+    platform: "Plateforme",
+    about: "À propos",
+    available: "Disponible",
+    legalAgent: "Runexa Legal Agent",
+    studyAgent: "Runexa Study Workspace",
+    financeAgent: "Runexa Finance Intelligence Agent",
+    businessAgent: "Runexa Business Decision Intelligence",
+    legalResource: "Runexa Legal Agent",
+    financeResource: "Runexa Finance Intelligence Agent",
+    studyResource: "Runexa Study Workspace",
+    businessResource: "Runexa Business Decision Intelligence",
+    blog: "Blog",
+    studyDemo: "Démo Runexa Study Workspace",
+    financeDemo: "Démo Runexa Finance Intelligence",
+    legalDemo: "Démo Runexa Legal Agent",
+    businessDemo: "Démo Runexa Business Decision Intelligence",
+    exploreAgents: "Explorer les agents",
+    tryLegalAgent: "Tester Runexa Legal Agent",
+    tryStudyAgent: "Tester Runexa Study Workspace",
+    tryFinanceAgent: "Tester Runexa Finance Intelligence Agent",
+    login: "Connexion",
+    register: "Inscription",
+    aboutText:
+      "Runexa Systems est une plateforme d’IA proposant des agents spécialisés pour aider les utilisateurs à analyser leurs documents, apprendre plus vite, mieux comprendre leurs données financières et prendre de meilleures décisions.",
+    builtBy: "Développé par le Dr Rachid Ejjami",
+    aboutPage: "À propos de Runexa",
+    copyright: "© 2026 Runexa Systems LLC. Tous droits réservés.",
+  },
+  ar: {
+    slogan: "وكلاء ذكاء اصطناعي متخصصون للعمل الواقعي",
+    footerDesc:
+      "وكلاء ذكاء اصطناعي متخصصون للتحليل القانوني والذكاء المالي والتعلم ودعم اتخاذ القرار في المؤسسات.",
+    companyAddress:
+      "Runexa Systems LLC\n1309 Coffeen Avenue, Suite 1200\nSheridan, WY 82801, الولايات المتحدة",
+    products: "المنتجات",
+    resources: "الموارد",
+    developers: "المطورون",
+    docs: "التوثيق",
+    apiDashboard: "لوحة تحكم API",
+    platform: "المنصة",
+    about: "حول",
+    available: "متاح",
+    legalAgent: "Runexa Legal Agent",
+    studyAgent: "Runexa Study Workspace",
+    financeAgent: "Runexa Finance Intelligence Agent",
+    businessAgent: "Runexa Business Decision Intelligence",
+    legalResource: "Runexa Legal Agent",
+    financeResource: "Runexa Finance Intelligence Agent",
+    studyResource: "Runexa Study Workspace",
+    businessResource: "Runexa Business Decision Intelligence",
+    blog: "المدونة",
+    studyDemo: "عرض Runexa Study Workspace",
+    financeDemo: "عرض Runexa Finance Intelligence",
+    legalDemo: "عرض Runexa Legal Agent",
+    businessDemo: "عرض Runexa Business Decision Intelligence",
+    exploreAgents: "استكشاف الوكلاء",
+    tryLegalAgent: "تجربة Runexa Legal Agent",
+    tryStudyAgent: "تجربة Runexa Study Workspace",
+    tryFinanceAgent: "تجربة Runexa Finance Intelligence Agent",
+    login: "تسجيل الدخول",
+    register: "إنشاء حساب",
+    aboutText:
+      "Runexa Systems منصة ذكاء اصطناعي توفر وكلاء متخصصين لمساعدة المستخدمين على تحليل المستندات والتعلم بشكل أسرع وفهم البيانات المالية واتخاذ قرارات أكثر ذكاءً.",
+    builtBy: "من تطوير الدكتور رشيد الجامعي",
+    aboutPage: "عن Runexa",
+    copyright: "© 2026 Runexa Systems LLC. جميع الحقوق محفوظة.",
+  },
+};
+
+const legalLabels: Record<Locale, LegalLabels> = {
+  en: {
+    terms: "Terms of Service",
+    privacy: "Privacy Policy",
+    productTerms: "Product Terms",
+    acceptableUse: "Acceptable Use Policy",
+    aiDisclaimer: "AI Disclaimer",
+    cookies: "Cookie Policy",
+    refunds: "Refund Policy",
+    security: "Security",
+    company: "Company Information",
+  },
+  fr: {
+    terms: "Conditions d’utilisation",
+    privacy: "Politique de confidentialité",
+    productTerms: "Conditions du produit",
+    acceptableUse: "Politique d’utilisation acceptable",
+    aiDisclaimer: "Avertissement relatif à l’IA",
+    cookies: "Politique relative aux cookies",
+    refunds: "Politique de remboursement",
+    security: "Sécurité",
+    company: "Informations sur l’entreprise",
+  },
+  ar: {
+    terms: "شروط الاستخدام",
+    privacy: "سياسة الخصوصية",
+    productTerms: "شروط المنتج",
+    acceptableUse: "سياسة الاستخدام المقبول",
+    aiDisclaimer: "إخلاء مسؤولية الذكاء الاصطناعي",
+    cookies: "سياسة ملفات تعريف الارتباط",
+    refunds: "سياسة الاسترداد",
+    security: "الأمان",
+    company: "معلومات الشركة",
+  },
+};
+
 export default function Footer() {
   const pathname = usePathname();
 
@@ -70,9 +263,7 @@ export default function Footer() {
   useEffect(() => {
     setLocale(resolveLocale());
 
-    const savedApiEnabled =
-      localStorage.getItem("api_enabled") === "true";
-
+    const savedApiEnabled = localStorage.getItem("api_enabled") === "true";
     setApiEnabled(savedApiEnabled);
 
     const handleLocaleChange = () => {
@@ -86,90 +277,8 @@ export default function Footer() {
     };
   }, [pathname]);
 
-  const t = translations[locale] || translations.en;
-
-  const legalLabels: Record<Locale, LegalLabels> = {
-    en: {
-      terms: "Terms of Service",
-      privacy: "Privacy Policy",
-      productTerms: "Product Terms",
-      acceptableUse: "Acceptable Use Policy",
-      aiDisclaimer: "AI Disclaimer",
-      cookies: "Cookie Policy",
-      refunds: "Refund Policy",
-      security: "Security",
-      company: "Company Information",
-    },
-    fr: {
-      terms: "Conditions d’utilisation",
-      privacy: "Politique de confidentialité",
-      productTerms: "Conditions du produit",
-      acceptableUse: "Politique d’utilisation acceptable",
-      aiDisclaimer: "Avertissement relatif à l’IA",
-      cookies: "Politique relative aux cookies",
-      refunds: "Politique de remboursement",
-      security: "Sécurité",
-      company: "Informations sur l’entreprise",
-    },
-    ar: {
-      terms: "شروط الاستخدام",
-      privacy: "سياسة الخصوصية",
-      productTerms: "شروط المنتج",
-      acceptableUse: "سياسة الاستخدام المقبول",
-      aiDisclaimer: "إخلاء مسؤولية الذكاء الاصطناعي",
-      cookies: "سياسة ملفات تعريف الارتباط",
-      refunds: "سياسة الاسترداد",
-      security: "الأمان",
-      company: "معلومات الشركة",
-    },
-  };
-
+  const t = footerCopy[locale] || footerCopy.en;
   const legal = legalLabels[locale] || legalLabels.en;
-
-  const demoLabels: Record<Locale, string> = {
-    en: "Study Agent Demo",
-    fr: "Démo Agent d’Étude",
-    ar: "عرض وكيل الدراسة",
-  };
-
-  const demoLabel = demoLabels[locale] || demoLabels.en;
-
-  const financeDemoLabels: Record<Locale, string> = {
-    en: "Finance Coach Demo",
-    fr: "Démo Coach Finance",
-    ar: "عرض مدرب المالية",
-  };
-
-  const financeDemoLabel =
-    financeDemoLabels[locale] || financeDemoLabels.en;
-
-
-  const legalDemoLabels: Record<Locale, string> = {
-    en: "Legal Agent Demo",
-    fr: "Démo Agent Juridique",
-    ar: "عرض الوكيل القانوني",
-  };
-
-  const legalDemoLabel =
-    legalDemoLabels[locale] || legalDemoLabels.en;
-
-
-  const businessDemoLabels: Record<Locale, string> = {
-    en: "Business Decision Agent Demo",
-    fr: "Démo Agent Décision Business",
-    ar: "عرض وكيل قرارات الأعمال",
-  };
-
-  const businessDemoLabel =
-    businessDemoLabels[locale] || businessDemoLabels.en;
-
-  const aboutPageLabels: Record<Locale, string> = {
-    en: "About Runexa",
-    fr: "À propos de Runexa",
-    ar: "عن Runexa",
-  };
-
-  const aboutPageLabel = aboutPageLabels[locale] || aboutPageLabels.en;
 
   const localizedHref = (href: string) => {
     if (pathname === "/en" || pathname?.startsWith("/en/")) {
@@ -228,18 +337,15 @@ export default function Footer() {
               </Link>
 
               <Link href="/study" className="block hover:text-white transition">
-                {(t.studyAgent || "Study Agent")}{" "}
+                {t.studyAgent}{" "}
                 <span className="text-green-400">· {t.available}</span>
               </Link>
 
               <Link href="/finance" className="block hover:text-white transition">
-                {(t.financeAgent === t.studyAgent
-                  ? "Personal Finance Coach Agent"
-                  : t.financeAgent || "Personal Finance Coach Agent")}{" "}
+                {t.financeAgent}{" "}
                 <span className="text-green-400">· {t.available}</span>
               </Link>
 
-              {/* ✅ UPDATED BUSINESS */}
               <Link href="/business" className="block hover:text-white transition">
                 {t.businessAgent}{" "}
                 <span className="text-green-400">· {t.available}</span>
@@ -252,25 +358,22 @@ export default function Footer() {
 
             <div className="mt-4 space-y-3 text-sm text-slate-400">
               <Link href="/legal-ai" className="block hover:text-white transition">
-                {t.legalAi}
+                {t.legalResource}
               </Link>
 
               <Link href="/finance-ai" className="block hover:text-white transition">
-                {t.financeAi}
+                {t.financeResource}
               </Link>
 
               <Link href="/study-ai" className="block hover:text-white transition">
-                {t.studyAi}
+                {t.studyResource}
               </Link>
 
               <Link href="/business-ai" className="block hover:text-white transition">
-                {t.businessAi}
+                {t.businessResource}
               </Link>
 
-              <Link
-                href="/blog"
-                className="block hover:text-white transition"
-              >
+              <Link href="/blog" className="block hover:text-white transition">
                 {t.blog}
               </Link>
 
@@ -278,50 +381,39 @@ export default function Footer() {
                 href={localizedHref("/demo/study-agent")}
                 className="block hover:text-white transition"
               >
-                {demoLabel}
+                {t.studyDemo}
               </Link>
 
               <Link
                 href={localizedHref("/demo/finance-agent")}
                 className="block hover:text-white transition"
               >
-                {financeDemoLabel}
+                {t.financeDemo}
               </Link>
-
 
               <Link
                 href={localizedHref("/demo/legal-agent")}
                 className="block hover:text-white transition"
               >
-                {legalDemoLabel}
+                {t.legalDemo}
               </Link>
 
               <Link
                 href={localizedHref("/demo/business-agent")}
                 className="block hover:text-white transition"
               >
-                {businessDemoLabel}
+                {t.businessDemo}
               </Link>
 
-
-              <Link
-                href="/developers"
-                className="block hover:text-white transition"
-              >
+              <Link href="/developers" className="block hover:text-white transition">
                 {t.developers}
               </Link>
 
-              <Link
-                href="/api"
-                className="block hover:text-white transition"
-              >
+              <Link href="/api" className="block hover:text-white transition">
                 API
               </Link>
 
-              <Link
-                href="/docs"
-                className="block hover:text-white transition"
-              >
+              <Link href="/docs" className="block hover:text-white transition">
                 {t.docs}
               </Link>
 
@@ -349,11 +441,11 @@ export default function Footer() {
               </Link>
 
               <Link href="/study" className="block hover:text-white transition">
-                {t.tryStudyAgent || "Try Study Agent"}
+                {t.tryStudyAgent}
               </Link>
 
               <Link href="/finance" className="block hover:text-white transition">
-                {t.tryFinanceAgent || "Try Finance Coach"}
+                {t.tryFinanceAgent}
               </Link>
 
               <Link href="/login" className="block hover:text-white transition">
@@ -381,7 +473,7 @@ export default function Footer() {
               href={localizedHref("/about")}
               className="mt-5 inline-block text-sm font-semibold text-blue-400 hover:text-blue-300 transition"
             >
-              {aboutPageLabel}
+              {t.aboutPage}
             </Link>
           </div>
         </div>
