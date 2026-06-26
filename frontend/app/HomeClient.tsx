@@ -264,7 +264,7 @@ export default function HomeClient({
           <WhyRunexa language={language} />
           <PrivacySection t={t} language={language} />
           <AgentsSection t={t} language={language} />
-          <FeedbackSection language={language} />
+          <ResultTestimonialsSection language={language} />
           <PricingSection language={language} />
           <FAQSection t={t} />
           <CTASection t={t} />
@@ -331,6 +331,138 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
       })}
     </div>
   </section>;
+}
+
+
+function ResultTestimonialsSection({ language }: { language: Locale }) {
+  const testimonials = {
+    en: {
+      eyebrow: "User outcomes",
+      title: "Real use cases. Concrete results.",
+      desc: "Runexa is designed to help users understand documents faster and make clearer decisions.",
+      items: [
+        {
+          role: "Freelancer",
+          useCase: "Contract review",
+          quote:
+            "I uploaded a freelance contract and Runexa highlighted 3 clauses I had completely missed, including payment terms and ownership risks.",
+          result: "3 risky clauses detected",
+        },
+        {
+          role: "Personal finance user",
+          useCase: "Bank statement analysis",
+          quote:
+            "Runexa helped me understand where my money was going and identified recurring expenses I had not noticed.",
+          result: "Subscriptions and savings opportunities found",
+        },
+        {
+          role: "Student",
+          useCase: "Study preparation",
+          quote:
+            "I uploaded a lesson PDF and received a summary, quiz, flashcards, and a revision plan instead of starting from a blank page.",
+          result: "Complete study plan generated",
+        },
+      ],
+    },
+    fr: {
+      eyebrow: "Résultats utilisateurs",
+      title: "Des cas d’usage réels. Des résultats concrets.",
+      desc:
+        "Runexa aide les utilisateurs à comprendre leurs documents plus vite et à prendre des décisions plus claires.",
+      items: [
+        {
+          role: "Freelance",
+          useCase: "Analyse de contrat",
+          quote:
+            "J’ai importé un contrat freelance et Runexa a mis en évidence 3 clauses que j’avais complètement manquées, notamment sur le paiement et les droits de propriété.",
+          result: "3 clauses à risque détectées",
+        },
+        {
+          role: "Utilisateur finance",
+          useCase: "Analyse de relevé bancaire",
+          quote:
+            "Runexa m’a aidé à comprendre où partait mon argent et a identifié des dépenses récurrentes que je n’avais pas remarquées.",
+          result: "Abonnements et économies détectés",
+        },
+        {
+          role: "Étudiant",
+          useCase: "Préparation de cours",
+          quote:
+            "J’ai importé un PDF de cours et j’ai reçu un résumé, un quiz, des flashcards et un plan de révision au lieu de partir de zéro.",
+          result: "Plan de révision complet généré",
+        },
+      ],
+    },
+    ar: {
+      eyebrow: "نتائج المستخدمين",
+      title: "حالات استخدام واقعية. نتائج ملموسة.",
+      desc:
+        "صُممت Runexa لمساعدة المستخدمين على فهم مستنداتهم بشكل أسرع واتخاذ قرارات أوضح.",
+      items: [
+        {
+          role: "مستقل",
+          useCase: "مراجعة عقد",
+          quote:
+            "رفعت عقد عمل حر، وساعدتني Runexa على اكتشاف 3 بنود مهمة لم أنتبه لها، خاصة ما يتعلق بالدفع وحقوق الملكية.",
+          result: "تم اكتشاف 3 بنود عالية الأهمية",
+        },
+        {
+          role: "مستخدم مالي",
+          useCase: "تحليل كشف بنكي",
+          quote:
+            "ساعدتني Runexa على فهم أين تذهب أموالي، واكتشفت مصاريف متكررة لم أكن ألاحظها.",
+          result: "اكتشاف اشتراكات وفرص توفير",
+        },
+        {
+          role: "طالب",
+          useCase: "التحضير للدراسة",
+          quote:
+            "رفعت ملف PDF خاصاً بالدرس، وحصلت على ملخص واختبار وبطاقات مراجعة وخطة دراسة بدل أن أبدأ من الصفر.",
+          result: "إنشاء خطة دراسة كاملة",
+        },
+      ],
+    },
+  };
+
+  const t = testimonials[language] || testimonials.en;
+
+  return (
+    <section className="rounded-3xl border border-slate-200 bg-white p-8 text-left shadow-sm md:p-12">
+      <p className="text-sm font-semibold text-blue-600">{t.eyebrow}</p>
+
+      <h2 className="mt-3 text-3xl font-bold text-slate-900">{t.title}</h2>
+
+      <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 md:text-base">
+        {t.desc}
+      </p>
+
+      <div className="mt-8 grid gap-5 md:grid-cols-3">
+        {t.items.map((item) => (
+          <div
+            key={item.useCase}
+            className="rounded-3xl border border-slate-200 bg-slate-50 p-6"
+          >
+            <p className="text-xs font-bold uppercase tracking-wide text-blue-600">
+              {item.useCase}
+            </p>
+
+            <blockquote className="mt-4 text-sm leading-6 text-slate-700">
+              “{item.quote}”
+            </blockquote>
+
+            <div className="mt-5 rounded-2xl bg-white p-4">
+              <p className="text-xs font-semibold text-slate-500">
+                {item.role}
+              </p>
+              <p className="mt-1 text-sm font-bold text-slate-900">
+                {item.result}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 }
 
 function FeedbackSection({ language }: { language: Locale }) {
