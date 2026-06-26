@@ -251,7 +251,7 @@ export default function HomeClient({
                 <p className="rounded-2xl border border-blue-100 bg-white/85 px-5 py-4 text-sm font-semibold text-slate-700 shadow-sm">{t.trustLine}</p>
               </div>
 
-              <div className="relative min-h-[420px]">
+              <div className="relative min-h-[420px] overflow-hidden sm:overflow-visible">
                 <div className="absolute left-1/2 top-8 h-[380px] w-[280px] -translate-x-1/2 rounded-[34px] border border-slate-200 bg-white p-7 shadow-[0_25px_80px_rgba(37,99,235,0.24)]">
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-700"><Sparkles className="h-6 w-6" /></div>
                   <p className="mt-8 text-xl font-black text-slate-950">{language === "fr" ? "Votre document" : language === "ar" ? "مستندك" : "Your Document"}</p>
@@ -446,9 +446,11 @@ function WhyRunexa({ language }: { language: Locale }) {
     <p className="text-sm font-semibold text-blue-600">{language === "fr" ? "Pourquoi Runexa plutôt qu’une IA généraliste ?" : language === "ar" ? "لماذا Runexa بدلاً من الذكاء الاصطناعي العام؟" : "Why Runexa Instead of Generic AI?"}</p>
     <h2 className="mt-3 text-2xl font-bold text-slate-900">{language === "fr" ? "La plupart des IA génèrent des réponses. Runexa automatise des workflows spécialisés." : language === "ar" ? "معظم أدوات الذكاء الاصطناعي تولد إجابات. أما Runexa فينفّذ سير عمل ذكياً ومتخصصاً." : "Most AI tools generate answers. Runexa executes specialized AI workflows."}</h2>
     <p className="mt-3 text-sm leading-6 text-slate-600">{language === "fr" ? "Importez un document. Recevez une analyse structurée. Prenez une décision." : language === "ar" ? "ارفع مستنداً. احصل على تحليل منظم. اتخذ قراراً أفضل." : "Upload a document. Receive structured analysis. Take action."}</p>
-    <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200">
-      <div className="grid grid-cols-3 bg-slate-50 text-xs font-bold uppercase tracking-wide text-slate-500"><div className="p-3">{language === "fr" ? "Concurrent" : language === "ar" ? "المنافس" : "Competitor"}</div><div className="p-3">{language === "fr" ? "Approche" : language === "ar" ? "النهج" : "Their Approach"}</div><div className="p-3">{language === "fr" ? "Avantage Runexa" : language === "ar" ? "ميزة Runexa" : "Runexa Advantage"}</div></div>
-      {rows.map((row) => <div key={row[0]} className="grid grid-cols-3 border-t border-slate-200 text-sm text-slate-700"><div className="p-3 font-semibold text-slate-900">{row[0]}</div><div className="p-3">{row[1]}</div><div className="p-3 font-medium text-blue-700">{row[2]}</div></div>)}
+    <div className="mt-6 overflow-x-auto rounded-2xl border border-slate-200">
+      <div className="min-w-[680px] md:min-w-0">
+        <div className="grid grid-cols-3 bg-slate-50 text-xs font-bold uppercase tracking-wide text-slate-500"><div className="p-3">{language === "fr" ? "Concurrent" : language === "ar" ? "المنافس" : "Competitor"}</div><div className="p-3">{language === "fr" ? "Approche" : language === "ar" ? "النهج" : "Their Approach"}</div><div className="p-3">{language === "fr" ? "Avantage Runexa" : language === "ar" ? "ميزة Runexa" : "Runexa Advantage"}</div></div>
+        {rows.map((row) => <div key={row[0]} className="grid grid-cols-3 border-t border-slate-200 text-sm text-slate-700"><div className="p-3 font-semibold text-slate-900">{row[0]}</div><div className="p-3">{row[1]}</div><div className="p-3 font-medium text-blue-700">{row[2]}</div></div>)}
+      </div>
     </div>
   </section>;
 }
