@@ -90,7 +90,7 @@ export const metadata: Metadata = {
 
     images: [
       {
-        url: "https://runexa.ai/og-image.png",
+        url: "https://runexa.ai/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Runexa AI Workspace",
@@ -112,7 +112,7 @@ export const metadata: Metadata = {
     description:
       "AI workspace platform for legal analysis, finance intelligence, study assistance, and business workflows.",
 
-    images: ["https://runexa.ai/og-image.png"],
+    images: ["https://runexa.ai/og-image.jpg"],
   },
 
   robots: {
