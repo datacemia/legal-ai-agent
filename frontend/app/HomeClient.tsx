@@ -15,6 +15,17 @@ import {
   Globe,
   MessageSquareQuote,
   CheckCircle2,
+  FileText,
+  FileSpreadsheet,
+  AlertTriangle,
+  BadgeCheck,
+  FileCheck,
+  TrendingUp,
+  CreditCard,
+  PiggyBank,
+  ClipboardList,
+  CalendarCheck,
+  Activity,
 } from "lucide-react";
 
 type Locale = "en" | "fr" | "ar";
@@ -453,6 +464,144 @@ function PrivacySection({ t, language }: { t: any; language: Locale }) {
 }
 
 function AgentsSection({ t, language }: { t: any; language: Locale }) {
+  const agentPreviews: Record<
+    Locale,
+    Record<
+      AgentKey,
+      {
+        file: string;
+        rows: Array<{ icon: any; label: string; value?: string }>;
+        cta: string;
+      }
+    >
+  > = {
+    en: {
+      legal: {
+        file: "Service_Contract.pdf",
+        rows: [
+          { icon: ShieldCheck, label: "Risk score", value: "82/100" },
+          { icon: AlertTriangle, label: "3 risky clauses" },
+          { icon: FileCheck, label: "Obligations extracted" },
+          { icon: BadgeCheck, label: "Negotiation priorities" },
+        ],
+        cta: "Open Legal Agent",
+      },
+      finance: {
+        file: "BankStatement.pdf",
+        rows: [
+          { icon: TrendingUp, label: "Cashflow", value: "+$2,430" },
+          { icon: CreditCard, label: "Subscriptions", value: "5 detected" },
+          { icon: PiggyBank, label: "Savings opportunities", value: "$310/month" },
+        ],
+        cta: "Open Finance Intelligence",
+      },
+      study: {
+        file: "Biology.pdf",
+        rows: [
+          { icon: FileText, label: "Summary" },
+          { icon: ClipboardList, label: "Flashcards" },
+          { icon: CheckCircle2, label: "Quiz" },
+          { icon: CalendarCheck, label: "Study plan" },
+        ],
+        cta: "Open Study Workspace",
+      },
+      business: {
+        file: "Sales_Report.xlsx",
+        rows: [
+          { icon: TrendingUp, label: "Revenue", value: "+12%" },
+          { icon: Activity, label: "Top KPI detected" },
+          { icon: BarChart3, label: "Forecast generated" },
+          { icon: FileSpreadsheet, label: "Export-ready report" },
+        ],
+        cta: "Open Business Intelligence",
+      },
+    },
+    fr: {
+      legal: {
+        file: "Contrat_Service.pdf",
+        rows: [
+          { icon: ShieldCheck, label: "Score de risque", value: "82/100" },
+          { icon: AlertTriangle, label: "3 clauses à risque" },
+          { icon: FileCheck, label: "Obligations extraites" },
+          { icon: BadgeCheck, label: "Priorités de négociation" },
+        ],
+        cta: "Ouvrir l’agent juridique",
+      },
+      finance: {
+        file: "Releve_Bancaire.pdf",
+        rows: [
+          { icon: TrendingUp, label: "Cashflow", value: "+2 430 $" },
+          { icon: CreditCard, label: "Abonnements", value: "5 détectés" },
+          { icon: PiggyBank, label: "Économies possibles", value: "310 $/mois" },
+        ],
+        cta: "Ouvrir Finance Intelligence",
+      },
+      study: {
+        file: "Biologie.pdf",
+        rows: [
+          { icon: FileText, label: "Résumé" },
+          { icon: ClipboardList, label: "Flashcards" },
+          { icon: CheckCircle2, label: "Quiz" },
+          { icon: CalendarCheck, label: "Plan de révision" },
+        ],
+        cta: "Ouvrir Study Workspace",
+      },
+      business: {
+        file: "Rapport_Ventes.xlsx",
+        rows: [
+          { icon: TrendingUp, label: "Revenus", value: "+12 %" },
+          { icon: Activity, label: "KPI principal détecté" },
+          { icon: BarChart3, label: "Prévision générée" },
+          { icon: FileSpreadsheet, label: "Rapport exportable" },
+        ],
+        cta: "Ouvrir Business Intelligence",
+      },
+    },
+    ar: {
+      legal: {
+        file: "عقد_خدمة.pdf",
+        rows: [
+          { icon: ShieldCheck, label: "تقييم المخاطر", value: "82/100" },
+          { icon: AlertTriangle, label: "3 بنود عالية المخاطر" },
+          { icon: FileCheck, label: "استخراج الالتزامات" },
+          { icon: BadgeCheck, label: "أولويات التفاوض" },
+        ],
+        cta: "فتح الوكيل القانوني",
+      },
+      finance: {
+        file: "كشف_حساب.pdf",
+        rows: [
+          { icon: TrendingUp, label: "التدفق النقدي", value: "+2,430 $" },
+          { icon: CreditCard, label: "الاشتراكات", value: "5 مكتشفة" },
+          { icon: PiggyBank, label: "فرص التوفير", value: "310 $/شهرياً" },
+        ],
+        cta: "فتح Finance Intelligence",
+      },
+      study: {
+        file: "Biology.pdf",
+        rows: [
+          { icon: FileText, label: "ملخص" },
+          { icon: ClipboardList, label: "بطاقات مراجعة" },
+          { icon: CheckCircle2, label: "اختبار" },
+          { icon: CalendarCheck, label: "خطة دراسة" },
+        ],
+        cta: "فتح Study Workspace",
+      },
+      business: {
+        file: "Sales_Report.xlsx",
+        rows: [
+          { icon: TrendingUp, label: "الإيرادات", value: "+12%" },
+          { icon: Activity, label: "اكتشاف مؤشر أداء رئيسي" },
+          { icon: BarChart3, label: "تم إنشاء توقعات" },
+          { icon: FileSpreadsheet, label: "تقرير قابل للتصدير" },
+        ],
+        cta: "فتح Business Intelligence",
+      },
+    },
+  };
+
+  const previews = agentPreviews[language] || agentPreviews.en;
+
   return <section id="agents" className="scroll-mt-24 rounded-[32px] border border-slate-200/80 bg-white/80 p-6 shadow-[0_20px_80px_rgba(15,23,42,0.08)] backdrop-blur-xl md:p-10">
     <div className="mb-8 flex justify-center"><div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-5 py-2 text-sm font-semibold text-blue-700"><Users className="h-4 w-4" />{language === "fr" ? "Agents IA spécialisés" : language === "ar" ? "وكلاء ذكاء اصطناعي متخصصون" : "Specialized AI Agents"}</div></div>
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -460,11 +609,54 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
         const style = agentStyles[agent[3]];
         const Icon = style.icon;
         const dark = agent[3] === "finance";
+        const preview = previews[agent[3]];
+
         return <Link key={agent[0]} href={agent[2]} className={`group relative overflow-hidden rounded-3xl border p-5 shadow-lg transition-all duration-200 ease-out hover:-translate-y-1.5 hover:shadow-2xl active:translate-y-0 active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${style.card}`}>
           <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${style.iconBox}`}><Icon className={`h-6 w-6 ${style.iconColor}`} /></div>
+
           <h3 className={`mt-4 text-base font-bold ${dark ? "text-white" : "text-slate-900"}`}>{agent[0]}</h3>
-          <p className={`mt-2 text-sm leading-6 ${dark ? "text-emerald-100" : "text-slate-500"}`}>{agent[1]}</p>
-          <div className={`mt-5 inline-flex rounded-full px-3 py-1 text-xs font-medium ${style.badge}`}>{t.available}</div>
+
+          <div className={`mt-4 rounded-2xl border p-4 ${dark ? "border-white/15 bg-white/10" : "border-slate-200 bg-slate-50"}`}>
+            <div className="flex items-center gap-2">
+              {agent[3] === "business" ? (
+                <FileSpreadsheet className={`h-4 w-4 ${dark ? "text-emerald-50" : "text-slate-500"}`} />
+              ) : (
+                <FileText className={`h-4 w-4 ${dark ? "text-emerald-50" : "text-slate-500"}`} />
+              )}
+              <p className={`truncate text-xs font-bold ${dark ? "text-emerald-50" : "text-slate-700"}`}>
+                {preview.file}
+              </p>
+            </div>
+
+            <div className={`my-3 h-px ${dark ? "bg-white/15" : "bg-slate-200"}`} />
+
+            <div className="space-y-2.5">
+              {preview.rows.map((row) => {
+                const RowIcon = row.icon;
+
+                return (
+                  <div key={row.label} className="flex items-center justify-between gap-3">
+                    <div className="flex min-w-0 items-center gap-2">
+                      <RowIcon className={`h-4 w-4 shrink-0 ${dark ? "text-emerald-50" : "text-blue-600"}`} />
+                      <span className={`truncate text-xs font-semibold ${dark ? "text-emerald-50" : "text-slate-700"}`}>
+                        {row.label}
+                      </span>
+                    </div>
+
+                    {row.value && (
+                      <span className={`shrink-0 text-xs font-black ${dark ? "text-white" : "text-slate-900"}`}>
+                        {row.value}
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className={`mt-5 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold ${style.badge}`}>
+            {preview.cta} <span>→</span>
+          </div>
         </Link>;
       })}
     </div>
@@ -482,7 +674,6 @@ function AgentsSection({ t, language }: { t: any; language: Locale }) {
     </div>
   </section>;
 }
-
 
 function ResultTestimonialsSection({ language }: { language: Locale }) {
   const testimonials = {
