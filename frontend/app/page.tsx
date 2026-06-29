@@ -78,43 +78,7 @@ export const metadata: Metadata = {
     },
   },
 
-  openGraph: {
-    title: "Runexa AI Workspace",
-
-    description:
-       "Runexa is an AI workspace with specialized agents for legal analysis, financial intelligence, study workflows, document analysis, and business decision support.",
-
-    url: siteUrl,
-
-    siteName: "Runexa Systems LLC",
-
-    images: [
-      {
-        url: "https://runexa.ai/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Runexa AI Workspace",
-      },
-    ],
-
-    locale: "en_US",
-
-    alternateLocale: ["fr_FR", "ar_AR"],
-
-    type: "website",
-  },
-
-  twitter: {
-    card: "summary_large_image",
-
-    title: "Runexa AI Workspace",
-
-    description:
-      "AI workspace platform for legal analysis, finance intelligence, study assistance, and business workflows.",
-
-    images: ["https://runexa.ai/og-image.jpg"],
-  },
-
+  
   robots: {
     index: true,
     follow: true,
