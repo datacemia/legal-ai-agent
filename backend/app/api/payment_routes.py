@@ -87,10 +87,7 @@ def _require_stripe_config():
         )
 
 
-def _get_or_create_stripe_customer(user: User, db: Session) -> str:
-    if user.stripe_customer_id:
-        return user.stripe_customer_id
-
+def _create_and_save_stripe_customer(user: User, db: Session) -> str:
     customer = stripe.Customer.create(
         email=user.email,
         metadata={
@@ -103,6 +100,20 @@ def _get_or_create_stripe_customer(user: User, db: Session) -> str:
     db.refresh(user)
 
     return customer.id
+
+
+def _get_or_create_stripe_customer(user: User, db: Session) -> str:
+    if not user.stripe_customer_id:
+        return _create_and_save_stripe_customer(user, db)
+
+    try:
+        stripe.Customer.retrieve(user.stripe_customer_id)
+        return user.stripe_customer_id
+    except stripe.error.InvalidRequestError as exc:
+        if "No such customer" not in str(exc):
+            raise
+
+        return _create_and_save_stripe_customer(user, db)
 
 
 def _create_price_data(
