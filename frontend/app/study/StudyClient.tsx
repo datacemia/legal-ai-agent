@@ -202,9 +202,15 @@ const labels: any = {
       "Personalized revision plan",
     ],
     audienceTitle: "Who uses Runexa Study Workspace?",
+    audienceLead: [
+      "Any document. Any level.\nAvailable in English, French and Arabic.",
+      "Primary school lesson or PhD research paper.",
+      "The AI adapts to you.",
+    ],
     audienceItems: [
+      "Students at every level, from primary school to university, in any subject, in English, French or Arabic",
       "Professional certification candidates (CPA, PMP, CFA, BAR, NCLEX, etc.)",
-      "Vocational training students in logistics, customs, accounting, and healthcare",
+      "Vocational training students in any field or specialization",
       "Researchers and academics analyzing papers and literature reviews",
       "Enterprise training teams for onboarding, compliance, and technical training",
       "Career transition professionals learning new domains quickly",
@@ -349,12 +355,18 @@ const labels: any = {
       "Plan de révision personnalisé",
     ],
     audienceTitle: "Qui utilise Runexa Study Workspace ?",
+    audienceLead: [
+      "Tout document. Tout niveau.\nDisponible en anglais, français et arabe.",
+      "Leçon de primaire ou article de doctorat.",
+      "L’IA s’adapte à vous.",
+    ],
     audienceItems: [
+      "Étudiants de tous niveaux, du primaire à l’université, dans toutes les matières, en anglais, français ou arabe",
       "Candidats à des certifications professionnelles (CPA, PMP, CFA, BAR, NCLEX, etc.)",
-      "Étudiants en formation professionnelle : logistique, douane, comptabilité et santé",
-      "Chercheurs et académiciens pour analyser des papers et revues de littérature",
-      "Équipes de formation en entreprise : onboarding, compliance et formation technique",
-      "Professionnels en reconversion qui doivent apprendre rapidement un nouveau domaine",
+      "Apprenants en formation professionnelle dans tous les domaines et spécialités",
+      "Chercheurs et académiciens analysant des articles et revues de littérature",
+      "Équipes de formation en entreprise pour l’onboarding, la conformité et la formation technique",
+      "Professionnels en reconversion apprenant rapidement de nouveaux domaines",
     ],
     comparisonTitle: "Runexa Study vs NotebookLM",
     comparisonRows: [
@@ -495,12 +507,18 @@ const labels: any = {
       "خطة مراجعة مخصصة",
     ],
     audienceTitle: "من يستخدم مساحة Runexa Study؟",
+    audienceLead: [
+      "أي مستند. أي مستوى.\nمتاح بالإنجليزية والفرنسية والعربية.",
+      "درس ابتدائي أو ورقة بحثية لمرحلة الدكتوراه.",
+      "الذكاء الاصطناعي يتكيف معك.",
+    ],
     audienceItems: [
-      "مرشحو الشهادات المهنية مثل CPA وPMP وCFA وBAR وNCLEX",
-      "طلاب التكوين المهني في اللوجستيك والجمارك والمحاسبة والصحة",
-      "الباحثون والأكاديميون لتحليل الأوراق العلمية ومراجعات الأدبيات",
-      "فرق التدريب في الشركات للتأهيل والامتثال والتدريب التقني",
-      "المهنيون في إعادة التوجيه لتعلم مجالات جديدة بسرعة",
+      "الطلاب من جميع المستويات، من الابتدائي إلى الجامعة، في أي مادة، بالإنجليزية والفرنسية والعربية",
+      "المرشحون للحصول على شهادات مهنية (CPA، PMP، CFA، BAR، NCLEX، إلخ)",
+      "طلاب التكوين المهني في جميع التخصصات والمجالات",
+      "الباحثون والأكاديميون الذين يحللون الأوراق البحثية ومراجعات الأدبيات",
+      "فرق التدريب في المؤسسات للتأهيل والامتثال والتدريب التقني",
+      "المحترفون في مرحلة التحول المهني الذين يتعلمون مجالات جديدة بسرعة",
     ],
     comparisonTitle: "Runexa Study مقارنة مع NotebookLM",
     comparisonRows: [
@@ -1492,6 +1510,7 @@ export default function StudyClient({
   const t = labels[language] || labels.en;
 
   const outputHighlights = Array.isArray(t.outputHighlights) ? t.outputHighlights : [];
+  const audienceLead = Array.isArray(t.audienceLead) ? t.audienceLead : [];
   const audienceItems = Array.isArray(t.audienceItems) ? t.audienceItems : [];
   const comparisonRows = Array.isArray(t.comparisonRows) ? t.comparisonRows : [];
 
@@ -2568,6 +2587,14 @@ export default function StudyClient({
             <h2 className="text-2xl font-bold text-slate-950">
               {t.audienceTitle}
             </h2>
+
+            {audienceLead.length > 0 && (
+              <div className="mt-4 rounded-2xl border border-blue-100 bg-blue-50 px-4 py-3 text-sm font-semibold leading-6 text-blue-900">
+                {audienceLead.map((line: string) => (
+                  <p key={line}>{line}</p>
+                ))}
+              </div>
+            )}
 
             <div className="mt-5 space-y-3">
               {audienceItems.map((item: string) => (
