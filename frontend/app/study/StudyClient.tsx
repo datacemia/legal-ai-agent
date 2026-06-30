@@ -129,7 +129,7 @@ const labels: any = {
       "After each quiz, the system identifies your weak points and uses them to personalize future learning sessions.",
     disclaimer:
       "Runexa Study Agent is designed to support learning and revision. Always verify important academic information with your teacher, institution, or official course materials.",
-    analyze: "Turn your document into a complete study kit — $1",
+    analyze: "Turn your document into a complete study kit",
     buyCredits: "Buy credits",
     chooseLevel: "Choose your level",
     selectLevel: "Select education level",
@@ -282,7 +282,7 @@ const labels: any = {
       "Après chaque quiz, le système identifie vos points faibles et les utilise pour personnaliser vos prochaines sessions d’apprentissage.",
     disclaimer:
       "Runexa Study Agent est conçu pour accompagner l’apprentissage et la révision. Vérifiez toujours les informations académiques importantes avec votre enseignant, votre établissement ou vos supports officiels.",
-    analyze: "Transformez votre document en kit d’étude complet — 1 $",
+    analyze: "Transformez votre document en kit d’étude complet",
     buyCredits: "Acheter des crédits",
     chooseLevel: "Choisissez votre niveau",
     selectLevel: "Sélectionnez le niveau d’étude",
@@ -435,7 +435,7 @@ const labels: any = {
       "بعد كل اختبار، يحدد النظام نقاط ضعفك ويستخدمها لتخصيص جلسات التعلم القادمة.",
     disclaimer:
       "تم تصميم Runexa Study Agent لدعم التعلم والمراجعة. تحقق دائماً من المعلومات الأكاديمية المهمة مع أستاذك أو مؤسستك أو المراجع الرسمية.",
-    analyze: "حوّل مستندك إلى مجموعة دراسية كاملة — دولار واحد",
+    analyze: "حوّل مستندك إلى مجموعة دراسية كاملة",
     buyCredits: "شراء رصيد",
     chooseLevel: "اختر مستواك",
     selectLevel: "اختر المستوى التعليمي",
