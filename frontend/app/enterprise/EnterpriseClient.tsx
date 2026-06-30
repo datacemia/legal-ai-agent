@@ -67,6 +67,37 @@ const labels: any = {
 
     ctaButton: "Get Started",
 
+    education: {
+      eyebrow: "Runexa for Education",
+      title: "AI Solutions for Education and Training",
+      description:
+        "Deploy secure AI workspaces for schools, universities, training centers and educational organizations with centralized administration, user management and dedicated credits.",
+      primaryCardTitle: "Study Workspace Agent",
+      primaryCardDesc:
+        "Transforms any course document, research paper or training material into a complete learning environment: summary, audio, mind map, quiz, flashcards and personalized revision plan.",
+      secondaryCardTitle: "Custom AI Solution",
+      secondaryCardDesc:
+        "Design education-specific AI workflows for your institution, teams, departments, programs and internal training operations.",
+      useCasesTitle: "Education use cases",
+      useCases: [
+        "Private schools deploying AI for teachers and students",
+        "Vocational training centers in any field",
+        "Universities and higher education institutions",
+        "Corporate training teams and onboarding programs",
+        "Organizations offering professional certifications",
+      ],
+      whyTitle: "Why Runexa for Education",
+      whyItems: [
+        "Each institution has its own secure administration space",
+        "User management, roles and permissions",
+        "Bulk credit purchase for the entire organization",
+        "Complete data isolation between workspaces",
+        "No client content used to train public AI models",
+        "Files deleted after analysis",
+        "Available in English, French and Arabic",
+      ],
+    },
+
     categories: [
       {
         title: "Legal AI Solutions",
@@ -273,6 +304,37 @@ const labels: any = {
 
     ctaButton: "Commencer",
 
+    education: {
+      eyebrow: "Runexa pour l’Éducation",
+      title: "Solutions IA pour l’Éducation et la Formation",
+      description:
+        "Déployez des espaces IA sécurisés pour les écoles, universités, centres de formation et organisations éducatives avec administration centralisée, gestion des utilisateurs et crédits dédiés.",
+      primaryCardTitle: "Study Workspace Agent",
+      primaryCardDesc:
+        "Transforme tout document de cours, article de recherche ou support pédagogique en environnement d’apprentissage complet : résumé, audio, carte mentale, quiz, flashcards et plan de révision personnalisé.",
+      secondaryCardTitle: "Solution IA sur mesure",
+      secondaryCardDesc:
+        "Concevez des workflows IA adaptés à votre établissement, vos équipes, vos départements, vos programmes et vos opérations de formation internes.",
+      useCasesTitle: "Cas d’usage éducatifs",
+      useCases: [
+        "Écoles privées déployant l’IA pour leurs enseignants et élèves",
+        "Centres de formation professionnelle dans tous les domaines",
+        "Universités et établissements d’enseignement supérieur",
+        "Équipes de formation en entreprise et onboarding",
+        "Organisations proposant des certifications professionnelles",
+      ],
+      whyTitle: "Pourquoi Runexa pour l’Éducation",
+      whyItems: [
+        "Chaque établissement dispose de son propre espace d’administration sécurisé",
+        "Gestion des utilisateurs, rôles et permissions",
+        "Achat de crédits en volume pour toute l’organisation",
+        "Isolation complète des données entre espaces",
+        "Aucun contenu client utilisé pour entraîner des modèles IA publics",
+        "Fichiers supprimés après analyse",
+        "Disponible en français, anglais et arabe",
+      ],
+    },
+
     categories: [
       {
         title: "Solutions IA juridiques",
@@ -475,6 +537,37 @@ const labels: any = {
 
     ctaButton: "ابدأوا اليوم",
 
+    education: {
+      eyebrow: "Runexa للتعليم",
+      title: "حلول الذكاء الاصطناعي للتعليم والتدريب",
+      description:
+        "انشر مساحات ذكاء اصطناعي آمنة للمدارس والجامعات ومراكز التدريب والمؤسسات التعليمية مع إدارة مركزية، وإدارة للمستخدمين، وأرصدة مخصصة.",
+      primaryCardTitle: "وكيل مساحة الدراسة",
+      primaryCardDesc:
+        "يحوّل أي مستند دراسي أو ورقة بحثية أو مادة تدريبية إلى بيئة تعلم متكاملة: ملخص، صوت، خريطة ذهنية، اختبار، بطاقات مراجعة وخطة مراجعة مخصصة.",
+      secondaryCardTitle: "حل ذكاء اصطناعي مخصص",
+      secondaryCardDesc:
+        "صمّم سير عمل ذكية مخصصة لمؤسستك التعليمية وفرقك وأقسامك وبرامجك وعمليات التدريب الداخلية.",
+      useCasesTitle: "حالات الاستخدام التعليمية",
+      useCases: [
+        "المدارس الخاصة التي تنشر الذكاء الاصطناعي للمعلمين والطلاب",
+        "مراكز التكوين المهني في جميع المجالات",
+        "الجامعات ومؤسسات التعليم العالي",
+        "فرق التدريب في المؤسسات وبرامج الإدماج",
+        "المنظمات التي تقدم شهادات مهنية",
+      ],
+      whyTitle: "لماذا Runexa للتعليم",
+      whyItems: [
+        "لكل مؤسسة فضاء إداري آمن خاص بها",
+        "إدارة المستخدمين والأدوار والصلاحيات",
+        "شراء الأرصدة بالجملة للمؤسسة بأكملها",
+        "عزل كامل للبيانات بين الفضاءات",
+        "لا يُستخدم أي محتوى للعملاء لتدريب نماذج الذكاء الاصطناعي العامة",
+        "حذف الملفات بعد التحليل",
+        "متاح بالإنجليزية والفرنسية والعربية",
+      ],
+    },
+
     categories: [
       {
         title: "حلول الذكاء الاصطناعي القانونية",
@@ -618,6 +711,7 @@ export default function EnterpriseClient() {
   const [language, setLanguage] =
     useState<"en" | "fr" | "ar">("en");
   const t = labels[language] || labels.en;
+  const education = t.education || labels.en.education;
 
   useEffect(() => {
     const saved = localStorage.getItem("locale");
@@ -730,6 +824,87 @@ export default function EnterpriseClient() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* EDUCATION */}
+      <section className="max-w-6xl mx-auto mt-20 overflow-hidden rounded-[2rem] border border-blue-100 bg-white shadow-sm">
+        <div className="grid lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="bg-gradient-to-br from-blue-700 via-indigo-700 to-slate-950 p-8 text-white md:p-10">
+            <span className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-blue-100">
+              {education.eyebrow}
+            </span>
+
+            <h2 className="mt-6 text-3xl font-bold leading-tight md:text-4xl">
+              {education.title}
+            </h2>
+
+            <p className="mt-5 text-sm leading-7 text-blue-100 md:text-base">
+              {education.description}
+            </p>
+
+            <div className="mt-8 grid gap-4">
+              <div className="rounded-3xl border border-white/15 bg-white/10 p-5 backdrop-blur">
+                <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-xl text-blue-700 shadow-sm">
+                  ◉
+                </div>
+                <h3 className="text-lg font-semibold">
+                  {education.primaryCardTitle}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-blue-100">
+                  {education.primaryCardDesc}
+                </p>
+              </div>
+
+              <div className="rounded-3xl border border-white/15 bg-white/10 p-5 backdrop-blur">
+                <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-xl text-blue-700 shadow-sm">
+                  ✦
+                </div>
+                <h3 className="text-lg font-semibold">
+                  {education.secondaryCardTitle}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-blue-100">
+                  {education.secondaryCardDesc}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-8 md:p-10">
+            <div className="grid gap-8 lg:grid-cols-2">
+              <div>
+                <h3 className="text-lg font-bold text-slate-900">
+                  {education.useCasesTitle}
+                </h3>
+                <div className="mt-5 space-y-3">
+                  {education.useCases.map((item: string) => (
+                    <div
+                      key={item}
+                      className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 text-slate-700"
+                    >
+                      <span className="font-semibold text-blue-700">✔</span> {item}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-lg font-bold text-slate-900">
+                  {education.whyTitle}
+                </h3>
+                <div className="mt-5 flex flex-wrap gap-3">
+                  {education.whyItems.map((item: string) => (
+                    <span
+                      key={item}
+                      className="rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-sm leading-6 text-blue-800"
+                    >
+                      ✔ {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
