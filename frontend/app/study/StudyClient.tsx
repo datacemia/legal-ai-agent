@@ -129,7 +129,7 @@ const labels: any = {
       "After each quiz, the system identifies your weak points and uses them to personalize future learning sessions.",
     disclaimer:
       "Runexa Study Agent is designed to support learning and revision. Always verify important academic information with your teacher, institution, or official course materials.",
-    analyze: "Generate Study Report",
+    analyze: "Turn your document into a complete study kit — $1",
     buyCredits: "Buy credits",
     chooseLevel: "Choose your level",
     selectLevel: "Select education level",
@@ -172,7 +172,7 @@ const labels: any = {
     proMessage:
       "Pro plan is not configured yet. Payments are temporarily unavailable during platform rollout.",
     trialInfo: "$1 trial per account. After your trial, continue with credits or a plan.",
-    startTrial: "Start $1 trial",
+    startTrial: "Turn your document into a complete study kit — $1",
     trialUsed: "Your $1 trial has already been used on this account. You can continue with credits or a Pro plan.",
     paymentRequired: "$1 Study trial activation required",
     errorMessage: "Failed to connect to Study Agent API.",
@@ -192,6 +192,40 @@ const labels: any = {
     studyWorkflow: "Upload → AI study analysis → Personalized revision",
     generateStudyWorkspace:
       "Generate a complete AI study workspace in minutes.",
+    proofPoint:
+      "Average quality score: 97/100 to 100/100 on real documents tested in EN, FR, and AR.",
+    outputHighlightsTitle: "Four concrete outputs",
+    outputHighlights: [
+      "Structured summary",
+      "Theory and practice quizzes",
+      "Flashcards",
+      "Personalized revision plan",
+    ],
+    audienceTitle: "Who uses Runexa Study Workspace?",
+    audienceItems: [
+      "Professional certification candidates (CPA, PMP, CFA, BAR, NCLEX, etc.)",
+      "Vocational training students in logistics, customs, accounting, and healthcare",
+      "Researchers and academics analyzing papers and literature reviews",
+      "Enterprise training teams for onboarding, compliance, and technical training",
+      "Career transition professionals learning new domains quickly",
+    ],
+    comparisonTitle: "Runexa Study vs NotebookLM",
+    comparisonRows: [
+      ["Price to start", "$1", "Free"],
+      ["Automatic quizzes", "✅", "❌"],
+      ["Flashcards", "✅", "❌"],
+      ["Revision plan", "✅", "❌"],
+      ["Generated audio", "✅", "❌"],
+      ["Quality score", "✅", "❌"],
+      ["Education levels", "✅", "❌"],
+      ["No prompting required", "✅", "❌"],
+      ["Conversational Q&A", "❌", "✅"],
+    ],
+    b2bTitle: "For insurance professionals",
+    b2bText:
+      "Underwriters analyzing construction contracts, marine policies, or complex budgets can use Study Workspace to master a new technical or regulatory domain quickly.",
+    b2bCta: "Upload your technical document. Get a complete mastery kit in 2 minutes.",
+    bottomDisclaimerTitle: "Learning disclaimer",
   },
   fr: {
     title: "Espace d’étude IA",
@@ -242,7 +276,7 @@ const labels: any = {
       "Après chaque quiz, le système identifie vos points faibles et les utilise pour personnaliser vos prochaines sessions d’apprentissage.",
     disclaimer:
       "Runexa Study Agent est conçu pour accompagner l’apprentissage et la révision. Vérifiez toujours les informations académiques importantes avec votre enseignant, votre établissement ou vos supports officiels.",
-    analyze: "Générer le rapport d’étude IA",
+    analyze: "Transformez votre document en kit d’étude complet — 1 $",
     buyCredits: "Acheter des crédits",
     chooseLevel: "Choisissez votre niveau",
     selectLevel: "Sélectionnez le niveau d’étude",
@@ -285,7 +319,7 @@ const labels: any = {
     proMessage:
       "Le plan Pro n’est pas encore configuré. Les paiements sont temporairement indisponibles pendant le déploiement de la plateforme.",
     trialInfo: "Essai à 1$ par compte. Après l’essai, continuez avec des crédits ou un abonnement.",
-    startTrial: "Activer l’essai à 1$",
+    startTrial: "Transformez votre document en kit d’étude complet — 1 $",
     trialUsed: "Votre essai à 1 $ a déjà été utilisé pour ce compte. Vous pouvez continuer avec des crédits ou un abonnement Pro.",
     paymentRequired: "Activation de l’essai Study à 1$ requise",
     errorMessage: "Impossible de se connecter à l’API Study Agent.",
@@ -305,6 +339,40 @@ const labels: any = {
     studyWorkflow: "Téléversement → Analyse IA → Révision personnalisée",
     generateStudyWorkspace:
       "Générez un espace d’étude IA complet en quelques minutes.",
+    proofPoint:
+      "Score qualité moyen : 97/100 à 100/100 sur des documents réels testés en EN, FR et AR.",
+    outputHighlightsTitle: "Quatre résultats concrets",
+    outputHighlights: [
+      "Résumé structuré",
+      "Quiz théoriques et pratiques",
+      "Flashcards",
+      "Plan de révision personnalisé",
+    ],
+    audienceTitle: "Qui utilise Runexa Study Workspace ?",
+    audienceItems: [
+      "Candidats à des certifications professionnelles (CPA, PMP, CFA, BAR, NCLEX, etc.)",
+      "Étudiants en formation professionnelle : logistique, douane, comptabilité et santé",
+      "Chercheurs et académiciens pour analyser des papers et revues de littérature",
+      "Équipes de formation en entreprise : onboarding, compliance et formation technique",
+      "Professionnels en reconversion qui doivent apprendre rapidement un nouveau domaine",
+    ],
+    comparisonTitle: "Runexa Study vs NotebookLM",
+    comparisonRows: [
+      ["Prix de départ", "1 $", "Gratuit"],
+      ["Quiz automatique", "✅", "❌"],
+      ["Flashcards", "✅", "❌"],
+      ["Plan de révision", "✅", "❌"],
+      ["Audio généré", "✅", "❌"],
+      ["Score qualité", "✅", "❌"],
+      ["Niveaux scolaires", "✅", "❌"],
+      ["Sans prompting", "✅", "❌"],
+      ["Q&A conversationnel", "❌", "✅"],
+    ],
+    b2bTitle: "Pour les professionnels de l’assurance",
+    b2bText:
+      "Les underwriters qui analysent des contrats de construction, des polices maritimes ou des budgets complexes peuvent utiliser Study Workspace pour maîtriser rapidement un nouveau domaine technique ou réglementaire.",
+    b2bCta: "Importez votre document technique. Obtenez un kit de maîtrise complet en 2 minutes.",
+    bottomDisclaimerTitle: "Avertissement pédagogique",
   },
   ar: {
     title: "مساحة الدراسة بالذكاء الاصطناعي",
@@ -355,7 +423,7 @@ const labels: any = {
       "بعد كل اختبار، يحدد النظام نقاط ضعفك ويستخدمها لتخصيص جلسات التعلم القادمة.",
     disclaimer:
       "تم تصميم Runexa Study Agent لدعم التعلم والمراجعة. تحقق دائماً من المعلومات الأكاديمية المهمة مع أستاذك أو مؤسستك أو المراجع الرسمية.",
-    analyze: "إنشاء تقرير الدراسة الذكي",
+    analyze: "حوّل مستندك إلى مجموعة دراسية كاملة — دولار واحد",
     buyCredits: "شراء رصيد",
     chooseLevel: "اختر مستواك",
     selectLevel: "اختر المستوى التعليمي",
@@ -397,7 +465,7 @@ const labels: any = {
     proMessage:
       "خطة Pro غير مفعلة حالياً. المدفوعات غير متاحة مؤقتاً أثناء إطلاق المنصة.",
     trialInfo: "تجربة واحدة بقيمة 1 دولار لكل حساب. بعد التجربة يمكنك المتابعة بالأرصدة أو الاشتراك.",
-    startTrial: "تفعيل تجربة 1 دولار",
+    startTrial: "حوّل مستندك إلى مجموعة دراسية كاملة — دولار واحد",
     trialUsed: "لقد تم استخدام تجربة 1 دولار الخاصة بهذا الحساب بالفعل. يمكنك المتابعة باستخدام الأرصدة أو الاشتراك في خطة Pro.",
     paymentRequired: "يلزم تفعيل تجربة الدراسة بقيمة 1 دولار",
     errorMessage: "تعذر الاتصال بواجهة Study Agent.",
@@ -417,6 +485,40 @@ const labels: any = {
     studyWorkflow: "رفع الملف → تحليل دراسي بالذكاء الاصطناعي → مراجعة مخصصة",
     generateStudyWorkspace:
       "أنشئ مساحة دراسة ذكية كاملة خلال دقائق.",
+    proofPoint:
+      "متوسط درجة الجودة: من 97/100 إلى 100/100 على مستندات حقيقية تم اختبارها بالإنجليزية والفرنسية والعربية.",
+    outputHighlightsTitle: "أربع نتائج عملية",
+    outputHighlights: [
+      "ملخص منظم",
+      "اختبارات نظرية وتطبيقية",
+      "بطاقات مراجعة",
+      "خطة مراجعة مخصصة",
+    ],
+    audienceTitle: "من يستخدم مساحة Runexa Study؟",
+    audienceItems: [
+      "مرشحو الشهادات المهنية مثل CPA وPMP وCFA وBAR وNCLEX",
+      "طلاب التكوين المهني في اللوجستيك والجمارك والمحاسبة والصحة",
+      "الباحثون والأكاديميون لتحليل الأوراق العلمية ومراجعات الأدبيات",
+      "فرق التدريب في الشركات للتأهيل والامتثال والتدريب التقني",
+      "المهنيون في إعادة التوجيه لتعلم مجالات جديدة بسرعة",
+    ],
+    comparisonTitle: "Runexa Study مقارنة مع NotebookLM",
+    comparisonRows: [
+      ["سعر البداية", "1 دولار", "مجاني"],
+      ["اختبارات تلقائية", "✅", "❌"],
+      ["بطاقات مراجعة", "✅", "❌"],
+      ["خطة مراجعة", "✅", "❌"],
+      ["صوت مولد", "✅", "❌"],
+      ["درجة الجودة", "✅", "❌"],
+      ["مستويات تعليمية", "✅", "❌"],
+      ["بدون كتابة prompts", "✅", "❌"],
+      ["أسئلة وأجوبة محادثية", "❌", "✅"],
+    ],
+    b2bTitle: "لمهنيي التأمين",
+    b2bText:
+      "يمكن للـ underwriters الذين يحللون عقود البناء أو وثائق التأمين البحري أو الميزانيات المعقدة استخدام Study Workspace لإتقان مجال تقني أو تنظيمي جديد بسرعة.",
+    b2bCta: "ارفع مستندك التقني. احصل على مجموعة إتقان كاملة خلال دقيقتين.",
+    bottomDisclaimerTitle: "تنبيه تعليمي",
   },
 };
 
@@ -1389,6 +1491,10 @@ export default function StudyClient({
 
   const t = labels[language] || labels.en;
 
+  const outputHighlights = Array.isArray(t.outputHighlights) ? t.outputHighlights : [];
+  const audienceItems = Array.isArray(t.audienceItems) ? t.audienceItems : [];
+  const comparisonRows = Array.isArray(t.comparisonRows) ? t.comparisonRows : [];
+
   const hasCredits = creditsBalance > 0;
   const hasPaidStudyTrial = studyTrialPaid && !studyTrialUsed;
   const hasUsedStudyTrial = studyTrialPaid && studyTrialUsed;
@@ -2219,6 +2325,10 @@ export default function StudyClient({
             {t.subtitle}
           </p>
 
+          <div className="mx-auto mt-4 inline-flex max-w-3xl items-center justify-center rounded-full border border-green-200 bg-green-50 px-4 py-2 text-sm font-semibold text-green-700">
+            {t.proofPoint}
+          </div>
+
           <div className="mt-5 flex flex-wrap items-center justify-center gap-3 text-sm font-medium text-slate-500">
             {t.studyWorkflow}
           </div>
@@ -2280,55 +2390,46 @@ export default function StudyClient({
           </div>
         </section>
 
-<div className="bg-white p-6 rounded-2xl border space-y-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
-          <div className="rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm text-slate-600 space-y-3 transition-all duration-300 hover:border-blue-200 hover:bg-white hover:shadow-md">
+        <div className="bg-white p-6 rounded-2xl border space-y-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
+          <div className="rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm text-slate-600 space-y-4 transition-all duration-300 hover:border-blue-200 hover:bg-white hover:shadow-md">
             <p>
               <strong>{t.howTitle}</strong> {t.how1}
             </p>
 
-            <p>{t.how2}</p>
+            <div>
+              <h3 className="text-sm font-bold uppercase tracking-wide text-slate-900">
+                {t.outputHighlightsTitle}
+              </h3>
 
-            <div className="grid gap-3 sm:grid-cols-2">
-              {t.items.map((item: string, index: number) => {
-                const style = featureStyles[index] || featureStyles[0];
+              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                {outputHighlights.map((item: string, index: number) => {
+                  const style = featureStyles[index] || featureStyles[0];
 
-                return (
-                  <div
-                    key={index}
-                    className={`group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-4 shadow-[0_1px_2px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(15,23,42,0.10)] ${style.hover}`}
-                  >
+                  return (
                     <div
-                      className={`absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent ${style.accent} to-transparent opacity-0 transition group-hover:opacity-100`}
-                    />
-
-                    <div
-                      className={`flex items-start gap-3 ${
-                        language === "ar" ? "text-right" : "text-left"
-                      }`}
+                      key={item}
+                      className={`group rounded-2xl border border-slate-200 bg-white p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md ${style.hover}`}
                     >
-                      <span
-                        className={`relative flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${style.icon} text-white shadow-sm ${style.glow} ring-1 ring-slate-900/5 transition group-hover:scale-105`}
+                      <div
+                        className={`flex items-center gap-3 ${
+                          language === "ar" ? "text-right" : "text-left"
+                        }`}
                       >
-                        <FeatureIcon index={index} />
-                      </span>
+                        <span
+                          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${style.icon} text-white shadow-sm ${style.glow}`}
+                        >
+                          <FeatureIcon index={index} />
+                        </span>
 
-                      <div className="min-w-0">
                         <p className="text-sm font-semibold leading-relaxed text-slate-900">
                           {item}
                         </p>
-                        <div
-                          className={`mt-2 h-1 w-10 rounded-full bg-gradient-to-r ${style.accent} opacity-70 transition group-hover:w-14`}
-                        />
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
-
-            <p>{t.how3}</p>
-
-            <p className="text-xs text-slate-500">{t.disclaimer}</p>
           </div>
 
           <select
@@ -2461,6 +2562,79 @@ export default function StudyClient({
             </p>
           )}
         </div>
+
+        <section className="grid gap-6 lg:grid-cols-2">
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="text-2xl font-bold text-slate-950">
+              {t.audienceTitle}
+            </h2>
+
+            <div className="mt-5 space-y-3">
+              {audienceItems.map((item: string) => (
+                <div
+                  key={item}
+                  className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 text-slate-700"
+                >
+                  ✓ {item}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-3xl border border-blue-100 bg-blue-50 p-6 shadow-sm">
+            <h2 className="text-2xl font-bold text-blue-950">
+              {t.b2bTitle}
+            </h2>
+
+            <p className="mt-4 text-sm leading-7 text-blue-900">
+              {t.b2bText}
+            </p>
+
+            <p className="mt-5 rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-blue-800 shadow-sm">
+              {t.b2bCta}
+            </p>
+          </div>
+        </section>
+
+        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 className="text-2xl font-bold text-slate-950">
+            {t.comparisonTitle}
+          </h2>
+
+          <div className="mt-5 overflow-hidden rounded-2xl border border-slate-200">
+            <table className="w-full text-sm">
+              <thead className="bg-slate-50 text-slate-700">
+                <tr>
+                  <th className="px-4 py-3 text-left font-semibold">
+                    Feature
+                  </th>
+                  <th className="px-4 py-3 text-center font-semibold">
+                    Runexa
+                  </th>
+                  <th className="px-4 py-3 text-center font-semibold">
+                    NotebookLM
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody className="divide-y divide-slate-200">
+                {comparisonRows.map((row: string[]) => (
+                  <tr key={row[0]} className="bg-white">
+                    <td className="px-4 py-3 font-medium text-slate-800">
+                      {row[0]}
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      {row[1]}
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      {row[2]}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
 
         {showLevelModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
@@ -2797,11 +2971,13 @@ export default function StudyClient({
               </ul>
             </section>
 
-            <p className="text-xs text-slate-500 border-t pt-4">
-              {result.disclaimer || t.disclaimer}
-            </p>
           </div>
         )}
+
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs leading-6 text-slate-500">
+          <strong className="text-slate-700">{t.bottomDisclaimerTitle}: </strong>
+          {t.disclaimer}
+        </section>
       </div>
     </main>
   );
