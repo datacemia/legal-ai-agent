@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { getSavedLocale } from "../../lib/i18n";
 
 type ApiKey = {
@@ -304,6 +305,8 @@ const translations = {
 };
 
 export default function ApiDashboardClient() {
+  const router = useRouter();
+
   const [keys, setKeys] = useState<ApiKey[]>([]);
   const [usage, setUsage] = useState<ApiUsage[]>([]);
   const [newKeyName, setNewKeyName] = useState("Production API Key");
@@ -333,7 +336,8 @@ export default function ApiDashboardClient() {
         : null;
 
     if (!token) {
-      window.location.href = "/login";
+      setLoading(false);
+      router.replace("/login");
       return;
     }
 
@@ -348,6 +352,17 @@ export default function ApiDashboardClient() {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);
+
+      if (
+        keysRes.status === 401 ||
+        keysRes.status === 403 ||
+        usageRes.status === 401 ||
+        usageRes.status === 403
+      ) {
+        localStorage.removeItem("token");
+        router.replace("/login");
+        return;
+      }
 
       if (!keysRes.ok || !usageRes.ok) {
         setMessage(t.couldNotLoad);
