@@ -2051,6 +2051,7 @@ export default function BusinessClient({
             completed = true;
             break;
           }
+          
 
           if (statusData.status === "failed") {
             throw new Error(
@@ -3429,7 +3430,7 @@ export default function BusinessClient({
         </div>
 
         {/* Results removed from public render to avoid showing the full executive dashboard block here. */}
-        {false && result && (
+        {result && (
           <SectionShell className="space-y-8">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
