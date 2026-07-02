@@ -215,25 +215,21 @@ def _format_export_percent(value: Any, language: str) -> str:
         return f"{number:.2f}".replace(".", ",") + " %"
     return f"{number:.2f}%"
 
-def _format_number(value: Any) -> str:
+def _format_number(value: Any, language: str = "en") -> str:
     numeric = _number(value)
 
     if numeric is None:
         return "-"
 
     if numeric.is_integer():
-        return f"{numeric:,.0f}"
+        formatted = f"{numeric:,.0f}"
+    else:
+        formatted = f"{numeric:,.2f}".rstrip("0").rstrip(".")
 
-    return f"{numeric:,.2f}".rstrip("0").rstrip(".")
+    if language == "fr":
+        return formatted.replace(",", " ").replace(".", ",")
 
-
-def _format_export_percent(value: Any, language) -> str:
-    numeric = _number(value)
-
-    if numeric is None:
-        return "-"
-
-    return f"{numeric:,.2f}%".rstrip("0").rstrip(".")
+    return formatted
 
 
 def _format_money(
@@ -309,7 +305,7 @@ def _labels(language: str) -> dict[str, str]:
             "profit": "Profit",
             "margin": "Profit Margin",
             "growth": "Growth",
-            "cashflow": "Flux de trésorerie",
+            "cashflow": "Cashflow",
             "decision": "Priority Decision",
             "risks": "Risks",
             "opportunities": "Opportunities",
@@ -351,7 +347,7 @@ def _labels(language: str) -> dict[str, str]:
             "profit": "Profit",
             "margin": "Marge",
             "growth": "Croissance",
-            "cashflow": "Flux de trésorerie",
+            "cashflow": "Cashflow",
             "decision": "Décision prioritaire",
             "risks": "Risques",
             "opportunities": "Opportunités",
@@ -1220,8 +1216,8 @@ def build_business_pdf_report(
     if forecast:
         story.extend(_section(labels["forecast"], styles, language))
         forecast_rows = [
-            [_p(labels["next_month"], styles["small"], language), _p(_format_export_number(forecast.get("next_month_revenue"), language), styles["body"], language)],
-            [_p(labels["next_quarter"], styles["small"], language), _p(_format_export_number(forecast.get("next_quarter_revenue"), language), styles["body"], language)],
+            [_p(labels["next_month"], styles["small"], language), _p(_format_money(forecast.get("next_month_revenue"), currency, language), styles["body"], language)],
+            [_p(labels["next_quarter"], styles["small"], language), _p(_format_money(forecast.get("next_quarter_revenue"), currency, language), styles["body"], language)],
             [_p(labels["trend"], styles["small"], language), _p(_translate_and_normalize(forecast.get("trend") or "-", language), styles["body"], language)],
             [_p(labels["cashflow_risk"], styles["small"], language), _p(_translate_and_normalize(forecast.get("cashflow_risk") or "-", language), styles["body"], language)],
             [_p(labels["volatility"], styles["small"], language), _p(_translate_and_normalize(forecast.get("volatility") or "-", language), styles["body"], language)],
@@ -1304,8 +1300,15 @@ def build_business_pdf_report(
         story.append(_table(rows, [6 * cm, 9.5 * cm], header=True, background=WHITE))
 
     story.extend(_section(labels["data_quality"], styles, language))
+    quality_score = data_quality.get("score")
+    quality_score_display = (
+        f"{int(round(float(quality_score)))}/100"
+        if isinstance(quality_score, (int, float)) and not isinstance(quality_score, bool)
+        else _translate_common_value("N/A", language)
+    )
+
     quality_rows = [
-        [_p(labels["score"], styles["small"], language), _p(f"{data_quality.get('score', 0)}/100", styles["body_bold"], language)],
+        [_p(labels["score"], styles["small"], language), _p(quality_score_display, styles["body_bold"], language)],
         [_p(labels["missing_fields"], styles["small"], language), _p(", ".join(data_quality.get("missing_fields") or []) or _empty_list_message("missing_fields", language), styles["body"], language)],
         [_p(labels["limitations"], styles["small"], language), _p(", ".join(data_quality.get("limitations") or []) or _empty_list_message("limitations", language), styles["body"], language)],
     ]
