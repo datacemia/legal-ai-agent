@@ -337,7 +337,7 @@ export default function ApiDashboardClient() {
 
     if (!token) {
       setLoading(false);
-      router.replace("/login");
+      setMessage(t.couldNotLoad);
       return;
     }
 
