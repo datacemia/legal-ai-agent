@@ -131,34 +131,34 @@ def _score_cashflow(cashflow_status: str) -> dict[str, Any]:
 
 def _score_churn(churn_rate_percent: float) -> dict[str, Any]:
     """
-    Churn scoring for SaaS/subscription-like businesses.
-    Lower churn is better.
+    Customer retention scoring.
+    Lower customer loss improves business health.
     """
 
     if churn_rate_percent <= 0:
         score = 70
-        signal = "churn_unknown_or_zero"
-        label = "Churn is zero or unavailable."
+        signal = "retention_unavailable"
+        label = "Customer retention data unavailable."
     elif churn_rate_percent <= 3:
         score = 95
-        signal = "excellent_churn"
-        label = "Excellent churn level."
+        signal = "excellent_customer_retention"
+        label = "Excellent customer retention."
     elif churn_rate_percent <= 7:
         score = 80
-        signal = "healthy_churn"
-        label = "Healthy churn level."
+        signal = "healthy_customer_retention"
+        label = "Healthy customer retention."
     elif churn_rate_percent <= 12:
         score = 55
-        signal = "elevated_churn"
-        label = "Elevated churn."
+        signal = "moderate_customer_retention"
+        label = "Customer retention should be monitored."
     elif churn_rate_percent <= 20:
         score = 35
-        signal = "high_churn"
-        label = "High churn."
+        signal = "weak_customer_retention"
+        label = "Customer retention requires attention."
     else:
         score = 15
-        signal = "critical_churn"
-        label = "Critical churn level."
+        signal = "critical_customer_retention"
+        label = "Customer retention is at risk."
 
     return {
         "score": score,
@@ -353,8 +353,8 @@ def calculate_backend_health_score(
         "cashflow": _score_cashflow(cashflow_status if profit_available else "unknown"),
         "churn": _score_churn(churn_rate) if churn_available else {
             "score": 60,
-            "signal": "churn_unavailable",
-            "label": "Churn unavailable.",
+            "signal": "retention_unavailable",
+            "label": "Customer retention data unavailable.",
             "value": "unavailable",
         },
         "roas": _score_roas(roas) if roas_available else {
