@@ -963,8 +963,8 @@ def _generate_insights(
             {
                 "kind": "insight",
                 "category": "customers",
-                "title": "Churn appears controlled.",
-                "summary": "Estimated churn is not currently in a high-risk range.",
+                "title": "Customer retention remains stable.",
+                "summary": "Recent customer retention indicators remain within expected levels.",
                 "business_impact": [
                     "retention_strength",
                 ],

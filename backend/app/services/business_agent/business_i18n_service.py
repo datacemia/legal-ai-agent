@@ -703,6 +703,11 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
         "fr": "L’attrition semble maîtrisée.",
         "ar": "يبدو أن فقدان العملاء تحت السيطرة.",
     },
+    "Customer retention remains stable.": {
+        "en": "Customer retention remains stable.",
+        "fr": "La rétention client reste stable.",
+        "ar": "يظل الاحتفاظ بالعملاء مستقراً.",
+    },
     "Churn or lower repeat purchases": {
         "en": "Churn or lower repeat purchases",
         "fr": "Attrition ou baisse des achats répétés",
@@ -909,6 +914,11 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
         "en": "Estimated churn is not currently in a high-risk range.",
         "fr": "Le taux d’attrition estimé n’est pas actuellement dans une zone à risque élevé.",
         "ar": "معدل فقدان العملاء المقدر ليس حالياً ضمن نطاق عالي المخاطر.",
+    },
+    "Recent customer retention indicators remain within expected levels.": {
+        "en": "Recent customer retention indicators remain within expected levels.",
+        "fr": "Les indicateurs récents de rétention client restent dans les niveaux attendus.",
+        "ar": "تبقى مؤشرات الاحتفاظ بالعملاء الأخيرة ضمن المستويات المتوقعة.",
     },
 
     "Customer losses are high relative to new customers.": {
