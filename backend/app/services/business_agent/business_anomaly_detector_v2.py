@@ -950,7 +950,7 @@ def _generate_insights(
             {
                 "kind": "insight",
                 "category": "marketing",
-                "title": "Marketing efficiency appears healthy.",
+                "title": "Marketing performance remains strong.",
                 "summary": "ROAS is in a healthy range, suggesting acquisition spend is producing return.",
                 "business_impact": [
                     "marketing_efficiency",
