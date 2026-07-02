@@ -918,6 +918,12 @@ def _generate_insights(
 
     profit_margin = _to_float(core_kpis.get("profit_margin_percent"))
     growth_rate = _to_float(core_kpis.get("growth_rate_percent"))
+    ad_spend = _to_float(advanced_kpis.get("ad_spend"))
+    ad_spend_available = _flag_enabled(
+        advanced_kpis,
+        "ad_spend_available",
+        ad_spend > 0,
+    )
     roas = _to_float(advanced_kpis.get("roas")) if roas_available else 0.0
     churn_rate = (
         _to_float(advanced_kpis.get("churn_rate_percent"))
@@ -939,7 +945,7 @@ def _generate_insights(
             }
         )
 
-    if roas_available and roas >= 3:
+    if roas_available and ad_spend_available and ad_spend > 0 and roas >= 3:
         insights.append(
             {
                 "kind": "insight",

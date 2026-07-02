@@ -478,7 +478,7 @@ def _get_top_items(items: list[dict[str, Any]], limit: int = 3) -> list[dict[str
 
 def _build_default_decision() -> dict[str, Any]:
     return {
-        "title": "Continue monitoring business performance",
+        "title": "Protect margins while sustaining growth",
         "decision": "Keep tracking revenue, expenses, cashflow, and customer metrics before making major changes.",
         "why": "No critical business risk was detected from the current analysis.",
         "impact": "medium",
@@ -693,6 +693,7 @@ def _build_opportunities(
     margin = _to_float(core_kpis.get("profit_margin_percent"))
     growth = _to_float(core_kpis.get("growth_rate_percent"))
     roas = _to_float(advanced_kpis.get("roas"))
+    ad_spend = _to_float(advanced_kpis.get("ad_spend"))
     churn = _to_float(advanced_kpis.get("churn_rate_percent"))
 
     profit_available = _flag_enabled(core_kpis, "profit_available", False)
@@ -703,6 +704,11 @@ def _build_opportunities(
     )
     churn_available = _flag_enabled(advanced_kpis, "churn_available", churn > 0)
     roas_available = _flag_enabled(advanced_kpis, "roas_available", roas > 0)
+    ad_spend_available = _flag_enabled(
+        advanced_kpis,
+        "ad_spend_available",
+        ad_spend > 0,
+    )
     cac_available = _flag_enabled(advanced_kpis, "cac_available", False)
 
     cac_ratio = _to_float(
@@ -723,7 +729,15 @@ def _build_opportunities(
             }
         )
 
-    if roas_available and cac_available and roas >= 3 and cac_ratio > 0 and cac_ratio <= 0.5:
+    if (
+        roas_available
+        and ad_spend_available
+        and ad_spend > 0
+        and cac_available
+        and roas >= 3
+        and cac_ratio > 0
+        and cac_ratio <= 0.5
+    ):
         opportunities.append(
             {
                 "opportunity": "Scale efficient acquisition carefully",

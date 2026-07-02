@@ -1131,9 +1131,14 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
     },
 
     "Continue monitoring business performance": {
-        "en": "Address slowing revenue growth",
-        "fr": "Traiter le ralentissement de la croissance des revenus",
-        "ar": "معالجة تباطؤ نمو الإيرادات",
+        "en": "Protect margins while sustaining growth",
+        "fr": "Protéger les marges tout en maintenant la croissance",
+        "ar": "حماية الهوامش مع الحفاظ على النمو",
+    },
+    "Protect margins while sustaining growth": {
+        "en": "Protect margins while sustaining growth",
+        "fr": "Protéger les marges tout en maintenant la croissance",
+        "ar": "حماية الهوامش مع الحفاظ على النمو",
     },
     "Keep tracking revenue, expenses, cashflow, and customer metrics before making major changes.": {
         "en": "Keep tracking revenue, expenses, cashflow, and customer metrics before making major changes.",
@@ -1386,9 +1391,14 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
         "ar": "الربحية غير متاحة لأنه لم يتم توفير المصاريف أو التكاليف.",
     },
     "No previous business analysis found for comparison.": {
-        "en": "No previous business analysis found for comparison.",
-        "fr": "Aucune analyse business précédente trouvée pour comparaison.",
-        "ar": "لم يتم العثور على تحليل أعمال سابق للمقارنة.",
+        "en": "First available analysis. No historical comparison yet.",
+        "fr": "Première analyse disponible. Aucune comparaison historique pour le moment.",
+        "ar": "أول تحليل متاح. لا توجد مقارنة تاريخية حتى الآن.",
+    },
+    "First available analysis. No historical comparison yet.": {
+        "en": "First available analysis. No historical comparison yet.",
+        "fr": "Première analyse disponible. Aucune comparaison historique pour le moment.",
+        "ar": "أول تحليل متاح. لا توجد مقارنة تاريخية حتى الآن.",
     },
     "Analyze a business file first.": {
         "en": "Analyze a business file first.",

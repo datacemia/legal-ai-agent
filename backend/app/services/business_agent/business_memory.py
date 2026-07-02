@@ -97,9 +97,11 @@ def compare_business_results(
     if not previous_result:
         return {
             "available": False,
-            "summary": "No previous business analysis found for comparison.",
+            "summary": "First available analysis. No historical comparison yet.",
             "changes": {},
-            "signals": [],
+            "signals": [
+                "First available analysis. No historical comparison yet."
+            ],
         }
 
     previous_kpis = _extract_kpis(previous_result)
@@ -220,7 +222,7 @@ def build_memory_context_for_ai(
     """
 
     if not memory_comparison.get("available"):
-        return "No previous business memory is available."
+        return "First available analysis. No historical comparison yet."
 
     lines = [
         "Business memory comparison:",

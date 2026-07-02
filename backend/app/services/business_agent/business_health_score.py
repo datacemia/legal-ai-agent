@@ -287,7 +287,7 @@ def _score_data_quality(data_quality_score: float) -> dict[str, Any]:
 
 
 def _risk_status_from_health_score(score: float) -> str:
-    if score >= 85:
+    if score >= 80:
         return "low_risk"
 
     if score >= 70:
@@ -314,14 +314,14 @@ def calculate_backend_health_score(
     - Profit margin when profitability is available
     - Revenue growth
     - Cashflow
-    - Churn when available
+    - Customer retention when available
     - ROAS when available
     - CAC efficiency when available
     - Data quality
 
     Missing KPIs are treated as neutral/unavailable rather than as strong
     positives or negatives. Revenue-only ecommerce files should not be
-    punished as if margin, ROAS, churn, CAC, or cashflow were bad.
+    punished as if margin, ROAS, customer retention, CAC, or cashflow were bad.
     """
 
     core_kpis = core_kpis or {}
