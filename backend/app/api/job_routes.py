@@ -1,3 +1,5 @@
+import json
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
@@ -7,6 +9,16 @@ from app.models.user import User
 from app.models.job import Job
 
 router = APIRouter(prefix="/jobs", tags=["Jobs"])
+
+
+def normalize_job_result(result):
+    if isinstance(result, str):
+        try:
+            return json.loads(result)
+        except Exception:
+            return result
+
+    return result
 
 
 @router.get("/{job_id}")
@@ -30,7 +42,7 @@ def get_job_status(
         "status": job.status,
         "progress": job.progress,
         "status_message": job.status_message,
-        "result": job.result,
+        "result": normalize_job_result(job.result),
         "error": job.error,
         "created_at": job.created_at,
         "started_at": job.started_at,
