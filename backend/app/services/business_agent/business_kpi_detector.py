@@ -2740,6 +2740,14 @@ def detect_smart_kpis(
     )
 
     business_model = model_details["business_model"]
+    if str(model_details.get("confidence") or "").lower() != "high":
+        business_model = "general"
+        model_details = {
+            **model_details,
+            "business_model": "general",
+            "display_business_model": "general",
+            "display_reason": "Business model confidence is not high enough for a specific industry label.",
+        }
 
     detected_columns = detect_kpi_columns(columns)
 
@@ -2869,18 +2877,27 @@ def detect_business_kpis(
     # Keep router-provided model only when verified business performance data exists.
     # For profile/reference/catalog/review files, force general to avoid false
     # e-commerce/restaurant/etc. classification from words like product/category/user.
-    if smart.get("analysis_available") and (
-        business_model in BUSINESS_MODELS or business_model == "general"
-    ):
-        smart["business_model"] = business_model
-    elif not smart.get("analysis_available"):
+    model_detection = smart.get("model_detection") or {}
+    model_confidence = str(model_detection.get("confidence") or "low").lower()
+    detected_model = model_detection.get("business_model") or "general"
+
+    if not smart.get("analysis_available"):
         smart["business_model"] = "general"
         smart["model_detection"] = {
-            **(smart.get("model_detection") or {}),
+            **model_detection,
             "business_model": "general",
             "confidence": "low",
         }
-
+    elif model_confidence == "high" and detected_model in BUSINESS_MODELS:
+        smart["business_model"] = detected_model
+    else:
+        smart["business_model"] = "general"
+        smart["model_detection"] = {
+            **model_detection,
+            "business_model": "general",
+            "display_business_model": "general",
+            "display_reason": "Business model confidence is not high enough for a specific industry label.",
+        }
     return {
         "business_model": smart["business_model"],
         "available": bool(smart.get("analysis_available")),
