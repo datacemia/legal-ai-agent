@@ -548,6 +548,47 @@ def _localized_metric_label(metric: Any, language: str) -> str:
     return labels.get(language, labels["en"]).get(normalized, text)
 
 
+
+def _localized_churn_metric_label(
+    advanced_kpis: dict[str, Any] | None,
+    language: str,
+) -> str:
+    advanced_kpis = advanced_kpis or {}
+    scope = str(advanced_kpis.get("churn_scope") or "").lower()
+    label_key = str(advanced_kpis.get("churn_label_key") or "").lower()
+
+    resolved_key = label_key or (
+        "latest_customer_churn"
+        if scope == "latest_period"
+        else "average_customer_churn"
+        if scope == "average_period"
+        else "customer_churn"
+    )
+
+    labels = {
+        "en": {
+            "latest_customer_churn": "Latest customer churn",
+            "average_customer_churn": "Average customer churn",
+            "customer_churn": "Customer churn",
+        },
+        "fr": {
+            "latest_customer_churn": "Churn client dernière période",
+            "average_customer_churn": "Churn client moyen",
+            "customer_churn": "Churn client",
+        },
+        "ar": {
+            "latest_customer_churn": "معدل فقدان العملاء لآخر فترة",
+            "average_customer_churn": "متوسط معدل فقدان العملاء",
+            "customer_churn": "معدل فقدان العملاء",
+        },
+    }
+
+    return labels.get(language, labels["en"]).get(
+        resolved_key,
+        labels.get(language, labels["en"])["customer_churn"],
+    )
+
+
 def _translate_and_normalize(value: Any, language: str) -> str:
     translated = _translate_common_value(value, language)
 
@@ -1280,7 +1321,7 @@ def build_business_pdf_report(
             ("ROAS", advanced.get("roas"), False, False),
             ("MRR", advanced.get("mrr"), True, False),
             ("ARR", advanced.get("arr"), True, False),
-            ("Churn", advanced.get("churn_rate_percent"), False, True),
+            (_localized_churn_metric_label(advanced, language), advanced.get("churn_rate_percent"), False, True),
             ("Customers", advanced.get("customers"), False, False),
             ("Orders", advanced.get("orders"), False, False),
             ("Ad spend", advanced.get("ad_spend"), True, False),

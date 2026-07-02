@@ -142,11 +142,6 @@ def _format_number(value: Any) -> str:
     return f"{numeric:,.2f}".rstrip("0").rstrip(".")
 
 
-def _format_export_percent(value: Any, language) -> str:
-    numeric = _number(value)
-    if numeric is None:
-        return "-"
-    return f"{numeric:,.2f}%".rstrip("0").rstrip(".")
 
 
 def _format_money(value: Any, currency: dict[str, Any] | None, language: str) -> str:
@@ -243,7 +238,7 @@ def _labels(language: str) -> dict[str, str]:
             "profit": "Profit",
             "margin": "Margin",
             "growth": "Growth",
-            "cashflow": "Flux de trésorerie",
+            "cashflow": "Cashflow",
             "next_month": "Next Month Revenue",
             "next_quarter": "Next Quarter Revenue",
             "generated_at": "Generated at",
@@ -346,7 +341,7 @@ def _story_labels(language: str) -> dict[str, str]:
             "revenue_growth": "Revenue growth",
             "profit_margin": "Profit margin",
             "health_score": "Health score",
-            "churn": "Churn",
+            "churn": "Customer churn",
         },
         "fr": {
             "summary_headline": "L’activité progresse avec rentabilité, mais la qualité de rétention exige une attention prioritaire",
@@ -367,7 +362,7 @@ def _story_labels(language: str) -> dict[str, str]:
             "revenue_growth": "Croissance des revenus",
             "profit_margin": "Marge bénéficiaire",
             "health_score": "Score de santé",
-            "churn": "Churn",
+            "churn": "Churn client",
         },
         "ar": {
             "summary_headline": "النشاط ينمو بربحية، لكن جودة الاحتفاظ بالعملاء تحتاج إلى أولوية واضحة",
@@ -545,6 +540,47 @@ def _add_insight_card(
         language,
         font_size=9,
         color=COLORS["ink"],
+    )
+
+
+
+def _localized_churn_metric_label(
+    advanced_kpis: dict[str, Any] | None,
+    language: str,
+) -> str:
+    advanced_kpis = advanced_kpis or {}
+    scope = str(advanced_kpis.get("churn_scope") or "").lower()
+    label_key = str(advanced_kpis.get("churn_label_key") or "").lower()
+
+    resolved_key = label_key or (
+        "latest_customer_churn"
+        if scope == "latest_period"
+        else "average_customer_churn"
+        if scope == "average_period"
+        else "customer_churn"
+    )
+
+    labels = {
+        "en": {
+            "latest_customer_churn": "Latest customer churn",
+            "average_customer_churn": "Average customer churn",
+            "customer_churn": "Customer churn",
+        },
+        "fr": {
+            "latest_customer_churn": "Churn client dernière période",
+            "average_customer_churn": "Churn client moyen",
+            "customer_churn": "Churn client",
+        },
+        "ar": {
+            "latest_customer_churn": "معدل فقدان العملاء لآخر فترة",
+            "average_customer_churn": "متوسط معدل فقدان العملاء",
+            "customer_churn": "معدل فقدان العملاء",
+        },
+    }
+
+    return labels.get(language, labels["en"]).get(
+        resolved_key,
+        labels.get(language, labels["en"])["customer_churn"],
     )
 
 
