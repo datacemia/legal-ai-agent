@@ -244,6 +244,42 @@ const unavailableMetricLabel = (locale: Locale = "en") => {
   return "N/A";
 };
 
+const getChurnMetricLabel = (
+  advancedKpis: Record<string, any> | null | undefined,
+  locale: Locale = "en"
+) => {
+  const scope = String(advancedKpis?.churn_scope || "").toLowerCase();
+  const labelKey = String(advancedKpis?.churn_label_key || "").toLowerCase();
+
+  const labelsByLocale: Record<Locale, Record<string, string>> = {
+    en: {
+      latest_customer_churn: "Latest customer churn",
+      average_customer_churn: "Average customer churn",
+      customer_churn: "Customer churn",
+    },
+    fr: {
+      latest_customer_churn: "Churn client dernière période",
+      average_customer_churn: "Churn client moyen",
+      customer_churn: "Churn client",
+    },
+    ar: {
+      latest_customer_churn: "معدل فقدان العملاء لآخر فترة",
+      average_customer_churn: "متوسط معدل فقدان العملاء",
+      customer_churn: "معدل فقدان العملاء",
+    },
+  };
+
+  const resolvedKey =
+    labelKey ||
+    (scope === "latest_period"
+      ? "latest_customer_churn"
+      : scope === "average_period"
+        ? "average_customer_churn"
+        : "customer_churn");
+
+  return labelsByLocale[locale]?.[resolvedKey] || labelsByLocale.en.customer_churn;
+};
+
 
 
 const normalizeBackendText = (
@@ -2911,7 +2947,7 @@ export default function BusinessClient({
         : unavailableMetricLabel(locale),
     },
     {
-      label: normalizeBackendText("Churn", locale),
+      label: getChurnMetricLabel(advancedKpis, locale),
       value: churnAvailable
         ? formatPercent(advancedKpis.churn_rate_percent, locale)
         : unavailableMetricLabel(locale),

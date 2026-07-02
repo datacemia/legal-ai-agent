@@ -2367,9 +2367,36 @@ def calculate_customer_metrics(
     )
 
     explicit_churn_rate = latest_column_value(rows, churn_rate_col)
+    customer_series = build_monthly_customer_series(
+        rows=rows,
+        columns=columns,
+        column_mapping=column_mapping,
+    )
 
-    # Use explicit churn rate only if there is a real churn_rate column.
-    churn_rate_percent = explicit_churn_rate if explicit_churn_rate > 0 else calculated_churn_rate
+    has_temporal_customer_data = bool(resolve_column("date", columns, column_mapping))
+
+    # Churn scope is exposed so frontend/PDF/PPT can label the metric correctly.
+    # This keeps the agent universal across SaaS, retail, services, finance,
+    # healthcare, education, and any other business model.
+    if churn_rate_col and explicit_churn_rate > 0:
+        churn_rate_percent = explicit_churn_rate
+        churn_scope = "latest_period" if has_temporal_customer_data else "provided"
+        churn_source = "explicit_churn_rate_column"
+    elif calculated_churn_rate > 0:
+        churn_rate_percent = calculated_churn_rate
+        churn_scope = "overall"
+        churn_source = "calculated_total_churned_over_customer_base"
+    else:
+        churn_rate_percent = 0.0
+        churn_scope = "unavailable"
+        churn_source = "unavailable"
+
+    churn_label_key = {
+        "latest_period": "latest_customer_churn",
+        "average_period": "average_customer_churn",
+        "overall": "customer_churn",
+        "provided": "customer_churn",
+    }.get(churn_scope, "customer_churn")
 
     return {
         "customers": round_money(effective_customers),
@@ -2379,11 +2406,10 @@ def calculate_customer_metrics(
         "new_customers": round_money(total_new_customers),
         "churned_customers": round_money(total_churned_customers),
         "churn_rate_percent": round_money(churn_rate_percent),
-        "customer_series": build_monthly_customer_series(
-            rows=rows,
-            columns=columns,
-            column_mapping=column_mapping,
-        ),
+        "churn_scope": churn_scope,
+        "churn_label_key": churn_label_key,
+        "churn_source": churn_source,
+        "customer_series": customer_series,
     }
 
 
@@ -2444,6 +2470,9 @@ def calculate_advanced_kpis(
         "cac": round_money(safe_divide(total_ad_spend, total_new_customers)) if cac_available else 0.0,
         "roas": round_money(safe_divide(total_revenue, total_ad_spend)) if roas_available else 0.0,
         "churn_rate_percent": round_money(churn_rate_percent) if churn_available else 0.0,
+        "churn_scope": customer_metrics.get("churn_scope") if churn_available else "unavailable",
+        "churn_label_key": customer_metrics.get("churn_label_key") if churn_available else "customer_churn",
+        "churn_source": customer_metrics.get("churn_source") if churn_available else "unavailable",
         "revenue_per_customer": round_money(
             safe_divide(total_revenue, total_customers)
         ) if revenue_per_customer_available else 0.0,
