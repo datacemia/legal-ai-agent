@@ -966,7 +966,7 @@ def _generate_insights(
                 "title": "Customer retention remains stable.",
                 "summary": "Recent customer retention indicators remain within expected levels.",
                 "business_impact": [
-                    "retention_strength",
+                    "customer_retention",
                 ],
             }
         )

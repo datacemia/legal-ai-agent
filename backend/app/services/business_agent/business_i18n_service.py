@@ -42,6 +42,11 @@ TERM_TRANSLATIONS: dict[str, dict[str, str]] = {
         "fr": "Attrition client",
         "ar": "فقدان العملاء",
     },
+    "customer_retention": {
+        "en": "Customer retention",
+        "fr": "Fidélisation client",
+        "ar": "الاحتفاظ بالعملاء",
+    },
     "customer_dissatisfaction": {
         "en": "Customer dissatisfaction",
         "fr": "Insatisfaction client",
