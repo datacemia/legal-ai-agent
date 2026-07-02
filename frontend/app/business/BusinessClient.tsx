@@ -1863,6 +1863,57 @@ export default function BusinessClient({
     return parsed;
   };
 
+
+  const normalizeBusinessAnalysisPayload = (payload: any) => {
+    if (!payload || typeof payload !== "object") {
+      return payload;
+    }
+
+    const candidates = [
+      payload,
+      payload.result,
+      payload.analysis,
+      payload.data,
+      payload.output,
+      payload.payload,
+      payload.result?.result,
+      payload.result?.analysis,
+      payload.result?.data,
+      payload.data?.result,
+      payload.data?.analysis,
+      payload.analysis?.result,
+      payload.analysis?.data,
+    ];
+
+    const looksLikeBusinessResult = (value: any) => {
+      if (!value || typeof value !== "object") {
+        return false;
+      }
+
+      return Boolean(
+        value.kpis ||
+          value.charts ||
+          value.smart_insights ||
+          value.executive_summary ||
+          value.summary ||
+          value.business_health_score ||
+          value.business_health ||
+          value.risks ||
+          value.opportunities ||
+          value.recommendations ||
+          value.forecast
+      );
+    };
+
+    return (
+      candidates.find(looksLikeBusinessResult) ||
+      payload.result ||
+      payload.analysis ||
+      payload.data ||
+      payload
+    );
+  };
+
   const handleAnalyze = async () => {
     if (!file) {
       setMessage(t.noFile);
@@ -1996,7 +2047,7 @@ export default function BusinessClient({
           }
 
           if (statusData.status === "completed") {
-            data = statusData.result;
+            data = normalizeBusinessAnalysisPayload(statusData.result || statusData);
             completed = true;
             break;
           }
@@ -2020,16 +2071,23 @@ export default function BusinessClient({
         setLoadingProgress(100);
       }
 
+      const normalizedData = normalizeBusinessAnalysisPayload(data);
+
       const savedAnalysisId =
+        normalizedData?.analysis_id ||
+        normalizedData?.business_analysis_id ||
+        normalizedData?.id ||
         data?.analysis_id ||
         data?.business_analysis_id ||
         data?.id ||
         (await getLatestSavedBusinessAnalysisId(token, file.name));
 
       const nextResult = {
-        ...data,
-        analysis_id: savedAnalysisId || data?.analysis_id,
+        ...normalizedData,
+        analysis_id: savedAnalysisId || normalizedData?.analysis_id,
       };
+
+      console.log("FINAL BUSINESS RESULT", nextResult);
 
       setLoadingProgress(100);
       setResult(nextResult);
