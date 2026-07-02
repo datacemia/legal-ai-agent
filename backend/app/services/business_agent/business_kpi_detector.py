@@ -935,6 +935,14 @@ KPI_ALIASES = {
         "customers",
         "customer_count",
         "active_customers",
+        "customers_end",
+        "ending_customers",
+        "end_customers",
+        "closing_customers",
+        "active_customers_end",
+        "customers_start",
+        "starting_customers",
+        "beginning_customers",
         "clients",
         "client",
         "client_count",
@@ -1142,11 +1150,17 @@ EXTRA_KPI_ALIASES = {
         "المعاملات", "الشراء", "المشتريات",
     ],
     "customers": [
+        "customers_end", "customer_end", "ending_customers", "end_customers",
+        "closing_customers", "active_customers_end", "customers_start",
+        "customer_start", "starting_customers", "beginning_customers",
         "customer_name", "client_name", "active_users", "users",
-        "nombre_clients", "clients_actifs", "identifiant_client",
+        "nombre_clients", "clients_actifs", "clients_fin", "clients_debut",
+        "clients_début", "clients_actifs_fin", "identifiant_client",
         "id_utilisateur", "identifiant_utilisateur", "id_acheteur",
         "abonne", "abonné",
         "العملاء", "عميل", "العميل", "الزبائن", "عدد_العملاء",
+        "العملاء_النشطون", "العملاء_في_النهاية", "عملاء_نهاية_الفترة",
+        "العملاء_في_البداية", "عملاء_بداية_الفترة",
         "معرف_العميل", "معرف_المستخدم", "رقم_العميل",
         "المستخدم", "المشتري", "مشترك", "المشترك",
     ],
@@ -2138,6 +2152,49 @@ def count_distinct_values(
     return float(len(values))
 
 
+def is_identifier_metric_column(column: str | None) -> bool:
+    if not column:
+        return False
+
+    normalized = normalize_text(column)
+
+    identifier_patterns = (
+        "_id",
+        "id_",
+        "uuid",
+        "identifier",
+        "identifiant",
+        "معرف",
+        "رقم",
+        "code_",
+        "_code",
+    )
+
+    return any(pattern in normalized for pattern in identifier_patterns)
+
+
+def is_count_metric_column(column: str | None) -> bool:
+    if not column:
+        return False
+
+    normalized = normalize_text(column)
+
+    count_patterns = (
+        "count",
+        "total",
+        "number",
+        "nombre",
+        "nb_",
+        "_nb",
+        "عدد",
+        "quantite",
+        "quantity",
+        "units",
+    )
+
+    return any(pattern in normalized for pattern in count_patterns)
+
+
 def count_or_sum_identifier_column(
     rows: list[dict[str, Any]],
     column: str | None,
@@ -2148,26 +2205,21 @@ def count_or_sum_identifier_column(
     summed = sum_column(rows, column)
     distinct = count_distinct_values(rows, column)
 
-    # Identifier columns such as order_id, purchase_id, user_id, client_id
-    # are often UUID/text values. They should be counted, not summed.
-    normalized = normalize_text(column)
-    identifier_tokens = [
-        "id",
-        "uuid",
-        "order",
-        "purchase",
-        "transaction",
-        "invoice",
-        "customer",
-        "client",
-        "user",
-        "buyer",
-    ]
+    # Universal business rule:
+    # - metric/count columns are summed: orders, order_count, commandes, عدد_الطلبات
+    # - identifier columns are counted distinctly: order_id, invoice_id, id_commande, معرف_الطلب
+    # - plain numeric metric columns default to SUM
+    # - non-numeric identifier-like columns default to COUNT DISTINCT
+    if is_count_metric_column(column):
+        return summed
 
-    if distinct > 0 and (summed <= 0 or any(token in normalized for token in identifier_tokens)):
+    if is_identifier_metric_column(column):
         return distinct
 
-    return summed
+    if summed > 0:
+        return summed
+
+    return distinct
 
 
 def latest_column_value(
@@ -2253,10 +2305,18 @@ def build_monthly_customer_series(
 
     for period in periods:
         item = grouped[period]
-        customers = max(item["customers_max"], item["customers_sum"])
+
+        # Customer base is a stock KPI, not a flow KPI.
+        # If a file has active/customers/end-customer counts, use the strongest
+        # observed value for the period instead of summing repeated snapshots.
+        customers = item["customers_max"]
 
         if customers <= 0 and item["new_customers"] > 0:
-            customers = item["new_customers"]
+            customers = max(
+                item["new_customers"] - item["churned_customers"],
+                item["new_customers"],
+                0.0,
+            )
 
         series.append(
             {
