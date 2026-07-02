@@ -1284,10 +1284,10 @@ PHRASE_TRANSLATIONS: dict[str, dict[str, str]] = {
         "fr": "La croissance et la rentabilité sont toutes deux positives.",
         "ar": "النمو والربحية كلاهما إيجابيان.",
     },
-    "Marketing performance remains strong.": {
-        "en": "Marketing performance remains strong.",
-        "fr": "Les performances marketing restent solides.",
-        "ar": "لا يزال أداء التسويق قويًا.",
+    "Marketing efficiency appears healthy.": {
+        "en": "Marketing efficiency appears healthy.",
+        "fr": "L’efficacité marketing semble saine.",
+        "ar": "تبدو كفاءة التسويق صحية.",
     },
     "Latest profit is above recent average.": {
         "en": "Latest profit is above recent average.",
