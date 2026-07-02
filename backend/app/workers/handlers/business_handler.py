@@ -638,4 +638,13 @@ def handle_business_ai(job: Job, db):
 
     update_job_progress(job, db, 96, business_progress_message("finalizing", output_language))
 
+    print("=" * 80, flush=True)
+    print("BUSINESS RESULT TYPE:", type(result), flush=True)
+    print("BUSINESS RESULT KEYS:", list(result.keys()) if isinstance(result, dict) else None, flush=True)
+    print("HAS KPIS:", isinstance(result, dict) and "kpis" in result, flush=True)
+    print("HAS CHARTS:", isinstance(result, dict) and "charts" in result, flush=True)
+    print("HAS SUMMARY:", isinstance(result, dict) and "executive_summary" in result, flush=True)
+    print("BUSINESS RESULT PREVIEW:", str(result)[:1500], flush=True)
+    print("=" * 80, flush=True)
+
     return result
