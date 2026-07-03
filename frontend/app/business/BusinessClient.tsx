@@ -1584,12 +1584,15 @@ function LoadingPanel({
 function SectionShell({
   children,
   className = "",
+  id,
 }: {
   children: React.ReactNode;
   className?: string;
+  id?: string;
 }) {
   return (
     <section
+      id={id}
       className={`rounded-[2rem] border border-slate-200 bg-white/95 p-6 shadow-sm ring-1 ring-slate-950/[0.02] backdrop-blur transition-all duration-300 hover:border-blue-200 hover:shadow-md md:p-8 ${className}`}
     >
       {children}
@@ -2232,6 +2235,10 @@ export default function BusinessClient({
       subtitle:
         "Upload business data to receive a data-verified executive analysis with KPIs, risks, opportunities, forecasts, and priority decisions.",
       eyebrow: "Universal AI business agent",
+      heroProofRevenue: "growth",
+      heroProofScore: "health score",
+      heroProofRoas: "ROAS",
+      startTrialCompact: "Start $1 trial",
       chooseFile: "Choose file",
       noFile: "No file selected",
       analyze: "Analyze Business",
@@ -2289,33 +2296,38 @@ export default function BusinessClient({
       whyNotGeneralAiTitle: "Why not use a general AI assistant?",
       whyNotGeneralAiText: "General AI assistants can explain business concepts. Runexa Business Agent combines deterministic KPI calculations, structured anomaly detection, churn and retention analysis, forecast generation, executive reporting, and multi-language output before generating recommendations.",
       usedForTitle: "Used for",
+      usedForBadge: "Global coverage",
+      usedForSubtitle: "Built for multilingual business performance files across modern industries, from SaaS and retail to healthcare, logistics, finance, and public-sector operations.",
+      usedForMetricSectors: "27 sectors",
+      usedForMetricLanguages: "EN / FR / AR",
       usedForItems: [
-        "SaaS businesses",
+        "SaaS / subscription",
+        "Retail",
+        "Wholesale",
+        "Manufacturing",
+        "Services",
+        "Healthcare",
+        "Education",
+        "Real estate",
+        "Logistics",
+        "Hospitality",
+        "Finance",
         "E-commerce",
-        "Agencies",
-        "Professional services",
-        "Marketplaces",
-        "Retail operations",
-      ],
-      sampleAnalysisTitle: "See a complete sample analysis",
-      sampleInputTitle: "Input",
-      sampleInputText: "Monthly business dataset",
-      sampleOutputTitle: "Output",
-      sampleOutputItems: [
-        "KPI dashboard",
-        "Risks",
-        "Forecast",
-        "Executive summary",
-        "Recommendations",
-        "PowerPoint report",
-      ],
-      questionsTitle: "Questions this agent answers",
-      questionsItems: [
-        "Is growth sustainable?",
-        "Are we overspending on acquisition?",
-        "Is customer churn becoming a risk?",
-        "Is profitability improving?",
-        "What should leadership prioritize next?",
+        "Agency / services",
+        "Restaurant / hospitality",
+        "Marketplace",
+        "Agriculture",
+        "Construction",
+        "Telecom",
+        "Insurance",
+        "Transport",
+        "Utilities",
+        "Media & advertising",
+        "Real estate development",
+        "Nonprofit",
+        "Tourism & travel",
+        "Automotive",
+        "Pharmacy",
       ],
       executiveInterpretationTitle: "Executive Interpretation",
       executiveInterpretationText: "Revenue growth remains strong (+52.75%) while maintaining a healthy 20.01% profit margin. The main concern is customer retention. 401 customers were lost during the period versus 543 acquired. Although growth remains positive, the current acquisition effort may become less efficient if retention does not improve.",
@@ -2381,6 +2393,10 @@ export default function BusinessClient({
       subtitle:
         "Importez vos données business pour recevoir une analyse exécutive vérifiée par les données avec KPIs, risques, opportunités, prévisions et décisions prioritaires.",
       eyebrow: "Agent d'analyse d'entreprise",
+      heroProofRevenue: "croissance",
+      heroProofScore: "score santé",
+      heroProofRoas: "ROAS",
+      startTrialCompact: "Essai à 1 $",
       chooseFile: "Choisir un fichier",
       noFile: "Aucun fichier sélectionné",
       analyze: "Analyser l’entreprise",
@@ -2438,33 +2454,38 @@ export default function BusinessClient({
       whyNotGeneralAiTitle: "Pourquoi ne pas utiliser un assistant IA généraliste ?",
       whyNotGeneralAiText: "Les assistants IA généralistes peuvent expliquer des concepts d’entreprise. Runexa Business Agent combine des calculs KPI déterministes, une détection structurée des anomalies, une analyse du churn et de la rétention, la génération de prévisions, le reporting exécutif et une sortie multilingue avant de générer des recommandations.",
       usedForTitle: "Utilisé pour",
+      usedForBadge: "Couverture mondiale",
+      usedForSubtitle: "Conçu pour les fichiers de performance business multilingues, du SaaS et du retail à la santé, la logistique, la finance et les opérations publiques.",
+      usedForMetricSectors: "27 secteurs",
+      usedForMetricLanguages: "EN / FR / AR",
       usedForItems: [
-        "Entreprises SaaS",
+        "SaaS / abonnement",
+        "Commerce de détail",
+        "Commerce de gros",
+        "Industrie / fabrication",
+        "Services",
+        "Santé",
+        "Éducation",
+        "Immobilier",
+        "Logistique",
+        "Hôtellerie / hospitalité",
+        "Finance",
         "E-commerce",
-        "Agences",
-        "Services professionnels",
-        "Marketplaces",
-        "Opérations retail",
-      ],
-      sampleAnalysisTitle: "Voir un exemple complet d’analyse",
-      sampleInputTitle: "Entrée",
-      sampleInputText: "Jeu de données d’entreprise mensuel",
-      sampleOutputTitle: "Sortie",
-      sampleOutputItems: [
-        "Tableau de bord KPI",
-        "Risques",
-        "Prévisions",
-        "Résumé exécutif",
-        "Recommandations",
-        "Rapport PowerPoint",
-      ],
-      questionsTitle: "Questions auxquelles cet agent répond",
-      questionsItems: [
-        "La croissance est-elle durable ?",
-        "Dépensons-nous trop en acquisition ?",
-        "Le churn client devient-il un risque ?",
-        "La rentabilité s’améliore-t-elle ?",
-        "Que doit prioriser la direction ensuite ?",
+        "Agence / services",
+        "Restaurant / hôtellerie",
+        "Marketplace",
+        "Agriculture",
+        "Construction",
+        "Télécoms",
+        "Assurance",
+        "Transport",
+        "Services publics",
+        "Médias & publicité",
+        "Promotion immobilière",
+        "Organisation à but non lucratif",
+        "Tourisme & voyage",
+        "Automobile",
+        "Pharmacie",
       ],
       executiveInterpretationTitle: "Interprétation exécutive",
       executiveInterpretationText: "La croissance du chiffre d’affaires reste forte (+52,75 %) tout en maintenant une marge bénéficiaire saine de 20,01 %. Le principal point d’attention concerne la rétention client. 401 clients ont été perdus sur la période contre 543 acquis. Même si la croissance reste positive, l’effort d’acquisition actuel peut devenir moins efficace si la rétention ne s’améliore pas.",
@@ -2530,6 +2551,10 @@ export default function BusinessClient({
       subtitle:
         "ارفع بيانات الأعمال للحصول على تحليل تنفيذي موثوق بالبيانات يتضمن المؤشرات والمخاطر والفرص والتوقعات والقرارات ذات الأولوية.",
       eyebrow: "وكيل أعمال ذكي عالمي",
+      heroProofRevenue: "النمو",
+      heroProofScore: "درجة الصحة",
+      heroProofRoas: "ROAS",
+      startTrialCompact: "تجربة 1 دولار",
       chooseFile: "اختيار ملف",
       noFile: "لم يتم اختيار ملف",
       analyze: "تحليل الأعمال",
@@ -2587,33 +2612,38 @@ export default function BusinessClient({
       whyNotGeneralAiTitle: "لماذا لا تستخدم مساعد ذكاء اصطناعي عاماً؟",
       whyNotGeneralAiText: "يمكن للمساعدات العامة شرح مفاهيم الأعمال. يجمع Runexa Business Agent بين حسابات KPI الحتمية، واكتشاف الشذوذ المنظم، وتحليل تسرّب العملاء والاحتفاظ بهم، وإنشاء التوقعات، والتقارير التنفيذية، والمخرجات متعددة اللغات قبل إنشاء التوصيات.",
       usedForTitle: "يُستخدم لـ",
+      usedForBadge: "تغطية عالمية",
+      usedForSubtitle: "مصمم لملفات أداء الأعمال متعددة اللغات عبر قطاعات حديثة، من SaaS والتجزئة إلى الصحة واللوجستيات والمالية والعمليات العامة.",
+      usedForMetricSectors: "27 قطاعاً",
+      usedForMetricLanguages: "EN / FR / AR",
       usedForItems: [
-        "شركات SaaS",
+        "SaaS / اشتراك",
+        "تجارة التجزئة",
+        "تجارة الجملة",
+        "التصنيع",
+        "الخدمات",
+        "الرعاية الصحية",
+        "التعليم",
+        "العقارات",
+        "الخدمات اللوجستية",
+        "الضيافة",
+        "المالية",
         "التجارة الإلكترونية",
-        "الوكالات",
-        "الخدمات المهنية",
-        "الأسواق الرقمية",
-        "عمليات البيع بالتجزئة",
-      ],
-      sampleAnalysisTitle: "شاهد مثالاً كاملاً للتحليل",
-      sampleInputTitle: "المدخلات",
-      sampleInputText: "مجموعة بيانات أعمال شهرية",
-      sampleOutputTitle: "المخرجات",
-      sampleOutputItems: [
-        "لوحة مؤشرات KPI",
-        "المخاطر",
-        "التوقعات",
-        "ملخص تنفيذي",
-        "التوصيات",
-        "تقرير PowerPoint",
-      ],
-      questionsTitle: "أسئلة يجيب عنها هذا الوكيل",
-      questionsItems: [
-        "هل النمو مستدام؟",
-        "هل ننفق كثيراً على الاكتساب؟",
-        "هل أصبح تسرّب العملاء خطراً؟",
-        "هل تتحسن الربحية؟",
-        "ما الذي يجب على القيادة إعطاؤه الأولوية بعد ذلك؟",
+        "وكالة / خدمات",
+        "مطعم / ضيافة",
+        "سوق رقمي",
+        "الزراعة",
+        "البناء",
+        "الاتصالات",
+        "التأمين",
+        "النقل",
+        "المرافق",
+        "الإعلام والإعلانات",
+        "التطوير العقاري",
+        "منظمة غير ربحية",
+        "السياحة والسفر",
+        "السيارات",
+        "الصيدلة",
       ],
       executiveInterpretationTitle: "تفسير تنفيذي",
       executiveInterpretationText: "لا يزال نمو الإيرادات قوياً (+52.75%) مع الحفاظ على هامش ربح صحي قدره 20.01%. مصدر القلق الرئيسي هو الاحتفاظ بالعملاء. تم فقدان 401 عميل خلال الفترة مقابل اكتساب 543 عميلاً. ورغم أن النمو لا يزال إيجابياً، فقد تصبح جهود الاكتساب الحالية أقل كفاءة إذا لم تتحسن معدلات الاحتفاظ.",
@@ -2863,108 +2893,6 @@ export default function BusinessClient({
     profitAvailable
   );
 
-  const previewText = {
-    en: {
-      kpiDashboard: "KPI Dashboard",
-      live: result ? "LIVE" : "READY",
-      businessInsights: "Business insights",
-      aiRecommendations: "AI recommendations",
-      riskMatrix: "Risk matrix",
-      normalRisk: "Normal",
-      noInsight: "Analyze a business file to see verified insights.",
-      noRecommendation: "Analyze a business file to see verified recommendations.",
-    },
-    fr: {
-      kpiDashboard: "Tableau des indicateurs clés",
-      live: result ? "EN DIRECT" : "PRÊT",
-      businessInsights: "Analyses métier",
-      aiRecommendations: "Recommandations IA",
-      riskMatrix: "Matrice de risque",
-      normalRisk: "Normal",
-      noInsight: "Analysez un fichier business pour voir les insights vérifiés.",
-      noRecommendation: "Analysez un fichier business pour voir les recommandations vérifiées.",
-    },
-    ar: {
-      kpiDashboard: "لوحة مؤشرات الأداء",
-      live: result ? "مباشر" : "جاهز",
-      businessInsights: "رؤى الأعمال",
-      aiRecommendations: "توصيات الذكاء الاصطناعي",
-      riskMatrix: "مصفوفة المخاطر",
-      normalRisk: "طبيعي",
-      noInsight: "حلّل ملف أعمال لعرض الرؤى الموثقة.",
-      noRecommendation: "حلّل ملف أعمال لعرض التوصيات الموثقة.",
-    },
-  }[locale];
-
-  const dashboardKpiCards = [
-    {
-      label: t.revenue,
-      value: isMetricAvailable(kpis, ["revenue_available"], false)
-        ? formatMoney(kpis.revenue, currency, locale)
-        : unavailableMetricLabel(locale),
-    },
-    {
-      label: t.profit,
-      value: profitAvailable
-        ? formatMoney(kpis.profit, currency, locale)
-        : unavailableMetricLabel(locale),
-    },
-    {
-      label: t.growth,
-      value: isMetricAvailable(kpis, ["growth_available"], false)
-        ? formatPercent(kpis.growth_rate_percent, locale)
-        : unavailableMetricLabel(locale),
-    },
-    {
-      label: t.cashflow,
-      value: cashflowAvailable
-        ? normalizeBackendText(kpis.cashflow_status || "unknown", locale)
-        : unavailableMetricLabel(locale),
-    },
-  ];
-
-  const dashboardInsights = keyInsights.length > 0
-    ? keyInsights
-        .slice(0, 3)
-        .map((item) => normalizeBackendText(item, locale))
-    : [previewText.noInsight];
-
-  const dashboardRecommendations = recommendations.length > 0
-    ? recommendations.slice(0, 3).map((item) =>
-        normalizeBackendText(getItemTitle(item), locale)
-      )
-    : [previewText.noRecommendation];
-
-  const dashboardRiskBadge = risks.length > 0
-    ? normalizeBackendText(getItemBadge(risks[0]) || "medium", locale)
-    : previewText.normalRisk;
-
-  const dashboardRiskCards = [
-    {
-      label: t.cashflow,
-      value: cashflowAvailable
-        ? normalizeBackendText(kpis.cashflow_status || "unknown", locale)
-        : unavailableMetricLabel(locale),
-    },
-    {
-      label: getChurnMetricLabel(advancedKpis, locale),
-      value: churnAvailable
-        ? formatPercent(advancedKpis.churn_rate_percent, locale)
-        : unavailableMetricLabel(locale),
-    },
-    {
-      label: t.expenses,
-      value: expensesAvailable
-        ? formatMoney(kpis.expenses, currency, locale)
-        : unavailableMetricLabel(locale),
-    },
-    {
-      label: t.growth,
-      value: isMetricAvailable(kpis, ["growth_available"], false)
-        ? formatPercent(kpis.growth_rate_percent, locale)
-        : unavailableMetricLabel(locale),
-    },
-  ];
 
   return (
     <main
@@ -2978,259 +2906,65 @@ export default function BusinessClient({
       }`}
     >
       <div className="mx-auto max-w-[1500px] space-y-10">
-        {/* Hero */}
+        {/* Hero — condensed, proof-first */}
         <section className="overflow-hidden rounded-[2.25rem] border border-slate-200 bg-white/95 shadow-sm ring-1 ring-slate-950/[0.02] backdrop-blur">
-          <div className="grid gap-8 p-6 md:p-8 lg:grid-cols-[1.35fr_0.85fr] lg:p-10">
-            <div>
-              <div className="flex flex-wrap gap-2">
-                <span className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">
-                  {t.eyebrow}
-                </span>
-
-                <span className="rounded-full border border-green-200 bg-green-50 px-3 py-1 text-xs font-bold text-green-700">
-                  {t.enterpriseReady}
-                </span>
-              </div>
-
-              <h1 className={`mt-6 max-w-4xl text-4xl font-black tracking-tight text-slate-950 md:text-6xl ${
-                locale === "ar" ? "leading-[1.35]" : "leading-[1.03]"
-              }`}>
-                {t.title}
-              </h1>
-
-              <p className="mt-4 text-sm font-semibold text-blue-600 md:text-base">
-                {t.heroPower}
-              </p>
-
-              <p className={`mt-5 max-w-3xl text-[15px] text-slate-600 md:text-base ${
-                locale === "ar" ? "leading-8" : "leading-7"
-              }`}>
-                {t.subtitle}
-              </p>
-
-              <p className={`mt-5 max-w-3xl rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-5 text-sm font-semibold text-slate-700 shadow-sm ${
-                locale === "ar" ? "leading-8" : "leading-6"
-              }`}>
-                {t.trustedData}
-              </p>
+          <div className="p-6 md:p-8 lg:p-10">
+            <div className="flex flex-wrap gap-2">
+              <span className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">
+                {t.eyebrow}
+              </span>
+              <span className="rounded-full border border-green-200 bg-green-50 px-3 py-1 text-xs font-bold text-green-700">
+                {t.enterpriseReady}
+              </span>
             </div>
 
-            <div className="relative overflow-hidden rounded-[2rem] border border-slate-800 bg-slate-950 p-6 text-white shadow-xl shadow-slate-950/10">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-emerald-500/10" />
+            <h1 className={`mt-5 max-w-3xl text-3xl font-black tracking-tight text-slate-950 md:text-5xl ${
+              locale === "ar" ? "leading-[1.35]" : "leading-[1.05]"
+            }`}>
+              {t.title}
+            </h1>
 
-              <div className="relative">
-                <p className="text-sm font-semibold text-slate-300">
-                  {t.dataTypes}
-                </p>
-
-                <div className="mt-5 grid gap-3">
-                {t.dataTypeItems.map((item: string, index: number) => (
-                  <div
-                    key={item}
-                    className="rounded-2xl bg-white/10 p-3"
-                  >
-                    <p className="font-bold">
-                      {item}
-                    </p>
-
-                    <p className="mt-1 text-xs leading-5 text-slate-300">
-                      {t.dataTypeDescriptions[index]}
-                    </p>
-                  </div>
-                ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="grid grid-cols-1 gap-5 lg:grid-cols-3">
-          <SectionShell>
-            <h2 className="text-2xl font-black text-slate-950">
-              {t.usedForTitle}
-            </h2>
-
-            <div className="mt-5 grid gap-3">
-              {t.usedForItems.map((item: string) => (
-                <div
-                  key={item}
-                  className="flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 p-3 text-sm font-semibold text-slate-700"
-                >
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-green-50 text-xs font-black text-green-700">
-                    ✓
-                  </span>
-                  <span>{normalizeBackendText(item, locale)}</span>
-                </div>
-              ))}
-            </div>
-          </SectionShell>
-
-          <SectionShell>
-            <h2 className="text-2xl font-black text-slate-950">
-              {t.dataVerificationTitle}
-            </h2>
-
-            <div className="mt-5 grid gap-3">
-              {t.dataVerificationItems.map((item: string) => (
-                <div
-                  key={item}
-                  className="flex items-center gap-3 rounded-2xl border border-blue-100 bg-blue-50 p-3 text-sm font-semibold text-blue-900"
-                >
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white text-xs font-black text-blue-700">
-                    ✓
-                  </span>
-                  <span>{normalizeBackendText(item, locale)}</span>
-                </div>
-              ))}
-            </div>
-          </SectionShell>
-
-          <SectionShell>
-            <h2 className="text-2xl font-black text-slate-950">
-              {t.questionsTitle}
-            </h2>
-
-            <div className="mt-5 space-y-3">
-              {t.questionsItems.map((item: string) => (
-                <p
-                  key={item}
-                  className="rounded-2xl border border-slate-100 bg-slate-50 p-3 text-sm leading-6 text-slate-700"
-                >
-                  • {item}
-                </p>
-              ))}
-            </div>
-          </SectionShell>
-        </section>
-
-        <section className="grid grid-cols-1 gap-5 lg:grid-cols-2">
-          <SectionShell>
-            <h2 className="text-2xl font-black text-slate-950">
-              {t.methodologyTitle}
-            </h2>
-
-            <div className="mt-5 space-y-3">
-              {t.methodologyItems.map((item: string, index: number) => (
-                <div
-                  key={item}
-                  className="flex gap-3 rounded-2xl border border-slate-100 bg-slate-50 p-3"
-                >
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-950 text-xs font-black text-white">
-                    {index + 1}
-                  </div>
-
-                  <p className="text-sm leading-6 text-slate-700">
-                    {item}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <p className="mt-5 rounded-2xl border border-green-200 bg-green-50 p-4 text-sm font-semibold leading-6 text-green-800">
-              {t.methodologyNote}
-            </p>
-          </SectionShell>
-
-          <SectionShell>
-            <h2 className="text-2xl font-black text-slate-950">
-              {t.whyNotGeneralAiTitle}
-            </h2>
-
-            <p className="mt-5 text-sm leading-7 text-slate-600">
-              {t.whyNotGeneralAiText}
+            <p className="mt-3 max-w-2xl text-[15px] text-slate-600 md:text-base">
+              {t.subtitle}
             </p>
 
-            <div className="mt-5 rounded-3xl border border-amber-200 bg-amber-50 p-5">
-              <p className="text-xs font-black uppercase tracking-wide text-amber-700">
-                {t.executiveInterpretationTitle}
-              </p>
-
-              <p className="mt-3 text-sm leading-7 text-slate-700">
-                {t.executiveInterpretationText}
-              </p>
-
-              <p className="mt-4 rounded-2xl bg-white p-3 text-sm font-bold leading-6 text-slate-900">
-                {t.executiveInterpretationPriority}
-              </p>
-            </div>
-          </SectionShell>
-        </section>
-
-        <SectionShell>
-          <h2 className="text-2xl font-black text-slate-950">
-            {t.sampleAnalysisTitle}
-          </h2>
-
-          <div className="mt-6 grid gap-5 lg:grid-cols-2">
-            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5">
-              <p className="text-sm font-black text-slate-900">
-                {t.sampleInputTitle}
-              </p>
-
-              <p className="mt-3 text-sm leading-6 text-slate-600">
-                {t.sampleInputText}
-              </p>
-            </div>
-
-            <div className="rounded-3xl border border-blue-100 bg-blue-50 p-5">
-              <p className="text-sm font-black text-blue-950">
-                {t.sampleOutputTitle}
-              </p>
-
-              <div className="mt-3 grid gap-2 sm:grid-cols-2">
-                {t.sampleOutputItems.map((item: string) => (
-                  <div
-                    key={item}
-                    className="rounded-2xl bg-white px-3 py-2 text-sm font-semibold text-blue-900"
-                  >
-                    ✓ {item}
-                  </div>
-                ))}
+            {/* Proof strip — real numbers, no reading required */}
+            <div className="mt-6 grid grid-cols-3 gap-3 max-w-md">
+              <div className="rounded-2xl bg-slate-50 p-3 text-center">
+                <p className="text-lg font-black text-slate-950">91/100</p>
+                <p className="text-[11px] text-slate-500">{t.heroProofScore}</p>
+              </div>
+              <div className="rounded-2xl bg-slate-50 p-3 text-center">
+                <p className="text-lg font-black text-slate-950">+52,75%</p>
+                <p className="text-[11px] text-slate-500">{t.heroProofRevenue}</p>
+              </div>
+              <div className="rounded-2xl bg-slate-50 p-3 text-center">
+                <p className="text-lg font-black text-slate-950">8.74</p>
+                <p className="text-[11px] text-slate-500">{t.heroProofRoas}</p>
               </div>
             </div>
+
+            {/* Single primary CTA — scrolls to the upload block below */}
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <button
+                onClick={() =>
+                  document
+                    .getElementById("business-upload-block")
+                    ?.scrollIntoView({ behavior: "smooth", block: "start" })
+                }
+                className="rounded-3xl bg-slate-950 px-8 py-4 text-sm font-black text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-md"
+              >
+                {t.startTrialCompact}
+              </button>
+              <span className="text-xs font-semibold text-slate-500">
+                {trialInfoMessage}
+              </span>
+            </div>
           </div>
-        </SectionShell>
-
-        {/* Explanation */}
-        <section className="grid grid-cols-1 gap-5 lg:grid-cols-2">
-          <SectionShell>
-            <h2 className="text-2xl font-black text-slate-950">
-              {t.whatItIs}
-            </h2>
-
-            <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              {t.whatYouGetItems.map((item: string, index: number) => (
-                <InfoCard
-                  key={item}
-                  title={item}
-                  description={t.whatYouGetDescriptions[index]}
-                  badge={t.whatYouGetBadges[index]}
-                  index={index}
-                />
-              ))}
-            </div>
-          </SectionShell>
-
-          <SectionShell>
-            <h2 className="text-2xl font-black text-slate-950">
-              {t.howItWorks}
-            </h2>
-
-            <div className="mt-5 space-y-4">
-              {t.howItWorksItems.map((item: string, index: number) => (
-                <InfoCard
-                  key={item}
-                  title={item}
-                  description={t.workflowDescriptions[index]}
-                  index={index}
-                />
-              ))}
-            </div>
-          </SectionShell>
         </section>
 
         {/* Upload Card */}
-        <SectionShell className="space-y-6">
+        <SectionShell id="business-upload-block" className="space-y-6">
           <select
             value={language}
             onChange={(e) => {
@@ -3364,106 +3098,6 @@ export default function BusinessClient({
           )}
         </SectionShell>
 
-
-        {/* AI BUSINESS PREVIEW */}
-
-        <div className="grid gap-4 lg:grid-cols-4">
-          {/* KPI DASHBOARD */}
-          <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-            <div className="flex items-center justify-between">
-              <p className="text-sm font-semibold text-slate-600">
-                {previewText.kpiDashboard}
-              </p>
-
-              <span className="rounded-full bg-emerald-100 px-2 py-1 text-xs font-bold text-emerald-700">
-                {previewText.live}
-              </span>
-            </div>
-
-            <div className="mt-5 grid grid-cols-2 gap-3">
-              {dashboardKpiCards.map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-2xl bg-slate-50 p-3"
-                >
-                  <p className="text-xs text-slate-500">
-                    {item.label}
-                  </p>
-
-                  <p className="mt-1 text-lg font-black text-slate-900">
-                    {item.value}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* BUSINESS INSIGHTS */}
-          <div className="rounded-3xl border border-blue-200 bg-blue-50 p-5 shadow-sm">
-            <p className="text-sm font-semibold text-blue-900">
-              {previewText.businessInsights}
-            </p>
-
-            <div className="mt-4 space-y-3">
-              {dashboardInsights.map((item) => (
-                <div
-                  key={String(item)}
-                  className="rounded-2xl bg-white px-3 py-2 text-sm text-blue-800"
-                >
-                  {normalizeBackendText(item, locale)}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* AI RECOMMENDATIONS */}
-          <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-5 shadow-sm">
-            <p className="text-sm font-semibold text-emerald-900">
-              {previewText.aiRecommendations}
-            </p>
-
-            <div className="mt-4 space-y-3">
-              {dashboardRecommendations.map((item) => (
-                <div
-                  key={String(item)}
-                  className="rounded-2xl bg-white px-3 py-2 text-sm text-emerald-800"
-                >
-                  {normalizeBackendText(item, locale)}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* RISK MATRIX */}
-          <div className="rounded-3xl border border-red-200 bg-red-50 p-5 shadow-sm">
-            <div className="flex items-center justify-between">
-              <p className="text-sm font-semibold text-red-900">
-                {previewText.riskMatrix}
-              </p>
-
-              <span className="rounded-full bg-white px-2 py-1 text-xs font-bold text-red-700">
-                {dashboardRiskBadge}
-              </span>
-            </div>
-
-            <div className="mt-5 grid grid-cols-2 gap-2">
-              {dashboardRiskCards.map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-2xl bg-white p-3"
-                >
-                  <p className="text-xs text-slate-500">
-                    {item.label}
-                  </p>
-
-                  <p className="mt-1 text-sm font-bold text-slate-900">
-                    {item.value}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
 
         {/* Results removed from public render to avoid showing the full executive dashboard block here. */}
         {result && (
@@ -3770,7 +3404,198 @@ export default function BusinessClient({
             )}
           </SectionShell>
         )}
+        <section className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+          <SectionShell className="overflow-hidden lg:col-span-3">
+            <div className="relative">
+              <div className="absolute -right-16 -top-16 h-44 w-44 rounded-full bg-blue-50 blur-3xl" />
+              <div className="absolute -bottom-20 -left-16 h-44 w-44 rounded-full bg-emerald-50 blur-3xl" />
+
+              <div className="relative flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+                <div className="max-w-3xl">
+                  <span className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-blue-700">
+                    {t.usedForBadge}
+                  </span>
+
+                  <h2 className="mt-4 text-2xl font-black tracking-tight text-slate-950 md:text-4xl">
+                    {t.usedForTitle}
+                  </h2>
+
+                  <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600 md:text-base">
+                    {t.usedForSubtitle}
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 sm:min-w-[260px]">
+                  <div className="rounded-3xl border border-slate-200 bg-slate-950 p-4 text-white shadow-sm">
+                    <p className="text-2xl font-black">
+                      27
+                    </p>
+                    <p className="mt-1 text-xs font-bold uppercase tracking-wide text-slate-300">
+                      {t.usedForMetricSectors}
+                    </p>
+                  </div>
+
+                  <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
+                    <p className="text-2xl font-black text-slate-950">
+                      3
+                    </p>
+                    <p className="mt-1 text-xs font-bold uppercase tracking-wide text-slate-500">
+                      {t.usedForMetricLanguages}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative mt-7 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+                {t.usedForItems.map((item: string, index: number) => (
+                  <div
+                    key={item}
+                    className="group flex min-h-[64px] items-center gap-3 rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-3 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md"
+                  >
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-slate-950 text-xs font-black text-white">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+
+                    <span className="text-sm font-black leading-snug text-slate-800">
+                      {normalizeBackendText(item, locale)}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </SectionShell>
+
+          <SectionShell>
+            <h2 className="text-2xl font-black text-slate-950">
+              {t.dataVerificationTitle}
+            </h2>
+
+            <div className="mt-5 grid gap-3">
+              {t.dataVerificationItems.map((item: string) => (
+                <div
+                  key={item}
+                  className="flex items-center gap-3 rounded-2xl border border-blue-100 bg-blue-50 p-3 text-sm font-semibold text-blue-900"
+                >
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white text-xs font-black text-blue-700">
+                    ✓
+                  </span>
+                  <span>{normalizeBackendText(item, locale)}</span>
+                </div>
+              ))}
+            </div>
+          </SectionShell>
+
+          
+        </section>
+
+        <section className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+          <SectionShell>
+            <h2 className="text-2xl font-black text-slate-950">
+              {t.methodologyTitle}
+            </h2>
+
+            <div className="mt-5 space-y-3">
+              {t.methodologyItems.map((item: string, index: number) => (
+                <div
+                  key={item}
+                  className="flex gap-3 rounded-2xl border border-slate-100 bg-slate-50 p-3"
+                >
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-950 text-xs font-black text-white">
+                    {index + 1}
+                  </div>
+
+                  <p className="text-sm leading-6 text-slate-700">
+                    {item}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <p className="mt-5 rounded-2xl border border-green-200 bg-green-50 p-4 text-sm font-semibold leading-6 text-green-800">
+              {t.methodologyNote}
+            </p>
+          </SectionShell>
+
+          <SectionShell>
+            <h2 className="text-2xl font-black text-slate-950">
+              {t.whyNotGeneralAiTitle}
+            </h2>
+
+            <p className="mt-5 text-sm leading-7 text-slate-600">
+              {t.whyNotGeneralAiText}
+            </p>
+
+            <div className="mt-5 rounded-3xl border border-amber-200 bg-amber-50 p-5">
+              <p className="text-xs font-black uppercase tracking-wide text-amber-700">
+                {t.executiveInterpretationTitle}
+              </p>
+
+              <p className="mt-3 text-sm leading-7 text-slate-700">
+                {t.executiveInterpretationText}
+              </p>
+
+              <p className="mt-4 rounded-2xl bg-white p-3 text-sm font-bold leading-6 text-slate-900">
+                {t.executiveInterpretationPriority}
+              </p>
+            </div>
+          </SectionShell>
+        </section>
+
+        {/* Explanation */}
+        <section className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+          <SectionShell>
+            <h2 className="text-2xl font-black text-slate-950">
+              {t.whatItIs}
+            </h2>
+
+            <div className="mt-5 grid gap-4 sm:grid-cols-2">
+              {t.whatYouGetItems.map((item: string, index: number) => (
+                <InfoCard
+                  key={item}
+                  title={item}
+                  description={t.whatYouGetDescriptions[index]}
+                  badge={t.whatYouGetBadges[index]}
+                  index={index}
+                />
+              ))}
+            </div>
+          </SectionShell>
+
+          <SectionShell>
+            <h2 className="text-2xl font-black text-slate-950">
+              {t.howItWorks}
+            </h2>
+
+            <div className="mt-5 space-y-4">
+              {t.howItWorksItems.map((item: string, index: number) => (
+                <InfoCard
+                  key={item}
+                  title={item}
+                  description={t.workflowDescriptions[index]}
+                  index={index}
+                />
+              ))}
+            </div>
+          </SectionShell>
+        </section>
+
       </div>
+        {!hasActiveAccess && (
+          <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-slate-200 bg-white/95 backdrop-blur px-4 py-3 shadow-[0_-4px_20px_rgba(15,23,42,0.08)] md:hidden">
+            <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-3">
+              <span className="text-xs font-semibold text-slate-600 truncate">
+                {t.startTrialCompact}
+              </span>
+              <button
+                onClick={handlePrimaryAction}
+                disabled={loading || hasUsedBusinessTrial}
+                className="shrink-0 rounded-full bg-slate-950 px-5 py-2.5 text-xs font-black text-white disabled:bg-slate-400"
+              >
+                {t.startTrialCompact}
+              </button>
+            </div>
+          </div>
+        )}
     </main>
   );
 }
