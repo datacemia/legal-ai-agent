@@ -24,7 +24,7 @@ def get_supabase_client():
 
 
 def get_storage_bucket() -> str:
-    return os.getenv("SUPABASE_STORAGE_BUCKET", "study-audio")
+    return os.getenv("SUPABASE_STORAGE_BUCKET", "runexa-files")
 
 
 def normalize_audio_language(language: str) -> str:
