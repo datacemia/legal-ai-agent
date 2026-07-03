@@ -2533,238 +2533,6 @@ export default function StudyClient({
           )}
         </div>
 
-        <StudyOutputShowcase locale={language} />
-
-        <section className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
-            <h2 className="text-2xl font-bold text-slate-950">
-              {t.methodologyTitle}
-            </h2>
-
-            <div className="mt-5 space-y-3">
-              {t.methodologySteps.map((step: string, index: number) => (
-                <div
-                  key={`${step}-${index}`}
-                  className="flex gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4"
-                >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">
-                    {index + 1}
-                  </span>
-
-                  <p className="text-sm leading-6 text-slate-700">
-                    {step}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-6">
-            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
-              <h2 className="text-2xl font-bold text-slate-950">
-                {t.learnerValueTitle}
-              </h2>
-
-              <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                {t.learnerValueItems.map((item: string) => (
-                  <div
-                    key={item}
-                    className="rounded-2xl border border-green-100 bg-green-50 px-4 py-3 text-sm font-medium text-green-800"
-                  >
-                    ✓ {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-3xl border border-blue-100 bg-blue-50 p-6 shadow-sm">
-              <h2 className="text-xl font-bold text-blue-950">
-                {t.multilingualTitle}
-              </h2>
-
-              <p className="mt-3 text-sm leading-6 text-blue-800">
-                {t.multilingualText}
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
-            <p>
-              <strong>{t.howTitle}</strong> {t.how1}
-            </p>
-
-            <div>
-              <h3 className="text-sm font-bold uppercase tracking-wide text-slate-900">
-                {t.outputHighlightsTitle}
-              </h3>
-
-              <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                {outputHighlights.map((item: string, index: number) => {
-                  const style = featureStyles[index] || featureStyles[0];
-
-                  return (
-                    <div
-                      key={item}
-                      className={`group rounded-2xl border border-slate-200 bg-white p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md ${style.hover}`}
-                    >
-                      <div
-                        className={`flex items-center gap-3 ${
-                          language === "ar" ? "text-right" : "text-left"
-                        }`}
-                      >
-                        <span
-                          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${style.icon} text-white shadow-sm ${style.glow}`}
-                        >
-                          <FeatureIcon index={index} />
-                        </span>
-
-                        <p className="text-sm font-semibold leading-relaxed text-slate-900">
-                          {item}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-
-
-
-        <section className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="text-2xl font-bold text-slate-950">
-              {t.audienceTitle}
-            </h2>
-
-            {audienceLead.length > 0 && (
-              <div className="mt-4 rounded-2xl border border-blue-100 bg-blue-50 px-4 py-3 text-sm font-semibold leading-6 text-blue-900">
-                {audienceLead.map((line: string) => (
-                  <p key={line}>{line}</p>
-                ))}
-              </div>
-            )}
-
-            <div className="mt-5 space-y-3">
-              {audienceItems.map((item: string) => (
-                <div
-                  key={item}
-                  className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 text-slate-700"
-                >
-                  ✓ {item}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="rounded-3xl border border-blue-100 bg-blue-50 p-6 shadow-sm">
-            <h2 className="text-2xl font-bold text-blue-950">
-              {t.b2bTitle}
-            </h2>
-
-            <p className="mt-4 text-sm leading-7 text-blue-900">
-              {t.b2bText}
-            </p>
-
-            <p className="mt-5 rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-blue-800 shadow-sm">
-              {t.b2bCta}
-            </p>
-          </div>
-        </section>
-
-        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 className="text-2xl font-bold text-slate-950">
-            {t.comparisonTitle}
-          </h2>
-
-          <div className="mt-5 overflow-hidden rounded-2xl border border-slate-200">
-            <table className="w-full text-sm">
-              <thead className="bg-slate-50 text-slate-700">
-                <tr>
-                  <th className="px-4 py-3 text-left font-semibold">
-                    Feature
-                  </th>
-                  <th className="px-4 py-3 text-center font-semibold">
-                    Runexa
-                  </th>
-                  <th className="px-4 py-3 text-center font-semibold">
-                    NotebookLM
-                  </th>
-                </tr>
-              </thead>
-
-              <tbody className="divide-y divide-slate-200">
-                {comparisonRows.map((row: string[]) => (
-                  <tr key={row[0]} className="bg-white">
-                    <td className="px-4 py-3 font-medium text-slate-800">
-                      {row[0]}
-                    </td>
-                    <td className="px-4 py-3 text-center">
-                      {row[1]}
-                    </td>
-                    <td className="px-4 py-3 text-center">
-                      {row[2]}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        {showLevelModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
-            <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl space-y-4">
-              <div>
-                <h2 className="text-xl font-semibold">{t.selectLevel}</h2>
-                <p className="text-sm text-slate-500 mt-1">{t.levelHelp}</p>
-              </div>
-
-              <select
-                value={educationLevel}
-                onChange={(e) => setEducationLevel(e.target.value)}
-                className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm"
-              >
-                <option value="">{t.chooseLevel}</option>
-                <option value="primary_school">
-                  {getLevelLabel("primary_school")}
-                </option>
-                <option value="middle_school">
-                  {getLevelLabel("middle_school")}
-                </option>
-                <option value="high_school">
-                  {getLevelLabel("high_school")}
-                </option>
-                <option value="vocational_training">
-                  {getLevelLabel("vocational_training")}
-                </option>
-                <option value="university">
-                  {getLevelLabel("university")}
-                </option>
-              </select>
-
-              <div className="grid grid-cols-2 gap-3 pt-2">
-                <button
-                  type="button"
-                  onClick={() => setShowLevelModal(false)}
-                  className="w-full rounded-xl border border-slate-300 py-3 text-slate-700 hover:bg-slate-50"
-                >
-                  {t.cancel}
-                </button>
-
-                <button
-                  type="button"
-                  onClick={handleAnalyze}
-                  disabled={!educationLevel || loading}
-                  className="w-full rounded-xl bg-slate-900 py-3 text-white disabled:bg-slate-400"
-                >
-                  {t.continue}
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
 
         {result?.detail && (
           <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-xl">
@@ -3050,6 +2818,243 @@ export default function StudyClient({
 
           </div>
         )}
+
+        <StudyOutputShowcase locale={language} />
+
+        <section className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
+            <h2 className="text-2xl font-bold text-slate-950">
+              {t.methodologyTitle}
+            </h2>
+
+            <div className="mt-5 space-y-3">
+              {t.methodologySteps.map((step: string, index: number) => (
+                <div
+                  key={`${step}-${index}`}
+                  className="flex gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">
+                    {index + 1}
+                  </span>
+
+                  <p className="text-sm leading-6 text-slate-700">
+                    {step}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-6">
+            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
+              <h2 className="text-2xl font-bold text-slate-950">
+                {t.learnerValueTitle}
+              </h2>
+
+              <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                {t.learnerValueItems.map((item: string) => (
+                  <div
+                    key={item}
+                    className="rounded-2xl border border-green-100 bg-green-50 px-4 py-3 text-sm font-medium text-green-800"
+                  >
+                    ✓ {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-blue-100 bg-blue-50 p-6 shadow-sm">
+              <h2 className="text-xl font-bold text-blue-950">
+                {t.multilingualTitle}
+              </h2>
+
+              <p className="mt-3 text-sm leading-6 text-blue-800">
+                {t.multilingualText}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
+            <p>
+              <strong>{t.howTitle}</strong> {t.how1}
+            </p>
+
+            <div>
+              <h3 className="text-sm font-bold uppercase tracking-wide text-slate-900">
+                {t.outputHighlightsTitle}
+              </h3>
+
+              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                {outputHighlights.map((item: string, index: number) => {
+                  const style = featureStyles[index] || featureStyles[0];
+
+                  return (
+                    <div
+                      key={item}
+                      className={`group rounded-2xl border border-slate-200 bg-white p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md ${style.hover}`}
+                    >
+                      <div
+                        className={`flex items-center gap-3 ${
+                          language === "ar" ? "text-right" : "text-left"
+                        }`}
+                      >
+                        <span
+                          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${style.icon} text-white shadow-sm ${style.glow}`}
+                        >
+                          <FeatureIcon index={index} />
+                        </span>
+
+                        <p className="text-sm font-semibold leading-relaxed text-slate-900">
+                          {item}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+
+
+
+        <section className="grid gap-6 lg:grid-cols-2">
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="text-2xl font-bold text-slate-950">
+              {t.audienceTitle}
+            </h2>
+
+            {audienceLead.length > 0 && (
+              <div className="mt-4 rounded-2xl border border-blue-100 bg-blue-50 px-4 py-3 text-sm font-semibold leading-6 text-blue-900">
+                {audienceLead.map((line: string) => (
+                  <p key={line}>{line}</p>
+                ))}
+              </div>
+            )}
+
+            <div className="mt-5 space-y-3">
+              {audienceItems.map((item: string) => (
+                <div
+                  key={item}
+                  className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm leading-6 text-slate-700"
+                >
+                  ✓ {item}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-3xl border border-blue-100 bg-blue-50 p-6 shadow-sm">
+            <h2 className="text-2xl font-bold text-blue-950">
+              {t.b2bTitle}
+            </h2>
+
+            <p className="mt-4 text-sm leading-7 text-blue-900">
+              {t.b2bText}
+            </p>
+
+            <p className="mt-5 rounded-2xl bg-white px-4 py-3 text-sm font-semibold text-blue-800 shadow-sm">
+              {t.b2bCta}
+            </p>
+          </div>
+        </section>
+
+        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 className="text-2xl font-bold text-slate-950">
+            {t.comparisonTitle}
+          </h2>
+
+          <div className="mt-5 overflow-hidden rounded-2xl border border-slate-200">
+            <table className="w-full text-sm">
+              <thead className="bg-slate-50 text-slate-700">
+                <tr>
+                  <th className="px-4 py-3 text-left font-semibold">
+                    Feature
+                  </th>
+                  <th className="px-4 py-3 text-center font-semibold">
+                    Runexa
+                  </th>
+                  <th className="px-4 py-3 text-center font-semibold">
+                    NotebookLM
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody className="divide-y divide-slate-200">
+                {comparisonRows.map((row: string[]) => (
+                  <tr key={row[0]} className="bg-white">
+                    <td className="px-4 py-3 font-medium text-slate-800">
+                      {row[0]}
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      {row[1]}
+                    </td>
+                    <td className="px-4 py-3 text-center">
+                      {row[2]}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {showLevelModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
+            <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl space-y-4">
+              <div>
+                <h2 className="text-xl font-semibold">{t.selectLevel}</h2>
+                <p className="text-sm text-slate-500 mt-1">{t.levelHelp}</p>
+              </div>
+
+              <select
+                value={educationLevel}
+                onChange={(e) => setEducationLevel(e.target.value)}
+                className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm"
+              >
+                <option value="">{t.chooseLevel}</option>
+                <option value="primary_school">
+                  {getLevelLabel("primary_school")}
+                </option>
+                <option value="middle_school">
+                  {getLevelLabel("middle_school")}
+                </option>
+                <option value="high_school">
+                  {getLevelLabel("high_school")}
+                </option>
+                <option value="vocational_training">
+                  {getLevelLabel("vocational_training")}
+                </option>
+                <option value="university">
+                  {getLevelLabel("university")}
+                </option>
+              </select>
+
+              <div className="grid grid-cols-2 gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setShowLevelModal(false)}
+                  className="w-full rounded-xl border border-slate-300 py-3 text-slate-700 hover:bg-slate-50"
+                >
+                  {t.cancel}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleAnalyze}
+                  disabled={!educationLevel || loading}
+                  className="w-full rounded-xl bg-slate-900 py-3 text-white disabled:bg-slate-400"
+                >
+                  {t.continue}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        
+
+        
 
         <section className="rounded-2xl border border-slate-200 bg-white p-5 text-xs leading-6 text-slate-500">
           <strong className="text-slate-700">{t.bottomDisclaimerTitle}: </strong>
