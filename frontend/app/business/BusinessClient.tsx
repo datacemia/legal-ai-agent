@@ -2286,19 +2286,12 @@ export default function BusinessClient({
         "AI generates the executive interpretation and recommendations.",
       ],
       methodologyNote: "The AI explains the numbers. It does not invent them.",
-      dataVerificationTitle: "Data verification",
-      dataVerificationItems: [
-        "47 KPI calculations completed",
-        "12 anomaly checks completed",
-        "8 business rules triggered",
-        "100% dataset coverage",
-      ],
       whyNotGeneralAiTitle: "Why not use a general AI assistant?",
       whyNotGeneralAiText: "General AI assistants can explain business concepts. Runexa Business Agent combines deterministic KPI calculations, structured anomaly detection, churn and retention analysis, forecast generation, executive reporting, and multi-language output before generating recommendations.",
       usedForTitle: "Used for",
       usedForBadge: "Global coverage",
       usedForSubtitle: "Built for multilingual business performance files across modern industries, from SaaS and retail to healthcare, logistics, finance, and public-sector operations.",
-      usedForMetricSectors: "27 sectors",
+      usedForMetricSectors: "sectors",
       usedForMetricLanguages: "EN / FR / AR",
       usedForItems: [
         "SaaS / subscription",
@@ -2444,19 +2437,12 @@ export default function BusinessClient({
         "L’IA génère l’interprétation exécutive et les recommandations.",
       ],
       methodologyNote: "L’IA explique les chiffres. Elle ne les invente pas.",
-      dataVerificationTitle: "Vérification des données",
-      dataVerificationItems: [
-        "47 calculs KPI effectués",
-        "12 contrôles d’anomalies effectués",
-        "8 règles business déclenchées",
-        "100 % de couverture du dataset",
-      ],
       whyNotGeneralAiTitle: "Pourquoi ne pas utiliser un assistant IA généraliste ?",
       whyNotGeneralAiText: "Les assistants IA généralistes peuvent expliquer des concepts d’entreprise. Runexa Business Agent combine des calculs KPI déterministes, une détection structurée des anomalies, une analyse du churn et de la rétention, la génération de prévisions, le reporting exécutif et une sortie multilingue avant de générer des recommandations.",
       usedForTitle: "Utilisé pour",
       usedForBadge: "Couverture mondiale",
       usedForSubtitle: "Conçu pour les fichiers de performance business multilingues, du SaaS et du retail à la santé, la logistique, la finance et les opérations publiques.",
-      usedForMetricSectors: "27 secteurs",
+      usedForMetricSectors: "secteurs",
       usedForMetricLanguages: "EN / FR / AR",
       usedForItems: [
         "SaaS / abonnement",
@@ -2602,19 +2588,12 @@ export default function BusinessClient({
         "يُنشئ الذكاء الاصطناعي التفسير التنفيذي والتوصيات.",
       ],
       methodologyNote: "الذكاء الاصطناعي يشرح الأرقام. ولا يخترعها.",
-      dataVerificationTitle: "التحقق من البيانات",
-      dataVerificationItems: [
-        "تم احتساب 47 مؤشراً للأداء",
-        "تم تنفيذ 12 فحصاً لاكتشاف الشذوذ",
-        "تم تفعيل 8 قواعد أعمال",
-        "تغطية 100% من مجموعة البيانات",
-      ],
       whyNotGeneralAiTitle: "لماذا لا تستخدم مساعد ذكاء اصطناعي عاماً؟",
       whyNotGeneralAiText: "يمكن للمساعدات العامة شرح مفاهيم الأعمال. يجمع Runexa Business Agent بين حسابات KPI الحتمية، واكتشاف الشذوذ المنظم، وتحليل تسرّب العملاء والاحتفاظ بهم، وإنشاء التوقعات، والتقارير التنفيذية، والمخرجات متعددة اللغات قبل إنشاء التوصيات.",
       usedForTitle: "يُستخدم لـ",
       usedForBadge: "تغطية عالمية",
       usedForSubtitle: "مصمم لملفات أداء الأعمال متعددة اللغات عبر قطاعات حديثة، من SaaS والتجزئة إلى الصحة واللوجستيات والمالية والعمليات العامة.",
-      usedForMetricSectors: "27 قطاعاً",
+      usedForMetricSectors: "قطاع",
       usedForMetricLanguages: "EN / FR / AR",
       usedForItems: [
         "SaaS / اشتراك",
@@ -3404,8 +3383,8 @@ export default function BusinessClient({
             )}
           </SectionShell>
         )}
-        <section className="grid grid-cols-1 gap-5 lg:grid-cols-3">
-          <SectionShell className="overflow-hidden lg:col-span-3">
+        <section className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+          <SectionShell className="overflow-hidden lg:col-span-2">
             <div className="relative">
               <div className="absolute -right-16 -top-16 h-44 w-44 rounded-full bg-blue-50 blur-3xl" />
               <div className="absolute -bottom-20 -left-16 h-44 w-44 rounded-full bg-emerald-50 blur-3xl" />
@@ -3428,7 +3407,7 @@ export default function BusinessClient({
                 <div className="grid grid-cols-2 gap-3 sm:min-w-[260px]">
                   <div className="rounded-3xl border border-slate-200 bg-slate-950 p-4 text-white shadow-sm">
                     <p className="text-2xl font-black">
-                      27
+                      {t.usedForItems.length}
                     </p>
                     <p className="mt-1 text-xs font-bold uppercase tracking-wide text-slate-300">
                       {t.usedForMetricSectors}
@@ -3437,7 +3416,7 @@ export default function BusinessClient({
 
                   <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
                     <p className="text-2xl font-black text-slate-950">
-                      3
+                      {(["en", "fr", "ar"] as Locale[]).length}
                     </p>
                     <p className="mt-1 text-xs font-bold uppercase tracking-wide text-slate-500">
                       {t.usedForMetricLanguages}
@@ -3462,26 +3441,6 @@ export default function BusinessClient({
                   </div>
                 ))}
               </div>
-            </div>
-          </SectionShell>
-
-          <SectionShell>
-            <h2 className="text-2xl font-black text-slate-950">
-              {t.dataVerificationTitle}
-            </h2>
-
-            <div className="mt-5 grid gap-3">
-              {t.dataVerificationItems.map((item: string) => (
-                <div
-                  key={item}
-                  className="flex items-center gap-3 rounded-2xl border border-blue-100 bg-blue-50 p-3 text-sm font-semibold text-blue-900"
-                >
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white text-xs font-black text-blue-700">
-                    ✓
-                  </span>
-                  <span>{normalizeBackendText(item, locale)}</span>
-                </div>
-              ))}
             </div>
           </SectionShell>
 
