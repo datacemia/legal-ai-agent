@@ -1593,6 +1593,7 @@ export default function StudyClient({
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
   const [audioLoading, setAudioLoading] = useState(false);
   const [audioUrl, setAudioUrl] = useState("");
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [userPlan, setUserPlan] = useState("trial");
   const [userRole, setUserRole] = useState("user");
   const [creditsBalance, setCreditsBalance] = useState(0);
@@ -1779,6 +1780,11 @@ export default function StudyClient({
 
   useEffect(() => {
     return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = "";
+      }
+
       setAudioUrl("");
     };
   }, []);
@@ -2318,9 +2324,32 @@ export default function StudyClient({
     }
   };
 
+  const playGeneratedAudio = async () => {
+    if (!audioUrl || !audioRef.current) {
+      return;
+    }
+
+    try {
+      setPaymentMessage("");
+      audioRef.current.load();
+      await audioRef.current.play();
+    } catch (error) {
+      console.error("Audio playback error:", error);
+
+      setPaymentMessage(
+        language === "fr"
+          ? "L’audio est prêt. Si la lecture ne démarre pas, utilisez le bouton de lecture du lecteur audio."
+          : language === "ar"
+          ? "الصوت جاهز. إذا لم يبدأ التشغيل، استخدم زر التشغيل داخل مشغل الصوت."
+          : "Audio is ready. If playback does not start, use the play button inside the audio player."
+      );
+    }
+  };
+
   const stopAudio = () => {
-    if (audioUrl && audioUrl.startsWith("blob:")) {
-      URL.revokeObjectURL(audioUrl);
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
     }
 
     setAudioUrl("");
@@ -2700,7 +2729,11 @@ export default function StudyClient({
                 <div className="mt-3 flex flex-wrap items-center gap-2">
                   <button
                     type="button"
-                    onClick={() => generateAudio(result.detailed_summary)}
+                    onClick={() =>
+                      audioUrl
+                        ? playGeneratedAudio()
+                        : generateAudio(result.detailed_summary)
+                    }
                     disabled={audioLoading}
                     className="rounded-xl bg-blue-600 px-4 py-2 text-sm text-white disabled:bg-slate-400"
                   >
@@ -2710,11 +2743,17 @@ export default function StudyClient({
                         : language === "ar"
                         ? "جاري إنشاء الصوت..."
                         : "Generating audio..."
+                      : audioUrl
+                      ? language === "fr"
+                        ? "▶ Lire l’audio"
+                        : language === "ar"
+                        ? "▶ تشغيل الصوت"
+                        : "▶ Play audio"
                       : language === "fr"
-                      ? "🔊 Écouter"
+                      ? "🔊 Générer l’audio"
                       : language === "ar"
-                      ? "🔊 استمع"
-                      : "🔊 Listen"}
+                      ? "🔊 إنشاء الصوت"
+                      : "🔊 Generate audio"}
                   </button>
 
                   {audioUrl && (
@@ -2734,11 +2773,23 @@ export default function StudyClient({
 
                 {audioUrl && (
                   <audio
+                    ref={audioRef}
                     key={audioUrl}
                     src={audioUrl}
                     controls
-                    autoPlay
+                    preload="auto"
                     className="mt-3 w-full"
+                    onError={(event) => {
+                      console.error("Audio element error:", event.currentTarget.error);
+
+                      setPaymentMessage(
+                        language === "fr"
+                          ? "L’audio a été généré, mais le lecteur n’arrive pas à charger le fichier."
+                          : language === "ar"
+                          ? "تم إنشاء الصوت، لكن مشغل الصوت لم يتمكن من تحميل الملف."
+                          : "Audio was generated, but the player could not load the file."
+                      );
+                    }}
                   />
                 )}
               </div>
