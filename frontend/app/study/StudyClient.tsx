@@ -2230,56 +2230,57 @@ export default function StudyClient({
     setAudioLoading(true);
 
     try {
-      if (audioUrl) {
+      if (audioUrl && audioUrl.startsWith("blob:")) {
         URL.revokeObjectURL(audioUrl);
-        setAudioUrl("");
       }
 
-      const token = getToken();
+      setAudioUrl("");
 
-      // 1. CREATE AUDIO JOB
-      const createRes = await fetch(
-        `${API_URL}/study/audio`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            ...(token ? { Authorization: `Bearer ${token}` } : {}),
-          },
-          body: JSON.stringify({
-            text,
-            language,
-          }),
-        }
-      );
+      const token = getToken?.() || safeGetLocalStorage("token");
+
+      const createRes = await fetch(`${API_URL}/study/audio`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({
+          text,
+          language,
+        }),
+      });
 
       if (!createRes.ok) {
         throw new Error("Failed to create audio job");
       }
 
       const createData = await createRes.json();
+      const immediateAudioUrl = resolveAudioUrl(createData);
 
-      const jobId = createData.job_id;
-
-      if (!jobId) {
-        throw new Error("Missing job ID");
+      if (immediateAudioUrl) {
+        setAudioUrl(immediateAudioUrl);
+        return;
       }
 
-      // 2. POLLING
-      let attempts = 0;
-      let completed = false;
+      const jobId =
+        createData.job_id ||
+        createData.id ||
+        createData.job?.id ||
+        createData.data?.job_id;
 
-      while (attempts < 60 && !completed) {
+      if (!jobId) {
+        console.error("Missing audio job ID payload:", createData);
+        throw new Error("Missing audio job ID");
+      }
+
+      let attempts = 0;
+
+      while (attempts < 90) {
         await new Promise((resolve) => setTimeout(resolve, 2000));
 
-        const statusRes = await fetch(
-          `${API_URL}/jobs/${jobId}`,
-          {
-            headers: token
-              ? { Authorization: `Bearer ${token}` }
-              : {},
-          }
-        );
+        const statusRes = await fetch(`${API_URL}/jobs/${jobId}`, {
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
+        });
 
         if (!statusRes.ok) {
           attempts++;
@@ -2287,31 +2288,11 @@ export default function StudyClient({
         }
 
         const statusData = await statusRes.json();
+        const resolvedAudioUrl = resolveAudioUrl(statusData);
 
-        if (statusData.status === "completed") {
-          const resolvedAudioUrl = resolveAudioUrl(statusData);
-
-          if (!resolvedAudioUrl) {
-            console.error("Missing audio URL payload:", statusData);
-            throw new Error("Missing audio URL");
-          }
-
-          const audioResponse = await fetch(resolvedAudioUrl, {
-            headers: token
-              ? { Authorization: `Bearer ${token}` }
-              : {},
-          });
-
-          if (!audioResponse.ok) {
-            throw new Error("Could not load generated audio");
-          }
-
-          const audioBlob = await audioResponse.blob();
-          const nextAudioUrl = URL.createObjectURL(audioBlob);
-
-          setAudioUrl(nextAudioUrl);
-
-          completed = true;
+        if (resolvedAudioUrl) {
+          setAudioUrl(resolvedAudioUrl);
+          return;
         }
 
         if (statusData.status === "failed") {
@@ -2321,11 +2302,17 @@ export default function StudyClient({
         attempts++;
       }
 
-      if (!completed) {
-        throw new Error("Audio generation timeout");
-      }
+      throw new Error("Audio generation timeout");
     } catch (error) {
       console.error("Audio error:", error);
+
+      setPaymentMessage(
+        language === "fr"
+          ? "L’audio a été généré, mais la lecture n’a pas pu démarrer. Veuillez réessayer."
+          : language === "ar"
+          ? "تم إنشاء الصوت، لكن تعذر بدء التشغيل. يرجى المحاولة مرة أخرى."
+          : "Audio was generated, but playback could not start. Please try again."
+      );
     } finally {
       setAudioLoading(false);
     }
