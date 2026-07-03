@@ -2926,11 +2926,9 @@ export default function BusinessClient({
             {/* Single primary CTA — scrolls to the upload block below */}
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <button
-                onClick={() =>
-                  document
-                    .getElementById("business-upload-block")
-                    ?.scrollIntoView({ behavior: "smooth", block: "start" })
-                }
+                onClick={() => {
+                  window.location.href = "/pricing";
+                }}
                 className="rounded-3xl bg-slate-950 px-8 py-4 text-sm font-black text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-md"
               >
                 {t.startTrialCompact}
