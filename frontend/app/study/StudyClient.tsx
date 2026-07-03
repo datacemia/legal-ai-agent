@@ -24,6 +24,39 @@ const safeSetLocalStorage = (key: string, value: string) => {
   localStorage.setItem(key, value);
 };
 
+const safeRemoveLocalStorage = (key: string) => {
+  if (typeof window === "undefined") return;
+
+  localStorage.removeItem(key);
+};
+
+const STUDY_LAST_RESULT_KEY = "runexa_study_last_result_v1";
+
+const loadSavedStudyResult = () => {
+  if (typeof window === "undefined") return null;
+
+  try {
+    const raw = localStorage.getItem(STUDY_LAST_RESULT_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+};
+
+const saveStudyResultSnapshot = (snapshot: any) => {
+  if (typeof window === "undefined") return;
+
+  try {
+    localStorage.setItem(STUDY_LAST_RESULT_KEY, JSON.stringify(snapshot));
+  } catch (error) {
+    console.error("Could not save study result snapshot:", error);
+  }
+};
+
+const clearSavedStudyResult = () => {
+  safeRemoveLocalStorage(STUDY_LAST_RESULT_KEY);
+};
+
 const LEVEL_LABELS: any = {
   en: {
     primary_school: "Primary school",
@@ -1585,6 +1618,7 @@ export default function StudyClient({
   const [creditsBalance, setCreditsBalance] = useState(0);
   const [studyTrialPaid, setStudyTrialPaid] = useState(false);
   const [studyTrialUsed, setStudyTrialUsed] = useState(false);
+  const restoredLastResultRef = useRef(false);
 
   const t = labels[language] || labels.en;
 
@@ -1650,6 +1684,11 @@ export default function StudyClient({
     : hasUsedStudyTrial
       ? t.trialUsed
       : t.startTrial;
+
+  const resetStudyResult = useCallback(() => {
+    setResult(null);
+    clearSavedStudyResult();
+  }, []);
 
   const formatDuration = (seconds: number) => {
     const safeSeconds = Math.max(0, Math.floor(seconds));
@@ -1763,6 +1802,37 @@ export default function StudyClient({
       window.removeEventListener("storage", syncBillingState);
     };
   }, [initialLocale, lockInitialLocale]);
+
+  useEffect(() => {
+    if (restoredLastResultRef.current) return;
+
+    restoredLastResultRef.current = true;
+
+    const saved = loadSavedStudyResult();
+
+    if (!saved?.result) return;
+
+    setResult(saved.result);
+
+    if (saved.educationLevel) {
+      setEducationLevel(String(saved.educationLevel));
+    }
+
+    if (!lockInitialLocale && saved.language) {
+      setLanguage(normalizeLocale(String(saved.language), initialLocale));
+    }
+  }, [initialLocale, lockInitialLocale]);
+
+  useEffect(() => {
+    if (!result || result.detail) return;
+
+    saveStudyResultSnapshot({
+      result,
+      educationLevel,
+      language,
+      savedAt: Date.now(),
+    });
+  }, [result, educationLevel, language]);
 
   useEffect(() => {
     return () => {
@@ -1911,7 +1981,7 @@ export default function StudyClient({
 
   const handlePrimaryAction = async () => {
     if (hasActiveAccess) {
-      setResult(null);
+      resetStudyResult();
       setSelectedAnswers({});
       setQuizSubmitted(false);
       setPaymentMessage("");
@@ -1944,7 +2014,7 @@ export default function StudyClient({
     setLoadingStep(t.loadingSteps.extracting);
     setLoadingProgress(15);
     setShowLevelModal(false);
-    setResult(null);
+    resetStudyResult();
     setPaymentMessage("");
     setSelectedAnswers({});
     setQuizSubmitted(false);
@@ -2482,7 +2552,7 @@ export default function StudyClient({
               stopAudio();
               setLanguage(normalizeLocale(e.target.value, initialLocale));
               setSavedLocale(normalizeLocale(e.target.value, initialLocale));
-              setResult(null);
+              resetStudyResult();
               setSelectedAnswers({});
               setQuizSubmitted(false);
               setRetryCount(0);
@@ -2503,7 +2573,7 @@ export default function StudyClient({
               onChange={(e) => {
                 stopAudio();
                 setFile(e.target.files?.[0] || null);
-                setResult(null);
+                resetStudyResult();
                 setPaymentMessage("");
                 setSelectedAnswers({});
                 setQuizSubmitted(false);
