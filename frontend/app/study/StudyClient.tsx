@@ -1441,35 +1441,98 @@ function MermaidDiagram({
   );
 }
 
+const normalizeGeneratedAudioUrl = (value: string) => {
+  const rawUrl = String(value || "").trim();
+
+  if (!rawUrl) return "";
+
+  if (/^https?:\/\//i.test(rawUrl) || rawUrl.startsWith("blob:")) {
+    return rawUrl;
+  }
+
+  if (rawUrl.startsWith("//")) {
+    return `https:${rawUrl}`;
+  }
+
+  if (rawUrl.startsWith("/")) {
+    return `${API_URL}${rawUrl}`;
+  }
+
+  return rawUrl;
+};
+
 function resolveAudioUrl(payload: any): string {
-  const result = payload?.result;
+  const seen = new WeakSet<object>();
 
-  if (typeof payload?.audio_url === "string") {
-    return payload.audio_url;
-  }
+  const walk = (value: any): string => {
+    if (!value) return "";
 
-  if (typeof result?.audio_url === "string") {
-    return result.audio_url;
-  }
+    if (typeof value === "string") {
+      const trimmed = value.trim();
 
-  if (typeof result?.audio_path === "string") {
-    return result.audio_path;
-  }
+      if (!trimmed) return "";
 
-  if (typeof result?.audio_path?.audio_url === "string") {
-    return result.audio_path.audio_url;
-  }
+      try {
+        return walk(JSON.parse(trimmed));
+      } catch {
+        if (
+          /^https?:\/\//i.test(trimmed) ||
+          trimmed.startsWith("/") ||
+          /\.(mp3|mpeg|wav|m4a|ogg)(\?|#|$)/i.test(trimmed)
+        ) {
+          return normalizeGeneratedAudioUrl(trimmed);
+        }
 
-  if (typeof result === "string") {
-    try {
-      const parsed = JSON.parse(result);
-      return resolveAudioUrl({ result: parsed });
-    } catch {
-      return "";
+        return "";
+      }
     }
-  }
 
-  return "";
+    if (typeof value !== "object") return "";
+
+    if (seen.has(value)) return "";
+    seen.add(value);
+
+    const directKeys = [
+      "audio_url",
+      "audioUrl",
+      "audio_path",
+      "audioPath",
+      "public_url",
+      "publicUrl",
+      "signed_url",
+      "signedUrl",
+      "url",
+      "path",
+    ];
+
+    for (const key of directKeys) {
+      const candidate = value?.[key];
+
+      if (typeof candidate === "string") {
+        const resolved = normalizeGeneratedAudioUrl(candidate);
+
+        if (resolved) return resolved;
+      }
+    }
+
+    const nestedKeys = ["result", "data", "payload", "output", "audio", "file"];
+
+    for (const key of nestedKeys) {
+      const resolved = walk(value?.[key]);
+
+      if (resolved) return resolved;
+    }
+
+    for (const candidate of Object.values(value)) {
+      const resolved = walk(candidate);
+
+      if (resolved) return resolved;
+    }
+
+    return "";
+  };
+
+  return walk(payload);
 }
 
 const normalizeLocale = (
@@ -1516,6 +1579,7 @@ export default function StudyClient({
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
   const [audioLoading, setAudioLoading] = useState(false);
   const [audioUrl, setAudioUrl] = useState("");
+  const [audioError, setAudioError] = useState("");
   const [userPlan, setUserPlan] = useState("trial");
   const [userRole, setUserRole] = useState("user");
   const [creditsBalance, setCreditsBalance] = useState(0);
@@ -1703,6 +1767,7 @@ export default function StudyClient({
   useEffect(() => {
     return () => {
       setAudioUrl("");
+      setAudioError("");
     };
   }, []);
 
@@ -2151,6 +2216,7 @@ export default function StudyClient({
     if (!text) return;
 
     setAudioLoading(true);
+    setAudioError("");
 
     try {
       if (audioUrl) {
@@ -2236,6 +2302,13 @@ export default function StudyClient({
       }
     } catch (error) {
       console.error("Audio error:", error);
+      setAudioError(
+        language === "fr"
+          ? "Audio indisponible. Vérifiez que le fichier audio est accessible."
+          : language === "ar"
+          ? "الصوت غير متاح. تحقق من أن ملف الصوت قابل للوصول."
+          : "Audio unavailable. Please check that the audio file is accessible."
+      );
     } finally {
       setAudioLoading(false);
     }
@@ -2243,6 +2316,7 @@ export default function StudyClient({
 
   const stopAudio = () => {
     setAudioUrl("");
+    setAudioError("");
   };
 
   const handleSubmitQuiz = () => {
@@ -2652,9 +2726,44 @@ export default function StudyClient({
                 </div>
 
                 {audioUrl && (
-                  <audio controls autoPlay className="mt-3 w-full">
-                    <source src={audioUrl} type="audio/mpeg" />
-                  </audio>
+                  <div className="mt-3 space-y-2">
+                    <audio
+                      key={audioUrl}
+                      controls
+                      autoPlay
+                      className="w-full"
+                      onError={() =>
+                        setAudioError(
+                          language === "fr"
+                            ? "Le navigateur ne peut pas lire ce fichier audio. Ouvrez le lien audio pour vérifier l’URL."
+                            : language === "ar"
+                            ? "لا يستطيع المتصفح تشغيل هذا الملف الصوتي. افتح رابط الصوت للتحقق من الرابط."
+                            : "The browser cannot play this audio file. Open the audio link to verify the URL."
+                        )
+                      }
+                    >
+                      <source src={audioUrl} type="audio/mpeg" />
+                    </audio>
+
+                    <a
+                      href={audioUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex text-xs font-semibold text-blue-700 underline"
+                    >
+                      {language === "fr"
+                        ? "Ouvrir le fichier audio"
+                        : language === "ar"
+                        ? "فتح ملف الصوت"
+                        : "Open audio file"}
+                    </a>
+                  </div>
+                )}
+
+                {audioError && (
+                  <p className="mt-2 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+                    {audioError}
+                  </p>
                 )}
               </div>
             )}
