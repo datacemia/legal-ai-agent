@@ -1441,112 +1441,35 @@ function MermaidDiagram({
   );
 }
 
-const normalizeGeneratedAudioUrl = (value: string) => {
-  const rawUrl = String(value || "").trim();
-
-  if (!rawUrl) {
-    return "";
-  }
-
-  if (/^https?:\/\//i.test(rawUrl) || rawUrl.startsWith("blob:")) {
-    return rawUrl;
-  }
-
-  if (rawUrl.startsWith("//")) {
-    return `https:${rawUrl}`;
-  }
-
-  if (rawUrl.startsWith("/")) {
-    return `${API_URL}${rawUrl}`;
-  }
-
-  return rawUrl;
-};
-
 function resolveAudioUrl(payload: any): string {
-  const seen = new WeakSet<object>();
+  const result = payload?.result;
 
-  const walk = (value: any): string => {
-    if (!value) {
+  if (typeof payload?.audio_url === "string") {
+    return payload.audio_url;
+  }
+
+  if (typeof result?.audio_url === "string") {
+    return result.audio_url;
+  }
+
+  if (typeof result?.audio_path === "string") {
+    return result.audio_path;
+  }
+
+  if (typeof result?.audio_path?.audio_url === "string") {
+    return result.audio_path.audio_url;
+  }
+
+  if (typeof result === "string") {
+    try {
+      const parsed = JSON.parse(result);
+      return resolveAudioUrl({ result: parsed });
+    } catch {
       return "";
     }
+  }
 
-    if (typeof value === "string") {
-      const trimmed = value.trim();
-
-      if (!trimmed) {
-        return "";
-      }
-
-      try {
-        const parsed = JSON.parse(trimmed);
-        return walk(parsed);
-      } catch {
-        return /\.(mp3|mpeg|wav|m4a|ogg)(\?|#|$)/i.test(trimmed) ||
-          /^https?:\/\//i.test(trimmed) ||
-          trimmed.startsWith("/")
-          ? normalizeGeneratedAudioUrl(trimmed)
-          : "";
-      }
-    }
-
-    if (typeof value !== "object") {
-      return "";
-    }
-
-    if (seen.has(value)) {
-      return "";
-    }
-
-    seen.add(value);
-
-    const directKeys = [
-      "audio_url",
-      "audioUrl",
-      "audio_path",
-      "audioPath",
-      "public_url",
-      "publicUrl",
-      "signed_url",
-      "signedUrl",
-      "url",
-      "path",
-    ];
-
-    for (const key of directKeys) {
-      const candidate = value?.[key];
-
-      if (typeof candidate === "string") {
-        const resolved = normalizeGeneratedAudioUrl(candidate);
-
-        if (resolved) {
-          return resolved;
-        }
-      }
-    }
-
-    const nestedKeys = ["result", "data", "payload", "output", "audio", "file"];
-
-    for (const key of nestedKeys) {
-      const resolved = walk(value?.[key]);
-
-      if (resolved) {
-        return resolved;
-      }
-    }
-
-    for (const candidate of Object.values(value)) {
-      const resolved = walk(candidate);
-
-      if (resolved) {
-        return resolved;
-      }
-    }
-
-    return "";
-  };
-
-  return walk(payload);
+  return "";
 }
 
 const normalizeLocale = (
@@ -1593,7 +1516,6 @@ export default function StudyClient({
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
   const [audioLoading, setAudioLoading] = useState(false);
   const [audioUrl, setAudioUrl] = useState("");
-  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [userPlan, setUserPlan] = useState("trial");
   const [userRole, setUserRole] = useState("user");
   const [creditsBalance, setCreditsBalance] = useState(0);
@@ -1780,11 +1702,6 @@ export default function StudyClient({
 
   useEffect(() => {
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.src = "";
-      }
-
       setAudioUrl("");
     };
   }, []);
@@ -2236,57 +2153,56 @@ export default function StudyClient({
     setAudioLoading(true);
 
     try {
-      if (audioUrl && audioUrl.startsWith("blob:")) {
+      if (audioUrl) {
         URL.revokeObjectURL(audioUrl);
+        setAudioUrl("");
       }
 
-      setAudioUrl("");
+      const token = getToken();
 
-      const token = getToken?.() || safeGetLocalStorage("token");
-
-      const createRes = await fetch(`${API_URL}/study/audio`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({
-          text,
-          language,
-        }),
-      });
+      // 1. CREATE AUDIO JOB
+      const createRes = await fetch(
+        `${API_URL}/study/audio`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+          body: JSON.stringify({
+            text,
+            language,
+          }),
+        }
+      );
 
       if (!createRes.ok) {
         throw new Error("Failed to create audio job");
       }
 
       const createData = await createRes.json();
-      const immediateAudioUrl = resolveAudioUrl(createData);
 
-      if (immediateAudioUrl) {
-        setAudioUrl(immediateAudioUrl);
-        return;
-      }
-
-      const jobId =
-        createData.job_id ||
-        createData.id ||
-        createData.job?.id ||
-        createData.data?.job_id;
+      const jobId = createData.job_id;
 
       if (!jobId) {
-        console.error("Missing audio job ID payload:", createData);
-        throw new Error("Missing audio job ID");
+        throw new Error("Missing job ID");
       }
 
+      // 2. POLLING
       let attempts = 0;
+      let completed = false;
 
-      while (attempts < 90) {
+      while (attempts < 60 && !completed) {
         await new Promise((resolve) => setTimeout(resolve, 2000));
 
-        const statusRes = await fetch(`${API_URL}/jobs/${jobId}`, {
-          headers: token ? { Authorization: `Bearer ${token}` } : {},
-        });
+        const statusRes = await fetch(
+          `${API_URL}/jobs/${jobId}`,
+          {
+            headers: token
+              ? { Authorization: `Bearer ${token}` }
+              : {},
+          }
+        );
 
         if (!statusRes.ok) {
           attempts++;
@@ -2294,11 +2210,18 @@ export default function StudyClient({
         }
 
         const statusData = await statusRes.json();
-        const resolvedAudioUrl = resolveAudioUrl(statusData);
 
-        if (resolvedAudioUrl) {
+        if (statusData.status === "completed") {
+          const resolvedAudioUrl = resolveAudioUrl(statusData);
+
+          if (!resolvedAudioUrl) {
+            console.error("Missing audio URL payload:", statusData);
+            throw new Error("Missing audio URL");
+          }
+
           setAudioUrl(resolvedAudioUrl);
-          return;
+
+          completed = true;
         }
 
         if (statusData.status === "failed") {
@@ -2308,50 +2231,17 @@ export default function StudyClient({
         attempts++;
       }
 
-      throw new Error("Audio generation timeout");
+      if (!completed) {
+        throw new Error("Audio generation timeout");
+      }
     } catch (error) {
       console.error("Audio error:", error);
-
-      setPaymentMessage(
-        language === "fr"
-          ? "L’audio a été généré, mais la lecture n’a pas pu démarrer. Veuillez réessayer."
-          : language === "ar"
-          ? "تم إنشاء الصوت، لكن تعذر بدء التشغيل. يرجى المحاولة مرة أخرى."
-          : "Audio was generated, but playback could not start. Please try again."
-      );
     } finally {
       setAudioLoading(false);
     }
   };
 
-  const playGeneratedAudio = async () => {
-    if (!audioUrl || !audioRef.current) {
-      return;
-    }
-
-    try {
-      setPaymentMessage("");
-      audioRef.current.load();
-      await audioRef.current.play();
-    } catch (error) {
-      console.error("Audio playback error:", error);
-
-      setPaymentMessage(
-        language === "fr"
-          ? "L’audio est prêt. Si la lecture ne démarre pas, utilisez le bouton de lecture du lecteur audio."
-          : language === "ar"
-          ? "الصوت جاهز. إذا لم يبدأ التشغيل، استخدم زر التشغيل داخل مشغل الصوت."
-          : "Audio is ready. If playback does not start, use the play button inside the audio player."
-      );
-    }
-  };
-
   const stopAudio = () => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    }
-
     setAudioUrl("");
   };
 
@@ -2729,11 +2619,7 @@ export default function StudyClient({
                 <div className="mt-3 flex flex-wrap items-center gap-2">
                   <button
                     type="button"
-                    onClick={() =>
-                      audioUrl
-                        ? playGeneratedAudio()
-                        : generateAudio(result.detailed_summary)
-                    }
+                    onClick={() => generateAudio(result.detailed_summary)}
                     disabled={audioLoading}
                     className="rounded-xl bg-blue-600 px-4 py-2 text-sm text-white disabled:bg-slate-400"
                   >
@@ -2743,17 +2629,11 @@ export default function StudyClient({
                         : language === "ar"
                         ? "جاري إنشاء الصوت..."
                         : "Generating audio..."
-                      : audioUrl
-                      ? language === "fr"
-                        ? "▶ Lire l’audio"
-                        : language === "ar"
-                        ? "▶ تشغيل الصوت"
-                        : "▶ Play audio"
                       : language === "fr"
-                      ? "🔊 Générer l’audio"
+                      ? "🔊 Écouter"
                       : language === "ar"
-                      ? "🔊 إنشاء الصوت"
-                      : "🔊 Generate audio"}
+                      ? "🔊 استمع"
+                      : "🔊 Listen"}
                   </button>
 
                   {audioUrl && (
@@ -2772,25 +2652,9 @@ export default function StudyClient({
                 </div>
 
                 {audioUrl && (
-                  <audio
-                    ref={audioRef}
-                    key={audioUrl}
-                    src={audioUrl}
-                    controls
-                    preload="auto"
-                    className="mt-3 w-full"
-                    onError={(event) => {
-                      console.error("Audio element error:", event.currentTarget.error);
-
-                      setPaymentMessage(
-                        language === "fr"
-                          ? "L’audio a été généré, mais le lecteur n’arrive pas à charger le fichier."
-                          : language === "ar"
-                          ? "تم إنشاء الصوت، لكن مشغل الصوت لم يتمكن من تحميل الملف."
-                          : "Audio was generated, but the player could not load the file."
-                      );
-                    }}
-                  />
+                  <audio controls autoPlay className="mt-3 w-full">
+                    <source src={audioUrl} type="audio/mpeg" />
+                  </audio>
                 )}
               </div>
             )}
