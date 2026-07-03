@@ -74,8 +74,17 @@ def upload_audio_to_supabase(local_path: Path, storage_path: str) -> str:
     supabase = get_supabase_client()
     bucket = get_storage_bucket()
 
+    print("=" * 60)
+    print("STUDY_AUDIO_BUCKET =", bucket)
+    print("STUDY_AUDIO_STORAGE_PATH =", storage_path)
+    print("STUDY_AUDIO_LOCAL_PATH =", str(local_path))
+    print("STUDY_AUDIO_LOCAL_EXISTS =", local_path.exists())
+    print("=" * 60)
+
     with open(local_path, "rb") as f:
         audio_bytes = f.read()
+
+    print("STUDY_AUDIO_BYTES =", len(audio_bytes))
 
     try:
         supabase.storage.from_(bucket).upload(
@@ -86,13 +95,21 @@ def upload_audio_to_supabase(local_path: Path, storage_path: str) -> str:
                 "upsert": "true",
             },
         )
+        print("STUDY_AUDIO_UPLOAD_OK = True")
     except Exception as e:
         message = str(e).lower()
+        print("STUDY_AUDIO_UPLOAD_ERROR =", str(e))
 
         if "already exists" not in message and "duplicate" not in message:
             raise
 
+        print("STUDY_AUDIO_UPLOAD_ALREADY_EXISTS = True")
+
     public_url = supabase.storage.from_(bucket).get_public_url(storage_path)
+
+    print("=" * 60)
+    print("STUDY_AUDIO_PUBLIC_URL =", public_url)
+    print("=" * 60)
 
     if not public_url:
         raise ValueError("Could not generate public audio URL")
@@ -112,6 +129,7 @@ def generate_study_audio(
         "SUPABASE_KEY starts =",
         os.getenv("SUPABASE_SERVICE_ROLE_KEY", "")[:12],
     )
+    print("SUPABASE_STORAGE_BUCKET =", os.getenv("SUPABASE_STORAGE_BUCKET"))
     print(
         "OPENAI_KEY starts =",
         os.getenv("OPENAI_API_KEY", "")[:8],
