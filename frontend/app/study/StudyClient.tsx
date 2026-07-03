@@ -1441,35 +1441,112 @@ function MermaidDiagram({
   );
 }
 
+const normalizeGeneratedAudioUrl = (value: string) => {
+  const rawUrl = String(value || "").trim();
+
+  if (!rawUrl) {
+    return "";
+  }
+
+  if (/^https?:\/\//i.test(rawUrl) || rawUrl.startsWith("blob:")) {
+    return rawUrl;
+  }
+
+  if (rawUrl.startsWith("//")) {
+    return `https:${rawUrl}`;
+  }
+
+  if (rawUrl.startsWith("/")) {
+    return `${API_URL}${rawUrl}`;
+  }
+
+  return rawUrl;
+};
+
 function resolveAudioUrl(payload: any): string {
-  const result = payload?.result;
+  const seen = new WeakSet<object>();
 
-  if (typeof payload?.audio_url === "string") {
-    return payload.audio_url;
-  }
-
-  if (typeof result?.audio_url === "string") {
-    return result.audio_url;
-  }
-
-  if (typeof result?.audio_path === "string") {
-    return result.audio_path;
-  }
-
-  if (typeof result?.audio_path?.audio_url === "string") {
-    return result.audio_path.audio_url;
-  }
-
-  if (typeof result === "string") {
-    try {
-      const parsed = JSON.parse(result);
-      return resolveAudioUrl({ result: parsed });
-    } catch {
+  const walk = (value: any): string => {
+    if (!value) {
       return "";
     }
-  }
 
-  return "";
+    if (typeof value === "string") {
+      const trimmed = value.trim();
+
+      if (!trimmed) {
+        return "";
+      }
+
+      try {
+        const parsed = JSON.parse(trimmed);
+        return walk(parsed);
+      } catch {
+        return /\.(mp3|mpeg|wav|m4a|ogg)(\?|#|$)/i.test(trimmed) ||
+          /^https?:\/\//i.test(trimmed) ||
+          trimmed.startsWith("/")
+          ? normalizeGeneratedAudioUrl(trimmed)
+          : "";
+      }
+    }
+
+    if (typeof value !== "object") {
+      return "";
+    }
+
+    if (seen.has(value)) {
+      return "";
+    }
+
+    seen.add(value);
+
+    const directKeys = [
+      "audio_url",
+      "audioUrl",
+      "audio_path",
+      "audioPath",
+      "public_url",
+      "publicUrl",
+      "signed_url",
+      "signedUrl",
+      "url",
+      "path",
+    ];
+
+    for (const key of directKeys) {
+      const candidate = value?.[key];
+
+      if (typeof candidate === "string") {
+        const resolved = normalizeGeneratedAudioUrl(candidate);
+
+        if (resolved) {
+          return resolved;
+        }
+      }
+    }
+
+    const nestedKeys = ["result", "data", "payload", "output", "audio", "file"];
+
+    for (const key of nestedKeys) {
+      const resolved = walk(value?.[key]);
+
+      if (resolved) {
+        return resolved;
+      }
+    }
+
+    for (const candidate of Object.values(value)) {
+      const resolved = walk(candidate);
+
+      if (resolved) {
+        return resolved;
+      }
+    }
+
+    return "";
+  };
+
+  return walk(payload);
 }
 
 const normalizeLocale = (
@@ -2219,7 +2296,20 @@ export default function StudyClient({
             throw new Error("Missing audio URL");
           }
 
-          setAudioUrl(resolvedAudioUrl);
+          const audioResponse = await fetch(resolvedAudioUrl, {
+            headers: token
+              ? { Authorization: `Bearer ${token}` }
+              : {},
+          });
+
+          if (!audioResponse.ok) {
+            throw new Error("Could not load generated audio");
+          }
+
+          const audioBlob = await audioResponse.blob();
+          const nextAudioUrl = URL.createObjectURL(audioBlob);
+
+          setAudioUrl(nextAudioUrl);
 
           completed = true;
         }
@@ -2242,6 +2332,10 @@ export default function StudyClient({
   };
 
   const stopAudio = () => {
+    if (audioUrl && audioUrl.startsWith("blob:")) {
+      URL.revokeObjectURL(audioUrl);
+    }
+
     setAudioUrl("");
   };
 
@@ -2652,9 +2746,13 @@ export default function StudyClient({
                 </div>
 
                 {audioUrl && (
-                  <audio controls autoPlay className="mt-3 w-full">
-                    <source src={audioUrl} type="audio/mpeg" />
-                  </audio>
+                  <audio
+                    key={audioUrl}
+                    src={audioUrl}
+                    controls
+                    autoPlay
+                    className="mt-3 w-full"
+                  />
                 )}
               </div>
             )}
