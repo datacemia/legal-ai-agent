@@ -84,6 +84,11 @@ const labels: any = {
     title: "AI Study Workspace",
     subtitle:
       "Upload study material to generate AI summaries, quizzes, flashcards, audio, and a personalized revision plan.",
+    heroProofQuality: "quality score",
+    heroProofLevels: "5 levels",
+    heroProofLevelsSub: "primary to university",
+    heroProofLangs: "3 languages",
+    startTrialCompact: "Start $1 trial",
     howTitle: "What the AI Study Workspace does:",
     how1:
       "Upload a PDF, Word document, or scanned study file. The Study Agent turns it into a complete, personalized learning workspace in minutes.",
@@ -237,6 +242,11 @@ const labels: any = {
     title: "Espace d’étude IA",
     subtitle:
       "Téléchargez un support de cours pour générer des résumés IA, des quiz, des flashcards, de l’audio et un plan de révision personnalisé.",
+    heroProofQuality: "score qualité",
+    heroProofLevels: "5 niveaux",
+    heroProofLevelsSub: "primaire à université",
+    heroProofLangs: "3 langues",
+    startTrialCompact: "Essai à 1 $",
     howTitle: "Ce que fait l’espace d’étude IA :",
     how1:
       "Téléchargez un PDF, un document Word ou un fichier scanné. L’Agent étude le transforme en espace d’apprentissage complet et personnalisé en quelques minutes.",
@@ -390,6 +400,11 @@ const labels: any = {
     title: "مساحة الدراسة بالذكاء الاصطناعي",
     subtitle:
       "ارفع محتوى دراسي لإنشاء ملخصات بالذكاء الاصطناعي واختبارات وبطاقات مراجعة وصوت وخطة مراجعة مخصصة.",
+    heroProofQuality: "درجة الجودة",
+    heroProofLevels: "5 مستويات",
+    heroProofLevelsSub: "من الابتدائي إلى الجامعة",
+    heroProofLangs: "3 لغات",
+    startTrialCompact: "تجربة 1 دولار",
     howTitle: "ما الذي تقدمه مساحة الدراسة الذكية:",
     how1:
       "ارفع ملف PDF أو Word أو مستنداً ممسوحاً ضوئياً. يحوّله وكيل الدراسة إلى مساحة تعلم كاملة وشخصية خلال دقائق.",
@@ -2335,121 +2350,54 @@ export default function StudyClient({
       className="min-h-screen bg-slate-50 px-4 py-16 sm:py-20"
     >
       <div className="max-w-4xl mx-auto space-y-8">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
+        {/* Hero — condensed, proof-first */}
+        <div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white/95 px-6 py-10 text-center shadow-sm ring-1 ring-slate-950/[0.02] backdrop-blur sm:px-8">
+          <div className="mx-auto inline-flex rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">
+            {t.studyWorkflow}
+          </div>
+
+          <h1 className="mx-auto mt-5 max-w-3xl text-4xl font-black tracking-tight text-slate-950 sm:text-5xl">
             {t.title}
           </h1>
 
-          <p className="mx-auto mt-4 max-w-3xl text-slate-500">
+          <p className="mx-auto mt-4 max-w-3xl text-[15px] leading-7 text-slate-600 sm:text-base">
             {t.subtitle}
           </p>
 
-          <div className="mx-auto mt-4 inline-flex max-w-3xl items-center justify-center rounded-full border border-green-200 bg-green-50 px-4 py-2 text-sm font-semibold text-green-700">
-            {t.proofPoint}
+          {/* Proof strip */}
+          <div className="mx-auto mt-6 grid max-w-xl grid-cols-3 gap-3">
+            <div className="rounded-2xl border border-slate-100 bg-slate-50 p-3 shadow-sm">
+              <p className="text-lg font-black text-slate-950">97/100</p>
+              <p className="text-[11px] font-semibold text-slate-500">{t.heroProofQuality}</p>
+            </div>
+            <div className="rounded-2xl border border-slate-100 bg-slate-50 p-3 shadow-sm">
+              <p className="text-lg font-black text-slate-950">{t.heroProofLevels}</p>
+              <p className="text-[11px] font-semibold text-slate-500">{t.heroProofLevelsSub}</p>
+            </div>
+            <div className="rounded-2xl border border-slate-100 bg-slate-50 p-3 shadow-sm">
+              <p className="text-lg font-black text-slate-950">EN/FR/AR</p>
+              <p className="text-[11px] font-semibold text-slate-500">{t.heroProofLangs}</p>
+            </div>
           </div>
 
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-3 text-sm font-medium text-slate-500">
-            {t.studyWorkflow}
+          {/* Single primary CTA — routes to pricing */}
+          <div className="mt-6 flex flex-col items-center gap-2">
+            <button
+              onClick={() => {
+                window.location.href = "/pricing";
+              }}
+              className="rounded-3xl bg-slate-900 px-8 py-4 text-sm font-black text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-md"
+            >
+              {t.startTrialCompact}
+            </button>
+            <span className="text-xs font-semibold text-slate-500">
+              {t.trialInfo}
+            </span>
           </div>
         </div>
 
-        <StudyOutputShowcase locale={language} />
+        <div id="study-upload-block" className="bg-white p-6 rounded-2xl border space-y-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
 
-        <section className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
-            <h2 className="text-2xl font-bold text-slate-950">
-              {t.methodologyTitle}
-            </h2>
-
-            <div className="mt-5 space-y-3">
-              {t.methodologySteps.map((step: string, index: number) => (
-                <div
-                  key={`${step}-${index}`}
-                  className="flex gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4"
-                >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">
-                    {index + 1}
-                  </span>
-
-                  <p className="text-sm leading-6 text-slate-700">
-                    {step}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-6">
-            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
-              <h2 className="text-2xl font-bold text-slate-950">
-                {t.learnerValueTitle}
-              </h2>
-
-              <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                {t.learnerValueItems.map((item: string) => (
-                  <div
-                    key={item}
-                    className="rounded-2xl border border-green-100 bg-green-50 px-4 py-3 text-sm font-medium text-green-800"
-                  >
-                    ✓ {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-3xl border border-blue-100 bg-blue-50 p-6 shadow-sm">
-              <h2 className="text-xl font-bold text-blue-950">
-                {t.multilingualTitle}
-              </h2>
-
-              <p className="mt-3 text-sm leading-6 text-blue-800">
-                {t.multilingualText}
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <div className="bg-white p-6 rounded-2xl border space-y-4 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
-          <div className="rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm text-slate-600 space-y-4 transition-all duration-300 hover:border-blue-200 hover:bg-white hover:shadow-md">
-            <p>
-              <strong>{t.howTitle}</strong> {t.how1}
-            </p>
-
-            <div>
-              <h3 className="text-sm font-bold uppercase tracking-wide text-slate-900">
-                {t.outputHighlightsTitle}
-              </h3>
-
-              <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                {outputHighlights.map((item: string, index: number) => {
-                  const style = featureStyles[index] || featureStyles[0];
-
-                  return (
-                    <div
-                      key={item}
-                      className={`group rounded-2xl border border-slate-200 bg-white p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md ${style.hover}`}
-                    >
-                      <div
-                        className={`flex items-center gap-3 ${
-                          language === "ar" ? "text-right" : "text-left"
-                        }`}
-                      >
-                        <span
-                          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${style.icon} text-white shadow-sm ${style.glow}`}
-                        >
-                          <FeatureIcon index={index} />
-                        </span>
-
-                        <p className="text-sm font-semibold leading-relaxed text-slate-900">
-                          {item}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
 
           <select
             value={language}
@@ -2581,6 +2529,105 @@ export default function StudyClient({
             </p>
           )}
         </div>
+
+        <StudyOutputShowcase locale={language} />
+
+        <section className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
+            <h2 className="text-2xl font-bold text-slate-950">
+              {t.methodologyTitle}
+            </h2>
+
+            <div className="mt-5 space-y-3">
+              {t.methodologySteps.map((step: string, index: number) => (
+                <div
+                  key={`${step}-${index}`}
+                  className="flex gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">
+                    {index + 1}
+                  </span>
+
+                  <p className="text-sm leading-6 text-slate-700">
+                    {step}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-6">
+            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
+              <h2 className="text-2xl font-bold text-slate-950">
+                {t.learnerValueTitle}
+              </h2>
+
+              <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                {t.learnerValueItems.map((item: string) => (
+                  <div
+                    key={item}
+                    className="rounded-2xl border border-green-100 bg-green-50 px-4 py-3 text-sm font-medium text-green-800"
+                  >
+                    ✓ {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-blue-100 bg-blue-50 p-6 shadow-sm">
+              <h2 className="text-xl font-bold text-blue-950">
+                {t.multilingualTitle}
+              </h2>
+
+              <p className="mt-3 text-sm leading-6 text-blue-800">
+                {t.multilingualText}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-xl">
+            <p>
+              <strong>{t.howTitle}</strong> {t.how1}
+            </p>
+
+            <div>
+              <h3 className="text-sm font-bold uppercase tracking-wide text-slate-900">
+                {t.outputHighlightsTitle}
+              </h3>
+
+              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                {outputHighlights.map((item: string, index: number) => {
+                  const style = featureStyles[index] || featureStyles[0];
+
+                  return (
+                    <div
+                      key={item}
+                      className={`group rounded-2xl border border-slate-200 bg-white p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md ${style.hover}`}
+                    >
+                      <div
+                        className={`flex items-center gap-3 ${
+                          language === "ar" ? "text-right" : "text-left"
+                        }`}
+                      >
+                        <span
+                          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${style.icon} text-white shadow-sm ${style.glow}`}
+                        >
+                          <FeatureIcon index={index} />
+                        </span>
+
+                        <p className="text-sm font-semibold leading-relaxed text-slate-900">
+                          {item}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+
+
 
         <section className="grid gap-6 lg:grid-cols-2">
           <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -3006,6 +3053,24 @@ export default function StudyClient({
           {t.disclaimer}
         </section>
       </div>
+
+        {!hasActiveAccess && (
+          <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-slate-200 bg-white/95 backdrop-blur px-4 py-3 shadow-[0_-4px_20px_rgba(15,23,42,0.08)] md:hidden">
+            <div className="mx-auto flex max-w-4xl items-center justify-between gap-3">
+              <span className="truncate text-xs font-semibold text-slate-600">
+                {t.startTrialCompact}
+              </span>
+              <button
+                onClick={handlePrimaryAction}
+                disabled={loading || hasUsedStudyTrial}
+                className="shrink-0 rounded-full bg-slate-900 px-5 py-2.5 text-xs font-black text-white disabled:bg-slate-400"
+              >
+                {t.startTrialCompact}
+              </button>
+            </div>
+          </div>
+        )}
+
     </main>
   );
 }
