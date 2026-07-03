@@ -2383,8 +2383,11 @@ export default function StudyClient({
           {/* Single primary CTA — routes to pricing */}
           <div className="mt-6 flex flex-col items-center gap-2">
             <button
+              type="button"
               onClick={() => {
-                window.location.href = "/pricing";
+                if (typeof window !== "undefined") {
+                  window.location.assign("/pricing");
+                }
               }}
               className="rounded-3xl bg-slate-900 px-8 py-4 text-sm font-black text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-md"
             >
