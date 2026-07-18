@@ -1,0 +1,1057 @@
+[
+  {
+    "fixture_id": "02_4_2_en",
+    "language": "en",
+    "source_text": "4.2 Provider may terminate this Agreement or any SOW immediately, for any reason or no reason, upon written notice to Client. Client may terminate only for Provider's uncured material breach following sixty (60) days' written notice and opportunity to cure.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "NOTICE_PREREQUISITE",
+        "TERMINATION_FOR_CAUSE",
+        "TERMINATION_FOR_CONVENIENCE"
+      ],
+      "relations": [
+        {
+          "concept": "TERMINATION_FOR_CONVENIENCE",
+          "right_holder": "PROVIDER",
+          "action": "TERMINATE",
+          "polarity": "RIGHT"
+        },
+        {
+          "concept": "TERMINATION_FOR_CAUSE",
+          "right_holder": "CLIENT",
+          "trigger": "UNCURED_MATERIAL_BREACH",
+          "action": "TERMINATE",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [
+        "MANUAL",
+        "NOTICE_REQUIRED"
+      ],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "termination",
+      "mechanisms": [
+        "NOTICE_PREREQUISITE",
+        "NOTICE_PROCEDURE",
+        "TERMINATION_FOR_CAUSE"
+      ],
+      "states": [
+        "MANUAL",
+        "NOTICE_REQUIRED"
+      ],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "NOTICE_PREREQUISITE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "TERMINATION_FOR_CAUSE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "NOTICE_PROCEDURE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:TERMINATION_FOR_CONVENIENCE"
+    ]
+  },
+  {
+    "fixture_id": "11_5_1_en",
+    "language": "en",
+    "source_text": "5.1 Tenant shall not assign this Lease or sublet the Premises, in whole or in part, without Landlord's prior written consent, which shall not be unreasonably withheld, conditioned, or delayed.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "ASSIGNMENT_RESTRICTION",
+        "CONSENT_PREREQUISITE"
+      ],
+      "relations": [
+        {
+          "concept": "ASSIGNMENT_RESTRICTION",
+          "obligated_actor": "TENANT",
+          "object": "LEASE_OR_PREMISES",
+          "action": "ASSIGN_OR_SUBLET",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL"
+      ],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "lease",
+      "mechanisms": [
+        "CONSENT_PREREQUISITE",
+        "PROHIBITION"
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL",
+        "PRIOR_CONSENT"
+      ],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:ASSIGNMENT_RESTRICTION"
+    ]
+  },
+  {
+    "fixture_id": "11_5_1_fr",
+    "language": "fr",
+    "source_text": "5.1 Le Preneur ne pourra céder le présent Bail ni sous-louer les Locaux, en tout ou partie, sans le consentement écrit préalable du Bailleur, lequel ne pourra être refusé, conditionné ou retardé sans motif raisonnable.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "ASSIGNMENT_RESTRICTION",
+        "CONSENT_PREREQUISITE"
+      ],
+      "relations": [
+        {
+          "concept": "ASSIGNMENT_RESTRICTION",
+          "obligated_actor": "TENANT",
+          "object": "LEASE_OR_PREMISES",
+          "action": "ASSIGN_OR_SUBLET",
+          "polarity": "PROHIBITION"
+        }
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL"
+      ],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "termination_for_convenience",
+      "mechanisms": [
+        "CONSENT_PREREQUISITE"
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL",
+        "PRIOR_CONSENT"
+      ],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:ASSIGNMENT_RESTRICTION"
+    ]
+  },
+  {
+    "fixture_id": "14_3_1_en",
+    "language": "en",
+    "source_text": "3.1 If holders of a majority of the outstanding Preferred Stock and a majority of the board approve a sale of the Company, all other shareholders shall be required to vote in favor of and consent to such transaction (\"Drag-Along Right\"), subject to customary protections regarding consideration and representations.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "DRAG_ALONG_RIGHT",
+        "MANDATORY_PARTICIPATION",
+        "OBLIGATION_TO_CONSENT",
+        "OBLIGATION_TO_VOTE_IN_FAVOR"
+      ],
+      "relations": [
+        {
+          "concept": "DRAG_ALONG_RIGHT",
+          "obligated_actor": "OTHER_SHAREHOLDERS",
+          "action": "VOTE_IN_FAVOR_AND_CONSENT",
+          "polarity": "MANDATORY_PARTICIPATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "share_transfer_rights",
+      "mechanisms": [],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [],
+    "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:DRAG_ALONG_RIGHT",
+      "MISSING_MATERIAL_MECHANISM:MANDATORY_PARTICIPATION",
+      "MISSING_MATERIAL_MECHANISM:OBLIGATION_TO_CONSENT",
+      "MISSING_MATERIAL_MECHANISM:OBLIGATION_TO_VOTE_IN_FAVOR"
+    ]
+  },
+  {
+    "fixture_id": "14_3_1_fr",
+    "language": "fr",
+    "source_text": "3.1 Si les détenteurs de la majorité des Actions Préférentielles en circulation et une majorité du conseil approuvent une cession de la Société, tous les autres actionnaires seront tenus de voter en faveur de cette opération et d'y consentir (« Droit de Cession Forcée »), sous réserve de protections usuelles concernant la contrepartie et les déclarations.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "DRAG_ALONG_RIGHT",
+        "MANDATORY_PARTICIPATION",
+        "OBLIGATION_TO_CONSENT",
+        "OBLIGATION_TO_VOTE_IN_FAVOR"
+      ],
+      "relations": [
+        {
+          "concept": "DRAG_ALONG_RIGHT",
+          "obligated_actor": "OTHER_SHAREHOLDERS",
+          "action": "VOTE_IN_FAVOR_AND_CONSENT",
+          "polarity": "MANDATORY_PARTICIPATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "share_transfer_rights",
+      "mechanisms": [],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [],
+    "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:DRAG_ALONG_RIGHT",
+      "MISSING_MATERIAL_MECHANISM:MANDATORY_PARTICIPATION",
+      "MISSING_MATERIAL_MECHANISM:OBLIGATION_TO_CONSENT",
+      "MISSING_MATERIAL_MECHANISM:OBLIGATION_TO_VOTE_IN_FAVOR"
+    ]
+  },
+  {
+    "fixture_id": "14_3_1_ar",
+    "language": "ar",
+    "source_text": "3.1 إذا وافق حاملو أغلبية الأسهم الممتازة القائمة وأغلبية المجلس على بيع الشركة، يلتزم جميع المساهمين الآخرين بالتصويت لصالح هذه المعاملة والموافقة عليها (\"حق التنازل الإلزامي\")، رهناً بالحمايات المعتادة المتعلقة بالمقابل والإقرارات.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "DRAG_ALONG_RIGHT",
+        "MANDATORY_PARTICIPATION",
+        "OBLIGATION_TO_CONSENT",
+        "OBLIGATION_TO_VOTE_IN_FAVOR"
+      ],
+      "relations": [
+        {
+          "concept": "DRAG_ALONG_RIGHT",
+          "obligated_actor": "OTHER_SHAREHOLDERS",
+          "action": "VOTE_IN_FAVOR_AND_CONSENT",
+          "polarity": "MANDATORY_PARTICIPATION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "assignment",
+      "mechanisms": [],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [],
+    "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:DRAG_ALONG_RIGHT",
+      "MISSING_MATERIAL_MECHANISM:MANDATORY_PARTICIPATION",
+      "MISSING_MATERIAL_MECHANISM:OBLIGATION_TO_CONSENT",
+      "MISSING_MATERIAL_MECHANISM:OBLIGATION_TO_VOTE_IN_FAVOR"
+    ]
+  },
+  {
+    "fixture_id": "14_3_2_en",
+    "language": "en",
+    "source_text": "3.2 If a founder proposes to transfer shares representing more than 5% of the Company's outstanding capital stock, the Investor shall have the right to participate in such sale on the same terms (\"Tag-Along Right\").",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "PARTICIPATION_OPTION",
+        "SAME_TERMS_RIGHT",
+        "TAG_ALONG_RIGHT"
+      ],
+      "relations": [
+        {
+          "concept": "TAG_ALONG_RIGHT",
+          "right_holder": "INVESTOR",
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "RIGHT"
+        },
+        {
+          "concept": "PARTICIPATION_OPTION",
+          "right_holder": "INVESTOR",
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "OPTION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "SHARE_TRANSFER_TRIGGER",
+          "related_mechanism": "TAG_ALONG_RIGHT"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "governance",
+      "mechanisms": [
+        "ASSIGNMENT_RESTRICTION",
+        "EXPRESS_RIGHT",
+        "TAG_ALONG_RIGHT"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "SHARE_TRANSFER_TRIGGER",
+          "related_mechanism": "TAG_ALONG_RIGHT"
+        },
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "SHARE_TRANSFER_TRIGGER",
+          "related_mechanism": "TAG_ALONG_RIGHT"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "TAG_ALONG_RIGHT",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "EXPRESS_RIGHT",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "ASSIGNMENT_RESTRICTION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:PARTICIPATION_OPTION",
+      "MISSING_MATERIAL_MECHANISM:SAME_TERMS_RIGHT"
+    ]
+  },
+  {
+    "fixture_id": "14_3_2_fr",
+    "language": "fr",
+    "source_text": "3.2 Si un fondateur propose de céder des actions représentant plus de 5 % du capital social en circulation de la Société, l'Investisseur aura le droit de participer à cette cession aux mêmes conditions (« Droit de Cession Conjointe »).",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "PARTICIPATION_OPTION",
+        "SAME_TERMS_RIGHT",
+        "TAG_ALONG_RIGHT"
+      ],
+      "relations": [
+        {
+          "concept": "TAG_ALONG_RIGHT",
+          "right_holder": "INVESTOR",
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "RIGHT"
+        },
+        {
+          "concept": "PARTICIPATION_OPTION",
+          "right_holder": "INVESTOR",
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "OPTION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "SHARE_TRANSFER_TRIGGER",
+          "related_mechanism": "TAG_ALONG_RIGHT"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "governance",
+      "mechanisms": [
+        "ASSIGNMENT_RESTRICTION",
+        "EXPRESS_RIGHT",
+        "TAG_ALONG_RIGHT"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "SHARE_TRANSFER_TRIGGER",
+          "related_mechanism": "TAG_ALONG_RIGHT"
+        },
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "SHARE_TRANSFER_TRIGGER",
+          "related_mechanism": "TAG_ALONG_RIGHT"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "TAG_ALONG_RIGHT",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "EXPRESS_RIGHT",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "ASSIGNMENT_RESTRICTION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:PARTICIPATION_OPTION",
+      "MISSING_MATERIAL_MECHANISM:SAME_TERMS_RIGHT"
+    ]
+  },
+  {
+    "fixture_id": "14_3_2_ar",
+    "language": "ar",
+    "source_text": "3.2 إذا اقترح أحد المؤسسين تحويل أسهم تمثل أكثر من 5% من رأس المال القائم للشركة، يحق للمستثمر المشاركة في هذا البيع بنفس الشروط (\"حق التنازل المشترك\").",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "PARTICIPATION_OPTION",
+        "SAME_TERMS_RIGHT",
+        "TAG_ALONG_RIGHT"
+      ],
+      "relations": [
+        {
+          "concept": "TAG_ALONG_RIGHT",
+          "right_holder": "INVESTOR",
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "RIGHT"
+        },
+        {
+          "concept": "PARTICIPATION_OPTION",
+          "right_holder": "INVESTOR",
+          "action": "PARTICIPATE_IN_SALE",
+          "polarity": "OPTION"
+        }
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "SHARE_TRANSFER_TRIGGER",
+          "related_mechanism": "TAG_ALONG_RIGHT"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "governance",
+      "mechanisms": [
+        "TAG_ALONG_RIGHT"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "SHARE_TRANSFER_TRIGGER",
+          "related_mechanism": "TAG_ALONG_RIGHT"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "TAG_ALONG_RIGHT",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:PARTICIPATION_OPTION",
+      "MISSING_MATERIAL_MECHANISM:SAME_TERMS_RIGHT"
+    ]
+  },
+  {
+    "fixture_id": "14_2_1_en",
+    "language": "en",
+    "source_text": "2.1 The Investor shall have the right to purchase its pro rata share of any new securities issued by the Company, subject to customary exceptions for equity incentive plan issuances, acquisitions, and Qualified IPO issuances.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "PREEMPTIVE_RIGHT"
+      ],
+      "relations": [
+        {
+          "concept": "PREEMPTIVE_RIGHT",
+          "right_holder": "INVESTOR",
+          "object": "NEW_SECURITIES",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "anti_dilution_preemptive_rights",
+      "mechanisms": [
+        "EXPRESS_RIGHT"
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [
+      {
+        "concept": "EXPRESS_RIGHT",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:PREEMPTIVE_RIGHT"
+    ]
+  },
+  {
+    "fixture_id": "14_2_1_fr",
+    "language": "fr",
+    "source_text": "2.1 L'Investisseur aura le droit d'acquérir sa quote-part proportionnelle de tout nouveau titre émis par la Société, sous réserve des exceptions usuelles pour les émissions au titre des plans d'intéressement, les acquisitions et les émissions liées à une Introduction en Bourse Qualifiée.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "PREEMPTIVE_RIGHT"
+      ],
+      "relations": [
+        {
+          "concept": "PREEMPTIVE_RIGHT",
+          "right_holder": "INVESTOR",
+          "object": "NEW_SECURITIES",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "other",
+      "mechanisms": [],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [],
+    "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:PREEMPTIVE_RIGHT"
+    ]
+  },
+  {
+    "fixture_id": "14_2_1_ar",
+    "language": "ar",
+    "source_text": "2.1 يحق للمستثمر شراء حصته التناسبية من أي أوراق مالية جديدة تصدرها الشركة، رهناً بالاستثناءات المعتادة لإصدارات خطط الحوافز، والاستحواذات، وإصدارات الطرح العام الأولي المؤهل.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "PREEMPTIVE_RIGHT"
+      ],
+      "relations": [
+        {
+          "concept": "PREEMPTIVE_RIGHT",
+          "right_holder": "INVESTOR",
+          "object": "NEW_SECURITIES",
+          "polarity": "RIGHT"
+        }
+      ],
+      "states": [],
+      "numeric_roles": []
+    },
+    "actual_semantics": {
+      "primary_type": "anti_dilution_preemptive_rights",
+      "mechanisms": [],
+      "states": [],
+      "numeric_roles": []
+    },
+    "source_evidence": [],
+    "first_bad_stage": "SOURCE_EVIDENCE_MODEL",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:PREEMPTIVE_RIGHT"
+    ]
+  },
+  {
+    "fixture_id": "14_1_1_en",
+    "language": "en",
+    "source_text": "1.1 The Company's board of directors shall consist of five (5) members: two (2) designated by the founders, one (1) designated by the Investor for so long as the Investor holds at least 5% of the Company's fully-diluted capitalization, and two (2) independent directors mutually agreed upon by the founders and the Investor.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "APPOINTMENT_RIGHT",
+        "BOARD_COMPOSITION"
+      ],
+      "relations": [],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "MEMBERS",
+          "semantic_role": "BOARD_SIZE",
+          "related_mechanism": "BOARD_COMPOSITION"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "governance",
+      "mechanisms": [
+        "BOARD_COMPOSITION"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "MEMBERS",
+          "semantic_role": "BOARD_SIZE",
+          "related_mechanism": "BOARD_COMPOSITION"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "BOARD_COMPOSITION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:APPOINTMENT_RIGHT"
+    ]
+  },
+  {
+    "fixture_id": "14_1_1_fr",
+    "language": "fr",
+    "source_text": "1.1 Le conseil d'administration de la Société sera composé de cinq (5) membres : deux (2) désignés par les fondateurs, un (1) désigné par l'Investisseur tant que celui-ci détiendra au moins 5 % du capital pleinement dilué de la Société, et deux (2) administrateurs indépendants désignés d'un commun accord entre les fondateurs et l'Investisseur.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "APPOINTMENT_RIGHT",
+        "BOARD_COMPOSITION"
+      ],
+      "relations": [],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "MEMBERS",
+          "semantic_role": "BOARD_SIZE",
+          "related_mechanism": "BOARD_COMPOSITION"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "governance",
+      "mechanisms": [
+        "BOARD_COMPOSITION"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "MEMBERS",
+          "semantic_role": "BOARD_SIZE",
+          "related_mechanism": "BOARD_COMPOSITION"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "BOARD_COMPOSITION",
+        "verdict": "GROUNDED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:APPOINTMENT_RIGHT"
+    ]
+  },
+  {
+    "fixture_id": "14_1_1_ar",
+    "language": "ar",
+    "source_text": "1.1 يتكون مجلس إدارة الشركة من خمسة (5) أعضاء: اثنان (2) يعينهما المؤسسون، وواحد (1) يعينه المستثمر طالما احتفظ بنسبة لا تقل عن 5% من رأس المال المخفف بالكامل للشركة، وعضوان (2) مستقلان يتفق عليهما المؤسسون والمستثمر.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "APPOINTMENT_RIGHT",
+        "BOARD_COMPOSITION"
+      ],
+      "relations": [],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "MEMBERS",
+          "semantic_role": "BOARD_SIZE",
+          "related_mechanism": "BOARD_COMPOSITION"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "governance",
+      "mechanisms": [
+        "BOARD_COMPOSITION"
+      ],
+      "states": [],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "MEMBERS",
+          "semantic_role": "BOARD_SIZE",
+          "related_mechanism": "BOARD_COMPOSITION"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "BOARD_COMPOSITION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:APPOINTMENT_RIGHT"
+    ]
+  },
+  {
+    "fixture_id": "14_6_1_en",
+    "language": "en",
+    "source_text": "6.1 For so long as the Investor holds at least 5% of the Company's fully-diluted capitalization, the Company shall not, without the Investor's prior written consent: (a) amend its certificate of incorporation in a manner adverse to the Preferred Stock; (b) authorize a new class of stock senior to the Preferred Stock; or (c) incur indebtedness in excess of $2,000,000, other than in the ordinary course of business.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "CONSENT_PREREQUISITE",
+        "INVESTOR_CONSENT_RIGHT",
+        "RESERVED_MATTER"
+      ],
+      "relations": [
+        {
+          "concept": "INVESTOR_CONSENT_RIGHT",
+          "right_holder": "INVESTOR",
+          "object": "RESERVED_MATTER",
+          "polarity": "CONSENT_RIGHT"
+        }
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL"
+      ],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+          "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+        },
+        {
+          "value": 2000000,
+          "unit": "USD",
+          "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+          "related_mechanism": "CONSENT_PREREQUISITE"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "governance",
+      "mechanisms": [
+        "CONSENT_PREREQUISITE",
+        "PROHIBITION",
+        "RESERVED_MATTERS_CONSENT"
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL",
+        "PRIOR_CONSENT"
+      ],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+          "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+        },
+        {
+          "value": 2000000,
+          "unit": "USD",
+          "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+          "related_mechanism": "CONSENT_PREREQUISITE"
+        },
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+          "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+        },
+        {
+          "value": 2000000,
+          "unit": "USD",
+          "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+          "related_mechanism": "CONSENT_PREREQUISITE"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "RESERVED_MATTERS_CONSENT",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:INVESTOR_CONSENT_RIGHT",
+      "MISSING_MATERIAL_MECHANISM:RESERVED_MATTER"
+    ]
+  },
+  {
+    "fixture_id": "14_6_1_fr",
+    "language": "fr",
+    "source_text": "6.1 Tant que l'Investisseur détiendra au moins 5 % du capital pleinement dilué de la Société, celle-ci ne pourra, sans le consentement écrit préalable de l'Investisseur : (a) modifier ses statuts d'une manière défavorable aux Actions Préférentielles ; (b) créer une nouvelle catégorie d'actions de rang supérieur aux Actions Préférentielles ; ou (c) contracter un endettement supérieur à 2 000 000 $, hors cours normal des affaires.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "CONSENT_PREREQUISITE",
+        "INVESTOR_CONSENT_RIGHT",
+        "RESERVED_MATTER"
+      ],
+      "relations": [
+        {
+          "concept": "INVESTOR_CONSENT_RIGHT",
+          "right_holder": "INVESTOR",
+          "object": "RESERVED_MATTER",
+          "polarity": "CONSENT_RIGHT"
+        }
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL"
+      ],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+          "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+        },
+        {
+          "value": 2000000,
+          "unit": "USD",
+          "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+          "related_mechanism": "CONSENT_PREREQUISITE"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "loan",
+      "mechanisms": [
+        "CONSENT_PREREQUISITE"
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL",
+        "PRIOR_CONSENT"
+      ],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+          "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+        },
+        {
+          "value": 2000000,
+          "unit": "USD",
+          "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+          "related_mechanism": "CONSENT_PREREQUISITE"
+        },
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+          "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+        },
+        {
+          "value": 2000000,
+          "unit": "USD",
+          "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+          "related_mechanism": "CONSENT_PREREQUISITE"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:INVESTOR_CONSENT_RIGHT",
+      "MISSING_MATERIAL_MECHANISM:RESERVED_MATTER"
+    ]
+  },
+  {
+    "fixture_id": "14_6_1_ar",
+    "language": "ar",
+    "source_text": "6.1 طالما احتفظ المستثمر بنسبة لا تقل عن 5% من رأس المال المخفف بالكامل للشركة، لا يجوز للشركة، دون موافقة خطية مسبقة من المستثمر: (أ) تعديل عقد التأسيس بشكل يضر بالأسهم الممتازة؛ (ب) إصدار فئة أسهم جديدة ذات أولوية على الأسهم الممتازة؛ أو (ج) تحمل مديونية تتجاوز 2,000,000 دولار، خارج السياق الاعتيادي للأعمال.",
+    "expected_semantics": {
+      "required_mechanisms": [
+        "CONSENT_PREREQUISITE",
+        "INVESTOR_CONSENT_RIGHT",
+        "RESERVED_MATTER"
+      ],
+      "relations": [
+        {
+          "concept": "INVESTOR_CONSENT_RIGHT",
+          "right_holder": "INVESTOR",
+          "object": "RESERVED_MATTER",
+          "polarity": "CONSENT_RIGHT"
+        }
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL"
+      ],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+          "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+        },
+        {
+          "value": 2000000,
+          "unit": "USD",
+          "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+          "related_mechanism": "CONSENT_PREREQUISITE"
+        }
+      ]
+    },
+    "actual_semantics": {
+      "primary_type": "payment",
+      "mechanisms": [
+        "CONSENT_PREREQUISITE",
+        "PROHIBITION"
+      ],
+      "states": [
+        "CONSENT_REQUIRED",
+        "PRIOR_APPROVAL",
+        "PRIOR_CONSENT"
+      ],
+      "numeric_roles": [
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+          "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+        },
+        {
+          "value": 2000000,
+          "unit": "USD",
+          "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+          "related_mechanism": "CONSENT_PREREQUISITE"
+        },
+        {
+          "value": 5,
+          "unit": "PERCENT",
+          "semantic_role": "INVESTOR_HOLDING_THRESHOLD",
+          "related_mechanism": "INVESTOR_CONSENT_RIGHT"
+        },
+        {
+          "value": 2000000,
+          "unit": "USD",
+          "semantic_role": "INDEBTEDNESS_CONSENT_THRESHOLD",
+          "related_mechanism": "CONSENT_PREREQUISITE"
+        }
+      ]
+    },
+    "source_evidence": [
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "GROUNDED"
+      },
+      {
+        "concept": "CONSENT_PREREQUISITE",
+        "verdict": "UNSUPPORTED"
+      },
+      {
+        "concept": "PROHIBITION",
+        "verdict": "UNSUPPORTED"
+      }
+    ],
+    "first_bad_stage": "NORMALIZED_SEMANTIC_EXTRACTION",
+    "root_cause": "Required normalized semantic state is absent or unsupported in persisted analysis JSON.",
+    "critical": [],
+    "high": [
+      "MISSING_MATERIAL_MECHANISM:INVESTOR_CONSENT_RIGHT",
+      "MISSING_MATERIAL_MECHANISM:RESERVED_MATTER"
+    ]
+  }
+]

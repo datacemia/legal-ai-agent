@@ -1,0 +1,1335 @@
+[
+  {
+    "language": "en",
+    "file": "01_NDA_Confidentiality_Agreement.docx",
+    "status": "PASS",
+    "clauses": 7,
+    "receipts": 13,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "6.1",
+        "clause_title": "Governing Law and Jurisdiction",
+        "clause_type": "governing_law",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Confirm that the chosen law and forum are practical, accessible, and consistent with the parties' location and transaction.",
+        "final_text": "Manual review required: generated text did not pass source-fidelity validation."
+      }
+    ]
+  },
+  {
+    "language": "en",
+    "file": "02_Master_Services_Agreement.docx",
+    "status": "PASS",
+    "clauses": 10,
+    "receipts": 26,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": []
+  },
+  {
+    "language": "en",
+    "file": "03_SaaS_Cloud_Agreement.docx",
+    "status": "PASS",
+    "clauses": 7,
+    "receipts": 20,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "3.1",
+        "clause_title": "Payment and Renewal",
+        "clause_type": "payment",
+        "field": "legal_insight",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "This clause defines financial obligations, payment timing, pricing mechanics, or interest exposure.",
+        "final_text": "Manual review required: generated text did not pass source-fidelity validation."
+      }
+    ]
+  },
+  {
+    "language": "en",
+    "file": "04_Cybersecurity_Services_Agreement.docx",
+    "status": "PASS",
+    "clauses": 9,
+    "receipts": 27,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "5.1",
+        "clause_title": "Limitation of Liability",
+        "clause_type": "liability",
+        "field": "legal_insight",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "This clause affects how financial responsibility is allocated if losses, claims, or disputes arise.",
+        "final_text": "Manual review required: generated text did not pass source-fidelity validation."
+      },
+      {
+        "clause_reference": "3.1",
+        "clause_title": "Certification Maintenance",
+        "clause_type": "security",
+        "field": "market_comparison",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "This clause is standard in agreements involving data security and compliance.",
+        "final_text": "Manual review required: generated text did not pass source-fidelity validation."
+      }
+    ]
+  },
+  {
+    "language": "en",
+    "file": "05_Data_Processing_Agreement.docx",
+    "status": "PASS",
+    "clauses": 8,
+    "receipts": 28,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": []
+  },
+  {
+    "language": "en",
+    "file": "06_Executive_Employment_Agreement.docx",
+    "status": "PASS",
+    "clauses": 8,
+    "receipts": 28,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "4.2",
+        "clause_title": "Non-Solicitation",
+        "clause_type": "restrictive_covenants",
+        "field": "negotiation_advice",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Consider limiting the scope, duration, territory, restricted activities, covered customers or personnel, and remedies for restrictive covenants. The restriction should be tied to a legitimate commercial interest and should include clear carve-outs for ordinary business activity.",
+        "final_text": "Manual review required: generated text did not pass source-fidelity validation."
+      },
+      {
+        "clause_reference": "6.1",
+        "clause_title": "Governing Law and Non-Compete Acknowledgment",
+        "clause_type": "governing_law",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Confirm that the chosen law and forum are practical, accessible, and consistent with the parties' location and transaction.",
+        "final_text": "Manual review required: generated text did not pass source-fidelity validation."
+      }
+    ]
+  },
+  {
+    "language": "en",
+    "file": "07_Software_Licensing_Agreement.docx",
+    "status": "PASS",
+    "clauses": 8,
+    "receipts": 27,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "4.1",
+        "clause_title": "Warranties",
+        "clause_type": "warranty",
+        "field": "legal_insight",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "This clause defines statements, quality commitments, disclaimers, or remedies if facts or performance standards are not met.",
+        "final_text": "Manual review required: generated text did not pass source-fidelity validation."
+      },
+      {
+        "clause_reference": "1.2",
+        "clause_title": "License Restrictions",
+        "clause_type": "intellectual_property",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "The clause effectively safeguards the Licensor's intellectual property rights while acknowledging potential legal limitations.",
+        "final_text": "Manual review required: generated text did not pass source-fidelity validation."
+      }
+    ]
+  },
+  {
+    "language": "en",
+    "file": "08_Procurement_Supply_Agreement.docx",
+    "status": "PASS",
+    "clauses": 9,
+    "receipts": 18,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "4.1",
+        "clause_title": "Warranty of Goods",
+        "clause_type": "supply_distribution",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "The warranty terms are reasonable and provide necessary protection for the buyer.",
+        "final_text": "Manual review required: generated text did not pass source-fidelity validation."
+      }
+    ]
+  },
+  {
+    "language": "en",
+    "file": "09_Consulting_Services_Agreement.docx",
+    "status": "PASS",
+    "clauses": 7,
+    "receipts": 20,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "3.1",
+        "clause_title": "Ownership of Work Product",
+        "clause_type": "intellectual_property",
+        "field": "legal_insight",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "This clause allocates ownership, use rights, licensing rights, or control over created or pre-existing intellectual property.",
+        "final_text": "Manual review required: generated text did not pass source-fidelity validation."
+      },
+      {
+        "clause_reference": "3.1",
+        "clause_title": "Ownership of Work Product",
+        "clause_type": "intellectual_property",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Confirm ownership of pre-existing materials, newly created deliverables, license scope, usage restrictions, moral rights, and post-termination rights.",
+        "final_text": "Manual review required: generated text did not pass source-fidelity validation."
+      }
+    ]
+  },
+  {
+    "language": "en",
+    "file": "10_Outsourcing_Managed_Services_Agreement.docx",
+    "status": "PASS",
+    "clauses": 7,
+    "receipts": 19,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": []
+  },
+  {
+    "language": "en",
+    "file": "11_Commercial_Lease_Agreement.docx",
+    "status": "PASS",
+    "clauses": 9,
+    "receipts": 23,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "5.1",
+        "clause_title": "Assignment and Subletting",
+        "clause_type": "lease",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Check payment timing, permitted use, maintenance obligations, repair allocation, deposit treatment, access rights, and termination consequences.",
+        "final_text": "Manual review required: generated text did not pass source-fidelity validation."
+      },
+      {
+        "clause_reference": "1.1",
+        "clause_title": "Term of Lease",
+        "clause_type": "lease",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Check payment timing, permitted use, maintenance obligations, repair allocation, deposit treatment, access rights, and termination consequences.",
+        "final_text": "Manual review required: generated text did not pass source-fidelity validation."
+      },
+      {
+        "clause_reference": "3.1",
+        "clause_title": "Security Deposit",
+        "clause_type": "payment",
+        "field": "legal_insight",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "This clause defines financial obligations, payment timing, pricing mechanics, or interest exposure.",
+        "final_text": "Manual review required: generated text did not pass source-fidelity validation."
+      },
+      {
+        "clause_reference": "4.1",
+        "clause_title": "Use of Premises",
+        "clause_type": "lease",
+        "field": "market_comparison",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "This clause is common in commercial leases to ensure the property is used appropriately and maintained.",
+        "final_text": "Manual review required: generated text did not pass source-fidelity validation."
+      }
+    ]
+  },
+  {
+    "language": "en",
+    "file": "12_Loan_Credit_Agreement.docx",
+    "status": "PASS",
+    "clauses": 8,
+    "receipts": 23,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "6.2",
+        "clause_title": "Event of Default",
+        "clause_type": "loan",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Check the specific loan trigger, amount or metric, timing, required evidence, and direct consequence stated in this clause.",
+        "final_text": "Manual review required: generated text did not pass source-fidelity validation."
+      }
+    ]
+  },
+  {
+    "language": "en",
+    "file": "13_Asset_Purchase_Agreement.docx",
+    "status": "PASS",
+    "clauses": 7,
+    "receipts": 24,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "3.1",
+        "clause_title": "Seller Representations and Warranties",
+        "clause_type": "warranty",
+        "field": "negotiation_advice",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Consider clarifying representations and warranties, quality standards, disclaimers, exclusions, remedy periods, reliance limitations, and how warranty remedies interact with limitation of liability.",
+        "final_text": "Manual review required: generated text did not pass source-fidelity validation."
+      },
+      {
+        "clause_reference": "5.1",
+        "clause_title": "Buyer's Obligation to Close",
+        "clause_type": "warranty",
+        "field": "legal_insight",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "This clause defines statements, quality commitments, disclaimers, or remedies if facts or performance standards are not met.",
+        "final_text": "Manual review required: generated text did not pass source-fidelity validation."
+      }
+    ]
+  },
+  {
+    "language": "en",
+    "file": "14_Shareholders_Agreement.docx",
+    "status": "PASS",
+    "clauses": 8,
+    "receipts": 25,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "3.1",
+        "clause_title": "Drag-Along Right",
+        "clause_type": "share_transfer_rights",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Check the transfer trigger, affected shares, eligible participants, notice or election mechanics, price basis, and completion procedure.",
+        "final_text": "Manual review required: generated text did not pass source-fidelity validation."
+      }
+    ]
+  },
+  {
+    "language": "en",
+    "file": "15_General_Commercial_Agreement.docx",
+    "status": "PASS",
+    "clauses": 7,
+    "receipts": 14,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "2.1",
+        "clause_title": "Cost Allocation",
+        "clause_type": "payment",
+        "field": "legal_insight",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "This clause defines financial obligations, payment timing, pricing mechanics, or interest exposure.",
+        "final_text": "Manual review required: generated text did not pass source-fidelity validation."
+      },
+      {
+        "clause_reference": "7.1",
+        "clause_title": "Limitation of Liability",
+        "clause_type": "liability",
+        "field": "legal_insight",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "This clause affects how financial responsibility is allocated if losses, claims, or disputes arise.",
+        "final_text": "Manual review required: generated text did not pass source-fidelity validation."
+      },
+      {
+        "clause_reference": "7.1",
+        "clause_title": "Limitation of Liability",
+        "clause_type": "liability",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Check whether the liability cap, exclusions, and carve-outs are clearly stated and proportionate.",
+        "final_text": "Manual review required: generated text did not pass source-fidelity validation."
+      }
+    ]
+  },
+  {
+    "language": "fr",
+    "file": "01_NDA_Confidentiality_Agreement_FR.docx",
+    "status": "PASS",
+    "clauses": 7,
+    "receipts": 20,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "4.1",
+        "clause_title": "Confidentialité",
+        "clause_type": "warranty",
+        "field": "legal_insight",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Cette clause définit des déclarations, engagements de qualité, exclusions ou recours si les faits ou standards de performance ne sont pas respectés.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      }
+    ]
+  },
+  {
+    "language": "fr",
+    "file": "02_Master_Services_Agreement_FR.docx",
+    "status": "PASS",
+    "clauses": 10,
+    "receipts": 32,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "1.1",
+        "clause_title": "Exécution des services",
+        "clause_type": "services",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Vérifier l'obligation exacte, la partie responsable, le standard prévu, le calendrier, les dépendances et la conséquence de l'inexécution.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      },
+      {
+        "clause_reference": "3.1",
+        "clause_title": "Droits de propriété intellectuelle",
+        "clause_type": "services",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Vérifier l'obligation exacte, la partie responsable, le standard prévu, le calendrier, les dépendances et la conséquence de l'inexécution.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      }
+    ]
+  },
+  {
+    "language": "fr",
+    "file": "03_SaaS_Cloud_Agreement_FR.docx",
+    "status": "PASS",
+    "clauses": 7,
+    "receipts": 19,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": []
+  },
+  {
+    "language": "fr",
+    "file": "04_Cybersecurity_Services_Agreement_FR.docx",
+    "status": "PASS",
+    "clauses": 9,
+    "receipts": 24,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": []
+  },
+  {
+    "language": "fr",
+    "file": "05_Data_Processing_Agreement_FR.docx",
+    "status": "PASS",
+    "clauses": 8,
+    "receipts": 24,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": []
+  },
+  {
+    "language": "fr",
+    "file": "06_Executive_Employment_Agreement_FR.docx",
+    "status": "PASS",
+    "clauses": 7,
+    "receipts": 18,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "2.2",
+        "clause_title": "Prime discrétionnaire et attribution d'actions",
+        "clause_type": "employment",
+        "field": "legal_insight",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Cette clause traite d'une condition, obligation, prestation, restriction ou conséquence propre à la relation de travail.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      },
+      {
+        "clause_reference": "2.2",
+        "clause_title": "Prime discrétionnaire et attribution d'actions",
+        "clause_type": "employment",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Vérifier la condition de travail précise, les personnes concernées, son déclencheur, sa durée, ses exceptions et sa conséquence.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      },
+      {
+        "clause_reference": "2.1",
+        "clause_title": "Salaire de base",
+        "clause_type": "employment",
+        "field": "legal_insight",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Cette clause traite d'une condition, obligation, prestation, restriction ou conséquence propre à la relation de travail.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      },
+      {
+        "clause_reference": "2.1",
+        "clause_title": "Salaire de base",
+        "clause_type": "employment",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Vérifier la condition de travail précise, les personnes concernées, son déclencheur, sa durée, ses exceptions et sa conséquence.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      }
+    ]
+  },
+  {
+    "language": "fr",
+    "file": "07_Software_Licensing_Agreement_FR.docx",
+    "status": "PASS",
+    "clauses": 8,
+    "receipts": 24,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": []
+  },
+  {
+    "language": "fr",
+    "file": "08_Procurement_Supply_Agreement_FR.docx",
+    "status": "PASS",
+    "clauses": 9,
+    "receipts": 24,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "2.1",
+        "clause_title": "Prix des Biens",
+        "clause_type": "payment",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Vérifier les échéances de paiement, les exigences de facturation, les intérêts, les pénalités, le traitement fiscal et les conséquences du non-paiement.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      }
+    ]
+  },
+  {
+    "language": "fr",
+    "file": "09_Consulting_Services_Agreement_FR.docx",
+    "status": "PASS",
+    "clauses": 7,
+    "receipts": 17,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "1.1",
+        "clause_title": "Statut du Consultant",
+        "clause_type": "liability",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Vérifier que le plafond de responsabilité, les exclusions et les exceptions sont clairement définis et proportionnés.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      },
+      {
+        "clause_reference": "4.1",
+        "clause_title": "Confidentialité",
+        "clause_type": "confidentiality",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Vérifier l'obligation exacte, la partie responsable, le standard prévu, le calendrier, les dépendances et la conséquence de l'inexécution.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      }
+    ]
+  },
+  {
+    "language": "fr",
+    "file": "10_Outsourcing_Managed_Services_Agreement_FR.docx",
+    "status": "PASS",
+    "clauses": 7,
+    "receipts": 14,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "7.1",
+        "clause_title": "Limitation de responsabilité",
+        "clause_type": "liability",
+        "field": "market_comparison",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Cette clause est relativement standard dans les contrats de services, mais les exceptions peuvent être considérées comme un point de négociation.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      }
+    ]
+  },
+  {
+    "language": "fr",
+    "file": "11_Commercial_Lease_Agreement_FR.docx",
+    "status": "PASS",
+    "clauses": 8,
+    "receipts": 20,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "Clause 4.2",
+        "clause_title": "Responsabilité d'entretien",
+        "clause_type": "liability",
+        "field": "market_comparison",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Cette clause est standard dans les contrats de location.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      },
+      {
+        "clause_reference": "Clause 4.2",
+        "clause_title": "Responsabilité d'entretien",
+        "clause_type": "liability",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Vérifier que le plafond de responsabilité, les exclusions et les exceptions sont clairement définis et proportionnés.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      }
+    ]
+  },
+  {
+    "language": "fr",
+    "file": "12_Loan_Credit_Agreement_FR.docx",
+    "status": "PASS",
+    "clauses": 8,
+    "receipts": 27,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "5.1",
+        "clause_title": "Garantie des obligations",
+        "clause_type": "warranty",
+        "field": "legal_insight",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Cette clause définit des déclarations, engagements de qualité, exclusions ou recours si les faits ou standards de performance ne sont pas respectés.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      },
+      {
+        "clause_reference": "6.1",
+        "clause_title": "Cas de Défaut",
+        "clause_type": "payment",
+        "field": "market_comparison",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Cette clause est relativement standard dans les contrats de prêt.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      }
+    ]
+  },
+  {
+    "language": "fr",
+    "file": "13_Asset_Purchase_Agreement_FR.docx",
+    "status": "PASS",
+    "clauses": 7,
+    "receipts": 25,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "3.1",
+        "clause_title": "Déclarations et garanties du Vendeur",
+        "clause_type": "warranty",
+        "field": "legal_insight",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Cette clause définit des déclarations, engagements de qualité, exclusions ou recours si les faits ou standards de performance ne sont pas respectés.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      },
+      {
+        "clause_reference": "3.1",
+        "clause_title": "Déclarations et garanties du Vendeur",
+        "clause_type": "warranty",
+        "field": "negotiation_advice",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Envisager de clarifier les déclarations et garanties, les standards de qualité, les exclusions, les délais de recours, les limites de confiance accordée aux déclarations et l'interaction entre les recours de garantie et la limitation de responsabilité.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      },
+      {
+        "clause_reference": "5.1",
+        "clause_title": "Obligation de clôture",
+        "clause_type": "warranty",
+        "field": "market_comparison",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Cette clause est courante dans les transactions d'acquisition.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      },
+      {
+        "clause_reference": "6.1",
+        "clause_title": "Indemnisation",
+        "clause_type": "indemnity",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Vérifier quelles réclamations sont couvertes, qui contrôle la défense, si une notification est requise et si les limites de responsabilité s'appliquent.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      },
+      {
+        "clause_reference": "2.1",
+        "clause_title": "Prix d'achat",
+        "clause_type": "payment",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Vérifier les échéances de paiement, les exigences de facturation, les intérêts, les pénalités, le traitement fiscal et les conséquences du non-paiement.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      }
+    ]
+  },
+  {
+    "language": "fr",
+    "file": "14_Shareholders_Agreement_FR.docx",
+    "status": "PASS",
+    "clauses": 8,
+    "receipts": 25,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": []
+  },
+  {
+    "language": "fr",
+    "file": "15_General_Commercial_Agreement_FR.docx",
+    "status": "PASS",
+    "clauses": 7,
+    "receipts": 19,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "Clause 4.1",
+        "clause_title": "Utilisation des marques",
+        "clause_type": "trademark_branding",
+        "field": "market_comparison",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Cette clause est courante dans les contrats impliquant des droits de propriété intellectuelle.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      },
+      {
+        "clause_reference": "Clause 7.1",
+        "clause_title": "Limitation de responsabilité",
+        "clause_type": "liability",
+        "field": "market_comparison",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Cette clause est conforme aux pratiques commerciales habituelles en matière de limitation de responsabilité.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      },
+      {
+        "clause_reference": "Clause 7.1",
+        "clause_title": "Limitation de responsabilité",
+        "clause_type": "liability",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "Vérifier que le plafond de responsabilité, les exclusions et les exceptions sont clairement définis et proportionnés.",
+        "final_text": "Revue manuelle requise : le texte généré n'a pas passé la validation de fidélité à la source."
+      }
+    ]
+  },
+  {
+    "language": "ar",
+    "file": "01_NDA_Confidentiality_Agreement_AR.docx",
+    "status": "PASS",
+    "clauses": 7,
+    "receipts": 17,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "6.1",
+        "clause_title": "القانون الواجب التطبيق والاختصاص القضائي",
+        "clause_type": "dispute_resolution",
+        "field": "negotiation_advice",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "يمكن التفاوض على القانون الواجب التطبيق، والجهة المختصة، وآلية التحكيم، ومكان النزاع، ولغة الإجراءات، والتدابير المؤقتة، ومدى ملاءمة الجهة المختارة للتنفيذ والوصول العملي.",
+        "final_text": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر."
+      }
+    ]
+  },
+  {
+    "language": "ar",
+    "file": "02_Master_Services_Agreement_AR.docx",
+    "status": "PASS",
+    "clauses": 10,
+    "receipts": 29,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "2.2",
+        "clause_title": "زيادة الرسوم",
+        "clause_type": "renewal",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "ينبغي مراجعة مدد التجديد، وصياغة التجديد التلقائي، ومهل الإشعار، وتغييرات الأسعار أو الخدمات، والإنهاء قبل التجديد.",
+        "final_text": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر."
+      },
+      {
+        "clause_reference": "2.2",
+        "clause_title": "زيادة الرسوم",
+        "clause_type": "renewal",
+        "field": "negotiation_advice",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "يمكن التفاوض على توضيح آليات التجديد، ومهل الإشعار، والتجديد التلقائي، وتغييرات الأسعار، والإنهاء قبل التجديد، وأي تغييرات في الخدمة أو الدفع.",
+        "final_text": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر."
+      }
+    ]
+  },
+  {
+    "language": "ar",
+    "file": "03_SaaS_Cloud_Agreement_AR.docx",
+    "status": "PASS",
+    "clauses": 7,
+    "receipts": 23,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "7.1",
+        "clause_title": "إنهاء الاتفاقية",
+        "clause_type": "termination",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "ينبغي مراجعة أسباب الإنهاء، ومتطلبات الإشعار، ومهل المعالجة، والالتزامات بعد الإنهاء.",
+        "final_text": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر."
+      }
+    ]
+  },
+  {
+    "language": "ar",
+    "file": "04_Cybersecurity_Services_Agreement_AR.docx",
+    "status": "PASS",
+    "clauses": 9,
+    "receipts": 27,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "5.2",
+        "clause_title": "تعويض الطرف الطرف المتعاقد ب ب",
+        "clause_type": "indemnity",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "ينبغي التأكد من نوع المطالبات المشمولة، ومن يتحكم في الدفاع، وما إذا كان الإشعار مطلوباً، وهل تنطبق حدود المسؤولية.",
+        "final_text": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر."
+      },
+      {
+        "clause_reference": "5.2",
+        "clause_title": "تعويض الطرف الطرف المتعاقد ب ب",
+        "clause_type": "indemnity",
+        "field": "negotiation_advice",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "يمكن التفاوض على حدود المسؤولية، والاستثناءات الخاصة بالإخلالات الجسيمة، وتوضيح استبعاد الأضرار غير المباشرة أو التبعية. وينبغي أيضاً مراجعة ما إذا كانت السرية أو حماية البيانات أو الملكية الفكرية أو الغش أو الخطأ العمدي أو التزامات الدفع يجب أن تكون داخل حد المسؤولية أو خارجه.",
+        "final_text": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر."
+      }
+    ]
+  },
+  {
+    "language": "ar",
+    "file": "05_Data_Processing_Agreement_AR.docx",
+    "status": "PASS",
+    "clauses": 8,
+    "receipts": 24,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "8.1",
+        "clause_title": "التدقيق والامتثال",
+        "clause_type": "data_protection",
+        "field": "market_comparison",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "تعتبر هذه الفقرة معيارية في عقود معالجة البيانات.",
+        "final_text": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر."
+      }
+    ]
+  },
+  {
+    "language": "ar",
+    "file": "06_Executive_Employment_Agreement_AR.docx",
+    "status": "PASS",
+    "clauses": 8,
+    "receipts": 25,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "5.1",
+        "clause_title": "تنازل عن الحقوق",
+        "clause_type": "intellectual_property",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "ينبغي التأكد من ملكية المواد السابقة، والمخرجات المنشأة، ونطاق الترخيص، وقيود الاستخدام، والحقوق المعنوية، والحقوق بعد الإنهاء.",
+        "final_text": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر."
+      }
+    ]
+  },
+  {
+    "language": "ar",
+    "file": "07_Software_Licensing_Agreement_AR.docx",
+    "status": "PASS",
+    "clauses": 8,
+    "receipts": 22,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "5.1",
+        "clause_title": "مدة الاتفاقية وإنهائها",
+        "clause_type": "termination",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "ينبغي مراجعة أسباب الإنهاء، ومتطلبات الإشعار، ومهل المعالجة، والالتزامات بعد الإنهاء.",
+        "final_text": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر."
+      }
+    ]
+  },
+  {
+    "language": "ar",
+    "file": "08_Procurement_Supply_Agreement_AR.docx",
+    "status": "PASS",
+    "clauses": 9,
+    "receipts": 25,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": []
+  },
+  {
+    "language": "ar",
+    "file": "09_Consulting_Services_Agreement_AR.docx",
+    "status": "PASS",
+    "clauses": 7,
+    "receipts": 18,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "4.1",
+        "clause_title": "سرية المعلومات",
+        "clause_type": "confidentiality",
+        "field": "market_comparison",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "هذا النوع من الالتزامات شائع في عقود الاستشارات.",
+        "final_text": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر."
+      }
+    ]
+  },
+  {
+    "language": "ar",
+    "file": "10_Outsourcing_Managed_Services_Agreement_AR.docx",
+    "status": "PASS",
+    "clauses": 7,
+    "receipts": 16,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": []
+  },
+  {
+    "language": "ar",
+    "file": "11_Commercial_Lease_Agreement_AR.docx",
+    "status": "PASS",
+    "clauses": 9,
+    "receipts": 20,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "6.1",
+        "clause_title": "إنهاء العقد بسبب عدم السداد",
+        "clause_type": "payment",
+        "field": "legal_insight",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "تحدد هذه المادة الالتزامات المالية، ومواعيد الدفع، وآليات التسعير، أو التعرض للفائدة.",
+        "final_text": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر."
+      },
+      {
+        "clause_reference": "6.1",
+        "clause_title": "إنهاء العقد بسبب عدم السداد",
+        "clause_type": "payment",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "ينبغي مراجعة آجال الدفع، ومتطلبات الفوترة، والفائدة، والجزاءات، والمعالجة الضريبية، وآثار عدم السداد.",
+        "final_text": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر."
+      }
+    ]
+  },
+  {
+    "language": "ar",
+    "file": "12_Loan_Credit_Agreement_AR.docx",
+    "status": "PASS",
+    "clauses": 8,
+    "receipts": 27,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "2.1",
+        "clause_title": "ضمان الالتزامات",
+        "clause_type": "loan",
+        "field": "negotiation_advice",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "يمكن التفاوض على التعهدات المالية، وحالات التعثر، وحقوق المعالجة، ومرونة السداد، والفوائد، والرسوم، والضمانات، والكفالات، والتعجيل بالاستحقاق، والتقارير، وآليات التنفيذ.",
+        "final_text": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر."
+      },
+      {
+        "clause_reference": "3.1",
+        "clause_title": "التعهدات المالية",
+        "clause_type": "loan",
+        "field": "negotiation_advice",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "يمكن التفاوض على التعهدات المالية، وحالات التعثر، وحقوق المعالجة، ومرونة السداد، والفوائد، والرسوم، والضمانات، والكفالات، والتعجيل بالاستحقاق، والتقارير، وآليات التنفيذ.",
+        "final_text": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر."
+      },
+      {
+        "clause_reference": "5.1",
+        "clause_title": "التزامات الطرف المتعاقد ب",
+        "clause_type": "guarantee",
+        "field": "negotiation_advice",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "يمكن التفاوض على التعهدات المالية، وحالات التعثر، وحقوق المعالجة، ومرونة السداد، والفوائد، والرسوم، والضمانات، والكفالات، والتعجيل بالاستحقاق، والتقارير، وآليات التنفيذ.",
+        "final_text": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر."
+      },
+      {
+        "clause_reference": "7.1",
+        "clause_title": "القانون الواجب التطبيق وحل النزاعات",
+        "clause_type": "dispute_resolution",
+        "field": "negotiation_advice",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "يمكن التفاوض على القانون الواجب التطبيق، والجهة المختصة، وآلية التحكيم، ومكان النزاع، ولغة الإجراءات، والتدابير المؤقتة، ومدى ملاءمة الجهة المختارة للتنفيذ والوصول العملي.",
+        "final_text": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر."
+      }
+    ]
+  },
+  {
+    "language": "ar",
+    "file": "13_Asset_Purchase_Agreement_AR.docx",
+    "status": "PASS",
+    "clauses": 7,
+    "receipts": 17,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "5.1",
+        "clause_title": "التزام الطرف الطرف المتعاقد ب أ بالإغلاق",
+        "clause_type": "covenant",
+        "field": "negotiation_advice",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "يمكن التفاوض على التعهدات المالية، وحالات التعثر، وحقوق المعالجة، ومرونة السداد، والفوائد، والرسوم، والضمانات، والكفالات، والتعجيل بالاستحقاق، والتقارير، وآليات التنفيذ.",
+        "final_text": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر."
+      },
+      {
+        "clause_reference": "2.1",
+        "clause_title": "ثمن شراء الأصول",
+        "clause_type": "indemnity",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "ينبغي التأكد من نوع المطالبات المشمولة، ومن يتحكم في الدفاع، وما إذا كان الإشعار مطلوباً، وهل تنطبق حدود المسؤولية.",
+        "final_text": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر."
+      },
+      {
+        "clause_reference": "4.1",
+        "clause_title": "إدارة النشاط",
+        "clause_type": "indemnity",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "ينبغي التأكد من نوع المطالبات المشمولة، ومن يتحكم في الدفاع، وما إذا كان الإشعار مطلوباً، وهل تنطبق حدود المسؤولية.",
+        "final_text": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر."
+      },
+      {
+        "clause_reference": "6.1",
+        "clause_title": "التعويض",
+        "clause_type": "indemnity",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "ينبغي التأكد من نوع المطالبات المشمولة، ومن يتحكم في الدفاع، وما إذا كان الإشعار مطلوباً، وهل تنطبق حدود المسؤولية.",
+        "final_text": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر."
+      }
+    ]
+  },
+  {
+    "language": "ar",
+    "file": "14_Shareholders_Agreement_AR.docx",
+    "status": "PASS",
+    "clauses": 8,
+    "receipts": 22,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": [
+      {
+        "clause_reference": "5.1",
+        "clause_title": "حق الشفعة",
+        "clause_type": "assignment",
+        "field": "negotiation_advice",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "يمكن التفاوض على اشتراط الموافقة الخطية المسبقة على أي تنازل أو نقل أو تفويض، مع السماح باستثناءات معقولة للشركات التابعة أو إعادة الهيكلة أو الاندماج أو الاستحواذ أو بيع معظم الأصول إذا كان المتنازل له قادراً على تنفيذ الالتزامات.",
+        "final_text": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر."
+      },
+      {
+        "clause_reference": "البند 7.1",
+        "clause_title": "إنهاء الاتفاقية",
+        "clause_type": "termination",
+        "field": "recommendation",
+        "gate_result": "BLOCK_AND_REPLACE_REVALIDATED",
+        "reasons": [
+          "FINAL_TEXT_SOURCE_CONTAMINATION"
+        ],
+        "text_before_validation": "ينبغي مراجعة مدة التجديد وسبب التجديد التلقائي وطريقة وموعد إشعار عدم التجديد وأي تغيير مرتبط صراحة بالتجديد.",
+        "final_text": "مراجعة يدوية مطلوبة: لم يجتز النص المُنشأ التحقق من مطابقته للمصدر."
+      }
+    ]
+  },
+  {
+    "language": "ar",
+    "file": "15_General_Commercial_Agreement_AR.docx",
+    "status": "PASS",
+    "clauses": 7,
+    "receipts": 19,
+    "unsuccessful": 0,
+    "hash_mismatches": 0,
+    "post_gate_mutations": 0,
+    "blocked": []
+  }
+]
